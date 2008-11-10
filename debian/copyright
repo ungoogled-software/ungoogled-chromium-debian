@@ -1,0 +1,73 @@
+This package was debianized by Fabien Tassin <fta@sofaraway.org> on
+Fri, 07 Nov 2008 13:10:21 +0100
+
+Copyright :
+
+(taken from http://code.google.com/chromium/terms.html)
+
+The Chromium software and sample code developed by Google is licensed under the
+BSD license. Other software included in this distribution is provided under
+other licenses listed below.
+
+=====================================
+BSD License
+
+Copyright © 2008, The Chromium Authors
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+    * Neither the name of the Google Inc. nor the names of its contributors may
+      be used to endorse or promote products derived from this software without
+      specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+=====================================
+
+Included Software and Licenses
+
+The following third party software is distributed with Chromium and is provided
+under other licenses and/or has source available from other locations.
+
+Package	Name		License
+----------------------	----------------------------------------
+bsdiff			BSD Protection License
+bspatch 		BSD Protection License
+bzip2 			BSD license
+dtoa 			BSD license
+hunspell	 	MPL 1.1/GPL 2.0/LGPL
+ICU 			ICU license
+JSCRE 			BSD license
+libjpeg 		libjpeg license
+libpng 			libpng license
+libxml 			MIT license
+libxslt 		MIT license
+LZMA SDK 		Special exception license
+modp_b64 		BSD license
+Mozilla interface to Java Plugin APIs 	MPL 1.1/GPL 2.0/LGPL
+npapi 			MPL 1.1/GPL 2.0/LGPL
+nspr 			MPL 1.1/GPL 2.0/LGPL
+nss 			MPL 1.1/GPL 2.0/LGPL
+Pthreads for win32 	LGPL 2.1
+sqlite 			Public domain
+tlslite 		Public domain
+V8 assembler 		BSD license
+WebKit 			BSD/LGPL 2/LGPL 2.1
+WTL 			Microsoft Permissive License
+zlib 			zlib license

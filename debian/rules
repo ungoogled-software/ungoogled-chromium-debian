@@ -1,0 +1,78 @@
+#!/usr/bin/make -f
+
+# These are used for cross-compiling and for saving the configure script
+# from having to guess our platform (since we know it already)
+DEB_HOST_GNU_TYPE       ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE      ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+DEB_BUILD_ARCH          ?= $(shell dpkg-architecture -qDEB_BUILD_ARCH)
+
+DEBIAN_NAME		:= chrome
+DEBIAN_VERSION		:= $(shell dpkg-parsechangelog | sed -n 's/^Version: *\(.*\)$$/\1/ p')
+DEBIAN_UPSTREAM_VERSION	:= $(shell echo $(DEBIAN_VERSION) | sed 's/^\(.*\)-[^-]*$$/\1/')
+DEBIAN_REVISION		:= $(shell echo $(DEBIAN_VERSION) | sed 's/^.*r\([^-]*\).*/\1/')
+
+DEB_TAR_SRCDIR := $(DEBIAN_NAME)
+SRC_DIR        := $(CURDIR)/build-tree/$(DEBIAN_NAME)
+DEB_BUILDDIR   := $(SRC_DIR)/chrome
+DEB_SCONS_ARGS := --site-dir=$(SRC_DIR)/site_scons
+
+include /usr/share/cdbs/1/rules/tarball.mk
+include /usr/share/cdbs/1/rules/patchsys-quilt.mk
+include /usr/share/cdbs/1/rules/debhelper.mk
+include $(CURDIR)/debian/cdbs/scons.mk
+
+INSTALL_EXCLUDES = \
+	lib \
+	obj \
+	.sconsign_linux2.dblite \
+	$(NULL)
+
+# Install: there's no install rules in scons yet, do it manually
+binary-install/$(DEBIAN_NAME)::
+	mkdir -p debian/$(DEBIAN_NAME)/usr/lib/$(DEBIAN_NAME)
+	( cd $(SRC_DIR)/chrome/Hammer ; tar $(foreach excl,$(INSTALL_EXCLUDES),--exclude=$(excl)) -cf - . ) | \
+	( cd debian/$(DEBIAN_NAME)/usr/lib/$(DEBIAN_NAME) ; tar xvf - )
+
+# Tarball (get-orig-source & get-current-source)
+GCLIENT_URL  := http://src.chromium.org/svn/trunk/depot_tools/linux
+CHROMIUM_URL := http://src.chromium.org/svn/trunk/src
+TMP_DIR      := $(DEBIAN_NAME)-$(shell echo $$$$)
+
+ifneq (,$(DEBIAN_TAG))
+get-orig-source: TAG  = $(NULL)
+else
+get-orig-source: TAG  = -r $(shell svn log --limit 1 $(CHROMIUM_URL) | grep ^r | head -1 | sed -e 's/^r\([^ ]*\).*/\1/')
+endif
+get-orig-source: gos-all
+
+get-current-source: TAG = -r $(DEBIAN_REVISION)
+get-current-source: gos-all
+
+gos-all: gos-co gos-pack
+gos-co:
+	rm -rf $(TMP_DIR)
+	mkdir $(TMP_DIR)
+	# Checkout
+	svn co $(GCLIENT_URL) $(TMP_DIR)/depot_tools
+	cd $(TMP_DIR) && ./depot_tools/gclient config $(CHROMIUM_URL)
+	cd $(TMP_DIR) && ./depot_tools/gclient sync
+	# Remove binaries
+	cd $(TMP_DIR)/src && find . -type f \( -iname \*.exe -o -iname \*.dll -o -iname \*.pdb \) -exec rm -fv {} \; > REMOVED-bin_only.txt
+	
+ifneq (,$(DEBIAN_TAG))
+gos-pack: VERSION  = $(shell echo $(DEBIAN_TAG) | cut -d= -f2)
+else
+gos-pack: REVISION = $(shell cd $(TMP_DIR)/src && svn log --xml --limit 1 | grep -E '^( *revision=|<date>)' | tr -d '\n' | \
+	             sed -e 's/.*"\([0-9]*\)".*>\(....\)-\(..\)-\(..\)T.*/\2\3\4r\1/')
+gos-pack: VERSION  = $(shell cut -d= -f2 $(TMP_DIR)/src/chrome/VERSION | sed -e 's,$$,.,' | tr -d '\n' | sed -e 's/.$$//')~svn$(REVISION)
+endif
+gos-pack:
+	# Pack
+	mv $(TMP_DIR)/src $(TMP_DIR)/$(DEBIAN_NAME)
+	cd $(TMP_DIR) && tar jcf $(DEBIAN_NAME)-$(VERSION)-source.tar.bz2 --exclude=.svn $(DEBIAN_NAME)
+	mkdir $(TMP_DIR)/$(DEBIAN_NAME)-$(VERSION)
+	mv $(TMP_DIR)/$(DEBIAN_NAME)-$(VERSION)-source.tar.bz2 $(TMP_DIR)/$(DEBIAN_NAME)-$(VERSION)
+	cd $(TMP_DIR) && tar zcf ../$(DEBIAN_NAME)_$(VERSION).orig.tar.gz $(DEBIAN_NAME)-$(VERSION)
+	rm -rf $(TMP_DIR)
+	@echo "# Done (created $(DEBIAN_NAME)_$(VERSION).orig.tar.gz)"
+	@ls -l $(DEBIAN_NAME)_$(VERSION).orig.tar.gz

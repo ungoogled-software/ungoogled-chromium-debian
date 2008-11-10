@@ -1,0 +1,29 @@
+Source: chrome
+Section: web
+Priority: optional
+Maintainer: Ubuntu Mozilla Team <ubuntu-mozillateam@lists.ubuntu.com>
+Vcs-Bzr: https://code.launchpad.net/~mozillateam/chromium/chrome.head
+Build-Depends: cdbs,
+	debhelper (>= 5),
+	libc6-dev-i386 [amd64],
+	pkg-config,
+	scons,
+	quilt,
+	patchutils (>= 0.2.25),
+	python,
+	bison,
+	flex,
+	gperf,
+	libnss3-dev,
+	libnspr4-dev,
+	libpango1.0-dev,
+	libglib2.0-dev,
+	libgtk2.0-dev
+Standards-Version: 3.8
+
+Package: chrome
+Architecture: i386
+Depends: ${shlibs:Depends}
+Description: Chromium browser
+ Chromium is an open-source browser project that aims to build a safer, faster,
+ and more stable way for all Internet users to experience the web.
