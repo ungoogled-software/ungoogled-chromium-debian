@@ -1,5 +1,5 @@
-chrome (0.3.155.0~svn20081108r5057-0ubuntu1) UNRELEASED; urgency=low
+chrome (0.3.155.0~svn20081110r5130-0ubuntu1) UNRELEASED; urgency=low
 
   * Initial release. (Closes: #XXXXXX)
 
- -- Fabien Tassin <fta@ubuntu.com>  Sat, 08 Nov 2008 14:10:01 +0100
+ -- Fabien Tassin <fta@ubuntu.com>  Mon, 10 Nov 2008 23:09:12 +0100
