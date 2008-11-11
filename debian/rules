@@ -16,6 +16,9 @@ SRC_DIR        := $(CURDIR)/build-tree/$(DEBIAN_NAME)
 DEB_BUILDDIR   := $(SRC_DIR)/chrome
 DEB_SCONS_ARGS := --site-dir=$(SRC_DIR)/site_scons
 
+# Verbose?
+DEB_SCONS_ARGS += VERBOSE=0
+
 include /usr/share/cdbs/1/rules/tarball.mk
 include /usr/share/cdbs/1/rules/patchsys-quilt.mk
 include /usr/share/cdbs/1/rules/debhelper.mk
@@ -26,6 +29,13 @@ INSTALL_EXCLUDES = \
 	obj \
 	.sconsign_linux2.dblite \
 	$(NULL)
+
+# System libs
+# - libpng: problem with undefined references to lots of webkit_png_* symbols
+# - zlib: symbols are remapped to MOZ_Z_xx for libpng
+# - libevent: 2 missing symbols. Too old?
+SYSTEM_LIBS     = bzip2,libjpeg,libxml,libxslt,lzma_sdk
+DEB_SCONS_ARGS += SYSTEM_LIBS=$(SYSTEM_LIBS)
 
 # Install: there's no install rules in scons yet, do it manually
 binary-install/$(DEBIAN_NAME)::
