@@ -26,7 +26,7 @@ _cdbs_class_scons = 1
 SCONS ?= scons
 
 common-build-arch common-build-indep:: debian/stamp-scons-build
-common-build-impl::
+debian/stamp-scons-build:
 	cd $(DEB_BUILDDIR) && $(DEB_SCONS_ENVVARS) $(SCONS) $(DEB_SCONS_ARGS)
 
 ### There's no install rule yet
@@ -36,5 +36,6 @@ common-build-impl::
 
 clean::
 	cd $(DEB_BUILDDIR) && $(DEB_SCONS_ENVVARS) $(SCONS) $(DEB_SCONS_CLEAN_ARGS) --keep-going --clean || true
+	rm -f debian/stamp-scons-build
 
 endif
