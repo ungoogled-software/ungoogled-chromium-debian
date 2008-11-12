@@ -4,46 +4,74 @@
 # Description: Allow system libs via a new SYSTEM_LIBS scons variable
 #
 ---
- build/SConscript.main                   |   76 ++++++++++++++++++++++++++------
+ build/SConscript.main                   |   78 +++++++++++++++++++++++++++-----
+ chrome/SConscript                       |    7 ++
  chrome/tools/test/image_diff/SConscript |    2 
  third_party/bzip2/using_bzip2.scons     |    2 
  third_party/libxml/using_libxml.scons   |    4 -
  webkit/tools/test_shell/SConscript      |    4 -
- 5 files changed, 69 insertions(+), 19 deletions(-)
+ 6 files changed, 79 insertions(+), 18 deletions(-)
 
 Index: chrome/build/SConscript.main
 ===================================================================
 --- chrome.orig/build/SConscript.main
 +++ chrome/build/SConscript.main
-@@ -20,16 +20,27 @@
- 
- 
- load = ARGUMENTS.get('LOAD')
- if load:
+@@ -24,16 +24,19 @@
      load = load.split(',')
  else:
      load = []
  
-+system_libs = ARGUMENTS.get('SYSTEM_LIBS')
-+if system_libs:
-+    system_libs = system_libs.split(',')
-+else:
-+    system_libs = []
-+all_system_libs = []
-+
-+def WantSystemLib(l):
-+    if l not in all_system_libs:
-+        all_system_libs.append(l)
-+    return (l in system_libs)
  
  root_env = Environment(
      tools = ['component_setup'],
  
++    all_system_libs = [],
++    req_system_libs = [],
++
      CHROME_SRC_DIR = '$MAIN_DIR/..',
      DESTINATION_ROOT = '$MAIN_DIR/Hammer',
      TARGET_ROOT = '$DESTINATION_ROOT',
  
-@@ -203,27 +214,43 @@
+     # Where ComponentTestProgram() will build test executables.
+     TESTS_DIR = '$TARGET_ROOT',
+ 
+     # Where ComponentProgram() will build program executables.
+@@ -90,16 +93,34 @@
+     PERL_INCLUDE_FLAG     = '-I ',
+     PERL_INCLUDE_SUFFIX   = '',
+     _PERL_INCLUDE_FLAGS   = ('${_concat(PERL_INCLUDE_FLAG, '
+                              'PERL_INCLUDE_PATH, '
+                              'PERL_INCLUDE_SUFFIX,'
+                              '__env__, RDirs, TARGET, SOURCE)}'),
+ )
+ 
++# Requested list of system (shared) libraries, from the comma separated
++# SYSTEM_LIBS variable
++root_env['req_system_libs'] = ARGUMENTS.get('SYSTEM_LIBS')
++if root_env['req_system_libs']:
++  root_env['req_system_libs'] = root_env['req_system_libs'].split(',')
++else:
++  root_env['req_system_libs'] = []
++
++def WantSystemLib(env, lib):
++  """
++  Return true if lib has been requested as a system library in SYSTEM_LIBS.
++  Also store its name into the 'all_system_libs' env variable so it could later be
++  listed as an available system library in the help message.
++  """
++  if lib not in env['all_system_libs']:
++    env['all_system_libs'].append(lib)
++  return (lib in env['req_system_libs'])
++root_env.AddMethod(WantSystemLib, "WantSystemLib")
+ 
+ def ChromeProgram(env, *args, **kw):
+   return env.ComponentProgram(*args, **kw)
+ root_env.AddMethod(ChromeProgram)
+ 
+ def ChromeTestProgram(env, *args, **kw):
+   return env.ComponentTestProgram(*args, **kw)
+ root_env.AddMethod(ChromeTestProgram)
+@@ -203,27 +224,43 @@
  
  if LoadComponent('skia'):
    sconscripts.append('$SKIA_DIR/SConscript')
@@ -52,25 +80,25 @@ Index: chrome/build/SConscript.main
    sconscripts.append('$TESTING_DIR/SConscript.gtest')
  
  if LoadComponent('third_party'):
-+  if not WantSystemLib('bzip2'):
++  if not root_env.WantSystemLib('bzip2'):
 +    sconscripts.append('$BZIP2_DIR/bzip2.scons')
 +    root_env.Append(BZIP2_LIB = ['bzip2'])
 +  else:
 +    root_env.Append(BZIP2_LIB = ['bz2'])
-+  if not WantSystemLib('libpng'):
++  if not root_env.WantSystemLib('libpng'):
 +    sconscripts.append('$LIBPNG_DIR/libpng.scons')
-+  if not WantSystemLib('libjpeg'):
++  if not root_env.WantSystemLib('libjpeg'):
 +    sconscripts.append('$LIBJPEG_DIR/SConscript')
-+  if not WantSystemLib('libxml'):
++  if not root_env.WantSystemLib('libxml'):
 +    sconscripts.append('$LIBXML_DIR/SConscript')
 +    root_env.Append(XML_LIB = ['libxml'])
 +  else:
 +    root_env.Append(XML_LIB = ['xml2'])
-+  if not WantSystemLib('libxslt'):
++  if not root_env.WantSystemLib('libxslt'):
 +    sconscripts.append('$LIBXSLT_DIR/SConscript')
-+  if not WantSystemLib('lzma_sdk'):
++  if not root_env.WantSystemLib('lzma_sdk'):
 +    sconscripts.append('$LZMA_SDK_DIR/SConscript')
-+  if not WantSystemLib('zlib'):
++  if not root_env.WantSystemLib('zlib'):
 +    sconscripts.append('$ZLIB_DIR/zlib.scons')
 +    root_env.Append(ZLIB_LIB = ['zlib'])
 +  else:
@@ -94,34 +122,7 @@ Index: chrome/build/SConscript.main
  
  if LoadComponent('webkit'):
    sconscripts.append('$WEBKIT_DIR/SConscript')
-@@ -435,20 +462,23 @@
-     linux_env['ENV'][envvar] = os.environ[envvar]
- 
- excluded_warnings = [
-   # TODO: Clean up uses of ext/hash_map and remove this.
-   # (see unordered_map and base/hash_tables.h)
-   '-Wno-deprecated',  # Needed for using ext/hash_map on GCC 4.3
-   '-Wno-unknown-pragmas',  # In wtf's ref counting system
- ]
-+if not WantSystemLib('libevent'):
-+  linux_env.Append(
-+        BUILD_SCONSCRIPTS = [
-+            '$LIBEVENT_DIR/libevent.scons',
-+        ],
-+  )
- linux_env.Append(
--    BUILD_SCONSCRIPTS = [
--        '$LIBEVENT_DIR/libevent.scons',
--    ],
-     CCFLAGS = ['-m32', '-g', '-pthread'],
-     CXXFLAGS = ['-Wall', '-Werror'] + excluded_warnings,
-     LINKFLAGS = ['-m32', '-pthread'],
- )
- 
- linux_env.Replace(
-     # We have several cases where archives depend on each other in a cyclic
-     # fashion. (V8Bindings, libport and WebCore being the most significant
-@@ -508,17 +538,30 @@
+@@ -508,17 +545,30 @@
    except OSError, e:
      print ('\n'
          'Failed to find a package dependency.  Please install all the\n'
@@ -131,14 +132,14 @@ Index: chrome/build/SConscript.main
  
      sys.exit(1)
 -
-+  if WantSystemLib('libxml'):
++  if root_env.WantSystemLib('libxml'):
 +    try:
 +      linux_env.ParseConfig('pkg-config --cflags --libs libxml-2.0')
 +    except OSError, e:
 +      print ('\n'
 +          'libxml requested in SYSTEM_LIBS but not found\n')
 +      sys.exit(1)
-+  if WantSystemLib('libxslt'):
++  if root_env.WantSystemLib('libxslt'):
 +    try:
 +      linux_env.ParseConfig('pkg-config --cflags --libs libxslt')
 +    except OSError, e:
@@ -153,7 +154,7 @@ Index: chrome/build/SConscript.main
  environment_list.append(mac_env)
  mac_env.Tool('target_platform_mac')
  mac_env.Tool('target_debug')
-@@ -549,20 +592,23 @@
+@@ -549,20 +599,23 @@
          '$GOOGLE_UPDATE_DIR/SConscript',
          '$RLZ_DIR/SConscript',
          '$SANDBOX_DIR/sandbox.scons',
@@ -163,7 +164,7 @@ Index: chrome/build/SConscript.main
  )
  
 -mac_env.Append(
-+if not WantSystemLib('libevent'):
++if not root_env.WantSystemLib('libevent'):
 +  mac_env.Append(
      BUILD_SCONSCRIPTS = [
          '$LIBEVENT_DIR/libevent.scons',
@@ -178,7 +179,7 @@ Index: chrome/build/SConscript.main
          '${str(SOURCE).endswith(".mm") and "-fobjc-gc" or ""}',
      ],
      CCFLAGS = [
-@@ -629,32 +675,36 @@
+@@ -629,32 +682,37 @@
  
  help_fmt = """
  Usage: hammer [SCONS_OPTIONS] [VARIABLES] [TARGET] ...
@@ -187,8 +188,9 @@ Index: chrome/build/SConscript.main
    LOAD=[module,...]         Comma-separated list of components to load in the
                                dependency graph ('-' prefix excludes):
  %s
-+  SYSTEM_LIBS=[lib,...]     Comma-separated list of system libraries that must
-+                              be used from the system (not be built here):
++  SYSTEM_LIBS=[lib,...]     Comma-separated list of system libraries to link
++                              dynamically (by default they are built in from
++                              included sources):
 +%s
    PROGRESS=type             Display a progress indicator:
                                name:  print each evaluated target name
@@ -204,7 +206,7 @@ Index: chrome/build/SConscript.main
      subsequent_indent = ' '*32,
    )
    components = tw.fill(', '.join(components))
-+  all_system_libs = tw.fill(', '.join(all_system_libs))
++  all_system_libs = tw.fill(', '.join(env['all_system_libs']))
  
 -  Help(help_fmt % components)
 +  Help(help_fmt % (components, all_system_libs))
@@ -323,3 +325,33 @@ Index: chrome/third_party/libxml/using_libxml.scons
 +        env['XML_LIB'],
      ],
  )
+Index: chrome/chrome/SConscript
+===================================================================
+--- chrome.orig/chrome/SConscript
++++ chrome/chrome/SConscript
+@@ -387,20 +387,23 @@
+ 
+ # TODO(port)
+   env_test.Object('test/test_file_util.cc',
+                   CPPPATH=['..'] + env['CPPPATH'])
+ 
+ sconscript_files = [
+     'test/chrome_plugin/SConscript',
+     'tools/test/image_diff/SConscript',
+-    'third_party/hunspell/SConscript',
+-    '$THIRD_PARTY_DIR/sqlite/SConscript',
+ ]
+ 
++if not env.WantSystemLib('hunspell'):
++  sconscript_files.append('third_party/hunspell/SConscript')
++if not env.WantSystemLib('sqlite'):
++  sconscript_files.append('$THIRD_PARTY_DIR/sqlite/SConscript')
++
+ # TODO(port)
+ if env['PLATFORM'] == 'win32':
+   sconscript_files.extend([
+       'app/resources/SConscript',
+       'app/theme/SConscript',
+       'browser/views/SConscript',
+       'installer/mini_installer/SConscript',
+       'installer/setup/SConscript',
