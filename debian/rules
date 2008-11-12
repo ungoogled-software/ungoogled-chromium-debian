@@ -34,7 +34,7 @@ INSTALL_EXCLUDES = \
 # - libpng: problem with undefined references to lots of webkit_png_* symbols
 # - zlib: symbols are remapped to MOZ_Z_xx for libpng
 # - libevent: 2 missing symbols. Too old?
-SYSTEM_LIBS     = bzip2,libjpeg,libxml,libxslt,lzma_sdk
+SYSTEM_LIBS     = bzip2,libjpeg,libxml,libxslt,lzma_sdk,hunspell,sqlite
 DEB_SCONS_ARGS += SYSTEM_LIBS=$(SYSTEM_LIBS)
 
 # Install: there's no install rules in scons yet, do it manually
