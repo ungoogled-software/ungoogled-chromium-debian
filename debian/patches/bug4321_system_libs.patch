@@ -1,6 +1,7 @@
 #
 # Ubuntu: none
-# Upstream: http://codereview.chromium.org/271
+# Upstream: http://codereview.chromium.org/10626
+#           http://code.google.com/p/chromium/issues/detail?id=4321
 # Description: Allow system libs via a new SYSTEM_LIBS scons variable
 #
 ---
