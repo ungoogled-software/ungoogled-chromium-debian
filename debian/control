@@ -1,8 +1,8 @@
-Source: chrome
+Source: chromium-browser
 Section: web
 Priority: optional
 Maintainer: Ubuntu Mozilla Team <ubuntu-mozillateam@lists.ubuntu.com>
-Vcs-Bzr: https://code.launchpad.net/~mozillateam/chromium/chrome.head
+Vcs-Bzr: https://code.launchpad.net/~mozillateam/chromium/chromium-browser.head
 Build-Depends: cdbs,
 	debhelper (>= 5),
 	libc6-dev-i386 [amd64],
@@ -28,7 +28,7 @@ Build-Depends: cdbs,
 	libgtk2.0-dev
 Standards-Version: 3.8
 
-Package: chrome
+Package: chromium-browser
 Architecture: i386
 Depends: ${shlibs:Depends}
 Description: Chromium browser
