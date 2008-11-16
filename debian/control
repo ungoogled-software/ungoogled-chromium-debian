@@ -2,7 +2,7 @@ Source: chromium-browser
 Section: web
 Priority: optional
 Maintainer: Ubuntu Mozilla Team <ubuntu-mozillateam@lists.ubuntu.com>
-Vcs-Bzr: https://code.launchpad.net/~mozillateam/chromium/chromium-browser.head
+Vcs-Bzr: https://code.launchpad.net/~chromium-team/chromium-browser/chromium-browser.head
 Build-Depends: cdbs,
 	debhelper (>= 5),
 	libc6-dev-i386 [amd64],
