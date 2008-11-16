@@ -27,7 +27,7 @@ Build-Depends: cdbs,
 	libpango1.0-dev,
 	libglib2.0-dev,
 	libgtk2.0-dev
-Standards-Version: 3.8
+Standards-Version: 3.8.0
 
 Package: chromium-browser
 Architecture: i386
