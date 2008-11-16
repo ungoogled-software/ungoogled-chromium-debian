@@ -34,3 +34,11 @@ Depends: ${shlibs:Depends}
 Description: Chromium browser
  Chromium is an open-source browser project that aims to build a safer, faster,
  and more stable way for all Internet users to experience the web.
+
+Package: chromium-browser-dbg
+Architecture: i386
+Section: devel
+Priority: optional
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: chromium-browser debug symbols
+ Debug symbols for the Chromium browser
