@@ -16,6 +16,14 @@ SRC_DIR        := $(CURDIR)/build-tree/$(DEBIAN_NAME)
 DEB_BUILDDIR   := $(SRC_DIR)/chrome
 DEB_SCONS_ARGS := --site-dir=$(SRC_DIR)/site_scons
 
+WANT_DEBUG := 0
+
+ifeq (1,$(WANT_DEBUG))
+DEB_SCONS_ARGS += --mode=dbg
+else
+DEB_SCONS_ARGS += --mode=opt
+endif
+
 # Verbose?
 DEB_SCONS_ARGS += VERBOSE=0
 
