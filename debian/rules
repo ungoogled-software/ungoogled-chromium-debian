@@ -52,6 +52,8 @@ endif
 # For now, build all test programs
 DEB_SCONS_ARGS += all_test_programs
 
+$(info # Building with DEB_SCONS_ARGS=$(DEB_SCONS_ARGS))
+
 # Install: there's no install rules in scons yet, do it manually
 binary-install/$(DEBIAN_NAME)::
 	mkdir -p debian/$(DEBIAN_NAME)/usr/lib/$(DEBIAN_NAME)
