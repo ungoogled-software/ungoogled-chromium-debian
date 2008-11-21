@@ -73,11 +73,13 @@ binary-install/$(DEBIAN_TESTSUITE)::
 
 # Tests
 binary-post-install/$(DEBIAN_TESTSUITE)::
+	mkdir -p debian/$(DEBIAN_TESTSUITE)/usr/lib/$(DEBIAN_NAME)/test-results
 	cd $(SRC_DIR)/chrome/Hammer ; \
-	for test in $(RUN_TESTS) ; do
+	for test in $(RUN_TESTS) ; do \
 		echo "==========================================================================" ; \
-		echo "# Running '$$test'" ; \
-		./$$test 2>&1 || true
+		echo "# Running '$$test' (last 100 lines only, visit /usr/lib/$(DEBIAN_NAME)/test-results/$$test.txt for more)" ; \
+		./$$test > $(CURDIR)/debian/$(DEBIAN_TESTSUITE)/usr/lib/$(DEBIAN_NAME)/test-results/$$test.txt 2>&1 || true ; \
+		tail -100  $(CURDIR)/debian/$(DEBIAN_TESTSUITE)/usr/lib/$(DEBIAN_NAME)/test-results/$$test.txt ; \
 		echo "==========================================================================" ; \
 		echo ; \
 	done
