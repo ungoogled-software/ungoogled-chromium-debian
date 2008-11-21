@@ -41,12 +41,14 @@ INSTALL_EXCLUDES = \
 	.sconsign_linux2.dblite \
 	$(NULL)
 
-RUN_TESTS = \
+TESTS = \
 	base_unittests \
 	googleurl_unittests \
 	media_unittests \
 	net_perftests \
-	net_unittests \
+	-net_unittests:"Infinite loop in TelnetServerTest.ServerClientSend" \
+	-test_shell:"Needs a DISPLAY" \
+	-test_shell_tests:"Needs a DISPLAY" \
 	unit_tests \
 	$(NULL)
 
@@ -75,9 +77,14 @@ binary-install/$(DEBIAN_TESTSUITE)::
 binary-post-install/$(DEBIAN_TESTSUITE)::
 	mkdir -p debian/$(DEBIAN_TESTSUITE)/usr/lib/$(DEBIAN_NAME)/test-results
 	cd $(SRC_DIR)/chrome/Hammer ; \
-	for test in $(RUN_TESTS) ; do \
+	for test in $(TESTS) ; do \
 		echo "==========================================================================" ; \
-		echo "# Running '$$test' (last 100 lines only, visit /usr/lib/$(DEBIAN_NAME)/test-results/$$test.txt for more)" ; \
+		echo -n "# Running '"`echo "$$test" | sed -e 's/^-\([^:]*\):.*/\1/'`"' " ; \
+		echo "(last 100 lines only, visit /usr/lib/$(DEBIAN_NAME)/test-results/$$test.txt for more)" ; \
+		if [ Z"`echo $$test | sed -e 's/^-.*//'`" = Z ] ; then \
+			echo "Skipped, reason: "`echo $$test | sed -e 's/^[^:]*://'` ; \
+			continue ; \
+		fi ; \
 		./$$test > $(CURDIR)/debian/$(DEBIAN_TESTSUITE)/usr/lib/$(DEBIAN_NAME)/test-results/$$test.txt 2>&1 || true ; \
 		tail -100  $(CURDIR)/debian/$(DEBIAN_TESTSUITE)/usr/lib/$(DEBIAN_NAME)/test-results/$$test.txt ; \
 		echo "==========================================================================" ; \
