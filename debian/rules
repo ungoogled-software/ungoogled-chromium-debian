@@ -39,6 +39,15 @@ INSTALL_EXCLUDES = \
 	.sconsign_linux2.dblite \
 	$(NULL)
 
+RUN_TESTS = \
+	base_unittests \
+	googleurl_unittests \
+	media_unittests \
+	net_perftests \
+	net_unittests \
+	unit_tests \
+	$(NULL)
+
 # System libs
 # - libpng: problem with undefined references to lots of webkit_png_* symbols
 # - zlib: symbols are remapped to MOZ_Z_xx for libpng
@@ -59,6 +68,17 @@ binary-install/$(DEBIAN_NAME)::
 	mkdir -p debian/$(DEBIAN_NAME)/usr/lib/$(DEBIAN_NAME)
 	( cd $(SRC_DIR)/chrome/Hammer ; tar $(foreach excl,$(INSTALL_EXCLUDES),--exclude=$(excl)) -cf - . ) | \
 	( cd debian/$(DEBIAN_NAME)/usr/lib/$(DEBIAN_NAME) ; tar xvf - )
+
+# Tests
+binary-post-install/$(DEBIAN_NAME)::
+	cd $(SRC_DIR)/chrome/Hammer ; \
+	for test in $(RUN_TESTS) ; do
+		echo "==========================================================================" ; \
+		echo "# Running '$$test'" ; \
+		./$$test 2>&1 || true
+		echo "==========================================================================" ; \
+		echo ; \
+	done
 
 # Tarball (get-orig-source & get-current-source)
 GCLIENT_URL  := http://src.chromium.org/svn/trunk/depot_tools/linux
