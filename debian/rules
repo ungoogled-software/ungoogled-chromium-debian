@@ -38,6 +38,8 @@ include $(CURDIR)/debian/cdbs/scons.mk
 INSTALL_EXCLUDES = \
 	lib \
 	obj \
+	opt \
+	dbg \
 	.sconsign_linux2.dblite \
 	$(NULL)
 
