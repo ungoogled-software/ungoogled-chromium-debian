@@ -82,10 +82,13 @@ binary-post-install/$(DEBIAN_TESTSUITE)::
 		echo ; \
 	done
 
+###############################################################################################
+
 # Tarball (get-orig-source & get-current-source)
 GCLIENT_URL  := http://src.chromium.org/svn/trunk/depot_tools/linux
 CHROMIUM_URL := http://src.chromium.org/svn/trunk/src
 TMP_DIR      := $(DEBIAN_NAME)-$(shell echo $$$$)
+USE_GCLIENT  := 0
 
 ifneq (,$(DEBIAN_TAG))
 get-orig-source: TAG  = $(NULL)
@@ -102,9 +105,19 @@ gos-co:
 	rm -rf $(TMP_DIR)
 	mkdir $(TMP_DIR)
 	# Checkout
+ifeq (1,$(USE_GCLIENT))
+ifneq (,$(TAG))
+	$(error glclient doesn't support tags)
+endif
 	svn co $(GCLIENT_URL) $(TMP_DIR)/depot_tools
 	cd $(TMP_DIR) && ./depot_tools/gclient config $(CHROMIUM_URL)
 	cd $(TMP_DIR) && ./depot_tools/gclient sync
+else
+	svn co $(TAG) $(CHROMIUM_URL) $(TMP_DIR)/src
+	for dep in `sed -e '/}/,$$d; /{/d; /^$$/d' $(TMP_DIR)/src/DEPS | perl -pe 's/:\n//' | cut -d\" -f2,4` ; do \
+	 svn co `echo $$dep | cut -d\" -f2 | sed -e 's,^/,$(CHROMIUM_URL:trunk/src=),'` $(TMP_DIR)/`echo $$dep | cut -d\" -f1` ; \
+	done
+endif
 	# Remove binaries
 	cd $(TMP_DIR)/src && find . -type f \( -iname \*.exe -o -iname \*.dll -o -iname \*.pdb \) -exec rm -fv {} \; > REMOVED-bin_only.txt
 	
