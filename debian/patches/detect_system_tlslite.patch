@@ -1,0 +1,26 @@
+---
+ net/url_request/url_request_unittest.h |    1 +
+ 1 file changed, 1 insertion(+)
+
+Index: chromium-browser/net/url_request/url_request_unittest.h
+===================================================================
+--- chromium-browser.orig/net/url_request/url_request_unittest.h
++++ chromium-browser/net/url_request/url_request_unittest.h
+@@ -292,16 +292,17 @@
+       command_line.append(L"\"");
+     }
+ 
+     ASSERT_TRUE(
+         base::LaunchApp(command_line, false, true, &process_handle_)) <<
+         "Failed to launch " << command_line;
+ #elif defined(OS_POSIX)
+     bool tlslite_installed = !access("/usr/bin/tls.py", X_OK) ||
++                             !access("/usr/bin/tls", X_OK) ||
+                              !access("/usr/local/bin/tls.py", X_OK);
+     ASSERT_TRUE(tlslite_installed) << "tlslite not installed?  Please run 'python setup.py install' in third_party/tlslite.";
+ 
+     std::vector<std::string> command_line;
+     command_line.push_back("python");
+     command_line.push_back(WideToUTF8(testserver_path));
+     command_line.push_back("--port=" + port_str);
+     command_line.push_back("--data-dir=" + WideToUTF8(test_data_directory));
