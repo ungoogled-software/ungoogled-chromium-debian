@@ -46,6 +46,9 @@ INSTALL_EXCLUDES = \
 SYSTEM_LIBS     = bzip2,libjpeg,libxml,libxslt,lzma_sdk,hunspell
 DEB_SCONS_ARGS += SYSTEM_LIBS=$(SYSTEM_LIBS)
 
+# For now, build all test programs
+DEB_SCONS_ARGS += all_test_programs
+
 # Install: there's no install rules in scons yet, do it manually
 binary-install/$(DEBIAN_NAME)::
 	mkdir -p debian/$(DEBIAN_NAME)/usr/lib/$(DEBIAN_NAME)
