@@ -15,6 +15,7 @@ Build-Depends: cdbs,
 	bison,
 	flex,
 	gperf,
+	msttcorefonts,
 	python-tlslite,
 	libjpeg62-dev,
 	libbz2-dev,
@@ -43,6 +44,6 @@ Package: chromium-testsuite-dbg
 Architecture: i386
 Section: devel
 Priority: optional
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, msttcorefonts
 Description: chromium-testsuite debug symbols
  Debug symbols for the Chromium test suite
