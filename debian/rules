@@ -80,9 +80,10 @@ binary-post-install/$(DEBIAN_TESTSUITE)::
 	mkdir -p debian/$(DEBIAN_TESTSUITE)/usr/lib/$(DEBIAN_NAME)/test-results
 	cd $(SRC_DIR)/chrome/Hammer ; \
 	for test in $(TESTS) ; do \
+		tname=`echo "$$test" | sed -e 's/^-\([^:]*\):.*/\1/' ; \
 		echo "==========================================================================" ; \
-		echo -n "# Running '"`echo "$$test" | sed -e 's/^-\([^:]*\):.*/\1/'`"' " ; \
-		echo "(last 100 lines only, visit /usr/lib/$(DEBIAN_NAME)/test-results/$$test.txt for more)" ; \
+		echo -n "# Running '$$tname' " ; \
+		echo "(last 100 lines only, visit /usr/lib/$(DEBIAN_NAME)/test-results/$$tname.txt for more)" ; \
 		if [ Z"`echo $$test | sed -e 's/^-.*//'`" = Z ] ; then \
 			echo "Skipped, reason: "`echo $$test | sed -e 's/^[^:]*://'` ; \
 			continue ; \
