@@ -41,12 +41,13 @@ endif
 ifeq (0,$(USE_SYSTEM_SCONS))
 SCONS := ../third_party/scons/scons.py
 endif
-$(info SCONS=$(SCONS))
 
 include /usr/share/cdbs/1/rules/tarball.mk
 include /usr/share/cdbs/1/rules/patchsys-quilt.mk
 include /usr/share/cdbs/1/rules/debhelper.mk
 include $(CURDIR)/debian/cdbs/scons.mk
+
+$(info SCONS=$(SCONS))
 
 INSTALL_EXCLUDES = \
 	lib \
