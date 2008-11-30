@@ -32,7 +32,7 @@ Standards-Version: 3.8.0
 
 Package: chromium-testsuite
 Architecture: i386
-Depends: ${shlibs:Depends}, msttcorefonts
+Depends: ${shlibs:Depends}, msttcorefonts, python-tlslite
 Description: Chromium test suite
  Chromium is an open-source browser project that aims to build a safer, faster,
  and more stable way for all Internet users to experience the web.
