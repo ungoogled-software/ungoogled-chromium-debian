@@ -113,8 +113,13 @@ binary-post-install/$(DEBIAN_TESTSUITE)::
 # Tarball (get-orig-source & get-current-source)
 GCLIENT_URL  := http://src.chromium.org/svn/trunk/depot_tools/linux
 CHROMIUM_URL := http://src.chromium.org/svn/trunk/src
-TMP_DIR      := $(DEBIAN_NAME)-$(shell echo $$$$)
 USE_GCLIENT  := 0
+TMP_DDIR     := $(DEBIAN_NAME)-$(shell echo $$$$)
+ifeq (,$(LOCAL_BRANCH))
+TMP_DIR      := $(TMP_DDIR)
+else
+TMP_DIR      := $(LOCAL_BRANCH)
+endif
 
 ifneq (,$(DEBIAN_TAG))
 get-orig-source: TAG  = $(NULL)
@@ -128,8 +133,10 @@ get-current-source: gos-all
 
 gos-all: gos-co gos-pack
 gos-co:
+ifeq (,$(LOCAL_BRANCH))
 	rm -rf $(TMP_DIR)
-	mkdir $(TMP_DIR)
+endif
+	@if [ ! -d $(TMP_DIR) ] ; then echo mkdir $(TMP_DIR); mkdir $(TMP_DIR) ; fi
 	# Checkout
 ifeq (1,$(USE_GCLIENT))
 ifneq (,$(TAG))
@@ -146,9 +153,14 @@ else
 	 svn co `echo $$dep | cut -d\" -f2 | sed -e 's,^/,$(CHROMIUM_URL:trunk/src=),'` $(TMP_DIR)/`echo $$dep | cut -d\" -f1` ; \
 	done
 endif
+ifneq (,$(LOCAL_BRANCH))
+	rm -rf $(TMP_DDIR)
+	cp -a $(TMP_DIR) $(TMP_DDIR)
+endif
 	# Remove binaries
-	cd $(TMP_DIR)/src && find . -type f \( -iname \*.exe -o -iname \*.dll -o -iname \*.pdb \) -exec rm -fv {} \; > REMOVED-bin_only.txt
+	cd $(TMP_DDIR)/src && find . -type f \( -iname \*.exe -o -iname \*.dll -o -iname \*.pdb \) -exec rm -fv {} \; > REMOVED-bin_only.txt
 	
+gos-pack: TMP_DIR  = $(TMP_DDIR)
 ifneq (,$(DEBIAN_TAG))
 gos-pack: VERSION  = $(shell echo $(DEBIAN_TAG) | cut -d= -f2)
 else
