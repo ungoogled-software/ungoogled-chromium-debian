@@ -147,8 +147,8 @@ endif
 	cd $(TMP_DIR) && ./depot_tools/gclient sync
 else
 	svn co $(TAG) $(CHROMIUM_URL) $(TMP_DIR)/src
-	@for dep in `perl -pe 's,^([a-z]),\\$$$$1,; s,([\]}])$$,$$1;,; s,:$$, => ,; s,:\s*({|"), => $$1,; s, \+ , . ,g; s/Var\("(.*?)"\)/\\$$vars->{"$$1"}/g;' $(TMP_DIR)/src/DEPS | \
-	  perl -e 'local $$/ = undef; $$s = <>; eval $$s; for my $$k (keys %$$deps) { print "$$k\"$$$$deps{$$k}\n" }'` ; do \
+	@for dep in `perl -pe 's,^([a-z]),\\$$$$1,; s,([\]}])$$,$$1;,; s,:$$, => ,; s,:\s*({|"), => $$1,; s, \+ , . ,g; s,@,\\\\@,g; s/Var\("(.*?)"\)/\\$$vars->{"$$1"}/g;' $(TMP_DIR)/src/DEPS | \
+	  perl -e 'local $$/ = undef; $$s = <>; eval $$s; for my $$k (sort keys %$$deps) { print "$$k\"$$$$deps{$$k}\n" }'` ; do \
 	 echo svn co `echo $$dep | cut -d\" -f2 | sed -e 's,^/,$(CHROMIUM_URL:trunk/src=),'` $(TMP_DIR)/`echo $$dep | cut -d\" -f1`  ; \
 	 svn co `echo $$dep | cut -d\" -f2 | sed -e 's,^/,$(CHROMIUM_URL:trunk/src=),'` $(TMP_DIR)/`echo $$dep | cut -d\" -f1` ; \
 	done
