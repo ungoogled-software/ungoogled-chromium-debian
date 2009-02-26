@@ -28,6 +28,7 @@ SCONS ?= scons
 common-build-arch common-build-indep:: debian/stamp-scons-build
 debian/stamp-scons-build:
 	cd $(DEB_BUILDDIR) && $(DEB_SCONS_ENVVARS) $(SCONS) $(DEB_SCONS_ARGS)
+	touch $@
 
 ### There's no install rule yet
 #common-install-arch common-install-indep:: common-install-impl
