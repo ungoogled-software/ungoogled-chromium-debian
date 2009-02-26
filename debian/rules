@@ -89,6 +89,9 @@ common-install-prehook-arch::
 	( cd $(SRC_DIR)/chrome/Hammer ; tar $(foreach excl,$(INSTALL_EXCLUDES),--exclude=$(excl)) -cf - . ) | \
 	( cd debian/tmp/usr/lib/$(DEBIAN_NAME) ; tar xvf - )
 
+binary-install/$(DEBIAN_NAME)::
+	dh_link -p$(DEBIAN_NAME) usr/lib/$(DEBIAN_NAME)/chrome usr/bin/$(DEBIAN_NAME)
+
 # Tests
 binary-post-install/$(DEBIAN_TESTSUITE)::
 	mkdir -p debian/$(DEBIAN_TESTSUITE)/usr/lib/$(DEBIAN_NAME)/test-results
