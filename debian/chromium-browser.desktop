@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Name=Chromium Web Browser
+Comment=Browse the World Wide Web
+GenericName=Web Browser
+Exec=chromium-browser
+Terminal=true
+X-MultipleArgs=false
+Type=Application
+Icon=chromium-browser
+Categories=Application;Network;
+MimeType=text/html;
+StartupWMClass=Chromium
+StartupNotify=true

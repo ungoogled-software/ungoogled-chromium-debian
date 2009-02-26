@@ -5,6 +5,8 @@ debian/tmp/usr/lib/chromium-browser/icudt38l.dat
 debian/tmp/usr/lib/chromium-browser/locales/*
 debian/tmp/usr/lib/chromium-browser/plugins/*
 debian/tmp/usr/lib/chromium-browser/themes/*
+debian/tmp/usr/share/pixmaps
+debian/chromium-browser.desktop usr/share/applications
 
 # to be confirmed
 debian/tmp/usr/lib/chromium-browser/gtk_clipboard_dump
