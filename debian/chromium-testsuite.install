@@ -1,0 +1,3 @@
+debian/tmp/usr/lib/chromium-browser/*tests
+debian/tmp/usr/lib/chromium-browser/*_cache
+debian/tmp/usr/lib/chromium-browser/image_diff
