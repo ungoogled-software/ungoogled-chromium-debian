@@ -174,7 +174,7 @@ else
 endif
 ifneq (,$(LOCAL_BRANCH))
 	rm -rf $(TMP_DDIR)
-	cp -a $(TMP_DIR) $(TMP_DDIR)
+	cp -la $(TMP_DIR) $(TMP_DDIR)
 endif
 	# Remove binaries
 	cd $(TMP_DDIR)/src && find . -type f \( -iname \*.exe -o -iname \*.dll -o -iname \*.pdb \) -exec rm -fv {} \; > REMOVED-bin_only.txt
