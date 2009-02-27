@@ -151,11 +151,25 @@ endif
 	cd $(TMP_DIR) && ./depot_tools/gclient config $(CHROMIUM_URL)
 	cd $(TMP_DIR) && ./depot_tools/gclient sync
 else
-	svn co $(TAG) $(CHROMIUM_URL) $(TMP_DIR)/src
+	@if [ ! -d $(TMP_DIR)/src ] ; then \
+	  echo svn co $(TAG) $(CHROMIUM_URL) $(TMP_DIR)/src ; \
+	  svn co $(TAG) $(CHROMIUM_URL) $(TMP_DIR)/src ; \
+	else \
+	  echo svn update $(TAG) $(TMP_DIR)/src ; \
+	  svn update $(TAG) $(TMP_DIR)/src ; \
+	fi
 	@for dep in `perl -pe 's,^([a-z]),\\$$$$1,; s,([\]}])$$,$$1;,; s,:$$, => ,; s,:\s*({|"), => $$1,; s, \+ , . ,g; s,@,\\\\@,g; s/Var\("(.*?)"\)/\\$$vars->{"$$1"}/g;' $(TMP_DIR)/src/DEPS | \
 	  perl -e 'local $$/ = undef; $$s = <>; eval $$s; for my $$k (sort keys %$$deps) { print "$$k\"$$$$deps{$$k}\n" }'` ; do \
-	 echo svn co `echo $$dep | cut -d\" -f2 | sed -e 's,^/,$(CHROMIUM_URL:trunk/src=),'` $(TMP_DIR)/`echo $$dep | cut -d\" -f1`  ; \
-	 svn co `echo $$dep | cut -d\" -f2 | sed -e 's,^/,$(CHROMIUM_URL:trunk/src=),'` $(TMP_DIR)/`echo $$dep | cut -d\" -f1` ; \
+	  OUT=$(TMP_DIR)/`echo $$dep | cut -d\" -f1` ; \
+	  if [ ! -d $$OUT ] ; then \
+	    echo svn co `echo $$dep | cut -d\" -f2 | sed -e 's,^/,$(CHROMIUM_URL:trunk/src=),'` $$OUT ; \
+	    svn co `echo $$dep | cut -d\" -f2 | sed -e 's,^/,$(CHROMIUM_URL:trunk/src=),'` $$OUT ; \
+	  else \
+	    REV=`echo $$dep | cut -d\" -f2 | grep @ | cut -d@ -f2` ; \
+	    if [ "Z$$REV" != Z ] ; then REV="-r $$REV" ; fi ; \
+	    echo svn update $$REV $$OUT ; \
+	    svn update $$REV $$OUT ; \
+	  fi ; \
 	done
 endif
 ifneq (,$(LOCAL_BRANCH))
