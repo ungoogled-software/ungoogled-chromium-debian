@@ -36,7 +36,7 @@ Build-Depends: cdbs,
 Standards-Version: 3.8.0
 
 Package: chromium-browser
-Architecture: i386
+Architecture: i386 amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Chromium browser
  Chromium is an open-source browser project that aims to build a safer, faster,
@@ -45,7 +45,7 @@ Description: Chromium browser
  This package contains the Chromium browser
 
 Package: chromium-browser-dbg
-Architecture: i386
+Architecture: i386 amd64
 Section: devel
 Priority: optional
 Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-browser (= ${binary:Version})
@@ -53,7 +53,7 @@ Description: chromium-browser debug symbols
  Debug symbols for the Chromium browser
 
 Package: chromium-testsuite
-Architecture: i386
+Architecture: i386 amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-browser (= ${binary:Version}), msttcorefonts, python-tlslite
 Description: Chromium test suite
  Chromium is an open-source browser project that aims to build a safer, faster,
@@ -62,7 +62,7 @@ Description: Chromium test suite
  This package contains a test suite, not the actual Chromium browser
 
 Package: chromium-testsuite-dbg
-Architecture: i386
+Architecture: i386 amd64
 Section: devel
 Priority: optional
 Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-testsuite (= ${binary:Version})
