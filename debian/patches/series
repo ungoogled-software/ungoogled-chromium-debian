@@ -1,3 +1,4 @@
 # build_with_only_one_cpu.patch
 # detect_system_tlslite.patch
 # install_resources.patch
+fix_werror.patch

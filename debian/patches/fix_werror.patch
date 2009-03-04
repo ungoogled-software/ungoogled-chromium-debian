@@ -1,0 +1,54 @@
+---
+ third_party/WebKit/WebCore/dom/XMLTokenizerLibxml2.cpp |    3 ++-
+ v8/src/log.cc                                          |    4 +++-
+ 2 files changed, 5 insertions(+), 2 deletions(-)
+
+Index: chromium-browser/third_party/WebKit/WebCore/dom/XMLTokenizerLibxml2.cpp
+===================================================================
+--- chromium-browser.orig/third_party/WebKit/WebCore/dom/XMLTokenizerLibxml2.cpp
++++ chromium-browser/third_party/WebKit/WebCore/dom/XMLTokenizerLibxml2.cpp
+@@ -840,17 +840,18 @@
+     if (m_parserStopped)
+         return;
+ 
+ #if PLATFORM(WIN_OS)
+     char m[1024];
+     vsnprintf(m, sizeof(m) - 1, message, args);
+ #else
+     char* m;
+-    vasprintf(&m, message, args);
++    if (vasprintf(&m, message, args) < 0)
++      return;
+ #endif
+     
+     if (m_parserPaused)
+         m_pendingCallbacks->appendErrorCallback(type, m, lineNumber(), columnNumber());
+     else
+         handleError(type, m, lineNumber(), columnNumber());
+ 
+ #if !PLATFORM(WIN_OS)
+Index: chromium-browser/v8/src/log.cc
+===================================================================
+--- chromium-browser.orig/v8/src/log.cc
++++ chromium-browser/v8/src/log.cc
+@@ -375,17 +375,19 @@
+       Append("%lc", c);
+     }
+   }
+ }
+ 
+ // Write the log message to the log file currently opened.
+ void LogMessageBuilder::WriteToLogFile() {
+   ASSERT(pos_ <= Logger::kMessageBufferSize);
+-  fwrite(Logger::message_buffer_, 1, pos_, Logger::logfile_);
++  int write = fwrite(Logger::message_buffer_, 1, pos_, Logger::logfile_);
++  if (write == 0)
++    return; // Well..
+ }
+ #endif
+ 
+ 
+ //
+ // Logger class implementation.
+ //
+ Ticker* Logger::ticker_ = NULL;
