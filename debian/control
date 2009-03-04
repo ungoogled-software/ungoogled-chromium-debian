@@ -12,7 +12,7 @@ Build-Depends: cdbs,
 	scons,
 	quilt,
 	g++,
-	g++-multilib
+	g++-multilib [amd64],
 	patchutils (>= 0.2.25),
 	python,
 	bison,
