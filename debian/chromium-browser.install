@@ -1,15 +1,8 @@
 debian/tmp/usr/lib/chromium-browser/chrom*
 debian/tmp/usr/lib/chromium-browser/convert_dict
-debian/tmp/usr/lib/chromium-browser/gtk_clipboard_dump
 debian/tmp/usr/lib/chromium-browser/icudt38l.dat
 debian/tmp/usr/lib/chromium-browser/locales/*
 debian/tmp/usr/lib/chromium-browser/plugins/*
 debian/tmp/usr/lib/chromium-browser/themes/*
 debian/chromium-browser.desktop usr/share/applications
 build-tree/chromium-browser/chrome/installer/linux/common/chromium-browser/chromium-browser.png usr/share/pixmaps
-
-# to be confirmed
-debian/tmp/usr/lib/chromium-browser/gtk_clipboard_dump
-debian/tmp/usr/lib/chromium-browser/test_shell
-debian/tmp/usr/lib/chromium-browser/test_shell.pak
-debian/tmp/usr/lib/chromium-browser/tld_cleanup
