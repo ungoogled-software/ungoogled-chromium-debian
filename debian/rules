@@ -88,8 +88,6 @@ common-install-prehook-arch::
 	mkdir -p debian/tmp/usr/lib/$(DEBIAN_NAME)
 	( cd $(SRC_DIR)/chrome/Hammer ; tar $(foreach excl,$(INSTALL_EXCLUDES),--exclude=$(excl)) -cf - . ) | \
 	( cd debian/tmp/usr/lib/$(DEBIAN_NAME) ; tar xvf - )
-	mkdir -p debian/tmp/usr/share/pixmaps
-	cp $(SRC_DIR)/chrome/app/theme/chromium/about_background.png debian/tmp/usr/share/pixmaps/$(DEBIAN_NAME).png
 
 binary-install/$(DEBIAN_NAME)::
 	dh_link -p$(DEBIAN_NAME) usr/lib/$(DEBIAN_NAME)/chrome usr/bin/$(DEBIAN_NAME)
