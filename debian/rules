@@ -111,6 +111,33 @@ binary-post-install/$(DEBIAN_TESTSUITE)::
 		echo ; \
 	done
 
+# Compare
+PKG_DIRS = $(addprefix debian/,$(shell grep ^Package debian/control | cut -d' ' -f2))
+
+binary-predeb/$(DEBIAN_NAME):: compare
+
+compare:
+	# Look for duplicates, fail if we find any
+	@DUPES=`find $(PKG_DIRS) -type f -print | grep -v /DEBIAN/ | cut -d/ -f3- | sort | uniq -c | grep -vE '^  *1 '` ; \
+	if [ "Z$$DUPES" != Z ] ; then \
+	  echo " => Found duplicates:\n $$DUPES" ; \
+	  exit 1 ; \
+	else \
+	  echo " => No duplicate found" ; \
+	fi
+	# Find missing
+	@find $(PKG_DIRS) -type f -print | grep -v /DEBIAN/ | grep -vE '(/usr/lib/debug|/test-results/)' | \
+	  grep usr/lib/$(DEBIAN_NAME) | cut -d/ -f5- | sort > /tmp/pkg-$$$$.indebs ; \
+	find debian/tmp/usr/lib/$(DEBIAN_NAME) -type f -print | cut -d/ -f5- | grep -vE '\.log$$' | sort > /tmp/pkg-$$$$.inhammer ; \
+	diff -u /tmp/pkg-$$$$.inhammer /tmp/pkg-$$$$.indebs ; \
+	if [ $$? -eq 0 ] ; then \
+	  echo " => All fine" ; \
+	else \
+	  echo " => Found differences, please investigate" ; \
+	  exit 1 ; \
+	fi ; \
+	rm -f /tmp/pkg-$$$$.inhammer /tmp/pkg-$$$$.indebs
+
 ###############################################################################################
 
 # Tarball (get-orig-source & get-current-source)
