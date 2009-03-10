@@ -1,7 +1,7 @@
 Source: chromium-browser
 Section: web
 Priority: optional
-Maintainer: Ubuntu Mozilla Team <ubuntu-mozillateam@lists.ubuntu.com>
+Maintainer: Fabien Tassin <fta@ubuntu.com>
 Vcs-Bzr: https://code.launchpad.net/~chromium-team/chromium-browser/chromium-browser.head
 Homepage: http://code.google.com/chromium/
 Build-Depends: cdbs,
