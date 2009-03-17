@@ -2,7 +2,6 @@ debian/tmp/usr/lib/chromium-browser/*tests
 debian/tmp/usr/lib/chromium-browser/*_cache
 debian/tmp/usr/lib/chromium-browser/image_diff
 debian/tmp/usr/lib/chromium-browser/gtk_clipboard_dump
-debian/tmp/usr/lib/chromium-browser/test_shell
+debian/tmp/usr/lib/chromium-browser/*_shell
 debian/tmp/usr/lib/chromium-browser/test_shell.pak
 debian/tmp/usr/lib/chromium-browser/tld_cleanup
-
