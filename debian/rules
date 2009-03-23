@@ -26,7 +26,7 @@ ifeq (1,$(WANT_DEBUG))
 DEB_SCONS_ARGS += --mode=dbg
 else
 DEB_SCONS_ARGS += --mode=opt
-# Add symbolds
+# Add symbols
 DEB_SCONS_ARGS += SYMBOLS=1
 endif
 
