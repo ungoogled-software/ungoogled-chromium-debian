@@ -140,7 +140,7 @@ compare:
 GCLIENT_URL  := http://src.chromium.org/svn/trunk/depot_tools/linux
 GCLIENT_RURL := http://src.chromium.org/svn/trunk/depot_tools/release/linux
 CHROMIUM_URL := http://src.chromium.org/svn/trunk/src
-USE_GCLIENT  := 0
+USE_GCLIENT  ?= 0
 TMP_DDIR     := $(DEBIAN_NAME)-$(shell echo $$$$)
 ifeq (,$(LOCAL_BRANCH))
 TMP_DIR      := $(TMP_DDIR)
