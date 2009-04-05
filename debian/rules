@@ -53,7 +53,8 @@ INSTALL_EXCLUDES = \
 	obj \
 	opt \
 	dbg \
-	.sconsign_linux2.dblite \
+	.sconsign.dblite \
+	linker.lock \
 	$(NULL)
 
 TESTS = \
