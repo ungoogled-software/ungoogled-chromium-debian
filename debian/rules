@@ -5,8 +5,9 @@ DEBIAN_VERSION		:= $(shell dpkg-parsechangelog | sed -n 's/^Version: *\(.*\)$$/\
 DEBIAN_UPSTREAM_VERSION	:= $(shell echo $(DEBIAN_VERSION) | sed 's/^\(.*\)-[^-]*$$/\1/')
 DEBIAN_REVISION		:= $(shell echo $(DEBIAN_VERSION) | sed 's/^.*r\([^-]*\).*/\1/')
 
-DEB_TAR_SRCDIR := $(DEBIAN_NAME)
-SRC_DIR        := $(CURDIR)/build-tree/$(DEBIAN_NAME)
+# DEB_TAR_SRCDIR has to be 'src' as this is what gyp expects :(
+DEB_TAR_SRCDIR := src
+SRC_DIR        := $(CURDIR)/build-tree/$(DEB_TAR_SRCDIR)
 DEB_BUILDDIR   := $(SRC_DIR)/build
 DEB_SCONS_ARGS := --site-dir=../site_scons
 
@@ -232,9 +233,9 @@ gos-pack: VERSION  = $(shell cut -d= -f2 $(TMP_DIR)/src/chrome/VERSION | sed -e 
 endif
 gos-pack:
 	# Pack
-	mv $(TMP_DIR)/src $(TMP_DIR)/$(DEBIAN_NAME)
-	mv $(TMP_DIR)/depot_tools $(TMP_DIR)/$(DEBIAN_NAME)/
-	cd $(TMP_DIR) && tar jcf $(DEBIAN_NAME)-$(VERSION)-source.tar.bz2 --exclude=.svn $(DEBIAN_NAME)
+	if [ src != $(DEB_TAR_SRCDIR) ] ; then mv $(TMP_DIR)/src $(TMP_DIR)/$(DEB_TAR_SRCDIR) ; fi
+	mv $(TMP_DIR)/depot_tools $(TMP_DIR)/$(DEB_TAR_SRCDIR)
+	cd $(TMP_DIR) && tar jcf $(DEBIAN_NAME)-$(VERSION)-source.tar.bz2 --exclude=.svn $(DEB_TAR_SRCDIR)
 	mkdir $(TMP_DIR)/$(DEBIAN_NAME)-$(VERSION)
 	mv $(TMP_DIR)/$(DEBIAN_NAME)-$(VERSION)-source.tar.bz2 $(TMP_DIR)/$(DEBIAN_NAME)-$(VERSION)
 	cd $(TMP_DIR) && tar zcf ../$(DEBIAN_NAME)_$(VERSION).orig.tar.gz $(DEBIAN_NAME)-$(VERSION)
