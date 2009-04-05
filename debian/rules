@@ -48,8 +48,6 @@ include /usr/share/cdbs/1/rules/patchsys-quilt.mk
 include /usr/share/cdbs/1/rules/debhelper.mk
 include $(CURDIR)/debian/cdbs/scons.mk
 
-$(info SCONS=$(SCONS))
-
 INSTALL_EXCLUDES = \
 	lib \
 	obj \
@@ -82,13 +80,13 @@ endif
 # For now, build everything (inc. all test programs)
 DEB_SCONS_ARGS += All
 
-$(info # Building with DEB_SCONS_ARGS=$(DEB_SCONS_ARGS))
-
 configure/$(DEBIAN_NAME):: debian/configure-stamp
 
 debian/configure-stamp:
 	cd $(SRC_DIR) && python tools/gyp/gyp_dogfood build/all.gyp
 	touch $@
+	# SCONS=$(SCONS) (version $(SCONS_VERSION))
+	# DEB_SCONS_ARGS=$(DEB_SCONS_ARGS)
 
 clean::
 	rm -f debian/configure-stamp
