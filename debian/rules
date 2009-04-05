@@ -77,8 +77,8 @@ SYSTEM_LIBS     = bzip2,libjpeg,libxml,libxslt,lzma_sdk,hunspell
 DEB_SCONS_ARGS += SYSTEM_LIBS=$(SYSTEM_LIBS)
 endif
 
-# For now, build all programs and test programs
-DEB_SCONS_ARGS += all_programs all_test_programs
+# For now, build everything (inc. all test programs)
+DEB_SCONS_ARGS += All
 
 $(info # Building with DEB_SCONS_ARGS=$(DEB_SCONS_ARGS))
 
