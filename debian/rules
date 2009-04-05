@@ -79,7 +79,7 @@ DEB_SCONS_ARGS += SYSTEM_LIBS=$(SYSTEM_LIBS)
 endif
 
 # For now, build everything (inc. all test programs)
-DEB_SCONS_ARGS += All
+# DEB_SCONS_ARGS += all
 
 configure/$(DEBIAN_NAME):: debian/configure-stamp
 
