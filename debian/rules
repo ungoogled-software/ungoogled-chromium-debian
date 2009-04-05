@@ -7,7 +7,7 @@ DEBIAN_REVISION		:= $(shell echo $(DEBIAN_VERSION) | sed 's/^.*r\([^-]*\).*/\1/'
 
 DEB_TAR_SRCDIR := $(DEBIAN_NAME)
 SRC_DIR        := $(CURDIR)/build-tree/$(DEBIAN_NAME)
-DEB_BUILDDIR   := $(SRC_DIR)/chrome
+DEB_BUILDDIR   := $(SRC_DIR)/build
 DEB_SCONS_ARGS := --site-dir=../site_scons
 
 DEBIAN_TESTSUITE := $(DEBIAN_NAME:browser=testsuite)
@@ -17,9 +17,9 @@ WANT_SYSTEM_LIBS := 0
 USE_SYSTEM_SCONS ?= 1
 
 ifeq (1,$(WANT_DEBUG))
-DEB_SCONS_ARGS += --mode=dbg
+DEB_SCONS_ARGS += --mode=Debug
 else
-DEB_SCONS_ARGS += --mode=opt
+DEB_SCONS_ARGS += --mode=Release
 # Add symbols
 DEB_SCONS_ARGS += SYMBOLS=1
 endif
@@ -80,6 +80,12 @@ endif
 DEB_SCONS_ARGS += all_programs all_test_programs
 
 $(info # Building with DEB_SCONS_ARGS=$(DEB_SCONS_ARGS))
+
+configure/$(DEBIAN_NAME):: debian/configure-stamp
+
+debian/configure-stamp:
+	cd $(SRC_DIR) && python tools/gyp/gyp_dogfood build/all.gyp
+	touch $@
 
 # Install: there's no install rules in scons yet, do it manually
 common-install-prehook-arch::
