@@ -18,12 +18,13 @@ WANT_SYSTEM_LIBS := 0
 USE_SYSTEM_SCONS ?= 1
 
 ifeq (1,$(WANT_DEBUG))
-DEB_SCONS_ARGS += --mode=Debug
+BUILD_TYPE := Debug
 else
-DEB_SCONS_ARGS += --mode=Release
+BUILD_TYPE := Release
 # Add symbols
 DEB_SCONS_ARGS += SYMBOLS=1
 endif
+DEB_SCONS_ARGS += --mode=$(BUILD_TYPE)
 
 # Verbose?
 DEB_SCONS_ARGS += VERBOSE=0
@@ -95,7 +96,7 @@ clean::
 # Install: there's no install rules in scons yet, do it manually
 common-install-prehook-arch::
 	mkdir -p debian/tmp/usr/lib/$(DEBIAN_NAME)
-	( cd $(SRC_DIR)/chrome/Hammer ; tar $(foreach excl,$(INSTALL_EXCLUDES),--exclude=$(excl)) -cf - . ) | \
+	( cd $(SRC_DIR)/sconsbuild/$(BUILD_TYPE) ; tar $(foreach excl,$(INSTALL_EXCLUDES),--exclude=$(excl)) -cf - . ) | \
 	( cd debian/tmp/usr/lib/$(DEBIAN_NAME) ; tar xvf - )
 
 binary-install/$(DEBIAN_NAME)::
@@ -104,7 +105,7 @@ binary-install/$(DEBIAN_NAME)::
 # Tests
 binary-post-install/$(DEBIAN_TESTSUITE)::
 	mkdir -p debian/$(DEBIAN_TESTSUITE)/usr/lib/$(DEBIAN_NAME)/test-results
-	cd $(SRC_DIR)/chrome/Hammer ; \
+	cd $(SRC_DIR)/sconsbuild/$(BUILD_TYPE) ; \
 	for test in $(TESTS) ; do \
 		tname=`echo "$$test" | sed -e 's/^-\([^:]*\):.*/\1/'` ; \
 		echo "==========================================================================" ; \
