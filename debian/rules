@@ -14,7 +14,7 @@ DEBIAN_TESTSUITE := $(DEBIAN_NAME:browser=testsuite)
 
 WANT_DEBUG       := 0
 WANT_SYSTEM_LIBS := 0
-USE_SYSTEM_SCONS := 1
+USE_SYSTEM_SCONS ?= 1
 
 ifeq (1,$(WANT_DEBUG))
 DEB_SCONS_ARGS += --mode=dbg
@@ -30,7 +30,9 @@ DEB_SCONS_ARGS += VERBOSE=0
 # scons 0.97 (hardy) fails, switch to in-source scons if system scons < 0.98
 SCONS_VERSION := $(shell grep ^__version__ /usr/bin/scons | cut -d\" -f2)
 ifneq (,$(SCONS_VERSION))
+ifeq (1,$(USE_SYSTEM_SCONS))
 USE_SYSTEM_SCONS := $(shell dpkg --compare-versions $(SCONS_VERSION) lt 0.98; echo $$?)
+endif
 else
 USE_SYSTEM_SCONS := 0
 endif
