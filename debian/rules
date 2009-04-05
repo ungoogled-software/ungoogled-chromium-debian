@@ -166,7 +166,7 @@ endif
 	# Checkout
 ifeq (1,$(USE_GCLIENT))
 ifneq (,$(TAG))
-	$(error glclient doesn't support tags)
+	$(error gclient doesn't support tags)
 endif
 	svn co $(GCLIENT_URL) $(TMP_DIR)/depot_tools
 	cd $(TMP_DIR) && ./depot_tools/gclient config $(CHROMIUM_URL)
