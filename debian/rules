@@ -88,6 +88,9 @@ debian/configure-stamp:
 	cd $(SRC_DIR) && python tools/gyp/gyp_dogfood build/all.gyp
 	touch $@
 
+clean::
+	rm -f debian/configure-stamp
+
 # Install: there's no install rules in scons yet, do it manually
 common-install-prehook-arch::
 	mkdir -p debian/tmp/usr/lib/$(DEBIAN_NAME)
