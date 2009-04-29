@@ -7,3 +7,7 @@ debian/tmp/usr/lib/chromium-browser/test_shell.pak
 debian/tmp/usr/lib/chromium-browser/tld_cleanup
 debian/tmp/usr/lib/chromium-browser/mksnapshot
 debian/tmp/usr/lib/chromium-browser/xml*
+debian/tmp/usr/lib/chromium-browser/codesighs
+debian/tmp/usr/lib/chromium-browser/maptsvdifftool
+debian/tmp/usr/lib/chromium-browser/media_bench
+debian/tmp/usr/lib/chromium-browser/nm2tsv
