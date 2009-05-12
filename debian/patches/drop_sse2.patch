@@ -1,0 +1,30 @@
+---
+ build/common.gypi |    5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+Index: src/build/common.gypi
+===================================================================
+--- src.orig/build/common.gypi
++++ src/build/common.gypi
+@@ -293,18 +293,19 @@
+             # double precision values). This means the floating-point value
+             # used during computation does not change depending on how the
+             # compiler optimized the code, since the value is always kept
+             # in its specified precision.
+             'cflags': [
+               '-m32',
+               '-march=pentium4',
+               '-fno-exceptions',
+-              '-msse2',
+-              '-mfpmath=sse',
++              # See http://code.google.com/p/chromium/issues/detail?id=9007
++              # '-msse2',
++              # '-mfpmath=sse',
+               '-Wall',
+             ],
+             'ldflags': [
+               '-m32',
+             ],
+           }],
+         ],
+       },
