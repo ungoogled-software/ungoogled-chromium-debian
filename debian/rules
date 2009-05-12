@@ -151,8 +151,7 @@ compare:
 ###############################################################################################
 
 # Tarball (get-orig-source & get-current-source)
-GCLIENT_URL  := http://src.chromium.org/svn/trunk/depot_tools/linux
-GCLIENT_RURL := http://src.chromium.org/svn/trunk/depot_tools/release/linux
+GCLIENT_URL  := http://src.chromium.org/svn/trunk/tools/depot_tools
 CHROMIUM_URL := http://src.chromium.org/svn/trunk/src
 USE_GCLIENT  ?= 0
 TMP_DDIR     := $(DEBIAN_NAME)-$(shell echo $$$$)
@@ -178,28 +177,21 @@ ifeq (,$(LOCAL_BRANCH))
 	rm -rf $(TMP_DIR)
 endif
 	@if [ ! -d $(TMP_DIR) ] ; then echo mkdir $(TMP_DIR); mkdir $(TMP_DIR) ; fi
-	@if [ ! -d $(TMP_DIR)/depot_tools ] ; then \
-	  echo svn co $(GCLIENT_URL) $(TMP_DIR)/depot_tools ; \
-	  svn co $(GCLIENT_URL) $(TMP_DIR)/depot_tools ; \
+	@if [ ! -d $(TMP_DIR)/tools/depot_tools ] ; then \
+	  echo svn co $(GCLIENT_URL) $(TMP_DIR)/tools/depot_tools ; \
+	  svn co $(GCLIENT_URL) $(TMP_DIR)/tools/depot_tools ; \
 	else \
-	  echo svn update $(TMP_DIR)/depot_tools ; \
-	  svn update $(TMP_DIR)/depot_tools ; \
+	  echo svn update $(TMP_DIR)/tools/depot_tools ; \
+	  svn update $(TMP_DIR)/tools/depot_tools ; \
 	fi
 	# Checkout
 ifeq (1,$(USE_GCLIENT))
 ifneq (,$(TAG))
 	$(error gclient doesn't support tags)
 endif
-	cd $(TMP_DIR) && ./depot_tools/gclient config $(CHROMIUM_URL)
-	cd $(TMP_DIR) && ./depot_tools/gclient sync
+	cd $(TMP_DIR) && ./tools/depot_tools/gclient config $(CHROMIUM_URL)
+	cd $(TMP_DIR) && ./tools/depot_tools/gclient sync
 else
-	@if [ ! -d $(TMP_DIR)/depot_tools/release/linux ] ; then \
-	  echo svn co $(GCLIENT_RURL) $(TMP_DIR)/depot_tools/release/linux ; \
-	  svn co $(GCLIENT_RURL) $(TMP_DIR)/depot_tools/release/linux ; \
-	else \
-	  echo svn update $(TMP_DIR)/depot_tools/release/linux ; \
-	  svn update $(TMP_DIR)/depot_tools/release/linux ; \
-	fi
 	@if [ ! -d $(TMP_DIR)/src ] ; then \
 	  echo svn co $(TAG) $(CHROMIUM_URL) $(TMP_DIR)/src ; \
 	  svn co $(TAG) $(CHROMIUM_URL) $(TMP_DIR)/src ; \
@@ -239,7 +231,7 @@ endif
 gos-pack:
 	# Pack
 	if [ src != $(DEB_TAR_SRCDIR) ] ; then mv $(TMP_DIR)/src $(TMP_DIR)/$(DEB_TAR_SRCDIR) ; fi
-	mv $(TMP_DIR)/depot_tools $(TMP_DIR)/$(DEB_TAR_SRCDIR)
+	mv $(TMP_DIR)/tools/depot_tools $(TMP_DIR)/$(DEB_TAR_SRCDIR)/depot_tools
 	cd $(TMP_DIR) && tar jcf $(DEBIAN_NAME)-$(VERSION)-source.tar.bz2 --exclude=.svn $(DEB_TAR_SRCDIR)
 	mkdir $(TMP_DIR)/$(DEBIAN_NAME)-$(VERSION)
 	mv $(TMP_DIR)/$(DEBIAN_NAME)-$(VERSION)-source.tar.bz2 $(TMP_DIR)/$(DEBIAN_NAME)-$(VERSION)
