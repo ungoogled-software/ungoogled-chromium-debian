@@ -27,7 +27,7 @@ endif
 DEB_SCONS_ARGS += --mode=$(BUILD_TYPE)
 
 # Verbose?
-DEB_SCONS_ARGS += VERBOSE=0
+DEB_SCONS_ARGS += VERBOSE=1
 
 # scons 0.97 (hardy) fails, switch to in-source scons if system scons < 0.98
 # scons 1.2.0 (jaunty) is no longer enough since gyp landed
