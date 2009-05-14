@@ -5,4 +5,3 @@ debian/tmp/usr/lib/chromium-browser/locales/*
 debian/tmp/usr/lib/chromium-browser/plugins/*
 debian/tmp/usr/lib/chromium-browser/themes/*
 debian/chromium-browser.desktop usr/share/applications
-build-tree/src/chrome/installer/linux/common/chromium-browser/chromium-browser.png usr/share/pixmaps

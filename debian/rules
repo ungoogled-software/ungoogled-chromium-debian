@@ -101,6 +101,7 @@ common-install-prehook-arch::
 
 binary-install/$(DEBIAN_NAME)::
 	dh_link -p$(DEBIAN_NAME) usr/lib/$(DEBIAN_NAME)/chrome usr/bin/$(DEBIAN_NAME)
+	cp -a build-tree/src/chrome/app/theme/chromium/product_logo_48.png $(CURDIR)/debian/$(DEBIAN_NAME)/usr/share/pixmaps/$(DEBIAN_NAME).png
 
 # Tests
 binary-post-install/$(DEBIAN_TESTSUITE)::
