@@ -41,6 +41,7 @@ ifeq (4.4,$(CC_VERSION))
 CC  := gcc-4.3
 CXX := g++-4.3
 export CC CXX
+$(info # CC=$(CC) CXX=$(CXX))
 endif
 endif
 
