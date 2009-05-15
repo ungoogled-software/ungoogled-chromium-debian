@@ -29,6 +29,18 @@ DEB_SCONS_ARGS += --mode=$(BUILD_TYPE)
 # Verbose?
 DEB_SCONS_ARGS += --verbose
 
+# We have some issues with gcc 4.4, use 4.3 for now
+AVOID_GCC_44 ?= 1
+CC_VERSION   := $(shell gcc -dumpversion | cut -d. -f-2)
+
+ifeq (1,$(AVOID_GCC_44))
+ifeq (4.4,$(CC_VERSION))
+CC  := gcc-4.3
+CXX := g++-4.3
+export CC CXX
+endif
+endif
+
 # scons 0.97 (hardy) fails, switch to in-source scons if system scons < 0.98
 # scons 1.2.0 (jaunty) is no longer enough since gyp landed
 SCONS_VERSION := $(shell grep ^__version__ /usr/bin/scons | cut -d\" -f2)
