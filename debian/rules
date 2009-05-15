@@ -16,6 +16,7 @@ DEBIAN_TESTSUITE := $(DEBIAN_NAME:browser=testsuite)
 WANT_DEBUG       := 0
 WANT_SYSTEM_LIBS := 0
 USE_SYSTEM_SCONS ?= 1
+VERBOSE          ?= 0
 
 ifeq (1,$(WANT_DEBUG))
 BUILD_TYPE := Debug
@@ -27,7 +28,9 @@ endif
 DEB_SCONS_ARGS += --mode=$(BUILD_TYPE)
 
 # Verbose?
+ifeq (1,$(VERBOSE))
 DEB_SCONS_ARGS += --verbose
+endif
 
 # We have some issues with gcc 4.4, use 4.3 for now
 AVOID_GCC_44 ?= 1
