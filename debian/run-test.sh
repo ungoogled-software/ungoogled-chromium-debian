@@ -24,7 +24,7 @@ if [ ! -d $LOGDIR ] ; then
 fi
 
 debug() {
-  echo "run\nbt f\n" > /tmp/gdb-cmds-$$.txt
+  echo "run\nbt\nbt f\n" > /tmp/gdb-cmds-$$.txt
   gdb -n -batch -x /tmp/gdb-cmds-$$.txt $TEST > $LOGDIR/$TEST--gdb.txt 2>&1
   rm -f /tmp/gdb-cmds-$$.txt
 }
