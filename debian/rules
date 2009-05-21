@@ -74,9 +74,14 @@ INSTALL_EXCLUDES = \
 	linker.lock \
 	$(NULL)
 
+# List of tests
+# - prefix the name with a "-" to disable the test suite completely and
+#   append a reason after a ":"
+# - to disable one or more tests within a given testsuite,
+#   append the names of the tests (using the Google Test filter syntax)
 TESTS = \
 	-app_unittests:"Needs a DISPLAY" \
-	base_unittests \
+	base_unittests:-StatsTableTest.VerifySlots \
 	googleurl_unittests \
 	ipc_tests \
 	media_unittests \
@@ -139,13 +144,14 @@ binary-post-install/$(DEBIAN_TESTSUITE)::
 	@mkdir -p debian/$(DEBIAN_TESTSUITE)/usr/lib/$(DEBIAN_NAME)/test-results
 	@cd $(SRC_DIR)/sconsbuild/$(BUILD_TYPE) && \
 	for test in $(TESTS) ; do \
-		tname=`echo "$$test" | sed -e 's/^-\([^:]*\):.*/\1/'` ; \
+		tname=`echo "$$test" | sed -e 's/^-\?\([^:]*\):.*/\1/'` ; \
+		filter=`echo "$$test" | sed -e 's/^[^-][^:]*://' | grep -v $$test` ; \
 		echo "==========================================================================" ; \
 		if [ Z"`echo $$test | sed -e 's/^-.*//'`" = Z ] ; then \
 			echo "Skipped '$$tname', reason: "`echo $$test | sed -e 's/^[^:]*://'` ; \
 			continue ; \
 		fi ; \
-		$(CURDIR)/debian/run-test.sh ./$$test $(CURDIR)/debian/$(DEBIAN_TESTSUITE)/usr/lib/$(DEBIAN_NAME)/test-results/ || true ; \
+		$(CURDIR)/debian/run-test.sh ./$$test $(CURDIR)/debian/$(DEBIAN_TESTSUITE)/usr/lib/$(DEBIAN_NAME)/test-results/ $$filter || true ; \
 		echo "==========================================================================" ; \
 		echo ; \
 	done

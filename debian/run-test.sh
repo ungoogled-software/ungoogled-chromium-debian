@@ -2,6 +2,7 @@
 
 TEST=$1
 LOGDIR=$2
+FILTER=$3
 
 if [ "Z$TEST" = "Z" ] ; then
   echo "Usage: $0 test_file logdir"
@@ -24,14 +25,20 @@ if [ ! -d $LOGDIR ] ; then
 fi
 
 debug() {
-  echo "run\necho ------------------------------------------------\\\\n\necho (gdb) bt\\\\n\nbt\n" > /tmp/gdb-cmds-$$.txt
+  echo "run $FILTER\necho ------------------------------------------------\\\\n\necho (gdb) bt\\\\n\nbt\n" > /tmp/gdb-cmds-$$.txt
   echo "echo ------------------------------------------------\\\\n\necho (gdb) bt f\\\\n\nbt f\n" >> /tmp/gdb-cmds-$$.txt
   gdb -n -batch -x /tmp/gdb-cmds-$$.txt $TEST > $LOGDIR/$TEST--gdb.txt 2>&1
   rm -f /tmp/gdb-cmds-$$.txt
 }
 
-echo "# Running '$TEST' ..."
-$TEST > $LOGDIR/$TEST.txt 2>&1
+if [ "Z$FILTER" != Z ] ; then
+  FILTER="--gtest_filter=$FILTER"
+  echo "# Running '$TEST $FILTER' ..."
+else
+  echo "# Running '$TEST' ..."
+fi
+
+$TEST $FILTER > $LOGDIR/$TEST.txt 2>&1
 RET=$?
 if [ $RET -ne 0 ] ; then
   echo "# '$TEST' returned with error code $RET"
