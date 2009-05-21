@@ -145,7 +145,7 @@ binary-post-install/$(DEBIAN_TESTSUITE)::
 	@cd $(SRC_DIR)/sconsbuild/$(BUILD_TYPE) && \
 	for test in $(TESTS) ; do \
 		tname=`echo "$$test" | sed -e 's/^-\?\([^:]*\):.*/\1/'` ; \
-		filter=`echo "$$test" | sed -e 's/^[^-][^:]*://' | grep -v $$test` ; \
+		filter=`echo "$$test" | sed -e 's/^[^-][^:]*://' | grep -v -- "$$test"` ; \
 		echo "==========================================================================" ; \
 		if [ Z"`echo $$test | sed -e 's/^-.*//'`" = Z ] ; then \
 			echo "Skipped '$$tname', reason: "`echo $$test | sed -e 's/^[^:]*://'` ; \
