@@ -75,13 +75,20 @@ INSTALL_EXCLUDES = \
 	$(NULL)
 
 TESTS = \
+	-app_unittests:"Needs a DISPLAY" \
 	base_unittests \
 	googleurl_unittests \
+	ipc_tests \
 	media_unittests \
 	net_perftests \
-	-net_unittests:"Infinite loop in TelnetServerTest.ServerClientSend" \
+	net_unittests \
+	-page_cycler_tests:"Needs a DISPLAY" \
+	perf_tests \
+	printing_unittests \
+	-startup_tests:"Needs a DISPLAY" \
 	-test_shell:"Needs a DISPLAY" \
 	-test_shell_tests:"Needs a DISPLAY" \
+	-ui_tests:"Needs a DISPLAY" \
 	unit_tests \
 	$(NULL)
 
