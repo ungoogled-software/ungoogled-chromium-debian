@@ -4,4 +4,5 @@ debian/tmp/usr/lib/chromium-browser/convert_dict
 debian/tmp/usr/lib/chromium-browser/locales/*
 debian/tmp/usr/lib/chromium-browser/plugins/*
 debian/tmp/usr/lib/chromium-browser/themes/*
+debian/tmp/usr/lib/chromium-browser/resources/*
 debian/chromium-browser.desktop usr/share/applications
