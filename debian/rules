@@ -122,19 +122,17 @@ binary-install/$(DEBIAN_NAME)::
 
 # Tests
 binary-post-install/$(DEBIAN_TESTSUITE)::
+	chmod u+x $(CURDIR)/debian/run-test.sh
 	mkdir -p debian/$(DEBIAN_TESTSUITE)/usr/lib/$(DEBIAN_NAME)/test-results
 	cd $(SRC_DIR)/sconsbuild/$(BUILD_TYPE) && \
 	for test in $(TESTS) ; do \
 		tname=`echo "$$test" | sed -e 's/^-\([^:]*\):.*/\1/'` ; \
 		echo "==========================================================================" ; \
-		echo -n "# Running '$$tname' " ; \
-		echo "(last 100 lines only, visit /usr/lib/$(DEBIAN_NAME)/test-results/$$tname.txt for more)" ; \
 		if [ Z"`echo $$test | sed -e 's/^-.*//'`" = Z ] ; then \
-			echo "Skipped, reason: "`echo $$test | sed -e 's/^[^:]*://'` ; \
+			echo "Skipped '$$tname', reason: "`echo $$test | sed -e 's/^[^:]*://'` ; \
 			continue ; \
 		fi ; \
-		./$$test > $(CURDIR)/debian/$(DEBIAN_TESTSUITE)/usr/lib/$(DEBIAN_NAME)/test-results/$$test.txt 2>&1 || true ; \
-		tail -100  $(CURDIR)/debian/$(DEBIAN_TESTSUITE)/usr/lib/$(DEBIAN_NAME)/test-results/$$test.txt ; \
+		$(CURDIR)/debian/run-test.sh ./$$test $(CURDIR)/debian/$(DEBIAN_TESTSUITE)/usr/lib/$(DEBIAN_NAME)/test-results/ || true ; \
 		echo "==========================================================================" ; \
 		echo ; \
 	done
