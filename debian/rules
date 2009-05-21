@@ -129,9 +129,15 @@ binary-install/$(DEBIAN_NAME)::
 
 # Tests
 binary-post-install/$(DEBIAN_TESTSUITE)::
-	chmod u+x $(CURDIR)/debian/run-test.sh
-	mkdir -p debian/$(DEBIAN_TESTSUITE)/usr/lib/$(DEBIAN_NAME)/test-results
-	cd $(SRC_DIR)/sconsbuild/$(BUILD_TYPE) && \
+	######################### TESTS ######################################
+	# Run all possible tests from the -testsuite
+	# Notes: all results could be found in the $(DEBIAN_TESTSUITE) under
+	# under /usr/lib/$(DEBIAN_NAME)/test-results
+	# The builders have no network access and no display so the corresponding
+	# tests have to be skipped
+	@chmod u+x $(CURDIR)/debian/run-test.sh
+	@mkdir -p debian/$(DEBIAN_TESTSUITE)/usr/lib/$(DEBIAN_NAME)/test-results
+	@cd $(SRC_DIR)/sconsbuild/$(BUILD_TYPE) && \
 	for test in $(TESTS) ; do \
 		tname=`echo "$$test" | sed -e 's/^-\([^:]*\):.*/\1/'` ; \
 		echo "==========================================================================" ; \
