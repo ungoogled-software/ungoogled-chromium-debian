@@ -135,8 +135,8 @@ binary-install/$(DEBIAN_NAME)::
 # Tests
 binary-post-install/$(DEBIAN_TESTSUITE)::
 	######################### TESTS ######################################
-	# Run all possible tests from the -testsuite
-	# Notes: all results could be found in the $(DEBIAN_TESTSUITE) under
+	# Run all possible tests from the chromium testsuite
+	# Full results could be found in the '$(DEBIAN_TESTSUITE)' package
 	# under /usr/lib/$(DEBIAN_NAME)/test-results
 	# The builders have no network access and no display so the corresponding
 	# tests have to be skipped
