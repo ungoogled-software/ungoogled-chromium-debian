@@ -1,5 +1,4 @@
 debian/tmp/usr/lib/chromium-browser/chrom*
-debian/tmp/usr/lib/chromium-browser/convert_dict
 #debian/tmp/usr/lib/chromium-browser/icudt38l.dat
 debian/tmp/usr/lib/chromium-browser/locales/*
 debian/tmp/usr/lib/chromium-browser/plugins/*

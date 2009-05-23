@@ -72,6 +72,7 @@ INSTALL_EXCLUDES = \
 	dbg \
 	.sconsign.dblite \
 	linker.lock \
+	convert_dict \
 	$(NULL)
 
 # List of tests
