@@ -151,7 +151,7 @@ binary-post-install/$(DEBIAN_TESTSUITE)::
 			echo "Skipped '$$tname', reason: "`echo $$test | sed -e 's/^[^:]*://'` ; \
 			continue ; \
 		fi ; \
-		$(CURDIR)/debian/run-test.sh ./$$test $(CURDIR)/debian/$(DEBIAN_TESTSUITE)/usr/lib/$(DEBIAN_NAME)/test-results/ $$filter || true ; \
+		$(CURDIR)/debian/run-test.sh ./$$tname $(CURDIR)/debian/$(DEBIAN_TESTSUITE)/usr/lib/$(DEBIAN_NAME)/test-results/ $$filter || true ; \
 		echo "==========================================================================" ; \
 		echo ; \
 	done
