@@ -190,6 +190,19 @@ compare:
 GCLIENT_URL  := http://src.chromium.org/svn/trunk/tools/depot_tools
 CHROMIUM_URL := http://src.chromium.org/svn/trunk/src
 USE_GCLIENT  ?= 0
+STRIP_TARBALL ?= 1
+
+STRIPPED_DIRS := \
+	webkit/data/layout_tests/platform/chromium-win \
+	webkit/data/layout_tests/platform/chromium-mac \
+	webkit/data/layout_tests/LayoutTests/platform/mac \
+	webkit/data/layout_tests/LayoutTests/platform/mac-tiger \
+	webkit/data/layout_tests/LayoutTests/platform/mac-leopard \
+	webkit/data/layout_tests/LayoutTests/platform/qt \
+	webkit/data/layout_tests/LayoutTests/platform/win \
+	third_party/icu38/mac \
+	$(NULL)
+
 TMP_DDIR     := $(DEBIAN_NAME)-$(shell echo $$$$)
 ifeq (,$(LOCAL_BRANCH))
 TMP_DIR      := $(TMP_DDIR)
@@ -255,6 +268,11 @@ ifneq (,$(LOCAL_BRANCH))
 endif
 	# Remove binaries
 	cd $(TMP_DDIR)/src && find . -type f \( -iname \*.exe -o -iname \*.dll -o -iname \*.pdb \) -exec rm -fv {} \; > REMOVED-bin_only.txt
+ifeq (1,$(STRIP_TARBALL))
+	# Strip tarball from some big directories not needed on the linux platform
+	cd $(TMP_DDIR)/src && rm -rfv $(STRIPPED_DIRS) | grep -vE '/\.svn(/|.$$)' > REMOVED-stripped.txt
+	wc $(TMP_DDIR)/src/REMOVED-stripped.txt
+endif
 	
 gos-pack: TMP_DIR  = $(TMP_DDIR)
 ifneq (,$(DEBIAN_TAG))
