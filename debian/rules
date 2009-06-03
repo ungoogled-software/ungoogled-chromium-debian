@@ -201,6 +201,7 @@ STRIPPED_DIRS := \
 	webkit/data/layout_tests/LayoutTests/platform/qt \
 	webkit/data/layout_tests/LayoutTests/platform/win \
 	third_party/icu38/mac \
+	o3d \
 	$(NULL)
 
 TMP_DDIR     := $(DEBIAN_NAME)-$(shell echo $$$$)
