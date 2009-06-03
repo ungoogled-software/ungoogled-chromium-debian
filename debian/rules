@@ -98,6 +98,32 @@ TESTS = \
 	unit_tests \
 	$(NULL)
 
+FFMPEG_MT_PREFIX = $(SRC_DIR)/sconsbuild/chromium-ffmpeg
+FFMPEG_MT_CONFIGURE_FLAGS = \
+	--disable-ffmpeg	\
+	--disable-ffplay	\
+	--disable-ffserver	\
+	--enable-shared		\
+	--disable-static	\
+	--disable-debug		\
+	--enable-pthreads	\
+	--disable-network	\
+	--disable-encoders	\
+	--disable-decoders	\
+	--disable-hwaccels	\
+	--disable-muxers	\
+	--disable-demuxers	\
+	--disable-parsers	\
+	--disable-bsfs		\
+	--disable-protocols	\
+	--disable-devices	\
+	--disable-filters	\
+	--enable-decoder=theora	\
+	--enable-decoder=vorbis	\
+	--enable-demuxer=ogg	\
+	--prefix=$(FFMPEG_MT_PREFIX)	\
+	$(NULL)
+
 # System libs
 # - libpng: problem with undefined references to lots of webkit_png_* symbols
 # - zlib: symbols are remapped to MOZ_Z_xx for libpng
@@ -123,15 +149,33 @@ clean::
 	rm -f debian/configure-stamp
 
 # Install: there's no install rules in scons yet, do it manually
-common-install-prehook-arch::
+common-install-prehook-arch:: debian/stamp-ffmpeg-build
 	mkdir -p debian/tmp/usr/lib/$(DEBIAN_NAME)
 	( cd $(SRC_DIR)/sconsbuild/$(BUILD_TYPE) && tar $(foreach excl,$(INSTALL_EXCLUDES),--exclude=$(excl)) -cf - . ) | \
 	( cd debian/tmp/usr/lib/$(DEBIAN_NAME) && tar xvf - )
+	cp -va $(FFMPEG_MT_PREFIX)/lib/*.so.* debian/tmp/usr/lib/$(DEBIAN_NAME)
 
 binary-install/$(DEBIAN_NAME)::
 	dh_link -p$(DEBIAN_NAME) usr/lib/$(DEBIAN_NAME)/chrome usr/bin/$(DEBIAN_NAME)
 	mkdir -p $(CURDIR)/debian/$(DEBIAN_NAME)/usr/share/pixmaps
 	cp -a build-tree/src/chrome/app/theme/chromium/product_logo_48.png $(CURDIR)/debian/$(DEBIAN_NAME)/usr/share/pixmaps/$(DEBIAN_NAME).png
+
+# Build a custom ffmpeg from the multi-threaded branch
+common-build-arch:: debian/stamp-ffmpeg-build
+
+debian/stamp-ffmpeg-configure:
+	if [ ! -d $(SRC_DIR)/ffmpeg/ffmpeg-mt ] ; then \
+	  cd $(SRC_DIR)/ffmpeg ; tar zxf ffmpeg-mt.tar.gz ; \
+	  cd $(SRC_DIR)/ffmpeg/ffmpeg-mt ; tar zxf ../libswscale.tar.gz ; \
+	fi
+	cd $(SRC_DIR)/ffmpeg/ffmpeg-mt ; \
+	./configure $(FFMPEG_MT_CONFIGURE_FLAGS)
+	touch $@
+
+debian/stamp-ffmpeg-build: debian/stamp-ffmpeg-configure
+	cd $(SRC_DIR)/ffmpeg/ffmpeg-mt ; $(MAKE)
+	cd $(SRC_DIR)/ffmpeg/ffmpeg-mt ; $(MAKE) install
+	touch $@
 
 # Tests
 binary-post-install/$(DEBIAN_TESTSUITE)::
@@ -189,6 +233,7 @@ compare:
 # Tarball (get-orig-source & get-current-source)
 GCLIENT_URL  := http://src.chromium.org/svn/trunk/tools/depot_tools
 CHROMIUM_URL := http://src.chromium.org/svn/trunk/src
+DEPS_URL     := http://src.chromium.org/svn/trunk/deps/third_party
 USE_GCLIENT  ?= 0
 STRIP_TARBALL ?= 1
 
@@ -263,6 +308,15 @@ else
 	  fi ; \
 	done
 endif
+	# we need a special FFmpeg with multi-threads, as mentionned here:
+	# http://src.chromium.org/viewvc/chrome/trunk/deps/third_party/ffmpeg/README.chromium?revision=16648
+	@if [ ! -d $(TMP_DIR)/src/ffmpeg ] ; then \
+	  echo svn co $(DEPS_URL)/ffmpeg $(TMP_DIR)/src/ffmpeg ; \
+	  svn co $(DEPS_URL)/ffmpeg $(TMP_DIR)/src/ffmpeg ; \
+	else \
+	  echo svn update $(TMP_DIR)/src/ffmpeg ; \
+	  svn update $(TMP_DIR)/src/ffmpeg ; \
+	fi
 ifneq (,$(LOCAL_BRANCH))
 	rm -rf $(TMP_DDIR)
 	cp -la $(TMP_DIR) $(TMP_DDIR)
