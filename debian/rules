@@ -82,20 +82,20 @@ INSTALL_EXCLUDES = \
 # - to disable one or more tests within a given testsuite,
 #   append the names of the tests (using the Google Test filter syntax)
 TESTS = \
-	-app_unittests:"Needs a DISPLAY" \
-	base_unittests:-StatsTableTest.VerifySlots \
+	-app_unittests:"No DISPLAY" \
+	base_unittests:-StatsTableTest.* \
+	breakpad_unittests \
 	googleurl_unittests \
 	ipc_tests \
 	media_unittests \
 	net_perftests \
-	net_unittests \
-	-page_cycler_tests:"Needs a DISPLAY" \
+	-net_unittests:"No network (killed by buildd after 150 min of inactivity)" \
+	-page_cycler_tests:"No DISPLAY" \
 	perf_tests \
 	printing_unittests \
-	-startup_tests:"Needs a DISPLAY" \
-	-test_shell:"Needs a DISPLAY" \
-	-test_shell_tests:"Needs a DISPLAY" \
-	-ui_tests:"Needs a DISPLAY" \
+	-startup_tests:"No DISPLAY" \
+	-test_shell_tests:"No DISPLAY" \
+	-ui_tests:"No DISPLAY" \
 	unit_tests \
 	$(NULL)
 
