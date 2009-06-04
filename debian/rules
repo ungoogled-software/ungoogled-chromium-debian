@@ -159,6 +159,11 @@ binary-install/$(DEBIAN_NAME)::
 	dh_link -p$(DEBIAN_NAME) usr/lib/$(DEBIAN_NAME)/chrome usr/bin/$(DEBIAN_NAME)
 	mkdir -p $(CURDIR)/debian/$(DEBIAN_NAME)/usr/share/pixmaps
 	cp -a build-tree/src/chrome/app/theme/chromium/product_logo_48.png $(CURDIR)/debian/$(DEBIAN_NAME)/usr/share/pixmaps/$(DEBIAN_NAME).png
+	for size in 16 32 48 256 ; do \
+	  mkdir -p $(CURDIR)/debian/$(DEBIAN_NAME)/usr/share/icons/hicolor/$${size}x$${size}/apps ; \
+	  cp -a build-tree/src/chrome/app/theme/chromium/product_logo_$$size.png  \
+	    $(CURDIR)/debian/$(DEBIAN_NAME)/usr/share/icons/hicolor/$${size}x$${size}/apps/$(DEBIAN_NAME).png ; \
+	done
 
 # Build a custom ffmpeg from the multi-threaded branch
 common-build-arch:: debian/stamp-ffmpeg-build
