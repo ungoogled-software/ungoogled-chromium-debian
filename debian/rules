@@ -84,7 +84,7 @@ INSTALL_EXCLUDES = \
 TESTS = \
 	-app_unittests:"No DISPLAY" \
 	base_unittests:-StatsTableTest.* \
-	breakpad_unittests \
+	-breakpad_unittests:"No network (killed by buildd after 150 min of inactivity)" \
 	googleurl_unittests \
 	ipc_tests \
 	media_unittests \
