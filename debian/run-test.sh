@@ -1,8 +1,21 @@
 #!/bin/sh
 
+# Authors:
+#  Fabien Tassin <fta@sofaraway.org>
+# License: GPLv2 or later
+
+usage () {
+  echo "Usage: "`basename $0`" [-x] test_file log_dir [filter]"
+  echo
+  echo "        -x               Run test_file under xvfb"
+}
+
 want_x=0
 while [ $# -gt 0 ]; do
   case "$1" in
+    -h | --help | -help )
+      usage
+      exit 0 ;;
     -x )
       want_x=1
       shift ;;
@@ -19,12 +32,12 @@ LOGDIR=$2
 FILTER=$3
 
 if [ "Z$TEST" = "Z" ] ; then
-  echo "Usage: $0 test_file logdir"
+  usage
   exit 1
 fi
 
 if  [ "Z$LOGDIR" = "Z" ] ; then
-  echo "Usage: $0 test_file logdir"
+  usage
   exit 1
 fi
 
