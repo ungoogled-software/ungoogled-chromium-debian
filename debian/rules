@@ -17,7 +17,7 @@ DEBIAN_TESTSUITE := $(DEBIAN_NAME:browser=testsuite)
 WANT_DEBUG       := 0
 WANT_SYSTEM_LIBS := 0
 USE_SYSTEM_SCONS ?= 1
-VERBOSE          ?= 0
+VERBOSE          ?= 1
 
 ifeq (1,$(WANT_DEBUG))
 BUILD_TYPE := Debug
