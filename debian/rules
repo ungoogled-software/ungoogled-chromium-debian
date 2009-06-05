@@ -81,18 +81,18 @@ INSTALL_EXCLUDES = \
 #   append a reason after a ":"
 # - prefix the name with a "@" to run the test suite in xvfb-run (fake
 #   X server for machines with no display hardware and no physical input
-#   devices.
+#   devices).
 # - to disable one or more tests within a given testsuite,
 #   append the names of the tests (using the Google Test filter syntax)
 TESTS = \
 	@app_unittests \
 	base_unittests:-StatsTableTest.* \
-	-breakpad_unittests:"No network (killed by buildd after 150 min of inactivity)" \
+	-breakpad_unittests:"No network (buildd would kill us after 150 min of inactivity)" \
 	googleurl_unittests \
 	ipc_tests \
 	media_unittests \
 	net_perftests \
-	-net_unittests:"No network (killed by buildd after 150 min of inactivity)" \
+	-net_unittests:"No network (buildd would kill us after 150 min of inactivity)" \
 	@page_cycler_tests \
 	perf_tests \
 	printing_unittests \
@@ -201,7 +201,7 @@ binary-post-install/$(DEBIAN_TESTSUITE)::
 	# Run all possible tests from the chromium testsuite
 	# Full results could be found in the '$(DEBIAN_TESTSUITE)' package
 	# under /$(LIB_DIR)/test-results
-	# The builders have no network access and no display so the corresponding
+	# Buildd doesn't allow network accesses so the corresponding
 	# tests have to be skipped
 	@chmod u+x $(CURDIR)/debian/run-test.sh
 	@mkdir -p debian/$(DEBIAN_TESTSUITE)/$(LIB_DIR)/test-results
@@ -304,7 +304,7 @@ endif
 	# Checkout
 ifeq (1,$(USE_GCLIENT))
 ifneq (,$(TAG))
-	$(error gclient doesn't support tags)
+	$(error gclient doesn\'t support tags)
 endif
 	cd $(TMP_DIR) && ./tools/depot_tools/gclient config $(CHROMIUM_URL)
 	cd $(TMP_DIR) && ./tools/depot_tools/gclient sync
