@@ -5,17 +5,27 @@
 # License: GPLv2 or later
 
 usage () {
-  echo "Usage: "`basename $0`" [-x] test_file log_dir [filter]"
+  echo "Usage: "`basename $0`" [-x] [-t sec] test_file log_dir [filter]"
   echo
   echo "        -x               Run test_file under xvfb"
+  echo "        -t sec           Timeout in seconds after which we kill the test"
 }
 
+timeout=600
 want_x=0
 while [ $# -gt 0 ]; do
   case "$1" in
     -h | --help | -help )
       usage
       exit 0 ;;
+    -t )
+      shift
+      if [ $# = 0 ] ; then
+        echo Error: -t needs an argument
+        exit 1
+      fi
+      timeout=$1
+      shift ;;
     -x )
       want_x=1
       shift ;;
@@ -66,7 +76,7 @@ else
   echo "# Running '$RTEST' ..."
 fi
 
-$XVFB $TEST $FILTER > $LOGDIR/$TEST.txt 2>&1
+timeout $timeout $XVFB $TEST $FILTER > $LOGDIR/$TEST.txt 2>&1
 RET=$?
 if [ $RET -ne 0 ] ; then
   echo "# '$RTEST' returned with error code $RET"
@@ -90,7 +100,7 @@ if [ $RET -eq 139 ] ; then
   fi
   echo "run $FILTER\necho ------------------------------------------------\\\\n\necho (gdb) bt\\\\n\nbt\n" > /tmp/gdb-cmds-$$.txt
   echo "echo ------------------------------------------------\\\\n\necho (gdb) bt f\\\\n\nbt f\n" >> /tmp/gdb-cmds-$$.txt
-  $GDB -n -batch -x /tmp/gdb-cmds-$$.txt $TEST > $LOGDIR/$TEST--gdb.txt 2>&1
+  timeout $timeout $GDB -n -batch -x /tmp/gdb-cmds-$$.txt $TEST > $LOGDIR/$TEST--gdb.txt 2>&1
   rm -f /tmp/gdb-cmds-$$.txt
   echo "---- crash logs ----"
   grep -E '^Program received signal' < $LOGDIR/$TEST--gdb.txt
