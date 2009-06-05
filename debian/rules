@@ -58,7 +58,7 @@ USE_SYSTEM_SCONS := 0
 endif
 ifeq (0,$(USE_SYSTEM_SCONS))
 SCONS := ../third_party/scons/scons.py
-SCONS_VERSION := $(shell grep ^__version__ $(SRC_DIR)/third_party/scons/scons.py | cut -d\" -f2)
+SCONS_VERSION = $(shell grep ^__version__ $(SRC_DIR)/third_party/scons/scons.py | cut -d\" -f2)
 endif
 
 include /usr/share/cdbs/1/rules/tarball.mk
