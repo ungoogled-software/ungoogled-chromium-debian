@@ -79,10 +79,13 @@ INSTALL_EXCLUDES = \
 # List of tests
 # - prefix the name with a "-" to disable the test suite completely and
 #   append a reason after a ":"
+# - prefix the name with a "@" to run the test suite in xvfb-run (fake
+#   X server for machines with no display hardware and no physical input
+#   devices.
 # - to disable one or more tests within a given testsuite,
 #   append the names of the tests (using the Google Test filter syntax)
 TESTS = \
-	-app_unittests:"No DISPLAY" \
+	@app_unittests \
 	base_unittests:-StatsTableTest.* \
 	-breakpad_unittests:"No network (killed by buildd after 150 min of inactivity)" \
 	googleurl_unittests \
@@ -90,12 +93,12 @@ TESTS = \
 	media_unittests \
 	net_perftests \
 	-net_unittests:"No network (killed by buildd after 150 min of inactivity)" \
-	-page_cycler_tests:"No DISPLAY" \
+	@page_cycler_tests \
 	perf_tests \
 	printing_unittests \
-	-startup_tests:"No DISPLAY" \
-	-test_shell_tests:"No DISPLAY" \
-	-ui_tests:"No DISPLAY" \
+	@startup_tests \
+	@test_shell_tests \
+	@ui_tests \
 	unit_tests \
 	$(NULL)
 
@@ -204,14 +207,18 @@ binary-post-install/$(DEBIAN_TESTSUITE)::
 	@mkdir -p debian/$(DEBIAN_TESTSUITE)/$(LIB_DIR)/test-results
 	@cd $(SRC_DIR)/sconsbuild/$(BUILD_TYPE) && \
 	for test in $(TESTS) ; do \
-		tname=`echo "$$test" | sed -e 's/^-\?\([^:]*\):.*/\1/'` ; \
+		tname=`echo "$$test" | sed -e 's/^[-@]\?\([^:]*\).*/\1/'` ; \
 		filter=`echo "$$test" | sed -e 's/^[^-][^:]*://' | grep -v -- "$$test"` ; \
 		echo "==========================================================================" ; \
 		if [ Z"`echo $$test | sed -e 's/^-.*//'`" = Z ] ; then \
 			echo "Skipped '$$tname', reason: "`echo $$test | sed -e 's/^[^:]*://'` ; \
 			continue ; \
 		fi ; \
-		$(CURDIR)/debian/run-test.sh ./$$tname $(CURDIR)/debian/$(DEBIAN_TESTSUITE)/$(LIB_DIR)/test-results/ $$filter || true ; \
+		OPT="" ; \
+		if [ Z"`echo $$test | sed -e 's/^@.*//'`" = Z ] ; then \
+			OPT=-x ; \
+		fi ; \
+		$(CURDIR)/debian/run-test.sh $$OPT ./$$tname $(CURDIR)/debian/$(DEBIAN_TESTSUITE)/$(LIB_DIR)/test-results/ $$filter || true ; \
 		echo "==========================================================================" ; \
 		echo ; \
 	done
