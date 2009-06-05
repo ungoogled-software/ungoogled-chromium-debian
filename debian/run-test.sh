@@ -87,8 +87,10 @@ if [ $(grep -c 'Global test environment tear-down' $LOGDIR/$TEST.txt) -eq 1 ] ; 
 else
   echo "# last 100 lines only:"
   tail -100 < $LOGDIR/$TEST.txt
-  echo "# list of FAILED tests (if any):"
-  grep '  FAILED  ' $LOGDIR/$TEST.txt
+  if [ $(grep -c ' FAILED  ' $LOGDIR/$TEST.txt) -ne 0 ] ; then
+    echo "# list of FAILED tests:"
+    grep '  FAILED  ' $LOGDIR/$TEST.txt
+  fi
 fi
 echo
 if [ $RET -eq 139 ] ; then
