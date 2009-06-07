@@ -62,7 +62,7 @@ if [ ! -d $LOGDIR ] ; then
 fi
 
 if [ $want_x -eq 1 ] ; then
-  XVFB="sh -x /usr/bin/xvfb-run -w 5"
+  XVFB="/usr/bin/xvfb-run -a"
   RTEST="$XVFB $TEST"
 else
   XVFB=""
@@ -96,7 +96,7 @@ echo
 if [ $RET -eq 139 ] ; then
   # debug in gdb
   if [ $want_x -eq 1 ] ; then
-    GDB="sh -x /usr/bin/xvfb-run -w 5 gdb"
+    GDB="/usr/bin/xvfb-run -a gdb"
   else
     GDB=gdb
   fi
