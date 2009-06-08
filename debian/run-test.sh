@@ -78,9 +78,7 @@ fi
 
 timeout $timeout $XVFB $TEST $FILTER > $LOGDIR/$TEST.txt 2>&1
 RET=$?
-if [ $RET -ne 0 ] ; then
-  echo "# '$RTEST' returned with error code $RET"
-fi
+echo "# '$RTEST' returned with error code $RET"
 
 if [ $(grep -c 'Global test environment tear-down' $LOGDIR/$TEST.txt) -eq 1 ] ; then
   sed -e '1,/Global test environment tear-down/d' < $LOGDIR/$TEST.txt
