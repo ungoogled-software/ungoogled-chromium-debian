@@ -87,12 +87,12 @@ INSTALL_EXCLUDES = \
 TESTS = \
 	@app_unittests \
 	base_unittests:-StatsTableTest.* \
-	-breakpad_unittests:"No network (buildd would kill us after 150 min of inactivity)" \
+	breakpad_unittests \
 	googleurl_unittests \
 	ipc_tests \
 	media_unittests \
 	net_perftests \
-	-net_unittests:"No network (buildd would kill us after 150 min of inactivity)" \
+	net_unittests \
 	@page_cycler_tests \
 	perf_tests \
 	printing_unittests \
