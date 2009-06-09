@@ -81,12 +81,14 @@ RET=$?
 echo "# '$RTEST' returned with error code $RET"
 
 if [ $(grep -c 'Global test environment tear-down' $LOGDIR/$TEST.txt) -eq 1 ] ; then
+  echo "## Results"
   sed -e '1,/Global test environment tear-down/d' < $LOGDIR/$TEST.txt
 else
-  echo "# last 100 lines only:"
-  tail -100 < $LOGDIR/$TEST.txt
+  echo "## Logs:"
+  cat $LOGDIR/$TEST.txt
   if [ $(grep -c ' FAILED  ' $LOGDIR/$TEST.txt) -ne 0 ] ; then
-    echo "# list of FAILED tests:"
+    echo
+    echo "## list of FAILED tests:"
     grep '  FAILED  ' $LOGDIR/$TEST.txt
   fi
 fi
