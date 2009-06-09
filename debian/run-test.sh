@@ -93,7 +93,7 @@ else
   fi
 fi
 echo
-if [ $RET -eq 139 ] ; then
+if [ $RET -ne 0 ] ; then
   # debug in gdb
   if [ $want_x -eq 1 ] ; then
     GDB="/usr/bin/xvfb-run -a gdb"
