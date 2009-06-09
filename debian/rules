@@ -87,12 +87,12 @@ INSTALL_EXCLUDES = \
 TESTS = \
 	@app_unittests \
 	base_unittests:-StatsTableTest.* \
-	breakpad_unittests \
+	breakpad_unittests:-ExceptionHandlerTest.ExternalDumper \
 	googleurl_unittests \
 	ipc_tests \
 	media_unittests \
 	net_perftests \
-	net_unittests \
+	net_unittests:-HttpNetworkLayerTest.GoogleGET \
 	@page_cycler_tests \
 	perf_tests \
 	printing_unittests \
