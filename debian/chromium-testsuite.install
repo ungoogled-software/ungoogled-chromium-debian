@@ -4,6 +4,7 @@ debian/tmp/usr/lib/chromium-browser/image_diff
 debian/tmp/usr/lib/chromium-browser/generate_test_dump
 debian/tmp/usr/lib/chromium-browser/gtk_clipboard_dump
 debian/tmp/usr/lib/chromium-browser/*_shell
+debian/tmp/usr/lib/chromium-browser/tab_switching_test
 debian/tmp/usr/lib/chromium-browser/test_shell.pak
 debian/tmp/usr/lib/chromium-browser/tld_cleanup
 debian/tmp/usr/lib/chromium-browser/mksnapshot
