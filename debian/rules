@@ -321,7 +321,7 @@ ifneq (,$(STRIPPED_DIRS_FROM_CO))
 	grep -Ev '^($$|[[:blank:]]*#)' $(TMP_DIR)/.gclient
 endif
 endif
-	cd $(TMP_DIR) && ./tools/depot_tools/gclient sync
+	cd $(TMP_DIR) && ./tools/depot_tools/gclient update
 else
 	@if [ ! -d $(TMP_DIR)/src ] ; then \
 	  echo svn co $(TAG) $(CHROMIUM_URL) $(TMP_DIR)/src ; \
