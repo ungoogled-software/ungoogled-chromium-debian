@@ -259,6 +259,10 @@ DEPS_URL     := http://src.chromium.org/svn/trunk/deps/third_party
 USE_GCLIENT  ?= 0
 STRIP_TARBALL ?= 1
 
+STRIPPED_DIRS_FROM_CO := \
+	webkit/data/layout_tests/LayoutTests \
+	$(NULL)
+
 STRIPPED_DIRS := \
 	webkit/data/layout_tests/platform/chromium-win \
 	webkit/data/layout_tests/platform/chromium-mac \
@@ -306,7 +310,17 @@ ifeq (1,$(USE_GCLIENT))
 ifneq (,$(TAG))
 	$(error gclient doesn\'t support tags)
 endif
+	rm -f $(TMP_DIR)/.gclient
 	cd $(TMP_DIR) && ./tools/depot_tools/gclient config $(CHROMIUM_URL)
+ifeq (1,$(STRIP_TARBALL))
+ifneq (,$(STRIPPED_DIRS_FROM_CO))
+	# Add exclusions in .gclient for $(STRIPPED_DIRS_FROM_CO)
+	@for excl in $(STRIPPED_DIRS_FROM_CO) ; do \
+	  perl -i -pe 's,("custom_deps"\s*:\s*{),$$1\n      "src/'$$excl'": None\,,' $(TMP_DIR)/.gclient ; \
+	done
+	grep -Ev '^($$|[[:blank:]]*#)' $(TMP_DIR)/.gclient
+endif
+endif
 	cd $(TMP_DIR) && ./tools/depot_tools/gclient sync
 else
 	@if [ ! -d $(TMP_DIR)/src ] ; then \
@@ -318,7 +332,18 @@ else
 	fi
 	@for dep in `perl -pe 's,\\$$,\\\\\\$$,g; s,^([a-z]),\\$$$$1,; s,([\]}])$$,$$1;,; s,:$$, => ,; s,:\s*({|"|\[), => $$1,; s, \+ , . ,g; s,@,\\\\@,g; s/Var\("(.*?)"\)/\\$$vars->{"$$1"}/g;' $(TMP_DIR)/src/DEPS | \
 	  perl -e 'local $$/ = undef; $$s = <>; eval $$s; for my $$k (sort keys %$$deps) { print "$$k\"$$$$deps{$$k}\n" }'` ; do \
-	  OUT=$(TMP_DIR)/`echo $$dep | cut -d\" -f1` ; \
+	  OUTDIR=`echo $$dep | cut -d\" -f1` ; \
+	  found=0 ; \
+	  echo OUTDIR=$$OUTDIR ; \
+	  for excl in $(STRIPPED_DIRS_FROM_CO) ; do \
+	    if [ src/$$excl = $$OUTDIR ] ; then \
+	      found=1 ; \
+	    fi ; \
+	  done ; \
+	  if [ $$found -eq 1 ] ; then \
+	    continue ; \
+	  fi ; \
+	  OUT=$(TMP_DIR)/$$OUTDIR ; \
 	  if [ ! -d $$OUT ] ; then \
 	    echo svn co `echo $$dep | cut -d\" -f2 | sed -e 's,^/,$(CHROMIUM_URL:trunk/src=),'` $$OUT ; \
 	    svn co `echo $$dep | cut -d\" -f2 | sed -e 's,^/,$(CHROMIUM_URL:trunk/src=),'` $$OUT ; \
