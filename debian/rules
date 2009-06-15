@@ -329,7 +329,6 @@ else
 	  perl -e 'local $$/ = undef; $$s = <>; eval $$s; for my $$k (sort keys %$$deps) { print "$$k\"$$$$deps{$$k}\n" }'` ; do \
 	  OUTDIR=`echo $$dep | cut -d\" -f1` ; \
 	  found=0 ; \
-	  echo OUTDIR=$$OUTDIR ; \
 	  for excl in $(STRIPPED_DIRS_FROM_CO) ; do \
 	    if [ src/$$excl = $$OUTDIR ] ; then \
 	      found=1 ; \
