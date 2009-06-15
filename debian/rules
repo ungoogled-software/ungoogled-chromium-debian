@@ -264,13 +264,8 @@ STRIPPED_DIRS_FROM_CO := \
 	$(NULL)
 
 STRIPPED_DIRS := \
-	webkit/data/layout_tests/platform/chromium-win \
-	webkit/data/layout_tests/platform/chromium-mac \
-	webkit/data/layout_tests/LayoutTests/platform/mac \
-	webkit/data/layout_tests/LayoutTests/platform/mac-tiger \
-	webkit/data/layout_tests/LayoutTests/platform/mac-leopard \
-	webkit/data/layout_tests/LayoutTests/platform/qt \
-	webkit/data/layout_tests/LayoutTests/platform/win \
+	chrome/tools/test/reference_build \
+	webkit/data/layout_tests \
 	third_party/icu38/mac \
 	o3d \
 	$(NULL)
