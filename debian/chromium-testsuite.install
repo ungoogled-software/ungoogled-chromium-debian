@@ -1,4 +1,4 @@
-debian/tmp/usr/lib/chromium-browser/*_{tests,unittests,test}
+debian/tmp/usr/lib/chromium-browser/*_{tests,unittests,perftests,test}
 debian/tmp/usr/lib/chromium-browser/*_cache
 debian/tmp/usr/lib/chromium-browser/image_diff
 debian/tmp/usr/lib/chromium-browser/generate_test_dump
