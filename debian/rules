@@ -256,10 +256,10 @@ compare:
 GCLIENT_URL  := http://src.chromium.org/svn/trunk/tools/depot_tools
 CHROMIUM_URL := http://src.chromium.org/svn/trunk/src
 DEPS_URL     := http://src.chromium.org/svn/trunk/deps/third_party
-SAFE_REV_URL := http://chromium-status.appspot.com/lkgr
+GREEN_REV_URL := http://chromium-status.appspot.com/lkgr
 
 # See Staying Green More Of The Time at http://dev.chromium.org/developers/how-tos/get-the-code
-USE_SAFE_REV ?= 1
+USE_GREEN_REV ?= 1
 
 USE_GCLIENT  ?= 0
 STRIP_TARBALL ?= 1
@@ -285,8 +285,8 @@ endif
 ifneq (,$(DEBIAN_TAG))
 get-orig-source: TAG  = $(NULL)
 else
-ifeq (1,$(USE_SAFE_REV))
-get-orig-source: TAG  = -r $(shell wget -qO - $(SAFE_REV_URL))
+ifeq (1,$(USE_GREEN_REV))
+get-orig-source: TAG  = -r $(shell wget -qO - $(GREEN_REV_URL))
 else
 get-orig-source: TAG  = -r $(shell svn log --limit 1 $(CHROMIUM_URL) | grep ^r | head -1 | sed -e 's/^r\([^ ]*\).*/\1/')
 endif
@@ -315,8 +315,8 @@ ifneq (,$(TAG))
 	$(error gclient doesn\'t support tags)
 endif
 	rm -f $(TMP_DIR)/.gclient
-ifeq (1,$(USE_SAFE_REV))
-	cd $(TMP_DIR) && ./tools/depot_tools/gclient config $(CHROMIUM_URL) $(SAFE_REV_URL)
+ifeq (1,$(USE_GREEN_REV))
+	cd $(TMP_DIR) && ./tools/depot_tools/gclient config $(CHROMIUM_URL) $(GREEN_REV_URL)
 else
 	cd $(TMP_DIR) && ./tools/depot_tools/gclient config $(CHROMIUM_URL)
 endif
