@@ -85,7 +85,7 @@ INSTALL_EXCLUDES = \
 # - to disable one or more tests within a given testsuite,
 #   append the names of the tests (using the Google Test filter syntax)
 TESTS = \
-	@app_unittests \
+	@app_unittests:-FontTest.LoadArial \
 	base_unittests:-StatsTableTest.* \
 	breakpad_unittests:-ExceptionHandlerTest.ExternalDumper \
 	googleurl_unittests \
