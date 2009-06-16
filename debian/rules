@@ -99,7 +99,7 @@ TESTS = \
 	@startup_tests \
 	@test_shell_tests \
 	@ui_tests \
-	unit_tests \
+	unit_tests:-StatsTable.* \
 	$(NULL)
 
 # FFmpeg-mt
