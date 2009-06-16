@@ -25,6 +25,13 @@ else
 fi
 export LD_LIBRARY_PATH
 
+# On x64, 32bit gtk2 is not looking for modules in the right place.
+# Workaround it by setting GTK_PATH.
+if [ -d /usr/lib32/gtk-2.0 ] ; then
+  GTK_PATH=/usr/lib32/gtk-2.0
+  export GTK_PATH
+fi
+
 want_debug=0
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -52,6 +59,7 @@ if [ $want_debug -eq 1 ] ; then
   echo "set args ${1+"$@"}" > $tmpfile
   echo "# Env:"
   echo "#     LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
+  echo "#            GTK_PATH=$GTK_PATH"
   echo "$GDB $LIBDIR/$APPNAME -x $tmpfile"
   $GDB "$LIBDIR/$APPNAME" -x $tmpfile
   exit $?
