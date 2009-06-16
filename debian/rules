@@ -92,7 +92,7 @@ TESTS = \
 	ipc_tests \
 	media_unittests \
 	net_perftests \
-	net_unittests:-HttpNetworkLayerTest.GoogleGET \
+	net_unittests:-HttpNetworkLayerTest.GoogleGET:TelnetServerTest.* \
 	@page_cycler_tests \
 	perf_tests \
 	printing_unittests \
