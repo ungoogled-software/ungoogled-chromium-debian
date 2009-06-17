@@ -34,7 +34,7 @@ DEB_SCONS_ARGS += --verbose
 endif
 
 # We have some issues with gcc 4.4, use 4.3 for now
-AVOID_GCC_44 ?= 1
+AVOID_GCC_44 ?= 0
 CC_VERSION   := $(shell gcc -dumpversion | cut -d. -f-2)
 
 ifeq (1,$(AVOID_GCC_44))
