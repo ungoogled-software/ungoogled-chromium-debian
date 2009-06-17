@@ -1,6 +1,8 @@
 debian/tmp/usr/lib/chromium-browser/*_{tests,unittests,perftests,test}
 debian/tmp/usr/lib/chromium-browser/*_cache
 debian/tmp/usr/lib/chromium-browser/image_diff
+debian/tmp/usr/lib/chromium-browser/fetch_client
+debian/tmp/usr/lib/chromium-browser/fetch_server
 debian/tmp/usr/lib/chromium-browser/generate_test_dump
 debian/tmp/usr/lib/chromium-browser/gtk_clipboard_dump
 debian/tmp/usr/lib/chromium-browser/*_shell
@@ -8,6 +10,7 @@ debian/tmp/usr/lib/chromium-browser/test_shell.pak
 debian/tmp/usr/lib/chromium-browser/tld_cleanup
 debian/tmp/usr/lib/chromium-browser/mksnapshot
 debian/tmp/usr/lib/chromium-browser/minidump_2_core
+debian/tmp/usr/lib/chromium-browser/xdisplaycheck
 debian/tmp/usr/lib/chromium-browser/xml*
 debian/tmp/usr/lib/chromium-browser/codesighs
 debian/tmp/usr/lib/chromium-browser/maptsvdifftool
