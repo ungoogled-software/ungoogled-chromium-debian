@@ -86,7 +86,7 @@ INSTALL_EXCLUDES = \
 #   append the names of the tests (using the Google Test filter syntax)
 TESTS = \
 	@app_unittests:-FontTest.LoadArial \
-	base_unittests:-StatsTableTest.* \
+	base_unittests \
 	breakpad_unittests:-ExceptionHandlerTest.ExternalDumper \
 	googleurl_unittests \
 	ipc_tests \
@@ -99,7 +99,7 @@ TESTS = \
 	@startup_tests \
 	@test_shell_tests \
 	@ui_tests \
-	unit_tests:-StatsTable.* \
+	unit_tests \
 	$(NULL)
 
 # FFmpeg-mt
