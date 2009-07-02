@@ -130,6 +130,20 @@ FFMPEG_MT_CONFIGURE_FLAGS = \
 	--prefix=$(FFMPEG_MT_PREFIX)	\
 	$(NULL)
 
+ifeq (x86_64,$(DEB_BUILD_GNU_CPU))
+FFMPEG_MT_CONFIGURE_FLAGS += \
+	--enable-cross-compile \
+	--extra-cflags=-m32 \
+	--extra-ldflags=-m32 \
+	$(NULL)
+endif
+
+ifneq (,$(CC))
+FFMPEG_MT_CONFIGURE_FLAGS += \
+	--cc=$(CC) \
+	$(NULL)
+endif
+
 # System libs
 # - libpng: problem with undefined references to lots of webkit_png_* symbols
 # - zlib: symbols are remapped to MOZ_Z_xx for libpng
