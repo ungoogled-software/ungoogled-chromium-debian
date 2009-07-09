@@ -16,6 +16,7 @@ DEBIAN_TESTSUITE := $(DEBIAN_NAME:browser=testsuite)
 
 WANT_DEBUG       := 0
 WANT_SYSTEM_LIBS := 0
+WANT_SANDBOXING  ?= 1
 USE_SYSTEM_SCONS ?= 1
 VERBOSE          ?= 0
 
@@ -157,10 +158,33 @@ endif
 # For now, build everything (inc. all test programs)
 # DEB_SCONS_ARGS += all
 
+SANDBOX_FILES := \
+	chrome/browser/zygote_host_linux.cc \
+	sandbox/linux/suid/sandbox.cc \
+	$(NULL)
+
+SANDBOX_FIX = \
+	echo ; \
+	echo \\\# Updating $(1) ... ; \
+	cd $(SRC_DIR) && sed -i~ 's,opt/google/chrome/chrome,$(LIB_DIR)/$(DEBIAN_NAME),' $(1) ; \
+	echo ====================================================== ; \
+	cd $(SRC_DIR) && diff -u $(1)~ $(1) ; \
+	echo ====================================================== ;
+
+# needed to preserve the suid
+DEB_FIXPERMS_EXCLUDE := $(DEBIAN_NAME)-sandbox
+
 configure/$(DEBIAN_NAME):: debian/configure-stamp
 
 debian/configure-stamp:
 	cd $(SRC_DIR) && python tools/gyp/gyp_dogfood build/all.gyp
+ifeq (1,$(WANT_SANDBOXING))
+	@echo
+	# We want the sandboxing to work. Some strings need to be adjusted
+	# See http://code.google.com/p/chromium/wiki/LinuxSUIDSandbox
+	# Note that we're not using patches here, they diverge too quickly
+	@$(foreach file,$(SANDBOX_FILES),$(call SANDBOX_FIX,$(file)))
+endif
 	touch $@
 	# SCONS=$(SCONS) (version $(SCONS_VERSION))
 	# DEB_SCONS_ARGS=$(DEB_SCONS_ARGS)
@@ -181,6 +205,7 @@ common-install-prehook-arch:: debian/stamp-ffmpeg-build
 	# as chromium dereferences all symlinks before starting its children
 	# making the Gnome System Monitor confused with icons
 	mv debian/tmp/$(LIB_DIR)/chrome debian/tmp/$(LIB_DIR)/$(DEBIAN_NAME)
+	mv debian/tmp/$(LIB_DIR)/chrome_sandbox debian/tmp/$(LIB_DIR)/$(DEBIAN_NAME)-sandbox
 	cp -va $(FFMPEG_MT_PREFIX)/lib/*.so.* debian/tmp/$(LIB_DIR)
 
 binary-install/$(DEBIAN_NAME)::
@@ -191,6 +216,11 @@ binary-install/$(DEBIAN_NAME)::
 	  cp -a build-tree/src/chrome/app/theme/chromium/product_logo_$$size.png  \
 	    $(CURDIR)/debian/$(DEBIAN_NAME)/usr/share/icons/hicolor/$${size}x$${size}/apps/$(DEBIAN_NAME).png ; \
 	done
+ifeq (1,$(WANT_SANDBOXING))
+	chmod 4755 $(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(DEBIAN_NAME)-sandbox
+	ls -l $(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(DEBIAN_NAME)-sandbox
+	install -d -m 755 $(CURDIR)/debian/$(DEBIAN_NAME)/var/run/$(DEBIAN_NAME)-sandbox
+endif
 
 # Build a custom ffmpeg from the multi-threaded branch
 common-build-arch:: debian/stamp-ffmpeg-build
