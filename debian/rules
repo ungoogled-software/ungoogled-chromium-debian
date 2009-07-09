@@ -171,8 +171,8 @@ SANDBOX_FIX = \
 	cd $(SRC_DIR) && diff -u $(1)~ $(1) ; \
 	echo ====================================================== ;
 
-# needed to preserve the suid
-DEB_FIXPERMS_EXCLUDE := $(DEBIAN_NAME)-sandbox
+# needed to preserve the suid and make the sandbox happy
+DEB_FIXPERMS_EXCLUDE := $(DEBIAN_NAME)-sandbox /$(DEBIAN_NAME)
 
 configure/$(DEBIAN_NAME):: debian/configure-stamp
 
@@ -218,6 +218,7 @@ binary-install/$(DEBIAN_NAME)::
 	done
 ifeq (1,$(WANT_SANDBOXING))
 	chmod 4755 $(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(DEBIAN_NAME)-sandbox
+	chmod 711 $(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(DEBIAN_NAME)
 	ls -l $(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(DEBIAN_NAME)-sandbox
 	install -d -m 755 $(CURDIR)/debian/$(DEBIAN_NAME)/var/run/chrome-sandbox
 endif
