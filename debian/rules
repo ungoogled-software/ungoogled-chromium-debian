@@ -16,6 +16,7 @@ DEBIAN_TESTSUITE := $(DEBIAN_NAME:browser=testsuite)
 
 WANT_DEBUG       := 0
 WANT_SYSTEM_LIBS := 0
+WANT_SHARED_LIBS ?= 0
 WANT_SANDBOXING  ?= 1
 USE_SYSTEM_SCONS ?= 1
 VERBOSE          ?= 0
@@ -32,6 +33,11 @@ DEB_SCONS_ARGS += --mode=$(BUILD_TYPE)
 # Verbose?
 ifeq (1,$(VERBOSE))
 DEB_SCONS_ARGS += --verbose
+endif
+
+# Shared libraries
+ifeq (1,$(WANT_SHARED_LIBS))
+GYP_DEFINES += library=shared_library
 endif
 
 # We have some issues with gcc 4.4, use 4.3 for now
@@ -177,7 +183,11 @@ DEB_FIXPERMS_EXCLUDE := $(DEBIAN_NAME)-sandbox /$(DEBIAN_NAME)
 configure/$(DEBIAN_NAME):: debian/configure-stamp
 
 debian/configure-stamp:
+ifneq (,$(GYP_DEFINES))
+	cd $(SRC_DIR) && GYP_DEFINES="$(GYP_DEFINES)" python tools/gyp/gyp_dogfood build/all.gyp
+else
 	cd $(SRC_DIR) && python tools/gyp/gyp_dogfood build/all.gyp
+endif
 ifeq (1,$(WANT_SANDBOXING))
 	@echo
 	# We want the sandboxing to work. Some strings need to be adjusted
