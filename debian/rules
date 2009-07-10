@@ -228,9 +228,8 @@ binary-install/$(DEBIAN_NAME)::
 	done
 ifeq (1,$(WANT_SANDBOXING))
 	chmod 4755 $(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(DEBIAN_NAME)-sandbox
-	chmod 711 $(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(DEBIAN_NAME)
-	ls -l $(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(DEBIAN_NAME)-sandbox
-	install -d -m 755 $(CURDIR)/debian/$(DEBIAN_NAME)/var/run/chrome-sandbox
+else
+	rm -vf $(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(DEBIAN_NAME)-sandbox
 endif
 
 # Build a custom ffmpeg from the multi-threaded branch
