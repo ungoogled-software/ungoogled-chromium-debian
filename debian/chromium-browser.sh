@@ -32,6 +32,12 @@ if [ -d /usr/lib32/gtk-2.0 ] ; then
   export GTK_PATH
 fi
 
+# For the Default Browser detection to work, we need to give access
+# to xdg-settings. Also set CHROME_WRAPPER in case xdg-settings is
+# not able to do anything useful
+export PATH="$LIBDIR:$PATH"
+export CHROME_WRAPPER=true
+
 want_debug=0
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -59,6 +65,7 @@ if [ $want_debug -eq 1 ] ; then
   echo "set args ${1+"$@"}" > $tmpfile
   echo "# Env:"
   echo "#     LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
+  echo "#                PATH=$PATH"
   echo "#            GTK_PATH=$GTK_PATH"
   echo "$GDB $LIBDIR/$APPNAME -x $tmpfile"
   $GDB "$LIBDIR/$APPNAME" -x $tmpfile

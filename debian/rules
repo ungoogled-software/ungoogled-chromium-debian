@@ -81,6 +81,8 @@ INSTALL_EXCLUDES = \
 	.sconsign.dblite \
 	linker.lock \
 	convert_dict \
+	chrome-wrapper \
+	product_logo_48.png \
 	$(NULL)
 
 # List of tests
