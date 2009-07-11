@@ -383,7 +383,7 @@ ifneq (,$(STRIPPED_DIRS_FROM_CO))
 	grep -Ev '^($$|[[:blank:]]*#)' $(TMP_DIR)/.gclient
 endif
 endif
-	cd $(TMP_DIR) && ./tools/depot_tools/gclient update
+	cd $(TMP_DIR) && ./tools/depot_tools/gclient sync
 	# we need a special FFmpeg with multi-threads, as mentionned here:
 	# http://src.chromium.org/viewvc/chrome/trunk/deps/third_party/ffmpeg/README.chromium?revision=16648
 	@if [ ! -d $(TMP_DIR)/src/ffmpeg ] ; then \
