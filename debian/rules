@@ -166,21 +166,15 @@ endif
 # For now, build everything (inc. all test programs)
 # DEB_SCONS_ARGS += all
 
-SANDBOX_FILES := \
-	chrome/browser/zygote_host_linux.cc \
-	sandbox/linux/suid/sandbox.cc \
+ifeq (1,$(WANT_SANDBOXING))
+GYP_DEFINES += \
+	linux_sandbox_path=/$(LIB_DIR)/$(DEBIAN_NAME)-sandbox \
+	linux_sandbox_chrome_path=/$(LIB_DIR)/$(DEBIAN_NAME) \
 	$(NULL)
 
-SANDBOX_FIX = \
-	echo ; \
-	echo \\\# Updating $(1) ... ; \
-	cd $(SRC_DIR) && sed -i~ 's,opt/google/chrome/chrome,$(LIB_DIR)/$(DEBIAN_NAME),' $(1) ; \
-	echo ====================================================== ; \
-	cd $(SRC_DIR) && diff -u $(1)~ $(1) ; \
-	echo ====================================================== ;
-
 # needed to preserve the suid and make the sandbox happy
-DEB_FIXPERMS_EXCLUDE := $(DEBIAN_NAME)-sandbox /$(DEBIAN_NAME)
+DEB_FIXPERMS_EXCLUDE := $(DEBIAN_NAME)-sandbox
+endif
 
 configure/$(DEBIAN_NAME):: debian/configure-stamp
 
@@ -189,13 +183,6 @@ ifneq (,$(GYP_DEFINES))
 	cd $(SRC_DIR) && GYP_DEFINES="$(GYP_DEFINES)" python tools/gyp/gyp_dogfood build/all.gyp
 else
 	cd $(SRC_DIR) && python tools/gyp/gyp_dogfood build/all.gyp
-endif
-ifeq (1,$(WANT_SANDBOXING))
-	@echo
-	# We want the sandboxing to work. Some strings need to be adjusted
-	# See http://code.google.com/p/chromium/wiki/LinuxSUIDSandbox
-	# Note that we're not using patches here, they diverge too quickly
-	@$(foreach file,$(SANDBOX_FILES),$(call SANDBOX_FIX,$(file)))
 endif
 	touch $@
 	# SCONS=$(SCONS) (version $(SCONS_VERSION))
