@@ -180,9 +180,9 @@ configure/$(DEBIAN_NAME):: debian/configure-stamp
 
 debian/configure-stamp:
 ifneq (,$(GYP_DEFINES))
-	cd $(SRC_DIR) && GYP_DEFINES="$(GYP_DEFINES)" python tools/gyp/gyp_dogfood build/all.gyp
+	cd $(SRC_DIR) && GYP_DEFINES="$(GYP_DEFINES)" python tools/gyp/gyp_chromium build/all.gyp
 else
-	cd $(SRC_DIR) && python tools/gyp/gyp_dogfood build/all.gyp
+	cd $(SRC_DIR) && python tools/gyp/gyp_chromium build/all.gyp
 endif
 	touch $@
 	# SCONS=$(SCONS) (version $(SCONS_VERSION))
