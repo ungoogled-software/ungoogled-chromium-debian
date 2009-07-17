@@ -21,6 +21,10 @@ if [ -f /etc/$APPNAME/default ] ; then
   . /etc/$APPNAME/default
 fi
 
+# Prefer user defined CHROMIUM_USER_FLAGS (fron env) over system
+# default CHROMIUM_FLAGS (from /etc/$APPNAME/default)
+CHROMIUM_FLAGS=${CHROMIUM_USER_FLAGS:-"$CHROMIUM_FLAGS"}
+
 # FFmpeg needs to know where its libs are located
 if [ "Z$LD_LIBRARY_PATH" != Z ] ; then
   LD_LIBRARY_PATH=$LIBDIR:$LD_LIBRARY_PATH
