@@ -75,6 +75,8 @@ if [ $want_debug -eq 1 ] ; then
   echo "#     LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
   echo "#                PATH=$PATH"
   echo "#            GTK_PATH=$GTK_PATH"
+  echo "# CHROMIUM_USER_FLAGS=$CHROMIUM_USER_FLAGS"
+  echo "#      CHROMIUM_FLAGS=$CHROMIUM_FLAGS"
   echo "$GDB $LIBDIR/$APPNAME -x $tmpfile"
   $GDB "$LIBDIR/$APPNAME" -x $tmpfile
   exit $?
