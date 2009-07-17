@@ -17,6 +17,10 @@ usage () {
   echo "        -h or --help            This help screen"
 }
 
+if [ -f /etc/default/$APPNAME ] ; then
+  . /etc/default/$APPNAME
+fi
+
 # FFmpeg needs to know where its libs are located
 if [ "Z$LD_LIBRARY_PATH" != Z ] ; then
   LD_LIBRARY_PATH=$LIBDIR:$LD_LIBRARY_PATH
@@ -62,7 +66,7 @@ if [ $want_debug -eq 1 ] ; then
   fi
   tmpfile=`mktemp /tmp/chromiumargs.XXXXXX` || { echo "Cannot create temporary file" >&2; exit 1; }
   trap " [ -f \"$tmpfile\" ] && /bin/rm -f -- \"$tmpfile\"" 0 1 2 3 13 15
-  echo "set args ${1+"$@"}" > $tmpfile
+  echo "set args $CHROMIUM_FLAGS ${1+"$@"}" > $tmpfile
   echo "# Env:"
   echo "#     LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
   echo "#                PATH=$PATH"
@@ -71,6 +75,6 @@ if [ $want_debug -eq 1 ] ; then
   $GDB "$LIBDIR/$APPNAME" -x $tmpfile
   exit $?
 else
-  exec $LIBDIR/$APPNAME "$@"
+  exec $LIBDIR/$APPNAME $CHROMIUM_FLAGS "$@"
 fi
 
