@@ -17,8 +17,8 @@ usage () {
   echo "        -h or --help            This help screen"
 }
 
-if [ -f /etc/default/$APPNAME ] ; then
-  . /etc/default/$APPNAME
+if [ -f /etc/$APPNAME/default ] ; then
+  . /etc/$APPNAME/default
 fi
 
 # FFmpeg needs to know where its libs are located
