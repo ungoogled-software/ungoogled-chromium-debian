@@ -312,12 +312,15 @@ STRIP_TARBALL ?= 1
 
 STRIPPED_DIRS_FROM_CO := \
 	webkit/data/layout_tests/LayoutTests \
+	third_party/WebKit/LayoutTests \
 	$(NULL)
 
 STRIPPED_DIRS := \
 	chrome/tools/test/reference_build \
 	webkit/data/layout_tests \
 	third_party/icu38/mac \
+	third_party/lighttpd/mac \
+	third_party/lighttpd/win \
 	o3d \
 	$(NULL)
 
