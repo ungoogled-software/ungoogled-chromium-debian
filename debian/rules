@@ -387,7 +387,7 @@ else
 	  echo svn update $(TAG) $(TMP_DIR)/src ; \
 	  svn update $(TAG) $(TMP_DIR)/src ; \
 	fi
-	for dep in `perl -pe 's,\\$$,\\\\\\$$,g; s,^([a-z]),\\$$$$1,; s,([\]}])$$,$$1;,; s,:$$, => ,; s,:\s*({|"|\[), => $$1,; s, \+ , . ,g; s,@,\\\\@,g; s/Var\("(.*?)"\)/\\$$vars->{"$$1"}/g;' $(TMP_DIR)/src/DEPS | \
+	@for dep in `perl -pe 's,\\$$,\\\\\\$$,g; s,^([a-z]),\\$$$$1,; s,([\]}])$$,$$1;,; s,:$$, => ,; s,:\s*({|"|\[), => $$1,; s, \+ , . ,g; s,@,\\\\@,g; s/Var\("(.*?)"\)/\\$$vars->{"$$1"}/g;' $(TMP_DIR)/src/DEPS | \
 	  perl -e 'local $$/ = undef; $$s = <>; eval $$s; for my $$k (sort keys %{$$$$deps_os{"unix"}}) { $$$$deps{$$k} = $$ $$deps_os{'unix'}{$$k} }; for my $$k (sort keys %$$deps) { print "$$k\"$$$$deps{$$k}\n" }'` ; do \
 	  OUTDIR=`echo $$dep | cut -d\" -f1` ; \
 	  found=0 ; \
