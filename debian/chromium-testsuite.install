@@ -1,5 +1,6 @@
 debian/tmp/usr/lib/chromium-browser/*_{tests,unittests,perftests,test}
 debian/tmp/usr/lib/chromium-browser/*_cache
+debian/tmp/usr/lib/chromium-browser/courgette*
 debian/tmp/usr/lib/chromium-browser/image_diff
 debian/tmp/usr/lib/chromium-browser/fetch_client
 debian/tmp/usr/lib/chromium-browser/fetch_server
