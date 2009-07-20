@@ -112,6 +112,7 @@ TESTS = \
 	$(NULL)
 
 # FFmpeg-mt
+GYP_DEFINES += use_system_ffmpeg=1
 DEB_DH_SHLIBDEPS_ARGS_$(DEBIAN_NAME) := -l$(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)
 FFMPEG_MT_PREFIX = $(SRC_DIR)/sconsbuild/chromium-ffmpeg
 FFMPEG_MT_CONFIGURE_FLAGS = \
