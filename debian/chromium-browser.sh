@@ -34,10 +34,12 @@ fi
 export LD_LIBRARY_PATH
 
 # On x64, 32bit gtk2 is not looking for modules in the right place.
-# Workaround it by setting GTK_PATH.
+# Workaround it by setting GTK_PATH. We also backup the previous
+# value of GTK_PATH into CHROMIUM_SAVED_GTK_PATH so that chromium
+# can restore it before calling native x64 apps using xdg-open
 if [ -d /usr/lib32/gtk-2.0 ] ; then
-  GTK_PATH=/usr/lib32/gtk-2.0
-  export GTK_PATH
+  export CHROMIUM_SAVED_GTK_PATH=$GTK_PATH
+  export GTK_PATH=/usr/lib32/gtk-2.0
 fi
 
 # For the Default Browser detection to work, we need to give access
