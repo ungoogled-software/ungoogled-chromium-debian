@@ -18,3 +18,4 @@ debian/tmp/usr/lib/chromium-browser/maptsvdifftool
 debian/tmp/usr/lib/chromium-browser/media_bench
 debian/tmp/usr/lib/chromium-browser/nm2tsv
 debian/tmp/usr/lib/chromium-browser/pbl_tool
+debian/tmp/usr/lib/chromium-browser/qt_faststart
