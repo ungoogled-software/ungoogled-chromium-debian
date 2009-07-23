@@ -210,6 +210,9 @@ common-install-prehook-arch:: debian/stamp-ffmpeg-build
 	mv debian/tmp/$(LIB_DIR)/chrome debian/tmp/$(LIB_DIR)/$(DEBIAN_NAME)
 	mv debian/tmp/$(LIB_DIR)/chrome_sandbox debian/tmp/$(LIB_DIR)/$(DEBIAN_NAME)-sandbox
 	cp -va $(FFMPEG_MT_PREFIX)/lib/*.so.* debian/tmp/$(LIB_DIR)
+	# Manpage
+	dh_installman -pchromium-browser debian/tmp/$(LIB_DIR)/chromium-browser.1
+	rm -f debian/tmp/$(LIB_DIR)/chromium-browser.1
 
 binary-install/$(DEBIAN_NAME)::
 	mkdir -p $(CURDIR)/debian/$(DEBIAN_NAME)/usr/share/pixmaps
