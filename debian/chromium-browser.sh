@@ -83,6 +83,6 @@ if [ $want_debug -eq 1 ] ; then
   $GDB "$LIBDIR/$APPNAME" -x $tmpfile
   exit $?
 else
-  exec -a $APPNAME $LIBDIR/$APPNAME $CHROMIUM_FLAGS "$@"
+  exec $LIBDIR/$APPNAME $CHROMIUM_FLAGS "$@"
 fi
 
