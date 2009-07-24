@@ -15,6 +15,10 @@ usage () {
   echo
   echo "        -g or --debug           Start within $GDB"
   echo "        -h or --help            This help screen"
+  echo
+  echo " Other supported options are:"
+  MANWIDTH=80 man chromium-browser | sed -e '1,/OPTIONS/d; /ENVIRONMENT/,$d'
+  echo " See 'man chromium-browser' for more details"
 }
 
 if [ -f /etc/$APPNAME/default ] ; then
