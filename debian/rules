@@ -22,6 +22,11 @@ USE_SYSTEM_SCONS ?= 1
 USE_SYSTEM_V8    ?= 1
 VERBOSE          ?= 0
 
+# enable this if you dont want all your cores to get drowned by 
+# chromium build
+# NUMBER_OF_PROCESSORS=1
+# export NUMBER_OF_PROCESSORS
+
 ifeq (1,$(WANT_DEBUG))
 BUILD_TYPE := Debug
 else
