@@ -19,6 +19,7 @@ WANT_SYSTEM_LIBS := 0
 WANT_SHARED_LIBS ?= 0
 WANT_SANDBOXING  ?= 1
 USE_SYSTEM_SCONS ?= 1
+USE_SYSTEM_V8    ?= 1
 VERBOSE          ?= 0
 
 ifeq (1,$(WANT_DEBUG))
@@ -176,6 +177,14 @@ GYP_DEFINES += \
 # needed to preserve the suid and make the sandbox happy
 DEB_FIXPERMS_EXCLUDE := $(DEBIAN_NAME)-sandbox
 endif
+
+# use system v8
+ifeq (1,$(USE_SYSTEM_V8))
+GYP_DEFINES += \
+	javascript_engine=system-v8 \
+	$(NULL)
+endif
+
 
 configure/$(DEBIAN_NAME):: debian/configure-stamp
 

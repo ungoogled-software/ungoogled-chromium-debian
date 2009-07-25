@@ -44,7 +44,8 @@ Build-Depends: cdbs,
 	libpango1.0-dev,
 	libglib2.0-dev,
 	libgtk2.0-dev,
-	libgconf2-dev
+	libgconf2-dev,
+	libv8-dev (>= 1.2.14~svn20090723)
 Standards-Version: 3.8.0
 
 Package: chromium-browser
