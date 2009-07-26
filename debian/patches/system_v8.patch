@@ -65,29 +65,6 @@ Index: src/webkit/webkit.gyp
            'sources': [
              '../third_party/WebKit/WebCore/platform/graphics/chromium/VDMXParser.cpp',
              '../third_party/WebKit/WebCore/platform/graphics/chromium/HarfbuzzSkia.cpp',
-Index: src/build/common.gypi
-===================================================================
---- src.orig/build/common.gypi
-+++ src/build/common.gypi
-@@ -39,17 +39,17 @@
-     # Set to 1 to enable code coverage.  In addition to build changes
-     # (e.g. extra CFLAGS), also creates a new target in the src/chrome
-     # project file called "coverage".
-     # Currently ignored on Windows.
-     'coverage%': 0,
- 
-     # Overridable specification for potential use of alternative
-     # JavaScript engines.
--    'javascript_engine%': 'v8',
-+    'javascript_engine%': 'system-v8',
- 
-     # To do a shared build on linux we need to be able to choose between type
-     # static_library and shared_library. We default to doing a static build
-     # but you can override this with "gyp -Dlibrary=shared_library" or you
-     # can add the following line (without the #) to ~/.gyp/include.gypi
-     # {'variables': {'library': 'shared_library'}}
-     # to compile as shared by default
-     'library%': 'static_library',
 Index: src/net/net.gyp
 ===================================================================
 --- src.orig/net/net.gyp
