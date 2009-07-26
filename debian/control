@@ -45,7 +45,7 @@ Build-Depends: cdbs,
 	libglib2.0-dev,
 	libgtk2.0-dev,
 	libgconf2-dev,
-	libv8-dev (>= 1.2.14~svn20090723)
+	libv8-dev (>= 1.2.14~svn20090723r2530-0ubuntu1~ucd3~)
 Standards-Version: 3.8.0
 
 Package: chromium-browser
