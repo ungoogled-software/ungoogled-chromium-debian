@@ -19,7 +19,7 @@ WANT_SYSTEM_LIBS := 0
 WANT_SHARED_LIBS ?= 0
 WANT_SANDBOXING  ?= 1
 USE_SYSTEM_SCONS ?= 1
-USE_SYSTEM_V8    ?= 1
+USE_SYSTEM_V8    ?= 0
 VERBOSE          ?= 0
 
 # enable this if you dont want all your cores to get drowned by 
