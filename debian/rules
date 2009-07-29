@@ -325,7 +325,6 @@ GREEN_REV_URL := http://chromium-status.appspot.com/lkgr
 # See Staying Green More Of The Time at http://dev.chromium.org/developers/how-tos/get-the-code
 USE_GREEN_REV ?= 1
 
-USE_GCLIENT   ?= 0
 STRIP_TARBALL ?= 1
 
 STRIPPED_DIRS_FROM_CO := \
@@ -378,7 +377,6 @@ endif
 	  svn update $(TMP_DIR)/tools/depot_tools ; \
 	fi
 	# Checkout
-ifeq (1,$(USE_GCLIENT))
 ifneq (,$(TAG))
 	$(error gclient doesn\'t support tags)
 endif
@@ -397,39 +395,7 @@ ifneq (,$(STRIPPED_DIRS_FROM_CO))
 	grep -Ev '^($$|[[:blank:]]*#)' $(TMP_DIR)/.gclient
 endif
 endif
-	cd $(TMP_DIR) && ./tools/depot_tools/gclient sync
-else
-	@if [ ! -d $(TMP_DIR)/src ] ; then \
-	  echo svn co $(TAG) $(CHROMIUM_URL) $(TMP_DIR)/src ; \
-	  svn co $(TAG) $(CHROMIUM_URL) $(TMP_DIR)/src ; \
-	else \
-	  echo svn update $(TAG) $(TMP_DIR)/src ; \
-	  svn update $(TAG) $(TMP_DIR)/src ; \
-	fi
-	@for dep in `perl -pe 's,\\$$,\\\\\\$$,g; s,^([a-z]),\\$$$$1,; s,([\]}])$$,$$1;,; s,:$$, => ,; s,:\s*({|"|\[), => $$1,; s, \+ , . ,g; s,@,\\\\@,g; s/Var\("(.*?)"\)/\\$$vars->{"$$1"}/g;' $(TMP_DIR)/src/DEPS | \
-	  perl -e 'local $$/ = undef; $$s = <>; eval $$s; for my $$k (sort keys %{$$$$deps_os{"unix"}}) { $$$$deps{$$k} = $$ $$deps_os{'unix'}{$$k} }; for my $$k (sort keys %$$deps) { print "$$k\"$$$$deps{$$k}\n" }'` ; do \
-	  OUTDIR=`echo $$dep | cut -d\" -f1` ; \
-	  found=0 ; \
-	  for excl in $(STRIPPED_DIRS_FROM_CO) ; do \
-	    if [ src/$$excl = $$OUTDIR ] ; then \
-	      found=1 ; \
-	    fi ; \
-	  done ; \
-	  if [ $$found -eq 1 ] ; then \
-	    continue ; \
-	  fi ; \
-	  OUT=$(TMP_DIR)/$$OUTDIR ; \
-	  if [ ! -d $$OUT ] ; then \
-	    echo svn co `echo $$dep | cut -d\" -f2 | sed -e 's,^/,$(CHROMIUM_URL:trunk/src=),'` $$OUT ; \
-	    svn co `echo $$dep | cut -d\" -f2 | sed -e 's,^/,$(CHROMIUM_URL:trunk/src=),'` $$OUT ; \
-	  else \
-	    REV=`echo $$dep | cut -d\" -f2 | grep @ | cut -d@ -f2` ; \
-	    if [ "Z$$REV" != Z ] ; then REV="-r $$REV" ; fi ; \
-	    echo svn update $$REV $$OUT ; \
-	    svn update $$REV $$OUT ; \
-	  fi ; \
-	done
-endif
+	cd $(TMP_DIR) && ./tools/depot_tools/gclient update --nohooks
 	# we need a special FFmpeg with multi-threads, as mentionned here:
 	# http://src.chromium.org/viewvc/chrome/trunk/deps/third_party/ffmpeg/README.chromium?revision=16648
 	@if [ ! -d $(TMP_DIR)/src/ffmpeg ] ; then \
