@@ -6,7 +6,7 @@ Index: src/build/common.gypi
 ===================================================================
 --- src.orig/build/common.gypi
 +++ src/build/common.gypi
-@@ -363,25 +363,26 @@
+@@ -386,25 +386,26 @@
              #
              # -mfpmath=sse -msse2 makes the compiler use SSE instructions
              # which keep floating-point values in SSE registers in its
@@ -36,9 +36,9 @@ Index: src/build/common.gypi
 +            # ],
              'cflags': [
                '-m32',
-               '-fno-exceptions',
-               '-Wall',
              ],
-             'cflags_cc': [
-               '-fno-threadsafe-statics',
+             'ldflags': [
+               '-m32',
              ],
+           }],
+         ],
