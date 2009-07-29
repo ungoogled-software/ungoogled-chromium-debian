@@ -10,6 +10,7 @@ Build-Depends: cdbs,
 	ia32-libs [amd64],
 	ia32-libs-chromium-browser [amd64],
 	pkg-config,
+	lzma,
 	scons,
 	quilt,
 	g++-4.3 | g++-4.2,
@@ -49,6 +50,7 @@ Standards-Version: 3.8.0
 
 Package: chromium-browser
 Architecture: i386 amd64 lpia
+Pre-Depends: lzma
 Depends: ${shlibs:Depends}, ${misc:Depends}, ia32-libs-chromium-browser [amd64], lib32asound2 [amd64]
 Description: Chromium browser
  Chromium is an open-source browser project that aims to build a safer, faster,
@@ -60,12 +62,14 @@ Package: chromium-browser-dbg
 Architecture: i386 amd64 lpia
 Section: devel
 Priority: optional
+Pre-Depends: lzma
 Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-browser (= ${binary:Version})
 Description: chromium-browser debug symbols
  Debug symbols for the Chromium browser
 
 Package: chromium-testsuite
 Architecture: i386 amd64 lpia
+Pre-Depends: lzma
 Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-browser (= ${binary:Version}), msttcorefonts, python-tlslite
 Description: Chromium test suite
  Chromium is an open-source browser project that aims to build a safer, faster,
@@ -77,6 +81,7 @@ Package: chromium-testsuite-dbg
 Architecture: i386 amd64 lpia
 Section: devel
 Priority: optional
+Pre-Depends: lzma
 Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-testsuite (= ${binary:Version})
 Description: chromium-testsuite debug symbols
  Debug symbols for the Chromium test suite

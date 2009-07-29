@@ -14,6 +14,9 @@ DEB_SCONS_ARGS := --site-dir=../site_scons
 
 DEBIAN_TESTSUITE := $(DEBIAN_NAME:browser=testsuite)
 
+# Use lzma instead of gzip inside the debs (passed to dpkg-deb)
+DEB_DH_BUILDDEB_ARGS += -- -Z lzma
+
 WANT_DEBUG       := 0
 WANT_SYSTEM_LIBS := 0
 WANT_SHARED_LIBS ?= 0
