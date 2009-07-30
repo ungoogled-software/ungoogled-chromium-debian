@@ -14,9 +14,7 @@ DEB_SCONS_ARGS := --site-dir=../site_scons
 
 DEBIAN_TESTSUITE := $(DEBIAN_NAME:browser=testsuite)
 
-# Use lzma instead of gzip inside the debs (passed to dpkg-deb)
-DEB_DH_BUILDDEB_ARGS += -- -Z lzma
-
+WANT_LZMA_DEBS   ?= 0
 WANT_DEBUG       := 0
 WANT_SYSTEM_LIBS := 0
 WANT_SHARED_LIBS ?= 0
@@ -29,6 +27,11 @@ VERBOSE          ?= 0
 # chromium build
 # NUMBER_OF_PROCESSORS=1
 # export NUMBER_OF_PROCESSORS
+
+# Use lzma instead of gzip inside the debs (passed to dpkg-deb)
+ifeq (1,$(WANT_LZMA_DEBS))
+DEB_DH_BUILDDEB_ARGS += -- -Z lzma
+endif
 
 ifeq (1,$(WANT_DEBUG))
 BUILD_TYPE := Debug
