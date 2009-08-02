@@ -1,0 +1,45 @@
+See http://code.google.com/p/chromium/issues/detail?id=16442
+Restore the default Downloads location used on Ubuntu.
+
+---
+ chrome/common/chrome_paths_linux.cc |   15 ---------------
+ 1 file changed, 15 deletions(-)
+
+Index: src/chrome/common/chrome_paths_linux.cc
+===================================================================
+--- src.orig/chrome/common/chrome_paths_linux.cc
++++ src/chrome/common/chrome_paths_linux.cc
+@@ -72,33 +72,18 @@
+   return true;
+ }
+ 
+ bool GetUserDocumentsDirectory(FilePath* result) {
+   *result = GetXDGUserDirectory("DOCUMENTS", "Documents");
+   return true;
+ }
+ 
+-// We respect the user's preferred download location, unless it is
+-// ~ or their desktop directory, in which case we default to ~/Downloads.
+ bool GetUserDownloadsDirectory(FilePath* result) {
+   *result = GetXDGUserDirectory("DOWNLOAD", "Downloads");
+-
+-  FilePath home = GetHomeDir();
+-  if (*result == home) {
+-    *result = home.Append("Downloads");
+-    return true;
+-  }
+-
+-  FilePath desktop;
+-  GetUserDesktop(&desktop);
+-  if (*result == desktop) {
+-    *result = home.Append("Downloads");
+-  }
+-
+   return true;
+ }
+ 
+ bool GetUserDesktop(FilePath* result) {
+   *result = GetXDGUserDirectory("DESKTOP", "Desktop");
+   return true;
+ }
+ 
