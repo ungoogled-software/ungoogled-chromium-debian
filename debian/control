@@ -38,8 +38,6 @@ Build-Depends: cdbs,
 	libhunspell-dev,
 	libsqlite3-dev,
 	libasound2-dev, lib32asound2-dev [amd64],
-	libtheora-dev (>> 0.0.0.alpha4),
-	libvorbis-dev,
 	libnss3-dev,
 	libnspr4-dev,
 	libpango1.0-dev,
@@ -51,7 +49,7 @@ Standards-Version: 3.8.0
 Package: chromium-browser
 Architecture: i386 amd64 lpia
 Pre-Depends: lzma
-Depends: ${shlibs:Depends}, ${misc:Depends}, ia32-libs-chromium-browser [amd64], lib32asound2 [amd64]
+Depends: ${shlibs:Depends}, ${misc:Depends}, ia32-libs-chromium-browser [amd64], lib32asound2 [amd64], chromium-codecs-ffmpeg | chromium-codecs-ffmpeg-nonfree
 Description: Chromium browser
  Chromium is an open-source browser project that aims to build a safer, faster,
  and more stable way for all Internet users to experience the web.
