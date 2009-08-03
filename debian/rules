@@ -28,6 +28,9 @@ VERBOSE          ?= 0
 # NUMBER_OF_PROCESSORS=1
 # export NUMBER_OF_PROCESSORS
 
+# Don't let dh_installinit install *.default in /etc/default
+DEB_DH_INSTALLINIT_ARGS += --noscripts --onlyscripts
+
 # Use lzma instead of gzip inside the debs (passed to dpkg-deb)
 ifeq (1,$(WANT_LZMA_DEBS))
 DEB_DH_BUILDDEB_ARGS += -- -Z lzma
