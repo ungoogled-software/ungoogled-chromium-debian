@@ -14,6 +14,7 @@ DEB_SCONS_ARGS := --site-dir=../site_scons
 
 DEBIAN_TESTSUITE := $(DEBIAN_NAME:browser=testsuite)
 
+WANT_LZMA_SRC    ?= 1
 WANT_LZMA_DEBS   ?= 0
 WANT_DEBUG       := 0
 WANT_SYSTEM_LIBS := 0
@@ -83,7 +84,16 @@ SCONS := ../third_party/scons/scons.py
 SCONS_VERSION = $(shell grep ^__version__ $(SRC_DIR)/third_party/scons/scons.py | cut -d\" -f2)
 endif
 
-include /usr/share/cdbs/1/rules/tarball.mk
+ifeq (1,$(WANT_LZMA_SRC))
+TAR_EXT   := lzma
+TAR_FLAGS := --lzma
+DEB_TARBALL = $(wildcard *.tar.bz2 *.tar.$(TAR_EXT))
+else
+TAR_EXT   := bz2
+TAR_FLAGS := -j
+endif
+
+include $(CURDIR)/debian/cdbs/tarball.mk
 include /usr/share/cdbs/1/rules/patchsys-quilt.mk
 include /usr/share/cdbs/1/rules/debhelper.mk
 include $(CURDIR)/debian/cdbs/scons.mk
@@ -371,9 +381,9 @@ gos-pack:
 	# Pack
 	if [ src != $(DEB_TAR_SRCDIR) ] ; then mv $(TMP_DIR)/src $(TMP_DIR)/$(DEB_TAR_SRCDIR) ; fi
 	mv $(TMP_DIR)/tools/depot_tools $(TMP_DIR)/$(DEB_TAR_SRCDIR)/depot_tools
-	cd $(TMP_DIR) && tar jcf $(DEBIAN_NAME)-$(VERSION)-source.tar.bz2 --exclude=.svn $(DEB_TAR_SRCDIR)
+	cd $(TMP_DIR) && tar -c $(TAR_FLAGS) -f $(DEBIAN_NAME)-$(VERSION)-source.tar.$(TAR_EXT) --exclude=.svn $(DEB_TAR_SRCDIR)
 	mkdir $(TMP_DIR)/$(DEBIAN_NAME)-$(VERSION)
-	mv $(TMP_DIR)/$(DEBIAN_NAME)-$(VERSION)-source.tar.bz2 $(TMP_DIR)/$(DEBIAN_NAME)-$(VERSION)
+	mv $(TMP_DIR)/$(DEBIAN_NAME)-$(VERSION)-source.tar.$(TAR_EXT) $(TMP_DIR)/$(DEBIAN_NAME)-$(VERSION)
 	cd $(TMP_DIR) && tar zcf ../$(DEBIAN_NAME)_$(VERSION).orig.tar.gz $(DEBIAN_NAME)-$(VERSION)
 	rm -rf $(TMP_DIR)
 	@echo "# Done (created $(DEBIAN_NAME)_$(VERSION).orig.tar.gz)"
