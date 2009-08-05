@@ -100,7 +100,9 @@ $(addsuffix .bz,$(_cdbs_tarball_stamp_base)) $(addsuffix .bz2,$(_cdbs_tarball_st
 	touch $@
 
 $(addsuffix .7z,$(_cdbs_tarball_stamp_base)) $(addsuffix .lzma,$(_cdbs_tarball_stamp_base)):
-	tar -C $(_cdbs_tarball_dir) $(_cdbs_tar_verbose) -x --lzma -f $(call _cdbs_stampname_to_tarname,$@)
+	# Hardy's tar doesn't support lzma
+	# tar -C $(_cdbs_tarball_dir) $(_cdbs_tar_verbose) -x --lzma -f $(call _cdbs_stampname_to_tarname,$@)
+	lzma -dkc $(call _cdbs_stampname_to_tarname,$@) | ( cd $(_cdbs_tarball_dir) ; tar xf - )
 	touch $@
 
 $(addsuffix .zip,$(_cdbs_tarball_stamp_base)):
