@@ -186,7 +186,7 @@ clean::
 	rm -f debian/configure-stamp
 
 # Install: there's no install rules in scons yet, do it manually
-common-install-prehook-arch::
+common-install-prehook-impl::
 	mkdir -p debian/tmp/$(LIB_DIR)
 	( cd $(SRC_DIR)/sconsbuild/$(BUILD_TYPE) && tar $(foreach excl,$(INSTALL_EXCLUDES),--exclude=$(excl)) -cf - . ) | \
 	( cd debian/tmp/$(LIB_DIR) && tar xvf - )
@@ -219,6 +219,12 @@ ifeq (1,$(WANT_SANDBOXING))
 else
 	rm -vf $(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(DEBIAN_NAME)-sandbox
 endif
+	# Locales: only keep en-US in the main deb
+	cd $(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/locales && \
+	  rm $(filter-out en-US.pak,$(notdir $(wildcard $(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/locales/*)))
+
+binary-install/$(DEBIAN_NAME)-l10n::
+	rm $(CURDIR)/debian/$(DEBIAN_NAME)-l10n/$(LIB_DIR)/locales/en-US.pak
 
 # Tests
 binary-post-install/$(DEBIAN_TESTSUITE)::

@@ -50,6 +50,7 @@ Package: chromium-browser
 Architecture: i386 amd64 lpia
 Pre-Depends: lzma
 Depends: ${shlibs:Depends}, ${misc:Depends}, ia32-libs-chromium-browser [amd64], lib32asound2 [amd64], chromium-codecs-ffmpeg | chromium-codecs-ffmpeg-nonfree
+Suggests: chromium-browser-l10n
 Description: Chromium browser
  Chromium is an open-source browser project that aims to build a safer, faster,
  and more stable way for all Internet users to experience the web.
@@ -64,6 +65,21 @@ Pre-Depends: lzma
 Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-browser (= ${binary:Version})
 Description: chromium-browser debug symbols
  Debug symbols for the Chromium browser
+
+Package: chromium-browser-l10n
+Architecture: all
+Pre-Depends: lzma
+Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-browser (= ${binary:Version})
+Breaks: chromium-browser (<< 3.0.197.0~svn20090804r22432)
+Replaces: chromium-browser
+Description: chromium-browser language packages
+ Chromium is an open-source browser project that aims to build a safer, faster,
+ and more stable way for all Internet users to experience the web.
+ .
+ This package contains language packages for 50 languages:
+ ar, bg, bn, ca, cs, da, de, el, en-GB, es-419, es, et, fi, fil, fr, gu, he,
+ hi, hr, hu, id, it, ja, kn, ko, lt, lv, ml, mr, nb, nl, or, pl, pt-BR, pt-PT,
+ ro, ru, sk, sl, sr, sv, ta, te, th, tr, uk, vi, zh-CN, zh-TW
 
 Package: chromium-testsuite
 Architecture: i386 amd64 lpia
