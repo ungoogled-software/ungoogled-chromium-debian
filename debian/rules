@@ -197,7 +197,7 @@ common-install-prehook-impl::
 ifneq (i386,$(DEB_BUILD_ARCH_CPU))
 	# We assume we're *not* doing the "Architecture: all" packages so we need
 	# to drop the -l10n files from debian/tmp to make 'compare' happy
-	cd $(CURDIR)/debian/tmp/locales && \
+	cd $(CURDIR)/debian/tmp/$(LIB_DIR)/locales && \
 	  rm $(filter-out en-US.pak,$(notdir $(wildcard $(CURDIR)/debian/tmp/$(LIB_DIR)/locales/*)))
 endif
 	# Launcher script
