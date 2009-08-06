@@ -193,13 +193,6 @@ common-install-prehook-impl::
 	mkdir -p debian/tmp/$(LIB_DIR)
 	( cd $(SRC_DIR)/sconsbuild/$(BUILD_TYPE) && tar $(foreach excl,$(INSTALL_EXCLUDES),--exclude=$(excl)) -cf - . ) | \
 	( cd debian/tmp/$(LIB_DIR) && tar xvf - )
-	$(info DEB_BUILD_ARCH_CPU=$(DEB_BUILD_ARCH_CPU))
-ifneq (i386,$(DEB_BUILD_ARCH_CPU))
-	# We assume we're *not* doing the "Architecture: all" packages so we need
-	# to drop the -l10n files from debian/tmp to make 'compare' happy
-	cd $(CURDIR)/debian/tmp/$(LIB_DIR)/locales && \
-	  rm $(filter-out en-US.pak,$(notdir $(wildcard $(CURDIR)/debian/tmp/$(LIB_DIR)/locales/*)))
-endif
 	# Launcher script
 	mkdir -p debian/tmp/usr/bin
 	cp -a debian/$(DEBIAN_NAME).sh debian/tmp/usr/bin/$(DEBIAN_NAME)
@@ -232,6 +225,13 @@ endif
 	# Locales: only keep en-US in the main deb
 	cd $(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/locales && \
 	  rm -f $(filter-out en-US.pak,$(notdir $(wildcard $(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/locales/*)))
+ifneq (i386,$(DEB_BUILD_ARCH_CPU))
+	# DEB_BUILD_ARCH_CPU=$(DEB_BUILD_ARCH_CPU)
+	# We assume we're *not* doing the "Architecture: all" packages so we need
+	# to drop the -l10n files from debian/tmp to make 'compare' happy
+	cd $(CURDIR)/debian/tmp/$(LIB_DIR)/locales && \
+	  rm $(filter-out en-US.pak,$(notdir $(wildcard $(CURDIR)/debian/tmp/$(LIB_DIR)/locales/*)))
+endif
 
 binary-install/$(DEBIAN_NAME)-l10n::
 	rm $(CURDIR)/debian/$(DEBIAN_NAME)-l10n/$(LIB_DIR)/locales/en-US.pak
