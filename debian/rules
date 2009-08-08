@@ -17,7 +17,7 @@ DEBIAN_TESTSUITE := $(DEBIAN_NAME:browser=testsuite)
 WANT_LZMA_SRC    ?= 1
 WANT_LZMA_DEBS   ?= 0
 WANT_DEBUG       := 0
-WANT_SYSTEM_LIBS := 0
+WANT_SYSTEM_LIBS ?= 1
 WANT_SHARED_LIBS ?= 0
 WANT_SANDBOXING  ?= 1
 USE_SYSTEM_SCONS ?= 1
@@ -140,13 +140,12 @@ TESTS = \
 GYP_DEFINES += use_system_ffmpeg=1
 
 # System libs
-# - libpng: problem with undefined references to lots of webkit_png_* symbols
-# - zlib: symbols are remapped to MOZ_Z_xx for libpng
-# - libevent: 2 missing symbols. Too old?
-# - sqlite: unit_tests crash in browser/history/text_database.cc
 ifeq (1,$(WANT_SYSTEM_LIBS))
-SYSTEM_LIBS     = bzip2,libjpeg,libxml,libxslt,lzma_sdk,hunspell
-DEB_SCONS_ARGS += SYSTEM_LIBS=$(SYSTEM_LIBS)
+GYP_DEFINES += \
+	use_system_bzip2=1 \
+	use_system_zlib=0 \
+	use_system_libjpeg=1 \
+	$(NULL)
 endif
 
 # For now, build everything (inc. all test programs)
