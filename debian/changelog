@@ -1,5 +1,5 @@
-chromium-browser (3.0.198.0~svn20090807r22729-0ubuntu1) UNRELEASED; urgency=low
+chromium-browser (3.0.198.0~svn20090808r22864-0ubuntu1) UNRELEASED; urgency=low
 
   * Initial release. (Closes: #XXXXXX)
 
- -- Fabien Tassin <fta@ubuntu.com>  Fri, 07 Aug 2009 17:00:02 +0200
+ -- Fabien Tassin <fta@ubuntu.com>  Sat, 08 Aug 2009 17:12:37 +0200
