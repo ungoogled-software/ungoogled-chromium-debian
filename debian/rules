@@ -74,7 +74,7 @@ endif
 SCONS_VERSION := $(shell grep ^__version__ /usr/bin/scons | cut -d\" -f2)
 ifneq (,$(SCONS_VERSION))
 ifeq (1,$(USE_SYSTEM_SCONS))
-USE_SYSTEM_SCONS := $(shell dpkg --compare-versions $(SCONS_VERSION) lt 1.2.0.d20090113; echo $$?)
+USE_SYSTEM_SCONS := $(shell dpkg --compare-versions $(SCONS_VERSION) lt 0.98; echo $$?)
 endif
 else
 USE_SYSTEM_SCONS := 0
