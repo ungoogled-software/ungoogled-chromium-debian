@@ -304,19 +304,46 @@ USE_GREEN_REV ?= 1
 STRIP_TARBALL ?= 1
 
 STRIPPED_DIRS_FROM_CO := \
+	native_client \
 	webkit/data/layout_tests/LayoutTests \
 	third_party/WebKit/LayoutTests \
 	third_party/ffmpeg/binaries/chromium \
 	$(NULL)
 
+# prefix with _ those that we can't remove (just yet) because of the gclient
+# hooks (see build/all.gyp) or of some unneeded deps/includes
 STRIPPED_DIRS := \
+	chrome/test/data/safe_browsing/old \
 	chrome/tools/test/reference_build \
-	webkit/data/layout_tests \
-	third_party/icu38/mac \
-	third_party/lighttpd/mac \
-	third_party/lighttpd/win \
+	gears \
+	google_update \
 	o3d \
+	third_party/boost \
+	third_party/bsdiff \
+	third_party/bspatch \
+	third_party/cld \
+	third_party/ffmpeg/binaries \
+	third_party/fuzzymatch \
+	third_party/icu38/mac \
+	third_party/lcov \
+	third_party/lighttpd \
+	_third_party/npapi \
+	third_party/nspr \
+	third_party/nss \
+	third_party/protobuf2 \
+	third_party/pthread \
+	third_party/pyftpdlib \
+	third_party/simplejson \
+	third_party/tcmalloc \
+	webkit/data/layout_tests \
 	$(NULL)
+
+ifeq (1,$(WANT_SYSTEM_LIBS))
+STRIPPED_DIRS += \
+	_third_party/bzip2 \
+	_third_party/libjpeg \
+	$(NULL)
+endif
 
 TMP_DDIR     := $(DEBIAN_NAME)-$(shell echo $$$$)
 ifeq (,$(LOCAL_BRANCH))
@@ -376,13 +403,13 @@ ifneq (,$(LOCAL_BRANCH))
 	rm -rf $(TMP_DDIR)
 	cp -la $(TMP_DIR) $(TMP_DDIR)
 endif
-	# Remove binaries
-	cd $(TMP_DDIR)/src && find . -type f \( -iname \*.exe -o -iname \*.dll -o -iname \*.pdb \) -exec rm -fv {} \; > REMOVED-bin_only.txt
 ifeq (1,$(STRIP_TARBALL))
 	# Strip tarball from some big directories not needed on the linux platform
 	cd $(TMP_DDIR)/src && rm -rfv $(STRIPPED_DIRS) | grep -vE '/\.svn(/|.$$)' > REMOVED-stripped.txt
-	wc $(TMP_DDIR)/src/REMOVED-stripped.txt
 endif
+	# Remove binaries
+	cd $(TMP_DDIR)/src && find . -type f \( -iname \*.exe -o -iname \*.dll -o -iname \*.pdb \) -exec rm -fv {} \; > REMOVED-bin_only.txt
+	wc -l $(TMP_DDIR)/src/REMOVED-*.txt
 	
 gos-pack: TMP_DIR  = $(TMP_DDIR)
 ifneq (,$(DEBIAN_TAG))
