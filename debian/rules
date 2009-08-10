@@ -69,12 +69,11 @@ $(info # CC=$(CC) CXX=$(CXX))
 endif
 endif
 
-# scons 0.97 (hardy) fails, switch to in-source scons if system scons < 0.98
-# scons 1.2.0 (jaunty) is no longer enough since gyp landed
+# scons 0.97 (hardy) and 0.98.5 (intrepid) fail, switch to in-source scons if system scons < 1.2.0
 SCONS_VERSION := $(shell grep ^__version__ /usr/bin/scons | cut -d\" -f2)
 ifneq (,$(SCONS_VERSION))
 ifeq (1,$(USE_SYSTEM_SCONS))
-USE_SYSTEM_SCONS := $(shell dpkg --compare-versions $(SCONS_VERSION) lt 0.98; echo $$?)
+USE_SYSTEM_SCONS := $(shell dpkg --compare-versions $(SCONS_VERSION) lt 1.2.0; echo $$?)
 endif
 else
 USE_SYSTEM_SCONS := 0
