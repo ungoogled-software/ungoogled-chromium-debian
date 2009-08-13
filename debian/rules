@@ -107,6 +107,9 @@ INSTALL_EXCLUDES = \
 	convert_dict \
 	chrome-wrapper \
 	product_logo_48.png \
+	libnpapi_layout_test_plugin.so \
+	libnpapi_test_plugin.so \
+	plugins \
 	$(NULL)
 
 # List of tests
