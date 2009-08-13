@@ -123,7 +123,6 @@ INSTALL_EXCLUDES = \
 TESTS = \
 	@app_unittests:-FontTest.LoadArial \
 	base_unittests \
-	breakpad_unittests:-ExceptionHandlerTest.ExternalDumper \
 	googleurl_unittests \
 	ipc_tests \
 	media_unittests \
@@ -154,8 +153,31 @@ GYP_DEFINES += \
 	$(NULL)
 endif
 
-# For now, build everything (inc. all test programs)
-# DEB_SCONS_ARGS += all
+# Build everything (like All), including test programs but minus things we don't
+# want (breakpad, courgette, ..) or don't need (the other small tools)
+DEB_SCONS_ARGS += \
+	chrome \
+	chrome_sandbox \
+	app_unittests \
+	base_unittests \
+	browser_tests \
+	googleurl_unittests \
+	ipc_tests \
+	media_unittests \
+	memory_test \
+	net_perftests \
+	net_unittests \
+	page_cycler_tests \
+	perf_tests \
+	printing_unittests \
+	startup_tests \
+	tab_switching_test \
+	test_shell_tests \
+	ui_tests \
+	unit_tests \
+	url_fetch_test \
+	wav_ola_test \
+	$(NULL)
 
 ifeq (1,$(WANT_SANDBOXING))
 GYP_DEFINES += \
