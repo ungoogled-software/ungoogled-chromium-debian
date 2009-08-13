@@ -2,7 +2,6 @@ debian/tmp/etc
 debian/tmp/usr/bin
 debian/tmp/usr/lib/chromium-browser/chrom*
 debian/tmp/usr/lib/chromium-browser/xdg-settings
-debian/tmp/usr/lib/chromium-browser/lib*.so*
 #debian/tmp/usr/lib/chromium-browser/icudt38l.dat
 debian/tmp/usr/lib/chromium-browser/locales/*
 debian/tmp/usr/lib/chromium-browser/plugins/*
