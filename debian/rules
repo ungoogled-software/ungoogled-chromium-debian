@@ -369,11 +369,23 @@ STRIPPED_DIRS := \
 	$(NULL)
 
 ifeq (1,$(WANT_SYSTEM_LIBS))
-STRIPPED_DIRS += \
-	_third_party/bzip2 \
-	_third_party/libjpeg \
+# Directories that will be dropped if the corresponding system lib are enabled in GYP_DEFINES
+# We need to keep some files (like *.gyp) so we can't use STRIPPED_DIRS
+STRIPPED_SYSTEM_LIB_DIRS += \
+	third_party/bzip2 \
+	third_party/zlib \
+	third_party/libjpeg \
+	third_party/libpng \
+	third_party/sqlite \
+	third_party/libxml \
+	third_party/libxslt \
 	$(NULL)
 endif
+
+STRIP_SYSTEM_DIRS = \
+	$(foreach DIR,$(1),$(if $(findstring use_system_$(notdir $(DIR))=1,$(GYP_DEFINES)),\
+	  (cd $(2)/$(dir $(DIR)) && \
+	  find $(notdir $(DIR)) -depth -mindepth 1 \! \( -name \*.gyp -o -name README.chromium -o -name \*.patch \) -print -delete );))
 
 TMP_DDIR     := $(DEBIAN_NAME)-$(shell echo $$$$)
 ifeq (,$(LOCAL_BRANCH))
@@ -436,6 +448,7 @@ endif
 ifeq (1,$(STRIP_TARBALL))
 	# Strip tarball from some big directories not needed on the linux platform
 	cd $(TMP_DDIR)/src && rm -rfv $(STRIPPED_DIRS) | grep -vE '/\.svn(/|.$$)' > REMOVED-stripped.txt
+	$(call STRIP_SYSTEM_DIRS,$(STRIPPED_SYSTEM_LIB_DIRS),$(TMP_DDIR)/src) >> $(TMP_DDIR)/src/REMOVED-stripped.txt
 endif
 	# Remove binaries
 	cd $(TMP_DDIR)/src && find . -type f \( -iname \*.exe -o -iname \*.dll -o -iname \*.pdb \) -exec rm -fv {} \; > REMOVED-bin_only.txt
