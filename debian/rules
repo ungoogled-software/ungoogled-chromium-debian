@@ -383,9 +383,9 @@ STRIPPED_SYSTEM_LIB_DIRS += \
 endif
 
 STRIP_SYSTEM_DIRS = \
-	$(foreach DIR,$(1),$(if $(findstring use_system_$(notdir $(DIR))=1,$(GYP_DEFINES)),\
+	($(foreach DIR,$(1),$(if $(findstring use_system_$(notdir $(DIR))=1,$(GYP_DEFINES)),\
 	  (cd $(2)/$(dir $(DIR)) && \
-	  find $(notdir $(DIR)) -depth -mindepth 1 \! \( -name \*.gyp -o -name README.chromium -o -name \*.patch \) -print -delete );))
+	  find $(notdir $(DIR)) -depth -mindepth 1 \! \( -name \*.gyp -o -name README.chromium -o -name \*.patch \) -print -delete );)))
 
 TMP_DDIR     := $(DEBIAN_NAME)-$(shell echo $$$$)
 ifeq (,$(LOCAL_BRANCH))
