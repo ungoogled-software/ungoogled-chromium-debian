@@ -448,7 +448,9 @@ endif
 ifeq (1,$(STRIP_TARBALL))
 	# Strip tarball from some big directories not needed on the linux platform
 	cd $(TMP_DDIR)/src && rm -rfv $(STRIPPED_DIRS) | grep -vE '/\.svn(/|.$$)' > REMOVED-stripped.txt
+ifeq (1,0)
 	$(call STRIP_SYSTEM_DIRS,$(STRIPPED_SYSTEM_LIB_DIRS),$(TMP_DDIR)/src) >> $(TMP_DDIR)/src/REMOVED-stripped.txt
+endif
 endif
 	# Remove binaries
 	cd $(TMP_DDIR)/src && find . -type f \( -iname \*.exe -o -iname \*.dll -o -iname \*.pdb \) -exec rm -fv {} \; > REMOVED-bin_only.txt
