@@ -37,18 +37,6 @@ else
 fi
 export LD_LIBRARY_PATH
 
-# On x64, 32bit gtk2 is not looking for modules in the right place.
-# Workaround it by setting GTK_PATH. We also backup the previous
-# value of GTK_PATH into CHROMIUM_SAVED_GTK_PATH so that chromium
-# can restore it before calling native x64 apps using xdg-open
-# also at-spi bridge does not work and causes crashes; we disable
-# this explicitly by setting NO_AT_BRIDGE
-if [ -d /usr/lib32/gtk-2.0 ] ; then
-  export CHROMIUM_SAVED_GTK_PATH=$GTK_PATH
-  export GTK_PATH=/usr/lib32/gtk-2.0
-  export NO_AT_BRIDGE=1
-fi
-
 # For the Default Browser detection to work, we need to give access
 # to xdg-settings. Also set CHROME_WRAPPER in case xdg-settings is
 # not able to do anything useful

@@ -24,6 +24,10 @@ USE_SYSTEM_SCONS ?= 1
 USE_SYSTEM_V8    ?= 0
 VERBOSE          ?= 0
 
+ifeq (x86_64,$(DEB_BUILD_GNU_CPU))
+GYP_DEFINES += target_arch=x64
+endif
+
 # enable this if you dont want all your cores to get drowned by 
 # chromium build
 # NUMBER_OF_PROCESSORS=1
@@ -438,6 +442,9 @@ ifneq (,$(LOCAL_BRANCH))
 	rm -rf $(TMP_DDIR)
 	cp -la $(TMP_DIR) $(TMP_DDIR)
 endif
+	# Hack: for x64, we need v8 from the bleeding edge branch
+	rm -rf $(TMP_DDIR)/src/v8
+	cd $(TMP_DDIR)/src && svn co http://v8.googlecode.com/svn/branches/bleeding_edge v8
 ifeq (1,$(STRIP_TARBALL))
 	# Strip tarball from some big directories not needed on the linux platform
 	cd $(TMP_DDIR)/src && rm -rfv $(STRIPPED_DIRS) | grep -vE '/\.svn(/|.$$)' > REMOVED-stripped.txt

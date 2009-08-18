@@ -6,14 +6,10 @@ Vcs-Bzr: https://code.launchpad.net/~chromium-team/chromium-browser/chromium-bro
 Homepage: http://code.google.com/chromium/
 Build-Depends: cdbs,
 	debhelper (>= 5),
-	libc6-dev-i386 [amd64],
-	ia32-libs [amd64],
-	ia32-libs-chromium-browser [amd64],
 	pkg-config,
 	lzma,
 	scons,
 	quilt,
-	g++-multilib [amd64],
 	patchutils (>= 0.2.25),
 	python,
 	bison,
@@ -30,14 +26,14 @@ Build-Depends: cdbs,
 	ttf-kochi-mincho,
 	libjpeg62-dev,
 	libpng12-dev,
-	libbz2-dev, lib32bz2-dev [amd64],
-	zlib1g-dev, lib32z1-dev [amd64],
+	libbz2-dev,
+	zlib1g-dev,
 	libxml2-dev,
 	libxslt1-dev,
 	lzma-dev,
 	libhunspell-dev,
 	libsqlite3-dev,
-	libasound2-dev, lib32asound2-dev [amd64],
+	libasound2-dev,
 	libnss3-dev,
 	libnspr4-dev,
 	libpango1.0-dev,
@@ -49,7 +45,7 @@ Standards-Version: 3.8.0
 Package: chromium-browser
 Architecture: i386 amd64 lpia
 Pre-Depends: lzma
-Depends: ${shlibs:Depends}, ${misc:Depends}, ia32-libs-chromium-browser [amd64], lib32asound2 [amd64], chromium-codecs-ffmpeg | chromium-codecs-ffmpeg-nonfree
+Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-codecs-ffmpeg | chromium-codecs-ffmpeg-nonfree
 Suggests: chromium-browser-l10n
 Description: Chromium browser
  Chromium is an open-source browser project that aims to build a safer, faster,
