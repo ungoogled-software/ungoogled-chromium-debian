@@ -59,7 +59,7 @@ endif
 CC_VERSION   := $(shell gcc -dumpversion | cut -d. -f-2)
 
 ifeq (4.4,$(CC_VERSION))
-GYP_DEFINES += no_strict_aliasing=1
+GYP_DEFINES += no_strict_aliasing=1 gcc_version=44
 endif
 
 # scons 0.97 (hardy) and 0.98.5 (intrepid) fail, switch to in-source scons if system scons < 1.2.0
