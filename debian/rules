@@ -301,9 +301,9 @@ compare:
 	  echo " => No duplicate found" ; \
 	fi
 	# Find missing
-	@find $(PKG_DIRS) -type f -print | grep -v /DEBIAN/ | grep -vE '(/usr/lib/debug|/test-results/)' | \
+	@find $(PKG_DIRS) -type f -print | grep -v /DEBIAN/ | grep -vE '(/usr/lib/debug|/test-results/|/locales/)' | \
 	  grep $(LIB_DIR) | cut -d/ -f5- | sort > /tmp/pkg-$$$$.indebs ; \
-	find debian/tmp/$(LIB_DIR) -type f -print | cut -d/ -f5- | grep -vE '\.log$$' | sort > /tmp/pkg-$$$$.inhammer ; \
+	find debian/tmp/$(LIB_DIR) -type f -print | cut -d/ -f5- | grep -vE '(\.log$$|/locales/)' | sort > /tmp/pkg-$$$$.inhammer ; \
 	diff -u /tmp/pkg-$$$$.inhammer /tmp/pkg-$$$$.indebs ; \
 	if [ $$? -eq 0 ] ; then \
 	  echo " => All fine" ; \
