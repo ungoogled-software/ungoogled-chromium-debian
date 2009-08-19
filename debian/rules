@@ -137,6 +137,8 @@ TESTS = \
 # FFmpeg-mt
 GYP_DEFINES += use_system_ffmpeg=1
 
+USE_SYSTEM_SQLITE := $(shell pkg-config 'sqlite3 >= 3.6.1' && echo 1 || echo 0)
+
 # System libs
 ifeq (1,$(WANT_SYSTEM_LIBS))
 GYP_DEFINES += \
@@ -145,8 +147,8 @@ GYP_DEFINES += \
 	use_system_libjpeg=1 \
 	use_system_libpng=1 \
 	use_system_sqlite=0 \
-	use_system_libxml=0 \
-	use_system_libxslt=0 \
+	use_system_libxml=1 \
+	use_system_libxslt=1 \
 	$(NULL)
 endif
 
@@ -368,12 +370,12 @@ STRIPPED_DIRS := \
 ifeq (1,$(WANT_SYSTEM_LIBS))
 # Directories that will be dropped if the corresponding system lib are enabled in GYP_DEFINES
 # We need to keep some files (like *.gyp) so we can't use STRIPPED_DIRS
-# We can't drop third_party/zlib because we don't have contrib/minizip/*zip.h
+# We can't drop third_party/zlib because we don't have contrib/minizip/*zip.h, and
+# third_party/sqlite because it's a conditional build (see USE_SYSTEM_SQLITE)
 STRIPPED_SYSTEM_LIB_DIRS += \
 	third_party/bzip2 \
 	third_party/libjpeg \
 	third_party/libpng \
-	third_party/sqlite \
 	third_party/libxml \
 	third_party/libxslt \
 	$(NULL)
