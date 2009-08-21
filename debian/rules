@@ -259,6 +259,8 @@ ifneq (i386,$(DEB_BUILD_ARCH_CPU))
 	# to drop the -l10n files from debian/tmp to make 'compare' happy
 	cd $(CURDIR)/debian/tmp/$(LIB_DIR)/locales && \
 	  rm $(filter-out en-US.pak,$(notdir $(wildcard $(CURDIR)/debian/tmp/$(LIB_DIR)/locales/*)))
+	# same for inspector
+	rm -rf $(CURDIR)/debian/tmp/$(LIB_DIR)/resources/inspector/*
 endif
 
 binary-install/$(DEBIAN_NAME)-l10n::
@@ -307,9 +309,9 @@ compare:
 	  echo " => No duplicate found" ; \
 	fi
 	# Find missing
-	@find $(PKG_DIRS) -type f -print | grep -v /DEBIAN/ | grep -vE '(/usr/lib/debug|/test-results/|/locales/)' | \
+	@find $(PKG_DIRS) -type f -print | grep -v /DEBIAN/ | grep -vE '(/usr/lib/debug|/test-results/|/locales/|/inspector/)' | \
 	  grep $(LIB_DIR) | cut -d/ -f5- | sort > /tmp/pkg-$$$$.indebs ; \
-	find debian/tmp/$(LIB_DIR) -type f -print | cut -d/ -f5- | grep -vE '(\.log$$|/locales/)' | sort > /tmp/pkg-$$$$.inhammer ; \
+	find debian/tmp/$(LIB_DIR) -type f -print | cut -d/ -f5- | grep -vE '(\.log$$|/locales/|/inspector/)' | sort > /tmp/pkg-$$$$.inhammer ; \
 	diff -u /tmp/pkg-$$$$.inhammer /tmp/pkg-$$$$.indebs ; \
 	if [ $$? -eq 0 ] ; then \
 	  echo " => All fine" ; \
