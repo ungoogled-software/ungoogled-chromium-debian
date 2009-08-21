@@ -77,6 +77,17 @@ Description: chromium-browser language packages
  hi, hr, hu, id, it, ja, kn, ko, lt, lv, ml, mr, nb, nl, or, pl, pt-BR, pt-PT,
  ro, ru, sk, sl, sr, sv, ta, te, th, tr, uk, vi, zh-CN, zh-TW
 
+Package: chromium-browser-inspector
+Architecture: all
+Pre-Depends: lzma
+Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-browser (= ${binary:Version})
+Description: page inspector for the chromium-browser
+ Chromium is an open-source browser project that aims to build a safer, faster,
+ and more stable way for all Internet users to experience the web.
+ .
+ This package contains 'inspector', allowing web developpers to inspect any
+ element of a web page at runtime (html, javascript, css, ..)
+
 Package: chromium-testsuite
 Architecture: i386 amd64 lpia
 Pre-Depends: lzma

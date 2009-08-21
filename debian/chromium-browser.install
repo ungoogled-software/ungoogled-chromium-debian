@@ -5,6 +5,5 @@ debian/tmp/usr/lib/chromium-browser/xdg-settings
 #debian/tmp/usr/lib/chromium-browser/icudt38l.dat
 debian/tmp/usr/lib/chromium-browser/locales/*
 debian/tmp/usr/lib/chromium-browser/themes/*
-debian/tmp/usr/lib/chromium-browser/resources/*
 debian/chromium-browser.desktop usr/share/applications
 debian/chromium-browser.xml usr/share/gnome-control-center/default-apps
