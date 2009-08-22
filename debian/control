@@ -67,7 +67,7 @@ Architecture: all
 Pre-Depends: lzma
 Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-browser (= ${binary:Version})
 Breaks: chromium-browser (<< 3.0.197.0~svn20090804r22432)
-Replaces: chromium-browser
+Replaces: chromium-browser (<< 3.0.197.0~svn20090804r22432)
 Description: chromium-browser language packages
  Chromium is an open-source browser project that aims to build a safer, faster,
  and more stable way for all Internet users to experience the web.
