@@ -345,6 +345,7 @@ STRIPPED_DIRS_FROM_CO := \
 # hooks (see build/all.gyp) or of some unneeded deps/includes
 STRIPPED_DIRS := \
 	chrome/test/data/safe_browsing/old \
+	chrome/test/data/firefox2_nss_mac \
 	chrome/tools/test/reference_build \
 	gears \
 	google_update \
@@ -455,7 +456,7 @@ ifeq (1,$(STRIP_TARBALL))
 	$(call STRIP_SYSTEM_DIRS,$(STRIPPED_SYSTEM_LIB_DIRS),$(TMP_DDIR)/src) | grep -vE '/\.svn(/|.$$)' >> $(TMP_DDIR)/src/REMOVED-stripped.txt
 endif
 	# Remove binaries
-	cd $(TMP_DDIR)/src && find . -type f \( -iname \*.exe -o -iname \*.dll -o -iname \*.pdb -o -name \*.o -o -name \*.a \) -exec rm -fv {} \; > REMOVED-bin_only.txt
+	cd $(TMP_DDIR)/src && find . -type f \( -iname \*.exe -o -iname \*.dll -o -iname \*.pdb -o -name \*.o -o -name \*.a -o -name \*.dylib \) -exec rm -fv {} \; > REMOVED-bin_only.txt
 	wc -l $(TMP_DDIR)/src/REMOVED-*.txt
 	
 gos-pack: TMP_DIR  = $(TMP_DDIR)
