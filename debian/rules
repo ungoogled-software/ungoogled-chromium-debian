@@ -207,7 +207,7 @@ endif
 	touch $@
 	# Populate the LASTCHANGE file template as we no longer have the VCS
 	# files at this point
-	echo $(DEBIAN_REVISION) > $(SRC_DIR)/build/LASTCHANGE.in
+	echo "Ubuntu build $(DEBIAN_REVISION)" > $(SRC_DIR)/build/LASTCHANGE.in
 	# SCONS=$(SCONS) (version $(SCONS_VERSION))
 	# DEB_SCONS_ARGS=$(DEB_SCONS_ARGS)
 
