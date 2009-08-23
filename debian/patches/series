@@ -3,3 +3,4 @@ honor_custom_nproc.patch
 drop_sse2.patch
 system_v8.patch
 ubuntu_dont_overwrite_default_download_directory.patch
+chromium_useragent.patch
