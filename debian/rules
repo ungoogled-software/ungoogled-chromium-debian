@@ -117,7 +117,7 @@ INSTALL_EXCLUDES = \
 #   devices).
 # - to disable one or more tests within a given testsuite,
 #   append the names of the tests (using the Google Test filter syntax)
-TESTS = \
+TESTS ?= \
 	@app_unittests:-FontTest.LoadArial \
 	base_unittests \
 	googleurl_unittests \
