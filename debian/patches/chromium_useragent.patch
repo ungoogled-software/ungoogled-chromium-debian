@@ -1,12 +1,13 @@
 ---
- webkit/glue/webkit_glue.cc |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ webkit/glue/webkit_glue.cc |    8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
 Index: src/webkit/glue/webkit_glue.cc
 ===================================================================
 --- src.orig/webkit/glue/webkit_glue.cc
 +++ src/webkit/glue/webkit_glue.cc
-@@ -367,17 +367,17 @@
+@@ -366,18 +366,24 @@
+   // Get the product name and version, and replace Safari's Version/X string
    // with it.  This is done to expose our product name in a manner that is
    // maximally compatible with Safari, we hope!!
    std::string product;
@@ -14,9 +15,15 @@ Index: src/webkit/glue/webkit_glue.cc
    if (!mimic_safari) {
      scoped_ptr<FileVersionInfo> version_info(
          FileVersionInfo::CreateFileVersionInfoForCurrentModule());
-     if (version_info.get())
--      product = "Chrome/" + WideToASCII(version_info->product_version());
-+      product = WideToASCII(version_info->product_name()) + "/" + WideToASCII(version_info->product_version());
+-    if (version_info.get())
++    if (version_info.get()) {
++      std::string product_name;
++
++      product_name = WideToASCII(version_info->product_name());
+       product = "Chrome/" + WideToASCII(version_info->product_version());
++      if (LowerCaseEqualsASCII(product_name, "chromium"))
++        product += " " + product_name + "/" + WideToASCII(version_info->product_version());
++    }
    }
  
    if (product.empty())
