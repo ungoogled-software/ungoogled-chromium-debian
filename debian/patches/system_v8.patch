@@ -1,9 +1,8 @@
 ---
- build/common.gypi      |    2 +-
  build/linux/system.gyp |   11 +++++++++++
  net/net.gyp            |    8 ++++++++
  webkit/webkit.gyp      |    8 ++++++++
- 4 files changed, 28 insertions(+), 1 deletion(-)
+ 3 files changed, 27 insertions(+)
 
 Index: src/build/linux/system.gyp
 ===================================================================
@@ -32,7 +31,7 @@ Index: src/build/linux/system.gyp
        'type': 'settings',
        'direct_dependent_settings': {
          'cflags': [
-           '<!@(pkg-config --cflags gtk+-2.0)',
+           '<!@(pkg-config --cflags gtk+-2.0 gthread-2.0)',
          ],
        },
        'link_settings': {
@@ -40,7 +39,7 @@ Index: src/webkit/webkit.gyp
 ===================================================================
 --- src.orig/webkit/webkit.gyp
 +++ src/webkit/webkit.gyp
-@@ -778,16 +778,24 @@
+@@ -782,16 +782,24 @@
          ['javascript_engine=="v8"', {
            'dependencies': [
              '../v8/tools/gyp/v8.gyp:v8',
@@ -69,7 +68,7 @@ Index: src/net/net.gyp
 ===================================================================
 --- src.orig/net/net.gyp
 +++ src/net/net.gyp
-@@ -350,16 +350,24 @@
+@@ -364,16 +364,24 @@
          '../base/base.gyp:base',
        ],
        'conditions': [
