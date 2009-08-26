@@ -19,6 +19,7 @@ WANT_LZMA_DEBS   ?= 0
 WANT_DEBUG       := 0
 WANT_SYSTEM_LIBS ?= 1
 WANT_SHARED_LIBS ?= 0
+WANT_TESTS       ?= 1
 WANT_SANDBOXING  ?= 1
 USE_SYSTEM_SCONS ?= 1
 USE_SYSTEM_V8    ?= 0
@@ -109,6 +110,12 @@ INSTALL_EXCLUDES = \
 	plugins \
 	$(NULL)
 
+ifneq (1,$(WANT_TESTS))
+INSTALL_EXCLUDES += \
+	mksnapshot \
+	$(NULL)
+endif
+
 # List of tests
 # - prefix the name with a "-" to disable the test suite completely and
 #   append a reason after a ":"
@@ -117,6 +124,7 @@ INSTALL_EXCLUDES = \
 #   devices).
 # - to disable one or more tests within a given testsuite,
 #   append the names of the tests (using the Google Test filter syntax)
+ifeq (1,$(WANT_TESTS))
 TESTS ?= \
 	@app_unittests:-FontTest.LoadArial \
 	base_unittests \
@@ -133,6 +141,7 @@ TESTS ?= \
 	@ui_tests \
 	unit_tests \
 	$(NULL)
+endif
 
 # FFmpeg-mt
 GYP_DEFINES += use_system_ffmpeg=1
@@ -157,6 +166,10 @@ endif
 DEB_SCONS_ARGS += \
 	chrome \
 	chrome_sandbox \
+	$(NULL)
+
+ifeq (1,$(WANT_TESTS))
+DEB_SCONS_ARGS += \
 	app_unittests \
 	base_unittests \
 	browser_tests \
@@ -177,6 +190,7 @@ DEB_SCONS_ARGS += \
 	url_fetch_test \
 	wav_ola_test \
 	$(NULL)
+endif
 
 ifeq (1,$(WANT_SANDBOXING))
 GYP_DEFINES += \
@@ -199,6 +213,9 @@ endif
 configure/$(DEBIAN_NAME):: debian/configure-stamp
 
 debian/configure-stamp:
+ifneq (1,$(WANT_TESTS))
+	sed -i -e '/^Package: chromium-testsuite.*/,/^$$/s/^/# /' debian/control
+endif
 ifneq (,$(GYP_DEFINES))
 	cd $(SRC_DIR) && GYP_DEFINES="$(GYP_DEFINES)" python tools/gyp/gyp_chromium build/all.gyp
 else
