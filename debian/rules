@@ -396,22 +396,29 @@ else
 TMP_DIR      := $(LOCAL_BRANCH)
 endif
 
+get-orig-source: REVISION = $(NULL)
+get-orig-source: TAG      = $(NULL)
 ifneq (,$(DEBIAN_TAG))
-get-orig-source: TAG  = $(NULL)
+get-orig-source: TAG      = $(DEBIAN_TAG)
 else
-ifeq (1,$(USE_GREEN_REV))
-get-orig-source: TAG  = -r $(shell wget -qO - $(GREEN_REV_URL))
-else
-get-orig-source: TAG  = -r $(shell svn log --limit 1 $(CHROMIUM_URL) | grep ^r | head -1 | sed -e 's/^r\([^ ]*\).*/\1/')
+ifneq (,$(DEBIAN_REV))
+get-orig-source: REVISION = --revision src@$(DEBIAN_REV)
 endif
 endif
 get-orig-source: gos-all
 
-get-current-source: TAG = -r $(DEBIAN_REVISION)
+get-current-source: TAG      = $(NULL)
+get-current-source: REVISION = --revision src@$(DEBIAN_REVISION)
+ifneq (,$(DEBIAN_REV))
+get-current-source: REVISION = --revision src@$(DEBIAN_REV)
+endif
 get-current-source: gos-all
 
 gos-all: gos-co gos-pack
 gos-co:
+ifneq (,$(TAG))
+	$(error gclient doesn\'t support tags. We need to tweak CHROMIUM_URL. Abort)
+endif
 ifeq (,$(LOCAL_BRANCH))
 	rm -rf $(TMP_DIR)
 endif
@@ -423,12 +430,8 @@ endif
 	  echo svn update $(TMP_DIR)/tools/depot_tools ; \
 	  svn update $(TMP_DIR)/tools/depot_tools ; \
 	fi
-	# Checkout
-ifneq (,$(TAG))
-	$(error gclient doesn\'t support tags)
-endif
 	rm -f $(TMP_DIR)/.gclient
-ifeq (1,$(USE_GREEN_REV))
+ifeq (1,$(USE_GREEN_REV)$(REVISION))
 	cd $(TMP_DIR) && ./tools/depot_tools/gclient config $(CHROMIUM_URL) $(GREEN_REV_URL)
 else
 	cd $(TMP_DIR) && ./tools/depot_tools/gclient config $(CHROMIUM_URL)
@@ -442,7 +445,8 @@ ifneq (,$(STRIPPED_DIRS_FROM_CO))
 	grep -Ev '^($$|[[:blank:]]*#)' $(TMP_DIR)/.gclient
 endif
 endif
-	cd $(TMP_DIR) && ./tools/depot_tools/gclient update --nohooks
+	# Checkout
+	cd $(TMP_DIR) && ./tools/depot_tools/gclient update --nohooks $(REVISION)
 ifneq (,$(LOCAL_BRANCH))
 	rm -rf $(TMP_DDIR)
 	cp -la $(TMP_DIR) $(TMP_DDIR)
