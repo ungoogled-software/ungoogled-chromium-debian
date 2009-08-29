@@ -155,6 +155,7 @@ endif
 GYP_DEFINES += use_system_ffmpeg=1
 
 USE_SYSTEM_SQLITE := $(shell pkg-config 'sqlite3 >= 3.6.1' && echo 1 || echo 0)
+USE_SYSTEM_SQLITE := 0
 
 # System libs
 ifeq (1,$(WANT_SYSTEM_LIBS))
