@@ -8,12 +8,13 @@ Index: src/build/linux/system.gyp
 ===================================================================
 --- src.orig/build/linux/system.gyp
 +++ src/build/linux/system.gyp
-@@ -1,15 +1,26 @@
- # Copyright (c) 2009 The Chromium Authors. All rights reserved.
- # Use of this source code is governed by a BSD-style license that can be
- # found in the LICENSE file.
- 
- {
+@@ -12,16 +12,27 @@
+         'pkg-config': './pkg-config-wrapper "<(sysroot)"',
+       }, {
+         'pkg-config': 'pkg-config'
+       }],
+     ],
+   },
    'targets': [
      {
 +      'target_name': 'v8',
@@ -31,7 +32,7 @@ Index: src/build/linux/system.gyp
        'type': 'settings',
        'direct_dependent_settings': {
          'cflags': [
-           '<!@(pkg-config --cflags gtk+-2.0 gthread-2.0)',
+           '<!@(<(pkg-config) --cflags gtk+-2.0 gthread-2.0)',
          ],
        },
        'link_settings': {
@@ -39,7 +40,7 @@ Index: src/webkit/webkit.gyp
 ===================================================================
 --- src.orig/webkit/webkit.gyp
 +++ src/webkit/webkit.gyp
-@@ -782,16 +782,24 @@
+@@ -783,16 +783,24 @@
          ['javascript_engine=="v8"', {
            'dependencies': [
              '../v8/tools/gyp/v8.gyp:v8',
@@ -68,7 +69,7 @@ Index: src/net/net.gyp
 ===================================================================
 --- src.orig/net/net.gyp
 +++ src/net/net.gyp
-@@ -364,16 +364,24 @@
+@@ -368,16 +368,24 @@
          '../base/base.gyp:base',
        ],
        'conditions': [
