@@ -361,6 +361,7 @@ USE_GREEN_REV ?= 0
 STRIP_TARBALL ?= 1
 
 STRIPPED_DIRS_FROM_CO := \
+	chrome/tools/test/reference_build \
 	native_client \
 	webkit/data/layout_tests/LayoutTests \
 	third_party/WebKit/LayoutTests \
@@ -372,7 +373,6 @@ STRIPPED_DIRS_FROM_CO := \
 STRIPPED_DIRS := \
 	chrome/test/data/safe_browsing/old \
 	chrome/test/data/firefox2_nss_mac \
-	chrome/tools/test/reference_build \
 	gears \
 	google_update \
 	o3d \
