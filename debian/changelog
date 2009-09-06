@@ -1,5 +1,5 @@
 chromium-browser (4.0.207.0~svn20090904r25449-0ubuntu1) UNRELEASED; urgency=low
 
-  * Initial release. (Closes: #XXXXXX)
+  * Initial release. (Closes: #520324, LP: #387765)
 
  -- Fabien Tassin <fta@ubuntu.com>  Fri, 04 Sep 2009 17:00:02 +0200
