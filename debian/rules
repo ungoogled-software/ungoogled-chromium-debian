@@ -382,6 +382,7 @@ STRIPPED_DIRS := \
 	third_party/cld \
 	third_party/ffmpeg/binaries \
 	third_party/fuzzymatch \
+	third_party/hunspell/dictionaries \
 	third_party/icu38/mac \
 	third_party/lcov \
 	third_party/lighttpd \
