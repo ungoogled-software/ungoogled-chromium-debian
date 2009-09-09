@@ -44,7 +44,7 @@ Build-Depends: cdbs,
 Standards-Version: 3.8.0
 
 Package: chromium-browser
-Architecture: i386 amd64 lpia
+Architecture: any
 Pre-Depends: lzma
 Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-codecs-ffmpeg | chromium-codecs-ffmpeg-nonfree
 Suggests: chromium-browser-l10n
