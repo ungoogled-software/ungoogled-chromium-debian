@@ -226,9 +226,9 @@ ifneq (1,$(WANT_TESTS))
 	sed -i -e '/^Package: chromium-testsuite.*/,/^$$/s/^/# /' debian/control
 endif
 ifneq (,$(GYP_DEFINES))
-	cd $(SRC_DIR) && GYP_DEFINES="$(GYP_DEFINES)" python tools/gyp/gyp_chromium -I build/common.gypi build/all.gyp
+	cd $(SRC_DIR) && GYP_DEFINES="$(GYP_DEFINES)" python build/gyp_chromium build/all.gyp
 else
-	cd $(SRC_DIR) && python tools/gyp/gyp_chromium -I build/common.gypi build/all.gyp
+	cd $(SRC_DIR) && python build/gyp_chromium build/all.gyp
 endif
 	touch $@
 	# Populate the LASTCHANGE file template as we no longer have the VCS
