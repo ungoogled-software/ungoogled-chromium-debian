@@ -361,11 +361,11 @@ USE_GREEN_REV ?= 1
 STRIP_TARBALL ?= 1
 
 STRIPPED_DIRS_FROM_CO := \
-	chrome/tools/test/reference_build \
-	native_client \
-	webkit/data/layout_tests/LayoutTests \
-	third_party/WebKit/LayoutTests \
-	third_party/ffmpeg/binaries/chromium \
+	src/chrome/tools/test/reference_build \
+	src/native_client \
+	src/webkit/data/layout_tests/LayoutTests \
+	src/third_party/WebKit/LayoutTests \
+	src/third_party/ffmpeg/binaries/chromium \
 	$(NULL)
 
 # prefix with _ those that we can't remove (just yet) because of the gclient
@@ -467,7 +467,7 @@ ifeq (1,$(STRIP_TARBALL))
 ifneq (,$(STRIPPED_DIRS_FROM_CO))
 	# Add exclusions in .gclient for $(STRIPPED_DIRS_FROM_CO)
 	@for excl in $(STRIPPED_DIRS_FROM_CO) ; do \
-	  perl -i -pe 's,("custom_deps"\s*:\s*{),$$1\n      "src/'$$excl'": None\,,' $(TMP_DIR)/.gclient ; \
+	  perl -i -pe 's,("custom_deps"\s*:\s*{),$$1\n      "'$$excl'": None\,,' $(TMP_DIR)/.gclient ; \
 	done
 	grep -Ev '^($$|[[:blank:]]*#)' $(TMP_DIR)/.gclient
 endif
