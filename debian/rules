@@ -365,7 +365,10 @@ STRIPPED_DIRS_FROM_CO := \
 	src/native_client \
 	src/webkit/data/layout_tests/LayoutTests \
 	src/third_party/WebKit/LayoutTests \
-	src/third_party/ffmpeg/binaries/chromium \
+	src/third_party/ffmpeg/binaries/chromium/linux/ia32 \
+	src/third_party/ffmpeg/binaries/chromium/linux/ia32_dbg \
+	src/third_party/ffmpeg/binaries/chromium/linux/x64 \
+	src/third_party/ffmpeg/binaries/chromium/linux/x64_dbg \
 	$(NULL)
 
 # prefix with _ those that we can't remove (just yet) because of the gclient
