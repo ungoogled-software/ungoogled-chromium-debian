@@ -359,7 +359,7 @@ DEPS_URL     := http://src.chromium.org/svn/trunk/deps/third_party
 GREEN_REV_URL := http://chromium-status.appspot.com/lkgr
 
 # See Staying Green More Of The Time at http://dev.chromium.org/developers/how-tos/get-the-code
-USE_GREEN_REV ?= 1
+USE_GREEN_REV ?= 0
 
 STRIP_TARBALL ?= 1
 
