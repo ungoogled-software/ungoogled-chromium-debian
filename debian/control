@@ -48,6 +48,9 @@ Architecture: any
 Pre-Depends: lzma
 Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-codecs-ffmpeg | chromium-codecs-ffmpeg-nonfree
 Suggests: chromium-browser-l10n
+Provides: chromium-testsuite
+Replaces: chromium-testsuite
+Conflicts: chromium-testsuite
 Description: Chromium browser
  Chromium is an open-source browser project that aims to build a safer, faster,
  and more stable way for all Internet users to experience the web.
@@ -60,6 +63,9 @@ Section: devel
 Priority: optional
 Pre-Depends: lzma
 Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-browser (= ${binary:Version})
+Provides: chromium-testsuite-dbg
+Replaces: chromium-testsuite-dbg
+Conflicts: chromium-testsuite-dbg
 Description: chromium-browser debug symbols
  Debug symbols for the Chromium browser
 
@@ -88,22 +94,3 @@ Description: page inspector for the chromium-browser
  .
  This package contains 'inspector', allowing web developpers to inspect any
  element of a web page at runtime (html, javascript, css, ..)
-
-Package: chromium-testsuite
-Architecture: i386 amd64 lpia
-Pre-Depends: lzma
-Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-browser (= ${binary:Version}), msttcorefonts, python-tlslite
-Description: Chromium test suite
- Chromium is an open-source browser project that aims to build a safer, faster,
- and more stable way for all Internet users to experience the web.
- .
- This package contains a test suite, not the actual Chromium browser
-
-Package: chromium-testsuite-dbg
-Architecture: i386 amd64 lpia
-Section: devel
-Priority: optional
-Pre-Depends: lzma
-Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-testsuite (= ${binary:Version})
-Description: chromium-testsuite debug symbols
- Debug symbols for the Chromium test suite

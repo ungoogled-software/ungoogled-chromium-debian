@@ -12,8 +12,6 @@ LIB_DIR        := usr/lib/$(DEBIAN_NAME)
 DEB_BUILDDIR   := $(SRC_DIR)/build
 DEB_SCONS_ARGS := --site-dir=../site_scons --keep-going
 
-DEBIAN_TESTSUITE := $(DEBIAN_NAME:browser=testsuite)
-
 WANT_LZMA_SRC    ?= 1
 WANT_LZMA_DEBS   ?= 0
 WANT_DEBUG       := 0
@@ -222,9 +220,6 @@ endif
 configure/$(DEBIAN_NAME):: debian/configure-stamp
 
 debian/configure-stamp:
-ifneq (1,$(WANT_TESTS))
-	sed -i -e '/^Package: chromium-testsuite.*/,/^$$/s/^/# /' debian/control
-endif
 ifneq (,$(GYP_DEFINES))
 	cd $(SRC_DIR) && GYP_DEFINES="$(GYP_DEFINES)" python build/gyp_chromium build/all.gyp
 else
@@ -293,15 +288,14 @@ binary-install/$(DEBIAN_NAME)-l10n::
 	rm $(CURDIR)/debian/$(DEBIAN_NAME)-l10n/$(LIB_DIR)/locales/en-US.pak
 
 # Tests
-binary-post-install/$(DEBIAN_TESTSUITE)::
+ifeq (1,$(WANT_TESTS))
+binary-post-install/$(DEBIAN_NAME)::
 	######################### TESTS ######################################
 	# Run all possible tests from the chromium testsuite
-	# Full results could be found in the '$(DEBIAN_TESTSUITE)' package
-	# under /$(LIB_DIR)/test-results
 	# Buildd doesn't allow network accesses so the corresponding
 	# tests have to be skipped
 	@chmod u+x $(CURDIR)/debian/run-test.sh
-	@mkdir -p debian/$(DEBIAN_TESTSUITE)/$(LIB_DIR)/test-results
+	@mkdir -p debian/test-results
 	@cd $(SRC_DIR)/sconsbuild/$(BUILD_TYPE) && \
 	for test in $(TESTS) ; do \
 		tname=`echo "$$test" | sed -e 's/^[-@]\?\([^:]*\).*/\1/'` ; \
@@ -315,10 +309,11 @@ binary-post-install/$(DEBIAN_TESTSUITE)::
 		if [ Z"`echo $$test | sed -e 's/^@.*//'`" = Z ] ; then \
 			OPT=-x ; \
 		fi ; \
-		$(CURDIR)/debian/run-test.sh $$OPT ./$$tname $(CURDIR)/debian/$(DEBIAN_TESTSUITE)/$(LIB_DIR)/test-results/ $$filter || true ; \
+		$(CURDIR)/debian/run-test.sh $$OPT ./$$tname $(CURDIR)/debian/test-results/ $$filter || true ; \
 		echo "==========================================================================" ; \
 		echo ; \
 	done
+endif
 
 # Compare
 PKG_DIRS = $(addprefix debian/,$(shell grep ^Package debian/control | cut -d' ' -f2))
