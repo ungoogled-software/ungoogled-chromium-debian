@@ -101,11 +101,15 @@ include /usr/share/cdbs/1/rules/patchsys-quilt.mk
 include /usr/share/cdbs/1/rules/debhelper.mk
 include $(CURDIR)/debian/cdbs/scons.mk
 
-INSTALL_EXCLUDES = \
+INSTALL_EXCLUDE_DIRS = \
 	lib \
 	obj \
 	opt \
 	dbg \
+	plugins \
+	$(NULL)
+
+INSTALL_EXCLUDE_FILES = \
 	.sconsign.dblite \
 	linker.lock \
 	convert_dict \
@@ -113,12 +117,13 @@ INSTALL_EXCLUDES = \
 	product_logo_48.png \
 	libnpapi_layout_test_plugin.so \
 	libnpapi_test_plugin.so \
-	plugins \
 	$(NULL)
 
 ifneq (1,$(WANT_TESTS))
-INSTALL_EXCLUDES += \
+INSTALL_EXCLUDE_FILES += \
 	mksnapshot \
+	test_shell.pak \
+	xdisplaycheck \
 	$(NULL)
 endif
 
@@ -175,8 +180,7 @@ DEB_SCONS_ARGS += \
 	chrome_sandbox \
 	$(NULL)
 
-ifeq (1,$(WANT_TESTS))
-DEB_SCONS_ARGS += \
+TESTS_TARGETS := \
 	app_unittests \
 	base_unittests \
 	browser_tests \
@@ -197,6 +201,10 @@ DEB_SCONS_ARGS += \
 	url_fetch_test \
 	wav_ola_test \
 	$(NULL)
+
+ifeq (1,$(WANT_TESTS))
+DEB_SCONS_ARGS        += $(TESTS_TARGETS)
+INSTALL_EXCLUDE_FILES += $(TESTS_TARGETS)
 endif
 
 ifeq (1,$(WANT_SANDBOXING))
@@ -215,7 +223,6 @@ GYP_DEFINES += \
 	javascript_engine=system-v8 \
 	$(NULL)
 endif
-
 
 configure/$(DEBIAN_NAME):: debian/configure-stamp
 
@@ -238,8 +245,9 @@ clean::
 # Install: there's no install rules in scons yet, do it manually
 common-install-prehook-impl::
 	mkdir -p debian/tmp/$(LIB_DIR)
-	( cd $(SRC_DIR)/sconsbuild/$(BUILD_TYPE) && tar $(foreach excl,$(INSTALL_EXCLUDES),--exclude=$(excl)) -cf - . ) | \
+	( cd $(SRC_DIR)/sconsbuild/$(BUILD_TYPE) && tar $(foreach excl,$(INSTALL_EXCLUDE_DIRS),--exclude=$(excl)) -cf - . ) | \
 	( cd debian/tmp/$(LIB_DIR) && tar xvf - )
+	cd debian/tmp/$(LIB_DIR) && rm -f $(INSTALL_EXCLUDE_FILES)
 	# Launcher script
 	mkdir -p debian/tmp/usr/bin
 	cp -a debian/$(DEBIAN_NAME).sh debian/tmp/usr/bin/$(DEBIAN_NAME)
