@@ -58,7 +58,7 @@ Description: Chromium browser
  This package contains the Chromium browser
 
 Package: chromium-browser-dbg
-Architecture: i386 amd64 lpia
+Architecture: any
 Section: devel
 Priority: optional
 Pre-Depends: lzma
