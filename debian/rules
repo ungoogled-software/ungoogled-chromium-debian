@@ -119,14 +119,6 @@ INSTALL_EXCLUDE_FILES = \
 	libnpapi_test_plugin.so \
 	$(NULL)
 
-ifneq (1,$(WANT_TESTS))
-INSTALL_EXCLUDE_FILES += \
-	mksnapshot \
-	test_shell.pak \
-	xdisplaycheck \
-	$(NULL)
-endif
-
 # List of tests
 # - prefix the name with a "-" to disable the test suite completely and
 #   append a reason after a ":"
@@ -204,7 +196,12 @@ TESTS_TARGETS := \
 
 ifeq (1,$(WANT_TESTS))
 DEB_SCONS_ARGS        += $(TESTS_TARGETS)
-INSTALL_EXCLUDE_FILES += $(TESTS_TARGETS)
+INSTALL_EXCLUDE_FILES += \
+	$(TESTS_TARGETS) \
+	mksnapshot \
+	test_shell.pak \
+	xdisplaycheck \
+	$(NULL)
 endif
 
 ifeq (1,$(WANT_SANDBOXING))
