@@ -13,7 +13,7 @@ DEB_BUILDDIR   := $(SRC_DIR)/build
 DEB_SCONS_ARGS := --site-dir=../site_scons --keep-going
 
 WANT_LZMA_SRC    ?= 1
-WANT_LZMA_DEBS   ?= 0
+WANT_LZMA_DEBS   ?= 1
 WANT_DEBUG       := 0
 WANT_SYSTEM_LIBS ?= 1
 WANT_SHARED_LIBS ?= 0
