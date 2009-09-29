@@ -205,6 +205,10 @@ INSTALL_EXCLUDE_FILES += \
 	mksnapshot \
 	test_shell.pak \
 	xdisplaycheck \
+	ncdecode_table \
+	ncdecode_tablegen \
+	springboard_gen \
+	tramp_gen \
 	$(NULL)
 endif
 
