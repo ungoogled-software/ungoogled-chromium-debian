@@ -23,8 +23,12 @@ USE_SYSTEM_SCONS ?= 1
 USE_SYSTEM_V8    ?= 0
 VERBOSE          ?= 1
 
+ifeq (armel,$(DEB_BUILD_ARCH))
+GYP_DEFINES += target_arch=arm
+else
 ifeq (x86_64,$(DEB_BUILD_GNU_CPU))
 GYP_DEFINES += target_arch=x64
+endif
 endif
 
 # enable this if you dont want all your cores to get drowned by 
