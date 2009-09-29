@@ -21,7 +21,7 @@ WANT_TESTS       ?= 1
 WANT_SANDBOXING  ?= 1
 USE_SYSTEM_SCONS ?= 1
 USE_SYSTEM_V8    ?= 0
-VERBOSE          ?= 0
+VERBOSE          ?= 1
 
 ifeq (x86_64,$(DEB_BUILD_GNU_CPU))
 GYP_DEFINES += target_arch=x64
