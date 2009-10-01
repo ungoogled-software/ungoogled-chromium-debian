@@ -121,6 +121,11 @@ INSTALL_EXCLUDE_FILES = \
 	product_logo_48.png \
 	libnpapi_layout_test_plugin.so \
 	libnpapi_test_plugin.so \
+	mksnapshot \
+	ncdecode_table \
+	ncdecode_tablegen \
+	springboard_gen \
+	tramp_gen \
 	$(NULL)
 
 # List of tests
@@ -202,13 +207,8 @@ ifeq (1,$(WANT_TESTS))
 DEB_SCONS_ARGS        += $(TESTS_TARGETS)
 INSTALL_EXCLUDE_FILES += \
 	$(TESTS_TARGETS) \
-	mksnapshot \
 	test_shell.pak \
 	xdisplaycheck \
-	ncdecode_table \
-	ncdecode_tablegen \
-	springboard_gen \
-	tramp_gen \
 	$(NULL)
 endif
 
