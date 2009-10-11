@@ -73,7 +73,7 @@ Description: chromium-browser debug symbols
 Package: chromium-browser-l10n
 Architecture: all
 Pre-Depends: lzma
-Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-browser (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-browser
 Breaks: chromium-browser (<< 3.0.197.0~svn20090804r22432)
 Replaces: chromium-browser (<< 3.0.197.0~svn20090804r22432)
 Description: chromium-browser language packages
