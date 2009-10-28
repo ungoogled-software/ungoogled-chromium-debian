@@ -399,7 +399,7 @@ STRIPPED_DIRS := \
 	_third_party/npapi \
 	third_party/nspr \
 	third_party/nss \
-	third_party/protobuf2 \
+	_third_party/protobuf2 \
 	third_party/pthread \
 	third_party/pyftpdlib \
 	third_party/simplejson \
