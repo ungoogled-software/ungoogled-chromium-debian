@@ -126,6 +126,7 @@ INSTALL_EXCLUDE_FILES = \
 	ncdecode_tablegen \
 	springboard_gen \
 	tramp_gen \
+	protoc \
 	$(NULL)
 
 # List of tests
