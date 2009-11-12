@@ -36,7 +36,7 @@ Build-Depends: cdbs,
 	libhunspell-dev,
 	libsqlite3-dev,
 	libasound2-dev,
-	libnss3-dev,
+	libnss3-dev (>= 3.12.3),
 	libnspr4-dev,
 	libglew1.5-dev,
 	libpango1.0-dev,
@@ -48,7 +48,7 @@ Standards-Version: 3.8.3
 Package: chromium-browser
 Architecture: any
 Pre-Depends: lzma
-Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-codecs-ffmpeg | chromium-codecs-ffmpeg-nonfree
+Depends: ${shlibs:Depends}, ${misc:Depends}, libnss3-1d (>= 3.12.3), chromium-codecs-ffmpeg | chromium-codecs-ffmpeg-nonfree
 Suggests: chromium-browser-l10n
 Provides: chromium-testsuite
 Replaces: chromium-testsuite
