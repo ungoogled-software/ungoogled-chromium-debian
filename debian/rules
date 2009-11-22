@@ -4,6 +4,7 @@ DEBIAN_NAME		:= $(shell dpkg-parsechangelog | sed -n 's/^Source: *\(.*\)$$/\1/ p
 DEBIAN_VERSION		:= $(shell dpkg-parsechangelog | sed -n 's/^Version: *\(.*\)$$/\1/ p')
 DEBIAN_UPSTREAM_VERSION	:= $(shell echo $(DEBIAN_VERSION) | sed 's/^\(.*\)-[^-]*$$/\1/')
 DEBIAN_REVISION		:= $(shell echo $(DEBIAN_VERSION) | sed 's/^.*r\([^-]*\)-.*/\1/')
+DEBIAN_DIST		:= $(shell lsb_release -ds | tr -d '()')
 
 # DEB_TAR_SRCDIR has to be 'src' as this is what gyp expects :(
 DEB_TAR_SRCDIR := src
@@ -22,6 +23,11 @@ WANT_SANDBOXING  ?= 1
 USE_SYSTEM_SCONS ?= 1
 USE_SYSTEM_V8    ?= 0
 VERBOSE          ?= 0
+
+# Only keep -Werror when building for the Debian or Ubuntu development branches
+ifeq (,$(filter unstable development,$(DEBIAN_DIST)))
+GYP_DEFINES += werror=$(NULL)
+endif
 
 ifeq (armel,$(DEB_BUILD_ARCH))
 GYP_DEFINES += target_arch=arm
