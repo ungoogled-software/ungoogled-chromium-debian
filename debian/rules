@@ -273,6 +273,7 @@ common-install-prehook-impl::
 	mv debian/tmp/$(LIB_DIR)/chrome debian/tmp/$(LIB_DIR)/$(DEBIAN_NAME)
 	mv debian/tmp/$(LIB_DIR)/chrome_sandbox debian/tmp/$(LIB_DIR)/$(DEBIAN_NAME)-sandbox
 	# Manpage
+	mv debian/tmp/$(LIB_DIR)/chrome.1 debian/tmp/$(LIB_DIR)/chromium-browser.1
 	dh_installman -pchromium-browser debian/tmp/$(LIB_DIR)/chromium-browser.1
 	rm -f debian/tmp/$(LIB_DIR)/chromium-browser.1
 
