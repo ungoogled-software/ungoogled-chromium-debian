@@ -30,7 +30,11 @@ GYP_DEFINES += werror=$(NULL)
 endif
 
 ifeq (armel,$(DEB_BUILD_ARCH))
-GYP_DEFINES += target_arch=arm
+GYP_DEFINES += \
+	target_arch=arm \
+	disable_nacl=1 \
+	v8_use_snapshot=false \
+	$(NULL)
 else
 ifeq (x86_64,$(DEB_BUILD_GNU_CPU))
 GYP_DEFINES += target_arch=x64
