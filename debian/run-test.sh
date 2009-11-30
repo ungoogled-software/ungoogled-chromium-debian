@@ -108,3 +108,4 @@ if [ $RET -ne 0 ] ; then
   grep -E '^Program received signal' < $LOGDIR/$TEST--gdb.txt
   sed -e '1,/^Program received signal/d' < $LOGDIR/$TEST--gdb.txt
 fi
+killall -q -v -9 $(basename $TEST)
