@@ -76,9 +76,11 @@ else
   echo "# Running '$RTEST' ..."
 fi
 
+T1=$(date +%s)
 timeout $timeout $XVFB $TEST $FILTER > $LOGDIR/$TEST.txt 2>&1
 RET=$?
-echo "# '$RTEST' returned with error code $RET"
+DELTA=$(expr $(date +%s) - $T1)
+echo "# '$RTEST $FILTER' returned with error code $RET (after $DELTA sec)"
 
 if [ $(grep -c 'Global test environment tear-down' $LOGDIR/$TEST.txt) -eq 1 ] ; then
   echo "## Results"
@@ -102,7 +104,11 @@ if [ $RET -ne 0 ] ; then
   fi
   echo "run $FILTER\necho ------------------------------------------------\\\\n\necho (gdb) bt\\\\n\nbt\n" > /tmp/gdb-cmds-$$.txt
   echo "echo ------------------------------------------------\\\\n\necho (gdb) bt f\\\\n\nbt f\n" >> /tmp/gdb-cmds-$$.txt
+  T2=$(date +%s)
   timeout $timeout $GDB -n -batch -x /tmp/gdb-cmds-$$.txt $TEST > $LOGDIR/$TEST--gdb.txt 2>&1
+  RET=$?
+  DELTA=$(expr $(date +%s) - $T2)
+  echo "# '$GDB -n -batch -x /tmp/gdb-cmds-$$.txt $TEST' returned with error code $RET (after $DELTA sec)"
   rm -f /tmp/gdb-cmds-$$.txt
   echo "---- crash logs ----"
   grep -E '^Program received signal' < $LOGDIR/$TEST--gdb.txt
