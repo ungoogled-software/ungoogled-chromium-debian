@@ -38,7 +38,10 @@ GYP_DEFINES += \
 WANT_LZMA_DEBS := 0
 ifneq (,$(filter unstable development,$(DEBIAN_DIST)))
 # on $(DEB_BUILD_ARCH) and $(DEBIAN_DIST), enforce an armv7 build
-GYP_DEFINES += armv7=1
+GYP_DEFINES += \
+	armv7=1 \
+	release_extra_cflags=-Wa,-mimplicit-it=thumb \
+	$(NULL)
 endif
 else
 ifeq (x86_64,$(DEB_BUILD_GNU_CPU))
