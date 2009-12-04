@@ -50,6 +50,7 @@ Package: chromium-browser
 Architecture: any
 Pre-Depends: lzma
 Depends: ${shlibs:Depends}, ${misc:Depends}, libnss3-1d (>= 3.12.3), chromium-codecs-ffmpeg | chromium-codecs-ffmpeg-nonfree
+Recommends: chromium-browser-inspector
 Suggests: chromium-browser-l10n
 Provides: chromium-testsuite
 Replaces: chromium-testsuite
