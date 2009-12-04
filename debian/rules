@@ -37,10 +37,10 @@ GYP_DEFINES += \
 	$(NULL)
 WANT_LZMA_DEBS := 0
 ifneq (,$(filter unstable development,$(DEBIAN_DIST)))
-# on $(DEB_BUILD_ARCH) and $(DEBIAN_DIST), enforce an armv7 build
+# on $(DEB_BUILD_ARCH) and $(DEBIAN_DIST), enforce an armv7 with thumb build
 GYP_DEFINES += \
 	armv7=1 \
-	release_extra_cflags=-Wa,-mimplicit-it=thumb \
+	arm_thumb=1 \
 	$(NULL)
 endif
 else
