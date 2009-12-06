@@ -158,12 +158,12 @@ INSTALL_EXCLUDE_FILES = \
 ifeq (1,$(WANT_TESTS))
 TESTS ?= \
 	@app_unittests:-FontTest.LoadArial \
-	base_unittests \
+	base_unittests:-StatsTableTest.* \
 	googleurl_unittests \
 	ipc_tests \
 	media_unittests \
 	net_perftests \
-	net_unittests:-HttpNetworkLayerTest.GoogleGET:TelnetServerTest.* \
+	net_unittests:-HttpNetworkLayerTest.GoogleGET:TelnetServerTest.*:PageCyclerTest.* \
 	@page_cycler_tests \
 	perf_tests \
 	printing_unittests \
