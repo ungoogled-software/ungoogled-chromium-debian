@@ -155,21 +155,56 @@ INSTALL_EXCLUDE_FILES = \
 #   devices).
 # - to disable one or more tests within a given testsuite,
 #   append the names of the tests (using the Google Test filter syntax)
+#   or call the gtfilter macro
 ifeq (1,$(WANT_TESTS))
+gtfilter = -$(shell echo $(SKIP_$(1)) | tr ' ' :)
+
+# tests we can't pass because we don't have enough permissions
+SKIP_base_unittests := \
+	StatsTableTest.* \
+	SysInfoTest.GetPrimaryDisplayDimensions \
+	$(NULL)
+
+SKIP_page_cycler_tests := \
+	PageCyclerTest.* \
+	PageCyclerReferenceTest.* \
+	$(NULL)
+
+SKIP_ui_tests := \
+	WorkerTest.MultipleWorkers \
+	WorkerTest.IncognitoSharedWorkers \
+	$(NULL)
+
+# tests we can't pass because we need to access internet (~61 out of 987 tests)
+SKIP_net_unittests := \
+	HttpNetworkLayerTest.GoogleGET \
+	TelnetServerTest.* \
+	PageCyclerTest.* \
+	URLRequestTestHTTP.* \
+	URLRequestTest.QuitTest \
+	URLRequestTest.DoNotSendCookies \
+	URLRequestTest.DoNotSaveCookies
+	HTTPSRequestTest.* \
+	URLRequestTestFTP.* \
+	SSLClientSocketTest.* \
+	ProxyScriptFetcherTest.* \
+	ListenSocketTest.* \
+	$(NULL)
+
 TESTS ?= \
 	@app_unittests:-FontTest.LoadArial \
-	base_unittests:-StatsTableTest.* \
+	base_unittests:$(call gtfilter,base_unittests) \
 	googleurl_unittests \
 	ipc_tests \
 	media_unittests \
 	net_perftests \
-	net_unittests:-HttpNetworkLayerTest.GoogleGET:TelnetServerTest.*:PageCyclerTest.* \
-	@page_cycler_tests \
+	net_unittests:$(call gtfilter,net_unittests) \
+	@page_cycler_tests:$(call gtfilter,page_cycler_tests) \
 	perf_tests \
 	printing_unittests \
 	@startup_tests \
 	@test_shell_tests \
-	@ui_tests \
+	@ui_tests:$(call gtfilter,ui_tests) \
 	unit_tests \
 	$(NULL)
 endif
