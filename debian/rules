@@ -183,7 +183,7 @@ SKIP_net_unittests := \
 	URLRequestTestHTTP.* \
 	URLRequestTest.QuitTest \
 	URLRequestTest.DoNotSendCookies \
-	URLRequestTest.DoNotSaveCookies
+	URLRequestTest.DoNotSaveCookies \
 	HTTPSRequestTest.* \
 	URLRequestTestFTP.* \
 	SSLClientSocketTest.* \
