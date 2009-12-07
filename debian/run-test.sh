@@ -86,8 +86,6 @@ if [ $(grep -c 'Global test environment tear-down' $LOGDIR/$TEST.txt) -eq 1 ] ; 
   echo "## Results"
   sed -e '1,/Global test environment tear-down/d' < $LOGDIR/$TEST.txt
 else
-  echo "## Logs:"
-  cat $LOGDIR/$TEST.txt
   if [ $(grep -c ' FAILED  ' $LOGDIR/$TEST.txt) -ne 0 ] ; then
     echo
     echo "## list of FAILED tests:"
@@ -96,6 +94,9 @@ else
 fi
 echo
 if [ $RET -ne 0 ] ; then
+  echo "=== Logs ==="
+  cat $LOGDIR/$TEST.txt
+  echo "==== end of logs ==="
   # debug in gdb
   if [ $want_x -eq 1 ] ; then
     GDB="/usr/bin/xvfb-run -a gdb"
