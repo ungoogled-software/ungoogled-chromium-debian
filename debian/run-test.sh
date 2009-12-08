@@ -62,8 +62,9 @@ if [ ! -d $LOGDIR ] ; then
 fi
 
 if [ $want_x -eq 1 ] ; then
-  XVFB="/usr/bin/xvfb-run -a"
+  XVFB="/usr/bin/xvfb-run -a -e $LOGDIR/xvfb.log"
   RTEST="$XVFB $TEST"
+  rm -f $LOGDIR/xvfb.log
 else
   XVFB=""
   RTEST=$TEST
@@ -96,6 +97,10 @@ echo
 if [ $RET -ne 0 ] ; then
   echo "=== Logs ==="
   cat $LOGDIR/$TEST.txt
+  if [ "Z$XVFB" != Z ] ; then
+    echo "=== xvfb logs ==="
+    cat $LOGDIR/xvfb.log
+  fi
   echo "==== end of logs ==="
   # debug in gdb
   if [ $want_x -eq 1 ] ; then
