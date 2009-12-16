@@ -428,6 +428,7 @@ STRIP_TARBALL ?= 1
 
 STRIPPED_DIRS_FROM_CO := \
 	src/chrome/tools/test/reference_build \
+	src/chrome/tools/test/reference_build/chrome_linux \
 	src/webkit/data/layout_tests/LayoutTests \
 	src/third_party/WebKit/LayoutTests \
 	src/third_party/ffmpeg/binaries/chromium/linux/ia32 \
