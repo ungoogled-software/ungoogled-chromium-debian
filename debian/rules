@@ -10,8 +10,8 @@ DEBIAN_DIST		:= $(shell lsb_release -ds | tr -d '()')
 DEB_TAR_SRCDIR := src
 SRC_DIR        := $(CURDIR)/build-tree/$(DEB_TAR_SRCDIR)
 LIB_DIR        := usr/lib/$(DEBIAN_NAME)
-DEB_BUILDDIR   := $(SRC_DIR)/build
-DEB_SCONS_ARGS := --site-dir=../site_scons --keep-going
+DEB_BUILDDIR   := $(SRC_DIR)
+#BUILD_ARGS     := --keep-going
 
 WANT_LZMA_SRC    ?= 1
 WANT_LZMA_DEBS   ?= 1
@@ -20,9 +20,12 @@ WANT_SYSTEM_LIBS ?= 1
 WANT_SHARED_LIBS ?= 0
 WANT_TESTS       ?= 1
 WANT_SANDBOXING  ?= 1
-USE_SYSTEM_SCONS ?= 1
 USE_SYSTEM_V8    ?= 0
 VERBOSE          ?= 0
+PROCESSORS       ?= $(shell grep -ic ^processor /proc/cpuinfo)
+ifeq (0,$(PROCESSORS))
+PROCESSORS := 1
+endif
 
 # Only keep -Werror when building for the Debian or Ubuntu development branches
 ifeq (,$(filter unstable development,$(DEBIAN_DIST)))
@@ -51,11 +54,6 @@ GYP_DEFINES += target_arch=x64
 endif
 endif
 
-# enable this if you dont want all your cores to get drowned by 
-# chromium build
-# NUMBER_OF_PROCESSORS=1
-# export NUMBER_OF_PROCESSORS
-
 # Don't let dh_installinit install *.default in /etc/default
 DEB_DH_INSTALLINIT_ARGS += --noscripts --onlyscripts
 
@@ -69,13 +67,13 @@ BUILD_TYPE := Debug
 else
 BUILD_TYPE := Release
 # Add symbols
-DEB_SCONS_ARGS += SYMBOLS=1
+BUILD_ARGS += SYMBOLS=1
 endif
-DEB_SCONS_ARGS += --mode=$(BUILD_TYPE)
+BUILD_ARGS += BUILDTYPE=$(BUILD_TYPE)
 
 # Verbose?
 ifeq (1,$(VERBOSE))
-DEB_SCONS_ARGS += --verbose
+BUILD_ARGS += V=1
 endif
 
 # Shared libraries
@@ -97,20 +95,6 @@ ifeq (4.4,$(CC_VERSION))
 GYP_DEFINES += no_strict_aliasing=1 gcc_version=44
 endif
 
-# scons 0.97 (hardy) and 0.98.5 (intrepid) fail, switch to in-source scons if system scons < 1.2.0
-SCONS_VERSION := $(shell grep ^__version__ /usr/bin/scons | cut -d\" -f2)
-ifneq (,$(SCONS_VERSION))
-ifeq (1,$(USE_SYSTEM_SCONS))
-USE_SYSTEM_SCONS := $(shell dpkg --compare-versions $(SCONS_VERSION) lt 1.2.0; echo $$?)
-endif
-else
-USE_SYSTEM_SCONS := 0
-endif
-ifeq (0,$(USE_SYSTEM_SCONS))
-SCONS := ../third_party/scons/scons.py
-SCONS_VERSION = $(shell grep ^__version__ $(SRC_DIR)/third_party/scons/scons.py | cut -d\" -f2)
-endif
-
 ifeq (1,$(WANT_LZMA_SRC))
 TAR_EXT   := lzma
 TAR_FLAGS := --lzma
@@ -123,14 +107,22 @@ endif
 include $(CURDIR)/debian/cdbs/tarball.mk
 include /usr/share/cdbs/1/rules/patchsys-quilt.mk
 include /usr/share/cdbs/1/rules/debhelper.mk
-include $(CURDIR)/debian/cdbs/scons.mk
+include /usr/share/cdbs/1/class/makefile.mk
+
+ifneq (1,$(PROCESSORS))
+DEB_MAKE_EXTRA_ARGS += -j$(PROCESSORS)
+endif
 
 INSTALL_EXCLUDE_DIRS = \
 	lib \
+	lib.target \
 	obj \
+	obj.target \
+	obj.host \
 	opt \
 	dbg \
 	plugins \
+	'*.d' \
 	$(NULL)
 
 INSTALL_EXCLUDE_FILES = \
@@ -147,6 +139,7 @@ INSTALL_EXCLUDE_FILES = \
 	springboard_gen \
 	tramp_gen \
 	protoc \
+	*.d \
 	$(NULL)
 
 # List of tests
@@ -232,7 +225,7 @@ endif
 
 # Build everything (like All), including test programs but minus things we don't
 # want (breakpad, courgette, ..) or don't need (the other small tools)
-DEB_SCONS_ARGS += \
+BUILD_TARGETS := \
 	chrome \
 	chrome_sandbox \
 	$(NULL)
@@ -260,7 +253,6 @@ TESTS_TARGETS := \
 	$(NULL)
 
 ifeq (1,$(WANT_TESTS))
-DEB_SCONS_ARGS        += $(TESTS_TARGETS)
 INSTALL_EXCLUDE_FILES += \
 	$(TESTS_TARGETS) \
 	test_shell.pak \
@@ -285,28 +277,41 @@ GYP_DEFINES += \
 	$(NULL)
 endif
 
+######
+DO = (echo '$(1)' ; $(1))
+
+DEB_MAKE_BUILD_TARGET := $(BUILD_ARGS) $(BUILD_TARGETS)
+
 configure/$(DEBIAN_NAME):: debian/configure-stamp
 
-debian/configure-stamp:
+debian/configure-stamp: GYP_ENV = GYP_GENERATORS=make
 ifneq (,$(GYP_DEFINES))
-	cd $(SRC_DIR) && GYP_DEFINES="$(GYP_DEFINES)" python build/gyp_chromium build/all.gyp
-else
-	cd $(SRC_DIR) && python build/gyp_chromium build/all.gyp
+debian/configure-stamp: GYP_ENV += GYP_DEFINES="$(GYP_DEFINES)"
 endif
+debian/configure-stamp:
+	cd $(SRC_DIR) && $(GYP_ENV) python build/gyp_chromium build/all.gyp
 	touch $@
 	# Populate the LASTCHANGE file template as we no longer have the VCS
 	# files at this point
 	echo "$(DEBIAN_REVISION)" > $(SRC_DIR)/build/LASTCHANGE.in
-	# SCONS=$(SCONS) (version $(SCONS_VERSION))
-	# DEB_SCONS_ARGS=$(DEB_SCONS_ARGS)
+	# BUILD_ARGS=$(BUILD_ARGS)
+
+# we don't want all the test binaries linked at the same time when using -jX (X > 2)
+# Each ld takes ~1.5GB of memory. So run make for each target separatly to workaround that
+ifeq (1,$(WANT_TESTS))
+common-build-arch common-build-indep:: debian/stamp-makefile-build-tests
+debian/stamp-makefile-build-tests: debian/stamp-makefile-build
+	@$(foreach target,$(TESTS_TARGETS),$(call DO,$(DEB_MAKE_INVOKE) $(BUILD_ARGS) $(target));)
+	touch $@
+endif
 
 clean::
-	rm -f debian/configure-stamp
+	rm -f debian/configure-stamp debian/stamp-makefile-build-tests
 
 # Install: there's no install rules in scons yet, do it manually
 common-install-prehook-impl::
 	mkdir -p debian/tmp/$(LIB_DIR)
-	( cd $(SRC_DIR)/sconsbuild/$(BUILD_TYPE) && tar $(foreach excl,$(INSTALL_EXCLUDE_DIRS),--exclude=$(excl)) -cf - . ) | \
+	( cd $(SRC_DIR)/out/$(BUILD_TYPE) && tar $(foreach excl,$(INSTALL_EXCLUDE_DIRS),--exclude=$(excl)) -cf - . ) | \
 	( cd debian/tmp/$(LIB_DIR) && tar xvf - )
 	cd debian/tmp/$(LIB_DIR) && rm -f $(INSTALL_EXCLUDE_FILES)
 	# Launcher script
@@ -366,7 +371,7 @@ binary-post-install/$(DEBIAN_NAME)::
 	# tests have to be skipped
 	@chmod u+x $(CURDIR)/debian/run-test.sh
 	@mkdir -p debian/test-results
-	@cd $(SRC_DIR)/sconsbuild/$(BUILD_TYPE) && \
+	@cd $(SRC_DIR)/out/$(BUILD_TYPE) && \
 	for test in $(TESTS) ; do \
 		tname=`echo "$$test" | sed -e 's/^[-@]\?\([^:]*\).*/\1/'` ; \
 		filter=`echo "$$test" | sed -e 's/^[^-][^:]*://' | grep -v -- "$$test"` ; \
