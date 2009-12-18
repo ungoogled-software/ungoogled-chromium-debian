@@ -278,7 +278,7 @@ GYP_DEFINES += \
 endif
 
 ######
-DO = (echo '$(1)' ; $(1))
+DO = (touch r1; echo '$(1)'; $(1); touch r2 ; T1=`date -r r1 +%s` ; T2=`date -r r2 +%s`; echo "PERF: '$(2)' built in "`expr $$T2 - $$T1`" sec"; rm -f r1 r2;)
 
 DEB_MAKE_BUILD_TARGET := $(BUILD_ARGS) $(BUILD_TARGETS)
 
@@ -296,17 +296,22 @@ debian/configure-stamp:
 	echo "$(DEBIAN_REVISION)" > $(SRC_DIR)/build/LASTCHANGE.in
 	# BUILD_ARGS=$(BUILD_ARGS)
 
+common-build-arch common-build-indep:: debian/stamp-makefile-build-perf
+debian/stamp-makefile-build-perf: debian/stamp-makefile-build
+	@T2=`date +%s`; T1=`date -r debian/configure-stamp +%s`; echo "PERF: '$(BUILD_TARGETS)' built in "`expr $$T2 - $$T1`" sec"
+	touch $@
+
 # we don't want all the test binaries linked at the same time when using -jX (X > 2)
 # Each ld takes ~1.5GB of memory. So run make for each target separatly to workaround that
 ifeq (1,$(WANT_TESTS))
 common-build-arch common-build-indep:: debian/stamp-makefile-build-tests
 debian/stamp-makefile-build-tests: debian/stamp-makefile-build
-	@$(foreach target,$(TESTS_TARGETS),$(call DO,$(DEB_MAKE_INVOKE) $(BUILD_ARGS) $(target));)
+	@$(foreach target,$(TESTS_TARGETS),$(call DO,$(DEB_MAKE_INVOKE) $(BUILD_ARGS) $(target),$(target));)
 	touch $@
 endif
 
 clean::
-	rm -f debian/configure-stamp debian/stamp-makefile-build-tests
+	rm -f debian/configure-stamp debian/stamp-makefile-build-*
 
 # Install: there's no install rules in scons yet, do it manually
 common-install-prehook-impl::
@@ -371,7 +376,7 @@ binary-post-install/$(DEBIAN_NAME)::
 	# tests have to be skipped
 	@chmod u+x $(CURDIR)/debian/run-test.sh
 	@mkdir -p debian/test-results
-	@cd $(SRC_DIR)/out/$(BUILD_TYPE) && \
+	@T1=`date +%s`; cd $(SRC_DIR)/out/$(BUILD_TYPE) && \
 	for test in $(TESTS) ; do \
 		tname=`echo "$$test" | sed -e 's/^[-@]\?\([^:]*\).*/\1/'` ; \
 		filter=`echo "$$test" | sed -e 's/^[^-][^:]*://' | grep -v -- "$$test"` ; \
@@ -387,7 +392,8 @@ binary-post-install/$(DEBIAN_NAME)::
 		$(CURDIR)/debian/run-test.sh $$OPT ./$$tname $(CURDIR)/debian/test-results/ $$filter || true ; \
 		echo "==========================================================================" ; \
 		echo ; \
-	done
+	done; \
+	T2=`date +%s`; echo "PERF: all tests run in "`expr $$T2 - $$T1`" sec"
 endif
 
 # Compare
