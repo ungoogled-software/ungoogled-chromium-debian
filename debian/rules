@@ -513,7 +513,7 @@ get-orig-source: REVISION = --revision src@$(DEBIAN_REV)
 else
 # Doing either the dev or beta channel
 ifneq (,$(CHANNEL))
-get-orig-source: VERS          = $(shell wget -qO - $(CHANNELS_URL) | perl -ne 'BEGIN { $$/ = "\n  \n" } if (m/Beta/) { s/.*Linux\s*:\s*(\S+).*/$$1\n/sm; print }')
+get-orig-source: VERS          = $(shell wget -qO - $(CHANNELS_URL) | perl -ne 'BEGIN { $$/ = "\n  \n" } if (m/$(CHANNEL)/i) { s/.*Linux\s*:\s*(\S+).*/$$1\n/sm; print }')
 # '
 get-orig-source: CHROMIUM_URL  = http://src.chromium.org/svn/releases/$(VERS)
 get-orig-source: USE_GREEN_REV = 0
