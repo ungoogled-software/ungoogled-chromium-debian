@@ -42,9 +42,9 @@ GYP_DEFINES += \
 WANT_LZMA_DEBS := 0
 WANT_TESTS     := 0
 ifneq (,$(filter unstable development,$(DEBIAN_DIST)))
-# on $(DEB_BUILD_ARCH) and $(DEBIAN_DIST), enforce an armv7 with thumb build
+# on $(DEB_BUILD_ARCH) and $(DEBIAN_DIST), enforce an armv7 with thumb build (or not)
 GYP_DEFINES += \
-	armv7=1 \
+	armv7=0 \
 	arm_thumb=1 \
 	$(NULL)
 endif
