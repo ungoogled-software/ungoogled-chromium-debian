@@ -36,7 +36,6 @@ ifeq (armel,$(DEB_BUILD_ARCH))
 GYP_DEFINES += \
 	target_arch=arm \
 	disable_nacl=1 \
-	v8_use_snapshot=false \
 	linux_use_tcmalloc=0 \
 	$(NULL)
 WANT_LZMA_DEBS := 0
