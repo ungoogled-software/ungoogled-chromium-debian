@@ -87,7 +87,7 @@ CC_VERSION   := $(shell gcc -dumpversion | cut -d. -f-2)
 ifeq (1/4.4,$(AVOID_GCC_44)/$(CC_VERSION))
 CC  := gcc-4.3
 CXX := g++-4.3
-export CC CXX
+BUILD_ARGS += CC=$(CC) CXX=(CXX)
 endif
 
 ifeq (4.4,$(CC_VERSION))
