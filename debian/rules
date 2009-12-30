@@ -35,6 +35,7 @@ endif
 ifeq (armel,$(DEB_BUILD_ARCH))
 AVOID_GCC_44 := 1
 GYP_DEFINES += \
+	arm_thumb=1 \
 	target_arch=arm \
 	disable_nacl=1 \
 	linux_use_tcmalloc=0 \
@@ -45,7 +46,6 @@ ifneq (,$(filter unstable development,$(DEBIAN_DIST)))
 # on $(DEB_BUILD_ARCH) and $(DEBIAN_DIST), enforce an armv7 with thumb build (or not)
 GYP_DEFINES += \
 	armv7=0 \
-	arm_thumb=1 \
 	$(NULL)
 endif
 else
