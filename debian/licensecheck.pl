@@ -171,7 +171,7 @@ while (!eof(LC) && defined($line = <LC>)) {
     #printf "%-80s %-30s %s\n", $file, $license, $copyright;
     my $path = $file;
     $path =~ s,/[^/]*$,,;
-    push @{$$data{$path}{$license}}, [ $file, $copyright ];
+    push @{$$data{$path}{$license}{$copyright}}, [ $file ];
     next if $line =~ m/^$/;
   }
   die "line='$line'\n";
@@ -188,12 +188,29 @@ for my $dir (sort keys %$data) {
       $skip++ if $w eq $license;
     }
     next if !$$opt{'a'} && $skip;
-    print "$dir/\n" if $l == 0;;
     $l++;
-    print "  [ $license ]:\n";
-    for my $file (sort { $$a[0] cmp $$b[0] } @{$$data{$dir}{$license}}) {
-      printf "      %-80s  %s\n", $$file[0], $$file[1];
+    for my $copyright (sort keys %{$$data{$dir}{$license}}) {
+      my @values = values %{$$data{$dir}{$license}};
+      if ($#values == 1) {
+        printf "Files: %s/*\n", $dir;
+      } else {
+        printf "Files: %s/{", $dir;
+        my $first = 1;
+        for my $file (sort { $$a[0] cmp $$b[0] } @{$$data{$dir}{$license}{$copyright}}) {
+          if ($first) {
+            $first = 0;
+          } else { 
+            printf ",";
+          }
+          my $filename = $$file[0];
+          $filename =~ s/$dir\///;
+          printf "%s", $filename;
+        }
+        printf "}\n";
+      }
+      print "Copyright: $copyright:\n";
+      print "License: $license\n";
+      print "\n";
     }
   }
-  print "\n" if $l;
 }
