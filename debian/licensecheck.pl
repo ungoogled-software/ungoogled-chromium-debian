@@ -24,39 +24,57 @@ use Getopt::Std;
 my $white_listed_licenses = [
   'global BSD-style Chromium',
   'global BSD-style Webkit/LGPL 2.1',
+  'global BSD-style libjingle',
   'Public domain',
   'Apache (v2.0)',
   'Apache (v2.0) GENERATED FILE',
   'Apache (v2.0) BSD (2 clause)',
   'BSD (2 clause)',
+  'BSD (2 clause) GENERATED FILE',
+  'BSD (2 clause)/LGPL 2 (or later)/LGPL 2.1 (or later)',
+  'BSD (2 or 3 clause)',
   'BSD (3 clause)',
   'BSD (3 clause) GENERATED FILE',
-  'BSD (4 clause)',
   'BSL (v1.0)',
   'BSL (v1) BSD (3 clause) GENERATED FILE',
+  'ICU-License',
   'dual GPLv1+/Artistic License',
   'GPL (with incorrect FSF address)',
   'GPL (unversioned/unknown version)',
   'GPL (v2 or later)',
+  'GPL (v2 or later) compatible',
   'GPL (v2 or later) (with incorrect FSF address)',
   'GPL (v2 or later) GENERATED FILE',
+  'GPL 2.0/LGPL 2.1/MPL 1.1 tri-license',
+  'harfbuzz-License',
   'ISC',
   'LGPL',
   'LGPL (v2)',
   'LGPL (v2 or later)',
   'LGPL (v2 or later) GENERATED FILE',
+  'LGPL (v2.1 or later) GENERATED FILE',
   'LGPL (v2 or later) (with incorrect FSF address)',
   'LGPL (v2 or later) (with incorrect FSF address) GENERATED FILE',
+  'LGPL (v2.1)',
   'LGPL (v2.1 or later)',
   'LGPL (v2.1 or later) (with incorrect FSF address)',
   'MIT/X11 (BSD like)',
   'MIT/X11 (BSD like) GENERATED FILE',
+  'MIT/X11-like (expat)',
   'MPL (v1.1,) GPL (unversioned/unknown version) LGPL (v2.1 or later)',
   'MPL (v1.1,) GPL (unversioned/unknown version) LGPL (v2 or later)',
   'MPL (v1.1) GPL (unversioned/unknown version)',
   'MPL (v1.1) GPL (unversioned/unknown version) GENERATED FILE',
+  'MPL 1.1/GPL 2.0/LGPL 2.1',
   'zlib/libpng',
   'GENERATED FILE',
+  '*No copyright* BSD (2 clause)',
+  '*No copyright* GPL (v2 or later)',
+  '*No copyright* LGPL (v2 or later)',
+  '*No copyright* LGPL (v2.1 or later)',
+  '*No copyright* GENERATED FILE',
+  '*No copyright* Public domain',
+  'ZERO-CODE-FILES or GENERATED',
 ];
 
 my $manually_identified = {
@@ -83,6 +101,90 @@ my $manually_identified = {
   '/webkit/data/layout_tests' => [
     'global BSD-style Webkit/LGPL 2.1',
     'http://webkit.org/projects/goals.html'
+  ],
+  '/third_party/WebKit/JavaScriptCore/icu' => [
+    'ICU-License',
+    'Copyright (c) 1995-2006 International Business Machines Corporation and others'
+  ],
+  '/third_party/WebKit/WebCore/icu/' => [
+    'ICU-License',
+    'Copyright (c) 1995-2006 International Business Machines Corporation and others'
+  ],
+  '/third_party/icu/' => [
+    'ICU-License',
+    'Copyright (c) 1995-2009 International Business Machines Corporation and others'
+  ],
+  '/third_party/harfbuzz/' => [
+    'harfbuzz-License',
+    'Copyright: 2000-2009 Red Hat, Inc'
+  ],
+  '/third_party/WebKit/JavaScriptCore/ForwardingHeaders/' => [
+    'ZERO-CODE-FILES or GENERATED',
+    'No copyright'
+  ],
+  '/third_party/WebKit/WebCore/ForwardingHeaders/' => [
+    'ZERO-CODE-FILES or GENERATED',
+    'No copyright'
+  ],
+  'build-tree/src/third_party/WebKit/WebCore/' => [
+    'BSD (2 clause)/LGPL 2 (or later)/LGPL 2.1 (or later)',
+    'No copyright'
+  ],
+  'third_party/WebKit/JavaScriptCore/' => [
+    'BSD (2 clause)/LGPL 2 (or later)/LGPL 2.1 (or later)',
+    'No copyright'
+  ],
+  'version.h' => [
+    'ZERO-CODE-FILES or GENERATED',
+    'No copyright'
+  ],
+  '/third_party/libjingle/files/talk/' => [
+    'global BSD-style libjingle',
+    'No copyright'
+  ],
+  '/third_party/skia/' => [
+    'Apache (v2.0)',
+    'No copyright'
+  ],
+  '/third_party/hunspell/' => [
+    'GPL 2.0/LGPL 2.1/MPL 1.1 tri-license',
+    'No copyright'
+  ],
+  '/third_party/expat/' => [
+    'MIT/X11-like (expat)',
+    'No copyright'
+  ],
+  '/third_party/yasm/source/patched-yasm/modules/parsers/nasm/' => [
+    'LGPL',
+    'No copyright'
+  ],
+  '/third_party/yasm/source/patched-yasm/modules/preprocs/' => [
+    'LGPL',
+    'No copyright'
+  ],
+  '/third_party/yasm/source/patched-yasm/modules/' => [
+    'BSD (2 or 3 clause)',
+    'No copyright'
+  ],
+  '/third_party/yasm/source/patched-yasm/tools/python-yasm/' => [
+    'LGPL',
+    'No copyright'
+  ],
+  '/third_party/yasm/' => [
+    'GPL (v2 or later) compatible',
+    'Copyright (c) 2001-2009 Peter Johnson and other Yasm developers.'
+  ],
+  '/third_party/tlslite/' => [
+    'Public domain',
+    'No copyright'
+  ],
+  '/third_party/ffmpeg/' => [
+    'GPL (v2 or later) compatible',
+    'No copyright'
+  ],
+  '/third_party/libevent/' => [
+    'BSD (3 clause)',
+    'No copyright'
   ],
 };
 
@@ -160,7 +262,15 @@ while (!eof(LC) && defined($line = <LC>)) {
     for my $manual (keys %$manually_identified) {
       if ($file =~ m,$manual,) {
         my $res = $$manually_identified{$manual};
-        ($license, $copyright) = @$res;
+        my $tmp_license = "";
+        my $tmp_copyright = "";
+        ($tmp_license, $tmp_copyright) = @$res;
+        if (!$copyright || $copyright =~ /.*no copyright.*/ ) {
+          $copyright = $tmp_copyright;
+        }
+        if (!$license || $license eq "UNKNOWN" || $license eq "*No copyright* UNKNOWN") {
+          $license = $tmp_license;
+        }
         last;
       }
     }
