@@ -470,6 +470,7 @@ STRIPPED_DIRS := \
 	_third_party/npapi \
 	third_party/nspr \
 	third_party/nss \
+	third_party/ocmock \
 	_third_party/protobuf2 \
 	third_party/pthread \
 	third_party/pyftpdlib \
