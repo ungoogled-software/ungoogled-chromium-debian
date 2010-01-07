@@ -477,6 +477,12 @@ STRIPPED_DIRS := \
 	third_party/simplejson \
 	third_party/scons \
 	_third_party/tcmalloc \
+	tools/symsrc \
+	tools/site_compare \
+	tools/stats_viewer \
+	tools/valgrind \
+	tools/wine_valgrind \
+	v8/test/cctest \
 	webkit/data/layout_tests \
 	$(NULL)
 
