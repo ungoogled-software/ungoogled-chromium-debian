@@ -35,6 +35,7 @@ my $white_listed_licenses = [
   'BSD (2 or 3 clause)',
   'BSD (3 clause)',
   'BSD (3 clause) GENERATED FILE',
+  'BSD (2 clause) MIT/X11 (BSD like)',
   'BSL (v1.0)',
   'BSL (v1) BSD (3 clause) GENERATED FILE',
   'ICU-License',
@@ -47,6 +48,7 @@ my $white_listed_licenses = [
   'GPL (v2 or later) GENERATED FILE',
   'GPL 2.0/LGPL 2.1/MPL 1.1 tri-license',
   'harfbuzz-License',
+  'ISC GENERATED FILE',
   'ISC',
   'LGPL',
   'LGPL (v2)',
@@ -63,11 +65,14 @@ my $white_listed_licenses = [
   'MIT/X11-like (expat)',
   'MPL (v1.1,) GPL (unversioned/unknown version) LGPL (v2.1 or later)',
   'MPL (v1.1,) GPL (unversioned/unknown version) LGPL (v2 or later)',
+  'MPL (v1.1,) BSD (3 clause) GPL (unversioned/unknown version) LGPL (v2.1 or later)',
   'MPL (v1.1) GPL (unversioned/unknown version)',
   'MPL (v1.1) GPL (unversioned/unknown version) GENERATED FILE',
   'MPL 1.1/GPL 2.0/LGPL 2.1',
+  'Ms-PL',
   'zlib/libpng',
   'GENERATED FILE',
+  '*No copyright* Apache (v2.0)',
   '*No copyright* BSD (2 clause)',
   '*No copyright* GPL (v2 or later)',
   '*No copyright* LGPL (v2 or later)',
@@ -78,9 +83,53 @@ my $white_listed_licenses = [
 ];
 
 my $manually_identified = {
+  '/base/third_party/dmg_fp/'   => [
+    'MIT/X11 (BSD like)',
+    'Copyright (c) 1991, 2000, 2001 by Lucent Technologies.'
+  ],
+  '/base/third_party/purify/pure_api.c'   => [
+    'Public Domain',
+    'Explicitly no copyright'
+  ],
+  '/base/third_party/purify/pure.h'   => [
+    'Public Domain',
+    '(C) Copyright IBM Corporation. 2006, 2006. All Rights Reserved.'
+  ],
   '/third_party/sqlite/'   => [
     'Public domain',
     'The author disclaims all copyright. The library is in the public domain.'
+  ],
+  '/src/chrome/'   => [
+    'BSD (3 clause)',
+    'No copyright'
+  ],
+  '/depot_tools/tests/pymox/'   => [
+    'Apache (v2.0)',
+    'No copyright'
+  ],
+  '/googleurl/'   => [
+    'BSD (3 clause)',
+    'No copyright'
+  ],
+  '/gpu/command_buffer/common/GLES2/'   => [
+    'SGI Free Software B License (v2.0)',
+    'No copyright'
+  ],
+  '/media/tools/qt_faststart/qt_faststart.c'   => [
+    'Public Domain',
+    'No copyright'
+  ],
+  '/native_client/src/third_party/libxt/'   => [
+    'MIT/X11 (BSD like)',
+    'No copyright'
+  ],
+  '/native_client/'   => [
+    'BSD (3 clause)',
+    'No copyright'
+  ],
+  '/v8/test/cctest/'   => [
+    'BSD (3 clause)',
+    'No copyright'
   ],
   '/third_party/WebKit/WebKitLibraries/WebCoreSQLite3/' => [
     'Public domain',
@@ -184,6 +233,18 @@ my $manually_identified = {
   ],
   '/third_party/libevent/' => [
     'BSD (3 clause)',
+    'No copyright'
+  ],
+  '/third_party/protobuf2/src/' => [
+    'BSD (3 clause)',
+    'No copyright'
+  ],
+  '/third_party/tcmalloc/tcmalloc/' => [
+    'BSD (3 clause)',
+    'No copyright'
+  ],
+  '/third_party/xdg-utils/' => [
+    'MIT/X11 (BSD like)',
     'No copyright'
   ],
 };
