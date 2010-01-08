@@ -51,6 +51,8 @@ endif
 else
 ifeq (x86_64,$(DEB_BUILD_GNU_CPU))
 GYP_DEFINES += target_arch=x64
+else
+GYP_DEFINES += target_arch=ia32
 endif
 endif
 
