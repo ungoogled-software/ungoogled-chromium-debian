@@ -486,6 +486,12 @@ STRIPPED_DIRS := \
 	webkit/data/layout_tests \
 	$(NULL)
 
+# There are directories we want to strip, but that are unnecessarily required by the build-system
+# So we drop everything but the gyp/gypi files and README.chromium (to see what that dir contained)
+ALMOST_STRIPPED_DIRS := \
+	courgette \
+	$(NULL)
+
 ifeq (1,$(WANT_SYSTEM_LIBS))
 # Directories that will be dropped if the corresponding system lib are enabled in GYP_DEFINES
 # We need to keep some files (like *.gyp) so we can't use STRIPPED_DIRS
@@ -503,7 +509,11 @@ endif
 STRIP_SYSTEM_DIRS = \
 	($(foreach DIR,$(1),$(if $(findstring use_system_$(notdir $(DIR))=1,$(GYP_DEFINES)),\
 	  (cd $(2)/$(dir $(DIR)) && \
-	  find $(notdir $(DIR)) -depth -mindepth 1 \! \( -name \*.gyp -o -name README.chromium -o -name \*.patch \) -print -delete );)))
+	  find $(notdir $(DIR)) -depth -mindepth 1 \! \( -name \*.gyp -o -name \*.gypi -o -name README.chromium -o -name \*.patch \) -print -delete );)))
+
+ALMOST_STRIP_DIRS = \
+	($(foreach DIR,$(1),(cd $(2)/$(dir $(DIR)) && \
+	  find $(notdir $(DIR)) -depth -mindepth 1 \! \( -name \*.gyp -o -name \*.gypi -o -name README.chromium \) -print -delete );))
 
 TMP_DDIR     := $(DEBIAN_NAME)-$(shell echo $$$$)
 ifeq (,$(LOCAL_BRANCH))
@@ -597,6 +607,10 @@ endif
 ifeq (1,$(STRIP_TARBALL))
 	# Strip tarball from some big directories not needed on the linux platform
 	cd $(TMP_DDIR)/src && rm -rfv $(STRIPPED_DIRS) | grep -vE '/\.svn(/|.$$)' > REMOVED-stripped.txt
+ifneq (,$(ALMOST_STRIPPED_DIRS))
+	# Strip listed dirs almost completely (keep *.gyp and README.chromium)
+	$(call ALMOST_STRIP_DIRS,$(ALMOST_STRIPPED_DIRS),$(TMP_DDIR)/src) | grep -vE '/\.svn(/|.$$)' >> $(TMP_DDIR)/src/REMOVED-stripped.txt
+endif
 ifneq (,$(STRIPPED_SYSTEM_LIB_DIRS))
 	$(call STRIP_SYSTEM_DIRS,$(STRIPPED_SYSTEM_LIB_DIRS),$(TMP_DDIR)/src) | grep -vE '/\.svn(/|.$$)' >> $(TMP_DDIR)/src/REMOVED-stripped.txt
 endif
