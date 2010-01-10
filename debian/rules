@@ -534,8 +534,13 @@ get-orig-source: REVISION = --revision src@$(DEBIAN_REV)
 else
 # Doing either the dev or beta channel
 ifneq (,$(CHANNEL))
+ifneq (,$(filter-out beta dev Beta Dev,$(CHANNEL)))
+# Assume it's a version
+get-orig-source: VERS          = $(CHANNEL)
+else
 get-orig-source: VERS          = $(shell wget -qO - $(CHANNELS_URL) | perl -ne 'BEGIN { $$/ = "\n  \n" } if (m/$(CHANNEL)/i) { s/.*Linux\s*:\s*(\S+).*/$$1\n/sm; print }')
 # '
+endif
 get-orig-source: CHROMIUM_URL  = http://src.chromium.org/svn/releases/$(VERS)
 get-orig-source: USE_GREEN_REV = 0
 endif
@@ -566,26 +571,11 @@ endif
 	  echo svn update $(TMP_DIR)/tools/depot_tools ; \
 	  svn update $(TMP_DIR)/tools/depot_tools ; \
 	fi
-ifneq (,$(CHANNEL))
-	# Workaround for gclient unable to get a release with the correct DEPS (part 1)
-	cd $(TMP_DIR) ; \
-	svnadmin create repo ; \
-	svn co file://`pwd`/repo repo2 ; \
-	svn export $(CHROMIUM_URL)/DEPS repo2/DEPS ; \
-	sed -i -e "s%'/%'http://src.chromium.org/svn/%" repo2/DEPS ; \
-	svn add repo2/DEPS ; \
-	svn commit -m '' repo2/DEPS
-endif
 	rm -f $(TMP_DIR)/.gclient
 ifeq (1,$(USE_GREEN_REV)$(REVISION))
 	cd $(TMP_DIR) && ./tools/depot_tools/gclient config $(CHROMIUM_URL) $(GREEN_REV_URL)
 else
 	cd $(TMP_DIR) && ./tools/depot_tools/gclient config $(CHROMIUM_URL)
-endif
-ifneq (,$(CHANNEL))
-	# Workaround (part 2)
-	cd $(TMP_DIR) ; \
-	perl -i -pe 's/("name"\s*:\s*").*?(".*)/$$1fake$$2/; s,("url"\s*:\s*").*?(".*),$$1file://'`pwd`'/repo$$2,' .gclient
 endif
 ifeq (1,$(STRIP_TARBALL))
 ifneq (,$(STRIPPED_DIRS_FROM_CO))
@@ -598,10 +588,6 @@ endif
 endif
 	# Checkout
 	cd $(TMP_DIR) && ./tools/depot_tools/gclient update --nohooks $(REVISION)
-ifneq (,$(CHANNEL))
-	# Workaround (part 3)
-	cd $(TMP_DIR) ; rm -rf repo repo2 fake
-endif
 ifneq (,$(LOCAL_BRANCH))
 	rm -rf $(TMP_DDIR)
 	cp -la $(TMP_DIR) $(TMP_DDIR)
