@@ -452,6 +452,12 @@ STRIPPED_DIRS_FROM_CO := \
 	src/third_party/ffmpeg/binaries/chromium/linux/x64_dbg \
 	$(NULL)
 
+# stuff we don't have access to and shouldn't be in DEPS
+STRIPPED_DIRS_FROM_CO += \
+	src/chrome/app/theme/google_chrome \
+	src/chrome/installer/linux \
+	$(NULL)
+
 # prefix with _ those that we can't remove (just yet) because of the gclient
 # hooks (see build/all.gyp) or of some unneeded deps/includes
 STRIPPED_DIRS := \
