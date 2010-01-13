@@ -38,7 +38,6 @@ my $white_listed_licenses = [
   'BSL (v1)',
   'BSL (v1) BSD (3 clause) GENERATED FILE',
   'ICU-License',
-  'dual GPLv1+/Artistic License',
   'GPL (with incorrect FSF address)',
   'GPL (unversioned/unknown version)',
   'GPL (v2 or later)',
