@@ -69,7 +69,6 @@ my $white_listed_licenses = [
   'MPL (v1.1) GPL (unversioned/unknown version)',
   'MPL (v1.1) GPL (unversioned/unknown version) GENERATED FILE',
   'MPL 1.1/GPL 2.0/LGPL 2.1',
-  'Ms-PL',
   'zlib/libpng',
   'GENERATED FILE',
   '*No copyright* Apache (v2.0)',
