@@ -23,7 +23,6 @@ use Getopt::Std;
 
 my $white_listed_licenses = [
   'global BSD-style Chromium',
-  'global BSD-style Webkit/LGPL 2.1',
   'global BSD-style libjingle',
   'Public domain',
   'Apache (v2.0)',
