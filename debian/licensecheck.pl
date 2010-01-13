@@ -87,11 +87,11 @@ my $manually_identified = {
     'Copyright (c) 1991, 2000, 2001 by Lucent Technologies.'
   ],
   '/base/third_party/purify/pure_api.c'   => [
-    'Public Domain',
+    'Public domain',
     'Explicitly no copyright'
   ],
   '/base/third_party/purify/pure.h'   => [
-    'Public Domain',
+    'Public domain',
     '(C) Copyright IBM Corporation. 2006, 2006. All Rights Reserved.'
   ],
   '/third_party/sqlite/'   => [
@@ -115,7 +115,7 @@ my $manually_identified = {
     'No copyright'
   ],
   '/media/tools/qt_faststart/qt_faststart.c'   => [
-    'Public Domain',
+    'Public domain',
     'No copyright'
   ],
   '/native_client/src/third_party/libxt/'   => [
