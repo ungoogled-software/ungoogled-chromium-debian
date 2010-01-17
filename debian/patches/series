@@ -3,4 +3,3 @@ drop_sse2.patch
 # system_v8.patch
 ubuntu_dont_overwrite_default_download_directory.patch
 # chromium_useragent.patch
-drop_armel_m32.patch
