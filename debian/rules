@@ -432,7 +432,7 @@ GCLIENT_URL  := http://src.chromium.org/svn/trunk/tools/depot_tools
 CHROMIUM_URL := http://src.chromium.org/svn/trunk/src
 DEPS_URL     := http://src.chromium.org/svn/trunk/deps/third_party
 GREEN_REV_URL := http://chromium-status.appspot.com/lkgr
-CHANNELS_URL  := http://src.chromium.org/svn/releases/LATEST.txt
+CHANNELS_URL  := http://omahaproxy.appspot.com/
 
 # See Staying Green More Of The Time at http://dev.chromium.org/developers/how-tos/get-the-code
 USE_GREEN_REV ?= 0
@@ -544,7 +544,7 @@ ifneq (,$(filter-out beta dev Beta Dev,$(CHANNEL)))
 # Assume it's a version
 get-orig-source: VERS          = $(CHANNEL)
 else
-get-orig-source: VERS          = $(shell wget -qO - $(CHANNELS_URL) | perl -ne 'BEGIN { $$/ = "\n  \n" } if (m/$(CHANNEL)/i) { s/.*Linux\s*:\s*(\S+).*/$$1\n/sm; print }')
+get-orig-source: VERS          = $(shell wget -qO - $(CHANNELS_URL) | grep -i '^linux,$(CHANNEL)' | cut -d, -f3)
 # '
 endif
 get-orig-source: CHROMIUM_URL  = http://src.chromium.org/svn/releases/$(VERS)
