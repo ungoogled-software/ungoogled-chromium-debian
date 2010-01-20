@@ -469,7 +469,6 @@ STRIPPED_DIRS := \
 	third_party/boost \
 	third_party/bsdiff \
 	third_party/bspatch \
-	third_party/cld \
 	third_party/ffmpeg/binaries \
 	third_party/fuzzymatch \
 	third_party/gles_book_examples \
