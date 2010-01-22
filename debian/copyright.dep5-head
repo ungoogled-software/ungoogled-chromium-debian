@@ -10,4 +10,3 @@ License: BSD-Style (3-clause)
 Files: debian/patches/*
 Copyright: 2009, the patch authors
 License: Same as patched sources
-
