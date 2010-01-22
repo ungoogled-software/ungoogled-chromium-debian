@@ -327,11 +327,10 @@ common-install-prehook-impl::
 	cd debian/tmp/$(LIB_DIR) && rm -f $(INSTALL_EXCLUDE_FILES)
 	# Launcher script
 	mkdir -p debian/tmp/usr/bin
-	cp -a debian/$(DEBIAN_NAME).sh debian/tmp/usr/bin/$(DEBIAN_NAME)
-	chmod 755 debian/tmp/usr/bin/$(DEBIAN_NAME)
+	install 755 debian/$(DEBIAN_NAME).sh debian/tmp/usr/bin/$(DEBIAN_NAME)
 	# Preferences
 	mkdir -p debian/tmp/etc/$(DEBIAN_NAME)
-	cp -a debian/$(DEBIAN_NAME).default debian/tmp/etc/$(DEBIAN_NAME)/default
+	install 644 debian/$(DEBIAN_NAME).default debian/tmp/etc/$(DEBIAN_NAME)/default
 	# Rename the binary from chrome to $(DEBIAN_NAME), this is required
 	# as chromium dereferences all symlinks before starting its children
 	# making the Gnome System Monitor confused with icons
