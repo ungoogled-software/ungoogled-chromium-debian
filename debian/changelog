@@ -1,5 +1,10 @@
-chromium-browser (4.0.301.0~svn20100116r36463-0ubuntu1) UNRELEASED; urgency=low
+chromium-browser (4.0.305.0~svn20100122r36862-0ubuntu1) UNRELEASED; urgency=low
 
   * Initial release. (Closes: #520324, LP: #387765)
 
- -- Fabien Tassin <fta@ubuntu.com>  Sun, 17 Jan 2010 04:00:02 +0100
+  [ Alexander Sack <asac@ubuntu.com> ]
+  * extensive license review; see copyright and copyright.problems;
+    also see debian/licensecheck.pl for details how the copyright files are
+    generated
+
+ -- Fabien Tassin <fta@ubuntu.com>  Fri, 22 Jan 2010 19:00:03 +0100
