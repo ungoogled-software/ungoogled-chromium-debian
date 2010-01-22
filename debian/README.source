@@ -6,6 +6,16 @@
 
 ------------------------------------------------------
 
+Content:
+
+  I. Packaging overview
+  II. Upstream (orig.tar.gz)
+  III. Get sources for channels (aka dev, beta, release)
+  IV. Efficient Upstream orig.tar.gz production
+  V. Patching
+
+------
+
 I. Packaging overview
 
   + Obtaining latest packaging:
@@ -50,7 +60,7 @@ CHANNEL=beta to your debian/rules line, e.g.:
 
   + ./debian/rules get-orig-source CHANNEL=beta
 
-V. Efficient Upstream orig.tar.gz production
+IV. Efficient Upstream orig.tar.gz production
 
 The packaging provides a feature to speed up the orig.tar.gz production by
 keeping a local mirror of the chromium checkouts; this reduces the
@@ -68,7 +78,7 @@ to your debian/rules invocation, e.g.
     ./debian/rules get-orig-source LOCAL_BRANCH=/home/asac/chromium/ CHANNEL=beta
 
 
-IV. Patching
+V. Patching
 
 We use quilt for the sake of efficiency to code and update patches.
 
@@ -88,4 +98,5 @@ and start working on quilt patches as usual, e.g.
  quilt pop
  quilt refresh
  ...
+
 
