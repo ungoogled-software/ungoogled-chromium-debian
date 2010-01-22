@@ -6,7 +6,7 @@ Index: chromium-browser/net/url_request/url_request_unittest.h
 ===================================================================
 --- chromium-browser.orig/net/url_request/url_request_unittest.h
 +++ chromium-browser/net/url_request/url_request_unittest.h
-@@ -292,16 +292,17 @@
+@@ -292,16 +292,18 @@
        command_line.append(L"\"");
      }
  
@@ -16,6 +16,7 @@ Index: chromium-browser/net/url_request/url_request_unittest.h
  #elif defined(OS_POSIX)
      bool tlslite_installed = !access("/usr/bin/tls.py", X_OK) ||
 +                             !access("/usr/bin/tls", X_OK) ||
++                             !access("/usr/local/bin/tls", X_OK) ||
                               !access("/usr/local/bin/tls.py", X_OK);
      ASSERT_TRUE(tlslite_installed) << "tlslite not installed?  Please run 'python setup.py install' in third_party/tlslite.";
  
