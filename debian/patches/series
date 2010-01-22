@@ -1,4 +1,3 @@
-# detect_system_tlslite.patch
 drop_sse2.patch
 # system_v8.patch
 ubuntu_dont_overwrite_default_download_directory.patch
