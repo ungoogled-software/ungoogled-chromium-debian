@@ -463,6 +463,7 @@ STRIPPED_DIRS_FROM_CO += \
 STRIPPED_DIRS := \
 	chrome/test/data/safe_browsing/old \
 	chrome/test/data/firefox2_nss_mac \
+	chrome/third_party/wtl/ \
 	gears \
 	google_update \
 	o3d \
