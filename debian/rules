@@ -33,7 +33,7 @@ GYP_DEFINES += werror=$(NULL)
 endif
 
 ifeq (armel,$(DEB_BUILD_ARCH))
-AVOID_GCC_44 := 1
+AVOID_GCC_44 := 0
 GYP_DEFINES += \
 	arm_thumb=1 \
 	target_arch=arm \
