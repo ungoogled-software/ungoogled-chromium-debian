@@ -15,6 +15,10 @@ Files: src/{PRESUBMIT.py}
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
+Files: src/.pc/html5_video_mimetypes.patch/net/base/{mime_util.cc}
+Copyright: Copyright (c) 2006-2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+License: global BSD-style Chromium
+
 Files: src/.pc/ubuntu_dont_overwrite_default_download_directory.patch/chrome/common/{chrome_paths_linux.cc}
 Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
@@ -1442,10 +1446,6 @@ License: global BSD-style Chromium
 Files: src/chrome/third_party/jstemplate/{compile.py}
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
-
-Files: src/chrome/third_party/wtl/include/{atlapp.h,atlcrack.h,atlctrls.h,atlctrlw.h,atlctrlx.h,atlddx.h,atldlgs.h,atlfind.h,atlframe.h,atlgdi.h,atlmisc.h,atlprint.h,atlres.h,atlresce.h,atlscrl.h,atlsplit.h,atltheme.h,atluser.h,atlwince.h,atlwinx.h}
-Copyright: Copyright (C) Microsoft Corporation. All rights reserved.  This file is a part of the Windows Template Library. The use and distribution terms for this software are covered by the Microsoft Permissive License (Ms-PL) which can be found in the file:
-License: Ms-PL
 
 Files: src/chrome/tools/*
 Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
@@ -3027,7 +3027,7 @@ Files: src/net/websockets/{websocket.cc,websocket.h,websocket_throttle.cc,websoc
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
-Files: src/out/Release/obj.target/geni/{chrome_version.cc}
+Files: src/out/Release/obj.target/geni/{chrome_version.cc,snapshot.cc}
 Copyright: UNKNOWN:
 License: *No copyright* GENERATED FILE
 
@@ -3035,9 +3035,17 @@ Files: src/out/Release/obj.target/geni/{chartables.c,ffmpeg_stubs.cc}
 Copyright: UNKNOWN:
 License: *No copyright* UNKNOWN
 
+Files: src/out/Release/obj.target/geni/{nacl_syscall_handlers.c}
+Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
+License: UNKNOWN
+
 Files: src/out/Release/obj.target/geni/{webkit_version.h}
 Copyright: UNKNOWN:
 License: ZERO-CODE-FILES or GENERATED
+
+Files: src/out/Release/obj.target/geni/gen/native_client/src/trusted/service_runtime/arch/x86/{springboard_data.h,tramp_data.h}
+Copyright: UNKNOWN:
+License: BSD (3 clause)
 
 Files: src/out/Release/obj/gen/{libraries-empty.cc,libraries.cc}
 Copyright: Copyright: 2008 Google Inc. All Rights Reserved:
@@ -3067,7 +3075,7 @@ Files: src/out/Release/obj/gen/chrome/grit/{theme_resources_map.cc,theme_resourc
 Copyright: Copyright: 2010 The Chromium Authors. All rights reserved:
 License: GENERATED FILE
 
-Files: src/out/Release/obj/gen/chrome/grit/{browser_resources.h,common_resources.h,generated_resources.h,locale_settings.h,renderer_resources.h,theme_resources.h}
+Files: src/out/Release/obj/gen/chrome/grit/{browser_resources.h,common_resources.h,generated_resources.h,locale_settings.h,platform_locale_settings.h,renderer_resources.h,theme_resources.h}
 Copyright: Copyright: Google Inc. 2010:
 License: GENERATED FILE
 
@@ -3075,9 +3083,17 @@ Files: src/out/Release/obj/gen/ffmpeg/third_party/ffmpeg/{ffmpeg_stubs.h}
 Copyright: UNKNOWN:
 License: GPL (v2 or later) compatible
 
+Files: src/out/Release/obj/gen/gen/native_client/src/trusted/validator_x86/{nc_opcode_table.h,ncdecodetab.h,ncdisasmtab.h,ncop_expr_node_flag.h,ncop_expr_node_flag_impl.h,ncop_expr_node_kind.h,ncop_expr_node_kind_impl.h,ncopcode_insts.h,ncopcode_insts_impl.h,ncopcode_opcode_flags.h,ncopcode_opcode_flags_impl.h,ncopcode_operand_flag.h,ncopcode_operand_flag_impl.h,ncopcode_operand_kind.h,ncopcode_operand_kind_impl.h,ncopcode_prefix.h,ncopcode_prefix_impl.h}
+Copyright: UNKNOWN:
+License: *No copyright* GENERATED FILE
+
 Files: src/out/Release/obj/gen/net/grit/{net_resources.h}
 Copyright: Copyright: Google Inc. 2010:
 License: GENERATED FILE
+
+Files: src/out/Release/obj/gen/protoc_out/chrome/browser/sync/protocol/{bookmark_specifics.pb.cc,bookmark_specifics.pb.h,sync.pb.cc,sync.pb.h}
+Copyright: UNKNOWN:
+License: *No copyright* GENERATED FILE
 
 Files: src/out/Release/obj/gen/webcore/bindings/{V8AbstractWorker.cpp,V8Attr.cpp,V8BarInfo.cpp,V8BeforeLoadEvent.cpp,V8Blob.cpp,V8CDATASection.cpp,V8CSSCharsetRule.cpp,V8CSSFontFaceRule.cpp,V8CSSImportRule.cpp,V8CSSMediaRule.cpp,V8CSSPageRule.cpp,V8CSSPrimitiveValue.cpp,V8CSSRule.cpp,V8CSSRuleList.cpp,V8CSSStyleDeclaration.cpp,V8CSSStyleRule.cpp,V8CSSStyleSheet.cpp,V8CSSValue.cpp,V8CSSValueList.cpp,V8CSSVariablesDeclaration.cpp,V8CSSVariablesRule.cpp,V8CanvasGradient.cpp,V8CanvasPattern.cpp,V8CanvasPixelArray.cpp,V8CanvasRenderingContext.cpp,V8CanvasRenderingContext2D.cpp,V8CharacterData.cpp,V8ClientRect.cpp,V8ClientRectList.cpp,V8Clipboard.cpp,V8Comment.cpp,V8CompositionEvent.cpp,V8Console.cpp,V8Coordinates.cpp,V8Counter.cpp,V8DOMApplicationCache.cpp,V8DOMCoreException.cpp,V8DOMImplementation.cpp,V8DOMParser.cpp,V8DOMSelection.cpp,V8DOMWindow.cpp,V8DataGridColumn.cpp,V8DataGridColumnList.cpp,V8Database.cpp,V8DedicatedWorkerContext.cpp,V8Document.cpp,V8DocumentFragment.cpp,V8DocumentType.cpp,V8Element.cpp,V8Entity.cpp,V8EntityReference.cpp,V8ErrorEvent.cpp,V8Event.cpp,V8EventException.cpp,V8File.cpp,V8FileList.cpp,V8Geolocation.cpp,V8Geoposition.cpp,V8HTMLAllCollection.cpp,V8HTMLAnchorElement.cpp,V8HTMLAppletElement.cpp,V8HTMLAreaElement.cpp,V8HTMLAudioElement.cpp,V8HTMLBRElement.cpp,V8HTMLBaseElement.cpp,V8HTMLBaseFontElement.cpp,V8HTMLBlockquoteElement.cpp,V8HTMLBodyElement.cpp,V8HTMLButtonElement.cpp,V8HTMLCanvasElement.cpp,V8HTMLCollection.cpp,V8HTMLDListElement.cpp,V8HTMLDataGridCellElement.cpp,V8HTMLDataGridColElement.cpp,V8HTMLDataGridElement.cpp,V8HTMLDataGridRowElement.cpp,V8HTMLDataListElement.cpp,V8HTMLDirectoryElement.cpp,V8HTMLDivElement.cpp,V8HTMLDocument.cpp,V8HTMLElement.cpp,V8HTMLEmbedElement.cpp,V8HTMLFieldSetElement.cpp,V8HTMLFontElement.cpp,V8HTMLFormElement.cpp,V8HTMLFrameElement.cpp,V8HTMLFrameSetElement.cpp,V8HTMLHRElement.cpp,V8HTMLHeadElement.cpp,V8HTMLHeadingElement.cpp,V8HTMLHtmlElement.cpp,V8HTMLIFrameElement.cpp,V8HTMLImageElement.cpp,V8HTMLInputElement.cpp,V8HTMLIsIndexElement.cpp,V8HTMLLIElement.cpp,V8HTMLLabelElement.cpp,V8HTMLLegendElement.cpp,V8HTMLLinkElement.cpp,V8HTMLMapElement.cpp,V8HTMLMarqueeElement.cpp,V8HTMLMediaElement.cpp,V8HTMLMenuElement.cpp,V8HTMLMetaElement.cpp,V8HTMLModElement.cpp,V8HTMLOListElement.cpp,V8HTMLObjectElement.cpp,V8HTMLOptGroupElement.cpp,V8HTMLOptionElement.cpp,V8HTMLOptionsCollection.cpp,V8HTMLParagraphElement.cpp,V8HTMLParamElement.cpp,V8HTMLPreElement.cpp,V8HTMLQuoteElement.cpp,V8HTMLScriptElement.cpp,V8HTMLSelectElement.cpp,V8HTMLSourceElement.cpp,V8HTMLStyleElement.cpp,V8HTMLTableCaptionElement.cpp,V8HTMLTableCellElement.cpp,V8HTMLTableColElement.cpp,V8HTMLTableElement.cpp,V8HTMLTableRowElement.cpp,V8HTMLTableSectionElement.cpp,V8HTMLTextAreaElement.cpp,V8HTMLTitleElement.cpp,V8HTMLUListElement.cpp,V8HTMLVideoElement.cpp,V8History.cpp,V8ImageData.cpp,V8InjectedScriptHost.cpp,V8InspectorBackend.cpp,V8InspectorFrontendHost.cpp,V8KeyboardEvent.cpp,V8Location.cpp,V8Media.cpp,V8MediaError.cpp,V8MediaList.cpp,V8MessageChannel.cpp,V8MessageEvent.cpp,V8MessagePort.cpp,V8MimeType.cpp,V8MimeTypeArray.cpp,V8MouseEvent.cpp,V8MutationEvent.cpp,V8NamedNodeMap.cpp,V8Navigator.cpp,V8Node.cpp,V8NodeFilter.cpp,V8NodeIterator.cpp,V8NodeList.cpp,V8Notation.cpp,V8Notification.cpp,V8NotificationCenter.cpp,V8OverflowEvent.cpp,V8PageTransitionEvent.cpp,V8Plugin.cpp,V8PluginArray.cpp,V8PopStateEvent.cpp,V8PositionError.cpp,V8ProcessingInstruction.cpp,V8ProgressEvent.cpp,V8RGBColor.cpp,V8Range.cpp,V8RangeException.cpp,V8Rect.cpp,V8SQLError.cpp,V8SQLResultSet.cpp,V8SQLResultSetRowList.cpp,V8SQLTransaction.cpp,V8SVGAElement.cpp,V8SVGAltGlyphElement.cpp,V8SVGAngle.cpp,V8SVGAnimateColorElement.cpp,V8SVGAnimateElement.cpp,V8SVGAnimateTransformElement.cpp,V8SVGAnimatedAngle.cpp,V8SVGAnimatedBoolean.cpp,V8SVGAnimatedEnumeration.cpp,V8SVGAnimatedInteger.cpp,V8SVGAnimatedLength.cpp,V8SVGAnimatedLengthList.cpp,V8SVGAnimatedNumber.cpp,V8SVGAnimatedNumberList.cpp,V8SVGAnimatedPoints.cpp,V8SVGAnimatedPreserveAspectRatio.cpp,V8SVGAnimatedRect.cpp,V8SVGAnimatedString.cpp,V8SVGAnimatedTransformList.cpp,V8SVGAnimationElement.cpp,V8SVGCircleElement.cpp,V8SVGClipPathElement.cpp,V8SVGColor.cpp,V8SVGComponentTransferFunctionElement.cpp,V8SVGCursorElement.cpp,V8SVGDefsElement.cpp,V8SVGDescElement.cpp,V8SVGDocument.cpp,V8SVGElement.cpp,V8SVGElementInstance.cpp,V8SVGElementInstanceList.cpp,V8SVGEllipseElement.cpp,V8SVGException.cpp,V8SVGFEBlendElement.cpp,V8SVGFEColorMatrixElement.cpp,V8SVGFEComponentTransferElement.cpp,V8SVGFECompositeElement.cpp,V8SVGFEDiffuseLightingElement.cpp,V8SVGFEDisplacementMapElement.cpp,V8SVGFEDistantLightElement.cpp,V8SVGFEFloodElement.cpp,V8SVGFEFuncAElement.cpp,V8SVGFEFuncBElement.cpp,V8SVGFEFuncGElement.cpp,V8SVGFEFuncRElement.cpp,V8SVGFEGaussianBlurElement.cpp,V8SVGFEImageElement.cpp,V8SVGFEMergeElement.cpp,V8SVGFEMergeNodeElement.cpp,V8SVGFEMorphologyElement.cpp,V8SVGFEOffsetElement.cpp,V8SVGFEPointLightElement.cpp,V8SVGFESpecularLightingElement.cpp,V8SVGFESpotLightElement.cpp,V8SVGFETileElement.cpp,V8SVGFETurbulenceElement.cpp,V8SVGFilterElement.cpp,V8SVGFilterPrimitiveStandardAttributes.cpp,V8SVGFontElement.cpp,V8SVGFontFaceElement.cpp,V8SVGFontFaceFormatElement.cpp,V8SVGFontFaceNameElement.cpp,V8SVGFontFaceSrcElement.cpp,V8SVGFontFaceUriElement.cpp,V8SVGForeignObjectElement.cpp,V8SVGGElement.cpp,V8SVGGlyphElement.cpp,V8SVGGradientElement.cpp,V8SVGImageElement.cpp,V8SVGLength.cpp,V8SVGLengthList.cpp,V8SVGLineElement.cpp,V8SVGLinearGradientElement.cpp,V8SVGMarkerElement.cpp,V8SVGMaskElement.cpp,V8SVGMatrix.cpp,V8SVGMetadataElement.cpp,V8SVGMissingGlyphElement.cpp,V8SVGNumber.cpp,V8SVGNumberList.cpp,V8SVGPaint.cpp,V8SVGPathElement.cpp,V8SVGPathSeg.cpp,V8SVGPathSegArcAbs.cpp,V8SVGPathSegArcRel.cpp,V8SVGPathSegClosePath.cpp,V8SVGPathSegCurvetoCubicAbs.cpp,V8SVGPathSegCurvetoCubicRel.cpp,V8SVGPathSegCurvetoCubicSmoothAbs.cpp,V8SVGPathSegCurvetoCubicSmoothRel.cpp,V8SVGPathSegCurvetoQuadraticAbs.cpp,V8SVGPathSegCurvetoQuadraticRel.cpp,V8SVGPathSegCurvetoQuadraticSmoothAbs.cpp,V8SVGPathSegCurvetoQuadraticSmoothRel.cpp,V8SVGPathSegLinetoAbs.cpp,V8SVGPathSegLinetoHorizontalAbs.cpp,V8SVGPathSegLinetoHorizontalRel.cpp,V8SVGPathSegLinetoRel.cpp,V8SVGPathSegLinetoVerticalAbs.cpp,V8SVGPathSegLinetoVerticalRel.cpp,V8SVGPathSegList.cpp,V8SVGPathSegMovetoAbs.cpp,V8SVGPathSegMovetoRel.cpp,V8SVGPatternElement.cpp,V8SVGPoint.cpp,V8SVGPointList.cpp,V8SVGPolygonElement.cpp,V8SVGPolylineElement.cpp,V8SVGPreserveAspectRatio.cpp,V8SVGRadialGradientElement.cpp,V8SVGRect.cpp,V8SVGRectElement.cpp,V8SVGRenderingIntent.cpp,V8SVGSVGElement.cpp,V8SVGScriptElement.cpp,V8SVGSetElement.cpp,V8SVGStopElement.cpp,V8SVGStringList.cpp,V8SVGStyleElement.cpp,V8SVGSwitchElement.cpp,V8SVGSymbolElement.cpp,V8SVGTRefElement.cpp,V8SVGTSpanElement.cpp,V8SVGTextContentElement.cpp,V8SVGTextElement.cpp,V8SVGTextPathElement.cpp,V8SVGTextPositioningElement.cpp,V8SVGTitleElement.cpp,V8SVGTransform.cpp,V8SVGTransformList.cpp,V8SVGUnitTypes.cpp,V8SVGUseElement.cpp,V8SVGViewElement.cpp,V8SVGZoomEvent.cpp,V8Screen.cpp,V8SharedWorker.cpp,V8SharedWorkerContext.cpp,V8Storage.cpp,V8StorageEvent.cpp,V8StyleSheet.cpp,V8StyleSheetList.cpp,V8Text.cpp,V8TextEvent.cpp,V8TextMetrics.cpp,V8TimeRanges.cpp,V8TreeWalker.cpp,V8UIEvent.cpp,V8ValidityState.cpp,V8WebGLActiveInfo.cpp,V8WebGLArray.cpp,V8WebGLArrayBuffer.cpp,V8WebGLBuffer.cpp,V8WebGLByteArray.cpp,V8WebGLContextAttributes.cpp,V8WebGLFloatArray.cpp,V8WebGLFramebuffer.cpp,V8WebGLIntArray.cpp,V8WebGLProgram.cpp,V8WebGLRenderbuffer.cpp,V8WebGLRenderingContext.cpp,V8WebGLShader.cpp,V8WebGLShortArray.cpp,V8WebGLTexture.cpp,V8WebGLUniformLocation.cpp,V8WebGLUnsignedByteArray.cpp,V8WebGLUnsignedIntArray.cpp,V8WebGLUnsignedShortArray.cpp,V8WebKitAnimationEvent.cpp,V8WebKitCSSKeyframeRule.cpp,V8WebKitCSSKeyframesRule.cpp,V8WebKitCSSMatrix.cpp,V8WebKitCSSTransformValue.cpp,V8WebKitPoint.cpp,V8WebKitTransitionEvent.cpp,V8WebSocket.cpp,V8WheelEvent.cpp,V8Worker.cpp,V8WorkerContext.cpp,V8WorkerLocation.cpp,V8WorkerNavigator.cpp,V8XMLHttpRequest.cpp,V8XMLHttpRequestException.cpp,V8XMLHttpRequestProgressEvent.cpp,V8XMLHttpRequestUpload.cpp,V8XMLSerializer.cpp,V8XPathEvaluator.cpp,V8XPathException.cpp,V8XPathExpression.cpp,V8XPathNSResolver.cpp,V8XPathResult.cpp,V8XSLTProcessor.cpp}
 Copyright: UNKNOWN:
@@ -4763,6 +4779,10 @@ Files: src/third_party/WebKit/WebCore/accessibility/{AccessibilityARIAGrid.cpp,A
 Copyright: Copyright: 2009 Apple Inc. All rights reserved:
 License: BSD (3 clause)
 
+Files: src/third_party/WebKit/WebCore/accessibility/{AccessibilityScrollbar.cpp,AccessibilityScrollbar.h}
+Copyright: Copyright: 2010 Apple Inc. All rights reserved:
+License: BSD (3 clause)
+
 Files: src/third_party/WebKit/WebCore/accessibility/chromium/{AXObjectCacheChromium.cpp,AccessibilityObjectChromium.cpp,AccessibilityObjectWrapper.h}
 Copyright: Copyright: 2008 Apple Inc. All Rights Reserved / 2008 Google Inc:
 License: BSD (2 clause)
@@ -5215,8 +5235,12 @@ Files: src/third_party/WebKit/WebCore/bindings/v8/{ScriptController.cpp}
 Copyright: Copyright: 2009 Apple Inc. All rights reserved / HOLDERS AND CONTRIBUTORS / 2008, 2009 Google Inc. All rights reserved:
 License: BSD (3 clause)
 
-Files: src/third_party/WebKit/WebCore/bindings/v8/{ChildThreadDOMData.cpp,ChildThreadDOMData.h,DOMData.cpp,DOMData.h,DOMDataStore.cpp,DOMDataStore.h,DOMObjectsInclude.h,DOMWrapperWorld.cpp,DOMWrapperWorld.h,DateExtension.cpp,DateExtension.h,IsolatedWorld.cpp,IsolatedWorld.h,MainThreadDOMData.cpp,MainThreadDOMData.h,OwnHandle.h,RuntimeEnabledFeatures.cpp,RuntimeEnabledFeatures.h,ScopedDOMDataStore.cpp,ScopedDOMDataStore.h,ScriptArray.cpp,ScriptArray.h,ScriptEventListener.cpp,ScriptEventListener.h,ScriptFunctionCall.cpp,ScriptFunctionCall.h,ScriptObject.cpp,ScriptObject.h,ScriptScope.cpp,ScriptScope.h,ScriptState.cpp,SerializedScriptValue.h,SharedPersistent.h,StaticDOMDataStore.cpp,StaticDOMDataStore.h,V8Binding.h,V8ConsoleMessage.cpp,V8ConsoleMessage.h,V8DOMMap.cpp,V8DOMMap.h,V8DOMWindowShell.h,V8DOMWrapper.cpp,V8DOMWrapper.h,V8DataGridDataSource.cpp,V8DataGridDataSource.h,V8EventListenerList.cpp,V8EventListenerList.h,V8GCController.cpp,V8GCController.h,V8HiddenPropertyName.cpp,V8HiddenPropertyName.h,V8Index.h,V8IsolatedContext.cpp,V8IsolatedContext.h,V8Proxy.h,WorkerContextExecutionProxy.cpp,WorkerContextExecutionProxy.h,WorkerScriptController.cpp,WorkerScriptController.h,WorldContextHandle.cpp,WorldContextHandle.h}
+Files: src/third_party/WebKit/WebCore/bindings/v8/{ChildThreadDOMData.cpp,ChildThreadDOMData.h,DOMData.cpp,DOMData.h,DOMDataStore.cpp,DOMDataStore.h,DOMObjectsInclude.h,DOMWrapperWorld.cpp,DOMWrapperWorld.h,DateExtension.cpp,DateExtension.h,IsolatedWorld.cpp,IsolatedWorld.h,MainThreadDOMData.cpp,MainThreadDOMData.h,OwnHandle.h,RuntimeEnabledFeatures.cpp,RuntimeEnabledFeatures.h,ScopedDOMDataStore.cpp,ScopedDOMDataStore.h,ScriptArray.cpp,ScriptArray.h,ScriptEventListener.cpp,ScriptEventListener.h,ScriptFunctionCall.cpp,ScriptFunctionCall.h,ScriptObject.cpp,ScriptObject.h,ScriptScope.cpp,ScriptScope.h,ScriptState.cpp,SharedPersistent.h,StaticDOMDataStore.cpp,StaticDOMDataStore.h,V8Binding.h,V8ConsoleMessage.cpp,V8ConsoleMessage.h,V8DOMMap.cpp,V8DOMMap.h,V8DOMWindowShell.h,V8DOMWrapper.cpp,V8DOMWrapper.h,V8DataGridDataSource.cpp,V8DataGridDataSource.h,V8EventListenerList.cpp,V8EventListenerList.h,V8GCController.cpp,V8GCController.h,V8HiddenPropertyName.cpp,V8HiddenPropertyName.h,V8Index.h,V8IsolatedContext.cpp,V8IsolatedContext.h,V8Proxy.h,WorkerContextExecutionProxy.cpp,WorkerContextExecutionProxy.h,WorkerScriptController.cpp,WorkerScriptController.h,WorldContextHandle.cpp,WorldContextHandle.h}
 Copyright: Copyright: 2009 Google Inc. All rights reserved / HOLDERS AND CONTRIBUTORS:
+License: BSD (3 clause)
+
+Files: src/third_party/WebKit/WebCore/bindings/v8/{SerializedScriptValue.cpp}
+Copyright: Copyright: 2010 Google Inc. All rights reserved / HOLDERS AND CONTRIBUTORS:
 License: BSD (3 clause)
 
 Files: src/third_party/WebKit/WebCore/bindings/v8/{NPV8Object.h,V8AbstractEventListener.cpp,V8AbstractEventListener.h,V8Binding.cpp,V8Collection.cpp,V8Collection.h,V8Helpers.h,V8LazyEventListener.cpp,V8LazyEventListener.h,V8NPObject.cpp,V8NPObject.h,V8NPUtils.h,V8NodeFilterCondition.h,V8Utilities.h,V8WorkerContextEventListener.cpp,V8WorkerContextEventListener.h}
@@ -5233,6 +5257,10 @@ License: BSD (3 clause)
 
 Files: src/third_party/WebKit/WebCore/bindings/v8/{npruntime_impl.h}
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008, 2009, Google Inc. All rights reserved:
+License: BSD (3 clause)
+
+Files: src/third_party/WebKit/WebCore/bindings/v8/{SerializedScriptValue.h}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009, 2010 Google Inc. All rights reserved:
 License: BSD (3 clause)
 
 Files: src/third_party/WebKit/WebCore/bindings/v8/{DerivedSourcesAllInOne.cpp}
@@ -5295,15 +5323,11 @@ Files: src/third_party/WebKit/WebCore/bridge/{npruntime_priv.h}
 Copyright: Copyright: 2003, 2006 Apple Computer, Inc. All rights reserved:
 License: BSD (2 clause)
 
-Files: src/third_party/WebKit/WebCore/bridge/{Bridge.cpp}
-Copyright: Copyright: 2003, 2006, 2008 Apple Inc. All rights reserved:
-License: BSD (2 clause)
-
 Files: src/third_party/WebKit/WebCore/bridge/{runtime_array.cpp,runtime_array.h,runtime_method.cpp,runtime_method.h}
 Copyright: Copyright: 2003, 2008 Apple Inc. All rights reserved:
 License: BSD (2 clause)
 
-Files: src/third_party/WebKit/WebCore/bridge/{Bridge.h,runtime_object.cpp,runtime_object.h}
+Files: src/third_party/WebKit/WebCore/bridge/{runtime_object.cpp,runtime_object.h}
 Copyright: Copyright: 2003, 2008, 2009 Apple Inc. All rights reserved:
 License: BSD (2 clause)
 
@@ -5321,6 +5345,10 @@ License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/bridge/{IdentifierRep.cpp,IdentifierRep.h}
 Copyright: Copyright: 2009 Apple Inc. All rights reserved:
+License: BSD (2 clause)
+
+Files: src/third_party/WebKit/WebCore/bridge/{Bridge.h}
+Copyright: Copyright: 2010, The Android Open Source Project / 2003, 2008, 2009 Apple Inc. All rights reserved:
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/bridge/{npruntime.h}
@@ -5359,7 +5387,7 @@ Files: src/third_party/WebKit/WebCore/bridge/c/{c_utility.cpp}
 Copyright: Copyright: 2004, 2006 Apple Computer, Inc. All rights reserved / 2006 Alexey Proskuryakov (ap@nypop.com):
 License: BSD (2 clause)
 
-Files: src/third_party/WebKit/WebCore/bridge/jni/{JNIBridge.cpp,JNIBridge.h,jni_jsobject.h}
+Files: src/third_party/WebKit/WebCore/bridge/jni/{jni_jsobject.h}
 Copyright: Copyright: 2003 Apple Computer, Inc. All rights reserved:
 License: BSD (2 clause)
 
@@ -5369,6 +5397,14 @@ License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/bridge/jni/{JNIUtility.h}
 Copyright: Copyright: 2003, 2004, 2005, 2008, 2009, 2010 Apple Inc. All rights reserved:
+License: BSD (2 clause)
+
+Files: src/third_party/WebKit/WebCore/bridge/jni/{JNIBridge.cpp}
+Copyright: Copyright: 2010, The Android Open Source Project / 2003, 2004, 2005, 2007, 2009 Apple Inc. All rights reserved:
+License: BSD (2 clause)
+
+Files: src/third_party/WebKit/WebCore/bridge/jni/{JNIBridge.h}
+Copyright: Copyright: 2010, The Android Open Source Project / 2003, 2004, 2005, 2007, 2009, 2010 Apple Inc. All rights reserved:
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/bridge/jni/jsc/{JavaInstanceJSC.h}
@@ -5395,6 +5431,14 @@ Files: src/third_party/WebKit/WebCore/bridge/jni/jsc/{JavaStringJSC.h}
 Copyright: Copyright: HOLDERS ``AS IS'' AND ANY / 2010 Apple Computer, Inc. All rights reserved / OWNER OR:
 License: BSD (2 clause)
 
+Files: src/third_party/WebKit/WebCore/bridge/jsc/*
+Copyright: Copyright: 2003, 2006, 2008 Apple Inc. All rights reserved / 2010, The Android Open Source Project:
+License: BSD (2 clause)
+
+Files: src/third_party/WebKit/WebCore/bridge/jsc/*
+Copyright: Copyright: 2010, The Android Open Source Project / 2003, 2008, 2009 Apple Inc. All rights reserved:
+License: BSD (2 clause)
+
 Files: src/third_party/WebKit/WebCore/bridge/objc/{objc_class.h}
 Copyright: Copyright: 2003 Apple Computer, Inc. All rights reserved:
 License: BSD (2 clause)
@@ -5415,8 +5459,12 @@ Files: src/third_party/WebKit/WebCore/bridge/objc/{WebScriptObject.h}
 Copyright: Copyright: 2006 Apple Inc. All rights reserved:
 License: BSD (2 clause)
 
-Files: src/third_party/WebKit/WebCore/bridge/qt/{qt_class.cpp,qt_class.h,qt_instance.cpp,qt_instance.h,qt_runtime.cpp,qt_runtime.h}
+Files: src/third_party/WebKit/WebCore/bridge/qt/*
 Copyright: Copyright: 2008 Nokia Corporation and/or its subsidiary(-ies):
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/bridge/qt/*
+Copyright: Copyright: 2009 Nokia Corporation and/or its subsidiary(-ies):
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/css/{MediaQuery.cpp}
@@ -7551,6 +7599,10 @@ Files: src/third_party/WebKit/WebCore/platform/android/{FileSystemAndroid.cpp}
 Copyright: Copyright: 2007 Holger Hans Peter Freyther / 2009, The Android Open Source Project:
 License: BSD (2 clause)
 
+Files: src/third_party/WebKit/WebCore/platform/android/{PlatformBridge.h}
+Copyright: Copyright: 2009, 2010, The Android Open Source Project / HOLDERS ``AS IS'' AND ANY / OWNER OR:
+License: BSD (2 clause)
+
 Files: src/third_party/WebKit/WebCore/platform/android/{FileChooserAndroid.cpp,RenderThemeAndroid.h,SearchPopupMenuAndroid.cpp}
 Copyright: Copyright: HOLDERS ``AS IS'' AND ANY / 2006, The Android Open Source Project:
 License: BSD (2 clause)
@@ -7575,7 +7627,7 @@ Files: src/third_party/WebKit/WebCore/platform/android/{TemporaryLinkStubs.cpp}
 Copyright: Copyright: HOLDERS ``AS IS'' AND ANY / 2009, The Android Open Source Project:
 License: BSD (2 clause)
 
-Files: src/third_party/WebKit/WebCore/platform/android/{GeolocationServiceAndroid.cpp,GeolocationServiceAndroid.h,GeolocationServiceBridge.cpp,GeolocationServiceBridge.h,PlatformBridge.h,RenderThemeAndroid.cpp,SSLKeyGeneratorAndroid.cpp,SoundAndroid.cpp}
+Files: src/third_party/WebKit/WebCore/platform/android/{GeolocationServiceAndroid.cpp,GeolocationServiceAndroid.h,GeolocationServiceBridge.cpp,GeolocationServiceBridge.h,RenderThemeAndroid.cpp,SSLKeyGeneratorAndroid.cpp,SoundAndroid.cpp}
 Copyright: Copyright: HOLDERS ``AS IS'' AND ANY / OWNER OR / 2009, The Android Open Source Project:
 License: BSD (2 clause)
 
@@ -7649,6 +7701,10 @@ License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/platform/chromium/{SuddenTerminationChromium.cpp}
 Copyright: Copyright: 2009 Google Inc. All rights reserved / HOLDERS AND CONTRIBUTORS:
+License: BSD (3 clause)
+
+Files: src/third_party/WebKit/WebCore/platform/chromium/{PlatformBridge.h}
+Copyright: Copyright: 2010 Google Inc. All rights reserved / HOLDERS AND CONTRIBUTORS:
 License: BSD (3 clause)
 
 Files: src/third_party/WebKit/WebCore/platform/chromium/{ChromiumBridge.h,ChromiumDataObject.cpp,ChromiumDataObject.h,ClipboardUtilitiesChromium.cpp,ClipboardUtilitiesChromium.h,ContextMenuChromium.cpp,ContextMenuItemChromium.cpp,CursorChromium.cpp,DragDataRef.h,DragImageChromium.cpp,DragImageRef.h,FileSystemChromium.cpp,FileSystemChromiumLinux.cpp,FileSystemChromiumWin.cpp,FramelessScrollView.cpp,FramelessScrollView.h,FramelessScrollViewClient.h,KeyCodeConversion.h,KeyboardCodesWin.h,Language.cpp,LinkHashChromium.cpp,MIMETypeRegistryChromium.cpp,PasteboardChromium.cpp,PlatformCursor.h,PlatformScreenChromium.cpp,PlatformWidget.h,PopupMenuChromium.cpp,PopupMenuChromium.h,PopupMenuPrivate.h,SSLKeyGeneratorChromium.cpp,ScrollbarThemeChromium.h,ScrollbarThemeChromiumLinux.cpp,SearchPopupMenuChromium.cpp,SoundChromiumPosix.cpp,SystemTimeChromium.cpp,TemporaryLinkStubs.cpp,WidgetChromium.cpp,WindowsVersion.h}
@@ -8305,6 +8361,10 @@ License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/platform/graphics/qt/{FontQt.cpp}
 Copyright: Copyright: 2009 Dirk Schulze <krit@webkit.org> / 2008 Holger Hans Peter Freyther / 2008 Nokia Corporation and/or its subsidiary(-ies):
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/platform/graphics/qt/{GraphicsLayerQt.cpp,GraphicsLayerQt.h}
+Copyright: Copyright: 2009 Nokia Corporation and/or its subsidiary(-ies):
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/platform/graphics/qt/{FontPlatformDataQt.cpp}
@@ -16391,50 +16451,6 @@ Files: src/third_party/protobuf2/src/vsprojects/{config.h,convert2008to2005.sh}
 Copyright: UNKNOWN:
 License: BSD (3 clause)
 
-Files: src/third_party/pywebsocket/{setup.py}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/pywebsocket/example/{echo_client.py,echo_wsh.py}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/pywebsocket/mod_pywebsocket/{__init__.py,dispatch.py,handshake.py,headerparserhandler.py,msgutil.py,standalone.py,util.py}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/pywebsocket/test/{config.py,mock.py,run_all.py,test_dispatch.py,test_handshake.py,test_mock.py,test_msgutil.py,test_util.py}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/pywebsocket/test/testdata/handlers/{blank_wsh.py,origin_check_wsh.py}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/pywebsocket/test/testdata/handlers/sub/{exception_in_transfer_wsh.py,no_wsh_at_the_end.py,non_callable_wsh.py,plain_wsh.py,wrong_handshake_sig_wsh.py,wrong_transfer_sig_wsh.py}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/skia/bench/{BitmapBench.cpp,DecodeBench.cpp,RectBench.cpp,RepeatTileBench.cpp,SkBenchmark.cpp,SkBenchmark.h,TextBench.cpp,benchmain.cpp}
-Copyright: UNKNOWN:
-License: Apache (v2.0)
-
-Files: src/third_party/skia/experimental/*
-Copyright: Copyright: 2005 Apple Computer, Inc. All rights reserved:
-License: Apache (v2.0)
-
-Files: src/third_party/skia/experimental/*
-Copyright: UNKNOWN:
-License: Apache (v2.0)
-
-Files: src/third_party/skia/forth/{Forth.cpp,Forth.h,ForthParser.h,ForthTests.cpp,SampleForth.cpp,StdWords.cpp}
-Copyright: UNKNOWN:
-License: Apache (v2.0)
-
-Files: src/third_party/skia/gm/{bitmapfilters.cpp,filltypes.cpp,gm.h,gmmain.cpp,gradients.cpp,shapes.cpp,tilemodes.cpp,xfermodes.cpp}
-Copyright: UNKNOWN:
-License: Apache (v2.0)
-
 Files: src/third_party/skia/include/animator/{SkAnimator.h,SkAnimatorView.h}
 Copyright: Copyright: 2006 The Android Open Source Project:
 License: Apache (v2.0)
@@ -16545,10 +16561,6 @@ License: Apache (v2.0)
 
 Files: src/third_party/skia/include/xml/{SkBML_WXMLParser.h,SkBML_XMLParser.h,SkDOM.h,SkJS.h,SkXMLParser.h,SkXMLWriter.h}
 Copyright: Copyright: 2006 The Android Open Source Project:
-License: Apache (v2.0)
-
-Files: src/third_party/skia/samplecode/{SampleAll.cpp,SampleApp.cpp,SampleArc.cpp,SampleBitmapRect.cpp,SampleBlur.cpp,SampleCamera.cpp,SampleCircle.cpp,SampleCode.h,SampleCull.cpp,SampleDecode.cpp,SampleDither.cpp,SampleDitherBitmap.cpp,SampleDrawLooper.cpp,SampleEffects.cpp,SampleEmboss.cpp,SampleEncode.cpp,SampleExtractAlpha.cpp,SampleFillType.cpp,SampleFilter.cpp,SampleFilter2.cpp,SampleFontCache.cpp,SampleFontScalerTest.cpp,SampleFuzz.cpp,SampleGM.cpp,SampleGradients.cpp,SampleHairline.cpp,SampleImage.cpp,SampleImageDir.cpp,SampleLCD.cpp,SampleLayerMask.cpp,SampleLayers.cpp,SampleLines.cpp,SampleMeasure.cpp,SampleMipMap.cpp,SampleMovie.cpp,SampleNinePatch.cpp,SampleOverflow.cpp,SamplePageFlip.cpp,SamplePatch.cpp,SamplePath.cpp,SamplePathClip.cpp,SamplePathEffects.cpp,SamplePicture.cpp,SamplePoints.cpp,SamplePolyToPoly.cpp,SampleRegion.cpp,SampleRepeatTile.cpp,SampleShaders.cpp,SampleShapes.cpp,SampleStrokePath.cpp,SampleStrokeText.cpp,SampleTestGL.cpp,SampleTests.cpp,SampleText.cpp,SampleTextAlpha.cpp,SampleTextEffects.cpp,SampleTextOnPath.cpp,SampleTiling.cpp,SampleTinyBitmap.cpp,SampleTriangles.cpp,SampleTypeface.cpp,SampleVertices.cpp,SampleXfermodes.cpp,vertexdump.cpp}
-Copyright: UNKNOWN:
 License: Apache (v2.0)
 
 Files: src/third_party/skia/src/animator/*
@@ -16732,26 +16744,6 @@ Copyright: Copyright: 2006, The Android Open Source Project:
 License: Apache (v2.0)
 
 Files: src/third_party/skia/src/xml/*
-Copyright: UNKNOWN:
-License: Apache (v2.0)
-
-Files: src/third_party/skia/tests/{BitmapCopyTest.cpp,ClipCubicTest.cpp,GeometryTest.cpp,MathTest.cpp,MatrixTest.cpp,PackBitsTest.cpp,PaintTest.cpp,ParsePathTest.cpp,PathMeasureTest.cpp,PathTest.cpp,Sk64Test.cpp,SortTest.cpp,SrcOverTest.cpp,StreamTest.cpp,StringTest.cpp,Test.cpp,Test.h,TestClassDef.h,TestSize.cpp,TriangulationTest.cpp,UtilsTest.cpp,testmain.cpp}
-Copyright: UNKNOWN:
-License: Apache (v2.0)
-
-Files: src/third_party/skia/tools/{skimage_main.cpp}
-Copyright: UNKNOWN:
-License: Apache (v2.0)
-
-Files: src/third_party/skia/xcode/hostapp/*
-Copyright: Copyright: 2005 Apple Computer, Inc. All rights reserved:
-License: Apache (v2.0)
-
-Files: src/third_party/skia/xcode/hostapp/*
-Copyright: UNKNOWN:
-License: Apache (v2.0)
-
-Files: src/third_party/skia/xcode/sampleapp_sdl/{SDLMain.h,skia_sdl_main.cpp}
 Copyright: UNKNOWN:
 License: Apache (v2.0)
 
@@ -17020,142 +17012,6 @@ Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008, Google Inc:
 License: BSD (3 clause)
 
 Files: src/third_party/tcmalloc/chromium/src/windows/google/{tcmalloc.h}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2003, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/{autogen.sh}
-Copyright: UNKNOWN:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/{ltmain.sh}
-Copyright: Copyright: 1996, 1997, 1998, 1999, 2000, 2001, 2003, 2004, 2005, 2006:
-License: GPL (v2 or later) GENERATED FILE
-
-Files: src/third_party/tcmalloc/tcmalloc/packages/{deb.sh,rpm.sh}
-Copyright: UNKNOWN:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/{debugallocation.cc}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2000, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/{addressmap-inl.h,getpc.h,heap-checker-bcad.cc,heap-checker.cc,heap-profiler.cc,internal_logging.cc,internal_logging.h,malloc_extension.cc,malloc_hook-inl.h,malloc_hook.cc,maybe_threads.cc,maybe_threads.h,pagemap.h,profiler.cc,stacktrace.cc,stacktrace_generic-inl.h,stacktrace_libunwind-inl.h,stacktrace_x86-inl.h,stacktrace_x86_64-inl.h,system-alloc.cc,system-alloc.h,tcmalloc.cc,tcmalloc_guard.h}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2005, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/{heap-profile-table.cc,heap-profile-table.h,memory_region_map.cc,memory_region_map.h}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2006, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/{config_for_unittests.h,memfs_malloc.cc,packed-cache-inl.h,profiledata.cc,profiledata.h,stacktrace_powerpc-inl.h,tcmalloc.h}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2007, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/{central_freelist.cc,central_freelist.h,common.cc,common.h,linked_list.h,page_heap.cc,page_heap.h,page_heap_allocator.h,raw_printer.cc,raw_printer.h,sampler.cc,sampler.h,span.cc,span.h,stacktrace_win32-inl.h,static_vars.cc,static_vars.h,thread_cache.cc,thread_cache.h}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/{profile-handler.cc,profile-handler.h,stack_trace_table.cc,stack_trace_table.h,stacktrace_config.h,stacktrace_with_context.cc,symbolize.cc,symbolize.h}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/base/{elfcore.h,linux_syscall_support.h}
-Copyright: Copyright: 2005-2008, Google Inc / HOLDERS AND CONTRIBUTORS:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/base/{vdso_support.h}
-Copyright: Copyright: 2008 Google Inc. All Rights Reserved:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/base/{cycleclock.h}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2004, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/base/{basictypes.h,commandlineflags.h,googleinit.h,logging.h}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2005, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/base/{linuxthreads.cc,linuxthreads.h,thread_lister.c,thread_lister.h}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2005-2007, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/base/{atomicops-internals-macosx.h,atomicops-internals-x86-msvc.h,atomicops-internals-x86.h,atomicops.h,low_level_alloc.cc,low_level_alloc.h,spinlock.cc,spinlock.h,stl_allocator.h,sysinfo.cc,sysinfo.h}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2006, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/base/{atomicops-internals-x86.cc,logging.cc,simple_mutex.h}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2007, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/base/{atomicops-internals-linuxppc.h,dynamic_annotations.cc,dynamic_annotations.h,thread_annotations.h,vdso_support.cc}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/base/{spinlock_linux-inl.h,spinlock_posix-inl.h,spinlock_win32-inl.h}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/google/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2005, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/google/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/tests/{profile-handler_unittest.cc,raw_printer_test.cc,stack_trace_table_test.cc}
-Copyright: Copyright: 2009 Google Inc. All Rights Reserved:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/tests/{frag_unittest.cc,markidle_unittest.cc,pagemap_unittest.cc}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2003, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/tests/{memalign_unittest.cc,thread_dealloc_unittest.cc}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2004, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/tests/{addressmap_unittest.cc,getpc_test.cc,heap-checker-death_unittest.sh,heap-checker_unittest.cc,heap-checker_unittest.sh,heap-profiler_unittest.cc,heap-profiler_unittest.sh,profiler_unittest.cc,profiler_unittest.sh,stacktrace_unittest.cc,tcmalloc_large_unittest.cc}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2005, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/tests/{atomicops_unittest.cc,low_level_alloc_unittest.cc}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2006, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/tests/{debugallocation_test.cc,maybe_threads_unittest.sh,packed-cache_test.cc,profiledata_unittest.cc,system-alloc_unittest.cc,testutil.cc,testutil.h}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2007, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/tests/{malloc_extension_test.cc,sampler_test.cc,sampling_test.cc,sampling_test.sh}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/tests/{debugallocation_test.sh,malloc_extension_c_test.c}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/tests/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2004, Google Inc:
-License: BSD (3 clause) GENERATED FILE
-
-Files: src/third_party/tcmalloc/tcmalloc/src/tests/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2005, Google Inc:
-License: BSD (3 clause) GENERATED FILE
-
-Files: src/third_party/tcmalloc/tcmalloc/src/windows/{ia32_modrm_map.cc,ia32_opcode_map.cc,mingw.h,mini_disassembler.cc,mini_disassembler.h,mini_disassembler_types.h,override_functions.cc,patch_functions.cc,port.cc,port.h,preamble_patcher.cc,preamble_patcher.h,preamble_patcher_with_stub.cc}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2007, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/windows/{addr2line-pdb.c,get_mangled_names.cc,nm-pdb.c}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008, Google Inc:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/windows/{config.h}
-Copyright: UNKNOWN:
-License: BSD (3 clause)
-
-Files: src/third_party/tcmalloc/tcmalloc/src/windows/google/{tcmalloc.h}
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2003, Google Inc:
 License: BSD (3 clause)
 
