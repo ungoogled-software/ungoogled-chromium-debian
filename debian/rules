@@ -49,13 +49,13 @@ GYP_DEFINES += \
 	$(NULL)
 endif
 else
-ifeq (x86_64,$(DEB_BUILD_GNU_CPU))
+ifeq (amd64,$(DEB_BUILD_ARCH))
 GYP_DEFINES += target_arch=x64
 else
-ifeq (x86,$(DEB_BUILD_GNU_CPU))
+ifeq (i386,$(DEB_BUILD_ARCH))
 GYP_DEFINES += target_arch=ia32
 else
-$(warning unsupported target arch $(DEB_BUILD_GNU_CPU) - continuing anyway)
+$(warning unsupported target arch $(DEB_BUILD_ARCH) - continuing anyway)
 endif
 endif
 endif
