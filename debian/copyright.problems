@@ -114,22 +114,6 @@ Files: src/net/tools/flip_server/{other_defines.h,string_piece_utils.h}
 Copyright: UNKNOWN:
 License: *No copyright* UNKNOWN
 
-Files: src/out/Release/obj.target/geni/{chartables.c,ffmpeg_stubs.cc}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/out/Release/obj.target/geni/{nacl_syscall_handlers.c}
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: UNKNOWN
-
-Files: src/out/Release/obj/gen/{libraries-empty.cc,libraries.cc}
-Copyright: Copyright: 2008 Google Inc. All Rights Reserved:
-License: UNKNOWN
-
-Files: src/out/Release/obj/gen/webkit/{ColorData.c,ColorData.cpp,DocTypeStrings.c,DocTypeStrings.cpp,UserAgentStyleSheets.h,UserAgentStyleSheetsData.cpp}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
 Files: src/sandbox/linux/seccomp/{access.cc,clone.cc,debug.cc,debug.h,exit.cc,getpid.cc,gettid.cc,ioctl.cc,ipc.cc,library.cc,library.h,madvise.cc,maps.cc,maps.h,mmap.cc,mprotect.cc,munmap.cc,mutex.h,open.cc,sandbox.cc,sandbox.h,sandbox_impl.h,securemem.cc,securemem.h,socketcall.cc,stat.cc,syscall.cc,syscall.h,syscall_table.c,syscall_table.h,tls.h,trusted_process.cc,trusted_thread.cc,x86_decode.cc,x86_decode.h}
 Copyright: UNKNOWN:
 License: *No copyright* UNKNOWN
@@ -209,66 +193,6 @@ License: GPL
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libswscale/x86/{yuv2rgb_template.c}
 Copyright: Copyright: 2000, Silicon Integrated System Corp:
 License: GPL
-
-Files: src/third_party/gles2_book/Chapter_10/MultiTexture/{MultiTexture.c}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Chapter_11/Multisample/{Multisample.c}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Chapter_11/Stencil_Test/{Stencil_Test.c,Stencil_Test.h}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Chapter_13/Noise3D/{generatenoise.c}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Chapter_13/ParticleSystem/{ParticleSystem.c}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Chapter_15/Hello_Triangle_KD/{Hello_Triangle_KD.c}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Chapter_2/Hello_Triangle/{Hello_Triangle.c,Hello_Triangle.h}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Chapter_8/Simple_VertexShader/{Simple_VertexShader.c,Simple_VertexShader.h}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Chapter_9/MipMap2D/{MipMap2D.c,MipMap2D.h}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Chapter_9/Simple_Texture2D/{Simple_Texture2D.c,Simple_Texture2D.h}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Chapter_9/Simple_TextureCubemap/{Simple_TextureCubemap.c,Simple_TextureCubemap.h}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Chapter_9/TextureWrap/{TextureWrap.c,TextureWrap.h}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Common/Include/{esUtil.h,esUtil_win.h}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Common/Source/{esShader.c,esShapes.c,esTransform.c,esUtil.c}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Common/Source/Win32/{esUtil_TGA.c}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
 
 Files: src/third_party/jemalloc/chromium/{build-crt.py}
 Copyright: UNKNOWN:

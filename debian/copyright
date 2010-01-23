@@ -15,14 +15,6 @@ Files: src/{PRESUBMIT.py}
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
-Files: src/.pc/html5_video_mimetypes.patch/net/base/{mime_util.cc}
-Copyright: Copyright (c) 2006-2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: global BSD-style Chromium
-
-Files: src/.pc/ubuntu_dont_overwrite_default_download_directory.patch/chrome/common/{chrome_paths_linux.cc}
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: global BSD-style Chromium
-
 Files: src/app/{animation.cc,animation_unittest.cc,drag_drop_types_win.cc,l10n_util.cc,l10n_util.h,l10n_util_dummy.cc,l10n_util_unittest.cc,resource_bundle_linux.cc,resource_bundle_win.cc,run_all_unittests.cc,slide_animation.cc,slide_animation.h,throb_animation.cc,throb_animation.h,tree_node_iterator.h,tree_node_iterator_unittest.cc,tree_node_model.h,win_util_unittest.cc}
 Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
@@ -335,7 +327,7 @@ Files: src/chrome/browser/{cookies_tree_model_unittest.cc}
 Copyright: Copyright (c) 2009-2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
-Files: src/chrome/browser/{alternate_nav_url_fetcher.cc,alternate_nav_url_fetcher.h,browser.cc,browser_main.cc,browser_prefs.cc,browser_process.h,browser_process_impl.cc,browser_process_impl.h,first_run.h,gpu_process_host.cc,gpu_process_host.h,intranet_redirect_detector.cc,intranet_redirect_detector.h,plugin_process_host.cc,shell_integration_win.cc,toolbar_model.cc}
+Files: src/chrome/browser/{alternate_nav_url_fetcher.cc,alternate_nav_url_fetcher.h,browser.cc,browser_main.cc,browser_prefs.cc,browser_process.h,browser_process_impl.cc,browser_process_impl.h,browser_process_sub_thread.cc,browser_process_sub_thread.h,first_run.h,gpu_process_host.cc,gpu_process_host.h,intranet_redirect_detector.cc,intranet_redirect_detector.h,io_thread.cc,io_thread.h,plugin_process_host.cc,shell_integration_win.cc,toolbar_model.cc}
 Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
@@ -407,7 +399,7 @@ Files: src/chrome/browser/chromeos/{browser_extenders.cc,clock_menu_button.cc,cl
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
-Files: src/chrome/browser/chromeos/{chromeos_browser_view.cc,chromeos_browser_view.h,compact_location_bar_host.cc,compact_location_bar_host.h,login_library.cc,login_library.h,panel_browser_view.cc,panel_browser_view.h}
+Files: src/chrome/browser/chromeos/{browser_notification_observers.cc,browser_notification_observers.h,chromeos_browser_view.cc,chromeos_browser_view.h,compact_location_bar_host.cc,compact_location_bar_host.h,login_library.cc,login_library.h,panel_browser_view.cc,panel_browser_view.h}
 Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
@@ -907,11 +899,11 @@ Files: src/chrome/browser/views/{blocked_popup_container_view_views.cc,blocked_p
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved.  Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
-Files: src/chrome/browser/views/{PRESUBMIT.py,about_chrome_view.cc,about_ipc_dialog.cc,about_ipc_dialog.h,about_network_dialog.cc,about_network_dialog.h,accelerator_table_gtk.cc,accelerator_table_gtk.h,accessible_toolbar_view.cc,accessible_toolbar_view.h,bookmark_bar_instructions_view.cc,bookmark_bar_instructions_view.h,bookmark_bar_view.cc,bookmark_bar_view.h,bookmark_bubble_view.cc,bookmark_bubble_view.h,bookmark_context_menu.cc,bookmark_context_menu.h,bookmark_editor_view.cc,bookmark_editor_view.h,bookmark_manager_view.cc,bookmark_manager_view.h,bookmark_menu_button.cc,bookmark_menu_button.h,bookmark_menu_controller_views.cc,bookmark_menu_controller_views.h,browser_actions_container.cc,browser_actions_container.h,browser_bubble.cc,browser_bubble.h,browser_bubble_gtk.cc,browser_bubble_win.cc,browser_dialogs.h,browser_views_accessibility_browsertest.cc,bubble_border.cc,bubble_border.h,bug_report_view.h,chrome_views_delegate.cc,chrome_views_delegate.h,confirm_message_box_dialog.cc,confirm_message_box_dialog.h,create_application_shortcut_view.cc,create_application_shortcut_view.h,detachable_toolbar_view.cc,detachable_toolbar_view.h,dialog_stubs_gtk.cc,download_started_animation_win.cc,dropdown_bar_view.h,edit_search_engine_dialog.cc,edit_search_engine_dialog.h,external_protocol_dialog.cc,external_protocol_dialog.h,find_bar_host_browsertest.cc,find_bar_host_uitest.cc,find_bar_view.cc,find_bar_view.h,first_run_bubble.cc,first_run_bubble.h,first_run_customize_view.h,first_run_view.h,first_run_view_base.cc,first_run_view_base.h,fullscreen_exit_bubble.cc,fullscreen_exit_bubble.h,info_bubble.h,keyword_editor_view.cc,location_bar_view.cc,location_bar_view.h,new_browser_window_widget.cc,new_browser_window_widget.h,new_profile_dialog.cc,new_profile_dialog.h,page_info_window_view.cc,task_manager_view.cc,theme_install_bubble_view.cc,theme_install_bubble_view.h,toolbar_view.cc,toolbar_view.h,uninstall_view.cc,uninstall_view.h,url_picker.cc,url_picker.h}
+Files: src/chrome/browser/views/{PRESUBMIT.py,about_chrome_view.cc,about_ipc_dialog.cc,about_ipc_dialog.h,about_network_dialog.cc,about_network_dialog.h,accelerator_table_gtk.cc,accelerator_table_gtk.h,accessible_toolbar_view.cc,accessible_toolbar_view.h,bookmark_bar_instructions_view.cc,bookmark_bar_instructions_view.h,bookmark_bar_view.cc,bookmark_bar_view.h,bookmark_bubble_view.cc,bookmark_bubble_view.h,bookmark_context_menu.cc,bookmark_context_menu.h,bookmark_editor_view.cc,bookmark_editor_view.h,bookmark_manager_view.cc,bookmark_manager_view.h,bookmark_menu_button.cc,bookmark_menu_button.h,bookmark_menu_controller_views.cc,bookmark_menu_controller_views.h,browser_bubble.cc,browser_bubble.h,browser_bubble_gtk.cc,browser_bubble_win.cc,browser_dialogs.h,browser_views_accessibility_browsertest.cc,bubble_border.cc,bubble_border.h,bug_report_view.h,chrome_views_delegate.cc,chrome_views_delegate.h,confirm_message_box_dialog.cc,confirm_message_box_dialog.h,create_application_shortcut_view.cc,create_application_shortcut_view.h,detachable_toolbar_view.cc,dialog_stubs_gtk.cc,download_started_animation_win.cc,dropdown_bar_view.h,edit_search_engine_dialog.cc,edit_search_engine_dialog.h,external_protocol_dialog.cc,external_protocol_dialog.h,find_bar_host_browsertest.cc,find_bar_host_uitest.cc,find_bar_view.cc,find_bar_view.h,first_run_bubble.cc,first_run_bubble.h,first_run_customize_view.h,first_run_view.h,first_run_view_base.cc,first_run_view_base.h,fullscreen_exit_bubble.cc,fullscreen_exit_bubble.h,info_bubble.h,keyword_editor_view.cc,new_browser_window_widget.cc,new_browser_window_widget.h,new_profile_dialog.cc,new_profile_dialog.h,page_info_window_view.cc,task_manager_view.cc,theme_install_bubble_view.cc,theme_install_bubble_view.h,toolbar_view.h,uninstall_view.cc,uninstall_view.h,url_picker.cc,url_picker.h}
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
-Files: src/chrome/browser/views/{bug_report_view.cc,theme_background.cc,theme_background.h,unhandled_keyboard_event_handler.cc}
+Files: src/chrome/browser/views/{browser_actions_container.cc,browser_actions_container.h,bug_report_view.cc,detachable_toolbar_view.h,location_bar_view.cc,location_bar_view.h,theme_background.cc,theme_background.h,toolbar_view.cc,unhandled_keyboard_event_handler.cc}
 Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
@@ -919,12 +911,16 @@ Files: src/chrome/browser/views/autocomplete/{autocomplete_popup_contents_view.c
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
-Files: src/chrome/browser/views/extensions/*
+Files: src/chrome/browser/views/extensions/{extension_view.cc,extension_view.h}
 Copyright: Copyright (c) 2006-2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
-Files: src/chrome/browser/views/extensions/*
+Files: src/chrome/browser/views/extensions/{extension_action_context_menu.cc,extension_action_context_menu.h,extension_install_prompt.cc,extension_popup.cc,extension_popup.h,extension_shelf.cc,extension_shelf.h}
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+License: global BSD-style Chromium
+
+Files: src/chrome/browser/views/extensions/{extension_installed_bubble.cc,extension_installed_bubble.h}
+Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
 Files: src/chrome/browser/views/frame/{browser_frame.h,browser_frame_win.cc,browser_frame_win.h,glass_browser_frame_view.cc,glass_browser_frame_view.h,opaque_browser_frame_view.cc,opaque_browser_frame_view.h}
@@ -1880,11 +1876,11 @@ Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of 
 License: global BSD-style Chromium
 
 Files: src/media/tools/player_x11/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved.  Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved.  Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
 Files: src/media/tools/player_x11/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
 Files: src/media/tools/qt_faststart/{qt_faststart.c}
@@ -2063,16 +2059,16 @@ Files: src/native_client/src/third_party/libxt/include/X11/{VarargsI.h}
 Copyright: Copyright: 1985, 1986, 1987, 1988, 1989, 1998 The Open Group:
 License: BSD (3 clause)
 
-Files: src/native_client/src/third_party/libxt/include/X11/{PassivGraI.h}
-Copyright: Copyright: 1987, 1988, 1989 by Digital Equipment Corporation, Maynard / 1987, 1988, 1989, 1998 The Open Group / 1988 by Hewlett-Packard Company:
-License: BSD (3 clause)
-
 Files: src/native_client/src/third_party/libxt/include/X11/{InitialI.h,Intrinsic.h,IntrinsicI.h,IntrinsicP.h,ObjectP.h,ResourceI.h,SelectionI.h,ShellP.h,Xtos.h}
-Copyright: Copyright: 1987, 1988, 1994, 1998 The Open Group / 1987, 1988 by Digital Equipment Corporation, Maynard, Massachusetts:
+Copyright: Copyright: 1987, 1988 by Digital Equipment Corporation, Maynard, Massachusetts / 1987, 1988, 1994, 1998 The Open Group:
 License: BSD (3 clause)
 
 Files: src/native_client/src/third_party/libxt/include/X11/{CallbackI.h,Composite.h,CompositeP.h,ConstrainP.h,Constraint.h,ConvertI.h,Core.h,CoreP.h,EventI.h,Object.h,RectObj.h,RectObjP.h,TranslateI.h,Vendor.h,VendorP.h}
-Copyright: Copyright: 1987, 1988, 1998 The Open Group / 1987, 1988 by Digital Equipment Corporation, Maynard, Massachusetts:
+Copyright: Copyright: 1987, 1988 by Digital Equipment Corporation, Maynard, Massachusetts / 1987, 1988, 1998 The Open Group:
+License: BSD (3 clause)
+
+Files: src/native_client/src/third_party/libxt/include/X11/{PassivGraI.h}
+Copyright: Copyright: 1987, 1988, 1989, 1998 The Open Group / 1988 by Hewlett-Packard Company / 1987, 1988, 1989 by Digital Equipment Corporation, Maynard:
 License: BSD (3 clause)
 
 Files: src/native_client/src/third_party/libxt/include/X11/{HookObjI.h}
@@ -2080,7 +2076,7 @@ Copyright: Copyright: 1994, 1998 The Open Group:
 License: BSD (3 clause)
 
 Files: src/native_client/src/third_party/libxt/include/X11/{ThreadsI.h}
-Copyright: Copyright: no- / 1993 by Sun Microsystems, Inc. Mountain View, CA / 1994, 1998 The Open Group:
+Copyright: Copyright: 1994, 1998 The Open Group / no- / 1993 by Sun Microsystems, Inc. Mountain View, CA:
 License: BSD (3 clause)
 
 Files: src/native_client/src/third_party/libxt/include/X11/{CreateI.h,ShellI.h}
@@ -2099,28 +2095,44 @@ Files: src/native_client/src/third_party/libxt/src/{Varargs.c}
 Copyright: Copyright: 1985, 1986, 1987, 1988, 1989, 1994, 1998 The Open Group:
 License: BSD (3 clause)
 
+Files: src/native_client/src/third_party/libxt/src/{Functions.c}
+Copyright: Copyright: 1985, 1986, 1987, 1988, 1989, 1994, 1998 The Open Group / 1993 by Sun Microsystems, Inc. Mountain View, CA:
+License: BSD (3 clause)
+
+Files: src/native_client/src/third_party/libxt/src/{Popup.c}
+Copyright: Copyright: 1987, 1988 by Digital Equipment Corporation, Maynard, Massachusetts / 1987, 1988, 1994, 1998 The Open Group:
+License: BSD (3 clause)
+
+Files: src/native_client/src/third_party/libxt/src/{Converters.c,Create.c,Destroy.c,Geometry.c,Initialize.c,Intrinsic.c,Manage.c,Object.c,Resources.c,Selection.c,SetValues.c,Shell.c,TMkey.c,TMstate.c}
+Copyright: Copyright: 1987, 1988 by Digital Equipment Corporation, Maynard, Massachusetts / 1987, 1988, 1994, 1998 The Open Group / 1993 by Sun Microsystems, Inc. Mountain View, CA:
+License: BSD (3 clause)
+
+Files: src/native_client/src/third_party/libxt/src/{ArgList.c,PopupCB.c,RectObj.c,Vendor.c}
+Copyright: Copyright: 1987, 1988 by Digital Equipment Corporation, Maynard, Massachusetts / 1987, 1988, 1998 The Open Group:
+License: BSD (3 clause)
+
+Files: src/native_client/src/third_party/libxt/src/{NextEvent.c}
+Copyright: Copyright: 1987, 1988 by Digital Equipment Corporation, Maynard, Massachusetts / 1993 by Sun Microsystems, Inc. Mountain View, CA / 1987, 1988, 1994, 1998, 2001 The Open Group:
+License: BSD (3 clause)
+
+Files: src/native_client/src/third_party/libxt/src/{EventUtil.c}
+Copyright: Copyright: 1987, 1988, 1989 by Digital Equipment Corporation, Maynard, Massachusetts / 1987, 1988, 1989, 1998 The Open Group / 1988 by Hewlett-Packard Company / 1993 by Sun Microsystems, Inc. Mountain View, CA:
+License: BSD (3 clause)
+
+Files: src/native_client/src/third_party/libxt/src/{Keyboard.c}
+Copyright: Copyright: 1987, 1988, 1989 by Digital Equipment Corporation, Maynard, Massachusetts / 1987, 1988, 1994, 1998 The Open Group / 1988 by Hewlett-Packard Company / 1993 by Sun Microsystems, Inc. Mountain View, CA:
+License: BSD (3 clause)
+
+Files: src/native_client/src/third_party/libxt/src/{PassivGrab.c}
+Copyright: Copyright: 1987, 1988, 1989, 1990, 1994, 1998 The Open Group / 1987, 1988, 1989,1990 by Digital Equipment Corporation, Maynard, Massachusetts / 1988 by Hewlett-Packard Company / 1993 by Sun Microsystems, Inc. Mountain View, CA:
+License: BSD (3 clause)
+
 Files: src/native_client/src/third_party/libxt/src/{Pointer.c}
-Copyright: Copyright: 1987, 1988, 1989 by Digital Equipment Corporation, Maynard / 1987, 1988, 1989, 1998 The Open Group / 1988 by Hewlett-Packard Company:
+Copyright: Copyright: 1987, 1988, 1989, 1998 The Open Group / 1988 by Hewlett-Packard Company / 1987, 1988, 1989 by Digital Equipment Corporation, Maynard:
 License: BSD (3 clause)
 
 Files: src/native_client/src/third_party/libxt/src/{GCManager.c}
 Copyright: Copyright: 1987, 1988, 1990 by Digital Equipment Corporation, Maynard, Massachusetts / 1987, 1988, 1990, 1994, 1998 The Open Group / 1993 by Sun Microsystems, Inc. Mountain View, CA:
-License: BSD (3 clause)
-
-Files: src/native_client/src/third_party/libxt/src/{Popup.c}
-Copyright: Copyright: 1987, 1988, 1994, 1998 The Open Group / 1987, 1988 by Digital Equipment Corporation, Maynard, Massachusetts:
-License: BSD (3 clause)
-
-Files: src/native_client/src/third_party/libxt/src/{Converters.c,Create.c,Destroy.c,Geometry.c,Initialize.c,Intrinsic.c,Manage.c,Object.c,Resources.c,Selection.c,SetValues.c,Shell.c,TMkey.c,TMstate.c}
-Copyright: Copyright: 1987, 1988, 1994, 1998 The Open Group / 1993 by Sun Microsystems, Inc. Mountain View, CA / 1987, 1988 by Digital Equipment Corporation, Maynard, Massachusetts:
-License: BSD (3 clause)
-
-Files: src/native_client/src/third_party/libxt/src/{Keyboard.c}
-Copyright: Copyright: 1987, 1988, 1994, 1998 The Open Group / 1993 by Sun Microsystems, Inc. Mountain View, CA / 1987, 1988, 1989 by Digital Equipment Corporation, Maynard, Massachusetts / 1988 by Hewlett-Packard Company:
-License: BSD (3 clause)
-
-Files: src/native_client/src/third_party/libxt/src/{ArgList.c,PopupCB.c,RectObj.c,Vendor.c}
-Copyright: Copyright: 1987, 1988, 1998 The Open Group / 1987, 1988 by Digital Equipment Corporation, Maynard, Massachusetts:
 License: BSD (3 clause)
 
 Files: src/native_client/src/third_party/libxt/src/{Constraint.c}
@@ -2128,31 +2140,15 @@ Copyright: Copyright: 1987, 1988, 1998 The Open Group / 1987, 1988 by Digital Eq
 License: BSD (3 clause)
 
 Files: src/native_client/src/third_party/libxt/src/{ActionHook.c,Alloc.c,Callback.c,ClickTime.c,Composite.c,Convert.c,Core.c,Display.c,Error.c,Event.c,GetActKey.c,GetResList.c,GetValues.c,SetSens.c,TMaction.c,TMgrab.c,TMparse.c,TMprint.c}
-Copyright: Copyright: 1987, 1988, 1998 The Open Group / 1993 by Sun Microsystems, Inc. Mountain View, CA / 1987, 1988 by Digital Equipment Corporation, Maynard, Massachusetts:
+Copyright: Copyright: 1987, 1988, 1998 The Open Group / 1987, 1988 by Digital Equipment Corporation, Maynard, Massachusetts / 1993 by Sun Microsystems, Inc. Mountain View, CA:
 License: BSD (3 clause)
 
 Files: src/native_client/src/third_party/libxt/src/{sharedlib.c}
 Copyright: Copyright: 1989, 1994, 1998 The Open Group:
 License: BSD (3 clause)
 
-Files: src/native_client/src/third_party/libxt/src/{Functions.c}
-Copyright: Copyright: 1993 by Sun Microsystems, Inc. Mountain View, CA / 1985, 1986, 1987, 1988, 1989, 1994, 1998 The Open Group:
-License: BSD (3 clause)
-
 Files: src/native_client/src/third_party/libxt/src/{VarGet.c}
 Copyright: Copyright: 1993 by Sun Microsystems, Inc. Mountain View, CA / 1985, 1986, 1987, 1988, 1989, 1998 The Open Group:
-License: BSD (3 clause)
-
-Files: src/native_client/src/third_party/libxt/src/{NextEvent.c}
-Copyright: Copyright: 1993 by Sun Microsystems, Inc. Mountain View, CA / 1987, 1988 by Digital Equipment Corporation, Maynard, Massachusetts / 1987, 1988, 1994, 1998, 2001 The Open Group:
-License: BSD (3 clause)
-
-Files: src/native_client/src/third_party/libxt/src/{EventUtil.c}
-Copyright: Copyright: 1993 by Sun Microsystems, Inc. Mountain View, CA / 1987, 1988, 1989 by Digital Equipment Corporation, Maynard, Massachusetts / 1987, 1988, 1989, 1998 The Open Group / 1988 by Hewlett-Packard Company:
-License: BSD (3 clause)
-
-Files: src/native_client/src/third_party/libxt/src/{PassivGrab.c}
-Copyright: Copyright: 1993 by Sun Microsystems, Inc. Mountain View, CA / 1987, 1988, 1989, 1990, 1994, 1998 The Open Group / 1987, 1988, 1989,1990 by Digital Equipment Corporation, Maynard, Massachusetts / 1988 by Hewlett-Packard Company:
 License: BSD (3 clause)
 
 Files: src/native_client/src/third_party/libxt/src/{HookObj.c,Hooks.c}
@@ -2160,7 +2156,7 @@ Copyright: Copyright: 1994, 1998 The Open Group:
 License: BSD (3 clause)
 
 Files: src/native_client/src/third_party/libxt/src/{Threads.c}
-Copyright: Copyright: no- / 1993 by Sun Microsystems, Inc. Mountain View, CA / 1994, 1998 The Open Group:
+Copyright: Copyright: 1994, 1998 The Open Group / no- / 1993 by Sun Microsystems, Inc. Mountain View, CA:
 License: BSD (3 clause)
 
 Files: src/native_client/src/third_party/libxt/src/*
@@ -3026,110 +3022,6 @@ License: global BSD-style Chromium
 Files: src/net/websockets/{websocket.cc,websocket.h,websocket_throttle.cc,websocket_throttle.h,websocket_throttle_unittest.cc,websocket_unittest.cc}
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
-
-Files: src/out/Release/obj.target/geni/{chrome_version.cc,snapshot.cc}
-Copyright: UNKNOWN:
-License: *No copyright* GENERATED FILE
-
-Files: src/out/Release/obj.target/geni/{chartables.c,ffmpeg_stubs.cc}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/out/Release/obj.target/geni/{nacl_syscall_handlers.c}
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: UNKNOWN
-
-Files: src/out/Release/obj.target/geni/{webkit_version.h}
-Copyright: UNKNOWN:
-License: ZERO-CODE-FILES or GENERATED
-
-Files: src/out/Release/obj.target/geni/gen/native_client/src/trusted/service_runtime/arch/x86/{springboard_data.h,tramp_data.h}
-Copyright: UNKNOWN:
-License: BSD (3 clause)
-
-Files: src/out/Release/obj/gen/{libraries-empty.cc,libraries.cc}
-Copyright: Copyright: 2008 Google Inc. All Rights Reserved:
-License: UNKNOWN
-
-Files: src/out/Release/obj/gen/app/app_locale_settings/grit/{app_locale_settings.h}
-Copyright: Copyright: Google Inc. 2010:
-License: GENERATED FILE
-
-Files: src/out/Release/obj/gen/app/app_resources/grit/{app_resources.h}
-Copyright: Copyright: Google Inc. 2010:
-License: GENERATED FILE
-
-Files: src/out/Release/obj/gen/app/app_strings/grit/{app_strings.h}
-Copyright: Copyright: Google Inc. 2010:
-License: GENERATED FILE
-
-Files: src/out/Release/obj/gen/base/{file_version_info_linux.h}
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: global BSD-style Chromium
-
-Files: src/out/Release/obj/gen/chrome/grit/{chromium_strings.h,google_chrome_strings.h}
-Copyright: Copyright: 17999 / Google Inc. 2010:
-License: GENERATED FILE
-
-Files: src/out/Release/obj/gen/chrome/grit/{theme_resources_map.cc,theme_resources_map.h}
-Copyright: Copyright: 2010 The Chromium Authors. All rights reserved:
-License: GENERATED FILE
-
-Files: src/out/Release/obj/gen/chrome/grit/{browser_resources.h,common_resources.h,generated_resources.h,locale_settings.h,platform_locale_settings.h,renderer_resources.h,theme_resources.h}
-Copyright: Copyright: Google Inc. 2010:
-License: GENERATED FILE
-
-Files: src/out/Release/obj/gen/ffmpeg/third_party/ffmpeg/{ffmpeg_stubs.h}
-Copyright: UNKNOWN:
-License: GPL (v2 or later) compatible
-
-Files: src/out/Release/obj/gen/gen/native_client/src/trusted/validator_x86/{nc_opcode_table.h,ncdecodetab.h,ncdisasmtab.h,ncop_expr_node_flag.h,ncop_expr_node_flag_impl.h,ncop_expr_node_kind.h,ncop_expr_node_kind_impl.h,ncopcode_insts.h,ncopcode_insts_impl.h,ncopcode_opcode_flags.h,ncopcode_opcode_flags_impl.h,ncopcode_operand_flag.h,ncopcode_operand_flag_impl.h,ncopcode_operand_kind.h,ncopcode_operand_kind_impl.h,ncopcode_prefix.h,ncopcode_prefix_impl.h}
-Copyright: UNKNOWN:
-License: *No copyright* GENERATED FILE
-
-Files: src/out/Release/obj/gen/net/grit/{net_resources.h}
-Copyright: Copyright: Google Inc. 2010:
-License: GENERATED FILE
-
-Files: src/out/Release/obj/gen/protoc_out/chrome/browser/sync/protocol/{bookmark_specifics.pb.cc,bookmark_specifics.pb.h,sync.pb.cc,sync.pb.h}
-Copyright: UNKNOWN:
-License: *No copyright* GENERATED FILE
-
-Files: src/out/Release/obj/gen/webcore/bindings/{V8AbstractWorker.cpp,V8Attr.cpp,V8BarInfo.cpp,V8BeforeLoadEvent.cpp,V8Blob.cpp,V8CDATASection.cpp,V8CSSCharsetRule.cpp,V8CSSFontFaceRule.cpp,V8CSSImportRule.cpp,V8CSSMediaRule.cpp,V8CSSPageRule.cpp,V8CSSPrimitiveValue.cpp,V8CSSRule.cpp,V8CSSRuleList.cpp,V8CSSStyleDeclaration.cpp,V8CSSStyleRule.cpp,V8CSSStyleSheet.cpp,V8CSSValue.cpp,V8CSSValueList.cpp,V8CSSVariablesDeclaration.cpp,V8CSSVariablesRule.cpp,V8CanvasGradient.cpp,V8CanvasPattern.cpp,V8CanvasPixelArray.cpp,V8CanvasRenderingContext.cpp,V8CanvasRenderingContext2D.cpp,V8CharacterData.cpp,V8ClientRect.cpp,V8ClientRectList.cpp,V8Clipboard.cpp,V8Comment.cpp,V8CompositionEvent.cpp,V8Console.cpp,V8Coordinates.cpp,V8Counter.cpp,V8DOMApplicationCache.cpp,V8DOMCoreException.cpp,V8DOMImplementation.cpp,V8DOMParser.cpp,V8DOMSelection.cpp,V8DOMWindow.cpp,V8DataGridColumn.cpp,V8DataGridColumnList.cpp,V8Database.cpp,V8DedicatedWorkerContext.cpp,V8Document.cpp,V8DocumentFragment.cpp,V8DocumentType.cpp,V8Element.cpp,V8Entity.cpp,V8EntityReference.cpp,V8ErrorEvent.cpp,V8Event.cpp,V8EventException.cpp,V8File.cpp,V8FileList.cpp,V8Geolocation.cpp,V8Geoposition.cpp,V8HTMLAllCollection.cpp,V8HTMLAnchorElement.cpp,V8HTMLAppletElement.cpp,V8HTMLAreaElement.cpp,V8HTMLAudioElement.cpp,V8HTMLBRElement.cpp,V8HTMLBaseElement.cpp,V8HTMLBaseFontElement.cpp,V8HTMLBlockquoteElement.cpp,V8HTMLBodyElement.cpp,V8HTMLButtonElement.cpp,V8HTMLCanvasElement.cpp,V8HTMLCollection.cpp,V8HTMLDListElement.cpp,V8HTMLDataGridCellElement.cpp,V8HTMLDataGridColElement.cpp,V8HTMLDataGridElement.cpp,V8HTMLDataGridRowElement.cpp,V8HTMLDataListElement.cpp,V8HTMLDirectoryElement.cpp,V8HTMLDivElement.cpp,V8HTMLDocument.cpp,V8HTMLElement.cpp,V8HTMLEmbedElement.cpp,V8HTMLFieldSetElement.cpp,V8HTMLFontElement.cpp,V8HTMLFormElement.cpp,V8HTMLFrameElement.cpp,V8HTMLFrameSetElement.cpp,V8HTMLHRElement.cpp,V8HTMLHeadElement.cpp,V8HTMLHeadingElement.cpp,V8HTMLHtmlElement.cpp,V8HTMLIFrameElement.cpp,V8HTMLImageElement.cpp,V8HTMLInputElement.cpp,V8HTMLIsIndexElement.cpp,V8HTMLLIElement.cpp,V8HTMLLabelElement.cpp,V8HTMLLegendElement.cpp,V8HTMLLinkElement.cpp,V8HTMLMapElement.cpp,V8HTMLMarqueeElement.cpp,V8HTMLMediaElement.cpp,V8HTMLMenuElement.cpp,V8HTMLMetaElement.cpp,V8HTMLModElement.cpp,V8HTMLOListElement.cpp,V8HTMLObjectElement.cpp,V8HTMLOptGroupElement.cpp,V8HTMLOptionElement.cpp,V8HTMLOptionsCollection.cpp,V8HTMLParagraphElement.cpp,V8HTMLParamElement.cpp,V8HTMLPreElement.cpp,V8HTMLQuoteElement.cpp,V8HTMLScriptElement.cpp,V8HTMLSelectElement.cpp,V8HTMLSourceElement.cpp,V8HTMLStyleElement.cpp,V8HTMLTableCaptionElement.cpp,V8HTMLTableCellElement.cpp,V8HTMLTableColElement.cpp,V8HTMLTableElement.cpp,V8HTMLTableRowElement.cpp,V8HTMLTableSectionElement.cpp,V8HTMLTextAreaElement.cpp,V8HTMLTitleElement.cpp,V8HTMLUListElement.cpp,V8HTMLVideoElement.cpp,V8History.cpp,V8ImageData.cpp,V8InjectedScriptHost.cpp,V8InspectorBackend.cpp,V8InspectorFrontendHost.cpp,V8KeyboardEvent.cpp,V8Location.cpp,V8Media.cpp,V8MediaError.cpp,V8MediaList.cpp,V8MessageChannel.cpp,V8MessageEvent.cpp,V8MessagePort.cpp,V8MimeType.cpp,V8MimeTypeArray.cpp,V8MouseEvent.cpp,V8MutationEvent.cpp,V8NamedNodeMap.cpp,V8Navigator.cpp,V8Node.cpp,V8NodeFilter.cpp,V8NodeIterator.cpp,V8NodeList.cpp,V8Notation.cpp,V8Notification.cpp,V8NotificationCenter.cpp,V8OverflowEvent.cpp,V8PageTransitionEvent.cpp,V8Plugin.cpp,V8PluginArray.cpp,V8PopStateEvent.cpp,V8PositionError.cpp,V8ProcessingInstruction.cpp,V8ProgressEvent.cpp,V8RGBColor.cpp,V8Range.cpp,V8RangeException.cpp,V8Rect.cpp,V8SQLError.cpp,V8SQLResultSet.cpp,V8SQLResultSetRowList.cpp,V8SQLTransaction.cpp,V8SVGAElement.cpp,V8SVGAltGlyphElement.cpp,V8SVGAngle.cpp,V8SVGAnimateColorElement.cpp,V8SVGAnimateElement.cpp,V8SVGAnimateTransformElement.cpp,V8SVGAnimatedAngle.cpp,V8SVGAnimatedBoolean.cpp,V8SVGAnimatedEnumeration.cpp,V8SVGAnimatedInteger.cpp,V8SVGAnimatedLength.cpp,V8SVGAnimatedLengthList.cpp,V8SVGAnimatedNumber.cpp,V8SVGAnimatedNumberList.cpp,V8SVGAnimatedPoints.cpp,V8SVGAnimatedPreserveAspectRatio.cpp,V8SVGAnimatedRect.cpp,V8SVGAnimatedString.cpp,V8SVGAnimatedTransformList.cpp,V8SVGAnimationElement.cpp,V8SVGCircleElement.cpp,V8SVGClipPathElement.cpp,V8SVGColor.cpp,V8SVGComponentTransferFunctionElement.cpp,V8SVGCursorElement.cpp,V8SVGDefsElement.cpp,V8SVGDescElement.cpp,V8SVGDocument.cpp,V8SVGElement.cpp,V8SVGElementInstance.cpp,V8SVGElementInstanceList.cpp,V8SVGEllipseElement.cpp,V8SVGException.cpp,V8SVGFEBlendElement.cpp,V8SVGFEColorMatrixElement.cpp,V8SVGFEComponentTransferElement.cpp,V8SVGFECompositeElement.cpp,V8SVGFEDiffuseLightingElement.cpp,V8SVGFEDisplacementMapElement.cpp,V8SVGFEDistantLightElement.cpp,V8SVGFEFloodElement.cpp,V8SVGFEFuncAElement.cpp,V8SVGFEFuncBElement.cpp,V8SVGFEFuncGElement.cpp,V8SVGFEFuncRElement.cpp,V8SVGFEGaussianBlurElement.cpp,V8SVGFEImageElement.cpp,V8SVGFEMergeElement.cpp,V8SVGFEMergeNodeElement.cpp,V8SVGFEMorphologyElement.cpp,V8SVGFEOffsetElement.cpp,V8SVGFEPointLightElement.cpp,V8SVGFESpecularLightingElement.cpp,V8SVGFESpotLightElement.cpp,V8SVGFETileElement.cpp,V8SVGFETurbulenceElement.cpp,V8SVGFilterElement.cpp,V8SVGFilterPrimitiveStandardAttributes.cpp,V8SVGFontElement.cpp,V8SVGFontFaceElement.cpp,V8SVGFontFaceFormatElement.cpp,V8SVGFontFaceNameElement.cpp,V8SVGFontFaceSrcElement.cpp,V8SVGFontFaceUriElement.cpp,V8SVGForeignObjectElement.cpp,V8SVGGElement.cpp,V8SVGGlyphElement.cpp,V8SVGGradientElement.cpp,V8SVGImageElement.cpp,V8SVGLength.cpp,V8SVGLengthList.cpp,V8SVGLineElement.cpp,V8SVGLinearGradientElement.cpp,V8SVGMarkerElement.cpp,V8SVGMaskElement.cpp,V8SVGMatrix.cpp,V8SVGMetadataElement.cpp,V8SVGMissingGlyphElement.cpp,V8SVGNumber.cpp,V8SVGNumberList.cpp,V8SVGPaint.cpp,V8SVGPathElement.cpp,V8SVGPathSeg.cpp,V8SVGPathSegArcAbs.cpp,V8SVGPathSegArcRel.cpp,V8SVGPathSegClosePath.cpp,V8SVGPathSegCurvetoCubicAbs.cpp,V8SVGPathSegCurvetoCubicRel.cpp,V8SVGPathSegCurvetoCubicSmoothAbs.cpp,V8SVGPathSegCurvetoCubicSmoothRel.cpp,V8SVGPathSegCurvetoQuadraticAbs.cpp,V8SVGPathSegCurvetoQuadraticRel.cpp,V8SVGPathSegCurvetoQuadraticSmoothAbs.cpp,V8SVGPathSegCurvetoQuadraticSmoothRel.cpp,V8SVGPathSegLinetoAbs.cpp,V8SVGPathSegLinetoHorizontalAbs.cpp,V8SVGPathSegLinetoHorizontalRel.cpp,V8SVGPathSegLinetoRel.cpp,V8SVGPathSegLinetoVerticalAbs.cpp,V8SVGPathSegLinetoVerticalRel.cpp,V8SVGPathSegList.cpp,V8SVGPathSegMovetoAbs.cpp,V8SVGPathSegMovetoRel.cpp,V8SVGPatternElement.cpp,V8SVGPoint.cpp,V8SVGPointList.cpp,V8SVGPolygonElement.cpp,V8SVGPolylineElement.cpp,V8SVGPreserveAspectRatio.cpp,V8SVGRadialGradientElement.cpp,V8SVGRect.cpp,V8SVGRectElement.cpp,V8SVGRenderingIntent.cpp,V8SVGSVGElement.cpp,V8SVGScriptElement.cpp,V8SVGSetElement.cpp,V8SVGStopElement.cpp,V8SVGStringList.cpp,V8SVGStyleElement.cpp,V8SVGSwitchElement.cpp,V8SVGSymbolElement.cpp,V8SVGTRefElement.cpp,V8SVGTSpanElement.cpp,V8SVGTextContentElement.cpp,V8SVGTextElement.cpp,V8SVGTextPathElement.cpp,V8SVGTextPositioningElement.cpp,V8SVGTitleElement.cpp,V8SVGTransform.cpp,V8SVGTransformList.cpp,V8SVGUnitTypes.cpp,V8SVGUseElement.cpp,V8SVGViewElement.cpp,V8SVGZoomEvent.cpp,V8Screen.cpp,V8SharedWorker.cpp,V8SharedWorkerContext.cpp,V8Storage.cpp,V8StorageEvent.cpp,V8StyleSheet.cpp,V8StyleSheetList.cpp,V8Text.cpp,V8TextEvent.cpp,V8TextMetrics.cpp,V8TimeRanges.cpp,V8TreeWalker.cpp,V8UIEvent.cpp,V8ValidityState.cpp,V8WebGLActiveInfo.cpp,V8WebGLArray.cpp,V8WebGLArrayBuffer.cpp,V8WebGLBuffer.cpp,V8WebGLByteArray.cpp,V8WebGLContextAttributes.cpp,V8WebGLFloatArray.cpp,V8WebGLFramebuffer.cpp,V8WebGLIntArray.cpp,V8WebGLProgram.cpp,V8WebGLRenderbuffer.cpp,V8WebGLRenderingContext.cpp,V8WebGLShader.cpp,V8WebGLShortArray.cpp,V8WebGLTexture.cpp,V8WebGLUniformLocation.cpp,V8WebGLUnsignedByteArray.cpp,V8WebGLUnsignedIntArray.cpp,V8WebGLUnsignedShortArray.cpp,V8WebKitAnimationEvent.cpp,V8WebKitCSSKeyframeRule.cpp,V8WebKitCSSKeyframesRule.cpp,V8WebKitCSSMatrix.cpp,V8WebKitCSSTransformValue.cpp,V8WebKitPoint.cpp,V8WebKitTransitionEvent.cpp,V8WebSocket.cpp,V8WheelEvent.cpp,V8Worker.cpp,V8WorkerContext.cpp,V8WorkerLocation.cpp,V8WorkerNavigator.cpp,V8XMLHttpRequest.cpp,V8XMLHttpRequestException.cpp,V8XMLHttpRequestProgressEvent.cpp,V8XMLHttpRequestUpload.cpp,V8XMLSerializer.cpp,V8XPathEvaluator.cpp,V8XPathException.cpp,V8XPathExpression.cpp,V8XPathNSResolver.cpp,V8XPathResult.cpp,V8XSLTProcessor.cpp}
-Copyright: UNKNOWN:
-License: *No copyright* LGPL (v2 or later) (with incorrect FSF address) GENERATED FILE
-
-Files: src/out/Release/obj/gen/webkit/{CSSPropertyNames.cpp,CSSPropertyNames.h,CSSValueKeywords.c,CSSValueKeywords.h}
-Copyright: UNKNOWN:
-License: *No copyright* GENERATED FILE
-
-Files: src/out/Release/obj/gen/webkit/{ColorData.c,ColorData.cpp,DocTypeStrings.c,DocTypeStrings.cpp,UserAgentStyleSheets.h,UserAgentStyleSheetsData.cpp}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/out/Release/obj/gen/webkit/{HTMLElementFactory.cpp,HTMLElementFactory.h,HTMLNames.cpp,HTMLNames.h,SVGElementFactory.cpp,SVGElementFactory.h,SVGNames.cpp,SVGNames.h,XLinkNames.cpp,XLinkNames.h,XMLNSNames.cpp,XMLNSNames.h,XMLNames.cpp,XMLNames.h}
-Copyright: Copyright: 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved:
-License: BSD (2 clause) GENERATED FILE
-
-Files: src/out/Release/obj/gen/webkit/{CSSGrammar.cpp,CSSGrammar.h,XPathGrammar.cpp,XPathGrammar.h}
-Copyright: Copyright: 1984, 1989, 1990, 2000, 2001, 2002, 2003, 2004, 2005, 2006:
-License: GPL (v3 or later)
-
-Files: src/out/Release/obj/gen/webkit/*
-Copyright: Copyright: 1999 Lars Knoll (knoll@mpi-hd.mpg.de) / 2002, 2003, 2004, 2005 Apple Inc. All rights reserved:
-License: LGPL (v2 or later) GENERATED FILE
-
-Files: src/out/Release/obj/gen/webkit/*
-Copyright: Copyright: 2003 Lars Knoll (knoll@kde.org):
-License: LGPL (v2 or later) GENERATED FILE
-
-Files: src/out/Release/obj/gen/webkit/bindings/{V8AbstractWorker.h,V8Attr.h,V8BarInfo.h,V8BeforeLoadEvent.h,V8Blob.h,V8CDATASection.h,V8CSSCharsetRule.h,V8CSSFontFaceRule.h,V8CSSImportRule.h,V8CSSMediaRule.h,V8CSSPageRule.h,V8CSSPrimitiveValue.h,V8CSSRule.h,V8CSSRuleList.h,V8CSSStyleDeclaration.h,V8CSSStyleRule.h,V8CSSStyleSheet.h,V8CSSValue.h,V8CSSValueList.h,V8CSSVariablesDeclaration.h,V8CSSVariablesRule.h,V8CanvasGradient.h,V8CanvasPattern.h,V8CanvasPixelArray.h,V8CanvasRenderingContext.h,V8CanvasRenderingContext2D.h,V8CharacterData.h,V8ClientRect.h,V8ClientRectList.h,V8Clipboard.h,V8Comment.h,V8CompositionEvent.h,V8Console.h,V8Coordinates.h,V8Counter.h,V8DOMApplicationCache.h,V8DOMCoreException.h,V8DOMImplementation.h,V8DOMParser.h,V8DOMSelection.h,V8DOMWindow.h,V8DataGridColumn.h,V8DataGridColumnList.h,V8Database.h,V8DedicatedWorkerContext.h,V8Document.h,V8DocumentFragment.h,V8DocumentType.h,V8Element.h,V8Entity.h,V8EntityReference.h,V8ErrorEvent.h,V8Event.h,V8EventException.h,V8File.h,V8FileList.h,V8Geolocation.h,V8Geoposition.h,V8HTMLAllCollection.h,V8HTMLAnchorElement.h,V8HTMLAppletElement.h,V8HTMLAreaElement.h,V8HTMLAudioElement.h,V8HTMLBRElement.h,V8HTMLBaseElement.h,V8HTMLBaseFontElement.h,V8HTMLBlockquoteElement.h,V8HTMLBodyElement.h,V8HTMLButtonElement.h,V8HTMLCanvasElement.h,V8HTMLCollection.h,V8HTMLDListElement.h,V8HTMLDataGridCellElement.h,V8HTMLDataGridColElement.h,V8HTMLDataGridElement.h,V8HTMLDataGridRowElement.h,V8HTMLDataListElement.h,V8HTMLDirectoryElement.h,V8HTMLDivElement.h,V8HTMLDocument.h,V8HTMLElement.h,V8HTMLEmbedElement.h,V8HTMLFieldSetElement.h,V8HTMLFontElement.h,V8HTMLFormElement.h,V8HTMLFrameElement.h,V8HTMLFrameSetElement.h,V8HTMLHRElement.h,V8HTMLHeadElement.h,V8HTMLHeadingElement.h,V8HTMLHtmlElement.h,V8HTMLIFrameElement.h,V8HTMLImageElement.h,V8HTMLInputElement.h,V8HTMLIsIndexElement.h,V8HTMLLIElement.h,V8HTMLLabelElement.h,V8HTMLLegendElement.h,V8HTMLLinkElement.h,V8HTMLMapElement.h,V8HTMLMarqueeElement.h,V8HTMLMediaElement.h,V8HTMLMenuElement.h,V8HTMLMetaElement.h,V8HTMLModElement.h,V8HTMLOListElement.h,V8HTMLObjectElement.h,V8HTMLOptGroupElement.h,V8HTMLOptionElement.h,V8HTMLOptionsCollection.h,V8HTMLParagraphElement.h,V8HTMLParamElement.h,V8HTMLPreElement.h,V8HTMLQuoteElement.h,V8HTMLScriptElement.h,V8HTMLSelectElement.h,V8HTMLSourceElement.h,V8HTMLStyleElement.h,V8HTMLTableCaptionElement.h,V8HTMLTableCellElement.h,V8HTMLTableColElement.h,V8HTMLTableElement.h,V8HTMLTableRowElement.h,V8HTMLTableSectionElement.h,V8HTMLTextAreaElement.h,V8HTMLTitleElement.h,V8HTMLUListElement.h,V8HTMLVideoElement.h,V8History.h,V8ImageData.h,V8InjectedScriptHost.h,V8InspectorBackend.h,V8InspectorFrontendHost.h,V8KeyboardEvent.h,V8Location.h,V8Media.h,V8MediaError.h,V8MediaList.h,V8MessageChannel.h,V8MessageEvent.h,V8MessagePort.h,V8MimeType.h,V8MimeTypeArray.h,V8MouseEvent.h,V8MutationEvent.h,V8NamedNodeMap.h,V8Navigator.h,V8Node.h,V8NodeFilter.h,V8NodeIterator.h,V8NodeList.h,V8Notation.h,V8Notification.h,V8NotificationCenter.h,V8OverflowEvent.h,V8PageTransitionEvent.h,V8Plugin.h,V8PluginArray.h,V8PopStateEvent.h,V8PositionError.h,V8ProcessingInstruction.h,V8ProgressEvent.h,V8RGBColor.h,V8Range.h,V8RangeException.h,V8Rect.h,V8SQLError.h,V8SQLResultSet.h,V8SQLResultSetRowList.h,V8SQLTransaction.h,V8SVGAElement.h,V8SVGAltGlyphElement.h,V8SVGAngle.h,V8SVGAnimateColorElement.h,V8SVGAnimateElement.h,V8SVGAnimateTransformElement.h,V8SVGAnimatedAngle.h,V8SVGAnimatedBoolean.h,V8SVGAnimatedEnumeration.h,V8SVGAnimatedInteger.h,V8SVGAnimatedLength.h,V8SVGAnimatedLengthList.h,V8SVGAnimatedNumber.h,V8SVGAnimatedNumberList.h,V8SVGAnimatedPoints.h,V8SVGAnimatedPreserveAspectRatio.h,V8SVGAnimatedRect.h,V8SVGAnimatedString.h,V8SVGAnimatedTransformList.h,V8SVGAnimationElement.h,V8SVGCircleElement.h,V8SVGClipPathElement.h,V8SVGColor.h,V8SVGComponentTransferFunctionElement.h,V8SVGCursorElement.h,V8SVGDefsElement.h,V8SVGDescElement.h,V8SVGDocument.h,V8SVGElement.h,V8SVGElementInstance.h,V8SVGElementInstanceList.h,V8SVGEllipseElement.h,V8SVGException.h,V8SVGFEBlendElement.h,V8SVGFEColorMatrixElement.h,V8SVGFEComponentTransferElement.h,V8SVGFECompositeElement.h,V8SVGFEDiffuseLightingElement.h,V8SVGFEDisplacementMapElement.h,V8SVGFEDistantLightElement.h,V8SVGFEFloodElement.h,V8SVGFEFuncAElement.h,V8SVGFEFuncBElement.h,V8SVGFEFuncGElement.h,V8SVGFEFuncRElement.h,V8SVGFEGaussianBlurElement.h,V8SVGFEImageElement.h,V8SVGFEMergeElement.h,V8SVGFEMergeNodeElement.h,V8SVGFEMorphologyElement.h,V8SVGFEOffsetElement.h,V8SVGFEPointLightElement.h,V8SVGFESpecularLightingElement.h,V8SVGFESpotLightElement.h,V8SVGFETileElement.h,V8SVGFETurbulenceElement.h,V8SVGFilterElement.h,V8SVGFilterPrimitiveStandardAttributes.h,V8SVGFontElement.h,V8SVGFontFaceElement.h,V8SVGFontFaceFormatElement.h,V8SVGFontFaceNameElement.h,V8SVGFontFaceSrcElement.h,V8SVGFontFaceUriElement.h,V8SVGForeignObjectElement.h,V8SVGGElement.h,V8SVGGlyphElement.h,V8SVGGradientElement.h,V8SVGImageElement.h,V8SVGLength.h,V8SVGLengthList.h,V8SVGLineElement.h,V8SVGLinearGradientElement.h,V8SVGMarkerElement.h,V8SVGMaskElement.h,V8SVGMatrix.h,V8SVGMetadataElement.h,V8SVGMissingGlyphElement.h,V8SVGNumber.h,V8SVGNumberList.h,V8SVGPaint.h,V8SVGPathElement.h,V8SVGPathSeg.h,V8SVGPathSegArcAbs.h,V8SVGPathSegArcRel.h,V8SVGPathSegClosePath.h,V8SVGPathSegCurvetoCubicAbs.h,V8SVGPathSegCurvetoCubicRel.h,V8SVGPathSegCurvetoCubicSmoothAbs.h,V8SVGPathSegCurvetoCubicSmoothRel.h,V8SVGPathSegCurvetoQuadraticAbs.h,V8SVGPathSegCurvetoQuadraticRel.h,V8SVGPathSegCurvetoQuadraticSmoothAbs.h,V8SVGPathSegCurvetoQuadraticSmoothRel.h,V8SVGPathSegLinetoAbs.h,V8SVGPathSegLinetoHorizontalAbs.h,V8SVGPathSegLinetoHorizontalRel.h,V8SVGPathSegLinetoRel.h,V8SVGPathSegLinetoVerticalAbs.h,V8SVGPathSegLinetoVerticalRel.h,V8SVGPathSegList.h,V8SVGPathSegMovetoAbs.h,V8SVGPathSegMovetoRel.h,V8SVGPatternElement.h,V8SVGPoint.h,V8SVGPointList.h,V8SVGPolygonElement.h,V8SVGPolylineElement.h,V8SVGPreserveAspectRatio.h,V8SVGRadialGradientElement.h,V8SVGRect.h,V8SVGRectElement.h,V8SVGRenderingIntent.h,V8SVGSVGElement.h,V8SVGScriptElement.h,V8SVGSetElement.h,V8SVGStopElement.h,V8SVGStringList.h,V8SVGStyleElement.h,V8SVGSwitchElement.h,V8SVGSymbolElement.h,V8SVGTRefElement.h,V8SVGTSpanElement.h,V8SVGTextContentElement.h,V8SVGTextElement.h,V8SVGTextPathElement.h,V8SVGTextPositioningElement.h,V8SVGTitleElement.h,V8SVGTransform.h,V8SVGTransformList.h,V8SVGUnitTypes.h,V8SVGUseElement.h,V8SVGViewElement.h,V8SVGZoomEvent.h,V8Screen.h,V8SharedWorker.h,V8SharedWorkerContext.h,V8Storage.h,V8StorageEvent.h,V8StyleSheet.h,V8StyleSheetList.h,V8Text.h,V8TextEvent.h,V8TextMetrics.h,V8TimeRanges.h,V8TreeWalker.h,V8UIEvent.h,V8ValidityState.h,V8WebGLActiveInfo.h,V8WebGLArray.h,V8WebGLArrayBuffer.h,V8WebGLBuffer.h,V8WebGLByteArray.h,V8WebGLContextAttributes.h,V8WebGLFloatArray.h,V8WebGLFramebuffer.h,V8WebGLIntArray.h,V8WebGLProgram.h,V8WebGLRenderbuffer.h,V8WebGLRenderingContext.h,V8WebGLShader.h,V8WebGLShortArray.h,V8WebGLTexture.h,V8WebGLUniformLocation.h,V8WebGLUnsignedByteArray.h,V8WebGLUnsignedIntArray.h,V8WebGLUnsignedShortArray.h,V8WebKitAnimationEvent.h,V8WebKitCSSKeyframeRule.h,V8WebKitCSSKeyframesRule.h,V8WebKitCSSMatrix.h,V8WebKitCSSTransformValue.h,V8WebKitPoint.h,V8WebKitTransitionEvent.h,V8WebSocket.h,V8WheelEvent.h,V8Worker.h,V8WorkerContext.h,V8WorkerLocation.h,V8WorkerNavigator.h,V8XMLHttpRequest.h,V8XMLHttpRequestException.h,V8XMLHttpRequestProgressEvent.h,V8XMLHttpRequestUpload.h,V8XMLSerializer.h,V8XPathEvaluator.h,V8XPathException.h,V8XPathExpression.h,V8XPathNSResolver.h,V8XPathResult.h,V8XSLTProcessor.h}
-Copyright: UNKNOWN:
-License: *No copyright* LGPL (v2 or later) (with incorrect FSF address) GENERATED FILE
-
-Files: src/out/Release/obj/gen/webkit/grit/{webkit_resources.h,webkit_strings.h}
-Copyright: Copyright: Google Inc. 2010:
-License: GENERATED FILE
 
 Files: src/printing/{emf_win.cc,emf_win.h,emf_win_unittest.cc,page_number.cc,page_number.h,page_number_unittest.cc,page_range.cc,page_range.h,page_range_unittest.cc,page_setup.cc,page_setup.h,page_setup_unittest.cc,print_settings.cc,print_settings.h,printed_document.h,printed_page.cc,printed_page.h,printed_pages_source.h,printing_context.h,printing_context_win_unittest.cc,printing_test.h,run_all_unittests.cc,units.cc,units.h,units_unittest.cc}
 Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
@@ -4931,10 +4823,6 @@ Files: src/third_party/WebKit/WebCore/bindings/js/{JSWebGLArrayHelper.h}
 Copyright: Copyright: 2009 Google Inc. All rights reserved / 2009 Apple Inc. All rights reserved:
 License: BSD (2 clause)
 
-Files: src/third_party/WebKit/WebCore/bindings/js/{DOMObjectWithSVGContext.h}
-Copyright: Copyright: 2009 Google, Inc. All rights reserved:
-License: BSD (2 clause)
-
 Files: src/third_party/WebKit/WebCore/bindings/js/{ScriptValue.cpp}
 Copyright: Copyright: 2006, 2007, 2008 Apple Inc. All rights reserved:
 License: BSD (3 clause)
@@ -4987,11 +4875,15 @@ Files: src/third_party/WebKit/WebCore/bindings/js/{JSEventSourceConstructor.cpp,
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009 Ericsson AB:
 License: BSD (3 clause)
 
+Files: src/third_party/WebKit/WebCore/bindings/js/{ScriptWrappable.h}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2010, Google Inc. All rights reserved:
+License: BSD (3 clause)
+
 Files: src/third_party/WebKit/WebCore/bindings/js/{JSImageConstructor.h,JSPluginElementFunctions.h}
 Copyright: Copyright: 1999 Harri Porten (porten@kde.org) / 2004, 2006, 2007, 2008 Apple Inc. All rights reserved:
 License: LGPL (v2 or later)
 
-Files: src/third_party/WebKit/WebCore/bindings/js/{JSPluginElementFunctions.cpp}
+Files: src/third_party/WebKit/WebCore/bindings/js/{JSImageConstructor.cpp}
 Copyright: Copyright: 1999-2000 Harri Porten (porten@kde.org) / 2004, 2005, 2006, 2007, 2008 Apple Inc. All rights reserved:
 License: LGPL (v2 or later)
 
@@ -5011,23 +4903,19 @@ Files: src/third_party/WebKit/WebCore/bindings/js/{ScheduledAction.h}
 Copyright: Copyright: 2000 Harri Porten (porten@kde.org) / 2003, 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reseved:
 License: LGPL (v2 or later)
 
-Files: src/third_party/WebKit/WebCore/bindings/js/{JSLazyEventListener.cpp}
+Files: src/third_party/WebKit/WebCore/bindings/js/{JSEventListener.cpp}
 Copyright: Copyright: 2001 Peter Kelly (pmk@post.com) / 2003, 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All Rights Reserved:
 License: LGPL (v2 or later)
 
-Files: src/third_party/WebKit/WebCore/bindings/js/{JSEventListener.h}
+Files: src/third_party/WebKit/WebCore/bindings/js/{JSEventListener.h,JSLazyEventListener.h}
 Copyright: Copyright: 2001 Peter Kelly (pmk@post.com) / 2003, 2008, 2009 Apple Inc. All rights reserved:
 License: LGPL (v2 or later)
 
-Files: src/third_party/WebKit/WebCore/bindings/js/{JSEventListener.cpp}
+Files: src/third_party/WebKit/WebCore/bindings/js/{JSLazyEventListener.cpp}
 Copyright: Copyright: 2003, 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All Rights Reserved / 2001 Peter Kelly (pmk@post.com):
 License: LGPL (v2 or later)
 
-Files: src/third_party/WebKit/WebCore/bindings/js/{JSLazyEventListener.h}
-Copyright: Copyright: 2003, 2008, 2009 Apple Inc. All rights reserved / 2001 Peter Kelly (pmk@post.com):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/bindings/js/{JSImageConstructor.cpp}
+Files: src/third_party/WebKit/WebCore/bindings/js/{JSPluginElementFunctions.cpp}
 Copyright: Copyright: 2004, 2005, 2006, 2007, 2008 Apple Inc. All rights reserved / 1999-2000 Harri Porten (porten@kde.org):
 License: LGPL (v2 or later)
 
@@ -5040,11 +4928,11 @@ Copyright: Copyright: 2005, 2006 Alexey Proskuryakov <ap@nypop.com> / 2004, 2007
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/bindings/js/{JSLocationCustom.cpp}
-Copyright: Copyright: 2006 Alexey Proskuryakov (ap@webkit.org) / 2006 Jon Shier (jshier@iastate.edu) / 2000 Harri Porten (porten@kde.org) / 2003, 2004, 2005, 2006, 2007, 2008 Apple Inc. All rights reseved:
+Copyright: Copyright: 2006 Alexey Proskuryakov (ap@webkit.org) / 2000 Harri Porten (porten@kde.org) / 2006 Jon Shier (jshier@iastate.edu) / 2003, 2004, 2005, 2006, 2007, 2008 Apple Inc. All rights reseved:
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/bindings/js/{JSDOMWindowBase.cpp}
-Copyright: Copyright: 2006 Alexey Proskuryakov (ap@webkit.org) / 2006 Jon Shier (jshier@iastate.edu) / 2000 Harri Porten (porten@kde.org) / 2003, 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reseved:
+Copyright: Copyright: 2006 Alexey Proskuryakov (ap@webkit.org) / 2000 Harri Porten (porten@kde.org) / 2006 Jon Shier (jshier@iastate.edu) / 2003, 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reseved:
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/bindings/js/{ScheduledAction.cpp}
@@ -5083,6 +4971,10 @@ Files: src/third_party/WebKit/WebCore/bindings/js/{JSDOMBinding.cpp}
 Copyright: Copyright: 2007 Samuel Weinig <sam@webkit.org> / 1999-2001 Harri Porten (porten@kde.org) / 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved:
 License: LGPL (v2 or later)
 
+Files: src/third_party/WebKit/WebCore/bindings/js/{JSDOMBinding.h}
+Copyright: Copyright: 2007 Samuel Weinig <sam@webkit.org> / 2003, 2004, 2005, 2006, 2008, 2009 Apple Inc. All rights reserved / 2009 Google, Inc. All rights reserved / 1999-2001 Harri Porten (porten@kde.org):
+License: LGPL (v2 or later)
+
 Files: src/third_party/WebKit/WebCore/bindings/js/{JSHTMLCollectionCustom.cpp}
 Copyright: Copyright: 2007, 2008 Apple Inc. All rights reserved:
 License: LGPL (v2 or later)
@@ -5119,12 +5011,12 @@ Files: src/third_party/WebKit/WebCore/bindings/js/{JSDOMWindowCustom.h}
 Copyright: Copyright: 2008, 2009 Apple Inc. All rights reseved:
 License: LGPL (v2 or later)
 
-Files: src/third_party/WebKit/WebCore/bindings/js/{JSDOMBinding.h}
-Copyright: Copyright: 2009 Google, Inc. All rights reserved / 2007 Samuel Weinig <sam@webkit.org> / 2003, 2004, 2005, 2006, 2008, 2009 Apple Inc. All rights reserved / 1999-2001 Harri Porten (porten@kde.org):
-License: LGPL (v2 or later)
-
 Files: src/third_party/WebKit/WebCore/bindings/js/{JSSVGMatrixCustom.cpp}
 Copyright: Copyright: 2009 Jeff Schiller <codedread@gmail.com> / 2006, 2007, 2008 Nikolas Zimmermann <zimmermann@kde.org>:
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/bindings/js/{JSSVGContextCache.h}
+Copyright: Copyright: Research In Motion Limited 2009-2010. All rights reserved:
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/bindings/objc/{DOMCSS.h,DOMStylesheets.h,DOMViews.h}
@@ -5239,7 +5131,7 @@ Files: src/third_party/WebKit/WebCore/bindings/v8/{ChildThreadDOMData.cpp,ChildT
 Copyright: Copyright: 2009 Google Inc. All rights reserved / HOLDERS AND CONTRIBUTORS:
 License: BSD (3 clause)
 
-Files: src/third_party/WebKit/WebCore/bindings/v8/{SerializedScriptValue.cpp}
+Files: src/third_party/WebKit/WebCore/bindings/v8/{ScriptWrappable.h,SerializedScriptValue.cpp}
 Copyright: Copyright: 2010 Google Inc. All rights reserved / HOLDERS AND CONTRIBUTORS:
 License: BSD (3 clause)
 
@@ -5356,7 +5248,7 @@ Copyright: Copyright: 2004, Apple Computer, Inc. and The Mozilla Foundation:
 License: BSD (3 clause)
 
 Files: src/third_party/WebKit/WebCore/bridge/{testbindings.cpp}
-Copyright: Copyright: 2004, 2005, 2006, 2007, 2008 Apple Inc. All rights reserved / 1999-2000 Harri Porten (porten@kde.org):
+Copyright: Copyright: 1999-2000 Harri Porten (porten@kde.org) / 2004, 2005, 2006, 2007, 2008 Apple Inc. All rights reserved:
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/bridge/{npruntime_internal.h}
@@ -5712,11 +5604,11 @@ Copyright: Copyright: 2005 Apple Computer, Inc. All rights reserved:
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/dom/{EventTarget.cpp}
-Copyright: Copyright: 2006 Alexey Proskuryakov (ap@webkit.org) / 2001 Dirk Mueller (mueller@kde.org) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2007, 2008 Nikolas Zimmermann <zimmermann@kde.org> / 2004, 2005, 2006, 2007 Apple Inc. All rights reserved:
+Copyright: Copyright: 2006 Alexey Proskuryakov (ap@webkit.org) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2001 Dirk Mueller (mueller@kde.org) / 2007, 2008 Nikolas Zimmermann <zimmermann@kde.org> / 2004, 2005, 2006, 2007 Apple Inc. All rights reserved:
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/dom/{EventTarget.h}
-Copyright: Copyright: 2006 Alexey Proskuryakov (ap@webkit.org) / 2004, 2005, 2006, 2007, 2008 Apple Inc. All rights reserved / 2001 Dirk Mueller (mueller@kde.org) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2007, 2008 Nikolas Zimmermann <zimmermann@kde.org>:
+Copyright: Copyright: 2006 Alexey Proskuryakov (ap@webkit.org) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2005, 2006, 2007, 2008 Apple Inc. All rights reserved / 2001 Dirk Mueller (mueller@kde.org) / 2007, 2008 Nikolas Zimmermann <zimmermann@kde.org>:
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/dom/{BeforeTextInsertedEvent.h,ClipboardAccessPolicy.h}
@@ -5747,16 +5639,16 @@ Files: src/third_party/WebKit/WebCore/dom/{ActiveDOMObject.cpp,ActiveDOMObject.h
 Copyright: Copyright: 2008 Apple Inc. All Rights Reserved:
 License: BSD (2 clause)
 
+Files: src/third_party/WebKit/WebCore/dom/{Touch.cpp,Touch.h,TouchEvent.cpp,TouchEvent.h,TouchList.cpp,TouchList.h}
+Copyright: Copyright: 2008, The Android Open Source Project / HOLDERS ``AS IS'' AND ANY:
+License: BSD (2 clause)
+
 Files: src/third_party/WebKit/WebCore/dom/{BeforeLoadEvent.h,ClientRect.cpp,ClientRect.h,ClientRectList.cpp,ClientRectList.h,PopStateEvent.cpp,PopStateEvent.h}
 Copyright: Copyright: 2009 Apple Inc. All Rights Reserved:
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/dom/{CompositionEvent.cpp,CompositionEvent.h,PageTransitionEvent.cpp,PageTransitionEvent.h,TransformSourceLibxslt.cpp,XMLTokenizerScope.cpp,XMLTokenizerScope.h}
 Copyright: Copyright: 2009 Apple Inc. All rights reserved:
-License: BSD (2 clause)
-
-Files: src/third_party/WebKit/WebCore/dom/{Touch.cpp,Touch.h,TouchEvent.cpp,TouchEvent.h,TouchList.cpp,TouchList.h}
-Copyright: Copyright: HOLDERS ``AS IS'' AND ANY / 2008, The Android Open Source Project:
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/dom/{ExceptionBase.h,StaticNodeList.cpp}
@@ -5783,12 +5675,124 @@ Files: src/third_party/WebKit/WebCore/dom/{make_names.pl}
 Copyright: Copyright: 2009, Julien Chaffraix <jchaffraix@webkit.org> / 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/) / 2005, 2006, 2007, 2009 Apple Inc. All rights reserved:
 License: BSD (3 clause)
 
-Files: src/third_party/WebKit/WebCore/dom/{Range.cpp,Range.h}
-Copyright: Copyright: 2000 Frederik Holljen (frederik.holljen@hig.no) / 2000 Gunnstein Lye (gunnstein@netcom.no) / 1999 Lars Knoll (knoll@kde.org) / 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2001 Peter Kelly (pmk@post.com):
+Files: src/third_party/WebKit/WebCore/dom/{ContainerNode.h}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2001 Dirk Mueller (mueller@kde.org) / 2004, 2005, 2006, 2007, 2009 Apple Inc. All rights reserved:
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{DOMImplementation.h}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2001 Dirk Mueller (mueller@kde.org) / 2004, 2005, 2006, 2008 Apple Inc. All rights reserved:
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{DocumentFragment.cpp,DocumentFragment.h}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2001 Dirk Mueller (mueller@kde.org) / 2004, 2005, 2006, 2009 Apple Inc. All rights reserved:
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{Attr.h,Element.h,StyledElement.h}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2001 Peter Kelly (pmk@post.com) / 2001 Dirk Mueller (mueller@kde.org) / 2003, 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved:
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{Attribute.cpp}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2001 Peter Kelly (pmk@post.com) / 2001 Dirk Mueller (mueller@kde.org) / 2004, 2005, 2006, 2007 Apple Inc. All rights reserved:
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{NamedMappedAttrMap.cpp}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2001 Peter Kelly (pmk@post.com) / 2001 Dirk Mueller (mueller@kde.org) / 2004, 2005, 2006, 2007 Apple Inc. All rights reserved / 2007 David Smith (catfish.man@gmail.com):
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{Attr.cpp}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2001 Peter Kelly (pmk@post.com) / 2001 Dirk Mueller (mueller@kde.org) / 2004, 2005, 2006, 2007, 2009 Apple Inc. All rights reserved:
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{MappedAttribute.cpp,StyledElement.cpp}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2001 Peter Kelly (pmk@post.com) / 2001 Dirk Mueller (mueller@kde.org) / 2004, 2005, 2006, 2008 Apple Inc. All rights reserved:
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{CharacterData.cpp,Text.cpp,Text.h}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2003, 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved:
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{CDATASection.cpp}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2003, 2008, 2009 Apple Inc. All rights reserved:
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{CSSMappedAttributeDeclaration.cpp}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2005, 2006 Apple Computer, Inc / 2001 Peter Kelly (pmk@post.com) / 2001 Dirk Mueller (mueller@kde.org):
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{NodeRenderStyle.h}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2005, 2006, 2007, 2008 Apple Inc. All rights reserved / 2001 Dirk Mueller (mueller@kde.org) / 2008 David Smith (catfish.man@gmail.com):
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{DOMImplementation.cpp}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2005, 2006, 2007, 2008 Apple Inc. All rights reserved / 2001 Dirk Mueller (mueller@kde.org) / 2008, 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/) / 2006 Samuel Weinig (sam@webkit.org):
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{TagNodeList.h}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2005, 2006, 2007, 2008 Apple Inc. All rights reserved / 2008 Nokia Corporation and/or its subsidiary(-ies) / 2001 Dirk Mueller (mueller@kde.org):
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{ContainerNode.cpp}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2001 Dirk Mueller (mueller@kde.org):
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{Node.h}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2001 Dirk Mueller (mueller@kde.org) / 2008, 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/):
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{NamedAttrMap.cpp}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2001 Peter Kelly (pmk@post.com) / 2007 Eric Seidel (eric@webkit.org) / 2001 Dirk Mueller (mueller@kde.org):
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{Element.cpp}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2001 Peter Kelly (pmk@post.com) / 2007 Eric Seidel (eric@webkit.org) / 2001 Dirk Mueller (mueller@kde.org) / 2007 David Smith (catfish.man@gmail.com):
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{Node.cpp}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2008 Nokia Corporation and/or its subsidiary(-ies) / 2001 Dirk Mueller (mueller@kde.org) / 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/):
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{DocumentType.cpp,DocumentType.h}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2005, 2006, 2008, 2009 Apple Inc. All rights reserved / 2001 Dirk Mueller (mueller@kde.org):
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{DynamicNodeList.h,NodeList.h}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2006, 2007 Apple Inc. All rights reserved / 2001 Dirk Mueller (mueller@kde.org):
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{DynamicNodeList.cpp}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2006, 2007, 2008 Apple Inc. All rights reserved / 2001 Dirk Mueller (mueller@kde.org):
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{ChildNodeList.h,NameNodeList.cpp}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2007 Apple Inc. All rights reserved / 2001 Dirk Mueller (mueller@kde.org):
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{ChildNodeList.cpp}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2007, 2008 Apple Inc. All rights reserved / 2001 Dirk Mueller (mueller@kde.org):
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{ScriptElement.cpp}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2008 Nikolas Zimmermann <zimmermann@kde.org> / 2003, 2004, 2005, 2006, 2007, 2008 Apple Inc. All rights reserved / 2001 Dirk Mueller (mueller@kde.org):
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{TagNodeList.cpp}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2008 Nokia Corporation and/or its subsidiary(-ies) / 2001 Dirk Mueller (mueller@kde.org) / 2004, 2005, 2006, 2007 Apple Inc. All rights reserved:
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{MappedAttributeEntry.h}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 2003, 2004, 2005, 2006 Apple Computer, Inc / 1999 Antti Koivisto (koivisto@kde.org) / 2001 Peter Kelly (pmk@post.com) / 2001 Dirk Mueller (mueller@kde.org):
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{Attribute.h,CSSMappedAttributeDeclaration.h,MappedAttribute.h,NamedAttrMap.h}
+Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 2003, 2004, 2005, 2006, 2008 Apple Inc. All rights reserved / 1999 Antti Koivisto (koivisto@kde.org) / 2001 Peter Kelly (pmk@post.com) / 2001 Dirk Mueller (mueller@kde.org):
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/dom/{RangeException.h}
-Copyright: Copyright: 2000 Frederik Holljen (frederik.holljen@hig.no) / 2004, 2005, 2006 Apple Computer, Inc / 2000 Gunnstein Lye (gunnstein@netcom.no) / 1999 Lars Knoll (knoll@kde.org) / 2001 Peter Kelly (pmk@post.com):
+Copyright: Copyright: 2000 Frederik Holljen (frederik.holljen@hig.no) / 1999 Lars Knoll (knoll@kde.org) / 2004, 2005, 2006 Apple Computer, Inc / 2001 Peter Kelly (pmk@post.com) / 2000 Gunnstein Lye (gunnstein@netcom.no):
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{Range.cpp,Range.h}
+Copyright: Copyright: 2000 Frederik Holljen (frederik.holljen@hig.no) / 1999 Lars Knoll (knoll@kde.org) / 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2001 Peter Kelly (pmk@post.com) / 2000 Gunnstein Lye (gunnstein@netcom.no):
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/dom/{NodeFilter.cpp,NodeFilterCondition.cpp,NodeIterator.cpp,NodeIterator.h,Traversal.cpp,Traversal.h,TreeWalker.cpp,TreeWalker.h}
@@ -5811,96 +5815,12 @@ Files: src/third_party/WebKit/WebCore/dom/{Notation.cpp,Notation.h}
 Copyright: Copyright: 2000 Peter Kelly (pmk@post.com) / 2006, 2009 Apple Inc. All rights reserved:
 License: LGPL (v2 or later)
 
-Files: src/third_party/WebKit/WebCore/dom/{Attribute.cpp}
-Copyright: Copyright: 2001 Dirk Mueller (mueller@kde.org) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2001 Peter Kelly (pmk@post.com) / 2004, 2005, 2006, 2007 Apple Inc. All rights reserved:
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{NamedMappedAttrMap.cpp}
-Copyright: Copyright: 2001 Dirk Mueller (mueller@kde.org) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2001 Peter Kelly (pmk@post.com) / 2004, 2005, 2006, 2007 Apple Inc. All rights reserved / 2007 David Smith (catfish.man@gmail.com):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{Attr.cpp}
-Copyright: Copyright: 2001 Dirk Mueller (mueller@kde.org) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2001 Peter Kelly (pmk@post.com) / 2004, 2005, 2006, 2007, 2009 Apple Inc. All rights reserved:
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{ContainerNode.cpp}
-Copyright: Copyright: 2001 Dirk Mueller (mueller@kde.org) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved:
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{NamedAttrMap.cpp}
-Copyright: Copyright: 2001 Dirk Mueller (mueller@kde.org) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2001 Peter Kelly (pmk@post.com) / 2007 Eric Seidel (eric@webkit.org):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{Element.cpp}
-Copyright: Copyright: 2001 Dirk Mueller (mueller@kde.org) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2001 Peter Kelly (pmk@post.com) / 2007 Eric Seidel (eric@webkit.org) / 2007 David Smith (catfish.man@gmail.com):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{Node.cpp}
-Copyright: Copyright: 2001 Dirk Mueller (mueller@kde.org) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2008 Nokia Corporation and/or its subsidiary(-ies) / 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{ContainerNode.h}
-Copyright: Copyright: 2001 Dirk Mueller (mueller@kde.org) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2005, 2006, 2007, 2009 Apple Inc. All rights reserved:
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{DocumentFragment.cpp,DocumentFragment.h}
-Copyright: Copyright: 2001 Dirk Mueller (mueller@kde.org) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2005, 2006, 2009 Apple Inc. All rights reserved:
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{DynamicNodeList.cpp}
-Copyright: Copyright: 2001 Dirk Mueller (mueller@kde.org) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2006, 2007, 2008 Apple Inc. All rights reserved:
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{TagNodeList.cpp}
-Copyright: Copyright: 2001 Dirk Mueller (mueller@kde.org) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2008 Nokia Corporation and/or its subsidiary(-ies) / 2004, 2005, 2006, 2007 Apple Inc. All rights reserved:
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{MappedAttributeEntry.h}
-Copyright: Copyright: 2001 Dirk Mueller (mueller@kde.org) / 1999 Lars Knoll (knoll@kde.org) / 2003, 2004, 2005, 2006 Apple Computer, Inc / 1999 Antti Koivisto (koivisto@kde.org) / 2001 Peter Kelly (pmk@post.com):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{Attribute.h,CSSMappedAttributeDeclaration.h,MappedAttribute.h,NamedAttrMap.h}
-Copyright: Copyright: 2001 Dirk Mueller (mueller@kde.org) / 1999 Lars Knoll (knoll@kde.org) / 2003, 2004, 2005, 2006, 2008 Apple Inc. All rights reserved / 1999 Antti Koivisto (koivisto@kde.org) / 2001 Peter Kelly (pmk@post.com):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{Attr.h,Element.h,StyledElement.h}
-Copyright: Copyright: 2001 Dirk Mueller (mueller@kde.org) / 2003, 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2001 Peter Kelly (pmk@post.com):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{DOMImplementation.h}
-Copyright: Copyright: 2001 Dirk Mueller (mueller@kde.org) / 2004, 2005, 2006, 2008 Apple Inc. All rights reserved / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{MappedAttribute.cpp,StyledElement.cpp}
-Copyright: Copyright: 2001 Dirk Mueller (mueller@kde.org) / 2004, 2005, 2006, 2008 Apple Inc. All rights reserved / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2001 Peter Kelly (pmk@post.com):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{NameNodeList.h}
-Copyright: Copyright: 2001 Dirk Mueller (mueller@kde.org) / 2004, 2007m 2008 Apple Inc. All rights reserved / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{Node.h}
-Copyright: Copyright: 2001 Dirk Mueller (mueller@kde.org) / 2008, 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved:
-License: LGPL (v2 or later)
-
 Files: src/third_party/WebKit/WebCore/dom/{BeforeUnloadEvent.h,MouseRelatedEvent.h}
-Copyright: Copyright: 2001 Tobias Anton (anton@stud.fbi.fh-darmstadt.de) / 2003, 2004, 2005, 2006 Apple Computer, Inc / 2006 Samuel Weinig (sam.weinig@gmail.com) / 2001 Peter Kelly (pmk@post.com):
+Copyright: Copyright: 2003, 2004, 2005, 2006 Apple Computer, Inc / 2006 Samuel Weinig (sam.weinig@gmail.com) / 2001 Peter Kelly (pmk@post.com) / 2001 Tobias Anton (anton@stud.fbi.fh-darmstadt.de):
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/dom/{Clipboard.h,MouseEvent.h,MutationEvent.h,UIEvent.h,UIEventWithKeyState.h,WheelEvent.h}
-Copyright: Copyright: 2001 Tobias Anton (anton@stud.fbi.fh-darmstadt.de) / 2003, 2004, 2005, 2006, 2008 Apple Inc. All rights reserved / 2006 Samuel Weinig (sam.weinig@gmail.com) / 2001 Peter Kelly (pmk@post.com):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{ClipboardEvent.cpp,Event.cpp,MouseEvent.cpp,MouseRelatedEvent.cpp,MutationEvent.cpp,RegisteredEventListener.cpp,UIEvent.cpp,WheelEvent.cpp}
-Copyright: Copyright: 2001 Tobias Anton (anton@stud.fbi.fh-darmstadt.de) / 2003, 2005, 2006, 2008 Apple Inc. All rights reserved / 2006 Samuel Weinig (sam.weinig@gmail.com) / 2001 Peter Kelly (pmk@post.com):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{ClipboardEvent.h,Event.h,KeyboardEvent.h}
-Copyright: Copyright: 2001 Tobias Anton (anton@stud.fbi.fh-darmstadt.de) / 2006 Samuel Weinig (sam.weinig@gmail.com) / 2001 Peter Kelly (pmk@post.com) / 2003, 2004, 2005, 2006, 2007, 2008 Apple Inc. All rights reserved:
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{CharacterData.cpp,Text.cpp,Text.h}
-Copyright: Copyright: 2003, 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org):
+Copyright: Copyright: 2003, 2004, 2005, 2006, 2008 Apple Inc. All rights reserved / 2006 Samuel Weinig (sam.weinig@gmail.com) / 2001 Peter Kelly (pmk@post.com) / 2001 Tobias Anton (anton@stud.fbi.fh-darmstadt.de):
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/dom/{CharacterData.h}
@@ -5908,23 +5828,15 @@ Copyright: Copyright: 2003, 2004, 2005, 2006, 2008, 2009 Apple Inc. All rights r
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/dom/{NamedMappedAttrMap.h}
-Copyright: Copyright: 2003, 2004, 2005, 2006, 2008, 2009 Apple Inc. All rights reserved / 2001 Dirk Mueller (mueller@kde.org) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2001 Peter Kelly (pmk@post.com) / 2007 David Smith (catfish.man@gmail.com):
+Copyright: Copyright: 2003, 2004, 2005, 2006, 2008, 2009 Apple Inc. All rights reserved / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2001 Peter Kelly (pmk@post.com) / 2001 Dirk Mueller (mueller@kde.org) / 2007 David Smith (catfish.man@gmail.com):
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/dom/{RegisteredEventListener.h}
-Copyright: Copyright: 2003, 2004, 2005, 2006, 2008, 2009 Apple Inc. All rights reserved / 2001 Tobias Anton (anton@stud.fbi.fh-darmstadt.de) / 2006 Samuel Weinig (sam.weinig@gmail.com) / 2001 Peter Kelly (pmk@post.com):
+Copyright: Copyright: 2003, 2004, 2005, 2006, 2008, 2009 Apple Inc. All rights reserved / 2006 Samuel Weinig (sam.weinig@gmail.com) / 2001 Peter Kelly (pmk@post.com) / 2001 Tobias Anton (anton@stud.fbi.fh-darmstadt.de):
 License: LGPL (v2 or later)
 
-Files: src/third_party/WebKit/WebCore/dom/{BeforeUnloadEvent.cpp}
-Copyright: Copyright: 2003, 2005, 2006 Apple Computer, Inc / 2001 Tobias Anton (anton@stud.fbi.fh-darmstadt.de) / 2006 Samuel Weinig (sam.weinig@gmail.com) / 2001 Peter Kelly (pmk@post.com):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{KeyboardEvent.cpp}
-Copyright: Copyright: 2003, 2005, 2006, 2007 Apple Inc. All rights reserved / 2001 Tobias Anton (anton@stud.fbi.fh-darmstadt.de) / 2006 Samuel Weinig (sam.weinig@gmail.com) / 2001 Peter Kelly (pmk@post.com):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{CDATASection.cpp}
-Copyright: Copyright: 2003, 2008, 2009 Apple Inc. All rights reserved / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org):
+Files: src/third_party/WebKit/WebCore/dom/{ClipboardEvent.cpp,Event.cpp,MouseEvent.cpp,MouseRelatedEvent.cpp,MutationEvent.cpp,RegisteredEventListener.cpp,UIEvent.cpp,WheelEvent.cpp}
+Copyright: Copyright: 2003, 2005, 2006, 2008 Apple Inc. All rights reserved / 2006 Samuel Weinig (sam.weinig@gmail.com) / 2001 Peter Kelly (pmk@post.com) / 2001 Tobias Anton (anton@stud.fbi.fh-darmstadt.de):
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/dom/{EditingText.cpp,EditingText.h}
@@ -5935,36 +5847,8 @@ Files: src/third_party/WebKit/WebCore/dom/{CDATASection.h,Comment.cpp,Comment.h}
 Copyright: Copyright: 2003, 2009 Apple Inc. All rights reserved / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org):
 License: LGPL (v2 or later)
 
-Files: src/third_party/WebKit/WebCore/dom/{CSSMappedAttributeDeclaration.cpp}
-Copyright: Copyright: 2004, 2005, 2006 Apple Computer, Inc / 2001 Dirk Mueller (mueller@kde.org) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2001 Peter Kelly (pmk@post.com):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{TagNodeList.h}
-Copyright: Copyright: 2004, 2005, 2006, 2007, 2008 Apple Inc. All rights reserved / 2001 Dirk Mueller (mueller@kde.org) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2008 Nokia Corporation and/or its subsidiary(-ies):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{NodeRenderStyle.h}
-Copyright: Copyright: 2004, 2005, 2006, 2007, 2008 Apple Inc. All rights reserved / 2001 Dirk Mueller (mueller@kde.org) / 2008 David Smith (catfish.man@gmail.com) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{DOMImplementation.cpp}
-Copyright: Copyright: 2004, 2005, 2006, 2007, 2008 Apple Inc. All rights reserved / 2001 Dirk Mueller (mueller@kde.org) / 2008, 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2006 Samuel Weinig (sam@webkit.org):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{DocumentType.cpp,DocumentType.h}
-Copyright: Copyright: 2004, 2005, 2006, 2008, 2009 Apple Inc. All rights reserved / 2001 Dirk Mueller (mueller@kde.org) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{DynamicNodeList.h,NodeList.h}
-Copyright: Copyright: 2004, 2006, 2007 Apple Inc. All rights reserved / 2001 Dirk Mueller (mueller@kde.org) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{ChildNodeList.h,NameNodeList.cpp}
-Copyright: Copyright: 2004, 2007 Apple Inc. All rights reserved / 2001 Dirk Mueller (mueller@kde.org) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{ChildNodeList.cpp}
-Copyright: Copyright: 2004, 2007, 2008 Apple Inc. All rights reserved / 2001 Dirk Mueller (mueller@kde.org) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org):
+Files: src/third_party/WebKit/WebCore/dom/{NameNodeList.h}
+Copyright: Copyright: 2004, 2007m 2008 Apple Inc. All rights reserved / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2001 Dirk Mueller (mueller@kde.org):
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/dom/{EventNames.cpp}
@@ -5980,11 +5864,11 @@ Copyright: Copyright: 2005, 2007 Apple Inc. All rights reserved / 2006 Jon Shier
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/dom/{Document.h}
-Copyright: Copyright: 2006 Alexey Proskuryakov (ap@webkit.org) / 2001 Dirk Mueller (mueller@kde.org) / 2008, 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved:
+Copyright: Copyright: 2006 Alexey Proskuryakov (ap@webkit.org) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2001 Dirk Mueller (mueller@kde.org) / 2008, 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/):
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/dom/{Document.cpp}
-Copyright: Copyright: 2006 Alexey Proskuryakov (ap@webkit.org) / 2008, 2009 Google Inc. All rights reserved / 2001 Dirk Mueller (mueller@kde.org) / 2008, 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved:
+Copyright: Copyright: 2006 Alexey Proskuryakov (ap@webkit.org) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2008, 2009 Google Inc. All rights reserved / 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2001 Dirk Mueller (mueller@kde.org) / 2008, 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/):
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/dom/{DocumentMarker.h,UIEventWithKeyState.cpp}
@@ -5995,12 +5879,28 @@ Files: src/third_party/WebKit/WebCore/dom/{ProcessingInstruction.h}
 Copyright: Copyright: 2006 Apple Inc. All rights reserved / 2000 Peter Kelly (pmk@post.com):
 License: LGPL (v2 or later)
 
+Files: src/third_party/WebKit/WebCore/dom/{ClipboardEvent.h,Event.h,KeyboardEvent.h}
+Copyright: Copyright: 2006 Samuel Weinig (sam.weinig@gmail.com) / 2001 Peter Kelly (pmk@post.com) / 2003, 2004, 2005, 2006, 2007, 2008 Apple Inc. All rights reserved / 2001 Tobias Anton (anton@stud.fbi.fh-darmstadt.de):
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{BeforeUnloadEvent.cpp}
+Copyright: Copyright: 2006 Samuel Weinig (sam.weinig@gmail.com) / 2003, 2005, 2006 Apple Computer, Inc / 2001 Peter Kelly (pmk@post.com) / 2001 Tobias Anton (anton@stud.fbi.fh-darmstadt.de):
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{KeyboardEvent.cpp}
+Copyright: Copyright: 2006 Samuel Weinig (sam.weinig@gmail.com) / 2003, 2005, 2006, 2007 Apple Inc. All rights reserved / 2001 Peter Kelly (pmk@post.com) / 2001 Tobias Anton (anton@stud.fbi.fh-darmstadt.de):
+License: LGPL (v2 or later)
+
 Files: src/third_party/WebKit/WebCore/dom/{ExceptionCode.h}
 Copyright: Copyright: 2006, 2007 Apple Inc. All rights reserved:
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/dom/{StyleElement.h}
 Copyright: Copyright: 2006, 2007 Rob Buis:
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/dom/{StyleElement.cpp}
+Copyright: Copyright: 2006, 2007 Rob Buis / 2008 Apple, Inc. All rights reserved:
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/dom/{EventListener.h}
@@ -6011,20 +5911,20 @@ Files: src/third_party/WebKit/WebCore/dom/{ContainerNodeAlgorithms.h}
 Copyright: Copyright: 2007 Apple Inc. All rights reserved / 2008 Nikolas Zimmermann <zimmermann@kde.org>:
 License: LGPL (v2 or later)
 
-Files: src/third_party/WebKit/WebCore/dom/{Tokenizer.h}
-Copyright: Copyright: 2007 Samuel Weinig (sam@webkit.org) / 2000 Peter Kelly (pmk@post.com) / 2005, 2006 Apple Computer, Inc:
+Files: src/third_party/WebKit/WebCore/dom/{XMLTokenizer.h}
+Copyright: Copyright: 2007 Samuel Weinig (sam@webkit.org) / 2000 Peter Kelly (pmk@post.com) / 2008 Nokia Corporation and/or its subsidiary(-ies) / 2008, 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/) / 2005, 2006, 2007 Apple Inc. All rights reserved:
 License: LGPL (v2 or later)
 
-Files: src/third_party/WebKit/WebCore/dom/{XMLTokenizer.h}
-Copyright: Copyright: 2007 Samuel Weinig (sam@webkit.org) / 2000 Peter Kelly (pmk@post.com) / 2008, 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/) / 2008 Nokia Corporation and/or its subsidiary(-ies) / 2005, 2006, 2007 Apple Inc. All rights reserved:
+Files: src/third_party/WebKit/WebCore/dom/{Tokenizer.h}
+Copyright: Copyright: 2007 Samuel Weinig (sam@webkit.org) / 2005, 2006 Apple Computer, Inc / 2000 Peter Kelly (pmk@post.com):
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/dom/{XMLTokenizerLibxml2.cpp,XMLTokenizerQt.cpp}
-Copyright: Copyright: 2007 Samuel Weinig (sam@webkit.org) / 2006 Alexey Proskuryakov (ap@webkit.org) / 2000 Peter Kelly (pmk@post.com) / 2008, 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/) / 2008 Holger Hans Peter Freyther / 2008 Nokia Corporation and/or its subsidiary(-ies) / 2005, 2006, 2008 Apple Inc. All rights reserved:
+Copyright: Copyright: 2007 Samuel Weinig (sam@webkit.org) / 2008 Holger Hans Peter Freyther / 2006 Alexey Proskuryakov (ap@webkit.org) / 2000 Peter Kelly (pmk@post.com) / 2008 Nokia Corporation and/or its subsidiary(-ies) / 2005, 2006, 2008 Apple Inc. All rights reserved / 2008, 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/):
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/dom/{XMLTokenizer.cpp}
-Copyright: Copyright: 2007 Samuel Weinig (sam@webkit.org) / 2006 Alexey Proskuryakov (ap@webkit.org) / 2008 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/) / 2000 Peter Kelly (pmk@post.com) / 2008 Holger Hans Peter Freyther / 2008 Nokia Corporation and/or its subsidiary(-ies) / 2005, 2006, 2008 Apple Inc. All rights reserved:
+Copyright: Copyright: 2007 Samuel Weinig (sam@webkit.org) / 2008 Holger Hans Peter Freyther / 2006 Alexey Proskuryakov (ap@webkit.org) / 2008 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/) / 2000 Peter Kelly (pmk@post.com) / 2008 Nokia Corporation and/or its subsidiary(-ies) / 2005, 2006, 2008 Apple Inc. All rights reserved:
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/dom/{CheckedRadioButtons.cpp,CheckedRadioButtons.h}
@@ -6035,16 +5935,8 @@ Files: src/third_party/WebKit/WebCore/dom/{NodeRareData.h}
 Copyright: Copyright: 2008 Apple Inc. All rights reserved / 2008 David Smith <catfish.man@gmail.com>:
 License: LGPL (v2 or later)
 
-Files: src/third_party/WebKit/WebCore/dom/{StyleElement.cpp}
-Copyright: Copyright: 2008 Apple, Inc. All rights reserved / 2006, 2007 Rob Buis:
-License: LGPL (v2 or later)
-
 Files: src/third_party/WebKit/WebCore/dom/{ScriptElement.h}
 Copyright: Copyright: 2008 Nikolas Zimmermann <zimmermann@kde.org>:
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/dom/{ScriptElement.cpp}
-Copyright: Copyright: 2008 Nikolas Zimmermann <zimmermann@kde.org> / 2001 Dirk Mueller (mueller@kde.org) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2003, 2004, 2005, 2006, 2007, 2008 Apple Inc. All rights reserved:
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/dom/{InputElement.cpp,InputElement.h}
@@ -6200,7 +6092,7 @@ Copyright: Copyright: 2006, 2007 Apple Inc. All rights reserved / 2009, The Andr
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/editing/chromium/{EditorChromium.cpp}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008, 2009, Google Inc. All rights reserved:
+Copyright: Copyright: 2008, 2009, Google Inc. All rights reserved / HOLDERS AND CONTRIBUTORS:
 License: BSD (3 clause)
 
 Files: src/third_party/WebKit/WebCore/editing/gtk/{SelectionControllerGtk.cpp}
@@ -6887,12 +6779,8 @@ Files: src/third_party/WebKit/WebCore/loader/{DocumentLoader.h,FrameLoaderClient
 Copyright: Copyright: 2006, 2007, 2008, 2009 Apple Inc. All rights reserved:
 License: BSD (3 clause)
 
-Files: src/third_party/WebKit/WebCore/loader/{HistoryController.cpp,PolicyCallback.cpp,PolicyChecker.cpp,ResourceLoadNotifier.cpp}
-Copyright: Copyright: 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2008 Nokia Corporation and/or its subsidiary(-ies) / 2008, 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/):
-License: BSD (3 clause)
-
-Files: src/third_party/WebKit/WebCore/loader/{RedirectScheduler.cpp}
-Copyright: Copyright: 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2008 Nokia Corporation and/or its subsidiary(-ies) / 2009 Adam Barth. All rights reserved / 2008, 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/):
+Files: src/third_party/WebKit/WebCore/loader/{FrameLoader.cpp}
+Copyright: Copyright: 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2008 Alp Toker <alp@atoker.com> / 2008, 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/) / Research In Motion Limited 2009. All rights reserved / 2008 Nokia Corporation and/or its subsidiary(-ies):
 License: BSD (3 clause)
 
 Files: src/third_party/WebKit/WebCore/loader/{MainResourceLoader.cpp}
@@ -6903,8 +6791,20 @@ Files: src/third_party/WebKit/WebCore/loader/{HistoryController.h,PolicyCallback
 Copyright: Copyright: 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2008, 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/):
 License: BSD (3 clause)
 
+Files: src/third_party/WebKit/WebCore/loader/{HistoryController.cpp,PolicyCallback.cpp,PolicyChecker.cpp,ResourceLoadNotifier.cpp}
+Copyright: Copyright: 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2008, 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/) / 2008 Nokia Corporation and/or its subsidiary(-ies):
+License: BSD (3 clause)
+
+Files: src/third_party/WebKit/WebCore/loader/{FrameLoader.h}
+Copyright: Copyright: 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2008, 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/) / Research In Motion Limited 2009. All rights reserved:
+License: BSD (3 clause)
+
 Files: src/third_party/WebKit/WebCore/loader/{RedirectScheduler.h}
 Copyright: Copyright: 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2009 Adam Barth. All rights reserved / 2008, 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/):
+License: BSD (3 clause)
+
+Files: src/third_party/WebKit/WebCore/loader/{RedirectScheduler.cpp}
+Copyright: Copyright: 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2009 Adam Barth. All rights reserved / 2008, 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/) / 2008 Nokia Corporation and/or its subsidiary(-ies):
 License: BSD (3 clause)
 
 Files: src/third_party/WebKit/WebCore/loader/{SubresourceLoader.cpp}
@@ -6923,72 +6823,64 @@ Files: src/third_party/WebKit/WebCore/loader/{WorkerThreadableLoader.cpp}
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009, 2010 Google Inc. All rights reserved:
 License: BSD (3 clause)
 
-Files: src/third_party/WebKit/WebCore/loader/{FrameLoader.cpp}
-Copyright: Copyright: Research In Motion Limited 2009. All rights reserved / 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2008 Alp Toker <alp@atoker.com> / 2008 Nokia Corporation and/or its subsidiary(-ies) / 2008, 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/):
-License: BSD (3 clause)
-
-Files: src/third_party/WebKit/WebCore/loader/{FrameLoader.h}
-Copyright: Copyright: Research In Motion Limited 2009. All rights reserved / 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2008, 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/):
-License: BSD (3 clause)
-
 Files: src/third_party/WebKit/WebCore/loader/{FTPDirectoryParser.cpp,FTPDirectoryParser.h}
 Copyright: Copyright: 2007 Apple Inc. All rights reserved / 2002 Cyrus Patel <cyp@fb14.uni-mainz.de>:
 License: LGPL
 
-Files: src/third_party/WebKit/WebCore/loader/{ImageLoader.h}
-Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2009 Apple Inc. All rights reserved:
+Files: src/third_party/WebKit/WebCore/loader/{CachedResourceClientWalker.h}
+Copyright: Copyright: 1998 Lars Knoll (knoll@mpi-hd.mpg.de) / 2001 Dirk Mueller <mueller@kde.org> / 2004, 2005, 2006, 2007 Apple Inc. All rights reserved:
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/loader/{loader.h}
+Copyright: Copyright: 1998 Lars Knoll (knoll@mpi-hd.mpg.de) / 2004, 2006, 2007, 2008 Apple Inc. All rights reserved / 2001 Dirk Mueller <mueller@kde.org>:
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/loader/{CachedImage.h,CachedResource.h,Request.h}
+Copyright: Copyright: 1998 Lars Knoll (knoll@mpi-hd.mpg.de) / 2006 Samuel Weinig (sam.weinig@gmail.com) / 2001 Dirk Mueller <mueller@kde.org> / 2004, 2005, 2006, 2007 Apple Inc. All rights reserved:
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/loader/{TextResourceDecoder.cpp}
-Copyright: Copyright: 1999 Lars Knoll (knoll@mpi-hd.mpg.de) / 2005, 2006, 2007 Alexey Proskuryakov (ap@nypop.com) / 2003, 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved:
+Copyright: Copyright: 1999 Lars Knoll (knoll@mpi-hd.mpg.de) / 2003, 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2005, 2006, 2007 Alexey Proskuryakov (ap@nypop.com):
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/loader/{TextResourceDecoder.h}
 Copyright: Copyright: 1999 Lars Knoll (knoll@mpi-hd.mpg.de) / 2006 Alexey Proskuryakov (ap@nypop.com) / 2006, 2008 Apple Inc. All rights reserved:
 License: LGPL (v2 or later)
 
-Files: src/third_party/WebKit/WebCore/loader/{CachedResourceClientWalker.h}
-Copyright: Copyright: 2001 Dirk Mueller <mueller@kde.org> / 2004, 2005, 2006, 2007 Apple Inc. All rights reserved / 1998 Lars Knoll (knoll@mpi-hd.mpg.de):
+Files: src/third_party/WebKit/WebCore/loader/{CachedResourceClientWalker.cpp}
+Copyright: Copyright: 2002 Waldo Bastian (bastian@kde.org) / 2001 Dirk Mueller (mueller@kde.org) / 1998 Lars Knoll (knoll@mpi-hd.mpg.de) / 2004, 2005, 2006, 2007 Apple Inc. All rights reserved:
 License: LGPL (v2 or later)
 
-Files: src/third_party/WebKit/WebCore/loader/{CachedResourceClientWalker.cpp}
-Copyright: Copyright: 2002 Waldo Bastian (bastian@kde.org) / 2001 Dirk Mueller (mueller@kde.org) / 2004, 2005, 2006, 2007 Apple Inc. All rights reserved / 1998 Lars Knoll (knoll@mpi-hd.mpg.de):
+Files: src/third_party/WebKit/WebCore/loader/{CachedImage.cpp,Request.cpp}
+Copyright: Copyright: 2002 Waldo Bastian (bastian@kde.org) / 2001 Dirk Mueller (mueller@kde.org) / 1998 Lars Knoll (knoll@mpi-hd.mpg.de) / 2006 Samuel Weinig (sam.weinig@gmail.com) / 2004, 2005, 2006, 2007 Apple Inc. All rights reserved:
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/loader/{CachedCSSStyleSheet.cpp}
+Copyright: Copyright: 2004, 2005, 2006 Apple Computer, Inc / 2002 Waldo Bastian (bastian@kde.org) / 2001 Dirk Mueller (mueller@kde.org) / 1998 Lars Knoll (knoll@mpi-hd.mpg.de) / 2006 Samuel Weinig (sam.weinig@gmail.com):
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/loader/{Cache.h,CachedResourceClient.h}
-Copyright: Copyright: 2004, 2005, 2006, 2007, 2008 Apple Inc. All rights reserved / 2001 Dirk Mueller <mueller@kde.org> / 1998 Lars Knoll (knoll@mpi-hd.mpg.de):
+Copyright: Copyright: 2004, 2005, 2006, 2007, 2008 Apple Inc. All rights reserved / 1998 Lars Knoll (knoll@mpi-hd.mpg.de) / 2001 Dirk Mueller <mueller@kde.org>:
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/loader/{CachedCSSStyleSheet.h,CachedScript.h,CachedXBLDocument.h,CachedXSLStyleSheet.h}
+Copyright: Copyright: 2004, 2005, 2006, 2007, 2008 Apple Inc. All rights reserved / 1998 Lars Knoll (knoll@mpi-hd.mpg.de) / 2006 Samuel Weinig (sam.weinig@gmail.com) / 2001 Dirk Mueller <mueller@kde.org>:
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/loader/{Cache.cpp}
 Copyright: Copyright: 2004, 2005, 2006, 2007, 2008 Apple Inc. All rights reserved / 2002 Waldo Bastian (bastian@kde.org) / 2001 Dirk Mueller (mueller@kde.org) / 1998 Lars Knoll (knoll@mpi-hd.mpg.de):
 License: LGPL (v2 or later)
 
+Files: src/third_party/WebKit/WebCore/loader/{CachedResource.cpp,CachedScript.cpp,CachedXBLDocument.cpp,CachedXSLStyleSheet.cpp,loader.cpp}
+Copyright: Copyright: 2004, 2005, 2006, 2007, 2008 Apple Inc. All rights reserved / 2002 Waldo Bastian (bastian@kde.org) / 2001 Dirk Mueller (mueller@kde.org) / 1998 Lars Knoll (knoll@mpi-hd.mpg.de) / 2006 Samuel Weinig (sam.weinig@gmail.com):
+License: LGPL (v2 or later)
+
 Files: src/third_party/WebKit/WebCore/loader/{ImageLoader.cpp}
 Copyright: Copyright: 2004, 2005, 2006, 2007, 2009, 2010 Apple Inc. All rights reserved / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org):
 License: LGPL (v2 or later)
 
-Files: src/third_party/WebKit/WebCore/loader/{loader.h}
-Copyright: Copyright: 2004, 2006, 2007, 2008 Apple Inc. All rights reserved / 2001 Dirk Mueller <mueller@kde.org> / 1998 Lars Knoll (knoll@mpi-hd.mpg.de):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/loader/{CachedImage.h,CachedResource.h,Request.h}
-Copyright: Copyright: 2006 Samuel Weinig (sam.weinig@gmail.com) / 2001 Dirk Mueller <mueller@kde.org> / 2004, 2005, 2006, 2007 Apple Inc. All rights reserved / 1998 Lars Knoll (knoll@mpi-hd.mpg.de):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/loader/{CachedImage.cpp,Request.cpp}
-Copyright: Copyright: 2006 Samuel Weinig (sam.weinig@gmail.com) / 2002 Waldo Bastian (bastian@kde.org) / 2001 Dirk Mueller (mueller@kde.org) / 2004, 2005, 2006, 2007 Apple Inc. All rights reserved / 1998 Lars Knoll (knoll@mpi-hd.mpg.de):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/loader/{CachedCSSStyleSheet.cpp}
-Copyright: Copyright: 2006 Samuel Weinig (sam.weinig@gmail.com) / 2004, 2005, 2006 Apple Computer, Inc / 2002 Waldo Bastian (bastian@kde.org) / 2001 Dirk Mueller (mueller@kde.org) / 1998 Lars Knoll (knoll@mpi-hd.mpg.de):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/loader/{CachedCSSStyleSheet.h,CachedScript.h,CachedXBLDocument.h,CachedXSLStyleSheet.h}
-Copyright: Copyright: 2006 Samuel Weinig (sam.weinig@gmail.com) / 2004, 2005, 2006, 2007, 2008 Apple Inc. All rights reserved / 2001 Dirk Mueller <mueller@kde.org> / 1998 Lars Knoll (knoll@mpi-hd.mpg.de):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/loader/{CachedResource.cpp,CachedScript.cpp,CachedXBLDocument.cpp,CachedXSLStyleSheet.cpp,loader.cpp}
-Copyright: Copyright: 2006 Samuel Weinig (sam.weinig@gmail.com) / 2004, 2005, 2006, 2007, 2008 Apple Inc. All rights reserved / 2002 Waldo Bastian (bastian@kde.org) / 2001 Dirk Mueller (mueller@kde.org) / 1998 Lars Knoll (knoll@mpi-hd.mpg.de):
+Files: src/third_party/WebKit/WebCore/loader/{ImageLoader.h}
+Copyright: Copyright: 2004, 2009 Apple Inc. All rights reserved / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org):
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/loader/{DocLoader.cpp}
@@ -6996,7 +6888,7 @@ Copyright: Copyright: 2009 Torch Mobile Inc. http://www.torchmobile.com/ / 2002 
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/loader/{DocLoader.h}
-Copyright: Copyright: 2009 Torch Mobile Inc. http://www.torchmobile.com/ / 2004, 2005, 2006 Apple Computer, Inc / 2001 Dirk Mueller <mueller@kde.org> / 1998 Lars Knoll (knoll@mpi-hd.mpg.de):
+Copyright: Copyright: 2009 Torch Mobile Inc. http://www.torchmobile.com/ / 2004, 2005, 2006 Apple Computer, Inc / 1998 Lars Knoll (knoll@mpi-hd.mpg.de) / 2001 Dirk Mueller <mueller@kde.org>:
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/loader/appcache/*
@@ -7008,7 +6900,7 @@ Copyright: Copyright: 2008, 2009 Apple Inc. All Rights Reserved:
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/loader/appcache/{ApplicationCacheHost.h}
-Copyright: Copyright: 2009, Google Inc. All rights reserved / HOLDERS AND CONTRIBUTORS:
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009, Google Inc. All rights reserved:
 License: BSD (3 clause)
 
 Files: src/third_party/WebKit/WebCore/loader/archive/{Archive.h,ArchiveFactory.cpp,ArchiveFactory.h,ArchiveResource.cpp,ArchiveResource.h,ArchiveResourceCollection.cpp,ArchiveResourceCollection.h}
@@ -7095,6 +6987,10 @@ Files: src/third_party/WebKit/WebCore/page/{FrameLoadRequest.h}
 Copyright: Copyright: 2003, 2006 Apple Computer, Inc. All rights reserved:
 License: BSD (2 clause)
 
+Files: src/third_party/WebKit/WebCore/page/{Settings.h}
+Copyright: Copyright: 2003, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2006 Graham Dennis (graham.dennis@gmail.com):
+License: BSD (2 clause)
+
 Files: src/third_party/WebKit/WebCore/page/{EventHandler.cpp}
 Copyright: Copyright: 2006 Alexey Proskuryakov (ap@webkit.org) / 2006, 2007, 2008, 2009 Apple Inc. All rights reserved:
 License: BSD (2 clause)
@@ -7103,16 +6999,16 @@ Files: src/third_party/WebKit/WebCore/page/{ContextMenuClient.h,FocusDirection.h
 Copyright: Copyright: 2006 Apple Computer, Inc. All rights reserved:
 License: BSD (2 clause)
 
-Files: src/third_party/WebKit/WebCore/page/{Settings.h}
-Copyright: Copyright: 2006 Graham Dennis (graham.dennis@gmail.com) / 2003, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved:
-License: BSD (2 clause)
-
 Files: src/third_party/WebKit/WebCore/page/{ContextMenuController.cpp,ContextMenuController.h,FocusController.h}
 Copyright: Copyright: 2006, 2007 Apple Inc. All rights reserved:
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/page/{EditorClient.h}
 Copyright: Copyright: 2006, 2007 Apple Inc. All rights reserved / 2008 Nokia Corporation and/or its subsidiary(-ies):
+License: BSD (2 clause)
+
+Files: src/third_party/WebKit/WebCore/page/{FocusController.cpp}
+Copyright: Copyright: 2006, 2007 Apple Inc. All rights reserved / 2008 Nuanti Ltd:
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/page/{DOMWindow.cpp}
@@ -7141,10 +7037,6 @@ License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/page/{PageGroup.h}
 Copyright: Copyright: 2008 Apple Inc. All rights reserved:
-License: BSD (2 clause)
-
-Files: src/third_party/WebKit/WebCore/page/{FocusController.cpp}
-Copyright: Copyright: 2008 Nuanti Ltd / 2006, 2007 Apple Inc. All rights reserved:
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/page/{Geolocation.h}
@@ -7200,31 +7092,31 @@ Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009 Ericsson AB:
 License: BSD (3 clause)
 
 Files: src/third_party/WebKit/WebCore/page/{FrameView.h}
-Copyright: Copyright: 1997 Martin Jones (mjones@kde.org) / 1998 Waldo Bastian (bastian@kde.org) / 1999 Lars Knoll (knoll@kde.org) / 1998, 1999 Torben Weis (weis@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved:
+Copyright: Copyright: 1998 Waldo Bastian (bastian@kde.org) / 1999 Lars Knoll (knoll@kde.org) / 1998, 1999 Torben Weis (weis@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 1997 Martin Jones (mjones@kde.org) / 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved:
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/page/{Frame.h}
-Copyright: Copyright: 1998, 1999 Torben Weis <weis@kde.org> / 2008 Eric Seidel <eric@webkit.org> / 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2008 Nokia Corporation and/or its subsidiary(-ies):
+Copyright: Copyright: 1998, 1999 Torben Weis <weis@kde.org> / 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2008 Eric Seidel <eric@webkit.org> / 2008 Nokia Corporation and/or its subsidiary(-ies):
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/page/{Frame.cpp}
-Copyright: Copyright: 1998, 1999 Torben Weis <weis@kde.org> / 2008 Eric Seidel <eric@webkit.org> / 2005 Alexey Proskuryakov <ap@nypop.com> / 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2008 Nokia Corporation and/or its subsidiary(-ies):
+Copyright: Copyright: 1998, 1999 Torben Weis <weis@kde.org> / 2005 Alexey Proskuryakov <ap@nypop.com> / 2004, 2005, 2006, 2007, 2008, 2009 Apple Inc. All rights reserved / 2008 Eric Seidel <eric@webkit.org> / 2008 Nokia Corporation and/or its subsidiary(-ies):
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/page/{Navigator.cpp}
-Copyright: Copyright: 2000 Daniel Molkentin (molkentin@kde.org) / 2000 Stefan Schimanski (schimmi@kde.org) / 2000 Harri Porten (porten@kde.org) / 2003, 2004, 2005, 2006 Apple Computer, Inc / 2008 Nokia Corporation and/or its subsidiary(-ies):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/page/{MouseEventWithHitTestResults.h}
-Copyright: Copyright: 2000 Simon Hausmann <hausmann@kde.org> / 2006 Apple Computer, Inc:
+Copyright: Copyright: 2000 Daniel Molkentin (molkentin@kde.org) / 2000 Harri Porten (porten@kde.org) / 2003, 2004, 2005, 2006 Apple Computer, Inc / 2008 Nokia Corporation and/or its subsidiary(-ies) / 2000 Stefan Schimanski (schimmi@kde.org):
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/page/{WindowFeatures.cpp}
-Copyright: Copyright: 2006 Alexey Proskuryakov (ap@webkit.org) / 2006 Jon Shier (jshier@iastate.edu) / 2000 Harri Porten (porten@kde.org) / 2003, 2004, 2005, 2006, 2007 Apple Inc. All rights reseved:
+Copyright: Copyright: 2006 Alexey Proskuryakov (ap@webkit.org) / 2000 Harri Porten (porten@kde.org) / 2006 Jon Shier (jshier@iastate.edu) / 2003, 2004, 2005, 2006, 2007 Apple Inc. All rights reseved:
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/page/{FrameTree.cpp,FrameTree.h,MouseEventWithHitTestResults.cpp}
 Copyright: Copyright: 2006 Apple Computer, Inc:
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/page/{MouseEventWithHitTestResults.h}
+Copyright: Copyright: 2006 Apple Computer, Inc / 2000 Simon Hausmann <hausmann@kde.org>:
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/page/{Chrome.h,PageGroupLoadDeferrer.h}
@@ -7312,7 +7204,7 @@ Copyright: Copyright: 2007 Ryan Leavengood <leavengood@gmail.com>:
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/page/haiku/{EventHandlerHaiku.cpp}
-Copyright: Copyright: 2007 Ryan Leavengood <leavengood@gmail.com> / 2009 Maxime Simon <simon.maxime@gmail.com> / 2006 Zack Rusin <zack@kde.org>:
+Copyright: Copyright: 2009 Maxime Simon <simon.maxime@gmail.com> / 2007 Ryan Leavengood <leavengood@gmail.com> / 2006 Zack Rusin <zack@kde.org>:
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/page/mac/{WebCoreKeyboardUIMode.h}
@@ -7355,12 +7247,12 @@ Files: src/third_party/WebKit/WebCore/page/win/{FrameCGWin.cpp,FrameWin.cpp}
 Copyright: Copyright: 2006, 2007, 2008 Apple Inc. All rights reserved:
 License: BSD (2 clause)
 
-Files: src/third_party/WebKit/WebCore/page/win/{DragControllerWin.cpp}
-Copyright: Copyright: 2007 Apple Inc. All rights reserved:
+Files: src/third_party/WebKit/WebCore/page/win/{EventHandlerWin.cpp}
+Copyright: Copyright: 2006, 2007, 2008 Apple Inc. All rights reserved / 2007-2009 Torch Mobile, Inc:
 License: BSD (2 clause)
 
-Files: src/third_party/WebKit/WebCore/page/win/{EventHandlerWin.cpp}
-Copyright: Copyright: 2007-2009 Torch Mobile, Inc / 2006, 2007, 2008 Apple Inc. All rights reserved:
+Files: src/third_party/WebKit/WebCore/page/win/{DragControllerWin.cpp}
+Copyright: Copyright: 2007 Apple Inc. All rights reserved:
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/page/win/{FrameCairoWin.cpp}
@@ -7368,7 +7260,7 @@ Copyright: Copyright: 2008 Apple Inc. All rights reserved:
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/page/wince/{FrameWince.cpp}
-Copyright: Copyright: 2007-2009 Torch Mobile, Inc / 2006, 2007 Apple Inc. All rights reserved:
+Copyright: Copyright: 2006, 2007 Apple Inc. All rights reserved / 2007-2009 Torch Mobile, Inc:
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/page/wx/{DragControllerWx.cpp}
@@ -7627,6 +7519,10 @@ Files: src/third_party/WebKit/WebCore/platform/android/{TemporaryLinkStubs.cpp}
 Copyright: Copyright: HOLDERS ``AS IS'' AND ANY / 2009, The Android Open Source Project:
 License: BSD (2 clause)
 
+Files: src/third_party/WebKit/WebCore/platform/android/{PlatformTouchEventAndroid.cpp,PlatformTouchPointAndroid.cpp}
+Copyright: Copyright: HOLDERS ``AS IS'' AND ANY / 2010, The Android Open Source Project / OWNER OR:
+License: BSD (2 clause)
+
 Files: src/third_party/WebKit/WebCore/platform/android/{GeolocationServiceAndroid.cpp,GeolocationServiceAndroid.h,GeolocationServiceBridge.cpp,GeolocationServiceBridge.h,RenderThemeAndroid.cpp,SSLKeyGeneratorAndroid.cpp,SoundAndroid.cpp}
 Copyright: Copyright: HOLDERS ``AS IS'' AND ANY / OWNER OR / 2009, The Android Open Source Project:
 License: BSD (2 clause)
@@ -7655,8 +7551,12 @@ Files: src/third_party/WebKit/WebCore/platform/cf/{FileSystemCF.cpp}
 Copyright: Copyright: 2007 Apple Inc. All rights reserved:
 License: BSD (3 clause)
 
-Files: src/third_party/WebKit/WebCore/platform/cf/{SchedulePair.cpp,SchedulePair.h,SharedBufferCF.cpp}
+Files: src/third_party/WebKit/WebCore/platform/cf/{SchedulePair.cpp,SchedulePair.h}
 Copyright: Copyright: 2008 Apple Inc. All rights reserved:
+License: BSD (3 clause)
+
+Files: src/third_party/WebKit/WebCore/platform/cf/{SharedBufferCF.cpp}
+Copyright: Copyright: 2008, 2010 Apple Inc. All rights reserved:
 License: BSD (3 clause)
 
 Files: src/third_party/WebKit/WebCore/platform/cf/{RunLoopTimerCF.cpp}
@@ -8131,8 +8031,12 @@ Files: src/third_party/WebKit/WebCore/platform/graphics/chromium/{HarfbuzzSkia.h
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009, Google Inc. All rights reserved:
 License: BSD (3 clause)
 
-Files: src/third_party/WebKit/WebCore/platform/graphics/filters/{FEBlend.cpp,FEBlend.h,FEColorMatrix.cpp,FEColorMatrix.h,FEComponentTransfer.cpp,FEComponentTransfer.h,FEComposite.cpp,FEComposite.h,FEGaussianBlur.cpp,FEGaussianBlur.h}
+Files: src/third_party/WebKit/WebCore/platform/graphics/filters/{FEBlend.cpp,FEBlend.h,FEColorMatrix.cpp,FEColorMatrix.h,FEComponentTransfer.h,FEComposite.cpp,FEComposite.h,FEGaussianBlur.cpp,FEGaussianBlur.h}
 Copyright: Copyright: 2004, 2005, 2006, 2007 Nikolas Zimmermann <zimmermann@kde.org>:
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/platform/graphics/filters/{FEComponentTransfer.cpp}
+Copyright: Copyright: 2004, 2005, 2006, 2007 Nikolas Zimmermann <zimmermann@kde.org> / Research In Motion Limited 2010. All rights reserved:
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/platform/graphics/filters/{FilterEffect.h,SourceGraphic.h}
@@ -9915,6 +9819,10 @@ Files: src/third_party/WebKit/WebCore/plugins/{PluginDebug.h,PluginInfoStore.cpp
 Copyright: Copyright: 2006, 2007 Apple Inc. All rights reserved:
 License: BSD (2 clause)
 
+Files: src/third_party/WebKit/WebCore/plugins/{PluginDatabase.cpp,PluginPackage.h}
+Copyright: Copyright: 2006, 2007 Apple Inc. All rights reserved / 2008 Collabora, Ltd. All rights reserved:
+License: BSD (2 clause)
+
 Files: src/third_party/WebKit/WebCore/plugins/{PluginView.cpp}
 Copyright: Copyright: 2006, 2007, 2008 Apple Inc. All rights reserved / 2008 Collabora Ltd. All rights reserved:
 License: BSD (2 clause)
@@ -9925,10 +9833,6 @@ License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/plugins/{PluginMainThreadScheduler.cpp,PluginMainThreadScheduler.h}
 Copyright: Copyright: 2008 Apple Inc. All Rights Reserved:
-License: BSD (2 clause)
-
-Files: src/third_party/WebKit/WebCore/plugins/{PluginDatabase.cpp,PluginPackage.h}
-Copyright: Copyright: 2008 Collabora, Ltd. All rights reserved / 2006, 2007 Apple Inc. All rights reserved:
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/plugins/{PluginStream.cpp,PluginStream.h}
@@ -9944,7 +9848,7 @@ Copyright: Copyright: 2009 Girish Ramakrishnan <girish@forwardbias.in> / 2006, 2
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/plugins/{PluginPackage.cpp}
-Copyright: Copyright: 2009 Holger Hans Peter Freyther / 2006, 2008 Apple Inc. All rights reserved / 2008 Collabora Ltd. All rights reserved:
+Copyright: Copyright: 2009 Holger Hans Peter Freyther / 2008 Collabora Ltd. All rights reserved / 2006, 2008 Apple Inc. All rights reserved:
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/plugins/{PluginDebug.cpp}
@@ -9952,7 +9856,7 @@ Copyright: Copyright: 2009 Nokia Corporation and/or its subsidiary(-ies) / 2006,
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/plugins/{PluginDatabase.h}
-Copyright: Copyright: 2009 Nokia Corporation and/or its subsidiary(-ies) / 2008 Collabora, Ltd. All rights reserved / 2006, 2007 Apple Inc. All rights reserved:
+Copyright: Copyright: 2009 Nokia Corporation and/or its subsidiary(-ies) / 2006, 2007 Apple Inc. All rights reserved / 2008 Collabora, Ltd. All rights reserved:
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/plugins/{PluginWidget.h}
@@ -9968,7 +9872,7 @@ Copyright: Copyright: 2008 Apple Inc. All rights reserved:
 License: BSD (3 clause)
 
 Files: src/third_party/WebKit/WebCore/plugins/{PluginData.cpp}
-Copyright: Copyright: 2000 Daniel Molkentin (molkentin@kde.org) / 2000 Stefan Schimanski (schimmi@kde.org) / 2003, 2004, 2005, 2006, 2007 Apple Inc. All Rights Reserved / 2000 Harri Porten (porten@kde.org) / 2008 Nokia Corporation and/or its subsidiary(-ies):
+Copyright: Copyright: 2000 Daniel Molkentin (molkentin@kde.org) / 2000 Harri Porten (porten@kde.org) / 2008 Nokia Corporation and/or its subsidiary(-ies) / 2000 Stefan Schimanski (schimmi@kde.org) / 2003, 2004, 2005, 2006, 2007 Apple Inc. All Rights Reserved:
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/plugins/{MimeTypeArray.cpp,MimeTypeArray.h,PluginArray.cpp,PluginArray.h}
@@ -9984,7 +9888,7 @@ Copyright: Copyright: 2009 Google, Inc. All rights reserved:
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/plugins/chromium/{PluginDataChromium.cpp}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008, 2009, Google Inc. All rights reserved:
+Copyright: Copyright: 2008, 2009, Google Inc. All rights reserved / HOLDERS AND CONTRIBUTORS:
 License: BSD (3 clause)
 
 Files: src/third_party/WebKit/WebCore/plugins/gtk/*
@@ -9992,7 +9896,7 @@ Copyright: Copyright: 2006, 2007 Apple Inc. All rights reserved / 2008 Collabora
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/plugins/gtk/*
-Copyright: Copyright: 2008 Nuanti Ltd / 2006, 2007 Apple Inc. All rights reserved / 2008 Collabora Ltd. All rights reserved / 2008 Novell Inc. All rights reserved:
+Copyright: Copyright: 2006, 2007 Apple Inc. All rights reserved / 2008 Nuanti Ltd / 2008 Collabora Ltd. All rights reserved / 2008 Novell Inc. All rights reserved:
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/plugins/gtk/{PluginDataGtk.cpp}
@@ -10036,7 +9940,7 @@ Copyright: Copyright: 2008 Collabora, Ltd. All rights reserved / 2006, 2007, 200
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/plugins/win/{PluginDatabaseWin.cpp}
-Copyright: Copyright: 2008 Collabora, Ltd. All rights reserved / 2008-2009 Torch Mobile, Inc. All rights reserved / 2006, 2007 Apple Inc. All rights reserved:
+Copyright: Copyright: 2008-2009 Torch Mobile, Inc. All rights reserved / 2006, 2007 Apple Inc. All rights reserved / 2008 Collabora, Ltd. All rights reserved:
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/plugins/win/{PluginViewWin.cpp}
@@ -10987,24 +10891,8 @@ Files: src/third_party/WebKit/WebCore/websockets/*
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009, 2010 Google Inc. All rights reserved:
 License: BSD (3 clause)
 
-Files: src/third_party/WebKit/WebCore/wml/{WMLBRElement.cpp}
-Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2003, 2006 Apple Computer, Inc / 2008 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/) / 2000 Simon Hausmann <hausmann@kde.org>:
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/wml/{WMLPElement.cpp,WMLPElement.h}
-Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2008 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/):
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/wml/{WMLBRElement.h}
-Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2008 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/) / 2000 Simon Hausmann <hausmann@kde.org>:
-License: LGPL (v2 or later)
-
-Files: src/third_party/WebKit/WebCore/wml/{WMLAElement.h}
-Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 2007, 2008 Apple Inc. All rights reserved / 1999 Antti Koivisto (koivisto@kde.org) / 2008 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/) / 2000 Simon Hausmann <hausmann@kde.org>:
-License: LGPL (v2 or later)
-
 Files: src/third_party/WebKit/WebCore/wml/{WMLAElement.cpp}
-Copyright: Copyright: 2003, 2006, 2007, 2008 Apple Inc. All rights reserved / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2008 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/) / 2000 Simon Hausmann <hausmann@kde.org> / 2006 Graham Dennis (graham.dennis@gmail.com):
+Copyright: Copyright: 2003, 2006, 2007, 2008 Apple Inc. All rights reserved / 2008 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/) / 2000 Simon Hausmann <hausmann@kde.org> / 2006 Graham Dennis (graham.dennis@gmail.com) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org):
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/wml/{WMLPageState.h}
@@ -11015,8 +10903,24 @@ Files: src/third_party/WebKit/WebCore/wml/{WMLPageState.cpp}
 Copyright: Copyright: 2004-2007 Apple Inc. All rights reserved / 2008, 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/):
 License: LGPL (v2 or later)
 
+Files: src/third_party/WebKit/WebCore/wml/{WMLAElement.h}
+Copyright: Copyright: 2007, 2008 Apple Inc. All rights reserved / 2008 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/) / 2000 Simon Hausmann <hausmann@kde.org> / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org):
+License: LGPL (v2 or later)
+
 Files: src/third_party/WebKit/WebCore/wml/{WMLAccessElement.cpp,WMLAccessElement.h,WMLAnchorElement.cpp,WMLAnchorElement.h,WMLDoElement.h,WMLDocument.cpp,WMLDocument.h,WMLElement.cpp,WMLErrorHandling.cpp,WMLErrorHandling.h,WMLFieldSetElement.cpp,WMLFieldSetElement.h,WMLGoElement.h,WMLImageElement.cpp,WMLImageElement.h,WMLImageLoader.cpp,WMLImageLoader.h,WMLInsertedLegendElement.cpp,WMLInsertedLegendElement.h,WMLIntrinsicEvent.cpp,WMLIntrinsicEvent.h,WMLIntrinsicEventHandler.cpp,WMLIntrinsicEventHandler.h,WMLMetaElement.cpp,WMLMetaElement.h,WMLNoopElement.cpp,WMLNoopElement.h,WMLOnEventElement.h,WMLPostfieldElement.cpp,WMLPostfieldElement.h,WMLPrevElement.cpp,WMLPrevElement.h,WMLRefreshElement.cpp,WMLRefreshElement.h,WMLSetvarElement.cpp,WMLSetvarElement.h,WMLTableElement.cpp,WMLTableElement.h,WMLTaskElement.cpp,WMLTaskElement.h,WMLTimerElement.cpp,WMLTimerElement.h,WMLVariables.cpp,WMLVariables.h}
 Copyright: Copyright: 2008 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/):
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/wml/{WMLPElement.cpp,WMLPElement.h}
+Copyright: Copyright: 2008 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/) / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org):
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/wml/{WMLBRElement.h}
+Copyright: Copyright: 2008 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/) / 2000 Simon Hausmann <hausmann@kde.org> / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org):
+License: LGPL (v2 or later)
+
+Files: src/third_party/WebKit/WebCore/wml/{WMLBRElement.cpp}
+Copyright: Copyright: 2008 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/) / 2000 Simon Hausmann <hausmann@kde.org> / 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2003, 2006 Apple Computer, Inc:
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/wml/{WMLCardElement.cpp,WMLCardElement.h,WMLDoElement.cpp,WMLElement.h,WMLEventHandlingElement.cpp,WMLEventHandlingElement.h,WMLGoElement.cpp,WMLInputElement.cpp,WMLInputElement.h,WMLOnEventElement.cpp,WMLTemplateElement.cpp,WMLTemplateElement.h}
@@ -11052,35 +10956,19 @@ Copyright: Copyright: 2005 Frerich Raabe <raabe@kde.org>:
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/xml/{XPathEvaluator.cpp,XPathEvaluator.h,XPathExpression.h,XPathExpressionNode.cpp,XPathNSResolver.cpp,XPathNSResolver.h,XPathPredicate.h,XPathUtil.h,XPathValue.cpp,XPathValue.h,XPathVariableReference.cpp}
-Copyright: Copyright: 2005 Frerich Raabe <raabe@kde.org> / 2006 Apple Computer, Inc:
-License: BSD (2 clause)
-
-Files: src/third_party/WebKit/WebCore/xml/{XPathExpressionNode.h,XPathFunctions.h,XPathPath.h,XPathStep.h,XPathUtil.cpp}
-Copyright: Copyright: 2005 Frerich Raabe <raabe@kde.org> / 2006, 2009 Apple Inc:
-License: BSD (2 clause)
-
-Files: src/third_party/WebKit/WebCore/xml/{XPathExpression.cpp,XPathNamespace.cpp,XPathNamespace.h,XPathResult.cpp,XPathResult.h}
-Copyright: Copyright: 2005 Frerich Raabe <raabe@kde.org> / 2006, 2009 Apple Inc. All rights reserved:
-License: BSD (2 clause)
-
-Files: src/third_party/WebKit/WebCore/xml/{XPathPredicate.cpp}
-Copyright: Copyright: 2005 Frerich Raabe <raabe@kde.org> / 2007 Alexey Proskuryakov <ap@webkit.org> / 2006 Apple Computer, Inc:
-License: BSD (2 clause)
-
-Files: src/third_party/WebKit/WebCore/xml/{XPathFunctions.cpp,XPathPath.cpp}
-Copyright: Copyright: 2005 Frerich Raabe <raabe@kde.org> / 2007 Alexey Proskuryakov <ap@webkit.org> / 2006, 2009 Apple Inc:
-License: BSD (2 clause)
-
-Files: src/third_party/WebKit/WebCore/xml/{XPathStep.cpp}
-Copyright: Copyright: 2005 Frerich Raabe <raabe@kde.org> / 2007 Alexey Proskuryakov <ap@webkit.org> / 2006, 2009 Apple Inc. All rights reserved:
+Copyright: Copyright: 2006 Apple Computer, Inc / 2005 Frerich Raabe <raabe@kde.org>:
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/xml/{XPathParser.h}
-Copyright: Copyright: 2005 Maksim Orlovich <maksim@kde.org> / 2006 Apple Computer, Inc:
+Copyright: Copyright: 2006 Apple Computer, Inc / 2005 Maksim Orlovich <maksim@kde.org>:
 License: BSD (2 clause)
 
-Files: src/third_party/WebKit/WebCore/xml/{XPathParser.cpp}
-Copyright: Copyright: 2005 Maksim Orlovich <maksim@kde.org> / 2007 Alexey Proskuryakov <ap@webkit.org> / 2006 Apple Computer, Inc:
+Files: src/third_party/WebKit/WebCore/xml/{XPathExpressionNode.h,XPathFunctions.h,XPathPath.h,XPathStep.h,XPathUtil.cpp}
+Copyright: Copyright: 2006, 2009 Apple Inc / 2005 Frerich Raabe <raabe@kde.org>:
+License: BSD (2 clause)
+
+Files: src/third_party/WebKit/WebCore/xml/{XPathExpression.cpp,XPathNamespace.cpp,XPathNamespace.h,XPathResult.cpp,XPathResult.h}
+Copyright: Copyright: 2006, 2009 Apple Inc. All rights reserved / 2005 Frerich Raabe <raabe@kde.org>:
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/xml/{NativeXPathNSResolver.cpp,NativeXPathNSResolver.h}
@@ -11089,6 +10977,22 @@ License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/xml/{XPathNodeSet.cpp,XPathNodeSet.h,XSLTExtensions.h}
 Copyright: Copyright: 2007 Alexey Proskuryakov <ap@webkit.org>:
+License: BSD (2 clause)
+
+Files: src/third_party/WebKit/WebCore/xml/{XPathPredicate.cpp}
+Copyright: Copyright: 2007 Alexey Proskuryakov <ap@webkit.org> / 2006 Apple Computer, Inc / 2005 Frerich Raabe <raabe@kde.org>:
+License: BSD (2 clause)
+
+Files: src/third_party/WebKit/WebCore/xml/{XPathParser.cpp}
+Copyright: Copyright: 2007 Alexey Proskuryakov <ap@webkit.org> / 2006 Apple Computer, Inc / 2005 Maksim Orlovich <maksim@kde.org>:
+License: BSD (2 clause)
+
+Files: src/third_party/WebKit/WebCore/xml/{XPathFunctions.cpp,XPathPath.cpp}
+Copyright: Copyright: 2007 Alexey Proskuryakov <ap@webkit.org> / 2006, 2009 Apple Inc / 2005 Frerich Raabe <raabe@kde.org>:
+License: BSD (2 clause)
+
+Files: src/third_party/WebKit/WebCore/xml/{XPathStep.cpp}
+Copyright: Copyright: 2007 Alexey Proskuryakov <ap@webkit.org> / 2006, 2009 Apple Inc. All rights reserved / 2005 Frerich Raabe <raabe@kde.org>:
 License: BSD (2 clause)
 
 Files: src/third_party/WebKit/WebCore/xml/{XMLHttpRequestUpload.cpp,XMLHttpRequestUpload.h}
@@ -11148,7 +11052,7 @@ Copyright: Copyright: 2005, 2006 Alexey Proskuryakov <ap@webkit.org> / 2004, 200
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/xml/{XMLHttpRequest.cpp}
-Copyright: Copyright: 2007, 2008 Julien Chaffraix <jchaffraix@webkit.org> / 2005-2007 Alexey Proskuryakov <ap@webkit.org> / 2008 David Levin <levin@chromium.org> / 2004, 2006, 2008 Apple Inc. All rights reserved:
+Copyright: Copyright: 2008 David Levin <levin@chromium.org> / 2007, 2008 Julien Chaffraix <jchaffraix@webkit.org> / 2005-2007 Alexey Proskuryakov <ap@webkit.org> / 2004, 2006, 2008 Apple Inc. All rights reserved:
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/xml/{XSLStyleSheetQt.cpp,XSLTProcessorQt.cpp}
@@ -11156,7 +11060,7 @@ Copyright: Copyright: 2009 Jakub Wieczorek <faw217@gmail.com>:
 License: LGPL (v2 or later)
 
 Files: src/third_party/WebKit/WebCore/xml/{XSLTExtensions.cpp}
-Copyright: Copyright: 2001-2002 Thomas Broyer, Charlie Bozeman and Daniel Veillard / 2007 Alexey Proskuryakov <ap@webkit.org>:
+Copyright: Copyright: 2007 Alexey Proskuryakov <ap@webkit.org> / 2001-2002 Thomas Broyer, Charlie Bozeman and Daniel Veillard:
 License: MIT/X11 (BSD like)
 
 Files: src/third_party/WebKit/WebKit/chromium/public/*
@@ -11608,7 +11512,7 @@ Copyright: UNKNOWN:
 License: *No copyright* LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{ac3dec.c}
-Copyright: Copyright: 2006 Kartikey Mahendra BHATT (bhattkm at gmail dot com) / 2007-2008 Bartlomiej Wolowiec <bartek.wolowiec@gmail.com> / 1999-2000 Aaron Holtzman <aholtzma@ess.engr.uvic.ca> / 2007 Justin Ruggles <justin.ruggles@gmail.com> / 2000-2003 Michel Lespinasse <walken@zoy.org>:
+Copyright: Copyright: 1999-2000 Aaron Holtzman <aholtzma@ess.engr.uvic.ca> / 2007 Justin Ruggles <justin.ruggles@gmail.com> / 2006 Kartikey Mahendra BHATT (bhattkm at gmail dot com) / 2007-2008 Bartlomiej Wolowiec <bartek.wolowiec@gmail.com> / 2000-2003 Michel Lespinasse <walken@zoy.org>:
 License: GPL (v2 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{jrevdct.c}
@@ -11647,36 +11551,32 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{ac3.h,ac3tab.
 Copyright: Copyright: 2000, 2001, 2002 Fabrice Bellard:
 License: LGPL (v2.1 or later)
 
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{mpegvideo.h,ratecontrol.h}
+Copyright: Copyright: 2000, 2001, 2002 Fabrice Bellard / 2002-2004 Michael Niedermayer:
+License: LGPL (v2.1 or later)
+
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{dsputil.h}
 Copyright: Copyright: 2000, 2001, 2002 Fabrice Bellard / 2002-2004 Michael Niedermayer <michaelni@gmx.at>:
 License: LGPL (v2.1 or later)
 
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{mpeg12.c,mpeg12data.c,mpeg12data.h,mpeg12decdata.h,mpeg12enc.c,mpeg4data.h,mpegvideo.c,mpegvideo_common.h,mpegvideo_enc.c,mpegvideo_parser.c}
-Copyright: Copyright: 2000,2001 Fabrice Bellard / 2002-2004 Michael Niedermayer <michaelni@gmx.at>:
-License: LGPL (v2.1 or later)
-
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{h263.c,h263data.h}
-Copyright: Copyright: 2000,2001 Fabrice Bellard / 2002-2004 Michael Niedermayer <michaelni@gmx.at> / 2001 Juan J. Sierralta P:
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{rl.h}
+Copyright: Copyright: 2000-2002 Fabrice Bellard / 2002-2004 Michael Niedermayer:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{ac3tab.c,api-example.c,avcodec.h,dct-test.c,motion-test.c,mpegaudio.h,pcm.c,raw.c,raw.h,rawdec.c,rawenc.c}
 Copyright: Copyright: 2001 Fabrice Bellard:
 License: LGPL (v2.1 or later)
 
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{h263dec.c,msmpeg4.c,msmpeg4data.c,msmpeg4data.h,options.c,utils.c}
-Copyright: Copyright: 2001 Fabrice Bellard / 2002-2004 Michael Niedermayer <michaelni@gmx.at>:
-License: LGPL (v2.1 or later)
-
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{simple_idct.c,simple_idct.h}
 Copyright: Copyright: 2001 Michael Niedermayer <michaelni@gmx.at>:
 License: LGPL (v2.1 or later)
 
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{mpegaudio.c,mpegaudiodec.c,mpegaudiodecheader.h}
-Copyright: Copyright: 2001, 2002 Fabrice Bellard:
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{roqvideoenc.c}
+Copyright: Copyright: 2001 Tim Ferguson / 2004-2007 Eric Lasota / 2007 Vitor Sessak <vitor1001@gmail.com>:
 License: LGPL (v2.1 or later)
 
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{mathops.h}
-Copyright: Copyright: 2001, 2002 Fabrice Bellard / 2006 Michael Niedermayer <michaelni@gmx.at> et al:
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{mpegaudio.c,mpegaudiodec.c,mpegaudiodecheader.h}
+Copyright: Copyright: 2001, 2002 Fabrice Bellard:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{mpegaudiodecheader.c}
@@ -11701,14 +11601,6 @@ License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{allcodecs.c,dvdata.h,fft-test.c,mdct.c,mpegaudiodata.c,mpegaudiodata.h,mpegaudiodectab.h}
 Copyright: Copyright: 2002 Fabrice Bellard:
-License: LGPL (v2.1 or later)
-
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{dv.c}
-Copyright: Copyright: 2002 Fabrice Bellard / 2003 Roman Shaposhnik / 2004 Roman Shaposhnik / 2006 Daniel Maas <dmaas@maasdigital.com>:
-License: LGPL (v2.1 or later)
-
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{fft.c}
-Copyright: Copyright: 2002 Fabrice Bellard / 2008 Loren Merritt:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{gif.c}
@@ -11755,20 +11647,28 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{motion_est_te
 Copyright: Copyright: 2002-2004 Michael Niedermayer:
 License: LGPL (v2.1 or later)
 
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{mpegvideo.h,ratecontrol.h}
-Copyright: Copyright: 2002-2004 Michael Niedermayer / 2000, 2001, 2002 Fabrice Bellard:
-License: LGPL (v2.1 or later)
-
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{motion_est.c,rv10.c}
 Copyright: Copyright: 2002-2004 Michael Niedermayer / 2000,2001 Fabrice Bellard:
 License: LGPL (v2.1 or later)
 
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{rl.h}
-Copyright: Copyright: 2002-2004 Michael Niedermayer / 2000-2002 Fabrice Bellard:
-License: LGPL (v2.1 or later)
-
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{error_resilience.c,h263_parser.c,h263_parser.h,ratecontrol.c}
 Copyright: Copyright: 2002-2004 Michael Niedermayer <michaelni@gmx.at>:
+License: LGPL (v2.1 or later)
+
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{mpeg12.c,mpeg12data.c,mpeg12data.h,mpeg12decdata.h,mpeg12enc.c,mpeg4data.h,mpegvideo.c,mpegvideo_common.h,mpegvideo_enc.c,mpegvideo_parser.c}
+Copyright: Copyright: 2002-2004 Michael Niedermayer <michaelni@gmx.at> / 2000,2001 Fabrice Bellard:
+License: LGPL (v2.1 or later)
+
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{h263.c,h263data.h}
+Copyright: Copyright: 2002-2004 Michael Niedermayer <michaelni@gmx.at> / 2000,2001 Fabrice Bellard / 2001 Juan J. Sierralta P:
+License: LGPL (v2.1 or later)
+
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{h263dec.c,msmpeg4.c,msmpeg4data.c,msmpeg4data.h,options.c,utils.c}
+Copyright: Copyright: 2002-2004 Michael Niedermayer <michaelni@gmx.at> / 2001 Fabrice Bellard:
+License: LGPL (v2.1 or later)
+
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{h261.c,h261.h,h261_parser.c,h261data.h,h261dec.c,h261enc.c}
+Copyright: Copyright: 2002-2004 Michael Niedermayer <michaelni@gmx.at> / 2004 Maarten Daniels:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{lcl.h,lcldec.c,lclenc.c}
@@ -11823,12 +11723,12 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{cabac.c,cabac
 Copyright: Copyright: 2003 Michael Niedermayer <michaelni@gmx.at>:
 License: LGPL (v2.1 or later)
 
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{golomb.h}
-Copyright: Copyright: 2003 Michael Niedermayer <michaelni@gmx.at> / 2004 Alex Beregszaszi:
-License: LGPL (v2.1 or later)
-
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{8bps.c}
 Copyright: Copyright: 2003 Roberto Togni:
+License: LGPL (v2.1 or later)
+
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{dv.c}
+Copyright: Copyright: 2003 Roman Shaposhnik / 2004 Roman Shaposhnik / 2006 Daniel Maas <dmaas@maasdigital.com> / 2002 Fabrice Bellard:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{cook.c,cookdata.h}
@@ -11863,16 +11763,20 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{sonic.c}
 Copyright: Copyright: 2004 Alex Beregszaszi:
 License: LGPL (v2.1 or later)
 
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{golomb.h}
+Copyright: Copyright: 2004 Alex Beregszaszi / 2003 Michael Niedermayer <michaelni@gmx.at>:
+License: LGPL (v2.1 or later)
+
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{beosthread.c}
 Copyright: Copyright: 2004 FranÃ§ois Revol <revol@free.fr>:
 License: LGPL (v2.1 or later)
 
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{qdrw.c,qpeg.c,tscc.c,ulti.c,ulti_cb.h,xl.c}
-Copyright: Copyright: 2004 Konstantin Shishkov:
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{dcahuff.h}
+Copyright: Copyright: 2004 Gildas Bazin / 2007 Konstantin Shishkov:
 License: LGPL (v2.1 or later)
 
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{h261.c,h261.h,h261_parser.c,h261data.h,h261dec.c,h261enc.c}
-Copyright: Copyright: 2004 Maarten Daniels / 2002-2004 Michael Niedermayer <michaelni@gmx.at>:
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{qdrw.c,qpeg.c,tscc.c,ulti.c,ulti_cb.h,xl.c}
+Copyright: Copyright: 2004 Konstantin Shishkov:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{get_bits.h,h264idct.c,os2thread.c,put_bits.h,rangecoder.c,rangecoder.h,resample2.c,snow.c,unary.h,w32thread.c}
@@ -11899,12 +11803,8 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{qtrle.c,vmdav
 Copyright: Copyright: 2004 the ffmpeg project:
 License: LGPL (v2.1 or later)
 
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{libgsm.c}
-Copyright: Copyright: 2005 Alban Bedel <albeu@free.fr> / 2006, 2007 Michel Bardiaux <mbardiaux@mediaxim.be>:
-License: LGPL (v2.1 or later)
-
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{qdm2.c,qdm2data.h}
-Copyright: Copyright: 2005 Alex Beregszaszi / 2005 Roberto Togni / 2005 Benjamin Larsson / 2003 Ewald Snel:
+Copyright: Copyright: 2005 Alex Beregszaszi / 2005 Benjamin Larsson / 2005 Roberto Togni / 2003 Ewald Snel:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{alac.c}
@@ -11951,6 +11851,10 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{mimic.c}
 Copyright: Copyright: 2005 Ole André Vadla Ravnås <oleavr@gmail.com> / 2008 Ramiro Polla <ramiro@lisha.ufsc.br>:
 License: LGPL (v2.1 or later)
 
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{fraps.c}
+Copyright: Copyright: 2005 Roine Gustafsson / 2006 Konstantin Shishkov:
+License: LGPL (v2.1 or later)
+
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{dvdsubenc.c}
 Copyright: Copyright: 2005 Wolfram Gloger:
 License: LGPL (v2.1 or later)
@@ -11961,6 +11865,10 @@ License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{aasc.c}
 Copyright: Copyright: 2005 the ffmpeg project:
+License: LGPL (v2.1 or later)
+
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{aac.c,aac.h,aacdectab.h,aactab.c,aactab.h}
+Copyright: Copyright: 2005-2006 Oded Shimon ( ods15 ods15 dyndns org ) / 2006-2007 Maxim Gavrilov ( maxim.gavrilov gmail com ):
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{tta.c}
@@ -11991,6 +11899,10 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{dcadata.h}
 Copyright: Copyright: 2006 Benjamin Larsson / 2004 Gildas Bazin:
 License: LGPL (v2.1 or later)
 
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{dca.c,dca.h,dca_parser.c}
+Copyright: Copyright: 2006 Benjamin Larsson / 2004 Gildas Bazin / 2004 Benjamin Zores / 2007 Konstantin Shishkov:
+License: LGPL (v2.1 or later)
+
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{libxvid_internal.h}
 Copyright: Copyright: 2006 Corey Hickey:
 License: LGPL (v2.1 or later)
@@ -12011,12 +11923,12 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{huffman.c,kmv
 Copyright: Copyright: 2006 Konstantin Shishkov:
 License: LGPL (v2.1 or later)
 
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{fraps.c}
-Copyright: Copyright: 2006 Konstantin Shishkov / 2005 Roine Gustafsson:
-License: LGPL (v2.1 or later)
-
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{audioconvert.c,bitstream_filter.c,dump_extradata_bsf.c,libxvid_rc.c,mp3_header_compress_bsf.c,mp3_header_decompress_bsf.c,noise_bsf.c,remove_extradata_bsf.c}
 Copyright: Copyright: 2006 Michael Niedermayer <michaelni@gmx.at>:
+License: LGPL (v2.1 or later)
+
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{mathops.h}
+Copyright: Copyright: 2006 Michael Niedermayer <michaelni@gmx.at> et al / 2001, 2002 Fabrice Bellard:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{vorbis.h,vorbis_enc.c,vorbis_enc_data.h}
@@ -12043,6 +11955,10 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{cavs.c,cavs.h
 Copyright: Copyright: 2006 Stefan Gehrer <stefan.gehrer@gmx.de>:
 License: LGPL (v2.1 or later)
 
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{libgsm.c}
+Copyright: Copyright: 2006, 2007 Michel Bardiaux <mbardiaux@mediaxim.be> / 2005 Alban Bedel <albeu@free.fr>:
+License: LGPL (v2.1 or later)
+
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{mmvideo.c}
 Copyright: Copyright: 2006,2008 Peter Ross:
 License: LGPL (v2.1 or later)
@@ -12055,16 +11971,16 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{vc1.c,vc1.h,v
 Copyright: Copyright: 2006-2007 Konstantin Shishkov / 2005 Anonymous, Alex Beregszaszi, Michael Niedermayer:
 License: LGPL (v2.1 or later)
 
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{aac.c,aac.h,aacdectab.h,aactab.c,aactab.h}
-Copyright: Copyright: 2006-2007 Maxim Gavrilov ( maxim.gavrilov gmail com ) / 2005-2006 Oded Shimon ( ods15 ods15 dyndns org ):
-License: LGPL (v2.1 or later)
-
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{libdiracdec.c,libdiracenc.c}
 Copyright: Copyright: 2006-2008 BBC, Anuradha Suraparaju <asuraparaju at gmail dot com > / 2005 BBC, Andrew Kennedy <dirac at rd dot bbc dot co dot uk>:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{atrac3.c}
-Copyright: Copyright: 2006-2008 Benjamin Larsson / 2006-2008 Maxim Poliakovski:
+Copyright: Copyright: 2006-2008 Maxim Poliakovski / 2006-2008 Benjamin Larsson:
+License: LGPL (v2.1 or later)
+
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{qtrleenc.c}
+Copyright: Copyright: 2007 Alexis Ballier / 2007 Clemens Fruhwirth:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{c93.c}
@@ -12091,10 +12007,6 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{ac3dec.h,ac3d
 Copyright: Copyright: 2007 Bartlomiej Wolowiec <bartek.wolowiec@gmail.com>:
 License: LGPL (v2.1 or later)
 
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{eac3dec.c}
-Copyright: Copyright: 2007 Bartlomiej Wolowiec <bartek.wolowiec@gmail.com> / 2008 Justin Ruggles:
-License: LGPL (v2.1 or later)
-
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{apedec.c}
 Copyright: Copyright: 2007 Benjamin Zores <ben@geexbox.org>:
 License: LGPL (v2.1 or later)
@@ -12105,10 +12017,6 @@ License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{rle.c,targaenc.c}
 Copyright: Copyright: 2007 Bobby Bingham:
-License: LGPL (v2.1 or later)
-
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{qtrleenc.c}
-Copyright: Copyright: 2007 Clemens Fruhwirth / 2007 Alexis Ballier:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{xiph.c,xiph.h}
@@ -12125,14 +12033,6 @@ License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{dxa.c,mpc8.c,mpc8data.h,mpc8huff.h,rv30.c,rv30data.h,rv30dsp.c,rv34data.h,rv34vlc.h,rv40.c,rv40data.h,rv40vlc2.h,vb.c}
 Copyright: Copyright: 2007 Konstantin Shishkov:
-License: LGPL (v2.1 or later)
-
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{dcahuff.h}
-Copyright: Copyright: 2007 Konstantin Shishkov / 2004 Gildas Bazin:
-License: LGPL (v2.1 or later)
-
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{dca.c,dca.h,dca_parser.c}
-Copyright: Copyright: 2007 Konstantin Shishkov / 2006 Benjamin Larsson / 2004 Gildas Bazin / 2004 Benjamin Zores:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{wmaenc.c}
@@ -12161,10 +12061,6 @@ License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{elbg.c,elbg.h}
 Copyright: Copyright: 2007 Vitor Sessak <vitor1001@gmail.com>:
-License: LGPL (v2.1 or later)
-
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{roqvideoenc.c}
-Copyright: Copyright: 2007 Vitor Sessak <vitor1001@gmail.com> / 2001 Tim Ferguson / 2004-2007 Eric Lasota:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{g729data.h}
@@ -12239,8 +12135,16 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{flac.h}
 Copyright: Copyright: 2008 Justin Ruggles:
 License: LGPL (v2.1 or later)
 
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{eac3dec.c}
+Copyright: Copyright: 2008 Justin Ruggles / 2007 Bartlomiej Wolowiec <bartek.wolowiec@gmail.com>:
+License: LGPL (v2.1 or later)
+
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{aacenc.c,aacpsy.c,aacpsy.h,faxcompr.c,faxcompr.h,iirfilter.c,iirfilter.h,msrledec.c,msrledec.h,rv40dsp.c}
 Copyright: Copyright: 2008 Konstantin Shishkov:
+License: LGPL (v2.1 or later)
+
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{fft.c}
+Copyright: Copyright: 2008 Loren Merritt / 2002 Fabrice Bellard:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/{vp3_parser.c}
@@ -12395,20 +12299,12 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/ppc/{idct_alti
 Copyright: Copyright: 2001 Michel Lespinasse:
 License: LGPL (v2.1 or later)
 
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/ppc/{mathops.h}
-Copyright: Copyright: 2001, 2002 Fabrice Bellard / 2006 Michael Niedermayer <michaelni@gmx.at> et al:
-License: LGPL (v2.1 or later)
-
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/ppc/{dsputil_altivec.c,dsputil_altivec.h,dsputil_ppc.c}
-Copyright: Copyright: 2002 Dieter Shirley / 2002 Brian Foley / 2003-2004 Romain Dolbeau <romain@dolbeau.org>:
-License: LGPL (v2.1 or later)
-
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/ppc/{mpegvideo_altivec.c}
 Copyright: Copyright: 2002 Dieter Shirley / 2003 Romain Dolbeau <romain@dolbeau.org>:
 License: LGPL (v2.1 or later)
 
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/ppc/{fft_altivec.c}
-Copyright: Copyright: 2002 Fabrice Bellard / 2003 Romain Dolbeau <romain@dolbeau.org>:
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/ppc/{dsputil_altivec.c,dsputil_altivec.h,dsputil_ppc.c}
+Copyright: Copyright: 2002 Dieter Shirley / 2003-2004 Romain Dolbeau <romain@dolbeau.org> / 2002 Brian Foley:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/ppc/{fdct_altivec.c}
@@ -12417,6 +12313,10 @@ License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/ppc/{gmc_altivec.c}
 Copyright: Copyright: 2003 Romain Dolbeau <romain@dolbeau.org>:
+License: LGPL (v2.1 or later)
+
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/ppc/{fft_altivec.c}
+Copyright: Copyright: 2003 Romain Dolbeau <romain@dolbeau.org> / 2002 Fabrice Bellard:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/ppc/{dsputil_ppc.h}
@@ -12439,12 +12339,12 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/ppc/{float_alt
 Copyright: Copyright: 2006 Luca Barbato <lu_zero@gentoo.org>:
 License: LGPL (v2.1 or later)
 
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/ppc/{int_altivec.c}
-Copyright: Copyright: 2007 Luca Barbato <lu_zero@gentoo.org>:
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/ppc/{mathops.h}
+Copyright: Copyright: 2006 Michael Niedermayer <michaelni@gmx.at> et al / 2001, 2002 Fabrice Bellard:
 License: LGPL (v2.1 or later)
 
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/ps2/{idct_mmi.c}
-Copyright: Copyright: 2000 Michel Lespinasse <walken@zoy.org> / 2002 by Leon van Stuivenberg / 2000-2001 Peter Gubanov <peter@elecard.net.ru>:
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/ppc/{int_altivec.c}
+Copyright: Copyright: 2007 Luca Barbato <lu_zero@gentoo.org>:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/ps2/{dsputil_mmi.c}
@@ -12453,6 +12353,10 @@ License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/ps2/{mpegvideo_mmi.c}
 Copyright: Copyright: 2000,2001 Fabrice Bellard:
+License: LGPL (v2.1 or later)
+
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/ps2/{idct_mmi.c}
+Copyright: Copyright: 2000-2001 Peter Gubanov <peter@elecard.net.ru> / 2000 Michel Lespinasse <walken@zoy.org> / 2002 by Leon van Stuivenberg:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/ps2/{mmi.h}
@@ -12491,6 +12395,10 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/x86/{mmx.h}
 Copyright: Copyright: 1997-2001 H. Dietz and R. Fisher:
 License: LGPL (v2.1 or later)
 
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/x86/{dsputil_mmx_avg_template.c}
+Copyright: Copyright: 2000, 2001 Fabrice Bellard / 2002-2004 Michael Niedermayer:
+License: LGPL (v2.1 or later)
+
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/x86/{dsputil_mmx.c,dsputilenc_mmx.c}
 Copyright: Copyright: 2000, 2001 Fabrice Bellard / 2002-2004 Michael Niedermayer <michaelni@gmx.at>:
 License: LGPL (v2.1 or later)
@@ -12504,7 +12412,7 @@ Copyright: Copyright: 2000,2001 Fabrice Bellard:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/x86/{idct_mmx_xvid.c}
-Copyright: Copyright: 2001 Peter Ross <pross@xvid.org> / 2000 Michel Lespinasse <walken@zoy.org> / 2000-2001 Peter Gubanov <peter@elecard.net.ru>:
+Copyright: Copyright: 2001 Peter Ross <pross@xvid.org> / 2000-2001 Peter Gubanov <peter@elecard.net.ru> / 2000 Michel Lespinasse <walken@zoy.org>:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/x86/{simple_idct_mmx.c}
@@ -12515,12 +12423,12 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/x86/{mpegvideo
 Copyright: Copyright: 2002 Michael Niedermayer <michaelni@gmx.at>:
 License: LGPL (v2.1 or later)
 
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/x86/{dsputil_mmx_avg_template.c}
-Copyright: Copyright: 2002-2004 Michael Niedermayer / 2000, 2001 Fabrice Bellard:
-License: LGPL (v2.1 or later)
-
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/x86/{motion_est_mmx.c}
 Copyright: Copyright: 2002-2004 Michael Niedermayer / 2001 Fabrice Bellard:
+License: LGPL (v2.1 or later)
+
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/x86/{fdct_mmx.c}
+Copyright: Copyright: 2002-2004 Michael Niedermayer <michaelni@gmx.at> / 2004 Denes Balatoni / 2001 Fabrice Bellard:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/x86/{h264_i386.h}
@@ -12529,10 +12437,6 @@ License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/x86/{idct_sse2_xvid.c}
 Copyright: Copyright: 2003 Pascal Massimino <skal@planet-d.net> / 1999 Intel Corporation):
-License: LGPL (v2.1 or later)
-
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/x86/{fdct_mmx.c}
-Copyright: Copyright: 2004 Denes Balatoni / 2001 Fabrice Bellard / 2002-2004 Michael Niedermayer <michaelni@gmx.at>:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/x86/{dsputil_mmx_qns_template.c}
@@ -12604,7 +12508,7 @@ Copyright: UNKNOWN:
 License: *No copyright* LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavdevice/{x11grab.c}
-Copyright: Copyright: 1997-1998 Rasca, Berlin / 2000-2001 Fabrice Bellard / 2006 Clemens Fruhwirth <clemens@endorphin.org>:
+Copyright: Copyright: 2006 Clemens Fruhwirth <clemens@endorphin.org> / 1997-1998 Rasca, Berlin / 2000-2001 Fabrice Bellard:
 License: GPL (v2 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavdevice/{beosaudio.cpp,oss_audio.c}
@@ -12615,16 +12519,12 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavdevice/{v4l.c}
 Copyright: Copyright: 2000,2001 Fabrice Bellard:
 License: LGPL (v2.1 or later)
 
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavdevice/{v4l2.c}
-Copyright: Copyright: 2000,2001 Fabrice Bellard / 2006 Luca Abeni:
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavdevice/{dv1394.h}
+Copyright: Copyright: 2001 Daniel Maas <dmaas@dcine.com> / 1999,2000 Sebastien Rougeaux <sebastien.rougeaux@anu.edu.au>:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavdevice/{bktr.c}
-Copyright: Copyright: 2000,2001 Gerard Lantau / 2002 Steve O'Hara-Smith / 1999 Roger Hardiman:
-License: LGPL (v2.1 or later)
-
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavdevice/{dv1394.h}
-Copyright: Copyright: 2001 Daniel Maas <dmaas@dcine.com> / 1999,2000 Sebastien Rougeaux <sebastien.rougeaux@anu.edu.au>:
+Copyright: Copyright: 2002 Steve O'Hara-Smith / 2000,2001 Gerard Lantau / 1999 Roger Hardiman:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavdevice/{dv1394.c}
@@ -12635,12 +12535,16 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavdevice/{libdc1394.c}
 Copyright: Copyright: 2004 Roman Shaposhnik / 2008 Alessandro Sappia:
 License: LGPL (v2.1 or later)
 
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavdevice/{v4l2.c}
+Copyright: Copyright: 2006 Luca Abeni / 2000,2001 Fabrice Bellard:
+License: LGPL (v2.1 or later)
+
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavdevice/{vfwcap.c}
 Copyright: Copyright: 2006-2008 Ramiro Polla:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavdevice/{alsa-audio-common.c,alsa-audio-dec.c,alsa-audio-enc.c,alsa-audio.h}
-Copyright: Copyright: 2007 Benoit Fouet ( benoit fouet free fr ) / 2007 Luca Abeni ( lucabe72 email it ):
+Copyright: Copyright: 2007 Luca Abeni ( lucabe72 email it ) / 2007 Benoit Fouet ( benoit fouet free fr ):
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavdevice/{jack_audio.c}
@@ -12675,8 +12579,20 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{asf.c,asfdec
 Copyright: Copyright: 2000, 2001 Fabrice Bellard:
 License: LGPL (v2.1 or later)
 
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{gopher.c}
+Copyright: Copyright: 2000, 2001 Fabrice Bellard / 2009 Toshimitsu Kimura:
+License: LGPL (v2.1 or later)
+
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{allformats.c,cutils.c,mpeg.c,mpeg.h,mpegenc.c,options.c,os_support.h,udp.c,utils.c}
 Copyright: Copyright: 2000, 2001, 2002 Fabrice Bellard:
+License: LGPL (v2.1 or later)
+
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{os_support.c}
+Copyright: Copyright: 2000, 2001, 2002 Fabrice Bellard / 2002 Francois Revol:
+License: LGPL (v2.1 or later)
+
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{img2.c}
+Copyright: Copyright: 2000, 2001, 2002 Fabrice Bellard / 2004 Michael Niedermayer:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{mpjpeg.c}
@@ -12707,26 +12623,6 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{crcenc.c,fra
 Copyright: Copyright: 2002 Fabrice Bellard:
 License: LGPL (v2.1 or later)
 
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{dv.h}
-Copyright: Copyright: 2002 Fabrice Bellard / 2003 Roman Shaposhnik:
-License: LGPL (v2.1 or later)
-
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{dv.c,dvenc.c}
-Copyright: Copyright: 2002 Fabrice Bellard / 2003 Roman Shaposhnik / 2006 Daniel Maas <dmaas@maasdigital.com>:
-License: LGPL (v2.1 or later)
-
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{rtpdec.h}
-Copyright: Copyright: 2002 Fabrice Bellard / 2006 Ryan Martell <rdm4@martellventures.com>:
-License: LGPL (v2.1 or later)
-
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{rtp_mpv.c}
-Copyright: Copyright: 2002 Fabrice Bellard / 2007 Luca Abeni:
-License: LGPL (v2.1 or later)
-
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{os_support.c}
-Copyright: Copyright: 2002 Francois Revol / 2000, 2001, 2002 Fabrice Bellard:
-License: LGPL (v2.1 or later)
-
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{isom.c,isom.h}
 Copyright: Copyright: 2002 Francois Revol <revol@free.fr> / 2001 Fabrice Bellard / 2006 Baptiste Coudurier <baptiste.coudurier@free.fr>:
 License: LGPL (v2.1 or later)
@@ -12735,8 +12631,20 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{mpegts.c}
 Copyright: Copyright: 2002-2003 Fabrice Bellard:
 License: LGPL (v2.1 or later)
 
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{nutdec.c}
+Copyright: Copyright: 2003 Alex Beregszaszi / 2004-2006 Michael Niedermayer:
+License: LGPL (v2.1 or later)
+
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{id3v2.c,id3v2.h,mp3.c,mpegts.h,mpegtsenc.c}
 Copyright: Copyright: 2003 Fabrice Bellard:
+License: LGPL (v2.1 or later)
+
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{dv.h}
+Copyright: Copyright: 2003 Roman Shaposhnik / 2002 Fabrice Bellard:
+License: LGPL (v2.1 or later)
+
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{dv.c,dvenc.c}
+Copyright: Copyright: 2003 Roman Shaposhnik / 2006 Daniel Maas <dmaas@maasdigital.com> / 2002 Fabrice Bellard:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{flvdec.c,flvenc.c}
@@ -12745,6 +12653,10 @@ License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{4xm.c,flic.c,idcin.c,idroq.c,ipmovie.c,psxstr.c,segafilm.c,wc3movie.c,westwood.c}
 Copyright: Copyright: 2003 The ffmpeg Project:
+License: LGPL (v2.1 or later)
+
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{movenc.c}
+Copyright: Copyright: 2003 Thomas Raivio / 2009 Baptiste Coudurier <baptiste dot coudurier at gmail dot com> / 2004 Gildas Bazin <gbazin at videolan dot org>:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{swf.h,swfdec.c,swfenc.c}
@@ -12759,20 +12671,12 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{matroskadec.
 Copyright: Copyright: 2003-2008 The FFmpeg Project:
 License: LGPL (v2.1 or later)
 
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{img2.c}
-Copyright: Copyright: 2004 Michael Niedermayer / 2000, 2001, 2002 Fabrice Bellard:
-License: LGPL (v2.1 or later)
-
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{nsvdec.c}
 Copyright: Copyright: 2004 The FFmpeg Project:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{sierravmd.c}
 Copyright: Copyright: 2004 The ffmpeg Project:
-License: LGPL (v2.1 or later)
-
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{nutdec.c}
-Copyright: Copyright: 2004-2006 Michael Niedermayer / 2003 Alex Beregszaszi:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{nut.c,nutenc.c}
@@ -12847,6 +12751,10 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{rtp_h264.c,r
 Copyright: Copyright: 2006 Ryan Martell:
 License: LGPL (v2.1 or later)
 
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{rtpdec.h}
+Copyright: Copyright: 2006 Ryan Martell <rdm4@martellventures.com> / 2002 Fabrice Bellard:
+License: LGPL (v2.1 or later)
+
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{gxfenc.c,mxf.c,mxf.h,mxfdec.c}
 Copyright: Copyright: 2006 SmartJog S.A., Baptiste Coudurier <baptiste dot coudurier at smartjog dot com>:
 License: LGPL (v2.1 or later)
@@ -12903,6 +12811,10 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{rtp_aac.c,sd
 Copyright: Copyright: 2007 Luca Abeni:
 License: LGPL (v2.1 or later)
 
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{rtp_mpv.c}
+Copyright: Copyright: 2007 Luca Abeni / 2002 Fabrice Bellard:
+License: LGPL (v2.1 or later)
+
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{thp.c}
 Copyright: Copyright: 2007 Marco Gerards:
 License: LGPL (v2.1 or later)
@@ -12944,7 +12856,7 @@ Copyright: Copyright: 2008 Baptiste Coudurier <baptiste dot coudurier at gmail d
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{mxfenc.c}
-Copyright: Copyright: 2008 Baptiste Coudurier <baptiste dot coudurier at gmail dot com> / 2008 GUCAS, Zhentan Feng <spyfeng at gmail dot com>:
+Copyright: Copyright: 2008 GUCAS, Zhentan Feng <spyfeng at gmail dot com> / 2008 Baptiste Coudurier <baptiste dot coudurier at gmail dot com>:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{mvi.c}
@@ -13011,10 +12923,6 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{mov.c}
 Copyright: Copyright: 2009 Baptiste Coudurier <baptiste dot coudurier at gmail dot com> / 2001 Fabrice Bellard:
 License: LGPL (v2.1 or later)
 
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{movenc.c}
-Copyright: Copyright: 2009 Baptiste Coudurier <baptiste dot coudurier at gmail dot com> / 2003 Thomas Raivio / 2004 Gildas Bazin <gbazin at videolan dot org>:
-License: LGPL (v2.1 or later)
-
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{rtp_vorbis.c,rtp_vorbis.h}
 Copyright: Copyright: 2009 Colin McQuillan:
 License: LGPL (v2.1 or later)
@@ -13045,10 +12953,6 @@ License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{ncdec.c}
 Copyright: Copyright: 2009 Nicolas Martin (martinic at iro dot umontreal dot ca):
-License: LGPL (v2.1 or later)
-
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{gopher.c}
-Copyright: Copyright: 2009 Toshimitsu Kimura / 2000, 2001 Fabrice Bellard:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/{vqf.c}
@@ -13084,7 +12988,11 @@ Copyright: UNKNOWN:
 License: *No copyright* LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavutil/{lzo.c}
-Copyright: Copyright: (*.in++) / 2006 Reimar Doeffinger / get_byte(&):
+Copyright: Copyright: (*.in++) / get_byte(&) / 2006 Reimar Doeffinger:
+License: LGPL (v2.1 or later)
+
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavutil/{fifo.c}
+Copyright: Copyright: 2000, 2001, 2002 Fabrice Bellard / 2006 Roman Shaposhnik:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavutil/{avstring.c}
@@ -13103,6 +13011,10 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavutil/{log.c}
 Copyright: Copyright: 2003 Michel Bardiaux:
 License: LGPL (v2.1 or later)
 
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavutil/{md5.c}
+Copyright: Copyright: 2003-2005 by Christopher R. Hertel (crh@ubiqx.mn.org) / 2006 Michael Niedermayer (michaelni@gmx.at):
+License: LGPL (v2.1 or later)
+
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavutil/{integer.c,integer.h,pca.c,pca.h}
 Copyright: Copyright: 2004 Michael Niedermayer <michaelni@gmx.at>:
 License: LGPL (v2.1 or later)
@@ -13115,20 +13027,12 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavutil/{adler32.h}
 Copyright: Copyright: 2006 Mans Rullgard:
 License: LGPL (v2.1 or later)
 
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavutil/{md5.c}
-Copyright: Copyright: 2006 Michael Niedermayer (michaelni@gmx.at) / 2003-2005 by Christopher R. Hertel (crh@ubiqx.mn.org):
-License: LGPL (v2.1 or later)
-
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavutil/{avutil.h,bswap.h,common.h,crc.c,crc.h,internal.h,lls.c,lls.h,log.h,md5.h,mem.h,pixfmt.h,softfloat.c,softfloat.h,timer.h,tree.c,tree.h,x86_cpu.h}
 Copyright: Copyright: 2006 Michael Niedermayer <michaelni@gmx.at>:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavutil/{lzo.h}
 Copyright: Copyright: 2006 Reimar Doeffinger:
-License: LGPL (v2.1 or later)
-
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavutil/{fifo.c}
-Copyright: Copyright: 2006 Roman Shaposhnik / 2000, 2001, 2002 Fabrice Bellard:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavutil/{base64.c,base64.h}
@@ -13275,12 +13179,12 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/tests/{audiogen.c,videoge
 Copyright: Copyright: 2002 Fabrice Bellard:
 License: LGPL (v2.1 or later)
 
-Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/tests/{seek_test.c}
-Copyright: Copyright: 2003 Fabrice Bellard / 2007 Michael Niedermayer:
-License: LGPL (v2.1 or later)
-
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/tests/{tiny_psnr.c}
 Copyright: Copyright: 2003 Michael Niedermayer <michaelni@gmx.at>:
+License: LGPL (v2.1 or later)
+
+Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/tests/{seek_test.c}
+Copyright: Copyright: 2007 Michael Niedermayer / 2003 Fabrice Bellard:
 License: LGPL (v2.1 or later)
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/tests/{rotozoom.c}
@@ -13299,76 +13203,16 @@ Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/tools/*
 Copyright: Copyright: 2007 Michael Niedermayer:
 License: LGPL (v2.1 or later)
 
-Files: src/third_party/gles2_book/Chapter_10/MultiTexture/{MultiTexture.c}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Chapter_11/Multisample/{Multisample.c}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Chapter_11/Stencil_Test/{Stencil_Test.c,Stencil_Test.h}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Chapter_13/Noise3D/{generatenoise.c}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Chapter_13/ParticleSystem/{ParticleSystem.c}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Chapter_15/Hello_Triangle_KD/{Hello_Triangle_KD.c}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Chapter_2/Hello_Triangle/{Hello_Triangle.c,Hello_Triangle.h}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Chapter_8/Simple_VertexShader/{Simple_VertexShader.c,Simple_VertexShader.h}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Chapter_9/MipMap2D/{MipMap2D.c,MipMap2D.h}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Chapter_9/Simple_Texture2D/{Simple_Texture2D.c,Simple_Texture2D.h}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Chapter_9/Simple_TextureCubemap/{Simple_TextureCubemap.c,Simple_TextureCubemap.h}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Chapter_9/TextureWrap/{TextureWrap.c,TextureWrap.h}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Common/Include/{esUtil.h,esUtil_win.h}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Common/Source/{esShader.c,esShapes.c,esTransform.c,esUtil.c}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/third_party/gles2_book/Common/Source/Win32/{esUtil_TGA.c}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
 Files: src/third_party/glew/include/GL/{wglew.h}
-Copyright: Copyright: 2007 The Khronos Group Inc / HOLDERS AND CONTRIBUTORS "AS IS" / 2002-2008, Marcelo E. Magallon <mmagallo[]debian org> / OWNER OR CONTRIBUTORS BE / 2002-2008, Milan Ikits <milan ikits[]ieee org> / 2002, Lev Povalahev / HOLDERS BE LIABLE FOR ANY:
+Copyright: Copyright: 2007 The Khronos Group Inc / HOLDERS AND CONTRIBUTORS "AS IS" / 2002-2008, Marcelo E. Magallon <mmagallo[]debian org> / OWNER OR CONTRIBUTORS BE / 2002, Lev Povalahev / 2002-2008, Milan Ikits <milan ikits[]ieee org> / HOLDERS BE LIABLE FOR ANY:
 License: BSD (2 clause)
 
 Files: src/third_party/glew/include/GL/{glew.h,glxew.h}
-Copyright: Copyright: 2007 The Khronos Group Inc / HOLDERS AND CONTRIBUTORS "AS IS" / 2002-2008, Marcelo E. Magallon <mmagallo[]debian org> / 1999-2007 Brian Paul All Rights Reserved / OWNER OR CONTRIBUTORS BE / 2002-2008, Milan Ikits <milan ikits[]ieee org> / 2002, Lev Povalahev:
+Copyright: Copyright: 2007 The Khronos Group Inc / HOLDERS AND CONTRIBUTORS "AS IS" / 2002-2008, Marcelo E. Magallon <mmagallo[]debian org> / OWNER OR CONTRIBUTORS BE / 2002, Lev Povalahev / 1999-2007 Brian Paul All Rights Reserved / 2002-2008, Milan Ikits <milan ikits[]ieee org>:
 License: BSD (2 clause) MIT/X11 (BSD like)
 
 Files: src/third_party/glew/src/{glew.c}
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS "AS IS" / 2002-2008, Marcelo E. Magallon <mmagallo[]debian org> / OWNER OR CONTRIBUTORS BE / 2002-2008, Milan Ikits <milan ikits[]ieee org> / 2002, Lev Povalahev:
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS "AS IS" / 2002-2008, Marcelo E. Magallon <mmagallo[]debian org> / OWNER OR CONTRIBUTORS BE / 2002, Lev Povalahev / 2002-2008, Milan Ikits <milan ikits[]ieee org>:
 License: BSD (2 clause)
 
 Files: src/third_party/harfbuzz/{autogen.sh,config.h}
@@ -13384,63 +13228,63 @@ Copyright: UNKNOWN:
 License: harfbuzz-License
 
 Files: src/third_party/harfbuzz/src/{harfbuzz-stream-private.h}
-Copyright: Copyright: ( (error = ) != 0 ) / HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / 2006 Behdad Esfahbod / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 1998-2004 David Turner and Werner Lemberg:
+Copyright: Copyright: ( (error = ) != 0 ) / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 1998-2004 David Turner and Werner Lemberg / HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / 2006 Behdad Esfahbod:
 License: harfbuzz-License
 
 Files: src/third_party/harfbuzz/src/{harfbuzz-dump.c,harfbuzz-dump.h}
-Copyright: Copyright: 2000, 2007 Red Hat, Inc / HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO:
+Copyright: Copyright: 2000, 2007 Red Hat, Inc / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING:
 License: harfbuzz-License
 
 Files: src/third_party/harfbuzz/src/{harfbuzz-buffer-private.h,harfbuzz-buffer.c,harfbuzz-buffer.h}
-Copyright: Copyright: 2004,2007 Red Hat, Inc / HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 1998-2004 David Turner and Werner Lemberg:
-License: harfbuzz-License
-
-Files: src/third_party/harfbuzz/src/{harfbuzz-stream.c}
-Copyright: Copyright: 2005 David Turner / HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 2007 Red Hat, Inc / 2008 Nokia Corporation and/or its subsidiary(-ies):
-License: harfbuzz-License
-
-Files: src/third_party/harfbuzz/src/{harfbuzz-stream.h}
-Copyright: Copyright: 2005 David Turner / HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 2008 Nokia Corporation and/or its subsidiary(-ies):
-License: harfbuzz-License
-
-Files: src/third_party/harfbuzz/src/{harfbuzz.c}
-Copyright: Copyright: HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / 2006 Behdad Esfahbod / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO:
+Copyright: Copyright: HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 1998-2004 David Turner and Werner Lemberg / 2004,2007 Red Hat, Inc / HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING:
 License: harfbuzz-License
 
 Files: src/third_party/harfbuzz/src/{harfbuzz-gdef-private.h,harfbuzz-gdef.c,harfbuzz-gdef.h,harfbuzz-gpos-private.h,harfbuzz-gpos.h,harfbuzz-gsub-private.h,harfbuzz-gsub.h,harfbuzz-impl.h,harfbuzz-open-private.h,harfbuzz-open.c,harfbuzz-open.h,harfbuzz.h}
-Copyright: Copyright: HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / 2006 Behdad Esfahbod / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 1998-2004 David Turner and Werner Lemberg:
+Copyright: Copyright: HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 1998-2004 David Turner and Werner Lemberg / HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / 2006 Behdad Esfahbod:
 License: harfbuzz-License
 
 Files: src/third_party/harfbuzz/src/{harfbuzz-gpos.c,harfbuzz-gsub.c}
-Copyright: Copyright: HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / 2006 Behdad Esfahbod / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 2007 Red Hat, Inc / 1998-2004 David Turner and Werner Lemberg:
-License: harfbuzz-License
-
-Files: src/third_party/harfbuzz/src/{harfbuzz-dump-main.c}
-Copyright: Copyright: HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 2000 Red Hat, Inc:
-License: harfbuzz-License
-
-Files: src/third_party/harfbuzz/src/{harfbuzz-shape.h}
-Copyright: Copyright: HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 2006 Red Hat, Inc:
-License: harfbuzz-License
-
-Files: src/third_party/harfbuzz/src/{harfbuzz-global.h}
-Copyright: Copyright: HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 2007 Red Hat, Inc / 2008 Nokia Corporation and/or its subsidiary(-ies):
+Copyright: Copyright: HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 1998-2004 David Turner and Werner Lemberg / HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / 2006 Behdad Esfahbod / 2007 Red Hat, Inc:
 License: harfbuzz-License
 
 Files: src/third_party/harfbuzz/src/{harfbuzz-impl.c}
-Copyright: Copyright: HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 2007 Red Hat, Inc / 2008 Nokia Corporation and/or its subsidiary(-ies) / 1998-2004 David Turner and Werner Lemberg:
+Copyright: Copyright: HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 1998-2004 David Turner and Werner Lemberg / HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / 2007 Red Hat, Inc / 2008 Nokia Corporation and/or its subsidiary(-ies):
+License: harfbuzz-License
+
+Files: src/third_party/harfbuzz/src/{harfbuzz-stream.c}
+Copyright: Copyright: HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 2005 David Turner / HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / 2007 Red Hat, Inc / 2008 Nokia Corporation and/or its subsidiary(-ies):
+License: harfbuzz-License
+
+Files: src/third_party/harfbuzz/src/{harfbuzz-stream.h}
+Copyright: Copyright: HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 2005 David Turner / HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / 2008 Nokia Corporation and/or its subsidiary(-ies):
+License: harfbuzz-License
+
+Files: src/third_party/harfbuzz/src/{harfbuzz-shape.h}
+Copyright: Copyright: HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 2006 Red Hat, Inc / HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING:
+License: harfbuzz-License
+
+Files: src/third_party/harfbuzz/src/{harfbuzz-dump-main.c}
+Copyright: Copyright: HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / 2000 Red Hat, Inc:
+License: harfbuzz-License
+
+Files: src/third_party/harfbuzz/src/{harfbuzz.c}
+Copyright: Copyright: HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / 2006 Behdad Esfahbod:
+License: harfbuzz-License
+
+Files: src/third_party/harfbuzz/src/{harfbuzz-global.h}
+Copyright: Copyright: HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / 2007 Red Hat, Inc / 2008 Nokia Corporation and/or its subsidiary(-ies):
 License: harfbuzz-License
 
 Files: src/third_party/harfbuzz/src/{harfbuzz-arabic.c,harfbuzz-external.h,harfbuzz-hangul.c,harfbuzz-hebrew.c,harfbuzz-indic.cpp,harfbuzz-khmer.c,harfbuzz-myanmar.c,harfbuzz-shaper-all.cpp,harfbuzz-shaper-private.h,harfbuzz-shaper.cpp,harfbuzz-shaper.h,harfbuzz-thai.c,harfbuzz-tibetan.c}
-Copyright: Copyright: HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 2008 Nokia Corporation and/or its subsidiary(-ies):
+Copyright: Copyright: HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / 2008 Nokia Corporation and/or its subsidiary(-ies):
 License: harfbuzz-License
 
 Files: src/third_party/harfbuzz/tests/linebreaking/{harfbuzz-qt.cpp,main.cpp}
-Copyright: Copyright: HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 2008 Nokia Corporation and/or its subsidiary(-ies):
+Copyright: Copyright: HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / 2008 Nokia Corporation and/or its subsidiary(-ies):
 License: harfbuzz-License
 
 Files: src/third_party/harfbuzz/tests/shaping/{main.cpp}
-Copyright: Copyright: HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 2008 Nokia Corporation and/or its subsidiary(-ies):
+Copyright: Copyright: HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING / 2008 Nokia Corporation and/or its subsidiary(-ies):
 License: harfbuzz-License
 
 Files: src/third_party/hunspell/google/{bdict.h,bdict_reader.cc,bdict_reader.h,bdict_writer.cc,bdict_writer.h,hunspell_tests.cc}
@@ -15776,7 +15620,7 @@ Copyright: Copyright: 2008 Jason Evans <jasone@FreeBSD.org> / HOLDER(S) ``AS IS'
 License: BSD (2 clause)
 
 Files: src/third_party/jemalloc/chromium/{ql.h,qr.h}
-Copyright: Copyright: HOLDER(S) ``AS IS'' AND ANY / 2002 Jason Evans <jasone@canonware.com> / HOLDER(S) BE / notices:
+Copyright: Copyright: HOLDER(S) ``AS IS'' AND ANY / HOLDER(S) BE / notices / 2002 Jason Evans <jasone@canonware.com>:
 License: BSD (2 clause)
 
 Files: src/third_party/jemalloc/chromium/{jemalloc.c,jemalloc.h}
@@ -15796,7 +15640,7 @@ Copyright: Copyright: 2008 Jason Evans <jasone@FreeBSD.org> / HOLDER(S) ``AS IS'
 License: BSD (2 clause)
 
 Files: src/third_party/jemalloc/vendor/{ql.h,qr.h}
-Copyright: Copyright: HOLDER(S) ``AS IS'' AND ANY / 2002 Jason Evans <jasone@canonware.com> / HOLDER(S) BE / notices:
+Copyright: Copyright: HOLDER(S) ``AS IS'' AND ANY / HOLDER(S) BE / notices / 2002 Jason Evans <jasone@canonware.com>:
 License: BSD (2 clause)
 
 Files: src/third_party/jemalloc/vendor/{jemalloc.c,jemalloc.h}
@@ -15867,10 +15711,6 @@ Files: src/third_party/libevent/{evrpc-internal.h}
 Copyright: Copyright: 2006 Niels Provos <provos@citi.umich.edu>:
 License: BSD (3 clause)
 
-Files: src/third_party/libevent/{evdns.h}
-Copyright: Copyright: 2006 Niels Provos <provos@citi.umich.edu> / below. Please:
-License: BSD (3 clause)
-
 Files: src/third_party/libevent/{evutil.c,evutil.h}
 Copyright: Copyright: 2007 Niels Provos <provos@citi.umich.edu>:
 License: BSD (3 clause)
@@ -15881,6 +15721,10 @@ License: BSD (3 clause)
 
 Files: src/third_party/libevent/{event-config.h}
 Copyright: Copyright: 2009 The Chromium Authors. All rights reserved:
+License: BSD (3 clause)
+
+Files: src/third_party/libevent/{evdns.h}
+Copyright: Copyright: below. Please / 2006 Niels Provos <provos@citi.umich.edu>:
 License: BSD (3 clause)
 
 Files: src/third_party/libevent/{autogen.sh,evdns.c,strlcpy-internal.h}
@@ -15975,16 +15819,16 @@ Files: src/third_party/libjingle/files/talk/base/{base64.cc,base64.h}
 Copyright: Copyright: 1999, Bob Withers - bwit@pobox.com:
 License: global BSD-style libjingle
 
+Files: src/third_party/libjingle/files/talk/base/{scoped_ptr.h}
+Copyright: Copyright: 2001, 2002 Peter Dimov / Greg Colvin and Beman Dawes 1998, 1999:
+License: global BSD-style libjingle
+
 Files: src/third_party/libjingle/files/talk/base/{diskcache_win32.h,diskcachestd.cc,diskcachestd.h}
 Copyright: Copyright: 2006 Google Inc. All rights reserved:
 License: global BSD-style libjingle
 
 Files: src/third_party/libjingle/files/talk/base/{virtualsocket_unittest.cc}
 Copyright: Copyright: 2006, Google Inc:
-License: global BSD-style libjingle
-
-Files: src/third_party/libjingle/files/talk/base/{scoped_ptr.h}
-Copyright: Copyright: Greg Colvin and Beman Dawes 1998, 1999 / 2001, 2002 Peter Dimov:
 License: global BSD-style libjingle
 
 Files: src/third_party/libjingle/files/talk/base/{Equifax_Secure_Global_eBusiness_CA-1.h,asynchttprequest.cc,asynchttprequest.h,autodetectproxy.h,diskcache_win32.cc,linked_ptr.h,nat_unittest.cc,openssladapter.cc,proxydetect.cc,proxydetect.h,signalthread.cc,signalthread.h,sigslot.h,tarstream.cc,tarstream.h,urlencode.cc,urlencode.h}
@@ -16451,6 +16295,50 @@ Files: src/third_party/protobuf2/src/vsprojects/{config.h,convert2008to2005.sh}
 Copyright: UNKNOWN:
 License: BSD (3 clause)
 
+Files: src/third_party/pywebsocket/{setup.py}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/pywebsocket/example/{echo_client.py,echo_wsh.py}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/pywebsocket/mod_pywebsocket/{__init__.py,dispatch.py,handshake.py,headerparserhandler.py,msgutil.py,standalone.py,util.py}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/pywebsocket/test/{config.py,mock.py,run_all.py,test_dispatch.py,test_handshake.py,test_mock.py,test_msgutil.py,test_util.py}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/pywebsocket/test/testdata/handlers/{blank_wsh.py,origin_check_wsh.py}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/pywebsocket/test/testdata/handlers/sub/{exception_in_transfer_wsh.py,no_wsh_at_the_end.py,non_callable_wsh.py,plain_wsh.py,wrong_handshake_sig_wsh.py,wrong_transfer_sig_wsh.py}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/skia/bench/{BitmapBench.cpp,DecodeBench.cpp,RectBench.cpp,RepeatTileBench.cpp,SkBenchmark.cpp,SkBenchmark.h,TextBench.cpp,benchmain.cpp}
+Copyright: UNKNOWN:
+License: Apache (v2.0)
+
+Files: src/third_party/skia/experimental/*
+Copyright: Copyright: 2005 Apple Computer, Inc. All rights reserved:
+License: Apache (v2.0)
+
+Files: src/third_party/skia/experimental/*
+Copyright: UNKNOWN:
+License: Apache (v2.0)
+
+Files: src/third_party/skia/forth/{Forth.cpp,Forth.h,ForthParser.h,ForthTests.cpp,SampleForth.cpp,StdWords.cpp}
+Copyright: UNKNOWN:
+License: Apache (v2.0)
+
+Files: src/third_party/skia/gm/{bitmapfilters.cpp,filltypes.cpp,gm.h,gmmain.cpp,gradients.cpp,shapes.cpp,tilemodes.cpp,xfermodes.cpp}
+Copyright: UNKNOWN:
+License: Apache (v2.0)
+
 Files: src/third_party/skia/include/animator/{SkAnimator.h,SkAnimatorView.h}
 Copyright: Copyright: 2006 The Android Open Source Project:
 License: Apache (v2.0)
@@ -16563,6 +16451,10 @@ Files: src/third_party/skia/include/xml/{SkBML_WXMLParser.h,SkBML_XMLParser.h,Sk
 Copyright: Copyright: 2006 The Android Open Source Project:
 License: Apache (v2.0)
 
+Files: src/third_party/skia/samplecode/{SampleAll.cpp,SampleApp.cpp,SampleArc.cpp,SampleBitmapRect.cpp,SampleBlur.cpp,SampleCamera.cpp,SampleCircle.cpp,SampleCode.h,SampleCull.cpp,SampleDecode.cpp,SampleDither.cpp,SampleDitherBitmap.cpp,SampleDrawLooper.cpp,SampleEffects.cpp,SampleEmboss.cpp,SampleEncode.cpp,SampleExtractAlpha.cpp,SampleFillType.cpp,SampleFilter.cpp,SampleFilter2.cpp,SampleFontCache.cpp,SampleFontScalerTest.cpp,SampleFuzz.cpp,SampleGM.cpp,SampleGradients.cpp,SampleHairline.cpp,SampleImage.cpp,SampleImageDir.cpp,SampleLCD.cpp,SampleLayerMask.cpp,SampleLayers.cpp,SampleLines.cpp,SampleMeasure.cpp,SampleMipMap.cpp,SampleMovie.cpp,SampleNinePatch.cpp,SampleOverflow.cpp,SamplePageFlip.cpp,SamplePatch.cpp,SamplePath.cpp,SamplePathClip.cpp,SamplePathEffects.cpp,SamplePicture.cpp,SamplePoints.cpp,SamplePolyToPoly.cpp,SampleRegion.cpp,SampleRepeatTile.cpp,SampleShaders.cpp,SampleShapes.cpp,SampleStrokePath.cpp,SampleStrokeText.cpp,SampleTestGL.cpp,SampleTests.cpp,SampleText.cpp,SampleTextAlpha.cpp,SampleTextEffects.cpp,SampleTextOnPath.cpp,SampleTiling.cpp,SampleTinyBitmap.cpp,SampleTriangles.cpp,SampleTypeface.cpp,SampleVertices.cpp,SampleXfermodes.cpp,vertexdump.cpp}
+Copyright: UNKNOWN:
+License: Apache (v2.0)
+
 Files: src/third_party/skia/src/animator/*
 Copyright: Copyright: 2006, The Android Open Source Project:
 License: Apache (v2.0)
@@ -16671,6 +16563,10 @@ Files: src/third_party/skia/src/ports/{SkDebug_android.cpp,SkDebug_stdio.cpp,SkF
 Copyright: Copyright: 2006, The Android Open Source Project:
 License: Apache (v2.0)
 
+Files: src/third_party/skia/src/ports/{SkXMLParser_empty.cpp}
+Copyright: Copyright: 2006, The Android Open Source Project / Skia Inc. 2004 - 2005:
+License: Apache (v2.0)
+
 Files: src/third_party/skia/src/ports/{SkFontHost_none.cpp}
 Copyright: Copyright: 2006-2008, The Android Open Source Project:
 License: Apache (v2.0)
@@ -16685,10 +16581,6 @@ License: Apache (v2.0)
 
 Files: src/third_party/skia/src/ports/{SkFontHost_FreeType_Subpixel.cpp,SkTime_win.cpp}
 Copyright: Copyright: 2009, The Android Open Source Project:
-License: Apache (v2.0)
-
-Files: src/third_party/skia/src/ports/{SkXMLParser_empty.cpp}
-Copyright: Copyright: Skia Inc. 2004 - 2005 / 2006, The Android Open Source Project:
 License: Apache (v2.0)
 
 Files: src/third_party/skia/src/ports/{SkFontHost_ascender.cpp,SkFontHost_gamma.cpp,SkFontHost_simple.cpp,SkFontHost_tables.cpp,SkImageRef_ashmem.cpp,SkImageRef_ashmem.h,SkMemory_malloc.cpp,SkThread_pthread.cpp,sk_predefined_gamma.h}
@@ -16744,6 +16636,26 @@ Copyright: Copyright: 2006, The Android Open Source Project:
 License: Apache (v2.0)
 
 Files: src/third_party/skia/src/xml/*
+Copyright: UNKNOWN:
+License: Apache (v2.0)
+
+Files: src/third_party/skia/tests/{BitmapCopyTest.cpp,ClipCubicTest.cpp,GeometryTest.cpp,MathTest.cpp,MatrixTest.cpp,PackBitsTest.cpp,PaintTest.cpp,ParsePathTest.cpp,PathMeasureTest.cpp,PathTest.cpp,Sk64Test.cpp,SortTest.cpp,SrcOverTest.cpp,StreamTest.cpp,StringTest.cpp,Test.cpp,Test.h,TestClassDef.h,TestSize.cpp,TriangulationTest.cpp,UtilsTest.cpp,testmain.cpp}
+Copyright: UNKNOWN:
+License: Apache (v2.0)
+
+Files: src/third_party/skia/tools/{skimage_main.cpp}
+Copyright: UNKNOWN:
+License: Apache (v2.0)
+
+Files: src/third_party/skia/xcode/hostapp/*
+Copyright: Copyright: 2005 Apple Computer, Inc. All rights reserved:
+License: Apache (v2.0)
+
+Files: src/third_party/skia/xcode/hostapp/*
+Copyright: UNKNOWN:
+License: Apache (v2.0)
+
+Files: src/third_party/skia/xcode/sampleapp_sdl/{SDLMain.h,skia_sdl_main.cpp}
 Copyright: UNKNOWN:
 License: Apache (v2.0)
 
@@ -17015,6 +16927,142 @@ Files: src/third_party/tcmalloc/chromium/src/windows/google/{tcmalloc.h}
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2003, Google Inc:
 License: BSD (3 clause)
 
+Files: src/third_party/tcmalloc/tcmalloc/{autogen.sh}
+Copyright: UNKNOWN:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/{ltmain.sh}
+Copyright: Copyright: 1996, 1997, 1998, 1999, 2000, 2001, 2003, 2004, 2005, 2006:
+License: GPL (v2 or later) GENERATED FILE
+
+Files: src/third_party/tcmalloc/tcmalloc/packages/{deb.sh,rpm.sh}
+Copyright: UNKNOWN:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/{debugallocation.cc}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2000, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/{addressmap-inl.h,getpc.h,heap-checker-bcad.cc,heap-checker.cc,heap-profiler.cc,internal_logging.cc,internal_logging.h,malloc_extension.cc,malloc_hook-inl.h,malloc_hook.cc,maybe_threads.cc,maybe_threads.h,pagemap.h,profiler.cc,stacktrace.cc,stacktrace_generic-inl.h,stacktrace_libunwind-inl.h,stacktrace_x86-inl.h,stacktrace_x86_64-inl.h,system-alloc.cc,system-alloc.h,tcmalloc.cc,tcmalloc_guard.h}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2005, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/{heap-profile-table.cc,heap-profile-table.h,memory_region_map.cc,memory_region_map.h}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2006, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/{config_for_unittests.h,memfs_malloc.cc,packed-cache-inl.h,profiledata.cc,profiledata.h,stacktrace_powerpc-inl.h,tcmalloc.h}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2007, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/{central_freelist.cc,central_freelist.h,common.cc,common.h,linked_list.h,page_heap.cc,page_heap.h,page_heap_allocator.h,raw_printer.cc,raw_printer.h,sampler.cc,sampler.h,span.cc,span.h,stacktrace_win32-inl.h,static_vars.cc,static_vars.h,thread_cache.cc,thread_cache.h}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/{profile-handler.cc,profile-handler.h,stack_trace_table.cc,stack_trace_table.h,stacktrace_config.h,stacktrace_with_context.cc,symbolize.cc,symbolize.h}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/base/{elfcore.h,linux_syscall_support.h}
+Copyright: Copyright: 2005-2008, Google Inc / HOLDERS AND CONTRIBUTORS:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/base/{vdso_support.h}
+Copyright: Copyright: 2008 Google Inc. All Rights Reserved:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/base/{cycleclock.h}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2004, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/base/{basictypes.h,commandlineflags.h,googleinit.h,logging.h}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2005, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/base/{linuxthreads.cc,linuxthreads.h,thread_lister.c,thread_lister.h}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2005-2007, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/base/{atomicops-internals-macosx.h,atomicops-internals-x86-msvc.h,atomicops-internals-x86.h,atomicops.h,low_level_alloc.cc,low_level_alloc.h,spinlock.cc,spinlock.h,stl_allocator.h,sysinfo.cc,sysinfo.h}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2006, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/base/{atomicops-internals-x86.cc,logging.cc,simple_mutex.h}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2007, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/base/{atomicops-internals-linuxppc.h,dynamic_annotations.cc,dynamic_annotations.h,thread_annotations.h,vdso_support.cc}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/base/{spinlock_linux-inl.h,spinlock_posix-inl.h,spinlock_win32-inl.h}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/google/*
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2005, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/google/*
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/tests/{profile-handler_unittest.cc,raw_printer_test.cc,stack_trace_table_test.cc}
+Copyright: Copyright: 2009 Google Inc. All Rights Reserved:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/tests/{frag_unittest.cc,markidle_unittest.cc,pagemap_unittest.cc}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2003, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/tests/{memalign_unittest.cc,thread_dealloc_unittest.cc}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2004, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/tests/{addressmap_unittest.cc,getpc_test.cc,heap-checker-death_unittest.sh,heap-checker_unittest.cc,heap-checker_unittest.sh,heap-profiler_unittest.cc,heap-profiler_unittest.sh,profiler_unittest.cc,profiler_unittest.sh,stacktrace_unittest.cc,tcmalloc_large_unittest.cc}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2005, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/tests/{atomicops_unittest.cc,low_level_alloc_unittest.cc}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2006, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/tests/{debugallocation_test.cc,maybe_threads_unittest.sh,packed-cache_test.cc,profiledata_unittest.cc,system-alloc_unittest.cc,testutil.cc,testutil.h}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2007, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/tests/{malloc_extension_test.cc,sampler_test.cc,sampling_test.cc,sampling_test.sh}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/tests/{debugallocation_test.sh,malloc_extension_c_test.c}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/tests/*
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2004, Google Inc:
+License: BSD (3 clause) GENERATED FILE
+
+Files: src/third_party/tcmalloc/tcmalloc/src/tests/*
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2005, Google Inc:
+License: BSD (3 clause) GENERATED FILE
+
+Files: src/third_party/tcmalloc/tcmalloc/src/windows/{ia32_modrm_map.cc,ia32_opcode_map.cc,mingw.h,mini_disassembler.cc,mini_disassembler.h,mini_disassembler_types.h,override_functions.cc,patch_functions.cc,port.cc,port.h,preamble_patcher.cc,preamble_patcher.h,preamble_patcher_with_stub.cc}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2007, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/windows/{addr2line-pdb.c,get_mangled_names.cc,nm-pdb.c}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008, Google Inc:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/windows/{config.h}
+Copyright: UNKNOWN:
+License: BSD (3 clause)
+
+Files: src/third_party/tcmalloc/tcmalloc/src/windows/google/{tcmalloc.h}
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2003, Google Inc:
+License: BSD (3 clause)
+
 Files: src/third_party/tcmalloc/vendor/{autogen.sh}
 Copyright: UNKNOWN:
 License: *No copyright* UNKNOWN
@@ -17251,16 +17299,16 @@ Files: src/third_party/yasm/source/patched-yasm/frontends/yasm/*
 Copyright: Copyright: 2001-2007 Peter Johnson:
 License: BSD (2 clause)
 
+Files: src/third_party/yasm/source/patched-yasm/libyasm/{errwarn.c}
+Copyright: Copyright: ( & 0x7F) / 2001-2007 Peter Johnson:
+License: BSD (2 clause)
+
 Files: src/third_party/yasm/source/patched-yasm/libyasm/{expr.c,expr.h,symrec.c,symrec.h}
 Copyright: Copyright: 2001-2007 Michael Urman, Peter Johnson:
 License: BSD (2 clause)
 
 Files: src/third_party/yasm/source/patched-yasm/libyasm/{bc-data.c,bc-incbin.c,bc-reserve.c,bytecode.c,bytecode.h,coretype.h,errwarn.h,file.c,file.h,floatnum.c,floatnum.h,hamt.c,hamt.h,intnum.c,intnum.h,objfmt.h,parser.h,preproc.h,section.c,section.h,valparam.c,valparam.h,xmalloc.c}
 Copyright: Copyright: 2001-2007 Peter Johnson:
-License: BSD (2 clause)
-
-Files: src/third_party/yasm/source/patched-yasm/libyasm/{errwarn.c}
-Copyright: Copyright: 2001-2007 Peter Johnson / ( & 0x7F):
 License: BSD (2 clause)
 
 Files: src/third_party/yasm/source/patched-yasm/libyasm/{arch.h,dbgfmt.h,insn.h,linemap.c,linemap.h,module.h}
@@ -17308,7 +17356,7 @@ Copyright: UNKNOWN:
 License: GPL (v2 or later) compatible
 
 Files: src/third_party/yasm/source/patched-yasm/libyasm/{md5.c}
-Copyright: Copyright: in any changes I have made; this code remains in the / issue. I hereby disclaim / is claimed:
+Copyright: Copyright: issue. I hereby disclaim / in any changes I have made; this code remains in the / is claimed:
 License: Public domain
 
 Files: src/third_party/yasm/source/patched-yasm/libyasm/tests/{bitvect_test.c,floatnum_test.c}
@@ -17540,7 +17588,7 @@ Copyright: UNKNOWN:
 License: GPL (v2 or later) compatible
 
 Files: src/third_party/yasm/source/patched-yasm/modules/preprocs/cpp/{cpp-preproc.c}
-Copyright: Copyright: 2001-2007 Peter Johnson / 2007 Paul Barker:
+Copyright: Copyright: 2007 Paul Barker / 2001-2007 Peter Johnson:
 License: BSD (2 clause)
 
 Files: src/third_party/yasm/source/patched-yasm/modules/preprocs/nasm/{nasm-preproc.c}
@@ -18071,7 +18119,7 @@ Files: src/views/controls/{label.cc,link.cc,link.h,native_control.cc,native_cont
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
-Files: src/views/controls/{label_unittest.cc,message_box_view.cc}
+Files: src/views/controls/{label_unittest.cc,message_box_view.cc,resize_gripper.cc,resize_gripper.h}
 Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
@@ -18244,7 +18292,7 @@ Copyright: Copyright (c) 2006-2009 The Chromium Authors. All rights reserved. Us
 License: global BSD-style Chromium
 
 Files: src/webkit/glue/{webcursor_gtk_data.h}
-Copyright: Copyright: 2001 Tim Copperfield <timecop@network.email.ne.jp> / is below / 2007 Christian Dywan <christian@twotoasts.de>:
+Copyright: Copyright: 2007 Christian Dywan <christian@twotoasts.de> / 2001 Tim Copperfield <timecop@network.email.ne.jp> / is below:
 License: LGPL (v2 or later)
 
 Files: src/webkit/glue/{multipart_response_delegate.h}
@@ -19171,29 +19219,3 @@ License: harfbuzz-License
  FITNESS FOR A PARTICULAR PURPOSE.  THE SOFTWARE PROVIDED HEREUNDER IS
  ON AN "AS IS" BASIS, AND THE COPYRIGHT HOLDER HAS NO OBLIGATION TO
  PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
-
-License: icu-license
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"),
- to deal in the Software without restriction, including without limitation
- the rights to use, copy, modify, merge, publish, distribute, and/or sell
- copies of the Software, and to permit persons
- to whom the Software is furnished to do so, provided that the above
- copyright notice(s) and this permission notice appear in all copies
- of the Software and that both the above copyright notice(s) and this
- permission notice appear in supporting documentation.
- .
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
- PARTICULAR PURPOSE AND NONINFRINGEMENT OF THIRD PARTY RIGHTS. IN NO EVENT SHALL
- THE COPYRIGHT HOLDER OR HOLDERS INCLUDED IN THIS NOTICE BE LIABLE FOR ANY CLAIM,
- OR ANY SPECIAL INDIRECT OR CONSEQUENTIAL DAMAGES, OR ANY DAMAGES WHATSOEVER
- RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT,
- NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE
- USE OR PERFORMANCE OF THIS SOFTWARE.
- .
- Except as contained in this notice, the name of a copyright holder shall not be
- used in advertising or otherwise to promote the sale, use or other dealings in
- this Software without prior written authorization of the copyright holder.
- .
- All trademarks and registered trademarks mentioned herein are the property of their respective owners.
