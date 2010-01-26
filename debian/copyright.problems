@@ -106,10 +106,6 @@ Files: src/gpu/command_buffer/common/KHR/{khrplatform.h}
 Copyright: Copyright: 2008-2009 The Khronos Group Inc / HOLDERS BE LIABLE FOR ANY:
 License: UNKNOWN
 
-Files: src/net/disk_cache/{hash.cc}
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
 Files: src/net/tools/flip_server/{other_defines.h,string_piece_utils.h}
 Copyright: UNKNOWN:
 License: *No copyright* UNKNOWN

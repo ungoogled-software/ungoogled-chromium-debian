@@ -68,6 +68,7 @@ my $white_listed_licenses = [
   'MPL (v1.1) GPL (unversioned/unknown version)',
   'MPL (v1.1) GPL (unversioned/unknown version) GENERATED FILE',
   'MPL 1.1/GPL 2.0/LGPL 2.1',
+  'Paul Hsieh\'s Public Domain Option',
   'SGI Free Software B License (v2.0)',
   'zlib/libpng',
   'GENERATED FILE',
@@ -245,6 +246,10 @@ my $manually_identified = {
   ],
   '/third_party/xdg-utils/' => [
     'MIT/X11 (BSD like)',
+    'No copyright'
+  ],
+  '/net/disk_cache/hash.cc' => [
+    'Paul Hsieh\'s Public Domain Option',
     'No copyright'
   ],
 };

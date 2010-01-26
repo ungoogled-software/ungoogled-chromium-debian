@@ -2801,7 +2801,7 @@ License: global BSD-style Chromium
 
 Files: src/net/disk_cache/{hash.cc}
 Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
+License: Paul Hsieh's Public Domain Option
 
 Files: src/net/disk_cache/{addr.h,addr_unittest.cc,backend_impl.cc,backend_impl.h,backend_unittest.cc,block_files.cc,block_files.h,block_files_unittest.cc,cache_util.h,cache_util_posix.cc,cache_util_win.cc,disk_cache.h,disk_cache_perftest.cc,disk_cache_test_base.cc,disk_cache_test_base.h,errors.h,eviction.cc,eviction.h,file.h,file_block.h,file_lock.cc,file_lock.h,file_posix.cc,file_win.cc,hash.h,mapped_file.h,mapped_file_posix.cc,mapped_file_unittest.cc,mapped_file_win.cc,mem_rankings.cc,mem_rankings.h,rankings.cc,rankings.h,stats.cc,stats.h,storage_block-inl.h,storage_block.h,storage_block_unittest.cc,stress_cache.cc,trace.cc,trace.h}
 Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:

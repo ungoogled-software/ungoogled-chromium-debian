@@ -7,5 +7,12 @@ chromium-browser (4.0.305.0~svn20100123r36929-0ubuntu1) UNRELEASED; urgency=low
   * extensive license review; see copyright and copyright.problems;
     also see debian/licensecheck.pl for details how the copyright files are
     generated
+  * address archive-admin comments:
+    + add "Paul Hsieh's Public Domain Option" license snippet and mark
+      net/disk_cache/hash.cc to be govered by that; recreate copyright*
+      - add debian/licenses/LICENSE.Paul Hsieh's Public Domain Option
+      - update debian/licensecheck.pl
+      - update debian/copyright
+      - update debian/copyright.problems
 
  -- Alexander Sack <asac@ubuntu.com>  Tue, 26 Jan 2010 16:52:46 +0100
