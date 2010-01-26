@@ -1,4 +1,4 @@
-chromium-browser (4.0.305.0~svn20100123r36929-0ubuntu1) lucid; urgency=low
+chromium-browser (4.0.305.0~svn20100123r36929-0ubuntu1) UNRELEASED; urgency=low
 
   [ Fabien Tassin <fta@ubuntu.com> ]
   * Initial release. (Closes: #520324, LP: #387765)
@@ -8,4 +8,4 @@ chromium-browser (4.0.305.0~svn20100123r36929-0ubuntu1) lucid; urgency=low
     also see debian/licensecheck.pl for details how the copyright files are
     generated
 
- -- Fabien Tassin <fta@ubuntu.com>  Fri, 22 Jan 2010 19:00:03 +0100
+ -- Alexander Sack <asac@ubuntu.com>  Tue, 26 Jan 2010 16:52:46 +0100
