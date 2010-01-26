@@ -19219,3 +19219,13 @@ License: harfbuzz-License
  FITNESS FOR A PARTICULAR PURPOSE.  THE SOFTWARE PROVIDED HEREUNDER IS
  ON AN "AS IS" BASIS, AND THE COPYRIGHT HOLDER HAS NO OBLIGATION TO
  PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
+
+License: Paul Hsieh's Public Domain Option
+ Unless covered by another accompanying license, source code shown on my
+ website can be used freely under the derivative license, (and may be
+ distributed under a public domain license, whether compiled into another
+ program or not, for example) however the font, comments, colors or any
+ layout details associated to that source code in its exposition are covered
+ by the exposition license.
+ .
+ Extracted from: http://www.azillionmonkeys.com/qed/weblicense.html
