@@ -1,6 +1,8 @@
 chromium-browser (5.0.307.0~svn20100127r37223-0ubuntu1) UNRELEASED; urgency=low
 
-  * 
+  * Add libxss-dev to Build-Depends, the new browser sync engine needs
+    X11/extensions/scrnsaver.h
+    - update debian/control
 
  -- Fabien Tassin <fta@ubuntu.com>  Wed, 27 Jan 2010 08:20:11 +0100
 
