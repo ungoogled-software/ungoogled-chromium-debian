@@ -434,6 +434,7 @@ compare:
 # Tarball (get-orig-source & get-current-source)
 GCLIENT_URL  := http://src.chromium.org/svn/trunk/tools/depot_tools
 CHROMIUM_URL := http://src.chromium.org/svn/trunk/src
+CHROMIUM_RLZ := http://src.chromium.org/svn/releases
 DEPS_URL     := http://src.chromium.org/svn/trunk/deps/third_party
 GREEN_REV_URL := http://chromium-status.appspot.com/lkgr
 CHANNELS_URL  := http://omahaproxy.appspot.com/
@@ -550,9 +551,8 @@ ifneq (,$(filter-out beta dev Beta Dev,$(CHANNEL)))
 get-orig-source: VERS          = $(CHANNEL)
 else
 get-orig-source: VERS          = $(shell wget -qO - $(CHANNELS_URL) | grep -i '^linux,$(CHANNEL)' | cut -d, -f3)
-# '
 endif
-get-orig-source: CHROMIUM_URL  = http://src.chromium.org/svn/releases/$(VERS)
+get-orig-source: CHROMIUM_URL  = $(CHROMIUM_RLZ)/$(VERS)
 get-orig-source: USE_GREEN_REV = 0
 endif
 endif
@@ -568,6 +568,12 @@ get-current-source: gos-all
 
 gos-all: gos-co gos-pack
 gos-co:
+ifneq (,$(CHANNEL))
+	@if [ Z$(VERS) = Z ] ; then \
+	  echo "Error: Cannot parse $(CHANNELS_URL) to get the release version for channel $(CHANNEL)" ; \
+	  exit 1 ; \
+	fi
+endif
 ifneq (,$(TAG))
 	$(error gclient doesn\'t support tags. We need to tweak CHROMIUM_URL. Abort)
 endif
