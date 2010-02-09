@@ -1,4 +1,4 @@
-chromium-browser (5.0.307.0~svn20100127r37223-0ubuntu1) UNRELEASED; urgency=low
+chromium-browser (5.0.307.5~r37950-0ubuntu1) lucid; urgency=low
 
   * Add libxss-dev to Build-Depends, the new browser sync engine needs
     X11/extensions/scrnsaver.h
@@ -6,7 +6,7 @@ chromium-browser (5.0.307.0~svn20100127r37223-0ubuntu1) UNRELEASED; urgency=low
   * Add a safety net to get-orig-source when fetching sources for a channel
     - update debian/rules
 
- -- Fabien Tassin <fta@ubuntu.com>  Wed, 27 Jan 2010 08:20:11 +0100
+ -- Fabien Tassin <fta@ubuntu.com>  Tue, 09 Feb 2010 17:07:18 +0100
 
 chromium-browser (4.0.305.0~svn20100123r36929-0ubuntu1) lucid; urgency=low
 
