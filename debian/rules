@@ -515,7 +515,6 @@ STRIPPED_SYSTEM_LIB_DIRS += \
 	third_party/bzip2 \
 	third_party/libjpeg \
 	third_party/libpng \
-	third_party/libxml \
 	third_party/libxslt \
 	$(NULL)
 endif

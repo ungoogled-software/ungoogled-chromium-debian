@@ -1,3 +1,10 @@
+chromium-browser (5.0.307.5~r37950-0ubuntu2) UNRELEASED; urgency=low
+
+  * Drop third_party/libxml from STRIPPED_SYSTEM_LIB_DIRS
+    - update debian/rules
+
+ -- Fabien Tassin <fta@ubuntu.com>  Wed, 10 Feb 2010 18:46:55 +0100
+
 chromium-browser (5.0.307.5~r37950-0ubuntu1) lucid; urgency=low
 
   * Add libxss-dev to Build-Depends, the new browser sync engine needs
