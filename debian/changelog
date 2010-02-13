@@ -1,9 +1,10 @@
-chromium-browser (5.0.307.5~r37950+0-0ubuntu2) UNRELEASED; urgency=low
+chromium-browser (5.0.307.7~r38400-0ubuntu1) lucid; urgency=low
 
+  * New upstream release from the Beta Channel
   * Re-add the -l10n strict version dependency on chromium-browser
     - update debian/control
 
- -- Fabien Tassin <fta@cube.opentransit.net>  Thu, 11 Feb 2010 22:10:19 +0100
+ -- Fabien Tassin <fta@ubuntu.com>  Fri, 12 Feb 2010 22:00:39 +0100
 
 chromium-browser (5.0.307.5~r37950+0-0ubuntu1) lucid; urgency=low
 
