@@ -1,4 +1,4 @@
-chromium-browser (5.0.307.7~r38400+0-0ubuntu1) UNRELEASED; urgency=low
+chromium-browser (5.0.307.7~r38400+0-0ubuntu1) lucid; urgency=low
 
   * Disable WANT_SYSTEM_LIBS since it makes Gmail/GCal crash (libxml,
     libxslt, ..). See http://crbug.com/34725 (LP: #522078)
