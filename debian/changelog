@@ -1,3 +1,11 @@
+chromium-browser (5.0.307.7~r38400-0ubuntu2) UNRELEASED; urgency=low
+
+  * Disable WANT_SYSTEM_LIBS since it makes Gmail/GCal crash (libxml,
+    libxslt, ..). See http://crbug.com/34725
+    - update debian/rules
+
+ -- Fabien Tassin <fta@ubuntu.com>  Mon, 15 Feb 2010 12:17:07 +0100
+
 chromium-browser (5.0.307.7~r38400-0ubuntu1) lucid; urgency=low
 
   * New upstream release from the Beta Channel
