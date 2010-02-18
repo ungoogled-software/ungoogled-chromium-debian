@@ -1,3 +1,12 @@
+chromium-browser (5.0.307.7~r38400+0-0ubuntu2) UNRELEASED; urgency=low
+
+  * Bump gyp Build-Depends to >= 0.1~svn785
+    - update debian/control
+  * Add --no-circular-check to gyp_chromium to prevent gyp from failing
+    - update debian/rules
+
+ -- Fabien Tassin <fta@ubuntu.com>  Thu, 18 Feb 2010 00:20:07 +0100
+
 chromium-browser (5.0.307.7~r38400+0-0ubuntu1) lucid; urgency=low
 
   * Disable WANT_SYSTEM_LIBS since it makes Gmail/GCal crash (libxml,

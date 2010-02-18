@@ -295,7 +295,7 @@ ifneq (,$(GYP_DEFINES))
 debian/configure-stamp: GYP_ENV += GYP_DEFINES="$(GYP_DEFINES)"
 endif
 debian/configure-stamp:
-	cd $(SRC_DIR) && $(GYP_ENV) python build/gyp_chromium build/all.gyp
+	cd $(SRC_DIR) && $(GYP_ENV) python build/gyp_chromium --no-circular-check build/all.gyp
 	touch $@
 	# Populate the LASTCHANGE file template as we no longer have the VCS
 	# files at this point
