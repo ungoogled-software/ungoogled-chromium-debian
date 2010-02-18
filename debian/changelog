@@ -1,4 +1,4 @@
-chromium-browser (5.0.307.7~r38400+0-0ubuntu2) UNRELEASED; urgency=low
+chromium-browser (5.0.307.9~r39052-0ubuntu1) UNRELEASED; urgency=low
 
   * Bump gyp Build-Depends to >= 0.1~svn785
     - update debian/control
