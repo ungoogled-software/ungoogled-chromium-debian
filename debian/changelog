@@ -1,5 +1,10 @@
-chromium-browser (5.0.307.9~r39052-0ubuntu1) UNRELEASED; urgency=low
+chromium-browser (5.0.307.9~r39052-0ubuntu1) lucid; urgency=low
 
+  * New upstream release from the Beta Channel
+    - Fixed a tab crash that could be triggered by visiting wordpress.com,
+      http://acid3.acidtests.org/, and many other sites. (Issue 35498)
+    - Fixed a tab crash in image loading. (Issue 32230)
+    - Improved font bolding for fonts without native bold. (Issue 22360)
   * Bump gyp Build-Depends to >= 0.1~svn785
     - update debian/control
   * Add --no-circular-check to gyp_chromium to prevent gyp from failing
