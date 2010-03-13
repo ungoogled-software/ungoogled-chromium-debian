@@ -1,6 +1,7 @@
 chromium-browser (5.0.353.0~svn20100313r41523-0ubuntu1) UNRELEASED; urgency=low
 
- * ..
+  * Add libdbus-glib-1-dev to Build-Depends
+    - update update debian/control
  
  -- Fabien Tassin <fta@ubuntu.com>  Sat, 13 Mar 2010 04:00:02 +0100
 
