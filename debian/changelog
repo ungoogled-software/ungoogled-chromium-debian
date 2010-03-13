@@ -1,3 +1,14 @@
+chromium-browser (5.0.307.11~r39572-0ubuntu1) lucid; urgency=low
+
+  * New upstream release from the Beta Channel
+    - Fixed an issue where an error resolving a proxy server would not try a
+      direct connection. (Issue 32316)
+    - Fixed an extensions bug that could crash the entire browser. (Issue 34778)
+    - Fixed an issue in the cross-site scripting auditor that could prevent
+      Google translate from working on sites. (Issue 33115)
+
+ -- Fabien Tassin <fta@ubuntu.com>  Sat, 27 Feb 2010 17:07:23 +0100
+
 chromium-browser (5.0.307.9~r39052-0ubuntu1) lucid; urgency=low
 
   * New upstream release from the Beta Channel
