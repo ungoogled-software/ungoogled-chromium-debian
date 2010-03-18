@@ -1,7 +1,10 @@
 chromium-browser (5.0.357.0~svn20100318r41908-0ubuntu1) UNRELEASED; urgency=low
 
   * Add libdbus-glib-1-dev to Build-Depends
-    - update update debian/control
+    - update debian/control
+  * Move third_party/gles2_book from STRIPPED_DIRS to ALMOST_STRIPPED_DIRS
+    as we now need its gyp file (but nothing else)
+    - update debian/rules
  
  -- Fabien Tassin <fta@ubuntu.com>  Thu, 18 Mar 2010 04:00:02 +0100
 

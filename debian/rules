@@ -477,7 +477,6 @@ STRIPPED_DIRS := \
 	third_party/bspatch \
 	third_party/ffmpeg/binaries \
 	third_party/fuzzymatch \
-	third_party/gles2_book \
 	third_party/gles_book_examples \
 	third_party/hunspell/dictionaries \
 	third_party/icu/mac \
@@ -504,6 +503,7 @@ STRIPPED_DIRS := \
 # So we drop everything but the gyp/gypi files and README.chromium (to see what that dir contained)
 ALMOST_STRIPPED_DIRS := \
 	courgette \
+	third_party/gles2_book \
 	$(NULL)
 
 ifeq (1,$(WANT_SYSTEM_LIBS))
