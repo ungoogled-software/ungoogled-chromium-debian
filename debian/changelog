@@ -7,6 +7,8 @@ chromium-browser (5.0.357.0~svn20100318r41908-0ubuntu1) UNRELEASED; urgency=low
     - update debian/rules
   * Bump gyp requirement to >= 0.1~svn795, it's needed for the new syntax
     - update debian/control
+  * Install resources/bookmark_manager in the main deb
+    - update debian/chromium-browser.install
  
  -- Fabien Tassin <fta@ubuntu.com>  Thu, 18 Mar 2010 04:00:02 +0100
 

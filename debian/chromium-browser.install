@@ -2,6 +2,7 @@ debian/tmp/etc
 debian/tmp/usr/bin
 debian/tmp/usr/lib/chromium-browser/chrom*
 debian/tmp/usr/lib/chromium-browser/xdg-settings
+debian/tmp/usr/lib/chromium-browser/resources/bookmark_manager
 #debian/tmp/usr/lib/chromium-browser/icudt38l.dat
 debian/tmp/usr/lib/chromium-browser/locales/*
 debian/chromium-browser.desktop usr/share/applications
