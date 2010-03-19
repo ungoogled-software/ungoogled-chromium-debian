@@ -143,6 +143,7 @@ INSTALL_EXCLUDE_FILES = \
 	ncdecode_table \
 	ncdecode_tablegen \
 	springboard_gen \
+	timestats \
 	tramp_gen \
 	protoc \
 	*.d \
