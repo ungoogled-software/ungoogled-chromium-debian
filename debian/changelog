@@ -18,6 +18,9 @@ chromium-browser (5.0.357.0~svn20100318r41908-0ubuntu1) UNRELEASED; urgency=low
     in /usr/share/icons/hicolor/scalable/apps (LP: #528640)
     - add debian/chromium-browser.svg
     - update debian/rules
+  * Move chromium-browser-inspector to Depends, it breaks some features
+    when it's not installed
+    - update debian/control
  
  -- Fabien Tassin <fta@ubuntu.com>  Thu, 18 Mar 2010 04:00:02 +0100
 
