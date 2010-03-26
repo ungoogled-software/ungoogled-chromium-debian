@@ -351,6 +351,8 @@ binary-install/$(DEBIAN_NAME)::
 	  cp -a build-tree/src/chrome/app/theme/chromium/product_logo_$$size.png  \
 	    $(CURDIR)/debian/$(DEBIAN_NAME)/usr/share/icons/hicolor/$${size}x$${size}/apps/$(DEBIAN_NAME).png ; \
 	done
+	mkdir -p $(CURDIR)/debian/$(DEBIAN_NAME)/usr/share/icons/hicolor/scalable/apps
+	cp -a $(CURDIR)/debian/$(DEBIAN_NAME).svg $(CURDIR)/debian/$(DEBIAN_NAME)/usr/share/icons/hicolor/scalable/apps
 ifeq (1,$(WANT_SANDBOXING))
 	chmod 4755 $(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(DEBIAN_NAME)-sandbox
 else

@@ -14,6 +14,10 @@ chromium-browser (5.0.357.0~svn20100318r41908-0ubuntu1) UNRELEASED; urgency=low
   * Import translations and mime-types from the upstream desktop file
     Thanks to Julien Lavergne <gilir@ubuntu.com> (LP: #538664)
     - update debian/chromium-browser.desktop
+  * Import the free SVG logo from the Chromium website and install it
+    in /usr/share/icons/hicolor/scalable/apps (LP: #528640)
+    - add debian/chromium-browser.svg
+    - update debian/rules
  
  -- Fabien Tassin <fta@ubuntu.com>  Thu, 18 Mar 2010 04:00:02 +0100
 
