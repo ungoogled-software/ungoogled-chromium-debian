@@ -21,6 +21,9 @@ chromium-browser (5.0.357.0~svn20100318r41908-0ubuntu1) UNRELEASED; urgency=low
   * Move chromium-browser-inspector to Depends, it breaks some features
     when it's not installed
     - update debian/control
+  * Rename chromium-codecs-ffmpeg-nonfree into chromium-codecs-ffmpeg-extra
+    and move the two codecs back to Depends (LP: #537617, #513776)
+    - update debian/control
  
  -- Fabien Tassin <fta@ubuntu.com>  Thu, 18 Mar 2010 04:00:02 +0100
 
