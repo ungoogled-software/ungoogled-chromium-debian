@@ -11,6 +11,9 @@ chromium-browser (5.0.357.0~svn20100318r41908-0ubuntu1) UNRELEASED; urgency=low
     - update debian/chromium-browser.install
   * Add 'timestats' to INSTALL_EXCLUDE_FILES
     - update debian/rules
+  * Import translations and mime-types from the upstream desktop file
+    Thanks to Julien Lavergne <gilir@ubuntu.com> (LP: #538664)
+    - update debian/chromium-browser.desktop
  
  -- Fabien Tassin <fta@ubuntu.com>  Thu, 18 Mar 2010 04:00:02 +0100
 
