@@ -1,5 +1,14 @@
-chromium-browser (5.0.357.0~svn20100318r41908-0ubuntu1) UNRELEASED; urgency=low
+chromium-browser (5.0.342.7~r42476-0ubuntu1) UNRELEASED; urgency=low
 
+  * New upstream release from the Beta Channel
+    - fix an issue with Google SSL sites failing with 'error 107
+      (net::ERR_SSL_PROTOCOL_ERROR)' (issue 37722)
+    - Automatic translations and greater control over content for privacy
+    - Really, really reload. A normal reload causes the browser to check with
+      the server before reusing its cached content.  The server can decide
+      whether or not the browser should use its cached content.  A force reload
+      causes the browser to ignore its cached content and ask the server for a
+      fresh copy of the page. Use Shift+Reload to force a reload.
   * Add libdbus-glib-1-dev to Build-Depends
     - update debian/control
   * Move third_party/gles2_book from STRIPPED_DIRS to ALMOST_STRIPPED_DIRS
@@ -25,7 +34,7 @@ chromium-browser (5.0.357.0~svn20100318r41908-0ubuntu1) UNRELEASED; urgency=low
     and move the two codecs back to Depends (LP: #537617, #513776)
     - update debian/control
  
- -- Fabien Tassin <fta@ubuntu.com>  Thu, 18 Mar 2010 04:00:02 +0100
+ -- Fabien Tassin <fta@ubuntu.com>  Thu, 25 Mar 2010 08:22:40 +0100
 
 chromium-browser (5.0.307.11~r39572-0ubuntu1) lucid; urgency=low
 
