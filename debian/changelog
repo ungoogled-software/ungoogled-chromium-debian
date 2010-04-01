@@ -1,5 +1,8 @@
 chromium-browser (5.0.367.0~svn20100401r43306-0ubuntu1) UNRELEASED; urgency=low
 
+  * Build with build_ffmpegsumo=0 instead of use_system_ffmpeg=1 (which
+    now means something else)
+    - update debian/rules
   * Install resources/{bookmark_manager,net_internals} in the main deb
     - update debian/chromium-browser.install
 
