@@ -217,11 +217,15 @@ GYP_DEFINES += build_ffmpegsumo=0
 USE_SYSTEM_SQLITE := $(shell pkg-config 'sqlite3 >= 3.6.1' && echo 1 || echo 0)
 USE_SYSTEM_SQLITE := 0
 
+ifneq (,$(filter 8.10 9.04,$(DEBIAN_DIST)))
+# Don't build with system zlib on Intrepid/Jaunty. See http://crbug.com/38073
+GYP_DEFINES += use_system_zlib=0
+endif
+
 # System libs
 ifeq (1,$(WANT_SYSTEM_LIBS))
 GYP_DEFINES += \
 	use_system_bzip2=1 \
-	use_system_zlib=0 \
 	use_system_libjpeg=1 \
 	use_system_libpng=1 \
 	use_system_sqlite=$(USE_SYSTEM_SQLITE) \

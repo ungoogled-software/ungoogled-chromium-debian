@@ -5,6 +5,8 @@ chromium-browser (5.0.370.0~svn20100405r43596-0ubuntu1) UNRELEASED; urgency=low
     - update debian/rules
   * Install resources/{bookmark_manager,net_internals} in the main deb
     - update debian/chromium-browser.install
+  * Don't build with system zlib on Intrepid/Jaunty. See http://crbug.com/38073
+    - update debian/rules
 
  -- Fabien Tassin <fta@ubuntu.com>  Mon, 05 Apr 2010 04:00:02 +0200
 
