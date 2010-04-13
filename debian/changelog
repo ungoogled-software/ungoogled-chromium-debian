@@ -1,4 +1,4 @@
-chromium-browser (5.0.342.9~r43360-0ubuntu1) UNRELEASED; urgency=low
+chromium-browser (5.0.342.9~r43360-0ubuntu1) lucid; urgency=low
 
   * New upstream release from the Beta Channel
     - Fix extensions installer where some extensions cannot be installed
