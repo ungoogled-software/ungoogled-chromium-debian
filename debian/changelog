@@ -1,14 +1,13 @@
-chromium-browser (5.0.370.0~svn20100405r43596-0ubuntu1) UNRELEASED; urgency=low
+chromium-browser (5.0.342.9~r43360-0ubuntu1) UNRELEASED; urgency=low
 
-  * Build with build_ffmpegsumo=0 instead of use_system_ffmpeg=1 (which
-    now means something else)
-    - update debian/rules
-  * Install resources/{bookmark_manager,net_internals} in the main deb
-    - update debian/chromium-browser.install
-  * Don't build with system zlib on Intrepid/Jaunty. See http://crbug.com/38073
+  * New upstream release from the Beta Channel
+    - Fix extensions installer where some extensions cannot be installed
+      (issue 38220)
+  * Don't build with system zlib on Intrepid/Jaunty (needed to unbreak the
+    backports). See http://crbug.com/38073
     - update debian/rules
 
- -- Fabien Tassin <fta@ubuntu.com>  Mon, 05 Apr 2010 04:00:02 +0200
+ -- Fabien Tassin <fta@ubuntu.com>  Wed, 07 Apr 2010 21:02:55 +0200
 
 chromium-browser (5.0.342.7~r42476-0ubuntu1) lucid; urgency=low
 
