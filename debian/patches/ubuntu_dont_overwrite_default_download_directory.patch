@@ -2,27 +2,27 @@ See http://code.google.com/p/chromium/issues/detail?id=16442
 Restore the default Downloads location used on Ubuntu.
 
 ---
- chrome/common/chrome_paths_linux.cc |   15 ---------------
- 1 file changed, 15 deletions(-)
+ chrome/common/chrome_paths_linux.cc |   16 +---------------
+ 1 file changed, 1 insertion(+), 15 deletions(-)
 
 Index: src/chrome/common/chrome_paths_linux.cc
 ===================================================================
 --- src.orig/chrome/common/chrome_paths_linux.cc
 +++ src/chrome/common/chrome_paths_linux.cc
-@@ -42,35 +42,20 @@
+@@ -40,34 +40,20 @@
+ }
  
  bool GetUserDocumentsDirectory(FilePath* result) {
-   scoped_ptr<base::EnvironmentVariableGetter> env(
-       base::EnvironmentVariableGetter::Create());
+   scoped_ptr<base::EnvVarGetter> env(base::EnvVarGetter::Create());
    *result = base::GetXDGUserDirectory(env.get(), "DOCUMENTS", "Documents");
    return true;
  }
  
 -// We respect the user's preferred download location, unless it is
 -// ~ or their desktop directory, in which case we default to ~/Downloads.
++// We respect the user's preferred download location
  bool GetUserDownloadsDirectory(FilePath* result) {
-   scoped_ptr<base::EnvironmentVariableGetter> env(
-       base::EnvironmentVariableGetter::Create());
+   scoped_ptr<base::EnvVarGetter> env(base::EnvVarGetter::Create());
    *result = base::GetXDGUserDirectory(env.get(), "DOWNLOAD", "Downloads");
 -
 -  FilePath home = base::GetHomeDir(env.get());
@@ -41,7 +41,7 @@ Index: src/chrome/common/chrome_paths_linux.cc
  }
  
  bool GetUserDesktop(FilePath* result) {
-   scoped_ptr<base::EnvironmentVariableGetter> env(
-       base::EnvironmentVariableGetter::Create());
+   scoped_ptr<base::EnvVarGetter> env(base::EnvVarGetter::Create());
    *result = base::GetXDGUserDirectory(env.get(), "DESKTOP", "Desktop");
    return true;
+ }
