@@ -291,6 +291,12 @@ endif
 ######
 DO = (touch r1; echo '$(1)'; $(1); touch r2 ; T1=`date -r r1 +%s` ; T2=`date -r r2 +%s`; echo "PERF: '$(2)' built in "`expr $$T2 - $$T1`" sec"; rm -f r1 r2;)
 
+pre-build::
+ifneq (,$(findstring Ubuntu,$(DEBIAN_DIST)))
+	sed -ri '/const PrepopulatedEngine google = \{/,/\}\;/ { s/sourceid=chrome\&/&client=ubuntu\&channel=cs\&/g; }' \
+		build-tree/src/chrome/browser/search_engines/template_url_prepopulate_data.cc
+endif
+
 DEB_MAKE_BUILD_TARGET := $(BUILD_ARGS) $(BUILD_TARGETS)
 
 configure/$(DEBIAN_NAME):: debian/configure-stamp

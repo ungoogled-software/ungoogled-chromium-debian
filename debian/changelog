@@ -1,5 +1,6 @@
 chromium-browser (5.0.370.0~svn20100405r43596-0ubuntu1) UNRELEASED; urgency=low
 
+  [ Fabien Tassin <fta@ubuntu.com> ]
   * Build with build_ffmpegsumo=0 instead of use_system_ffmpeg=1 (which
     now means something else)
     - update debian/rules
@@ -7,6 +8,10 @@ chromium-browser (5.0.370.0~svn20100405r43596-0ubuntu1) UNRELEASED; urgency=low
     - update debian/chromium-browser.install
   * When 'gclient update' fails, clear up the cache and retry. This helps
     the channels updates often failing with a "Can't switch the checkout" error
+    - update debian/rules
+
+  [ Chris Coulson <chris.coulson@canonical.com> ]
+  * Update the default search URL
     - update debian/rules
 
  -- Fabien Tassin <fta@ubuntu.com>  Mon, 05 Apr 2010 04:00:02 +0200
