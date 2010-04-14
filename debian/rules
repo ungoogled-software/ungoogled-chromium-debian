@@ -609,8 +609,10 @@ ifneq (,$(STRIPPED_DIRS_FROM_CO))
 	grep -Ev '^($$|[[:blank:]]*#)' $(TMP_DIR)/.gclient
 endif
 endif
-	# Checkout
-	cd $(TMP_DIR) && ./tools/depot_tools/gclient update --nohooks $(REVISION)
+	# Checkout (drop the previous content and retry if gclient failed, see http://crbug.com/39954)
+	cd $(TMP_DIR) && ./tools/depot_tools/gclient update --nohooks $(REVISION) || \
+	  ( rm -rf $(TMP_DIR)/{src,[0-9]*} ; ./tools/depot_tools/gclient update --nohooks $(REVISION) )
+
 ifneq (,$(LOCAL_BRANCH))
 	rm -rf $(TMP_DDIR)
 	cp -la $(TMP_DIR) $(TMP_DDIR)
