@@ -63,6 +63,10 @@ Description: Chromium browser
  Chromium is an open-source browser project that aims to build a safer, faster,
  and more stable way for all Internet users to experience the web.
  .
+ Chromium serves as a base for Google Chrome, which is Chromium rebranded (name
+ and logo) with very few additions such as usage tracking and an auto-updater
+ system.
+ .
  This package contains the Chromium browser
 
 Package: chromium-browser-dbg

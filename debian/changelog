@@ -1,5 +1,7 @@
 chromium-browser (5.0.370.0~svn20100405r43596-0ubuntu1) UNRELEASED; urgency=low
 
+  * Mention 'Chrome' in the main package description (LP: #561667)
+    - update debian/control
   * Build with build_ffmpegsumo=0 instead of use_system_ffmpeg=1 (which
     now means something else)
     - update debian/rules
