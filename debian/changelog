@@ -1,4 +1,4 @@
-chromium-browser (5.0.342.9~r43360-0ubuntu2) UNRELEASED; urgency=low
+chromium-browser (5.0.342.9~r43360-0ubuntu2) lucid; urgency=low
 
   [ Fabien Tassin <fta@ubuntu.com> ]
   * Mention 'Chrome' in the main package description (LP: #561667)
