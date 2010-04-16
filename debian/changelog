@@ -1,13 +1,8 @@
-chromium-browser (5.0.378.0~svn20100415r44604-0ubuntu1) UNRELEASED; urgency=low
+chromium-browser (5.0.342.9~r43360-0ubuntu2) UNRELEASED; urgency=low
 
   [ Fabien Tassin <fta@ubuntu.com> ]
   * Mention 'Chrome' in the main package description (LP: #561667)
     - update debian/control
-  * Build with build_ffmpegsumo=0 instead of use_system_ffmpeg=1 (which
-    now means something else)
-    - update debian/rules
-  * Install resources/{bookmark_manager,net_internals} in the main deb
-    - update debian/chromium-browser.install
   * When 'gclient update' fails, clear up the cache and retry. This helps
     the channels updates often failing with a "Can't switch the checkout" error
     - update debian/rules
@@ -16,7 +11,7 @@ chromium-browser (5.0.378.0~svn20100415r44604-0ubuntu1) UNRELEASED; urgency=low
   * Update the default search URL
     - update debian/rules
 
- -- Fabien Tassin <fta@ubuntu.com>  Thu, 15 Apr 2010 04:12:13 +0200
+ -- Fabien Tassin <fta@ubuntu.com>  Fri, 16 Apr 2010 17:36:29 +0200
 
 chromium-browser (5.0.342.9~r43360-0ubuntu1) lucid; urgency=low
 
