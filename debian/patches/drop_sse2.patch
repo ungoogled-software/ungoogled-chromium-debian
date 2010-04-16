@@ -1,12 +1,12 @@
 ---
- build/common.gypi |   19 ++++++++++---------
- 1 file changed, 10 insertions(+), 9 deletions(-)
+ build/common.gypi |   20 +++++++++++---------
+ 1 file changed, 11 insertions(+), 9 deletions(-)
 
 Index: src/build/common.gypi
 ===================================================================
 --- src.orig/build/common.gypi
 +++ src/build/common.gypi
-@@ -386,25 +386,26 @@
+@@ -878,25 +878,27 @@
              #
              # -mfpmath=sse -msse2 makes the compiler use SSE instructions
              # which keep floating-point values in SSE registers in its
@@ -24,7 +24,8 @@ Index: src/build/common.gypi
 -                ],
 -              }],
 -            ],
-+            # Disabled: see http://code.google.com/p/chromium/issues/detail?id=9007
++            #
++            # # Disabled: see http://code.google.com/p/chromium/issues/detail?id=9007
 +            # 'conditions': [
 +            #   ['branding=="Chromium"', {
 +            #     'cflags': [
@@ -34,11 +35,11 @@ Index: src/build/common.gypi
 +            #     ],
 +            #   }],
 +            # ],
+             # -mmmx allows mmintrin.h to be used for mmx intrinsics.
+             # video playback is mmx and sse2 optimized.
              'cflags': [
                '-m32',
+               '-mmmx',
              ],
              'ldflags': [
                '-m32',
-             ],
-           }],
-         ],

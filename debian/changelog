@@ -1,3 +1,13 @@
+chromium-browser (5.0.378.0~svn20100415r44604-0ubuntu1) UNRELEASED; urgency=low
+
+  * Build with build_ffmpegsumo=0 instead of use_system_ffmpeg=1 (which
+    now means something else)
+    - update debian/rules
+  * Install resources/{bookmark_manager,net_internals} in the main deb
+    - update debian/chromium-browser.install
+
+ -- Fabien Tassin <fta@ubuntu.com>  Thu, 15 Apr 2010 04:12:13 +0200
+
 chromium-browser (5.0.342.9~r43360-0ubuntu2) lucid; urgency=low
 
   [ Fabien Tassin <fta@ubuntu.com> ]
