@@ -27,6 +27,9 @@ ifeq (0,$(PROCESSORS))
 PROCESSORS := 1
 endif
 
+# Disable SSE2
+GYP_DEFINES = enable_sse2=0
+
 # Only keep -Werror when building for the Debian or Ubuntu development branches
 ifeq (,$(filter unstable development,$(DEBIAN_DIST)))
 GYP_DEFINES += werror=$(NULL)

@@ -5,6 +5,10 @@ chromium-browser (5.0.381.0~svn20100417r44876-0ubuntu1) UNRELEASED; urgency=low
     - update debian/rules
   * Install resources/{bookmark_manager,net_internals} in the main deb
     - update debian/chromium-browser.install
+  * Introduce a enable_sse2 flag in the gyp rules and set it to 0
+    - update debian/patches/drop_sse2.patch => debian/patches/add_enable_sse2_flag.patch
+    - update debian/patches/series
+    - update debian/rules
 
  -- Fabien Tassin <fta@ubuntu.com>  Sun, 18 Apr 2010 04:00:01 +0200
 

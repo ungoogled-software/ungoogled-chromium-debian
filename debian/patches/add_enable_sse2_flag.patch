@@ -1,0 +1,78 @@
+---
+ build/common.gypi |    9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+
+Index: src/build/common.gypi
+===================================================================
+--- src.orig/build/common.gypi
++++ src/build/common.gypi
+@@ -81,16 +81,20 @@
+ 
+       # Set to 1 compile with -fPIC cflag on linux. This is a must for shared
+       # libraries on linux x86-64 and arm.
+       'linux_fpic%': 0,
+ 
+       # Python version.
+       'python_ver%': '2.5',
+ 
++      # Set to 1 to build with -sse2. As it causes SIGILL on older CPUs, it must
++      # be set to 0 when a broader audience is targetted.
++      'enable_sse2%': 1,
++
+       # Set ARM-v7 compilation flags
+       'armv7%': 0,
+ 
+       # Set Neon compilation flags (only meaningful if armv7==1).
+       'arm_neon%': 1,
+ 
+       # The system root for cross-compiles. Default: none.
+       'sysroot%': '',
+@@ -103,16 +107,17 @@
+     'target_arch%': '<(target_arch)',
+     'host_arch%': '<(host_arch)',
+     'toolkit_views%': '<(toolkit_views)',
+     'chromeos%': '<(chromeos)',
+     'inside_chromium_build%': '<(inside_chromium_build)',
+     'fastbuild%': '<(fastbuild)',
+     'linux_fpic%': '<(linux_fpic)',
+     'python_ver%': '<(python_ver)',
++    'enable_sse2%': '<(enable_sse2)',
+     'armv7%': '<(armv7)',
+     'arm_neon%': '<(arm_neon)',
+     'sysroot%': '<(sysroot)',
+ 
+     # The release channel that this build targets. This is used to restrict
+     # channel-specific build options, like which installer packages to create.
+     # The default is 'all', which does no channel-specific filtering.
+     'channel%': 'all',
+@@ -885,28 +890,28 @@
+             # -mfpmath=sse -msse2 makes the compiler use SSE instructions
+             # which keep floating-point values in SSE registers in its
+             # native precision (32-bit for single precision, and 64-bit for
+             # double precision values). This means the floating-point value
+             # used during computation does not change depending on how the
+             # compiler optimized the code, since the value is always kept
+             # in its specified precision.
+             'conditions': [
+-              ['branding=="Chromium"', {
++              ['branding=="Chromium" and enable_sse2==1', {
+                 'cflags': [
+                   '-march=pentium4',
+                   '-msse2',
+                   '-mfpmath=sse',
+                 ],
+               }],
+               # ChromeOS targets Pinetrail, which is ssse3, but most of the
+               # benefit comes from sse2 so this setting allows ChromeOS
+               # to build on other CPUs.  In the future -march=atom would help
+               # but requires a newer compiler.
+-              ['chromeos==1', {
++              ['chromeos==1 and enable_sse2==1', {
+                 'cflags': [
+                   '-msse2',
+                 ],
+               }],
+             ],
+             # -mmmx allows mmintrin.h to be used for mmx intrinsics.
+             # video playback is mmx and sse2 optimized.
+             'cflags': [
