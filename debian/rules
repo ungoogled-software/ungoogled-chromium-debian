@@ -132,6 +132,7 @@ INSTALL_EXCLUDE_DIRS = \
 	dbg \
 	plugins \
 	'*.d' \
+	.deps \
 	$(NULL)
 
 INSTALL_EXCLUDE_FILES = \
@@ -271,6 +272,10 @@ INSTALL_EXCLUDE_FILES += \
 	$(TESTS_TARGETS) \
 	test_shell.pak \
 	xdisplaycheck \
+	$(NULL)
+
+INSTALL_EXCLUDE_DIRS += \
+	app_unittests_strings \
 	$(NULL)
 endif
 
