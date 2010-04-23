@@ -11,6 +11,8 @@ chromium-browser (5.0.386.0~svn20100423r45407-0ubuntu1) UNRELEASED; urgency=low
     - update debian/rules
   * Add app_unittests_strings to INSTALL_EXCLUDE_DIRS
     - update debian/rules
+  * Add xdg-utils to Depends (LP: #568984)
+    - update debian/control
 
  -- Fabien Tassin <fta@ubuntu.com>  Fri, 23 Apr 2010 04:00:02 +0200
 
