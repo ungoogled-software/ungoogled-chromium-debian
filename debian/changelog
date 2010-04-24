@@ -21,8 +21,9 @@ chromium-browser (5.0.342.9~r43360-1) experimental; urgency=low
     description
   * Set CHROME_VERSION_EXTRA to Debian in the Debian package
   * Updated Maintainer and Uploader lists
+  * Upload to experimental (Closes: #520324)
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 24 Apr 2010 15:57:50 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 24 Apr 2010 16:01:51 +0200
 
 chromium-browser (5.0.342.9~r43360-0ubuntu2) lucid; urgency=low
 
