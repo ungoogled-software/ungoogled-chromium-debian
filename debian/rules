@@ -14,7 +14,11 @@ DEB_BUILDDIR   := $(SRC_DIR)
 #BUILD_ARGS     := --keep-going
 
 WANT_LZMA_SRC    ?= 1
+ifneq (,$(findstring Ubuntu,$(DEBIAN_DIST)))
 WANT_LZMA_DEBS   ?= 1
+else
+WANT_LZMA_DEBS   ?= 0
+endif
 WANT_DEBUG       := 0
 WANT_SYSTEM_LIBS ?= 0
 WANT_SHARED_LIBS ?= 0
@@ -329,6 +333,7 @@ endif
 
 clean::
 	rm -f debian/configure-stamp debian/stamp-makefile-build-*
+	rm -f *.cdbs-config_list
 
 # Install: there's no install rules in scons yet, do it manually
 common-install-prehook-impl::
@@ -338,6 +343,9 @@ common-install-prehook-impl::
 	cd debian/tmp/$(LIB_DIR) && rm -f $(INSTALL_EXCLUDE_FILES)
 	# Launcher script
 	mkdir -p debian/tmp/usr/bin
+ifneq (,$(findstring Debian,$(DEBIAN_DIST)))
+	sed -ri 's:'CHROME_VERSION_EXTRA=Ubuntu':'CHROME_VERSION_EXTRA=Debian':' debian/$(DEBIAN_NAME).sh
+endif
 	cp -a debian/$(DEBIAN_NAME).sh debian/tmp/usr/bin/$(DEBIAN_NAME)
 	chmod 755 debian/tmp/usr/bin/$(DEBIAN_NAME)
 	# Preferences

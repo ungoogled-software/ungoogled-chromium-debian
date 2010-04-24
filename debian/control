@@ -5,7 +5,7 @@ Maintainer: Fabien Tassin <fta@ubuntu.com>
 Vcs-Bzr: https://code.launchpad.net/~chromium-team/chromium-browser/chromium-browser.head
 Homepage: http://code.google.com/chromium/
 Build-Depends: cdbs,
-	debhelper (>= 5),
+	debhelper (>= 7),
 	pkg-config,
 	lsb-release,
 	lzma,
@@ -21,9 +21,8 @@ Build-Depends: cdbs,
 	gperf,
 	gdb,
 	wdiff,
-	timeout,
 	xvfb,
-	xbase-clients,
+	x11-apps,
 	xfonts-base,
 	ttf-kochi-gothic,
 	ttf-kochi-mincho,
@@ -49,7 +48,7 @@ Build-Depends: cdbs,
 	libgtk2.0-dev,
 	libdbus-glib-1-dev,
 	libgconf2-dev
-Standards-Version: 3.8.3
+Standards-Version: 3.8.4
 
 Package: chromium-browser
 Architecture: any
@@ -74,8 +73,8 @@ Description: Chromium browser
 
 Package: chromium-browser-dbg
 Architecture: any
-Section: devel
-Priority: optional
+Section: debug
+Priority: extra
 Pre-Depends: lzma
 Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-browser (= ${binary:Version})
 Provides: chromium-testsuite-dbg
@@ -83,11 +82,14 @@ Replaces: chromium-testsuite-dbg
 Conflicts: chromium-testsuite-dbg
 Description: chromium-browser debug symbols
  Debug symbols for the Chromium browser
+ .
+ Chromium is an open-source browser project that aims to build a safer, faster,
+ and more stable way for all Internet users to experience the web.
 
 Package: chromium-browser-l10n
 Architecture: all
 Pre-Depends: lzma
-Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-browser (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-browser (>= ${source:Version}), chromium-browser (<< ${source:Version}.1~)
 Breaks: chromium-browser (<< 3.0.197.0~svn20090804r22432)
 Replaces: chromium-browser (<< 3.0.197.0~svn20090804r22432)
 Description: chromium-browser language packages

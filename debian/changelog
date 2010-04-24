@@ -1,6 +1,25 @@
 chromium-browser (5.0.342.9~r43360-1) experimental; urgency=low
 
-  * 
+  [ Fabien Tassin ]
+  * Add xdg-utils to Depends (LP: #568984)
+    - update debian/control
+
+  [ Giuseppe Iuculano ]
+  * Replace xbase-clients with x11-apps in build-depdends 
+  * Bump debhelper compatibility to 7
+  * Bump to Standards-Version 3.8.4, no changes needed
+  * Removed the strict depends in chromium-browser-l10n, and made
+    chromium-browser safely binNMUable
+  * Set Priority extra for chromium-browser-dbg
+  * Added the debhelper token in prerm and postinst scripts
+  * Removed cdbs cruft and fix patch-system-but-direct-changes-in-diff lintian
+    warning
+  * Removed "timeout" from build-depends,  "coreutils" already provides the
+    binary 
+  * Use lzma only in Ubuntu, this is not yet permitted in the Debian archive
+  * Move chromium-browser-dbg in debug section and improve its extended
+    description
+  * Set CHROME_VERSION_EXTRA to Debian in the Debian package
 
  -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 24 Apr 2010 15:34:58 +0200
 
