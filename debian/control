@@ -58,8 +58,7 @@ Architecture: any
 Pre-Depends: lzma
 Depends: ${shlibs:Depends}, ${misc:Depends},
 	libnss3-1d (>= 3.12.3),
-	chromium-browser-inspector,
-	chromium-codecs-ffmpeg | chromium-codecs-ffmpeg-extra
+	chromium-browser-inspector
 Suggests: chromium-browser-l10n
 Provides: www-browser, chromium-testsuite
 Replaces: chromium-testsuite
