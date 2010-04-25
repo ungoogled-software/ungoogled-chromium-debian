@@ -1,4 +1,4 @@
-chromium-browser (5.0.386.0~svn20100423r45407-0ubuntu1) UNRELEASED; urgency=low
+chromium-browser (5.0.388.0~svn20100424r45543-0ubuntu1) UNRELEASED; urgency=low
 
   * Build with build_ffmpegsumo=0 instead of use_system_ffmpeg=1 (which
     now means something else)
@@ -14,7 +14,7 @@ chromium-browser (5.0.386.0~svn20100423r45407-0ubuntu1) UNRELEASED; urgency=low
   * Add xdg-utils to Depends (LP: #568984)
     - update debian/control
 
- -- Fabien Tassin <fta@ubuntu.com>  Fri, 23 Apr 2010 04:00:02 +0200
+ -- Fabien Tassin <fta@ubuntu.com>  Sun, 25 Apr 2010 04:00:02 +0200
 
 chromium-browser (5.0.342.9~r43360-0ubuntu2) lucid; urgency=low
 
