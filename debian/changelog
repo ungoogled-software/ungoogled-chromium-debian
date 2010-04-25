@@ -3,6 +3,8 @@ chromium-browser (5.0.342.9~r43360-1) experimental; urgency=low
   [ Fabien Tassin ]
   * Add xdg-utils to Depends (LP: #568984)
     - update debian/control
+  * Disable DLOG and DCHECK. This should improve performances.
+    - update debian/rules
 
   [ Giuseppe Iuculano ]
   * Replace xbase-clients with x11-apps in build-depdends 
