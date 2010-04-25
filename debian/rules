@@ -30,6 +30,9 @@ endif
 # Disable SSE2
 GYP_DEFINES = enable_sse2=0
 
+# Disable DLOG and DCHECK for performance reasons
+GYP_DEFINES += OMIT_DLOG_AND_DCHECK=1
+
 # Only keep -Werror when building for the Debian or Ubuntu development branches
 ifeq (,$(filter unstable development,$(DEBIAN_DIST)))
 GYP_DEFINES += werror=$(NULL)

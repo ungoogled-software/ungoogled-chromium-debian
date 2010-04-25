@@ -1,5 +1,7 @@
 chromium-browser (5.0.388.0~svn20100424r45543-0ubuntu1) UNRELEASED; urgency=low
 
+  * Disable DLOG and DCHECK. This should improve performances.
+    - update debian/rules
   * Build with build_ffmpegsumo=0 instead of use_system_ffmpeg=1 (which
     now means something else)
     - update debian/rules
