@@ -7,26 +7,40 @@ chromium-browser (5.0.342.9~r43360-1) experimental; urgency=low
     - update debian/rules
 
   [ Giuseppe Iuculano ]
-  * Replace xbase-clients with x11-apps in build-depdends 
+  * Replace xbase-clients with x11-apps in build-depdends
+    - update debian/control
   * Bump debhelper compatibility to 7
+    - update debian/control
+    - update debian/compat
   * Bump to Standards-Version 3.8.4, no changes needed
+    - update debian/control
   * Removed the strict depends in chromium-browser-l10n, and made
     chromium-browser safely binNMUable
+    - update debian/control
   * Set Priority extra for chromium-browser-dbg
+    - update debian/control
   * Added the debhelper token in prerm and postinst scripts
+    - update debian/chromium-browser.postinst
+    - update debian/chromium-browser.prerm
   * Removed cdbs cruft and fix patch-system-but-direct-changes-in-diff lintian
     warning
+    - update debian/rules
   * Build-depends on coreutils >= 7.5 | timeout
     - update debian/control
   * Use lzma only in Ubuntu, this is not yet permitted in the Debian archive
+    - update debian/rules
   * Move chromium-browser-dbg in debug section and improve its extended
     description
+    - update debian/control
   * Set CHROME_VERSION_EXTRA to Debian in the Debian package
+    - update debian/rules
   * Updated Maintainer and Uploader lists
+    - update debian/control
   * Upload to experimental (Closes: #520324)
   * Removed chromium-codecs-ffmpeg from Depends
+    - update debian/control
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 24 Apr 2010 17:54:08 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Mon, 26 Apr 2010 15:03:00 +0200
 
 chromium-browser (5.0.342.9~r43360-0ubuntu2) lucid; urgency=low
 
