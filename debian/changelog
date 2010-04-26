@@ -16,8 +16,8 @@ chromium-browser (5.0.342.9~r43360-1) experimental; urgency=low
   * Added the debhelper token in prerm and postinst scripts
   * Removed cdbs cruft and fix patch-system-but-direct-changes-in-diff lintian
     warning
-  * Removed "timeout" from build-depends,  "coreutils" already provides the
-    binary 
+  * Build-depends on coreutils >= 7.5 | timeout
+    - update debian/control
   * Use lzma only in Ubuntu, this is not yet permitted in the Debian archive
   * Move chromium-browser-dbg in debug section and improve its extended
     description
