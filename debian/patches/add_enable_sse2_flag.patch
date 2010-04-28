@@ -6,7 +6,7 @@ Index: src/build/common.gypi
 ===================================================================
 --- src.orig/build/common.gypi
 +++ src/build/common.gypi
-@@ -81,16 +81,20 @@
+@@ -93,16 +93,20 @@
  
        # Set to 1 compile with -fPIC cflag on linux. This is a must for shared
        # libraries on linux x86-64 and arm.
@@ -27,7 +27,7 @@ Index: src/build/common.gypi
  
        # The system root for cross-compiles. Default: none.
        'sysroot%': '',
-@@ -103,16 +107,17 @@
+@@ -115,16 +119,17 @@
      'target_arch%': '<(target_arch)',
      'host_arch%': '<(host_arch)',
      'toolkit_views%': '<(toolkit_views)',
@@ -45,7 +45,7 @@ Index: src/build/common.gypi
      # channel-specific build options, like which installer packages to create.
      # The default is 'all', which does no channel-specific filtering.
      'channel%': 'all',
-@@ -885,28 +890,28 @@
+@@ -911,28 +916,28 @@
              # -mfpmath=sse -msse2 makes the compiler use SSE instructions
              # which keep floating-point values in SSE registers in its
              # native precision (32-bit for single precision, and 64-bit for
@@ -62,7 +62,7 @@ Index: src/build/common.gypi
                    '-mfpmath=sse',
                  ],
                }],
-               # ChromeOS targets Pinetrail, which is ssse3, but most of the
+               # ChromeOS targets Pinetrail, which is sse3, but most of the
                # benefit comes from sse2 so this setting allows ChromeOS
                # to build on other CPUs.  In the future -march=atom would help
                # but requires a newer compiler.
