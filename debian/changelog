@@ -17,6 +17,8 @@ chromium-browser (5.0.391.0~svn20100428r45775-0ubuntu1) UNRELEASED; urgency=low
     - update debian/rules
   * Add xdg-utils to Depends (LP: #568984)
     - update debian/control
+  * Add a gnome-www-browser alternative (LP: #571103)
+    - update debian/chromium-browser.{postinst,prerm}
 
  -- Fabien Tassin <fta@ubuntu.com>  Wed, 28 Apr 2010 04:00:02 +0200
 
