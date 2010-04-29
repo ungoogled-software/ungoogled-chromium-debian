@@ -9,8 +9,8 @@ chromium-browser (5.0.392.0~svn20100429r45902-0ubuntu1) UNRELEASED; urgency=low
   * Install new resources (bookmark_manager, calendar_app, docs_app, gmail_app
     and net_internals) in the main deb
     - update debian/chromium-browser.install
-  * Introduce a enable_sse2 flag in the gyp rules and set it to 0
-    - update debian/patches/drop_sse2.patch => debian/patches/add_enable_sse2_flag.patch
+  * Drop the sse2 patch, it has been applied upstream, and set disable_sse2
+    - drop debian/patches/drop_sse2.patch
     - update debian/patches/series
     - update debian/rules
   * Add app_unittests_strings to INSTALL_EXCLUDE_DIRS
