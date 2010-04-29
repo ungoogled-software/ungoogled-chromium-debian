@@ -7,6 +7,7 @@ debian/tmp/usr/lib/chromium-browser/resources/calendar_app
 debian/tmp/usr/lib/chromium-browser/resources/docs_app
 debian/tmp/usr/lib/chromium-browser/resources/gmail_app
 debian/tmp/usr/lib/chromium-browser/resources/net_internals
+debian/tmp/usr/lib/chromium-browser/resources/shared
 #debian/tmp/usr/lib/chromium-browser/icudt38l.dat
 debian/tmp/usr/lib/chromium-browser/locales/*
 debian/chromium-browser.desktop usr/share/applications
