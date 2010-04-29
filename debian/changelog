@@ -6,14 +6,14 @@ chromium-browser (5.0.392.0~svn20100429r45902-0ubuntu1) UNRELEASED; urgency=low
   * Build with build_ffmpegsumo=0 instead of use_system_ffmpeg=1 (which
     now means something else)
     - update debian/rules
-  * Install new resources (bookmark_manager, calendar_app, docs_app, gmail_app,
-    shared and net_internals) in the main deb
+  * Install resources/{bookmark_manager,shared,net_internals} in the main deb
     - update debian/chromium-browser.install
   * Drop the sse2 patch, it has been applied upstream, and set disable_sse2
     - drop debian/patches/drop_sse2.patch
     - update debian/patches/series
     - update debian/rules
-  * Add app_unittests_strings to INSTALL_EXCLUDE_DIRS
+  * Add app_unittests_strings and resources/{calendar_app,docs_app,gmail_app}
+    to INSTALL_EXCLUDE_DIRS
     - update debian/rules
   * Add xdg-utils to Depends (LP: #568984)
     - update debian/control

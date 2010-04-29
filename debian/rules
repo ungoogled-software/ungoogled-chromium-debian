@@ -133,6 +133,9 @@ INSTALL_EXCLUDE_DIRS = \
 	plugins \
 	'*.d' \
 	.deps \
+	calendar_app \
+	docs_app \
+	gmail_app \
 	$(NULL)
 
 INSTALL_EXCLUDE_FILES = \
