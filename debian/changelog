@@ -1,4 +1,4 @@
-chromium-browser (5.0.392.0~svn20100429r45902-0ubuntu1) UNRELEASED; urgency=low
+chromium-browser (5.0.394.0~svn20100501r46184-0ubuntu1) UNRELEASED; urgency=low
 
   * Disable DLOG and DCHECK. This should improve performances.
     - add debian/patches/disable_dlog_and_dcheck_in_release_builds.patch
@@ -20,7 +20,7 @@ chromium-browser (5.0.392.0~svn20100429r45902-0ubuntu1) UNRELEASED; urgency=low
   * Add a gnome-www-browser alternative (LP: #571103)
     - update debian/chromium-browser.{postinst,prerm}
 
- -- Fabien Tassin <fta@ubuntu.com>  Thu, 29 Apr 2010 04:12:21 +0200
+ -- Fabien Tassin <fta@ubuntu.com>  Sat, 01 May 2010 13:13:39 +0200
 
 chromium-browser (5.0.342.9~r43360-0ubuntu2) lucid; urgency=low
 
