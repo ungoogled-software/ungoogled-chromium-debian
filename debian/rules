@@ -136,6 +136,7 @@ INSTALL_EXCLUDE_DIRS = \
 	calendar_app \
 	docs_app \
 	gmail_app \
+	pyproto \
 	$(NULL)
 
 INSTALL_EXCLUDE_FILES = \

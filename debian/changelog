@@ -12,8 +12,8 @@ chromium-browser (5.0.394.0~svn20100501r46184-0ubuntu1) UNRELEASED; urgency=low
     - drop debian/patches/drop_sse2.patch
     - update debian/patches/series
     - update debian/rules
-  * Add app_unittests_strings and resources/{calendar_app,docs_app,gmail_app}
-    to INSTALL_EXCLUDE_DIRS
+  * Add app_unittests_strings, resources/{calendar_app,docs_app,gmail_app}
+    and pyproto to INSTALL_EXCLUDE_DIRS
     - update debian/rules
   * Add xdg-utils to Depends (LP: #568984)
     - update debian/control
