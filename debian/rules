@@ -20,7 +20,7 @@ else
 WANT_LZMA_DEBS   ?= 0
 endif
 WANT_DEBUG       := 0
-WANT_SYSTEM_LIBS ?= 0
+WANT_SYSTEM_LIBS ?= 1
 WANT_SHARED_LIBS ?= 0
 WANT_TESTS       ?= 1
 WANT_SANDBOXING  ?= 1
@@ -236,7 +236,7 @@ GYP_DEFINES += \
 	use_system_libjpeg=1 \
 	use_system_libpng=1 \
 	use_system_sqlite=$(USE_SYSTEM_SQLITE) \
-	use_system_libxml=0 \
+	use_system_libxml=1 \
 	use_system_libxslt=1 \
 	$(NULL)
 endif
