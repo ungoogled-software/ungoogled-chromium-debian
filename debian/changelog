@@ -7,6 +7,8 @@ chromium-browser (5.0.342.9~r43360-2) UNRELEASED; urgency=low
     - update debian/control
   * Add app_unittests_strings to INSTALL_EXCLUDE_DIRS
     - update debian/rules
+  * Add a gnome-www-browser alternative (LP: #571103)
+    - update debian/chromium-browser.{postinst,prerm}
 
  -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 02 May 2010 12:27:03 +0200
 
