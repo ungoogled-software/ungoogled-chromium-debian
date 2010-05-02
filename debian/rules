@@ -238,6 +238,9 @@ GYP_DEFINES += \
 	use_system_sqlite=$(USE_SYSTEM_SQLITE) \
 	use_system_libxml=1 \
 	use_system_libxslt=1 \
+	use_system_zlib=1 \
+	use_system_libevent=1 \
+	use_system_icu=1 \
 	$(NULL)
 endif
 

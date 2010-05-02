@@ -2,8 +2,11 @@ chromium-browser (5.0.342.9~r43360-2) UNRELEASED; urgency=low
 
   * Switch to system libs and enabled libxml.
     - update debian/rules
+  * Use system libevent, libicu and libxslt
+    - update debian/rules
+    - update debian/control
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 02 May 2010 12:16:03 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 02 May 2010 12:27:03 +0200
 
 chromium-browser (5.0.342.9~r43360-1) experimental; urgency=low
 
