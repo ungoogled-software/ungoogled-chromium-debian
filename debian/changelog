@@ -1,4 +1,4 @@
-chromium-browser (5.0.342.9~r43360-2) UNRELEASED; urgency=low
+chromium-browser (5.0.375.29~r46008-1) UNRELEASED; urgency=low
 
   * Switch to system libs and enabled libxml.
     - update debian/rules
@@ -9,8 +9,9 @@ chromium-browser (5.0.342.9~r43360-2) UNRELEASED; urgency=low
     - update debian/rules
   * Add a gnome-www-browser alternative (LP: #571103)
     - update debian/chromium-browser.{postinst,prerm}
+  * New upstream release from the Beta Channel
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 02 May 2010 12:27:03 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 04 May 2010 22:40:12 +0200
 
 chromium-browser (5.0.342.9~r43360-1) experimental; urgency=low
 
