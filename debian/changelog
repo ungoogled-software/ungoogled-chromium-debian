@@ -10,6 +10,18 @@ chromium-browser (5.0.375.29~r46008-1) UNRELEASED; urgency=low
   * Add a gnome-www-browser alternative (LP: #571103)
     - update debian/chromium-browser.{postinst,prerm}
   * New upstream release from the Beta Channel
+  * Build with build_ffmpegsumo=0 instead of use_system_ffmpeg=1 (which
+    now means something else)
+    - update debian/rules
+  * Install resources/{bookmark_manager,shared,net_internals} in the main deb
+    - update debian/chromium-browser.install
+  * Drop the sse2 patch, it has been applied upstream, and set disable_sse2
+    - drop debian/patches/drop_sse2.patch
+    - update debian/patches/series
+    - update debian/rules
+  * Add app_unittests_strings, resources/{calendar_app,docs_app,gmail_app}
+    and pyproto to INSTALL_EXCLUDE_DIRS
+    - update debian/rules
 
  -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 04 May 2010 22:40:12 +0200
 
