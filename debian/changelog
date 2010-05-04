@@ -1,3 +1,33 @@
+chromium-browser (5.0.375.29~r46008-0ubuntu1) UNRELEASED; urgency=low
+
+  * New upstream release from the Beta Channel
+    - HTML5 Features: Geolocation, App Cache, web sockets, file drag-and-drop.
+    - V8 performance improvements
+    - Preferences synchronization
+    - NaCl behind a flag
+  * Disable DLOG and DCHECK (like it is done in Chrome). This should improve
+    performances.
+    - add debian/patches/disable_dlog_and_dcheck_in_release_builds.patch
+    - update debian/patches/series
+  * Build with build_ffmpegsumo=0 instead of use_system_ffmpeg=1 (which
+    now means something else)
+    - update debian/rules
+  * Install resources/{bookmark_manager,shared,net_internals} in the main deb
+    - update debian/chromium-browser.install
+  * Introduce a enable_sse2 flag in the gyp rules and set it to 0
+    - update debian/patches/drop_sse2.patch => debian/patches/add_enable_sse2_flag.patch
+    - update debian/patches/series
+    - update debian/rules
+  * Add app_unittests_strings and resources/{calendar_app,docs_app,gmail_app}
+    to INSTALL_EXCLUDE_DIRS
+    - update debian/rules
+  * Add xdg-utils to Depends (LP: #568984)
+    - update debian/control
+  * Add a gnome-www-browser alternative (LP: #571103)
+    - update debian/chromium-browser.{postinst,prerm}
+
+ -- Fabien Tassin <fta@ubuntu.com>  Tue, 04 May 2010 17:00:02 +0200
+
 chromium-browser (5.0.342.9~r43360-0ubuntu2) lucid; urgency=low
 
   [ Fabien Tassin <fta@ubuntu.com> ]
