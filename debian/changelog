@@ -1,3 +1,9 @@
+chromium-browser (5.0.394.0~svn20100501r46184-0ubuntu1) UNRELEASED; urgency=low
+
+  * New upstream snapshot
+
+ -- Fabien Tassin <fta@ubuntu.com>  Sat, 01 May 2010 13:13:39 +0200
+
 chromium-browser (5.0.375.29~r46008-0ubuntu1) maverick; urgency=low
 
   * New upstream release from the Beta Channel

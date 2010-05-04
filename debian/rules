@@ -28,12 +28,12 @@ PROCESSORS := 1
 endif
 
 # Disable SSE2
-GYP_DEFINES = enable_sse2=0
+GYP_DEFINES = disable_sse2=1
 
 # Only keep -Werror when building for the Debian or Ubuntu development branches
-#ifeq (,$(filter unstable development,$(DEBIAN_DIST)))
+ifeq (,$(filter unstable development,$(DEBIAN_DIST)))
 GYP_DEFINES += werror=$(NULL)
-#endif
+endif
 
 ifeq (armel,$(DEB_BUILD_ARCH))
 AVOID_GCC_44 := 0
@@ -136,6 +136,7 @@ INSTALL_EXCLUDE_DIRS = \
 	calendar_app \
 	docs_app \
 	gmail_app \
+	pyproto \
 	$(NULL)
 
 INSTALL_EXCLUDE_FILES = \

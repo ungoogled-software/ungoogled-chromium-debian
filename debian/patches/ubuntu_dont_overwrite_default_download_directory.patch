@@ -9,7 +9,7 @@ Index: src/chrome/common/chrome_paths_linux.cc
 ===================================================================
 --- src.orig/chrome/common/chrome_paths_linux.cc
 +++ src/chrome/common/chrome_paths_linux.cc
-@@ -40,34 +40,19 @@
+@@ -41,34 +41,19 @@
  }
  
  bool GetUserDocumentsDirectory(FilePath* result) {
@@ -24,7 +24,7 @@ Index: src/chrome/common/chrome_paths_linux.cc
    scoped_ptr<base::EnvVarGetter> env(base::EnvVarGetter::Create());
    *result = base::GetXDGUserDirectory(env.get(), "DOWNLOAD", "Downloads");
 -
--  FilePath home = base::GetHomeDir(env.get());
+-  FilePath home = file_util::GetHomeDir();
 -  if (*result == home) {
 -    *result = home.Append("Downloads");
 -    return true;
