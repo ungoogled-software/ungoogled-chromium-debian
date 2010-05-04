@@ -54,11 +54,7 @@ Standards-Version: 3.8.3
 Package: chromium-browser
 Architecture: any
 Pre-Depends: lzma
-Depends: ${shlibs:Depends}, ${misc:Depends},
-	libnss3-1d (>= 3.12.3),
-	xdg-utils,
-	chromium-browser-inspector,
-	chromium-codecs-ffmpeg | chromium-codecs-ffmpeg-extra
+Depends: ${shlibs:Depends}, ${misc:Depends}, libnss3-1d (>= 3.12.3), chromium-browser-inspector, chromium-codecs-ffmpeg | chromium-codecs-ffmpeg-extra
 Suggests: chromium-browser-l10n
 Provides: www-browser, chromium-testsuite
 Replaces: chromium-testsuite

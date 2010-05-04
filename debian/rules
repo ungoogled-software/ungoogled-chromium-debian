@@ -27,9 +27,6 @@ ifeq (0,$(PROCESSORS))
 PROCESSORS := 1
 endif
 
-# Disable SSE2
-GYP_DEFINES = disable_sse2=1
-
 # Only keep -Werror when building for the Debian or Ubuntu development branches
 ifeq (,$(filter unstable development,$(DEBIAN_DIST)))
 GYP_DEFINES += werror=$(NULL)
@@ -132,11 +129,6 @@ INSTALL_EXCLUDE_DIRS = \
 	dbg \
 	plugins \
 	'*.d' \
-	.deps \
-	calendar_app \
-	docs_app \
-	gmail_app \
-	pyproto \
 	$(NULL)
 
 INSTALL_EXCLUDE_FILES = \
@@ -220,7 +212,7 @@ TESTS ?= \
 endif
 
 # FFmpeg-mt
-GYP_DEFINES += build_ffmpegsumo=0
+GYP_DEFINES += use_system_ffmpeg=1
 
 USE_SYSTEM_SQLITE := $(shell pkg-config 'sqlite3 >= 3.6.1' && echo 1 || echo 0)
 USE_SYSTEM_SQLITE := 0
@@ -276,10 +268,6 @@ INSTALL_EXCLUDE_FILES += \
 	$(TESTS_TARGETS) \
 	test_shell.pak \
 	xdisplaycheck \
-	$(NULL)
-
-INSTALL_EXCLUDE_DIRS += \
-	app_unittests_strings \
 	$(NULL)
 endif
 
