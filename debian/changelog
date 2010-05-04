@@ -1,4 +1,4 @@
-chromium-browser (5.0.375.29~r46008-0ubuntu1) UNRELEASED; urgency=low
+chromium-browser (5.0.375.29~r46008-0ubuntu1) maverick; urgency=low
 
   * New upstream release from the Beta Channel
     - HTML5 Features: Geolocation, App Cache, web sockets, file drag-and-drop.
