@@ -24,8 +24,12 @@ chromium-browser (5.0.375.29~r46008-1) UNRELEASED; urgency=low
     - update debian/rules
   * Fixed a typo in the maintainer field
     - update debian/control
+  * Removed ubuntu_dont_overwrite_default_download_directory.patch, the default
+    download location can be set via the options dialog
+    - update debian/patches/series
+    - removed ubuntu_dont_overwrite_default_download_directory.patch
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 05 May 2010 18:07:32 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 05 May 2010 18:31:25 +0200
 
 chromium-browser (5.0.342.9~r43360-1) experimental; urgency=low
 
