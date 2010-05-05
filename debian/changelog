@@ -13,7 +13,7 @@ chromium-browser (5.0.375.29~r46008-1) UNRELEASED; urgency=low
   * Build with build_ffmpegsumo=0 instead of use_system_ffmpeg=1 (which
     now means something else)
     - update debian/rules
-  * Install resources/{bookmark_manager,shared,net_internals} in the main deb
+  * Install resources/{bookmark_manager,net_internals} in the main deb
     - update debian/chromium-browser.install
   * Drop the sse2 patch, it has been applied upstream, and set disable_sse2
     - drop debian/patches/drop_sse2.patch
@@ -28,11 +28,8 @@ chromium-browser (5.0.375.29~r46008-1) UNRELEASED; urgency=low
     download location can be set via the options dialog
     - update debian/patches/series
     - removed ubuntu_dont_overwrite_default_download_directory.patch
-  * install usr/lib/chromium-browser/resources directory instead of 
-    usr/lib/chromium-browser/resources/subdirectories
-    - update debian/chromium-browser.install
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 05 May 2010 22:16:10 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 05 May 2010 23:10:34 +0200
 
 chromium-browser (5.0.342.9~r43360-1) experimental; urgency=low
 
