@@ -28,8 +28,10 @@ chromium-browser (5.0.375.29~r46008-1) UNRELEASED; urgency=low
     download location can be set via the options dialog
     - update debian/patches/series
     - removed ubuntu_dont_overwrite_default_download_directory.patch
+  * use dh_install --list-missing
+    - update debian/rules
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 05 May 2010 23:10:34 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 05 May 2010 23:38:26 +0200
 
 chromium-browser (5.0.342.9~r43360-1) experimental; urgency=low
 

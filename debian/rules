@@ -70,6 +70,9 @@ endif
 # Don't let dh_installinit install *.default in /etc/default
 DEB_DH_INSTALLINIT_ARGS += --noscripts --onlyscripts
 
+# don't miss installing newly added files in new upstream releases
+DEB_DH_INSTALL_ARGS += --list-missing
+
 # Use lzma instead of gzip inside the debs (passed to dpkg-deb)
 ifeq (1,$(WANT_LZMA_DEBS))
 DEB_DH_BUILDDEB_ARGS += -- -Z lzma
