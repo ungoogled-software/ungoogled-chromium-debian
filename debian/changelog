@@ -32,8 +32,11 @@ chromium-browser (5.0.375.29~r46008-1) UNRELEASED; urgency=low
     - update debian/rules
   * Updated VCS control field, at this moment is a private branch on launchpad
     - update debian/control
+  * Updated debian/copyright and fixed glitches pointed out by ftpmaster
+    - update debian/copyright
+    - update debian/copyright.problems
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 06 May 2010 10:03:26 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 06 May 2010 11:25:35 +0200
 
 chromium-browser (5.0.342.9~r43360-1) experimental; urgency=low
 
