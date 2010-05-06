@@ -1,6 +1,6 @@
-chromium-browser (5.0.375.29~r46008-1) UNRELEASED; urgency=low
+chromium-browser (5.0.375.29~r46008-1) experimental; urgency=low
 
-  * Switch to system libs and enabled libxml.
+  * Switch to system libs and enabled libxml
     - update debian/rules
   * Use system libevent, libicu and libxslt
     - update debian/rules
@@ -38,7 +38,7 @@ chromium-browser (5.0.375.29~r46008-1) UNRELEASED; urgency=low
   * Added a strict depend in chromium-browser-inspector
     - update debian/control
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 06 May 2010 11:51:03 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 06 May 2010 12:01:07 +0200
 
 chromium-browser (5.0.342.9~r43360-1) experimental; urgency=low
 
