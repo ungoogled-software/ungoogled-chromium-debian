@@ -58,7 +58,6 @@ Standards-Version: 3.8.4
 
 Package: chromium-browser
 Architecture: any
-Pre-Depends: lzma
 Depends: ${shlibs:Depends}, ${misc:Depends},
 	libnss3-1d (>= 3.12.3),
 	xdg-utils,
@@ -81,7 +80,6 @@ Package: chromium-browser-dbg
 Architecture: any
 Section: debug
 Priority: extra
-Pre-Depends: lzma
 Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-browser (= ${binary:Version})
 Provides: chromium-testsuite-dbg
 Replaces: chromium-testsuite-dbg
@@ -94,7 +92,6 @@ Description: chromium-browser debug symbols
 
 Package: chromium-browser-l10n
 Architecture: all
-Pre-Depends: lzma
 Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-browser (>= ${source:Version}), chromium-browser (<< ${source:Version}.1~)
 Breaks: chromium-browser (<< 3.0.197.0~svn20090804r22432)
 Replaces: chromium-browser (<< 3.0.197.0~svn20090804r22432)
@@ -109,7 +106,6 @@ Description: chromium-browser language packages
 
 Package: chromium-browser-inspector
 Architecture: all
-Pre-Depends: lzma
 Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-browser (>= ${source:Version}), chromium-browser (<< ${source:Version}.1~)
 Description: page inspector for the chromium-browser
  Chromium is an open-source browser project that aims to build a safer, faster,
