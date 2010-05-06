@@ -5,7 +5,7 @@ Maintainer: Debian Chromium Maintainers <pkg-chromium-maint@lists.alioth.debian.
 Uploaders: Giuseppe Iuculano <iuculano@debian.org>,
 	Fabien Tassin <fta@ubuntu.com>,
 	Alexander Sack <asac@debian.org>
-Vcs-Bzr: https://code.launchpad.net/~chromium-team/chromium-browser/chromium-browser.head
+Vcs-Bzr: https://code.launchpad.net/~giuseppe-iuculano/chromium-browser/chromium-browser.debian
 Homepage: http://code.google.com/chromium/
 Build-Depends: cdbs,
 	debhelper (>= 7),
