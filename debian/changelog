@@ -12,8 +12,11 @@ chromium-browser (5.0.375.29~r46008-2) UNRELEASED; urgency=low
     - update debian/patches/series
   * Added a Debian menu file (Closes: #580591)
     - add debian/chromium-browser.menu 
+  * Use system yasm
+    - update debian/rules
+    - update debian/control
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 07 May 2010 15:12:08 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 07 May 2010 23:02:27 +0200
 
 chromium-browser (5.0.375.29~r46008-1) experimental; urgency=low
 
