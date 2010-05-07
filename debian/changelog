@@ -18,8 +18,15 @@ chromium-browser (5.0.375.29~r46008-2) UNRELEASED; urgency=low
   * Removed DEB_MAKE_EXTRA_ARGS, we already use DEB_MAKE_ENVVARS for parallel
     build
     - update debian/rules
+  * Set use_system_ffmpeg and symlink libavcodec libavformat and libavutil.
+    This enables HTML5 video (Closes: 580610)
+    - update debian/rules
+    - update debian/patches/series
+    - add debian/chromium-browser.links
+    - add debian/patches/ffmpeg-no-pkgconfig.patch
+    - add debian/patches/ffmpegfix.patch
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 08 May 2010 00:24:16 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 08 May 2010 00:36:03 +0200
 
 chromium-browser (5.0.375.29~r46008-1) experimental; urgency=low
 

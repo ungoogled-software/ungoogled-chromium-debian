@@ -4,3 +4,5 @@ add_enable_sse2_flag.patch
 html5_video_mimetypes.patch
 no_tree_sink_v8.patch
 disable_dlog_and_dcheck_in_release_builds.patch
+ffmpegfix.patch
+ffmpeg-no-pkgconfig.patch

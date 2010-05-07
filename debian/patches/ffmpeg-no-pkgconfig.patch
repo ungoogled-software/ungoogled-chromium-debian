@@ -1,0 +1,21 @@
+--- a/third_party/ffmpeg/ffmpeg.gyp
++++ b/third_party/ffmpeg/ffmpeg.gyp
+@@ -767,12 +767,14 @@
+ 
+             # Add pkg-config result to include path when use_system_ffmpeg!=0
+             ['use_system_ffmpeg!=0', {
+-              'cflags': [
+-                '<!@(pkg-config --cflags libavcodec libavformat libavutil)',
++              'include_dirs': [
++                'source/config',
++                'source/patched-ffmpeg-mt',
+               ],
+               'direct_dependent_settings': {
+-                'cflags': [
+-                  '<!@(pkg-config --cflags libavcodec libavformat libavutil)',
++                'include_dirs': [
++                  'source/config',
++                  'source/patched-ffmpeg-mt',
+                 ],
+               },
+             }, {  # else use_system_ffmpeg==0, add local copy to include path
