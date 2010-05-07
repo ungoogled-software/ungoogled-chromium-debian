@@ -37,9 +37,8 @@ PARALLEL_JOBS := $(shell if [ -f /proc/cpuinfo ]; \
 	else echo 1; fi)
 endif
 NJOBS := -j$(PARALLEL_JOBS)
-DEB_MAKE_EXTRA_ARGS += -j$(PARALLEL_JOBS)
-endif
 DEB_MAKE_ENVVARS := MAKEFLAGS=$(NJOBS)
+endif
 
 # Disable SSE2
 GYP_DEFINES = enable_sse2=0
