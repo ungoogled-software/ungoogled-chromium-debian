@@ -1,0 +1,5 @@
+?package(chromium-browser):needs="x11" section="Applications/Network/Web Browsing" \
+        title="Chromium" \
+        longtitle="Chromium Web Browser" \
+        icon="/usr/share/pixmaps/chromium-browser.png" \
+        command="chromium-browser"
