@@ -25,8 +25,10 @@ chromium-browser (5.0.375.29~r46008-2) UNRELEASED; urgency=low
     - add debian/chromium-browser.links
     - add debian/patches/ffmpeg-no-pkgconfig.patch
     - add debian/patches/ffmpegfix.patch
+  * Added libavcodec52, libavformat52 and libavutil50 in Depends
+    - update debian/control
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 08 May 2010 00:36:03 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 08 May 2010 00:40:04 +0200
 
 chromium-browser (5.0.375.29~r46008-1) experimental; urgency=low
 

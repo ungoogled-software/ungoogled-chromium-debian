@@ -61,6 +61,9 @@ Package: chromium-browser
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
 	libnss3-1d (>= 3.12.3),
+	libavcodec52,
+	libavformat52,
+	libavutil50,
 	xdg-utils,
 	chromium-browser-inspector
 Suggests: chromium-browser-l10n
