@@ -6,8 +6,12 @@ chromium-browser (5.0.375.29~r46008-2) UNRELEASED; urgency=low
     instead so the person doing the build can decide how many processes to run
     in parallel. (Closes: #580490)
     - update debian/rules
+  * Reintroduce add_enable_sse2_flag.patch (Closes: #580608)
+    - update debian/rules
+    - update debian/patches/add_enable_sse2_flag.patch
+    - update debian/patches/series
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 07 May 2010 14:31:20 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 07 May 2010 14:37:01 +0200
 
 chromium-browser (5.0.375.29~r46008-1) experimental; urgency=low
 

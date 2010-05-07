@@ -1,3 +1,4 @@
+add_enable_sse2_flag.patch
 # system_v8.patch
 # chromium_useragent.patch
 html5_video_mimetypes.patch
