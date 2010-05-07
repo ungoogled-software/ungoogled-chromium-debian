@@ -26,10 +26,20 @@ WANT_TESTS       ?= 1
 WANT_SANDBOXING  ?= 1
 USE_SYSTEM_V8    ?= 0
 VERBOSE          ?= 0
-PROCESSORS       ?= $(shell grep -ic ^processor /proc/cpuinfo)
-ifeq (0,$(PROCESSORS))
-PROCESSORS := 1
+
+#use DEB_BUILD_OPTIONS's parallel=n option (see Policy 4.9.1)
+ifneq (,$(findstring parallel,$(DEB_BUILD_OPTIONS)))
+PARALLEL_JOBS := $(shell echo $(DEB_BUILD_OPTIONS) | \
+	sed -e 's/.*parallel=\([0-9]\+\).*/\1/')
+ifeq ($(DEB_BUILD_OPTIONS),$(PARALLEL_JOBS))
+PARALLEL_JOBS := $(shell if [ -f /proc/cpuinfo ]; \
+	then echo `cat /proc/cpuinfo | grep 'processor' | wc -l`; \
+	else echo 1; fi)
 endif
+NJOBS := -j$(PARALLEL_JOBS)
+DEB_MAKE_EXTRA_ARGS += -j$(PARALLEL_JOBS)
+endif
+DEB_MAKE_ENVVARS := MAKEFLAGS=$(NJOBS)
 
 # Disable SSE2
 GYP_DEFINES += disable_sse2=1
@@ -124,10 +134,6 @@ include $(CURDIR)/debian/cdbs/tarball.mk
 include /usr/share/cdbs/1/rules/patchsys-quilt.mk
 include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/class/makefile.mk
-
-ifneq (1,$(PROCESSORS))
-DEB_MAKE_EXTRA_ARGS += -j$(PROCESSORS)
-endif
 
 INSTALL_EXCLUDE_DIRS = \
 	lib \
