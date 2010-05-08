@@ -3,8 +3,10 @@ chromium-browser (5.0.375.29~r46008-3) UNRELEASED; urgency=low
   * Include system copy of prtime.h
    - add debian/patches/nspr.patch
    - update debian/patches/series
+  * Use system libicu
+    - add debian/patches/system-icu.patch
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 08 May 2010 11:30:14 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 08 May 2010 11:42:21 +0200
 
 chromium-browser (5.0.375.29~r46008-2) experimental; urgency=low
 

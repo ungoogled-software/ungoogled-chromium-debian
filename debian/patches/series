@@ -7,3 +7,4 @@ disable_dlog_and_dcheck_in_release_builds.patch
 ffmpegfix.patch
 ffmpeg-no-pkgconfig.patch
 nspr.patch
+system-icu.patch
