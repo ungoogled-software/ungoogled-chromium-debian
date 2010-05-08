@@ -78,8 +78,8 @@ Use system libicu
 +              '<!@(pkg-config --libs-only-l icu)',
 +            ],
 +          },
-+      }]]   
-+    },      
++      }]]
++    },
  # TODO(evanm): temporarily disabled while we figure out whether to depend
  # on gnome-keyring etc.
  # http://code.google.com/p/chromium/issues/detail?id=12351
@@ -431,3 +431,55 @@ Use system libicu
              'npapi_test_common',
            ],
            'sources': [
+--- a/chrome/browser/autocomplete/autocomplete_popup_model.cc
++++ b/chrome/browser/autocomplete/autocomplete_popup_model.cc
+@@ -11,7 +11,7 @@
+ #include "chrome/browser/search_engines/template_url.h"
+ #include "chrome/browser/search_engines/template_url_model.h"
+ #include "chrome/common/notification_service.h"
+-#include "third_party/icu/public/common/unicode/ubidi.h"
++#include <unicode/ubidi.h>
+ 
+ ///////////////////////////////////////////////////////////////////////////////
+ // AutocompletePopupModel
+--- a/chrome/browser/views/autocomplete/autocomplete_popup_contents_view.cc
++++ b/chrome/browser/views/autocomplete/autocomplete_popup_contents_view.cc
+@@ -21,7 +21,7 @@
+ #include "grit/generated_resources.h"
+ #include "grit/theme_resources.h"
+ #include "third_party/skia/include/core/SkShader.h"
+-#include "third_party/icu/public/common/unicode/ubidi.h"
++#include <unicode/ubidi.h>
+ #include "views/widget/widget.h"
+ 
+ #if defined(OS_WIN)
+--- a/chrome/renderer/spellchecker/spellcheck_worditerator.cc
++++ b/chrome/renderer/spellchecker/spellcheck_worditerator.cc
+@@ -10,10 +10,10 @@
+ #include "base/basictypes.h"
+ #include "base/utf_string_conversions.h"
+ #include "chrome/renderer/spellchecker/spellcheck.h"
+-#include "third_party/icu/public/common/unicode/normlzr.h"
+-#include "third_party/icu/public/common/unicode/schriter.h"
+-#include "third_party/icu/public/common/unicode/uscript.h"
+-#include "third_party/icu/public/i18n/unicode/ulocdata.h"
++#include <unicode/normlzr.h>
++#include <unicode/schriter.h>
++#include <unicode/uscript.h>
++#include <unicode/ulocdata.h>
+ 
+ ///////////////////////////////////////////////////////////////////////////////
+ // SpellcheckCharAttribute implementation:
+--- a/chrome/renderer/spellchecker/spellcheck_worditerator.h
++++ b/chrome/renderer/spellchecker/spellcheck_worditerator.h
+@@ -10,8 +10,8 @@
+ 
+ #include "base/basictypes.h"
+ #include "base/string16.h"
+-#include "third_party/icu/public/common/unicode/ubrk.h"
+-#include "third_party/icu/public/common/unicode/uscript.h"
++#include <unicode/ubrk.h>
++#include <unicode/uscript.h>
+ 
+ // A class which encapsulates language-specific operations used by
+ // SpellcheckWordIterator.
