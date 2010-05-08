@@ -1,0 +1,12 @@
+Include system copy of expat.h
+--- a/chrome/browser/autofill/autofill_xml_parser.h
++++ b/chrome/browser/autofill/autofill_xml_parser.h
+@@ -10,7 +10,7 @@
+ #include "base/basictypes.h"
+ #include "chrome/browser/autofill/field_types.h"
+ #include "chrome/browser/autofill/form_structure.h"
+-#include "third_party/expat/files/lib/expat.h"
++#include <expat.h>
+ #include "third_party/libjingle/files/talk/xmllite/xmlparser.h"
+ 
+ // The base class that contains common functionality between

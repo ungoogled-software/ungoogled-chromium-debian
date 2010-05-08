@@ -10,8 +10,11 @@ chromium-browser (5.0.375.29~r46008-3) UNRELEASED; urgency=low
     - update debian/patches/series
   * Ops, libavutil50 is not yet in Debian, removed from depends (Closes: #580769)
     - update debian/control
+  * Include system copy of expat.h
+    - update debian/patches/series
+    - add debian/patches/expat.patch
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 08 May 2010 16:22:59 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 08 May 2010 19:27:49 +0200
 
 chromium-browser (5.0.375.29~r46008-2) experimental; urgency=low
 
