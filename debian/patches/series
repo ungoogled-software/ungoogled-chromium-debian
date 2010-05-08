@@ -8,3 +8,4 @@ ffmpegfix.patch
 ffmpeg-no-pkgconfig.patch
 nspr.patch
 system-icu.patch
+nss.patch

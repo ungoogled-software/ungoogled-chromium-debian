@@ -5,8 +5,11 @@ chromium-browser (5.0.375.29~r46008-3) UNRELEASED; urgency=low
    - update debian/patches/series
   * Use system libicu
     - add debian/patches/system-icu.patch
+  * webkit needs to call nss to pull in nspr headers
+    - add debian/patches/nss.patch
+    - update debian/patches/series
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 08 May 2010 11:42:21 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 08 May 2010 12:04:53 +0200
 
 chromium-browser (5.0.375.29~r46008-2) experimental; urgency=low
 
