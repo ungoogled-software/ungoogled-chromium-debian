@@ -67,15 +67,15 @@ Use system libicu
 +        ['_toolset=="target"', {
 +          'direct_dependent_settings': {
 +            'cflags': [
-+              '<!@(pkg-config --cflags icu)',
++              '<!@()',
 +            ],
 +          },
 +          'link_settings': {
 +            'ldflags': [
-+              '<!@(pkg-config --libs-only-L --libs-only-other icu)',
++              '<!@(icu-config --ldflags)',
 +            ],
 +            'libraries': [
-+              '<!@(pkg-config --libs-only-l icu)',
++              '<!@(icu-config --ldflags-libsonly)',
 +            ],
 +          },
 +      }]]
