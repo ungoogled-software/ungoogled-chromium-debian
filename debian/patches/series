@@ -6,3 +6,4 @@ no_tree_sink_v8.patch
 disable_dlog_and_dcheck_in_release_builds.patch
 ffmpegfix.patch
 ffmpeg-no-pkgconfig.patch
+nspr.patch

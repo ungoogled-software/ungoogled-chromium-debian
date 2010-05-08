@@ -1,3 +1,11 @@
+chromium-browser (5.0.375.29~r46008-3) UNRELEASED; urgency=low
+
+  * Include system copy of prtime.h
+   - add debian/patches/nspr.patch
+   - update debian/patches/series
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 08 May 2010 11:30:14 +0200
+
 chromium-browser (5.0.375.29~r46008-2) experimental; urgency=low
 
   * Do not pre-depend on lzma. Thanks to Sven Joachim. (Closes: #580485)
