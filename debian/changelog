@@ -8,8 +8,10 @@ chromium-browser (5.0.375.29~r46008-3) UNRELEASED; urgency=low
   * webkit needs to call nss to pull in nspr headers
     - add debian/patches/nss.patch
     - update debian/patches/series
+  * Ops, libavutil50 is not yet in Debian, removed from depends (Closes: #580769)
+    - update debian/control
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 08 May 2010 12:04:53 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 08 May 2010 16:22:59 +0200
 
 chromium-browser (5.0.375.29~r46008-2) experimental; urgency=low
 
