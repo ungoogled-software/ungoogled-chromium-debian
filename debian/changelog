@@ -1,4 +1,4 @@
-chromium-browser (5.0.375.29~r46008-3) UNRELEASED; urgency=low
+chromium-browser (5.0.375.29~r46008-3) experimental; urgency=low
 
   * Include system copy of prtime.h
    - add debian/patches/nspr.patch
@@ -14,7 +14,7 @@ chromium-browser (5.0.375.29~r46008-3) UNRELEASED; urgency=low
     - update debian/patches/series
     - add debian/patches/expat.patch
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 08 May 2010 19:27:49 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 09 May 2010 11:34:10 +0200
 
 chromium-browser (5.0.375.29~r46008-2) experimental; urgency=low
 
