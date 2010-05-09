@@ -1,3 +1,14 @@
+chromium-browser (5.0.375.29~r46008-4) UNRELEASED; urgency=low
+
+  * Use system copy of libv8
+   - update debian/control
+   - update debian/patches/series
+   - update debian/patches/system_v8.patch
+   - update debian/rules
+
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 09 May 2010 22:04:17 +0200
+
 chromium-browser (5.0.375.29~r46008-3) experimental; urgency=low
 
   * Include system copy of prtime.h

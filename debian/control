@@ -54,7 +54,8 @@ Build-Depends: cdbs,
 	libgconf2-dev,
 	libicu-dev,
 	libevent-dev,
-	yasm
+	yasm,
+	libv8-dev (>>2.2.6-1)
 Standards-Version: 3.8.4
 
 Package: chromium-browser
