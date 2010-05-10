@@ -11,3 +11,4 @@ system-icu.patch
 nss.patch
 expat.patch
 system_v8.patch
+memory_iceweasel.patch

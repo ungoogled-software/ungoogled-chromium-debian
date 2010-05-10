@@ -8,8 +8,11 @@ chromium-browser (5.0.375.29~r46008-4) UNRELEASED; urgency=low
   * Build-depends on libv8-dev >= 2.2.7
     See http://code.google.com/p/v8/issues/detail?id=506
    - update debian/control
+  * Recognize iceweasel in about:memory
+    - update debian/patches/series
+    - add debian/patches/memory_iceweasel.patch
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Mon, 10 May 2010 10:04:31 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Mon, 10 May 2010 20:46:26 +0200
 
 chromium-browser (5.0.375.29~r46008-3) experimental; urgency=low
 
