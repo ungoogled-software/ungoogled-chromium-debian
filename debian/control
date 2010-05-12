@@ -55,15 +55,16 @@ Build-Depends: cdbs,
 	libicu-dev,
 	libevent-dev,
 	yasm,
-	libv8-dev (>= 2.2.7-1)
+	libv8-dev (>= 2.2.7-1),
+	libavcodec-dev,
+	libavformat-dev,
+	libavutil-dev
 Standards-Version: 3.8.4
 
 Package: chromium-browser
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
 	libnss3-1d (>= 3.12.3),
-	libavcodec52,
-	libavformat52,
 	xdg-utils,
 	chromium-browser-inspector
 Suggests: chromium-browser-l10n
