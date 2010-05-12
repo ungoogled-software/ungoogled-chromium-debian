@@ -62,7 +62,7 @@ Build-Depends: cdbs,
 Standards-Version: 3.8.4
 
 Package: chromium-browser
-Architecture: any
+Architecture: i386 amd64 armel mips
 Depends: ${shlibs:Depends}, ${misc:Depends},
 	libnss3-1d (>= 3.12.3),
 	xdg-utils,
@@ -82,7 +82,7 @@ Description: Chromium browser
  This package contains the Chromium browser
 
 Package: chromium-browser-dbg
-Architecture: any
+Architecture: i386 amd64 armel mips
 Section: debug
 Priority: extra
 Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-browser (= ${binary:Version})

@@ -12,11 +12,12 @@ chromium-browser (5.0.375.29~r46008-4) UNRELEASED; urgency=low
   * Recognize iceweasel in about:memory
     - update debian/patches/series
     - add debian/patches/memory_iceweasel.patch
+  * Set arch to i386 amd64 armel mips
 
   [ Andres Mejia ]
   * Be able to use system ffmpeg-0.5.1. (Closes: #580947)
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 12 May 2010 23:59:50 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 13 May 2010 00:14:52 +0200
 
 chromium-browser (5.0.375.29~r46008-3) experimental; urgency=low
 
