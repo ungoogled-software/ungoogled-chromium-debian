@@ -1,4 +1,4 @@
-chromium-browser (5.0.375.29~r46008-4) UNRELEASED; urgency=low
+chromium-browser (5.0.375.38~r46659-1) UNRELEASED; urgency=low
 
   [ Giuseppe Iuculano ]
   * Use system copy of libv8
@@ -13,11 +13,14 @@ chromium-browser (5.0.375.29~r46008-4) UNRELEASED; urgency=low
     - update debian/patches/series
     - add debian/patches/memory_iceweasel.patch
   * Set arch to i386 amd64 armel mips
+  * New beta release
+    - In addition to crash and stability fixes, this release also includes
+      a localization refresh
 
   [ Andres Mejia ]
   * Be able to use system ffmpeg-0.5.1. (Closes: #580947)
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 13 May 2010 00:14:52 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 13 May 2010 11:25:12 +0200
 
 chromium-browser (5.0.375.29~r46008-3) experimental; urgency=low
 
