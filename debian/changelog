@@ -1,4 +1,4 @@
-chromium-browser (5.0.375.38~r46659-1) UNRELEASED; urgency=low
+chromium-browser (5.0.375.38~r46659-1) unstable; urgency=low
 
   [ Giuseppe Iuculano ]
   * Use system copy of libv8
@@ -16,11 +16,12 @@ chromium-browser (5.0.375.38~r46659-1) UNRELEASED; urgency=low
   * New beta release
     - In addition to crash and stability fixes, this release also includes
       a localization refresh
+  * Upload in unstable
 
   [ Andres Mejia ]
   * Be able to use system ffmpeg-0.5.1. (Closes: #580947)
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 13 May 2010 11:25:12 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 13 May 2010 11:31:32 +0200
 
 chromium-browser (5.0.375.29~r46008-3) experimental; urgency=low
 
