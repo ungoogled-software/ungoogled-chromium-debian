@@ -111,7 +111,8 @@ Description: chromium-browser language packages
 
 Package: chromium-browser-inspector
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-browser (>= ${source:Version}), chromium-browser (<< ${source:Version}.1~)
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Recommends: chromium-browser
 Description: page inspector for the chromium-browser
  Chromium is an open-source browser project that aims to build a safer, faster,
  and more stable way for all Internet users to experience the web.
