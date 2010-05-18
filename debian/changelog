@@ -1,5 +1,11 @@
 chromium-browser (5.0.375.38~r46659-2) UNRELEASED; urgency=low
 
+  [ Fabien Tassin ]
+  * Unbreak get-orig-source when it needs to drop its cache after a channel jump
+    (replace brace expansion - which is a bashism - with proper $(wildcard))
+    - update debian/rules
+  
+  [ Giuseppe Iuculano ]
   * chromium-browser-inspector: demoted chromium-browser to Recommend and
     avoid circular dependency (Closes: #581743)
   * Unbreak get-orig-source when it needs to drop its cache after a channel jump
@@ -18,8 +24,11 @@ chromium-browser (5.0.375.38~r46659-2) UNRELEASED; urgency=low
     - update debian/chromium-browser.menu
   * Removed libc6-dev-i386 [amd64] and g++-multilib [amd64] from Build-Depends
     - update debian/control
+  * Install a presubj bug file
+    - update debian/chromium-browser.install 
+    - add debian/presubj
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 18 May 2010 20:27:59 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 18 May 2010 22:58:24 +0200
 
 chromium-browser (5.0.375.38~r46659-1) unstable; urgency=low
 

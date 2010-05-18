@@ -9,3 +9,4 @@ debian/tmp/usr/lib/chromium-browser/locales/*
 debian/chromium-browser.desktop usr/share/applications
 debian/chromium-browser.xml usr/share/gnome-control-center/default-apps
 debian/master_preferences etc/chromium-browser
+debian/presubj usr/share/bug/chromium-browser

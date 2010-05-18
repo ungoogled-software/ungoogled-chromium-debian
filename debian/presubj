@@ -1,0 +1,9 @@
+*** Please submit non packaging issue (e.g. feature requests) bugs to
+the Debian BTS and the upstream bug tracking system
+(http://code.google.com/p/chromium/issues/entry?template=Defect%20on%20Linux)
+and put a reference to the upstream bug in the Debian bug report to ease bug
+triage for the maintainers. Thank you. ***
+
+If you get crashes, please read this wiki page to provide a proper 
+backtrace for your crash:
+http://wiki.debian.org/Chromium/Debugging
