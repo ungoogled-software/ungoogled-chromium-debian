@@ -5,8 +5,11 @@ chromium-browser (5.0.375.38~r46659-2) UNRELEASED; urgency=low
   * Unbreak get-orig-source when it needs to drop its cache after a channel jump
     (replace brace expansion - which is a bashism - with proper $(wildcard))
     - update debian/rules
+  * Tell Chromium to look in /etc/chromium for the master_preferences file
+   - update debian/patches/series
+   - add debian/patches/prefs.patch
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 18 May 2010 11:02:49 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 18 May 2010 12:11:08 +0200
 
 chromium-browser (5.0.375.38~r46659-1) unstable; urgency=low
 
