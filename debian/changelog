@@ -12,8 +12,10 @@ chromium-browser (5.0.375.38~r46659-2) UNRELEASED; urgency=low
   * Ship a custom first-run preferences file
     - update debian/chromium-browser.install
     - add debian/master_preferences
+  * Removed g++-4.3 | g++-4.2 from Build-Depends
+    - update debian/control
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 18 May 2010 18:15:51 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 18 May 2010 19:14:36 +0200
 
 chromium-browser (5.0.375.38~r46659-1) unstable; urgency=low
 
