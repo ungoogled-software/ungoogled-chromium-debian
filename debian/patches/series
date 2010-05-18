@@ -12,3 +12,4 @@ expat.patch
 system_v8.patch
 memory_iceweasel.patch
 prefs.patch
+zoom_incognito.patch

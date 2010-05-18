@@ -8,9 +8,6 @@ chromium-browser (5.0.375.38~r46659-2) UNRELEASED; urgency=low
   [ Giuseppe Iuculano ]
   * chromium-browser-inspector: demoted chromium-browser to Recommend and
     avoid circular dependency (Closes: #581743)
-  * Unbreak get-orig-source when it needs to drop its cache after a channel jump
-    (replace brace expansion - which is a bashism - with proper $(wildcard))
-    - update debian/rules
   * Tell Chromium to look in /etc/chromium-browser for the master_preferences
     file
    - update debian/patches/series
@@ -27,8 +24,11 @@ chromium-browser (5.0.375.38~r46659-2) UNRELEASED; urgency=low
   * Install a presubj bug file
     - update debian/chromium-browser.install 
     - add debian/presubj
+  * Forget zoom levels set/changed in incognito mode
+    - add debian/patches/zoom_incognito.patch
+    - update debian/patches/series
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 18 May 2010 22:58:24 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 18 May 2010 23:49:34 +0200
 
 chromium-browser (5.0.375.38~r46659-1) unstable; urgency=low
 
