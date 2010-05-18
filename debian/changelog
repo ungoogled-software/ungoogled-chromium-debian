@@ -1,4 +1,4 @@
-chromium-browser (5.0.375.38~r46659-2) UNRELEASED; urgency=low
+chromium-browser (5.0.375.38~r46659-2) unstable; urgency=low
 
   [ Fabien Tassin ]
   * Unbreak get-orig-source when it needs to drop its cache after a channel jump
@@ -28,7 +28,7 @@ chromium-browser (5.0.375.38~r46659-2) UNRELEASED; urgency=low
     - add debian/patches/zoom_incognito.patch
     - update debian/patches/series
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 18 May 2010 23:49:34 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 18 May 2010 23:52:40 +0200
 
 chromium-browser (5.0.375.38~r46659-1) unstable; urgency=low
 
