@@ -1,0 +1,16 @@
+{
+  "distribution": {
+     "create_all_shortcuts": true,
+     "show_welcome_page": true
+  },
+  "browser": {
+     "show_home_button": true
+  },
+  "bookmark_bar": {
+     "show_on_all_tabs": true
+  },
+  "first_run_tabs": [
+     "http://www.debian.org"
+  ],
+  "homepage": "http://www.debian.org"
+}
