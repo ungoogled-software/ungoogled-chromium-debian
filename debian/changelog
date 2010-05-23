@@ -7,8 +7,10 @@ chromium-browser (5.0.375.53~r47719-1) UNRELEASED; urgency=low
     - Now debian/rules binary works (Closes: #580535)
   * Refreshed patches and removed zoom_incognito.patch (applied upstream)
   * Removed quilt from Build-Depends
+  * Build-depends on libv8-dev >= 2.2.7 and fix build-depends-on-1-revision
+    lintian warning
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 23 May 2010 18:15:18 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 23 May 2010 18:26:41 +0200
 
 chromium-browser (5.0.375.38~r46659-2) unstable; urgency=low
 

@@ -51,7 +51,7 @@ Build-Depends: cdbs,
 	libicu-dev,
 	libevent-dev,
 	yasm,
-	libv8-dev (>= 2.2.7-1),
+	libv8-dev (>= 2.2.7),
 	libavcodec-dev,
 	libavformat-dev,
 	libavutil-dev
