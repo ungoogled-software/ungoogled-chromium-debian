@@ -2,16 +2,9 @@
  build/common.gypi |    7 ++++++-
  1 file changed, 6 insertions(+), 1 deletion(-)
 
-Index: src/build/common.gypi
-===================================================================
---- src.orig/build/common.gypi
-+++ src/build/common.gypi
-@@ -81,16 +81,20 @@
- 
-       # Set to 1 compile with -fPIC cflag on linux. This is a must for shared
-       # libraries on linux x86-64 and arm.
-       'linux_fpic%': 0,
- 
+--- a/src/build/common.gypi
++++ b/src/build/common.gypi
+@@ -86,6 +86,10 @@
        # Python version.
        'python_ver%': '2.5',
  
@@ -22,17 +15,7 @@ Index: src/build/common.gypi
        # Set ARM-v7 compilation flags
        'armv7%': 0,
  
-       # Set Neon compilation flags (only meaningful if armv7==1).
-       'arm_neon%': 1,
- 
-       # The system root for cross-compiles. Default: none.
-       'sysroot%': '',
-@@ -103,16 +107,17 @@
-     'target_arch%': '<(target_arch)',
-     'host_arch%': '<(host_arch)',
-     'toolkit_views%': '<(toolkit_views)',
-     'chromeos%': '<(chromeos)',
-     'inside_chromium_build%': '<(inside_chromium_build)',
+@@ -108,6 +112,7 @@
      'fastbuild%': '<(fastbuild)',
      'linux_fpic%': '<(linux_fpic)',
      'python_ver%': '<(python_ver)',
@@ -40,17 +23,7 @@ Index: src/build/common.gypi
      'armv7%': '<(armv7)',
      'arm_neon%': '<(arm_neon)',
      'sysroot%': '<(sysroot)',
- 
-     # The release channel that this build targets. This is used to restrict
-     # channel-specific build options, like which installer packages to create.
-     # The default is 'all', which does no channel-specific filtering.
-     'channel%': 'all',
-@@ -877,17 +882,17 @@
-             # -mfpmath=sse -msse2 makes the compiler use SSE instructions
-             # which keep floating-point values in SSE registers in its
-             # native precision (32-bit for single precision, and 64-bit for
-             # double precision values). This means the floating-point value
-             # used during computation does not change depending on how the
+@@ -882,7 +887,7 @@
              # compiler optimized the code, since the value is always kept
              # in its specified precision.
              'conditions': [
@@ -59,8 +32,3 @@ Index: src/build/common.gypi
                  'cflags': [
                    '-march=pentium4',
                    '-msse2',
-                   '-mfpmath=sse',
-                 ],
-               }],
-             ],
-             # -mmmx allows mmintrin.h to be used for mmx intrinsics.

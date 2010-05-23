@@ -1,6 +1,6 @@
 Use system copy of libv8
---- a/build/linux/system.gyp
-+++ b/build/linux/system.gyp
+--- a/src/build/linux/system.gyp
++++ b/src/build/linux/system.gyp
 @@ -274,6 +274,18 @@
            },
        }]]
@@ -20,8 +20,8 @@ Use system copy of libv8
  # TODO(evanm): temporarily disabled while we figure out whether to depend
  # on gnome-keyring etc.
  # http://code.google.com/p/chromium/issues/detail?id=12351
---- a/net/net.gyp
-+++ b/net/net.gyp
+--- a/src/net/net.gyp
++++ b/src/net/net.gyp
 @@ -534,7 +534,7 @@
        'conditions': [
          ['javascript_engine=="v8"', {
@@ -31,8 +31,8 @@ Use system copy of libv8
            ],
          }],
          [ 'OS == "linux" or OS == "freebsd" or OS == "openbsd"', {
---- a/build/all.gyp
-+++ b/build/all.gyp
+--- a/src/build/all.gyp
++++ b/src/build/all.gyp
 @@ -44,7 +44,7 @@
        'conditions': [
          ['javascript_engine=="v8"', {
@@ -42,8 +42,8 @@ Use system copy of libv8
            ],
          }],
          ['OS=="mac" or OS=="linux" or OS=="freebsd"', {
---- a/third_party/WebKit/WebCore/WebCore.gyp/WebCore.gyp
-+++ b/third_party/WebKit/WebCore/WebCore.gyp/WebCore.gyp
+--- a/src/third_party/WebKit/WebCore/WebCore.gyp/WebCore.gyp
++++ b/src/third_party/WebKit/WebCore/WebCore.gyp/WebCore.gyp
 @@ -652,7 +652,7 @@
        'conditions': [
          ['javascript_engine=="v8"', {
@@ -66,8 +66,8 @@ Use system copy of libv8
            ],
          }],
          ['enable_svg!=0', {
---- a/chrome/browser/browser_about_handler.cc
-+++ b/chrome/browser/browser_about_handler.cc
+--- a/src/chrome/browser/browser_about_handler.cc
++++ b/src/chrome/browser/browser_about_handler.cc
 @@ -49,7 +49,7 @@
  #include "grit/locale_settings.h"
  #include "webkit/glue/webkit_glue.h"
@@ -77,8 +77,8 @@ Use system copy of libv8
  #endif
  
  #if defined(OS_WIN)
---- a/chrome/browser/memory_purger.cc
-+++ b/chrome/browser/memory_purger.cc
+--- a/src/chrome/browser/memory_purger.cc
++++ b/src/chrome/browser/memory_purger.cc
 @@ -23,7 +23,7 @@
  #include "net/proxy/proxy_resolver.h"
  #include "net/url_request/url_request_context.h"
@@ -88,8 +88,8 @@ Use system copy of libv8
  
  // PurgeMemoryHelper -----------------------------------------------------------
  
---- a/chrome/renderer/automation/dom_automation_v8_extension.h
-+++ b/chrome/renderer/automation/dom_automation_v8_extension.h
+--- a/src/chrome/renderer/automation/dom_automation_v8_extension.h
++++ b/src/chrome/renderer/automation/dom_automation_v8_extension.h
 @@ -5,7 +5,7 @@
  #ifndef CHROME_RENDERER_AUTOMATION_DOM_AUTOMATION_V8_EXTENSION_H_
  #define CHROME_RENDERER_AUTOMATION_DOM_AUTOMATION_V8_EXTENSION_H_
@@ -99,8 +99,8 @@ Use system copy of libv8
  
  class DomAutomationV8Extension {
   public:
---- a/chrome/renderer/extensions/bindings_utils.h
-+++ b/chrome/renderer/extensions/bindings_utils.h
+--- a/src/chrome/renderer/extensions/bindings_utils.h
++++ b/src/chrome/renderer/extensions/bindings_utils.h
 @@ -9,7 +9,7 @@
  #include "base/linked_ptr.h"
  #include "base/singleton.h"
@@ -110,8 +110,8 @@ Use system copy of libv8
  
  #include <list>
  #include <string>
---- a/chrome/renderer/extensions/event_bindings.h
-+++ b/chrome/renderer/extensions/event_bindings.h
+--- a/src/chrome/renderer/extensions/event_bindings.h
++++ b/src/chrome/renderer/extensions/event_bindings.h
 @@ -7,7 +7,7 @@
  
  #include <string>
@@ -121,8 +121,8 @@ Use system copy of libv8
  
  class RenderThreadBase;
  class RenderView;
---- a/chrome/renderer/extensions/extension_process_bindings.h
-+++ b/chrome/renderer/extensions/extension_process_bindings.h
+--- a/src/chrome/renderer/extensions/extension_process_bindings.h
++++ b/src/chrome/renderer/extensions/extension_process_bindings.h
 @@ -12,7 +12,7 @@
  #include <vector>
  
@@ -132,8 +132,8 @@ Use system copy of libv8
  
  class GURL;
  class URLPattern;
---- a/chrome/renderer/extensions/js_only_v8_extensions.h
-+++ b/chrome/renderer/extensions/js_only_v8_extensions.h
+--- a/src/chrome/renderer/extensions/js_only_v8_extensions.h
++++ b/src/chrome/renderer/extensions/js_only_v8_extensions.h
 @@ -5,7 +5,7 @@
  #ifndef CHROME_RENDERER_EXTENSIONS_JS_ONLY_V8_EXTENSIONS_H_
  #define CHROME_RENDERER_EXTENSIONS_JS_ONLY_V8_EXTENSIONS_H_
@@ -143,8 +143,8 @@ Use system copy of libv8
  
  // This file contains various V8 Extensions that are JavaScript only, and
  // don't have any C++ native functions.
---- a/chrome/renderer/extensions/renderer_extension_bindings.h
-+++ b/chrome/renderer/extensions/renderer_extension_bindings.h
+--- a/src/chrome/renderer/extensions/renderer_extension_bindings.h
++++ b/src/chrome/renderer/extensions/renderer_extension_bindings.h
 @@ -5,7 +5,7 @@
  #ifndef CHROME_RENDERER_EXTENSIONS_RENDERER_EXTENSION_BINDINGS_H_
  #define CHROME_RENDERER_EXTENSIONS_RENDERER_EXTENSION_BINDINGS_H_
@@ -154,8 +154,8 @@ Use system copy of libv8
  
  #include <string>
  
---- a/chrome/renderer/loadtimes_extension_bindings.cc
-+++ b/chrome/renderer/loadtimes_extension_bindings.cc
+--- a/src/chrome/renderer/loadtimes_extension_bindings.cc
++++ b/src/chrome/renderer/loadtimes_extension_bindings.cc
 @@ -9,7 +9,7 @@
  #include "base/time.h"
  #include "chrome/renderer/navigation_state.h"
@@ -165,8 +165,8 @@ Use system copy of libv8
  
  using WebKit::WebDataSource;
  using WebKit::WebFrame;
---- a/chrome/renderer/render_thread.cc
-+++ b/chrome/renderer/render_thread.cc
+--- a/src/chrome/renderer/render_thread.cc
++++ b/src/chrome/renderer/render_thread.cc
 @@ -78,7 +78,7 @@
  #include "webkit/extensions/v8/gears_extension.h"
  #include "webkit/extensions/v8/interval_extension.h"
@@ -176,8 +176,8 @@ Use system copy of libv8
  
  #if defined(OS_WIN)
  #include <windows.h>
---- a/chrome/test/v8_unit_test.h
-+++ b/chrome/test/v8_unit_test.h
+--- a/src/chrome/test/v8_unit_test.h
++++ b/src/chrome/test/v8_unit_test.h
 @@ -8,7 +8,7 @@
  #include <string>
  
@@ -187,8 +187,8 @@ Use system copy of libv8
  
  namespace base {
  class StringPiece;
---- a/net/proxy/proxy_resolver_v8.cc
-+++ b/net/proxy/proxy_resolver_v8.cc
+--- a/src/net/proxy/proxy_resolver_v8.cc
++++ b/src/net/proxy/proxy_resolver_v8.cc
 @@ -12,7 +12,7 @@
  #include "net/proxy/proxy_info.h"
  #include "net/proxy/proxy_resolver_js_bindings.h"
@@ -198,8 +198,8 @@ Use system copy of libv8
  
  // Notes on the javascript environment:
  //
---- a/webkit/extensions/v8/benchmarking_extension.h
-+++ b/webkit/extensions/v8/benchmarking_extension.h
+--- a/src/webkit/extensions/v8/benchmarking_extension.h
++++ b/src/webkit/extensions/v8/benchmarking_extension.h
 @@ -9,7 +9,7 @@
  #ifndef WEBKIT_EXTENSIONS_V8_BENCHMARKING_EXTENSION_H_
  #define WEBKIT_EXTENSIONS_V8_BENCHMARKING_EXTENSION_H_
@@ -209,8 +209,8 @@ Use system copy of libv8
  
  namespace extensions_v8 {
  
---- a/webkit/extensions/v8/gc_extension.h
-+++ b/webkit/extensions/v8/gc_extension.h
+--- a/src/webkit/extensions/v8/gc_extension.h
++++ b/src/webkit/extensions/v8/gc_extension.h
 @@ -8,7 +8,7 @@
  #ifndef WEBKIT_EXTENSIONS_V8_GC_EXTENSION_H_
  #define WEBKIT_EXTENSIONS_V8_GC_EXTENSION_H_
@@ -220,8 +220,8 @@ Use system copy of libv8
  
  namespace extensions_v8 {
  
---- a/webkit/extensions/v8/gears_extension.h
-+++ b/webkit/extensions/v8/gears_extension.h
+--- a/src/webkit/extensions/v8/gears_extension.h
++++ b/src/webkit/extensions/v8/gears_extension.h
 @@ -9,7 +9,7 @@
  #ifndef WEBKIT_EXTENSIONS_V8_GEARS_EXTENSION_H_
  #define WEBKIT_EXTENSIONS_V8_GEARS_EXTENSION_H_
@@ -231,8 +231,8 @@ Use system copy of libv8
  
  namespace extensions_v8 {
  
---- a/webkit/extensions/v8/heap_profiler_extension.h
-+++ b/webkit/extensions/v8/heap_profiler_extension.h
+--- a/src/webkit/extensions/v8/heap_profiler_extension.h
++++ b/src/webkit/extensions/v8/heap_profiler_extension.h
 @@ -9,7 +9,7 @@
  #ifndef WEBKIT_EXTENSIONS_V8_HEAP_PROFILER_EXTENSION_H_
  #define WEBKIT_EXTENSIONS_V8_HEAP_PROFILER_EXTENSION_H_
@@ -242,8 +242,8 @@ Use system copy of libv8
  
  namespace extensions_v8 {
  
---- a/webkit/extensions/v8/interval_extension.h
-+++ b/webkit/extensions/v8/interval_extension.h
+--- a/src/webkit/extensions/v8/interval_extension.h
++++ b/src/webkit/extensions/v8/interval_extension.h
 @@ -8,7 +8,7 @@
  #ifndef WEBKIT_EXTENSIONS_V8_INTERVAL_EXTENSION_H_
  #define WEBKIT_EXTENSIONS_V8_INTERVAL_EXTENSION_H_
@@ -253,8 +253,8 @@ Use system copy of libv8
  
  namespace extensions_v8 {
  
---- a/webkit/extensions/v8/playback_extension.h
-+++ b/webkit/extensions/v8/playback_extension.h
+--- a/src/webkit/extensions/v8/playback_extension.h
++++ b/src/webkit/extensions/v8/playback_extension.h
 @@ -5,7 +5,7 @@
  #ifndef WEBKIT_EXTENSIONS_V8_PLAYBACK_EXTENSION_H_
  #define WEBKIT_EXTENSIONS_V8_PLAYBACK_EXTENSION_H_
@@ -264,8 +264,8 @@ Use system copy of libv8
  
  namespace extensions_v8 {
  
---- a/webkit/extensions/v8/profiler_extension.h
-+++ b/webkit/extensions/v8/profiler_extension.h
+--- a/src/webkit/extensions/v8/profiler_extension.h
++++ b/src/webkit/extensions/v8/profiler_extension.h
 @@ -9,7 +9,7 @@
  #ifndef WEBKIT_EXTENSIONS_V8_PROFILER_EXTENSION_H_
  #define WEBKIT_EXTENSIONS_V8_PROFILER_EXTENSION_H_
@@ -275,8 +275,8 @@ Use system copy of libv8
  
  namespace extensions_v8 {
  
---- a/webkit/glue/webkit_glue.cc
-+++ b/webkit/glue/webkit_glue.cc
+--- a/src/webkit/glue/webkit_glue.cc
++++ b/src/webkit/glue/webkit_glue.cc
 @@ -41,7 +41,7 @@
  #include "third_party/WebKit/WebKit/chromium/public/win/WebInputEventFactory.h"
  #endif
@@ -286,8 +286,8 @@ Use system copy of libv8
  
  #include "webkit_version.h"  // Generated
  
---- a/webkit/glue/webkitclient_impl.cc
-+++ b/webkit/glue/webkitclient_impl.cc
+--- a/src/webkit/glue/webkitclient_impl.cc
++++ b/src/webkit/glue/webkitclient_impl.cc
 @@ -41,7 +41,7 @@
  #include "webkit/glue/weburlloader_impl.h"
  
@@ -297,8 +297,8 @@ Use system copy of libv8
  #endif
  
  using WebKit::WebCookie;
---- a/webkit/support/test_webkit_client.cc
-+++ b/webkit/support/test_webkit_client.cc
+--- a/src/webkit/support/test_webkit_client.cc
++++ b/src/webkit/support/test_webkit_client.cc
 @@ -38,7 +38,7 @@
  #include "webkit/tools/test_shell/simple_resource_loader_bridge.h"
  #include "webkit/tools/test_shell/simple_webcookiejar_impl.h"
@@ -308,8 +308,8 @@ Use system copy of libv8
  
  #if defined(OS_WIN)
  #include "third_party/WebKit/WebKit/chromium/public/win/WebThemeEngine.h"
---- a/webkit/tools/test_shell/listener_leak_test.cc
-+++ b/webkit/tools/test_shell/listener_leak_test.cc
+--- a/src/webkit/tools/test_shell/listener_leak_test.cc
++++ b/src/webkit/tools/test_shell/listener_leak_test.cc
 @@ -7,7 +7,7 @@
  #include "base/path_service.h"
  #include "base/string_util.h"
@@ -319,8 +319,8 @@ Use system copy of libv8
  #include "webkit/glue/webkit_glue.h"
  #include "webkit/tools/test_shell/test_shell.h"
  #include "webkit/tools/test_shell/test_shell_test.h"
---- a/webkit/tools/test_shell/test_shell_webkit_init.h
-+++ b/webkit/tools/test_shell/test_shell_webkit_init.h
+--- a/src/webkit/tools/test_shell/test_shell_webkit_init.h
++++ b/src/webkit/tools/test_shell/test_shell_webkit_init.h
 @@ -35,7 +35,7 @@
  #include "webkit/tools/test_shell/simple_resource_loader_bridge.h"
  #include "webkit/tools/test_shell/simple_webcookiejar_impl.h"
@@ -330,8 +330,8 @@ Use system copy of libv8
  
  #if defined(OS_WIN)
  #include "third_party/WebKit/WebKit/chromium/public/win/WebThemeEngine.h"
---- a/third_party/WebKit/WebCore/bindings/v8/ScriptGCEvent.h
-+++ b/third_party/WebKit/WebCore/bindings/v8/ScriptGCEvent.h
+--- a/src/third_party/WebKit/WebCore/bindings/v8/ScriptGCEvent.h
++++ b/src/third_party/WebKit/WebCore/bindings/v8/ScriptGCEvent.h
 @@ -33,7 +33,7 @@
  
  #if ENABLE(INSPECTOR)

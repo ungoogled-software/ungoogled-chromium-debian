@@ -1,6 +1,6 @@
 Include system copy of expat.h
---- a/chrome/browser/autofill/autofill_xml_parser.h
-+++ b/chrome/browser/autofill/autofill_xml_parser.h
+--- a/src/chrome/browser/autofill/autofill_xml_parser.h
++++ b/src/chrome/browser/autofill/autofill_xml_parser.h
 @@ -10,7 +10,7 @@
  #include "base/basictypes.h"
  #include "chrome/browser/autofill/field_types.h"

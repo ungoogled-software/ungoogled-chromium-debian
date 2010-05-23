@@ -1,6 +1,6 @@
 webkit needs to call nss to pull in nspr headers
---- a/webkit/glue/webkit_glue.gypi
-+++ b/webkit/glue/webkit_glue.gypi
+--- a/src/webkit/glue/webkit_glue.gypi
++++ b/src/webkit/glue/webkit_glue.gypi
 @@ -299,6 +299,7 @@
            'dependencies': [
              '<(DEPTH)/build/linux/system.gyp:gtk',

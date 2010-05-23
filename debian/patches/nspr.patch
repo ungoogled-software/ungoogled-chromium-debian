@@ -1,6 +1,6 @@
 Include system copy of prtime.h
---- a/base/pr_time_unittest.cc
-+++ b/base/pr_time_unittest.cc
+--- a/src/base/pr_time_unittest.cc
++++ b/src/base/pr_time_unittest.cc
 @@ -4,7 +4,7 @@
  
  #include <time.h>
@@ -10,8 +10,8 @@ Include system copy of prtime.h
  #include "base/time.h"
  #include "testing/gtest/include/gtest/gtest.h"
  
---- a/base/time.cc
-+++ b/base/time.cc
+--- a/src/base/time.cc
++++ b/src/base/time.cc
 @@ -5,7 +5,7 @@
  #include "base/time.h"
  #include "base/string_util.h"

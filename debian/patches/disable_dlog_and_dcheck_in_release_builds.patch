@@ -2,16 +2,9 @@
  base/logging.h |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Index: src/base/logging.h
-===================================================================
---- src.orig/base/logging.h
-+++ src/base/logging.h
-@@ -382,17 +382,17 @@
- //   #ifndef NDEBUG
- //     foo.CheckThatFoo();
- //   #endif
- 
- // http://crbug.com/16512 is open for a real fix for this.  For now, Windows
+--- a/src/base/logging.h
++++ b/src/base/logging.h
+@@ -387,7 +387,7 @@ DECLARE_CHECK_STROP_IMPL(_stricmp, false
  // uses OFFICIAL_BUILD and other platforms use the branding flag when NDEBUG is
  // defined.
  #if ( defined(OS_WIN) && defined(OFFICIAL_BUILD)) || \
@@ -20,8 +13,3 @@ Index: src/base/logging.h
  // In order to have optimized code for official builds, remove DLOGs and
  // DCHECKs.
  #define OMIT_DLOG_AND_DCHECK 1
- #endif
- 
- #ifdef OMIT_DLOG_AND_DCHECK
- 
- #define DLOG(severity) \

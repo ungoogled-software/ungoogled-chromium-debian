@@ -2,16 +2,9 @@
  net/base/mime_util.cc |    4 ----
  1 file changed, 4 deletions(-)
 
-Index: src/net/base/mime_util.cc
-===================================================================
---- src.orig/net/base/mime_util.cc
-+++ src/net/base/mime_util.cc
-@@ -183,39 +183,35 @@
- // A list of media types: http://en.wikipedia.org/wiki/Internet_media_type
- // A comprehensive mime type list: http://plugindoc.mozdev.org/winmime.php
- static const char* const supported_media_types[] = {
-   // Ogg.
-   "video/ogg",
+--- a/src/net/base/mime_util.cc
++++ b/src/net/base/mime_util.cc
+@@ -189,7 +189,6 @@ static const char* const supported_media
    "audio/ogg",
    "application/ogg",
  
@@ -19,10 +12,7 @@ Index: src/net/base/mime_util.cc
    // MPEG-4.
    "video/mp4",
    "video/x-m4v",
-   "audio/mp4",
-   "audio/x-m4a",
- 
-   // MP3.
+@@ -200,7 +199,6 @@ static const char* const supported_media
    "audio/mp3",
    "audio/x-mp3",
    "audio/mpeg",
@@ -30,7 +20,7 @@ Index: src/net/base/mime_util.cc
  };
  
  // List of supported codecs when passed in with <source type="...">.
- //
+@@ -208,10 +206,8 @@ static const char* const supported_media
  // Refer to http://wiki.whatwg.org/wiki/Video_type_parameters#Browser_Support
  // for more information.
  static const char* const supported_media_codecs[] = {
@@ -41,8 +31,3 @@ Index: src/net/base/mime_util.cc
    "theora",
    "vorbis",
  };
- 
- // Note: does not include javascript types list (see supported_javascript_types)
- static const char* const supported_non_image_types[] = {
-   "text/html",
-   "text/xml",

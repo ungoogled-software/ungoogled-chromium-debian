@@ -1,6 +1,6 @@
 Tell Chromium to look in /etc/chromium for the master_preferences file
---- a/chrome/browser/first_run_gtk.cc
-+++ b/chrome/browser/first_run_gtk.cc
+--- a/src/chrome/browser/first_run_gtk.cc
++++ b/src/chrome/browser/first_run_gtk.cc
 @@ -46,9 +46,7 @@ bool FirstRun::ProcessMasterPreferences(
    DCHECK(!user_data_dir.empty());
    FilePath master_prefs = master_prefs_path;
