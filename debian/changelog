@@ -1,4 +1,4 @@
-chromium-browser (5.0.375.53~r47719-1) UNRELEASED; urgency=low
+chromium-browser (5.0.375.55~r47796-1) UNRELEASED; urgency=low
 
   * New beta release.
     - This release contains some minor crash and stability fixes.
