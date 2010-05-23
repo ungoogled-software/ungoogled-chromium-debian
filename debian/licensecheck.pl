@@ -176,7 +176,7 @@ my $manually_identified = {
     'ZERO-CODE-FILES or GENERATED',
     'No copyright'
   ],
-  'build-tree/src/third_party/WebKit/WebCore/' => [
+  'src/third_party/WebKit/WebCore/' => [
     'BSD (2 clause)/LGPL 2 (or later)/LGPL 2.1 (or later)',
     'No copyright'
   ],
