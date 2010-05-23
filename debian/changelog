@@ -1,3 +1,10 @@
+chromium-browser (5.0.375.53~r47719-1) UNRELEASED; urgency=low
+
+  * New beta release.
+    - This release contains some minor crash and stability fixes.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 23 May 2010 17:28:44 +0200
+
 chromium-browser (5.0.375.38~r46659-2) unstable; urgency=low
 
   [ Fabien Tassin ]
