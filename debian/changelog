@@ -2,8 +2,11 @@ chromium-browser (5.0.375.53~r47719-1) UNRELEASED; urgency=low
 
   * New beta release.
     - This release contains some minor crash and stability fixes.
+  * Switch to dpkg-source 3.0 (quilt) format.
+  * Don't use a tar.lzma-in-a-tar.gz
+    - Now debian/rules binary works (Closes: #580535)
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 23 May 2010 17:28:44 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 23 May 2010 17:36:54 +0200
 
 chromium-browser (5.0.375.38~r46659-2) unstable; urgency=low
 

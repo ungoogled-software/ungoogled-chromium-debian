@@ -11,12 +11,12 @@ LIBAVUTIL_BASENAME	:= $(shell basename $$(ls -x /usr/lib/libavutil.so.* | cut -d
 
 # DEB_TAR_SRCDIR has to be 'src' as this is what gyp expects :(
 DEB_TAR_SRCDIR := src
-SRC_DIR        := $(CURDIR)/build-tree/$(DEB_TAR_SRCDIR)
+SRC_DIR        := $(CURDIR)/$(DEB_TAR_SRCDIR)
 LIB_DIR        := usr/lib/$(DEBIAN_NAME)
 DEB_BUILDDIR   := $(SRC_DIR)
 #BUILD_ARGS     := --keep-going
 
-WANT_LZMA_SRC    ?= 1
+WANT_LZMA_SRC    ?= 0
 ifneq (,$(findstring Ubuntu,$(DEBIAN_DIST)))
 WANT_LZMA_DEBS   ?= 1
 else
@@ -132,8 +132,6 @@ TAR_EXT   := bz2
 TAR_FLAGS := -j
 endif
 
-include $(CURDIR)/debian/cdbs/tarball.mk
-include /usr/share/cdbs/1/rules/patchsys-quilt.mk
 include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/class/makefile.mk
 
@@ -712,10 +710,9 @@ gos-pack:
 	# Pack
 	if [ src != $(DEB_TAR_SRCDIR) ] ; then mv $(TMP_DIR)/src $(TMP_DIR)/$(DEB_TAR_SRCDIR) ; fi
 	mv $(TMP_DIR)/tools/depot_tools $(TMP_DIR)/$(DEB_TAR_SRCDIR)/depot_tools
-	cd $(TMP_DIR) && tar -c $(TAR_FLAGS) -f $(DEBIAN_NAME)-$(VERSION)-source.tar.$(TAR_EXT) --exclude=.svn $(DEB_TAR_SRCDIR)
 	mkdir $(TMP_DIR)/$(DEBIAN_NAME)-$(VERSION)
-	mv $(TMP_DIR)/$(DEBIAN_NAME)-$(VERSION)-source.tar.$(TAR_EXT) $(TMP_DIR)/$(DEBIAN_NAME)-$(VERSION)
-	cd $(TMP_DIR) && tar zcf ../$(DEBIAN_NAME)_$(VERSION).orig.tar.gz $(DEBIAN_NAME)-$(VERSION)
+	mv $(TMP_DIR)/$(DEB_TAR_SRCDIR) $(TMP_DIR)/$(DEBIAN_NAME)-$(VERSION)/
+	cd $(TMP_DIR) && tar -c $(TAR_FLAGS) -f ../$(DEBIAN_NAME)_$(VERSION).orig.tar.$(TAR_EXT) --exclude=.svn $(DEBIAN_NAME)-$(VERSION)
 	rm -rf $(TMP_DIR)
-	@echo "# Done (created $(DEBIAN_NAME)_$(VERSION).orig.tar.gz)"
-	@ls -l $(DEBIAN_NAME)_$(VERSION).orig.tar.gz
+	@echo "# Done (created $(DEBIAN_NAME)_$(VERSION).orig.tar.$(TAR_EXT))"
+	@ls -l $(DEBIAN_NAME)_$(VERSION).orig.tar.$(TAR_EXT)
