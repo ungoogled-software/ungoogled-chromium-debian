@@ -112,5 +112,5 @@ Type=Application
 Icon=chromium-browser
 Categories=Network;WebBrowser;
 MimeType=text/html;text/xml;application/xhtml_xml;
-StartupWMClass=Chromium
+StartupWMClass=Chromium-browser
 StartupNotify=true

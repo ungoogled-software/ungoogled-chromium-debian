@@ -4,6 +4,9 @@ chromium-browser (5.0.375.70~r48679-1) UNRELEASED; urgency=low
   * Add a --temp-profile knob to the launcher script starting Chromium with
     a new profile which will last only for the duration of the session
     - update debian/chromium-browser.sh
+  * Change StartupWMClass to Chromium-browser in the desktop launcher so
+    cairo-dock does the right thing (LP: #587664)
+    - update debian/chromium-browser.desktop
   
   [ Giuseppe Iuculano ]
   * New upstream stable release, this release fixes the following security
