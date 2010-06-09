@@ -11,10 +11,11 @@ LIBDIR=/usr/lib/chromium-browser
 GDB=/usr/bin/gdb
 
 usage () {
-  echo "$APPNAME [-h|--help] [-g|--debug] [options] [URL]"
+  echo "$APPNAME [-h|--help] [-g|--debug] [--temp-profile] [options] [URL]"
   echo
   echo "        -g or --debug           Start within $GDB"
   echo "        -h or --help            This help screen"
+  echo "        --temp-profile          Start with a new and temporary profile"
   echo
   echo " Other supported options are:"
   MANWIDTH=80 man chromium-browser | sed -e '1,/OPTIONS/d; /ENVIRONMENT/,$d'
@@ -47,6 +48,7 @@ export CHROME_WRAPPER=true
 export CHROME_VERSION_EXTRA=Ubuntu
 
 want_debug=0
+want_temp_profile=0
 while [ $# -gt 0 ]; do
   case "$1" in
     -h | --help | -help )
@@ -55,6 +57,9 @@ while [ $# -gt 0 ]; do
     -g | --debug )
       want_debug=1
       shift ;;
+    --temp-profile )
+      want_temp_profile=1
+      shift ;;
     -- ) # Stop option prcessing
       shift
       break ;;
@@ -62,6 +67,11 @@ while [ $# -gt 0 ]; do
       break ;;
   esac
 done
+
+if [ $want_temp_profile -eq 1 ] ; then
+  TEMP_PROFILE=`mktemp -d`
+  CHROMIUM_FLAGS="$CHROMIUM_FLAGS --user-data-dir=$TEMP_PROFILE"
+fi
 
 if [ $want_debug -eq 1 ] ; then
   if [ ! -x $GDB ] ; then
@@ -79,8 +89,17 @@ if [ $want_debug -eq 1 ] ; then
   echo "#      CHROMIUM_FLAGS=$CHROMIUM_FLAGS"
   echo "$GDB $LIBDIR/$APPNAME -x $tmpfile"
   $GDB "$LIBDIR/$APPNAME" -x $tmpfile
+  if [ $want_temp_profile -eq 1 ] ; then
+    rm -rf $TEMP_PROFILE
+  fi
   exit $?
 else
-  exec $LIBDIR/$APPNAME $CHROMIUM_FLAGS "$@"
+  if [ $want_temp_profile -eq 0 ] ; then
+    exec $LIBDIR/$APPNAME $CHROMIUM_FLAGS "$@"
+  else
+    # we can't exec here as we need to clean-up the temporary profile
+    $LIBDIR/$APPNAME $CHROMIUM_FLAGS "$@"
+    rm -rf $TEMP_PROFILE
+  fi
 fi
 

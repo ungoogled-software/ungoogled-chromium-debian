@@ -1,5 +1,11 @@
 chromium-browser (5.0.375.70~r48679-1) UNRELEASED; urgency=low
 
+  [ Fabien Tassin ]
+  * Add a --temp-profile knob to the launcher script starting Chromium with
+    a new profile which will last only for the duration of the session
+    - update debian/chromium-browser.sh
+  
+  [ Giuseppe Iuculano ]
   * New upstream stable release, this release fixes the following security
     issues:
     - [15766] Medium Cross-origin keystroke redirection.
@@ -15,7 +21,7 @@ chromium-browser (5.0.375.70~r48679-1) UNRELEASED; urgency=low
     - [44955] High Memory corruption in rendering of list markers.
 
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 09 Jun 2010 11:41:07 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 09 Jun 2010 11:55:41 +0200
 
 chromium-browser (5.0.375.55~r47796-1) unstable; urgency=low
 
