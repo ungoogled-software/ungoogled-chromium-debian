@@ -7,6 +7,10 @@ chromium-browser (5.0.375.70~r48679-1) UNRELEASED; urgency=low
   * Change StartupWMClass to Chromium-browser in the desktop launcher so
     cairo-dock does the right thing (LP: #587664)
     - update debian/chromium-browser.desktop
+  * Set XLIB_SKIP_ARGB_VISUALS=1 in the wrapper to prevent flash from dying
+    with a Gdk-ERROR when gtk2 is built with RGBA support (like in Maverick).
+    (LP: #584959)
+    - update debian/chromium-browser.sh
   
   [ Giuseppe Iuculano ]
   * New upstream stable release, this release fixes the following security

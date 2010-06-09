@@ -47,6 +47,10 @@ export CHROME_WRAPPER=true
 # Set CHROME_VERSION_EXTRA visible in the About dialog and in about:version
 export CHROME_VERSION_EXTRA=Ubuntu
 
+# Set this to prevent flash from dying with a Gdk-ERROR when gtk2 is
+# built with RGBA support (like in Maverick). See LP #584959
+export XLIB_SKIP_ARGB_VISUALS=1
+
 want_debug=0
 want_temp_profile=0
 while [ $# -gt 0 ]; do
