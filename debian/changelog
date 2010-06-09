@@ -1,3 +1,22 @@
+chromium-browser (5.0.375.70~r48679-1) UNRELEASED; urgency=low
+
+  * New upstream stable release, this release fixes the following security
+    issues:
+    - [15766] Medium Cross-origin keystroke redirection.
+    - [39985] High Cross-origin bypass in DOM methods.
+    - [42723] High Memory error in table layout.
+    - [43304] High Linux sandbox escape.
+    - [43307] High Bitmap stale pointer.
+    - [43315] High Memory corruption in DOM node normalization.
+    - [43487] High Memory corruption in text transforms.
+    - [43902] Medium XSS in innerHTML property of textarea.
+    - [44740] High Memory corruption in font handling.
+    - [44868] High Geolocation events fire after document deletion.
+    - [44955] High Memory corruption in rendering of list markers.
+
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 09 Jun 2010 11:41:07 +0200
+
 chromium-browser (5.0.375.55~r47796-1) unstable; urgency=low
 
   * New beta release.
