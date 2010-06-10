@@ -4,8 +4,11 @@ chromium-browser (5.0.375.70~r48679-2) UNRELEASED; urgency=low
   * Accept 'stable' as value for $(CHANNEL)
     - update debian/rules
 
+  [ Giuseppe Iuculano ]
+  * Use the full path in chromium-browser.xml, now Gnome's Preferred
+    Applications doesn't get confused. (Closes: #580582)
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 10 Jun 2010 14:35:20 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 10 Jun 2010 14:37:24 +0200
 
 chromium-browser (5.0.375.70~r48679-1) unstable; urgency=low
 
