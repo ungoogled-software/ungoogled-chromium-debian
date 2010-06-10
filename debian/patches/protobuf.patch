@@ -1,0 +1,109 @@
+Do not embedd protobuf
+Index: chromium-browser-5.0.375.70~r48679/src/chrome/chrome.gyp
+===================================================================
+--- chromium-browser-5.0.375.70~r48679.orig/src/chrome/chrome.gyp	2010-06-10 16:48:32.000000000 +0200
++++ chromium-browser-5.0.375.70~r48679/src/chrome/chrome.gyp	2010-06-10 16:48:32.000000000 +0200
+@@ -710,7 +710,7 @@
+           'rule_name': 'genproto',
+           'extension': 'proto',
+           'inputs': [
+-            '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)protoc<(EXECUTABLE_SUFFIX)',
++            '/usr/bin/protoc',
+           ],
+           'variables': {
+             # The protoc compiler requires a proto_path argument with the
+@@ -723,7 +723,7 @@
+             '<(protoc_out_dir)/chrome/<(rule_input_relpath)/<(RULE_INPUT_ROOT).pb.cc',
+           ],
+           'action': [
+-            '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)protoc<(EXECUTABLE_SUFFIX)',
++            '/usr/bin/protoc',
+             '--proto_path=./<(rule_input_relpath)',
+             './<(rule_input_relpath)/<(RULE_INPUT_ROOT)<(RULE_INPUT_EXT)',
+             '--cpp_out=<(protoc_out_dir)/chrome/<(rule_input_relpath)',
+@@ -732,8 +732,7 @@
+         },
+       ],
+       'dependencies': [
+-        '../third_party/protobuf2/protobuf.gyp:protobuf_lite',
+-        '../third_party/protobuf2/protobuf.gyp:protoc#host',
++        '../build/linux/system.gyp:protobuf',
+       ],
+       'direct_dependent_settings': {
+         'include_dirs': [
+@@ -741,7 +740,7 @@
+         ]
+       },
+       'export_dependent_settings': [
+-        '../third_party/protobuf2/protobuf.gyp:protobuf_lite',
++        '../build/linux/system.gyp:protobuf',
+       ],
+     },
+     {
+Index: chromium-browser-5.0.375.70~r48679/src/chrome/chrome_browser.gypi
+===================================================================
+--- chromium-browser-5.0.375.70~r48679.orig/src/chrome/chrome_browser.gypi	2010-06-10 16:48:32.000000000 +0200
++++ chromium-browser-5.0.375.70~r48679/src/chrome/chrome_browser.gypi	2010-06-10 16:52:40.765501317 +0200
+@@ -3074,8 +3074,7 @@
+                 ['exclude', '^browser/notifications/balloon_collection_linux.cc'],
+               ],
+               'dependencies': [
+-                '../third_party/protobuf2/protobuf.gyp:protobuf_lite',
+-                '../third_party/protobuf2/protobuf.gyp:protoc#host',
++                '../build/linux/system.gyp:protobuf',
+                 '../third_party/chromeos_login_manager/chromeos_login_manager/chromeos_login_manager.gyp:session',
+                 '../third_party/chromeos_login_manager/chromeos_login_manager/chromeos_login_manager.gyp:emit_login_prompt_ready',
+                 '../third_party/cros/cros_api.gyp:cros_api',
+@@ -3084,7 +3083,7 @@
+                 {
+                   'action_name': 'my_proto',
+                   'inputs': [
+-                    '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)protoc<(EXECUTABLE_SUFFIX)',
++                    '/usr/bin/protoc',
+                     'browser/metrics/system_metrics.proto',
+                   ],
+                   'outputs': [
+@@ -3092,10 +3091,10 @@
+                     '<(INTERMEDIATE_DIR)/chrome/browser/metrics/system_metrics.pb.h',
+                   ],
+                   'dependencies': [
+-                    '../third_party/protobuf2/protobuf.gyp:protoc',
++                    '../build/linux/system.gyp:protobuf',
+                   ],
+                   'action': [
+-                    '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)protoc<(EXECUTABLE_SUFFIX)',
++                    '/usr/bin/protoc',
+                     'browser/metrics/system_metrics.proto',
+                     '--cpp_out=<(INTERMEDIATE_DIR)/chrome',
+                   ],
+Index: chromium-browser-5.0.375.70~r48679/src/build/linux/system.gyp
+===================================================================
+--- chromium-browser-5.0.375.70~r48679.orig/src/build/linux/system.gyp	2010-06-10 16:48:32.000000000 +0200
++++ chromium-browser-5.0.375.70~r48679/src/build/linux/system.gyp	2010-06-10 16:48:32.000000000 +0200
+@@ -275,6 +275,26 @@
+       }]]
+     },
+     {
++      'target_name': 'protobuf',
++      'type': 'settings',
++      'conditions': [
++        ['_toolset=="target"', {
++          'direct_dependent_settings': {
++            'cflags': [
++              '<!@(pkg-config --cflags protobuf)',
++            ],
++          },
++          'link_settings': {
++            'ldflags': [
++              '<!@(pkg-config --libs-only-L --libs-only-other protobuf)',
++            ],
++            'libraries': [
++              '<!@(pkg-config --libs-only-l protobuf)',
++            ],
++          },
++      }]]
++    },
++    {
+       'target_name': 'v8',
+       'type': 'settings',
+       'conditions': [
