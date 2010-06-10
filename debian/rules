@@ -611,9 +611,9 @@ else
 ifneq (,$(DEBIAN_REV))
 get-orig-source: REVISION = --revision src@$(DEBIAN_REV)
 else
-# Doing either the dev or beta channel
+# Doing either the dev or beta or stable channel
 ifneq (,$(CHANNEL))
-ifneq (,$(filter-out beta dev Beta Dev,$(CHANNEL)))
+ifneq (,$(filter-out stable beta dev Stable Beta Dev,$(CHANNEL)))
 # Assume it's a version
 get-orig-source: VERS          = $(CHANNEL)
 else
