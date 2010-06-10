@@ -8,8 +8,9 @@ chromium-browser (5.0.375.70~r48679-2) UNRELEASED; urgency=low
   * Use the full path in chromium-browser.xml, now Gnome's Preferred
     Applications doesn't get confused. (Closes: #580582)
   * debian/patches/protobuf: Use system copy of libprotobuf
+  * Added protobuf-compiler and libprotobuf-dev in Build-Depends
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 10 Jun 2010 17:22:01 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 10 Jun 2010 17:25:01 +0200
 
 chromium-browser (5.0.375.70~r48679-1) unstable; urgency=low
 

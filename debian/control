@@ -54,7 +54,9 @@ Build-Depends: cdbs,
 	libv8-dev (>= 2.2.7),
 	libavcodec-dev,
 	libavformat-dev,
-	libavutil-dev
+	libavutil-dev,
+	libprotobuf-dev,
+	protobuf-compiler
 Standards-Version: 3.8.4
 
 Package: chromium-browser
