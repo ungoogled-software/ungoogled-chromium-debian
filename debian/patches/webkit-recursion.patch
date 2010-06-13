@@ -1,0 +1,13 @@
+Index: chromium-browser-5.0.375.70~r48679/src/third_party/WebKit/WebCore/dom/make_names.pl
+===================================================================
+--- chromium-browser-5.0.375.70~r48679.orig/src/third_party/WebKit/WebCore/dom/make_names.pl	2010-06-13 19:43:59.081746707 +0200
++++ chromium-browser-5.0.375.70~r48679/src/third_party/WebKit/WebCore/dom/make_names.pl	2010-06-13 19:45:16.585501775 +0200
+@@ -866,7 +866,7 @@
+ {
+     Settings* settings = element->document()->settings();
+     if (!MediaPlayer::isAvailable() || (settings && !settings->isMediaEnabled()))
+-        return toV8(static_cast<$parameters{namespace}Element*>(element));
++        return V8$parameters{namespace}Element::wrap(element);
+     return toV8(static_cast<${JSInterfaceName}*>(element));
+ }
+ 

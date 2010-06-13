@@ -14,8 +14,10 @@ chromium-browser (5.0.375.70~r48679-2) UNRELEASED; urgency=low
   * Added libglewmx1.5-dev in Build-Depends
   * Removed Fabien and Alexander from Uploaders.
   * Updated VCS control fields
+  * Fix an infinite recursion crash when trying to wrap media elements without
+    a media player. (Closes: #582709)
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 13 Jun 2010 14:35:45 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 13 Jun 2010 22:06:19 +0200
 
 chromium-browser (5.0.375.70~r48679-1) unstable; urgency=low
 

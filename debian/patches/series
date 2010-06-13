@@ -14,3 +14,4 @@ memory_iceweasel.patch
 prefs.patch
 protobuf.patch
 glew.patch
+webkit-recursion.patch
