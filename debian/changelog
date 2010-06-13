@@ -1,4 +1,4 @@
-chromium-browser (5.0.375.70~r48679-2) UNRELEASED; urgency=low
+chromium-browser (5.0.375.70~r48679-2) unstable; urgency=low
 
   [ Fabien Tassin ]
   * Accept 'stable' as value for $(CHANNEL)
@@ -17,7 +17,7 @@ chromium-browser (5.0.375.70~r48679-2) UNRELEASED; urgency=low
   * Fix an infinite recursion crash when trying to wrap media elements without
     a media player. (Closes: #582709)
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 13 Jun 2010 22:06:19 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 13 Jun 2010 22:23:59 +0200
 
 chromium-browser (5.0.375.70~r48679-1) unstable; urgency=low
 
