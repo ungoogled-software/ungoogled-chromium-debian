@@ -56,7 +56,8 @@ Build-Depends: cdbs,
 	libavformat-dev,
 	libavutil-dev,
 	libprotobuf-dev,
-	protobuf-compiler
+	protobuf-compiler,
+	libglewmx1.5-dev
 Standards-Version: 3.8.4
 
 Package: chromium-browser
