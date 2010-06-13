@@ -13,8 +13,9 @@ chromium-browser (5.0.375.70~r48679-2) UNRELEASED; urgency=low
     support for thread-safe usage of multiple rendering contexts)
   * Added libglewmx1.5-dev in Build-Depends
   * Removed Fabien and Alexander from Uploaders.
+  * Updated VCS control fields
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 13 Jun 2010 14:30:05 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 13 Jun 2010 14:35:45 +0200
 
 chromium-browser (5.0.375.70~r48679-1) unstable; urgency=low
 
