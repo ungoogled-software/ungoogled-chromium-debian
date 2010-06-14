@@ -1,3 +1,12 @@
+chromium-browser (5.0.375.70~r48679-3) UNRELEASED; urgency=low
+
+  * Use dpkg-architecture directly instead of relying on
+    dpkg-buildpackage to set DEB_*_ARCH variables.  Use
+    DEB_HOST_ARCH_CPU instead of DEB_BUILD_ARCH to detect target CPU.
+    (Closes: #585801)
+
+ -- Jonathan Nieder <jrnieder@gmail.com>  Sun, 13 Jun 2010 17:20:52 -0500
+
 chromium-browser (5.0.375.70~r48679-2) unstable; urgency=low
 
   [ Fabien Tassin ]
