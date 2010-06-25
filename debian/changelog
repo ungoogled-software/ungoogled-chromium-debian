@@ -2,8 +2,10 @@ chromium-browser (5.0.375.86~r49890-2) UNRELEASED; urgency=low
 
   * Partially revert info in about:version, it has significant impact in
     first-run performance
+  * Build and use the custom ffmpeg copy, when ffmpeg 0.6 will be uploaded in
+    unstable chromium will use the system copy of ffmpeg. (Closes: #581507) 
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 25 Jun 2010 21:26:35 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 25 Jun 2010 21:36:18 +0200
 
 chromium-browser (5.0.375.86~r49890-1) unstable; urgency=low
 
