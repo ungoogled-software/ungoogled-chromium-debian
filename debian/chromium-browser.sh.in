@@ -9,6 +9,7 @@
 APPNAME=chromium-browser
 LIBDIR=/usr/lib/chromium-browser
 GDB=/usr/bin/gdb
+BUILD_DIST="@BUILD_DIST@"
 
 usage () {
   echo "$APPNAME [-h|--help] [-g|--debug] [--temp-profile] [options] [URL]"
@@ -48,7 +49,11 @@ DIST=`lsb_release -si`
 RELEASE=`lsb_release -sr`
 
 # Set CHROME_VERSION_EXTRA visible in the About dialog and in about:version
-export CHROME_VERSION_EXTRA=$DIST
+if [ "$DIST $RELEASE" = "$BUILD_DIST" ] ; then
+  export CHROME_VERSION_EXTRA="$DIST $RELEASE"
+else
+  export CHROME_VERSION_EXTRA="Built on $BUILD_DIST, running on $DIST $RELEASE"
+fi
 
 want_debug=0
 want_temp_profile=0

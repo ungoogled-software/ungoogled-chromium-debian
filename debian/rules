@@ -5,6 +5,8 @@ DEBIAN_VERSION		:= $(shell dpkg-parsechangelog | sed -n 's/^Version: *\(.*\)$$/\
 DEBIAN_UPSTREAM_VERSION	:= $(shell echo $(DEBIAN_VERSION) | sed 's/^\(.*\)-[^-]*$$/\1/')
 DEBIAN_REVISION		:= $(shell echo $(DEBIAN_VERSION) | sed 's/^.*r\([^-]*\)-.*/\1/')
 DEBIAN_DIST		:= $(shell lsb_release -ds | tr -d '()')
+DEBIAN_DIST_NAME	:= $(shell lsb_release -si)
+DEBIAN_DIST_VERSION	:= $(shell lsb_release -sr)
 LIBAVCODEC_BASENAME	:= $(shell basename $$(ls -x /usr/lib/libavcodec.so.* | cut -d ' ' -f 1))
 LIBAVFORMAT_BASENAME	:= $(shell basename $$(ls -x /usr/lib/libavformat.so.* | cut -d ' ' -f 1))
 LIBAVUTIL_BASENAME	:= $(shell basename $$(ls -x /usr/lib/libavutil.so.* | cut -d ' ' -f 1))
@@ -323,7 +325,17 @@ endif
 ######
 DO = (touch r1; echo '$(1)'; $(1); touch r2 ; T1=`date -r r1 +%s` ; T2=`date -r r2 +%s`; echo "PERF: '$(2)' built in "`expr $$T2 - $$T1`" sec"; rm -f r1 r2;)
 
-pre-build::
+subst_files = \
+	debian/$(DEBIAN_NAME).sh \
+	$(NULL)
+
+%:: %.in
+	sed -e 's/@BUILD_DIST@/$(DEBIAN_DIST_NAME) $(DEBIAN_DIST_VERSION)/g' \
+	    -e 's/@BUILD_DIST_NAME@/$(DEBIAN_DIST_NAME)/g' \
+	    -e 's/@BUILD_DIST_VERSION)@/$(DEBIAN_DIST_VERSION)/g' \
+	    < $< > $@
+
+pre-build:: $(subst_files)
 ifneq (,$(findstring Ubuntu,$(DEBIAN_DIST)))
 	sed -ri '/const PrepopulatedEngine google = \{/,/\}\;/ { s/sourceid=chrome\&/&client=ubuntu\&channel=cs\&/g; }' \
 		build-tree/src/chrome/browser/search_engines/template_url_prepopulate_data.cc
@@ -361,7 +373,7 @@ endif
 
 clean::
 	rm -f debian/configure-stamp debian/stamp-makefile-build-*
-	rm -f *.cdbs-config_list
+	rm -f *.cdbs-config_list $(subst_files)
 
 # Install: there's no install rules in scons yet, do it manually
 common-install-prehook-impl::
