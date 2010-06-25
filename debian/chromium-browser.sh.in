@@ -45,8 +45,10 @@ export LD_LIBRARY_PATH
 export PATH="$LIBDIR:$PATH"
 export CHROME_WRAPPER=true
 
-DIST=`lsb_release -si`
-RELEASE=`lsb_release -sr`
+#DIST=`lsb_release -si`
+#RELEASE=`lsb_release -sr`
+DIST=Debian
+RELEASE=`cat /etc/debian_version`
 
 # Set CHROME_VERSION_EXTRA visible in the About dialog and in about:version
 if [ "$DIST $RELEASE" = "$BUILD_DIST" ] ; then

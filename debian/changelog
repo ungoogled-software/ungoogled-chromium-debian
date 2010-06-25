@@ -1,3 +1,10 @@
+chromium-browser (5.0.375.86~r49890-2) UNRELEASED; urgency=low
+
+  * Partially revert info in about:version, it has significant impact in
+    first-run performance
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 25 Jun 2010 21:26:35 +0200
+
 chromium-browser (5.0.375.86~r49890-1) unstable; urgency=low
 
   [ Jonathan Nieder ]
