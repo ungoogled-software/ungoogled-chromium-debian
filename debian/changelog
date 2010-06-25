@@ -21,6 +21,11 @@ chromium-browser (5.0.375.86~r49890-1) UNRELEASED; urgency=low
     - [46126] High Stale pointer in x509-user-cert response. Credit to Rodrigo
       Marcos of SECFORCE. 
      
+  [ Fabien Tassin ]
+  * Limit the XLIB_SKIP_ARGB_VISUALS workaround to Ubuntu/Maverick as it
+    creates regressions. See http://crbug.com/46439
+    - update debian/chromium-browser.sh
+
  -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 25 Jun 2010 09:36:58 +0200
 
 chromium-browser (5.0.375.70~r48679-2) unstable; urgency=low

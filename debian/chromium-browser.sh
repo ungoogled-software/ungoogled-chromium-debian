@@ -44,12 +44,17 @@ export LD_LIBRARY_PATH
 export PATH="$LIBDIR:$PATH"
 export CHROME_WRAPPER=true
 
+DIST=`lsb_release -si`
+RELEASE=`lsb_release -sr`
+
 # Set CHROME_VERSION_EXTRA visible in the About dialog and in about:version
-export CHROME_VERSION_EXTRA=Ubuntu
+export CHROME_VERSION_EXTRA=$DIST
 
 # Set this to prevent flash from dying with a Gdk-ERROR when gtk2 is
 # built with RGBA support (like in Maverick). See LP #584959
-export XLIB_SKIP_ARGB_VISUALS=1
+if [ $DIST = "Ubuntu" ] && [ $RELEASE = 10.10 ] ; then
+  export XLIB_SKIP_ARGB_VISUALS=1
+fi
 
 want_debug=0
 want_temp_profile=0
