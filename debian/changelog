@@ -1,11 +1,27 @@
-chromium-browser (5.0.375.70~r48679-3) UNRELEASED; urgency=low
+chromium-browser (5.0.375.86~r49890-1) UNRELEASED; urgency=low
 
+  [ Jonathan Nieder ]
   * Use dpkg-architecture directly instead of relying on
     dpkg-buildpackage to set DEB_*_ARCH variables.  Use
     DEB_HOST_ARCH_CPU instead of DEB_BUILD_ARCH to detect target CPU.
     (Closes: #585801)
 
- -- Jonathan Nieder <jrnieder@gmail.com>  Sun, 13 Jun 2010 17:20:52 -0500
+  [ Giuseppe Iuculano ]
+  * New stable version, this release fixes the following security
+    issues:
+    - [38105] Medium XSS via application/json response (regression). Credit to
+       Ben Davis for original discovery and Emanuele Gentili for regression
+       discovery.
+    - [43322] Medium Memory error in video handling. Credit to Mark Dowd under
+       contract to Google Chrome Security Team.
+    - [43967] High Subresource displayed in omnibox loading. Credit to Michal
+       Zalewski of Google Security Team.
+    - [45267] High Memory error in video handling. Credit to Google Chrome
+      Security Team (Cris Neckar).
+    - [46126] High Stale pointer in x509-user-cert response. Credit to Rodrigo
+      Marcos of SECFORCE. 
+     
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 25 Jun 2010 09:36:58 +0200
 
 chromium-browser (5.0.375.70~r48679-2) unstable; urgency=low
 
