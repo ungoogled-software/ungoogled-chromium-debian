@@ -5,7 +5,7 @@
     <web-browser>
       <name>Chromium</name>
       <executable>chromium-browser</executable>
-      <command>/usr/lib/chromium-browser/chromium-browser %s</command>
+      <command>/usr/bin/chromium-browser %s</command>
       <icon-name>chromium-browser</icon-name>
       <run-in-terminal>false</run-in-terminal>
       <netscape-remote>false</netscape-remote>

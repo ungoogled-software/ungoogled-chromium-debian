@@ -22,6 +22,7 @@ chromium-browser (5.0.375.86~r49890-1) UNRELEASED; urgency=low
       Marcos of SECFORCE. 
     - Drop the XLIB_SKIP_ARGB_VISUALS workaround as it creates regressions.
       See http://crbug.com/46439 
+  * Use /usr/bin/chromium-browser in chromium-browser.xml (Closes: #580582)
 
   [ Fabien Tassin ]
   * Show in about:version when chromium is running on a different
@@ -29,7 +30,7 @@ chromium-browser (5.0.375.86~r49890-1) UNRELEASED; urgency=low
     - udpate debian/rules
     - rename and update debian/chromium-browser.sh => debian/chromium-browser.sh.in
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 25 Jun 2010 09:36:58 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 25 Jun 2010 10:11:29 +0200
 
 chromium-browser (5.0.375.70~r48679-2) unstable; urgency=low
 
