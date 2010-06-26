@@ -5,8 +5,11 @@ chromium-browser (5.0.375.86~r49890-2) UNRELEASED; urgency=low
   * Build and use the custom ffmpeg copy, when ffmpeg 0.6 will be uploaded in
     unstable chromium will use the system copy of ffmpeg. (Closes: #581507) 
   * Install libffmpegsumo
+  * Add a replace and conflict entry for chromium-codecs-ffmpeg and
+    chromium-codecs-ffmpeg-extra. This is necessary for people who used or
+    are using the unofficial PPA build.
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 26 Jun 2010 09:07:54 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 26 Jun 2010 09:10:29 +0200
 
 chromium-browser (5.0.375.86~r49890-1) unstable; urgency=low
 

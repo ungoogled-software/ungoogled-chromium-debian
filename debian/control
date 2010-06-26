@@ -64,8 +64,8 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
 	chromium-browser-inspector
 Suggests: chromium-browser-l10n
 Provides: www-browser, chromium-testsuite
-Replaces: chromium-testsuite
-Conflicts: chromium-testsuite
+Replaces: chromium-testsuite, chromium-codecs-ffmpeg, chromium-codecs-ffmpeg-extra
+Conflicts: chromium-testsuite, chromium-codecs-ffmpeg, chromium-codecs-ffmpeg-extra
 Description: Chromium browser
  Chromium is an open-source browser project that aims to build a safer, faster,
  and more stable way for all Internet users to experience the web.
