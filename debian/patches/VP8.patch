@@ -1,0 +1,1823 @@
+VP8/WebM support
+Index: chromium-browser-5.0.375.86~r49890/src/media/filters/ffmpeg_demuxer.cc
+===================================================================
+--- chromium-browser-5.0.375.86~r49890.orig/src/media/filters/ffmpeg_demuxer.cc	2010-06-25 09:40:12.000000000 +0200
++++ chromium-browser-5.0.375.86~r49890/src/media/filters/ffmpeg_demuxer.cc	2010-06-26 19:23:09.000000000 +0200
+@@ -406,11 +406,19 @@
+ 
+   // Create demuxer streams for all supported streams.
+   base::TimeDelta max_duration;
++  const bool kDemuxerIsWebm = !strcmp("webm", format_context_->iformat->name);
+   for (size_t i = 0; i < format_context_->nb_streams; ++i) {
+     AVCodecContext* codec_context = format_context_->streams[i]->codec;
+     CodecType codec_type = codec_context->codec_type;
+     if (codec_type == CODEC_TYPE_AUDIO || codec_type == CODEC_TYPE_VIDEO) {
+       AVStream* stream = format_context_->streams[i];
++      // WebM is currently strictly VP8 and Vorbis.
++      if (kDemuxerIsWebm && (stream->codec->codec_id != CODEC_ID_VP8 &&
++        stream->codec->codec_id != CODEC_ID_VORBIS)) {
++        packet_streams_.push_back(NULL);
++        continue;
++      }
++
+       FFmpegDemuxerStream* demuxer_stream
+           = new FFmpegDemuxerStream(this, stream);
+ 
+Index: chromium-browser-5.0.375.86~r49890/src/media/filters/ffmpeg_demuxer_unittest.cc
+===================================================================
+--- chromium-browser-5.0.375.86~r49890.orig/src/media/filters/ffmpeg_demuxer_unittest.cc	2010-06-25 09:40:12.000000000 +0200
++++ chromium-browser-5.0.375.86~r49890/src/media/filters/ffmpeg_demuxer_unittest.cc	2010-06-26 19:23:09.000000000 +0200
+@@ -79,6 +79,7 @@
+ 
+     // Initialize FFmpeg fixtures.
+     memset(&format_context_, 0, sizeof(format_context_));
++    memset(&input_format_, 0, sizeof(input_format_));
+     memset(&streams_, 0, sizeof(streams_));
+     memset(&codecs_, 0, sizeof(codecs_));
+ 
+@@ -96,6 +97,9 @@
+     codecs_[AV_STREAM_AUDIO].channels = kChannels;
+     codecs_[AV_STREAM_AUDIO].sample_rate = kSampleRate;
+ 
++    input_format_.name = "foo";
++    format_context_.iformat = &input_format_;
++
+     // Initialize AVStream and AVFormatContext structures.  We set the time base
+     // of the streams such that duration is reported in microseconds.
+     format_context_.nb_streams = AV_STREAM_MAX;
+@@ -162,6 +166,7 @@
+ 
+   // FFmpeg fixtures.
+   AVFormatContext format_context_;
++  AVInputFormat input_format_;
+   AVCodecContext codecs_[AV_STREAM_MAX];
+   AVStream streams_[AV_STREAM_MAX];
+   MockFFmpeg mock_ffmpeg_;
+Index: chromium-browser-5.0.375.86~r49890/src/net/base/mime_util.cc
+===================================================================
+--- chromium-browser-5.0.375.86~r49890.orig/src/net/base/mime_util.cc	2010-06-26 19:23:09.000000000 +0200
++++ chromium-browser-5.0.375.86~r49890/src/net/base/mime_util.cc	2010-06-26 19:23:09.000000000 +0200
+@@ -1,7 +1,8 @@
+-// Copyright (c) 2006-2009 The Chromium Authors. All rights reserved.
++// Copyright (c) 2010 The Chromium Authors. All rights reserved.
+ // Use of this source code is governed by a BSD-style license that can be
+ // found in the LICENSE file.
+ 
++#include <map>
+ #include <string>
+ 
+ #include "net/base/mime_util.h"
+@@ -41,7 +42,12 @@
+   bool AreSupportedMediaCodecs(const std::vector<std::string>& codecs) const;
+ 
+   void ParseCodecString(const std::string& codecs,
+-                        std::vector<std::string>* codecs_out);
++                        std::vector<std::string>* codecs_out,
++                        bool strip);
++
++  bool IsStrictMediaMimeType(const std::string& mime_type) const;
++  bool IsSupportedStrictMediaMimeType(const std::string& mime_type,
++      const std::vector<std::string>& codecs) const;
+ 
+  private:
+   friend struct DefaultSingletonTraits<MimeUtil>;
+@@ -59,6 +65,9 @@
+   MimeMappings javascript_map_;
+   MimeMappings view_source_map_;
+   MimeMappings codecs_map_;
++
++  typedef std::map<std::string, base::hash_set<std::string> > StrictMappings;
++  StrictMappings strict_format_map_;
+ };  // class MimeUtil
+ 
+ struct MimeInfo {
+@@ -78,6 +87,8 @@
+   { "audio/mp3", "mp3" },
+   { "video/ogg", "ogv,ogm" },
+   { "audio/ogg", "ogg,oga" },
++  { "video/webm", "webm" },
++  { "audio/webm", "webm" },
+   { "application/xhtml+xml", "xhtml,xht" },
+   { "application/x-chrome-extension", "crx" }
+ };
+@@ -188,6 +199,8 @@
+   "video/ogg",
+   "audio/ogg",
+   "application/ogg",
++  "video/webm",
++  "audio/webm",
+ 
+   // MPEG-4.
+   "video/mp4",
+@@ -210,6 +223,7 @@
+   "mp4a",
+   "theora",
+   "vorbis",
++  "vp8"
+ };
+ 
+ // Note: does not include javascript types list (see supported_javascript_types)
+@@ -273,6 +287,16 @@
+   "image/svg+xml"
+ };
+ 
++struct MediaFormatStrict {
++  const char* mime_type;
++  const char* codecs_list;
++};
++
++static const MediaFormatStrict format_codec_mappings[] = {
++  { "video/webm", "vorbis,vp8,vp8.0" },
++  { "audio/webm", "vorbis" }
++};
++
+ void MimeUtil::InitializeMimeTypeMaps() {
+   for (size_t i = 0; i < arraysize(supported_image_types); ++i)
+     image_map_.insert(supported_image_types[i]);
+@@ -297,6 +321,19 @@
+ 
+   for (size_t i = 0; i < arraysize(supported_media_codecs); ++i)
+     codecs_map_.insert(supported_media_codecs[i]);
++
++  // Initialize the strict supported media types.
++  for (size_t i = 0; i < arraysize(format_codec_mappings); ++i) {
++    std::vector<std::string> mime_type_codecs;
++    ParseCodecString(format_codec_mappings[i].codecs_list,
++                     &mime_type_codecs,
++                     false);
++
++    MimeMappings codecs;
++    for (size_t j = 0; j < mime_type_codecs.size(); ++j)
++      codecs.insert(mime_type_codecs[j]);
++    strict_format_map_[format_codec_mappings[i].mime_type] = codecs;
++  }
+ }
+ 
+ bool MimeUtil::IsSupportedImageMimeType(const char* mime_type) const {
+@@ -374,12 +411,16 @@
+ }
+ 
+ void MimeUtil::ParseCodecString(const std::string& codecs,
+-                                std::vector<std::string>* codecs_out) {
++                                std::vector<std::string>* codecs_out,
++                                bool strip) {
+   std::string no_quote_codecs;
+   TrimString(codecs, "\"", &no_quote_codecs);
+   SplitString(no_quote_codecs, ',', codecs_out);
+ 
+-  // Truncate each string at the '.'
++  if (!strip)
++    return;
++
++  // Strip everything past the first '.'
+   for (std::vector<std::string>::iterator it = codecs_out->begin();
+        it != codecs_out->end();
+        ++it) {
+@@ -389,6 +430,28 @@
+   }
+ }
+ 
++bool MimeUtil::IsStrictMediaMimeType(const std::string& mime_type) const {
++  if (strict_format_map_.find(mime_type) == strict_format_map_.end())
++    return false;
++  return true;
++}
++
++bool MimeUtil::IsSupportedStrictMediaMimeType(const std::string& mime_type,
++    const std::vector<std::string>& codecs) const {
++  StrictMappings::const_iterator it = strict_format_map_.find(mime_type);
++
++  if (it == strict_format_map_.end())
++    return false;
++
++  const MimeMappings strict_codecs_map = it->second;
++  for (size_t i = 0; i < codecs.size(); ++i) {
++    if (strict_codecs_map.find(codecs[i]) == strict_codecs_map.end()) {
++      return false;
++    }
++  }
++  return true;
++}
++
+ //----------------------------------------------------------------------------
+ // Wrappers for the singleton
+ //----------------------------------------------------------------------------
+@@ -444,9 +507,19 @@
+   return GetMimeUtil()->AreSupportedMediaCodecs(codecs);
+ }
+ 
++bool IsStrictMediaMimeType(const std::string& mime_type) {
++  return GetMimeUtil()->IsStrictMediaMimeType(mime_type);
++}
++
++bool IsSupportedStrictMediaMimeType(const std::string& mime_type,
++                                    const std::vector<std::string>& codecs) {
++  return GetMimeUtil()->IsSupportedStrictMediaMimeType(mime_type, codecs);
++}
++
+ void ParseCodecString(const std::string& codecs,
+-                      std::vector<std::string>* codecs_out) {
+-  GetMimeUtil()->ParseCodecString(codecs, codecs_out);
++                      std::vector<std::string>* codecs_out,
++                      const bool strip) {
++  GetMimeUtil()->ParseCodecString(codecs, codecs_out, strip);
+ }
+ 
+ }  // namespace net
+Index: chromium-browser-5.0.375.86~r49890/src/net/base/mime_util.h
+===================================================================
+--- chromium-browser-5.0.375.86~r49890.orig/src/net/base/mime_util.h	2010-06-25 09:40:28.000000000 +0200
++++ chromium-browser-5.0.375.86~r49890/src/net/base/mime_util.h	2010-06-26 19:23:09.000000000 +0200
+@@ -1,4 +1,4 @@
+-// Copyright (c) 2006-2009 The Chromium Authors. All rights reserved.
++// Copyright (c) 2010 The Chromium Authors. All rights reserved.
+ // Use of this source code is governed by a BSD-style license that can be
+ // found in the LICENSE file.
+ 
+@@ -50,11 +50,25 @@
+ bool AreSupportedMediaCodecs(const std::vector<std::string>& codecs);
+ 
+ // Parses a codec string, populating |codecs_out| with the prefix of each codec
+-// in the string |codecs_in|. For example, passed "aaa.b.c,dd.eee", |codecs_out|
+-// will contain {"aaa", "dd"}.
++// in the string |codecs_in|. For example, passed "aaa.b.c,dd.eee", if
++// |strip| == true |codecs_out| will contain {"aaa", "dd"}, if |strip| == false
++// |codecs_out| will contain {"aaa.b.c", "dd.eee"}.
+ // See http://www.ietf.org/rfc/rfc4281.txt.
+ void ParseCodecString(const std::string& codecs,
+-                      std::vector<std::string>* codecs_out);
++                      std::vector<std::string>* codecs_out,
++                      bool strip);
++
++// Check to see if a particular MIME type is in our list which only supports a
++// certain subset of codecs.
++bool IsStrictMediaMimeType(const std::string& mime_type);
++
++// Check to see if a particular MIME type is in our list which only supports a
++// certain subset of codecs. Returns true if and only if all codecs are
++// supported for that specific MIME type, false otherwise. If this returns
++// false you will still need to check if the media MIME tpyes and codecs are
++// supported.
++bool IsSupportedStrictMediaMimeType(const std::string& mime_type,
++    const std::vector<std::string>& codecs);
+ 
+ }  // namespace net
+ 
+Index: chromium-browser-5.0.375.86~r49890/src/net/base/mime_util_unittest.cc
+===================================================================
+--- chromium-browser-5.0.375.86~r49890.orig/src/net/base/mime_util_unittest.cc	2010-06-25 09:40:28.000000000 +0200
++++ chromium-browser-5.0.375.86~r49890/src/net/base/mime_util_unittest.cc	2010-06-26 19:23:09.000000000 +0200
+@@ -118,10 +118,17 @@
+ 
+   for (size_t i = 0; i < ARRAYSIZE_UNSAFE(tests); ++i) {
+     std::vector<std::string> codecs_out;
+-    net::ParseCodecString(tests[i].original, &codecs_out);
++    net::ParseCodecString(tests[i].original, &codecs_out, true);
+     EXPECT_EQ(tests[i].expected_size, codecs_out.size());
+     for (size_t j = 0; j < tests[i].expected_size; ++j) {
+       EXPECT_EQ(tests[i].results[j], codecs_out[j]);
+     }
+   }
++
++  // Test without stripping the codec type.
++  std::vector<std::string> codecs_out;
++  net::ParseCodecString("avc1.42E01E, mp4a.40.2", &codecs_out, false);
++  EXPECT_EQ(2u, codecs_out.size());
++  EXPECT_STREQ("avc1.42E01E", codecs_out[0].c_str());
++  EXPECT_STREQ("mp4a.40.2", codecs_out[1].c_str());
+ }
+Index: chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/ffmpeg.gyp
+===================================================================
+--- chromium-browser-5.0.375.86~r49890.orig/src/third_party/ffmpeg/ffmpeg.gyp	2010-06-25 09:40:41.000000000 +0200
++++ chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/ffmpeg.gyp	2010-06-26 19:26:38.457499405 +0200
+@@ -58,6 +58,16 @@
+       ['target_arch=="arm"', {
+         'ffmpeg_asm_lib': 0,
+       }],
++
++      # libvpx location.
++      # TODO(scherkus): libvpx_hack_dir is a hack to make -L work on linux.
++      ['OS=="mac" or OS=="win"', {
++        'libvpx_dir': '../libvpx',
++        'libvpx_hack_dir': '../libvpx',
++      }, {
++        'libvpx_dir': '../libvpx',
++        'libvpx_hack_dir': 'third_party/libvpx',
++      }],
+     ],
+     'ffmpeg_variant%': '<(target_arch)',
+ 
+@@ -88,6 +98,7 @@
+             'source/patched-ffmpeg-mt/libavcodec/golomb.c', # TODO(fbarchard): Move to Chrome
+             'source/patched-ffmpeg-mt/libavcodec/imgconvert.c',
+             'source/patched-ffmpeg-mt/libavcodec/jrevdct.c',
++            'source/patched-ffmpeg-mt/libavcodec/libvpxdec.c',
+             'source/patched-ffmpeg-mt/libavcodec/mdct.c',
+             'source/patched-ffmpeg-mt/libavcodec/mpeg12data.c', # TODO(fbarchard): Move to ChromeOS
+             'source/patched-ffmpeg-mt/libavcodec/opt.c',
+@@ -110,6 +121,8 @@
+             'source/patched-ffmpeg-mt/libavformat/aviobuf.c',
+             'source/patched-ffmpeg-mt/libavformat/cutils.c',
+             'source/patched-ffmpeg-mt/libavformat/id3v1.c',
++            'source/patched-ffmpeg-mt/libavformat/matroska.c',
++            'source/patched-ffmpeg-mt/libavformat/matroskadec.c',
+             'source/patched-ffmpeg-mt/libavformat/metadata.c',
+             'source/patched-ffmpeg-mt/libavformat/metadata_compat.c',
+             'source/patched-ffmpeg-mt/libavformat/oggdec.c',
+@@ -118,10 +131,14 @@
+             'source/patched-ffmpeg-mt/libavformat/oggparsevorbis.c',
+             'source/patched-ffmpeg-mt/libavformat/options.c',
+             'source/patched-ffmpeg-mt/libavformat/riff.c',
++            'source/patched-ffmpeg-mt/libavformat/rm.c',
++            'source/patched-ffmpeg-mt/libavformat/rmdec.c',
+             'source/patched-ffmpeg-mt/libavformat/utils.c',
+             'source/patched-ffmpeg-mt/libavutil/avstring.c',
++            'source/patched-ffmpeg-mt/libavutil/base64.c',
+             'source/patched-ffmpeg-mt/libavutil/crc.c',
+             'source/patched-ffmpeg-mt/libavutil/log.c',
++            'source/patched-ffmpeg-mt/libavutil/lzo.c',
+             'source/patched-ffmpeg-mt/libavutil/mathematics.c',
+             'source/patched-ffmpeg-mt/libavutil/mem.c',
+             'source/patched-ffmpeg-mt/libavutil/pixdesc.c',
+@@ -134,6 +151,7 @@
+             'source/config/<(ffmpeg_branding)/<(OS)/<(ffmpeg_config)',
+             'source/patched-ffmpeg-mt',
+             'source/config',
++            '/usr/include/vpx',
+           ],
+           'defines': [
+             'HAVE_AV_CONFIG_H',
+@@ -367,6 +385,7 @@
+                 ],
+                 'libraries': [
+                   '-lz',
++                  '-lvpx',
+                 ],
+                 'conditions': [
+                   ['ffmpeg_asm_lib==1', {
+@@ -413,7 +432,7 @@
+                   # butterflies still exist...as do rainbows, sunshine,
+                   # tulips, etc., etc...but not kittens. Those went away
+                   # with this flag.
+-                  '-Wl,-read_only_relocs,suppress'
++                  '-Wl,-read_only_relocs,suppress',
+                 ],
+               },
+             }],  # OS=="mac"
+Index: chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/config/Chrome/linux/ia32/config.h
+===================================================================
+--- chromium-browser-5.0.375.86~r49890.orig/src/third_party/ffmpeg/source/config/Chrome/linux/ia32/config.h	2010-06-25 09:40:41.000000000 +0200
++++ chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/config/Chrome/linux/ia32/config.h	2010-06-26 19:23:09.000000000 +0200
+@@ -875,4 +875,8 @@
+ #define CONFIG_ALSA_OUTDEV 0
+ #define CONFIG_AUDIO_BEOS_OUTDEV 0
+ #define CONFIG_OSS_OUTDEV 0
++#define CONFIG_LIBVPX_VP8_DECODER 1
++#define CONFIG_LIBVPX_VP8_ENCODER 0
++#define CONFIG_WEBM_DEMUXER 1
++#define CONFIG_WEBM_MUXER 0
+ #endif /* FFMPEG_CONFIG_H */
+Index: chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/config/Chrome/linux/x64/config.h
+===================================================================
+--- chromium-browser-5.0.375.86~r49890.orig/src/third_party/ffmpeg/source/config/Chrome/linux/x64/config.h	2010-06-25 09:40:41.000000000 +0200
++++ chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/config/Chrome/linux/x64/config.h	2010-06-26 19:23:09.000000000 +0200
+@@ -875,4 +875,8 @@
+ #define CONFIG_ALSA_OUTDEV 0
+ #define CONFIG_AUDIO_BEOS_OUTDEV 0
+ #define CONFIG_OSS_OUTDEV 0
++#define CONFIG_LIBVPX_VP8_DECODER 1
++#define CONFIG_LIBVPX_VP8_ENCODER 0
++#define CONFIG_WEBM_DEMUXER 1
++#define CONFIG_WEBM_MUXER 0
+ #endif /* FFMPEG_CONFIG_H */
+Index: chromium-browser-5.0.375.86~r49890/src/webkit/glue/simple_webmimeregistry_impl.cc
+===================================================================
+--- chromium-browser-5.0.375.86~r49890.orig/src/webkit/glue/simple_webmimeregistry_impl.cc	2010-06-25 09:40:13.000000000 +0200
++++ chromium-browser-5.0.375.86~r49890/src/webkit/glue/simple_webmimeregistry_impl.cc	2010-06-26 19:23:09.000000000 +0200
+@@ -54,9 +54,28 @@
+   if (!net::IsSupportedMediaMimeType(ToASCIIOrEmpty(mime_type).c_str()))
+     return IsNotSupported;
+ 
++  // Check list of strict codecs to see if it is supported.
++  if (net::IsStrictMediaMimeType(ToASCIIOrEmpty(mime_type).c_str())) {
++    // We support the container, but no codecs were specified.
++    if (codecs.isNull())
++      return MayBeSupported;
++
++    // Check if the codecs are a perfect match.
++    std::vector<std::string> strict_codecs;
++    net::ParseCodecString(ToASCIIOrEmpty(codecs).c_str(),
++                          &strict_codecs,
++                          false);
++    if (!net::IsSupportedStrictMediaMimeType(ToASCIIOrEmpty(mime_type).c_str(),
++                                             strict_codecs))
++      return IsNotSupported;
++
++    // Good to go!
++    return IsSupported;
++  }
++
+   // If we don't recognize the codec, it's possible we support it.
+   std::vector<std::string> parsed_codecs;
+-  net::ParseCodecString(ToASCIIOrEmpty(codecs).c_str(), &parsed_codecs);
++  net::ParseCodecString(ToASCIIOrEmpty(codecs).c_str(), &parsed_codecs, true);
+   if (!net::AreSupportedMediaCodecs(parsed_codecs))
+     return MayBeSupported;
+ 
+Index: chromium-browser-5.0.375.86~r49890/src/webkit/tools/test_shell/test_shell_webmimeregistry_impl.cc
+===================================================================
+--- chromium-browser-5.0.375.86~r49890.orig/src/webkit/tools/test_shell/test_shell_webmimeregistry_impl.cc	2010-06-25 09:40:13.000000000 +0200
++++ chromium-browser-5.0.375.86~r49890/src/webkit/tools/test_shell/test_shell_webmimeregistry_impl.cc	2010-06-26 19:23:09.000000000 +0200
+@@ -41,7 +41,7 @@
+ 
+   // If we don't recognize the codec, it's possible we support it.
+   std::vector<std::string> parsed_codecs;
+-  net::ParseCodecString(ToASCIIOrEmpty(codecs).c_str(), &parsed_codecs);
++  net::ParseCodecString(ToASCIIOrEmpty(codecs).c_str(), &parsed_codecs, true);
+   if (!AreSupportedMediaCodecs(parsed_codecs))
+     return MayBeSupported;
+ 
+Index: chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/config/Chrome/linux/arm-neon/config.h
+===================================================================
+--- chromium-browser-5.0.375.86~r49890.orig/src/third_party/ffmpeg/source/config/Chrome/linux/arm-neon/config.h	2010-06-25 09:40:41.000000000 +0200
++++ chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/config/Chrome/linux/arm-neon/config.h	2010-06-26 19:23:09.000000000 +0200
+@@ -875,4 +875,8 @@
+ #define CONFIG_ALSA_OUTDEV 0
+ #define CONFIG_AUDIO_BEOS_OUTDEV 0
+ #define CONFIG_OSS_OUTDEV 0
++#define CONFIG_LIBVPX_VP8_DECODER 1
++#define CONFIG_LIBVPX_VP8_ENCODER 0
++#define CONFIG_WEBM_DEMUXER 1
++#define CONFIG_WEBM_MUXER 0
+ #endif /* FFMPEG_CONFIG_H */
+Index: chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/config/Chrome/linux/arm/config.h
+===================================================================
+--- chromium-browser-5.0.375.86~r49890.orig/src/third_party/ffmpeg/source/config/Chrome/linux/arm/config.h	2010-06-25 09:40:41.000000000 +0200
++++ chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/config/Chrome/linux/arm/config.h	2010-06-26 19:23:09.000000000 +0200
+@@ -875,4 +875,8 @@
+ #define CONFIG_ALSA_OUTDEV 0
+ #define CONFIG_AUDIO_BEOS_OUTDEV 0
+ #define CONFIG_OSS_OUTDEV 0
++#define CONFIG_LIBVPX_VP8_DECODER 1
++#define CONFIG_LIBVPX_VP8_ENCODER 0
++#define CONFIG_WEBM_DEMUXER 1
++#define CONFIG_WEBM_MUXER 0
+ #endif /* FFMPEG_CONFIG_H */
+Index: chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/Makefile
+===================================================================
+--- chromium-browser-5.0.375.86~r49890.orig/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/Makefile	2010-06-25 09:43:22.000000000 +0200
++++ chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/Makefile	2010-06-26 19:23:09.000000000 +0200
+@@ -522,6 +522,8 @@
+ OBJS-$(CONFIG_LIBSPEEX_DECODER)           += libspeexdec.o
+ OBJS-$(CONFIG_LIBTHEORA_ENCODER)          += libtheoraenc.o
+ OBJS-$(CONFIG_LIBVORBIS_ENCODER)          += libvorbis.o
++OBJS-$(CONFIG_LIBVPX_VP8_DECODER)         += libvpxdec.o
++OBJS-$(CONFIG_LIBVPX_VP8_ENCODER)         += libvpxenc.o
+ OBJS-$(CONFIG_LIBX264_ENCODER)            += libx264.o
+ OBJS-$(CONFIG_LIBXVID_ENCODER)            += libxvidff.o libxvid_rc.o
+ 
+Index: chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/allcodecs.c
+===================================================================
+--- chromium-browser-5.0.375.86~r49890.orig/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/allcodecs.c	2010-06-25 09:43:22.000000000 +0200
++++ chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/allcodecs.c	2010-06-26 19:23:09.000000000 +0200
+@@ -356,6 +356,7 @@
+     REGISTER_DECODER (LIBSPEEX, libspeex);
+     REGISTER_ENCODER (LIBTHEORA, libtheora);
+     REGISTER_ENCODER (LIBVORBIS, libvorbis);
++    REGISTER_ENCDEC  (LIBVPX_VP8, libvpx_vp8);
+     REGISTER_ENCODER (LIBX264, libx264);
+     REGISTER_ENCODER (LIBXVID, libxvid);
+ 
+Index: chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/avcodec.h
+===================================================================
+--- chromium-browser-5.0.375.86~r49890.orig/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/avcodec.h	2010-06-25 09:43:22.000000000 +0200
++++ chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/avcodec.h	2010-06-26 19:23:09.000000000 +0200
+@@ -209,6 +209,7 @@
+     CODEC_ID_IFF_ILBM,
+     CODEC_ID_IFF_BYTERUN1,
+     CODEC_ID_KGV1,
++    CODEC_ID_VP8,
+ 
+     /* various PCM "codecs" */
+     CODEC_ID_PCM_S16LE= 0x10000,
+@@ -2692,6 +2693,160 @@
+      * - decoding: Set by libavcodec.
+      */
+     int active_thread_type;
++
++    /**
++     * Enable spatial resampling
++     *
++     * Spatial resampling allows the codec to compress a lower resolution
++     * version of the frame, which is then upscaled by the encoder to the
++     * correct presentation resolution. This increases visual quality at low
++     * data rates, at the expense of CPU time on the encoder/decoder.
++     * - encoding: Set by user.
++     * - decoding: unused
++     *
++     *  \attention VP8 specific
++     */
++    int spatial_rsmpl;
++
++    /**
++     * Spatial resampling up watermark.
++     *
++     * This threshold is described as a percentage of the target data buffer.
++     * When the data buffer rises above this percentage of fullness, the
++     * encoder will step up to a higher resolution version of the frame.
++     * - encoding: Set by user.
++     * - decoding: unused
++     *
++     *  \attention VP8 specific
++     */
++    int spatial_rsmpl_up;
++
++    /**
++     * Spatial resampling down watermark.
++     *
++     * This threshold is described as a percentage of the target data buffer.
++     * When the data buffer falls below this percentage of fullness, the
++     * encoder will step down to a lower resolution version of the frame.
++     * - encoding: Set by user.
++     * - decoding: unused
++     *
++     *  \attention VP8 specific
++     */
++    int spatial_rsmpl_down;
++
++    /**
++     * Two-pass mode CBR/VBR bias.
++     *
++     * Bias, expressed on a scale of 0 to 100, for determining target size for
++     * the current frame. The value 0 indicates the optimal CBR mode value
++     * should be used. The value 100 indicates the optimal VBR mode value
++     * should be used. Values in between indicate which way the encoder should
++     * "lean." RC mode bias between CBR and VBR(0-100: 0->CBR, 100->VBR)
++     * - encoding: Set by user.
++     * - decoding: unused
++     *
++     *  \attention VP8 specific
++     */
++    int vbr_bias;
++
++    /**
++     * Allow lagged encoding.
++     *
++     * If set, this value allows the encoder to consume a number of input
++     * frames before producing output frames. This allows the encoder to base
++     * decisions for the current frame on future frames. This does increase the
++     * latency of the encoding pipeline, so it is not appropriate in all
++     * situations (ex: realtime encoding). Half the output average output
++     * framerate is a reasonable default in other cases.
++     *
++     * Note that this is a maximum value -- the encoder may produce frames
++     * sooner than the given limit. Set this value to 0 to disable this
++     * feature.
++     * - encoding: Set by user.
++     * - decoding: unused
++     *
++     *  \attention VP8 specific
++     */
++    int lag;
++
++    /**
++     * Control sharpness preprocessing
++     *
++     * This setting does not impact any other setting and is largely a matter
++     * of personal preference.  A low sharpness setting will result in fewer
++     * visible artifacts but may blur the image somewhat; a high sharpness will
++     * result in a sharper image but may result in more visible artifacts.
++     * Valid Range: [0,7]
++     * - encoding: Set by user.
++     * - decoding: unused
++     *
++     *  \attention VP8 specific
++     */
++    int sharpness;
++
++    /**
++     * Allow encoder to automatically set and use alternate reference frame.
++     * - encoding: Set by user.
++     * - decoding: unused
++     *
++     *  \attention VP8 specific
++     */
++    int altref;
++
++    /**
++     * Set the max number of frames blurred creating the alternate reference frame.
++     * - encoding: Set by user.
++     * - decoding: unused
++     *
++     *  \attention VP8 specific
++     */
++    int ar_max_frames;
++
++    /**
++     * Set the type of filter to use for the alternate reference frame.
++     * - encoding: Set by user.
++     * - decoding: unused
++     *
++     *  \attention VP8 specific
++     */
++    int ar_type;
++
++    /**
++     * Set the filter strength for the alternate reference frame.
++     * - encoding: Set by user.
++     * - decoding: unused
++     *
++     *  \attention VP8 specific
++     */
++    int ar_strength;
++
++    /**
++     * Set the threshold for macroblocks treated as static.
++     * - encoding: Set by user.
++     * - decoding: unused
++     *
++     *  \attention VP8 specific
++     */
++    int mb_static_threshold;
++
++    /**
++     * Number of bits which should be maintained in rc buffer during decoding.
++     * - encoding: Set by user.
++     * - decoding: unused
++     *
++     *  \attention VP8 specific
++     */
++    int rc_optimal_buffer_occupancy;
++
++    /**
++     * Number of token partitions.
++     * Valid Values: {1,2,4,8}
++     * - encoding: Set by user.
++     * - decoding: unused
++     *
++     *  \attention VP8 specific
++     */
++    int token_partitions;
+ } AVCodecContext;
+ 
+ /**
+Index: chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/libvpxdec.c
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/libvpxdec.c	2010-06-26 19:23:09.000000000 +0200
+@@ -0,0 +1,152 @@
++/*
++ *  Copyright (c) 2010, Google, Inc.
++ *
++ *  All rights reserved.
++ *
++ *  Redistribution and use in source and binary forms, with or without
++ *  modification, are permitted provided that the following conditions
++ *  are met:
++ *
++ *  - Redistributions of source code must retain the above copyright
++ *    notice, this list of conditions and the following disclaimer.
++ *
++ *  - Redistributions in binary form must reproduce the above
++ *    copyright notice, this list of conditions and the following
++ *    disclaimer in the documentation and/or other materials provided
++ *    with the distribution.
++ *
++ *  - Neither the name of Google nor the names of its contributors may
++ *    be used to endorse or promote products derived from this software
++ *    without specific prior written permission.
++ *
++ *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
++ *  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
++ *  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
++ *  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
++ *  HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
++ *  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
++ *  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
++ *  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
++ *  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
++ *  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
++ *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++ *
++ *  Subject to the terms and conditions of the above License, Google
++ *  hereby grants to You a perpetual, worldwide, non-exclusive,
++ *  no-charge, royalty-free, irrevocable (except as stated in this
++ *  section) patent license to make, have made, use, offer to sell, sell,
++ *  import, and otherwise transfer this implementation of VP8, where such
++ *  license applies only to those patent claims, both currently owned by
++ *  Google and acquired in the future, licensable by Google that are
++ *  necessarily infringed by this implementation of VP8. If You or your
++ *  agent or exclusive licensee institute or order or agree to the
++ *  institution of patent litigation against any entity (including a
++ *  cross-claim or counterclaim in a lawsuit) alleging that this
++ *  implementation of VP8 or any code incorporated within this
++ *  implementation of VP8 constitutes direct or contributory patent
++ *  infringement, or inducement of patent infringement, then any rights
++ *  granted to You under this License for this implementation of VP8
++ *  shall terminate as of the date such litigation is filed.
++ */
++
++/*!\file
++   \brief VP8 decoder support via libvpx
++*/
++
++#include "avcodec.h"
++
++#ifndef HAVE_STDINT_H
++# define HAVE_STDINT_H 1
++#endif
++#define VPX_CODEC_DISABLE_COMPAT 1
++#include <vpx_decoder.h>
++#include <vp8dx.h>
++
++#include <assert.h>
++
++typedef struct VP8DecoderContext {
++  vpx_codec_ctx_t decoder;
++} vp8dctx_t;
++
++static av_cold int vp8_init(AVCodecContext* avctx)
++{
++  vp8dctx_t* const ctx = avctx->priv_data;
++  vpx_codec_iface_t* const iface = &vpx_codec_vp8_dx_algo;
++  vpx_codec_dec_cfg_t deccfg = { /*token partitions+1 would be a decent choice*/
++                                 .threads= FFMIN(avctx->thread_count,16) };
++
++  av_log(avctx,AV_LOG_INFO,"%s\n",vpx_codec_version_str());
++  av_log(avctx,AV_LOG_VERBOSE,"%s\n",vpx_codec_build_config());
++
++  if(vpx_codec_dec_init(&ctx->decoder,iface,&deccfg,0)!=VPX_CODEC_OK) {
++    const char* error = vpx_codec_error(&ctx->decoder);
++    av_log(avctx,AV_LOG_ERROR,"Failed to initialize decoder: %s\n",error);
++    return -1;
++  }
++
++  avctx->pix_fmt = PIX_FMT_YUV420P;
++  return 0;
++}
++
++static int vp8_decode(AVCodecContext* avctx,
++                      void* data, int* data_size,
++                      AVPacket *avpkt)
++{
++  const uint8_t* const buf = avpkt->data;
++  const int buf_size = avpkt->size;
++  vp8dctx_t* const ctx = avctx->priv_data;
++  AVFrame* const picture = data;
++  vpx_codec_iter_t iter = NULL;
++  vpx_image_t* img;
++
++  if(vpx_codec_decode(&ctx->decoder,buf,buf_size,NULL,0)!=VPX_CODEC_OK) {
++    const char* error = vpx_codec_error(&ctx->decoder);
++    const char* detail = vpx_codec_error_detail(&ctx->decoder);
++
++    av_log(avctx,AV_LOG_ERROR,"Failed to decode frame: %s\n",error);
++    if(detail) av_log(avctx,AV_LOG_ERROR,"  Additional information: %s\n",detail);
++    return -1;
++  }
++
++  if( (img= vpx_codec_get_frame(&ctx->decoder,&iter)) ) {
++    assert(img->fmt==IMG_FMT_I420);
++
++    if((int)img->d_w!=avctx->width || (int)img->d_h!=avctx->height) {
++      av_log(avctx,AV_LOG_INFO,"dimension change! %dx%d -> %dx%d\n",
++        avctx->width,avctx->height,img->d_w,img->d_h);
++      if(avcodec_check_dimensions(avctx,img->d_w,img->d_h))
++        return -1;
++      avcodec_set_dimensions(avctx,img->d_w,img->d_h);
++    }
++    picture->data[0] = img->planes[0];
++    picture->data[1] = img->planes[1];
++    picture->data[2] = img->planes[2];
++    picture->data[3] = img->planes[3];
++    picture->linesize[0] = img->stride[0];
++    picture->linesize[1] = img->stride[1];
++    picture->linesize[2] = img->stride[2];
++    picture->linesize[3] = img->stride[3];
++    *data_size = sizeof(AVPicture);
++  }
++  return buf_size;
++}
++
++static av_cold int vp8_free(AVCodecContext *avctx)
++{
++  vp8dctx_t* const ctx = avctx->priv_data;
++  vpx_codec_destroy(&ctx->decoder);
++  return 0;
++}
++
++AVCodec libvpx_vp8_decoder = {
++  "libvpx_vp8",
++  CODEC_TYPE_VIDEO,
++  CODEC_ID_VP8,
++  sizeof(vp8dctx_t),
++  vp8_init,
++  NULL, /*encode*/
++  vp8_free,
++  vp8_decode,
++  0, /*capabilities*/
++  .long_name = NULL_IF_CONFIG_SMALL("libvpx VP8"),
++};
+Index: chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/libvpxenc.c
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/libvpxenc.c	2010-06-26 19:23:09.000000000 +0200
+@@ -0,0 +1,529 @@
++/*
++ *  Copyright (c) 2010, Google, Inc.
++ *
++ *  All rights reserved.
++ *
++ *  Redistribution and use in source and binary forms, with or without
++ *  modification, are permitted provided that the following conditions
++ *  are met:
++ *
++ *  - Redistributions of source code must retain the above copyright
++ *    notice, this list of conditions and the following disclaimer.
++ *
++ *  - Redistributions in binary form must reproduce the above
++ *    copyright notice, this list of conditions and the following
++ *    disclaimer in the documentation and/or other materials provided
++ *    with the distribution.
++ *
++ *  - Neither the name of Google nor the names of its contributors may
++ *    be used to endorse or promote products derived from this software
++ *    without specific prior written permission.
++ *
++ *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
++ *  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
++ *  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
++ *  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
++ *  HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
++ *  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
++ *  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
++ *  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
++ *  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
++ *  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
++ *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++ *
++ *  Subject to the terms and conditions of the above License, Google
++ *  hereby grants to You a perpetual, worldwide, non-exclusive,
++ *  no-charge, royalty-free, irrevocable (except as stated in this
++ *  section) patent license to make, have made, use, offer to sell, sell,
++ *  import, and otherwise transfer this implementation of VP8, where such
++ *  license applies only to those patent claims, both currently owned by
++ *  Google and acquired in the future, licensable by Google that are
++ *  necessarily infringed by this implementation of VP8. If You or your
++ *  agent or exclusive licensee institute or order or agree to the
++ *  institution of patent litigation against any entity (including a
++ *  cross-claim or counterclaim in a lawsuit) alleging that this
++ *  implementation of VP8 or any code incorporated within this
++ *  implementation of VP8 constitutes direct or contributory patent
++ *  infringement, or inducement of patent infringement, then any rights
++ *  granted to You under this License for this implementation of VP8
++ *  shall terminate as of the date such litigation is filed.
++ */
++
++/*!\file
++   \brief VP8 encoding support via libvpx
++
++   \par VPx SDK param./#AVCodecContext param./Assoc. cli opt {{{
++   <table>
++   <tr><td>g_threads</td><td>AVCodecContext::thread_count</td><td>-threads</td></tr>
++   <tr><td>g_lag_in_frames</td><td>AVCodecContext::lag</td><td>-lag</td></tr>
++   <tr><td>rc_target_bitrate</td><td>AVCodecContext::bit_rate/1000</td><td>-vb</td></tr>
++   <tr><td>kf_max_dist</td><td>AVCodecContext::gop_size</td><td>-g</td></tr>
++   <tr><td>kf_min_dist</td><td>AVCodecContext::keyint_min</td><td>-keyint_min</td></tr>
++   <tr><td><code>VPX_KF_FIXED</code></td><td>AVCodecContext::keyint_min == AVCodecContext::gop_size</td><td>-keyint_min -g</td></tr>
++   <tr><td>rc_min_quantizer</td><td>((AVCodecContext::qmin*5+1)&gt;&gt;2) - 1</td><td>-qmin</td></tr>
++   <tr><td>rc_max_quantizer</td><td>((AVCodecContext::qmax*5+1)&gt;&gt;2) - 1</td><td>-qmax</td></tr>
++   <tr><td>rc_buf_sz</td><td>AVCodecContext::rc_buffer_size*1000 / AVCodecContext::bit_rate</td><td>-bufsize -vb</td></tr>
++   <tr><td>rc_buf_initial_sz</td><td>AVCodecContext::rc_initial_buffer_occupancy*1000 / AVCodecContext::bit_rate</td><td>-rc_init_occupancy -vb</td></tr>
++   <tr><td>rc_buf_optimal_sz</td><td>AVCodecContext::rc_optimal_buffer_occupancy*1000 / AVCodecContext::bit_rate</td><td>-rc_opt_occupancy -vb</td></tr>
++   <tr><td>rc_dropframe_thresh</td><td>AVCodecContext::frame_skip_threshold</td><td>-skip_threshold</td></tr>
++   <tr><td>rc_undershoot_pct</td><td>AVCodecContext::rc_buffer_aggressivity*100</td><td>-rc_buf_aggressivity</td></tr>
++   <tr><td>rc_overshoot_pct</td><td>AVCodecContext::bit_rate_tolerance*100 / AVCodecContext::bit_rate</td><td>-bt -vb</td></tr>
++   <tr><td>rc_resize_allowed</td><td>AVCodecContext::spatial_rsmpl</td><td>-spatial_rsmpl</td></tr>
++   <tr><td>rc_resize_up_thresh</td><td>AVCodecContext::spatial_rsmpl_up</td><td>-spatial_rsmpl_up</td></tr>
++   <tr><td>rc_resize_down_thresh</td><td>AVCodecContext::spatial_rsmpl_down</td><td>-spatial_rsmpl_down</td></tr>
++   <tr><td>rc_2pass_vbr_bias_pct</td><td>AVCodecContext::vbr_bias</td><td>-vbr_bias</td></tr>
++   <tr><td>rc_2pass_vbr_maxsection_pct</td><td>AVCodecContext::rc_max_rate*100 / AVCodecContext::bit_rate</td><td>-maxrate -vb</td></tr>
++   <tr><td>rc_2pass_vbr_minsection_pct</td><td>AVCodecContext::rc_min_rate*100 / AVCodecContext::bit_rate</td><td>-minrate -vb</td></tr>
++   <tr><td>VPX_CBR</td><td>AVCodecContext::rc_min_rate == AVCodecContext::rc_max_rate &amp;&amp; AVCodecContext::rc_min_rate == AVCodecContext::bit_rate</td><td>-minrate -maxrate -vb</td></tr>
++   <tr><td>g_profile</td><td>AVCodecContext::profile</td><td>-profile</td></tr>
++   <tr><td>g_error_resilient</td><td>AVCodecContext::level&lt;0</td><td>-level</td></tr>
++   <tr><td><code>VPX_DL_BEST_QUALITY(1)/VPX_DL_GOOD_QUALITY(2)/VPX_DL_REALTIME(3)</code></td><td>#FFABS(AVCodecContext::level)/100</td><td>-level</td></tr>
++   <tr><td><code>VP8E_SET_CPUUSED</code></td><td>#FFABS(AVCodecContext::level)%%100-16</td><td>-level</td></tr>
++   <tr><td><code>VP8E_SET_NOISE_SENSITIVITY</code></td><td>AVCodecContext::noise_reduction</td><td>-nr</td></tr>
++   <tr><td><code>VP8E_SET_SHARPNESS</code></td><td>AVCodecContext::sharpness</td><td>-sharpness</td></tr>
++   <tr><td><code>VP8E_SET_ENABLEAUTOALTREF</code></td><td>AVCodecContext::altref</td><td>-altref</td></tr>
++   <tr><td><code>VP8E_SET_ARNR_MAXFRAMES</code></td><td>AVCodecContext::ar_max_frames</td><td>-ar_max_frames</td></tr>
++   <tr><td><code>VP8E_SET_ARNR_TYPE</code></td><td>AVCodecContext::ar_type</td><td>-ar_type</td></tr>
++   <tr><td><code>VP8E_SET_ARNR_STRENGTH</code></td><td>AVCodecContext::ar_strength</td><td>-ar_strength</td></tr>
++   <tr><td><code>VP8E_SET_STATIC_THRESHOLD</code></td><td>AVCodecContext::mb_static_threshold</td><td>-mb_static_threshold</td></tr>
++   <tr><td><code>VP8E_SET_TOKEN_PARTITIONS</code></td><td>AVCodecContext::token_partitions</td><td>-token_partitions</td></tr>
++   </table> }}}
++*/
++
++#include "avcodec.h"
++#include "libavutil/base64.h"
++
++#ifndef HAVE_STDINT_H
++# define HAVE_STDINT_H 1
++#endif
++#define VPX_CODEC_DISABLE_COMPAT 1
++#include <vpx_encoder.h>
++#include <vp8cx.h>
++
++/*!Portion of #vpx_codec_cx_pkt_t from vpx_encoder.h.
++   One encoded frame returned from the library.*/
++typedef struct FrameListData {
++  void                    *buf;      /**< compressed data buffer */
++  size_t                   sz;       /**< length of compressed data */
++  vpx_codec_pts_t          pts;      /**< time stamp to show frame
++                                          (in timebase units) */
++  unsigned long            duration; /**< duration to show frame
++                                          (in timebase units) */
++  vpx_codec_frame_flags_t  flags;    /**< flags for this frame */
++  struct FrameListData    *next;
++} coded_frame_t;
++
++typedef struct VP8EncoderContext {
++  vpx_codec_ctx_t encoder;
++  vpx_image_t rawimg;
++  vpx_fixed_buf_t twopass_stats;
++  unsigned long deadline; //i.e., RT/GOOD/BEST
++  coded_frame_t* coded_frame_list;
++} vp8ctx_t;
++
++static int vp8_free(AVCodecContext *avctx);
++static void free_frame_list(coded_frame_t* list);
++static void free_coded_frame(coded_frame_t* cx_frame);
++static void coded_frame_add(void* list, coded_frame_t* cx_frame);
++static void log_encoder_error(AVCodecContext *avctx, const char* desc);
++static void dump_enc_cfg(AVCodecContext *avctx, const vpx_codec_enc_cfg_t* cfg);
++
++static av_cold int vp8_init(AVCodecContext *avctx)
++{
++  vp8ctx_t* const ctx = avctx->priv_data;
++  vpx_codec_iface_t* const iface = &vpx_codec_vp8_cx_algo;
++  const int log_field_width = -30;
++  const unsigned int usage = 0; //should be 0 for current VP8
++  const vpx_codec_flags_t flags = 0;
++  int cpuused = 3;
++  vpx_codec_enc_cfg_t enccfg;
++  vpx_codec_err_t res;
++
++  av_log(avctx,AV_LOG_INFO,"%s\n",vpx_codec_version_str());
++  av_log(avctx,AV_LOG_VERBOSE,"%s\n",vpx_codec_build_config());
++
++  if((res= vpx_codec_enc_config_default(iface,&enccfg,usage))!=VPX_CODEC_OK) {
++    av_log(avctx,AV_LOG_ERROR,"Failed to get config: %s\n",vpx_codec_err_to_string(res));
++    return -1;
++  }
++  dump_enc_cfg(avctx,&enccfg);
++
++  enccfg.g_w = avctx->width;
++  enccfg.g_h = avctx->height;
++
++  /*With altref set an additional frame at the same pts may be produced.
++    Increasing the time_base gives the library a window to place these frames
++    ensuring strictly increasing timestamps.*/
++  if(avctx->altref) {
++    avctx->ticks_per_frame = 2;
++    avctx->time_base = av_mul_q(avctx->time_base,(AVRational){1,avctx->ticks_per_frame});
++  }
++  enccfg.g_timebase.num = avctx->time_base.num;
++  enccfg.g_timebase.den = avctx->time_base.den;
++
++  enccfg.g_threads = FFMIN(avctx->thread_count,64);
++  if(avctx->flags&CODEC_FLAG_PASS1) enccfg.g_pass= VPX_RC_FIRST_PASS;
++  else if(avctx->flags&CODEC_FLAG_PASS2) enccfg.g_pass= VPX_RC_LAST_PASS;
++  else enccfg.g_pass= VPX_RC_ONE_PASS;
++
++  enccfg.rc_resize_allowed     = avctx->spatial_rsmpl;
++  enccfg.rc_resize_up_thresh   = avctx->spatial_rsmpl_up;
++  enccfg.rc_resize_down_thresh = avctx->spatial_rsmpl_down;
++  enccfg.rc_dropframe_thresh   = avctx->frame_skip_threshold;
++
++  if(avctx->rc_min_rate==avctx->rc_max_rate && avctx->rc_min_rate==avctx->bit_rate)
++    enccfg.rc_end_usage = VPX_CBR;
++  enccfg.rc_target_bitrate = (unsigned int)av_rescale_rnd(avctx->bit_rate,1,1000,AV_ROUND_NEAR_INF);
++  enccfg.rc_overshoot_pct = avctx->bit_rate_tolerance*100/avctx->bit_rate;
++
++  //convert [1,51] -> [0,63]
++  enccfg.rc_min_quantizer = ((avctx->qmin*5+1)>>2) - 1;
++  enccfg.rc_max_quantizer = ((avctx->qmax*5+1)>>2) - 1;
++  if(avctx->rc_buffer_size)
++    enccfg.rc_buf_sz = avctx->rc_buffer_size*1000/avctx->bit_rate;
++  if(avctx->rc_initial_buffer_occupancy)
++    enccfg.rc_buf_initial_sz = avctx->rc_initial_buffer_occupancy*1000/avctx->bit_rate;
++  if(avctx->rc_optimal_buffer_occupancy)
++    enccfg.rc_buf_optimal_sz = avctx->rc_optimal_buffer_occupancy*1000/avctx->bit_rate;
++  if(avctx->rc_buffer_aggressivity)
++    enccfg.rc_undershoot_pct = (unsigned int)round(avctx->rc_buffer_aggressivity*100);
++
++  enccfg.rc_2pass_vbr_bias_pct= avctx->vbr_bias;
++  if(avctx->rc_min_rate)
++    enccfg.rc_2pass_vbr_minsection_pct = avctx->rc_min_rate*100/avctx->bit_rate;
++  if(avctx->rc_max_rate)
++    enccfg.rc_2pass_vbr_maxsection_pct = avctx->rc_max_rate*100/avctx->bit_rate;
++
++  if(avctx->keyint_min==avctx->gop_size) enccfg.kf_mode= VPX_KF_FIXED;
++  //_enc_init() will balk if kf_min_dist is set in this case
++  if(enccfg.kf_mode!=VPX_KF_AUTO) enccfg.kf_min_dist= avctx->keyint_min;
++  enccfg.kf_max_dist = avctx->gop_size;
++  enccfg.g_lag_in_frames= avctx->lag;
++
++  if(enccfg.g_pass==VPX_RC_FIRST_PASS) enccfg.g_lag_in_frames= 0;
++  if(enccfg.g_pass==VPX_RC_LAST_PASS) {
++    int decode_size;
++
++    if(!avctx->stats_in) {
++      av_log(avctx,AV_LOG_ERROR,"No stats file for second pass\n");
++      return -1;
++    }
++
++    ctx->twopass_stats.sz  = strlen(avctx->stats_in) * 3/4;
++    ctx->twopass_stats.buf = av_malloc(ctx->twopass_stats.sz);
++    if(!ctx->twopass_stats.buf) {
++      av_log(avctx,AV_LOG_ERROR,"Stat buffer alloc (%zu bytes) failed\n",ctx->twopass_stats.sz);
++      return AVERROR(ENOMEM);
++    }
++    decode_size =
++      av_base64_decode(ctx->twopass_stats.buf, avctx->stats_in, ctx->twopass_stats.sz);
++    if(decode_size<0) {
++      av_log(avctx,AV_LOG_ERROR,"Stat buffer decode failed\n");
++      return -1;
++    }
++
++    ctx->twopass_stats.sz      = decode_size;
++    enccfg.rc_twopass_stats_in = ctx->twopass_stats;
++  }
++
++  if(avctx->profile!=FF_PROFILE_UNKNOWN) enccfg.g_profile= avctx->profile;
++  switch(FFABS(avctx->level)/100) {
++  case 1:          ctx->deadline = VPX_DL_BEST_QUALITY; break;
++  case 2: default: ctx->deadline = VPX_DL_GOOD_QUALITY; break;
++  case 3:          ctx->deadline = VPX_DL_REALTIME; break;
++  }
++  av_log(avctx,AV_LOG_DEBUG,"Using deadline: %lu\n",ctx->deadline);
++
++  if(avctx->level!=FF_LEVEL_UNKNOWN) {
++    enccfg.g_error_resilient = avctx->level<0;
++    cpuused = FFABS(avctx->level)%100-16;
++  }
++
++  dump_enc_cfg(avctx,&enccfg);
++  /* Construct Encoder Context */
++  res = vpx_codec_enc_init(&ctx->encoder,iface,&enccfg,flags);
++  if(res!=VPX_CODEC_OK) { log_encoder_error(avctx,"Failed to initialize encoder"); return -1; }
++
++  //codec control failures are currently treated only as warnings
++  av_log(avctx,AV_LOG_DEBUG,"vpx_codec_control\n");
++  #define codecctl(id,val)\
++    do if(av_log(avctx,AV_LOG_DEBUG,"%*s%d\n",log_field_width," "#id":",val),\
++          (res= vpx_codec_control(&ctx->encoder,id,val))!=VPX_CODEC_OK) {\
++      log_encoder_error(avctx,"Failed to set "#id" codec control");\
++    } while(0);
++  codecctl(VP8E_SET_CPUUSED,cpuused);
++  codecctl(VP8E_SET_NOISE_SENSITIVITY,avctx->noise_reduction);
++  codecctl(VP8E_SET_SHARPNESS,avctx->sharpness);
++  codecctl(VP8E_SET_ENABLEAUTOALTREF,avctx->altref);
++  codecctl(VP8E_SET_ARNR_MAXFRAMES,avctx->ar_max_frames);
++  codecctl(VP8E_SET_ARNR_TYPE,avctx->ar_type);
++  codecctl(VP8E_SET_ARNR_STRENGTH,avctx->ar_strength);
++  codecctl(VP8E_SET_STATIC_THRESHOLD,avctx->mb_static_threshold);
++  codecctl(VP8E_SET_TOKEN_PARTITIONS,av_log2(avctx->token_partitions));
++  #undef codecctl
++
++  //provide dummy value to initialize wrapper, values will be updated each _encode()
++  vpx_img_wrap(&ctx->rawimg,IMG_FMT_I420,avctx->width,avctx->height,1,(unsigned char*)1);
++
++  avctx->coded_frame = avcodec_alloc_frame();
++  if(!avctx->coded_frame) {
++    av_log(avctx,AV_LOG_ERROR,"Error allocating coded frame\n");
++    vp8_free(avctx);
++    return AVERROR(ENOMEM);
++  }
++  return 0;
++}
++
++static inline void cx_pktcpy(coded_frame_t* dst, const vpx_codec_cx_pkt_t* src)
++{
++  dst->pts      = src->data.frame.pts;
++  dst->duration = src->data.frame.duration;
++  dst->flags    = src->data.frame.flags;
++  dst->sz       = src->data.frame.sz;
++  dst->buf      = src->data.frame.buf;
++}
++
++/*!Store coded frame information in format suitable for return from encode().
++   Write buffer information from \a cx_frame to \a buf & \a buf_size.
++   Timing/frame details to \a coded_frame.
++   \return Frame size written to \a buf on success
++   \return -1 on error*/
++static int storeframe(AVCodecContext *avctx, coded_frame_t* cx_frame,
++                      uint8_t* buf, int buf_size, AVFrame* coded_frame)
++{
++  if((int)cx_frame->sz<=buf_size) {
++    buf_size = cx_frame->sz;
++    memcpy(buf,cx_frame->buf,buf_size);
++    coded_frame->pts = cx_frame->pts;
++    coded_frame->key_frame = !!(cx_frame->flags&VPX_FRAME_IS_KEY);
++
++    if(coded_frame->key_frame)
++      coded_frame->pict_type = FF_I_TYPE;
++    else
++      coded_frame->pict_type = FF_P_TYPE;
++  } else {
++    av_log(avctx,AV_LOG_ERROR,
++      "Compressed frame larger than storage provided! (%zu/%d)\n",
++      cx_frame->sz,buf_size);
++    return -1;
++  }
++  return buf_size;
++}
++
++/*!Queue multiple output frames from the encoder, returning the front-most.
++   In cases where vpx_codec_get_cx_data() returns more than 1 frame append
++   the frame queue. Return the head frame if available.
++   \return Stored frame size
++   \return -1 on error*/
++static int queue_frames(AVCodecContext *avctx, uint8_t* buf, int buf_size, AVFrame* coded_frame)
++{
++  vp8ctx_t* const ctx = avctx->priv_data;
++  const vpx_codec_cx_pkt_t* pkt;
++  vpx_codec_iter_t iter = NULL;
++  int size = 0;
++
++  if(ctx->coded_frame_list) {
++    coded_frame_t* const cx_frame = ctx->coded_frame_list;
++    /*return the leading frame if we've already begun queueing*/
++    size = storeframe(avctx,cx_frame,buf,buf_size,coded_frame);
++    if(size<0)
++      return -1;
++    ctx->coded_frame_list = cx_frame->next;
++    free_coded_frame(cx_frame);
++  }
++
++  /*consume all available output from the encoder before returning. buffers
++    are only good through the next vpx_codec call*/
++  while( (pkt= vpx_codec_get_cx_data(&ctx->encoder,&iter)) ) {
++    switch(pkt->kind) {
++    case VPX_CODEC_CX_FRAME_PKT: {
++      if(!size) {
++        coded_frame_t cx_frame;
++
++        /*avoid storing the frame when the list is empty and we haven't yet
++          provided a frame for output*/
++        assert(!ctx->coded_frame_list);
++        cx_pktcpy(&cx_frame,pkt);
++        size = storeframe(avctx,&cx_frame,buf,buf_size,coded_frame);
++        if(size<0)
++          return -1;
++      } else {
++        coded_frame_t* const cx_frame = av_malloc(sizeof(coded_frame_t));
++
++        if(!cx_frame) {
++          av_log(avctx,AV_LOG_ERROR,"Frame queue element alloc failed\n");
++          return AVERROR(ENOMEM);
++        }
++        cx_pktcpy(cx_frame,pkt);
++        cx_frame->buf = av_malloc(cx_frame->sz);
++
++        if(!cx_frame->buf) {
++          av_log(avctx,AV_LOG_ERROR,"Data buffer alloc (%zu bytes) failed\n",
++            cx_frame->sz);
++          return AVERROR(ENOMEM);
++        }
++        memcpy(cx_frame->buf,pkt->data.frame.buf,pkt->data.frame.sz);
++        coded_frame_add(&ctx->coded_frame_list,cx_frame);
++      }
++      break; }
++    case VPX_CODEC_STATS_PKT: {
++      vpx_fixed_buf_t* const stats = &ctx->twopass_stats;
++      stats->buf = av_realloc(stats->buf,stats->sz+pkt->data.twopass_stats.sz);
++      if(!stats->buf) {
++        av_log(avctx,AV_LOG_ERROR,"Stat buffer realloc failed\n");
++        return AVERROR(ENOMEM);
++      }
++      memcpy((uint8_t*)stats->buf + stats->sz,
++          pkt->data.twopass_stats.buf,
++          pkt->data.twopass_stats.sz);
++      stats->sz += pkt->data.twopass_stats.sz;
++      break; }
++    case VPX_CODEC_CUSTOM_PKT:
++      //ignore unsupported/unrecognized packet types
++      break;
++    }
++  }
++
++  return size;
++}
++
++static int vp8_encode(AVCodecContext *avctx, uint8_t *buf, int buf_size, void *data)
++{
++  vp8ctx_t* const ctx = avctx->priv_data;
++  AVFrame* const frame = data;
++  vpx_image_t* rawimg = NULL;
++  int coded_size;
++
++  if(frame) {
++    rawimg = &ctx->rawimg;
++    rawimg->planes[PLANE_Y] = frame->data[0];
++    rawimg->planes[PLANE_U] = frame->data[1];
++    rawimg->planes[PLANE_V] = frame->data[2];
++    rawimg->stride[PLANE_Y] = frame->linesize[0];
++    rawimg->stride[PLANE_U] = frame->linesize[1];
++    rawimg->stride[PLANE_V] = frame->linesize[2];
++  }
++
++  { vpx_codec_err_t res;
++  const vpx_codec_pts_t timestamp = frame?frame->pts:0;
++  const unsigned long framedur = avctx->ticks_per_frame;
++  const vpx_enc_frame_flags_t flags = 0; //VPX_EFLAG_FORCE_KF
++  const unsigned long deadline = ctx->deadline;
++
++  //FIXME use vpx_codec_set_cx_data_buf?
++  res = vpx_codec_encode(&ctx->encoder,rawimg,timestamp,framedur,flags,deadline);
++  if(res!=VPX_CODEC_OK) { log_encoder_error(avctx,"Error encoding frame"); return -1; } }
++  coded_size = queue_frames(avctx,buf,buf_size,avctx->coded_frame);
++
++  if(!frame && avctx->flags&CODEC_FLAG_PASS1) {
++    const unsigned int b64_size = ((ctx->twopass_stats.sz + 2) / 3) * 4 + 1;
++
++    avctx->stats_out = av_malloc(b64_size);
++    if(!avctx->stats_out) {
++      av_log(avctx,AV_LOG_ERROR,"Stat buffer alloc (%d bytes) failed\n",b64_size);
++      return AVERROR(ENOMEM);
++    }
++    av_base64_encode(avctx->stats_out, b64_size, ctx->twopass_stats.buf, ctx->twopass_stats.sz);
++  }
++  return coded_size;
++}
++
++static av_cold int vp8_free(AVCodecContext *avctx)
++{
++  vp8ctx_t* const ctx = avctx->priv_data;
++
++  vpx_codec_destroy(&ctx->encoder);
++  av_freep(&ctx->twopass_stats.buf);
++  av_freep(&avctx->coded_frame);
++  av_freep(&avctx->stats_out);
++  free_frame_list(ctx->coded_frame_list);
++  return 0;
++}
++
++static av_cold void free_coded_frame(coded_frame_t* cx_frame)
++{
++  av_freep(&cx_frame->buf);
++  av_freep(&cx_frame);
++}
++
++static av_cold void free_frame_list(coded_frame_t* list)
++{
++  coded_frame_t* p = list;
++
++  while(p) {
++    list = list->next;
++    free_coded_frame(p);
++    p = list;
++  }
++}
++
++static void coded_frame_add(void* list, coded_frame_t* cx_frame)
++{
++  coded_frame_t** p = list;
++
++  while(*p!=NULL) p= &(*p)->next;
++  *p = cx_frame;
++  cx_frame->next = NULL;
++}
++
++static av_cold void log_encoder_error(AVCodecContext *avctx, const char* desc)
++{
++  vp8ctx_t* const ctx = avctx->priv_data;
++  const char* error = vpx_codec_error(&ctx->encoder);
++  const char* detail = vpx_codec_error_detail(&ctx->encoder);
++
++  av_log(avctx,AV_LOG_ERROR,"%s: %s\n",desc,error);
++  if(detail) av_log(avctx,AV_LOG_ERROR,"  Additional information: %s\n",detail);
++}
++
++static av_cold void dump_enc_cfg(AVCodecContext *avctx, const vpx_codec_enc_cfg_t* cfg)
++{
++  const int width = -30;
++  const int level = AV_LOG_DEBUG;
++
++  av_log(avctx,level,"vpx_codec_enc_cfg\n");
++  av_log(avctx,level," %*s%u\n",      width, " g_usage:", cfg->g_usage);
++  av_log(avctx,level," %*s%u\n",      width, " g_threads:", cfg->g_threads);
++  av_log(avctx,level," %*s%u\n",      width, " g_profile:", cfg->g_profile);
++  av_log(avctx,level," %*s%u\n",      width, " g_w:", cfg->g_w);
++  av_log(avctx,level," %*s%u\n",      width, " g_h:", cfg->g_h);
++  av_log(avctx,level," %*s{%u/%u}\n", width, " g_timebase:", cfg->g_timebase.num, cfg->g_timebase.den);
++  av_log(avctx,level," %*s%u\n",      width, " g_error_resilient:", cfg->g_error_resilient);
++  av_log(avctx,level," %*s%d\n",      width, " g_pass:", cfg->g_pass);
++  av_log(avctx,level," %*s%u\n",      width, " g_lag_in_frames:", cfg->g_lag_in_frames);
++  av_log(avctx,level," %*s%u\n",      width, " rc_dropframe_thresh:", cfg->rc_dropframe_thresh);
++  av_log(avctx,level," %*s%u\n",      width, " rc_resize_allowed:", cfg->rc_resize_allowed);
++  av_log(avctx,level," %*s%u\n",      width, " rc_resize_up_thresh:", cfg->rc_resize_up_thresh);
++  av_log(avctx,level," %*s%u\n",      width, " rc_resize_down_thresh:", cfg->rc_resize_down_thresh);
++  av_log(avctx,level," %*s%d\n",      width, " rc_end_usage:", cfg->rc_end_usage);
++  av_log(avctx,level," %*s%p(%zu)\n", width, " rc_twopass_stats_in:", cfg->rc_twopass_stats_in.buf, cfg->rc_twopass_stats_in.sz);
++  av_log(avctx,level," %*s%u\n",      width, " rc_target_bitrate:", cfg->rc_target_bitrate);
++  av_log(avctx,level," %*s%u\n",      width, " rc_min_quantizer:", cfg->rc_min_quantizer);
++  av_log(avctx,level," %*s%u\n",      width, " rc_max_quantizer:", cfg->rc_max_quantizer);
++  av_log(avctx,level," %*s%u\n",      width, " rc_undershoot_pct:", cfg->rc_undershoot_pct);
++  av_log(avctx,level," %*s%u\n",      width, " rc_overshoot_pct:", cfg->rc_overshoot_pct);
++  av_log(avctx,level," %*s%u\n",      width, " rc_buf_sz:", cfg->rc_buf_sz);
++  av_log(avctx,level," %*s%u\n",      width, " rc_buf_initial_sz:", cfg->rc_buf_initial_sz);
++  av_log(avctx,level," %*s%u\n",      width, " rc_buf_optimal_sz:", cfg->rc_buf_optimal_sz);
++  av_log(avctx,level," %*s%u\n",      width, " rc_2pass_vbr_bias_pct:", cfg->rc_2pass_vbr_bias_pct);
++  av_log(avctx,level," %*s%u\n",      width, " rc_2pass_vbr_minsection_pct:", cfg->rc_2pass_vbr_minsection_pct);
++  av_log(avctx,level," %*s%u\n",      width, " rc_2pass_vbr_maxsection_pct:", cfg->rc_2pass_vbr_maxsection_pct);
++  av_log(avctx,level," %*s%d\n",      width, " kf_mode:", cfg->kf_mode);
++  av_log(avctx,level," %*s%u\n",      width, " kf_min_dist:", cfg->kf_min_dist);
++  av_log(avctx,level," %*s%u\n",      width, " kf_max_dist:", cfg->kf_max_dist);
++  av_log(avctx,level,"\n");
++}
++
++AVCodec libvpx_vp8_encoder = {
++  "libvpx_vp8",
++  CODEC_TYPE_VIDEO,
++  CODEC_ID_VP8,
++  sizeof(vp8ctx_t),
++  vp8_init,
++  vp8_encode,
++  vp8_free,
++  NULL,
++  CODEC_CAP_DELAY,
++  .pix_fmts  = (const enum PixelFormat[]) { PIX_FMT_YUV420P, PIX_FMT_NONE },
++  .long_name = NULL_IF_CONFIG_SMALL("libvpx VP8"),
++};
+Index: chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/options.c
+===================================================================
+--- chromium-browser-5.0.375.86~r49890.orig/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/options.c	2010-06-25 09:43:22.000000000 +0200
++++ chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavcodec/options.c	2010-06-26 19:23:09.000000000 +0200
+@@ -415,6 +415,19 @@
+ {"thread_type", "select multithreading type", OFFSET(thread_type), FF_OPT_TYPE_INT, FF_THREAD_SLICE|FF_THREAD_FRAME, 0, INT_MAX, V|E|D, "thread_type"},
+ {"slice", NULL, 0, FF_OPT_TYPE_CONST, FF_THREAD_SLICE, INT_MIN, INT_MAX, V|E|D, "thread_type"},
+ {"frame", NULL, 0, FF_OPT_TYPE_CONST, FF_THREAD_FRAME, INT_MIN, INT_MAX, V|E|D, "thread_type"},
++{"spatial_rsmpl", "Enable spatial resampling (VP8)", OFFSET(spatial_rsmpl), FF_OPT_TYPE_INT, 0, 0, 1, V|E},
++{"spatial_rsmpl_up", "Spatial resampling up watermark, percentage of target data buffer. (VP8)", OFFSET(spatial_rsmpl_up), FF_OPT_TYPE_INT, 60, 0, 100, V|E},
++{"spatial_rsmpl_down", "Spatial resampling down watermark, percentage of target data buffer. (VP8)", OFFSET(spatial_rsmpl_down), FF_OPT_TYPE_INT, 30, 0, 100, V|E},
++{"vbr_bias", "Two-pass mode CBR/VBR bias, 0-100 (VP8)", OFFSET(vbr_bias), FF_OPT_TYPE_INT, 50, 0, 100, V|E},
++{"lag", "Allow lagged encoding, given as frames (VP8)", OFFSET(lag), FF_OPT_TYPE_INT, 0, 0, INT_MAX, V|E},
++{"sharpness", "[0-7] (VP8)", OFFSET(sharpness), FF_OPT_TYPE_INT, 0, 0, 7, V|E},
++{"altref", "Allow use of alternate reference frame", OFFSET(altref), FF_OPT_TYPE_INT, 0, 0, 1, V|E},
++{"ar_max_frames", "Max frames used in creating alt. ref. [0,25]", OFFSET(ar_max_frames), FF_OPT_TYPE_INT, 0, 0, 25, V|E},
++{"ar_type", "Filter type used in creating alt. ref.", OFFSET(ar_type), FF_OPT_TYPE_INT, 0, 0, INT_MAX, V|E},
++{"ar_strength", "Filter strength used in creating alt. ref. [0,6]", OFFSET(ar_strength), FF_OPT_TYPE_INT, 0, 0, 6, V|E},
++{"mb_static_threshold", "", OFFSET(mb_static_threshold), FF_OPT_TYPE_INT, 800, 0, INT_MAX, V|E},
++{"rc_opt_occupancy", "number of bits which should be kept in the rc buffer during decoding", OFFSET(rc_optimal_buffer_occupancy), FF_OPT_TYPE_INT, DEFAULT, INT_MIN, INT_MAX, V|E},
++{"token_partitions", "Number of sub-streams in bitstream (1,2,4,8). Used for parallelized decoding.", OFFSET(token_partitions), FF_OPT_TYPE_INT, 1, 1, INT_MAX, V|E},
+ {NULL},
+ };
+ 
+Index: chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/Makefile
+===================================================================
+--- chromium-browser-5.0.375.86~r49890.orig/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/Makefile	2010-06-25 09:43:23.000000000 +0200
++++ chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/Makefile	2010-06-26 19:23:09.000000000 +0200
+@@ -255,6 +255,8 @@
+ OBJS-$(CONFIG_WAV_DEMUXER)               += wav.o riff.o raw.o
+ OBJS-$(CONFIG_WAV_MUXER)                 += wav.o riff.o
+ OBJS-$(CONFIG_WC3_DEMUXER)               += wc3movie.o
++OBJS-$(CONFIG_WEBM_DEMUXER)              += matroskadec.o matroska.o
++OBJS-$(CONFIG_WEBM_MUXER)                += matroskaenc.o matroska.o
+ OBJS-$(CONFIG_WSAUD_DEMUXER)             += westwood.o
+ OBJS-$(CONFIG_WSVQA_DEMUXER)             += westwood.o
+ OBJS-$(CONFIG_WV_DEMUXER)                += wv.o apetag.o id3v1.o
+Index: chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/allformats.c
+===================================================================
+--- chromium-browser-5.0.375.86~r49890.orig/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/allformats.c	2010-06-25 09:43:23.000000000 +0200
++++ chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/allformats.c	2010-06-26 19:23:09.000000000 +0200
+@@ -203,6 +203,7 @@
+     REGISTER_DEMUXER  (W64, w64);
+     REGISTER_MUXDEMUX (WAV, wav);
+     REGISTER_DEMUXER  (WC3, wc3);
++    REGISTER_MUXDEMUX (WEBM, webm);
+     REGISTER_DEMUXER  (WSAUD, wsaud);
+     REGISTER_DEMUXER  (WSVQA, wsvqa);
+     REGISTER_DEMUXER  (WV, wv);
+Index: chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/matroska.c
+===================================================================
+--- chromium-browser-5.0.375.86~r49890.orig/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/matroska.c	2010-06-25 09:43:23.000000000 +0200
++++ chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/matroska.c	2010-06-26 19:23:09.000000000 +0200
+@@ -76,6 +76,7 @@
+     {"V_SNOW"           , CODEC_ID_SNOW},
+     {"V_THEORA"         , CODEC_ID_THEORA},
+     {"V_UNCOMPRESSED"   , CODEC_ID_RAWVIDEO},
++    {"V_VP8"            , CODEC_ID_VP8},
+ 
+     {""                 , CODEC_ID_NONE}
+ };
+Index: chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/matroskadec.c
+===================================================================
+--- chromium-browser-5.0.375.86~r49890.orig/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/matroskadec.c	2010-06-25 09:43:23.000000000 +0200
++++ chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/matroskadec.c	2010-06-26 19:23:09.000000000 +0200
+@@ -37,7 +37,9 @@
+ #include "rm.h"
+ #endif
+ #include "matroska.h"
++#if CONFIG_MATROSKA_DEMUXER
+ #include "libavcodec/mpeg4audio.h"
++#endif
+ #include "libavutil/intfloat_readwrite.h"
+ #include "libavutil/intreadwrite.h"
+ #include "libavutil/avstring.h"
+@@ -828,14 +830,10 @@
+ }
+ 
+ 
+-/*
+- * Autodetecting...
+- */
+-static int matroska_probe(AVProbeData *p)
++static int ebml_probe(AVProbeData *p, const char probe_data[], const int probe_data_size)
+ {
+     uint64_t total = 0;
+     int len_mask = 0x80, size = 1, n = 1;
+-    static const char probe_data[] = "matroska";
+ 
+     /* EBML header? */
+     if (AV_RB32(p->buf) != EBML_ID_HEADER)
+@@ -857,20 +855,37 @@
+     if (p->buf_size < 4 + size + total)
+       return 0;
+ 
+-    if (total < sizeof(probe_data))
++    if (total < probe_data_size)
+       return 0;
+ 
+-    /* The header must contain the document type 'matroska'. For now,
+-     * we don't parse the whole header but simply check for the
+-     * availability of that array of characters inside the header.
+-     * Not fully fool-proof, but good enough. */
+-    for (n = 4+size; n <= 4+size+total-(sizeof(probe_data)-1); n++)
+-        if (!memcmp(p->buf+n, probe_data, sizeof(probe_data)-1))
++    /* The header must contain the document type from the demuxer
++     * specific probe function. For now, we don't parse the whole
++     * header but simply check for the availability of that array
++     * of characters inside the header. Not fully fool-proof, but
++     * good enough. */
++    for (n = 4+size; n <= 4+size+total-(probe_data_size-1); n++)
++        if (!memcmp(p->buf+n, probe_data, probe_data_size-1))
+             return AVPROBE_SCORE_MAX;
+ 
+     return 0;
+ }
+ 
++/*
++ * Autodetecting...
++ */
++static int matroska_probe(AVProbeData *p)
++{
++    static const char probe_data[] = "matroska";
++    return ebml_probe(p, probe_data, sizeof(probe_data));
++}
++#if CONFIG_WEBM_DEMUXER
++static int webm_probe(AVProbeData *p)
++{
++    static const char probe_data[] = "webm";
++    return ebml_probe(p, probe_data, sizeof(probe_data));
++}
++#endif
++
+ static MatroskaTrack *matroska_find_track_by_num(MatroskaDemuxContext *matroska,
+                                                  int num)
+ {
+@@ -1126,11 +1141,12 @@
+ 
+ static int matroska_aac_sri(int samplerate)
+ {
+-    int sri;
+-
++    int sri = 0;
++#if CONFIG_MATROSKA_DEMUXER
+     for (sri=0; sri<FF_ARRAY_ELEMS(ff_mpeg4audio_sample_rates); sri++)
+         if (ff_mpeg4audio_sample_rates[sri] == samplerate)
+             break;
++#endif
+     return sri;
+ }
+ 
+@@ -1155,7 +1171,7 @@
+     /* First read the EBML header. */
+     if (ebml_parse(matroska, ebml_syntax, &ebml)
+         || ebml.version > EBML_VERSION       || ebml.max_size > sizeof(uint64_t)
+-        || ebml.id_length > sizeof(uint32_t) || strcmp(ebml.doctype, "matroska")
++        || ebml.id_length > sizeof(uint32_t) || strcmp(ebml.doctype, s->iformat->name)
+         || ebml.doctype_version > 2) {
+         av_log(matroska->ctx, AV_LOG_ERROR,
+                "EBML header using unsupported features\n"
+@@ -1280,11 +1296,13 @@
+             ff_get_wav_header(&b, st->codec, track->codec_priv.size);
+             codec_id = st->codec->codec_id;
+             extradata_offset = FFMIN(track->codec_priv.size, 18);
++#if CONFIG_MATROSKA_DEMUXER
+         } else if (!strcmp(track->codec_id, "V_QUICKTIME")
+                    && (track->codec_priv.size >= 86)
+                    && (track->codec_priv.data != NULL)) {
+             track->video.fourcc = AV_RL32(track->codec_priv.data);
+             codec_id=ff_codec_get_id(codec_movvideo_tags, track->video.fourcc);
++#endif
+         } else if (codec_id == CODEC_ID_PCM_S16BE) {
+             switch (track->audio.bitdepth) {
+             case  8:  codec_id = CODEC_ID_PCM_U8;     break;
+@@ -1888,7 +1906,7 @@
+ 
+     return 0;
+ }
+-
++#if CONFIG_MATROSKA_DEMUXER
+ AVInputFormat matroska_demuxer = {
+     "matroska",
+     NULL_IF_CONFIG_SMALL("Matroska file format"),
+@@ -1900,3 +1918,17 @@
+     matroska_read_seek,
+     .metadata_conv = ff_mkv_metadata_conv,
+ };
++#endif
++#if CONFIG_WEBM_DEMUXER
++AVInputFormat webm_demuxer = {
++    "webm",
++    NULL_IF_CONFIG_SMALL("WebM file format"),
++    sizeof(MatroskaDemuxContext),
++    webm_probe,
++    matroska_read_header,
++    matroska_read_packet,
++    matroska_read_close,
++    matroska_read_seek,
++    .metadata_conv = ff_mkv_metadata_conv,
++};
++#endif
+Index: chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/matroskaenc.c
+===================================================================
+--- chromium-browser-5.0.375.86~r49890.orig/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/matroskaenc.c	2010-06-25 09:43:23.000000000 +0200
++++ chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/matroskaenc.c	2010-06-26 19:23:09.000000000 +0200
+@@ -28,7 +28,9 @@
+ #include "libavutil/intreadwrite.h"
+ #include "libavutil/md5.h"
+ #include "libavcodec/xiph.h"
++#if CONFIG_MATROSKA_MUXER
+ #include "libavcodec/mpeg4audio.h"
++#endif
+ 
+ typedef struct ebml_master {
+     int64_t         pos;                ///< absolute offset in the file where the master's elements start
+@@ -81,6 +83,12 @@
+     mkv_track       *tracks;
+ 
+     struct AVMD5    *md5_ctx;
++    int             max_cluster_size;
++    int             max_cluster_pts;
++#if CONFIG_WEBM_MUXER
++    unsigned int    audio_buffer_size;
++    AVPacket        cur_audio_pkt;
++#endif
+ } MatroskaMuxContext;
+ 
+ 
+@@ -443,6 +451,7 @@
+         av_log(s, AV_LOG_WARNING, "AAC samplerate index out of bounds\n");
+         return;
+     }
++#if CONFIG_MATROSKA_MUXER
+     *sample_rate = ff_mpeg4audio_sample_rates[sri];
+ 
+     // if sbr, get output sample rate as well
+@@ -454,6 +463,7 @@
+         }
+         *output_sample_rate = ff_mpeg4audio_sample_rates[sri];
+     }
++#endif
+ }
+ 
+ static int mkv_write_codecprivate(AVFormatContext *s, ByteIOContext *pb, AVCodecContext *codec, int native_id, int qt_id)
+@@ -469,16 +479,20 @@
+     if (native_id) {
+         if (codec->codec_id == CODEC_ID_VORBIS || codec->codec_id == CODEC_ID_THEORA)
+             ret = put_xiph_codecpriv(s, dyn_cp, codec);
++#if CONFIG_MATROSKA_MUXER
+         else if (codec->codec_id == CODEC_ID_FLAC)
+             ret = ff_flac_write_header(dyn_cp, codec, 1);
+         else if (codec->codec_id == CODEC_ID_H264)
+             ret = ff_isom_write_avcc(dyn_cp, codec->extradata, codec->extradata_size);
++#endif
+         else if (codec->extradata_size)
+             put_buffer(dyn_cp, codec->extradata, codec->extradata_size);
+     } else if (codec->codec_type == CODEC_TYPE_VIDEO) {
+         if (qt_id) {
++#if CONFIG_MATROSKA_MUXER
+             if (!codec->codec_tag)
+                 codec->codec_tag = ff_codec_get_tag(codec_movvideo_tags, codec->codec_id);
++#endif
+             if (codec->extradata_size)
+                 put_buffer(dyn_cp, codec->extradata, codec->extradata_size);
+         } else {
+@@ -568,6 +582,7 @@
+             case CODEC_TYPE_VIDEO:
+                 put_ebml_uint(pb, MATROSKA_ID_TRACKTYPE, MATROSKA_TRACK_TYPE_VIDEO);
+ 
++#if CONFIG_MATROSKA_MUXER
+                 if (!native_id &&
+                       ff_codec_get_tag(codec_movvideo_tags, codec->codec_id) &&
+                     (!ff_codec_get_tag(ff_codec_bmp_tags,   codec->codec_id)
+@@ -575,6 +590,7 @@
+                      || codec->codec_id == CODEC_ID_SVQ3
+                      || codec->codec_id == CODEC_ID_CINEPAK))
+                     qt_id = 1;
++#endif
+ 
+                 if (qt_id)
+                     put_ebml_string(pb, MATROSKA_ID_CODECID, "V_QUICKTIME");
+@@ -693,7 +709,7 @@
+     put_ebml_uint   (pb, EBML_ID_EBMLREADVERSION    ,           1);
+     put_ebml_uint   (pb, EBML_ID_EBMLMAXIDLENGTH    ,           4);
+     put_ebml_uint   (pb, EBML_ID_EBMLMAXSIZELENGTH  ,           8);
+-    put_ebml_string (pb, EBML_ID_DOCTYPE            ,  "matroska");
++    put_ebml_string (pb, EBML_ID_DOCTYPE            , s->oformat->name);
+     put_ebml_uint   (pb, EBML_ID_DOCTYPEVERSION     ,           2);
+     put_ebml_uint   (pb, EBML_ID_DOCTYPEREADVERSION ,           2);
+     end_ebml_master(pb, ebml_header);
+@@ -746,6 +762,20 @@
+     if (mkv->cues == NULL)
+         return AVERROR(ENOMEM);
+ 
++#if CONFIG_WEBM_MUXER
++    av_init_packet(&mkv->cur_audio_pkt);
++    mkv->cur_audio_pkt.size = 0;
++    mkv->audio_buffer_size = 0;
++#endif
++
++    if (!strcmp("webm", s->oformat->name)) {
++        mkv->max_cluster_size = 500*1024*1024;   // 500 MB
++        mkv->max_cluster_pts = 30000;            // 30 seconds
++    } else {
++        mkv->max_cluster_size = 5*1024*1024;     // 5 MB
++        mkv->max_cluster_pts = 5000;             // 5 seconds
++    }
++
+     put_flush_packet(pb);
+     return 0;
+ }
+@@ -831,10 +861,12 @@
+     av_log(s, AV_LOG_DEBUG, "Writing block at offset %" PRIu64 ", size %d, "
+            "pts %" PRId64 ", dts %" PRId64 ", duration %d, flags %d\n",
+            url_ftell(pb), pkt->size, pkt->pts, pkt->dts, pkt->duration, flags);
++#if CONFIG_MATROSKA_MUXER
+     if (codec->codec_id == CODEC_ID_H264 && codec->extradata_size > 0 &&
+         (AV_RB24(codec->extradata) == 1 || AV_RB32(codec->extradata) == 1))
+         ff_avc_parse_nal_units_buf(pkt->data, &data, &size);
+     else
++#endif
+         data = pkt->data;
+     put_ebml_id(pb, blockid);
+     put_ebml_num(pb, size+4, 0);
+@@ -910,9 +942,10 @@
+         if (ret < 0) return ret;
+     }
+ 
+-    // start a new cluster every 5 MB or 5 sec, or 32k / 1 sec for streaming
++    // start a new cluster every 32k / 1 sec for streaming
+     if ((url_is_streamed(s->pb) && (url_ftell(pb) > 32*1024 || ts > mkv->cluster_pts + 1000))
+-        ||  url_ftell(pb) > mkv->cluster_pos + 5*1024*1024 || ts > mkv->cluster_pts + 5000) {
++        || url_ftell(pb) > mkv->cluster_pos + mkv->max_cluster_size
++        || ts > mkv->cluster_pts + mkv->max_cluster_pts) {
+         av_log(s, AV_LOG_DEBUG, "Starting new cluster at offset %" PRIu64
+                " bytes, pts %" PRIu64 "\n", url_ftell(pb), ts);
+         end_ebml_master(pb, mkv->cluster);
+@@ -924,7 +957,59 @@
+     mkv->duration = FFMAX(mkv->duration, ts + duration);
+     return 0;
+ }
++#if CONFIG_WEBM_MUXER
++static int mkv_copy_packet(MatroskaMuxContext *mkv, const AVPacket *pkt)
++{
++    uint8_t *data = mkv->cur_audio_pkt.data;
++    mkv->cur_audio_pkt = *pkt;
++    mkv->cur_audio_pkt.data = av_fast_realloc(data, &mkv->audio_buffer_size, pkt->size);
++    if (mkv->cur_audio_pkt.data == NULL)
++        return AVERROR(ENOMEM);
++
++    memcpy(mkv->cur_audio_pkt.data, pkt->data, pkt->size);
++    mkv->cur_audio_pkt.size = pkt->size;
++    return 0;
++}
++
++static int mkv_write_packet2(AVFormatContext *s, AVPacket *pkt)
++{
++    MatroskaMuxContext *mkv = s->priv_data;
++    ByteIOContext *pb = s->pb;
++    AVCodecContext *codec = s->streams[pkt->stream_index]->codec;
++    int keyframe = !!(pkt->flags & PKT_FLAG_KEY);
++    int ret = 0;
++
++    if (codec->codec_type == CODEC_TYPE_VIDEO && keyframe && mkv->cluster_pos) {
++        // Start a new cluster when we get a key frame
++        int64_t ts = mkv->tracks[pkt->stream_index].write_dts ? pkt->dts : pkt->pts;
+ 
++        av_log(s, AV_LOG_DEBUG, "Starting new cluster at offset %" PRIu64
++          " bytes, pts %" PRIu64 "\n", url_ftell(pb), ts);
++
++        end_ebml_master(pb, mkv->cluster);
++        mkv->cluster_pos = 0;
++        if (mkv->dyn_bc)
++            mkv_flush_dynbuf(s);
++    }
++
++    // Check if we have an audio packet cached
++    if ( (codec->codec_type == CODEC_TYPE_AUDIO || codec->codec_type == CODEC_TYPE_VIDEO)
++      && mkv->cur_audio_pkt.size > 0) {
++        ret = mkv_write_packet(s, &mkv->cur_audio_pkt);
++        mkv->cur_audio_pkt.size = 0;
++        if (ret < 0) {
++            av_log(s, AV_LOG_ERROR, "Could not write cached audio packet ret:%d\n", ret);
++            return ret;
++        }
++    }
++
++    if (codec->codec_type == CODEC_TYPE_AUDIO)
++        ret = mkv_copy_packet(mkv, pkt);
++    else
++        ret = mkv_write_packet(s, pkt);
++    return ret;
++}
++#endif
+ static int mkv_write_trailer(AVFormatContext *s)
+ {
+     MatroskaMuxContext *mkv = s->priv_data;
+@@ -932,6 +1017,18 @@
+     int64_t currentpos, second_seekhead, cuespos;
+     int ret;
+ 
++#if CONFIG_WEBM_MUXER
++    // Check if we have an audio packet cached
++    if (mkv->cur_audio_pkt.size > 0) {
++        ret = mkv_write_packet(s, &mkv->cur_audio_pkt);
++        mkv->cur_audio_pkt.size = 0;
++        if (ret < 0) {
++            av_log(s, AV_LOG_ERROR, "Could not write cached audio packet ret:%d\n", ret);
++            return ret;
++        }
++    }
++#endif
++
+     if (mkv->dyn_bc) {
+         end_ebml_master(mkv->dyn_bc, mkv->cluster);
+         mkv_flush_dynbuf(s);
+@@ -970,10 +1067,15 @@
+     end_ebml_master(pb, mkv->segment);
+     av_free(mkv->md5_ctx);
+     av_free(mkv->tracks);
++#if CONFIG_WEBM_MUXER
++    if (!strcmp("webm", s->oformat->name))
++        av_destruct_packet(&mkv->cur_audio_pkt);
++#endif
+     put_flush_packet(pb);
+     return 0;
+ }
+ 
++#if CONFIG_MATROSKA_MUXER
+ AVOutputFormat matroska_muxer = {
+     "matroska",
+     NULL_IF_CONFIG_SMALL("Matroska file format"),
+@@ -989,6 +1091,24 @@
+     .codec_tag = (const AVCodecTag* const []){ff_codec_bmp_tags, ff_codec_wav_tags, 0},
+     .subtitle_codec = CODEC_ID_TEXT,
+ };
++#endif
++#if CONFIG_WEBM_MUXER
++AVOutputFormat webm_muxer = {
++    "webm",
++    NULL_IF_CONFIG_SMALL("WebM file format"),
++    "video/x-webm",
++    "webm",
++    sizeof(MatroskaMuxContext),
++    CODEC_ID_VORBIS,
++    CODEC_ID_VP8,
++    mkv_write_header,
++    mkv_write_packet2,
++    mkv_write_trailer,
++    .flags = AVFMT_GLOBALHEADER | AVFMT_VARIABLE_FPS,
++    .codec_tag = (const AVCodecTag* const []){ff_codec_bmp_tags, ff_codec_wav_tags, 0},
++    .subtitle_codec = CODEC_ID_TEXT,
++};
++#endif
+ 
+ AVOutputFormat matroska_audio_muxer = {
+     "matroska",
+Index: chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/riff.c
+===================================================================
+--- chromium-browser-5.0.375.86~r49890.orig/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/riff.c	2010-06-25 09:43:23.000000000 +0200
++++ chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/riff.c	2010-06-26 19:23:09.000000000 +0200
+@@ -180,6 +180,7 @@
+     { CODEC_ID_VP6,          MKTAG('V', 'P', '6', '0') },
+     { CODEC_ID_VP6,          MKTAG('V', 'P', '6', '1') },
+     { CODEC_ID_VP6,          MKTAG('V', 'P', '6', '2') },
++    { CODEC_ID_VP8,          MKTAG('V', 'P', '8', '0') },
+     { CODEC_ID_ASV1,         MKTAG('A', 'S', 'V', '1') },
+     { CODEC_ID_ASV2,         MKTAG('A', 'S', 'V', '2') },
+     { CODEC_ID_VCR1,         MKTAG('V', 'C', 'R', '1') },
