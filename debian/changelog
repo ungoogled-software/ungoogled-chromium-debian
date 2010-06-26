@@ -1,4 +1,4 @@
-chromium-browser (5.0.375.86~r49890-2) UNRELEASED; urgency=low
+chromium-browser (5.0.375.86~r49890-2) unstable; urgency=low
 
   * Partially revert info in about:version, it has significant impact in
     first-run performance
@@ -10,7 +10,7 @@ chromium-browser (5.0.375.86~r49890-2) UNRELEASED; urgency=low
     are using the unofficial PPA build.
   * Update language list in chromium-browser-l10n description
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 26 Jun 2010 09:27:08 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 26 Jun 2010 09:47:17 +0200
 
 chromium-browser (5.0.375.86~r49890-1) unstable; urgency=low
 
