@@ -8,8 +8,9 @@ chromium-browser (5.0.375.86~r49890-2) UNRELEASED; urgency=low
   * Add a replace and conflict entry for chromium-codecs-ffmpeg and
     chromium-codecs-ffmpeg-extra. This is necessary for people who used or
     are using the unofficial PPA build.
+  * Update language list in chromium-browser-l10n description
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 26 Jun 2010 09:10:29 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 26 Jun 2010 09:27:08 +0200
 
 chromium-browser (5.0.375.86~r49890-1) unstable; urgency=low
 
