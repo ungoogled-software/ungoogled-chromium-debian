@@ -2548,10 +2548,6 @@ Files: src/native_client/src/third_party/valgrind/{memcheck.h,valgrind.h}
 Copyright: Copyright: 2000-2009 Julian Seward. All rights reserved:
 License: BSD (3 clause)
 
-Files: src/native_client/src/third_party/valgrind/bin/{memcheck.sh}
-Copyright: Copyright: Xıõwµ·Z'¡DEI`åä”S i‚ï"¨6ÆWC-2&ÕÖÕ¦x]—/yš•íSHå±ÉÌqƒÚš j¢µªnƒg½§Á / ¨ ai,`@€!ûã³O ıP:é ¯!¸@o; ZŸºL½Ç¾b‚!²+9Œªë·p±ÚòL¸ªIèŞ3ïÅ§áiªÀÉm°‚måI5¿…¡#¨jÑ†_¤áï¾‚õ5=ËŸóa / ºÒWèè´¬ÑÑ;)§~„ÒÏèè÷Ï‘Ë5:ú×´œ¡£wÓr›~#-Çëèí´<®£ï£e@G’Úùc=‘–»tô	´ôêè³Z–ş0Õÿ=ı-çéèh9\G›–}Øù½=´Ş÷¹Şãó®÷öm'6ãNg®!8ë‡œÓYYSWëÄÙ,àtrĞ­İØ‹§pş@ƒ»~çÙXàüõ0Ï¼Àìòû=ÀèuUûÃçåj<5~O Îyjëœ¾:·+P]WË5x\œ·>p#êªqùà,Ñì / 41¶à¸™¬Q§B%RK*è8-Ğ5Av0+€·®Ã‰æ+Ptm½ˆ7¸q´+€†´Î°Aä¡Ë‹XÛ¡kÔEÖï¥–K˜0C@4Rÿ+(y´ûä¦~|¼®7ÃÍ½’57àL†9”1ê’`9¶ß¡°z6Äºà\×Ú.¹6œ%CÄ¡.ôå§ÄĞşÃO¥O€Spªû<ˆÚÛfóöG¥»sqBmïmïà!‹<BÄ’åíV°)ãäŸÄ½{°}ƒšı… ñàg`Ë!+üêßàj«Ùæh¼sÇ!ïfÈqXu³àıÓôŞßƒıšO1×[×á§5»kÚ2­C]­±¶‚,f¾:¸qÑ÷÷lòCµ‡ö'êN¼½*Ã?Ö[÷EGèV[—£­~`,=Ã^QÚ—„^°/u'wZaåHÖ5­7´.¥»³ ewÂˆ#ù™Â-›¢•.\.ÒQo{ÆK7qIÚ3—‡Üs4ç›;‚ÿ:
-License: GENERATED FILE
-
 Files: src/native_client/src/third_party_mod/npapi_plugin/{np_entry.cc,npn_gate.cc}
 Copyright: Copyright: 1998:
 License: GPL (unversioned/unknown version)

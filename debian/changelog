@@ -3,8 +3,9 @@ chromium-browser (5.0.375.86~r49890-3) UNRELEASED; urgency=low
   * Set ffmpeg_branding=Chrome to enable the h264 decoder (Closes: #587293)
   * Backport VP8/WebM code and use system copy of libvpx
   * Add xulrunner lib path to LD_LIBRARY_PATH (Closes: #574679)
+  * Removed license info for src/native_client/src/third_party/valgrind/bin/
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 27 Jun 2010 10:24:01 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 27 Jun 2010 10:37:23 +0200
 
 chromium-browser (5.0.375.86~r49890-2) unstable; urgency=low
 
