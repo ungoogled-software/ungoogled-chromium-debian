@@ -50,7 +50,8 @@ chromium-browser (5.0.375.86~r49890-1) unstable; urgency=low
   * Show in about:version when chromium is running on a different
     distribution that it has been built on
     - udpate debian/rules
-    - rename and update debian/chromium-browser.sh => debian/chromium-browser.sh.in
+    - rename and update debian/chromium-browser.sh =>
+      debian/chromium-browser.sh.in
 
  -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 25 Jun 2010 10:15:35 +0200
 
