@@ -1,0 +1,99 @@
+enable 3d on youtube video with html5 and Webm
+Index: chromium-browser-5.0.375.86~r49890/src/media/base/yuv_convert.cc
+===================================================================
+--- chromium-browser-5.0.375.86~r49890.orig/src/media/base/yuv_convert.cc	2010-06-26 22:37:59.586752753 +0200
++++ chromium-browser-5.0.375.86~r49890/src/media/base/yuv_convert.cc	2010-06-26 22:40:08.605746952 +0200
+@@ -20,6 +20,8 @@
+ // Header for low level row functions.
+ #include "media/base/yuv_row.h"
+ 
++#define EXPERIMENTAL_3D
++
+ #if USE_MMX
+ #if defined(_MSC_VER)
+ #include <intrin.h>
+@@ -34,11 +36,52 @@
+ 
+ namespace media {
+ 
++// 4096 allows 3 buffers to fit in 12k.
++// Helps performance on CPU with 16K L1 cache.
++// Large enough for 3830x2160 and 30" displays which are 2560x1600.
++const int kFilterBufferSize = 4096;
++
+ // 16.16 fixed point arithmetic
+ const int kFractionBits = 16;
+ const int kFractionMax = 1 << kFractionBits;
+ const int kFractionMask = ((1 << kFractionBits) - 1);
+ 
++#ifdef EXPERIMENTAL_3D
++// Convert side by side images to Red / Cyan 3d.
++// alpha,red from left, green,blue from right.
++static void RedCyanRows(uint8* dest_buf,
++                        const uint8* left_ptr, int width) {
++  int width_bytes = width * 4;
++  const uint8* right_ptr = left_ptr + width_bytes;
++  for (int i = 0; i < width_bytes; i += 4) {
++    dest_buf[i + 0] = right_ptr[i + 0];  // b
++    dest_buf[i + 1] = right_ptr[i + 1];  // g
++    dest_buf[i + 2] = left_ptr[i + 2];   // r
++    dest_buf[i + 3] = left_ptr[i + 3];   // a
++  }
++}
++
++// Bilinear filter a row of RGB32 pixels to double width.
++void DoubleRGB32(uint8* dest_buf, uint8* source_ptr, int width) {
++  int width_bytes = width * 4;
++  // repeat last source pixel to avoid edge bleed.
++  source_ptr[width_bytes + 0] = source_ptr[width_bytes - 4 + 0];
++  source_ptr[width_bytes + 1] = source_ptr[width_bytes - 4 + 1];
++  source_ptr[width_bytes + 2] = source_ptr[width_bytes - 4 + 2];
++  source_ptr[width_bytes + 3] = source_ptr[width_bytes - 4 + 3];
++  for (int i = 0, j =0; i < width_bytes; i += 4, j += 8) {
++    dest_buf[j + 0] = source_ptr[i + 0];
++    dest_buf[j + 1] = source_ptr[i + 1];
++    dest_buf[j + 2] = source_ptr[i + 2];
++    dest_buf[j + 3] = source_ptr[i + 3];
++    dest_buf[j + 4] = (source_ptr[i + 0] + source_ptr[i + 4] + 1) >> 1;
++    dest_buf[j + 5] = (source_ptr[i + 1] + source_ptr[i + 5] + 1) >> 1;
++    dest_buf[j + 6] = (source_ptr[i + 2] + source_ptr[i + 6] + 1) >> 1;
++    dest_buf[j + 7] = (source_ptr[i + 3] + source_ptr[i + 7] + 1) >> 1;
++  }
++}
++#endif
++
+ // Convert a frame of YUV to 32 bit ARGB.
+ void ConvertYUVToRGB32(const uint8* y_buf,
+                        const uint8* u_buf,
+@@ -62,6 +105,11 @@
+                              v_ptr,
+                              rgb_row,
+                              width);
++#ifdef EXPERIMENTAL_3D
++    uint8 rgb_buf[kFilterBufferSize * 4 + 16];
++    RedCyanRows(rgb_buf, rgb_row, width / 2);
++    DoubleRGB32(rgb_row, rgb_buf, width / 2);
++#endif
+   }
+ 
+   // MMX used for FastConvertYUVToRGB32Row requires emms instruction.
+@@ -164,7 +212,6 @@
+                      YUVType yuv_type,
+                      Rotate view_rotate,
+                      ScaleFilter filter) {
+-  const int kFilterBufferSize = 8192;
+   // Disable filtering if the screen is too big (to avoid buffer overflows).
+   // This should never happen to regular users: they don't have monitors
+   // wider than 8192 pixels.
+@@ -317,6 +364,11 @@
+                            dest_pixel, width, source_dx);
+ #endif
+       }
++#ifdef EXPERIMENTAL_3D
++      uint8 rgb_buf[kFilterBufferSize * 4 + 16];
++      RedCyanRows(rgb_buf, dest_pixel, width / 2);
++      DoubleRGB32(dest_pixel, rgb_buf, width / 2);
++#endif
+     }
+   }
+   // MMX used for FastConvertYUVToRGB32Row and FilterRows requires emms.
