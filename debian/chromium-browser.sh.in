@@ -8,6 +8,7 @@
 
 APPNAME=chromium-browser
 LIBDIR=/usr/lib/chromium-browser
+EXTRALIB=/usr/lib/xulrunner-1.9.1
 GDB=/usr/bin/gdb
 BUILD_DIST="@BUILD_DIST@"
 
@@ -33,9 +34,9 @@ CHROMIUM_FLAGS=${CHROMIUM_USER_FLAGS:-"$CHROMIUM_FLAGS"}
 
 # FFmpeg needs to know where its libs are located
 if [ "Z$LD_LIBRARY_PATH" != Z ] ; then
-  LD_LIBRARY_PATH=$LIBDIR:$LD_LIBRARY_PATH
+  LD_LIBRARY_PATH=$LIBDIR:$EXTRALIB:$LD_LIBRARY_PATH
 else
-  LD_LIBRARY_PATH=$LIBDIR
+  LD_LIBRARY_PATH=$LIBDIR:$EXTRALIB
 fi
 export LD_LIBRARY_PATH
 

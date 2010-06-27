@@ -2,8 +2,9 @@ chromium-browser (5.0.375.86~r49890-3) UNRELEASED; urgency=low
 
   * Set ffmpeg_branding=Chrome to enable the h264 decoder
   * Backport VP8/WebM code and use system copy of libvpx
+  * Add xulrunner lib path to LD_LIBRARY_PATH (Closes: #574679)
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 26 Jun 2010 20:23:29 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 27 Jun 2010 10:20:04 +0200
 
 chromium-browser (5.0.375.86~r49890-2) unstable; urgency=low
 
