@@ -1,3 +1,9 @@
+chromium-browser (5.0.375.86~r49890-4) UNRELEASED; urgency=low
+
+  * Use the full path in chromium-browser.desktop Exec fiels (Closes: #580582)
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Mon, 28 Jun 2010 10:40:45 +0200
+
 chromium-browser (5.0.375.86~r49890-3) unstable; urgency=low
 
   * Set ffmpeg_branding=Chrome to enable the h264 decoder (Closes: #587293)
