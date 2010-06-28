@@ -2,8 +2,10 @@ chromium-browser (5.0.375.86~r49890-4) UNRELEASED; urgency=low
 
   * Use the full path in chromium-browser.desktop Exec fiels (Closes: #580582)
   * Remove the 3d patch, non-3d video are messed up (Closes: 587389)
+  * Build depends on libicu-dev (>= 4.2.1) and libevent-dev (>= 1.4.13) to
+    to avoid bad backports
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Mon, 28 Jun 2010 10:42:18 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Mon, 28 Jun 2010 12:40:35 +0200
 
 chromium-browser (5.0.375.86~r49890-3) unstable; urgency=low
 
