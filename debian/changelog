@@ -1,3 +1,9 @@
+chromium-browser (5.0.375.86~r49890-5) UNRELEASED; urgency=low
+
+  * DEB_HOST_ARCH_CPU in armel is arm, updating debian/rules
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 30 Jun 2010 12:19:16 +0200
+
 chromium-browser (5.0.375.86~r49890-4) unstable; urgency=low
 
   * Use the full path in chromium-browser.desktop Exec field (Closes: #580582)

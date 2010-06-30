@@ -55,22 +55,17 @@ endif
 
 DEB_HOST_ARCH_CPU := $(shell dpkg-architecture -qDEB_HOST_ARCH_CPU)
 
-ifeq (armel,$(DEB_HOST_ARCH_CPU))
+ifeq (arm,$(DEB_HOST_ARCH_CPU))
 AVOID_GCC_44 := 0
 GYP_DEFINES += \
 	arm_thumb=1 \
 	target_arch=arm \
 	disable_nacl=1 \
 	linux_use_tcmalloc=0 \
+	armv7=0 \
 	$(NULL)
 WANT_LZMA_DEBS := 0
 WANT_TESTS     := 0
-ifneq (,$(filter unstable development,$(DEBIAN_DIST)))
-# depending on cpu and distribution, enforce an armv7 with thumb build (or not)
-GYP_DEFINES += \
-	armv7=0 \
-	$(NULL)
-endif
 else
 ifeq (amd64,$(DEB_HOST_ARCH_CPU))
 GYP_DEFINES += target_arch=x64
