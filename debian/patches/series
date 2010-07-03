@@ -16,3 +16,4 @@ protobuf.patch
 glew.patch
 webkit-recursion.patch
 VP8.patch
+ffmpeg_arm.patch

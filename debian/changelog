@@ -18,8 +18,9 @@ chromium-browser (5.0.375.99~r51029-1) UNRELEASED; urgency=low
       team509.
     - [46575] Low Annoyance with print dialogs. Credit to Mats Ahlgren.
     - [47056] Low Crash with modal dialogs. Credit to Aki Helin of OUSPG.
+  * Remove armv6 and armv7 support from ffmpeg internal copy
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 03 Jul 2010 11:46:34 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 03 Jul 2010 13:12:17 +0200
 
 chromium-browser (5.0.375.86~r49890-4) unstable; urgency=low
 

@@ -1,0 +1,17 @@
+Index: chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/config/Chrome/linux/arm/config.h
+===================================================================
+--- chromium-browser-5.0.375.86~r49890.orig/src/third_party/ffmpeg/source/config/Chrome/linux/arm/config.h	2010-06-29 10:02:42.000000000 +0000
++++ chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/config/Chrome/linux/arm/config.h	2010-06-29 10:03:23.000000000 +0000
+@@ -35,9 +35,9 @@
+ #define HAVE_AMD3DNOW 0
+ #define HAVE_AMD3DNOWEXT 0
+ #define HAVE_ARMV5TE 1
+-#define HAVE_ARMV6 1
+-#define HAVE_ARMV6T2 1
+-#define HAVE_ARMVFP 1
++#define HAVE_ARMV6 0
++#define HAVE_ARMV6T2 0
++#define HAVE_ARMVFP 0
+ #define HAVE_IWMMXT 0
+ #define HAVE_MMI 0
+ #define HAVE_MMX 0
