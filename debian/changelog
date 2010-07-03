@@ -1,4 +1,4 @@
-chromium-browser (5.0.375.99~r51029-1) UNRELEASED; urgency=low
+chromium-browser (5.0.375.99~r51029-1) unstable; urgency=low
 
   * DEB_HOST_ARCH_CPU in armel is arm, updating debian/rules
   * New stable version, this release fixes the following security
@@ -22,7 +22,7 @@ chromium-browser (5.0.375.99~r51029-1) UNRELEASED; urgency=low
   * Set arm_thumb=0 to avoid FTBFS in armel. Thanks to Peter De Schrijver,
     Timo Lindfors and Reinhard Tartler
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 03 Jul 2010 13:17:09 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 03 Jul 2010 13:23:26 +0200
 
 chromium-browser (5.0.375.86~r49890-4) unstable; urgency=low
 
