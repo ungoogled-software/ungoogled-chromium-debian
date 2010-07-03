@@ -1,8 +1,25 @@
-chromium-browser (5.0.375.86~r49890-5) UNRELEASED; urgency=low
+chromium-browser (5.0.375.99~r51029-1) UNRELEASED; urgency=low
 
   * DEB_HOST_ARCH_CPU in armel is arm, updating debian/rules
+  * New stable version, this release fixes the following security
+    issues:
+    - [42396] Low OOB read with WebGL. Credit to Sergey Glazunov; Google Chrome
+      Security Team (SkyLined). 
+    - [42575] [42980] Medium Isolate sandboxed iframes more strongly. Credit to
+      sirdarckcat of Google Security Team.
+    - [43488] High Memory corruption with invalid SVGs. Credit to Aki Hekin of
+      OUSPG; wushi of team509.
+    - [44424] High Memory corruption in bidi algorithm. Credit to wushi of
+      team509.
+    - [45164] Low Crash with invalid image. Credit to javg0x83.
+    - [45983] High Memory corruption with invalid PNG (libpng bug). Credit to
+      Aki Helin of OUSPG.
+    - [46360] High Memory corruption in CSS style rendering. Credit to wushi of
+      team509.
+    - [46575] Low Annoyance with print dialogs. Credit to Mats Ahlgren.
+    - [47056] Low Crash with modal dialogs. Credit to Aki Helin of OUSPG.
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 30 Jun 2010 12:19:16 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 03 Jul 2010 11:46:34 +0200
 
 chromium-browser (5.0.375.86~r49890-4) unstable; urgency=low
 
