@@ -1,10 +1,10 @@
-chromium-browser (5.0.375.99~r51029-2) UNRELEASED; urgency=low
+chromium-browser (5.0.375.99~r51029-2) unstable; urgency=low
 
   * Backport patch for CVE-2010-1760
   * [armel] set arm_neon=0
   * [armel] Remove all V5TE, VFP code from ffmpeg
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 06 Jul 2010 16:11:02 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 06 Jul 2010 16:14:12 +0200
 
 chromium-browser (5.0.375.99~r51029-1) unstable; urgency=low
 
