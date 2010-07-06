@@ -63,6 +63,7 @@ GYP_DEFINES += \
 	disable_nacl=1 \
 	linux_use_tcmalloc=0 \
 	armv7=0 \
+	arm_neon=0 \
 	$(NULL)
 WANT_LZMA_DEBS := 0
 WANT_TESTS     := 0
