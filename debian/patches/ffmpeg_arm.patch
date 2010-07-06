@@ -1,17 +1,50 @@
 Index: chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/config/Chrome/linux/arm/config.h
 ===================================================================
---- chromium-browser-5.0.375.86~r49890.orig/src/third_party/ffmpeg/source/config/Chrome/linux/arm/config.h	2010-06-29 10:02:42.000000000 +0000
-+++ chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/config/Chrome/linux/arm/config.h	2010-06-29 10:03:23.000000000 +0000
-@@ -35,9 +35,9 @@
+--- chromium-browser-5.0.375.86~r49890.orig/src/third_party/ffmpeg/source/config/Chrome/linux/arm/config.h	2010-07-06 09:38:41.000000000 +0000
++++ chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/source/config/Chrome/linux/arm/config.h	2010-07-06 10:10:22.000000000 +0000
+@@ -34,10 +34,10 @@
+ #define HAVE_ALTIVEC 0
  #define HAVE_AMD3DNOW 0
  #define HAVE_AMD3DNOWEXT 0
- #define HAVE_ARMV5TE 1
+-#define HAVE_ARMV5TE 1
 -#define HAVE_ARMV6 1
 -#define HAVE_ARMV6T2 1
 -#define HAVE_ARMVFP 1
++#define HAVE_ARMV5TE 0
 +#define HAVE_ARMV6 0
 +#define HAVE_ARMV6T2 0
 +#define HAVE_ARMVFP 0
  #define HAVE_IWMMXT 0
  #define HAVE_MMI 0
  #define HAVE_MMX 0
+Index: chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/ffmpeg.gyp
+===================================================================
+--- chromium-browser-5.0.375.86~r49890.orig/src/third_party/ffmpeg/ffmpeg.gyp	2010-07-06 09:38:41.000000000 +0000
++++ chromium-browser-5.0.375.86~r49890/src/third_party/ffmpeg/ffmpeg.gyp	2010-07-06 13:06:57.000000000 +0000
+@@ -318,10 +318,7 @@
+                 'source/patched-ffmpeg-mt/libavcodec/arm/dsputil_arm.S',
+                 'source/patched-ffmpeg-mt/libavcodec/arm/dsputil_armv6.S',
+                 'source/patched-ffmpeg-mt/libavcodec/arm/dsputil_init_arm.c',
+-                'source/patched-ffmpeg-mt/libavcodec/arm/dsputil_init_armv5te.c',
+                 'source/patched-ffmpeg-mt/libavcodec/arm/dsputil_init_armv6.c',
+-                'source/patched-ffmpeg-mt/libavcodec/arm/dsputil_init_vfp.c',
+-                'source/patched-ffmpeg-mt/libavcodec/arm/dsputil_vfp.S',
+                 'source/patched-ffmpeg-mt/libavcodec/arm/fft_init_arm.c',
+                 'source/patched-ffmpeg-mt/libavcodec/arm/jrevdct_arm.S',
+                 'source/patched-ffmpeg-mt/libavcodec/arm/simple_idct_arm.S',
+@@ -346,6 +343,7 @@
+             ['target_arch=="arm" and (ffmpeg_branding=="Chrome" or ffmpeg_branding=="ChromeOS")', {
+               'sources': [
+                 'source/patched-ffmpeg-mt/libavcodec/arm/h264dsp_init_arm.c',
++                'source/patched-ffmpeg-mt/libavcodec/arm/h264pred_init_arm.c',
+                 'source/patched-ffmpeg-mt/libavcodec/arm/mpegvideo_arm.c',
+                 'source/patched-ffmpeg-mt/libavcodec/arm/mpegvideo_armv5te.c',
+                 'source/patched-ffmpeg-mt/libavcodec/arm/mpegvideo_armv5te_s.S',
+@@ -355,7 +353,6 @@
+                   'sources': [
+                     'source/patched-ffmpeg-mt/libavcodec/arm/h264dsp_neon.S',
+                     'source/patched-ffmpeg-mt/libavcodec/arm/h264idct_neon.S',
+-                    'source/patched-ffmpeg-mt/libavcodec/arm/h264pred_init_arm.c',
+                     'source/patched-ffmpeg-mt/libavcodec/arm/h264pred_neon.S',
+                   ],
+                 }],
