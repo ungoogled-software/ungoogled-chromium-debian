@@ -18,3 +18,4 @@ webkit-recursion.patch
 VP8.patch
 ffmpeg_arm.patch
 webkit-CVE-2010-1760.patch
+gtk-ambiance.patch

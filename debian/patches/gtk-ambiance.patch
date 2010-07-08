@@ -1,0 +1,1306 @@
+GTK: Support Ambiance/Radiance and Dust button ordering.
+
+When running under GNOME, read the gconf key that defines the button placement
+and lay the close, minimize and maximize buttons out. This can even handle
+bizarre combinations like putting the close button on the left and the
+minimize/maximize buttons on the right.
+
+When running under anything else, use the default button ordering.
+
+BUG=39406
+TEST=none
+
+Review URL: http://codereview.chromium.org/2095001
+
+gtk: Make use of gtk signal macros in BrowserTitleBar.
+
+BUG=None
+TEST=trybots and manually
+
+Review URL: http://codereview.chromium.org/2448001
+---
+ base/process_util_linux.cc                        |   10 
+ base/string_tokenizer.h                           |   71 +++--
+ chrome/browser/gtk/browser_titlebar.cc            |  312 +++++++++++++++-------
+ chrome/browser/gtk/browser_titlebar.h             |   55 ++-
+ chrome/browser/gtk/gconf_titlebar_listener.cc     |  116 ++++++++
+ chrome/browser/gtk/gconf_titlebar_listener.h      |   64 ++++
+ chrome/chrome_browser.gypi                        |    3 
+ src/chrome/browser/gtk/gconf_titlebar_listener.cc |  116 ++++++++
+ src/chrome/browser/gtk/gconf_titlebar_listener.h  |   64 ++++
+ 9 files changed, 679 insertions(+), 132 deletions(-)
+
+Index: src/src/chrome/browser/gtk/gconf_titlebar_listener.cc
+===================================================================
+--- /dev/null
++++ src/src/chrome/browser/gtk/gconf_titlebar_listener.cc
+@@ -0,0 +1,116 @@
++// Copyright (c) 2010 The Chromium Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style license that can be
++// found in the LICENSE file.
++
++#include "chrome/browser/gtk/gconf_titlebar_listener.h"
++
++#include <gtk/gtk.h>
++
++#include "base/scoped_ptr.h"
++#include "base/env_var.h"
++#include "base/linux_util.h"
++#include "chrome/browser/gtk/browser_titlebar.h"
++
++namespace {
++
++// A default button order string for when we aren't asking gconf for the
++// metacity configuration.
++const char* kDefaultButtonPlacement = ":minimize,maximize,close";
++
++// The GConf key we read for the button placement string. Even through the key
++// has "metacity" in it, it's shared between metacity and compiz.
++const char* kButtonLayoutKey = "/apps/metacity/general/button_layout";
++
++// GConf requires us to subscribe to a parent directory before we can subscribe
++// to changes in an individual key in that directory.
++const char* kMetacityGeneral = "/apps/metacity/general";
++
++}  // namespace
++
++// Public interface:
++
++void GConfTitlebarListener::SetTitlebarButtons(BrowserTitlebar* titlebar) {
++  if (client_) {
++    titlebar->BuildButtons(current_value_);
++    titlebars_.insert(titlebar);
++  } else {
++    titlebar->BuildButtons(kDefaultButtonPlacement);
++  }
++}
++
++void GConfTitlebarListener::RemoveObserver(BrowserTitlebar* titlebar) {
++  titlebars_.erase(titlebar);
++}
++
++// Private:
++
++GConfTitlebarListener::GConfTitlebarListener() : client_(NULL) {
++  scoped_ptr<base::EnvVarGetter> env_getter(base::EnvVarGetter::Create());
++  if (base::GetDesktopEnvironment(env_getter.get()) ==
++      base::DESKTOP_ENVIRONMENT_GNOME) {
++    client_ = gconf_client_get_default();
++    // If we fail to get a context, that's OK, since we'll just fallback on
++    // not receiving gconf keys.
++    if (client_) {
++      // Get the initial value of the key.
++      GError* error = NULL;
++      GConfValue* gconf_value = gconf_client_get(client_, kButtonLayoutKey,
++                                                 &error);
++      if (HandleGError(error, kButtonLayoutKey))
++        return;
++      ParseAndStoreValue(gconf_value);
++      if (gconf_value)
++        gconf_value_free(gconf_value);
++
++      // Register that we're interested in the values of this directory.
++      gconf_client_add_dir(client_, kMetacityGeneral,
++                           GCONF_CLIENT_PRELOAD_ONELEVEL, &error);
++      if (HandleGError(error, kMetacityGeneral))
++        return;
++
++      // Register to get notifies about changes to this key.
++      gconf_client_notify_add(
++          client_, kButtonLayoutKey,
++          reinterpret_cast<void (*)(GConfClient*, guint, GConfEntry*, void*)>(
++              OnChangeNotificationThunk),
++          this, NULL, &error);
++      if (HandleGError(error, kButtonLayoutKey))
++        return;
++    }
++  }
++}
++
++void GConfTitlebarListener::OnChangeNotification(GConfClient* client,
++                                                 guint cnxn_id,
++                                                 GConfEntry* entry) {
++  if (strcmp(gconf_entry_get_key(entry), kButtonLayoutKey) == 0) {
++    GConfValue* gconf_value = gconf_entry_get_value(entry);
++    ParseAndStoreValue(gconf_value);
++
++    // Broadcast the new configuration to all windows:
++    for (std::set<BrowserTitlebar*>::const_iterator it = titlebars_.begin();
++         it != titlebars_.end(); ++it) {
++      (*it)->BuildButtons(current_value_);
++    }
++  }
++}
++
++bool GConfTitlebarListener::HandleGError(GError* error, const char* key) {
++  if (error != NULL) {
++    LOG(ERROR) << "Error with gconf key '" << key << "': " << error->message;
++    g_error_free(error);
++    g_object_unref(client_);
++    client_ = NULL;
++    return true;
++  }
++  return false;
++}
++
++void GConfTitlebarListener::ParseAndStoreValue(GConfValue* gconf_value) {
++  if (gconf_value) {
++    const char* value = gconf_value_get_string(gconf_value);
++    current_value_ = value ? value : kDefaultButtonPlacement;
++  } else {
++    current_value_ = kDefaultButtonPlacement;
++  }
++}
+Index: src/src/chrome/browser/gtk/gconf_titlebar_listener.h
+===================================================================
+--- /dev/null
++++ src/src/chrome/browser/gtk/gconf_titlebar_listener.h
+@@ -0,0 +1,64 @@
++// Copyright (c) 2010 The Chromium Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style license that can be
++// found in the LICENSE file.
++
++#ifndef CHROME_BROWSER_GTK_GCONF_TITLEBAR_LISTENER_H_
++#define CHROME_BROWSER_GTK_GCONF_TITLEBAR_LISTENER_H_
++
++#include <gconf/gconf-client.h>
++#include <gtk/gtk.h>
++
++#include <set>
++#include <string>
++
++#include "app/gtk_signal.h"
++#include "base/singleton.h"
++
++class BrowserTitlebar;
++
++// On GNOME desktops, subscribes to the gconf key which controlls button order.
++// Everywhere else, SetTiltebarButtons() just calls back into BrowserTitlebar
++// with the default ordering.
++//
++// Meant to be used as a Singleton through base/singleton.h's interface.
++class GConfTitlebarListener {
++ public:
++  // Sets the current titlebar button order. On GNOME desktops, also subscribes
++  // to further notifications when this changes.
++  void SetTitlebarButtons(BrowserTitlebar* titlebar);
++
++  // Removes |titlebar| from the list of objects observing button order change
++  // notifications.
++  void RemoveObserver(BrowserTitlebar* titlebar);
++
++ private:
++  // Private constructor to enforce singleton access.
++  GConfTitlebarListener();
++
++  // Called whenever the metacity key changes.
++  CHROMEG_CALLBACK_2(GConfTitlebarListener, void, OnChangeNotification,
++                     GConfClient*, guint, GConfEntry*);
++
++  // Checks |error|. On error, prints out a message and closes the connection
++  // to GConf and reverts to default mode.
++  bool HandleGError(GError* error, const char* key);
++
++  // Parses the return data structure from GConf, falling back to the default
++  // value on any error.
++  void ParseAndStoreValue(GConfValue* gconf_value);
++
++  // Pointer to our gconf context. NULL if we aren't on a desktop that uses
++  // gconf.
++  GConfClient* client_;
++
++  // The current button ordering as heard from gconf.
++  std::string current_value_;
++
++  // BrowserTitlebar objects which have subscribed to updates.
++  std::set<BrowserTitlebar*> titlebars_;
++
++  friend struct DefaultSingletonTraits<GConfTitlebarListener>;
++  DISALLOW_COPY_AND_ASSIGN(GConfTitlebarListener);
++};
++
++#endif  // CHROME_BROWSER_GTK_GCONF_TITLEBAR_LISTENER_H_
+Index: src/base/process_util_linux.cc
+===================================================================
+--- src.orig/base/process_util_linux.cc
++++ src/base/process_util_linux.cc
+@@ -259,33 +259,35 @@
+ bool ProcessMetrics::GetWorkingSetKBytes(WorkingSetKBytes* ws_usage) const {
+   FilePath stat_file =
+     FilePath("/proc").Append(IntToString(process_)).Append("smaps");
+   std::string smaps;
+   int private_kb = 0;
+   int pss_kb = 0;
+   bool have_pss = false;
+   if (file_util::ReadFileToString(stat_file, &smaps) && smaps.length() > 0) {
++    const std::string private_prefix = "Private_";
++    const std::string pss_prefix = "Pss";
+     StringTokenizer tokenizer(smaps, ":\n");
++    StringPiece last_key_name;
+     ParsingState state = KEY_NAME;
+-    std::string last_key_name;
+     while (tokenizer.GetNext()) {
+       switch (state) {
+         case KEY_NAME:
+-          last_key_name = tokenizer.token();
++          last_key_name = tokenizer.token_piece();
+           state = KEY_VALUE;
+           break;
+         case KEY_VALUE:
+           if (last_key_name.empty()) {
+             NOTREACHED();
+             return false;
+           }
+-          if (StartsWithASCII(last_key_name, "Private_", 1)) {
++          if (last_key_name.starts_with(private_prefix)) {
+             private_kb += StringToInt(tokenizer.token());
+-          } else if (StartsWithASCII(last_key_name, "Pss", 1)) {
++          } else if (last_key_name.starts_with(pss_prefix)) {
+             have_pss = true;
+             pss_kb += StringToInt(tokenizer.token());
+           }
+           state = KEY_NAME;
+           break;
+       }
+     }
+   } else {
+Index: src/base/string_tokenizer.h
+===================================================================
+--- src.orig/base/string_tokenizer.h
++++ src/base/string_tokenizer.h
+@@ -1,17 +1,20 @@
+ // Copyright (c) 2006-2008 The Chromium Authors. All rights reserved.
+ // Use of this source code is governed by a BSD-style license that can be
+ // found in the LICENSE file.
+ 
+ #ifndef BASE_STRING_TOKENIZER_H_
+ #define BASE_STRING_TOKENIZER_H_
+ 
++#include <algorithm>
+ #include <string>
+ 
++#include "base/string_piece.h"
++
+ // StringTokenizerT is a simple string tokenizer class.  It works like an
+ // iterator that with each step (see the Advance method) updates members that
+ // refer to the next token in the input string.  The user may optionally
+ // configure the tokenizer to return delimiters.
+ //
+ // Warning: be careful not to pass a C string into the 2-arg constructor:
+ // StringTokenizer t("this is a test", " ");  // WRONG
+ // This will create a temporary std::string, save the begin() and end()
+@@ -116,34 +119,20 @@
+   // finds another instance of the quote char.  If a backslash is encountered
+   // within a quoted string, then the next character is skipped.
+   void set_quote_chars(const str& quotes) { quotes_ = quotes; }
+ 
+   // Call this method to advance the tokenizer to the next delimiter.  This
+   // returns false if the tokenizer is complete.  This method must be called
+   // before calling any of the token* methods.
+   bool GetNext() {
+-    AdvanceState state;
+-    token_is_delim_ = false;
+-    for (;;) {
+-      token_begin_ = token_end_;
+-      if (token_end_ == end_)
+-        return false;
+-      ++token_end_;
+-      if (AdvanceOne(&state, *token_begin_))
+-        break;
+-      if (options_ & RETURN_DELIMS) {
+-        token_is_delim_ = true;
+-        return true;
+-      }
+-      // else skip over delim
+-    }
+-    while (token_end_ != end_ && AdvanceOne(&state, *token_end_))
+-      ++token_end_;
+-    return true;
++    if (quotes_.empty() && options_ == 0)
++      return QuickGetNext();
++    else
++      return FullGetNext();
+   }
+ 
+   // Start iterating through tokens from the beginning of the string.
+   void Reset() {
+     token_end_ = start_pos_;
+   }
+ 
+   // Returns true if token is a delimiter.  When the tokenizer is constructed
+@@ -151,28 +140,74 @@
+   // returned token is actually a delimiter.
+   bool token_is_delim() const { return token_is_delim_; }
+ 
+   // If GetNext() returned true, then these methods may be used to read the
+   // value of the token.
+   const_iterator token_begin() const { return token_begin_; }
+   const_iterator token_end() const { return token_end_; }
+   str token() const { return str(token_begin_, token_end_); }
++  base::StringPiece token_piece() const {
++    return base::StringPiece(&*token_begin_,
++                             std::distance(token_begin_, token_end_));
++  }
+ 
+  private:
+   void Init(const_iterator string_begin,
+             const_iterator string_end,
+             const str& delims) {
+     start_pos_ = string_begin;
++    token_begin_ = string_begin;
+     token_end_ = string_begin;
+     end_ = string_end;
+     delims_ = delims;
+     options_ = 0;
+   }
+ 
++  // Implementation of GetNext() for when we have no quote characters. We have
++  // two separate implementations because AdvanceOne() is a hot spot in large
++  // text files with large tokens.
++  bool QuickGetNext() {
++    token_is_delim_ = false;
++    for (;;) {
++      token_begin_ = token_end_;
++      if (token_end_ == end_)
++        return false;
++      ++token_end_;
++      if (delims_.find(*token_begin_) == str::npos)
++        break;
++      // else skip over delim
++    }
++    while (token_end_ != end_ && delims_.find(*token_end_) == str::npos)
++      ++token_end_;
++    return true;
++  }
++
++  // Implementation of GetNext() for when we have to take quotes into account.
++  bool FullGetNext() {
++    AdvanceState state;
++    token_is_delim_ = false;
++    for (;;) {
++      token_begin_ = token_end_;
++      if (token_end_ == end_)
++        return false;
++      ++token_end_;
++      if (AdvanceOne(&state, *token_begin_))
++        break;
++      if (options_ & RETURN_DELIMS) {
++        token_is_delim_ = true;
++        return true;
++      }
++      // else skip over delim
++    }
++    while (token_end_ != end_ && AdvanceOne(&state, *token_end_))
++      ++token_end_;
++    return true;
++  }
++
+   bool IsDelim(char_type c) const {
+     return delims_.find(c) != str::npos;
+   }
+ 
+   bool IsQuote(char_type c) const {
+     return quotes_.find(c) != str::npos;
+   }
+ 
+Index: src/chrome/browser/gtk/browser_titlebar.cc
+===================================================================
+--- src.orig/chrome/browser/gtk/browser_titlebar.cc
++++ src/chrome/browser/gtk/browser_titlebar.cc
+@@ -9,22 +9,25 @@
+ 
+ #include <string>
+ #include <vector>
+ 
+ #include "app/l10n_util.h"
+ #include "app/resource_bundle.h"
+ #include "base/command_line.h"
+ #include "base/singleton.h"
++#include "base/string_piece.h"
++#include "base/string_tokenizer.h"
+ #include "chrome/app/chrome_dll_resource.h"
+ #include "chrome/browser/browser.h"
+ #include "chrome/browser/encoding_menu_controller.h"
+ #include "chrome/browser/gtk/accelerators_gtk.h"
+ #include "chrome/browser/gtk/browser_window_gtk.h"
+ #include "chrome/browser/gtk/custom_button.h"
++#include "chrome/browser/gtk/gconf_titlebar_listener.h"
+ #include "chrome/browser/gtk/gtk_theme_provider.h"
+ #include "chrome/browser/gtk/gtk_util.h"
+ #include "chrome/browser/gtk/menu_gtk.h"
+ #include "chrome/browser/gtk/nine_box.h"
+ #include "chrome/browser/gtk/standard_menus.h"
+ #include "chrome/browser/gtk/tabs/tab_strip_gtk.h"
+ #include "chrome/browser/page_menu_model.h"
+ #include "chrome/browser/pref_service.h"
+@@ -124,103 +127,142 @@
+   else
+     return *one;
+ }
+ 
+ }  // namespace
+ 
+ BrowserTitlebar::BrowserTitlebar(BrowserWindowGtk* browser_window,
+                                  GtkWindow* window)
+-    : browser_window_(browser_window), window_(window),
++    : browser_window_(browser_window),
++      window_(window),
++      titlebar_left_buttons_vbox_(NULL),
++      titlebar_right_buttons_vbox_(NULL),
++      titlebar_left_buttons_hbox_(NULL),
++      titlebar_right_buttons_hbox_(NULL),
++      top_padding_left_(NULL),
++      top_padding_right_(NULL),
+       app_mode_favicon_(NULL),
+       app_mode_title_(NULL),
+       using_custom_frame_(false),
+       window_has_focus_(false),
+       theme_provider_(NULL) {
+   Init();
+ }
+ 
+ void BrowserTitlebar::Init() {
+   // The widget hierarchy is shown below.
+   //
+-  // +- EventBox (container_) -------------------------------------------------+
+-  // +- HBox (container_hbox) -------------------------------------------------+
+-  // |+- Algn. -++- Alignment --------------++- VBox (titlebar_buttons_box_) -+|
+-  // ||+ Image +||   (titlebar_alignment_)  ||+ - Fixed (top_padding_) ------+||
+-  // |||       |||                          ||+- HBox -----------------------+||
+-  // |||spy_guy|||                          |||+- button -++- button -+      |||
+-  // |||       |||+- TabStripGtk  ---------+|||| minimize || restore  | ...  |||
+-  // |||  )8\  |||| tab   tab   tabclose   ||||+----------++----------+      |||
+-  // ||+-------+||+------------------------+||+------------------------------+||
+-  // |+---------++--------------------------++--------------------------------+|
+-  // +-------------------------------------------------------------------------+
++  // +- EventBox (container_) -------------------------------------+
++  // +- HBox (container_hbox_) ------------------------------------+
++  // |+ VBox ---++- Algn. -++- Alignment --------------++ VBox ---+|
++  // || titlebar||+ Image +||   (titlebar_alignment_)  || titlebar||
++  // || left    |||       |||                          || right   ||
++  // || button  |||spy_guy|||                          || button  ||
++  // || vbox    |||       |||+- TabStripGtk  ---------+|| vbox    ||
++  // ||         |||  )8\  |||| tab   tab   tabclose   |||         ||
++  // ||         ||+-------+||+------------------------+||         ||
++  // |+---------++---------++--------------------------++---------+|
++  // +-------------------------------------------------------------+
++  //
++  // There are two vboxes on either side of |container_hbox_| because when the
++  // desktop is GNOME, the button placement is configurable based on a metacity
++  // gconf key. We can't just have one vbox and move it back and forth because
++  // the gconf language allows you to place buttons on both sides of the
++  // window.  This being Linux, I'm sure there's a bunch of people who have
++  // already configured their window manager to do so and we don't want to get
++  // confused when that happens. The actual contents of these vboxes are lazily
++  // generated so they don't interfere with alignment when everything is
++  // stuffed in the other box.
++  //
++  // Each vbox has the contains the following hierarchy if it contains buttons:
++  //
++  // +- VBox (titlebar_{l,r}_buttons_vbox_) ---------+
++  // |+- Fixed (top_padding_{l,r}_) ----------------+|
++  // ||+- HBox (titlebar_{l,r}_buttons_hbox_ ------+||
++  // ||| (buttons of a configurable layout)        |||
++  // ||+-------------------------------------------+||
++  // |+---------------------------------------------+|
++  // +-----------------------------------------------+
+   //
+   // If we're a popup window or in app mode, we don't display the spy guy or
+   // the tab strip.  Instead, put an hbox in titlebar_alignment_ in place of
+   // the tab strip.
+   // +- Alignment (titlebar_alignment_) -----------------------------------+
+   // |+ HBox -------------------------------------------------------------+|
+   // ||+- TabStripGtk -++- Image ----------------++- Label --------------+||
+   // ||| hidden        ++    (app_mode_favicon_) ||    (app_mode_title_) |||
+   // |||               ||  favicon               ||  page title          |||
+   // ||+---------------++------------------------++----------------------+||
+   // |+-------------------------------------------------------------------+|
+   // +---------------------------------------------------------------------+
+-  GtkWidget* container_hbox = gtk_hbox_new(FALSE, 0);
++  container_hbox_ = gtk_hbox_new(FALSE, 0);
+ 
+   container_ = gtk_event_box_new();
+   gtk_widget_set_name(container_, "chrome-browser-titlebar");
+   gtk_event_box_set_visible_window(GTK_EVENT_BOX(container_), FALSE);
+-  gtk_container_add(GTK_CONTAINER(container_), container_hbox);
++  gtk_container_add(GTK_CONTAINER(container_), container_hbox_);
+ 
+-  g_signal_connect(container_, "scroll-event", G_CALLBACK(OnScroll), this);
++  g_signal_connect(container_, "scroll-event", G_CALLBACK(OnScrollThunk), this);
+ 
+   g_signal_connect(window_, "window-state-event",
+-                   G_CALLBACK(OnWindowStateChanged), this);
++                   G_CALLBACK(OnWindowStateChangedThunk), this);
++
++  // Allocate the two button boxes on the left and right parts of the bar.
++  titlebar_left_buttons_vbox_ = gtk_vbox_new(FALSE, 0);
++  gtk_box_pack_start(GTK_BOX(container_hbox_), titlebar_left_buttons_vbox_,
++                     FALSE, FALSE, 0);
++  titlebar_right_buttons_vbox_ = gtk_vbox_new(FALSE, 0);
++  gtk_box_pack_end(GTK_BOX(container_hbox_), titlebar_right_buttons_vbox_,
++                   FALSE, FALSE, 0);
++
++  // Either read the gconf database and register for updates (on GNOME), or use
++  // the default value (anywhere else).
++  Singleton<GConfTitlebarListener>()->SetTitlebarButtons(this);
+ 
+   if (browser_window_->browser()->profile()->IsOffTheRecord() &&
+       browser_window_->browser()->type() == Browser::TYPE_NORMAL) {
+     GtkWidget* spy_guy = gtk_image_new_from_pixbuf(GetOTRAvatar());
+     gtk_misc_set_alignment(GTK_MISC(spy_guy), 0.0, 1.0);
+     GtkWidget* spy_frame = gtk_alignment_new(0.0, 0.0, 1.0, 1.0);
+     // We use this alignment rather than setting padding on the GtkImage because
+     // the image's intrinsic padding doesn't clip the pixbuf during painting.
+     gtk_alignment_set_padding(GTK_ALIGNMENT(spy_frame), 0,
+         kOTRBottomSpacing, kOTRSideSpacing, kOTRSideSpacing);
+     gtk_widget_set_size_request(spy_guy, -1, 0);
+     gtk_container_add(GTK_CONTAINER(spy_frame), spy_guy);
+-    gtk_box_pack_start(GTK_BOX(container_hbox), spy_frame, FALSE, FALSE, 0);
++    gtk_box_pack_start(GTK_BOX(container_hbox_), spy_frame, FALSE, FALSE, 0);
+   }
+ 
+   // We use an alignment to control the titlebar height.
+   titlebar_alignment_ = gtk_alignment_new(0.0, 0.0, 1.0, 1.0);
+   if (browser_window_->browser()->type() == Browser::TYPE_NORMAL) {
+-    gtk_box_pack_start(GTK_BOX(container_hbox), titlebar_alignment_, TRUE,
++    gtk_box_pack_start(GTK_BOX(container_hbox_), titlebar_alignment_, TRUE,
+                        TRUE, 0);
+ 
+     // Put the tab strip in the titlebar.
+     gtk_container_add(GTK_CONTAINER(titlebar_alignment_),
+                       browser_window_->tabstrip()->widget());
+   } else {
+     // App mode specific widgets.
+-    gtk_box_pack_start(GTK_BOX(container_hbox), titlebar_alignment_, TRUE,
++    gtk_box_pack_start(GTK_BOX(container_hbox_), titlebar_alignment_, TRUE,
+                        TRUE, 0);
+     GtkWidget* app_mode_hbox = gtk_hbox_new(FALSE, kIconTitleSpacing);
+     gtk_container_add(GTK_CONTAINER(titlebar_alignment_), app_mode_hbox);
+ 
+     // Put the tab strip in the hbox even though we don't show it.  Sometimes
+     // we need the position of the tab strip so make sure it's in our widget
+     // hierarchy.
+     gtk_box_pack_start(GTK_BOX(app_mode_hbox),
+         browser_window_->tabstrip()->widget(), FALSE, FALSE, 0);
+ 
+     GtkWidget* favicon_event_box = gtk_event_box_new();
+     gtk_event_box_set_visible_window(GTK_EVENT_BOX(favicon_event_box), FALSE);
+     g_signal_connect(favicon_event_box, "button-press-event",
+-                     G_CALLBACK(OnButtonPressed), this);
++                     G_CALLBACK(OnButtonPressedThunk), this);
+     gtk_box_pack_start(GTK_BOX(app_mode_hbox), favicon_event_box, FALSE,
+                        FALSE, 0);
+     // We use the app logo as a placeholder image so the title doesn't jump
+     // around.
+     ResourceBundle& rb = ResourceBundle::GetSharedInstance();
+     app_mode_favicon_ = gtk_image_new_from_pixbuf(
+         rb.GetRTLEnabledPixbufNamed(IDR_PRODUCT_LOGO_16));
+     g_object_set_data(G_OBJECT(app_mode_favicon_), "left-align-popup",
+@@ -238,82 +280,150 @@
+     theme_provider_ = GtkThemeProvider::GetFrom(
+         browser_window_->browser()->profile());
+     registrar_.Add(this, NotificationType::BROWSER_THEME_CHANGED,
+                    NotificationService::AllSources());
+     theme_provider_->InitThemesFor(this);
+     UpdateTitleAndIcon();
+   }
+ 
+-  // We put the min/max/restore/close buttons in a vbox so they are top aligned
+-  // (up to padding) and don't vertically stretch.
+-  titlebar_buttons_box_ = gtk_vbox_new(FALSE, 0);
+-  GtkWidget* buttons_hbox = gtk_hbox_new(FALSE, kButtonSpacing);
+-  top_padding_ = gtk_fixed_new();
+-  gtk_widget_set_size_request(top_padding_, -1, kButtonOuterPadding);
+-  gtk_box_pack_start(GTK_BOX(titlebar_buttons_box_), top_padding_, FALSE, FALSE,
+-                     0);
+-  gtk_box_pack_start(GTK_BOX(titlebar_buttons_box_), buttons_hbox, FALSE,
+-                     FALSE, 0);
+-
+-  close_button_.reset(BuildTitlebarButton(IDR_CLOSE, IDR_CLOSE_P, IDR_CLOSE_H,
+-                                          buttons_hbox,
+-                                          IDS_XPFRAME_CLOSE_TOOLTIP));
+-
+-  restore_button_.reset(BuildTitlebarButton(IDR_RESTORE, IDR_RESTORE_P,
+-                        IDR_RESTORE_H, buttons_hbox,
+-                        IDS_XPFRAME_RESTORE_TOOLTIP));
+-  maximize_button_.reset(BuildTitlebarButton(IDR_MAXIMIZE, IDR_MAXIMIZE_P,
+-                         IDR_MAXIMIZE_H, buttons_hbox,
+-                         IDS_XPFRAME_MAXIMIZE_TOOLTIP));
+-  minimize_button_.reset(BuildTitlebarButton(IDR_MINIMIZE, IDR_MINIMIZE_P,
+-                         IDR_MINIMIZE_H, buttons_hbox,
+-                         IDS_XPFRAME_MINIMIZE_TOOLTIP));
+-
+-  gtk_util::SetButtonClickableByMouseButtons(maximize_button_->widget(),
+-                                             true, true, true);
+-
+-  gtk_widget_size_request(close_button_->widget(), &close_button_req_);
+-  gtk_widget_size_request(minimize_button_->widget(), &minimize_button_req_);
+-  gtk_widget_size_request(restore_button_->widget(), &restore_button_req_);
+-
+-  gtk_box_pack_end(GTK_BOX(container_hbox), titlebar_buttons_box_, FALSE,
+-                   FALSE, 0);
+-
+   gtk_widget_show_all(container_);
+ 
+   ActiveWindowWatcherX::AddObserver(this);
+ }
+ 
+ BrowserTitlebar::~BrowserTitlebar() {
+   ActiveWindowWatcherX::RemoveObserver(this);
++  Singleton<GConfTitlebarListener>()->RemoveObserver(this);
++}
++
++void BrowserTitlebar::BuildButtons(const std::string& button_string) {
++  // Clear out all previous data.
++  close_button_.reset();
++  restore_button_.reset();
++  maximize_button_.reset();
++  minimize_button_.reset();
++  gtk_util::RemoveAllChildren(titlebar_left_buttons_vbox_);
++  gtk_util::RemoveAllChildren(titlebar_right_buttons_vbox_);
++  titlebar_left_buttons_hbox_ = NULL;
++  titlebar_right_buttons_hbox_ = NULL;
++  top_padding_left_ = NULL;
++  top_padding_right_ = NULL;
++
++  bool left_side = true;
++  StringTokenizer tokenizer(button_string, ":,");
++  tokenizer.set_options(StringTokenizer::RETURN_DELIMS);
++  while (tokenizer.GetNext()) {
++    if (tokenizer.token_is_delim()) {
++      if (*tokenizer.token_begin() == ':')
++        left_side = false;
++    } else {
++      base::StringPiece token = tokenizer.token_piece();
++      if (token == "minimize") {
++        GtkWidget* parent_box = GetButtonHBox(left_side);
++        minimize_button_.reset(
++            BuildTitlebarButton(IDR_MINIMIZE, IDR_MINIMIZE_P,
++                                IDR_MINIMIZE_H, parent_box,
++                                IDS_XPFRAME_MINIMIZE_TOOLTIP));
++
++        gtk_widget_size_request(minimize_button_->widget(),
++                                &minimize_button_req_);
++      } else if (token == "maximize") {
++        GtkWidget* parent_box = GetButtonHBox(left_side);
++        restore_button_.reset(
++            BuildTitlebarButton(IDR_RESTORE, IDR_RESTORE_P,
++                                IDR_RESTORE_H, parent_box,
++                                IDS_XPFRAME_RESTORE_TOOLTIP));
++        maximize_button_.reset(
++            BuildTitlebarButton(IDR_MAXIMIZE, IDR_MAXIMIZE_P,
++                                IDR_MAXIMIZE_H, parent_box,
++                                IDS_XPFRAME_MAXIMIZE_TOOLTIP));
++
++        gtk_util::SetButtonClickableByMouseButtons(maximize_button_->widget(),
++                                                   true, true, true);
++        gtk_widget_size_request(restore_button_->widget(),
++                                &restore_button_req_);
++      } else if (token == "close") {
++        GtkWidget* parent_box = GetButtonHBox(left_side);
++        close_button_.reset(
++            BuildTitlebarButton(IDR_CLOSE, IDR_CLOSE_P,
++                                IDR_CLOSE_H, parent_box,
++                                IDS_XPFRAME_CLOSE_TOOLTIP));
++
++        gtk_widget_size_request(close_button_->widget(), &close_button_req_);
++      }
++      // Ignore any other values like "pin" since we don't have images for
++      // those.
++    }
++  }
++
++  // Now show the correct widgets in the two hierarchies.
++  gtk_widget_show_all(titlebar_left_buttons_vbox_);
++  gtk_widget_show_all(titlebar_right_buttons_vbox_);
++  UpdateMaximizeRestoreVisibility();
++}
++
++GtkWidget* BrowserTitlebar::GetButtonHBox(bool left_side) {
++  if (left_side && titlebar_left_buttons_hbox_)
++    return titlebar_left_buttons_hbox_;
++  else if (!left_side && titlebar_right_buttons_hbox_)
++    return titlebar_right_buttons_hbox_;
++
++  // We put the min/max/restore/close buttons in a vbox so they are top aligned
++  // (up to padding) and don't vertically stretch.
++  GtkWidget* vbox = left_side ? titlebar_left_buttons_vbox_ :
++                    titlebar_right_buttons_vbox_;
++
++  GtkWidget* top_padding = gtk_fixed_new();
++  gtk_widget_set_size_request(top_padding, -1, kButtonOuterPadding);
++  gtk_box_pack_start(GTK_BOX(vbox), top_padding, FALSE, FALSE, 0);
++
++  GtkWidget* buttons_hbox = gtk_hbox_new(FALSE, kButtonSpacing);
++  gtk_box_pack_start(GTK_BOX(vbox), buttons_hbox, FALSE, FALSE, 0);
++
++  if (left_side) {
++    titlebar_left_buttons_hbox_ = buttons_hbox;
++    top_padding_left_ = top_padding;
++  } else {
++    titlebar_right_buttons_hbox_ = buttons_hbox;
++    top_padding_right_ = top_padding;
++  }
++
++  return buttons_hbox;
+ }
+ 
+ CustomDrawButton* BrowserTitlebar::BuildTitlebarButton(int image,
+     int image_pressed, int image_hot, GtkWidget* box, int tooltip) {
+   CustomDrawButton* button = new CustomDrawButton(image, image_pressed,
+                                                   image_hot, 0);
+   gtk_widget_add_events(GTK_WIDGET(button->widget()), GDK_POINTER_MOTION_MASK);
+   g_signal_connect(button->widget(), "clicked",
+                    G_CALLBACK(OnButtonClickedThunk), this);
+   g_signal_connect(button->widget(), "motion-notify-event",
+                    G_CALLBACK(OnMouseMoveEvent), browser_window_);
+   std::string localized_tooltip = l10n_util::GetStringUTF8(tooltip);
+   gtk_widget_set_tooltip_text(button->widget(),
+                               localized_tooltip.c_str());
+-  gtk_box_pack_end(GTK_BOX(box), button->widget(), FALSE, FALSE, 0);
++  gtk_box_pack_start(GTK_BOX(box), button->widget(), FALSE, FALSE, 0);
+   return button;
+ }
+ 
+ void BrowserTitlebar::UpdateCustomFrame(bool use_custom_frame) {
+   using_custom_frame_ = use_custom_frame;
+-  if (use_custom_frame)
+-    gtk_widget_show(titlebar_buttons_box_);
+-  else
+-    gtk_widget_hide(titlebar_buttons_box_);
++  if (use_custom_frame) {
++    if (titlebar_left_buttons_vbox_)
++      gtk_widget_show(titlebar_left_buttons_vbox_);
++    if (titlebar_right_buttons_vbox_)
++      gtk_widget_show(titlebar_right_buttons_vbox_);
++  } else {
++    if (titlebar_left_buttons_vbox_)
++      gtk_widget_hide(titlebar_left_buttons_vbox_);
++    if (titlebar_right_buttons_vbox_)
++      gtk_widget_hide(titlebar_right_buttons_vbox_);
++  }
+   UpdateTitlebarAlignment();
+ }
+ 
+ void BrowserTitlebar::UpdateTitleAndIcon() {
+   if (!app_mode_title_)
+     return;
+ 
+   // Get the page title and elide it to the available space.
+@@ -401,28 +511,41 @@
+   GtkRequisition close_button_req = close_button_req_;
+   GtkRequisition minimize_button_req = minimize_button_req_;
+   GtkRequisition restore_button_req = restore_button_req_;
+   if (using_custom_frame_ && browser_window_->IsMaximized()) {
+     close_button_req.width += kButtonOuterPadding;
+     close_button_req.height += kButtonOuterPadding;
+     minimize_button_req.height += kButtonOuterPadding;
+     restore_button_req.height += kButtonOuterPadding;
+-    gtk_widget_hide(top_padding_);
++    if (top_padding_left_)
++      gtk_widget_hide(top_padding_left_);
++    if (top_padding_right_)
++      gtk_widget_hide(top_padding_right_);
+   } else {
+-    gtk_widget_show(top_padding_);
++    if (top_padding_left_)
++      gtk_widget_show(top_padding_left_);
++    if (top_padding_right_)
++      gtk_widget_show(top_padding_right_);
++  }
++  if (close_button_.get()) {
++    gtk_widget_set_size_request(close_button_->widget(),
++                                close_button_req.width,
++                                close_button_req.height);
++  }
++  if (minimize_button_.get()) {
++    gtk_widget_set_size_request(minimize_button_->widget(),
++                                minimize_button_req.width,
++                                minimize_button_req.height);
++  }
++  if (maximize_button_.get()) {
++    gtk_widget_set_size_request(restore_button_->widget(),
++                                restore_button_req.width,
++                                restore_button_req.height);
+   }
+-  gtk_widget_set_size_request(close_button_->widget(),
+-                              close_button_req.width, close_button_req.height);
+-  gtk_widget_set_size_request(minimize_button_->widget(),
+-                              minimize_button_req.width,
+-                              minimize_button_req.height);
+-  gtk_widget_set_size_request(restore_button_->widget(),
+-                              restore_button_req.width,
+-                              restore_button_req.height);
+ }
+ 
+ void BrowserTitlebar::UpdateTextColor() {
+   if (app_mode_title_) {
+     if (theme_provider_ && theme_provider_->UseGtkTheme()) {
+       // We don't really have any good options here.
+       //
+       // Colors from window manager themes aren't exposed in GTK; the window
+@@ -490,69 +613,68 @@
+       height = screen_rect.height;
+     }
+ 
+     browser_window_->SetBounds(gfx::Rect(x, y, width, height));
+   }
+   gdk_event_free(event);
+ }
+ 
+-// static
+-gboolean BrowserTitlebar::OnWindowStateChanged(GtkWindow* window,
+-    GdkEventWindowState* event, BrowserTitlebar* titlebar) {
+-  // Update the maximize/restore button.
+-  if (titlebar->browser_window_->IsMaximized()) {
+-    gtk_widget_hide(titlebar->maximize_button_->widget());
+-    gtk_widget_show(titlebar->restore_button_->widget());
+-  } else {
+-    gtk_widget_hide(titlebar->restore_button_->widget());
+-    gtk_widget_show(titlebar->maximize_button_->widget());
++void BrowserTitlebar::UpdateMaximizeRestoreVisibility() {
++  if (maximize_button_.get()) {
++    if (browser_window_->IsMaximized()) {
++      gtk_widget_hide(maximize_button_->widget());
++      gtk_widget_show(restore_button_->widget());
++    } else {
++      gtk_widget_hide(restore_button_->widget());
++      gtk_widget_show(maximize_button_->widget());
++    }
+   }
+-  titlebar->UpdateTitlebarAlignment();
+-  titlebar->UpdateTextColor();
++}
++
++gboolean BrowserTitlebar::OnWindowStateChanged(GtkWindow* window,
++                                               GdkEventWindowState* event) {
++  UpdateMaximizeRestoreVisibility();
++  UpdateTitlebarAlignment();
++  UpdateTextColor();
+   return FALSE;
+ }
+ 
+-// static
+-gboolean BrowserTitlebar::OnScroll(GtkWidget* widget, GdkEventScroll* event,
+-                                   BrowserTitlebar* titlebar) {
+-  TabStripModel* tabstrip_model =
+-      titlebar->browser_window_->browser()->tabstrip_model();
++gboolean BrowserTitlebar::OnScroll(GtkWidget* widget, GdkEventScroll* event) {
++  TabStripModel* tabstrip_model = browser_window_->browser()->tabstrip_model();
+   int index = tabstrip_model->selected_index();
+   if (event->direction == GDK_SCROLL_LEFT ||
+       event->direction == GDK_SCROLL_UP) {
+     if (index != 0)
+       tabstrip_model->SelectPreviousTab();
+   } else if (index + 1 < tabstrip_model->count()) {
+     tabstrip_model->SelectNextTab();
+   }
+   return TRUE;
+ }
+ 
+ // static
+ void BrowserTitlebar::OnButtonClicked(GtkWidget* button) {
+-  if (close_button_->widget() == button) {
++  if (close_button_.get() && close_button_->widget() == button) {
+     browser_window_->Close();
+-  } else if (restore_button_->widget() == button) {
++  } else if (restore_button_.get() && restore_button_->widget() == button) {
+     browser_window_->UnMaximize();
+-  } else if (maximize_button_->widget() == button) {
++  } else if (maximize_button_.get() && maximize_button_->widget() == button) {
+     MaximizeButtonClicked();
+-  } else if (minimize_button_->widget() == button) {
++  } else if (minimize_button_.get() && minimize_button_->widget() == button) {
+     gtk_window_iconify(window_);
+   }
+ }
+ 
+-// static
+ gboolean BrowserTitlebar::OnButtonPressed(GtkWidget* widget,
+-                                          GdkEventButton* event,
+-                                          BrowserTitlebar* titlebar) {
++                                          GdkEventButton* event) {
+   if (event->button != 1)
+     return FALSE;
+ 
+-  titlebar->ShowFaviconMenu(event);
++  ShowFaviconMenu(event);
+   return TRUE;
+ }
+ 
+ void BrowserTitlebar::ShowContextMenu() {
+   if (!context_menu_.get()) {
+     context_menu_model_.reset(new ContextMenuModel(this));
+     context_menu_.reset(new MenuGtk(NULL, context_menu_model_.get()));
+   }
+Index: src/chrome/browser/gtk/browser_titlebar.h
+===================================================================
+--- src.orig/chrome/browser/gtk/browser_titlebar.h
++++ src/chrome/browser/gtk/browser_titlebar.h
+@@ -34,16 +34,19 @@
+   virtual ~BrowserTitlebar();
+ 
+   GtkWidget* widget() {
+     return container_;
+   }
+ 
+   void set_window(GtkWindow* window) { window_ = window; }
+ 
++  // Builds the buttons based on the metacity |button_string|.
++  void BuildButtons(const std::string& button_string);
++
+   // Update the appearance of the title bar based on whether we're showing a
+   // custom frame or not.  If |use_custom_frame| is true, we show an extra
+   // tall titlebar and the min/max/close buttons.
+   void UpdateCustomFrame(bool use_custom_frame);
+ 
+   // Updates the title and icon when in app or popup mode (no tabstrip).
+   void UpdateTitleAndIcon();
+ 
+@@ -84,16 +87,22 @@
+     explicit ContextMenuModel(menus::SimpleMenuModel::Delegate* delegate);
+   };
+ 
+   // Build the titlebar, the space above the tab
+   // strip, and (maybe) the min, max, close buttons.  |container| is the gtk
+   // continer that we put the widget into.
+   void Init();
+ 
++  // Lazily builds and returns |titlebar_{left,right}_buttons_vbox_| and their
++  // subtrees. We do this lazily because in most situations, only one of them
++  // is allocated (though the user can (and do) manually mess with their gconf
++  // settings to get absolutely horrid combinations of buttons on both sides.
++  GtkWidget* GetButtonHBox(bool left_side);
++
+   // Constructs a CustomDraw button given 3 image ids (IDR_), the box to place
+   // the button into, and a tooltip id (IDS_).
+   CustomDrawButton* BuildTitlebarButton(int image, int image_pressed,
+                                         int image_hot, GtkWidget* box,
+                                         int tooltip);
+ 
+   // Update the titlebar spacing based on the custom frame and maximized state.
+   void UpdateTitlebarAlignment();
+@@ -104,32 +113,35 @@
+ 
+   // Show the menu that the user gets from left-clicking the favicon.
+   void ShowFaviconMenu(GdkEventButton* event);
+ 
+   // The maximize button was clicked, take an action depending on which mouse
+   // button the user pressed.
+   void MaximizeButtonClicked();
+ 
++  // Updates the visibility of the maximize and restore buttons; only one can
++  // be visible at a time.
++  void UpdateMaximizeRestoreVisibility();
++
+   // Callback for changes to window state.  This includes
+   // maximizing/restoring/minimizing the window.
+-  static gboolean OnWindowStateChanged(GtkWindow* window,
+-                                       GdkEventWindowState* event,
+-                                       BrowserTitlebar* titlebar);
++  CHROMEG_CALLBACK_1(BrowserTitlebar, gboolean, OnWindowStateChanged,
++                     GtkWindow*, GdkEventWindowState*);
+ 
+   // Callback for mousewheel events.
+-  static gboolean OnScroll(GtkWidget* widget, GdkEventScroll* event,
+-                           BrowserTitlebar* titlebar);
++  CHROMEGTK_CALLBACK_1(BrowserTitlebar, gboolean, OnScroll,
++                       GdkEventScroll*);
+ 
+   // Callback for min/max/close buttons.
+   CHROMEGTK_CALLBACK_0(BrowserTitlebar, void, OnButtonClicked);
+ 
+   // Callback for favicon.
+-  static gboolean OnButtonPressed(GtkWidget* widget, GdkEventButton* event,
+-                                  BrowserTitlebar* titlebar);
++  CHROMEGTK_CALLBACK_1(BrowserTitlebar, gboolean, OnButtonPressed,
++                       GdkEventButton*);
+ 
+   // -- Context Menu -----------------------------------------------------------
+ 
+   // SimpleMenuModel::Delegate implementation:
+   virtual bool IsCommandIdEnabled(int command_id) const;
+   virtual bool IsCommandIdChecked(int command_id) const;
+   virtual void ExecuteCommand(int command_id);
+   virtual bool GetAcceleratorForCommandId(int command_id,
+@@ -142,28 +154,41 @@
+ 
+   // Overriden from ActiveWindowWatcher::Observer.
+   virtual void ActiveWindowChanged(GdkWindow* active_window);
+ 
+   // Pointers to the browser window that owns us and it's GtkWindow.
+   BrowserWindowGtk* browser_window_;
+   GtkWindow* window_;
+ 
+-  // The container widget the holds the whole titlebar.
++  // The container widget the holds the hbox which contains the whole titlebar.
+   GtkWidget* container_;
+-  // Box that holds the min/max/close buttons if the user turns off window
+-  // manager decorations.
+-  GtkWidget* titlebar_buttons_box_;
+-  // Gtk alignment that contains the tab strip.  If the user turns off window
+-  // manager decorations, we draw this taller.
+-  GtkWidget* titlebar_alignment_;
++
++  // The hbox that contains the whole titlebar.
++  GtkWidget* container_hbox_;
++
++  // VBoxes that holds the min/max/close buttons box and an optional padding
++  // that defines the skyline if the user turns off window manager decorations.
++  // There is a left and right version of this box since we try to integrate
++  // with the recent Ubuntu theme changes which put the buttons on the left.
++  GtkWidget* titlebar_left_buttons_vbox_;
++  GtkWidget* titlebar_right_buttons_vbox_;
++
++  // HBoxes that contains the actual min/max/close buttons.
++  GtkWidget* titlebar_left_buttons_hbox_;
++  GtkWidget* titlebar_right_buttons_hbox_;
+ 
+   // Padding between the titlebar buttons and the top of the screen. Only show
+   // when not maximized.
+-  GtkWidget* top_padding_;
++  GtkWidget* top_padding_left_;
++  GtkWidget* top_padding_right_;
++
++  // Gtk alignment that contains the tab strip.  If the user turns off window
++  // manager decorations, we draw this taller.
++  GtkWidget* titlebar_alignment_;
+ 
+   // The favicon and page title used when in app mode or popup mode.
+   GtkWidget* app_mode_favicon_;
+   GtkWidget* app_mode_title_;
+ 
+   // Whether we are using a custom frame.
+   bool using_custom_frame_;
+ 
+Index: src/chrome/browser/gtk/gconf_titlebar_listener.cc
+===================================================================
+--- /dev/null
++++ src/chrome/browser/gtk/gconf_titlebar_listener.cc
+@@ -0,0 +1,116 @@
++// Copyright (c) 2010 The Chromium Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style license that can be
++// found in the LICENSE file.
++
++#include "chrome/browser/gtk/gconf_titlebar_listener.h"
++
++#include <gtk/gtk.h>
++
++#include "base/scoped_ptr.h"
++#include "base/env_var.h"
++#include "base/linux_util.h"
++#include "chrome/browser/gtk/browser_titlebar.h"
++
++namespace {
++
++// A default button order string for when we aren't asking gconf for the
++// metacity configuration.
++const char* kDefaultButtonPlacement = ":minimize,maximize,close";
++
++// The GConf key we read for the button placement string. Even through the key
++// has "metacity" in it, it's shared between metacity and compiz.
++const char* kButtonLayoutKey = "/apps/metacity/general/button_layout";
++
++// GConf requires us to subscribe to a parent directory before we can subscribe
++// to changes in an individual key in that directory.
++const char* kMetacityGeneral = "/apps/metacity/general";
++
++}  // namespace
++
++// Public interface:
++
++void GConfTitlebarListener::SetTitlebarButtons(BrowserTitlebar* titlebar) {
++  if (client_) {
++    titlebar->BuildButtons(current_value_);
++    titlebars_.insert(titlebar);
++  } else {
++    titlebar->BuildButtons(kDefaultButtonPlacement);
++  }
++}
++
++void GConfTitlebarListener::RemoveObserver(BrowserTitlebar* titlebar) {
++  titlebars_.erase(titlebar);
++}
++
++// Private:
++
++GConfTitlebarListener::GConfTitlebarListener() : client_(NULL) {
++  scoped_ptr<base::EnvVarGetter> env_getter(base::EnvVarGetter::Create());
++  if (base::GetDesktopEnvironment(env_getter.get()) ==
++      base::DESKTOP_ENVIRONMENT_GNOME) {
++    client_ = gconf_client_get_default();
++    // If we fail to get a context, that's OK, since we'll just fallback on
++    // not receiving gconf keys.
++    if (client_) {
++      // Get the initial value of the key.
++      GError* error = NULL;
++      GConfValue* gconf_value = gconf_client_get(client_, kButtonLayoutKey,
++                                                 &error);
++      if (HandleGError(error, kButtonLayoutKey))
++        return;
++      ParseAndStoreValue(gconf_value);
++      if (gconf_value)
++        gconf_value_free(gconf_value);
++
++      // Register that we're interested in the values of this directory.
++      gconf_client_add_dir(client_, kMetacityGeneral,
++                           GCONF_CLIENT_PRELOAD_ONELEVEL, &error);
++      if (HandleGError(error, kMetacityGeneral))
++        return;
++
++      // Register to get notifies about changes to this key.
++      gconf_client_notify_add(
++          client_, kButtonLayoutKey,
++          reinterpret_cast<void (*)(GConfClient*, guint, GConfEntry*, void*)>(
++              OnChangeNotificationThunk),
++          this, NULL, &error);
++      if (HandleGError(error, kButtonLayoutKey))
++        return;
++    }
++  }
++}
++
++void GConfTitlebarListener::OnChangeNotification(GConfClient* client,
++                                                 guint cnxn_id,
++                                                 GConfEntry* entry) {
++  if (strcmp(gconf_entry_get_key(entry), kButtonLayoutKey) == 0) {
++    GConfValue* gconf_value = gconf_entry_get_value(entry);
++    ParseAndStoreValue(gconf_value);
++
++    // Broadcast the new configuration to all windows:
++    for (std::set<BrowserTitlebar*>::const_iterator it = titlebars_.begin();
++         it != titlebars_.end(); ++it) {
++      (*it)->BuildButtons(current_value_);
++    }
++  }
++}
++
++bool GConfTitlebarListener::HandleGError(GError* error, const char* key) {
++  if (error != NULL) {
++    LOG(ERROR) << "Error with gconf key '" << key << "': " << error->message;
++    g_error_free(error);
++    g_object_unref(client_);
++    client_ = NULL;
++    return true;
++  }
++  return false;
++}
++
++void GConfTitlebarListener::ParseAndStoreValue(GConfValue* gconf_value) {
++  if (gconf_value) {
++    const char* value = gconf_value_get_string(gconf_value);
++    current_value_ = value ? value : kDefaultButtonPlacement;
++  } else {
++    current_value_ = kDefaultButtonPlacement;
++  }
++}
+Index: src/chrome/browser/gtk/gconf_titlebar_listener.h
+===================================================================
+--- /dev/null
++++ src/chrome/browser/gtk/gconf_titlebar_listener.h
+@@ -0,0 +1,64 @@
++// Copyright (c) 2010 The Chromium Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style license that can be
++// found in the LICENSE file.
++
++#ifndef CHROME_BROWSER_GTK_GCONF_TITLEBAR_LISTENER_H_
++#define CHROME_BROWSER_GTK_GCONF_TITLEBAR_LISTENER_H_
++
++#include <gconf/gconf-client.h>
++#include <gtk/gtk.h>
++
++#include <set>
++#include <string>
++
++#include "app/gtk_signal.h"
++#include "base/singleton.h"
++
++class BrowserTitlebar;
++
++// On GNOME desktops, subscribes to the gconf key which controlls button order.
++// Everywhere else, SetTiltebarButtons() just calls back into BrowserTitlebar
++// with the default ordering.
++//
++// Meant to be used as a Singleton through base/singleton.h's interface.
++class GConfTitlebarListener {
++ public:
++  // Sets the current titlebar button order. On GNOME desktops, also subscribes
++  // to further notifications when this changes.
++  void SetTitlebarButtons(BrowserTitlebar* titlebar);
++
++  // Removes |titlebar| from the list of objects observing button order change
++  // notifications.
++  void RemoveObserver(BrowserTitlebar* titlebar);
++
++ private:
++  // Private constructor to enforce singleton access.
++  GConfTitlebarListener();
++
++  // Called whenever the metacity key changes.
++  CHROMEG_CALLBACK_2(GConfTitlebarListener, void, OnChangeNotification,
++                     GConfClient*, guint, GConfEntry*);
++
++  // Checks |error|. On error, prints out a message and closes the connection
++  // to GConf and reverts to default mode.
++  bool HandleGError(GError* error, const char* key);
++
++  // Parses the return data structure from GConf, falling back to the default
++  // value on any error.
++  void ParseAndStoreValue(GConfValue* gconf_value);
++
++  // Pointer to our gconf context. NULL if we aren't on a desktop that uses
++  // gconf.
++  GConfClient* client_;
++
++  // The current button ordering as heard from gconf.
++  std::string current_value_;
++
++  // BrowserTitlebar objects which have subscribed to updates.
++  std::set<BrowserTitlebar*> titlebars_;
++
++  friend struct DefaultSingletonTraits<GConfTitlebarListener>;
++  DISALLOW_COPY_AND_ASSIGN(GConfTitlebarListener);
++};
++
++#endif  // CHROME_BROWSER_GTK_GCONF_TITLEBAR_LISTENER_H_
+Index: src/chrome/chrome_browser.gypi
+===================================================================
+--- src.orig/chrome/chrome_browser.gypi
++++ src/chrome/chrome_browser.gypi
+@@ -1197,16 +1197,18 @@
+         'browser/gtk/certificate_viewer.cc',
+         'browser/gtk/certificate_viewer.h',
+         'browser/gtk/clear_browsing_data_dialog_gtk.cc',
+         'browser/gtk/clear_browsing_data_dialog_gtk.h',
+         'browser/gtk/constrained_window_gtk.cc',
+         'browser/gtk/constrained_window_gtk.h',
+         'browser/gtk/content_setting_bubble_gtk.cc',
+         'browser/gtk/content_setting_bubble_gtk.h',
++        'browser/gtk/gconf_titlebar_listener.cc',
++        'browser/gtk/gconf_titlebar_listener.h',
+         'browser/gtk/gtk_chrome_cookie_view.cc',
+         'browser/gtk/gtk_chrome_cookie_view.h',
+         'browser/gtk/create_application_shortcuts_dialog_gtk.cc',
+         'browser/gtk/create_application_shortcuts_dialog_gtk.h',
+         'browser/gtk/custom_button.cc',
+         'browser/gtk/custom_button.h',
+         'browser/gtk/custom_drag.cc',
+         'browser/gtk/custom_drag.h',
+@@ -2472,16 +2474,17 @@
+         ['chromeos==0', {
+           'sources/': [
+             ['exclude', '^browser/chromeos'],
+           ],
+         }],
+         ['OS=="linux"', {
+           'dependencies': [
+             '../build/linux/system.gyp:dbus-glib',
++            '../build/linux/system.gyp:gconf',
+             # Temporarily disabled while we figure some stuff out.
+             # http://code.google.com/p/chromium/issues/detail?id=12351
+             # '../build/linux/system.gyp:gnome-keyring',
+             '../build/linux/system.gyp:gtk',
+             '../build/linux/system.gyp:gtkprint',
+             '../build/linux/system.gyp:nss',
+             '../base/base.gyp:linux_versioninfo',
+           ],

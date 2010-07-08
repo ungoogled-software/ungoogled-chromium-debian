@@ -2,8 +2,10 @@ chromium-browser (5.0.375.99~r51029-3) UNRELEASED; urgency=low
 
   * [armel] Disabled thumb to fix FTBFS in armel
   * Bump to Standards-Version 3.9.0, no changes needed
+  * Backport support for the Ambiance/Radiance and Dust themes button ordering
+    by reading the gconf pref
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 08 Jul 2010 12:51:55 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 08 Jul 2010 13:18:00 +0200
 
 chromium-browser (5.0.375.99~r51029-2) unstable; urgency=low
 
