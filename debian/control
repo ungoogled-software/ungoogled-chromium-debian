@@ -55,7 +55,7 @@ Build-Depends: cdbs,
 	protobuf-compiler,
 	libglewmx1.5-dev,
 	libvpx-dev
-Standards-Version: 3.8.4
+Standards-Version: 3.9.0
 
 Package: chromium-browser
 Architecture: i386 amd64 armel mips
