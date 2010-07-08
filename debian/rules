@@ -58,7 +58,7 @@ DEB_HOST_ARCH_CPU := $(shell dpkg-architecture -qDEB_HOST_ARCH_CPU)
 ifeq (arm,$(DEB_HOST_ARCH_CPU))
 AVOID_GCC_44 := 0
 GYP_DEFINES += \
-	arm_thumb=1 \
+	arm_thumb=0 \
 	target_arch=arm \
 	disable_nacl=1 \
 	linux_use_tcmalloc=0 \

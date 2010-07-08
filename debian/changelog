@@ -1,3 +1,9 @@
+chromium-browser (5.0.375.99~r51029-3) UNRELEASED; urgency=low
+
+  * [armel] Disabled thumb to fix FTBFS in armel
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 08 Jul 2010 12:44:53 +0200
+
 chromium-browser (5.0.375.99~r51029-2) unstable; urgency=low
 
   * Backport patch for CVE-2010-1760
