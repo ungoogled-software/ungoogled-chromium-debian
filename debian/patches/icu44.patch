@@ -1,0 +1,24 @@
+--- a/src/base/i18n/word_iterator.h
++++ b/src/base/i18n/word_iterator.h
+@@ -9,6 +9,9 @@
+ #include <vector>
+ 
+ #include "unicode/uchar.h"
++#if U_ICU_VERSION_MAJOR_NUM == 4 && U_ICU_VERSION_MINOR_NUM >= 4
++#include "unicode/ubrk.h"
++#endif
+ 
+ #include "base/basictypes.h"
+ 
+@@ -67,7 +70,11 @@ class WordIterator {
+ 
+  private:
+   // ICU iterator.
++#if U_ICU_VERSION_MAJOR_NUM == 4 && U_ICU_VERSION_MINOR_NUM >= 4
++  UBreakIterator* iter_;
++#else
+   void* iter_;
++#endif
+ #if !defined(WCHAR_T_IS_UTF16)
+   std::vector<UChar> chars_;
+ #endif
