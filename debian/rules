@@ -370,6 +370,8 @@ endif
 clean::
 	rm -f debian/configure-stamp debian/stamp-makefile-build-*
 	rm -f *.cdbs-config_list $(subst_files)
+	rm -fr src/out
+	find src/tools -name "*.pyc" | xargs rm -f
 
 # Install: there's no install rules in scons yet, do it manually
 common-install-prehook-impl::
