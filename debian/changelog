@@ -1,8 +1,9 @@
 chromium-browser (5.0.375.99~r51029-4) UNRELEASED; urgency=low
 
   * Fix FTBFS with icu 4.4 (Closes: #589414)
+  * Do not use armv4 incompatible code
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 17 Jul 2010 17:08:55 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 17 Jul 2010 17:17:18 +0200
 
 chromium-browser (5.0.375.99~r51029-3) unstable; urgency=low
 
