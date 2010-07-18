@@ -1,0 +1,45 @@
+Flush cairo surface at end of CanvasPaintLinux
+--- a/src/skia/ext/bitmap_platform_device_linux.cc
++++ b/src/skia/ext/bitmap_platform_device_linux.cc
+@@ -47,7 +47,6 @@ class BitmapPlatformDevice::BitmapPlatfo
+   explicit BitmapPlatformDeviceData(cairo_surface_t* surface);
+ 
+   cairo_t* GetContext();
+-  cairo_surface_t* GetSurface();
+ 
+   // Sets the transform and clip operations. This will not update the Cairo
+   // surface, but will mark the config as dirty. The next call of LoadConfig
+@@ -110,13 +109,6 @@ void BitmapPlatformDevice::BitmapPlatfor
+   config_dirty_ = true;
+ }
+ 
+-cairo_surface_t*
+-BitmapPlatformDevice::BitmapPlatformDeviceData::GetSurface() {
+-  // TODO(brettw) this function should be removed.
+-  LoadConfig();
+-  return surface_;
+-}
+-
+ void BitmapPlatformDevice::BitmapPlatformDeviceData::LoadConfig() {
+   if (!config_dirty_ || !context_)
+     return;  // Nothing to do.
+--- a/src/skia/ext/canvas_paint_linux.h
++++ b/src/skia/ext/canvas_paint_linux.h
+@@ -49,6 +49,8 @@ class CanvasPaintT : public T {
+         cairo_set_operator(cr, CAIRO_OPERATOR_SOURCE);
+       cairo_surface_t* source_surface = cairo_get_target(context_);
+       CHECK(source_surface);
++      // Flush cairo's cache of the surface.
++      cairo_surface_mark_dirty(source_surface);
+       GdkRectangle bounds = rectangle();
+       cairo_set_source_surface(cr, source_surface, bounds.x, bounds.y);
+       gdk_cairo_region(cr, region_);
+@@ -83,7 +85,7 @@ class CanvasPaintT : public T {
+     GdkRectangle bounds = rectangle();
+     if (!T::initialize(bounds.width, bounds.height, opaque, NULL)) {
+       // Cause a deliberate crash;
+-      *(char*) 0 = 0;
++      CHECK(false);
+     }
+ 
+     // Need to translate so that the dirty region appears at the origin of the

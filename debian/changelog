@@ -1,3 +1,9 @@
+chromium-browser (5.0.375.99~r51029-5) UNRELEASED; urgency=low
+
+  * Flush cairo surface at end of CanvasPaintLinux (Closes: #587164)
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 18 Jul 2010 12:43:25 +0200
+
 chromium-browser (5.0.375.99~r51029-4) unstable; urgency=low
 
   * Fix FTBFS with icu 4.4 (Closes: #589414)
