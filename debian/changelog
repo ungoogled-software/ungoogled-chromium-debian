@@ -3,8 +3,10 @@ chromium-browser (6.0.466.0~r52279-1) UNRELEASED; urgency=low
   * Flush cairo surface at end of CanvasPaintLinux (Closes: #587164)
   * New dev upstream for experimental suite
   * Refreshed patches.
+  * Install new resource.pak
+  * Added libcups2-dev, libgnome-keyring-dev, libgconf2-dev in BUild-depends
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 18 Jul 2010 21:59:30 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 18 Jul 2010 22:09:23 +0200
 
 chromium-browser (5.0.375.99~r51029-4) unstable; urgency=low
 
