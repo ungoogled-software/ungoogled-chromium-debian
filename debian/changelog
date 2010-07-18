@@ -6,8 +6,9 @@ chromium-browser (6.0.466.0~r52279-1) UNRELEASED; urgency=low
   * Install new resource.pak
   * Added libcups2-dev, libgnome-keyring-dev, libgconf2-dev in BUild-depends
   * set disable_sse2=1
+  * Switch back to ffmpeg system libs
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 18 Jul 2010 22:12:55 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 18 Jul 2010 22:21:16 +0200
 
 chromium-browser (5.0.375.99~r51029-4) unstable; urgency=low
 
