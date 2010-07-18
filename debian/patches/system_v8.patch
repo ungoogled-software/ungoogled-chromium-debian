@@ -1,11 +1,10 @@
 Use system copy of libv8
 --- a/src/build/linux/system.gyp
 +++ b/src/build/linux/system.gyp
-@@ -274,6 +274,18 @@
-           },
+@@ -276,6 +276,18 @@
        }]]
      },
-+    {
+     {
 +      'target_name': 'v8',
 +      'type': 'settings',
 +      'conditions': [
@@ -17,12 +16,13 @@ Use system copy of libv8
 +          },
 +      }]]
 +    },
- # TODO(evanm): temporarily disabled while we figure out whether to depend
- # on gnome-keyring etc.
- # http://code.google.com/p/chromium/issues/detail?id=12351
++    {
+       'target_name': 'gnome-keyring',
+       'type': 'settings',
+       'conditions': [
 --- a/src/net/net.gyp
 +++ b/src/net/net.gyp
-@@ -534,7 +534,7 @@
+@@ -573,7 +573,7 @@
        'conditions': [
          ['javascript_engine=="v8"', {
            'dependencies': [
@@ -33,7 +33,7 @@ Use system copy of libv8
          [ 'OS == "linux" or OS == "freebsd" or OS == "openbsd"', {
 --- a/src/build/all.gyp
 +++ b/src/build/all.gyp
-@@ -44,7 +44,7 @@
+@@ -51,7 +51,7 @@
        'conditions': [
          ['javascript_engine=="v8"', {
            'dependencies': [
@@ -41,19 +41,19 @@ Use system copy of libv8
 +            'linux/system.gyp:v8',
            ],
          }],
-         ['OS=="mac" or OS=="linux" or OS=="freebsd"', {
+         ['OS=="mac" or OS=="linux" or OS=="freebsd" or OS=="openbsd"', {
 --- a/src/third_party/WebKit/WebCore/WebCore.gyp/WebCore.gyp
 +++ b/src/third_party/WebKit/WebCore/WebCore.gyp/WebCore.gyp
-@@ -652,7 +652,7 @@
+@@ -719,7 +719,7 @@
        'conditions': [
          ['javascript_engine=="v8"', {
            'dependencies': [
 -            '<(chromium_src_dir)/v8/tools/gyp/v8.gyp:v8',
 +            '<(chromium_src_dir)/build/linux/system.gyp:v8',
            ],
-         }],
-         ['enable_svg!=0', {
-@@ -871,10 +871,10 @@
+           'conditions': [
+             ['inside_chromium_build==1 and OS=="win" and component=="shared_library"', {
+@@ -944,10 +944,10 @@
        'conditions': [
          ['javascript_engine=="v8"', {
            'dependencies': [
@@ -64,11 +64,11 @@ Use system copy of libv8
 -            '<(chromium_src_dir)/v8/tools/gyp/v8.gyp:v8',
 +            '<(chromium_src_dir)/build/linux/system.gyp:v8',
            ],
-         }],
-         ['enable_svg!=0', {
+           'conditions': [
+             ['inside_chromium_build==1 and OS=="win" and component=="shared_library"', {
 --- a/src/chrome/browser/browser_about_handler.cc
 +++ b/src/chrome/browser/browser_about_handler.cc
-@@ -49,7 +49,7 @@
+@@ -51,7 +51,7 @@
  #include "grit/locale_settings.h"
  #include "webkit/glue/webkit_glue.h"
  #ifdef CHROME_V8
@@ -119,8 +119,8 @@ Use system copy of libv8
 -#include "v8/include/v8.h"
 +#include <v8.h>
  
+ class GURL;
  class RenderThreadBase;
- class RenderView;
 --- a/src/chrome/renderer/extensions/extension_process_bindings.h
 +++ b/src/chrome/renderer/extensions/extension_process_bindings.h
 @@ -12,7 +12,7 @@
@@ -167,7 +167,7 @@ Use system copy of libv8
  using WebKit::WebFrame;
 --- a/src/chrome/renderer/render_thread.cc
 +++ b/src/chrome/renderer/render_thread.cc
-@@ -78,7 +78,7 @@
+@@ -81,7 +81,7 @@
  #include "webkit/extensions/v8/gears_extension.h"
  #include "webkit/extensions/v8/interval_extension.h"
  #include "webkit/extensions/v8/playback_extension.h"
@@ -189,9 +189,9 @@ Use system copy of libv8
  class StringPiece;
 --- a/src/net/proxy/proxy_resolver_v8.cc
 +++ b/src/net/proxy/proxy_resolver_v8.cc
-@@ -12,7 +12,7 @@
- #include "net/proxy/proxy_info.h"
+@@ -17,7 +17,7 @@
  #include "net/proxy/proxy_resolver_js_bindings.h"
+ #include "net/proxy/proxy_resolver_request_context.h"
  #include "net/proxy/proxy_resolver_script.h"
 -#include "v8/include/v8.h"
 +#include <v8.h>
@@ -288,7 +288,7 @@ Use system copy of libv8
  
 --- a/src/webkit/glue/webkitclient_impl.cc
 +++ b/src/webkit/glue/webkitclient_impl.cc
-@@ -41,7 +41,7 @@
+@@ -38,7 +38,7 @@
  #include "webkit/glue/weburlloader_impl.h"
  
  #if defined(OS_LINUX)
@@ -299,7 +299,7 @@ Use system copy of libv8
  using WebKit::WebCookie;
 --- a/src/webkit/support/test_webkit_client.cc
 +++ b/src/webkit/support/test_webkit_client.cc
-@@ -38,7 +38,7 @@
+@@ -41,7 +41,7 @@
  #include "webkit/tools/test_shell/simple_resource_loader_bridge.h"
  #include "webkit/tools/test_shell/simple_webcookiejar_impl.h"
  #include "webkit/tools/test_shell/test_shell_request_context.h"
@@ -307,7 +307,7 @@ Use system copy of libv8
 +#include <v8.h>
  
  #if defined(OS_WIN)
- #include "third_party/WebKit/WebKit/chromium/public/win/WebThemeEngine.h"
+ #include "webkit/tools/test_shell/test_shell_webthemeengine.h"
 --- a/src/webkit/tools/test_shell/listener_leak_test.cc
 +++ b/src/webkit/tools/test_shell/listener_leak_test.cc
 @@ -7,7 +7,7 @@
@@ -319,17 +319,6 @@ Use system copy of libv8
  #include "webkit/glue/webkit_glue.h"
  #include "webkit/tools/test_shell/test_shell.h"
  #include "webkit/tools/test_shell/test_shell_test.h"
---- a/src/webkit/tools/test_shell/test_shell_webkit_init.h
-+++ b/src/webkit/tools/test_shell/test_shell_webkit_init.h
-@@ -35,7 +35,7 @@
- #include "webkit/tools/test_shell/simple_resource_loader_bridge.h"
- #include "webkit/tools/test_shell/simple_webcookiejar_impl.h"
- #include "webkit/tools/test_shell/test_shell_webmimeregistry_impl.h"
--#include "v8/include/v8.h"
-+#include <v8.h>
- 
- #if defined(OS_WIN)
- #include "third_party/WebKit/WebKit/chromium/public/win/WebThemeEngine.h"
 --- a/src/third_party/WebKit/WebCore/bindings/v8/ScriptGCEvent.h
 +++ b/src/third_party/WebKit/WebCore/bindings/v8/ScriptGCEvent.h
 @@ -33,7 +33,7 @@
@@ -341,3 +330,14 @@ Use system copy of libv8
  #include <wtf/Vector.h>
  
  namespace WebCore {
+--- a/src/webkit/glue/plugins/pepper_var.cc
++++ b/src/webkit/glue/plugins/pepper_var.cc
+@@ -12,7 +12,7 @@
+ #include "third_party/ppapi/c/ppp_class.h"
+ #include "third_party/WebKit/WebKit/chromium/public/WebBindings.h"
+ #include "webkit/glue/plugins/pepper_string.h"
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ using WebKit::WebBindings;
+ 

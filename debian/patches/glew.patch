@@ -1,8 +1,6 @@
-Index: chromium-browser-5.0.375.70~r48679/src/build/linux/system.gyp
-===================================================================
---- chromium-browser-5.0.375.70~r48679.orig/src/build/linux/system.gyp	2010-06-13 13:11:14.000000000 +0200
-+++ chromium-browser-5.0.375.70~r48679/src/build/linux/system.gyp	2010-06-13 13:11:14.000000000 +0200
-@@ -295,6 +295,23 @@
+--- a/src/build/linux/system.gyp
++++ b/src/build/linux/system.gyp
+@@ -296,6 +296,23 @@
        }]]
      },
      {
@@ -26,11 +24,9 @@ Index: chromium-browser-5.0.375.70~r48679/src/build/linux/system.gyp
        'target_name': 'v8',
        'type': 'settings',
        'conditions': [
-Index: chromium-browser-5.0.375.70~r48679/src/chrome/chrome.gyp
-===================================================================
---- chromium-browser-5.0.375.70~r48679.orig/src/chrome/chrome.gyp	2010-06-13 13:11:14.000000000 +0200
-+++ chromium-browser-5.0.375.70~r48679/src/chrome/chrome.gyp	2010-06-13 13:11:14.000000000 +0200
-@@ -583,6 +583,7 @@
+--- a/src/chrome/chrome.gyp
++++ b/src/chrome/chrome.gyp
+@@ -684,6 +684,7 @@
          '../base/base.gyp:base',
          'common',
          '../skia/skia.gyp:skia',
@@ -38,71 +34,9 @@ Index: chromium-browser-5.0.375.70~r48679/src/chrome/chrome.gyp
        ],
        'sources': [
          'gpu/gpu_backing_store_win.cc',
-@@ -623,7 +624,7 @@
-             'gpu/gpu_video_layer_glx.h',
-           ],
-           'dependencies': [
--            '../gpu/gpu.gyp:gl_libs',
-+            '../build/linux/system.gyp:glew',
-           ],
-         }],
-         ['enable_gpu==1', {
-Index: chromium-browser-5.0.375.70~r48679/src/chrome/gpu/gpu_backing_store_glx_context.cc
-===================================================================
---- chromium-browser-5.0.375.70~r48679.orig/src/chrome/gpu/gpu_backing_store_glx_context.cc	2010-06-09 11:25:27.000000000 +0200
-+++ chromium-browser-5.0.375.70~r48679/src/chrome/gpu/gpu_backing_store_glx_context.cc	2010-06-13 13:11:14.000000000 +0200
-@@ -62,8 +62,10 @@
-                                 NULL, True);
-   bool success = ::glXMakeCurrent(gpu_thread_->display(), window_id, context_);
-   DCHECK(success);
-+  GLEWContext _glewctx;
-+  #define glewGetContext() (&_glewctx)
-   glewInit();
--  glewInitGL2Hack();  // Work around for I915.  See gpu_video_layer_glx.cc.
-+  // Do we really need to call _glewInit_GL_VERSION_2_0(GLEW_CONTEXT_ARG_VAR_INIT) here? glewInit() does it. Supposed work around for I915.  See gpu_video_layer_glx.cc.
-   return context_;
- }
- 
-Index: chromium-browser-5.0.375.70~r48679/src/gpu/gpu.gyp
-===================================================================
---- chromium-browser-5.0.375.70~r48679.orig/src/gpu/gpu.gyp	2010-06-09 11:24:11.000000000 +0200
-+++ chromium-browser-5.0.375.70~r48679/src/gpu/gpu.gyp	2010-06-13 13:11:14.000000000 +0200
-@@ -253,7 +253,7 @@
-       },
-       'dependencies': [
-         'command_buffer_common',
--        'gl_libs',
-+        '../build/linux/system.gyp:glew',
-         '../gfx/gfx.gyp:gfx',
-       ],
-       'sources': [
-@@ -280,7 +280,7 @@
-       },
-       'dependencies': [
-         'command_buffer_service_impl',
--        'gl_libs',
-+        '../build/linux/system.gyp:glew',
-       ],
-       'sources': [
-         '<@(gpu_service_source_files)',
-Index: chromium-browser-5.0.375.70~r48679/src/media/media.gyp
-===================================================================
---- chromium-browser-5.0.375.70~r48679.orig/src/media/media.gyp	2010-06-09 11:24:10.000000000 +0200
-+++ chromium-browser-5.0.375.70~r48679/src/media/media.gyp	2010-06-13 13:11:14.000000000 +0200
-@@ -424,7 +424,7 @@
-             }],
-             ['player_x11_renderer == "gl"', {
-               'dependencies': [
--                '../gpu/gpu.gyp:gl_libs',
-+                '../build/linux/system.gyp:glew',
-               ],
-               'sources': [
-                 'tools/player_x11/gl_video_renderer.cc',
-Index: chromium-browser-5.0.375.70~r48679/src/third_party/WebKit/WebKit/chromium/WebKit.gyp
-===================================================================
---- chromium-browser-5.0.375.70~r48679.orig/src/third_party/WebKit/WebKit/chromium/WebKit.gyp	2010-06-09 11:27:36.000000000 +0200
-+++ chromium-browser-5.0.375.70~r48679/src/third_party/WebKit/WebKit/chromium/WebKit.gyp	2010-06-13 13:11:14.000000000 +0200
-@@ -454,16 +454,14 @@
+--- a/src/third_party/WebKit/WebKit/chromium/WebKit.gyp
++++ b/src/third_party/WebKit/WebKit/chromium/WebKit.gyp
+@@ -518,16 +518,14 @@
                  }],
                  ['"ENABLE_3D_CANVAS=1" in feature_defines', {
                      # Conditionally compile in GLEW and our GraphicsContext3D implementation.
@@ -122,86 +56,40 @@ Index: chromium-browser-5.0.375.70~r48679/src/third_party/WebKit/WebKit/chromium
 +                        'GLEW_MX'
                      ],
                      'conditions': [
-                         ['OS=="win"', {
-Index: chromium-browser-5.0.375.70~r48679/src/third_party/WebKit/WebKit/chromium/src/WebGraphicsContext3DDefaultImpl.h
-===================================================================
---- chromium-browser-5.0.375.70~r48679.orig/src/third_party/WebKit/WebKit/chromium/src/WebGraphicsContext3DDefaultImpl.h	2010-06-09 11:27:35.000000000 +0200
-+++ chromium-browser-5.0.375.70~r48679/src/third_party/WebKit/WebKit/chromium/src/WebGraphicsContext3DDefaultImpl.h	2010-06-13 13:11:14.000000000 +0200
+                         ['OS=="mac"', {
+--- a/src/third_party/WebKit/WebKit/chromium/src/WebGraphicsContext3DDefaultImpl.h
++++ b/src/third_party/WebKit/WebKit/chromium/src/WebGraphicsContext3DDefaultImpl.h
 @@ -41,7 +41,7 @@
  #include <windows.h>
  #endif
  
 -#include "GL/glew.h"
 +#include <GL/glew.h>
+ #if OS(WINDOWS)
+ #include "GL/wglew.h"
+ #endif
+@@ -53,7 +53,7 @@
+ #endif
  
- #if PLATFORM(CG)
- #include <OpenGL/OpenGL.h>
-Index: chromium-browser-5.0.375.70~r48679/src/build/common.gypi
-===================================================================
---- chromium-browser-5.0.375.70~r48679.orig/src/build/common.gypi	2010-06-13 13:11:14.000000000 +0200
-+++ chromium-browser-5.0.375.70~r48679/src/build/common.gypi	2010-06-13 13:11:14.000000000 +0200
-@@ -400,6 +400,7 @@
+ #if OS(LINUX)
+-#include "GL/glxew.h"
++#include <GL/glxew.h>
+ #endif
+ 
+ namespace WebKit {
+--- a/src/build/common.gypi
++++ b/src/build/common.gypi
+@@ -467,6 +467,7 @@
        ['enable_gpu==1', {
          'defines': [
            'ENABLE_GPU=1',
 +          'GLEW_MX',
          ],
        }],
-       ['coverage!=0', {
-Index: chromium-browser-5.0.375.70~r48679/src/chrome/gpu/gpu_main.cc
-===================================================================
---- chromium-browser-5.0.375.70~r48679.orig/src/chrome/gpu/gpu_main.cc	2010-06-09 11:25:27.000000000 +0200
-+++ chromium-browser-5.0.375.70~r48679/src/chrome/gpu/gpu_main.cc	2010-06-13 13:11:14.000000000 +0200
-@@ -41,6 +41,8 @@
- #if defined(OS_WIN)
-   win_util::ScopedCOMInitializer com_initializer;
- #elif defined(GPU_USE_GLX)
-+  GLXEWContext _glxewctx;
-+  #define glxewGetContext() (&_glxewctx)
-   dlopen("libGL.so.1", RTLD_LAZY | RTLD_GLOBAL);
-   glxewInit();
- #endif
-Index: chromium-browser-5.0.375.70~r48679/src/gpu/command_buffer/service/gl_context.cc
-===================================================================
---- chromium-browser-5.0.375.70~r48679.orig/src/gpu/command_buffer/service/gl_context.cc	2010-06-09 11:24:11.000000000 +0200
-+++ chromium-browser-5.0.375.70~r48679/src/gpu/command_buffer/service/gl_context.cc	2010-06-13 13:11:14.000000000 +0200
-@@ -27,6 +27,9 @@
-     return true;
- 
-   // Initializes context-dependent parts of GLEW.
-+  GLEWContext _glewctx;
-+  #define glewGetContext() (&_glewctx)
-+
-   if (glewInit() != GLEW_OK) {
-     LOG(ERROR) << "GLEW failed initialization";
-     return false;
-Index: chromium-browser-5.0.375.70~r48679/src/gpu/command_buffer/service/gl_context_linux.cc
-===================================================================
---- chromium-browser-5.0.375.70~r48679.orig/src/gpu/command_buffer/service/gl_context_linux.cc	2010-06-09 11:24:11.000000000 +0200
-+++ chromium-browser-5.0.375.70~r48679/src/gpu/command_buffer/service/gl_context_linux.cc	2010-06-13 13:11:14.000000000 +0200
-@@ -44,6 +44,8 @@
-     }
- 
-     // Initializes context-independent parts of GLEW
-+    GLXEWContext _glxewctx;
-+    #define glxewGetContext() (&_glxewctx)
-     if (glxewInit() != GLEW_OK) {
-       LOG(ERROR) << "glxewInit failed";
-       return false;
-@@ -52,7 +54,7 @@
-     // complete, and we don't want to have to create an OpenGL context
-     // just to get access to GLX 1.3 entry points to create pbuffers.
-     // We therefore added a glxewContextInitWithDisplay entry point.
--    if (glxewContextInitWithDisplay(display) != GLEW_OK) {
-+    if (glxewContextInit(&_glxewctx) != GLEW_OK) {
-       LOG(ERROR) << "glxewContextInit failed";
-       return false;
-     }
-Index: chromium-browser-5.0.375.70~r48679/src/third_party/WebKit/WebKit/chromium/src/WebGraphicsContext3DDefaultImpl.cpp
-===================================================================
---- chromium-browser-5.0.375.70~r48679.orig/src/third_party/WebKit/WebKit/chromium/src/WebGraphicsContext3DDefaultImpl.cpp	2010-06-13 13:14:32.626246590 +0200
-+++ chromium-browser-5.0.375.70~r48679/src/third_party/WebKit/WebKit/chromium/src/WebGraphicsContext3DDefaultImpl.cpp	2010-06-13 13:16:08.449501614 +0200
-@@ -366,6 +366,8 @@
+       ['enable_eglimage==1', {
+--- a/src/third_party/WebKit/WebKit/chromium/src/WebGraphicsContext3DDefaultImpl.cpp
++++ b/src/third_party/WebKit/WebKit/chromium/src/WebGraphicsContext3DDefaultImpl.cpp
+@@ -374,6 +374,8 @@ bool WebGraphicsContext3DDefaultImpl::in
  
      if (!s_initializedGLEW) {
          // Initialize GLEW and check for GL 2.0 support by the drivers.

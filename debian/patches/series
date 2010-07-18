@@ -1,7 +1,5 @@
-add_enable_sse2_flag.patch
 # system_v8.patch
 # chromium_useragent.patch
-html5_video_mimetypes.patch
 #no_tree_sink_v8.patch
 disable_dlog_and_dcheck_in_release_builds.patch
 #ffmpegfix.patch
@@ -10,15 +8,9 @@ system-icu.patch
 nss.patch
 expat.patch
 system_v8.patch
-memory_iceweasel.patch
 prefs.patch
 protobuf.patch
 glew.patch
-webkit-recursion.patch
-VP8.patch
-ffmpeg_arm.patch
 webkit-CVE-2010-1760.patch
-gtk-ambiance.patch
 icu44.patch
 armv4.patch
-libcairo.patch

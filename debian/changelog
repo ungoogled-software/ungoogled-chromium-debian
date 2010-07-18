@@ -1,8 +1,10 @@
-chromium-browser (5.0.375.99~r51029-5) UNRELEASED; urgency=low
+chromium-browser (6.0.466.0~r52279-1) UNRELEASED; urgency=low
 
   * Flush cairo surface at end of CanvasPaintLinux (Closes: #587164)
+  * New dev upstream for experimental suite
+  * Refreshed patches.
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 18 Jul 2010 12:43:25 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 18 Jul 2010 21:59:30 +0200
 
 chromium-browser (5.0.375.99~r51029-4) unstable; urgency=low
 

@@ -9,8 +9,8 @@
 +#endif
  
  #include "base/basictypes.h"
- 
-@@ -67,7 +70,11 @@ class WordIterator {
+ #include "base/string16.h"
+@@ -68,7 +71,11 @@ class WordIterator {
  
   private:
    // ICU iterator.
