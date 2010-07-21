@@ -1,4 +1,4 @@
-chromium-browser (6.0.466.0~r52279-1) UNRELEASED; urgency=low
+chromium-browser (6.0.466.0~r52279-1) experimental; urgency=low
 
   * Flush cairo surface at end of CanvasPaintLinux (Closes: #587164)
   * New dev upstream for experimental suite
@@ -11,7 +11,7 @@ chromium-browser (6.0.466.0~r52279-1) UNRELEASED; urgency=low
   * Define GOOGLE_PROTOBUF_NO_RTTI to fix FTBFS when compiling against system
     protobuf
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 21 Jul 2010 10:50:54 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 21 Jul 2010 14:40:57 +0200
 
 chromium-browser (5.0.375.99~r51029-4) unstable; urgency=low
 
