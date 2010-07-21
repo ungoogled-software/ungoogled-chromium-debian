@@ -8,8 +8,10 @@ chromium-browser (6.0.466.0~r52279-1) UNRELEASED; urgency=low
   * set disable_sse2=1
   * Switch back to ffmpeg system libs
   * Install DumpRenderTree_resources
+  * Define GOOGLE_PROTOBUF_NO_RTTI to fix FTBFS when compiling against system
+    protobuf
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 21 Jul 2010 10:43:06 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 21 Jul 2010 10:50:54 +0200
 
 chromium-browser (5.0.375.99~r51029-4) unstable; urgency=low
 

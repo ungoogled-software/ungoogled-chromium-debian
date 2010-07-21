@@ -1,7 +1,15 @@
 Do not embedd protobuf
 --- a/src/chrome/chrome_browser.gypi
 +++ b/src/chrome/chrome_browser.gypi
-@@ -3441,16 +3441,14 @@
+@@ -45,6 +45,7 @@
+       ],
+       'defines': [
+         '<@(nacl_defines)',
++        'GOOGLE_PROTOBUF_NO_RTTI',
+       ],
+       'direct_dependent_settings': {
+         'defines': [
+@@ -3441,16 +3442,14 @@
                  ['exclude', '^browser/notifications/balloon_collection_linux.cc'],
                ],
                'dependencies': [
@@ -20,7 +28,7 @@ Do not embedd protobuf
                      'browser/metrics/system_metrics.proto',
                    ],
                    'outputs': [
-@@ -3458,10 +3456,10 @@
+@@ -3458,10 +3457,10 @@
                      '<(INTERMEDIATE_DIR)/chrome/browser/metrics/system_metrics.pb.h',
                    ],
                    'dependencies': [
@@ -33,7 +41,7 @@ Do not embedd protobuf
                      'browser/metrics/system_metrics.proto',
                      '--cpp_out=<(INTERMEDIATE_DIR)/chrome',
                    ],
-@@ -3545,7 +3543,7 @@
+@@ -3545,7 +3544,7 @@
            'rule_name': 'genproto',
            'extension': 'proto',
            'inputs': [
@@ -42,7 +50,7 @@ Do not embedd protobuf
            ],
            'variables': {
              # The protoc compiler requires a proto_path argument with the
-@@ -3558,7 +3556,7 @@
+@@ -3558,7 +3557,7 @@
              '<(protoc_out_dir)/chrome/<(rule_input_relpath)/<(RULE_INPUT_ROOT).pb.cc',
            ],
            'action': [
@@ -51,7 +59,7 @@ Do not embedd protobuf
              '--proto_path=./<(rule_input_relpath)',
              './<(rule_input_relpath)/<(RULE_INPUT_ROOT)<(RULE_INPUT_EXT)',
              '--cpp_out=<(protoc_out_dir)/chrome/<(rule_input_relpath)',
-@@ -3567,8 +3565,7 @@
+@@ -3567,8 +3566,7 @@
          },
        ],
        'dependencies': [
@@ -61,7 +69,7 @@ Do not embedd protobuf
        ],
        'direct_dependent_settings': {
          'include_dirs': [
-@@ -3576,7 +3573,7 @@
+@@ -3576,7 +3574,7 @@
          ]
        },
        'export_dependent_settings': [
