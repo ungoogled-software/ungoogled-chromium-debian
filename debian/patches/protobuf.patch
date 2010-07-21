@@ -184,6 +184,24 @@ Do not embedd protobuf
          ['OS == "linux" or OS == "freebsd" or OS == "openbsd"', {
 --- a/src/remoting/base/protocol/chromotocol.gyp
 +++ b/src/remoting/base/protocol/chromotocol.gyp
+@@ -20,7 +20,7 @@
+           'rule_name': 'genproto',
+           'extension': 'proto',
+           'inputs': [
+-            '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)protoc<(EXECUTABLE_SUFFIX)',
++            '/usr/bin/protoc',
+           ],
+           'outputs': [
+             '<(PRODUCT_DIR)/pyproto/chromotocol_pb/<(RULE_INPUT_ROOT)_pb2.py',
+@@ -28,7 +28,7 @@
+             '<(out_dir)/<(RULE_INPUT_ROOT).pb.h',
+           ],
+           'action': [
+-            '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)protoc<(EXECUTABLE_SUFFIX)',
++            '/usr/bin/protoc',
+             '--proto_path=.',
+             './<(RULE_INPUT_ROOT)<(RULE_INPUT_EXT)',
+             '--cpp_out=<(out_dir)',
 @@ -38,7 +38,7 @@
          },
        ],
