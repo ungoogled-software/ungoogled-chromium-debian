@@ -485,6 +485,15 @@ Use system libicu
              '-Wno-unused',
 --- a/src/third_party/WebKit/WebKit/chromium/WebKit.gyp
 +++ b/src/third_party/WebKit/WebKit/chromium/WebKit.gyp
+@@ -457,7 +457,7 @@
+                             'dependencies': [
+                                 '../../WebCore/WebCore.gyp/WebCore.gyp:webcore_bindings',
+                                 '<(chromium_src_dir)/gpu/gpu.gyp:gles2_c_lib',
+-                                '<(chromium_src_dir)/third_party/icu/icu.gyp:*',
++                                '<(chromium_src_dir)/build/linux/system.gyp:icu',
+                                 '<(chromium_src_dir)/third_party/libjpeg/libjpeg.gyp:libjpeg',
+                                 '<(chromium_src_dir)/third_party/libpng/libpng.gyp:libpng',
+                                 '<(chromium_src_dir)/third_party/libxml/libxml.gyp:libxml',
 @@ -611,7 +611,7 @@
                  'ImageDiff',
                  'webkit',
@@ -494,3 +503,59 @@ Use system libicu
                  '<(chromium_src_dir)/webkit/support/webkit_support.gyp:npapi_layout_test_plugin',
                  '<(chromium_src_dir)/webkit/support/webkit_support.gyp:webkit_support',
                  '<(chromium_src_dir)/gpu/gpu.gyp:gles2_c_lib'
+--- a/src/chrome/browser/chromeos/cros/input_method_library.cc
++++ b/src/chrome/browser/chromeos/cros/input_method_library.cc
+@@ -11,7 +11,7 @@
+ #include "chrome/browser/chromeos/cros/cros_library.h"
+ #include "chrome/browser/chromeos/cros/keyboard_library.h"
+ #include "chrome/browser/chromeos/language_preferences.h"
+-#include "third_party/icu/public/common/unicode/uloc.h"
++#include <unicode/uloc.h>
+ 
+ // Allows InvokeLater without adding refcounting. This class is a Singleton and
+ // won't be deleted until it's last InvokeLater is run.
+--- a/src/chrome/browser/chromeos/dom_ui/system_options_handler.h
++++ b/src/chrome/browser/chromeos/dom_ui/system_options_handler.h
+@@ -9,7 +9,7 @@
+ #include <vector>
+ 
+ #include "chrome/browser/dom_ui/options_ui.h"
+-#include "third_party/icu/public/i18n/unicode/timezone.h"
++#include <unicode/timezone.h>
+ 
+ // ChromeOS system options page UI handler.
+ class SystemOptionsHandler : public OptionsPageUIHandler {
+--- a/src/chrome/browser/chromeos/input_method/input_method_util.cc
++++ b/src/chrome/browser/chromeos/input_method/input_method_util.cc
+@@ -22,7 +22,7 @@
+ #include "chrome/browser/chromeos/cros/keyboard_library.h"
+ #include "chrome/browser/chromeos/language_preferences.h"
+ #include "grit/generated_resources.h"
+-#include "third_party/icu/public/common/unicode/uloc.h"
++#include <unicode/uloc.h>
+ 
+ namespace {
+ 
+--- a/src/chrome/default_plugin/default_plugin.gyp
++++ b/src/chrome/default_plugin/default_plugin.gyp
+@@ -16,8 +16,7 @@
+       'dependencies': [
+         ':default_plugin_resources',
+         '<(DEPTH)/net/net.gyp:net_resources',
+-        '<(DEPTH)/third_party/icu/icu.gyp:icui18n',
+-        '<(DEPTH)/third_party/icu/icu.gyp:icuuc',
++        '<(DEPTH)/build/linux/system.gyp:icu',
+         '<(DEPTH)/third_party/libxml/libxml.gyp:libxml',
+         '<(DEPTH)/third_party/npapi/npapi.gyp:npapi',
+         '<(DEPTH)/webkit/support/webkit_support.gyp:webkit_resources',
+--- a/src/skia/ext/SkFontHost_fontconfig_direct.cpp
++++ b/src/skia/ext/SkFontHost_fontconfig_direct.cpp
+@@ -22,7 +22,7 @@
+ 
+ #include <fontconfig/fontconfig.h>
+ 
+-#include "third_party/icu/public/common/unicode/utf16.h"
++#include <unicode/utf16.h>
+ 
+ namespace {
+ 
