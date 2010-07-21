@@ -4,6 +4,7 @@ debian/tmp/usr/lib/chromium-browser/chrom*
 debian/tmp/usr/lib/chromium-browser/xdg-settings
 debian/tmp/usr/lib/chromium-browser/resources.pak
 debian/tmp/usr/lib/chromium-browser/locales/*
+debian/tmp/usr/lib/chromium-browser/DumpRenderTree_resources
 debian/chromium-browser.desktop usr/share/applications
 debian/chromium-browser.xml usr/share/gnome-control-center/default-apps
 debian/master_preferences etc/chromium-browser
