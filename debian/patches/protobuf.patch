@@ -1,7 +1,7 @@
 Do not embedd protobuf
 --- a/src/chrome/chrome_browser.gypi
 +++ b/src/chrome/chrome_browser.gypi
-@@ -45,6 +45,7 @@
+@@ -46,6 +46,7 @@
        ],
        'defines': [
          '<@(nacl_defines)',
@@ -9,7 +9,7 @@ Do not embedd protobuf
        ],
        'direct_dependent_settings': {
          'defines': [
-@@ -3441,16 +3442,14 @@
+@@ -3521,16 +3522,14 @@
                  ['exclude', '^browser/notifications/balloon_collection_linux.cc'],
                ],
                'dependencies': [
@@ -28,7 +28,7 @@ Do not embedd protobuf
                      'browser/metrics/system_metrics.proto',
                    ],
                    'outputs': [
-@@ -3458,10 +3457,10 @@
+@@ -3538,10 +3537,10 @@
                      '<(INTERMEDIATE_DIR)/chrome/browser/metrics/system_metrics.pb.h',
                    ],
                    'dependencies': [
@@ -41,7 +41,7 @@ Do not embedd protobuf
                      'browser/metrics/system_metrics.proto',
                      '--cpp_out=<(INTERMEDIATE_DIR)/chrome',
                    ],
-@@ -3545,7 +3544,7 @@
+@@ -3625,7 +3624,7 @@
            'rule_name': 'genproto',
            'extension': 'proto',
            'inputs': [
@@ -50,7 +50,7 @@ Do not embedd protobuf
            ],
            'variables': {
              # The protoc compiler requires a proto_path argument with the
-@@ -3558,7 +3557,7 @@
+@@ -3638,7 +3637,7 @@
              '<(protoc_out_dir)/chrome/<(rule_input_relpath)/<(RULE_INPUT_ROOT).pb.cc',
            ],
            'action': [
@@ -59,7 +59,7 @@ Do not embedd protobuf
              '--proto_path=./<(rule_input_relpath)',
              './<(rule_input_relpath)/<(RULE_INPUT_ROOT)<(RULE_INPUT_EXT)',
              '--cpp_out=<(protoc_out_dir)/chrome/<(rule_input_relpath)',
-@@ -3567,8 +3566,7 @@
+@@ -3647,8 +3646,7 @@
          },
        ],
        'dependencies': [
@@ -69,7 +69,7 @@ Do not embedd protobuf
        ],
        'direct_dependent_settings': {
          'include_dirs': [
-@@ -3576,7 +3574,7 @@
+@@ -3656,7 +3654,7 @@
          ]
        },
        'export_dependent_settings': [
@@ -127,7 +127,7 @@ Do not embedd protobuf
              '--proto_path=.',
              './<(RULE_INPUT_ROOT)<(RULE_INPUT_EXT)',
              '--cpp_out=<(SHARED_INTERMEDIATE_DIR)/protoc_out/chrome/browser/sync/protocol',
-@@ -47,18 +47,18 @@
+@@ -47,7 +47,7 @@
          },
        ],
        'dependencies': [
@@ -136,26 +136,29 @@ Do not embedd protobuf
        ],
      },
      {
-       'target_name': 'sync_proto_cpp',
-       'type': 'none',
+@@ -56,13 +56,13 @@
        'export_dependent_settings': [
--        '../../../../third_party/protobuf2/protobuf.gyp:protobuf_lite',
+         # TODO(akalin): Change back to protobuf_lite once it supports
+         # preserving unknown fields.
+-        '../../../../third_party/protobuf2/protobuf.gyp:protobuf',
 +        '../../../../build/linux/system.gyp:protobuf',
          'sync_proto',
        ],
        'dependencies': [
--        '../../../../third_party/protobuf2/protobuf.gyp:protobuf_lite',
+         # TODO(akalin): Change back to protobuf_lite once it supports
+         # preserving unknown fields.
+-        '../../../../third_party/protobuf2/protobuf.gyp:protobuf',
 +        '../../../../build/linux/system.gyp:protobuf',
          'sync_proto',
        ],
        'direct_dependent_settings': {
 --- a/src/chrome/chrome.gyp
 +++ b/src/chrome/chrome.gyp
-@@ -952,7 +952,7 @@
-         '../skia/skia.gyp:skia',
-         '../third_party/libjingle/libjingle.gyp:libjingle',
+@@ -953,7 +953,7 @@
          'browser/sync/protocol/sync_proto.gyp:sync_proto_cpp',
--        '../third_party/protobuf2/protobuf.gyp:protobuf_lite#target',
+         # TODO(akalin): Change back to protobuf_lite once it supports
+         # preserving unknown fields.
+-        '../third_party/protobuf2/protobuf.gyp:protobuf#target',
 +        '../build/linux/system.gyp:protobuf',
        ],
        'conditions': [
@@ -173,7 +176,7 @@ Do not embedd protobuf
          '../src/trusted/nacl_breakpad/nacl_breakpad.gyp:*',
 --- a/src/net/net.gyp
 +++ b/src/net/net.gyp
-@@ -918,7 +918,7 @@
+@@ -924,7 +924,7 @@
          ['inside_chromium_build==1', {
            'dependencies': [
              '../chrome/browser/sync/protocol/sync_proto.gyp:sync_proto',
@@ -227,7 +230,7 @@ Do not embedd protobuf
        # This target exports a hard dependency because depedents require
 --- a/src/remoting/remoting.gyp
 +++ b/src/remoting/remoting.gyp
-@@ -105,7 +105,7 @@
+@@ -112,7 +112,7 @@
        'dependencies': [
          '../gfx/gfx.gyp:gfx',
          '../media/media.gyp:media',
@@ -236,7 +239,7 @@ Do not embedd protobuf
          '../third_party/zlib/zlib.gyp:zlib',
          'base/protocol/chromotocol.gyp:chromotocol_proto_lib',
          'chromoting_jingle_glue',
-@@ -113,7 +113,7 @@
+@@ -120,7 +120,7 @@
          #'third_party/on2/on2.gyp:vp8',
        ],
        'export_dependent_settings': [

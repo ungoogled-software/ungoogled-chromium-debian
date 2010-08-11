@@ -26,7 +26,7 @@
        'conditions': [
 --- a/src/chrome/chrome.gyp
 +++ b/src/chrome/chrome.gyp
-@@ -684,6 +684,7 @@
+@@ -685,6 +685,7 @@
          '../base/base.gyp:base',
          'common',
          '../skia/skia.gyp:skia',
@@ -36,7 +36,7 @@
          'gpu/gpu_backing_store_win.cc',
 --- a/src/third_party/WebKit/WebKit/chromium/WebKit.gyp
 +++ b/src/third_party/WebKit/WebKit/chromium/WebKit.gyp
-@@ -518,16 +518,14 @@
+@@ -563,16 +563,14 @@
                  }],
                  ['"ENABLE_3D_CANVAS=1" in feature_defines', {
                      # Conditionally compile in GLEW and our GraphicsContext3D implementation.
@@ -79,7 +79,7 @@
  namespace WebKit {
 --- a/src/build/common.gypi
 +++ b/src/build/common.gypi
-@@ -467,6 +467,7 @@
+@@ -473,6 +473,7 @@
        ['enable_gpu==1', {
          'defines': [
            'ENABLE_GPU=1',

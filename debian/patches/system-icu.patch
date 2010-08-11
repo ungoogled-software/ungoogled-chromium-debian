@@ -96,7 +96,7 @@ Use system libicu
        ],
        'sources': [
          '../../googleurl/src/gurl.cc',
-@@ -66,7 +64,7 @@
+@@ -71,7 +69,7 @@
        'dependencies': [
          'googleurl',
          '../../testing/gtest.gyp:gtest',
@@ -118,7 +118,7 @@ Use system libicu
        ],
        'include_dirs': [
          '..',
-@@ -573,8 +573,7 @@
+@@ -574,8 +574,7 @@
          'chrome_strings',
          '../media/media.gyp:media',
          '../skia/skia.gyp:skia',
@@ -128,7 +128,7 @@ Use system libicu
          '../third_party/npapi/npapi.gyp:npapi',
          '../third_party/hunspell/hunspell.gyp:hunspell',
          '../webkit/support/webkit_support.gyp:glue',
-@@ -790,7 +789,7 @@
+@@ -791,7 +790,7 @@
          '../base/base.gyp:base',
          '../build/temp_gyp/googleurl.gyp:googleurl',
          '../jingle/jingle.gyp:notifier',
@@ -139,7 +139,7 @@ Use system libicu
          'browser/sync/protocol/sync_proto.gyp:sync_proto_cpp',
 --- a/src/chrome/chrome_browser.gypi
 +++ b/src/chrome/chrome_browser.gypi
-@@ -29,8 +29,7 @@
+@@ -30,8 +30,7 @@
          '../skia/skia.gyp:skia',
          '../third_party/bzip2/bzip2.gyp:bzip2',
          '../third_party/expat/expat.gyp:expat',
@@ -163,7 +163,7 @@ Use system libicu
          '../webkit/support/webkit_support.gyp:glue',
 --- a/src/chrome/chrome_tests.gypi
 +++ b/src/chrome/chrome_tests.gypi
-@@ -267,8 +267,7 @@
+@@ -272,8 +272,7 @@
          '../skia/skia.gyp:skia',
          '../testing/gmock.gyp:gmock',
          '../testing/gtest.gyp:gtest',
@@ -173,7 +173,7 @@ Use system libicu
          '../third_party/libxml/libxml.gyp:libxml',
          # run time dependencies
          'default_plugin/default_plugin.gyp:default_plugin',
-@@ -441,8 +440,7 @@
+@@ -565,8 +564,7 @@
          '../net/net.gyp:net',
          '../skia/skia.gyp:skia',
          '../testing/gtest.gyp:gtest',
@@ -183,7 +183,7 @@ Use system libicu
        ],
        'include_dirs': [
          '..',
-@@ -521,8 +519,7 @@
+@@ -646,8 +644,7 @@
          '../third_party/bzip2/bzip2.gyp:bzip2',
          '../third_party/cld/cld.gyp:cld',
          '../third_party/expat/expat.gyp:expat',
@@ -193,7 +193,7 @@ Use system libicu
          '../third_party/libjingle/libjingle.gyp:libjingle',
          '../third_party/libxml/libxml.gyp:libxml',
          '../third_party/npapi/npapi.gyp:npapi',
-@@ -1325,8 +1322,7 @@
+@@ -1465,8 +1462,7 @@
          '../skia/skia.gyp:skia',
          '../testing/gmock.gyp:gmock',
          '../testing/gtest.gyp:gtest',
@@ -203,7 +203,7 @@ Use system libicu
        ],
        'include_dirs': [
          '..',
-@@ -1975,8 +1971,7 @@
+@@ -2119,8 +2115,7 @@
          '../skia/skia.gyp:skia',
          '../testing/gmock.gyp:gmock',
          '../testing/gtest.gyp:gtest',
@@ -238,7 +238,7 @@ Use system libicu
          'npchrome_frame',
 --- a/src/gfx/gfx.gyp
 +++ b/src/gfx/gfx.gyp
-@@ -65,8 +65,7 @@
+@@ -66,8 +66,7 @@
          '../base/base.gyp:base',
          '../base/base.gyp:base_i18n',
          '../skia/skia.gyp:skia',
@@ -260,7 +260,7 @@ Use system libicu
          '../third_party/zlib/zlib.gyp:zlib',
          'net_resources',
        ],
-@@ -233,8 +232,7 @@
+@@ -235,8 +234,7 @@
          '../base/base.gyp:base_i18n',
          '../build/temp_gyp/googleurl.gyp:googleurl',
          '../sdch/sdch.gyp:sdch',
@@ -328,7 +328,7 @@ Use system libicu
          'HUNSPELL_STATIC',
 --- a/src/third_party/libxml/libxml.gyp
 +++ b/src/third_party/libxml/libxml.gyp
-@@ -157,11 +157,11 @@
+@@ -154,11 +154,11 @@
              'include',
            ],
            'dependencies': [
@@ -341,7 +341,7 @@ Use system libicu
 +            '../../build/linux/system.gyp:icu',
            ],
            'direct_dependent_settings': {
-             'defines': [
+             'include_dirs': [
 --- a/src/third_party/sqlite/sqlite.gyp
 +++ b/src/third_party/sqlite/sqlite.gyp
 @@ -205,8 +205,7 @@
@@ -387,7 +387,7 @@ Use system libicu
        'include_dirs': [
 --- a/src/webkit/tools/test_shell/test_shell.gypi
 +++ b/src/webkit/tools/test_shell/test_shell.gypi
-@@ -517,7 +517,7 @@
+@@ -489,7 +489,7 @@
            'mac_bundle': 1,
            'msvs_guid': '0D04AEC1-6B68-492C-BCCF-808DFD69ABC6',
            'dependencies': [
@@ -398,7 +398,7 @@ Use system libicu
            'sources': [
 --- a/src/chrome/browser/autocomplete/autocomplete_popup_model.cc
 +++ b/src/chrome/browser/autocomplete/autocomplete_popup_model.cc
-@@ -11,7 +11,7 @@
+@@ -12,7 +12,7 @@
  #include "chrome/browser/search_engines/template_url.h"
  #include "chrome/browser/search_engines/template_url_model.h"
  #include "chrome/common/notification_service.h"
@@ -450,8 +450,8 @@ Use system libicu
  // SpellcheckWordIterator. When we set the spellchecker language, this class
 --- a/src/chrome/chrome_common.gypi
 +++ b/src/chrome/chrome_common.gypi
-@@ -138,8 +138,7 @@
-         '../net/net.gyp:net',
+@@ -149,8 +149,7 @@
+         '../printing/printing.gyp:printing',
          '../skia/skia.gyp:skia',
          '../third_party/bzip2/bzip2.gyp:bzip2',
 -        '../third_party/icu/icu.gyp:icui18n',
@@ -462,9 +462,9 @@ Use system libicu
          '../third_party/zlib/zlib.gyp:zlib',
 --- a/src/webkit/glue/webkit_glue.gypi
 +++ b/src/webkit/glue/webkit_glue.gypi
-@@ -113,8 +113,7 @@
-         '<(DEPTH)/base/base.gyp:base_i18n',
+@@ -114,8 +114,7 @@
          '<(DEPTH)/net/net.gyp:net',
+         '<(DEPTH)/printing/printing.gyp:printing',
          '<(DEPTH)/skia/skia.gyp:skia',
 -        '<(DEPTH)/third_party/icu/icu.gyp:icui18n',
 -        '<(DEPTH)/third_party/icu/icu.gyp:icuuc',
@@ -485,22 +485,22 @@ Use system libicu
              '-Wno-unused',
 --- a/src/third_party/WebKit/WebKit/chromium/WebKit.gyp
 +++ b/src/third_party/WebKit/WebKit/chromium/WebKit.gyp
-@@ -457,7 +457,7 @@
-                             'dependencies': [
+@@ -493,7 +493,7 @@
                                  '../../WebCore/WebCore.gyp/WebCore.gyp:webcore_bindings',
+                                 '<(chromium_src_dir)/build/temp_gyp/googleurl.gyp:googleurl',
                                  '<(chromium_src_dir)/gpu/gpu.gyp:gles2_c_lib',
 -                                '<(chromium_src_dir)/third_party/icu/icu.gyp:*',
 +                                '<(chromium_src_dir)/build/linux/system.gyp:icu',
                                  '<(chromium_src_dir)/third_party/libjpeg/libjpeg.gyp:libjpeg',
                                  '<(chromium_src_dir)/third_party/libpng/libpng.gyp:libpng',
                                  '<(chromium_src_dir)/third_party/libxml/libxml.gyp:libxml',
-@@ -611,7 +611,7 @@
-                 'ImageDiff',
+@@ -730,7 +730,7 @@
+                 'inspector_resources',
                  'webkit',
                  '../../JavaScriptCore/JavaScriptCore.gyp/JavaScriptCore.gyp:wtf_config',
 -                '<(chromium_src_dir)/third_party/icu/icu.gyp:icuuc',
 +                '<(chromium_src_dir)/build/linux/system.gyp:icu',
-                 '<(chromium_src_dir)/webkit/support/webkit_support.gyp:npapi_layout_test_plugin',
+                 '<(chromium_src_dir)/webkit/support/webkit_support.gyp:copy_npapi_layout_test_plugin',
                  '<(chromium_src_dir)/webkit/support/webkit_support.gyp:webkit_support',
                  '<(chromium_src_dir)/gpu/gpu.gyp:gles2_c_lib'
 --- a/src/chrome/browser/chromeos/cros/input_method_library.cc

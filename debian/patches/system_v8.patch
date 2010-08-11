@@ -22,7 +22,7 @@ Use system copy of libv8
        'conditions': [
 --- a/src/net/net.gyp
 +++ b/src/net/net.gyp
-@@ -573,7 +573,7 @@
+@@ -575,7 +575,7 @@
        'conditions': [
          ['javascript_engine=="v8"', {
            'dependencies': [
@@ -33,7 +33,7 @@ Use system copy of libv8
          [ 'OS == "linux" or OS == "freebsd" or OS == "openbsd"', {
 --- a/src/build/all.gyp
 +++ b/src/build/all.gyp
-@@ -51,7 +51,7 @@
+@@ -52,7 +52,7 @@
        'conditions': [
          ['javascript_engine=="v8"', {
            'dependencies': [
@@ -167,7 +167,7 @@ Use system copy of libv8
  using WebKit::WebFrame;
 --- a/src/chrome/renderer/render_thread.cc
 +++ b/src/chrome/renderer/render_thread.cc
-@@ -81,7 +81,7 @@
+@@ -76,7 +76,7 @@
  #include "webkit/extensions/v8/gears_extension.h"
  #include "webkit/extensions/v8/interval_extension.h"
  #include "webkit/extensions/v8/playback_extension.h"

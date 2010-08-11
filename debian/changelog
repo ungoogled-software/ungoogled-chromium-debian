@@ -1,8 +1,9 @@
 chromium-browser (6.0.472.25~r55113-1) UNRELEASED; urgency=low
 
   * New dev version
+  * Refreshed patches
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 11 Aug 2010 19:17:48 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 11 Aug 2010 19:36:13 +0200
 
 chromium-browser (6.0.466.0~r52279-1) experimental; urgency=low
 
