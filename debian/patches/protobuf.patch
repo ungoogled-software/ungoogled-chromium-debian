@@ -1,6 +1,8 @@
 Do not embedd protobuf
---- a/src/chrome/chrome_browser.gypi
-+++ b/src/chrome/chrome_browser.gypi
+Index: chromium-browser-6.0.472.36~r55963/src/chrome/chrome_browser.gypi
+===================================================================
+--- chromium-browser-6.0.472.36~r55963.orig/src/chrome/chrome_browser.gypi	2010-08-18 16:18:55.000000000 +0000
++++ chromium-browser-6.0.472.36~r55963/src/chrome/chrome_browser.gypi	2010-08-18 16:18:55.000000000 +0000
 @@ -46,6 +46,7 @@
        ],
        'defines': [
@@ -9,7 +11,7 @@ Do not embedd protobuf
        ],
        'direct_dependent_settings': {
          'defines': [
-@@ -3521,16 +3522,14 @@
+@@ -3527,16 +3528,14 @@
                  ['exclude', '^browser/notifications/balloon_collection_linux.cc'],
                ],
                'dependencies': [
@@ -28,7 +30,7 @@ Do not embedd protobuf
                      'browser/metrics/system_metrics.proto',
                    ],
                    'outputs': [
-@@ -3538,10 +3537,10 @@
+@@ -3544,10 +3543,10 @@
                      '<(INTERMEDIATE_DIR)/chrome/browser/metrics/system_metrics.pb.h',
                    ],
                    'dependencies': [
@@ -41,7 +43,7 @@ Do not embedd protobuf
                      'browser/metrics/system_metrics.proto',
                      '--cpp_out=<(INTERMEDIATE_DIR)/chrome',
                    ],
-@@ -3625,7 +3624,7 @@
+@@ -3631,7 +3630,7 @@
            'rule_name': 'genproto',
            'extension': 'proto',
            'inputs': [
@@ -50,7 +52,7 @@ Do not embedd protobuf
            ],
            'variables': {
              # The protoc compiler requires a proto_path argument with the
-@@ -3638,7 +3637,7 @@
+@@ -3644,7 +3643,7 @@
              '<(protoc_out_dir)/chrome/<(rule_input_relpath)/<(RULE_INPUT_ROOT).pb.cc',
            ],
            'action': [
@@ -59,7 +61,7 @@ Do not embedd protobuf
              '--proto_path=./<(rule_input_relpath)',
              './<(rule_input_relpath)/<(RULE_INPUT_ROOT)<(RULE_INPUT_EXT)',
              '--cpp_out=<(protoc_out_dir)/chrome/<(rule_input_relpath)',
-@@ -3647,8 +3646,7 @@
+@@ -3653,8 +3652,7 @@
          },
        ],
        'dependencies': [
@@ -69,7 +71,7 @@ Do not embedd protobuf
        ],
        'direct_dependent_settings': {
          'include_dirs': [
-@@ -3656,7 +3654,7 @@
+@@ -3662,7 +3660,7 @@
          ]
        },
        'export_dependent_settings': [
@@ -78,8 +80,10 @@ Do not embedd protobuf
        ],
      },
    ],
---- a/src/build/linux/system.gyp
-+++ b/src/build/linux/system.gyp
+Index: chromium-browser-6.0.472.36~r55963/src/build/linux/system.gyp
+===================================================================
+--- chromium-browser-6.0.472.36~r55963.orig/src/build/linux/system.gyp	2010-08-18 16:18:55.000000000 +0000
++++ chromium-browser-6.0.472.36~r55963/src/build/linux/system.gyp	2010-08-18 16:19:51.553746647 +0000
 @@ -276,6 +276,26 @@
        }]]
      },
@@ -107,8 +111,10 @@ Do not embedd protobuf
        'target_name': 'v8',
        'type': 'settings',
        'conditions': [
---- a/src/chrome/browser/sync/protocol/sync_proto.gyp
-+++ b/src/chrome/browser/sync/protocol/sync_proto.gyp
+Index: chromium-browser-6.0.472.36~r55963/src/chrome/browser/sync/protocol/sync_proto.gyp
+===================================================================
+--- chromium-browser-6.0.472.36~r55963.orig/src/chrome/browser/sync/protocol/sync_proto.gyp	2010-08-04 15:01:18.000000000 +0000
++++ chromium-browser-6.0.472.36~r55963/src/chrome/browser/sync/protocol/sync_proto.gyp	2010-08-18 16:18:55.000000000 +0000
 @@ -29,7 +29,7 @@
            'rule_name': 'genproto',
            'extension': 'proto',
@@ -152,8 +158,10 @@ Do not embedd protobuf
          'sync_proto',
        ],
        'direct_dependent_settings': {
---- a/src/chrome/chrome.gyp
-+++ b/src/chrome/chrome.gyp
+Index: chromium-browser-6.0.472.36~r55963/src/chrome/chrome.gyp
+===================================================================
+--- chromium-browser-6.0.472.36~r55963.orig/src/chrome/chrome.gyp	2010-08-18 16:18:55.000000000 +0000
++++ chromium-browser-6.0.472.36~r55963/src/chrome/chrome.gyp	2010-08-18 16:19:51.557747075 +0000
 @@ -953,7 +953,7 @@
          'browser/sync/protocol/sync_proto.gyp:sync_proto_cpp',
          # TODO(akalin): Change back to protobuf_lite once it supports
@@ -163,8 +171,10 @@ Do not embedd protobuf
        ],
        'conditions': [
          ['OS=="win"', {
---- a/src/native_client/build/all.gyp
-+++ b/src/native_client/build/all.gyp
+Index: chromium-browser-6.0.472.36~r55963/src/native_client/build/all.gyp
+===================================================================
+--- chromium-browser-6.0.472.36~r55963.orig/src/native_client/build/all.gyp	2010-08-04 15:02:34.000000000 +0000
++++ chromium-browser-6.0.472.36~r55963/src/native_client/build/all.gyp	2010-08-18 16:18:55.000000000 +0000
 @@ -16,7 +16,7 @@
  #        '../src/shared/platform/platform_tests.gyp:*',
          '../src/shared/srpc/srpc.gyp:*',
@@ -174,8 +184,10 @@ Do not embedd protobuf
          '../src/trusted/debug_stub/debug_stub.gyp:*',
          '../src/trusted/desc/desc.gyp:*',
          '../src/trusted/nacl_breakpad/nacl_breakpad.gyp:*',
---- a/src/net/net.gyp
-+++ b/src/net/net.gyp
+Index: chromium-browser-6.0.472.36~r55963/src/net/net.gyp
+===================================================================
+--- chromium-browser-6.0.472.36~r55963.orig/src/net/net.gyp	2010-08-18 16:18:55.000000000 +0000
++++ chromium-browser-6.0.472.36~r55963/src/net/net.gyp	2010-08-18 16:18:55.000000000 +0000
 @@ -924,7 +924,7 @@
          ['inside_chromium_build==1', {
            'dependencies': [
@@ -185,8 +197,10 @@ Do not embedd protobuf
            ],
          }],
          ['OS == "linux" or OS == "freebsd" or OS == "openbsd"', {
---- a/src/remoting/base/protocol/chromotocol.gyp
-+++ b/src/remoting/base/protocol/chromotocol.gyp
+Index: chromium-browser-6.0.472.36~r55963/src/remoting/base/protocol/chromotocol.gyp
+===================================================================
+--- chromium-browser-6.0.472.36~r55963.orig/src/remoting/base/protocol/chromotocol.gyp	2010-08-04 14:59:33.000000000 +0000
++++ chromium-browser-6.0.472.36~r55963/src/remoting/base/protocol/chromotocol.gyp	2010-08-18 16:18:55.000000000 +0000
 @@ -20,7 +20,7 @@
            'rule_name': 'genproto',
            'extension': 'proto',
@@ -228,8 +242,10 @@ Do not embedd protobuf
          'chromotocol_proto',
        ],
        # This target exports a hard dependency because depedents require
---- a/src/remoting/remoting.gyp
-+++ b/src/remoting/remoting.gyp
+Index: chromium-browser-6.0.472.36~r55963/src/remoting/remoting.gyp
+===================================================================
+--- chromium-browser-6.0.472.36~r55963.orig/src/remoting/remoting.gyp	2010-08-04 14:59:33.000000000 +0000
++++ chromium-browser-6.0.472.36~r55963/src/remoting/remoting.gyp	2010-08-18 16:18:55.000000000 +0000
 @@ -112,7 +112,7 @@
        'dependencies': [
          '../gfx/gfx.gyp:gfx',
@@ -248,8 +264,10 @@ Do not embedd protobuf
          'base/protocol/chromotocol.gyp:chromotocol_proto_lib',
          # TODO(hclam): Enable VP8 in the build.
          #'third_party/on2/on2.gyp:vp8',
---- a/src/third_party/cacheinvalidation/cacheinvalidation.gyp
-+++ b/src/third_party/cacheinvalidation/cacheinvalidation.gyp
+Index: chromium-browser-6.0.472.36~r55963/src/third_party/cacheinvalidation/cacheinvalidation.gyp
+===================================================================
+--- chromium-browser-6.0.472.36~r55963.orig/src/third_party/cacheinvalidation/cacheinvalidation.gyp	2010-08-04 15:00:05.000000000 +0000
++++ chromium-browser-6.0.472.36~r55963/src/third_party/cacheinvalidation/cacheinvalidation.gyp	2010-08-18 16:18:55.000000000 +0000
 @@ -33,14 +33,14 @@
            'rule_name': 'genproto',
            'extension': 'proto',
@@ -294,3 +312,17 @@ Do not embedd protobuf
          'cacheinvalidation_proto',
        ],
      },
+Index: chromium-browser-6.0.472.36~r55963/src/build/common.gypi
+===================================================================
+--- chromium-browser-6.0.472.36~r55963.orig/src/build/common.gypi	2010-08-18 16:20:10.114496753 +0000
++++ chromium-browser-6.0.472.36~r55963/src/build/common.gypi	2010-08-18 16:28:58.069501686 +0000
+@@ -738,6 +738,9 @@
+             'cflags': [
+              '<@(release_extra_cflags)',
+             ],
++            'defines': [
++              'GOOGLE_PROTOBUF_NO_RTTI',
++            ],
+           }],
+         ],
+       },

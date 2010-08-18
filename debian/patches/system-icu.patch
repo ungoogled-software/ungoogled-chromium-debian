@@ -173,7 +173,7 @@ Use system libicu
          '../third_party/libxml/libxml.gyp:libxml',
          # run time dependencies
          'default_plugin/default_plugin.gyp:default_plugin',
-@@ -565,8 +564,7 @@
+@@ -571,8 +570,7 @@
          '../net/net.gyp:net',
          '../skia/skia.gyp:skia',
          '../testing/gtest.gyp:gtest',
@@ -183,7 +183,7 @@ Use system libicu
        ],
        'include_dirs': [
          '..',
-@@ -646,8 +644,7 @@
+@@ -652,8 +650,7 @@
          '../third_party/bzip2/bzip2.gyp:bzip2',
          '../third_party/cld/cld.gyp:cld',
          '../third_party/expat/expat.gyp:expat',
@@ -193,7 +193,7 @@ Use system libicu
          '../third_party/libjingle/libjingle.gyp:libjingle',
          '../third_party/libxml/libxml.gyp:libxml',
          '../third_party/npapi/npapi.gyp:npapi',
-@@ -1465,8 +1462,7 @@
+@@ -1474,8 +1471,7 @@
          '../skia/skia.gyp:skia',
          '../testing/gmock.gyp:gmock',
          '../testing/gtest.gyp:gtest',
@@ -203,7 +203,7 @@ Use system libicu
        ],
        'include_dirs': [
          '..',
-@@ -2119,8 +2115,7 @@
+@@ -2128,8 +2124,7 @@
          '../skia/skia.gyp:skia',
          '../testing/gmock.gyp:gmock',
          '../testing/gtest.gyp:gtest',
@@ -387,7 +387,7 @@ Use system libicu
        'include_dirs': [
 --- a/src/webkit/tools/test_shell/test_shell.gypi
 +++ b/src/webkit/tools/test_shell/test_shell.gypi
-@@ -489,7 +489,7 @@
+@@ -496,7 +496,7 @@
            'mac_bundle': 1,
            'msvs_guid': '0D04AEC1-6B68-492C-BCCF-808DFD69ABC6',
            'dependencies': [
@@ -512,8 +512,8 @@ Use system libicu
 -#include "third_party/icu/public/common/unicode/uloc.h"
 +#include <unicode/uloc.h>
  
- // Allows InvokeLater without adding refcounting. This class is a Singleton and
- // won't be deleted until it's last InvokeLater is run.
+ #include <glib.h>
+ #include <signal.h>
 --- a/src/chrome/browser/chromeos/dom_ui/system_options_handler.h
 +++ b/src/chrome/browser/chromeos/dom_ui/system_options_handler.h
 @@ -9,7 +9,7 @@
