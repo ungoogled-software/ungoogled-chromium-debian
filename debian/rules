@@ -52,7 +52,6 @@ GYP_DEFINES = disable_sse2=1
 # is installed, the set of usable codecs (at runtime) will still vary
 GYP_DEFINES += proprietary_codecs=1
 
-
 # Only keep -Werror when building for the Debian or Ubuntu development branches
 ifeq (,$(filter unstable development,$(DEBIAN_DIST)))
 GYP_DEFINES += werror=$(NULL)
@@ -238,7 +237,7 @@ TESTS ?= \
 endif
 
 # FFmpeg-mt
-GYP_DEFINES += build_ffmpegsumo=0
+GYP_DEFINES += build_ffmpegsumo=1 ffmpeg_branding=Chrome
 
 USE_SYSTEM_SQLITE := $(shell pkg-config 'sqlite3 >= 3.6.1' && echo 1 || echo 0)
 USE_SYSTEM_SQLITE := 0
@@ -261,7 +260,8 @@ GYP_DEFINES += \
 	use_system_libevent=1 \
 	use_system_icu=1 \
 	use_system_yasm=1 \
-	use_system_ffmpeg=1 \
+	use_system_ffmpeg=0 \
+	use_system_vpx=1 \
 	$(NULL)
 endif
 
@@ -434,12 +434,12 @@ ifneq (i386,$(DEB_HOST_ARCH_CPU))
 	rm -rf $(CURDIR)/debian/tmp/$(LIB_DIR)/resources/inspector/*
 endif
 	# Install symlinks to system ffmpeg libs
-	ln -sf "/usr/lib/$(LIBAVCODEC_BASENAME)" \
-		"$(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(LIBAVCODEC_BASENAME)"
-	ln -sf "/usr/lib/$(LIBAVFORMAT_BASENAME)" \
-		"$(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(LIBAVFORMAT_BASENAME)"
-	ln -sf "/usr/lib/$(LIBAVUTIL_BASENAME)" \
-		"$(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(LIBAVUTIL_BASENAME)"
+	#ln -sf "/usr/lib/$(LIBAVCODEC_BASENAME)" \
+	#	"$(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(LIBAVCODEC_BASENAME)"
+	#ln -sf "/usr/lib/$(LIBAVFORMAT_BASENAME)" \
+	#	"$(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(LIBAVFORMAT_BASENAME)"
+	#ln -sf "/usr/lib/$(LIBAVUTIL_BASENAME)" \
+	#	"$(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(LIBAVUTIL_BASENAME)"
 
 binary-install/$(DEBIAN_NAME)-l10n::
 	rm $(CURDIR)/debian/$(DEBIAN_NAME)-l10n/$(LIB_DIR)/locales/en-US.pak
@@ -504,12 +504,12 @@ binary-makedeb-IMPL/$(DEBIAN_NAME)::
 	dh_gencontrol -p$(DEBIAN_NAME)
 	# Manually insert ffmpeg libs shlib deps for chromium-browser since the
 	# libs are dlopened.
-	sed "s/^Depends:.*$$/&, $$(sh debian/var_info LIBAVCODEC_DEPENDS)/" \
-		-i "debian/$(DEBIAN_NAME)/DEBIAN/control"
-	sed "s/^Depends:.*$$/&, $$(sh debian/var_info LIBAVFORMAT_DEPENDS)/" \
-		-i "debian/$(DEBIAN_NAME)/DEBIAN/control"
-	sed "s/^Depends:.*$$/&, $$(sh debian/var_info LIBAVUTIL_DEPENDS)/" \
-		-i "debian/$(DEBIAN_NAME)/DEBIAN/control"
+	#sed "s/^Depends:.*$$/&, $$(sh debian/var_info LIBAVCODEC_DEPENDS)/" \
+	#	-i "debian/$(DEBIAN_NAME)/DEBIAN/control"
+	#sed "s/^Depends:.*$$/&, $$(sh debian/var_info LIBAVFORMAT_DEPENDS)/" \
+	#	-i "debian/$(DEBIAN_NAME)/DEBIAN/control"
+	#sed "s/^Depends:.*$$/&, $$(sh debian/var_info LIBAVUTIL_DEPENDS)/" \
+	#	-i "debian/$(DEBIAN_NAME)/DEBIAN/control"
 	dh_md5sums -p$(DEBIAN_NAME)
 	dh_builddeb -p$(DEBIAN_NAME)
 

@@ -5,6 +5,9 @@ debian/tmp/usr/lib/chromium-browser/xdg-settings
 debian/tmp/usr/lib/chromium-browser/resources.pak
 debian/tmp/usr/lib/chromium-browser/locales/*
 debian/tmp/usr/lib/chromium-browser/DumpRenderTree_resources
+debian/tmp/usr/lib/chromium-browser/ffmpegsumo_nolink
+debian/tmp/usr/lib/chromium-browser/libffmpegsumo.so
+debian/tmp/usr/lib/chromium-browser/libppapi_tests.so
 debian/chromium-browser.desktop usr/share/applications
 debian/chromium-browser.xml usr/share/gnome-control-center/default-apps
 debian/master_preferences etc/chromium-browser

@@ -2,8 +2,9 @@ chromium-browser (6.0.472.36~r55963-1) experimental; urgency=low
 
   * New beta release
   * Refreshed patches
+  * Build and use the custom ffmpeg copy
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 18 Aug 2010 16:30:10 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 18 Aug 2010 19:20:32 +0200
 
 chromium-browser (6.0.466.0~r52279-1) experimental; urgency=low
 
