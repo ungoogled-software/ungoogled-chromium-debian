@@ -9,7 +9,7 @@ nss.patch
 expat.patch
 system_v8.patch
 prefs.patch
-protobuf.patch
+#protobuf.patch
 glew.patch
 icu44.patch
 armv4.patch

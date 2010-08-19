@@ -3,8 +3,9 @@ chromium-browser (6.0.472.36~r55963-1) experimental; urgency=low
   * New beta release
   * Refreshed patches
   * Build and use the custom ffmpeg copy
+  * Build and use the custom protobuf copy.
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 18 Aug 2010 19:20:32 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 19 Aug 2010 09:53:03 +0200
 
 chromium-browser (6.0.466.0~r52279-1) experimental; urgency=low
 
