@@ -1,0 +1,12 @@
+Remove gecko-mediaplayer from blacklist
+--- a/src/webkit/glue/plugins/plugin_list_posix.cc
++++ b/src/webkit/glue/plugins/plugin_list_posix.cc
+@@ -63,7 +63,7 @@ bool IsUndesirablePlugin(const WebPlugin
+ bool IsBlacklistedPlugin(const FilePath& path) {
+   const char* kBlackListedPlugins[] = {
+     "nppdf.so",           // Adobe PDF
+-    "gecko-mediaplayer",  // Gecko Media Player
++    //"gecko-mediaplayer",  // Gecko Media Player
+   };
+   std::string filename = path.BaseName().value();
+   for (size_t i = 0; i < arraysize(kBlackListedPlugins); i++) {

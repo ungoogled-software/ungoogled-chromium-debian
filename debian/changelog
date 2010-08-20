@@ -13,8 +13,9 @@ chromium-browser (5.0.375.127~r55887-1) UNRELEASED; urgency=low
       password. Credit to Robert Hansen.
     - High. Memory corruption with Ruby support. Credit to kuzzcc.
     - High. Memory corruption with Geolocation support. Credit to kuzzcc.
+  * Remove gecko-mediaplayer from blacklist (Closes: #590145)
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 20 Aug 2010 09:42:52 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 20 Aug 2010 10:00:09 +0200
 
 chromium-browser (5.0.375.125~r53311-1) unstable; urgency=medium
 
