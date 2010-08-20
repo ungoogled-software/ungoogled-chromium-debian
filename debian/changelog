@@ -1,6 +1,6 @@
-chromium-browser (5.0.375.127~r55887-1) UNRELEASED; urgency=low
+chromium-browser (5.0.375.127~r55887-1) unstable; urgency=high
 
-  * New stable microrelease
+  * New stable security microrelease.
     - Critical. Memory corruption with file dialog. Credit to Sergey Glazunov.
     - High. Memory corruption with SVGs. Credit to wushi of team509.
     - High. Bad cast with text editing. Credit to wushi of team509.
@@ -15,7 +15,7 @@ chromium-browser (5.0.375.127~r55887-1) UNRELEASED; urgency=low
     - High. Memory corruption with Geolocation support. Credit to kuzzcc.
   * Remove gecko-mediaplayer from blacklist (Closes: #590145)
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 20 Aug 2010 10:00:09 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 20 Aug 2010 11:09:16 +0200
 
 chromium-browser (5.0.375.125~r53311-1) unstable; urgency=medium
 
