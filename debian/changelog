@@ -1,3 +1,21 @@
+chromium-browser (5.0.375.127~r55887-1) UNRELEASED; urgency=low
+
+  * New stable microrelease
+    - Critical. Memory corruption with file dialog. Credit to Sergey Glazunov.
+    - High. Memory corruption with SVGs. Credit to wushi of team509.
+    - High. Bad cast with text editing. Credit to wushi of team509.
+    - High. Possible address bar spoofing with history bug. Credit to Mike
+      Taylor.
+    - High. Memory corruption in MIME type handling. Credit to Sergey Glazunov.
+    - Critical. Crash on shutdown due to notifications bug. Credit to Sergey
+      Glazunov.
+    - Medium. Stop omnibox autosuggest if the user might be about to type a
+      password. Credit to Robert Hansen.
+    - High. Memory corruption with Ruby support. Credit to kuzzcc.
+    - High. Memory corruption with Geolocation support. Credit to kuzzcc.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 20 Aug 2010 09:42:52 +0200
+
 chromium-browser (5.0.375.125~r53311-1) unstable; urgency=medium
 
   * Flush cairo surface at end of CanvasPaintLinux (Closes: #587164)
