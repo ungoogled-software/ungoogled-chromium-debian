@@ -64,7 +64,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
 	xdg-utils,
 	chromium-browser-inspector
 Suggests: chromium-browser-l10n
-Provides: www-browser, chromium-testsuite
+Provides: www-browser, chromium-testsuite, gnome-www-browser
 Replaces: chromium-testsuite, chromium-codecs-ffmpeg, chromium-codecs-ffmpeg-extra
 Conflicts: chromium-testsuite, chromium-codecs-ffmpeg, chromium-codecs-ffmpeg-extra
 Description: Chromium browser
