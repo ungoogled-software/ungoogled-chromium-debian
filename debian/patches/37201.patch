@@ -1,0 +1,102 @@
+[37201] Medium URL bar visual spoofing with homographic sequences. Credit to Chris Weber of Casaba Security.
+--- a/src/net/base/net_util.cc
++++ b/src/net/base/net_util.cc
+@@ -6,6 +6,7 @@
+ 
+ #include <algorithm>
+ #include <map>
++#include <unicode/regex.h>
+ #include <unicode/ucnv.h>
+ #include <unicode/uidna.h>
+ #include <unicode/ulocdata.h>
+@@ -612,6 +613,13 @@ bool IsIDNComponentSafe(const char16* st
+       L"\u3015\u3033\u3164\u321d\u321e\u33ae\u33af\u33c6\u33df\ufe14"
+       L"\ufe15\ufe3f\ufe5d\ufe5e\ufeff\uff0e\uff06\uff61\uffa0\ufff9]"
+       L"[\ufffa-\ufffd]]"), status);
++  DCHECK(U_SUCCESS(status));
++  icu::RegexMatcher dangerous_patterns(icu::UnicodeString(
++      // Lone katakana no, so, or n
++      L"[^\\p{Katakana}][\u30ce\u30f3\u30bd][^\\p{Katakana}]"
++      // Repeating Japanese accent characters
++      L"|[\u3099\u309a\u309b\u309c][\u3099\u309a\u309b\u309c]"),
++      0, status);
+ #else
+   icu::UnicodeSet dangerous_characters(icu::UnicodeString(
+       "[[\\u0020\\u00bc\\u00bd\\u01c3\\u0337\\u0338"
+@@ -622,13 +630,26 @@ bool IsIDNComponentSafe(const char16* st
+       "\\u3015\\u3033\\u3164\\u321d\\u321e\\u33ae\\u33af\\u33c6\\u33df\\ufe14"
+       "\\ufe15\\ufe3f\\ufe5d\\ufe5e\\ufeff\\uff0e\\uff06\\uff61\\uffa0\\ufff9]"
+       "[\\ufffa-\\ufffd]]", -1, US_INV), status);
++  DCHECK(U_SUCCESS(status));
++  icu::RegexMatcher dangerous_patterns(icu::UnicodeString(
++      // Lone katakana no, so, or n
++      "[^\\p{Katakana}][\\u30ce\\u30f3\u30bd][^\\p{Katakana}]"
++      // Repeating Japanese accent characters
++      "|[\\u3099\\u309a\\u309b\\u309c][\\u3099\\u309a\\u309b\\u309c]"),
++      0, status);
+ #endif
+   DCHECK(U_SUCCESS(status));
+   icu::UnicodeSet component_characters;
+-  component_characters.addAll(icu::UnicodeString(str, str_len));
++  icu::UnicodeString component_string(str, str_len);
++  component_characters.addAll(component_string);
+   if (dangerous_characters.containsSome(component_characters))
+     return false;
+ 
++  DCHECK(U_SUCCESS(status));
++  dangerous_patterns.reset(component_string);
++  if (dangerous_patterns.find())
++    return false;
++
+   // If the language list is empty, the result is completely determined
+   // by whether a component is a single script or not. This will block
+   // even "safe" script mixing cases like <Chinese, Latin-ASCII> that are
+--- a/src/net/base/net_util_unittest.cc
++++ b/src/net/base/net_util_unittest.cc
+@@ -128,6 +128,12 @@ const IDNTestCase idn_cases[] = {
+     false, false, false, false, false,
+     false, false, false, true, false,
+     }},
++  {"xn--3ck7a7g.jp", L"\u30ce\u30f3\u30bd.jp",
++   {true, false, false, true,  false,
++    false, false, false, false, false,
++    false, false, false, false, false,
++    false, false, false, true, false,
++    }},
+   // Katakana + Latin (Japanese)
+   // TODO(jungshik): Change 'false' in the first element to 'true'
+   // after upgrading to ICU 4.2.1 to use new uspoof_* APIs instead
+@@ -138,6 +144,12 @@ const IDNTestCase idn_cases[] = {
+     false, false, false, false, false,
+     false, false, false, true, false,
+     }},
++  {"xn--3bkxe.jp", L"\x30c8\x309a.jp",
++   {false, false, false, true,  false,
++    false, false, false, false, false,
++    false, false, false, false, false,
++    false, false, false, true, false,
++    }},
+   // Hangul (Korean)
+   {"www.xn--or3b17p6jjc.kr", L"www.\xc804\xc790\xc815\xbd80.kr",
+    {true,  false, false, false, true,
+@@ -322,7 +334,19 @@ const IDNTestCase idn_cases[] = {
+      false, false, false, false, false,
+      false, false, false, false, false,
+      false, false, false, false, false,
+-     }},
++  }},
++  {"google.xn--com-oh4ba.evil.jp", L"google.com\x309a\x309a.evil.jp",
++    {false, false, false, false, false,
++     false, false, false, false, false,
++     false, false, false, false, false,
++     false, false, false, false, false,
++  }},
++  {"google.xn--comevil-v04f.jp", L"google.com\x30ce" L"evil.jp",
++    {false, false, false, false, false,
++     false, false, false, false, false,
++     false, false, false, false, false,
++     false, false, false, false, false,
++  }},
+ #if 0
+   // These two cases are special. We need a separate test.
+   // U+3000 and U+3002 are normalized to ASCII space and dot.

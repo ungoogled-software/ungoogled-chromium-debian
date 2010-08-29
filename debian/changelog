@@ -2,8 +2,10 @@ chromium-browser (5.0.375.127~r55887-2) UNRELEASED; urgency=low
 
   * Provide gnome-www-browser (Closes: #594057)
   * Use hardening-wrapper
+  * 37201.patch: (Backport) URL bar visual spoofing with homographic sequences.
+    Credit to Chris Weber of Casaba Security.
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 29 Aug 2010 12:16:35 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 29 Aug 2010 12:20:18 +0200
 
 chromium-browser (5.0.375.127~r55887-1) unstable; urgency=high
 
