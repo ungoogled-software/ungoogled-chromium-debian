@@ -1,8 +1,9 @@
 chromium-browser (5.0.375.127~r55887-2) UNRELEASED; urgency=low
 
   * Provide gnome-www-browser (Closes: #594057)
+  * Use hardening-wrapper
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 28 Aug 2010 10:51:19 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 29 Aug 2010 12:16:35 +0200
 
 chromium-browser (5.0.375.127~r55887-1) unstable; urgency=high
 

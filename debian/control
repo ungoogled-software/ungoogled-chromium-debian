@@ -54,7 +54,8 @@ Build-Depends: cdbs,
 	libprotobuf-dev,
 	protobuf-compiler,
 	libglewmx1.5-dev,
-	libvpx-dev
+	libvpx-dev,
+	hardening-wrapper
 Standards-Version: 3.9.0
 
 Package: chromium-browser
