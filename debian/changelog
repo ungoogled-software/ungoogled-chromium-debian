@@ -1,4 +1,4 @@
-chromium-browser (6.0.472.53~r57914-1) UNRELEASED; urgency=low
+chromium-browser (6.0.472.53~r57914-1) experimental; urgency=low
 
   * New upstream release
   * Merge the unstable branch
@@ -6,7 +6,7 @@ chromium-browser (6.0.472.53~r57914-1) UNRELEASED; urgency=low
   * chromium-browser-inspector: added a conflict with
     chromium-browser (<< ${source:Version}) (Closes: #594909)
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 01 Sep 2010 15:37:02 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 01 Sep 2010 15:39:16 +0200
 
 chromium-browser (6.0.472.36~r55963-1) experimental; urgency=low
 
