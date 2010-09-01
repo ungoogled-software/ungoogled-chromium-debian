@@ -1,0 +1,30 @@
+--- a/src/third_party/ffmpeg/config/Chrome/linux/arm/config.h
++++ b/src/third_party/ffmpeg/config/Chrome/linux/arm/config.h
+@@ -34,10 +34,10 @@
+ #define HAVE_ALTIVEC 0
+ #define HAVE_AMD3DNOW 0
+ #define HAVE_AMD3DNOWEXT 0
+-#define HAVE_ARMV5TE 1
+-#define HAVE_ARMV6 1
+-#define HAVE_ARMV6T2 1
+-#define HAVE_ARMVFP 1
++#define HAVE_ARMV5TE 0
++#define HAVE_ARMV6 0
++#define HAVE_ARMV6T2 0
++#define HAVE_ARMVFP 0
+ #define HAVE_IWMMXT 0
+ #define HAVE_MMI 0
+ #define HAVE_MMX 0
+--- a/src/third_party/ffmpeg/ffmpeg.gyp
++++ b/src/third_party/ffmpeg/ffmpeg.gyp
+@@ -333,10 +333,7 @@
+                 'patched-ffmpeg-mt/libavcodec/arm/dsputil_arm.S',
+                 'patched-ffmpeg-mt/libavcodec/arm/dsputil_armv6.S',
+                 'patched-ffmpeg-mt/libavcodec/arm/dsputil_init_arm.c',
+-                'patched-ffmpeg-mt/libavcodec/arm/dsputil_init_armv5te.c',
+                 'patched-ffmpeg-mt/libavcodec/arm/dsputil_init_armv6.c',
+-                'patched-ffmpeg-mt/libavcodec/arm/dsputil_init_vfp.c',
+-                'patched-ffmpeg-mt/libavcodec/arm/dsputil_vfp.S',
+                 'patched-ffmpeg-mt/libavcodec/arm/fft_init_arm.c',
+                 'patched-ffmpeg-mt/libavcodec/arm/jrevdct_arm.S',
+                 'patched-ffmpeg-mt/libavcodec/arm/simple_idct_arm.S',
