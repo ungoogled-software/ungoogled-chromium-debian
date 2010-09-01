@@ -193,7 +193,7 @@ Use system libicu
          '../third_party/libjingle/libjingle.gyp:libjingle',
          '../third_party/libxml/libxml.gyp:libxml',
          '../third_party/npapi/npapi.gyp:npapi',
-@@ -1474,8 +1471,7 @@
+@@ -1475,8 +1472,7 @@
          '../skia/skia.gyp:skia',
          '../testing/gmock.gyp:gmock',
          '../testing/gtest.gyp:gtest',
@@ -203,7 +203,7 @@ Use system libicu
        ],
        'include_dirs': [
          '..',
-@@ -2128,8 +2124,7 @@
+@@ -2129,8 +2125,7 @@
          '../skia/skia.gyp:skia',
          '../testing/gmock.gyp:gmock',
          '../testing/gtest.gyp:gtest',

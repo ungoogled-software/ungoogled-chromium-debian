@@ -57,7 +57,8 @@ Build-Depends: cdbs,
 	libvpx-dev,
 	libcups2-dev | libcupsys2-dev,
 	libgnome-keyring-dev,
-	libgconf2-dev
+	libgconf2-dev,
+	hardening-wrapper
 Standards-Version: 3.9.0
 
 Package: chromium-browser
@@ -67,7 +68,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
 	xdg-utils,
 	chromium-browser-inspector
 Suggests: chromium-browser-l10n
-Provides: www-browser, chromium-testsuite
+Provides: www-browser, chromium-testsuite, gnome-www-browser
 Replaces: chromium-testsuite, chromium-codecs-ffmpeg, chromium-codecs-ffmpeg-extra
 Conflicts: chromium-testsuite, chromium-codecs-ffmpeg, chromium-codecs-ffmpeg-extra
 Description: Chromium browser

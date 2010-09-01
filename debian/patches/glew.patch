@@ -1,6 +1,6 @@
 --- a/src/build/linux/system.gyp
 +++ b/src/build/linux/system.gyp
-@@ -296,6 +296,23 @@
+@@ -276,6 +276,23 @@
        }]]
      },
      {

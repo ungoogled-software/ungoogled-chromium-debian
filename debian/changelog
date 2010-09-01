@@ -1,3 +1,10 @@
+chromium-browser (6.0.472.53~r57914-1) UNRELEASED; urgency=low
+
+  * New upstream release
+  * Merge the unstable branch
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 01 Sep 2010 09:22:50 +0200
+
 chromium-browser (6.0.472.36~r55963-1) experimental; urgency=low
 
   * New beta release
@@ -21,6 +28,46 @@ chromium-browser (6.0.466.0~r52279-1) experimental; urgency=low
     protobuf
 
  -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 21 Jul 2010 14:40:57 +0200
+
+chromium-browser (5.0.375.127~r55887-2) UNRELEASED; urgency=low
+
+  * Provide gnome-www-browser (Closes: #594057)
+  * Use hardening-wrapper
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 29 Aug 2010 12:20:18 +0200
+
+chromium-browser (5.0.375.127~r55887-1) unstable; urgency=high
+
+  * New stable security microrelease.
+    - Critical. Memory corruption with file dialog. Credit to Sergey Glazunov.
+    - High. Memory corruption with SVGs. Credit to wushi of team509.
+    - High. Bad cast with text editing. Credit to wushi of team509.
+    - High. Possible address bar spoofing with history bug. Credit to Mike
+      Taylor.
+    - High. Memory corruption in MIME type handling. Credit to Sergey Glazunov.
+    - Critical. Crash on shutdown due to notifications bug. Credit to Sergey
+      Glazunov.
+    - Medium. Stop omnibox autosuggest if the user might be about to type a
+      password. Credit to Robert Hansen.
+    - High. Memory corruption with Ruby support. Credit to kuzzcc.
+    - High. Memory corruption with Geolocation support. Credit to kuzzcc.
+  * Remove gecko-mediaplayer from blacklist (Closes: #590145)
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 20 Aug 2010 11:09:16 +0200
+
+chromium-browser (5.0.375.125~r53311-1) unstable; urgency=medium
+
+  * Flush cairo surface at end of CanvasPaintLinux (Closes: #587164)
+  * New stable micro release:
+    - Medium Memory contents disclosure in layout code. Credit to Michail
+      Nikolaev.
+    - High Issue with large canvases. Credit to sp3x of SecurityReason.com.
+    - High Memory corruption in rendering code. Credit to Jose A. Vazquez.
+    - High Memory corruption in SVG handling. Credit to Aki Helin of OUSPG.
+    - Low Avoid hostname truncation and incorrect eliding. Credit to Google
+      Chrome Security Team (Inferno).
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 27 Jul 2010 12:44:58 +0200
 
 chromium-browser (5.0.375.99~r51029-4) unstable; urgency=low
 
