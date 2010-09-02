@@ -1,8 +1,10 @@
 chromium-browser (6.0.472.53~r57914-2) UNRELEASED; urgency=low
 
   * Do not install libppapi_tests.so and DumpRenderTree_resources/
+  * Add libppapi_tests.so to INSTALL_EXCLUDE_FILES and
+    DumpRenderTree_resources/ to INSTALL_EXCLUDE_DIRS
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 02 Sep 2010 09:50:44 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 02 Sep 2010 09:55:55 +0200
 
 chromium-browser (6.0.472.53~r57914-1) experimental; urgency=low
 
