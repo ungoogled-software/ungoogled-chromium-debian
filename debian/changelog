@@ -1,3 +1,9 @@
+chromium-browser (6.0.472.53~r57914-2) UNRELEASED; urgency=low
+
+  * Do not install libppapi_tests.so and DumpRenderTree_resources/
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 02 Sep 2010 09:50:44 +0200
+
 chromium-browser (6.0.472.53~r57914-1) experimental; urgency=low
 
   * New upstream release
