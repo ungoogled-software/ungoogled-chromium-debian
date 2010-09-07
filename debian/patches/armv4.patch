@@ -23,7 +23,7 @@ Do not use armv4 incopatible code
  #endif
 --- a/src/build/common.gypi
 +++ b/src/build/common.gypi
-@@ -915,6 +915,7 @@
+@@ -1044,6 +1044,7 @@
                    # silences those warnings, as they are not helpful and
                    # clutter legitimate warnings.
                    '-Wno-abi',

@@ -48,7 +48,11 @@ DEB_MAKE_ENVVARS := MAKEFLAGS=$(NJOBS)
 endif
 
 # Disable SSE2
-GYP_DEFINES = enable_sse2=0
+GYP_DEFINES = disable_sse2=1
+
+# Enable all codecs for HTML5 in chromium, depending on which ffmpeg sumo lib
+# is installed, the set of usable codecs (at runtime) will still vary
+GYP_DEFINES += proprietary_codecs=1
 
 # Only keep -Werror when building for the Debian or Ubuntu development branches
 ifeq (,$(filter unstable development,$(DEBIAN_DIST)))
@@ -152,6 +156,7 @@ INSTALL_EXCLUDE_DIRS = \
 	docs_app \
 	gmail_app \
 	pyproto \
+	DumpRenderTree_resources \
 	$(NULL)
 
 INSTALL_EXCLUDE_FILES = \
@@ -169,6 +174,7 @@ INSTALL_EXCLUDE_FILES = \
 	timestats \
 	tramp_gen \
 	protoc \
+	libppapi_tests.so \
 	*.d \
 	$(NULL)
 
@@ -259,6 +265,7 @@ GYP_DEFINES += \
 	use_system_icu=1 \
 	use_system_yasm=1 \
 	use_system_ffmpeg=0 \
+	use_system_vpx=1 \
 	$(NULL)
 endif
 

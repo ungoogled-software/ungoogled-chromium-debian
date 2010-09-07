@@ -1,9 +1,49 @@
+chromium-browser (6.0.472.53~r57914-2) experimental; urgency=low
+
+  * Do not install libppapi_tests.so and DumpRenderTree_resources/
+  * Add libppapi_tests.so to INSTALL_EXCLUDE_FILES and
+    DumpRenderTree_resources/ to INSTALL_EXCLUDE_DIRS
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 04 Sep 2010 08:28:27 +0200
+
+chromium-browser (6.0.472.53~r57914-1) experimental; urgency=low
+
+  * New upstream release
+  * Merge the unstable branch
+  * Backport arm ffmpeg fix from unstable (v5)
+  * chromium-browser-inspector: added a conflict with
+    chromium-browser (<< ${source:Version}) (Closes: #594909)
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 01 Sep 2010 15:39:16 +0200
+
+chromium-browser (6.0.472.36~r55963-1) experimental; urgency=low
+
+  * New beta release
+  * Refreshed patches
+  * Build and use the custom ffmpeg copy
+  * Build and use the custom protobuf copy.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 19 Aug 2010 09:53:03 +0200
+
+chromium-browser (6.0.466.0~r52279-1) experimental; urgency=low
+
+  * Flush cairo surface at end of CanvasPaintLinux (Closes: #587164)
+  * New dev upstream for experimental suite
+  * Refreshed patches.
+  * Install new resource.pak
+  * Added libcups2-dev, libgnome-keyring-dev, libgconf2-dev in BUild-depends
+  * set disable_sse2=1
+  * Switch back to ffmpeg system libs
+  * Install DumpRenderTree_resources
+  * Define GOOGLE_PROTOBUF_NO_RTTI to fix FTBFS when compiling against system
+    protobuf
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 21 Jul 2010 14:40:57 +0200
+
 chromium-browser (5.0.375.127~r55887-2) UNRELEASED; urgency=low
 
   * Provide gnome-www-browser (Closes: #594057)
   * Use hardening-wrapper
-  * 37201.patch: (Backport) URL bar visual spoofing with homographic sequences.
-    Credit to Chris Weber of Casaba Security.
 
  -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 29 Aug 2010 12:20:18 +0200
 

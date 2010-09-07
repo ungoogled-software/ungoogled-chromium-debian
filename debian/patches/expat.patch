@@ -7,6 +7,98 @@ Include system copy of expat.h
  #include "chrome/browser/autofill/form_structure.h"
 -#include "third_party/expat/files/lib/expat.h"
 +#include <expat.h>
- #include "third_party/libjingle/files/talk/xmllite/xmlparser.h"
+ #include "third_party/libjingle/source/talk/xmllite/xmlparser.h"
  
  // The base class that contains common functionality between
+--- a/src/third_party/libjingle/source/talk/xmllite/xmlbuilder.cc
++++ b/src/third_party/libjingle/source/talk/xmllite/xmlbuilder.cc
+@@ -31,9 +31,9 @@
+ #include "talk/xmllite/xmlelement.h"
+ #include "talk/xmllite/xmlbuilder.h"
+ #ifdef EXPAT_RELATIVE_PATH
+-#include "lib/expat.h"
++#include <expat.h>
+ #else
+-#include "third_party/expat/v2_0_1/Source/lib/expat.h"
++#include <expat.h>
+ #endif  // EXPAT_RELATIVE_PATH
+ 
+ namespace buzz {
+--- a/src/third_party/libjingle/source/talk/xmllite/xmlbuilder.h
++++ b/src/third_party/libjingle/source/talk/xmllite/xmlbuilder.h
+@@ -34,9 +34,9 @@
+ #include "talk/xmllite/xmlparser.h"
+ 
+ #ifdef EXPAT_RELATIVE_PATH
+-#include "lib/expat.h"
++#include <expat.h>
+ #else
+-#include "third_party/expat/v2_0_1/Source/lib/expat.h"
++#include <expat.h>
+ #endif  // EXPAT_RELATIVE_PATH
+ 
+ namespace buzz {
+--- a/src/third_party/libjingle/source/talk/xmllite/xmlparser.cc
++++ b/src/third_party/libjingle/source/talk/xmllite/xmlparser.cc
+@@ -36,9 +36,9 @@
+ #include "talk/xmllite/xmlconstants.h"
+ #include "talk/xmllite/xmlnsstack.h"
+ #ifdef EXPAT_RELATIVE_PATH
+-#include "lib/expat.h"
++#include <expat.h>
+ #else
+-#include "third_party/expat/v2_0_1/Source/lib/expat.h"
++#include <expat.h>
+ #endif  // EXPAT_RELATIVE_PATH
+ 
+ namespace buzz {
+--- a/src/third_party/libjingle/source/talk/xmllite/xmlparser.h
++++ b/src/third_party/libjingle/source/talk/xmllite/xmlparser.h
+@@ -32,9 +32,9 @@
+ 
+ #include "talk/xmllite/xmlnsstack.h"
+ #ifdef EXPAT_RELATIVE_PATH
+-#include "lib/expat.h"
++#include <expat.h>
+ #else
+-#include "third_party/expat/v2_0_1/Source/lib/expat.h"
++#include <expat.h>
+ #endif  // EXPAT_RELATIVE_PATH
+ 
+ struct XML_ParserStruct;
+--- a/src/third_party/libjingle/source/talk/xmpp/xmppstanzaparser.cc
++++ b/src/third_party/libjingle/source/talk/xmpp/xmppstanzaparser.cc
+@@ -30,9 +30,9 @@
+ #include "talk/xmpp/xmppstanzaparser.h"
+ #include "talk/xmpp/constants.h"
+ #ifdef EXPAT_RELATIVE_PATH
+-#include "lib/expat.h"
++#include <expat.h>
+ #else
+-#include "third_party/expat/v2_0_1/Source/lib/expat.h"
++#include <expat.h>
+ #endif
+ 
+ namespace buzz {
+--- a/src/third_party/skia/src/ports/SkXMLParser_expat.cpp
++++ b/src/third_party/skia/src/ports/SkXMLParser_expat.cpp
+@@ -19,7 +19,7 @@
+ #include "SkString.h"
+ #include "SkStream.h"
+ 
+-#include "expat.h"
++#include <expat.h>
+ 
+ #ifdef SK_BUILD_FOR_PPI
+ #define CHAR_16_TO_9
+--- a/src/third_party/skia/src/ports/SkXMLPullParser_expat.cpp
++++ b/src/third_party/skia/src/ports/SkXMLPullParser_expat.cpp
+@@ -20,7 +20,7 @@
+ #include "SkString.h"
+ #include "SkStream.h"
+ 
+-#include "expat.h"
++#include <expat.h>
+ 
+ static inline char* dupstr(SkChunkAlloc& chunk, const char src[], size_t len)
+ {
