@@ -1,4 +1,4 @@
-chromium-browser (6.0.472.53~r57914-3) UNRELEASED; urgency=low
+chromium-browser (6.0.472.53~r57914-3) unstable; urgency=low
 
   * Upload to unstable, this release fixes the following security issue:
     - [34414] Low Pop-up blocker bypass with blank frame target. Credit to
@@ -35,7 +35,7 @@ chromium-browser (6.0.472.53~r57914-3) UNRELEASED; urgency=low
    * check DISPLAY envvar (Closes: #587398)
    * Doesn't segfault with cups (Closes: #593748)
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 07 Sep 2010 18:35:50 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 07 Sep 2010 18:49:45 +0200
 
 chromium-browser (6.0.472.53~r57914-2) experimental; urgency=low
 
