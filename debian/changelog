@@ -1,3 +1,23 @@
+chromium-browser (6.0.472.59~r59126-1) unstable; urgency=low
+
+  * New stable security microrelease:
+    - [50250] High Use-after-free when using document APIs during parse. Credit
+      to David Weston of Microsoft + Microsoft Vulnerability Research (MSVR) and
+      wushi of team 509 (independent discoveries).
+    - [50712] High Use-after-free in SVG styles. Credit to kuzzcc.
+    - [51252] High Use-after-free with nested SVG elements. Credit to kuzzcc.
+    - [51709] Low Possible browser assert in cursor handling. Credit to
+      "magnusmorton".
+    - [51919] High Race condition in console handling. Credit to kuzzcc.
+    - [53176] Low Unlikely browser crash in pop-up blocking. Credit to kuzzcc.
+    - [53394] High Memory corruption in Geolocation. Credit to kuzzcc.
+    - [53930] High Memory corruption in Khmer handling. Credit to Google Chrome
+      Security Team (Chris Evans).
+    - [54006] Low Failure to prompt for extension history access. Credit to
+      "adriennefelt".
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 15 Sep 2010 16:00:10 +0200
+
 chromium-browser (6.0.472.53~r57914-3) unstable; urgency=low
 
   * Upload to unstable, this release fixes the following security issue:
