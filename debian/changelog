@@ -1,3 +1,14 @@
+chromium-browser (6.0.472.62~r59676-1) UNRELEASED; urgency=low
+
+  * New stable security microrelease:
+    - [55114] High Bad cast with malformed SVG. Credit to wushi of team 509.
+    - [55119] Critical Buffer mismanagement in the SPDY protocol. Credit to Ron
+      Ten-Hove of Google.
+    - [55350] High Cross-origin property pollution. Credit to Stefano Di Paola
+      of MindedSecurity.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 18 Sep 2010 15:23:05 +0200
+
 chromium-browser (6.0.472.59~r59126-1) unstable; urgency=low
 
   * New stable security microrelease:
