@@ -6,8 +6,10 @@ chromium-browser (6.0.472.62~r59676-1) UNRELEASED; urgency=low
       Ten-Hove of Google.
     - [55350] High Cross-origin property pollution. Credit to Stefano Di Paola
       of MindedSecurity.
+  * Add translations for the "Name" field in the desktop file, and fix
+    some "Comment" / "GenericName". Thanks to the Ubuntu translation team.
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 18 Sep 2010 15:23:05 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 18 Sep 2010 15:32:31 +0200
 
 chromium-browser (6.0.472.59~r59126-1) unstable; urgency=low
 
