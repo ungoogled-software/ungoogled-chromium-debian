@@ -8,8 +8,9 @@ chromium-browser (6.0.472.62~r59676-1) UNRELEASED; urgency=low
       of MindedSecurity.
   * Add translations for the "Name" field in the desktop file, and fix
     some "Comment" / "GenericName". Thanks to the Ubuntu translation team.
+  * Build with PIE (Position Independent Executable) 
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 18 Sep 2010 15:32:31 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 18 Sep 2010 16:47:17 +0200
 
 chromium-browser (6.0.472.59~r59126-1) unstable; urgency=low
 
