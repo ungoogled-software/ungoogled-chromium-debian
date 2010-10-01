@@ -1,3 +1,10 @@
+chromium-browser (7.0.536.2~r60818-1) UNRELEASED; urgency=low
+
+  * New dev version
+  * Remove system-icu.patch, applied upstream
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 01 Oct 2010 15:30:45 +0200
+
 chromium-browser (6.0.472.62~r59676-1) unstable; urgency=low
 
   * New stable security microrelease:

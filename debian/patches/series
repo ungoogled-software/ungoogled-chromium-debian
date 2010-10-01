@@ -4,7 +4,6 @@
 disable_dlog_and_dcheck_in_release_builds.patch
 #ffmpegfix.patch
 nspr.patch
-system-icu.patch
 nss.patch
 expat.patch
 system_v8.patch
