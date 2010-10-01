@@ -1,3 +1,76 @@
+chromium-browser (6.0.472.62~r59676-1) unstable; urgency=low
+
+  * New stable security microrelease:
+    - [55114] High Bad cast with malformed SVG. Credit to wushi of team 509.
+    - [55119] Critical Buffer mismanagement in the SPDY protocol. Credit to Ron
+      Ten-Hove of Google.
+    - [55350] High Cross-origin property pollution. Credit to Stefano Di Paola
+      of MindedSecurity.
+  * Add translations for the "Name" field in the desktop file, and fix
+    some "Comment" / "GenericName". Thanks to the Ubuntu translation team.
+  * Build with PIE (Position Independent Executable) 
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 18 Sep 2010 16:48:44 +0200
+
+chromium-browser (6.0.472.59~r59126-1) unstable; urgency=low
+
+  * New stable security microrelease:
+    - [50250] High Use-after-free when using document APIs during parse. Credit
+      to David Weston of Microsoft + Microsoft Vulnerability Research (MSVR) and
+      wushi of team 509 (independent discoveries).
+    - [50712] High Use-after-free in SVG styles. Credit to kuzzcc.
+    - [51252] High Use-after-free with nested SVG elements. Credit to kuzzcc.
+    - [51709] Low Possible browser assert in cursor handling. Credit to
+      "magnusmorton".
+    - [51919] High Race condition in console handling. Credit to kuzzcc.
+    - [53176] Low Unlikely browser crash in pop-up blocking. Credit to kuzzcc.
+    - [53394] High Memory corruption in Geolocation. Credit to kuzzcc.
+    - [53930] High Memory corruption in Khmer handling. Credit to Google Chrome
+      Security Team (Chris Evans).
+    - [54006] Low Failure to prompt for extension history access. Credit to
+      "adriennefelt".
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 15 Sep 2010 16:00:10 +0200
+
+chromium-browser (6.0.472.53~r57914-3) unstable; urgency=low
+
+  * Upload to unstable, this release fixes the following security issue:
+    - [34414] Low Pop-up blocker bypass with blank frame target. Credit to
+      Google Chrome Security Team (Inferno) and “ironfist99”.
+    - [37201] Medium URL bar visual spoofing with homographic sequences. Credit
+      to Chris Weber of Casaba Security.
+    - [41654] Medium Apply more restrictions on setting clipboard content.
+      Credit to Brook Novak.
+    - [45659] High Stale pointer with SVG filters. Credit to Tavis Ormandy of
+      the Google Security Team.
+    - [45876] Medium Possible installed extension enumeration. Credit to
+      Lostmon.
+    - [46750] [51846] Low Browser NULL crash with WebSockets. Credit to Google
+      Chrome Security Team (SkyLined), Google Chrome Security Team
+      (Justin Schuh) and Keith Campbell.
+    - [50386] High Use-after-free in Notifications presenter. Credit to Sergey
+      Glazunov.
+    - [50839] High Notification permissions memory corruption. Credit to Michal
+      Zalewski of the Google Security Team and Google Chrome Security Team
+      (SkyLined).
+    - [51630] [51739] High Integer errors in WebSockets. Credit to
+      Keith Campbell and Google Chrome Security Team (Cris Neckar).
+    - [51653] High Memory corruption with counter nodes. Credit to kuzzcc.
+    - [51727] Low Avoid storing excessive autocomplete entries. Credit to Google
+      Chrome Security Team (Inferno).
+    - [52443] High Stale pointer in focus handling. Credit to VUPEN
+      Vulnerability Research Team (VUPEN-SR-2010-249).
+    - [52682] High Sandbox parameter deserialization error. Credit to Ashutosh
+      Mehra and Vineet Batra of the Adobe Reader Sandbox Team.
+    - [53001] Medium Cross-origin image theft. Credit to Isaac Dawson.
+   * Provide gnome-www-browser (Closes: #594057)
+   * use startup-notification correctly (Closes: #581347)
+   * the main scrollbar doesn'have anymore low contrast (Closes: #582648)
+   * check DISPLAY envvar (Closes: #587398)
+   * Doesn't segfault with cups (Closes: #593748)
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 07 Sep 2010 18:49:45 +0200
+
 chromium-browser (6.0.472.53~r57914-2) experimental; urgency=low
 
   * Do not install libppapi_tests.so and DumpRenderTree_resources/

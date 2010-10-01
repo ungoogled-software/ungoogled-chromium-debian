@@ -33,7 +33,6 @@ USE_SYSTEM_V8    ?= 1
 VERBOSE          ?= 0
 
 export DEB_BUILD_HARDENING=1
-export DEB_BUILD_HARDENING_PIE=0
 #use DEB_BUILD_OPTIONS's parallel=n option (see Policy 4.9.1)
 ifneq (,$(findstring parallel,$(DEB_BUILD_OPTIONS)))
 PARALLEL_JOBS := $(shell echo $(DEB_BUILD_OPTIONS) | \
