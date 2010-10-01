@@ -4,7 +4,7 @@
 
 --- a/src/base/logging.h
 +++ b/src/base/logging.h
-@@ -387,7 +387,7 @@ DECLARE_CHECK_STROP_IMPL(_stricmp, false
+@@ -416,7 +416,7 @@ DECLARE_CHECK_STROP_IMPL(_stricmp, false
  // uses OFFICIAL_BUILD and other platforms use the branding flag when NDEBUG is
  // defined.
  #if ( defined(OS_WIN) && defined(OFFICIAL_BUILD)) || \

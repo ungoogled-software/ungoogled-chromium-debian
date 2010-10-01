@@ -1,6 +1,6 @@
 --- a/src/build/linux/system.gyp
 +++ b/src/build/linux/system.gyp
-@@ -276,6 +276,23 @@
+@@ -256,6 +256,23 @@
        }]]
      },
      {
@@ -26,60 +26,17 @@
        'conditions': [
 --- a/src/chrome/chrome.gyp
 +++ b/src/chrome/chrome.gyp
-@@ -685,6 +685,7 @@
-         '../base/base.gyp:base',
+@@ -695,6 +695,7 @@
          'common',
+         '../media/media.gyp:media',
          '../skia/skia.gyp:skia',
 +        '../build/linux/system.gyp:glew',
        ],
        'sources': [
          'gpu/gpu_backing_store_win.cc',
---- a/src/third_party/WebKit/WebKit/chromium/WebKit.gyp
-+++ b/src/third_party/WebKit/WebKit/chromium/WebKit.gyp
-@@ -563,16 +563,14 @@
-                 }],
-                 ['"ENABLE_3D_CANVAS=1" in feature_defines', {
-                     # Conditionally compile in GLEW and our GraphicsContext3D implementation.
-+                    'dependencies': [
-+                        '<(chromium_src_dir)/build/linux/system.gyp:glew'
-+                    ],
-                     'sources+': [
-                         'src/GraphicsContext3D.cpp',
--                        '<(chromium_src_dir)/third_party/glew/src/glew.c'
--                    ],
--                    'include_dirs+': [
--                        '<(chromium_src_dir)/third_party/glew/include'
-                     ],
-                     'defines+': [
--                        'GLEW_STATIC=1',
--                        'GLEW_NO_GLU=1',
-+                        'GLEW_MX'
-                     ],
-                     'conditions': [
-                         ['OS=="mac"', {
---- a/src/third_party/WebKit/WebKit/chromium/src/WebGraphicsContext3DDefaultImpl.h
-+++ b/src/third_party/WebKit/WebKit/chromium/src/WebGraphicsContext3DDefaultImpl.h
-@@ -41,7 +41,7 @@
- #include <windows.h>
- #endif
- 
--#include "GL/glew.h"
-+#include <GL/glew.h>
- #if OS(WINDOWS)
- #include "GL/wglew.h"
- #endif
-@@ -53,7 +53,7 @@
- #endif
- 
- #if OS(LINUX)
--#include "GL/glxew.h"
-+#include <GL/glxew.h>
- #endif
- 
- namespace WebKit {
 --- a/src/build/common.gypi
 +++ b/src/build/common.gypi
-@@ -473,6 +473,7 @@
+@@ -492,6 +492,7 @@
        ['enable_gpu==1', {
          'defines': [
            'ENABLE_GPU=1',
@@ -87,14 +44,3 @@
          ],
        }],
        ['enable_eglimage==1', {
---- a/src/third_party/WebKit/WebKit/chromium/src/WebGraphicsContext3DDefaultImpl.cpp
-+++ b/src/third_party/WebKit/WebKit/chromium/src/WebGraphicsContext3DDefaultImpl.cpp
-@@ -374,6 +374,8 @@ bool WebGraphicsContext3DDefaultImpl::in
- 
-     if (!s_initializedGLEW) {
-         // Initialize GLEW and check for GL 2.0 support by the drivers.
-+        GLEWContext _glewctx;
-+        #define glewGetContext() (&_glewctx)
-         GLenum glewInitResult = glewInit();
-         if (glewInitResult != GLEW_OK) {
-             printf("WebGraphicsContext3DDefaultImpl: GLEW initialization failed\n");

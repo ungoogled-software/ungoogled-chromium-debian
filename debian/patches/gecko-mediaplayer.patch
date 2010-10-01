@@ -1,7 +1,7 @@
 Remove gecko-mediaplayer from blacklist
 --- a/src/webkit/glue/plugins/plugin_list_posix.cc
 +++ b/src/webkit/glue/plugins/plugin_list_posix.cc
-@@ -88,7 +88,7 @@ bool IsUndesirablePlugin(const WebPlugin
+@@ -89,7 +89,7 @@ bool IsUndesirablePlugin(const WebPlugin
  bool IsBlacklistedPlugin(const FilePath& path) {
    const char* kBlackListedPlugins[] = {
      "nppdf.so",           // Adobe PDF
