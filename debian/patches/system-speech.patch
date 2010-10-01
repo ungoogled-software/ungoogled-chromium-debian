@@ -1,0 +1,52 @@
+Use system speex
+--- a/src/build/linux/system.gyp
++++ b/src/build/linux/system.gyp
+@@ -285,6 +285,26 @@
+       }]]
+     },
+     {
++      'target_name': 'speex',
++      'type': 'settings',
++      'conditions': [
++        ['_toolset=="target"', {
++          'direct_dependent_settings': {
++            'cflags': [
++              '<!@(pkg-config --cflags speex)',
++            ],
++          },
++          'link_settings': {
++            'ldflags': [
++              '<!@(pkg-config --libs-only-L --libs-only-other speex)',
++            ],
++            'libraries': [
++              '<!@(pkg-config --libs-only-l speex)',
++            ],
++          },
++      }]]
++    },
++    {
+       'target_name': 'gnome-keyring',
+       'type': 'settings',
+       'conditions': [
+--- a/src/chrome/browser/speech/speech_recognizer.cc
++++ b/src/chrome/browser/speech/speech_recognizer.cc
+@@ -10,7 +10,7 @@
+ #include "chrome/browser/chrome_thread.h"
+ #include "chrome/browser/profile.h"
+ #include "chrome/common/net/url_request_context_getter.h"
+-#include "third_party/speex/include/speex/speex.h"
++#include <speex/speex.h>
+ 
+ using media::AudioInputController;
+ using std::list;
+--- a/src/chrome/chrome_browser.gypi
++++ b/src/chrome/chrome_browser.gypi
+@@ -36,7 +36,7 @@
+         '../third_party/libxml/libxml.gyp:libxml',
+         '../third_party/npapi/npapi.gyp:npapi',
+         '../third_party/hunspell/hunspell.gyp:hunspell',
+-        '../third_party/speex/speex.gyp:libspeex',
++        '../build/linux/system.gyp:speex',
+         '../webkit/support/webkit_support.gyp:appcache',
+         '../webkit/support/webkit_support.gyp:blob',
+         '../webkit/support/webkit_support.gyp:database',

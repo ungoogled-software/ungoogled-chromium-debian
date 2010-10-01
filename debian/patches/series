@@ -13,3 +13,4 @@ glew.patch
 armv4.patch
 gecko-mediaplayer.patch
 ffmpeg_arm.patch
+system-speech.patch
