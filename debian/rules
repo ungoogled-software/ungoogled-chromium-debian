@@ -53,6 +53,9 @@ GYP_DEFINES = disable_sse2=1
 # is installed, the set of usable codecs (at runtime) will still vary
 GYP_DEFINES += proprietary_codecs=1
 
+# enable compile-time dependency on gnome-keyring
+GYP_DEFINES += use_gnome_keyring=1
+
 # Only keep -Werror when building for the Debian or Ubuntu development branches
 ifeq (,$(filter unstable development,$(DEBIAN_DIST)))
 GYP_DEFINES += werror=$(NULL)
