@@ -1,7 +1,6 @@
 # system_v8.patch
 # chromium_useragent.patch
 #no_tree_sink_v8.patch
-disable_dlog_and_dcheck_in_release_builds.patch
 #ffmpegfix.patch
 nspr.patch
 nss.patch
