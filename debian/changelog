@@ -1,4 +1,4 @@
-chromium-browser (7.0.536.2~r60818-1) UNRELEASED; urgency=low
+chromium-browser (7.0.544.0~r61416-1) UNRELEASED; urgency=low
 
   * New dev version
   * Remove system-icu.patch, applied upstream
