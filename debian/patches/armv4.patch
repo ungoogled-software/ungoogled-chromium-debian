@@ -12,7 +12,7 @@ Do not use armv4 incopatible code
          SkASSERT((int16_t)y == y);
 --- a/src/base/debug_util_posix.cc
 +++ b/src/base/debug_util_posix.cc
-@@ -253,7 +253,7 @@ bool DebugUtil::BeingDebugged() {
+@@ -257,7 +257,7 @@ bool DebugUtil::BeingDebugged() {
  #if defined(NDEBUG) && !defined(OS_MACOSX)
  #define DEBUG_BREAK() abort()
  #elif defined(ARCH_CPU_ARM_FAMILY)
@@ -23,7 +23,7 @@ Do not use armv4 incopatible code
  #endif
 --- a/src/build/common.gypi
 +++ b/src/build/common.gypi
-@@ -1075,6 +1075,7 @@
+@@ -1082,6 +1082,7 @@
                    # silences those warnings, as they are not helpful and
                    # clutter legitimate warnings.
                    '-Wno-abi',

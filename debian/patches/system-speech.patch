@@ -1,7 +1,7 @@
 Use system speex
 --- a/src/build/linux/system.gyp
 +++ b/src/build/linux/system.gyp
-@@ -285,6 +285,26 @@
+@@ -286,6 +286,26 @@
        }]]
      },
      {
