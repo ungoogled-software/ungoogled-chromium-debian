@@ -8,8 +8,9 @@ chromium-browser (7.0.544.0~r61416-1) UNRELEASED; urgency=low
   * Use system speex
   * Build depends on libv8-dev >= 2.4.7
   * Remove disable_dlog_and_dcheck_in_release_builds.patch
+  * Install libosmesa.so ssl_false_start_blacklist_process and xdg-mime
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 06 Oct 2010 11:11:03 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 06 Oct 2010 14:55:53 +0200
 
 chromium-browser (6.0.472.62~r59676-1) unstable; urgency=low
 
