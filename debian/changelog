@@ -6,8 +6,9 @@ chromium-browser (7.0.536.2~r60818-1) UNRELEASED; urgency=low
   * Refreshed patches
   * Enable compile-time dependency on gnome-keyring
   * Use system speex
+  * Build depends on libv8-dev >= 2.4.7
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 01 Oct 2010 18:11:27 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 06 Oct 2010 08:38:08 +0200
 
 chromium-browser (6.0.472.62~r59676-1) unstable; urgency=low
 
