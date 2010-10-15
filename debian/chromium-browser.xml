@@ -8,11 +8,9 @@
       <command>/usr/bin/chromium-browser %s</command>
       <icon-name>chromium-browser</icon-name>
       <run-in-terminal>false</run-in-terminal>
-      <netscape-remote>false</netscape-remote>
-      <!--
-      <tab-command>false</tab-command>
-      <win-command>false</win-command>
-      -->
+      <netscape-remote>true</netscape-remote>
+      <tab-command>/usr/bin/chromium-browser %s</tab-command>
+      <win-command>/usr/bin/chromium-browser --new-window %s</win-command>
     </web-browser>
   </web-browsers>
 </default-apps>

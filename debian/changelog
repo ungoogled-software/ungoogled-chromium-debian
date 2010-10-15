@@ -1,3 +1,11 @@
+chromium-browser (6.0.472.63~r59945-1) UNRELEASED; urgency=low
+
+  * New stable version.
+  * Allow to choose whether links are opened in a new link or new tab.
+  (Closes: #581391) Thanks to Sam Morris
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 15 Oct 2010 10:03:40 +0200
+
 chromium-browser (6.0.472.62~r59676-1) unstable; urgency=low
 
   * New stable security microrelease:
