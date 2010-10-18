@@ -1,0 +1,184 @@
+--- a/src/third_party/WebKit/WebCore/html/HTMLFormElement.cpp
++++ b/src/third_party/WebKit/WebCore/html/HTMLFormElement.cpp
+@@ -74,7 +74,7 @@ static int64_t generateFormDataIdentifie
+ 
+ HTMLFormElement::HTMLFormElement(const QualifiedName& tagName, Document* document)
+     : HTMLElement(tagName, document)
+-    , m_submissionTrigger(NotSubmittedByJavaScript)
++    , m_wasUserSubmitted(false)
+     , m_autocomplete(true)
+     , m_insubmit(false)
+     , m_doingsubmit(false)
+@@ -115,13 +115,13 @@ bool HTMLFormElement::rendererIsNeeded(R
+ {
+     if (!isDemoted())
+         return HTMLElement::rendererIsNeeded(style);
+-    
++
+     Node* node = parentNode();
+     RenderObject* parentRenderer = node->renderer();
+     bool parentIsTableElementPart = (parentRenderer->isTable() && node->hasTagName(tableTag))
+         || (parentRenderer->isTableRow() && node->hasTagName(trTag))
+         || (parentRenderer->isTableSection() && node->hasTagName(tbodyTag))
+-        || (parentRenderer->isTableCol() && node->hasTagName(colTag)) 
++        || (parentRenderer->isTableCol() && node->hasTagName(colTag))
+         || (parentRenderer->isTableCell() && node->hasTagName(trTag));
+ 
+     if (!parentIsTableElementPart)
+@@ -148,7 +148,7 @@ void HTMLFormElement::removedFromDocumen
+ {
+     if (document()->isHTMLDocument())
+         static_cast<HTMLDocument*>(document())->removeNamedItem(m_name);
+-   
++
+     HTMLElement::removedFromDocument();
+ }
+ 
+@@ -345,7 +345,7 @@ bool HTMLFormElement::prepareSubmit(Even
+     m_insubmit = false;
+ 
+     if (m_doingsubmit)
+-        submit(event, true, false, NotSubmittedByJavaScript);
++        submit(event, true, true, NotSubmittedByJavaScript);
+ 
+     return m_doingsubmit;
+ }
+@@ -353,12 +353,12 @@ bool HTMLFormElement::prepareSubmit(Even
+ void HTMLFormElement::submit(Frame* javaScriptActiveFrame)
+ {
+     if (javaScriptActiveFrame)
+-        submit(0, false, !javaScriptActiveFrame->script()->anyPageIsProcessingUserGesture(), SubmittedByJavaScript);
++        submit(0, false, javaScriptActiveFrame->script()->anyPageIsProcessingUserGesture(), SubmittedByJavaScript);
+     else
+-        submit(0, false, false, NotSubmittedByJavaScript);
++        submit(0, false, true, NotSubmittedByJavaScript);
+ }
+ 
+-void HTMLFormElement::submit(Event* event, bool activateSubmitButton, bool lockHistory, FormSubmissionTrigger formSubmissionTrigger)
++void HTMLFormElement::submit(Event* event, bool activateSubmitButton, bool processingUserGesture, FormSubmissionTrigger formSubmissionTrigger)
+ {
+     FrameView* view = document()->view();
+     Frame* frame = document()->frame();
+@@ -371,11 +371,11 @@ void HTMLFormElement::submit(Event* even
+     }
+ 
+     m_insubmit = true;
+-    m_submissionTrigger = formSubmissionTrigger;
++    m_wasUserSubmitted = processingUserGesture;
+ 
+     HTMLFormControlElement* firstSuccessfulSubmitButton = 0;
+     bool needButtonActivation = activateSubmitButton; // do we need to activate a submit button?
+-    
++
+     for (unsigned i = 0; i < m_associatedElements.size(); ++i) {
+         HTMLFormControlElement* control = m_associatedElements[i];
+         if (needButtonActivation) {
+@@ -389,7 +389,7 @@ void HTMLFormElement::submit(Event* even
+     if (needButtonActivation && firstSuccessfulSubmitButton)
+         firstSuccessfulSubmitButton->setActivatedSubmit(true);
+ 
+-    frame->loader()->submitForm(prepareFormSubmission(event, lockHistory, formSubmissionTrigger));
++    frame->loader()->submitForm(prepareFormSubmission(event, !processingUserGesture, formSubmissionTrigger));
+ 
+     if (needButtonActivation && firstSuccessfulSubmitButton)
+         firstSuccessfulSubmitButton->setActivatedSubmit(false);
+@@ -437,7 +437,7 @@ void HTMLFormElement::parseMappedAttribu
+     } else if (attr->name() == autocompleteAttr) {
+         m_autocomplete = !equalIgnoringCase(attr->value(), "off");
+         if (!m_autocomplete)
+-            document()->registerForDocumentActivationCallbacks(this);    
++            document()->registerForDocumentActivationCallbacks(this);
+         else
+             document()->unregisterForDocumentActivationCallbacks(this);
+     } else if (attr->name() == onsubmitAttr)
+@@ -561,9 +561,9 @@ String HTMLFormElement::target() const
+     return getAttribute(targetAttr);
+ }
+ 
+-FormSubmissionTrigger HTMLFormElement::submissionTrigger() const
++bool HTMLFormElement::wasUserSubmitted() const
+ {
+-    return m_submissionTrigger;
++    return m_wasUserSubmitted;
+ }
+ 
+ HTMLFormControlElement* HTMLFormElement::defaultButton() const
+@@ -635,13 +635,13 @@ void HTMLFormElement::getNamedElements(c
+     }
+     // name has been accessed, remember it
+     if (namedItems.size() && aliasElem != namedItems.first())
+-        addElementAlias(static_cast<HTMLFormControlElement*>(namedItems.first().get()), name);        
++        addElementAlias(static_cast<HTMLFormControlElement*>(namedItems.first().get()), name);
+ }
+ 
+ void HTMLFormElement::documentDidBecomeActive()
+ {
+     ASSERT(!m_autocomplete);
+-    
++
+     for (unsigned i = 0; i < m_associatedElements.size(); ++i)
+         m_associatedElements[i]->reset();
+ }
+--- a/src/third_party/WebKit/WebCore/html/HTMLFormElement.h
++++ b/src/third_party/WebKit/WebCore/html/HTMLFormElement.h
+@@ -43,7 +43,7 @@ class TextEncoding;
+ 
+ struct CollectionCache;
+ 
+-class HTMLFormElement : public HTMLElement { 
++class HTMLFormElement : public HTMLElement {
+ public:
+     static PassRefPtr<HTMLFormElement> create(Document*);
+     static PassRefPtr<HTMLFormElement> create(const QualifiedName&, Document*);
+@@ -98,7 +98,7 @@ public:
+ 
+     virtual String target() const;
+ 
+-    FormSubmissionTrigger submissionTrigger() const;
++    bool wasUserSubmitted() const;
+ 
+     HTMLFormControlElement* defaultButton() const;
+ 
+@@ -120,7 +120,7 @@ private:
+     virtual bool rendererIsNeeded(RenderStyle*);
+     virtual void insertedIntoDocument();
+     virtual void removedFromDocument();
+- 
++
+     virtual void handleLocalEvents(Event*);
+ 
+     virtual void parseMappedAttribute(Attribute*);
+@@ -132,7 +132,7 @@ private:
+     virtual void willMoveToNewOwnerDocument();
+     virtual void didMoveToNewOwnerDocument();
+ 
+-    void submit(Event*, bool activateSubmitButton, bool lockHistory, FormSubmissionTrigger);
++    void submit(Event*, bool activateSubmitButton, bool processingUserGesture, FormSubmissionTrigger);
+ 
+     PassRefPtr<FormSubmission> prepareFormSubmission(Event*, bool lockHistory, FormSubmissionTrigger);
+     unsigned formElementIndex(HTMLFormControlElement*);
+@@ -151,11 +151,11 @@ private:
+     OwnPtr<CollectionCache> m_collectionCache;
+ 
+     CheckedRadioButtons m_checkedRadioButtons;
+-    
++
+     Vector<HTMLFormControlElement*> m_associatedElements;
+     Vector<HTMLImageElement*> m_imageElements;
+ 
+-    FormSubmissionTrigger m_submissionTrigger;
++    bool m_wasUserSubmitted;
+ 
+     bool m_autocomplete : 1;
+     bool m_insubmit : 1;
+--- a/src/third_party/WebKit/WebKit/chromium/src/WebFormElement.cpp
++++ b/src/third_party/WebKit/WebKit/chromium/src/WebFormElement.cpp
+@@ -68,7 +68,7 @@ WebString WebFormElement::method() const
+ 
+ bool WebFormElement::wasUserSubmitted() const
+ {
+-    return constUnwrap<HTMLFormElement>()->submissionTrigger() == NotSubmittedByJavaScript;
++    return constUnwrap<HTMLFormElement>()->wasUserSubmitted();
+ }
+ 
+ void WebFormElement::submit()

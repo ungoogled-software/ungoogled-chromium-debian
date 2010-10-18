@@ -1,0 +1,299 @@
+--- a/src/chrome/renderer/form_manager.cc
++++ b/src/chrome/renderer/form_manager.cc
+@@ -215,7 +215,7 @@ string16 InferLabelFromDefinitionList(
+   return inferred_label;
+ }
+ 
+-void GetOptionStringsFromElement(WebKit::WebFormControlElement element,
++void GetOptionStringsFromElement(WebFormControlElement element,
+                                  std::vector<string16>* option_strings) {
+   DCHECK(!element.isNull());
+   DCHECK(option_strings);
+@@ -449,7 +449,7 @@ void FormManager::ExtractForms(const Web
+       form_elements->control_elements.push_back(element);
+     }
+ 
+-    form_elements_map_[frame].push_back(form_elements);
++    form_elements_.push_back(form_elements);
+   }
+ }
+ 
+@@ -457,17 +457,14 @@ void FormManager::GetForms(RequirementsM
+                            std::vector<FormData>* forms) {
+   DCHECK(forms);
+ 
+-  for (WebFrameFormElementMap::iterator iter = form_elements_map_.begin();
+-       iter != form_elements_map_.end(); ++iter) {
+-    for (std::vector<FormElement*>::iterator form_iter = iter->second.begin();
+-         form_iter != iter->second.end(); ++form_iter) {
+-      FormData form;
+-      if (WebFormElementToFormData((*form_iter)->form_element,
+-                                   requirements,
+-                                   true,
+-                                   &form))
+-        forms->push_back(form);
+-    }
++  for (FormElementList::iterator form_iter = form_elements_.begin();
++       form_iter != form_elements_.end(); ++form_iter) {
++    FormData form;
++    if (WebFormElementToFormData((*form_iter)->form_element,
++                                 requirements,
++                                 true,
++                                 &form))
++      forms->push_back(form);
+   }
+ }
+ 
+@@ -477,17 +474,15 @@ void FormManager::GetFormsInFrame(const
+   DCHECK(frame);
+   DCHECK(forms);
+ 
+-  WebFrameFormElementMap::iterator iter = form_elements_map_.find(frame);
+-  if (iter == form_elements_map_.end())
+-    return;
+-
+   // TODO(jhawkins): Factor this out and use it here and in GetForms.
+-  const std::vector<FormElement*>& form_elements = iter->second;
+-  for (std::vector<FormElement*>::const_iterator form_iter =
+-           form_elements.begin();
+-       form_iter != form_elements.end(); ++form_iter) {
++  for (FormElementList::const_iterator form_iter =
++           form_elements_.begin();
++       form_iter != form_elements_.end(); ++form_iter) {
+     FormElement* form_element = *form_iter;
+ 
++    if (form_element->form_element.document().frame() != frame)
++      continue;
++
+     // We need at least |kRequiredAutoFillFields| fields before appending this
+     // form to |forms|.
+     if (form_element->control_elements.size() < kRequiredAutoFillFields)
+@@ -513,14 +508,11 @@ bool FormManager::FindForm(const WebForm
+   if (!frame)
+     return false;
+ 
+-  WebFrameFormElementMap::const_iterator frame_iter =
+-      form_elements_map_.find(frame);
+-  if (frame_iter == form_elements_map_.end())
+-    return false;
++  for (FormElementList::const_iterator iter = form_elements_.begin();
++       iter != form_elements_.end(); ++iter) {
++    if ((*iter)->form_element.document().frame() != frame)
++      continue;
+ 
+-  for (std::vector<FormElement*>::const_iterator iter =
+-           frame_iter->second.begin();
+-       iter != frame_iter->second.end(); ++iter) {
+     if ((*iter)->form_element.name() != element.name())
+       continue;
+ 
+@@ -540,14 +532,13 @@ bool FormManager::FindFormWithFormContro
+   if (!frame)
+     return false;
+ 
+-  if (form_elements_map_.find(frame) == form_elements_map_.end())
+-    return false;
+-
+-  const std::vector<FormElement*> forms = form_elements_map_[frame];
+-  for (std::vector<FormElement*>::const_iterator iter = forms.begin();
+-       iter != forms.end(); ++iter) {
++  for (FormElementList::const_iterator iter = form_elements_.begin();
++       iter != form_elements_.end(); ++iter) {
+     const FormElement* form_element = *iter;
+ 
++    if (form_element->form_element.document().frame() != frame)
++      continue;
++
+     for (std::vector<WebFormControlElement>::const_iterator iter =
+              form_element->control_elements.begin();
+          iter != form_element->control_elements.end(); ++iter) {
+@@ -562,7 +553,7 @@ bool FormManager::FindFormWithFormContro
+   return false;
+ }
+ 
+-bool FormManager::FillForm(const FormData& form, const WebKit::WebNode& node) {
++bool FormManager::FillForm(const FormData& form, const WebNode& node) {
+   FormElement* form_element = NULL;
+   if (!FindCachedFormElement(form, &form_element))
+     return false;
+@@ -594,7 +585,7 @@ bool FormManager::PreviewForm(const Form
+   return true;
+ }
+ 
+-bool FormManager::ClearFormWithNode(const WebKit::WebNode& node) {
++bool FormManager::ClearFormWithNode(const WebNode& node) {
+   FormElement* form_element = NULL;
+   if (!FindCachedFormElementWithNode(node, &form_element))
+     return false;
+@@ -617,7 +608,7 @@ bool FormManager::ClearFormWithNode(cons
+   return true;
+ }
+ 
+-bool FormManager::ClearPreviewedFormWithNode(const WebKit::WebNode& node) {
++bool FormManager::ClearPreviewedFormWithNode(const WebNode& node) {
+   FormElement* form_element = NULL;
+   if (!FindCachedFormElementWithNode(node, &form_element))
+     return false;
+@@ -648,22 +639,22 @@ bool FormManager::ClearPreviewedFormWith
+ }
+ 
+ void FormManager::Reset() {
+-  for (WebFrameFormElementMap::iterator iter = form_elements_map_.begin();
+-       iter != form_elements_map_.end(); ++iter) {
+-    STLDeleteElements(&iter->second);
+-  }
+-  form_elements_map_.clear();
++  STLDeleteElements(&form_elements_);
+ }
+ 
+ void FormManager::ResetFrame(const WebFrame* frame) {
+-  WebFrameFormElementMap::iterator iter = form_elements_map_.find(frame);
+-  if (iter != form_elements_map_.end()) {
+-    STLDeleteElements(&iter->second);
+-    form_elements_map_.erase(iter);
++  FormElementList::iterator iter = form_elements_.begin();
++  while (iter != form_elements_.end()) {
++    if ((*iter)->form_element.document().frame() == frame) {
++      delete *iter;
++      iter = form_elements_.erase(iter);
++    } else {
++      ++iter;
++    }
+   }
+ }
+ 
+-bool FormManager::FormWithNodeIsAutoFilled(const WebKit::WebNode& node) {
++bool FormManager::FormWithNodeIsAutoFilled(const WebNode& node) {
+   FormElement* form_element = NULL;
+   if (!FindCachedFormElementWithNode(node, &form_element))
+     return false;
+@@ -747,21 +738,17 @@ string16 FormManager::InferLabelForEleme
+   return inferred_label;
+ }
+ 
+-bool FormManager::FindCachedFormElementWithNode(const WebKit::WebNode& node,
++bool FormManager::FindCachedFormElementWithNode(const WebNode& node,
+                                                 FormElement** form_element) {
+-  for (WebFrameFormElementMap::const_iterator frame_iter =
+-           form_elements_map_.begin();
+-       frame_iter != form_elements_map_.end(); ++frame_iter) {
+-    for (std::vector<FormElement*>::const_iterator form_iter =
+-             frame_iter->second.begin();
+-         form_iter != frame_iter->second.end(); ++form_iter) {
+-      for (std::vector<WebKit::WebFormControlElement>::const_iterator iter =
+-               (*form_iter)->control_elements.begin();
+-           iter != (*form_iter)->control_elements.end(); ++iter) {
+-        if (*iter == node) {
+-          *form_element = *form_iter;
+-          return true;
+-        }
++  for (FormElementList::const_iterator form_iter =
++           form_elements_.begin();
++       form_iter != form_elements_.end(); ++form_iter) {
++    for (std::vector<WebFormControlElement>::const_iterator iter =
++             (*form_iter)->control_elements.begin();
++         iter != (*form_iter)->control_elements.end(); ++iter) {
++      if (*iter == node) {
++        *form_element = *form_iter;
++        return true;
+       }
+     }
+   }
+@@ -771,28 +758,22 @@ bool FormManager::FindCachedFormElementW
+ 
+ bool FormManager::FindCachedFormElement(const FormData& form,
+                                         FormElement** form_element) {
+-  for (WebFrameFormElementMap::iterator iter = form_elements_map_.begin();
+-       iter != form_elements_map_.end(); ++iter) {
+-    const WebFrame* frame = iter->first;
+-    // Remove once http://crbug.com/48857.
+-    CHECK(frame);
+-
+-    for (std::vector<FormElement*>::iterator form_iter = iter->second.begin();
+-         form_iter != iter->second.end(); ++form_iter) {
+-      // TODO(dhollowa): matching on form name here which is not guaranteed to
+-      // be unique for the page, nor is it guaranteed to be non-empty.  Need to
+-      // find a way to uniquely identify the form cross-process.  For now we'll
+-      // check form name and form action for identity.
+-      // http://crbug.com/37990 test file sample8.html.
+-      // Also note that WebString() == WebString(string16()) does not seem to
+-      // evaluate to |true| for some reason TBD, so forcing to string16.
+-      string16 element_name((*form_iter)->form_element.name());
+-      GURL action(
+-          frame->document().completeURL((*form_iter)->form_element.action()));
+-      if (element_name == form.name && action == form.action) {
+-        *form_element = *form_iter;
+-        return true;
+-      }
++  for (FormElementList::iterator form_iter = form_elements_.begin();
++       form_iter != form_elements_.end(); ++form_iter) {
++    // TODO(dhollowa): matching on form name here which is not guaranteed to
++    // be unique for the page, nor is it guaranteed to be non-empty.  Need to
++    // find a way to uniquely identify the form cross-process.  For now we'll
++    // check form name and form action for identity.
++    // http://crbug.com/37990 test file sample8.html.
++    // Also note that WebString() == WebString(string16()) does not seem to
++    // evaluate to |true| for some reason TBD, so forcing to string16.
++    string16 element_name((*form_iter)->form_element.name());
++    GURL action(
++        (*form_iter)->form_element.document().completeURL(
++            (*form_iter)->form_element.action()));
++    if (element_name == form.name && action == form.action) {
++      *form_element = *form_iter;
++      return true;
+     }
+   }
+ 
+@@ -800,7 +781,7 @@ bool FormManager::FindCachedFormElement(
+ }
+ 
+ void FormManager::ForEachMatchingFormField(FormElement* form,
+-                                           const WebKit::WebNode& node,
++                                           const WebNode& node,
+                                            RequirementsMask requirements,
+                                            const FormData& data,
+                                            Callback* callback) {
+@@ -863,7 +844,7 @@ void FormManager::ForEachMatchingFormFie
+   delete callback;
+ }
+ 
+-void FormManager::FillFormField(WebKit::WebFormControlElement* field,
++void FormManager::FillFormField(WebFormControlElement* field,
+                                 const FormField* data) {
+   // Nothing to fill.
+   if (data->value().empty())
+@@ -882,7 +863,7 @@ void FormManager::FillFormField(WebKit::
+   }
+ }
+ 
+-void FormManager::PreviewFormField(WebKit::WebFormControlElement* field,
++void FormManager::PreviewFormField(WebFormControlElement* field,
+                                    const FormField* data) {
+   // Nothing to preview.
+   if (data->value().empty())
+--- a/src/chrome/renderer/form_manager.h
++++ b/src/chrome/renderer/form_manager.h
+@@ -121,10 +121,8 @@ class FormManager {
+     std::vector<WebKit::WebFormControlElement> control_elements;
+   };
+ 
+-  // A map of vectors of FormElements keyed by the WebFrame containing each
+-  // form.
+-  typedef std::map<const WebKit::WebFrame*, std::vector<FormElement*> >
+-      WebFrameFormElementMap;
++  // Type for cache of FormElement objects.
++  typedef std::vector<FormElement*> FormElementList;
+ 
+   // The callback type used by ForEachMatchingFormField().
+   typedef Callback2<WebKit::WebFormControlElement*,
+@@ -175,8 +173,8 @@ class FormManager {
+   void PreviewFormField(WebKit::WebFormControlElement* field,
+                         const webkit_glue::FormField* data);
+ 
+-  // The map of form elements.
+-  WebFrameFormElementMap form_elements_map_;
++  // The cached FormElement objects.
++  FormElementList form_elements_;
+ 
+   DISALLOW_COPY_AND_ASSIGN(FormManager);
+ };
