@@ -1,8 +1,8 @@
-chromium-browser (6.0.472.63~r59945-1) UNRELEASED; urgency=low
+chromium-browser (6.0.472.63~r59945-1) unstable; urgency=high
 
-  * New stable version.
+  * New stable microrelease.
   * Allow to choose whether links are opened in a new link or new tab.
-  (Closes: #581391) Thanks to Sam Morris
+    (Closes: #581391) Thanks to Sam Morris
   * Backported security patches:
     - Medium Possible autofill / autocomplete profile spamming. Credit to
       Google Chrome Security Team (Inferno).
@@ -17,7 +17,7 @@ chromium-browser (6.0.472.63~r59945-1) UNRELEASED; urgency=low
     - High Stale elements in an element map. Credit to Michal Zalewski of the
       Google Security Team.
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Mon, 18 Oct 2010 12:05:40 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 19 Oct 2010 12:59:21 +0200
 
 chromium-browser (6.0.472.62~r59676-1) unstable; urgency=low
 
