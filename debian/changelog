@@ -1,3 +1,11 @@
+chromium-browser (6.0.472.63~r59945-2) unstable; urgency=low
+
+  * Added the missing changelog credit for the 5.0.375.29~r46008-1 revision.
+    Obviously this was not a "stealing" as foolishly written by Fabien Tassin
+    in a blog rant, but was a bad debian/changelog merge.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 04 Nov 2010 18:38:00 +0100
+
 chromium-browser (6.0.472.63~r59945-1) unstable; urgency=high
 
   * New stable microrelease.
@@ -471,28 +479,13 @@ chromium-browser (5.0.375.29~r46008-2) experimental; urgency=low
 
 chromium-browser (5.0.375.29~r46008-1) experimental; urgency=low
 
+  [Giuseppe Iuculano]
   * Switch to system libs and enabled libxml
     - update debian/rules
   * Use system libevent, libicu and libxslt
     - update debian/rules
     - update debian/control
-  * Add app_unittests_strings to INSTALL_EXCLUDE_DIRS
-    - update debian/rules
-  * Add a gnome-www-browser alternative (LP: #571103)
-    - update debian/chromium-browser.{postinst,prerm}
   * New upstream release from the Beta Channel
-  * Build with build_ffmpegsumo=0 instead of use_system_ffmpeg=1 (which
-    now means something else)
-    - update debian/rules
-  * Install resources/{bookmark_manager,net_internals} in the main deb
-    - update debian/chromium-browser.install
-  * Drop the sse2 patch, it has been applied upstream, and set disable_sse2
-    - drop debian/patches/drop_sse2.patch
-    - update debian/patches/series
-    - update debian/rules
-  * Add app_unittests_strings, resources/{calendar_app,docs_app,gmail_app}
-    and pyproto to INSTALL_EXCLUDE_DIRS
-    - update debian/rules
   * Fixed a typo in the maintainer field
     - update debian/control
   * Removed ubuntu_dont_overwrite_default_download_directory.patch, the default
@@ -508,6 +501,24 @@ chromium-browser (5.0.375.29~r46008-1) experimental; urgency=low
     - update debian/copyright.problems
   * Added a strict depend in chromium-browser-inspector
     - update debian/control
+
+  [ Fabien Tassin ]
+  * Add app_unittests_strings to INSTALL_EXCLUDE_DIRS
+    - update debian/rules
+  * Add a gnome-www-browser alternative (LP: #571103)
+    - update debian/chromium-browser.{postinst,prerm}
+  * Build with build_ffmpegsumo=0 instead of use_system_ffmpeg=1 (which
+    now means something else)
+    - update debian/rules
+  * Install resources/{bookmark_manager,net_internals} in the main deb
+    - update debian/chromium-browser.install
+  * Drop the sse2 patch, it has been applied upstream, and set disable_sse2
+    - drop debian/patches/drop_sse2.patch
+    - update debian/patches/series
+    - update debian/rules
+  * Add app_unittests_strings, resources/{calendar_app,docs_app,gmail_app}
+    and pyproto to INSTALL_EXCLUDE_DIRS
+    - update debian/rules
 
  -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 06 May 2010 12:01:07 +0200
 
