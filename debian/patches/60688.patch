@@ -1,0 +1,11 @@
+--- a/src/third_party/WebKit/WebCore/platform/graphics/filters/FEBlend.cpp
++++ b/src/third_party/WebKit/WebCore/platform/graphics/filters/FEBlend.cpp
+@@ -105,7 +105,7 @@ void FEBlend::apply(Filter* filter)
+     if (!m_in->resultImage() || !m_in2->resultImage())
+         return;
+ 
+-    if (m_mode == FEBLEND_MODE_UNKNOWN)
++    if (m_mode <= FEBLEND_MODE_UNKNOWN || m_mode > FEBLEND_MODE_LIGHTEN)
+         return;
+ 
+     if (!getEffectContext())

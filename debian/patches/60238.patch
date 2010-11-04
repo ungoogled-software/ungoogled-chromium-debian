@@ -1,0 +1,12 @@
+--- a/src/third_party/WebKit/WebCore/loader/FrameLoader.cpp
++++ b/src/third_party/WebKit/WebCore/loader/FrameLoader.cpp
+@@ -1498,6 +1498,9 @@ void FrameLoader::load(DocumentLoader* n
+ 
+ void FrameLoader::loadWithDocumentLoader(DocumentLoader* loader, FrameLoadType type, PassRefPtr<FormState> prpFormState)
+ {
++    // Retain because dispatchBeforeLoadEvent may release the last reference to it.
++    RefPtr<Frame> protect(m_frame);
++
+     ASSERT(m_client->hasWebView());
+ 
+     // Unfortunately the view must be non-nil, this is ultimately due

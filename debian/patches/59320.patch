@@ -1,0 +1,35 @@
+--- a/src/third_party/skia/include/core/SkScalerContext.h
++++ b/src/third_party/skia/include/core/SkScalerContext.h
+@@ -31,6 +31,8 @@ class SkRasterizer;
+ // needs to be != to any valid SkMask::Format
+ #define MASK_FORMAT_JUST_ADVANCE    (0xFF)
+ 
++#define kMaxGlyphWidth (1<<13)
++
+ struct SkGlyph {
+     void*       fImage;
+     SkPath*     fPath;
+--- a/src/third_party/skia/src/core/SkChunkAlloc.cpp
++++ b/src/third_party/skia/src/core/SkChunkAlloc.cpp
+@@ -85,7 +85,9 @@ SkChunkAlloc::Block* SkChunkAlloc::newBl
+         return block;
+     }
+ 
+-    size_t  size = SkMax32((int32_t)bytes, (int32_t)fMinSize);
++    size_t size = bytes;
++    if (size < fMinSize)
++	    size = fMinSize;
+ 
+     block = (Block*)sk_malloc_flags(sizeof(Block) + size,
+                         ftype == kThrow_AllocFailType ? SK_MALLOC_THROW : 0);
+--- a/src/third_party/skia/src/core/SkGlyphCache.cpp
++++ b/src/third_party/skia/src/core/SkGlyphCache.cpp
+@@ -306,7 +306,7 @@ SkGlyph* SkGlyphCache::lookupMetrics(uin
+ }
+ 
+ const void* SkGlyphCache::findImage(const SkGlyph& glyph) {
+-    if (glyph.fWidth) {
++    if (glyph.fWidth > 0 && glyph.fWidth < kMaxGlyphWidth) {
+         if (glyph.fImage == NULL) {
+             size_t  size = glyph.computeImageSize();
+             const_cast<SkGlyph&>(glyph).fImage = fImageAlloc.alloc(size,

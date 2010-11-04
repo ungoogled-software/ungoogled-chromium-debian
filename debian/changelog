@@ -3,8 +3,23 @@ chromium-browser (6.0.472.63~r59945-2) unstable; urgency=low
   * Added the missing changelog credit for the 5.0.375.29~r46008-1 revision.
     Obviously this was not a "stealing" as foolishly written by Fabien Tassin
     in a blog rant, but was a bad debian/changelog merge.
+  * Backported security patches from stable:
+    - High Use-after-free in text editing. Credit to David Bloom of the Google
+      Security Team, Google Chrome Security Team (Inferno) and Google Chrome
+      Security Team (Cris Neckar).
+    - High Memory corruption with enormous text area. Credit to wushi of
+      team509.
+    - High Bad cast with the SVG use element. Credit to the kuzzcc.
+    - High Use-after-free in text control selections. Credit to "vkouchna".
+    - High Integer overflows in font handling. Credit to Aki Helin of OUSPG.
+    - High Bad use of destroyed frame object. Credit to various developers,
+      including "gundlach".
+    - High Type confusions with event objects. Credit to "fam.lam" and Google
+      Chrome Security Team (Inferno).
+    - High Out-of-bounds array access in SVG handling. Credit to wushi of
+      team509.
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 04 Nov 2010 18:38:00 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 04 Nov 2010 18:57:06 +0100
 
 chromium-browser (6.0.472.63~r59945-1) unstable; urgency=high
 
