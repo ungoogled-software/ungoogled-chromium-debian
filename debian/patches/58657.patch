@@ -32,8 +32,8 @@
 +        // case where <use> doesn't contain disallowed elements (ie. <foreignObject>).
 +        // Though if there are disallowed elements in the subtree, we have to remove them.
 +        // For instance: <use> on <g> containing <foreignObject> (indirect case).
-+        if (subtreeContainsDisallowedElement(newChild.get()))
-+            removeDisallowedElementsFromSubtree(newChild.get());
++        if (subtreeContainsDisallowedElement(cloneParent.get()))
++            removeDisallowedElementsFromSubtree(cloneParent.get());
 +
          // Replace <use> with referenced content.
          ASSERT(use->parentNode()); 
