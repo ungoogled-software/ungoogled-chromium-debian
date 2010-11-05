@@ -1,4 +1,4 @@
-chromium-browser (6.0.472.63~r59945-2) unstable; urgency=low
+chromium-browser (6.0.472.63~r59945-2) unstable; urgency=high
 
   * Added the missing changelog credit for the 5.0.375.29~r46008-1 revision.
     Obviously this was not a "stealing" as foolishly written by Fabien Tassin
@@ -19,7 +19,7 @@ chromium-browser (6.0.472.63~r59945-2) unstable; urgency=low
     - High Out-of-bounds array access in SVG handling. Credit to wushi of
       team509.
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 04 Nov 2010 18:57:06 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 05 Nov 2010 09:19:33 +0100
 
 chromium-browser (6.0.472.63~r59945-1) unstable; urgency=high
 
