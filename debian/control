@@ -59,7 +59,8 @@ Build-Depends: cdbs,
 	libgnome-keyring-dev,
 	libgconf2-dev,
 	libspeex-dev,
-	hardening-wrapper
+	hardening-wrapper,
+	libxtst-dev
 Standards-Version: 3.9.0
 
 Package: chromium-browser
