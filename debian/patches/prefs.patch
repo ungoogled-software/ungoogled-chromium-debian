@@ -12,7 +12,7 @@ Tell Chromium to look in /etc/chromium for the master_preferences file
          return false;
 --- a/src/chrome/browser/first_run/first_run.cc
 +++ b/src/chrome/browser/first_run/first_run.cc
-@@ -78,9 +78,7 @@ bool FirstRun::ProcessMasterPreferences(
+@@ -92,9 +92,7 @@ bool FirstRun::ProcessMasterPreferences(
  
    // The standard location of the master prefs is next to the chrome binary.
    FilePath master_prefs;
@@ -21,5 +21,5 @@ Tell Chromium to look in /etc/chromium for the master_preferences file
 -  master_prefs = master_prefs.AppendASCII(installer_util::kDefaultMasterPrefs);
 +  master_prefs = FilePath("/etc/chromium-browser");
  
-   scoped_ptr<DictionaryValue> prefs(
-       installer_util::ParseDistributionPreferences(master_prefs));
+   installer_util::MasterPreferences prefs(master_prefs);
+   if (!prefs.read_from_file())

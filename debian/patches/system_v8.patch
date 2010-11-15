@@ -22,7 +22,7 @@ Use system copy of libv8
        'conditions': [
 --- a/src/net/net.gyp
 +++ b/src/net/net.gyp
-@@ -652,7 +652,7 @@
+@@ -711,7 +711,7 @@
        'conditions': [
          ['javascript_engine=="v8"', {
            'dependencies': [
@@ -33,7 +33,7 @@ Use system copy of libv8
          ['chromeos==1', {
 --- a/src/build/all.gyp
 +++ b/src/build/all.gyp
-@@ -53,7 +53,7 @@
+@@ -54,7 +54,7 @@
        'conditions': [
          ['javascript_engine=="v8"', {
            'dependencies': [
@@ -44,7 +44,7 @@ Use system copy of libv8
          ['OS=="mac" or OS=="linux" or OS=="freebsd" or OS=="openbsd"', {
 --- a/src/third_party/WebKit/WebCore/WebCore.gyp/WebCore.gyp
 +++ b/src/third_party/WebKit/WebCore/WebCore.gyp/WebCore.gyp
-@@ -778,7 +778,7 @@
+@@ -782,7 +782,7 @@
        'conditions': [
          ['javascript_engine=="v8"', {
            'dependencies': [
@@ -53,7 +53,7 @@ Use system copy of libv8
            ],
            'conditions': [
              ['inside_chromium_build==1 and OS=="win" and component=="shared_library"', {
-@@ -882,10 +882,10 @@
+@@ -890,10 +890,10 @@
        'conditions': [
          ['javascript_engine=="v8"', {
            'dependencies': [
@@ -66,7 +66,7 @@ Use system copy of libv8
            ],
            'conditions': [
              ['inside_chromium_build==1 and OS=="win" and component=="shared_library"', {
-@@ -1383,10 +1383,10 @@
+@@ -1390,10 +1390,10 @@
        'conditions': [
          ['javascript_engine=="v8"', {
            'dependencies': [
@@ -81,9 +81,9 @@ Use system copy of libv8
          ['OS=="mac"', {
 --- a/src/chrome/browser/browser_about_handler.cc
 +++ b/src/chrome/browser/browser_about_handler.cc
-@@ -57,7 +57,7 @@
- #include "grit/locale_settings.h"
+@@ -60,7 +60,7 @@
  #include "webkit/glue/webkit_glue.h"
+ #include "net/base/escape.h"
  #ifdef CHROME_V8
 -#include "v8/include/v8.h"
 +#include <v8.h>
@@ -180,7 +180,7 @@ Use system copy of libv8
  using WebKit::WebFrame;
 --- a/src/chrome/renderer/render_thread.cc
 +++ b/src/chrome/renderer/render_thread.cc
-@@ -91,7 +91,7 @@
+@@ -92,7 +92,7 @@
  #include "webkit/extensions/v8/benchmarking_extension.h"
  #include "webkit/extensions/v8/gears_extension.h"
  #include "webkit/extensions/v8/playback_extension.h"
@@ -301,7 +301,7 @@ Use system copy of libv8
  using WebKit::WebCookie;
 --- a/src/webkit/support/test_webkit_client.cc
 +++ b/src/webkit/support/test_webkit_client.cc
-@@ -48,7 +48,7 @@
+@@ -49,7 +49,7 @@
  #include "webkit/tools/test_shell/simple_webcookiejar_impl.h"
  #include "webkit/tools/test_shell/test_shell_request_context.h"
  #include "webkit/tools/test_shell/test_shell_webblobregistry_impl.h"
@@ -309,7 +309,7 @@ Use system copy of libv8
 +#include <v8.h>
  
  #if defined(OS_WIN)
- #include "webkit/tools/test_shell/test_shell_webthemeengine.h"
+ #include "third_party/WebKit/WebKit/chromium/public/win/WebThemeEngine.h"
 --- a/src/webkit/tools/test_shell/listener_leak_test.cc
 +++ b/src/webkit/tools/test_shell/listener_leak_test.cc
 @@ -8,7 +8,7 @@
@@ -334,8 +334,8 @@ Use system copy of libv8
  namespace WebCore {
 --- a/src/webkit/glue/plugins/pepper_var.cc
 +++ b/src/webkit/glue/plugins/pepper_var.cc
-@@ -12,7 +12,7 @@
- #include "third_party/WebKit/WebKit/chromium/public/WebBindings.h"
+@@ -17,7 +17,7 @@
+ #include "webkit/glue/plugins/pepper_plugin_instance.h"
  #include "webkit/glue/plugins/pepper_plugin_module.h"
  #include "webkit/glue/plugins/pepper_plugin_object.h"
 -#include "v8/include/v8.h"
@@ -400,7 +400,7 @@ Use system copy of libv8
  
 --- a/src/webkit/glue/webkit_glue.gypi
 +++ b/src/webkit/glue/webkit_glue.gypi
-@@ -462,7 +462,7 @@
+@@ -472,7 +472,7 @@
              ['inside_chromium_build==1 and component=="shared_library"', {
                'dependencies': [
                  '<(DEPTH)/third_party/WebKit/WebKit/chromium/WebKit.gyp:webkit',
@@ -411,7 +411,7 @@ Use system copy of libv8
                   '<(DEPTH)/third_party/WebKit/WebKit/chromium/WebKit.gyp:webkit',
 --- a/src/chrome/browser/dom_ui/options/about_page_handler.cc
 +++ b/src/chrome/browser/dom_ui/options/about_page_handler.cc
-@@ -28,7 +28,7 @@
+@@ -29,7 +29,7 @@
  #include "webkit/glue/webkit_glue.h"
  
  #if defined(CHROME_V8)

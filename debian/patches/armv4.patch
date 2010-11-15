@@ -10,9 +10,19 @@ Do not use armv4 incopatible code
      static inline int32_t SkMulS16(S16CPU x, S16CPU y) {
          SkASSERT((int16_t)x == x);
          SkASSERT((int16_t)y == y);
---- a/src/base/debug_util_posix.cc
-+++ b/src/base/debug_util_posix.cc
-@@ -257,7 +257,7 @@ bool DebugUtil::BeingDebugged() {
+--- a/src/build/common.gypi
++++ b/src/build/common.gypi
+@@ -1096,6 +1096,7 @@
+                   # silences those warnings, as they are not helpful and
+                   # clutter legitimate warnings.
+                   '-Wno-abi',
++                  '-fno-tree-sink',
+                 ],
+                 'conditions': [
+                   ['arm_thumb == 1', {
+--- a/src/base/debug/debugger_posix.cc
++++ b/src/base/debug/debugger_posix.cc
+@@ -152,7 +152,7 @@ bool DebugUtil::BeingDebugged() {
  #if defined(NDEBUG) && !defined(OS_MACOSX)
  #define DEBUG_BREAK() abort()
  #elif defined(ARCH_CPU_ARM_FAMILY)
@@ -21,13 +31,3 @@ Do not use armv4 incopatible code
  #else
  #define DEBUG_BREAK() asm("int3")
  #endif
---- a/src/build/common.gypi
-+++ b/src/build/common.gypi
-@@ -1082,6 +1082,7 @@
-                   # silences those warnings, as they are not helpful and
-                   # clutter legitimate warnings.
-                   '-Wno-abi',
-+                  '-fno-tree-sink',
-                 ],
-                 'conditions': [
-                   ['arm_thumb == 1', {
