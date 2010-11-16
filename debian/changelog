@@ -5,8 +5,9 @@ chromium-browser (9.0.576.0~r65344-1) UNRELEASED; urgency=low
   * Added libxtst-dev in build-depends
   * Use v8 and glew system copy for the moment.
   * Include libvpx system headers.
+  * Build depends on libvpx-dev (>=0.9.5)
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 16 Nov 2010 13:34:02 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 16 Nov 2010 13:37:34 +0100
 
 chromium-browser (7.0.544.0~r61416-1) UNRELEASED; urgency=low
 
