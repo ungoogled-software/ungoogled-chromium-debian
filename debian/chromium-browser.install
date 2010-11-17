@@ -6,7 +6,6 @@ debian/tmp/usr/lib/chromium-browser/resources.pak
 debian/tmp/usr/lib/chromium-browser/locales/*
 debian/tmp/usr/lib/chromium-browser/ffmpegsumo_nolink
 debian/tmp/usr/lib/chromium-browser/libffmpegsumo.so
-debian/tmp/usr/lib/chromium-browser/libosmesa.so
 debian/tmp/usr/lib/chromium-browser/ssl_false_start_blacklist_process
 debian/tmp/usr/lib/chromium-browser/xdg-mime
 debian/chromium-browser.desktop usr/share/applications

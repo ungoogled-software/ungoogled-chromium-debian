@@ -5,8 +5,9 @@ chromium-browser (9.0.576.0~r65344-1) UNRELEASED; urgency=low
   * Added libxtst-dev in build-depends
   * Use v8, libvpx and glew system copy for the moment.
   * Disable tests
+  * Do not install /usr/lib/chromium-browser/libosmesa.so (Closes: #599511)
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 17 Nov 2010 09:04:33 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 17 Nov 2010 22:25:22 +0100
 
 chromium-browser (7.0.544.0~r61416-1) UNRELEASED; urgency=low
 
