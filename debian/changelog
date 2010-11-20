@@ -1,3 +1,9 @@
+chromium-browser (9.0.587.0~r66374-1) UNRELEASED; urgency=low
+
+  * New dev version
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 20 Nov 2010 13:20:35 +0100
+
 chromium-browser (9.0.576.0~r65344-1) experimental; urgency=low
 
   * New dev version
