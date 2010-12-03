@@ -1,0 +1,250 @@
+--- a/src/webkit/glue/media/buffered_data_source.cc
++++ b/src/webkit/glue/media/buffered_data_source.cc
+@@ -544,6 +544,7 @@ BufferedDataSource::BufferedDataSource(
+     : total_bytes_(kPositionNotSpecified),
+       loaded_(false),
+       streaming_(false),
++      single_origin_(true),
+       bridge_factory_(bridge_factory),
+       loader_(NULL),
+       network_activity_(false),
+@@ -652,6 +653,12 @@ bool BufferedDataSource::IsStreaming() {
+   return streaming_;
+ }
+ 
++bool BufferedDataSource::HasSingleOrigin() {
++  DCHECK(MessageLoop::current() == render_loop_);
++  return single_origin_;
++}
++
++
+ /////////////////////////////////////////////////////////////////////////////
+ // BufferedDataSource, render thread tasks
+ void BufferedDataSource::InitializeTask() {
+@@ -862,6 +869,9 @@ void BufferedDataSource::HttpInitialStar
+   DCHECK(MessageLoop::current() == render_loop_);
+   DCHECK(loader_.get());
+ 
++  // Check if the request ended up at a different origin via redirect.
++  single_origin_ = url_.GetOrigin() == loader_->url().GetOrigin();
++
+   int64 instance_size = loader_->instance_size();
+   bool partial_response = loader_->partial_response();
+   bool success = error == net::OK;
+@@ -915,6 +925,9 @@ void BufferedDataSource::NonHttpInitialS
+   DCHECK(MessageLoop::current() == render_loop_);
+   DCHECK(loader_.get());
+ 
++  // Check if the request ended up at a different origin via redirect.
++  single_origin_ = url_.GetOrigin() == loader_->url().GetOrigin();
++
+   int64 instance_size = loader_->instance_size();
+   bool success = error == net::OK && instance_size != kPositionNotSpecified;
+ 
+--- a/src/webkit/glue/media/buffered_data_source.h
++++ b/src/webkit/glue/media/buffered_data_source.h
+@@ -107,6 +107,9 @@ class BufferedResourceLoader :
+   // Returns true if network is currently active.
+   virtual bool network_activity() { return !completed_ && !deferred_; }
+ 
++  // Returns resulting URL.
++  virtual const GURL& url() { return url_; }
++
+   /////////////////////////////////////////////////////////////////////////////
+   // webkit_glue::ResourceLoaderBridge::Peer implementations.
+   virtual void OnUploadProgress(uint64 position, uint64 size) {}
+@@ -247,6 +250,8 @@ class BufferedDataSource : public media:
+     return media_format_;
+   }
+ 
++  virtual bool HasSingleOrigin();
++
+  protected:
+   BufferedDataSource(
+       MessageLoop* render_loop,
+@@ -348,6 +353,9 @@ class BufferedDataSource : public media:
+   // i.e. range request is not supported.
+   bool streaming_;
+ 
++  // True if the media resource has a single origin.
++  bool single_origin_;
++
+   // A factory object to produce ResourceLoaderBridge.
+   scoped_ptr<webkit_glue::MediaResourceLoaderBridgeFactory> bridge_factory_;
+ 
+--- a/src/webkit/glue/media/buffered_data_source_unittest.cc
++++ b/src/webkit/glue/media/buffered_data_source_unittest.cc
+@@ -25,6 +25,7 @@ using ::testing::Invoke;
+ using ::testing::InvokeWithoutArgs;
+ using ::testing::NotNull;
+ using ::testing::Return;
++using ::testing::ReturnRef;
+ using ::testing::SetArgumentPointee;
+ using ::testing::StrictMock;
+ using ::testing::WithArgs;
+@@ -523,6 +524,7 @@ class MockBufferedResourceLoader : publi
+   MOCK_METHOD0(instance_size, int64());
+   MOCK_METHOD0(partial_response, bool());
+   MOCK_METHOD0(network_activity, bool());
++  MOCK_METHOD0(url, const GURL&());
+   MOCK_METHOD0(GetBufferedFirstBytePosition, int64());
+   MOCK_METHOD0(GetBufferedLastBytePosition, int64());
+ 
+@@ -629,10 +631,12 @@ class BufferedDataSourceTest : public te
+     }
+ 
+     StrictMock<media::MockFilterCallback> callback;
+-    EXPECT_CALL(*loader_, instance_size())
+-        .WillRepeatedly(Return(instance_size));
+-    EXPECT_CALL(*loader_, partial_response())
+-        .WillRepeatedly(Return(partial_response));
++    ON_CALL(*loader_, instance_size())
++        .WillByDefault(Return(instance_size));
++    ON_CALL(*loader_, partial_response())
++        .WillByDefault(Return(partial_response));
++    ON_CALL(*loader_, url())
++        .WillByDefault(ReturnRef(gurl_));
+     if (error == net::OK) {
+       // Expected loaded or not.
+       EXPECT_CALL(host_, SetLoaded(loaded));
+--- a/src/webkit/glue/media/simple_data_source.cc
++++ b/src/webkit/glue/media/simple_data_source.cc
+@@ -47,6 +47,7 @@ SimpleDataSource::SimpleDataSource(
+     : render_loop_(render_loop),
+       bridge_factory_(bridge_factory),
+       size_(-1),
++      single_origin_(true),
+       state_(UNINITIALIZED) {
+   DCHECK(render_loop);
+ }
+@@ -129,7 +130,9 @@ bool SimpleDataSource::OnReceivedRedirec
+     const webkit_glue::ResourceLoaderBridge::ResponseInfo& info,
+     bool* has_new_first_party_for_cookies,
+     GURL* new_first_party_for_cookies) {
+-  SetURL(new_url);
++  DCHECK(MessageLoop::current() == render_loop_);
++  single_origin_ = url_.GetOrigin() == new_url.GetOrigin();
++
+   // TODO(wtc): should we return a new first party for cookies URL?
+   *has_new_first_party_for_cookies = false;
+   return true;
+@@ -138,15 +141,18 @@ bool SimpleDataSource::OnReceivedRedirec
+ void SimpleDataSource::OnReceivedResponse(
+     const webkit_glue::ResourceLoaderBridge::ResponseInfo& info,
+     bool content_filtered) {
++  DCHECK(MessageLoop::current() == render_loop_);
+   size_ = info.content_length;
+ }
+ 
+ void SimpleDataSource::OnReceivedData(const char* data, int len) {
++  DCHECK(MessageLoop::current() == render_loop_);
+   data_.append(data, len);
+ }
+ 
+ void SimpleDataSource::OnCompletedRequest(const URLRequestStatus& status,
+                                           const std::string& security_info) {
++  DCHECK(MessageLoop::current() == render_loop_);
+   AutoLock auto_lock(lock_);
+   // It's possible this gets called after Stop(), in which case |host_| is no
+   // longer valid.
+@@ -173,6 +179,16 @@ GURL SimpleDataSource::GetURLForDebuggin
+   return url_;
+ }
+ 
++bool SimpleDataSource::HasSingleOrigin() {
++  DCHECK(MessageLoop::current() == render_loop_);
++  return single_origin_;
++}
++
++void SimpleDataSource::Abort() {
++  DCHECK(MessageLoop::current() == render_loop_);
++  NOTIMPLEMENTED();
++}
++
+ void SimpleDataSource::SetURL(const GURL& url) {
+   url_ = url;
+   media_format_.Clear();
+@@ -182,8 +198,8 @@ void SimpleDataSource::SetURL(const GURL
+ }
+ 
+ void SimpleDataSource::StartTask() {
+-  AutoLock auto_lock(lock_);
+   DCHECK(MessageLoop::current() == render_loop_);
++  AutoLock auto_lock(lock_);
+ 
+   // We may have stopped.
+   if (state_ == STOPPED)
+@@ -208,6 +224,7 @@ void SimpleDataSource::StartTask() {
+ }
+ 
+ void SimpleDataSource::CancelTask() {
++  DCHECK(MessageLoop::current() == render_loop_);
+   AutoLock auto_lock(lock_);
+   DCHECK_EQ(state_, STOPPED);
+ 
+--- a/src/webkit/glue/media/simple_data_source.h
++++ b/src/webkit/glue/media/simple_data_source.h
+@@ -15,13 +15,14 @@
+ #include "media/base/factory.h"
+ #include "media/base/filters.h"
+ #include "webkit/glue/media/media_resource_loader_bridge_factory.h"
++#include "webkit/glue/media/web_data_source.h"
+ 
+ class MessageLoop;
+ class WebMediaPlayerDelegateImpl;
+ 
+ namespace webkit_glue {
+ 
+-class SimpleDataSource : public media::DataSource,
++class SimpleDataSource : public WebDataSource,
+                          public webkit_glue::ResourceLoaderBridge::Peer {
+  public:
+   static media::FilterFactory* CreateFactory(
+@@ -66,6 +67,10 @@ class SimpleDataSource : public media::D
+                                   const std::string& security_info);
+   virtual GURL GetURLForDebugging() const;
+ 
++  // webkit_glue::WebDataSource implementation.
++  virtual bool HasSingleOrigin();
++  virtual void Abort();
++
+  private:
+   friend class media::FilterFactoryImpl2<
+       SimpleDataSource,
+@@ -101,6 +106,7 @@ class SimpleDataSource : public media::D
+   GURL url_;
+   std::string data_;
+   int64 size_;
++  bool single_origin_;
+ 
+   // Simple state tracking variable.
+   enum State {
+--- a/src/webkit/glue/webmediaplayer_impl.cc
++++ b/src/webkit/glue/webmediaplayer_impl.cc
+@@ -102,6 +102,14 @@ void WebMediaPlayerImpl::Proxy::SetSize(
+   }
+ }
+ 
++bool WebMediaPlayerImpl::Proxy::HasSingleOrigin() {
++  DCHECK(MessageLoop::current() == render_loop_);
++  if (data_source_) {
++    return data_source_->HasSingleOrigin();
++  }
++  return true;
++}
++
+ void WebMediaPlayerImpl::Proxy::Detach() {
+   DCHECK(MessageLoop::current() == render_loop_);
+   webmediaplayer_ = NULL;
+@@ -549,9 +557,8 @@ void WebMediaPlayerImpl::paint(WebCanvas
+ }
+ 
+ bool WebMediaPlayerImpl::hasSingleSecurityOrigin() const {
+-  // TODO(scherkus): we'll need to do something smarter here if/when we start to
+-  // support formats that contain references to external resources (i.e., MP4s
+-  // containing links to other MP4s).  See http://crbug.com/25432
++  if (proxy_)
++    return proxy_->HasSingleOrigin();
+   return true;
+ }
+ 
