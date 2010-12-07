@@ -8,8 +8,9 @@ chromium-browser (6.0.472.63~r59945-3) UNRELEASED; urgency=low
       Windows platforms. Credit to Billy Rios of the Google Security Team.
     - High Crash due to bad indexing with malformed video. Credit to miaubiz. 
     - High Use after free with SVG animations. Credit to Sławomir Błażek.
+    - Medium Use after free in mouse dragging event handling. Credit to kuzzcc.
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 07 Dec 2010 10:18:56 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 07 Dec 2010 10:25:26 +0100
 
 chromium-browser (6.0.472.63~r59945-2) unstable; urgency=high
 
