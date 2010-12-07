@@ -4,8 +4,10 @@ chromium-browser (6.0.472.63~r59945-3) UNRELEASED; urgency=low
     - Medium Cross-origin video theft with <canvas>. Credit to Nirankush
       Panchbhai and Microsoft Vulnerability Research (MSVR).
     - High Use after free in history handling. Credit to Stefan Troger.
+    - Medium Make sure the “dangerous file types” list is uptodate with the
+      Windows platforms. Credit to Billy Rios of the Google Security Team.
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Mon, 06 Dec 2010 21:58:11 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 07 Dec 2010 09:48:31 +0100
 
 chromium-browser (6.0.472.63~r59945-2) unstable; urgency=high
 
