@@ -6,8 +6,9 @@ chromium-browser (6.0.472.63~r59945-3) UNRELEASED; urgency=low
     - High Use after free in history handling. Credit to Stefan Troger.
     - Medium Make sure the “dangerous file types” list is uptodate with the
       Windows platforms. Credit to Billy Rios of the Google Security Team.
+    - High Crash due to bad indexing with malformed video. Credit to miaubiz. 
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 07 Dec 2010 09:48:31 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 07 Dec 2010 10:08:33 +0100
 
 chromium-browser (6.0.472.63~r59945-2) unstable; urgency=high
 
