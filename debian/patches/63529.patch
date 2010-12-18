@@ -1,0 +1,36 @@
+--- a/src/chrome/browser/worker_host/message_port_dispatcher.cc
++++ b/src/chrome/browser/worker_host/message_port_dispatcher.cc
+@@ -192,11 +192,13 @@ void MessagePortDispatcher::PostMessageT
+       sent_ports[i]->route_id = new_routing_ids[i];
+     }
+ 
+-    // Now send the message to the entangled port.
+-    IPC::Message* ipc_msg = new WorkerProcessMsg_Message(
+-        entangled_port.route_id, message, sent_message_port_ids,
+-        new_routing_ids);
+-    entangled_port.sender->Send(ipc_msg);
++    if (entangled_port.sender) {
++      // Now send the message to the entangled port
++      IPC::Message* ipc_msg = new WorkerProcessMsg_Message(
++	  entangled_port.route_id, message, sent_message_port_ids,
++	  new_routing_ids);
++      entangled_port.sender->Send(ipc_msg);
++    }
+   }
+   DCHECK(CheckMessagePortMap(true));
+ }
+@@ -209,9 +211,11 @@ void MessagePortDispatcher::OnQueueMessa
+   }
+ 
+   MessagePort& port = message_ports_[message_port_id];
+-  port.sender->Send(new WorkerProcessMsg_MessagesQueued(port.route_id));
+-  port.queue_messages = true;
+-  port.sender = NULL;
++  if (port.sender) {
++    port.sender->Send(new WorkerProcessMsg_MessagesQueued(port.route_id));
++    port.queue_messages = true;
++    port.sender = NULL;
++  }
+   DCHECK(CheckMessagePortMap(true));
+ }
+ 
