@@ -1,3 +1,11 @@
+chromium-browser (6.0.472.63~r59945-4) UNRELEASED; urgency=low
+
+  * Backported security patches from stable:
+    - [64-bit Linux only] High Bad validation for message deserialization on
+      64-bit builds. Credit to Lei Zhang of the Chromium development community.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 18 Dec 2010 13:11:38 +0100
+
 chromium-browser (6.0.472.63~r59945-3) unstable; urgency=high
 
   * Backported security patches from stable:
