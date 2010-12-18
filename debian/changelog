@@ -6,8 +6,10 @@ chromium-browser (6.0.472.63~r59945-4) UNRELEASED; urgency=low
     - Low Browser crash with NULL pointer in web worker handling. Credit to 
       Nathan Weizenbaum of Google.
     - Medium Out-of-bounds read in CSS parsing. Credit to Chris Rohlf.
+    - High Stale pointers in cursor handling. Credit to Sławomir Błażek and
+      Sergey Glazunov.
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 18 Dec 2010 14:02:24 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 18 Dec 2010 14:08:02 +0100
 
 chromium-browser (6.0.472.63~r59945-3) unstable; urgency=high
 
