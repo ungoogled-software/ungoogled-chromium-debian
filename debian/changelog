@@ -1,4 +1,4 @@
-chromium-browser (6.0.472.63~r59945-4) UNRELEASED; urgency=low
+chromium-browser (6.0.472.63~r59945-4) unstable; urgency=high
 
   * Backported security patches from stable:
     - [64-bit Linux only] High Bad validation for message deserialization on
@@ -9,7 +9,7 @@ chromium-browser (6.0.472.63~r59945-4) UNRELEASED; urgency=low
     - High Stale pointers in cursor handling. Credit to Sławomir Błażek and
       Sergey Glazunov.
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 18 Dec 2010 14:08:02 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 18 Dec 2010 17:39:19 +0100
 
 chromium-browser (6.0.472.63~r59945-3) unstable; urgency=high
 
