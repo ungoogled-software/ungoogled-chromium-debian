@@ -34,7 +34,7 @@ Include system copy of prtime.h
  #include "chrome/browser/autocomplete/autocomplete.h"
 --- a/src/chrome/common/metrics_helpers.cc
 +++ b/src/chrome/common/metrics_helpers.cc
-@@ -20,7 +20,7 @@
+@@ -19,7 +19,7 @@
  #include "base/string_number_conversions.h"
  #include "base/sys_info.h"
  #include "base/utf_string_conversions.h"
