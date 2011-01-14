@@ -9,17 +9,16 @@
  }
  
  String CSSCanvasValue::cssText() const
-@@ -62,8 +62,7 @@ void CSSCanvasValue::canvasResized(HTMLC
- void CSSCanvasValue::canvasDestroyed(HTMLCanvasElement* element)
+@@ -63,7 +63,7 @@ void CSSCanvasValue::canvasDestroyed(HTM
  {
      ASSERT(element == m_element);
--    if (element == m_element)
+     if (element == m_element)
 -        m_element = 0;
-+    m_element = 0;
++	m_element = 0;
  }
  
  IntSize CSSCanvasValue::fixedSize(const RenderObject* renderer)
-@@ -79,7 +78,7 @@ HTMLCanvasElement* CSSCanvasValue::eleme
+@@ -79,7 +79,7 @@ HTMLCanvasElement* CSSCanvasValue::eleme
          m_element = document->getCSSCanvasElement(m_name);
          if (!m_element)
              return 0;
