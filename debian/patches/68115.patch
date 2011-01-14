@@ -1,0 +1,24 @@
+--- a/src/third_party/ffmpeg/patched-ffmpeg-mt/libavcodec/vorbis_dec.c
++++ b/src/third_party/ffmpeg/patched-ffmpeg-mt/libavcodec/vorbis_dec.c
+@@ -536,6 +536,12 @@ static int vorbis_parse_setup_hdr_floors
+             rangebits = get_bits(gb, 4);
+             floor_setup->data.t1.list[0].x = 0;
+             floor_setup->data.t1.list[1].x = (1 << rangebits);
++	    if (floor_setup->data.t1.list[1].x > vc->blocksize[1] / 2) {
++		av_log(vc->avccontext, AV_LOG_ERROR,
++		       "Floor value is too large for blocksize: %d (%d)\n",
++		       floor_setup->data.t1.list[1].x, vc->blocksize[1] / 2);
++		return -1;
++	    }
+ 
+             for (j = 0; j < floor_setup->data.t1.partitions; ++j) {
+                 for (k = 0; k < floor_setup->data.t1.class_dimensions[floor_setup->data.t1.partition_class[j]]; ++k, ++floor1_values) {
+@@ -653,7 +659,7 @@ static int vorbis_parse_setup_hdr_residu
+         res_setup->partition_size = get_bits(gb, 24) + 1;
+         /* Validations to prevent a buffer overflow later. */
+         if (res_setup->begin>res_setup->end ||
+-            res_setup->end > vc->avccontext->channels * vc->blocksize[1] / (res_setup->type == 2 ? 1 : 2) ||
++            res_setup->end > vc->avccontext->channels * vc->blocksize[1] / 2 ||
+             (res_setup->end-res_setup->begin) / res_setup->partition_size > V_MAX_PARTITIONS) {
+             av_log(vc->avccontext, AV_LOG_ERROR, "partition out of bounds: type, begin, end, size, blocksize: %"PRIdFAST16", %"PRIdFAST32", %"PRIdFAST32", %u, %"PRIdFAST32"\n", res_setup->type, res_setup->begin, res_setup->end, res_setup->partition_size, vc->blocksize[1] / 2);
+             return -1;
