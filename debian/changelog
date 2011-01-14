@@ -9,8 +9,11 @@ chromium-browser (6.0.472.63~r59945-5) UNRELEASED; urgency=high
     - High Vorbis decoder buffer overflows. Credit to David Warren of CERT. 
     - High Bad cast in anchor handling. Credit to Sergey Glazunov. 
     - High Bad cast in video handling. Credit to Sergey Glazunov. 
+    - High Stale rendering node after DOM node removal. Credit to Martin
+      Barbella; plus independent discovery by Google Chrome Security Team
+      (SkyLined). 
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 14 Jan 2011 16:51:24 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 14 Jan 2011 17:04:21 +0100
 
 chromium-browser (6.0.472.63~r59945-4) unstable; urgency=high
 
