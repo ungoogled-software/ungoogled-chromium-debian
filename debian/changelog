@@ -7,8 +7,9 @@ chromium-browser (6.0.472.63~r59945-5) UNRELEASED; urgency=high
     - High Stale pointer with SVG use element. Credited anonymously; plus
       indepdent discovery by miaubiz.
     - High Vorbis decoder buffer overflows. Credit to David Warren of CERT. 
+    - High Bad cast in anchor handling. Credit to Sergey Glazunov. 
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 14 Jan 2011 16:29:37 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 14 Jan 2011 16:35:32 +0100
 
 chromium-browser (6.0.472.63~r59945-4) unstable; urgency=high
 
