@@ -1,4 +1,4 @@
-chromium-browser (6.0.472.63~r59945-5) UNRELEASED; urgency=high
+chromium-browser (6.0.472.63~r59945-5) unstable; urgency=high
 
   * Backported security patches from stable:
     - High Bad pointer handling in node iteration. Credit to Sergey Glazunov.
@@ -13,7 +13,7 @@ chromium-browser (6.0.472.63~r59945-5) UNRELEASED; urgency=high
       Barbella; plus independent discovery by Google Chrome Security Team
       (SkyLined). 
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 14 Jan 2011 17:04:21 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 15 Jan 2011 12:04:52 +0100
 
 chromium-browser (6.0.472.63~r59945-4) unstable; urgency=high
 
