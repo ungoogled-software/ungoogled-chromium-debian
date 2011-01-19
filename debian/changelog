@@ -1,3 +1,10 @@
+chromium-browser (6.0.472.63~r59945-5.1) unstable; urgency=low
+
+  [ Daniel Echeverry ]
+  * Updated copyright file to DEP5. Closes: #580784
+
+ -- Daniel Echeverry <epsilon77@gmail.com>  Mon, 17 Jan 2011 22:36:28 -0500
+
 chromium-browser (6.0.472.63~r59945-5) unstable; urgency=high
 
   * Backported security patches from stable:
