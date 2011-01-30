@@ -13,6 +13,7 @@ chromium-browser (9.0.597.83~r72435-1) UNRELEASED; urgency=low
   * Use system libvpx
   * Use system glew
   * Use system xdg-utils
+  * Build-depends on libv8-dev >= 2.5.9
 
   [ Fabien Tassin ]
   * Add libxt-dev to Build-deps needed by ppGoogleNaClPluginChrome
@@ -23,7 +24,7 @@ chromium-browser (9.0.597.83~r72435-1) UNRELEASED; urgency=low
   * Set CHROME_DESKTOP in the wrapper to help the default browser
     checker (LP: #513133)
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 30 Jan 2011 16:31:17 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 30 Jan 2011 16:34:22 +0100
 
 chromium-browser (9.0.587.0~r66374-1) experimental; urgency=low
 
