@@ -16,9 +16,11 @@ chromium-browser (9.0.597.83~r72435-1) UNRELEASED; urgency=low
   [ Fabien Tassin ]
   * Add libxt-dev to Build-deps needed by ppGoogleNaClPluginChrome
   * Add x-scheme-handler/http and x-scheme-handler/https to the MimeType
-    entry of the desktop file 
+    entry of the desktop file
+  * Set CHROME_WRAPPER to the real name of the wrapper now that upstream
+    use its value
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 30 Jan 2011 16:16:20 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 30 Jan 2011 16:18:38 +0100
 
 chromium-browser (9.0.587.0~r66374-1) experimental; urgency=low
 
