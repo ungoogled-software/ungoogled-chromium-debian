@@ -1,5 +1,6 @@
 chromium-browser (9.0.597.83~r72435-1) UNRELEASED; urgency=low
 
+  [ Giuseppe Iuculano ]
   * New beta version.
   * Added a README.Debian and warn about downgrading (Closes: #605548) 
   * honor DEB_BUILD_OPTIONS=nocheck, thanks to Jonathan Nieder
@@ -11,6 +12,9 @@ chromium-browser (9.0.597.83~r72435-1) UNRELEASED; urgency=low
   * Use libicu system headers
   * Use system libvpx
   * Use system glew
+
+  [ Fabien Tassin ]
+  * Add libxt-dev to Build-deps needed by ppGoogleNaClPluginChrome
 
  -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 30 Jan 2011 16:05:34 +0100
 
