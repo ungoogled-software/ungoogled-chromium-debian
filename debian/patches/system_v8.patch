@@ -400,7 +400,7 @@ Use system copy of libv8
  
 --- a/src/webkit/glue/webkit_glue.gypi
 +++ b/src/webkit/glue/webkit_glue.gypi
-@@ -473,7 +473,7 @@
+@@ -473,11 +473,11 @@
              ['inside_chromium_build==1 and component=="shared_library"', {
                'dependencies': [
                  '<(DEPTH)/third_party/WebKit/WebKit/chromium/WebKit.gyp:webkit',
@@ -409,6 +409,11 @@ Use system copy of libv8
                 ],
                 'export_dependent_settings': [
                   '<(DEPTH)/third_party/WebKit/WebKit/chromium/WebKit.gyp:webkit',
+-                 '<(DEPTH)/v8/tools/gyp/v8.gyp:v8',
++                 '<(DEPTH)/build/linux/system.gyp:v8',
+                ],
+             }],
+           ],
 --- a/src/chrome/browser/dom_ui/options/about_page_handler.cc
 +++ b/src/chrome/browser/dom_ui/options/about_page_handler.cc
 @@ -29,7 +29,7 @@
@@ -420,3 +425,67 @@ Use system copy of libv8
  #endif
  
  #if defined(OS_CHROMEOS)
+--- a/src/chrome/renderer/searchbox_extension.cc
++++ b/src/chrome/renderer/searchbox_extension.cc
+@@ -13,7 +13,7 @@
+ #include "third_party/WebKit/WebKit/chromium/public/WebFrame.h"
+ #include "third_party/WebKit/WebKit/chromium/public/WebScriptSource.h"
+ #include "third_party/WebKit/WebKit/chromium/public/WebString.h"
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ using WebKit::WebFrame;
+ using WebKit::WebScriptSource;
+--- a/src/third_party/WebKit/WebKitTools/DumpRenderTree/chromium/DumpRenderTree.cpp
++++ b/src/third_party/WebKit/WebKitTools/DumpRenderTree/chromium/DumpRenderTree.cpp
+@@ -32,7 +32,7 @@
+ 
+ #include "TestShell.h"
+ #include "webkit/support/webkit_support.h"
+-#include <v8/include/v8.h>
++#include <v8.h>
+ #include <wtf/Vector.h>
+ 
+ using namespace std;
+--- a/src/v8/tools/gyp/v8.gyp
++++ b/src/v8/tools/gyp/v8.gyp
+@@ -745,7 +745,7 @@
+       'target_name': 'v8_shell',
+       'type': 'executable',
+       'dependencies': [
+-        'v8'
++        '../../../build/linux/system.gyp:v8',
+       ],
+       'sources': [
+         '../../samples/shell.cc',
+--- a/src/chrome/renderer/render_view.cc
++++ b/src/chrome/renderer/render_view.cc
+@@ -153,7 +153,7 @@
+ #include "third_party/WebKit/WebKit/chromium/public/WebWindowFeatures.h"
+ #include "third_party/cld/encodings/compact_lang_det/win/cld_unicodetext.h"
+ #include "third_party/skia/include/core/SkBitmap.h"
+-#include "v8/include/v8.h"
++#include <v8.h>
+ #include "webkit/appcache/web_application_cache_host_impl.h"
+ #include "webkit/glue/alt_error_page_resource_fetcher.h"
+ #include "webkit/glue/context_menu.h"
+--- a/src/third_party/WebKit/WebKit/chromium/WebKit.gyp
++++ b/src/third_party/WebKit/WebKit/chromium/WebKit.gyp
+@@ -588,7 +588,7 @@
+                                 '<(chromium_src_dir)/third_party/nss/nss.gyp:*',
+                                 '<(chromium_src_dir)/third_party/ots/ots.gyp:ots',
+                                 '<(chromium_src_dir)/third_party/zlib/zlib.gyp:zlib',
+-                                '<(chromium_src_dir)/v8/tools/gyp/v8.gyp:v8',
++                                '<(chromium_src_dir)/build/linux/system.gyp:v8',
+                             ],
+                             'direct_dependent_settings': {
+                                 'defines': [
+@@ -597,7 +597,7 @@
+                             },
+                             'export_dependent_settings': [
+                                 '<(chromium_src_dir)/build/temp_gyp/googleurl.gyp:googleurl',
+-                                '<(chromium_src_dir)/v8/tools/gyp/v8.gyp:v8',
++                                '<(chromium_src_dir)/build/linux/system.gyp:v8',
+                             ],
+                             'sources': [
+                                 '<@(webkit_unittest_files)',
