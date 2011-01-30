@@ -45,6 +45,7 @@ export LD_LIBRARY_PATH
 # not able to do anything useful
 export PATH="$LIBDIR:$PATH"
 export CHROME_WRAPPER="`readlink -f "$0"`"
+export CHROME_DESKTOP=$APPNAME.desktop
 
 #DIST=`lsb_release -si`
 #RELEASE=`lsb_release -sr`
