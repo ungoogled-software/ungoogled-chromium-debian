@@ -46,6 +46,10 @@ NJOBS := -j$(PARALLEL_JOBS)
 DEB_MAKE_ENVVARS := MAKEFLAGS=$(NJOBS)
 endif
 
+ifneq (,$(filter nocheck,$(DEB_BUILD_OPTIONS))
+WANT_TESTS := 0
+endif
+
 # Disable SSE2
 GYP_DEFINES = disable_sse2=1
 

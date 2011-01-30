@@ -2,8 +2,10 @@ chromium-browser (9.0.597.83~r72435-1) UNRELEASED; urgency=low
 
   * New beta version.
   * Added a README.Debian and warn about downgrading (Closes: #605548) 
+  * honor DEB_BUILD_OPTIONS=nocheck, thanks to Jonathan Nieder
+    (Closes: #589653)
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 30 Jan 2011 13:51:40 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 30 Jan 2011 13:58:09 +0100
 
 chromium-browser (9.0.587.0~r66374-1) experimental; urgency=low
 
