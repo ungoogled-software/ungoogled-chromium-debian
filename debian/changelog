@@ -6,8 +6,9 @@ chromium-browser (9.0.597.83~r72435-1) UNRELEASED; urgency=low
     (Closes: #589653)
   * Avoid "cannot access" messagges when using ffmpeg internal copy. Thanks to
     Jonathan Nieder. (Closes: #589563)
+  * Refreshed patches.
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 30 Jan 2011 14:14:28 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 30 Jan 2011 14:51:07 +0100
 
 chromium-browser (9.0.587.0~r66374-1) experimental; urgency=low
 
