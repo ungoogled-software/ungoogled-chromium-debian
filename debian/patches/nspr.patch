@@ -12,12 +12,34 @@ Include system copy of prtime.h
  
 --- a/src/base/time.cc
 +++ b/src/base/time.cc
-@@ -5,7 +5,7 @@
+@@ -4,7 +4,7 @@
+ 
  #include "base/time.h"
- #include "base/string_util.h"
  #include "base/sys_string_conversions.h"
 -#include "base/third_party/nspr/prtime.h"
 +#include <prtime.h>
  
  #include "base/logging.h"
  
+--- a/src/chrome/browser/metrics/metrics_log.cc
++++ b/src/chrome/browser/metrics/metrics_log.cc
+@@ -13,7 +13,7 @@
+ #include "base/scoped_ptr.h"
+ #include "base/string_util.h"
+ #include "base/sys_info.h"
+-#include "base/third_party/nspr/prtime.h"
++#include <prtime.h>
+ #include "base/time.h"
+ #include "base/utf_string_conversions.h"
+ #include "chrome/browser/autocomplete/autocomplete.h"
+--- a/src/chrome/common/metrics_helpers.cc
++++ b/src/chrome/common/metrics_helpers.cc
+@@ -20,7 +20,7 @@
+ #include "base/string_number_conversions.h"
+ #include "base/sys_info.h"
+ #include "base/utf_string_conversions.h"
+-#include "base/third_party/nspr/prtime.h"
++#include <nspr/prtime.h>
+ #include "chrome/common/logging_chrome.h"
+ #include "googleurl/src/gurl.h"
+ #include "libxml/xmlwriter.h"

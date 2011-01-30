@@ -1,3 +1,34 @@
+chromium-browser (9.0.587.0~r66374-1) experimental; urgency=low
+
+  * New dev version
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 20 Nov 2010 18:33:03 +0100
+
+chromium-browser (9.0.576.0~r65344-1) experimental; urgency=low
+
+  * New dev version
+  * Refreshed patches
+  * Added libxtst-dev in build-depends
+  * Use v8, libvpx and glew system copy for the moment.
+  * Disable tests
+  * Do not install /usr/lib/chromium-browser/libosmesa.so (Closes: #599511)
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 17 Nov 2010 22:26:37 +0100
+
+chromium-browser (7.0.544.0~r61416-1) UNRELEASED; urgency=low
+
+  * New dev version
+  * Remove system-icu.patch, applied upstream
+  * Remove icu44.patch, applied upstream
+  * Refreshed patches
+  * Enable compile-time dependency on gnome-keyring
+  * Use system speex
+  * Build depends on libv8-dev >= 2.4.7
+  * Remove disable_dlog_and_dcheck_in_release_builds.patch
+  * Install libosmesa.so ssl_false_start_blacklist_process and xdg-mime
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 06 Oct 2010 14:55:53 +0200
+
 chromium-browser (6.0.472.63~r59945-5.1) unstable; urgency=low
 
   [ Daniel Echeverry ]

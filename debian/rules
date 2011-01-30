@@ -27,9 +27,9 @@ endif
 WANT_DEBUG       := 0
 WANT_SYSTEM_LIBS ?= 1
 WANT_SHARED_LIBS ?= 0
-WANT_TESTS       ?= 1
+WANT_TESTS       ?= 0
 WANT_SANDBOXING  ?= 1
-USE_SYSTEM_V8    ?= 1
+USE_SYSTEM_V8    ?= 0
 VERBOSE          ?= 0
 
 export DEB_BUILD_HARDENING=1
@@ -52,6 +52,9 @@ GYP_DEFINES = disable_sse2=1
 # Enable all codecs for HTML5 in chromium, depending on which ffmpeg sumo lib
 # is installed, the set of usable codecs (at runtime) will still vary
 GYP_DEFINES += proprietary_codecs=1
+
+# enable compile-time dependency on gnome-keyring
+GYP_DEFINES += use_gnome_keyring=1
 
 # Only keep -Werror when building for the Debian or Ubuntu development branches
 ifeq (,$(filter unstable development,$(DEBIAN_DIST)))
@@ -264,7 +267,7 @@ GYP_DEFINES += \
 	use_system_icu=1 \
 	use_system_yasm=1 \
 	use_system_ffmpeg=0 \
-	use_system_vpx=1 \
+	use_system_vpx=0 \
 	$(NULL)
 endif
 
