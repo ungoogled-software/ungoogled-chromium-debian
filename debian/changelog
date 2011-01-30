@@ -25,7 +25,7 @@ chromium-browser (9.0.597.83~r72435-1) unstable; urgency=low
   * Set CHROME_DESKTOP in the wrapper to help the default browser
     checker (LP: #513133)
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 30 Jan 2011 21:49:31 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 30 Jan 2011 22:14:01 +0100
 
 chromium-browser (9.0.587.0~r66374-1) experimental; urgency=low
 
