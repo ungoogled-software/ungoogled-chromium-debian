@@ -10,7 +10,6 @@ chromium-browser (9.0.597.83~r72435-1) UNRELEASED; urgency=low
   * Refreshed patches.
   * Build against libv8
   * Use libicu system headers
-  * Use system libvpx
   * Use system glew
   * Use system xdg-utils
   * Build-depends on libv8-dev >= 2.5.9
@@ -25,7 +24,7 @@ chromium-browser (9.0.597.83~r72435-1) UNRELEASED; urgency=low
   * Set CHROME_DESKTOP in the wrapper to help the default browser
     checker (LP: #513133)
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 30 Jan 2011 17:09:36 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 30 Jan 2011 18:38:57 +0100
 
 chromium-browser (9.0.587.0~r66374-1) experimental; urgency=low
 

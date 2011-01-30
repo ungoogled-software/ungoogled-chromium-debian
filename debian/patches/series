@@ -13,5 +13,5 @@ gecko-mediaplayer.patch
 ffmpeg_arm.patch
 system-speech.patch
 icu.patch
-vpx.patch
+#vpx.patch
 glew.patch
