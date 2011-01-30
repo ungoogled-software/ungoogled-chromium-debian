@@ -278,7 +278,7 @@ GYP_DEFINES += \
 	use_system_icu=1 \
 	use_system_yasm=1 \
 	use_system_ffmpeg=$(USE_SYSTEM_FFMPEG) \
-	use_system_vpx=0 \
+	use_system_vpx=1 \
 	$(NULL)
 endif
 
