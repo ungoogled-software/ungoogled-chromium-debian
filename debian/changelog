@@ -10,8 +10,9 @@ chromium-browser (9.0.597.83~r72435-1) UNRELEASED; urgency=low
   * Build against libv8
   * Use libicu system headers
   * Use system libvpx
+  * Use system glew
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 30 Jan 2011 15:46:48 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 30 Jan 2011 16:05:34 +0100
 
 chromium-browser (9.0.587.0~r66374-1) experimental; urgency=low
 
