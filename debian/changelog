@@ -1,4 +1,4 @@
-chromium-browser (9.0.597.84~r72991-1) UNRELEASED; urgency=low
+chromium-browser (9.0.597.84~r72991-1) unstable; urgency=low
 
   * New stable version:
     - [55831] High Use-after-free in image loading. Credit to Aki Helin of OUSPG
@@ -14,7 +14,7 @@ chromium-browser (9.0.597.84~r72991-1) UNRELEASED; urgency=low
     - [69195] Critical Race condition in audio handling. Credit to the gamers of
       Reddit!
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 06 Feb 2011 17:28:12 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 06 Feb 2011 23:50:23 +0100
 
 chromium-browser (9.0.597.83~r72435-1) unstable; urgency=low
 
