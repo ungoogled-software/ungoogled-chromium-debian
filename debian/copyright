@@ -6,7 +6,7 @@ Source: http://src.chromium.org/viewvc/chrome/
 Files: debian/*
 Copyright: 2009-2010, Fabien Tassin <fta@ubuntu.com>
            2010, Giuseppe Iuculano <iuculano@debian.org>
-License: BSD-Style (3-clause)
+License: BSD (guessed)
 
 Files: debian/patches/*
 Copyright: 2009, the patch authors
