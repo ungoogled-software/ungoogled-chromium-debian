@@ -1,4 +1,4 @@
-chromium-browser (9.0.597.98~r74359-1) UNRELEASED; urgency=low
+chromium-browser (9.0.597.98~r74359-1) unstable; urgency=low
 
   * New stable version:
     - [67234] High Stale pointer in animation event handling. Credit to Rik
@@ -11,7 +11,7 @@ chromium-browser (9.0.597.98~r74359-1) UNRELEASED; urgency=low
     - [70456] Medium Possible failure to terminate process on out-of-memory
       condition. Credit to David Warren of CERT/CC.
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Mon, 14 Feb 2011 09:48:00 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Mon, 14 Feb 2011 10:06:36 +0100
 
 chromium-browser (9.0.597.84~r72991-1) unstable; urgency=low
 
