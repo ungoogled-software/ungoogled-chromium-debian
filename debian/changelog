@@ -13,9 +13,9 @@ chromium-browser (9.0.597.98~r74359-1) unstable; urgency=low
       condition. Credit to David Warren of CERT/CC.
 
   [ Daniel Echeverry ]
-  * Fixed prtime.h caused by nspr.patch (Closes: #612618)
+  * Fixed FTBFS caused by nspr.patch (Closes: #612618)
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 16 Feb 2011 07:49:23 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 16 Feb 2011 09:07:31 +0100
 
 chromium-browser (9.0.597.84~r72991-1) unstable; urgency=low
 
