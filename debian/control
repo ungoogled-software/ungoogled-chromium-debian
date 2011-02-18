@@ -50,7 +50,7 @@ Build-Depends: cdbs,
 	libicu-dev (>= 4.2.1),
 	libevent-dev (>= 1.4.13),
 	yasm,
-	libv8-dev (>= 2.4.7),
+	libv8-dev (>= 2.5.9),
 	libprotobuf-dev,
 	protobuf-compiler,
 	libglewmx1.5-dev,
@@ -60,6 +60,7 @@ Build-Depends: cdbs,
 	libgconf2-dev,
 	libspeex-dev,
 	hardening-wrapper,
+	libxt-dev,
 	libxtst-dev
 Standards-Version: 3.9.0
 

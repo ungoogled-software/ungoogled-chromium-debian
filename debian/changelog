@@ -1,3 +1,69 @@
+chromium-browser (9.0.597.98~r74359-1) unstable; urgency=low
+
+  [ Giuseppe Iuculano ]
+  * New stable version:
+    - [67234] High Stale pointer in animation event handling. Credit to Rik
+      Cabanier.
+    - [68120] High Use-after-free in SVG font faces. Credit to miaubiz.
+    - [69556] High Stale pointer with anonymous block handling. Credit to
+      Martin Barbella.
+    - [69970] Medium Out-of-bounds read in plug-in handling. Credit to Bill
+      Budge of Google.
+    - [70456] Medium Possible failure to terminate process on out-of-memory
+      condition. Credit to David Warren of CERT/CC.
+
+  [ Daniel Echeverry ]
+  * Fixed FTBFS caused by nspr.patch (Closes: #612618)
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 16 Feb 2011 09:07:31 +0100
+
+chromium-browser (9.0.597.84~r72991-1) unstable; urgency=low
+
+  * New stable version:
+    - [55831] High Use-after-free in image loading. Credit to Aki Helin of OUSPG
+    - [59081] Low Apply some restrictions to cross-origin drag + drop. Credit to
+      Google Chrome Security Team (SkyLined) and the Google Security Team
+      (Michal Zalewski, David Bloom).
+    - [62791] Low Browser crash with extension with missing key. Credit to Brian
+      Kirchoff.
+    - [65669] Low Handle merging of autofill profiles more gracefully. Credit to
+      Google Chrome Security Team (Inferno).
+    - [68244] Low Browser crash with bad volume setting. Credit to Matthew
+      Heidermann.
+    - [69195] Critical Race condition in audio handling. Credit to the gamers of
+      Reddit!
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 06 Feb 2011 23:50:23 +0100
+
+chromium-browser (9.0.597.83~r72435-1) unstable; urgency=low
+
+  [ Giuseppe Iuculano ]
+  * New beta version.
+  * Added a README.Debian and warn about downgrading (Closes: #605548) 
+  * honor DEB_BUILD_OPTIONS=nocheck, thanks to Jonathan Nieder
+    (Closes: #589653)
+  * Avoid "cannot access" messagges when using ffmpeg internal copy. Thanks to
+    Jonathan Nieder. (Closes: #589563)
+  * Refreshed patches.
+  * Build against libv8
+  * Use libicu system headers
+  * Use system glew
+  * Use system xdg-utils
+  * Build-depends on libv8-dev >= 2.5.9
+  * Update translations in Desktop file. Thanks to the Ubuntu translation team.
+  * Upload to unstable
+
+  [ Fabien Tassin ]
+  * Add libxt-dev to Build-deps needed by ppGoogleNaClPluginChrome
+  * Add x-scheme-handler/http and x-scheme-handler/https to the MimeType
+    entry of the desktop file
+  * Set CHROME_WRAPPER to the real name of the wrapper now that upstream
+    use its value
+  * Set CHROME_DESKTOP in the wrapper to help the default browser
+    checker (LP: #513133)
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 30 Jan 2011 22:14:01 +0100
+
 chromium-browser (9.0.597.45~r70550-1) experimental; urgency=low
 
   * New beta version
@@ -41,6 +107,101 @@ chromium-browser (7.0.544.0~r61416-1) UNRELEASED; urgency=low
   * Install libosmesa.so ssl_false_start_blacklist_process and xdg-mime
 
  -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 06 Oct 2010 14:55:53 +0200
+
+chromium-browser (6.0.472.63~r59945-5.1) unstable; urgency=low
+
+  [ Daniel Echeverry ]
+  * Updated copyright file to DEP5. Closes: #580784
+
+ -- Daniel Echeverry <epsilon77@gmail.com>  Mon, 17 Jan 2011 22:36:28 -0500
+
+chromium-browser (6.0.472.63~r59945-5) unstable; urgency=high
+
+  * Backported security patches from stable:
+    - High Bad pointer handling in node iteration. Credit to Sergey Glazunov.
+    - High Stale pointer with CSS + canvas. Credit to Sergey Glazunov. 
+    - High Stale pointer with CSS + cursors. Credit to Jan Tošovský.
+    - High Stale pointer with SVG use element. Credited anonymously; plus
+      indepdent discovery by miaubiz.
+    - High Vorbis decoder buffer overflows. Credit to David Warren of CERT. 
+    - High Bad cast in anchor handling. Credit to Sergey Glazunov. 
+    - High Bad cast in video handling. Credit to Sergey Glazunov. 
+    - High Stale rendering node after DOM node removal. Credit to Martin
+      Barbella; plus independent discovery by Google Chrome Security Team
+      (SkyLined). 
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 15 Jan 2011 12:04:52 +0100
+
+chromium-browser (6.0.472.63~r59945-4) unstable; urgency=high
+
+  * Backported security patches from stable:
+    - [64-bit Linux only] High Bad validation for message deserialization on
+      64-bit builds. Credit to Lei Zhang of the Chromium development community.
+    - Low Browser crash with NULL pointer in web worker handling. Credit to 
+      Nathan Weizenbaum of Google.
+    - Medium Out-of-bounds read in CSS parsing. Credit to Chris Rohlf.
+    - High Stale pointers in cursor handling. Credit to Sławomir Błażek and
+      Sergey Glazunov.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 18 Dec 2010 17:39:19 +0100
+
+chromium-browser (6.0.472.63~r59945-3) unstable; urgency=high
+
+  * Backported security patches from stable:
+    - Medium Cross-origin video theft with <canvas>. Credit to Nirankush
+      Panchbhai and Microsoft Vulnerability Research (MSVR).
+    - High Use after free in history handling. Credit to Stefan Troger.
+    - Medium Make sure the “dangerous file types” list is uptodate with the
+      Windows platforms. Credit to Billy Rios of the Google Security Team.
+    - High Crash due to bad indexing with malformed video. Credit to miaubiz. 
+    - High Use after free with SVG animations. Credit to Sławomir Błażek.
+    - Medium Use after free in mouse dragging event handling. Credit to kuzzcc.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 07 Dec 2010 12:53:25 +0100
+
+chromium-browser (6.0.472.63~r59945-2) unstable; urgency=high
+
+  * Added the missing changelog credit for the 5.0.375.29~r46008-1 revision.
+    Obviously this was not a "stealing" as foolishly written by Fabien Tassin
+    in a blog rant, but was a bad debian/changelog merge.
+  * Backported security patches from stable:
+    - High Use-after-free in text editing. Credit to David Bloom of the Google
+      Security Team, Google Chrome Security Team (Inferno) and Google Chrome
+      Security Team (Cris Neckar).
+    - High Memory corruption with enormous text area. Credit to wushi of
+      team509.
+    - High Bad cast with the SVG use element. Credit to the kuzzcc.
+    - High Use-after-free in text control selections. Credit to "vkouchna".
+    - High Integer overflows in font handling. Credit to Aki Helin of OUSPG.
+    - High Bad use of destroyed frame object. Credit to various developers,
+      including "gundlach".
+    - High Type confusions with event objects. Credit to "fam.lam" and Google
+      Chrome Security Team (Inferno).
+    - High Out-of-bounds array access in SVG handling. Credit to wushi of
+      team509.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 05 Nov 2010 09:19:33 +0100
+
+chromium-browser (6.0.472.63~r59945-1) unstable; urgency=high
+
+  * New stable microrelease.
+  * Allow to choose whether links are opened in a new link or new tab.
+    (Closes: #581391) Thanks to Sam Morris
+  * Backported security patches:
+    - Medium Possible autofill / autocomplete profile spamming. Credit to
+      Google Chrome Security Team (Inferno).
+    - High Crash with forms. Credit to the Chromium development community.
+    - Critical Browser crash with form autofill. Credit to the Chromium
+      development community.
+    - High Possible URL spoofing on page unload. Credit to kuzzcc; plus
+      independent discovery by Jordi Chancel.
+    - High Possible memory corruption with animated GIF. Credit to Simon Schaak.
+    - High Failure to sandbox worker processes on Linux. Credit to Google
+      Chrome Security Team (Chris Evans).
+    - High Stale elements in an element map. Credit to Michal Zalewski of the
+      Google Security Team.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 19 Oct 2010 12:59:21 +0200
 
 chromium-browser (6.0.472.62~r59676-1) unstable; urgency=low
 
@@ -494,28 +655,13 @@ chromium-browser (5.0.375.29~r46008-2) experimental; urgency=low
 
 chromium-browser (5.0.375.29~r46008-1) experimental; urgency=low
 
+  [Giuseppe Iuculano]
   * Switch to system libs and enabled libxml
     - update debian/rules
   * Use system libevent, libicu and libxslt
     - update debian/rules
     - update debian/control
-  * Add app_unittests_strings to INSTALL_EXCLUDE_DIRS
-    - update debian/rules
-  * Add a gnome-www-browser alternative (LP: #571103)
-    - update debian/chromium-browser.{postinst,prerm}
   * New upstream release from the Beta Channel
-  * Build with build_ffmpegsumo=0 instead of use_system_ffmpeg=1 (which
-    now means something else)
-    - update debian/rules
-  * Install resources/{bookmark_manager,net_internals} in the main deb
-    - update debian/chromium-browser.install
-  * Drop the sse2 patch, it has been applied upstream, and set disable_sse2
-    - drop debian/patches/drop_sse2.patch
-    - update debian/patches/series
-    - update debian/rules
-  * Add app_unittests_strings, resources/{calendar_app,docs_app,gmail_app}
-    and pyproto to INSTALL_EXCLUDE_DIRS
-    - update debian/rules
   * Fixed a typo in the maintainer field
     - update debian/control
   * Removed ubuntu_dont_overwrite_default_download_directory.patch, the default
@@ -531,6 +677,24 @@ chromium-browser (5.0.375.29~r46008-1) experimental; urgency=low
     - update debian/copyright.problems
   * Added a strict depend in chromium-browser-inspector
     - update debian/control
+
+  [ Fabien Tassin ]
+  * Add app_unittests_strings to INSTALL_EXCLUDE_DIRS
+    - update debian/rules
+  * Add a gnome-www-browser alternative (LP: #571103)
+    - update debian/chromium-browser.{postinst,prerm}
+  * Build with build_ffmpegsumo=0 instead of use_system_ffmpeg=1 (which
+    now means something else)
+    - update debian/rules
+  * Install resources/{bookmark_manager,net_internals} in the main deb
+    - update debian/chromium-browser.install
+  * Drop the sse2 patch, it has been applied upstream, and set disable_sse2
+    - drop debian/patches/drop_sse2.patch
+    - update debian/patches/series
+    - update debian/rules
+  * Add app_unittests_strings, resources/{calendar_app,docs_app,gmail_app}
+    and pyproto to INSTALL_EXCLUDE_DIRS
+    - update debian/rules
 
  -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 06 May 2010 12:01:07 +0200
 

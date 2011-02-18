@@ -5,12 +5,13 @@
 nspr.patch
 nss.patch
 expat.patch
-#system_v8.patch
+system_v8.patch
 prefs.patch
 #protobuf.patch
-#glew.patch
 armv4.patch
 gecko-mediaplayer.patch
 ffmpeg_arm.patch
 system-speech.patch
+icu.patch
 #vpx.patch
+glew.patch

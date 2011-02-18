@@ -7,9 +7,12 @@ DEBIAN_REVISION		:= $(shell echo $(DEBIAN_VERSION) | sed 's/^.*r\([^-]*\)-.*/\1/
 DEBIAN_DIST		:= $(shell lsb_release -ds | tr -d '()')
 DEBIAN_DIST_NAME	:= $(shell lsb_release -si)
 DEBIAN_DIST_VERSION	:= $(shell lsb_release -sr)
+USE_SYSTEM_FFMPEG	:= 0
+ifeq (1,$(USE_SYSTEM_FFMPEG))
 LIBAVCODEC_BASENAME	:= $(shell basename $$(ls -x /usr/lib/libavcodec.so.* | cut -d ' ' -f 1))
 LIBAVFORMAT_BASENAME	:= $(shell basename $$(ls -x /usr/lib/libavformat.so.* | cut -d ' ' -f 1))
 LIBAVUTIL_BASENAME	:= $(shell basename $$(ls -x /usr/lib/libavutil.so.* | cut -d ' ' -f 1))
+endif
 
 # DEB_TAR_SRCDIR has to be 'src' as this is what gyp expects :(
 DEB_TAR_SRCDIR := src
@@ -29,7 +32,7 @@ WANT_SYSTEM_LIBS ?= 1
 WANT_SHARED_LIBS ?= 0
 WANT_TESTS       ?= 0
 WANT_SANDBOXING  ?= 1
-USE_SYSTEM_V8    ?= 0
+USE_SYSTEM_V8    ?= 1
 VERBOSE          ?= 0
 
 export DEB_BUILD_HARDENING=1
@@ -44,6 +47,10 @@ PARALLEL_JOBS := $(shell if [ -f /proc/cpuinfo ]; \
 endif
 NJOBS := -j$(PARALLEL_JOBS)
 DEB_MAKE_ENVVARS := MAKEFLAGS=$(NJOBS)
+endif
+
+ifneq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
+WANT_TESTS := 0
 endif
 
 # Disable SSE2
@@ -243,7 +250,11 @@ TESTS ?= \
 endif
 
 # FFmpeg-mt
+ifeq (1,$(USE_SYSTEM_FFMPEG))
+GYP_DEFINES += build_ffmpegsumo=0
+else
 GYP_DEFINES += build_ffmpegsumo=1 ffmpeg_branding=Chrome
+endif
 
 USE_SYSTEM_SQLITE := $(shell pkg-config 'sqlite3 >= 3.6.1' && echo 1 || echo 0)
 USE_SYSTEM_SQLITE := 0
@@ -266,8 +277,9 @@ GYP_DEFINES += \
 	use_system_libevent=1 \
 	use_system_icu=1 \
 	use_system_yasm=1 \
-	use_system_ffmpeg=0 \
+	use_system_ffmpeg=$(USE_SYSTEM_FFMPEG) \
 	use_system_vpx=0 \
+	use_system_xdg_utils=1 \
 	$(NULL)
 endif
 
@@ -439,13 +451,15 @@ ifneq (i386,$(DEB_HOST_ARCH_CPU))
 	# same for inspector
 	rm -rf $(CURDIR)/debian/tmp/$(LIB_DIR)/resources/inspector/*
 endif
-	# Install symlinks to system ffmpeg libs
-	#ln -sf "/usr/lib/$(LIBAVCODEC_BASENAME)" \
-	#	"$(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(LIBAVCODEC_BASENAME)"
-	#ln -sf "/usr/lib/$(LIBAVFORMAT_BASENAME)" \
-	#	"$(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(LIBAVFORMAT_BASENAME)"
-	#ln -sf "/usr/lib/$(LIBAVUTIL_BASENAME)" \
-	#	"$(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(LIBAVUTIL_BASENAME)"
+ifeq (1,$(USE_SYSTEM_FFMPEG))
+	 Install symlinks to system ffmpeg libs
+	ln -sf "/usr/lib/$(LIBAVCODEC_BASENAME)" \
+		"$(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(LIBAVCODEC_BASENAME)"
+	ln -sf "/usr/lib/$(LIBAVFORMAT_BASENAME)" \
+		"$(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(LIBAVFORMAT_BASENAME)"
+	ln -sf "/usr/lib/$(LIBAVUTIL_BASENAME)" \
+		"$(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(LIBAVUTIL_BASENAME)"
+endif
 
 binary-install/$(DEBIAN_NAME)-l10n::
 	rm $(CURDIR)/debian/$(DEBIAN_NAME)-l10n/$(LIB_DIR)/locales/en-US.pak
@@ -508,14 +522,16 @@ compare:
 
 binary-makedeb-IMPL/$(DEBIAN_NAME)::
 	dh_gencontrol -p$(DEBIAN_NAME)
+ifeq (1,$(USE_SYSTEM_FFMPEG))
 	# Manually insert ffmpeg libs shlib deps for chromium-browser since the
 	# libs are dlopened.
-	#sed "s/^Depends:.*$$/&, $$(sh debian/var_info LIBAVCODEC_DEPENDS)/" \
-	#	-i "debian/$(DEBIAN_NAME)/DEBIAN/control"
-	#sed "s/^Depends:.*$$/&, $$(sh debian/var_info LIBAVFORMAT_DEPENDS)/" \
-	#	-i "debian/$(DEBIAN_NAME)/DEBIAN/control"
-	#sed "s/^Depends:.*$$/&, $$(sh debian/var_info LIBAVUTIL_DEPENDS)/" \
-	#	-i "debian/$(DEBIAN_NAME)/DEBIAN/control"
+	sed "s/^Depends:.*$$/&, $$(sh debian/var_info LIBAVCODEC_DEPENDS)/" \
+		-i "debian/$(DEBIAN_NAME)/DEBIAN/control"
+	sed "s/^Depends:.*$$/&, $$(sh debian/var_info LIBAVFORMAT_DEPENDS)/" \
+		-i "debian/$(DEBIAN_NAME)/DEBIAN/control"
+	sed "s/^Depends:.*$$/&, $$(sh debian/var_info LIBAVUTIL_DEPENDS)/" \
+		-i "debian/$(DEBIAN_NAME)/DEBIAN/control"
+endif
 	dh_md5sums -p$(DEBIAN_NAME)
 	dh_builddeb -p$(DEBIAN_NAME)
 

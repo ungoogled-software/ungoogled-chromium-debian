@@ -6,7 +6,7 @@ Include system copy of prtime.h
  #include <time.h>
  
 -#include "base/third_party/nspr/prtime.h"
-+#include <prtime.h>
++#include <nspr/prtime.h>
  #include "base/time.h"
  #include "testing/gtest/include/gtest/gtest.h"
  
@@ -17,7 +17,7 @@ Include system copy of prtime.h
  #include "base/time.h"
  #include "base/sys_string_conversions.h"
 -#include "base/third_party/nspr/prtime.h"
-+#include <prtime.h>
++#include <nspr/prtime.h>
  
  #include "base/logging.h"
  
@@ -28,7 +28,7 @@ Include system copy of prtime.h
  #include "base/string_util.h"
  #include "base/sys_info.h"
 -#include "base/third_party/nspr/prtime.h"
-+#include <prtime.h>
++#include <nspr/prtime.h>
  #include "base/time.h"
  #include "base/utf_string_conversions.h"
  #include "chrome/browser/autocomplete/autocomplete.h"
@@ -43,3 +43,13 @@ Include system copy of prtime.h
  #include "chrome/common/logging_chrome.h"
  #include "googleurl/src/gurl.h"
  #include "libxml/xmlwriter.h"
+--- a/src/base/nss_util.cc
++++ b/src/base/nss_util.cc
+@@ -9,7 +9,7 @@
+ #include <plarena.h>
+ #include <prerror.h>
+ #include <prinit.h>
+-#include <prtime.h>
++#include <nspr/prtime.h>
+ #include <pk11pub.h>
+ #include <secmod.h>
