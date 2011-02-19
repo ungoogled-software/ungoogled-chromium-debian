@@ -1,6 +1,6 @@
 --- a/src/build/linux/system.gyp
 +++ b/src/build/linux/system.gyp
-@@ -283,6 +283,23 @@
+@@ -282,6 +282,23 @@
        }]]
      },
      {
@@ -26,7 +26,7 @@
        'conditions': [
 --- a/src/chrome/chrome.gyp
 +++ b/src/chrome/chrome.gyp
-@@ -701,6 +701,7 @@
+@@ -664,6 +664,7 @@
          'common',
          '../media/media.gyp:media',
          '../skia/skia.gyp:skia',
@@ -36,7 +36,7 @@
          'gpu/gpu_channel.cc',
 --- a/src/build/common.gypi
 +++ b/src/build/common.gypi
-@@ -513,6 +513,7 @@
+@@ -576,6 +576,7 @@
        ['enable_gpu==1', {
          'defines': [
            'ENABLE_GPU=1',

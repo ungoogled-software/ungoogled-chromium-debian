@@ -1,7 +1,7 @@
 Tell Chromium to look in /etc/chromium for the master_preferences file
 --- a/src/chrome/common/chrome_paths.cc
 +++ b/src/chrome/common/chrome_paths.cc
-@@ -288,7 +288,7 @@ bool PathProvider(int key, FilePath* res
+@@ -299,7 +299,7 @@ bool PathProvider(int key, FilePath* res
  #if defined(GOOGLE_CHROME_BUILD)
        cur = FilePath(FILE_PATH_LITERAL("/etc/opt/chrome/policies"));
  #else
@@ -18,8 +18,8 @@ Tell Chromium to look in /etc/chromium for the master_preferences file
    FilePath master_prefs;
 -  if (!PathService::Get(base::DIR_EXE, &master_prefs))
 -    return true;
--  master_prefs = master_prefs.AppendASCII(installer_util::kDefaultMasterPrefs);
-+  master_prefs = FilePath("/etc/chromium-browser");
+-  master_prefs = master_prefs.AppendASCII(installer::kDefaultMasterPrefs);
++  master_prefs = FilePath("/etc/chromium");
  
-   installer_util::MasterPreferences prefs(master_prefs);
+   installer::MasterPreferences prefs(master_prefs);
    if (!prefs.read_from_file())

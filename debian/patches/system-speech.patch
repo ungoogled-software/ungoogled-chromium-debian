@@ -1,7 +1,7 @@
 Use system speex
 --- a/src/build/linux/system.gyp
 +++ b/src/build/linux/system.gyp
-@@ -295,6 +295,26 @@
+@@ -294,6 +294,26 @@
        }]]
      },
      {
@@ -28,20 +28,9 @@ Use system speex
        'target_name': 'gnome-keyring',
        'type': 'settings',
        'conditions': [
---- a/src/chrome/browser/speech/speech_recognizer.cc
-+++ b/src/chrome/browser/speech/speech_recognizer.cc
-@@ -10,7 +10,7 @@
- #include "chrome/browser/browser_thread.h"
- #include "chrome/browser/profile.h"
- #include "chrome/common/net/url_request_context_getter.h"
--#include "third_party/speex/include/speex/speex.h"
-+#include <speex/speex.h>
- 
- using media::AudioInputController;
- using std::list;
 --- a/src/chrome/chrome_browser.gypi
 +++ b/src/chrome/chrome_browser.gypi
-@@ -37,7 +37,7 @@
+@@ -40,7 +40,7 @@
          '../third_party/libxml/libxml.gyp:libxml',
          '../third_party/npapi/npapi.gyp:npapi',
          '../third_party/hunspell/hunspell.gyp:hunspell',
@@ -50,3 +39,14 @@ Use system speex
          '../webkit/support/webkit_support.gyp:appcache',
          '../webkit/support/webkit_support.gyp:blob',
          '../webkit/support/webkit_support.gyp:database',
+--- a/src/chrome/browser/speech/audio_encoder.cc
++++ b/src/chrome/browser/speech/audio_encoder.cc
+@@ -10,7 +10,7 @@
+ #include "base/stl_util-inl.h"
+ #include "base/string_number_conversions.h"
+ #include "third_party/flac/flac.h"
+-#include "third_party/speex/speex.h"
++#include <speex/speex.h>
+ 
+ using std::string;
+ 

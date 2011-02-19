@@ -1,7 +1,7 @@
 Do not use armv4 incopatible code
 --- a/src/third_party/skia/include/core/SkMath.h
 +++ b/src/third_party/skia/include/core/SkMath.h
-@@ -170,7 +170,7 @@ static inline int SkNextLog2(uint32_t va
+@@ -177,7 +177,7 @@ static inline bool SkIsPow2(int value) {
  #if defined(__arm__) \
    && !defined(__thumb__) \
    && !defined(__ARM_ARCH_4T__) \
@@ -12,7 +12,7 @@ Do not use armv4 incopatible code
          SkASSERT((int16_t)y == y);
 --- a/src/build/common.gypi
 +++ b/src/build/common.gypi
-@@ -1107,6 +1107,7 @@
+@@ -1100,6 +1100,7 @@
                    # silences those warnings, as they are not helpful and
                    # clutter legitimate warnings.
                    '-Wno-abi',
@@ -22,8 +22,8 @@ Do not use armv4 incopatible code
                    ['arm_thumb == 1', {
 --- a/src/base/debug/debugger_posix.cc
 +++ b/src/base/debug/debugger_posix.cc
-@@ -152,7 +152,7 @@ bool DebugUtil::BeingDebugged() {
- #if defined(NDEBUG) && !defined(OS_MACOSX)
+@@ -167,7 +167,7 @@ bool BeingDebugged() {
+ // http://code.google.com/p/nativeclient/issues/detail?id=645
  #define DEBUG_BREAK() abort()
  #elif defined(ARCH_CPU_ARM_FAMILY)
 -#define DEBUG_BREAK() asm("bkpt 0")
