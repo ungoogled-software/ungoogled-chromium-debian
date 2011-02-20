@@ -15,3 +15,4 @@ system-speech.patch
 icu.patch
 #vpx.patch
 glew.patch
+fix-manpage.patch
