@@ -1,7 +1,7 @@
 --- a/src/build/linux/system.gyp
 +++ b/src/build/linux/system.gyp
-@@ -282,6 +282,23 @@
-       }]]
+@@ -341,6 +341,23 @@
+       ],
      },
      {
 +      'target_name': 'glew',
@@ -21,9 +21,9 @@
 +      }]]
 +    },
 +    {
-       'target_name': 'v8',
+       'target_name': 'dbus-glib',
        'type': 'settings',
-       'conditions': [
+       'direct_dependent_settings': {
 --- a/src/chrome/chrome.gyp
 +++ b/src/chrome/chrome.gyp
 @@ -664,6 +664,7 @@
