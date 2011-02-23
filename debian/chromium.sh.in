@@ -6,8 +6,8 @@
 #  Fabien Tassin <fta@sofaraway.org>
 # License: GPLv2 or later
 
-APPNAME=chromium-browser
-LIBDIR=/usr/lib/chromium-browser
+APPNAME=chromium
+LIBDIR=/usr/lib/chromium
 EXTRALIB=/usr/lib/xulrunner-1.9.1
 GDB=/usr/bin/gdb
 BUILD_DIST="@BUILD_DIST@"
@@ -20,8 +20,8 @@ usage () {
   echo "        --temp-profile          Start with a new and temporary profile"
   echo
   echo " Other supported options are:"
-  MANWIDTH=80 man chromium-browser | sed -e '1,/OPTIONS/d; /ENVIRONMENT/,$d'
-  echo " See 'man chromium-browser' for more details"
+  MANWIDTH=80 man chromium | sed -e '1,/OPTIONS/d; /ENVIRONMENT/,$d'
+  echo " See 'man chromium' for more details"
 }
 
 if [ -f /etc/$APPNAME/default ] ; then
