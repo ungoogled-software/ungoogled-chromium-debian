@@ -61,7 +61,8 @@ Build-Depends: cdbs,
 	libspeex-dev,
 	hardening-wrapper,
 	libxt-dev,
-	libxtst-dev
+	libxtst-dev,
+	binutils-gold
 Standards-Version: 3.9.0
 
 Package: chromium-browser
