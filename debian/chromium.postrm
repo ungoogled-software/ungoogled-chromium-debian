@@ -2,17 +2,9 @@
 
 set -e
 
-if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] ; then
-    update-alternatives --install /usr/bin/x-www-browser \
-        x-www-browser /usr/bin/chromium 40
-    update-alternatives --install /usr/bin/gnome-www-browser \
-        gnome-www-browser /usr/bin/chromium 40
-fi
-
-rm -f /etc/default/chromium
-
 if dpkg-maintscript-helper supports mv_conffile 2>/dev/null; then
 	dpkg-maintscript-helper mv_conffile /etc/chromium-browser/default /etc/chromium/default 10.0.648.82~r75062-0 -- "$@"
 	dpkg-maintscript-helper mv_conffile /etc/chromium-browser/master_preferences /etc/chromium/master_preferences 10.0.648.82~r75062-0 -- "$@"
 fi
+
 #DEBHELPER#

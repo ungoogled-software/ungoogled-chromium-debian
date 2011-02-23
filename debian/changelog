@@ -5,8 +5,10 @@ chromium-browser (10.0.648.82~r75062-1) UNRELEASED; urgency=low
   * Renamed binary packages, new names: chromium, chromium-l10n,
     chromium-inspector, chromium-dbg
   * Removed SMULBB instructions (Closes: 611725) Thanks to Jérémy Lal
+  * Move /etc/chromium-browser/{default,master_preferences} to
+    /etc/chromium/{default,master_preferences}
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 23 Feb 2011 10:26:01 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 23 Feb 2011 11:12:01 +0100
 
 chromium-browser (9.0.597.98~r74359-1) unstable; urgency=low
 
