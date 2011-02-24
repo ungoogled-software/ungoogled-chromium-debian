@@ -10,8 +10,9 @@ chromium-browser (10.0.648.82~r75062-1) UNRELEASED; urgency=low
   * Remove mips from archs
   * Use in-source v8
   * Added binutils-gold in build-depends to use the experimental gold linker
+  * debian/rules: Force $DEBIAN_NAME to chromium
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 23 Feb 2011 12:15:57 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 24 Feb 2011 21:22:49 +0100
 
 chromium-browser (9.0.597.98~r74359-1) unstable; urgency=low
 
