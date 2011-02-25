@@ -4,7 +4,7 @@
        default_lastchange=None,
        directory=os.path.join(webkit_dir, version_file_dir))
  
-+  if version_info.url is None or version_info.url == 'unknown':
++  if version_info.url is None or version_info.url == '':
 +    # parse the DEPS file
 +    data = open("../../DEPS", "rb").read()
 +    x = re.search(r'"webkit_revision": "(\d+)",', data)
