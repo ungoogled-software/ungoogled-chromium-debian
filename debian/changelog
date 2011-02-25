@@ -1,4 +1,4 @@
-chromium-browser (10.0.648.82~r75062-1) UNRELEASED; urgency=low
+chromium-browser (10.0.648.114~r75702-1) UNRELEASED; urgency=low
 
   * New beta version
   * Refreshed pathces
@@ -11,8 +11,9 @@ chromium-browser (10.0.648.82~r75062-1) UNRELEASED; urgency=low
   * Use in-source v8
   * Added binutils-gold in build-depends to use the experimental gold linker
   * debian/rules: Force $DEBIAN_NAME to chromium
+  * Fixed the webkit version parser. Patch from Ubuntu, thanks to Fabien Tassin
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 24 Feb 2011 21:22:49 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 25 Feb 2011 10:40:33 +0100
 
 chromium-browser (9.0.597.98~r74359-1) unstable; urgency=low
 
