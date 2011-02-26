@@ -12,8 +12,9 @@ chromium-browser (10.0.648.114~r75702-1) UNRELEASED; urgency=low
   * Added binutils-gold in build-depends to use the experimental gold linker
   * debian/rules: Force $DEBIAN_NAME to chromium
   * Fixed the webkit version parser. Patch from Ubuntu, thanks to Fabien Tassin
+  * Do not install anymore xdg-settings and xdg-mime copy
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 25 Feb 2011 10:40:33 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 26 Feb 2011 12:03:11 +0100
 
 chromium-browser (9.0.597.98~r74359-1) unstable; urgency=low
 
