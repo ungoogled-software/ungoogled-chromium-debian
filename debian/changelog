@@ -1,3 +1,37 @@
+chromium-browser (9.0.597.107~r75357-1) UNRELEASED; urgency=low
+
+  [ Giuseppe Iuculano ]
+  * New Stable version:
+    - [54262] High URL bar spoof. Credit to Jordi Chancel.
+    - [63732] High Crash with javascript dialogs. Credit to Sergey Radchenko.
+    - [68263] High Stylesheet node stale pointer. Credit to Sergey Glazunov.
+    - [68741] High Stale pointer with key frame rule. Credit to Sergey Glazunov.
+    - [70078] High Crash with forms controls. Credit to Stefan van Zanden.
+    - [70244] High Crash in SVG rendering. Credit to Sławomir Błażek.
+    - [64-bit Linux only] [70376] Medium Out-of-bounds read in pickle
+      deserialization. Credit to Evgeniy Stepanov of the Chromium development community.
+    - [71114] High Stale node in table handling. Credit to Martin Barbella.
+    - [71115] High Stale pointer in table rendering. Credit to Martin Barbella.
+    - [71296] High Stale pointer in SVG animations. Credit to miaubiz.
+    - [71386] High Stale nodes in XHTML. Credit to wushi of team509.
+    - [71388] High Crash in textarea handling. Credit to wushi of team509.
+    - [71595] High Stale pointer in device orientation. Credit to 
+      Sergey Glazunov.
+    - [71717] Medium Out-of-bounds read in WebGL. Credit to miaubiz.
+    - [71855] High Integer overflow in textarea handling. Credit to miaubiz.
+    - [71960] Medium Out-of-bounds read in WebGL.
+      Credit to Google Chrome Security Team (Inferno).
+    - [72214] High Accidental exposure of internal extension functions.
+      Credit to Tavis Ormandy of the Google Security Team.
+    - [72437] High Use-after-free with blocked plug-ins.
+      Credit to Chamal de Silva.
+    - [73235] High Stale pointer in layout. Credit to Martin Barbella.
+
+  [ Daniel Echeverry ]
+  * Added patch fix-manpage.patch Closes: #607503
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 03 Mar 2011 11:39:01 +0100
+
 chromium-browser (9.0.597.98~r74359-1) unstable; urgency=low
 
   [ Giuseppe Iuculano ]
@@ -14,7 +48,6 @@ chromium-browser (9.0.597.98~r74359-1) unstable; urgency=low
 
   [ Daniel Echeverry ]
   * Fixed FTBFS caused by nspr.patch (Closes: #612618)
-  * Added patch fix-manpage.patch Closes: #607503
 
  -- Daniel Echeverry <epsilon77@gmail.com>  Sun, 20 Feb 2011 13:57:29 -0500
 
