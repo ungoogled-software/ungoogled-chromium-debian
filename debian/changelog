@@ -1,4 +1,4 @@
-chromium-browser (9.0.597.107~r75357-1) UNRELEASED; urgency=low
+chromium-browser (9.0.597.107~r75357-1) unstable; urgency=low
 
   [ Giuseppe Iuculano ]
   * New Stable version:
@@ -30,7 +30,7 @@ chromium-browser (9.0.597.107~r75357-1) UNRELEASED; urgency=low
   [ Daniel Echeverry ]
   * Added patch fix-manpage.patch Closes: #607503
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 03 Mar 2011 11:39:01 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 03 Mar 2011 11:42:01 +0100
 
 chromium-browser (9.0.597.98~r74359-1) unstable; urgency=low
 
