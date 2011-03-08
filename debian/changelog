@@ -1,3 +1,22 @@
+chromium-browser (10.0.648.114~r75702-1) experimental; urgency=low
+
+  * New beta version
+  * Refreshed pathces
+  * Renamed binary packages, new names: chromium, chromium-l10n,
+    chromium-inspector, chromium-dbg
+  * Removed SMULBB instructions (Closes: 611725) Thanks to Jérémy Lal
+  * Move /etc/chromium-browser/{default,master_preferences} to
+    /etc/chromium/{default,master_preferences}
+  * Remove mips from archs
+  * Use in-source v8
+  * Added binutils-gold in build-depends to use the experimental gold linker
+  * debian/rules: Force $DEBIAN_NAME to chromium
+  * Fixed the webkit version parser. Patch from Ubuntu, thanks to Fabien Tassin
+  * Do not install anymore xdg-settings and xdg-mime copy
+  * Install libppGoogleNaClPluginChrome.so
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 02 Mar 2011 11:36:53 +0100
+
 chromium-browser (9.0.597.107~r75357-1) unstable; urgency=low
 
   [ Giuseppe Iuculano ]
@@ -97,6 +116,19 @@ chromium-browser (9.0.597.83~r72435-1) unstable; urgency=low
     checker (LP: #513133)
 
  -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 30 Jan 2011 22:14:01 +0100
+
+chromium-browser (9.0.597.45~r70550-1) experimental; urgency=low
+
+  * New beta version
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Mon, 17 Jan 2011 09:55:51 +0100
+
+chromium-browser (9.0.597.19~r68937-1) experimental; urgency=low
+
+  * New beta version
+  * Refreshed patches
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 29 Dec 2010 09:17:12 +0100
 
 chromium-browser (9.0.587.0~r66374-1) experimental; urgency=low
 

@@ -53,3 +53,4 @@ Include system copy of prtime.h
 +#include <nspr/prtime.h>
  #include <pk11pub.h>
  #include <secmod.h>
+ 

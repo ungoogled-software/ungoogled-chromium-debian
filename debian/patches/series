@@ -5,7 +5,7 @@
 nspr.patch
 nss.patch
 expat.patch
-system_v8.patch
+#system_v8.patch
 prefs.patch
 #protobuf.patch
 armv4.patch
@@ -16,3 +16,4 @@ icu.patch
 #vpx.patch
 glew.patch
 fix-manpage.patch
+webkit-version.patch

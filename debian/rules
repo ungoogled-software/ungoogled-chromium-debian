@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 
-DEBIAN_NAME		:= $(shell dpkg-parsechangelog | sed -n 's/^Source: *\(.*\)$$/\1/ p')
+DEBIAN_NAME		:= chromium
 DEBIAN_VERSION		:= $(shell dpkg-parsechangelog | sed -n 's/^Version: *\(.*\)$$/\1/ p')
 DEBIAN_UPSTREAM_VERSION	:= $(shell echo $(DEBIAN_VERSION) | sed 's/^\(.*\)-[^-]*$$/\1/')
 DEBIAN_REVISION		:= $(shell echo $(DEBIAN_VERSION) | sed 's/^.*r\([^-]*\)-.*/\1/')
@@ -32,7 +32,7 @@ WANT_SYSTEM_LIBS ?= 1
 WANT_SHARED_LIBS ?= 0
 WANT_TESTS       ?= 0
 WANT_SANDBOXING  ?= 1
-USE_SYSTEM_V8    ?= 1
+USE_SYSTEM_V8    ?= 0
 VERBOSE          ?= 0
 
 export DEB_BUILD_HARDENING=1
@@ -418,9 +418,9 @@ endif
 	mv debian/tmp/$(LIB_DIR)/chrome debian/tmp/$(LIB_DIR)/$(DEBIAN_NAME)
 	mv debian/tmp/$(LIB_DIR)/chrome_sandbox debian/tmp/$(LIB_DIR)/$(DEBIAN_NAME)-sandbox
 	# Manpage
-	mv debian/tmp/$(LIB_DIR)/chrome.1 debian/tmp/$(LIB_DIR)/chromium-browser.1
-	dh_installman -pchromium-browser debian/tmp/$(LIB_DIR)/chromium-browser.1
-	rm -f debian/tmp/$(LIB_DIR)/chromium-browser.1
+	mv debian/tmp/$(LIB_DIR)/chrome.1 debian/tmp/$(LIB_DIR)/chromium.1
+	dh_installman -pchromium debian/tmp/$(LIB_DIR)/chromium.1
+	rm -f debian/tmp/$(LIB_DIR)/chromium.1
 
 binary-install/$(DEBIAN_NAME)::
 	mkdir -p $(CURDIR)/debian/$(DEBIAN_NAME)/usr/share/pixmaps
@@ -523,7 +523,7 @@ compare:
 binary-makedeb-IMPL/$(DEBIAN_NAME)::
 	dh_gencontrol -p$(DEBIAN_NAME)
 ifeq (1,$(USE_SYSTEM_FFMPEG))
-	# Manually insert ffmpeg libs shlib deps for chromium-browser since the
+	# Manually insert ffmpeg libs shlib deps for chromium since the
 	# libs are dlopened.
 	sed "s/^Depends:.*$$/&, $$(sh debian/var_info LIBAVCODEC_DEPENDS)/" \
 		-i "debian/$(DEBIAN_NAME)/DEBIAN/control"

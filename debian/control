@@ -61,19 +61,68 @@ Build-Depends: cdbs,
 	libspeex-dev,
 	hardening-wrapper,
 	libxt-dev,
-	libxtst-dev
+	libxtst-dev,
+	binutils-gold
 Standards-Version: 3.9.0
 
 Package: chromium-browser
-Architecture: i386 amd64 armel mips
+Architecture: all
+Depends: chromium
+Section: oldlibs
+Description: Chromium browser - transitional dummy package
+ Chromium is an open-source browser project that aims to build a safer, faster,
+ and more stable way for all Internet users to experience the web.
+ .
+ Chromium serves as a base for Google Chrome, which is Chromium rebranded (name
+ and logo) with very few additions such as usage tracking and an auto-updater
+ system.
+ .
+ This package contains the Chromium browser transitional dummy package
+
+Package: chromium-browser-dbg
+Architecture: all
+Section: oldlibs
+Depends: chromium-dbg
+Description: chromium-browser debug symbols transitional dummy package
+ Debug symbols for the Chromium browser - transitional dummy package
+ .
+ Chromium is an open-source browser project that aims to build a safer, faster,
+ and more stable way for all Internet users to experience the web.
+
+Package: chromium-browser-l10n
+Architecture: all
+Section: oldlibs
+Depends: chromium-l10n
+Description: chromium-browser language packages - transitional dummy package
+ Chromium is an open-source browser project that aims to build a safer, faster,
+ and more stable way for all Internet users to experience the web.
+ .
+ This package contains language packages for 50 languages
+ (transitional dummy package):
+ am, ar, bg, bn, ca, cs, da, de, el, en-GB, es-419, es, et, fi, fil, fr, gu, he,
+ hi, hr, hu, id, it, ja, kn, ko, lt, lv, ml, mr, nb, nl, pl, pt-BR, pt-PT,
+ ro, ru, sk, sl, sr, sv, sw, ta, te, th, tr, uk, vi, zh-CN, zh-TW
+
+Package: chromium-browser-inspector
+Architecture: all
+Section: oldlibs
+Depends: chromium-inspector
+Description: page inspector for the chromium-browser - transitional dummy package
+ Chromium is an open-source browser project that aims to build a safer, faster,
+ and more stable way for all Internet users to experience the web.
+ .
+ This package contains 'inspector', transitional dummy package
+
+Package: chromium
+Architecture: i386 amd64 armel
 Depends: ${shlibs:Depends}, ${misc:Depends},
 	libnss3-1d (>= 3.12.3),
 	xdg-utils,
-	chromium-browser-inspector
-Suggests: chromium-browser-l10n
+	chromium-inspector
+Suggests: chromium-l10n
 Provides: www-browser, chromium-testsuite, gnome-www-browser
-Replaces: chromium-testsuite, chromium-codecs-ffmpeg, chromium-codecs-ffmpeg-extra
-Conflicts: chromium-testsuite, chromium-codecs-ffmpeg, chromium-codecs-ffmpeg-extra
+Replaces: chromium-testsuite, chromium-codecs-ffmpeg, chromium-codecs-ffmpeg-extra, chromium-browser (<< 10.0.648.82~r75062-1~)
+Conflicts: chromium-testsuite, chromium-codecs-ffmpeg, chromium-codecs-ffmpeg-extra, chromium-browser (<< 10.0.648.82~r75062-1~)
 Description: Chromium browser
  Chromium is an open-source browser project that aims to build a safer, faster,
  and more stable way for all Internet users to experience the web.
@@ -84,25 +133,25 @@ Description: Chromium browser
  .
  This package contains the Chromium browser
 
-Package: chromium-browser-dbg
-Architecture: i386 amd64 armel mips
+Package: chromium-dbg
+Architecture: i386 amd64 armel
 Section: debug
 Priority: extra
-Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-browser (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, chromium (= ${binary:Version})
 Provides: chromium-testsuite-dbg
-Replaces: chromium-testsuite-dbg
-Conflicts: chromium-testsuite-dbg
+Replaces: chromium-testsuite-dbg, chromium-browser-dbg (<< 10.0.648.82~r75062-1~)
+Conflicts: chromium-testsuite-dbg, chromium-browser-dbg (<< 10.0.648.82~r75062-1~)
 Description: chromium-browser debug symbols
  Debug symbols for the Chromium browser
  .
  Chromium is an open-source browser project that aims to build a safer, faster,
  and more stable way for all Internet users to experience the web.
 
-Package: chromium-browser-l10n
+Package: chromium-l10n
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, chromium-browser (>= ${source:Version}), chromium-browser (<< ${source:Version}.1~)
-Breaks: chromium-browser (<< 3.0.197.0~svn20090804r22432)
-Replaces: chromium-browser (<< 3.0.197.0~svn20090804r22432)
+Depends: ${shlibs:Depends}, ${misc:Depends}, chromium (>= ${source:Version}), chromium (<< ${source:Version}.1~)
+Replaces: chromium-browser-l10n (<< 10.0.648.82~r75062-1~)
+Conflicts: chromium-browser-l10n (<< 10.0.648.82~r75062-1~)
 Description: chromium-browser language packages
  Chromium is an open-source browser project that aims to build a safer, faster,
  and more stable way for all Internet users to experience the web.
@@ -112,12 +161,13 @@ Description: chromium-browser language packages
  hi, hr, hu, id, it, ja, kn, ko, lt, lv, ml, mr, nb, nl, pl, pt-BR, pt-PT,
  ro, ru, sk, sl, sr, sv, sw, ta, te, th, tr, uk, vi, zh-CN, zh-TW
 
-Package: chromium-browser-inspector
+Package: chromium-inspector
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Recommends: chromium-browser
-Conflicts: chromium-browser (<< ${source:Version})
-Description: page inspector for the chromium-browser
+Recommends: chromium
+Conflicts: chromium (<< ${source:Version}), chromium-browser-inspector (<< 10.0.648.82~r75062-1~)
+Replaces: chromium-browser-inspector (<< 10.0.648.82~r75062-1~)
+Description: page inspector for the chromium browser
  Chromium is an open-source browser project that aims to build a safer, faster,
  and more stable way for all Internet users to experience the web.
  .
