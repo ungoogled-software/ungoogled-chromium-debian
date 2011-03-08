@@ -1,4 +1,4 @@
-chromium-browser (10.0.648.114~r75702-1) UNRELEASED; urgency=low
+chromium-browser (10.0.648.114~r75702-1) experimental; urgency=low
 
   * New beta version
   * Refreshed pathces
