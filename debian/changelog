@@ -2,10 +2,8 @@ chromium-browser (10.0.648.127~r76697-1) UNRELEASED; urgency=low
 
   * New stable version
   * Refreshed patches 
-  * Use system ffmpeg
-  * Add libavcodec-dev libavformat-dev libavutil-dev in Build-depends
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 09 Mar 2011 14:16:10 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 08 Mar 2011 20:37:47 +0100
 
 chromium-browser (10.0.648.114~r75702-1) experimental; urgency=low
 

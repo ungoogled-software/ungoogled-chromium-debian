@@ -7,7 +7,7 @@ DEBIAN_REVISION		:= $(shell echo $(DEBIAN_VERSION) | sed 's/^.*r\([^-]*\)-.*/\1/
 DEBIAN_DIST		:= $(shell lsb_release -ds | tr -d '()')
 DEBIAN_DIST_NAME	:= $(shell lsb_release -si)
 DEBIAN_DIST_VERSION	:= $(shell lsb_release -sr)
-USE_SYSTEM_FFMPEG	:= 1
+USE_SYSTEM_FFMPEG	:= 0
 ifeq (1,$(USE_SYSTEM_FFMPEG))
 LIBAVCODEC_BASENAME	:= $(shell basename $$(ls -x /usr/lib/libavcodec.so.* | cut -d ' ' -f 1))
 LIBAVFORMAT_BASENAME	:= $(shell basename $$(ls -x /usr/lib/libavformat.so.* | cut -d ' ' -f 1))
