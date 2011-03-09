@@ -66,7 +66,6 @@ Build-Depends: cdbs,
 	libavcodec-dev (>= 4:0.6),
 	libavformat-dev (>= 4:0.6),
 	libavutil-dev (>= 4:0.6)
-
 Standards-Version: 3.9.0
 
 Package: chromium-browser
