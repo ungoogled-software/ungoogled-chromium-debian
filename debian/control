@@ -62,7 +62,11 @@ Build-Depends: cdbs,
 	hardening-wrapper,
 	libxt-dev,
 	libxtst-dev,
-	binutils-gold
+	binutils-gold,
+	libavcodec-dev (>= 4:0.6),
+	libavformat-dev (>= 4:0.6),
+	libavutil-dev (>= 4:0.6)
+
 Standards-Version: 3.9.0
 
 Package: chromium-browser
