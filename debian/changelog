@@ -1,3 +1,9 @@
+chromium-browser (10.0.648.127~r76697-2) UNRELEASED; urgency=low
+
+  * chromium-browser: Depend on chromium (>= 10) (Closes: #617760)
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 11 Mar 2011 14:38:34 +0100
+
 chromium-browser (10.0.648.127~r76697-1) unstable; urgency=low
 
   * New stable version
