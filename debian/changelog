@@ -1,8 +1,11 @@
 chromium-browser (10.0.648.127~r76697-2) UNRELEASED; urgency=low
 
   * chromium-browser: Depend on chromium (>= 10) (Closes: #617760)
+  * Added a symlink to old binary name in chromium-browser package
+    (Closes: #616623)
+  * Document the binary renaming in the NEWS file.
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 11 Mar 2011 14:38:34 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 11 Mar 2011 15:14:15 +0100
 
 chromium-browser (10.0.648.127~r76697-1) unstable; urgency=low
 
