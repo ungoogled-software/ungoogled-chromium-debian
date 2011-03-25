@@ -13,8 +13,9 @@ chromium-browser (10.0.648.204~r79063-1) UNRELEASED; urgency=low
      Credit to Sergey Glazunov.
    - [75170] High CVE-2011-1296: Stale pointer in SVG text handling.
      Credit to Sergey Glazunov.
+  * Depends on libvpx0 >= 0.9.6 (Closes: #618621)
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 25 Mar 2011 11:54:21 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 25 Mar 2011 12:16:46 +0100
 
 chromium-browser (10.0.648.133~r77742-1) unstable; urgency=high
 
