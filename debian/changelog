@@ -1,3 +1,21 @@
+chromium-browser (10.0.648.204~r79063-1) UNRELEASED; urgency=low
+
+  * New stable release:
+   - [72517] High CVE-2011-1291: Buffer error in base string handling. Credit to
+     Alex Turpin.
+   - [73216] High CVE-2011-1292: Use-after-free in the frame loader. Credit to
+     Sławomir Błażek.
+   - [73595] High CVE-2011-1293: Use-after-free in HTMLCollection. Credit to
+     Sergey Glazunov.
+   - [74562] High CVE-2011-1294: Stale pointer in CSS handling. Credit to Sergey
+     Glazunov.
+   - [74991] High CVE-2011-1295: DOM tree corruption with broken node parentage.
+     Credit to Sergey Glazunov.
+   - [75170] High CVE-2011-1296: Stale pointer in SVG text handling.
+     Credit to Sergey Glazunov.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 25 Mar 2011 11:54:21 +0100
+
 chromium-browser (10.0.648.133~r77742-1) unstable; urgency=high
 
   * New stable release:
