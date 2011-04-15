@@ -1,3 +1,13 @@
+chromium-browser (10.0.648.205~r81283-1) unstable; urgency=low
+
+  * New stable release:
+  - [75629] Critical CVE-2011-1301: Use-after-free in the GPU process.
+    Credit to Google Chrome Security Team (Inferno).
+  - [78524] Critical CVE-2011-1302: Heap overflow in the GPU process.
+    Credit to Christoph Diehl.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 15 Apr 2011 09:13:45 +0200
+
 chromium-browser (10.0.648.204~r79063-1) unstable; urgency=low
 
   * New stable release:
