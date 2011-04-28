@@ -1,7 +1,7 @@
 Use system copy of libv8
 --- a/src/build/linux/system.gyp
 +++ b/src/build/linux/system.gyp
-@@ -322,6 +322,18 @@
+@@ -302,6 +302,18 @@
        }]]
      },
      {
@@ -22,7 +22,7 @@ Use system copy of libv8
        'conditions': [
 --- a/src/net/net.gyp
 +++ b/src/net/net.gyp
-@@ -744,7 +744,7 @@
+@@ -746,7 +746,7 @@
        'conditions': [
          ['javascript_engine=="v8"', {
            'dependencies': [
@@ -33,7 +33,7 @@ Use system copy of libv8
          ['chromeos==1', {
 --- a/src/build/all.gyp
 +++ b/src/build/all.gyp
-@@ -54,7 +54,7 @@
+@@ -55,7 +55,7 @@
        'conditions': [
          ['javascript_engine=="v8"', {
            'dependencies': [
@@ -343,7 +343,7 @@ Use system copy of libv8
  
 --- a/src/webkit/glue/webkit_glue.gypi
 +++ b/src/webkit/glue/webkit_glue.gypi
-@@ -532,11 +532,11 @@
+@@ -533,11 +533,11 @@
              ['inside_chromium_build==1 and component=="shared_library"', {
                'dependencies': [
                  '<(DEPTH)/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp:webkit',

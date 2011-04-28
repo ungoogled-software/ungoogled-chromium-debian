@@ -1,5 +1,5 @@
---- a/src/chrome/browser/chromeos/dom_ui/system_settings_provider.h
-+++ b/src/chrome/browser/chromeos/dom_ui/system_settings_provider.h
+--- a/src/chrome/browser/chromeos/webui/system_settings_provider.h
++++ b/src/chrome/browser/chromeos/webui/system_settings_provider.h
 @@ -10,7 +10,7 @@
  #include "base/string16.h"
  #include "chrome/browser/chromeos/cros/system_library.h"
