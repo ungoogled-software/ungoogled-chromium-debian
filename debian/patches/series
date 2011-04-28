@@ -9,7 +9,6 @@ expat.patch
 prefs.patch
 #protobuf.patch
 armv4.patch
-gecko-mediaplayer.patch
 ffmpeg_arm.patch
 system-speech.patch
 icu.patch

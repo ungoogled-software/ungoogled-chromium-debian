@@ -1,10 +1,10 @@
 --- a/src/webkit/build/webkit_version.py
 +++ b/src/webkit/build/webkit_version.py
-@@ -52,6 +52,15 @@ def GetWebKitRevision(webkit_dir, versio
+@@ -51,6 +51,15 @@ def GetWebKitRevision(webkit_dir, versio
        default_lastchange=None,
        directory=os.path.join(webkit_dir, version_file_dir))
  
-+  if version_info.url is None or version_info.url == '':
++  if version_info.url is None or version_info.url == 'unknown':
 +    # parse the DEPS file
 +    data = open("../../DEPS", "rb").read()
 +    x = re.search(r'"webkit_revision": "(\d+)",', data)
@@ -13,6 +13,6 @@
 +    branch = os.path.basename(x.group(1)) if x else "n-a"
 +    return "%s@%s" % (branch, rev)
 +
-   # Now compute the real WebKit URL by stripping off the version file
-   # directory from the URL we get out of version_info.
-   # Further, we want to strip off the "http://svn..." from the left.
+   if (version_info.url.startswith(version_info.root) and
+       version_info.url.endswith(version_file_dir)):
+     # Now compute the real WebKit URL by stripping off the version file
