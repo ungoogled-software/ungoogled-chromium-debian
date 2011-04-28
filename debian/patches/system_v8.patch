@@ -1,7 +1,7 @@
 Use system copy of libv8
 --- a/src/build/linux/system.gyp
 +++ b/src/build/linux/system.gyp
-@@ -282,6 +282,18 @@
+@@ -322,6 +322,18 @@
        }]]
      },
      {
@@ -22,7 +22,7 @@ Use system copy of libv8
        'conditions': [
 --- a/src/net/net.gyp
 +++ b/src/net/net.gyp
-@@ -740,7 +740,7 @@
+@@ -744,7 +744,7 @@
        'conditions': [
          ['javascript_engine=="v8"', {
            'dependencies': [
@@ -33,7 +33,7 @@ Use system copy of libv8
          ['chromeos==1', {
 --- a/src/build/all.gyp
 +++ b/src/build/all.gyp
-@@ -55,7 +55,7 @@
+@@ -54,7 +54,7 @@
        'conditions': [
          ['javascript_engine=="v8"', {
            'dependencies': [
@@ -44,9 +44,9 @@ Use system copy of libv8
          ['OS=="mac" or OS=="linux" or OS=="freebsd" or OS=="openbsd"', {
 --- a/src/chrome/browser/browser_about_handler.cc
 +++ b/src/chrome/browser/browser_about_handler.cc
-@@ -56,7 +56,7 @@
- #include "ui/base/l10n/l10n_util.h"
+@@ -59,7 +59,7 @@
  #include "ui/base/resource/resource_bundle.h"
+ #include "webkit/glue/webkit_glue.h"
  #ifdef CHROME_V8
 -#include "v8/include/v8.h"
 +#include <v8.h>
@@ -143,15 +143,15 @@ Use system copy of libv8
  using WebKit::WebFrame;
 --- a/src/chrome/renderer/render_thread.cc
 +++ b/src/chrome/renderer/render_thread.cc
-@@ -96,7 +96,7 @@
- #include "webkit/extensions/v8/benchmarking_extension.h"
+@@ -93,7 +93,7 @@
  #include "webkit/extensions/v8/gears_extension.h"
  #include "webkit/extensions/v8/playback_extension.h"
+ #include "webkit/glue/webkit_glue.h"
 -#include "v8/include/v8.h"
 +#include <v8.h>
  
+ // TODO(port)
  #if defined(OS_WIN)
- #include <windows.h>
 --- a/src/chrome/test/v8_unit_test.h
 +++ b/src/chrome/test/v8_unit_test.h
 @@ -9,7 +9,7 @@
@@ -242,7 +242,7 @@ Use system copy of libv8
  
 --- a/src/webkit/glue/webkit_glue.cc
 +++ b/src/webkit/glue/webkit_glue.cc
-@@ -43,7 +43,7 @@
+@@ -44,7 +44,7 @@
  #endif
  #include "webkit/glue/glue_serialize.h"
  #include "webkit/glue/user_agent.h"
@@ -253,7 +253,7 @@ Use system copy of libv8
  using WebKit::WebData;
 --- a/src/webkit/glue/webkitclient_impl.cc
 +++ b/src/webkit/glue/webkitclient_impl.cc
-@@ -43,7 +43,7 @@
+@@ -44,7 +44,7 @@
  #include "webkit/glue/weburlloader_impl.h"
  
  #if defined(OS_LINUX)
@@ -275,12 +275,14 @@ Use system copy of libv8
  #include "third_party/WebKit/Source/WebKit/chromium/public/win/WebThemeEngine.h"
 --- a/src/webkit/tools/test_shell/listener_leak_test.cc
 +++ b/src/webkit/tools/test_shell/listener_leak_test.cc
-@@ -8,7 +8,7 @@
+@@ -8,8 +8,8 @@
  #include "base/string_number_conversions.h"
  #include "base/string_util.h"
  #include "testing/gtest/include/gtest/gtest.h"
 -#include "v8/include/v8.h"
+-#include "v8/include/v8-profiler.h"
 +#include <v8.h>
++#include <v8-profiler.h>
  #include "webkit/glue/webkit_glue.h"
  #include "webkit/tools/test_shell/test_shell.h"
  #include "webkit/tools/test_shell/test_shell_test.h"
@@ -308,9 +310,9 @@ Use system copy of libv8
  using WebKit::WebView;
 --- a/src/chrome/renderer/search_extension.cc
 +++ b/src/chrome/renderer/search_extension.cc
-@@ -11,7 +11,7 @@
- #include "chrome/common/render_messages_params.h"
+@@ -12,7 +12,7 @@
  #include "chrome/renderer/render_view.h"
+ #include "chrome/renderer/searchbox.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebFrame.h"
 -#include "v8/include/v8.h"
 +#include <v8.h>
@@ -319,7 +321,7 @@ Use system copy of libv8
  using WebKit::WebView;
 --- a/src/chrome/renderer/translate_helper.cc
 +++ b/src/chrome/renderer/translate_helper.cc
-@@ -12,7 +12,7 @@
+@@ -13,7 +13,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebFrame.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebScriptSource.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebView.h"
@@ -341,7 +343,7 @@ Use system copy of libv8
  
 --- a/src/webkit/glue/webkit_glue.gypi
 +++ b/src/webkit/glue/webkit_glue.gypi
-@@ -524,11 +524,11 @@
+@@ -532,11 +532,11 @@
              ['inside_chromium_build==1 and component=="shared_library"', {
                'dependencies': [
                  '<(DEPTH)/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp:webkit',
@@ -355,20 +357,9 @@ Use system copy of libv8
                 ],
              }],
            ],
---- a/src/chrome/browser/dom_ui/options/about_page_handler.cc
-+++ b/src/chrome/browser/dom_ui/options/about_page_handler.cc
-@@ -30,7 +30,7 @@
- #include "webkit/glue/webkit_glue.h"
- 
- #if defined(CHROME_V8)
--#include "v8/include/v8.h"
-+#include <v8.h>
- #endif
- 
- #if defined(OS_CHROMEOS)
 --- a/src/chrome/renderer/searchbox_extension.cc
 +++ b/src/chrome/renderer/searchbox_extension.cc
-@@ -15,7 +15,7 @@
+@@ -16,7 +16,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebFrame.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebScriptSource.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebString.h"
@@ -379,7 +370,7 @@ Use system copy of libv8
  using WebKit::WebScriptSource;
 --- a/src/v8/tools/gyp/v8.gyp
 +++ b/src/v8/tools/gyp/v8.gyp
-@@ -831,7 +831,7 @@
+@@ -832,7 +832,7 @@
            'target_name': 'v8_shell',
            'type': 'executable',
            'dependencies': [
@@ -390,20 +381,20 @@ Use system copy of libv8
              '../../samples/shell.cc',
 --- a/src/chrome/renderer/render_view.cc
 +++ b/src/chrome/renderer/render_view.cc
-@@ -160,8 +160,8 @@
- #include "ui/base/message_box_flags.h"
- #include "ui/base/l10n/l10n_util.h"
- #include "ui/base/resource/resource_bundle.h"
--#include "v8/include/v8.h"
+@@ -174,8 +174,8 @@
+ #include "ui/gfx/point.h"
+ #include "ui/gfx/rect.h"
+ #include "ui/gfx/skbitmap_operations.h"
 -#include "v8/include/v8-testing.h"
-+#include <v8.h>
+-#include "v8/include/v8.h"
 +#include <v8-testing.h>
++#include <v8.h>
  #include "webkit/appcache/web_application_cache_host_impl.h"
  #include "webkit/glue/alt_error_page_resource_fetcher.h"
  #include "webkit/glue/context_menu.h"
 --- a/src/third_party/WebKit/Source/WebCore/WebCore.gyp/WebCore.gyp
 +++ b/src/third_party/WebKit/Source/WebCore/WebCore.gyp/WebCore.gyp
-@@ -814,7 +814,7 @@
+@@ -849,7 +849,7 @@
        'conditions': [
          ['javascript_engine=="v8"', {
            'dependencies': [
@@ -412,7 +403,7 @@ Use system copy of libv8
            ],
            'conditions': [
              ['inside_chromium_build==1 and OS=="win" and component=="shared_library"', {
-@@ -929,10 +929,10 @@
+@@ -969,10 +969,10 @@
        'conditions': [
          ['javascript_engine=="v8"', {
            'dependencies': [
@@ -425,7 +416,7 @@ Use system copy of libv8
            ],
            'conditions': [
              ['inside_chromium_build==1 and OS=="win" and component=="shared_library"', {
-@@ -1459,10 +1459,10 @@
+@@ -1595,10 +1595,10 @@
        'conditions': [
          ['javascript_engine=="v8"', {
            'dependencies': [
@@ -473,3 +464,14 @@ Use system copy of libv8
  
  using WebKit::WebBindings;
  
+--- a/src/chrome/browser/ui/webui/options/about_page_handler.cc
++++ b/src/chrome/browser/ui/webui/options/about_page_handler.cc
+@@ -29,7 +29,7 @@
+ #include "webkit/glue/webkit_glue.h"
+ 
+ #if defined(CHROME_V8)
+-#include "v8/include/v8.h"
++#include <v8.h>
+ #endif
+ 
+ #if defined(OS_CHROMEOS)

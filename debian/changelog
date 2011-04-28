@@ -49,8 +49,9 @@ chromium-browser (11.0.696.57~r82915-1) UNRELEASED; urgency=low
    - [79199] High CVE-2011-1454: Use-after-free in DOM id handling.
      Credit to Sergey Glazunov.
   * Updated patches
+  * Use libv8 system copy
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 28 Apr 2011 13:47:21 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 28 Apr 2011 14:33:30 +0200
 
 chromium-browser (10.0.648.205~r81283-1) unstable; urgency=low
 
