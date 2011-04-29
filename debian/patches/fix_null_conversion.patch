@@ -1,0 +1,60 @@
+--- a/src/chrome/browser/gpu_process_host_ui_shim.cc
++++ b/src/chrome/browser/gpu_process_host_ui_shim.cc
+@@ -102,7 +102,7 @@ RenderWidgetHostView* GpuProcessHostUISh
+ 
+ GpuProcessHostUIShim::GpuProcessHostUIShim()
+     : host_id_(++g_last_host_id),
+-      gpu_process_(NULL) {
++      gpu_process_(0) {
+   g_hosts_by_id.AddWithID(this, host_id_);
+   gpu_data_manager_ = GpuDataManager::GetInstance();
+   DCHECK(gpu_data_manager_);
+@@ -236,7 +236,7 @@ void GpuProcessHostUIShim::SendOutstandi
+     channel_requests_.pop();
+     EstablishChannelError(callback.release(),
+                           IPC::ChannelHandle(),
+-                          NULL,
++                          0,
+                           GPUInfo());
+   }
+ 
+@@ -266,7 +266,7 @@ void GpuProcessHostUIShim::EstablishGpuC
+   // If GPU features are already blacklisted, no need to establish the channel.
+   if (gpu_data_manager_->GetGpuFeatureFlags().flags() != 0) {
+     EstablishChannelError(
+-        wrapped_callback.release(), IPC::ChannelHandle(), NULL, GPUInfo());
++        wrapped_callback.release(), IPC::ChannelHandle(), 0, GPUInfo());
+     return;
+   }
+ 
+@@ -274,7 +274,7 @@ void GpuProcessHostUIShim::EstablishGpuC
+     channel_requests_.push(wrapped_callback);
+   } else {
+     EstablishChannelError(
+-        wrapped_callback.release(), IPC::ChannelHandle(), NULL, GPUInfo());
++        wrapped_callback.release(), IPC::ChannelHandle(), 0, GPUInfo());
+   }
+ }
+ 
+@@ -419,7 +419,7 @@ void GpuProcessHostUIShim::OnChannelEsta
+     Send(new GpuMsg_CloseChannel(channel_handle));
+     EstablishChannelError(callback.release(),
+                           IPC::ChannelHandle(),
+-                          NULL,
++                          0,
+                           gpu_info);
+     AddCustomLogMessage(logging::LOG_WARNING, "WARNING",
+         "Hardware acceleration is unavailable.");
+--- a/src/chrome/gpu/gpu_channel.cc
++++ b/src/chrome/gpu/gpu_channel.cc
+@@ -26,8 +26,8 @@ GpuChannel::GpuChannel(GpuThread* gpu_th
+                        int renderer_id)
+     : gpu_thread_(gpu_thread),
+       renderer_id_(renderer_id),
+-      renderer_process_(NULL),
+-      renderer_pid_(NULL) {
++      renderer_process_(0),
++      renderer_pid_(0) {
+   DCHECK(gpu_thread);
+   DCHECK(renderer_id);
+   const CommandLine* command_line = CommandLine::ForCurrentProcess();

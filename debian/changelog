@@ -1,6 +1,7 @@
 chromium-browser (11.0.696.57~r82915-1) UNRELEASED; urgency=low
 
   * New Stable release:
+   - Fixed password loss (Closes: #619903)
    - [61502] High CVE-2011-1303: Stale pointer in floating object handling.
      Credit to Scott Hess of the Chromium development community and
      Martin Barbella.
@@ -50,8 +51,9 @@ chromium-browser (11.0.696.57~r82915-1) UNRELEASED; urgency=low
      Credit to Sergey Glazunov.
   * Updated patches
   * Use libv8 system copy
+  * Fixed FTBFS (converting to non-pointer type from NULL)
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 28 Apr 2011 14:33:30 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 28 Apr 2011 19:33:20 +0200
 
 chromium-browser (10.0.648.205~r81283-1) unstable; urgency=low
 
