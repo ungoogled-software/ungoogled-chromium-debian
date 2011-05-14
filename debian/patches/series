@@ -10,10 +10,11 @@ prefs.patch
 armv4.patch
 ffmpeg_arm.patch
 system-speech.patch
-icu.patch
-#vpx.patch
+#icu.patch
 glew.patch
 fix-manpage.patch
 webkit-version.patch
 system_v8.patch
-fix_null_conversion.patch
+#ffmpeg.patch
+gcc46.patch
+#vpx.patch

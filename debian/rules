@@ -126,12 +126,26 @@ endif
 
 # Set this to use gcc 4.3 instead of 4.4
 AVOID_GCC_44 ?= 0
+
+# Set this to use gcc 4.5 instead of 4.6
+AVOID_GCC_46 ?= 0
 CC_VERSION   := $(shell gcc -dumpversion | cut -d. -f-2)
  
 ifeq (1/4.4,$(AVOID_GCC_44)/$(CC_VERSION))
 CC  := gcc-4.3
 CXX := g++-4.3
 BUILD_ARGS += CC=$(CC) CXX=$(CXX) CC.host=$(CC) CXX.host=$(CXX)
+endif
+
+
+ifeq (1/4.6,$(AVOID_GCC_46)/$(CC_VERSION))
+CC  := gcc-4.5
+CXX := g++-4.5
+BUILD_ARGS += CC=$(CC) CXX=$(CXX) CC.host=$(CC) CXX.host=$(CXX)
+endif
+
+ifeq (0/4.6,$(AVOID_GCC_46)/$(CC_VERSION))
+GYP_DEFINES += werror=$(NULL)
 endif
 
 ifeq (4.4,$(CC_VERSION))
@@ -185,6 +199,13 @@ INSTALL_EXCLUDE_FILES = \
 	protoc \
 	libppapi_tests.so \
 	*.d \
+	genmacro \
+	genmodule \
+	genperf \
+	genstring \
+	genversion \
+	re2c \
+	yasm \
 	$(NULL)
 
 # List of tests
@@ -253,7 +274,7 @@ endif
 ifeq (1,$(USE_SYSTEM_FFMPEG))
 GYP_DEFINES += build_ffmpegsumo=0
 else
-GYP_DEFINES += build_ffmpegsumo=1 ffmpeg_branding=Chrome
+GYP_DEFINES += ffmpeg_branding=Chrome
 endif
 
 USE_SYSTEM_SQLITE := $(shell pkg-config 'sqlite3 >= 3.6.1' && echo 1 || echo 0)
@@ -275,7 +296,7 @@ GYP_DEFINES += \
 	use_system_libxslt=1 \
 	use_system_zlib=1 \
 	use_system_libevent=1 \
-	use_system_icu=1 \
+	use_system_icu=0 \
 	use_system_yasm=1 \
 	use_system_ffmpeg=$(USE_SYSTEM_FFMPEG) \
 	use_system_vpx=0 \

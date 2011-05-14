@@ -1,12 +1,20 @@
+--- a/src/remoting/remoting.gyp
++++ b/src/remoting/remoting.gyp
+@@ -127,6 +127,7 @@
+         '../ui/gfx/gfx.gyp:gfx',
+         '../media/media.gyp:media',
+         '../third_party/protobuf/protobuf.gyp:protobuf_lite',
++        '../third_party/ffmpeg/ffmpeg.gyp:ffmpeg',
+         '../third_party/libvpx/libvpx.gyp:libvpx_include',
+         '../third_party/zlib/zlib.gyp:zlib',
+         'chromoting_jingle_glue',
 --- a/src/remoting/base/decoder_vp8.cc
 +++ b/src/remoting/base/decoder_vp8.cc
-@@ -10,9 +10,9 @@
+@@ -10,7 +10,9 @@
  
  extern "C" {
  #define VPX_CODEC_DISABLE_COMPAT 1
--#include "third_party/libvpx/include/vpx/vpx_codec.h"
--#include "third_party/libvpx/include/vpx/vpx_decoder.h"
--#include "third_party/libvpx/include/vpx/vp8dx.h"
+-#include "third_party/libvpx/libvpx.h"
 +#include <vpx/vpx_codec.h>
 +#include <vpx/vpx_decoder.h>
 +#include <vpx/vp8dx.h>
@@ -15,64 +23,14 @@
  namespace remoting {
 --- a/src/remoting/base/encoder_vp8.cc
 +++ b/src/remoting/base/encoder_vp8.cc
-@@ -11,9 +11,9 @@
+@@ -13,7 +13,9 @@
  
  extern "C" {
  #define VPX_CODEC_DISABLE_COMPAT 1
--#include "third_party/libvpx/include/vpx/vpx_codec.h"
--#include "third_party/libvpx/include/vpx/vpx_encoder.h"
--#include "third_party/libvpx/include/vpx/vp8cx.h"
+-#include "third_party/libvpx/libvpx.h"
 +#include <vpx/vpx_codec.h>
 +#include <vpx/vpx_encoder.h>
 +#include <vpx/vp8cx.h>
  }
  
- namespace remoting {
---- a/src/third_party/ffmpeg/ffmpeg.gyp
-+++ b/src/third_party/ffmpeg/ffmpeg.gyp
-@@ -841,10 +841,20 @@
-               'cflags': [
-                 '<!@(pkg-config --cflags libavcodec libavformat libavutil)',
-               ],
-+              'link_settings': {
-+                'libraries': [
-+                  '-lvpx',
-+                ],
-+              },
-               'direct_dependent_settings': {
-                 'cflags': [
-                   '<!@(pkg-config --cflags libavcodec libavformat libavutil)',
-                 ],
-+              'link_settings': {
-+                'libraries': [
-+                  '-lvpx',
-+                ],
-+               },
-               },
-             }, {  # else use_system_ffmpeg==0, add local copy to include path
-               'include_dirs': [
---- a/src/third_party/ffmpeg/ffmpeg_stub_headers.fragment
-+++ b/src/third_party/ffmpeg/ffmpeg_stub_headers.fragment
-@@ -7,9 +7,9 @@ extern "C" {
- #include <libavformat/avformat.h>
- 
- #define VPX_CODEC_DISABLE_COMPAT 1
--#include "third_party/libvpx/include/vpx/vpx_codec.h"
--#include "third_party/libvpx/include/vpx/vpx_encoder.h"
--#include "third_party/libvpx/include/vpx/vpx_decoder.h"
-+#include "vpx/vpx_codec.h"
-+#include "vpx/vpx_encoder.h"
-+#include "vpx/vpx_decoder.h"
- 
- typedef int (*AVLockMgrOperation)(void**, enum AVLockOp);
- 
---- a/src/remoting/remoting.gyp
-+++ b/src/remoting/remoting.gyp
-@@ -114,7 +114,6 @@
-         '../gfx/gfx.gyp:gfx',
-         '../media/media.gyp:media',
-         '../third_party/protobuf/protobuf.gyp:protobuf_lite',
--        '../third_party/libvpx/libvpx.gyp:libvpx_include',
-         '../third_party/zlib/zlib.gyp:zlib',
-         'chromoting_jingle_glue',
-         'proto/chromotocol.gyp:chromotocol_proto_lib',
+ namespace {

@@ -1,0 +1,163 @@
+--- a/src/chrome/browser/possible_url_model.h
++++ b/src/chrome/browser/possible_url_model.h
+@@ -57,7 +57,7 @@ class PossibleURLModel : public ui::Tabl
+   ui::TableModelObserver* observer_;
+ 
+   // Our consumer for favicon requests.
+-  CancelableRequestConsumerT<size_t, NULL> consumer_;
++  CancelableRequestConsumerT<size_t, 0> consumer_;
+ 
+   // The results we're showing.
+   struct Result;
+--- a/src/chrome/browser/search_engines/template_url_prepopulate_data.h
++++ b/src/chrome/browser/search_engines/template_url_prepopulate_data.h
+@@ -6,6 +6,7 @@
+ #define CHROME_BROWSER_SEARCH_ENGINES_TEMPLATE_URL_PREPOPULATE_DATA_H_
+ #pragma once
+ 
++#include <cstddef>
+ #include <vector>
+ 
+ class GURL;
+--- a/src/gpu/command_buffer/common/cmd_buffer_common.h
++++ b/src/gpu/command_buffer/common/cmd_buffer_common.h
+@@ -7,6 +7,8 @@
+ #ifndef GPU_COMMAND_BUFFER_COMMON_CMD_BUFFER_COMMON_H_
+ #define GPU_COMMAND_BUFFER_COMMON_CMD_BUFFER_COMMON_H_
+ 
++
++#include <cstddef>
+ #include "../common/types.h"
+ #include "../common/bitfield_helpers.h"
+ #include "../common/logging.h"
+--- a/src/gpu/command_buffer/common/gles2_cmd_format.h
++++ b/src/gpu/command_buffer/common/gles2_cmd_format.h
+@@ -11,6 +11,7 @@
+ #include <KHR/khrplatform.h>
+ 
+ #include <string.h>
++#include <cstddef>
+ 
+ #include "../common/types.h"
+ #include "../common/bitfield_helpers.h"
+--- a/src/net/http/http_net_log_params.h
++++ b/src/net/http/http_net_log_params.h
+@@ -12,6 +12,7 @@
+ #include "base/ref_counted.h"
+ #include "net/base/net_log.h"
+ #include "net/http/http_request_headers.h"
++#include "net/http/http_response_headers.h"
+ 
+ class Value;
+ 
+--- a/src/net/spdy/spdy_http_stream.cc
++++ b/src/net/spdy/spdy_http_stream.cc
+@@ -16,6 +16,7 @@
+ #include "net/base/net_util.h"
+ #include "net/http/http_request_headers.h"
+ #include "net/http/http_request_info.h"
++#include "net/http/http_response_headers.h"
+ #include "net/http/http_response_info.h"
+ #include "net/http/http_util.h"
+ #include "net/spdy/spdy_http_utils.h"
+--- a/src/ppapi/cpp/paint_aggregator.h
++++ b/src/ppapi/cpp/paint_aggregator.h
+@@ -5,6 +5,7 @@
+ #ifndef PPAPI_CPP_PAINT_AGGREGATOR_H_
+ #define PPAPI_CPP_PAINT_AGGREGATOR_H_
+ 
++#include <cstdlib>
+ #include <vector>
+ 
+ #include "ppapi/cpp/point.h"
+--- a/src/third_party/ots/src/ots.h
++++ b/src/third_party/ots/src/ots.h
+@@ -6,6 +6,7 @@
+ #define OTS_H_
+ 
+ #include <cstdarg>
++#include <cstddef>
+ #include <cstdio>
+ #include <cstdlib>
+ #include <cstring>
+--- a/src/third_party/tcmalloc/chromium/src/base/stl_allocator.h
++++ b/src/third_party/tcmalloc/chromium/src/base/stl_allocator.h
+@@ -37,6 +37,7 @@
+ 
+ #include <config.h>
+ 
++#include <cstddef>
+ #include <limits>
+ 
+ #include "base/basictypes.h"
+--- a/src/third_party/tcmalloc/chromium/src/base/vdso_support.cc
++++ b/src/third_party/tcmalloc/chromium/src/base/vdso_support.cc
+@@ -39,6 +39,7 @@
+ 
+ #ifdef HAVE_VDSO_SUPPORT     // defined in vdso_support.h
+ 
++#include <cstddef>
+ #include <fcntl.h>
+ 
+ #include "base/atomicops.h"  // for MemoryBarrier
+--- a/src/third_party/tcmalloc/chromium/src/symbolize.h
++++ b/src/third_party/tcmalloc/chromium/src/symbolize.h
+@@ -48,7 +48,7 @@ using std::map;
+ class SymbolTable {
+  public:
+   SymbolTable()
+-    : symbol_buffer_(NULL) {}
++    : symbol_buffer_(0) {}
+   ~SymbolTable() {
+     delete[] symbol_buffer_;
+   }
+--- a/src/third_party/tcmalloc/chromium/src/system-alloc.cc
++++ b/src/third_party/tcmalloc/chromium/src/system-alloc.cc
+@@ -31,6 +31,7 @@
+ // Author: Sanjay Ghemawat
+ 
+ #include <config.h>
++#include <cstddef>
+ #if defined HAVE_STDINT_H
+ #include <stdint.h>
+ #elif defined HAVE_INTTYPES_H
+--- a/src/ui/gfx/codec/jpeg_codec.h
++++ b/src/ui/gfx/codec/jpeg_codec.h
+@@ -7,6 +7,7 @@
+ #pragma once
+ 
+ #include <vector>
++#include <cstdlib>
+ 
+ class SkBitmap;
+ 
+--- a/src/third_party/libjingle/source/talk/base/sigslot.h
++++ b/src/third_party/libjingle/source/talk/base/sigslot.h
+@@ -80,6 +80,7 @@
+ 
+ #include <set>
+ #include <list>
++#include <cstddef>
+ 
+ // On our copy of sigslot.h, we force single threading
+ #define SIGSLOT_PURE_ISO
+--- a/src/third_party/ots/src/os2.cc
++++ b/src/third_party/ots/src/os2.cc
+@@ -5,6 +5,7 @@
+ #include "os2.h"
+ 
+ #include "head.h"
++#include <cstddef>
+ 
+ // OS/2 - OS/2 and Windows Metrics
+ // http://www.microsoft.com/opentype/otspec/os2.htm
+--- a/src/third_party/tcmalloc/chromium/src/common.cc
++++ b/src/third_party/tcmalloc/chromium/src/common.cc
+@@ -30,6 +30,7 @@
+ // ---
+ // Author: Sanjay Ghemawat <opensource@google.com>
+ 
++#include <cstddef>
+ #include "config.h"
+ #include "system-alloc.h"
+ #include "config.h"
