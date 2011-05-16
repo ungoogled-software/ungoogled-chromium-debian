@@ -1,3 +1,20 @@
+chromium-browser (11.0.696.68~r84545-1) unstable; urgency=high
+
+  * New Stable release:
+    - [64046] High CVE-2011-1799: Bad casts in Chromium WebKit glue.
+      Credit to Google Chrome Security Team (SkyLined).
+    - [80608] High CVE-2011-1800: Integer overflows in SVG filters.
+      Credit to Google Chrome Security Team (Cris Neckar).
+  * Added --password-store=detect in chromium flags
+  * Updated the svg logo
+  * Ship the app icon in all the sizes provided upstream (Thanks Fabien Tassin)
+  * Build-dep on gyp >= 0.1~svn917 to try to fix FTBFS on armel
+  * Use protobuf system copy, this should fix FTBFS on armel #616662
+  * Bump urgency, we want chromium 11 in wheezy
+  * Remove *.pyc from src/depot_tools and src/build (Closes: #626894)
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Mon, 16 May 2011 22:05:07 +0200
+
 chromium-browser (11.0.696.65~r84435-1) unstable; urgency=low
 
   * New Stable release:

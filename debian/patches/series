@@ -18,3 +18,4 @@ system_v8.patch
 #ffmpeg.patch
 gcc46.patch
 #vpx.patch
+protobuf.patch

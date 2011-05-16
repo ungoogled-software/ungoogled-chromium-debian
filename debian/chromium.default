@@ -2,4 +2,4 @@
 # /usr/bin/chromium
 
 # Options to pass to chromium
-CHROMIUM_FLAGS=""
+CHROMIUM_FLAGS="--password-store=detect"
