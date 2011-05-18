@@ -19,3 +19,4 @@ system_v8.patch
 gcc46.patch
 #vpx.patch
 protobuf.patch
+javascript-i18n.patch

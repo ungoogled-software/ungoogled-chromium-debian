@@ -1,3 +1,11 @@
+chromium-browser (11.0.696.68~r84545-2) unstable; urgency=low
+
+  * Fix the libv8 patch
+  * Disable javascript i18n api, we will re-enable it when libv8 will compile
+    i18n experimental extension, #627066
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 17 May 2011 22:18:11 +0200
+
 chromium-browser (11.0.696.68~r84545-1) unstable; urgency=high
 
   * New Stable release:

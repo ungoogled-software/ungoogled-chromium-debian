@@ -416,6 +416,15 @@ Use system copy of libv8
            ],
            'conditions': [
              ['inside_chromium_build==1 and OS=="win" and component=="shared_library"', {
+@@ -1550,7 +1550,7 @@
+         }],
+         ['javascript_engine=="v8"', {
+           'dependencies': [
+-            '<(chromium_src_dir)/v8/src/extensions/experimental/experimental.gyp:i18n_api',
++            '<(chromium_src_dir)/build/linux/system.gyp:v8',
+           ],
+         }],
+       ],
 @@ -1595,10 +1595,10 @@
        'conditions': [
          ['javascript_engine=="v8"', {
@@ -475,3 +484,14 @@ Use system copy of libv8
  #endif
  
  #if defined(OS_CHROMEOS)
+--- a/src/third_party/WebKit/Source/WebCore/bindings/v8/V8DOMWindowShell.cpp
++++ b/src/third_party/WebKit/Source/WebCore/bindings/v8/V8DOMWindowShell.cpp
+@@ -65,7 +65,7 @@
+ #include <v8.h>
+ 
+ #if ENABLE(JAVASCRIPT_I18N_API)
+-#include <v8/src/extensions/experimental/i18n-extension.h>
++#include <i18n-extension.h>
+ #endif
+ 
+ #include <wtf/Assertions.h>
