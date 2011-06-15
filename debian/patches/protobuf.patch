@@ -1,32 +1,3 @@
---- a/src/build/linux/system.gyp
-+++ b/src/build/linux/system.gyp
-@@ -302,6 +302,26 @@
-       }]]
-     },
-     {
-+      'target_name': 'protobuf',
-+      'type': 'settings',
-+      'conditions': [
-+        ['_toolset=="target"', {
-+          'direct_dependent_settings': {
-+            'cflags': [
-+              '<!@(pkg-config --cflags protobuf)',
-+            ],
-+          },
-+          'link_settings': {
-+            'ldflags': [
-+              '<!@(pkg-config --libs-only-L --libs-only-other protobuf)',
-+            ],
-+            'libraries': [
-+              '<!@(pkg-config --libs-only-l protobuf)',
-+            ],
-+          },
-+      }]]
-+    },
-+    {
-       'target_name': 'v8',
-       'type': 'settings',
-       'conditions': [
 --- a/src/chrome/app/policy/cloud_policy_codegen.gyp
 +++ b/src/chrome/app/policy/cloud_policy_codegen.gyp
 @@ -67,7 +67,7 @@
@@ -56,7 +27,7 @@
          'cloud_policy_code_generate',
        ],
        'direct_dependent_settings': {
-@@ -107,7 +107,7 @@
+@@ -109,7 +109,7 @@
            'rule_name': 'gen_proto',
            'extension': 'proto',
            'inputs': [
@@ -65,25 +36,25 @@
            ],
            'outputs': [
              '<(PRODUCT_DIR)/pyproto/device_management_pb/<(RULE_INPUT_ROOT)_pb2.py',
-@@ -115,7 +115,7 @@
+@@ -117,7 +117,7 @@
              '<(protoc_out_dir)/<(proto_path_substr)/<(RULE_INPUT_ROOT).pb.cc',
            ],
            'action': [
 -            '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)protoc<(EXECUTABLE_SUFFIX)',
 +            '/usr/bin/protoc',
-             '--proto_path=<(policy_out_dir)/policy',
              '--proto_path=<(proto_rel_path)',
              '<(proto_rel_path)/<(RULE_INPUT_NAME)',
-@@ -126,7 +126,7 @@
-         }
+             '--cpp_out=<(protoc_out_dir)/<(proto_path_substr)',
+@@ -127,7 +127,7 @@
+         },
        ],
        'dependencies': [
 -        '<(DEPTH)/third_party/protobuf/protobuf.gyp:protoc#host',
 +        '<(DEPTH)/build/linux/system.gyp:protobuf',
-         'cloud_policy_proto_compile',
        ],
        'direct_dependent_settings': {
-@@ -162,7 +162,7 @@
+         'include_dirs': [
+@@ -164,7 +164,7 @@
          'cloud_policy_code_generate',
          'cloud_policy_proto_compile',
          'cloud_policy_backend_header_compile',
@@ -94,7 +65,7 @@
    ],
 --- a/src/chrome/browser/sync/protocol/sync_proto.gyp
 +++ b/src/chrome/browser/sync/protocol/sync_proto.gyp
-@@ -32,7 +32,7 @@
+@@ -33,7 +33,7 @@
            'rule_name': 'genproto',
            'extension': 'proto',
            'inputs': [
@@ -103,16 +74,16 @@
            ],
            'outputs': [
              '<(PRODUCT_DIR)/pyproto/sync_pb/<(RULE_INPUT_ROOT)_pb2.py',
-@@ -40,7 +40,7 @@
-             '<(SHARED_INTERMEDIATE_DIR)/protoc_out/chrome/browser/sync/protocol/<(RULE_INPUT_ROOT).pb.cc',
+@@ -41,7 +41,7 @@
+             '<(protoc_out_dir)/chrome/browser/sync/protocol/<(RULE_INPUT_ROOT).pb.cc',
            ],
            'action': [
 -            '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)protoc<(EXECUTABLE_SUFFIX)',
 +            '/usr/bin/protoc',
              '--proto_path=.',
              './<(RULE_INPUT_ROOT)<(RULE_INPUT_EXT)',
-             '--cpp_out=<(SHARED_INTERMEDIATE_DIR)/protoc_out/chrome/browser/sync/protocol',
-@@ -50,18 +50,18 @@
+             '--cpp_out=<(protoc_out_dir)/chrome/browser/sync/protocol',
+@@ -51,7 +51,7 @@
          },
        ],
        'dependencies': [
@@ -121,8 +92,9 @@
        ],
      },
      {
-       'target_name': 'sync_proto_cpp',
-       'type': 'none',
+@@ -84,11 +84,11 @@
+         '<(protoc_out_dir)/chrome/browser/sync/protocol/typed_url_specifics.pb.h',
+       ],
        'export_dependent_settings': [
 -        '../../../../third_party/protobuf/protobuf.gyp:protobuf_lite',
 +        '../../../../build/linux/system.gyp:protobuf',
@@ -134,21 +106,10 @@
          'sync_proto',
        ],
        'direct_dependent_settings': {
---- a/src/chrome/chrome.gyp
-+++ b/src/chrome/chrome.gyp
-@@ -1019,7 +1019,7 @@
-         '../skia/skia.gyp:skia',
-         '../third_party/libjingle/libjingle.gyp:libjingle',
-         'browser/sync/protocol/sync_proto.gyp:sync_proto_cpp',
--        '../third_party/protobuf/protobuf.gyp:protobuf_lite#target',
-+        '../build/linux/system.gyp:protobuf',
-       ],
-       'conditions': [
-         ['OS=="win"', {
 --- a/src/chrome/chrome_browser.gypi
 +++ b/src/chrome/chrome_browser.gypi
-@@ -4154,8 +4154,7 @@
-                 ['exclude', '^browser/notifications/balloon_collection_linux.cc'],
+@@ -4213,8 +4213,7 @@
+                 ['exclude', '^browser/ui/login/login_prompt_gtk.cc'],
                ],
                'dependencies': [
 -                '../third_party/protobuf/protobuf.gyp:protobuf_lite',
@@ -157,7 +118,7 @@
                ],
                'conditions': [
                  ['system_libcros==0', {
-@@ -4178,7 +4177,7 @@
+@@ -4237,7 +4236,7 @@
                  {
                    'action_name': 'my_proto',
                    'inputs': [
@@ -166,7 +127,7 @@
                      'browser/metrics/system_metrics.proto',
                    ],
                    'outputs': [
-@@ -4186,10 +4185,10 @@
+@@ -4245,10 +4244,10 @@
                      '<(INTERMEDIATE_DIR)/chrome/browser/metrics/system_metrics.pb.h',
                    ],
                    'dependencies': [
@@ -179,7 +140,7 @@
                      'browser/metrics/system_metrics.proto',
                      '--cpp_out=<(INTERMEDIATE_DIR)/chrome',
                    ],
-@@ -4254,7 +4253,7 @@
+@@ -4322,7 +4321,7 @@
            'rule_name': 'genproto',
            'extension': 'proto',
            'inputs': [
@@ -188,7 +149,7 @@
            ],
            'variables': {
              # The protoc compiler requires a proto_path argument with the
-@@ -4267,7 +4266,7 @@
+@@ -4335,7 +4334,7 @@
              '<(protoc_out_dir)/chrome/<(rule_input_relpath)/<(RULE_INPUT_ROOT).pb.cc',
            ],
            'action': [
@@ -197,7 +158,7 @@
              '--proto_path=./<(rule_input_relpath)',
              './<(rule_input_relpath)/<(RULE_INPUT_ROOT)<(RULE_INPUT_EXT)',
              '--cpp_out=<(protoc_out_dir)/chrome/<(rule_input_relpath)',
-@@ -4276,8 +4275,7 @@
+@@ -4344,8 +4343,7 @@
          },
        ],
        'dependencies': [
@@ -207,7 +168,7 @@
        ],
        'direct_dependent_settings': {
          'include_dirs': [
-@@ -4285,7 +4283,7 @@
+@@ -4353,7 +4351,7 @@
          ]
        },
        'export_dependent_settings': [
@@ -216,7 +177,7 @@
        ],
      },
      {
-@@ -4299,7 +4297,7 @@
+@@ -4367,7 +4365,7 @@
            'rule_name': 'genproto',
            'extension': 'proto',
            'inputs': [
@@ -225,7 +186,7 @@
            ],
            'variables': {
              # The protoc compiler requires a proto_path argument with the
-@@ -4313,7 +4311,7 @@
+@@ -4381,7 +4379,7 @@
              '<(protoc_out_dir)/chrome/<(rule_input_relpath)/<(RULE_INPUT_ROOT).pb.cc',
            ],
            'action': [
@@ -234,7 +195,7 @@
              '--proto_path=./<(rule_input_relpath)',
              './<(rule_input_relpath)/<(RULE_INPUT_ROOT)<(RULE_INPUT_EXT)',
              '--cpp_out=<(protoc_out_dir)/chrome/<(rule_input_relpath)',
-@@ -4322,8 +4320,7 @@
+@@ -4390,8 +4388,7 @@
          },
        ],
        'dependencies': [
@@ -244,7 +205,7 @@
        ],
        'direct_dependent_settings': {
          'include_dirs': [
-@@ -4331,7 +4328,7 @@
+@@ -4399,7 +4396,7 @@
          ]
        },
        'export_dependent_settings': [
@@ -253,7 +214,7 @@
        ],
      },
      {
-@@ -4345,7 +4342,7 @@
+@@ -4413,7 +4410,7 @@
            'rule_name': 'genproto',
            'extension': 'proto',
            'inputs': [
@@ -262,7 +223,7 @@
            ],
            'variables': {
              # The protoc compiler requires a proto_path argument with the
-@@ -4359,7 +4356,7 @@
+@@ -4427,7 +4424,7 @@
              '<(protoc_out_dir)/chrome/<(rule_input_relpath)/<(RULE_INPUT_ROOT).pb.cc',
            ],
            'action': [
@@ -271,7 +232,7 @@
              '--proto_path=./<(rule_input_relpath)',
              './<(rule_input_relpath)/<(RULE_INPUT_ROOT)<(RULE_INPUT_EXT)',
              '--cpp_out=<(protoc_out_dir)/chrome/<(rule_input_relpath)',
-@@ -4368,8 +4365,7 @@
+@@ -4436,8 +4433,7 @@
          },
        ],
        'dependencies': [
@@ -281,7 +242,7 @@
        ],
        'direct_dependent_settings': {
          'include_dirs': [
-@@ -4377,7 +4373,7 @@
+@@ -4445,7 +4441,7 @@
          ]
        },
        'export_dependent_settings': [
@@ -290,46 +251,9 @@
        ],
      },
      {
-@@ -4391,7 +4387,7 @@
-           'rule_name': 'genproto',
-           'extension': 'proto',
-           'inputs': [
--            '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)protoc<(EXECUTABLE_SUFFIX)',
-+            '/usr/bin/protoc',
-           ],
-           'variables': {
-             # The protoc compiler requires a proto_path argument with the
-@@ -4405,7 +4401,7 @@
-             '<(protoc_out_dir)/chrome/<(rule_input_relpath)/<(RULE_INPUT_ROOT).pb.cc',
-           ],
-           'action': [
--            '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)protoc<(EXECUTABLE_SUFFIX)',
-+            '/usr/bin/protoc',
-             '--proto_path=./<(rule_input_relpath)',
-             './<(rule_input_relpath)/<(RULE_INPUT_ROOT)<(RULE_INPUT_EXT)',
-             '--cpp_out=<(protoc_out_dir)/chrome/<(rule_input_relpath)',
-@@ -4414,8 +4410,7 @@
-         },
-       ],
-       'dependencies': [
--        '../third_party/protobuf/protobuf.gyp:protobuf_lite',
--        '../third_party/protobuf/protobuf.gyp:protoc#host',
-+        '../build/linux/system.gyp:protobuf',
-       ],
-       'direct_dependent_settings': {
-         'include_dirs': [
-@@ -4423,7 +4418,7 @@
-         ]
-       },
-       'export_dependent_settings': [
--        '../third_party/protobuf/protobuf.gyp:protobuf_lite',
-+        '../build/linux/system.gyp:protobuf',
-       ],
-     },
-   ],
 --- a/src/chrome/chrome_renderer.gypi
 +++ b/src/chrome/chrome_renderer.gypi
-@@ -347,7 +347,7 @@
+@@ -229,7 +229,7 @@
            'rule_name': 'genproto',
            'extension': 'proto',
            'inputs': [
@@ -338,7 +262,7 @@
            ],
            'variables': {
              # The protoc compiler requires a proto_path argument with the
-@@ -360,7 +360,7 @@
+@@ -242,7 +242,7 @@
              '<(protoc_out_dir)/chrome/<(rule_input_relpath)/<(RULE_INPUT_ROOT).pb.cc',
            ],
            'action': [
@@ -347,7 +271,7 @@
              '--proto_path=./<(rule_input_relpath)',
              './<(rule_input_relpath)/<(RULE_INPUT_ROOT)<(RULE_INPUT_EXT)',
              '--cpp_out=<(protoc_out_dir)/chrome/<(rule_input_relpath)',
-@@ -369,8 +369,7 @@
+@@ -251,8 +251,7 @@
          },
        ],
        'dependencies': [
@@ -357,7 +281,7 @@
        ],
        'direct_dependent_settings': {
          'include_dirs': [
-@@ -378,7 +377,7 @@
+@@ -260,7 +259,7 @@
          ]
        },
        'export_dependent_settings': [
@@ -368,7 +292,7 @@
    ],
 --- a/src/net/net.gyp
 +++ b/src/net/net.gyp
-@@ -1180,7 +1180,7 @@
+@@ -1216,7 +1216,7 @@
            'dependencies': [
              '../chrome/app/policy/cloud_policy_codegen.gyp:cloud_policy_proto_compile',
              '../chrome/browser/sync/protocol/sync_proto.gyp:sync_proto',
@@ -464,16 +388,16 @@
        # This target exports a hard dependency because depedents require
 --- a/src/remoting/remoting.gyp
 +++ b/src/remoting/remoting.gyp
-@@ -126,7 +126,7 @@
+@@ -116,7 +116,7 @@
        'dependencies': [
-         '../ui/gfx/gfx.gyp:gfx',
+         '../ui/ui.gyp:ui_gfx',
          '../media/media.gyp:media',
 -        '../third_party/protobuf/protobuf.gyp:protobuf_lite',
 +        '../build/linux/system.gyp:protobuf',
          '../third_party/libvpx/libvpx.gyp:libvpx_include',
          '../third_party/zlib/zlib.gyp:zlib',
          'chromoting_jingle_glue',
-@@ -136,7 +136,7 @@
+@@ -126,7 +126,7 @@
          #'third_party/on2/on2.gyp:vp8',
        ],
        'export_dependent_settings': [
@@ -484,50 +408,42 @@
        # This target needs a hard dependency because dependent targets
 --- a/src/third_party/cacheinvalidation/cacheinvalidation.gyp
 +++ b/src/third_party/cacheinvalidation/cacheinvalidation.gyp
-@@ -35,14 +35,14 @@
-           'rule_name': 'genproto',
-           'extension': 'proto',
-           'inputs': [
--            '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)protoc<(EXECUTABLE_SUFFIX)',
-+            '/usr/bin/protoc',
-           ],
-           'outputs': [
-             '<(protoc_out_dir)/<(proto_dir_relpath)/<(RULE_INPUT_ROOT).pb.h',
-             '<(protoc_out_dir)/<(proto_dir_relpath)/<(RULE_INPUT_ROOT).pb.cc',
-           ],
-           'action': [
--            '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)protoc<(EXECUTABLE_SUFFIX)',
-+            '/usr/bin/protoc',
-             '--proto_path=<(proto_dir_root)',
-             # This path needs to be prefixed by proto_path, so we can't
-             # use RULE_INPUT_PATH (which is an absolute path).
-@@ -53,7 +53,7 @@
+@@ -17,7 +17,7 @@
+     # Where files generated from proto files are put.
+     'protoc_out_dir': '<(SHARED_INTERMEDIATE_DIR)/protoc_out',
+     # The path to the protoc executable.
+-    'protoc': '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)protoc<(EXECUTABLE_SUFFIX)',
++    'protoc': '/usr/bin/protoc',
+   },
+   'targets': [
+     # The rule/action to generate files from the cacheinvalidation proto
+@@ -55,7 +55,7 @@
          },
        ],
        'dependencies': [
 -        '../../third_party/protobuf/protobuf.gyp:protoc#host',
 +        '../../build/linux/system.gyp:protobuf',
        ],
-       # This target exports a hard dependency because it generates header
-       # files.
-@@ -114,7 +114,7 @@
+     },
+     # The C++ files generated from the cache invalidation protocol buffers.
+@@ -71,7 +71,7 @@
+         '<(protoc_out_dir)/<(proto_dir_relpath)/types.pb.cc',
        ],
        'dependencies': [
-         '../../base/base.gyp:base',
 -        '../../third_party/protobuf/protobuf.gyp:protobuf_lite',
 +        '../../build/linux/system.gyp:protobuf',
          'cacheinvalidation_proto',
        ],
-       # This target exports a hard dependency because depedents require
-@@ -128,7 +128,7 @@
+       'include_dirs': [
+@@ -83,7 +83,7 @@
          ],
        },
        'export_dependent_settings': [
 -        '../../third_party/protobuf/protobuf.gyp:protobuf_lite',
 +        '../../build/linux/system.gyp:protobuf',
-         'cacheinvalidation_proto',
        ],
-     },
+       # This target exports a hard dependency because it contains generated
+       # header files.
 --- a/src/third_party/safe_browsing/safe_browsing.gyp
 +++ b/src/third_party/safe_browsing/safe_browsing.gyp
 @@ -13,10 +13,10 @@

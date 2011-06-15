@@ -24,7 +24,7 @@ Include system copy of prtime.h
 --- a/src/chrome/browser/metrics/metrics_log.cc
 +++ b/src/chrome/browser/metrics/metrics_log.cc
 @@ -13,7 +13,7 @@
- #include "base/scoped_ptr.h"
+ #include "base/perftimer.h"
  #include "base/string_util.h"
  #include "base/sys_info.h"
 -#include "base/third_party/nspr/prtime.h"
@@ -43,14 +43,3 @@ Include system copy of prtime.h
  #include "chrome/common/logging_chrome.h"
  #include "googleurl/src/gurl.h"
  #include "libxml/xmlwriter.h"
---- a/src/base/nss_util.cc
-+++ b/src/base/nss_util.cc
-@@ -9,7 +9,7 @@
- #include <plarena.h>
- #include <prerror.h>
- #include <prinit.h>
--#include <prtime.h>
-+#include <nspr/prtime.h>
- #include <pk11pub.h>
- #include <secmod.h>
- 

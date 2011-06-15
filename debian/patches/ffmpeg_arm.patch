@@ -17,7 +17,7 @@
  #define HAVE_MMX 0
 --- a/src/third_party/ffmpeg/ffmpeg.gyp
 +++ b/src/third_party/ffmpeg/ffmpeg.gyp
-@@ -271,10 +271,7 @@
+@@ -273,10 +273,7 @@
                  'patched-ffmpeg-mt/libavcodec/arm/dsputil_arm.S',
                  'patched-ffmpeg-mt/libavcodec/arm/dsputil_armv6.S',
                  'patched-ffmpeg-mt/libavcodec/arm/dsputil_init_arm.c',

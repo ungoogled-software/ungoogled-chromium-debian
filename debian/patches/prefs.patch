@@ -1,7 +1,7 @@
 Tell Chromium to look in /etc/chromium for the master_preferences file
 --- a/src/chrome/common/chrome_paths.cc
 +++ b/src/chrome/common/chrome_paths.cc
-@@ -307,7 +307,7 @@ bool PathProvider(int key, FilePath* res
+@@ -279,7 +279,7 @@ bool PathProvider(int key, FilePath* res
  #if defined(GOOGLE_CHROME_BUILD)
        cur = FilePath(FILE_PATH_LITERAL("/etc/opt/chrome/policies"));
  #else
@@ -12,7 +12,7 @@ Tell Chromium to look in /etc/chromium for the master_preferences file
          return false;
 --- a/src/chrome/browser/first_run/first_run.cc
 +++ b/src/chrome/browser/first_run/first_run.cc
-@@ -93,9 +93,7 @@ bool FirstRun::ProcessMasterPreferences(
+@@ -101,9 +101,7 @@ bool FirstRun::ProcessMasterPreferences(
  
    // The standard location of the master prefs is next to the chrome binary.
    FilePath master_prefs;

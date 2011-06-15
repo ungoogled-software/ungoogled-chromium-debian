@@ -14,9 +14,9 @@ system-speech.patch
 glew.patch
 fix-manpage.patch
 webkit-version.patch
-system_v8.patch
+#system_v8.patch
 #ffmpeg.patch
 gcc46.patch
 #vpx.patch
-protobuf.patch
-javascript-i18n.patch
+#protobuf.patch
+#javascript-i18n.patch

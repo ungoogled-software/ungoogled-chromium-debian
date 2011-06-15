@@ -26,17 +26,17 @@
        'direct_dependent_settings': {
 --- a/src/chrome/chrome.gyp
 +++ b/src/chrome/chrome.gyp
-@@ -654,6 +654,7 @@
-         'common',
-         '../media/media.gyp:media',
+@@ -409,6 +409,7 @@
+       'dependencies': [
+         '../base/base.gyp:base',
          '../skia/skia.gyp:skia',
 +        '../build/linux/system.gyp:glew',
        ],
        'sources': [
-         'gpu/gpu_channel.cc',
+         'utility/utility_main.cc',
 --- a/src/build/common.gypi
 +++ b/src/build/common.gypi
-@@ -628,6 +628,7 @@
+@@ -655,6 +655,7 @@
        ['enable_gpu==1', {
          'defines': [
            'ENABLE_GPU=1',

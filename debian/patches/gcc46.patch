@@ -1,6 +1,6 @@
 --- a/src/chrome/browser/possible_url_model.h
 +++ b/src/chrome/browser/possible_url_model.h
-@@ -57,7 +57,7 @@ class PossibleURLModel : public ui::Tabl
+@@ -54,7 +54,7 @@ class PossibleURLModel : public ui::Tabl
    ui::TableModelObserver* observer_;
  
    // Our consumer for favicon requests.
@@ -43,7 +43,7 @@
 --- a/src/net/http/http_net_log_params.h
 +++ b/src/net/http/http_net_log_params.h
 @@ -12,6 +12,7 @@
- #include "base/ref_counted.h"
+ #include "base/memory/ref_counted.h"
  #include "net/base/net_log.h"
  #include "net/http/http_request_headers.h"
 +#include "net/http/http_response_headers.h"

@@ -1,3 +1,62 @@
+chromium-browser (12.0.742.91~r87961-1) UNRELEASED; urgency=low
+
+  * New stable major release (Closes: 630548)
+    - [73962] [79746] High CVE-2011-1808: Use-after-free due to integer issues
+      in float handling. Credit to miaubiz.
+    - [75496] Medium CVE-2011-1809: Use-after-free in accessibility support.
+      Credit to Google Chrome Security Team (SkyLined).
+    - [75643] Low CVE-2011-1810: Visit history information leak in CSS.
+      Credit to Jesse Mohrland of Microsoft and Microsoft Vulnerability Research
+    - [76034] Low CVE-2011-1811: Browser crash with lots of form submissions.
+      Credit to “DimitrisV22”.
+    - [77026] Medium CVE-2011-1812: Extensions permission bypass.
+      Credit to kuzzcc.
+    - [78516] High CVE-2011-1813: Stale pointer in extension framework.
+      Credit to Google Chrome Security Team (Inferno).
+    - [79362] Medium CVE-2011-1814: Read from uninitialized pointer.
+      Credit to Eric Roman of the Chromium development community.
+    - [79862] Low CVE-2011-1815: Extension script injection into new tab page.
+      Credit to kuzzcc.
+    - [80358] Medium CVE-2011-1816: Use-after-free in developer tools.
+      Credit to kuzzcc.
+    - [81916] Medium CVE-2011-1817: Browser memory corruption in history
+      deletion. Credit to Collin Payne.
+    - [81949] High CVE-2011-1818: Use-after-free in image loader.
+      Credit to miaubiz.
+    - [83010] Medium CVE-2011-1819: Extension injection into chrome:// pages.
+      Credit to Vladislavas Jarmalis, plus subsequent independent discovery by Sergey Glazunov.
+    - [83275] High CVE-2011-2332: Same origin bypass in v8.
+      Credit to Sergey Glazunov.
+    - [83743] High CVE-2011-2342: Same origin bypass in DOM.
+      Credit to Sergey Glazunov.
+  * Refreshed patches.
+  * Use internal libv8 copy
+  * Use internal protobuf copy
+  * Remove armel from archs, too many toolchain issues and we want chromium in
+    testing.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 15 Jun 2011 11:44:00 +0200
+
+chromium-browser (11.0.696.71~r86024-1) unstable; urgency=low
+
+  * New Stable release:
+  - [72189] Low CVE-2011-1801: Pop-up blocker bypass. Credit to Chamal De Silva
+  - [82546] High CVE-2011-1804: Stale pointer in floats rendering.
+    Credit to Martin Barbella.
+  - [82873] Critical CVE-2011-1806: Memory corruption in GPU command buffer.
+    Credit to Google Chrome Security Team (Cris Neckar).
+  - [82903] Critical CVE-2011-1807: Out-of-bounds write in blob handling.
+    Credit to Google Chrome Security Team (Inferno) and Kostya Serebryany of the
+    Chromium development community.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 25 May 2011 09:16:11 +0200
+
+chromium-browser (11.0.696.68~r84545-3) unstable; urgency=low
+
+  * Use the experimental gold linker
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Mon, 23 May 2011 08:57:21 +0200
+
 chromium-browser (11.0.696.68~r84545-2) unstable; urgency=low
 
   * Fix the libv8 patch

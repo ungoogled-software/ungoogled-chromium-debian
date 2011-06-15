@@ -1,7 +1,7 @@
 webkit needs to call nss to pull in nspr headers
 --- a/src/webkit/glue/webkit_glue.gypi
 +++ b/src/webkit/glue/webkit_glue.gypi
-@@ -483,6 +483,7 @@
+@@ -441,6 +441,7 @@
          ['OS=="linux" or OS=="freebsd" or OS=="openbsd" or OS=="solaris"', {
            'dependencies': [
              '<(DEPTH)/build/linux/system.gyp:gtk',
@@ -9,3 +9,17 @@ webkit needs to call nss to pull in nspr headers
            ],
            'sources!': [
              'plugins/plugin_stubs.cc',
+--- a/src/chrome/chrome_common.gypi
++++ b/src/chrome/chrome_common.gypi
+@@ -18,6 +18,11 @@
+               '<(DEPTH)/third_party/wtl/include',
+             ],
+           }],
++          ['OS=="linux"', {
++            'include_dirs': [
++              '/usr/include/nspr',
++            ],
++          }],
+         ],
+         'sources': [
+           # .cc, .h, and .mm files under chrome/common that are used on all
