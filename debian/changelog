@@ -4,8 +4,9 @@ chromium-browser (13.0.782.56~r92025-1) UNRELEASED; urgency=low
   * Re-added binutils-gold in Build-depends
   * Refreshed patches
   * Use system ffmpeg libs
+  * Switch to git
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Mon, 18 Jul 2011 15:10:07 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Mon, 18 Jul 2011 15:17:47 +0200
 
 chromium-browser (12.0.742.112~r90304-1) unstable; urgency=high
 
