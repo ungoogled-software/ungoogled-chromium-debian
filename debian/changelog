@@ -1,4 +1,25 @@
-chromium-browser (12.0.742.91~r87961-1) UNRELEASED; urgency=low
+chromium-browser (12.0.742.112~r90304-1) unstable; urgency=high
+
+  * New stable micro release
+  - [77493] Medium CVE-2011-2345: Out-of-bounds read in NPAPI string handling.
+    Credit to Philippe Arteau.
+  - [84355] High CVE-2011-2346: Use-after-free in SVG font handling.
+    Credit to miaubiz.
+  - [85003] High CVE-2011-2347: Memory corruption in CSS parsing.
+    Credit to miaubiz.
+  - [85102] High CVE-2011-2350: Lifetime and re-entrancy issues in the HTML parser.
+    Credit to miaubiz.
+  - [85177] High CVE-2011-2348: Bad bounds check in v8.
+    Credit to Aki Helin of OUSPG.
+  - [85211] High CVE-2011-2351: Use-after-free with SVG use element.
+    Credit to miaubiz.
+  - [85418] High CVE-2011-2349: Use-after-free in text selection.
+    Credit to miaubiz.
+  * Do not use the experimental gold linker
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 29 Jun 2011 15:28:33 +0200
+
+chromium-browser (12.0.742.91~r87961-1) unstable; urgency=high
 
   * New stable major release (Closes: 630548)
     - [73962] [79746] High CVE-2011-1808: Use-after-free due to integer issues
@@ -24,7 +45,8 @@ chromium-browser (12.0.742.91~r87961-1) UNRELEASED; urgency=low
     - [81949] High CVE-2011-1818: Use-after-free in image loader.
       Credit to miaubiz.
     - [83010] Medium CVE-2011-1819: Extension injection into chrome:// pages.
-      Credit to Vladislavas Jarmalis, plus subsequent independent discovery by Sergey Glazunov.
+      Credit to Vladislavas Jarmalis, plus subsequent independent discovery
+      by Sergey Glazunov.
     - [83275] High CVE-2011-2332: Same origin bypass in v8.
       Credit to Sergey Glazunov.
     - [83743] High CVE-2011-2342: Same origin bypass in DOM.
@@ -34,8 +56,9 @@ chromium-browser (12.0.742.91~r87961-1) UNRELEASED; urgency=low
   * Use internal protobuf copy
   * Remove armel from archs, too many toolchain issues and we want chromium in
     testing.
+  * Override the embedded-library error, chromium uses a modified sqlite copy.
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 15 Jun 2011 11:44:00 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 17 Jun 2011 11:13:54 +0200
 
 chromium-browser (11.0.696.71~r86024-1) unstable; urgency=low
 

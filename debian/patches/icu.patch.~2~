@@ -1,0 +1,11 @@
+--- a/src/chrome/browser/ui/webui/options/chromeos/system_settings_provider.h
++++ b/src/chrome/browser/ui/webui/options/chromeos/system_settings_provider.h
+@@ -10,7 +10,7 @@
+ #include "base/string16.h"
+ #include "chrome/browser/chromeos/cros_settings_provider.h"
+ #include "chrome/browser/chromeos/system_access.h"
+-#include "third_party/icu/public/i18n/unicode/timezone.h"
++#include <unicode/timezone.h>
+ 
+ class Value;
+ class ListValue;
