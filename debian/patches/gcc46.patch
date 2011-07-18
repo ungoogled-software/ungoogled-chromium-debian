@@ -1,24 +1,3 @@
---- a/src/chrome/browser/possible_url_model.h
-+++ b/src/chrome/browser/possible_url_model.h
-@@ -54,7 +54,7 @@ class PossibleURLModel : public ui::Tabl
-   ui::TableModelObserver* observer_;
- 
-   // Our consumer for favicon requests.
--  CancelableRequestConsumerT<size_t, NULL> consumer_;
-+  CancelableRequestConsumerT<size_t, 0> consumer_;
- 
-   // The results we're showing.
-   struct Result;
---- a/src/chrome/browser/search_engines/template_url_prepopulate_data.h
-+++ b/src/chrome/browser/search_engines/template_url_prepopulate_data.h
-@@ -6,6 +6,7 @@
- #define CHROME_BROWSER_SEARCH_ENGINES_TEMPLATE_URL_PREPOPULATE_DATA_H_
- #pragma once
- 
-+#include <cstddef>
- #include <vector>
- 
- class GURL;
 --- a/src/gpu/command_buffer/common/cmd_buffer_common.h
 +++ b/src/gpu/command_buffer/common/cmd_buffer_common.h
 @@ -7,6 +7,8 @@
@@ -60,16 +39,6 @@
  #include "net/http/http_response_info.h"
  #include "net/http/http_util.h"
  #include "net/spdy/spdy_http_utils.h"
---- a/src/ppapi/cpp/paint_aggregator.h
-+++ b/src/ppapi/cpp/paint_aggregator.h
-@@ -5,6 +5,7 @@
- #ifndef PPAPI_CPP_PAINT_AGGREGATOR_H_
- #define PPAPI_CPP_PAINT_AGGREGATOR_H_
- 
-+#include <cstdlib>
- #include <vector>
- 
- #include "ppapi/cpp/point.h"
 --- a/src/third_party/ots/src/ots.h
 +++ b/src/third_party/ots/src/ots.h
 @@ -6,6 +6,7 @@
@@ -123,24 +92,14 @@
  #elif defined HAVE_INTTYPES_H
 --- a/src/ui/gfx/codec/jpeg_codec.h
 +++ b/src/ui/gfx/codec/jpeg_codec.h
-@@ -7,6 +7,7 @@
- #pragma once
+@@ -8,6 +8,7 @@
  
+ #include <stddef.h>
  #include <vector>
 +#include <cstdlib>
  
  class SkBitmap;
  
---- a/src/third_party/libjingle/source/talk/base/sigslot.h
-+++ b/src/third_party/libjingle/source/talk/base/sigslot.h
-@@ -80,6 +80,7 @@
- 
- #include <set>
- #include <list>
-+#include <cstddef>
- 
- // On our copy of sigslot.h, we force single threading
- #define SIGSLOT_PURE_ISO
 --- a/src/third_party/ots/src/os2.cc
 +++ b/src/third_party/ots/src/os2.cc
 @@ -5,6 +5,7 @@

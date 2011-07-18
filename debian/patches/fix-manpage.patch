@@ -6,7 +6,7 @@ Last-Update: 2011-02-20
 
 --- a/src/chrome/app/resources/manpage.1.in
 +++ b/src/chrome/app/resources/manpage.1.in
-@@ -103,6 +103,7 @@ as
+@@ -110,6 +110,7 @@ as
  See the GTK documentation for more:
  .IP
  <http://library.gnome.org/devel/gtk/stable/gtk-running.html>
