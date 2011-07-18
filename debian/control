@@ -62,7 +62,8 @@ Build-Depends: cdbs,
 	hardening-wrapper,
 	libxt-dev,
 	libxtst-dev,
-	libpam0g-dev
+	libpam0g-dev,
+	binutils-gold
 Standards-Version: 3.9.0
 
 Package: chromium-browser
