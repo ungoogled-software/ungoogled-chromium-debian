@@ -11,8 +11,8 @@ webkit needs to call nss to pull in nspr headers
              'plugins/plugin_stubs.cc',
 --- a/src/chrome/chrome_common.gypi
 +++ b/src/chrome/chrome_common.gypi
-@@ -23,6 +23,11 @@
-               '/usr/include/nspr',
+@@ -18,6 +18,11 @@
+               '<(DEPTH)/third_party/wtl/include',
              ],
            }],
 +          ['OS=="linux"', {
