@@ -1,6 +1,3 @@
-# system_v8.patch
-# chromium_useragent.patch
-#no_tree_sink_v8.patch
 #ffmpegfix.patch
 nspr.patch
 nss.patch
