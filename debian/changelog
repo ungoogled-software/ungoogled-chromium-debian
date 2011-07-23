@@ -6,8 +6,9 @@ chromium-browser (13.0.782.99~r93151-1) UNRELEASED; urgency=low
   * Use system ffmpeg libs
   * Switch to git
   * Use system icu, vpx, flac, webp, speex libs
+  * Build-depens on gyp >= 0.1~svn971
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 23 Jul 2011 14:15:30 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 23 Jul 2011 19:55:04 +0200
 
 chromium-browser (12.0.742.112~r90304-1) unstable; urgency=high
 
