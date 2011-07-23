@@ -738,6 +738,12 @@ endif
 	# Checkout (drop the previous content and retry if gclient failed, see http://crbug.com/39954)
 	cd $(TMP_DIR) && ./tools/depot_tools/gclient update --nohooks $(REVISION) || \
 	  ( rm -rf $(foreach dir,src [0-9]*,$(wildcard $(TMP_DIR)/$(dir))) ; ./tools/depot_tools/gclient update --nohooks $(REVISION) )
+	# For NaCL, run the hooks, but not the gyp ones
+	( cd $(TMP_DIR) ; \
+		SDIR=`grep '"name"' .gclient | cut -d\" -f4` ; \
+		perl -i~ -pe 's%(.python., .src/build/gyp_chromium.)%"echo", "#disabled#", $$1%' $$SDIR/DEPS; \
+		./tools/depot_tools/gclient runhooks ; \
+		mv $$SDIR/DEPS~ $$SDIR/DEPS ; )
 
 ifneq (,$(LOCAL_BRANCH))
 	rm -rf $(TMP_DDIR)
