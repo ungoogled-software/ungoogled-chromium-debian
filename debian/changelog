@@ -10,8 +10,9 @@ chromium-browser (13.0.782.99~r93151-1) UNRELEASED; urgency=low
   * Run the gclient hooks when creating the source tarball, as we need files
     from the Native Client's integrated runtime (IRT) library
     (Thanks to Fabien Tassin)
+  * Install the NaCL IRT files
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 23 Jul 2011 20:46:56 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 23 Jul 2011 20:49:47 +0200
 
 chromium-browser (12.0.742.112~r90304-1) unstable; urgency=high
 
