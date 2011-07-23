@@ -1,4 +1,4 @@
-chromium-browser (13.0.782.56~r92025-1) UNRELEASED; urgency=low
+chromium-browser (13.0.782.99~r93151-1) UNRELEASED; urgency=low
 
   * New beta version
   * Re-added binutils-gold in Build-depends
@@ -7,7 +7,7 @@ chromium-browser (13.0.782.56~r92025-1) UNRELEASED; urgency=low
   * Switch to git
   * Use system icu, vpx, flac, webp, speex libs
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Mon, 18 Jul 2011 16:13:11 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 23 Jul 2011 14:15:30 +0200
 
 chromium-browser (12.0.742.112~r90304-1) unstable; urgency=high
 
