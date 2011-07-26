@@ -3,7 +3,6 @@ chromium-browser (13.0.782.99~r93151-1) UNRELEASED; urgency=low
   * New beta version
   * Re-added binutils-gold in Build-depends
   * Refreshed patches
-  * Use system ffmpeg libs
   * Switch to git
   * Use system icu, vpx, flac, webp, speex libs
   * Build-depens on gyp >= 0.1~svn971

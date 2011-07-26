@@ -7,7 +7,6 @@ prefs.patch
 armv4.patch
 ffmpeg_arm.patch
 system-speech.patch
-#icu.patch
 glew.patch
 fix-manpage.patch
 webkit-version.patch
@@ -17,3 +16,4 @@ gcc46.patch
 #vpx.patch
 #protobuf.patch
 #javascript-i18n.patch
+icu.patch
