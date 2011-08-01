@@ -77,15 +77,15 @@
 +        ['_toolset=="target"', {
 +          'direct_dependent_settings': {
 +            'cflags': [
-+              '<!@(pkg-config --cflags icu)',
++              '<!@()',
 +            ],
 +          },
 +          'link_settings': {
 +            'ldflags': [
-+              '<!@(pkg-config --libs-only-L --libs-only-other icu)',
++              '<!@(icu-config --ldflags)',
 +            ],
 +            'libraries': [
-+              '<!@(pkg-config --libs-only-l icu)',
++              '<!@(icu-config --ldflags-libsonly)',
 +            ],
 +          },
 +      }]]
@@ -644,7 +644,7 @@
        ],
        'dependencies': [
 -        '<(icu_src_dir)/icu.gyp:*',
-+        '<(chromium_src_dir)/build/linux/system.gyp:icu',
++        '../../../../build/linux/system.gyp:icu',
          'js2c_i18n#host',
          '../../../tools/gyp/v8.gyp:v8',
        ],
