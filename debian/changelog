@@ -4,14 +4,14 @@ chromium-browser (13.0.782.99~r93151-1) UNRELEASED; urgency=low
   * Re-added binutils-gold in Build-depends
   * Refreshed patches
   * Switch to git
-  * Use system vpx, flac, webp, speex libs, libv8
+  * Use system vpx, flac, webp, speex libs
   * Build-depens on gyp >= 0.1~svn971
   * Run the gclient hooks when creating the source tarball, as we need files
     from the Native Client's integrated runtime (IRT) library
     (Thanks to Fabien Tassin)
   * Install the NaCL IRT files
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Mon, 01 Aug 2011 14:03:22 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 03 Aug 2011 10:58:37 +0200
 
 chromium-browser (12.0.742.112~r90304-1) unstable; urgency=high
 
