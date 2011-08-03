@@ -1,6 +1,60 @@
-chromium-browser (13.0.782.99~r93151-1) UNRELEASED; urgency=low
+chromium-browser (13.0.782.107~r94237-1) UNRELEASED; urgency=low
 
-  * New beta version
+  * New stable version
+    - Medium CVE-2011-2358: Always confirm an extension install via a browser
+      dialog. Credit to Sergey Glazunov.
+    - High CVE-2011-2359: Stale pointer due to bad line box tracking in
+      rendering. Credit to miaubiz and Martin Barbella.
+    - Low CVE-2011-2360: Potential bypass of dangerous file prompt.
+      Credit to kuzzcc.
+    - Low CVE-2011-2361: Improve designation of strings in the basic auth
+      dialog. Credit to kuzzcc.
+    - Medium CVE-2011-2782: File permissions error with drag and drop.
+      Credit to Evan Martin of the Chromium development community.
+    - Medium CVE-2011-2783: Always confirm a developer mode NPAPI extension
+      install via a browser dialog. Credit to Sergey Glazunov.
+    - Low CVE-2011-2784: Local file path disclosure via GL program log.
+      Credit to kuzzcc.
+    - Low CVE-2011-2785: Sanitize the homepage URL in extensions.
+      Credit to kuzzcc.
+    - Low CVE-2011-2786: Make sure the speech input bubble is always on-screen.
+      Credit to Olli Pettay of Mozilla.
+    - Medium CVE-2011-2787: Browser crash due to GPU lock re-entrancy issue.
+      Credit to kuzzcc.
+    - Low CVE-2011-2788: Buffer overflow in inspector serialization.
+      Credit to Mikołaj Małecki.
+    - Medium CVE-2011-2789: Use after free in Pepper plug-in instantiation.
+      Credit to Mario Gomes and kuzzcc.
+    - High CVE-2011-2790: Use-after-free with floating styles.
+      Credit to miaubiz.
+    - High CVE-2011-2791: Out-of-bounds write in ICU. Credit to Yang Dingning
+      from NCNIPC, Graduate University of Chinese Academy of Sciences.
+    - High CVE-2011-2792: Use-after-free with float removal. Credit to miaubiz.
+    - High CVE-2011-2793: Use-after-free in media selectors. Credit to miaubiz.
+    - Medium CVE-2011-2794: Out-of-bounds read in text iteration.
+      Credit to miaubiz.
+    - Medium CVE-2011-2795: Cross-frame function leak. Credit to Shih Wei-Long.
+    - High CVE-2011-2796: Use-after-free in Skia. Credit to Google Chrome
+      Security Team (Inferno) and Kostya Serebryany of the Chromium
+      development community.
+    - High CVE-2011-2797: Use-after-free in resource caching. Credit to miaubiz.
+    - Low CVE-2011-2798: Prevent a couple of internal schemes from being web
+      accessible. Credit to sirdarckcat of the Google Security Team.
+    - High CVE-2011-2799: Use-after-free in HTML range handling.
+      Credit to miaubiz.
+    - Medium CVE-2011-2800: Leak of client-side redirect target.
+      Credit to Juho Nurminen.
+    - High CVE-2011-2802: v8 crash with const lookups.
+      Credit to Christian Holler.
+    - Medium CVE-2011-2803: Out-of-bounds read in Skia paths.
+      Credit to Google Chrome Security Team (Inferno).
+    - High CVE-2011-2801: Use-after-free in frame loader. Credit to miaubiz.
+    - High CVE-2011-2818: Use-after-free in display box rendering.
+      Credit to Martin Barbella.
+    - High CVE-2011-2805: Cross-origin script injection.
+      Credit to Sergey Glazunov.
+    - [90222] High CVE-2011-2819: Cross-origin violation in base URI handling.
+      Credit to Sergey Glazunov.
   * Re-added binutils-gold in Build-depends
   * Refreshed patches
   * Switch to git
@@ -11,7 +65,7 @@ chromium-browser (13.0.782.99~r93151-1) UNRELEASED; urgency=low
     (Thanks to Fabien Tassin)
   * Install the NaCL IRT files
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 03 Aug 2011 10:58:37 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 03 Aug 2011 13:28:49 +0200
 
 chromium-browser (12.0.742.112~r90304-1) unstable; urgency=high
 
