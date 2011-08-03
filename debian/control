@@ -63,9 +63,6 @@ Build-Depends: cdbs,
 	libxtst-dev,
 	libpam0g-dev,
 	binutils-gold,
-	libavcodec-dev (>= 4:0.7),
-	libavformat-dev (>= 4:0.7),
-	libavutil-dev (>= 4:0.7),
 	libflac-dev,
 	libwebp-dev
 Standards-Version: 3.9.0
