@@ -65,7 +65,7 @@ Build-Depends: cdbs,
 	binutils-gold,
 	libflac-dev,
 	libwebp-dev
-Standards-Version: 3.9.0
+Standards-Version: 3.9.2
 
 Package: chromium-browser
 Architecture: all
