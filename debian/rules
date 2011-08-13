@@ -417,10 +417,14 @@ endif
 clean::
 	rm -f debian/configure-stamp debian/stamp-makefile-build-*
 	rm -f *.cdbs-config_list $(subst_files)
-	rm -fr src/out
-	find src/tools -name "*.pyc" | xargs rm -f
-	find src/build -name "*.pyc" | xargs rm -f
-	find src/depot_tools -name "*.pyc" | xargs rm -f
+	rm -fr src/out src/Makefile
+	find src -name *.pyc -execdir rm -f {} \;
+	find src -name *.mk -execdir rm -f {} \;
+	find src -name *.Makefile -execdir rm -f {} \;
+	find src -name Makefile -execdir rm -f {} \;
+	rm -f src/build/LASTCHANGE.in
+	rm -f src/third_party/WebKit/Source/WebCore/WebCore.gyp/idls_list_temp_file.tmp
+	rm -f src/v8/tools/gyp/v8.log
 
 # Install: there's no install rules in scons yet, do it manually
 common-install-prehook-impl::
