@@ -1,0 +1,32 @@
+Description: Fix build failure due to cups 1.5 header changes
+Author: Michael Gilbert <michael.s.gilbert@gmail.com>
+--- chromium-browser-13.0.782.107~r94237.orig/src/printing/backend/cups_helper.h
++++ chromium-browser-13.0.782.107~r94237/src/printing/backend/cups_helper.h
+@@ -7,6 +7,7 @@
+ #pragma once
+ 
+ #include <cups/cups.h>
++#include <cups/ppd.h>
+ 
+ class GURL;
+ 
+--- chromium-browser-13.0.782.107~r94237.orig/src/chrome/service/cloud_print/print_system_cups.cc
++++ chromium-browser-13.0.782.107~r94237/src/chrome/service/cloud_print/print_system_cups.cc
+@@ -5,6 +5,7 @@
+ #include "chrome/service/cloud_print/print_system.h"
+ 
+ #include <cups/cups.h>
++#include <cups/ppd.h>
+ #include <dlfcn.h>
+ #include <errno.h>
+ #include <pthread.h>
+--- chromium-browser-13.0.782.107~r94237.orig/src/chrome/browser/ui/webui/print_preview_handler.cc
++++ chromium-browser-13.0.782.107~r94237/src/chrome/browser/ui/webui/print_preview_handler.cc
+@@ -37,6 +37,7 @@
+ 
+ #if defined(USE_CUPS)
+ #include <cups/cups.h>
++#include <cups/ppd.h>
+ 
+ #include "base/file_util.h"
+ #endif

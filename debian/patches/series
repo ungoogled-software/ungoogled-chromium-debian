@@ -17,3 +17,4 @@ gcc46.patch
 #javascript-i18n.patch
 #icu.patch
 #system_v8.patch
+cups1.5.patch
