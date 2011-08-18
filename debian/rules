@@ -399,6 +399,8 @@ debian/configure-stamp:
 	# files at this point
 	echo "$(DEBIAN_REVISION)" > $(SRC_DIR)/build/LASTCHANGE.in
 	# BUILD_ARGS=$(BUILD_ARGS)
+	cp -p /usr/share/misc/config.guess src/third_party/yasm/source/patched-yasm/config
+	cp -p /usr/share/misc/config.sub src/third_party/yasm/source/patched-yasm/config
 
 common-build-arch common-build-indep:: debian/stamp-makefile-build-perf
 debian/stamp-makefile-build-perf: debian/stamp-makefile-build
@@ -425,6 +427,8 @@ clean::
 	rm -f src/build/LASTCHANGE.in
 	rm -f src/third_party/WebKit/Source/WebCore/WebCore.gyp/idls_list_temp_file.tmp
 	rm -f src/v8/tools/gyp/v8.log
+	rm -f src/third_party/yasm/source/patched-yasm/config/config.guess
+	rm -f src/third_party/yasm/source/patched-yasm/config/config.sub
 
 # Install: there's no install rules in scons yet, do it manually
 common-install-prehook-impl::

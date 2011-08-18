@@ -6,6 +6,7 @@ chromium-browser (13.0.782.107~r94237-2) UNRELEASED; urgency=low
   * Fix an obsolete character encoding in debian/copyright.
   * Fix build failure with cups >= 1.5.0.
   * Don't support lenny's cups anymore.
+  * Use system config.guess and config.sub for yasm's autotools files.
   * Clean up package short descriptions.
 
  -- Michael Gilbert <michael.s.gilbert@gmail.com>  Sun, 07 Aug 2011 02:25:23 -0400
