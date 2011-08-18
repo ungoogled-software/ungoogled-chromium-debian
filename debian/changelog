@@ -2,8 +2,9 @@ chromium-browser (13.0.782.107~r94237-2) UNRELEASED; urgency=low
 
   * Remove all automatically generated files during clean up (this makes
     it possible to build from source twice in a row now).
-  * Bump standards to 3.9.2.
-  * Fix an outdated charater in debian/copyright.
+  * Bump standards version to 3.9.2.
+  * Fix an obsolete character encoding in debian/copyright.
+  * Clean up package short descriptions.
 
  -- Michael Gilbert <michael.s.gilbert@gmail.com>  Sun, 07 Aug 2011 02:25:23 -0400
 

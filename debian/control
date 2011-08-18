@@ -85,6 +85,7 @@ Package: chromium-browser-dbg
 Architecture: all
 Section: oldlibs
 Depends: chromium-dbg
+Priority: extra
 Description: chromium-browser debug symbols transitional dummy package
  Debug symbols for the Chromium browser - transitional dummy package
  .
@@ -126,7 +127,7 @@ Suggests: chromium-l10n
 Provides: www-browser, chromium-testsuite, gnome-www-browser
 Replaces: chromium-testsuite, chromium-codecs-ffmpeg, chromium-codecs-ffmpeg-extra, chromium-browser (<< 10.0.648.82~r75062-1~)
 Conflicts: chromium-testsuite, chromium-codecs-ffmpeg, chromium-codecs-ffmpeg-extra, chromium-browser (<< 10.0.648.82~r75062-1~)
-Description: Chromium browser
+Description: The Chromium open source web browser
  Chromium is an open-source browser project that aims to build a safer, faster,
  and more stable way for all Internet users to experience the web.
  .
@@ -144,7 +145,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, chromium (= ${binary:Version})
 Provides: chromium-testsuite-dbg
 Replaces: chromium-testsuite-dbg, chromium-browser-dbg (<< 10.0.648.82~r75062-1~)
 Conflicts: chromium-testsuite-dbg, chromium-browser-dbg (<< 10.0.648.82~r75062-1~)
-Description: chromium-browser debug symbols
+Description: Debugging symbols for the chomium web browser
  Debug symbols for the Chromium browser
  .
  Chromium is an open-source browser project that aims to build a safer, faster,
