@@ -15,8 +15,9 @@ chromium-browser (13.0.782.107~r94237-2) UNRELEASED; urgency=low
 
   [ Giuseppe Iuculano ]
   * Move the compatibility symlinks to the chromium-browser package
+  * Fix the Vcs-Browser control field
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 19 Aug 2011 18:36:36 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 19 Aug 2011 18:50:47 +0200
 
 chromium-browser (13.0.782.107~r94237-1) unstable; urgency=high
 
