@@ -9,6 +9,7 @@ chromium-browser (13.0.782.107~r94237-2) UNRELEASED; urgency=low
   * Use system config.guess and config.sub for yasm's autotools files.
   * Add chromium-browser.png symlink so old menu entries keep their icons
     (closes: #622841).
+  * Add chromium-browser manpage symlink.
   * Clean up package short descriptions.
 
  -- Michael Gilbert <michael.s.gilbert@gmail.com>  Thu, 18 Aug 2011 20:10:59 -0400
