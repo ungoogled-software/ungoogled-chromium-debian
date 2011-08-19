@@ -15123,7 +15123,7 @@ Copyright: Copyright: 2005 Michael Ahlberg, MÃ¥ns RullgÃ¥rd:
 License: Expat
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/oggdec.c, src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/oggdec.h
-Copyright: Copyright: 2005 Michael Ahlberg, Måns Rullgård:
+Copyright: Copyright: 2005 Michael Ahlberg, Mans Rullgard:
 License: Expat
 
 Files: src/third_party/ffmpeg/source/patched-ffmpeg-mt/libavformat/oggparsespeex.c

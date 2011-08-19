@@ -54,7 +54,7 @@ Build-Depends: cdbs,
 	protobuf-compiler,
 	libglewmx1.5-dev,
 	libvpx-dev,
-	libcups2-dev | libcupsys2-dev,
+	libcups2-dev (>= 1.5.0),
 	libgnome-keyring-dev,
 	libgconf2-dev,
 	libspeex-dev,
@@ -65,11 +65,11 @@ Build-Depends: cdbs,
 	binutils-gold,
 	libflac-dev,
 	libwebp-dev
-Standards-Version: 3.9.0
+Standards-Version: 3.9.2
 
 Package: chromium-browser
 Architecture: all
-Depends: chromium (>= 10)
+Depends: chromium (>= 10), ${misc:Depends}
 Section: oldlibs
 Description: Chromium browser - transitional dummy package
  Chromium is an open-source browser project that aims to build a safer, faster,
@@ -84,7 +84,8 @@ Description: Chromium browser - transitional dummy package
 Package: chromium-browser-dbg
 Architecture: all
 Section: oldlibs
-Depends: chromium-dbg
+Depends: chromium-dbg, ${misc:Depends}
+Priority: extra
 Description: chromium-browser debug symbols transitional dummy package
  Debug symbols for the Chromium browser - transitional dummy package
  .
@@ -94,7 +95,7 @@ Description: chromium-browser debug symbols transitional dummy package
 Package: chromium-browser-l10n
 Architecture: all
 Section: oldlibs
-Depends: chromium-l10n
+Depends: chromium-l10, ${misc:Depends}
 Description: chromium-browser language packages - transitional dummy package
  Chromium is an open-source browser project that aims to build a safer, faster,
  and more stable way for all Internet users to experience the web.
@@ -108,7 +109,7 @@ Description: chromium-browser language packages - transitional dummy package
 Package: chromium-browser-inspector
 Architecture: all
 Section: oldlibs
-Depends: chromium-inspector
+Depends: chromium-inspector, ${misc:Depends}
 Description: page inspector for the chromium-browser - transitional dummy package
  Chromium is an open-source browser project that aims to build a safer, faster,
  and more stable way for all Internet users to experience the web.
@@ -126,7 +127,7 @@ Suggests: chromium-l10n
 Provides: www-browser, chromium-testsuite, gnome-www-browser
 Replaces: chromium-testsuite, chromium-codecs-ffmpeg, chromium-codecs-ffmpeg-extra, chromium-browser (<< 10.0.648.82~r75062-1~)
 Conflicts: chromium-testsuite, chromium-codecs-ffmpeg, chromium-codecs-ffmpeg-extra, chromium-browser (<< 10.0.648.82~r75062-1~)
-Description: Chromium browser
+Description: Google's open source chromium web browser
  Chromium is an open-source browser project that aims to build a safer, faster,
  and more stable way for all Internet users to experience the web.
  .
@@ -144,7 +145,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, chromium (= ${binary:Version})
 Provides: chromium-testsuite-dbg
 Replaces: chromium-testsuite-dbg, chromium-browser-dbg (<< 10.0.648.82~r75062-1~)
 Conflicts: chromium-testsuite-dbg, chromium-browser-dbg (<< 10.0.648.82~r75062-1~)
-Description: chromium-browser debug symbols
+Description: Debugging symbols for the chromium web browser
  Debug symbols for the Chromium browser
  .
  Chromium is an open-source browser project that aims to build a safer, faster,

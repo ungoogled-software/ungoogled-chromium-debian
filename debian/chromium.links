@@ -1,1 +1,3 @@
 usr/bin/chromium usr/bin/chromium-browser
+usr/share/pixmaps/chromium.png usr/share/pixmaps/chromium-browser.png
+usr/share/man/man1/chromium.1.gz usr/share/man/man1/chromium-browser.1.gz

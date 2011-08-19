@@ -1,3 +1,19 @@
+chromium-browser (13.0.782.107~r94237-2) UNRELEASED; urgency=low
+
+  * Remove all automatically generated files during clean up (this makes
+    it possible to build from source twice in a row now).
+  * Bump standards version to 3.9.2.
+  * Fix an obsolete character encoding in debian/copyright.
+  * Fix build failure with cups >= 1.5.0.
+  * Don't support lenny's cups anymore.
+  * Use system config.guess and config.sub for yasm's autotools files.
+  * Add chromium-browser.png symlink so old menu entries keep their icons
+    (closes: #622841).
+  * Add chromium-browser manpage symlink.
+  * Clean up package short descriptions.
+
+ -- Michael Gilbert <michael.s.gilbert@gmail.com>  Thu, 18 Aug 2011 20:10:59 -0400
+
 chromium-browser (13.0.782.107~r94237-1) unstable; urgency=high
 
   * New stable version
