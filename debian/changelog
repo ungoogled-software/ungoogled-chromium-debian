@@ -1,5 +1,6 @@
 chromium-browser (13.0.782.107~r94237-2) UNRELEASED; urgency=low
 
+  [ Michael Gilbert ]
   * Remove all automatically generated files during clean up (this makes
     it possible to build from source twice in a row now).
   * Bump standards version to 3.9.2.
@@ -12,7 +13,10 @@ chromium-browser (13.0.782.107~r94237-2) UNRELEASED; urgency=low
   * Add chromium-browser manpage symlink.
   * Clean up package short descriptions.
 
- -- Michael Gilbert <michael.s.gilbert@gmail.com>  Thu, 18 Aug 2011 20:10:59 -0400
+  [ Giuseppe Iuculano ]
+  * Move the compatibility symlinks to the chromium-browser package
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 19 Aug 2011 18:36:36 +0200
 
 chromium-browser (13.0.782.107~r94237-1) unstable; urgency=high
 
