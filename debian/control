@@ -64,7 +64,8 @@ Build-Depends: cdbs,
 	libpam0g-dev,
 	binutils-gold,
 	libflac-dev,
-	libwebp-dev
+	libwebp-dev,
+	autotools-dev
 Standards-Version: 3.9.2
 
 Package: chromium-browser

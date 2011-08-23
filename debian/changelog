@@ -33,8 +33,9 @@ chromium-browser (13.0.782.215~r97094-1) unstable; urgency=low
       Credit to Google Chrome Security Team (SkyLined).
     - High CVE-2011-2829: Integer overflow in uniform arrays.
       Credit to Sergey Glazunov.
+  * Added autotools-dev in Build-Depends
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 23 Aug 2011 14:11:43 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 23 Aug 2011 17:31:19 +0200
 
 chromium-browser (13.0.782.107~r94237-1) unstable; urgency=high
 
