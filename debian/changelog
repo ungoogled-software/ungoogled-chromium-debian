@@ -1,4 +1,4 @@
-chromium-browser (13.0.782.215~r97094-1) UNRELEASED; urgency=low
+chromium-browser (13.0.782.215~r97094-1) unstable; urgency=low
 
   [ Michael Gilbert ]
   * Remove all automatically generated files during clean up (this makes
@@ -34,7 +34,7 @@ chromium-browser (13.0.782.215~r97094-1) UNRELEASED; urgency=low
     - High CVE-2011-2829: Integer overflow in uniform arrays.
       Credit to Sergey Glazunov.
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 23 Aug 2011 13:29:54 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 23 Aug 2011 14:11:43 +0200
 
 chromium-browser (13.0.782.107~r94237-1) unstable; urgency=high
 
