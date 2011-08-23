@@ -1,4 +1,4 @@
-chromium-browser (13.0.782.107~r94237-2) UNRELEASED; urgency=low
+chromium-browser (13.0.782.215~r97094-1) UNRELEASED; urgency=low
 
   [ Michael Gilbert ]
   * Remove all automatically generated files during clean up (this makes
@@ -16,8 +16,25 @@ chromium-browser (13.0.782.107~r94237-2) UNRELEASED; urgency=low
   [ Giuseppe Iuculano ]
   * Move the compatibility symlinks to the chromium-browser package
   * Fix the Vcs-Browser control field
+  * New stable release:
+    - High CVE-2011-2823: Use-after-free in line box handling. Credit to Google
+      Chrome Security Team (SkyLined) and independent later discovery
+      by miaubiz.
+    - High CVE-2011-2824: Use-after-free with counter nodes. Credit to miaubiz.
+    - High CVE-2011-2825: Use-after-free with custom fonts. Credit to wushi of
+      team509 reported through ZDI (ZDI-CAN-1283), plus indepdendent later
+      discovery by miaubiz.
+    - High CVE-2011-2821: Double free in libxml XPath handling. Credit to Yang
+      Dingning from NCNIPC, Graduate University of Chinese Academy of Sciences.
+    - High CVE-2011-2826: Cross-origin violation with empty origins.
+      Credit to Sergey Glazunov.
+    - High CVE-2011-2827: Use-after-free in text searching. Credit to miaubiz.
+    - High CVE-2011-2828: Out-of-bounds write in v8.
+      Credit to Google Chrome Security Team (SkyLined).
+    - High CVE-2011-2829: Integer overflow in uniform arrays.
+      Credit to Sergey Glazunov.
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 19 Aug 2011 18:50:47 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 23 Aug 2011 13:29:54 +0200
 
 chromium-browser (13.0.782.107~r94237-1) unstable; urgency=high
 
