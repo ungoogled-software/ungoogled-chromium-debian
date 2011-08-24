@@ -71,6 +71,8 @@ Standards-Version: 3.9.2
 Package: chromium-browser
 Architecture: all
 Depends: chromium (>= 10), ${misc:Depends}
+Breaks: chromium (<< 13.0.782.215~r97094-1)
+Replaces: chromium (<< 13.0.782.215~r97094-1)
 Section: oldlibs
 Description: Chromium browser - transitional dummy package
  Chromium is an open-source browser project that aims to build a safer, faster,
