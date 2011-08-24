@@ -1,3 +1,9 @@
+chromium-browser (13.0.782.215~r97094-2) UNRELEASED; urgency=low
+
+  * Fixed the dummy chromium-browser-l10n dependency (Closes: 639126)
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 24 Aug 2011 14:23:49 +0200
+
 chromium-browser (13.0.782.215~r97094-1) unstable; urgency=low
 
   [ Michael Gilbert ]

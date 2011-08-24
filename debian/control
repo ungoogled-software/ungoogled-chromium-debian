@@ -96,7 +96,7 @@ Description: chromium-browser debug symbols transitional dummy package
 Package: chromium-browser-l10n
 Architecture: all
 Section: oldlibs
-Depends: chromium-l10, ${misc:Depends}
+Depends: chromium-l10n, ${misc:Depends}
 Description: chromium-browser language packages - transitional dummy package
  Chromium is an open-source browser project that aims to build a safer, faster,
  and more stable way for all Internet users to experience the web.
