@@ -1,7 +1,7 @@
 --- a/src/build/linux/system.gyp
 +++ b/src/build/linux/system.gyp
-@@ -399,6 +399,23 @@
-       ],
+@@ -432,6 +432,23 @@
+       },
      },
      {
 +      'target_name': 'glew',
@@ -21,22 +21,22 @@
 +      }]]
 +    },
 +    {
+       # TODO(satorux): Remove this once dbus-glib clients are gone.
        'target_name': 'dbus-glib',
        'type': 'settings',
-       'direct_dependent_settings': {
 --- a/src/chrome/chrome.gyp
 +++ b/src/chrome/chrome.gyp
-@@ -482,6 +482,7 @@
-       'dependencies': [
+@@ -499,6 +499,7 @@
          '../base/base.gyp:base',
+         '../content/content.gyp:content_utility',
          '../skia/skia.gyp:skia',
 +        '../build/linux/system.gyp:glew',
        ],
        'sources': [
-         'utility/utility_main.cc',
+         'utility/chrome_content_utility_client.cc',
 --- a/src/build/common.gypi
 +++ b/src/build/common.gypi
-@@ -720,6 +720,7 @@
+@@ -810,6 +810,7 @@
        ['enable_gpu==1', {
          'defines': [
            'ENABLE_GPU=1',

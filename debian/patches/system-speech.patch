@@ -1,7 +1,7 @@
 Use system speex
 --- a/src/build/linux/system.gyp
 +++ b/src/build/linux/system.gyp
-@@ -340,6 +340,26 @@
+@@ -323,6 +323,26 @@
        }]]
      },
      {
@@ -25,13 +25,13 @@ Use system speex
 +      }]]
 +    },
 +    {
-       'target_name': 'gnome-keyring',
+       'target_name': 'gnome_keyring',
        'type': 'settings',
        'conditions': [
 --- a/src/content/browser/speech/audio_encoder.cc
 +++ b/src/content/browser/speech/audio_encoder.cc
 @@ -10,7 +10,7 @@
- #include "base/stl_util-inl.h"
+ #include "base/stl_util.h"
  #include "base/string_number_conversions.h"
  #include "third_party/flac/flac.h"
 -#include "third_party/speex/speex.h"
@@ -49,4 +49,4 @@ Use system speex
 +        '../build/linux/system.gyp:speex',
          '../third_party/WebKit/Source/WebKit/chromium/WebKit.gyp:webkit',
          '../third_party/zlib/zlib.gyp:zlib',
-         '../ui/ui.gyp:ui_base',
+         '../ui/ui.gyp:ui',

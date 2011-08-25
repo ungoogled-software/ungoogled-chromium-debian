@@ -1,6 +1,6 @@
 --- a/src/webkit/build/webkit_version.py
 +++ b/src/webkit/build/webkit_version.py
-@@ -51,6 +51,15 @@ def GetWebKitRevision(webkit_dir, versio
+@@ -60,6 +60,15 @@ def GetWebKitRevision(webkit_dir, versio
        default_lastchange=None,
        directory=os.path.join(webkit_dir, version_file_dir))
  

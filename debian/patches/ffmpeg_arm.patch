@@ -1,6 +1,6 @@
 --- a/src/third_party/ffmpeg/config/Chrome/linux/arm/config.h
 +++ b/src/third_party/ffmpeg/config/Chrome/linux/arm/config.h
-@@ -35,10 +35,10 @@
+@@ -34,10 +34,10 @@
  #define HAVE_ALTIVEC 0
  #define HAVE_AMD3DNOW 0
  #define HAVE_AMD3DNOWEXT 0
@@ -12,19 +12,23 @@
 +#define HAVE_ARMV6 0
 +#define HAVE_ARMV6T2 0
 +#define HAVE_ARMVFP 0
+ #define HAVE_AVX 0
  #define HAVE_IWMMXT 0
  #define HAVE_MMI 0
- #define HAVE_MMX 0
 --- a/src/third_party/ffmpeg/ffmpeg.gyp
 +++ b/src/third_party/ffmpeg/ffmpeg.gyp
-@@ -275,10 +275,7 @@
-                 'patched-ffmpeg-mt/libavcodec/arm/dsputil_arm.S',
-                 'patched-ffmpeg-mt/libavcodec/arm/dsputil_armv6.S',
-                 'patched-ffmpeg-mt/libavcodec/arm/dsputil_init_arm.c',
--                'patched-ffmpeg-mt/libavcodec/arm/dsputil_init_armv5te.c',
-                 'patched-ffmpeg-mt/libavcodec/arm/dsputil_init_armv6.c',
--                'patched-ffmpeg-mt/libavcodec/arm/dsputil_init_vfp.c',
--                'patched-ffmpeg-mt/libavcodec/arm/dsputil_vfp.S',
-                 'patched-ffmpeg-mt/libavcodec/arm/fft_init_arm.c',
-                 'patched-ffmpeg-mt/libavcodec/arm/jrevdct_arm.S',
-                 'patched-ffmpeg-mt/libavcodec/arm/simple_idct_arm.S',
+@@ -395,14 +395,10 @@
+                 'patched-ffmpeg/libavcodec/arm/dsputil_arm.S',
+                 'patched-ffmpeg/libavcodec/arm/dsputil_armv6.S',
+                 'patched-ffmpeg/libavcodec/arm/dsputil_init_arm.c',
+-                'patched-ffmpeg/libavcodec/arm/dsputil_init_armv5te.c',
+                 'patched-ffmpeg/libavcodec/arm/dsputil_init_armv6.c',
+-                'patched-ffmpeg/libavcodec/arm/dsputil_init_vfp.c',
+-                'patched-ffmpeg/libavcodec/arm/dsputil_vfp.S',
+                 'patched-ffmpeg/libavcodec/arm/fft_fixed_init_arm.c',  # jun 11
+                 'patched-ffmpeg/libavcodec/arm/fft_init_arm.c',
+                 'patched-ffmpeg/libavcodec/arm/fmtconvert_init_arm.c', # jun 11
+-                'patched-ffmpeg/libavcodec/arm/fmtconvert_vfp.S',      # jun 11
+                 # BUG(ihf): Seems like a bug in ffmpeg that we need
+                 #           h264pred_init_arm.c to enable vp8.
+                 'patched-ffmpeg/libavcodec/arm/h264pred_init_arm.c',

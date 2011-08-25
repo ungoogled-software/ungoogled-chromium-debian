@@ -1,7 +1,7 @@
 Description: Fix build failure due to cups 1.5 header changes
 Author: Michael Gilbert <michael.s.gilbert@gmail.com>
---- chromium-browser-13.0.782.107~r94237.orig/src/printing/backend/cups_helper.h
-+++ chromium-browser-13.0.782.107~r94237/src/printing/backend/cups_helper.h
+--- a/src/printing/backend/cups_helper.h
++++ b/src/printing/backend/cups_helper.h
 @@ -7,6 +7,7 @@
  #pragma once
  
@@ -10,8 +10,8 @@ Author: Michael Gilbert <michael.s.gilbert@gmail.com>
  
  class GURL;
  
---- chromium-browser-13.0.782.107~r94237.orig/src/chrome/service/cloud_print/print_system_cups.cc
-+++ chromium-browser-13.0.782.107~r94237/src/chrome/service/cloud_print/print_system_cups.cc
+--- a/src/chrome/service/cloud_print/print_system_cups.cc
++++ b/src/chrome/service/cloud_print/print_system_cups.cc
 @@ -5,6 +5,7 @@
  #include "chrome/service/cloud_print/print_system.h"
  
@@ -20,9 +20,9 @@ Author: Michael Gilbert <michael.s.gilbert@gmail.com>
  #include <dlfcn.h>
  #include <errno.h>
  #include <pthread.h>
---- chromium-browser-13.0.782.107~r94237.orig/src/chrome/browser/ui/webui/print_preview_handler.cc
-+++ chromium-browser-13.0.782.107~r94237/src/chrome/browser/ui/webui/print_preview_handler.cc
-@@ -37,6 +37,7 @@
+--- a/src/chrome/browser/ui/webui/print_preview_handler.cc
++++ b/src/chrome/browser/ui/webui/print_preview_handler.cc
+@@ -46,6 +46,7 @@
  
  #if defined(USE_CUPS)
  #include <cups/cups.h>

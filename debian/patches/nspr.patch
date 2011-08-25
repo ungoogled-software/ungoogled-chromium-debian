@@ -34,12 +34,12 @@ Include system copy of prtime.h
  #include "chrome/browser/autocomplete/autocomplete.h"
 --- a/src/chrome/common/metrics_helpers.cc
 +++ b/src/chrome/common/metrics_helpers.cc
-@@ -19,7 +19,7 @@
+@@ -17,7 +17,7 @@
+ #include "base/perftimer.h"
  #include "base/string_number_conversions.h"
  #include "base/sys_info.h"
- #include "base/utf_string_conversions.h"
 -#include "base/third_party/nspr/prtime.h"
 +#include <nspr/prtime.h>
+ #include "base/time.h"
+ #include "base/utf_string_conversions.h"
  #include "chrome/common/logging_chrome.h"
- #include "googleurl/src/gurl.h"
- #include "libxml/xmlwriter.h"

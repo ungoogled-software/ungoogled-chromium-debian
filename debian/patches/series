@@ -11,7 +11,7 @@ glew.patch
 fix-manpage.patch
 webkit-version.patch
 #ffmpeg.patch
-gcc46.patch
+#gcc46.patch
 #vpx.patch
 #protobuf.patch
 #javascript-i18n.patch

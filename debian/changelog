@@ -2,8 +2,9 @@ chromium-browser (14.0.835.109~r97804-1) UNRELEASED; urgency=low
 
   * New beta release
   * Fix gbp.conf for experimental branch
+  * Refreshed patches
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 24 Aug 2011 19:21:48 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 25 Aug 2011 14:36:05 +0200
 
 chromium-browser (13.0.782.215~r97094-2) UNRELEASED; urgency=low
 
