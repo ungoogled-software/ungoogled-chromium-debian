@@ -8,7 +8,12 @@ chromium-browser (14.0.835.109~r97804-1) UNRELEASED; urgency=low
 
 chromium-browser (13.0.782.215~r97094-2) UNRELEASED; urgency=low
 
+  [ Giuseppe Iuculano ]
   * Fixed the dummy chromium-browser-l10n dependency (Closes: 639126)
+
+  [ Jonathan Nieder ]
+  * Add a replace and breaks entry to reflect the compatibility symlinks
+    having moved to the chromium-browser package.
 
  -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 24 Aug 2011 14:23:49 +0200
 
