@@ -4,8 +4,9 @@ chromium-browser (14.0.835.109~r97804-1) UNRELEASED; urgency=low
   * Fix gbp.conf for experimental branch
   * Refreshed patches
   * Use libv8 system copy
+  * Do not remove Makefile files
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 27 Aug 2011 13:48:51 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 27 Aug 2011 19:43:48 +0200
 
 chromium-browser (13.0.782.215~r97094-2) UNRELEASED; urgency=low
 

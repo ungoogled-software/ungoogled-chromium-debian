@@ -423,7 +423,6 @@ clean::
 	find src -name *.pyc -execdir rm -f {} \;
 	find src -name *.mk -execdir rm -f {} \;
 	find src -name *.Makefile -execdir rm -f {} \;
-	find src -name Makefile -execdir rm -f {} \;
 	rm -f src/build/LASTCHANGE.in
 	rm -f src/third_party/WebKit/Source/WebCore/WebCore.gyp/idls_list_temp_file.tmp
 	rm -f src/v8/tools/gyp/v8.log
