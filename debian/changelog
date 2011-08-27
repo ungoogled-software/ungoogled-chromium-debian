@@ -16,6 +16,12 @@ chromium-browser (13.0.782.215~r97094-2) UNRELEASED; urgency=low
   * Add a replace and breaks entry to reflect the compatibility symlinks
     having moved to the chromium-browser package.
 
+  [ Michael Gilbert ]
+  * Fix lintian warning.
+  * Fix manpage comment characters.
+  * Strip the Native Client Integrated RunTime (NaCl IRT) libraries.
+  * Objectify an old changelog entry (closes: #606261).
+
  -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 24 Aug 2011 14:23:49 +0200
 
 chromium-browser (13.0.782.215~r97094-1) unstable; urgency=low
@@ -562,8 +568,7 @@ chromium-browser (6.0.472.63~r59945-3) unstable; urgency=high
 chromium-browser (6.0.472.63~r59945-2) unstable; urgency=high
 
   * Added the missing changelog credit for the 5.0.375.29~r46008-1 revision.
-    Obviously this was not a "stealing" as foolishly written by Fabien Tassin
-    in a blog rant, but was a bad debian/changelog merge.
+    This corrects a bad debian/changelog merge.
   * Backported security patches from stable:
     - High Use-after-free in text editing. Credit to David Bloom of the Google
       Security Team, Google Chrome Security Team (Inferno) and Google Chrome

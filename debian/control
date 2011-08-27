@@ -88,7 +88,7 @@ Description: Chromium browser - transitional dummy package
 Package: chromium-browser-dbg
 Architecture: all
 Section: oldlibs
-Depends: chromium-dbg, ${misc:Depends}
+Depends: chromium-dbg, chromium, ${misc:Depends}
 Priority: extra
 Description: chromium-browser debug symbols transitional dummy package
  Debug symbols for the Chromium browser - transitional dummy package
