@@ -9,6 +9,7 @@ chromium-browser (13.0.782.215~r97094-2) UNRELEASED; urgency=low
 
   [ Michael Gilbert ]
   * Fix lintian warning.
+  * Fix manpage comment characters.
   * Strip the Native Client Integrated RunTime (NaCl IRT) libraries.
 
  -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 24 Aug 2011 14:23:49 +0200
