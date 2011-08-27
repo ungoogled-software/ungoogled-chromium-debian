@@ -5,8 +5,9 @@ chromium-browser (14.0.835.109~r97804-1) UNRELEASED; urgency=low
   * Refreshed patches
   * Use libv8 system copy
   * Do not remove Makefile files
+  * Added libpulse-dev in Build-Depends.
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 27 Aug 2011 19:43:48 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 27 Aug 2011 19:45:05 +0200
 
 chromium-browser (13.0.782.215~r97094-2) UNRELEASED; urgency=low
 
