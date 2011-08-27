@@ -455,6 +455,8 @@ endif
 	mv debian/tmp/$(LIB_DIR)/chrome.1 debian/tmp/$(LIB_DIR)/chromium.1
 	dh_installman -pchromium debian/tmp/$(LIB_DIR)/chromium.1
 	rm -f debian/tmp/$(LIB_DIR)/chromium.1
+	strip debian/tmp/usr/lib/chromium/nacl_irt_x86_32.nexe || true
+	strip debian/tmp/usr/lib/chromium/nacl_irt_x86_64.nexe || true
 
 binary-install/$(DEBIAN_NAME)::
 	mkdir -p $(CURDIR)/debian/$(DEBIAN_NAME)/usr/share/pixmaps
