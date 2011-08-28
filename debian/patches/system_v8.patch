@@ -575,6 +575,15 @@ Use system copy of libv8
                              ],
                              'include_dirs': [
                                  # WARNING: Do not view this particular case as a precedent for
+@@ -965,7 +965,7 @@
+                 '../../JavaScriptCore/JavaScriptCore.gyp/JavaScriptCore.gyp:wtf_config',
+                 '<(chromium_src_dir)/third_party/icu/icu.gyp:icuuc',
+                 '<(chromium_src_dir)/third_party/mesa/mesa.gyp:osmesa',
+-                '<(chromium_src_dir)/v8/tools/gyp/v8.gyp:v8',
++                '<(chromium_src_dir)/build/linux/system.gyp:v8',
+                 '<(chromium_src_dir)/webkit/support/webkit_support.gyp:blob',
+                 '<(chromium_src_dir)/webkit/support/webkit_support.gyp:webkit_support',
+             ],
 --- a/src/webkit/support/test_webkit_client.cc
 +++ b/src/webkit/support/test_webkit_client.cc
 @@ -32,7 +32,7 @@
@@ -597,3 +606,67 @@ Use system copy of libv8
  #include "webkit/tools/test_shell/test_shell.h"
  
  #if defined(OS_WIN)
+--- a/src/content/content_renderer.gypi
++++ b/src/content/content_renderer.gypi
+@@ -21,7 +21,7 @@
+         '../third_party/npapi/npapi.gyp:npapi',
+         '../third_party/WebKit/Source/WebKit/chromium/WebKit.gyp:webkit',
+         '../ui/gfx/surface/surface.gyp:surface',
+-        '../v8/tools/gyp/v8.gyp:v8',
++        '../build/linux/system.gyp:v8',
+       ],
+       'include_dirs': [
+         '..',
+--- a/src/third_party/WebKit/Source/ThirdParty/gyp/samples/samples
++++ b/src/third_party/WebKit/Source/ThirdParty/gyp/samples/samples
+@@ -38,7 +38,7 @@ gyps = [
+     'third_party/npapi/npapi.gyp',
+     'third_party/sqlite/sqlite.gyp',
+     'third_party/zlib/zlib.gyp',
+-    'v8/tools/gyp/v8.gyp',
++    'build/linux/system.gyp:v8',
+     'webkit/activex_shim/activex_shim.gyp',
+     'webkit/activex_shim_dll/activex_shim_dll.gyp',
+     'webkit/build/action_csspropertynames.py',
+--- a/src/webkit/tools/test_shell/test_shell.gypi
++++ b/src/webkit/tools/test_shell/test_shell.gypi
+@@ -38,7 +38,7 @@
+         '<(DEPTH)/testing/gtest.gyp:gtest',
+         '<(DEPTH)/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp:inspector_resources',
+         '<(DEPTH)/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp:webkit',
+-        '<(DEPTH)/v8/tools/gyp/v8.gyp:v8',
++        '<(DEPTH)/build/linux/system.gyp:v8',
+         '<(DEPTH)/webkit/support/webkit_support.gyp:appcache',
+         '<(DEPTH)/webkit/support/webkit_support.gyp:blob',
+         '<(DEPTH)/webkit/support/webkit_support.gyp:database',
+@@ -358,7 +358,7 @@
+         '<(DEPTH)/testing/gmock.gyp:gmock',
+         '<(DEPTH)/testing/gtest.gyp:gtest',
+         '<(DEPTH)/third_party/leveldb/leveldb.gyp:leveldb',
+-        '<(DEPTH)/v8/tools/gyp/v8.gyp:v8',
++        '<(DEPTH)/build/linux/system.gyp:v8',
+       ],
+       'sources': [
+         '../../../skia/ext/convolver_unittest.cc',
+--- a/src/chrome/browser/ui/webui/options/chromeos/about_page_handler.cc
++++ b/src/chrome/browser/ui/webui/options/chromeos/about_page_handler.cc
+@@ -28,7 +28,7 @@
+ #include "webkit/glue/webkit_glue.h"
+ 
+ #if defined(CHROME_V8)
+-#include "v8/include/v8.h"
++#include <v8.h>
+ #endif
+ 
+ #include "chrome/browser/chromeos/cros/cros_library.h"
+--- a/src/third_party/WebKit/Source/WebKit/chromium/src/WebTestingSupport.cpp
++++ b/src/third_party/WebKit/Source/WebKit/chromium/src/WebTestingSupport.cpp
+@@ -28,7 +28,7 @@
+ 
+ #include "WebCoreTestSupport.h"
+ #include "WebFrame.h"
+-#include <v8/include/v8.h>
++#include <v8.h>
+ 
+ namespace WebKit {
+ 
