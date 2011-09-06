@@ -7,8 +7,9 @@ chromium-browser (14.0.835.109~r97804-1) experimental; urgency=low
   * Do not remove Makefile files
   * Added libpulse-dev in Build-Depends.
   * re-enable armel build
+  * Patch v8_i18n to compile with libv8 system copy, thanks to Jérémy Lal
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 06 Sep 2011 10:11:27 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 06 Sep 2011 11:59:30 +0200
 
 chromium-browser (13.0.782.220~r99552-1) unstable; urgency=high
 

@@ -670,3 +670,14 @@ Use system copy of libv8
  
  namespace WebKit {
  
+--- a/src/chrome/renderer/chrome_render_view_observer.cc
++++ b/src/chrome/renderer/chrome_render_view_observer.cc
+@@ -45,7 +45,7 @@
+ #include "webkit/glue/image_decoder.h"
+ #include "webkit/glue/image_resource_fetcher.h"
+ #include "webkit/glue/webkit_glue.h"
+-#include "v8/include/v8-testing.h"
++#include <v8-testing.h>
+ 
+ using WebKit::WebCString;
+ using WebKit::WebDataSource;
