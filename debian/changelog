@@ -1,4 +1,4 @@
-chromium-browser (14.0.835.109~r97804-1) UNRELEASED; urgency=low
+chromium-browser (14.0.835.109~r97804-1) experimental; urgency=low
 
   * New beta release
   * Fix gbp.conf for experimental branch
@@ -8,7 +8,7 @@ chromium-browser (14.0.835.109~r97804-1) UNRELEASED; urgency=low
   * Added libpulse-dev in Build-Depends.
   * re-enable armel build
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 28 Aug 2011 19:02:15 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 06 Sep 2011 10:11:27 +0200
 
 chromium-browser (13.0.782.220~r99552-1) unstable; urgency=high
 
