@@ -1,4 +1,4 @@
-chromium-browser (14.0.835.109~r97804-1) experimental; urgency=low
+chromium-browser (14.0.835.157~r99685-1) experimental; urgency=low
 
   * New beta release
   * Fix gbp.conf for experimental branch
@@ -9,7 +9,7 @@ chromium-browser (14.0.835.109~r97804-1) experimental; urgency=low
   * re-enable armel build
   * Patch v8_i18n to compile with libv8 system copy, thanks to Jérémy Lal
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 06 Sep 2011 11:59:30 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 07 Sep 2011 08:32:34 +0200
 
 chromium-browser (13.0.782.220~r99552-1) unstable; urgency=high
 
