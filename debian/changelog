@@ -8,8 +8,9 @@ chromium-browser (14.0.835.157~r99685-1) experimental; urgency=low
   * Added libpulse-dev in Build-Depends.
   * re-enable armel build
   * Patch v8_i18n to compile with libv8 system copy, thanks to Jérémy Lal
+  * Added a lintian override for the NaCL IRT files
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 07 Sep 2011 08:32:34 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 07 Sep 2011 13:06:57 +0200
 
 chromium-browser (13.0.782.220~r99552-1) unstable; urgency=high
 
