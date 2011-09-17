@@ -1,3 +1,73 @@
+chromium-browser (14.0.835.163~r101024-1) unstable; urgency=low
+
+  [ Matteo F. Vescovi ]
+  * [82a8b0b] debian/control: changing b-deps to libjpeg-dev (Closes: 641099)
+
+  [ Giuseppe Iuculano ]
+  * [ac85d47] Use system ffmpeg and icu
+  * [b4fbcd0] debian/gbp.conf: Added conf for git-dch
+  * [a4f4ee1] Do not install ffmpeg internal copy
+  * New stable release:
+    - High CVE-2011-2835: Race condition in the certificate cache.
+      Credit to Ryan Sleevi of the Chromium development community.
+    - Low CVE-2011-2836: Infobar the Windows Media Player plug-in to avoid
+      click-free access to the system Flash. Credit to electronixtar.
+    - Low CVE-2011-2837: Use PIC / pie compiler flags. Credit to wbrana.
+    - Low CVE-2011-2838: Treat MIME type more authoritatively when loading
+      plug-ins. Credit to Michal Zalewski of the Google Security Team.
+    - High CVE-2011-2839: Crash in v8 script object wrappers.
+      Credit to Kostya Serebryany of the Chromium development community.
+    - Low CVE-2011-2840: Possible URL bar spoofs with unusual user interaction.
+      Credit to kuzzcc.
+    - Medium CVE-2011-2843: Out-of-bounds read with media buffers.
+      Credit to Kostya Serebryany of the Chromium development community.
+    - Medium CVE-2011-2844: Out-of-bounds read with mp3 files.
+      Credit to Mario Gomes.
+    - High CVE-2011-2846: Use-after-free in unload event handling.
+      Credit to Arthur Gerkis.
+    - High CVE-2011-2847: Use-after-free in document loader.
+      Credit to miaubiz.
+    - Medium CVE-2011-2848: URL bar spoof with forward button.
+      Credit to Jordi Chancel.
+    - Low CVE-2011-2849: Browser NULL pointer crash with WebSockets.
+      Credit to Arthur Gerkis.
+    - Medium CVE-2011-3234: Out-of-bounds read in box handling.
+      Credit to miaubiz.
+    - Medium CVE-2011-2850: Out-of-bounds read with Khmer characters.
+      Credit to miaubiz.
+    - Medium CVE-2011-2851: Out-of-bounds read in video handling.
+      Credit to Google Chrome Security Team (Inferno).
+    - High CVE-2011-2852: Off-by-one in v8. Credit to Christian Holler.
+    - High CVE-2011-2853: Use-after-free in plug-in handling.
+      Credit to Google Chrome Security Team (SkyLined).
+    - High CVE-2011-2854: Use-after-free in ruby / table style handing.
+      Credit to Sławomir Błażek, and independent later discoveries by miaubiz
+      and Google Chrome Security Team (Inferno).
+    - High CVE-2011-2855: Stale node in stylesheet handling.
+      Credit to Arthur Gerkis.
+    - High CVE-2011-2856: Cross-origin bypass in v8.
+      Credit to Daniel Divricean.
+    - High CVE-2011-2857: Use-after-free in focus controller. Credit to miaubiz.
+    - High CVE-2011-2834: Double free in libxml XPath handling.
+      Credit to Yang Dingning from NCNIPC, Graduate University of Chinese
+      Academy of Sciences.
+    - Medium CVE-2011-2859: Incorrect permissions assigned to non-gallery pages.
+      Credit to Bernhard ‘Bruhns’ Brehm of Recurity Labs.
+    - High CVE-2011-2860: Use-after-free in table style handling.
+      Credit to miaubiz.
+    - High CVE-2011-2862: Unintended access to v8 built-in objects.
+      Credit to Sergey Glazunov.
+    - Medium CVE-2011-2864: Out-of-bounds read with Tibetan characters.
+      Credit to Google Chrome Security Team (Inferno).
+    - Medium CVE-2011-2858: Out-of-bounds read with triangle arrays. 
+      Credit to Google Chrome Security Team (Inferno).
+    - Low CVE-2011-2874: Failure to pin a self-signed cert for a session. 
+      Credit to Nishant Yadant of VMware and Craig Chamberlain (@randomuserid).
+    - High CVE-2011-2875: Type confusion in v8 object sealing.
+      Credit to Christian Holler.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 17 Sep 2011 21:46:29 +0200
+
 chromium-browser (14.0.835.157~r99685-1) experimental; urgency=low
 
   * New beta release

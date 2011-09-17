@@ -487,7 +487,7 @@ ifneq (i386,$(DEB_HOST_ARCH_CPU))
 	rm -rf $(CURDIR)/debian/tmp/$(LIB_DIR)/resources/inspector/*
 endif
 ifeq (1,$(USE_SYSTEM_FFMPEG))
-	 Install symlinks to system ffmpeg libs
+	# Install symlinks to system ffmpeg libs
 	ln -sf "/usr/lib/$(LIBAVCODEC_BASENAME)" \
 		"$(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(LIBAVCODEC_BASENAME)"
 	ln -sf "/usr/lib/$(LIBAVFORMAT_BASENAME)" \
