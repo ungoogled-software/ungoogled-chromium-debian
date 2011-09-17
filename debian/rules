@@ -7,7 +7,7 @@ DEBIAN_REVISION		:= $(shell echo $(DEBIAN_VERSION) | sed 's/^.*r\([^-]*\)-.*/\1/
 DEBIAN_DIST		:= $(shell lsb_release -ds | tr -d '()')
 DEBIAN_DIST_NAME	:= $(shell lsb_release -si)
 DEBIAN_DIST_VERSION	:= $(shell lsb_release -sr)
-USE_SYSTEM_FFMPEG	:= 0
+USE_SYSTEM_FFMPEG	:= 1
 ifeq (1,$(USE_SYSTEM_FFMPEG))
 LIBAVCODEC_BASENAME	:= $(shell basename $$(ls -x /usr/lib/libavcodec.so.* | cut -d ' ' -f 1))
 LIBAVFORMAT_BASENAME	:= $(shell basename $$(ls -x /usr/lib/libavformat.so.* | cut -d ' ' -f 1))
@@ -296,7 +296,7 @@ GYP_DEFINES += \
 	use_system_libxslt=1 \
 	use_system_zlib=1 \
 	use_system_libevent=1 \
-	use_system_icu=0 \
+	use_system_icu=1 \
 	use_system_yasm=1 \
 	use_system_ffmpeg=$(USE_SYSTEM_FFMPEG) \
 	use_system_vpx=1 \

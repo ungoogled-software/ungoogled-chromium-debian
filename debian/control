@@ -67,7 +67,11 @@ Build-Depends: cdbs,
 	libwebp-dev,
 	autotools-dev,
 	libv8-dev (>= 3.4.14.13),
-	libpulse-dev
+	libpulse-dev,
+	libavcodec-dev (>= 4:0.7.1),
+	libavformat-dev (>= 4:0.7.1),
+	libavutil-dev (>= 4:0.7.1)
+	
 Standards-Version: 3.9.2
 
 Package: chromium-browser
