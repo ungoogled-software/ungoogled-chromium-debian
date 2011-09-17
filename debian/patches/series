@@ -3,7 +3,6 @@ nspr.patch
 nss.patch
 expat.patch
 prefs.patch
-#protobuf.patch
 armv4.patch
 ffmpeg_arm.patch
 system-speech.patch
@@ -19,3 +18,4 @@ webkit-version.patch
 cups1.5.patch
 system_v8.patch
 system_v8_i18n.patch
+protobuf.patch

@@ -5,7 +5,7 @@ debian/tmp/usr/lib/chromium/resources.pak
 debian/tmp/usr/lib/chromium/locales/*
 #debian/tmp/usr/lib/chromium/ffmpegsumo_nolink
 debian/tmp/usr/lib/chromium/libppGoogleNaClPluginChrome.so
-debian/tmp/usr/lib/chromium/libffmpegsumo.so
+#debian/tmp/usr/lib/chromium/libffmpegsumo.so
 debian/tmp/usr/lib/chromium/ssl_false_start_blacklist_process
 debian/tmp/usr/lib/chromium/nacl_irt_*
 debian/chromium.desktop usr/share/applications
