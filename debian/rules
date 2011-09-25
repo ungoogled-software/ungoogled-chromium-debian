@@ -489,11 +489,11 @@ ifneq (i386,$(DEB_HOST_ARCH_CPU))
 endif
 ifeq (1,$(USE_SYSTEM_FFMPEG))
 	# Install symlinks to system ffmpeg libs
-	ln -sf "/usr/lib/$(MULTIARCH)/$(LIBAVCODEC_BASENAME)" \
+	ln -sf "../$(MULTIARCH)/$(LIBAVCODEC_BASENAME)" \
 		"$(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(LIBAVCODEC_BASENAME)"
-	ln -sf "/usr/lib/$(MULTIARCH)/$(LIBAVFORMAT_BASENAME)" \
+	ln -sf "../$(MULTIARCH)/$(LIBAVFORMAT_BASENAME)" \
 		"$(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(LIBAVFORMAT_BASENAME)"
-	ln -sf "/usr/lib/$(MULTIARCH)/$(LIBAVUTIL_BASENAME)" \
+	ln -sf "../$(MULTIARCH)/$(LIBAVUTIL_BASENAME)" \
 		"$(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(LIBAVUTIL_BASENAME)"
 endif
 
