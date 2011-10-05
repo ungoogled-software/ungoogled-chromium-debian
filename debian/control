@@ -87,7 +87,7 @@ Description: Chromium browser - transitional dummy package
  and logo) with very few additions such as usage tracking and an auto-updater
  system.
  .
- This package contains the Chromium browser transitional dummy package
+ This package contains the Chromium browser transitional dummy package.
 
 Package: chromium-browser-dbg
 Architecture: all
@@ -122,7 +122,7 @@ Description: page inspector for the chromium-browser - transitional dummy packag
  Chromium is an open-source browser project that aims to build a safer, faster,
  and more stable way for all Internet users to experience the web.
  .
- This package contains 'inspector', transitional dummy package
+ This package contains 'inspector', transitional dummy package.
 
 Package: chromium
 Architecture: i386 amd64 armel
@@ -143,7 +143,7 @@ Description: Google's open source chromium web browser
  and logo) with very few additions such as usage tracking and an auto-updater
  system.
  .
- This package contains the Chromium browser
+ This package contains the Chromium browser.
 
 Package: chromium-dbg
 Architecture: i386 amd64 armel
@@ -154,7 +154,7 @@ Provides: chromium-testsuite-dbg
 Replaces: chromium-testsuite-dbg, chromium-browser-dbg (<< 10.0.648.82~r75062-1~)
 Conflicts: chromium-testsuite-dbg, chromium-browser-dbg (<< 10.0.648.82~r75062-1~)
 Description: Debugging symbols for the chromium web browser
- Debug symbols for the Chromium browser
+ Debug symbols for the Chromium browser.
  .
  Chromium is an open-source browser project that aims to build a safer, faster,
  and more stable way for all Internet users to experience the web.
@@ -183,5 +183,5 @@ Description: page inspector for the chromium browser
  Chromium is an open-source browser project that aims to build a safer, faster,
  and more stable way for all Internet users to experience the web.
  .
- This package contains 'inspector', allowing web developpers to inspect any
- element of a web page at runtime (html, javascript, css, ..)
+ This package contains 'inspector', allowing web developers to inspect any
+ element of a web page at runtime (HTML, JavaScript, CSS, ..).
