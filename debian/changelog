@@ -1,3 +1,29 @@
+chromium-browser (14.0.835.202~r103287-1) unstable; urgency=low
+
+  [ Michael Gilbert ]
+  * [0e3387d] Remove unneeded shlibs:Depends
+  * [d7d8b22] Support libav's transition to multiarch
+  * [3211a33] Use url to writable git repo in vcs-git field
+  * [1c83896] Use relative symlinks to ffmpeg libraries
+
+  [ Giuseppe Iuculano ]
+  * New stable release:
+    - High CVE-2011-2876: Use-after-free in text line box handling.
+      Credit to miaubiz.
+    - High CVE-2011-2877: Stale font in SVG text handling. Credit to
+      miaubiz.
+    - High CVE-2011-2878: Inappropriate cross-origin access to the
+      window prototype. Credit to Sergey Glazunov.
+    - High CVE-2011-2879: Lifetime and threading issues in audio node
+      handling. Credit to Google Chrome Security Team (Inferno).
+    - High CVE-2011-2880: Use-after-free in the v8
+      bindings. Credit to Sergey Glazunov.
+    - High CVE-2011-2881: Memory corruption with v8 hidden objects.
+      Credit to Sergey Glazunov.
+    - Critical CVE-2011-3873: Memory corruption in shader translator. 
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 05 Oct 2011 11:15:53 +0200
+
 chromium-browser (14.0.835.163~r101024-1) unstable; urgency=low
 
   [ Matteo F. Vescovi ]
