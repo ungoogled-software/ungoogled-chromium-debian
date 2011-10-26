@@ -8,7 +8,7 @@ Author: Michael Gilbert <michael.s.gilbert@gmail.com>
  #include <cups/cups.h>
 +#include <cups/ppd.h>
  
- class GURL;
+ #include "printing/printing_export.h"
  
 --- a/src/chrome/service/cloud_print/print_system_cups.cc
 +++ b/src/chrome/service/cloud_print/print_system_cups.cc
@@ -20,13 +20,3 @@ Author: Michael Gilbert <michael.s.gilbert@gmail.com>
  #include <dlfcn.h>
  #include <errno.h>
  #include <pthread.h>
---- a/src/chrome/browser/ui/webui/print_preview_handler.cc
-+++ b/src/chrome/browser/ui/webui/print_preview_handler.cc
-@@ -46,6 +46,7 @@
- 
- #if defined(USE_CUPS)
- #include <cups/cups.h>
-+#include <cups/ppd.h>
- 
- #include "base/file_util.h"
- #endif

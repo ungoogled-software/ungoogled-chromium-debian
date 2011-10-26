@@ -15,20 +15,27 @@
  #define HAVE_AVX 0
  #define HAVE_IWMMXT 0
  #define HAVE_MMI 0
---- a/src/third_party/ffmpeg/ffmpeg.gyp
-+++ b/src/third_party/ffmpeg/ffmpeg.gyp
-@@ -395,14 +395,10 @@
-                 'patched-ffmpeg/libavcodec/arm/dsputil_arm.S',
-                 'patched-ffmpeg/libavcodec/arm/dsputil_armv6.S',
-                 'patched-ffmpeg/libavcodec/arm/dsputil_init_arm.c',
--                'patched-ffmpeg/libavcodec/arm/dsputil_init_armv5te.c',
-                 'patched-ffmpeg/libavcodec/arm/dsputil_init_armv6.c',
--                'patched-ffmpeg/libavcodec/arm/dsputil_init_vfp.c',
--                'patched-ffmpeg/libavcodec/arm/dsputil_vfp.S',
-                 'patched-ffmpeg/libavcodec/arm/fft_fixed_init_arm.c',  # jun 11
-                 'patched-ffmpeg/libavcodec/arm/fft_init_arm.c',
-                 'patched-ffmpeg/libavcodec/arm/fmtconvert_init_arm.c', # jun 11
--                'patched-ffmpeg/libavcodec/arm/fmtconvert_vfp.S',      # jun 11
-                 # BUG(ihf): Seems like a bug in ffmpeg that we need
-                 #           h264pred_init_arm.c to enable vp8.
-                 'patched-ffmpeg/libavcodec/arm/h264pred_init_arm.c',
+--- a/src/third_party/ffmpeg/ffmpeg_generated.gypi
++++ b/src/third_party/ffmpeg/ffmpeg_generated.gypi
+@@ -155,21 +155,14 @@
+         'patched-ffmpeg/libavcodec/arm/dsputil_arm.S',
+         'patched-ffmpeg/libavcodec/arm/dsputil_armv6.S',
+         'patched-ffmpeg/libavcodec/arm/dsputil_init_arm.c',
+-        'patched-ffmpeg/libavcodec/arm/dsputil_init_armv5te.c',
+         'patched-ffmpeg/libavcodec/arm/dsputil_init_armv6.c',
+-        'patched-ffmpeg/libavcodec/arm/dsputil_init_vfp.c',
+-        'patched-ffmpeg/libavcodec/arm/dsputil_vfp.S',
+         'patched-ffmpeg/libavcodec/arm/fft_fixed_init_arm.c',
+         'patched-ffmpeg/libavcodec/arm/fft_init_arm.c',
+         'patched-ffmpeg/libavcodec/arm/fmtconvert_init_arm.c',
+-        'patched-ffmpeg/libavcodec/arm/fmtconvert_vfp.S',
+         'patched-ffmpeg/libavcodec/arm/h264pred_init_arm.c',
+         'patched-ffmpeg/libavcodec/arm/jrevdct_arm.S',
+         'patched-ffmpeg/libavcodec/arm/mpegvideo_arm.c',
+-        'patched-ffmpeg/libavcodec/arm/mpegvideo_armv5te.c',
+-        'patched-ffmpeg/libavcodec/arm/mpegvideo_armv5te_s.S',
+         'patched-ffmpeg/libavcodec/arm/simple_idct_arm.S',
+-        'patched-ffmpeg/libavcodec/arm/simple_idct_armv5te.S',
+         'patched-ffmpeg/libavcodec/arm/simple_idct_armv6.S',
+         'patched-ffmpeg/libavcodec/arm/vp8_armv6.S',
+         'patched-ffmpeg/libavcodec/arm/vp8dsp_armv6.S',

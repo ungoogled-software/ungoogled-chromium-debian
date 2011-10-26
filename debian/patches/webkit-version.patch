@@ -2,8 +2,8 @@
 +++ b/src/webkit/build/webkit_version.py
 @@ -60,6 +60,15 @@ def GetWebKitRevision(webkit_dir, versio
        default_lastchange=None,
-       directory=os.path.join(webkit_dir, version_file_dir))
- 
+       directory=os.path.join(webkit_dir, version_file_dir),
+       directory_regex_prior_to_src_url='webkit')
 +  if version_info.url is None or version_info.url == 'unknown':
 +    # parse the DEPS file
 +    data = open("../../DEPS", "rb").read()
@@ -13,6 +13,6 @@
 +    branch = os.path.basename(x.group(1)) if x else "n-a"
 +    return "%s@%s" % (branch, rev)
 +
-   if (version_info.url.startswith(version_info.root) and
-       version_info.url.endswith(version_file_dir)):
-     # Now compute the real WebKit URL by stripping off the version file
+ 
+   if version_info.url == None:
+     version_info.url = 'Unknown URL'

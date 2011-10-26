@@ -1,7 +1,7 @@
 Use system speex
 --- a/src/build/linux/system.gyp
 +++ b/src/build/linux/system.gyp
-@@ -323,6 +323,26 @@
+@@ -319,6 +319,26 @@
        }]]
      },
      {
@@ -41,10 +41,10 @@ Use system speex
  
 --- a/src/content/content_browser.gypi
 +++ b/src/content/content_browser.gypi
-@@ -15,7 +15,7 @@
+@@ -17,7 +17,7 @@
          '../third_party/flac/flac.gyp:libflac',
          # TODO(ericu): remove leveldb ref after crbug.com/6955013 is fixed.
-         '../third_party/leveldb/leveldb.gyp:leveldb',
+         '../third_party/leveldatabase/leveldatabase.gyp:leveldatabase',
 -        '../third_party/speex/speex.gyp:libspeex',
 +        '../build/linux/system.gyp:speex',
          '../third_party/WebKit/Source/WebKit/chromium/WebKit.gyp:webkit',

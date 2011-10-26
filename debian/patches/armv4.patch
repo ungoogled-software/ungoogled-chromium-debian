@@ -1,7 +1,7 @@
 Do not use armv4 incopatible code
 --- a/src/third_party/skia/include/core/SkMath.h
 +++ b/src/third_party/skia/include/core/SkMath.h
-@@ -163,7 +163,7 @@ static inline bool SkIsPow2(int value) {
+@@ -156,7 +156,7 @@ static inline bool SkIsPow2(int value) {
  #if defined(__arm__) \
    && !defined(__thumb__) \
    && !defined(__ARM_ARCH_4T__) \
@@ -12,7 +12,7 @@ Do not use armv4 incopatible code
          SkASSERT((int16_t)y == y);
 --- a/src/build/common.gypi
 +++ b/src/build/common.gypi
-@@ -1426,6 +1426,7 @@
+@@ -1503,6 +1503,7 @@
                    # silences those warnings, as they are not helpful and
                    # clutter legitimate warnings.
                    '-Wno-abi',
@@ -33,7 +33,7 @@ Do not use armv4 incopatible code
  #define DEBUG_BREAK() asm("int3")
 --- a/src/third_party/skia/src/opts/SkBlitRow_opts_arm.cpp
 +++ b/src/third_party/skia/src/opts/SkBlitRow_opts_arm.cpp
-@@ -685,8 +685,8 @@ static void S32A_Blend_BlitRow32_arm(SkP
+@@ -675,8 +675,8 @@ static void S32A_Blend_BlitRow32_arm(SkP
                    /* dst1_scale and dst2_scale*/
                    "lsr    r9, r5, #24                \n\t" /* src >> 24 */
                    "lsr    r10, r6, #24               \n\t" /* src >> 24 */
@@ -44,7 +44,7 @@ Do not use armv4 incopatible code
                    "lsr    r9, r9, #8                 \n\t" /* r9 >> 8 */
                    "lsr    r10, r10, #8               \n\t" /* r10 >> 8 */
                    "rsb    r9, r9, #256               \n\t" /* dst1_scale = r9 = 255 - r9 + 1 */
-@@ -755,7 +755,7 @@ static void S32A_Blend_BlitRow32_arm(SkP
+@@ -745,7 +745,7 @@ static void S32A_Blend_BlitRow32_arm(SkP
  
                    "lsr    r6, r5, #24                \n\t" /* src >> 24 */
                    "and    r8, r12, r5, lsr #8        \n\t" /* ag = r8 = r5 masked by r12 lsr by #8 */

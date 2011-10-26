@@ -40,7 +40,7 @@ Include system copy of expat.h
  namespace buzz {
 --- a/src/third_party/skia/src/ports/SkXMLParser_expat.cpp
 +++ b/src/third_party/skia/src/ports/SkXMLParser_expat.cpp
-@@ -19,7 +19,7 @@
+@@ -11,7 +11,7 @@
  #include "SkString.h"
  #include "SkStream.h"
  
@@ -51,7 +51,7 @@ Include system copy of expat.h
  #define CHAR_16_TO_9
 --- a/src/third_party/skia/src/ports/SkXMLPullParser_expat.cpp
 +++ b/src/third_party/skia/src/ports/SkXMLPullParser_expat.cpp
-@@ -20,7 +20,7 @@
+@@ -12,7 +12,7 @@
  #include "SkString.h"
  #include "SkStream.h"
  

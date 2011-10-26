@@ -4,10 +4,8 @@ Author: Daniel Echeverry <epsilon77@gmail.com>
 Origin: vendor
 Last-Update: 2011-02-20
 
-Index: chromium/src/chrome/app/resources/manpage.1.in
-===================================================================
---- chromium.orig/src/chrome/app/resources/manpage.1.in	2011-08-26 20:52:39.000000000 -0400
-+++ chromium/src/chrome/app/resources/manpage.1.in	2011-08-26 20:55:12.000000000 -0400
+--- a/src/chrome/app/resources/manpage.1.in
++++ b/src/chrome/app/resources/manpage.1.in
 @@ -1,5 +1,5 @@
 -." This file is processed by chrome.gyp to generate manpages in the
 -." build diretory.
@@ -16,7 +14,7 @@ Index: chromium/src/chrome/app/resources/manpage.1.in
  .TH @@FILENAME@@ 1 "" "" "USER COMMANDS"
  
  .SH NAME
-@@ -110,6 +110,7 @@
+@@ -110,6 +110,7 @@ as
  See the GTK documentation for more:
  .IP
  <http://library.gnome.org/devel/gtk/stable/gtk-running.html>

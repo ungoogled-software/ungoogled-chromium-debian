@@ -1,6 +1,6 @@
 --- a/src/build/linux/system.gyp
 +++ b/src/build/linux/system.gyp
-@@ -432,6 +432,23 @@
+@@ -428,6 +428,23 @@
        },
      },
      {
@@ -26,7 +26,7 @@
        'type': 'settings',
 --- a/src/chrome/chrome.gyp
 +++ b/src/chrome/chrome.gyp
-@@ -499,6 +499,7 @@
+@@ -472,6 +472,7 @@
          '../base/base.gyp:base',
          '../content/content.gyp:content_utility',
          '../skia/skia.gyp:skia',
@@ -36,7 +36,7 @@
          'utility/chrome_content_utility_client.cc',
 --- a/src/build/common.gypi
 +++ b/src/build/common.gypi
-@@ -810,6 +810,7 @@
+@@ -875,6 +875,7 @@
        ['enable_gpu==1', {
          'defines': [
            'ENABLE_GPU=1',

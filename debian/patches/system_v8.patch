@@ -1,7 +1,7 @@
 Use system copy of libv8
 --- a/src/build/linux/system.gyp
 +++ b/src/build/linux/system.gyp
-@@ -343,6 +343,18 @@
+@@ -339,6 +339,18 @@
        }]]
      },
      {
@@ -22,7 +22,7 @@ Use system copy of libv8
        'conditions': [
 --- a/src/net/net.gyp
 +++ b/src/net/net.gyp
-@@ -690,7 +690,7 @@
+@@ -710,7 +710,7 @@
        'conditions': [
          ['javascript_engine=="v8"', {
            'dependencies': [
@@ -33,7 +33,7 @@ Use system copy of libv8
          ['chromeos==1', {
 --- a/src/build/all.gyp
 +++ b/src/build/all.gyp
-@@ -57,7 +57,7 @@
+@@ -60,7 +60,7 @@
        'conditions': [
          ['javascript_engine=="v8"', {
            'dependencies': [
@@ -44,8 +44,8 @@ Use system copy of libv8
          ['OS=="mac" or OS=="linux"', {
 --- a/src/chrome/browser/browser_about_handler.cc
 +++ b/src/chrome/browser/browser_about_handler.cc
-@@ -63,7 +63,7 @@
- #include "webkit/plugins/npapi/webplugininfo.h"
+@@ -64,7 +64,7 @@
+ #include "webkit/plugins/webplugininfo.h"
  
  #ifdef CHROME_V8
 -#include "v8/include/v8.h"
@@ -53,72 +53,17 @@ Use system copy of libv8
  #endif
  
  #if defined(OS_WIN)
---- a/src/chrome/browser/memory_purger.cc
-+++ b/src/chrome/browser/memory_purger.cc
-@@ -23,7 +23,7 @@
- #include "net/url_request/url_request_context.h"
- #include "net/url_request/url_request_context_getter.h"
- #include "third_party/tcmalloc/chromium/src/google/malloc_extension.h"
--#include "v8/include/v8.h"
-+#include <v8.h>
- 
- // PurgeMemoryHelper -----------------------------------------------------------
- 
---- a/src/chrome/renderer/automation/dom_automation_v8_extension.h
-+++ b/src/chrome/renderer/automation/dom_automation_v8_extension.h
-@@ -6,7 +6,7 @@
- #define CHROME_RENDERER_AUTOMATION_DOM_AUTOMATION_V8_EXTENSION_H_
- #pragma once
- 
--#include "v8/include/v8.h"
-+#include <v8.h>
- 
- class DomAutomationV8Extension {
-  public:
 --- a/src/chrome/renderer/extensions/bindings_utils.h
 +++ b/src/chrome/renderer/extensions/bindings_utils.h
-@@ -10,7 +10,7 @@
+@@ -8,7 +8,7 @@
+ 
+ #include "base/memory/linked_ptr.h"
  #include "base/memory/singleton.h"
- #include "base/string_piece.h"
- #include "ui/base/resource/resource_bundle.h"
 -#include "v8/include/v8.h"
 +#include <v8.h>
  
  #include <list>
- #include <string>
---- a/src/chrome/renderer/extensions/event_bindings.h
-+++ b/src/chrome/renderer/extensions/event_bindings.h
-@@ -8,7 +8,7 @@
- 
- #include <string>
- 
--#include "v8/include/v8.h"
-+#include <v8.h>
- 
- class ExtensionDispatcher;
- class GURL;
---- a/src/chrome/renderer/extensions/js_only_v8_extensions.h
-+++ b/src/chrome/renderer/extensions/js_only_v8_extensions.h
-@@ -6,7 +6,7 @@
- #define CHROME_RENDERER_EXTENSIONS_JS_ONLY_V8_EXTENSIONS_H_
- #pragma once
- 
--#include "v8/include/v8.h"
-+#include <v8.h>
- 
- // This file contains various V8 Extensions that are JavaScript only, and
- // don't have any C++ native functions.
---- a/src/chrome/renderer/extensions/renderer_extension_bindings.h
-+++ b/src/chrome/renderer/extensions/renderer_extension_bindings.h
-@@ -6,7 +6,7 @@
- #define CHROME_RENDERER_EXTENSIONS_RENDERER_EXTENSION_BINDINGS_H_
- #pragma once
- 
--#include "v8/include/v8.h"
-+#include <v8.h>
- 
- #include <string>
- 
+ #include <map>
 --- a/src/chrome/renderer/loadtimes_extension_bindings.cc
 +++ b/src/chrome/renderer/loadtimes_extension_bindings.cc
 @@ -9,7 +9,7 @@
@@ -130,17 +75,6 @@ Use system copy of libv8
  
  using WebKit::WebDataSource;
  using WebKit::WebFrame;
---- a/src/chrome/test/v8_unit_test.h
-+++ b/src/chrome/test/v8_unit_test.h
-@@ -9,7 +9,7 @@
- #include <string>
- 
- #include "testing/gtest/include/gtest/gtest.h"
--#include "v8/include/v8.h"
-+#include <v8.h>
- 
- namespace base {
- class StringPiece;
 --- a/src/net/proxy/proxy_resolver_v8.cc
 +++ b/src/net/proxy/proxy_resolver_v8.cc
 @@ -23,7 +23,7 @@
@@ -157,28 +91,6 @@ Use system copy of libv8
 @@ -9,7 +9,7 @@
  #ifndef WEBKIT_EXTENSIONS_V8_BENCHMARKING_EXTENSION_H_
  #define WEBKIT_EXTENSIONS_V8_BENCHMARKING_EXTENSION_H_
- 
--#include "v8/include/v8.h"
-+#include <v8.h>
- 
- namespace extensions_v8 {
- 
---- a/src/webkit/extensions/v8/gc_extension.h
-+++ b/src/webkit/extensions/v8/gc_extension.h
-@@ -8,7 +8,7 @@
- #ifndef WEBKIT_EXTENSIONS_V8_GC_EXTENSION_H_
- #define WEBKIT_EXTENSIONS_V8_GC_EXTENSION_H_
- 
--#include "v8/include/v8.h"
-+#include <v8.h>
- 
- namespace extensions_v8 {
- 
---- a/src/webkit/extensions/v8/heap_profiler_extension.h
-+++ b/src/webkit/extensions/v8/heap_profiler_extension.h
-@@ -9,7 +9,7 @@
- #ifndef WEBKIT_EXTENSIONS_V8_HEAP_PROFILER_EXTENSION_H_
- #define WEBKIT_EXTENSIONS_V8_HEAP_PROFILER_EXTENSION_H_
  
 -#include "v8/include/v8.h"
 +#include <v8.h>
@@ -218,17 +130,6 @@ Use system copy of libv8
  
  using WebKit::WebCanvas;
  using WebKit::WebData;
---- a/src/webkit/glue/webkitclient_impl.cc
-+++ b/src/webkit/glue/webkitclient_impl.cc
-@@ -44,7 +44,7 @@
- #include "webkit/glue/weburlloader_impl.h"
- 
- #if defined(OS_LINUX)
--#include "v8/include/v8.h"
-+#include <v8.h>
- #endif
- 
- using WebKit::WebAudioBus;
 --- a/src/webkit/tools/test_shell/listener_leak_test.cc
 +++ b/src/webkit/tools/test_shell/listener_leak_test.cc
 @@ -8,8 +8,8 @@
@@ -266,12 +167,16 @@ Use system copy of libv8
  using WebKit::WebView;
 --- a/src/webkit/glue/webkit_glue.gypi
 +++ b/src/webkit/glue/webkit_glue.gypi
-@@ -502,11 +502,11 @@
-             ['inside_chromium_build==1 and component=="shared_library"', {
-               'dependencies': [
-                 '<(DEPTH)/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp:webkit',
--                '<(DEPTH)/v8/tools/gyp/v8.gyp:v8',
-+                '<(DEPTH)/build/linux/system.gyp:v8',
+@@ -115,7 +115,7 @@
+         '<(DEPTH)/third_party/icu/icu.gyp:icui18n',
+         '<(DEPTH)/third_party/icu/icu.gyp:icuuc',
+         '<(DEPTH)/third_party/npapi/npapi.gyp:npapi',
+-        '<(DEPTH)/v8/tools/gyp/v8.gyp:v8',
++        '<(DEPTH)/build/linux/system.gyp:v8',
+         'webkit_resources',
+         'webkit_strings',
+         'webkit_user_agent',
+@@ -509,7 +509,7 @@
                 ],
                 'export_dependent_settings': [
                   '<(DEPTH)/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp:webkit',
@@ -293,18 +198,18 @@ Use system copy of libv8
  using WebKit::WebScriptSource;
 --- a/src/v8/tools/gyp/v8.gyp
 +++ b/src/v8/tools/gyp/v8.gyp
-@@ -964,7 +964,7 @@
-           'type': 'executable',
-           'toolsets': ['host'],
+@@ -832,7 +832,7 @@
+             }],
+           ],
            'dependencies': [
 -            'v8'
 +            '../../../build/linux/system.gyp:v8',
            ],
-           'sources': [
-             '../../samples/shell.cc',
+         },
+       ],
 --- a/src/third_party/WebKit/Source/WebCore/WebCore.gyp/WebCore.gyp
 +++ b/src/third_party/WebKit/Source/WebCore/WebCore.gyp/WebCore.gyp
-@@ -972,7 +972,7 @@
+@@ -995,7 +995,7 @@
        'conditions': [
          ['javascript_engine=="v8"', {
            'dependencies': [
@@ -313,7 +218,7 @@ Use system copy of libv8
            ],
            'conditions': [
              ['inside_chromium_build==1 and OS=="win" and component=="shared_library"', {
-@@ -1086,10 +1086,10 @@
+@@ -1113,10 +1113,10 @@
        'conditions': [
          ['javascript_engine=="v8"', {
            'dependencies': [
@@ -326,16 +231,7 @@ Use system copy of libv8
            ],
            'conditions': [
              ['inside_chromium_build==1 and OS=="win" and component=="shared_library"', {
-@@ -1754,7 +1754,7 @@
-         }],
-         ['javascript_engine=="v8"', {
-           'dependencies': [
--            '<(chromium_src_dir)/v8/src/extensions/experimental/experimental.gyp:i18n_api',
-+            '<(chromium_src_dir)/build/linux/system.gyp:v8',
-           ],
-         }],
-       ],
-@@ -1801,10 +1801,10 @@
+@@ -1811,10 +1811,10 @@
        'conditions': [
          ['javascript_engine=="v8"', {
            'dependencies': [
@@ -361,31 +257,9 @@ Use system copy of libv8
  #include <wtf/Vector.h>
  
  using namespace std;
---- a/src/webkit/plugins/ppapi/var.cc
-+++ b/src/webkit/plugins/ppapi/var.cc
-@@ -19,7 +19,7 @@
- #include "webkit/plugins/ppapi/plugin_object.h"
- #include "webkit/plugins/ppapi/ppapi_plugin_instance.h"
- #include "webkit/plugins/ppapi/resource_tracker.h"
--#include "v8/include/v8.h"
-+#include <v8.h>
- 
- using WebKit::WebBindings;
- 
---- a/src/third_party/WebKit/Source/WebCore/bindings/v8/V8DOMWindowShell.cpp
-+++ b/src/third_party/WebKit/Source/WebCore/bindings/v8/V8DOMWindowShell.cpp
-@@ -66,7 +66,7 @@
- #include <v8.h>
- 
- #if ENABLE(JAVASCRIPT_I18N_API)
--#include <v8/src/extensions/experimental/i18n-extension.h>
-+#include <i18n-extension.h>
- #endif
- 
- #include <wtf/Assertions.h>
 --- a/src/chrome/browser/task_manager/task_manager_resource_providers.cc
 +++ b/src/chrome/browser/task_manager/task_manager_resource_providers.cc
-@@ -46,7 +46,7 @@
+@@ -48,7 +48,7 @@
  #include "third_party/sqlite/sqlite3.h"
  #include "ui/base/l10n/l10n_util.h"
  #include "ui/base/resource/resource_bundle.h"
@@ -396,7 +270,7 @@ Use system copy of libv8
  #include "skia/ext/skia_utils_mac.h"
 --- a/src/chrome/chrome.gyp
 +++ b/src/chrome/chrome.gyp
-@@ -1422,7 +1422,7 @@
+@@ -1376,7 +1376,7 @@
              '../rlz/rlz.gyp:*',
              '../sandbox/sandbox.gyp:*',
              '../tools/memory_watcher/memory_watcher.gyp:*',
@@ -407,25 +281,25 @@ Use system copy of libv8
            'conditions': [
 --- a/src/chrome/chrome_tests.gypi
 +++ b/src/chrome/chrome_tests.gypi
-@@ -1244,7 +1244,7 @@
-         '../third_party/libxml/libxml.gyp:libxml',
+@@ -1248,7 +1248,7 @@
          '../ui/gfx/gl/gl.gyp:gl',
          '../ui/ui.gyp:ui_resources',
+         '../ui/ui.gyp:ui_resources_standard',
 -        '../v8/tools/gyp/v8.gyp:v8',
 +        '../build/linux/system.gyp:v8',
          'chrome_resources',
          'chrome_strings',
        ],
-@@ -2379,7 +2379,7 @@
-         '../third_party/cld/cld.gyp:cld',
+@@ -2348,7 +2348,7 @@
          '../third_party/icu/icu.gyp:icui18n',
          '../third_party/icu/icu.gyp:icuuc',
+         '../third_party/leveldatabase/leveldatabase.gyp:leveldatabase',
 -        '../v8/tools/gyp/v8.gyp:v8',
 +        '../build/linux/system.gyp:v8',
          '../webkit/webkit.gyp:test_shell_test_support',
          # Runtime dependencies
          '../third_party/mesa/mesa.gyp:osmesa',
-@@ -2852,7 +2852,7 @@
+@@ -2856,7 +2856,7 @@
            ],
            'dependencies': [
              # build time dependency.
@@ -436,7 +310,7 @@ Use system copy of libv8
            ],
 --- a/src/chrome/renderer/chrome_render_process_observer.cc
 +++ b/src/chrome/renderer/chrome_render_process_observer.cc
-@@ -39,7 +39,7 @@
+@@ -41,7 +41,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebFrame.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebRuntimeFeatures.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebView.h"
@@ -447,8 +321,8 @@ Use system copy of libv8
  #include "base/win/iat_patch_function.h"
 --- a/src/chrome/renderer/extensions/bindings_utils.cc
 +++ b/src/chrome/renderer/extensions/bindings_utils.cc
-@@ -14,7 +14,7 @@
- #include "third_party/WebKit/Source/WebKit/chromium/public/WebDocument.h"
+@@ -10,7 +10,7 @@
+ #include "content/renderer/render_view.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebFrame.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebView.h"
 -#include "v8/include/v8.h"
@@ -458,7 +332,7 @@ Use system copy of libv8
  using WebKit::WebView;
 --- a/src/chrome/renderer/extensions/extension_dispatcher.cc
 +++ b/src/chrome/renderer/extensions/extension_dispatcher.cc
-@@ -23,7 +23,7 @@
+@@ -25,7 +25,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebSecurityPolicy.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebString.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebURLRequest.h"
@@ -467,17 +341,6 @@ Use system copy of libv8
  
  namespace {
  static const double kInitialExtensionIdleHandlerDelayS = 5.0 /* seconds */;
---- a/src/chrome/renderer/extensions/extension_process_bindings.h
-+++ b/src/chrome/renderer/extensions/extension_process_bindings.h
-@@ -12,7 +12,7 @@
- #include <string>
- #include <vector>
- 
--#include "v8/include/v8.h"
-+#include <v8.h>
- 
- class ExtensionDispatcher;
- class GURL;
 --- a/src/chrome/renderer/external_extension.cc
 +++ b/src/chrome/renderer/external_extension.cc
 @@ -12,7 +12,7 @@
@@ -502,7 +365,7 @@ Use system copy of libv8
  using WebKit::WebDocument;
 --- a/src/content/renderer/render_thread.cc
 +++ b/src/content/renderer/render_thread.cc
-@@ -64,7 +64,7 @@
+@@ -65,7 +65,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebStorageEventDispatcher.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebString.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebView.h"
@@ -513,7 +376,7 @@ Use system copy of libv8
  #include "webkit/glue/webkit_glue.h"
 --- a/src/content/renderer/render_view.cc
 +++ b/src/content/renderer/render_view.cc
-@@ -123,7 +123,7 @@
+@@ -126,7 +126,7 @@
  #include "ui/gfx/native_widget_types.h"
  #include "ui/gfx/point.h"
  #include "ui/gfx/rect.h"
@@ -557,7 +420,23 @@ Use system copy of libv8
   protected:
 --- a/src/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp
 +++ b/src/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp
-@@ -617,7 +617,7 @@
+@@ -72,13 +72,13 @@
+                 '<(chromium_src_dir)/third_party/icu/icu.gyp:icuuc',
+                 '<(chromium_src_dir)/third_party/npapi/npapi.gyp:npapi',
+                 '<(chromium_src_dir)/third_party/angle/src/build_angle.gyp:translator_glsl',
+-                '<(chromium_src_dir)/v8/tools/gyp/v8.gyp:v8',
++                '<(chromium_src_dir)/build/linux/system.gyp:v8',
+             ],
+             'export_dependent_settings': [
+                 '<(chromium_src_dir)/skia/skia.gyp:skia',
+                 '<(chromium_src_dir)/third_party/icu/icu.gyp:icuuc',
+                 '<(chromium_src_dir)/third_party/npapi/npapi.gyp:npapi',
+-                '<(chromium_src_dir)/v8/tools/gyp/v8.gyp:v8',
++                '<(chromium_src_dir)/build/linux/system.gyp:v8',
+             ],
+             'include_dirs': [
+                 'public',
+@@ -631,7 +631,7 @@
                                  '<(chromium_src_dir)/third_party/modp_b64/modp_b64.gyp:modp_b64',
                                  '<(chromium_src_dir)/third_party/ots/ots.gyp:ots',
                                  '<(chromium_src_dir)/third_party/zlib/zlib.gyp:zlib',
@@ -566,7 +445,7 @@ Use system copy of libv8
                                  # We must not add webkit_support here because of cyclic dependency.
                              ],
                              'direct_dependent_settings': {
-@@ -627,7 +627,7 @@
+@@ -641,7 +641,7 @@
                              },
                              'export_dependent_settings': [
                                  '<(chromium_src_dir)/build/temp_gyp/googleurl.gyp:googleurl',
@@ -575,8 +454,8 @@ Use system copy of libv8
                              ],
                              'include_dirs': [
                                  # WARNING: Do not view this particular case as a precedent for
-@@ -965,7 +965,7 @@
-                 '../../JavaScriptCore/JavaScriptCore.gyp/JavaScriptCore.gyp:wtf_config',
+@@ -990,7 +990,7 @@
+                 '<(chromium_src_dir)/build/temp_gyp/googleurl.gyp:googleurl',
                  '<(chromium_src_dir)/third_party/icu/icu.gyp:icuuc',
                  '<(chromium_src_dir)/third_party/mesa/mesa.gyp:osmesa',
 -                '<(chromium_src_dir)/v8/tools/gyp/v8.gyp:v8',
@@ -584,17 +463,6 @@ Use system copy of libv8
                  '<(chromium_src_dir)/webkit/support/webkit_support.gyp:blob',
                  '<(chromium_src_dir)/webkit/support/webkit_support.gyp:webkit_support',
              ],
---- a/src/webkit/support/test_webkit_client.cc
-+++ b/src/webkit/support/test_webkit_client.cc
-@@ -32,7 +32,7 @@
- #include "third_party/WebKit/Source/WebKit/chromium/public/WebStorageNamespace.h"
- #include "third_party/WebKit/Source/WebKit/chromium/public/WebString.h"
- #include "third_party/WebKit/Source/WebKit/chromium/public/WebURL.h"
--#include "v8/include/v8.h"
-+#include <v8.h>
- #include "webkit/appcache/web_application_cache_host_impl.h"
- #include "webkit/database/vfs_backend.h"
- #include "webkit/extensions/v8/gc_extension.h"
 --- a/src/webkit/tools/test_shell/test_shell_webkit_init.cc
 +++ b/src/webkit/tools/test_shell/test_shell_webkit_init.cc
 @@ -14,7 +14,7 @@
@@ -614,9 +482,9 @@ Use system copy of libv8
          '../ui/gfx/surface/surface.gyp:surface',
 -        '../v8/tools/gyp/v8.gyp:v8',
 +        '../build/linux/system.gyp:v8',
+         '../webkit/support/webkit_support.gyp:webkit_gpu',
        ],
        'include_dirs': [
-         '..',
 --- a/src/third_party/WebKit/Source/ThirdParty/gyp/samples/samples
 +++ b/src/third_party/WebKit/Source/ThirdParty/gyp/samples/samples
 @@ -38,7 +38,7 @@ gyps = [
@@ -642,7 +510,7 @@ Use system copy of libv8
 @@ -358,7 +358,7 @@
          '<(DEPTH)/testing/gmock.gyp:gmock',
          '<(DEPTH)/testing/gtest.gyp:gtest',
-         '<(DEPTH)/third_party/leveldb/leveldb.gyp:leveldb',
+         '<(DEPTH)/third_party/leveldatabase/leveldatabase.gyp:leveldatabase',
 -        '<(DEPTH)/v8/tools/gyp/v8.gyp:v8',
 +        '<(DEPTH)/build/linux/system.gyp:v8',
        ],
@@ -681,3 +549,267 @@ Use system copy of libv8
  
  using WebKit::WebCString;
  using WebKit::WebDataSource;
+--- a/src/chrome/renderer/automation/dom_automation_v8_extension.cc
++++ b/src/chrome/renderer/automation/dom_automation_v8_extension.cc
+@@ -6,7 +6,7 @@
+ 
+ #include "chrome/renderer/extensions/extension_base.h"
+ #include "grit/renderer_resources.h"
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ const char kName[] = "chrome/domautomation";
+ 
+--- a/src/chrome/renderer/extensions/chrome_webstore_bindings.cc
++++ b/src/chrome/renderer/extensions/chrome_webstore_bindings.cc
+@@ -16,7 +16,7 @@
+ #include "third_party/WebKit/Source/WebKit/chromium/public/WebFrame.h"
+ #include "third_party/WebKit/Source/WebKit/chromium/public/WebNode.h"
+ #include "third_party/WebKit/Source/WebKit/chromium/public/WebNodeList.h"
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ using WebKit::WebDocument;
+ using WebKit::WebElement;
+--- a/src/chrome/renderer/extensions/event_bindings.cc
++++ b/src/chrome/renderer/extensions/event_bindings.cc
+@@ -32,7 +32,7 @@
+ #include "third_party/WebKit/Source/WebKit/chromium/public/WebURL.h"
+ #include "third_party/WebKit/Source/WebKit/chromium/public/WebURLRequest.h"
+ #include "third_party/WebKit/Source/WebKit/chromium/public/WebView.h"
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ using bindings_utils::CallFunctionInContext;
+ using bindings_utils::ContextInfo;
+--- a/src/chrome/renderer/extensions/extension_base.cc
++++ b/src/chrome/renderer/extensions/extension_base.cc
+@@ -17,7 +17,7 @@
+ #include "third_party/WebKit/Source/WebKit/chromium/public/WebFrame.h"
+ #include "third_party/WebKit/Source/WebKit/chromium/public/WebView.h"
+ #include "ui/base/resource/resource_bundle.h"
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ using WebKit::WebFrame;
+ using WebKit::WebView;
+--- a/src/chrome/renderer/extensions/extension_base.h
++++ b/src/chrome/renderer/extensions/extension_base.h
+@@ -7,7 +7,7 @@
+ #pragma once
+ 
+ #include "base/logging.h"
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ #include <string>
+ 
+--- a/src/chrome/renderer/extensions/extension_process_bindings.cc
++++ b/src/chrome/renderer/extensions/extension_process_bindings.cc
+@@ -40,7 +40,7 @@
+ #include "third_party/WebKit/Source/WebKit/chromium/public/WebView.h"
+ #include "third_party/skia/include/core/SkBitmap.h"
+ #include "third_party/skia/include/core/SkColor.h"
+-#include "v8/include/v8.h"
++#include <v8.h>
+ #include "webkit/glue/webkit_glue.h"
+ 
+ using bindings_utils::GetPendingRequestMap;
+--- a/src/chrome/renderer/extensions/js_only_v8_extensions.cc
++++ b/src/chrome/renderer/extensions/js_only_v8_extensions.cc
+@@ -6,7 +6,7 @@
+ 
+ #include "chrome/renderer/extensions/extension_base.h"
+ #include "grit/renderer_resources.h"
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ // JsonSchemaJsV8Extension
+ const char* JsonSchemaJsV8Extension::kName = "chrome/jsonschema";
+--- a/src/chrome/renderer/extensions/renderer_extension_bindings.cc
++++ b/src/chrome/renderer/extensions/renderer_extension_bindings.cc
+@@ -19,7 +19,7 @@
+ #include "content/renderer/render_thread.h"
+ #include "content/renderer/render_view.h"
+ #include "grit/renderer_resources.h"
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ // Message passing API example (in a content script):
+ // var extension =
+--- a/src/chrome/test/base/v8_unit_test.h
++++ b/src/chrome/test/base/v8_unit_test.h
+@@ -9,7 +9,7 @@
+ #include <string>
+ 
+ #include "testing/gtest/include/gtest/gtest.h"
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ namespace base {
+ class StringPiece;
+--- a/src/content/renderer/mock_content_renderer_client.cc
++++ b/src/content/renderer/mock_content_renderer_client.cc
+@@ -5,7 +5,7 @@
+ #include "content/renderer/mock_content_renderer_client.h"
+ 
+ #include <string>
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ namespace content {
+ 
+--- a/src/third_party/v8-i18n/build/all.gyp
++++ b/src/third_party/v8-i18n/build/all.gyp
+@@ -51,7 +51,7 @@
+         '<(icu_path)/public/common',
+       ],
+       'dependencies': [
+-        '<(v8_path)/v8/tools/gyp/v8.gyp:v8',
++        '<(v8_path)/build/linux/system.gyp:v8',
+         '<(icu_path)/icu.gyp:*',
+         'api2c#host',
+       ],
+--- a/src/third_party/v8-i18n/include/extension.h
++++ b/src/third_party/v8-i18n/include/extension.h
+@@ -15,7 +15,7 @@
+ #ifndef V8_I18N_INCLUDE_EXTENSION_H_
+ #define V8_I18N_INCLUDE_EXTENSION_H_
+ 
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ namespace v8_i18n {
+ 
+--- a/src/third_party/v8-i18n/src/break-iterator.h
++++ b/src/third_party/v8-i18n/src/break-iterator.h
+@@ -16,7 +16,7 @@
+ #define V8_I18N_SRC_BREAK_ITERATOR_H_
+ 
+ #include "unicode/uversion.h"
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ namespace U_ICU_NAMESPACE {
+ class BreakIterator;
+--- a/src/third_party/v8-i18n/src/collator.h
++++ b/src/third_party/v8-i18n/src/collator.h
+@@ -29,7 +29,7 @@
+ #define V8_I18N_SRC_COLLATOR_H_
+ 
+ #include "unicode/uversion.h"
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ namespace U_ICU_NAMESPACE {
+ class Collator;
+--- a/src/third_party/v8-i18n/src/datetime-format.h
++++ b/src/third_party/v8-i18n/src/datetime-format.h
+@@ -16,7 +16,7 @@
+ #define V8_I18N_SRC_DATETIME_FORMAT_H_
+ 
+ #include "unicode/uversion.h"
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ namespace U_ICU_NAMESPACE {
+ class SimpleDateFormat;
+--- a/src/third_party/v8-i18n/src/language-matcher.h
++++ b/src/third_party/v8-i18n/src/language-matcher.h
+@@ -16,7 +16,7 @@
+ #define V8_I18N_SRC_LANGUAGE_MATCHER_H_
+ 
+ #include "unicode/uloc.h"
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ namespace v8_i18n {
+ 
+--- a/src/third_party/v8-i18n/src/number-format.h
++++ b/src/third_party/v8-i18n/src/number-format.h
+@@ -16,7 +16,7 @@
+ #define V8_I18N_SRC_NUMBER_FORMAT_H_
+ 
+ #include "unicode/uversion.h"
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ namespace U_ICU_NAMESPACE {
+ class DecimalFormat;
+--- a/src/third_party/v8-i18n/src/utils.h
++++ b/src/third_party/v8-i18n/src/utils.h
+@@ -16,7 +16,7 @@
+ #define V8_I18N_SRC_UTILS_H_
+ 
+ #include "unicode/uversion.h"
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ namespace U_ICU_NAMESPACE {
+ class UnicodeString;
+--- a/src/v8/src/extensions/experimental/break-iterator.h
++++ b/src/v8/src/extensions/experimental/break-iterator.h
+@@ -28,7 +28,7 @@
+ #ifndef V8_EXTENSIONS_EXPERIMENTAL_BREAK_ITERATOR_H_
+ #define V8_EXTENSIONS_EXPERIMENTAL_BREAK_ITERATOR_H_
+ 
+-#include "include/v8.h"
++#include <v8.h>
+ 
+ #include "unicode/uversion.h"
+ 
+--- a/src/webkit/extensions/v8/gc_extension.cc
++++ b/src/webkit/extensions/v8/gc_extension.cc
+@@ -4,7 +4,7 @@
+ 
+ #include "webkit/extensions/v8/gc_extension.h"
+ 
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ const char kGCExtensionName[] = "v8/GCController";
+ 
+--- a/src/webkit/extensions/v8/heap_profiler_extension.cc
++++ b/src/webkit/extensions/v8/heap_profiler_extension.cc
+@@ -5,7 +5,7 @@
+ #include "webkit/extensions/v8/heap_profiler_extension.h"
+ 
+ #include "base/basictypes.h"
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ #if defined(USE_TCMALLOC) && !defined(OS_WIN)
+ #include "third_party/tcmalloc/chromium/src/google/heap-profiler.h"
+--- a/src/webkit/glue/webkitplatformsupport_impl.cc
++++ b/src/webkit/glue/webkitplatformsupport_impl.cc
+@@ -45,7 +45,7 @@
+ #include "webkit/glue/weburlloader_impl.h"
+ 
+ #if defined(OS_LINUX)
+-#include "v8/include/v8.h"
++#include <v8.h>
+ #endif
+ 
+ using WebKit::WebAudioBus;
+--- a/src/webkit/plugins/ppapi/ppb_var_impl.cc
++++ b/src/webkit/plugins/ppapi/ppb_var_impl.cc
+@@ -17,7 +17,7 @@
+ #include "webkit/plugins/ppapi/plugin_object.h"
+ #include "webkit/plugins/ppapi/ppapi_plugin_instance.h"
+ #include "webkit/plugins/ppapi/resource_tracker.h"
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ using ppapi::NPObjectVar;
+ using ppapi::StringVar;
+--- a/src/webkit/support/test_webkit_platform_support.cc
++++ b/src/webkit/support/test_webkit_platform_support.cc
+@@ -32,7 +32,7 @@
+ #include "third_party/WebKit/Source/WebKit/chromium/public/WebStorageNamespace.h"
+ #include "third_party/WebKit/Source/WebKit/chromium/public/WebString.h"
+ #include "third_party/WebKit/Source/WebKit/chromium/public/WebURL.h"
+-#include "v8/include/v8.h"
++#include <v8.h>
+ #include "webkit/appcache/web_application_cache_host_impl.h"
+ #include "webkit/database/vfs_backend.h"
+ #include "webkit/extensions/v8/gc_extension.h"
