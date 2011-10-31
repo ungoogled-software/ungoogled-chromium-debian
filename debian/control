@@ -70,7 +70,10 @@ Build-Depends: cdbs,
 	libpulse-dev,
 	libavcodec-dev (>= 4:0.7.1),
 	libavformat-dev (>= 4:0.7.1),
-	libavutil-dev (>= 4:0.7.1)
+	libavutil-dev (>= 4:0.7.1),
+	scons,
+	libelf-dev,
+	python-simplejson
 Standards-Version: 3.9.2
 
 Package: chromium-browser
