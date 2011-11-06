@@ -38,7 +38,7 @@ Use system copy of libv8
          ['javascript_engine=="v8"', {
            'dependencies': [
 -            '../v8/tools/gyp/v8.gyp:*',
-+            'linux/system.gyp:v8',
++            '../build/linux/system.gyp:v8',
            ],
          }],
          ['OS=="mac" or OS=="linux"', {
