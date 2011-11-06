@@ -1,4 +1,4 @@
-chromium-browser (15.0.874.106~r107270-1) unstable; urgency=low
+chromium-browser (15.0.874.106~r107270-1) unstable; urgency=medium
 
   [ Matteo F. Vescovi ]
   * [fb744c6] debian/control: cosmetic typo corrections (Closes: #644386)
@@ -48,7 +48,7 @@ chromium-browser (15.0.874.106~r107270-1) unstable; urgency=low
   * [59f4ae6] debian/licenses: add Ms-PL license snippet.
     Thanks to Alexander Reichle-Schmehl (Closes: #647528)
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 06 Nov 2011 14:20:10 +0100
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 06 Nov 2011 14:27:45 +0100
 
 chromium-browser (14.0.835.202~r103287-1) unstable; urgency=low
 
