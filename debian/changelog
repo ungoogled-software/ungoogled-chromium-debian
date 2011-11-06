@@ -1,3 +1,55 @@
+chromium-browser (15.0.874.106~r107270-1) unstable; urgency=low
+
+  [ Matteo F. Vescovi ]
+  * [fb744c6] debian/control: cosmetic typo corrections (Closes: #644386)
+
+  [ Giuseppe Iuculano ]
+  * New stable release:
+  - High CVE-2011-2845: URL bar spoof in history handling. Credit to Jordi
+    Chancel.
+  - Medium CVE-2011-3875: URL bar spoof with drag+drop of URLs. Credit to
+    Jordi Chancel.
+  - Low CVE-2011-3876: Avoid stripping whitespace at the end of download
+    filenames. Credit to Marc Novak.
+  - Low CVE-2011-3877: XSS in appcache internals page. Credit to Google
+    Chrome Security Team (Tom Sepez) plus independent discovery by
+    Juho Nurminen.
+  - Medium CVE-2011-3878: Race condition in worker process initialization.
+    Credit to miaubiz.
+  - Low CVE-2011-3879: Avoid redirect to chrome scheme URIs. Credit to
+    Masato Kinugawa.
+  - Low CVE-2011-3880: Don’t permit  as a HTTP header delimiter. Credit to
+    Vladimir Vorontsov, ONsec company.
+  - High CVE-2011-3881: Cross-origin policy violations.
+    Credit to Sergey Glazunov.
+  - High CVE-2011-3882: Use-after-free in media buffer handling. Credit to
+    Google Chrome Security Team (Inferno).
+  - High CVE-2011-3883: Use-after-free in counter handling. Credit to miaubiz.
+  - High CVE-2011-3884: Timing issues in DOM traversal. Credit to Brian
+    Ryner of the Chromium development community.
+  - High CVE-2011-3885: Stale style bugs leading to use-after-free.
+    Credit to miaubiz.
+  - High CVE-2011-3886: Out of bounds writes in v8. Credit to Christian Holler.
+  - Medium CVE-2011-3887: Cookie theft with javascript URIs.
+    Credit to Sergey Glazunov.
+  - [99138] High CVE-2011-3888: Use-after-free with plug-in and editing.
+    Credit to miaubiz.
+  - High CVE-2011-3889: Heap overflow in Web Audio. Credit to miaubiz.
+  - High CVE-2011-3890: Use-after-free in video source handling. Credit to
+    Ami Fischman of the Chromium development community.
+  - High CVE-2011-3891: Exposure of internal v8 functions. Credit to
+    Steven Keuchel of the Chromium development community plus independent
+    discovery by Daniel Divricean.
+  * [62dfe31] Refreshed patches
+  * [ebe38a0] Added scons, libelf-dev, and python-simplejson in Build-Depends
+  * [301651c] Use icu and libv8 private copy and disable nacl
+
+  [ Jonathan Nieder ]
+  * [59f4ae6] debian/licenses: add Ms-PL license snippet.
+    Thanks to Alexander Reichle-Schmehl (Closes: #647528)
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 06 Nov 2011 14:20:10 +0100
+
 chromium-browser (14.0.835.202~r103287-1) unstable; urgency=low
 
   [ Michael Gilbert ]
