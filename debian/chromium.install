@@ -8,6 +8,7 @@ debian/tmp/usr/lib/chromium/locales/*
 #debian/tmp/usr/lib/chromium/libffmpegsumo.so
 debian/tmp/usr/lib/chromium/ssl_false_start_blacklist_process
 #debian/tmp/usr/lib/chromium/nacl_irt_*
+debian/tmp/usr/lib/chromium/pseudo_locales/fake-bidi.pak
 debian/chromium.desktop usr/share/applications
 debian/chromium.xml usr/share/gnome-control-center/default-apps
 debian/master_preferences etc/chromium
