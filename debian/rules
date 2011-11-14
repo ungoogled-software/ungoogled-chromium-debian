@@ -6,7 +6,7 @@ DEBIAN_UPSTREAM_VERSION	:= $(shell echo $(DEBIAN_VERSION) | sed 's/^\(.*\)-[^-]*
 DEBIAN_REVISION		:= $(shell echo $(DEBIAN_VERSION) | sed 's/^.*r\([^-]*\)-.*/\1/')
 DEBIAN_DIST		:= $(shell lsb_release -ds | tr -d '()')
 DEBIAN_DIST_NAME	:= $(shell lsb_release -si)
-DEBIAN_DIST_VERSION	:= $(shell lsb_release -sr)
+DEBIAN_DIST_VERSION	:= $(shell cat /etc/debian_version)
 MULTIARCH		:= $(shell dpkg-architecture -qDEB_BUILD_MULTIARCH)
 USE_SYSTEM_FFMPEG	:= 1
 ifeq (1,$(USE_SYSTEM_FFMPEG))
