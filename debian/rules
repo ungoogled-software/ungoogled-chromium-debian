@@ -377,9 +377,9 @@ subst_files = \
 	$(NULL)
 
 %:: %.in
-	sed -e 's/@BUILD_DIST@/$(DEBIAN_DIST_NAME) $(DEBIAN_DIST_VERSION)/g' \
-	    -e 's/@BUILD_DIST_NAME@/$(DEBIAN_DIST_NAME)/g' \
-	    -e 's/@BUILD_DIST_VERSION)@/$(DEBIAN_DIST_VERSION)/g' \
+	sed -e 's|@BUILD_DIST@|$(DEBIAN_DIST_NAME) $(DEBIAN_DIST_VERSION)|g' \
+	    -e 's|@BUILD_DIST_NAME@|$(DEBIAN_DIST_NAME)|g' \
+	    -e 's|@BUILD_DIST_VERSION)@|$(DEBIAN_DIST_VERSION)|g' \
 	    < $< > $@
 
 pre-build:: $(subst_files)
