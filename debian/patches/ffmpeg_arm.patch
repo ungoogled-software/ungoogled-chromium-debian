@@ -1,3 +1,13 @@
+From: Giuseppe Iuculano <iuculano@debian.org>
+Date: Sat, 3 Jul 2010 13:16:40 +0200
+Subject: Disable ARMv6, ARMv7, V5TE, VFP code in internal copy of ffmpeg
+---
+ .../ffmpeg/config/Chrome/linux/arm/config.h        |    8 ++++----
+ src/third_party/ffmpeg/ffmpeg_generated.gypi       |    7 -------
+ 2 files changed, 4 insertions(+), 11 deletions(-)
+
+diff --git a/src/third_party/ffmpeg/config/Chrome/linux/arm/config.h b/src/third_party/ffmpeg/config/Chrome/linux/arm/config.h
+index e225e1d6..e04005fe 100644
 --- a/src/third_party/ffmpeg/config/Chrome/linux/arm/config.h
 +++ b/src/third_party/ffmpeg/config/Chrome/linux/arm/config.h
 @@ -34,10 +34,10 @@
@@ -15,6 +25,8 @@
  #define HAVE_AVX 0
  #define HAVE_IWMMXT 0
  #define HAVE_MMI 0
+diff --git a/src/third_party/ffmpeg/ffmpeg_generated.gypi b/src/third_party/ffmpeg/ffmpeg_generated.gypi
+index c2aa3c28..37c2ec56 100644
 --- a/src/third_party/ffmpeg/ffmpeg_generated.gypi
 +++ b/src/third_party/ffmpeg/ffmpeg_generated.gypi
 @@ -155,21 +155,14 @@

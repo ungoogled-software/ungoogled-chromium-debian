@@ -1,4 +1,15 @@
-Include system copy of prtime.h
+From: Giuseppe Iuculano <iuculano@debian.org>
+Date: Sat, 8 May 2010 11:30:40 +0200
+Subject: Include system copy of prtime.h
+---
+ src/base/pr_time_unittest.cc              |    2 +-
+ src/base/time.cc                          |    2 +-
+ src/chrome/browser/metrics/metrics_log.cc |    2 +-
+ src/chrome/common/metrics_helpers.cc      |    2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/src/base/pr_time_unittest.cc b/src/base/pr_time_unittest.cc
+index 5c8bad1d..8a9697de 100644
 --- a/src/base/pr_time_unittest.cc
 +++ b/src/base/pr_time_unittest.cc
 @@ -4,7 +4,7 @@
@@ -10,6 +21,8 @@ Include system copy of prtime.h
  #include "base/time.h"
  #include "testing/gtest/include/gtest/gtest.h"
  
+diff --git a/src/base/time.cc b/src/base/time.cc
+index 859810e7..996c33dc 100644
 --- a/src/base/time.cc
 +++ b/src/base/time.cc
 @@ -4,7 +4,7 @@
@@ -21,6 +34,8 @@ Include system copy of prtime.h
  
  #include "base/logging.h"
  
+diff --git a/src/chrome/browser/metrics/metrics_log.cc b/src/chrome/browser/metrics/metrics_log.cc
+index d0bffb0d..3702c326 100644
 --- a/src/chrome/browser/metrics/metrics_log.cc
 +++ b/src/chrome/browser/metrics/metrics_log.cc
 @@ -13,7 +13,7 @@
@@ -32,9 +47,11 @@ Include system copy of prtime.h
  #include "base/time.h"
  #include "base/utf_string_conversions.h"
  #include "chrome/browser/autocomplete/autocomplete.h"
+diff --git a/src/chrome/common/metrics_helpers.cc b/src/chrome/common/metrics_helpers.cc
+index 599bf12a..ea993a0c 100644
 --- a/src/chrome/common/metrics_helpers.cc
 +++ b/src/chrome/common/metrics_helpers.cc
-@@ -17,7 +17,7 @@
+@@ -11,7 +11,7 @@
  #include "base/perftimer.h"
  #include "base/string_number_conversions.h"
  #include "base/sys_info.h"

@@ -1,15 +1,13 @@
-Description: Fix build failure due to cups 1.5 header changes
-Author: Michael Gilbert <michael.s.gilbert@gmail.com>
---- a/src/printing/backend/cups_helper.h
-+++ b/src/printing/backend/cups_helper.h
-@@ -7,6 +7,7 @@
- #pragma once
- 
- #include <cups/cups.h>
-+#include <cups/ppd.h>
- 
- #include "printing/printing_export.h"
- 
+From: Michael Gilbert <michael.s.gilbert@gmail.com>
+Date: Thu, 18 Aug 2011 17:45:23 -0400
+Subject: Fix build failure with cups >= 1.5.0
+---
+ .../service/cloud_print/print_system_cups.cc       |    1 +
+ src/printing/backend/cups_helper.h                 |    1 +
+ 2 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/src/chrome/service/cloud_print/print_system_cups.cc b/src/chrome/service/cloud_print/print_system_cups.cc
+index 54ee38fc..cdddac0d 100644
 --- a/src/chrome/service/cloud_print/print_system_cups.cc
 +++ b/src/chrome/service/cloud_print/print_system_cups.cc
 @@ -5,6 +5,7 @@
@@ -20,3 +18,15 @@ Author: Michael Gilbert <michael.s.gilbert@gmail.com>
  #include <dlfcn.h>
  #include <errno.h>
  #include <pthread.h>
+diff --git a/src/printing/backend/cups_helper.h b/src/printing/backend/cups_helper.h
+index ee1de9a0..388919d8 100644
+--- a/src/printing/backend/cups_helper.h
++++ b/src/printing/backend/cups_helper.h
+@@ -7,6 +7,7 @@
+ #pragma once
+ 
+ #include <cups/cups.h>
++#include <cups/ppd.h>
+ 
+ #include "printing/printing_export.h"
+ 

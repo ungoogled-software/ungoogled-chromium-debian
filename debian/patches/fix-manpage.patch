@@ -1,9 +1,24 @@
-Description: Removed warning in help option.
-Forwarded: http://code.google.com/p/chromium/issues/detail?id=73591
-Author: Daniel Echeverry <epsilon77@gmail.com>
-Origin: vendor
-Last-Update: 2011-02-20
+From: Daniel Echeverry <epsilon77@gmail.com>
+Date: Sun, 20 Feb 2011 14:04:21 -0500
+Subject: Remove warning on --help
 
+"chromium-browser --help" produces the following output:
+
+	chromium-browser.1:99: warning [p 2, 5.3i]: cannot adjust line
+
+Add a paragraph break to the manpage so the usage string can be viewed
+without a warning.
+
+Fixes http://crbug.com/73591
+Fixes http://bugs.debian.org/607503
+
+Reported-by: shirish शिरीष <shirishag75@gmail.com>
+---
+ src/chrome/app/resources/manpage.1.in |    5 +++--
+ 1 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/src/chrome/app/resources/manpage.1.in b/src/chrome/app/resources/manpage.1.in
+index 695cc1f2..15377b92 100644
 --- a/src/chrome/app/resources/manpage.1.in
 +++ b/src/chrome/app/resources/manpage.1.in
 @@ -1,5 +1,5 @@

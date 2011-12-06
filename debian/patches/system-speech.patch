@@ -1,8 +1,18 @@
-Use system speex
+From: Giuseppe Iuculano <iuculano@debian.org>
+Date: Fri Oct 1 18:14:08 2010 +0200
+Subject: Use system speex
+---
+ src/build/linux/system.gyp                  |   20 ++++++++++++++++++++
+ src/content/browser/speech/audio_encoder.cc |    2 +-
+ src/content/content_browser.gypi            |    2 +-
+ 3 files changed, 22 insertions(+), 2 deletions(-)
+
+diff --git a/src/build/linux/system.gyp b/src/build/linux/system.gyp
+index e8e3287e..779816c0 100644
 --- a/src/build/linux/system.gyp
 +++ b/src/build/linux/system.gyp
-@@ -319,6 +319,26 @@
-       }]]
+@@ -359,6 +359,26 @@
+       ],
      },
      {
 +      'target_name': 'speex',
@@ -26,8 +36,10 @@ Use system speex
 +    },
 +    {
        'target_name': 'gnome_keyring',
-       'type': 'settings',
+       'type': 'none',
        'conditions': [
+diff --git a/src/content/browser/speech/audio_encoder.cc b/src/content/browser/speech/audio_encoder.cc
+index 683ec0e3..0d44a80b 100644
 --- a/src/content/browser/speech/audio_encoder.cc
 +++ b/src/content/browser/speech/audio_encoder.cc
 @@ -10,7 +10,7 @@
@@ -39,14 +51,16 @@ Use system speex
  
  using std::string;
  
+diff --git a/src/content/content_browser.gypi b/src/content/content_browser.gypi
+index 7ab16fea..253a54e2 100644
 --- a/src/content/content_browser.gypi
 +++ b/src/content/content_browser.gypi
-@@ -17,7 +17,7 @@
-         '../third_party/flac/flac.gyp:libflac',
-         # TODO(ericu): remove leveldb ref after crbug.com/6955013 is fixed.
-         '../third_party/leveldatabase/leveldatabase.gyp:leveldatabase',
--        '../third_party/speex/speex.gyp:libspeex',
-+        '../build/linux/system.gyp:speex',
-         '../third_party/WebKit/Source/WebKit/chromium/WebKit.gyp:webkit',
-         '../third_party/zlib/zlib.gyp:zlib',
-         '../ui/ui.gyp:ui',
+@@ -12,7 +12,7 @@
+     '../third_party/flac/flac.gyp:libflac',
+     # TODO(ericu): remove leveldb ref after crbug.com/6955013 is fixed.
+     '../third_party/leveldatabase/leveldatabase.gyp:leveldatabase',
+-    '../third_party/speex/speex.gyp:libspeex',
++    '../build/linux/system.gyp:speex',
+     '../third_party/WebKit/Source/WebKit/chromium/WebKit.gyp:webkit',
+     '../third_party/zlib/zlib.gyp:zlib',
+     '../ui/ui.gyp:ui',

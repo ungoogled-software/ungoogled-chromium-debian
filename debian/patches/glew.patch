@@ -1,6 +1,29 @@
+From: Giuseppe Iuculano <iuculano@debian.org>
+Date: Sun, 13 Jun 2010 14:29:11 +0200
+Subject: Use system copy of libglewmx
+---
+ src/build/common.gypi      |    1 +
+ src/build/linux/system.gyp |   17 +++++++++++++++++
+ src/chrome/chrome.gyp      |    1 +
+ 3 files changed, 19 insertions(+), 0 deletions(-)
+
+diff --git a/src/build/common.gypi b/src/build/common.gypi
+index 8f83b57c..35b6b641 100644
+--- a/src/build/common.gypi
++++ b/src/build/common.gypi
+@@ -1064,6 +1064,7 @@
+       ['enable_gpu==1', {
+         'defines': [
+           'ENABLE_GPU=1',
++          'GLEW_MX',
+         ],
+       }],
+       ['use_openssl==1', {
+diff --git a/src/build/linux/system.gyp b/src/build/linux/system.gyp
+index 779816c0..0b5dee53 100644
 --- a/src/build/linux/system.gyp
 +++ b/src/build/linux/system.gyp
-@@ -428,6 +428,23 @@
+@@ -468,6 +468,23 @@
        },
      },
      {
@@ -23,10 +46,12 @@
 +    {
        # TODO(satorux): Remove this once dbus-glib clients are gone.
        'target_name': 'dbus-glib',
-       'type': 'settings',
+       'type': 'none',
+diff --git a/src/chrome/chrome.gyp b/src/chrome/chrome.gyp
+index 19014090..2d87e661 100644
 --- a/src/chrome/chrome.gyp
 +++ b/src/chrome/chrome.gyp
-@@ -472,6 +472,7 @@
+@@ -460,6 +460,7 @@
          '../base/base.gyp:base',
          '../content/content.gyp:content_utility',
          '../skia/skia.gyp:skia',
@@ -34,13 +59,3 @@
        ],
        'sources': [
          'utility/chrome_content_utility_client.cc',
---- a/src/build/common.gypi
-+++ b/src/build/common.gypi
-@@ -875,6 +875,7 @@
-       ['enable_gpu==1', {
-         'defines': [
-           'ENABLE_GPU=1',
-+          'GLEW_MX',
-         ],
-       }],
-       ['use_openssl==1', {

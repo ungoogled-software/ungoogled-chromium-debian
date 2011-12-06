@@ -1,15 +1,23 @@
-webkit needs to call nss to pull in nspr headers
+From: Giuseppe Iuculano <iuculano@debian.org>
+Date: Sat, 8 May 2010 12:05:46 +0200
+Subject: Pull in nspr headers
+---
+ src/chrome/chrome_common.gypi |    5 +++++
+ 1 files changed, 5 insertions(+), 0 deletions(-)
+
+diff --git a/src/chrome/chrome_common.gypi b/src/chrome/chrome_common.gypi
+index 1e0a23e5..062713b6 100644
 --- a/src/chrome/chrome_common.gypi
 +++ b/src/chrome/chrome_common.gypi
-@@ -18,6 +18,11 @@
-               '<(DEPTH)/third_party/wtl/include',
-             ],
-           }],
-+          ['OS=="linux"', {
-+            'include_dirs': [
-+              '/usr/include/nspr',
-+            ],
-+          }],
-         ],
-         'sources': [
-           # .cc, .h, and .mm files under chrome/common that are used on all
+@@ -237,6 +237,11 @@
+             '<(DEPTH)/third_party/wtl/include',
+           ],
+         }],
++        ['OS=="linux"', {
++          'include_dirs': [
++            '/usr/include/nspr',
++          ],
++        }],
+         ['toolkit_uses_gtk == 1', {
+           'dependencies': [
+             '../build/linux/system.gyp:gtk',
