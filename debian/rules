@@ -786,7 +786,7 @@ gos-pack: REVISION = $(shell cd $(TMP_DIR)/src && svn log --xml --limit 1 | grep
 	             sed -e 's/.*"\([0-9]*\)".*>\(....\)-\(..\)-\(..\)T.*/\2\3\4r\1/')
 gos-pack: VERSION  = $(shell cut -d= -f2 $(TMP_DIR)/src/chrome/VERSION | sed -e 's,$$,.,' | tr -d '\n' | sed -e 's/.$$//')~svn$(REVISION)
 else
-gos-pack: REVISION = $(shell cd $(TMP_DIR)/src && svn info | grep ^Revision: | cut -d' ' -f2)
+gos-pack: REVISION = $(shell cd $(TMP_DIR)/src && svn log --xml --limit 1 | grep '^ *revision=' | cut -d'"' -f2)
 gos-pack: VERSION  = $(shell cut -d= -f2 $(TMP_DIR)/src/chrome/VERSION | sed -e 's,$$,.,' | tr -d '\n' | sed -e 's/.$$//')~r$(REVISION)
 endif
 endif
