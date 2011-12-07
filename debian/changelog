@@ -1,3 +1,35 @@
+chromium-browser (15.0.874.121~r109964-1) unstable; urgency=high
+
+  [ Jonathan Nieder ]
+  * [f67eee0] chromium-inspector: Recommend chromium (>= 10) to avoid pulling in chromium-bsu
+  * [4de64d5] Use /etc/debian_version, not `lsb_release -sr`, to populate BUILD_DIST
+  * [7dba3cb] Permit '/' in Debian release names (Closes: #644526)
+  * [aa996fe] Unbreak get-orig-source in non-C locales by using "svn log --xml" instead of "svn info"
+
+  [ Giuseppe Iuculano ]
+  * [dc3b8be] Revert "Merge 104421 - Fix library paths for preloading NSS on Ubuntu 11.10."
+    Thanks to Jonathan Nieder (Closes: #647992)
+  * [d729967] Use system v8
+  * New stable release:
+    - High CVE-2011-3892: Double free in Theora decoder.
+      Credit to Aki Helin of OUSPG.
+    - Medium CVE-2011-3893: Out of bounds reads in MKV and
+      Vorbis media handlers. Credit to Aki Helin of OUSPG.
+    - High CVE-2011-3894: Memory corruption regression in VP8 decoding.
+      Credit to Andrew Scherkus of the Chromium development community.
+    - High CVE-2011-3895: Heap overflow in Vorbis decoder. Credit
+      to Aki Helin of OUSPG.
+    - High CVE-2011-3896: Buffer overflow in shader variable mapping.
+      Credit to Ken “strcpy” Russell of the Chromium development community.
+    - High CVE-2011-3897: Use-after-free in editing. Credit to pa_kt
+      reported through ZDI (ZDI-CAN-1416).
+    - Low CVE-2011-3898: Failure to ask for permission to run applets in
+      JRE7. Credit to Google Chrome Security Team (Chris Evans).
+    - High CVE-2011-3900: Out-of-bounds write in v8. Credit to Christian
+      Holler.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 07 Dec 2011 09:12:54 +0100
+
 chromium-browser (15.0.874.106~r107270-1) unstable; urgency=medium
 
   [ Matteo F. Vescovi ]
