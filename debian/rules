@@ -6,7 +6,7 @@ DEBIAN_UPSTREAM_VERSION	:= $(shell echo $(DEBIAN_VERSION) | sed 's/^\(.*\)-[^-]*
 DEBIAN_REVISION		:= $(shell echo $(DEBIAN_VERSION) | sed 's/^.*r\([^-]*\)-.*/\1/')
 DEBIAN_DIST		:= $(shell lsb_release -ds | tr -d '()')
 DEBIAN_DIST_NAME	:= $(shell lsb_release -si)
-DEBIAN_DIST_VERSION	:= $(shell lsb_release -sr)
+DEBIAN_DIST_VERSION	:= $(shell cat /etc/debian_version)
 MULTIARCH		:= $(shell dpkg-architecture -qDEB_BUILD_MULTIARCH)
 USE_SYSTEM_FFMPEG	:= 1
 ifeq (1,$(USE_SYSTEM_FFMPEG))
@@ -377,9 +377,9 @@ subst_files = \
 	$(NULL)
 
 %:: %.in
-	sed -e 's/@BUILD_DIST@/$(DEBIAN_DIST_NAME) $(DEBIAN_DIST_VERSION)/g' \
-	    -e 's/@BUILD_DIST_NAME@/$(DEBIAN_DIST_NAME)/g' \
-	    -e 's/@BUILD_DIST_VERSION)@/$(DEBIAN_DIST_VERSION)/g' \
+	sed -e 's|@BUILD_DIST@|$(DEBIAN_DIST_NAME) $(DEBIAN_DIST_VERSION)|g' \
+	    -e 's|@BUILD_DIST_NAME@|$(DEBIAN_DIST_NAME)|g' \
+	    -e 's|@BUILD_DIST_VERSION)@|$(DEBIAN_DIST_VERSION)|g' \
 	    < $< > $@
 
 pre-build:: $(subst_files)
@@ -786,7 +786,7 @@ gos-pack: REVISION = $(shell cd $(TMP_DIR)/src && svn log --xml --limit 1 | grep
 	             sed -e 's/.*"\([0-9]*\)".*>\(....\)-\(..\)-\(..\)T.*/\2\3\4r\1/')
 gos-pack: VERSION  = $(shell cut -d= -f2 $(TMP_DIR)/src/chrome/VERSION | sed -e 's,$$,.,' | tr -d '\n' | sed -e 's/.$$//')~svn$(REVISION)
 else
-gos-pack: REVISION = $(shell cd $(TMP_DIR)/src && svn info | grep ^Revision: | cut -d' ' -f2)
+gos-pack: REVISION = $(shell cd $(TMP_DIR)/src && svn log --xml --limit 1 | grep '^ *revision=' | cut -d'"' -f2)
 gos-pack: VERSION  = $(shell cut -d= -f2 $(TMP_DIR)/src/chrome/VERSION | sed -e 's,$$,.,' | tr -d '\n' | sed -e 's/.$$//')~r$(REVISION)
 endif
 endif
