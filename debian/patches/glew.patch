@@ -1,6 +1,6 @@
 --- a/src/build/linux/system.gyp
 +++ b/src/build/linux/system.gyp
-@@ -428,6 +428,23 @@
+@@ -468,6 +468,23 @@
        },
      },
      {
@@ -23,10 +23,10 @@
 +    {
        # TODO(satorux): Remove this once dbus-glib clients are gone.
        'target_name': 'dbus-glib',
-       'type': 'settings',
+       'type': 'none',
 --- a/src/chrome/chrome.gyp
 +++ b/src/chrome/chrome.gyp
-@@ -472,6 +472,7 @@
+@@ -460,6 +460,7 @@
          '../base/base.gyp:base',
          '../content/content.gyp:content_utility',
          '../skia/skia.gyp:skia',
@@ -36,7 +36,7 @@
          'utility/chrome_content_utility_client.cc',
 --- a/src/build/common.gypi
 +++ b/src/build/common.gypi
-@@ -875,6 +875,7 @@
+@@ -1064,6 +1064,7 @@
        ['enable_gpu==1', {
          'defines': [
            'ENABLE_GPU=1',

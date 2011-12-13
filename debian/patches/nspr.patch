@@ -34,7 +34,7 @@ Include system copy of prtime.h
  #include "chrome/browser/autocomplete/autocomplete.h"
 --- a/src/chrome/common/metrics_helpers.cc
 +++ b/src/chrome/common/metrics_helpers.cc
-@@ -17,7 +17,7 @@
+@@ -11,7 +11,7 @@
  #include "base/perftimer.h"
  #include "base/string_number_conversions.h"
  #include "base/sys_info.h"
@@ -43,3 +43,35 @@ Include system copy of prtime.h
  #include "base/time.h"
  #include "base/utf_string_conversions.h"
  #include "chrome/common/logging_chrome.h"
+--- a/src/base/base.gypi
++++ b/src/base/base.gypi
+@@ -18,7 +18,6 @@
+           'third_party/dynamic_annotations/dynamic_annotations.h',
+           'third_party/icu/icu_utf.cc',
+           'third_party/icu/icu_utf.h',
+-          'third_party/nspr/prtime.cc',
+           'third_party/nspr/prtime.h',
+           'third_party/nspr/prcpucfg_linux.h',
+           'third_party/xdg_mime/xdgmime.h',
+--- a/src/crypto/nss_util.cc
++++ b/src/crypto/nss_util.cc
+@@ -9,7 +9,7 @@
+ #include <plarena.h>
+ #include <prerror.h>
+ #include <prinit.h>
+-#include <prtime.h>
++#include <nspr/prtime.h>
+ #include <pk11pub.h>
+ #include <secmod.h>
+ 
+--- a/src/net/base/x509_certificate_nss.cc
++++ b/src/net/base/x509_certificate_nss.cc
+@@ -9,7 +9,7 @@
+ #include <nss.h>
+ #include <pk11pub.h>
+ #include <prerror.h>
+-#include <prtime.h>
++#include <nspr/prtime.h>
+ #include <secder.h>
+ #include <secerr.h>
+ #include <sechash.h>

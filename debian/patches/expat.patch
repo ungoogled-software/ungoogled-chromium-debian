@@ -60,3 +60,18 @@ Include system copy of expat.h
  
  static inline char* dupstr(SkChunkAlloc& chunk, const char src[], size_t len)
  {
+--- a/src/third_party/libjingle/source/talk/xmllite/xmlbuilder.h
++++ b/src/third_party/libjingle/source/talk/xmllite/xmlbuilder.h
+@@ -33,11 +33,7 @@
+ #include "talk/base/scoped_ptr.h"
+ #include "talk/xmllite/xmlparser.h"
+ 
+-#ifdef EXPAT_RELATIVE_PATH
+-#include "expat.h"
+-#else
+-#include "third_party/expat/v2_0_1/Source/lib/expat.h"
+-#endif  // EXPAT_RELATIVE_PATH
++#include <expat.h>
+ 
+ namespace buzz {
+ 
