@@ -2,7 +2,9 @@ Source: chromium-browser
 Section: web
 Priority: optional
 Maintainer: Debian Chromium Maintainers <pkg-chromium-maint@lists.alioth.debian.org>
-Uploaders: Giuseppe Iuculano <iuculano@debian.org>
+Uploaders:
+ Giuseppe Iuculano <iuculano@debian.org>,
+ Michael Gilbert <michael.s.gilbert@gmail.com>
 Vcs-Git: git://git.debian.org/git/pkg-chromium/pkg-chromium.git
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-chromium/pkg-chromium.git
 Homepage: http://code.google.com/chromium/
