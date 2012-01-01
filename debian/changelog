@@ -1,3 +1,43 @@
+chromium-browser (16.0.912.63~r113337-1) unstable; urgency=low
+
+  [ Giuseppe Iuculano ]
+  * New stable version:
+    - Medium CVE-2011-3903: Out-of-bounds read in regex matching. Credit to
+      David Holloway of the Chromium development community.
+    - Low CVE-2011-3905: Out-of-bounds reads in libxml. Credit to Google
+      Chrome Security Team (Inferno).
+    - Medium CVE-2011-3906: Out-of-bounds read in PDF parser. Credit
+      to Aki Helin of OUSPG.
+    - High CVE-2011-3907: URL bar spoofing with view-source. Credit
+      to Luka Treiber of ACROS Security.
+    - Low CVE-2011-3908: Out-of-bounds read in SVG parsing. Credit to Aki
+      Helin of OUSPG.
+    - Medium CVE-2011-3909: [64-bit only] Memory corruption in CSS property
+      array. Credit to Google Chrome Security Team (scarybeasts) and Chu.
+    - Medium CVE-2011-3910: Out-of-bounds read in YUV video frame handling.
+      Credit to Google Chrome Security Team (Cris Neckar).
+    - High CVE-2011-3912: Use-after-free in SVG filters. Credit to
+      Arthur Gerkis.
+    - High CVE-2011-3913: Use-after-free in Range handling. Credit
+      to Arthur Gerkis.
+    - High CVE-2011-3914: Out-of-bounds write in v8 i18n handling.
+      Credit to Sławomir Błażek.
+    - High CVE-2011-3915: Buffer overflow in PDF font handling.
+      Credit to Atte Kettunen of OUSPG.
+    - Medium CVE-2011-3917: Stack-buffer-overflow in FileWatcher. Credit to
+      Google Chrome Security Team (Marty Barbella).
+    - High CVE-2011-3904: Use-after-free in bidi handling. Credit to Google
+      Chrome Security Team (Inferno) and miaubiz.
+  * [5299644] Update patches for v16
+
+  [ Michael Gilbert ]
+  * [ce38c6a] depend on gyp >= r1119
+  * [d4236b8] fix upstream channel naming in source readme
+  * [3683f5d] refresh nss-workaround.patch and system_v8.patch
+  * [4c18347] add myself to uploaders
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 01 Jan 2012 13:45:54 +0100
+
 chromium-browser (15.0.874.121~r109964-1) unstable; urgency=high
 
   [ Jonathan Nieder ]
