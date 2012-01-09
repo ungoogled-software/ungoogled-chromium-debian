@@ -1,3 +1,14 @@
+chromium-browser (16.0.912.75~r116452-1) unstable; urgency=low
+
+  * New stable version:
+    - High CVE-2011-3921: Use-after-free in animation frames.
+      Credit to Boris Zbarsky of Mozilla.
+    - High CVE-2011-3919: Heap-buffer-overflow in libxml. Credit to Jüri Aedla.
+    - High CVE-2011-3922: Stack-buffer-overflow in glyph handling. Credit
+      to Google Chrome Security Team (Cris Neckar).
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Mon, 09 Jan 2012 10:30:41 +0100
+
 chromium-browser (16.0.912.63~r113337-1) unstable; urgency=low
 
   [ Giuseppe Iuculano ]
