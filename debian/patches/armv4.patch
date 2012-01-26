@@ -1,47 +1,4 @@
-From: Giuseppe Iuculano <iuculano@debian.org>
-Date: Sat, 17 Jul 2010 17:17:42 +0200
-Subject: Do not use armv4-incompatible code
-
-Fixes http://bugs.debian.org/584946
-Fixes http://bugs.debian.org/611725
-Fixes http://code.google.com/p/skia/issues/detail?id=160
-
-Reported-by: Timo Juhani Lindfors <timo.lindfors@iki.fi>
-Improved-by: Jérémy Lal <jerry@edagames.com>
----
- src/base/debug/debugger_posix.cc                   |    2 +-
- src/build/common.gypi                              |    1 +
- src/third_party/skia/include/core/SkMath.h         |    2 +-
- .../skia/src/opts/SkBlitRow_opts_arm.cpp           |    6 +++---
- 4 files changed, 6 insertions(+), 5 deletions(-)
-
-diff --git a/src/base/debug/debugger_posix.cc b/src/base/debug/debugger_posix.cc
-index 8b4c8f12..3fcca9fe 100644
---- a/src/base/debug/debugger_posix.cc
-+++ b/src/base/debug/debugger_posix.cc
-@@ -189,7 +189,7 @@ bool BeingDebugged() {
- } while (0)
- #else
- // ARM && !ANDROID
--#define DEBUG_BREAK() asm("bkpt 0")
-+#define DEBUG_BREAK() asm("nop")
- #endif
- #else
- #define DEBUG_BREAK() asm("int3")
-diff --git a/src/build/common.gypi b/src/build/common.gypi
-index 108a5356..8f83b57c 100644
---- a/src/build/common.gypi
-+++ b/src/build/common.gypi
-@@ -1753,6 +1753,7 @@
-                   # silences those warnings, as they are not helpful and
-                   # clutter legitimate warnings.
-                   '-Wno-abi',
-+                  '-fno-tree-sink',
-                 ],
-                 'conditions': [
-                   ['arm_thumb==1', {
-diff --git a/src/third_party/skia/include/core/SkMath.h b/src/third_party/skia/include/core/SkMath.h
-index 58891036..9cbbec68 100644
+Do not use armv4 incopatible code
 --- a/src/third_party/skia/include/core/SkMath.h
 +++ b/src/third_party/skia/include/core/SkMath.h
 @@ -156,7 +156,7 @@ static inline bool SkIsPow2(int value) {
@@ -53,11 +10,30 @@ index 58891036..9cbbec68 100644
      static inline int32_t SkMulS16(S16CPU x, S16CPU y) {
          SkASSERT((int16_t)x == x);
          SkASSERT((int16_t)y == y);
-diff --git a/src/third_party/skia/src/opts/SkBlitRow_opts_arm.cpp b/src/third_party/skia/src/opts/SkBlitRow_opts_arm.cpp
-index 393af3c1..92951387 100644
+--- a/src/build/common.gypi
++++ b/src/build/common.gypi
+@@ -1753,6 +1753,7 @@
+                   # silences those warnings, as they are not helpful and
+                   # clutter legitimate warnings.
+                   '-Wno-abi',
++                  '-fno-tree-sink',
+                 ],
+                 'conditions': [
+                   ['arm_thumb==1', {
+--- a/src/base/debug/debugger_posix.cc
++++ b/src/base/debug/debugger_posix.cc
+@@ -189,7 +189,7 @@ bool BeingDebugged() {
+ } while (0)
+ #else
+ // ARM && !ANDROID
+-#define DEBUG_BREAK() asm("bkpt 0")
++#define DEBUG_BREAK() asm("nop")
+ #endif
+ #else
+ #define DEBUG_BREAK() asm("int3")
 --- a/src/third_party/skia/src/opts/SkBlitRow_opts_arm.cpp
 +++ b/src/third_party/skia/src/opts/SkBlitRow_opts_arm.cpp
-@@ -675,8 +675,8 @@ static void S32A_Blend_BlitRow32_arm(SkPMColor* SK_RESTRICT dst,
+@@ -675,8 +675,8 @@ static void S32A_Blend_BlitRow32_arm(SkP
                    /* dst1_scale and dst2_scale*/
                    "lsr    r9, r5, #24                \n\t" /* src >> 24 */
                    "lsr    r10, r6, #24               \n\t" /* src >> 24 */
@@ -68,7 +44,7 @@ index 393af3c1..92951387 100644
                    "lsr    r9, r9, #8                 \n\t" /* r9 >> 8 */
                    "lsr    r10, r10, #8               \n\t" /* r10 >> 8 */
                    "rsb    r9, r9, #256               \n\t" /* dst1_scale = r9 = 255 - r9 + 1 */
-@@ -745,7 +745,7 @@ static void S32A_Blend_BlitRow32_arm(SkPMColor* SK_RESTRICT dst,
+@@ -745,7 +745,7 @@ static void S32A_Blend_BlitRow32_arm(SkP
  
                    "lsr    r6, r5, #24                \n\t" /* src >> 24 */
                    "and    r8, r12, r5, lsr #8        \n\t" /* ag = r8 = r5 masked by r12 lsr by #8 */

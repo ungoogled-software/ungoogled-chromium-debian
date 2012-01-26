@@ -10,7 +10,7 @@ Content:
 
   I. Packaging overview
   II. Upstream (orig.tar.gz)
-  III. Get sources for channels (aka dev, beta, release)
+  III. Get sources for channels (aka dev, beta, stable)
   IV. Efficient Upstream orig.tar.gz production
   V. Patching
 
@@ -52,10 +52,10 @@ Examples on how to get orig.tar.gz for snapshots:
     ./debian/rules get-current-source
 
 
-III. Get sources for channels (aka dev, beta, release)
+III. Get sources for channels (aka dev, beta, stable)
 
-The packaging provides a feature to produce orig.tar.gz for release channels,
-like dev, beta and release builds. To get the latest beta build, append
+The packaging provides a feature to produce orig.tar.gz for stable channels,
+like dev, beta and stable builds. To get the latest beta build, append
 CHANNEL=beta to your debian/rules line, e.g.:
 
   + ./debian/rules get-orig-source CHANNEL=beta

@@ -1,31 +1,7 @@
-From: Giuseppe Iuculano <iuculano@debian.org>
-Date: Wed, 26 Oct 2011 09:54:36 +0200
-Subject: Tell Chromium to look in /etc/chromium-browser for the master_preferences file
-
-... instead of next to the chromium binary.
----
- src/chrome/browser/first_run/first_run.cc |    2 +-
- src/chrome/common/chrome_paths.cc         |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/src/chrome/browser/first_run/first_run.cc b/src/chrome/browser/first_run/first_run.cc
-index a1ce8314..18d4a478 100644
---- a/src/chrome/browser/first_run/first_run.cc
-+++ b/src/chrome/browser/first_run/first_run.cc
-@@ -151,7 +151,7 @@ bool FirstRun::ProcessMasterPreferences(const FilePath& user_data_dir,
-                                         MasterPrefs* out_prefs) {
-   DCHECK(!user_data_dir.empty());
- 
--  FilePath master_prefs = MasterPrefsPath();
-+  FilePath master_prefs = FilePath("/etc/chromium");
-   if (master_prefs.empty())
-     return true;
-   installer::MasterPreferences prefs(master_prefs);
-diff --git a/src/chrome/common/chrome_paths.cc b/src/chrome/common/chrome_paths.cc
-index cfd60587..56cc7d87 100644
+Tell Chromium to look in /etc/chromium for the master_preferences file
 --- a/src/chrome/common/chrome_paths.cc
 +++ b/src/chrome/common/chrome_paths.cc
-@@ -303,7 +303,7 @@ bool PathProvider(int key, FilePath* result) {
+@@ -303,7 +303,7 @@ bool PathProvider(int key, FilePath* res
  #if defined(GOOGLE_CHROME_BUILD)
        cur = FilePath(FILE_PATH_LITERAL("/etc/opt/chrome/policies"));
  #else
@@ -34,3 +10,14 @@ index cfd60587..56cc7d87 100644
  #endif
        break;
      }
+--- a/src/chrome/browser/first_run/first_run.cc
++++ b/src/chrome/browser/first_run/first_run.cc
+@@ -151,7 +151,7 @@ bool FirstRun::ProcessMasterPreferences(
+                                         MasterPrefs* out_prefs) {
+   DCHECK(!user_data_dir.empty());
+ 
+-  FilePath master_prefs = MasterPrefsPath();
++  FilePath master_prefs = FilePath("/etc/chromium");
+   if (master_prefs.empty())
+     return true;
+   installer::MasterPreferences prefs(master_prefs);

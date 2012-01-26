@@ -1,0 +1,49 @@
+Subject: Revert "Merge 104421 - Fix library paths for preloading NSS on Ubuntu 11.10."
+
+This backs out the change introduced by r104798, which allowed NSS to
+actually be initialized, where "initialized" means "trip a sandboxing
+bug and take down the renderer".
+
+Works around: http://bugs.debian.org/647992
+
+Index: chromium/src/crypto/nss_util.cc
+===================================================================
+--- chromium.orig/src/crypto/nss_util.cc	2011-12-27 16:16:31.000000000 -0500
++++ chromium/src/crypto/nss_util.cc	2011-12-27 16:16:31.000000000 -0500
+@@ -29,7 +29,6 @@
+ #include "base/native_library.h"
+ #include "base/stringprintf.h"
+ #include "base/threading/thread_restrictions.h"
+-#include "build/build_config.h"
+ #include "crypto/scoped_nss_types.h"
+ 
+ #if defined(OS_CHROMEOS)
+@@ -648,18 +647,9 @@
+   // Use relative path to Search PATH for the library files.
+   paths.push_back(FilePath());
+ 
+-  // For Debian derivatives NSS libraries are located here.
++  // For Debian derivaties NSS libraries are located here.
+   paths.push_back(FilePath("/usr/lib/nss"));
+ 
+-  // Ubuntu 11.10 (Oneiric) places the libraries here.
+-#if defined(ARCH_CPU_X86_64)
+-  paths.push_back(FilePath("/usr/lib/x86_64-linux-gnu/nss"));
+-#elif defined(ARCH_CPU_X86)
+-  paths.push_back(FilePath("/usr/lib/i386-linux-gnu/nss"));
+-#elif defined(ARCH_CPU_ARMEL)
+-  paths.push_back(FilePath("/usr/lib/arm-linux-gnueabi/nss"));
+-#endif
+-
+   // A list of library files to load.
+   std::vector<std::string> libs;
+   libs.push_back("libsoftokn3.so");
+@@ -682,7 +672,7 @@
+   if (loaded == libs.size()) {
+     VLOG(3) << "NSS libraries loaded.";
+   } else {
+-    LOG(ERROR) << "Failed to load NSS libraries.";
++    LOG(WARNING) << "Failed to load NSS libraries.";
+   }
+ #endif
+ }

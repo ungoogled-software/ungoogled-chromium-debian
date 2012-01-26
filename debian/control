@@ -2,7 +2,9 @@ Source: chromium-browser
 Section: web
 Priority: optional
 Maintainer: Debian Chromium Maintainers <pkg-chromium-maint@lists.alioth.debian.org>
-Uploaders: Giuseppe Iuculano <iuculano@debian.org>
+Uploaders:
+ Giuseppe Iuculano <iuculano@debian.org>,
+ Michael Gilbert <michael.s.gilbert@gmail.com>
 Vcs-Git: git://git.debian.org/git/pkg-chromium/pkg-chromium.git
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-chromium/pkg-chromium.git
 Homepage: http://code.google.com/chromium/
@@ -11,7 +13,7 @@ Build-Depends: cdbs,
 	pkg-config,
 	lsb-release,
 	lzma,
-	gyp (>= 0.1~svn971),
+	gyp (>= 0.1~svn1119),
 	patchutils (>= 0.2.25),
 	python,
 	bison,
@@ -66,7 +68,7 @@ Build-Depends: cdbs,
 	libflac-dev,
 	libwebp-dev,
 	autotools-dev,
-	libv8-dev (>= 3.4.14.13),
+	libv8-dev (>= 3.5),
 	libpulse-dev,
 	libavcodec-dev (>= 4:0.7.1),
 	libavformat-dev (>= 4:0.7.1),
