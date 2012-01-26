@@ -1,3 +1,25 @@
+chromium-browser (16.0.912.77~r118311-1) unstable; urgency=high
+
+  [ Jonathan Nieder ]
+  * [b9c1859] fix path in Ubuntu-specific build rules.
+    Thanks to Michael Kuhn (Closes: #655521)
+
+  [ Giuseppe Iuculano ]
+  * [c6132fa] Fix FTBFS with libav 0.8 (Closes: #654215)
+  * New stable release:
+    - High CVE-2011-3924: Use-after-free in DOM selections.
+      Credit to Arthur Gerkis.
+    - Critical CVE-2011-3925: Use-after-free in Safe Browsing
+      navigation. Credit to Chamal de Silva.
+    - High CVE-2011-3928: Use-after-free in DOM handling. Credit to wushi
+      of team509 reported through ZDI (ZDI-CAN-1415).
+    - High CVE-2011-3927: Uninitialized value in Skia. Credit to
+      miaubiz.
+    - High CVE-2011-3926: Heap-buffer-overflow in tree builder.
+      Credit to Arthur Gerkis.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 26 Jan 2012 10:57:28 +0100
+
 chromium-browser (16.0.912.75~r116452-1) unstable; urgency=low
 
   * New stable version:
