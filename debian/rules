@@ -385,7 +385,7 @@ subst_files = \
 pre-build:: $(subst_files)
 ifneq (,$(findstring Ubuntu,$(DEBIAN_DIST)))
 	sed -ri '/const PrepopulatedEngine google = \{/,/\}\;/ { s/sourceid=chrome\&/&client=ubuntu\&channel=cs\&/g; }' \
-		build-tree/src/chrome/browser/search_engines/template_url_prepopulate_data.cc
+		src/chrome/browser/search_engines/template_url_prepopulate_data.cc
 endif
 
 DEB_MAKE_BUILD_TARGET := $(BUILD_ARGS) $(BUILD_TARGETS)
