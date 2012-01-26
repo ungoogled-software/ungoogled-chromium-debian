@@ -19,3 +19,4 @@ cups1.5.patch
 system_v8.patch
 #protobuf.patch
 nss-workaround.patch
+libav0.8.patch
