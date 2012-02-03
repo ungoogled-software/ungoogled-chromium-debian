@@ -1,3 +1,4 @@
+description: ffmpeg compatibility on the arm arch
 --- a/src/third_party/ffmpeg/config/Chrome/linux/arm/config.h
 +++ b/src/third_party/ffmpeg/config/Chrome/linux/arm/config.h
 @@ -34,10 +34,10 @@

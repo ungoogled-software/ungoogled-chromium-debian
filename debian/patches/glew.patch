@@ -1,3 +1,4 @@
+description: use system glew library
 --- a/src/build/linux/system.gyp
 +++ b/src/build/linux/system.gyp
 @@ -468,6 +468,23 @@
