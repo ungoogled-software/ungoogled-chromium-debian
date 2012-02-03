@@ -796,7 +796,7 @@ gos-pack:
 	mv $(TMP_DIR)/tools/depot_tools $(TMP_DIR)/$(DEB_TAR_SRCDIR)/depot_tools
 	mkdir $(TMP_DIR)/$(DEBIAN_NAME)-$(VERSION)
 	mv $(TMP_DIR)/$(DEB_TAR_SRCDIR) $(TMP_DIR)/$(DEBIAN_NAME)-$(VERSION)/
-	cd $(TMP_DIR) && tar -c $(TAR_FLAGS) -f ../$(DEBIAN_NAME)_$(VERSION).orig.tar.$(TAR_EXT) --exclude=.svn $(DEBIAN_NAME)-$(VERSION)
+	cd $(TMP_DIR) && tar -c $(TAR_FLAGS) -f ../$(DEBIAN_NAME)_$(VERSION).orig.tar.$(TAR_EXT) --exclude=.svn --exclude=.git $(DEBIAN_NAME)-$(VERSION)
 	rm -rf $(TMP_DIR)
 	@echo "# Done (created $(DEBIAN_NAME)_$(VERSION).orig.tar.$(TAR_EXT))"
 	@ls -l $(DEBIAN_NAME)_$(VERSION).orig.tar.$(TAR_EXT)
