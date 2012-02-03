@@ -1,6 +1,5 @@
-Format-Specification: http://dep.debian.net/deps/dep5
-Name: Chromium Browser
-Maintainer: Debian Chromium Maintainers <pkg-chromium-maint@lists.alioth.debian.org>
+Format: http://anonscm.debian.org/viewvc/dep/web/deps/dep5.mdwn?revision=202
+Upstream-Name: chromium
 Source: http://src.chromium.org/viewvc/chrome/
 
 Files: debian/*
@@ -465,7 +464,7 @@ Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of 
 License: global BSD-style Chromium
 
 Files: src/chrome/browser/chromeos/login/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
 License: global BSD-style Chromium
 
 Files: src/chrome/browser/chromeos/login/*
