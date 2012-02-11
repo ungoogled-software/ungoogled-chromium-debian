@@ -1,7 +1,9 @@
 Use system speex
---- a/src/build/linux/system.gyp
-+++ b/src/build/linux/system.gyp
-@@ -359,6 +359,26 @@
+Index: chromium/src/build/linux/system.gyp
+===================================================================
+--- chromium.orig/src/build/linux/system.gyp	2012-02-10 22:00:38.000000000 -0500
++++ chromium/src/build/linux/system.gyp	2012-02-10 22:25:22.000000000 -0500
+@@ -380,6 +380,26 @@
        ],
      },
      {
@@ -28,8 +30,10 @@ Use system speex
        'target_name': 'gnome_keyring',
        'type': 'none',
        'conditions': [
---- a/src/content/browser/speech/audio_encoder.cc
-+++ b/src/content/browser/speech/audio_encoder.cc
+Index: chromium/src/content/browser/speech/audio_encoder.cc
+===================================================================
+--- chromium.orig/src/content/browser/speech/audio_encoder.cc	2012-02-10 22:00:39.000000000 -0500
++++ chromium/src/content/browser/speech/audio_encoder.cc	2012-02-10 22:25:22.000000000 -0500
 @@ -10,7 +10,7 @@
  #include "base/stl_util.h"
  #include "base/string_number_conversions.h"
@@ -39,14 +43,16 @@ Use system speex
  
  using std::string;
  
---- a/src/content/content_browser.gypi
-+++ b/src/content/content_browser.gypi
-@@ -12,7 +12,7 @@
+Index: chromium/src/content/content_browser.gypi
+===================================================================
+--- chromium.orig/src/content/content_browser.gypi	2012-02-10 22:00:39.000000000 -0500
++++ chromium/src/content/content_browser.gypi	2012-02-10 22:25:41.000000000 -0500
+@@ -10,7 +10,7 @@
+     '../ppapi/ppapi_internal.gyp:ppapi_proxy',
+     '../skia/skia.gyp:skia',
      '../third_party/flac/flac.gyp:libflac',
-     # TODO(ericu): remove leveldb ref after crbug.com/6955013 is fixed.
-     '../third_party/leveldatabase/leveldatabase.gyp:leveldatabase',
 -    '../third_party/speex/speex.gyp:libspeex',
 +    '../build/linux/system.gyp:speex',
      '../third_party/WebKit/Source/WebKit/chromium/WebKit.gyp:webkit',
      '../third_party/zlib/zlib.gyp:zlib',
-     '../ui/ui.gyp:ui',
+     '../ui/gfx/surface/surface.gyp:surface',

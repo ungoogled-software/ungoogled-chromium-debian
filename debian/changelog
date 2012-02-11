@@ -1,3 +1,9 @@
+chromium-browser (17.0.963.46~r119351-1) UNRELEASED; urgency=low
+
+  * New stable release:
+
+ -- Michael Gilbert <michael.s.gilbert@gmail.com>  Fri, 10 Feb 2012 22:04:12 -0500
+
 chromium-browser (16.0.912.77~r118311-1) unstable; urgency=high
 
   [ Jonathan Nieder ]
