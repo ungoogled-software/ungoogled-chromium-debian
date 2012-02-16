@@ -311,6 +311,9 @@ GYP_DEFINES += \
 	$(NULL)
 endif
 
+# Use pulseaudio
+GYP_DEFINES += use_pulseaudio=1
+
 # Build everything (like All), including test programs but minus things we don't
 # want (breakpad, courgette, ..) or don't need (the other small tools)
 BUILD_TARGETS := \
