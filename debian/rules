@@ -73,17 +73,32 @@ GYP_DEFINES += werror=$(NULL)
 endif
 
 DEB_HOST_ARCH_CPU := $(shell dpkg-architecture -qDEB_HOST_ARCH_CPU)
+DEB_HOST_ARCH := $(shell dpkg-architecture -qDEB_HOST_ARCH)
 
 ifeq (arm,$(DEB_HOST_ARCH_CPU))
-AVOID_GCC_44 := 0
 GYP_DEFINES += \
-	arm_thumb=0 \
 	target_arch=arm \
 	disable_nacl=1 \
 	linux_use_tcmalloc=0 \
+	enable_webrtc=0 \
+	use_cups=1 \
+	$(NULL)
+ifeq (armel,$(DEB_HOST_ARCH))
+AVOID_GCC_44 := 0
+GYP_DEFINES += \
+	arm_thumb=0 \
 	armv7=0 \
 	arm_neon=0 \
 	$(NULL)
+endif
+ifeq (armhf,$(DEB_HOST_ARCH))
+GYP_DEFINES += \
+	arm_thumb=1 \
+	armv7=1 \
+	arm_neon=0 \
+	$(NULL)
+endif
+
 WANT_LZMA_DEBS := 0
 WANT_TESTS     := 0
 else

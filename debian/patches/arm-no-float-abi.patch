@@ -1,0 +1,10 @@
+--- a/src/build/common.gypi
++++ b/src/build/common.gypi
+@@ -1819,7 +1819,6 @@
+                     'cflags': [
+                       '-march=armv7-a',
+                       '-mtune=cortex-a8',
+-                      '-mfloat-abi=softfp',
+                     ],
+                     'conditions': [
+                       ['arm_neon==1', {
