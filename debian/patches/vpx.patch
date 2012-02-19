@@ -1,36 +1,22 @@
 --- a/src/remoting/remoting.gyp
 +++ b/src/remoting/remoting.gyp
-@@ -127,6 +127,7 @@
-         '../ui/gfx/gfx.gyp:gfx',
-         '../media/media.gyp:media',
+@@ -427,7 +427,7 @@
+         '../ui/ui.gyp:ui',
+         '../net/net.gyp:net',
+         '../skia/skia.gyp:skia',
+-        '../third_party/libvpx/libvpx.gyp:libvpx',
++        '../third_party/libvpx/libvpx.gyp:libvpx_include',
          '../third_party/protobuf/protobuf.gyp:protobuf_lite',
-+        '../third_party/ffmpeg/ffmpeg.gyp:ffmpeg',
-         '../third_party/libvpx/libvpx.gyp:libvpx_include',
          '../third_party/zlib/zlib.gyp:zlib',
-         'chromoting_jingle_glue',
---- a/src/remoting/base/decoder_vp8.cc
-+++ b/src/remoting/base/decoder_vp8.cc
-@@ -10,7 +10,9 @@
- 
- extern "C" {
- #define VPX_CODEC_DISABLE_COMPAT 1
--#include "third_party/libvpx/libvpx.h"
-+#include <vpx/vpx_codec.h>
-+#include <vpx/vpx_decoder.h>
-+#include <vpx/vp8dx.h>
- }
- 
- namespace remoting {
---- a/src/remoting/base/encoder_vp8.cc
-+++ b/src/remoting/base/encoder_vp8.cc
-@@ -13,7 +13,9 @@
- 
- extern "C" {
- #define VPX_CODEC_DISABLE_COMPAT 1
--#include "third_party/libvpx/libvpx.h"
-+#include <vpx/vpx_codec.h>
-+#include <vpx/vpx_encoder.h>
-+#include <vpx/vp8cx.h>
- }
- 
- namespace {
+         '../media/media.gyp:yuv_convert',
+--- a/src/third_party/ffmpeg/ffmpeg.gyp
++++ b/src/third_party/ffmpeg/ffmpeg.gyp
+@@ -513,7 +513,7 @@
+             ['OS == "linux" or OS == "solaris"', {
+               'link_settings': {
+                 'libraries': [
+-                  '-ldl',
++                  '-ldl', '-lvpx',
+                 ],
+               },
+             }],
