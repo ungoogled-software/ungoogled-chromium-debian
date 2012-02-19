@@ -1,8 +1,6 @@
 Include system copy of prtime.h
-Index: chromium/src/base/pr_time_unittest.cc
-===================================================================
---- chromium.orig/src/base/pr_time_unittest.cc	2012-02-10 23:31:43.000000000 -0500
-+++ chromium/src/base/pr_time_unittest.cc	2012-02-10 23:31:49.000000000 -0500
+--- a/src/base/pr_time_unittest.cc
++++ b/src/base/pr_time_unittest.cc
 @@ -4,7 +4,7 @@
  
  #include <time.h>
@@ -12,10 +10,8 @@ Index: chromium/src/base/pr_time_unittest.cc
  #include "base/time.h"
  #include "testing/gtest/include/gtest/gtest.h"
  
-Index: chromium/src/base/time.cc
-===================================================================
---- chromium.orig/src/base/time.cc	2012-02-10 23:31:43.000000000 -0500
-+++ chromium/src/base/time.cc	2012-02-10 23:31:49.000000000 -0500
+--- a/src/base/time.cc
++++ b/src/base/time.cc
 @@ -4,7 +4,7 @@
  
  #include "base/time.h"
@@ -25,10 +21,8 @@ Index: chromium/src/base/time.cc
  
  #include "base/logging.h"
  
-Index: chromium/src/chrome/browser/metrics/metrics_log.cc
-===================================================================
---- chromium.orig/src/chrome/browser/metrics/metrics_log.cc	2012-02-10 23:31:44.000000000 -0500
-+++ chromium/src/chrome/browser/metrics/metrics_log.cc	2012-02-10 23:31:49.000000000 -0500
+--- a/src/chrome/browser/metrics/metrics_log.cc
++++ b/src/chrome/browser/metrics/metrics_log.cc
 @@ -14,7 +14,7 @@
  #include "base/perftimer.h"
  #include "base/string_util.h"
@@ -38,10 +32,8 @@ Index: chromium/src/chrome/browser/metrics/metrics_log.cc
  #include "base/time.h"
  #include "base/utf_string_conversions.h"
  #include "chrome/browser/autocomplete/autocomplete.h"
-Index: chromium/src/chrome/common/metrics_helpers.cc
-===================================================================
---- chromium.orig/src/chrome/common/metrics_helpers.cc	2012-02-10 23:31:44.000000000 -0500
-+++ chromium/src/chrome/common/metrics_helpers.cc	2012-02-10 23:31:49.000000000 -0500
+--- a/src/chrome/common/metrics_helpers.cc
++++ b/src/chrome/common/metrics_helpers.cc
 @@ -11,7 +11,7 @@
  #include "base/perftimer.h"
  #include "base/string_number_conversions.h"
@@ -51,10 +43,8 @@ Index: chromium/src/chrome/common/metrics_helpers.cc
  #include "base/time.h"
  #include "base/utf_string_conversions.h"
  #include "chrome/common/logging_chrome.h"
-Index: chromium/src/base/base.gypi
-===================================================================
---- chromium.orig/src/base/base.gypi	2012-02-10 23:31:43.000000000 -0500
-+++ chromium/src/base/base.gypi	2012-02-10 23:31:49.000000000 -0500
+--- a/src/base/base.gypi
++++ b/src/base/base.gypi
 @@ -17,7 +17,6 @@
            'third_party/dmg_fp/dtoa_wrapper.cc',
            'third_party/icu/icu_utf.cc',
@@ -63,10 +53,8 @@ Index: chromium/src/base/base.gypi
            'third_party/nspr/prtime.h',
            'third_party/nspr/prcpucfg_linux.h',
            'third_party/xdg_mime/xdgmime.h',
-Index: chromium/src/crypto/nss_util.cc
-===================================================================
---- chromium.orig/src/crypto/nss_util.cc	2012-02-10 23:31:44.000000000 -0500
-+++ chromium/src/crypto/nss_util.cc	2012-02-10 23:31:49.000000000 -0500
+--- a/src/crypto/nss_util.cc
++++ b/src/crypto/nss_util.cc
 @@ -9,7 +9,7 @@
  #include <plarena.h>
  #include <prerror.h>
@@ -76,10 +64,8 @@ Index: chromium/src/crypto/nss_util.cc
  #include <pk11pub.h>
  #include <secmod.h>
  
-Index: chromium/src/net/base/x509_certificate_nss.cc
-===================================================================
---- chromium.orig/src/net/base/x509_certificate_nss.cc	2012-02-10 23:31:44.000000000 -0500
-+++ chromium/src/net/base/x509_certificate_nss.cc	2012-02-10 23:31:49.000000000 -0500
+--- a/src/net/base/x509_certificate_nss.cc
++++ b/src/net/base/x509_certificate_nss.cc
 @@ -10,7 +10,7 @@
  #include <nss.h>
  #include <pk11pub.h>

@@ -1,6 +1,6 @@
 --- a/src/media/ffmpeg/ffmpeg_common.h
 +++ b/src/media/ffmpeg/ffmpeg_common.h
-@@ -26,6 +26,7 @@ MSVC_PUSH_DISABLE_WARNING(4244);
+@@ -23,6 +23,7 @@ MSVC_PUSH_DISABLE_WARNING(4244);
  #include <libavformat/avformat.h>
  #include <libavformat/avio.h>
  #include <libavutil/avutil.h>

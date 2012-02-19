@@ -1,7 +1,7 @@
 Tell Chromium to look in /etc/chromium for the master_preferences file
 --- a/src/chrome/common/chrome_paths.cc
 +++ b/src/chrome/common/chrome_paths.cc
-@@ -303,7 +303,7 @@ bool PathProvider(int key, FilePath* res
+@@ -323,7 +323,7 @@ bool PathProvider(int key, FilePath* res
  #if defined(GOOGLE_CHROME_BUILD)
        cur = FilePath(FILE_PATH_LITERAL("/etc/opt/chrome/policies"));
  #else
