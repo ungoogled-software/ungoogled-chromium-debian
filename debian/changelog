@@ -1,8 +1,86 @@
-chromium-browser (17.0.963.46~r119351-1) UNRELEASED; urgency=low
+chromium-browser (17.0.963.56~r121963-1) unstable; urgency=high
 
+  [ Michael Gilbert ]
+  * [5c3bb1e] remove duplicate dependency on libgconf2-dev
+  * [a978400] exclude .git directories from upstream tarball
+  * [d29d859] add descriptions to patches
+  * [52af88b] update debian/copyright field to adhere to latest DEP5 specification
+  * [f3b7ba9] update patches for chromium 17
+  * [4634823] install content_resources.pak
+  * [e7883c9] depend on libv8 >= 3.7
+  * [dd4fe7d] use pulseaudio
+
+  [ Giuseppe Iuculano ]
+  * [826649a] Fix FTBFS on armel and added armhf.
+    Thanks to Riku Voipio (Closes: #632119)
+  * [e9ac7ab] Link against system vpx (Closes: #642760)
+  * [b88a849] Remove ardcoded dependency on libvpx0 (Closes: #660159)
+  * [9dec8df] Updated patches
   * New stable release:
+    - Medium CVE-2011-3016: Read-after-free with counter nodes.
+      Credit to miaubiz.
+    - High CVE-2011-3017: Possible use-after-free in database
+      handling. Credit to miaubiz.
+    - High CVE-2011-3018: Heap overflow in path rendering. Credit
+      to Aki Helin of OUSPG.
+    - High CVE-2011-3019: Heap buffer overflow in MKV handling. Credit to
+      Google Chrome Security Team (scarybeasts) and Mateusz Jurczyk / Gynvael
+      Coldwind of the Google Security Team.
+    - Medium CVE-2011-3020: Native client validator error. Credit to Nick
+      Bray of the Chromium development community.
+    - High CVE-2011-3021: Use-after-free in subframe loading.
+      Credit to Arthur Gerkis.
+    - Medium CVE-2011-3022: Inappropriate use of http for translation
+      script. Credit to Google Chrome Security Team (Jorge Obes).
+    - Medium CVE-2011-3023: Use-after-free with drag and drop.
+      Credit to pa_kt.
+    - Low CVE-2011-3024: Browser crash with empty x509 certificate. Credit
+      to chrometot.
+    - Medium CVE-2011-3025: Out-of-bounds read in h.264 parsing.
+      Credit to Sławomir Błażek.
+    - High CVE-2011-3026: Integer overflow / truncation in libpng.
+      Credit to Jüri Aedla.
+    - High CVE-2011-3027: Bad cast in column handling. Credit to
+      miaubiz
+    - Low CVE-2011-3953: Avoid clipboard monitoring after paste event.
+      Credit to Daniel Cheng of the Chromium development community.
+    - Low CVE-2011-3954: Crash with excessive database usage. Credit to
+      Collin Payne.
+    - High CVE-2011-3955: Crash aborting an IndexDB transaction. Credit to
+      David Grogan of the Chromium development community.
+    - Low CVE-2011-3956: Incorrect handling of sandboxed origins inside
+      extensions. Credit to Devdatta Akhawe, UC Berkeley.
+    - High CVE-2011-3958: Bad casts with column spans. Credit to
+      miaubiz.
+    - High CVE-2011-3959: Buffer overflow in locale handling.
+      Credit to Aki Helin of OUSPG.
+    - Medium CVE-2011-3960: Out-of-bounds read in audio decoding.
+      Credit to Aki Helin of OUSPG.
+    - Critical CVE-2011-3961: Race condition after crash of utility
+      process. Credit to Shawn Goertzen.
+    - Medium CVE-2011-3962: Out-of-bounds read in path clipping.
+      Credit to Aki Helin of OUSPG.
+    - Low CVE-2011-3964: URL bar confusion after drag + drop. Credit to
+      Code Audit Labs of VulnHunt.com.
+    - Low CVE-2011-3965: Crash in signature check. Credit to Sławomir
+      Błażek.
+    - High CVE-2011-3966: Use-after-free in stylesheet error
+      handling. Credit to Aki Helin of OUSPG.
+    - Low CVE-2011-3967: Crash with unusual certificate. Credit to Ben
+      Carrillo.
+    - High CVE-2011-3968: Use-after-free in CSS handling. Credit to
+      Arthur Gerkis.
+    - High CVE-2011-3969: Use-after-free in SVG layout. Credit to
+      Arthur Gerkis.
+    - Medium CVE-2011-3970: Out-of-bounds read in libxslt. Credit to
+      Aki Helin of OUSPG.
+    - High CVE-2011-3971: Use-after-free with mousemove events.
+      Credit to Arthur Gerkis.
+    - Medium CVE-2011-3972: Out-of-bounds read in shader translator. Credit
+      to Google Chrome Security Team (Inferno).
 
- -- Michael Gilbert <michael.s.gilbert@gmail.com>  Fri, 10 Feb 2012 22:04:12 -0500
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 19 Feb 2012 20:29:17 +0100
 
 chromium-browser (16.0.912.77~r118311-1) unstable; urgency=high
 
