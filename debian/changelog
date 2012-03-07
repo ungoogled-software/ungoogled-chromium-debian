@@ -1,3 +1,42 @@
+chromium-browser (17.0.963.66~r124982-1) unstable; urgency=high
+
+  [ Jonathan Nieder ]
+  * [78437ab] Depend on libpng-dev instead of libpng12-dev at build time
+    (Closes: #662287)
+
+  [ Giuseppe Iuculano ]
+  * New stable release:
+    - High CVE-2011-3031: Use-after-free in v8 element wrapper.
+      Credit to Chamal de Silva.
+    - High CVE-2011-3032: Use-after-free in SVG value handling.
+      Credit to Arthur Gerkis.
+    - High CVE-2011-3033: Buffer overflow in the Skia
+      drawing library. Credit to Aki Helin of OUSPG.
+    - High CVE-2011-3034: Use-after-free in SVG document handling.
+      Credit to Arthur Gerkis.
+    - High CVE-2011-3035: Use-after-free in SVG use handling.
+      Credit to Arthur Gerkis.
+    - High CVE-2011-3036: Bad cast in line box handling. Credit to
+      miaubiz.
+    - High CVE-2011-3037: Bad casts in anonymous
+      block splitting. Credit to miaubiz.
+    - High CVE-2011-3038: Use-after-free in multi-column handling.
+      Credit to miaubiz.
+    - High CVE-2011-3039: Use-after-free in quote handling. Credit
+      to miaubiz.
+    - Medium CVE-2011-3040: Out-of-bounds read in text handling.
+      Credit to miaubiz.
+    - High CVE-2011-3041: Use-after-free in class attribute
+      handling. Credit to miaubiz.
+    - High CVE-2011-3042: Use-after-free in table section handling.
+      Credit to miaubiz.
+    - High CVE-2011-3043: Use-after-free in flexbox with floats.
+      Credit to miaubiz.
+    - High CVE-2011-3044: Use-after-free with SVG animation
+      elements. Credit to Arthur Gerkis.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 07 Mar 2012 17:21:51 +0100
+
 chromium-browser (17.0.963.56~r121963-1) unstable; urgency=high
 
   [ Michael Gilbert ]
