@@ -1,3 +1,11 @@
+chromium-browser (17.0.963.78~r125577-1) unstable; urgency=high
+
+  * New stable release fixed issue found at Google's Pwnium competition:
+    - CVE-2011-3046: UXSS and bad history navigation. Credit to Sergey
+      Glazunov.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 08 Mar 2012 23:41:39 +0100
+
 chromium-browser (17.0.963.66~r124982-1) unstable; urgency=high
 
   [ Jonathan Nieder ]
