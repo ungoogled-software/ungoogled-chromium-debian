@@ -1,3 +1,27 @@
+chromium-browser (17.0.963.83~r127885-1) unstable; urgency=high
+
+  * New stable release:
+    - CVE-2011-3050: Use-after-free with first-letter handling.
+      Credit to miaubiz.
+    - CVE-2011-3051: Use-after-free in CSS cross-fade
+      handling. Credit to Arthur Gerkis.
+    - CVE-2011-3052: Memory corruption in WebGL canvas handling.
+      Credit to Ben Vanik of Google.
+    - CVE-2011-3053: Use-after-free in block splitting. Credit
+      to miaubiz.
+    - Low CVE-2011-3054: Apply additional isolations to webui privileges.
+      Credit to Sergey Glazunov.
+    - CVE-2011-3055: Prompt in the browser native UI for unpacked
+      extension installation. Credit to PinkiePie.
+    - High CVE-2011-3056: Cross-origin violation with "magic
+      iframe". Credit to Sergey Glazunov.
+    - Low CVE-2011-3049: Extension web request API can interfere with
+      system requests. Credit to Michael Gundlach.
+    - CVE-2011-3047: Errant plug-in load and GPU process memory corruption.
+      Credit to PinkiePie.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 23 Mar 2012 09:45:08 +0100
+
 chromium-browser (17.0.963.78~r125577-1) unstable; urgency=high
 
   * New stable release fixed issue found at Google's Pwnium competition:
