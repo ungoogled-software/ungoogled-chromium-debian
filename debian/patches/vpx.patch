@@ -1,6 +1,8 @@
---- a/src/remoting/remoting.gyp
-+++ b/src/remoting/remoting.gyp
-@@ -427,7 +427,7 @@
+Index: chromium-browser/src/remoting/remoting.gyp
+===================================================================
+--- chromium-browser.orig/src/remoting/remoting.gyp	2012-03-29 14:17:12.152763545 -0400
++++ chromium-browser/src/remoting/remoting.gyp	2012-03-29 14:17:19.016677254 -0400
+@@ -430,7 +430,7 @@
          '../ui/ui.gyp:ui',
          '../net/net.gyp:net',
          '../skia/skia.gyp:skia',
@@ -9,8 +11,10 @@
          '../third_party/protobuf/protobuf.gyp:protobuf_lite',
          '../third_party/zlib/zlib.gyp:zlib',
          '../media/media.gyp:yuv_convert',
---- a/src/third_party/ffmpeg/ffmpeg.gyp
-+++ b/src/third_party/ffmpeg/ffmpeg.gyp
+Index: chromium-browser/src/third_party/ffmpeg/ffmpeg.gyp
+===================================================================
+--- chromium-browser.orig/src/third_party/ffmpeg/ffmpeg.gyp	2012-03-29 14:17:12.152763545 -0400
++++ chromium-browser/src/third_party/ffmpeg/ffmpeg.gyp	2012-03-29 14:17:19.016677254 -0400
 @@ -513,7 +513,7 @@
              ['OS == "linux" or OS == "solaris"', {
                'link_settings': {

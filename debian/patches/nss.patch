@@ -1,8 +1,10 @@
 webkit needs to call nss to pull in nspr headers
---- a/src/chrome/chrome_common.gypi
-+++ b/src/chrome/chrome_common.gypi
+Index: chromium-browser/src/chrome/chrome_common.gypi
+===================================================================
+--- chromium-browser.orig/src/chrome/chrome_common.gypi	2012-03-28 21:08:38.341059603 -0400
++++ chromium-browser/src/chrome/chrome_common.gypi	2012-03-29 12:40:31.207018782 -0400
 @@ -260,6 +260,11 @@
-             '<(DEPTH)/chrome/default_plugin/default_plugin.gyp:default_plugin',
+             '<(DEPTH)/third_party/wtl/include',
            ]
          }],
 +        ['OS=="linux"', {

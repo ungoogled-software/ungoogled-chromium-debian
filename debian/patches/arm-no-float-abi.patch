@@ -1,6 +1,8 @@
---- a/src/build/common.gypi
-+++ b/src/build/common.gypi
-@@ -1819,7 +1819,6 @@
+Index: chromium-browser/src/build/common.gypi
+===================================================================
+--- chromium-browser.orig/src/build/common.gypi	2012-03-29 13:57:30.399620199 -0400
++++ chromium-browser/src/build/common.gypi	2012-03-29 14:16:57.820943720 -0400
+@@ -1829,7 +1829,6 @@
                      'cflags': [
                        '-march=armv7-a',
                        '-mtune=cortex-a8',

@@ -1,6 +1,8 @@
 description: use system glew library
---- a/src/build/linux/system.gyp
-+++ b/src/build/linux/system.gyp
+Index: chromium-browser/src/build/linux/system.gyp
+===================================================================
+--- chromium-browser.orig/src/build/linux/system.gyp	2012-03-29 13:57:24.643692557 -0400
++++ chromium-browser/src/build/linux/system.gyp	2012-03-29 13:57:30.367620612 -0400
 @@ -493,6 +493,23 @@
        },
      },
@@ -25,9 +27,11 @@ description: use system glew library
        # TODO(satorux): Remove this once dbus-glib clients are gone.
        'target_name': 'dbus-glib',
        'type': 'none',
---- a/src/chrome/chrome.gyp
-+++ b/src/chrome/chrome.gyp
-@@ -225,6 +225,7 @@
+Index: chromium-browser/src/chrome/chrome.gyp
+===================================================================
+--- chromium-browser.orig/src/chrome/chrome.gyp	2012-03-28 21:07:26.745959676 -0400
++++ chromium-browser/src/chrome/chrome.gyp	2012-03-29 13:57:30.399620199 -0400
+@@ -237,6 +237,7 @@
          '../base/base.gyp:base',
          '../content/content.gyp:content_utility',
          '../skia/skia.gyp:skia',
@@ -35,9 +39,11 @@ description: use system glew library
        ],
        'sources': [
          'utility/chrome_content_utility_client.cc',
---- a/src/build/common.gypi
-+++ b/src/build/common.gypi
-@@ -1093,6 +1093,7 @@
+Index: chromium-browser/src/build/common.gypi
+===================================================================
+--- chromium-browser.orig/src/build/common.gypi	2012-03-29 13:56:28.044404104 -0400
++++ chromium-browser/src/build/common.gypi	2012-03-29 13:57:30.399620199 -0400
+@@ -1141,6 +1141,7 @@
        ['enable_gpu==1', {
          'defines': [
            'ENABLE_GPU=1',

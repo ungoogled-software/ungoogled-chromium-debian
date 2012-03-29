@@ -1,6 +1,8 @@
 Use system speex
---- a/src/build/linux/system.gyp
-+++ b/src/build/linux/system.gyp
+Index: chromium-browser/src/build/linux/system.gyp
+===================================================================
+--- chromium-browser.orig/src/build/linux/system.gyp	2012-03-28 21:11:00.543271878 -0400
++++ chromium-browser/src/build/linux/system.gyp	2012-03-29 13:57:24.643692557 -0400
 @@ -380,6 +380,26 @@
        ],
      },
@@ -28,8 +30,10 @@ Use system speex
        'target_name': 'gnome_keyring',
        'type': 'none',
        'conditions': [
---- a/src/content/browser/speech/audio_encoder.cc
-+++ b/src/content/browser/speech/audio_encoder.cc
+Index: chromium-browser/src/content/browser/speech/audio_encoder.cc
+===================================================================
+--- chromium-browser.orig/src/content/browser/speech/audio_encoder.cc	2012-03-28 21:11:03.131239343 -0400
++++ chromium-browser/src/content/browser/speech/audio_encoder.cc	2012-03-29 13:57:24.659692354 -0400
 @@ -10,7 +10,7 @@
  #include "base/stl_util.h"
  #include "base/string_number_conversions.h"
@@ -39,9 +43,11 @@ Use system speex
  
  using std::string;
  
---- a/src/content/content_browser.gypi
-+++ b/src/content/content_browser.gypi
-@@ -10,7 +10,7 @@
+Index: chromium-browser/src/content/content_browser.gypi
+===================================================================
+--- chromium-browser.orig/src/content/content_browser.gypi	2012-03-28 21:11:07.991178245 -0400
++++ chromium-browser/src/content/content_browser.gypi	2012-03-29 13:57:24.675692152 -0400
+@@ -12,7 +12,7 @@
      '../ppapi/ppapi_internal.gyp:ppapi_proxy',
      '../skia/skia.gyp:skia',
      '../third_party/flac/flac.gyp:libflac',

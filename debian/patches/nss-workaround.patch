@@ -6,17 +6,19 @@ bug and take down the renderer".
 
 Works around: http://bugs.debian.org/647992
 
---- a/src/crypto/nss_util.cc
-+++ b/src/crypto/nss_util.cc
-@@ -32,7 +32,6 @@
- #include "base/native_library.h"
+Index: chromium-browser/src/crypto/nss_util.cc
+===================================================================
+--- chromium-browser.orig/src/crypto/nss_util.cc	2012-03-29 12:40:18.697434130 -0400
++++ chromium-browser/src/crypto/nss_util.cc	2012-03-29 14:16:29.741296729 -0400
+@@ -33,7 +33,6 @@
+ #include "base/scoped_temp_dir.h"
  #include "base/stringprintf.h"
  #include "base/threading/thread_restrictions.h"
 -#include "build/build_config.h"
  #include "crypto/scoped_nss_types.h"
  
  #if defined(OS_CHROMEOS)
-@@ -656,18 +655,9 @@ void LoadNSSLibraries() {
+@@ -665,18 +664,9 @@
    // Use relative path to Search PATH for the library files.
    paths.push_back(FilePath());
  
@@ -36,7 +38,7 @@ Works around: http://bugs.debian.org/647992
    // A list of library files to load.
    std::vector<std::string> libs;
    libs.push_back("libsoftokn3.so");
-@@ -690,7 +680,7 @@ void LoadNSSLibraries() {
+@@ -699,7 +689,7 @@
    if (loaded == libs.size()) {
      VLOG(3) << "NSS libraries loaded.";
    } else {

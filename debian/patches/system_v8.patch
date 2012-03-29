@@ -1,6 +1,8 @@
 Use system copy of libv8
---- a/src/build/linux/system.gyp
-+++ b/src/build/linux/system.gyp
+Index: chromium-browser/src/build/linux/system.gyp
+===================================================================
+--- chromium-browser.orig/src/build/linux/system.gyp	2012-03-29 13:57:30.000000000 -0400
++++ chromium-browser/src/build/linux/system.gyp	2012-03-29 13:59:01.534474473 -0400
 @@ -400,6 +400,18 @@
        }]]
      },
@@ -20,8 +22,10 @@ Use system copy of libv8
        'target_name': 'gnome_keyring',
        'type': 'none',
        'conditions': [
---- a/src/net/net.gyp
-+++ b/src/net/net.gyp
+Index: chromium-browser/src/net/net.gyp
+===================================================================
+--- chromium-browser.orig/src/net/net.gyp	2012-03-28 21:07:16.000000000 -0400
++++ chromium-browser/src/net/net.gyp	2012-03-29 13:59:01.534474473 -0400
 @@ -35,7 +35,7 @@
          '../third_party/icu/icu.gyp:icui18n',
          '../third_party/icu/icu.gyp:icuuc',
@@ -31,19 +35,23 @@ Use system copy of libv8
          'net_resources',
          'ssl_false_start_blacklist_process#host',
        ],
---- a/src/build/all.gyp
-+++ b/src/build/all.gyp
+Index: chromium-browser/src/build/all.gyp
+===================================================================
+--- chromium-browser.orig/src/build/all.gyp	2012-03-28 21:11:00.000000000 -0400
++++ chromium-browser/src/build/all.gyp	2012-03-29 13:59:01.534474473 -0400
 @@ -50,7 +50,7 @@
          '../third_party/sqlite/sqlite.gyp:*',
-         '../third_party/WebKit/Source/WebKit/chromium/WebKit.gyp:*',
+         '../third_party/WebKit/Source/WebKit/chromium/All.gyp:*',
          '../third_party/zlib/zlib.gyp:*',
 -        '../v8/tools/gyp/v8.gyp:*',
 +        '../build/linux/system.gyp:v8',
          '../webkit/support/webkit_support.gyp:*',
          '../webkit/webkit.gyp:*',
          'util/build_util.gyp:*',
---- a/src/chrome/renderer/loadtimes_extension_bindings.cc
-+++ b/src/chrome/renderer/loadtimes_extension_bindings.cc
+Index: chromium-browser/src/chrome/renderer/loadtimes_extension_bindings.cc
+===================================================================
+--- chromium-browser.orig/src/chrome/renderer/loadtimes_extension_bindings.cc	2012-03-28 21:08:47.000000000 -0400
++++ chromium-browser/src/chrome/renderer/loadtimes_extension_bindings.cc	2012-03-29 13:59:01.538474424 -0400
 @@ -9,7 +9,7 @@
  #include "base/time.h"
  #include "content/public/renderer/document_state.h"
@@ -53,8 +61,10 @@ Use system copy of libv8
  
  using WebKit::WebDataSource;
  using WebKit::WebFrame;
---- a/src/net/proxy/proxy_resolver_v8.cc
-+++ b/src/net/proxy/proxy_resolver_v8.cc
+Index: chromium-browser/src/net/proxy/proxy_resolver_v8.cc
+===================================================================
+--- chromium-browser.orig/src/net/proxy/proxy_resolver_v8.cc	2012-03-28 21:07:14.000000000 -0400
++++ chromium-browser/src/net/proxy/proxy_resolver_v8.cc	2012-03-29 13:59:01.538474424 -0400
 @@ -24,7 +24,7 @@
  #include "net/proxy/proxy_resolver_js_bindings.h"
  #include "net/proxy/proxy_resolver_request_context.h"
@@ -64,8 +74,10 @@ Use system copy of libv8
  
  // Notes on the javascript environment:
  //
---- a/src/webkit/glue/webkit_glue.cc
-+++ b/src/webkit/glue/webkit_glue.cc
+Index: chromium-browser/src/webkit/glue/webkit_glue.cc
+===================================================================
+--- chromium-browser.orig/src/webkit/glue/webkit_glue.cc	2012-03-28 21:07:04.000000000 -0400
++++ chromium-browser/src/webkit/glue/webkit_glue.cc	2012-03-29 13:59:01.538474424 -0400
 @@ -45,7 +45,7 @@
  #if defined(OS_WIN)
  #include "third_party/WebKit/Source/WebKit/chromium/public/win/WebInputEventFactory.h"
@@ -75,8 +87,10 @@ Use system copy of libv8
  #include "webkit/glue/glue_serialize.h"
  #include "webkit/glue/user_agent.h"
  
---- a/src/webkit/tools/test_shell/listener_leak_test.cc
-+++ b/src/webkit/tools/test_shell/listener_leak_test.cc
+Index: chromium-browser/src/webkit/tools/test_shell/listener_leak_test.cc
+===================================================================
+--- chromium-browser.orig/src/webkit/tools/test_shell/listener_leak_test.cc	2012-03-28 21:07:06.000000000 -0400
++++ chromium-browser/src/webkit/tools/test_shell/listener_leak_test.cc	2012-03-29 13:59:01.538474424 -0400
 @@ -8,8 +8,8 @@
  #include "base/string_number_conversions.h"
  #include "base/string_util.h"
@@ -88,8 +102,10 @@ Use system copy of libv8
  #include "webkit/glue/webkit_glue.h"
  #include "webkit/tools/test_shell/test_shell.h"
  #include "webkit/tools/test_shell/test_shell_test.h"
---- a/src/chrome/renderer/search_extension.cc
-+++ b/src/chrome/renderer/search_extension.cc
+Index: chromium-browser/src/chrome/renderer/search_extension.cc
+===================================================================
+--- chromium-browser.orig/src/chrome/renderer/search_extension.cc	2012-03-28 21:08:47.000000000 -0400
++++ chromium-browser/src/chrome/renderer/search_extension.cc	2012-03-29 13:59:01.538474424 -0400
 @@ -11,7 +11,7 @@
  #include "chrome/renderer/searchbox.h"
  #include "content/public/renderer/render_view.h"
@@ -99,9 +115,11 @@ Use system copy of libv8
  
  using WebKit::WebFrame;
  using WebKit::WebView;
---- a/src/webkit/glue/webkit_glue.gypi
-+++ b/src/webkit/glue/webkit_glue.gypi
-@@ -130,7 +130,7 @@
+Index: chromium-browser/src/webkit/glue/webkit_glue.gypi
+===================================================================
+--- chromium-browser.orig/src/webkit/glue/webkit_glue.gypi	2012-03-28 21:07:05.000000000 -0400
++++ chromium-browser/src/webkit/glue/webkit_glue.gypi	2012-03-29 13:59:01.542474374 -0400
+@@ -131,7 +131,7 @@
          '<(DEPTH)/third_party/icu/icu.gyp:icuuc',
          '<(DEPTH)/third_party/npapi/npapi.gyp:npapi',
          '<(DEPTH)/ui/ui.gyp:ui',
@@ -110,7 +128,7 @@ Use system copy of libv8
          'fileapi',
          'webkit_media',
          'webkit_resources',
-@@ -521,7 +521,7 @@
+@@ -528,7 +528,7 @@
                 ],
                 'export_dependent_settings': [
                   '<(DEPTH)/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp:webkit',
@@ -119,8 +137,10 @@ Use system copy of libv8
                 ],
              }],
            ],
---- a/src/chrome/renderer/searchbox_extension.cc
-+++ b/src/chrome/renderer/searchbox_extension.cc
+Index: chromium-browser/src/chrome/renderer/searchbox_extension.cc
+===================================================================
+--- chromium-browser.orig/src/chrome/renderer/searchbox_extension.cc	2012-03-28 21:08:48.000000000 -0400
++++ chromium-browser/src/chrome/renderer/searchbox_extension.cc	2012-03-29 13:59:01.542474374 -0400
 @@ -15,7 +15,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebFrame.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebScriptSource.h"
@@ -130,9 +150,11 @@ Use system copy of libv8
  
  using WebKit::WebFrame;
  using WebKit::WebScriptSource;
---- a/src/v8/tools/gyp/v8.gyp
-+++ b/src/v8/tools/gyp/v8.gyp
-@@ -932,7 +932,7 @@
+Index: chromium-browser/src/v8/tools/gyp/v8.gyp
+===================================================================
+--- chromium-browser.orig/src/v8/tools/gyp/v8.gyp	2012-03-28 21:08:53.000000000 -0400
++++ chromium-browser/src/v8/tools/gyp/v8.gyp	2012-03-29 13:59:01.542474374 -0400
+@@ -950,7 +950,7 @@
              }],
            ],
            'dependencies': [
@@ -141,9 +163,11 @@ Use system copy of libv8
            ],
          },
        ],
---- a/src/third_party/WebKit/Source/WebCore/WebCore.gyp/WebCore.gyp
-+++ b/src/third_party/WebKit/Source/WebCore/WebCore.gyp/WebCore.gyp
-@@ -1003,7 +1003,7 @@
+Index: chromium-browser/src/third_party/WebKit/Source/WebCore/WebCore.gyp/WebCore.gyp
+===================================================================
+--- chromium-browser.orig/src/third_party/WebKit/Source/WebCore/WebCore.gyp/WebCore.gyp	2012-03-28 21:13:52.000000000 -0400
++++ chromium-browser/src/third_party/WebKit/Source/WebCore/WebCore.gyp/WebCore.gyp	2012-03-29 13:59:01.546474324 -0400
+@@ -1055,7 +1055,7 @@
          '<(chromium_src_dir)/third_party/libwebp/libwebp.gyp:libwebp',
          '<(chromium_src_dir)/third_party/npapi/npapi.gyp:npapi',
          '<(chromium_src_dir)/third_party/sqlite/sqlite.gyp:sqlite',
@@ -152,7 +176,7 @@ Use system copy of libv8
          '<(libjpeg_gyp_path):libjpeg',
        ],
        'include_dirs': [
-@@ -1127,7 +1127,7 @@
+@@ -1175,7 +1175,7 @@
          '<(chromium_src_dir)/third_party/ots/ots.gyp:ots',
          '<(chromium_src_dir)/third_party/sqlite/sqlite.gyp:sqlite',
          '<(chromium_src_dir)/third_party/angle/src/build_angle.gyp:translator_glsl',
@@ -161,7 +185,7 @@ Use system copy of libv8
          '<(libjpeg_gyp_path):libjpeg',
        ],
        'export_dependent_settings': [
-@@ -1145,7 +1145,7 @@
+@@ -1193,7 +1193,7 @@
          '<(chromium_src_dir)/third_party/ots/ots.gyp:ots',
          '<(chromium_src_dir)/third_party/sqlite/sqlite.gyp:sqlite',
          '<(chromium_src_dir)/third_party/angle/src/build_angle.gyp:translator_glsl',
@@ -170,7 +194,7 @@ Use system copy of libv8
          '<(libjpeg_gyp_path):libjpeg',
        ],
        # This is needed for mac because of webkit_system_interface. It'd be nice
-@@ -1900,7 +1900,7 @@
+@@ -1954,7 +1954,7 @@
          '<(chromium_src_dir)/build/temp_gyp/googleurl.gyp:googleurl',
          '<(chromium_src_dir)/skia/skia.gyp:skia',
          '<(chromium_src_dir)/third_party/npapi/npapi.gyp:npapi',
@@ -179,7 +203,7 @@ Use system copy of libv8
        ],
        'export_dependent_settings': [
          'webcore_bindings',
-@@ -1909,7 +1909,7 @@
+@@ -1963,7 +1963,7 @@
          '<(chromium_src_dir)/build/temp_gyp/googleurl.gyp:googleurl',
          '<(chromium_src_dir)/skia/skia.gyp:skia',
          '<(chromium_src_dir)/third_party/npapi/npapi.gyp:npapi',
@@ -188,8 +212,10 @@ Use system copy of libv8
        ],
        'direct_dependent_settings': {
          'include_dirs': [
---- a/src/third_party/WebKit/Tools/DumpRenderTree/chromium/DumpRenderTree.cpp
-+++ b/src/third_party/WebKit/Tools/DumpRenderTree/chromium/DumpRenderTree.cpp
+Index: chromium-browser/src/third_party/WebKit/Tools/DumpRenderTree/chromium/DumpRenderTree.cpp
+===================================================================
+--- chromium-browser.orig/src/third_party/WebKit/Tools/DumpRenderTree/chromium/DumpRenderTree.cpp	2012-03-28 21:13:19.000000000 -0400
++++ chromium-browser/src/third_party/WebKit/Tools/DumpRenderTree/chromium/DumpRenderTree.cpp	2012-03-29 13:59:01.546474324 -0400
 @@ -32,8 +32,8 @@
  
  #include "TestShell.h"
@@ -201,8 +227,10 @@ Use system copy of libv8
  #include <wtf/Vector.h>
  
  using namespace std;
---- a/src/chrome/browser/task_manager/task_manager_resource_providers.cc
-+++ b/src/chrome/browser/task_manager/task_manager_resource_providers.cc
+Index: chromium-browser/src/chrome/browser/task_manager/task_manager_resource_providers.cc
+===================================================================
+--- chromium-browser.orig/src/chrome/browser/task_manager/task_manager_resource_providers.cc	2012-03-28 21:08:20.000000000 -0400
++++ chromium-browser/src/chrome/browser/task_manager/task_manager_resource_providers.cc	2012-03-29 13:59:01.546474324 -0400
 @@ -55,7 +55,7 @@
  #include "third_party/sqlite/sqlite3.h"
  #include "ui/base/l10n/l10n_util.h"
@@ -212,9 +240,11 @@ Use system copy of libv8
  
  #if defined(OS_MACOSX)
  #include "skia/ext/skia_utils_mac.h"
---- a/src/chrome/chrome.gyp
-+++ b/src/chrome/chrome.gyp
-@@ -1094,7 +1094,7 @@
+Index: chromium-browser/src/chrome/chrome.gyp
+===================================================================
+--- chromium-browser.orig/src/chrome/chrome.gyp	2012-03-29 13:57:30.000000000 -0400
++++ chromium-browser/src/chrome/chrome.gyp	2012-03-29 13:59:01.550474273 -0400
+@@ -1125,7 +1125,7 @@
              '../testing/gtest.gyp:*',
              '../tools/memory_watcher/memory_watcher.gyp:*',
              '../ui/ui.gyp:*',
@@ -223,18 +253,20 @@ Use system copy of libv8
              '../webkit/support/webkit_support.gyp:*',
              '../webkit/webkit.gyp:*',
              '<(libjpeg_gyp_path):*',
---- a/src/chrome/chrome_tests.gypi
-+++ b/src/chrome/chrome_tests.gypi
-@@ -1179,7 +1179,7 @@
+Index: chromium-browser/src/chrome/chrome_tests.gypi
+===================================================================
+--- chromium-browser.orig/src/chrome/chrome_tests.gypi	2012-03-28 21:07:21.000000000 -0400
++++ chromium-browser/src/chrome/chrome_tests.gypi	2012-03-29 14:12:03.824639581 -0400
+@@ -1216,7 +1216,7 @@
          '../ui/ui.gyp:ui_resources',
          '../ui/ui.gyp:ui_resources_standard',
          '../ui/ui.gyp:ui_test_support',
 -        '../v8/tools/gyp/v8.gyp:v8',
 +        '../build/linux/system.gyp:v8',
+         'common/extensions/api/api.gyp:api',
          'chrome_resources.gyp:chrome_resources',
          'chrome_resources.gyp:chrome_strings',
-       ],
-@@ -2393,7 +2393,7 @@
+@@ -2459,7 +2459,7 @@
          '../third_party/icu/icu.gyp:icui18n',
          '../third_party/icu/icu.gyp:icuuc',
          '../third_party/leveldatabase/leveldatabase.gyp:leveldatabase',
@@ -243,7 +275,7 @@ Use system copy of libv8
          '../webkit/webkit.gyp:test_shell_test_support',
          # Runtime dependencies
          '../third_party/mesa/mesa.gyp:osmesa',
-@@ -2992,7 +2992,7 @@
+@@ -3102,7 +3102,7 @@
          ['target_arch!="arm"', {
            'dependencies': [
              # build time dependency.
@@ -252,8 +284,10 @@ Use system copy of libv8
              # run time dependency
              '../webkit/webkit.gyp:copy_npapi_test_plugin',
            ],
---- a/src/chrome/renderer/chrome_render_process_observer.cc
-+++ b/src/chrome/renderer/chrome_render_process_observer.cc
+Index: chromium-browser/src/chrome/renderer/chrome_render_process_observer.cc
+===================================================================
+--- chromium-browser.orig/src/chrome/renderer/chrome_render_process_observer.cc	2012-03-28 21:08:48.000000000 -0400
++++ chromium-browser/src/chrome/renderer/chrome_render_process_observer.cc	2012-03-29 13:59:01.554474222 -0400
 @@ -42,7 +42,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebFrame.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebRuntimeFeatures.h"
@@ -263,8 +297,10 @@ Use system copy of libv8
  
  #if defined(OS_WIN)
  #include "base/win/iat_patch_function.h"
---- a/src/chrome/renderer/extensions/extension_dispatcher.cc
-+++ b/src/chrome/renderer/extensions/extension_dispatcher.cc
+Index: chromium-browser/src/chrome/renderer/extensions/extension_dispatcher.cc
+===================================================================
+--- chromium-browser.orig/src/chrome/renderer/extensions/extension_dispatcher.cc	2012-03-28 21:08:47.000000000 -0400
++++ chromium-browser/src/chrome/renderer/extensions/extension_dispatcher.cc	2012-03-29 13:59:01.554474222 -0400
 @@ -32,7 +32,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/platform/WebURLRequest.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebView.h"
@@ -274,8 +310,10 @@ Use system copy of libv8
  
  namespace {
  static const int64 kInitialExtensionIdleHandlerDelayMs = 5*1000;
---- a/src/chrome/renderer/external_extension.cc
-+++ b/src/chrome/renderer/external_extension.cc
+Index: chromium-browser/src/chrome/renderer/external_extension.cc
+===================================================================
+--- chromium-browser.orig/src/chrome/renderer/external_extension.cc	2012-03-28 21:08:48.000000000 -0400
++++ chromium-browser/src/chrome/renderer/external_extension.cc	2012-03-29 13:59:01.554474222 -0400
 @@ -12,7 +12,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebDocument.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebFrame.h"
@@ -285,8 +323,10 @@ Use system copy of libv8
  
  using WebKit::WebFrame;
  using WebKit::WebView;
---- a/src/chrome/renderer/translate_helper.cc
-+++ b/src/chrome/renderer/translate_helper.cc
+Index: chromium-browser/src/chrome/renderer/translate_helper.cc
+===================================================================
+--- chromium-browser.orig/src/chrome/renderer/translate_helper.cc	2012-03-28 21:08:48.000000000 -0400
++++ chromium-browser/src/chrome/renderer/translate_helper.cc	2012-03-29 13:59:01.554474222 -0400
 @@ -18,7 +18,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebScriptSource.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebView.h"
@@ -296,9 +336,11 @@ Use system copy of libv8
  #include "webkit/glue/dom_operations.h"
  
  using WebKit::WebDocument;
---- a/src/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp
-+++ b/src/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp
-@@ -74,13 +74,13 @@
+Index: chromium-browser/src/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp
+===================================================================
+--- chromium-browser.orig/src/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp	2012-03-28 21:14:20.000000000 -0400
++++ chromium-browser/src/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp	2012-03-29 13:59:01.558474171 -0400
+@@ -73,13 +73,13 @@
                  '<(chromium_src_dir)/third_party/icu/icu.gyp:icuuc',
                  '<(chromium_src_dir)/third_party/npapi/npapi.gyp:npapi',
                  '<(chromium_src_dir)/third_party/angle/src/build_angle.gyp:translator_glsl',
@@ -314,7 +356,7 @@ Use system copy of libv8
              ],
              'include_dirs': [
                  'public',
-@@ -694,7 +694,7 @@
+@@ -708,7 +708,7 @@
                                  '<(chromium_src_dir)/third_party/modp_b64/modp_b64.gyp:modp_b64',
                                  '<(chromium_src_dir)/third_party/ots/ots.gyp:ots',
                                  '<(chromium_src_dir)/third_party/zlib/zlib.gyp:zlib',
@@ -323,7 +365,7 @@ Use system copy of libv8
                                  # We must not add webkit_support here because of cyclic dependency.
                              ],
                              'direct_dependent_settings': {
-@@ -704,7 +704,7 @@
+@@ -718,7 +718,7 @@
                              },
                              'export_dependent_settings': [
                                  '<(chromium_src_dir)/build/temp_gyp/googleurl.gyp:googleurl',
@@ -332,17 +374,10 @@ Use system copy of libv8
                              ],
                              'include_dirs': [
                                  # WARNING: Do not view this particular case as a precedent for
-@@ -1091,7 +1091,7 @@
-                 '../../JavaScriptCore/JavaScriptCore.gyp/JavaScriptCore.gyp:wtf_config',
-                 '<(chromium_src_dir)/build/temp_gyp/googleurl.gyp:googleurl',
-                 '<(chromium_src_dir)/third_party/icu/icu.gyp:icuuc',
--                '<(chromium_src_dir)/v8/tools/gyp/v8.gyp:v8',
-+                '<(chromium_src_dir)/build/linux/system.gyp:v8',
-                 '<(chromium_src_dir)/webkit/support/webkit_support.gyp:blob',
-                 '<(chromium_src_dir)/webkit/support/webkit_support.gyp:webkit_support',
-                 '<(chromium_src_dir)/webkit/support/webkit_support.gyp:webkit_user_agent',
---- a/src/webkit/tools/test_shell/test_shell_webkit_init.cc
-+++ b/src/webkit/tools/test_shell/test_shell_webkit_init.cc
+Index: chromium-browser/src/webkit/tools/test_shell/test_shell_webkit_init.cc
+===================================================================
+--- chromium-browser.orig/src/webkit/tools/test_shell/test_shell_webkit_init.cc	2012-03-28 21:07:05.000000000 -0400
++++ chromium-browser/src/webkit/tools/test_shell/test_shell_webkit_init.cc	2012-03-29 13:59:01.558474171 -0400
 @@ -14,7 +14,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebScriptController.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebSecurityPolicy.h"
@@ -352,8 +387,10 @@ Use system copy of libv8
  #include "webkit/plugins/npapi/plugin_list.h"
  #include "webkit/plugins/webplugininfo.h"
  #include "webkit/tools/test_shell/simple_socket_stream_bridge.h"
---- a/src/content/content_renderer.gypi
-+++ b/src/content/content_renderer.gypi
+Index: chromium-browser/src/content/content_renderer.gypi
+===================================================================
+--- chromium-browser.orig/src/content/content_renderer.gypi	2012-03-28 21:11:08.000000000 -0400
++++ chromium-browser/src/content/content_renderer.gypi	2012-03-29 13:59:01.558474171 -0400
 @@ -17,7 +17,7 @@
      '../third_party/npapi/npapi.gyp:npapi',
      '../third_party/WebKit/Source/WebKit/chromium/WebKit.gyp:webkit',
@@ -363,9 +400,11 @@ Use system copy of libv8
      '../webkit/support/webkit_support.gyp:webkit_media',
      '../webkit/support/webkit_support.gyp:webkit_gpu',
    ],
---- a/src/third_party/WebKit/Source/ThirdParty/gyp/samples/samples
-+++ b/src/third_party/WebKit/Source/ThirdParty/gyp/samples/samples
-@@ -38,7 +38,7 @@ gyps = [
+Index: chromium-browser/src/third_party/WebKit/Source/ThirdParty/gyp/samples/samples
+===================================================================
+--- chromium-browser.orig/src/third_party/WebKit/Source/ThirdParty/gyp/samples/samples	2012-03-28 21:14:16.000000000 -0400
++++ chromium-browser/src/third_party/WebKit/Source/ThirdParty/gyp/samples/samples	2012-03-29 13:59:01.562474121 -0400
+@@ -38,7 +38,7 @@
      'third_party/npapi/npapi.gyp',
      'third_party/sqlite/sqlite.gyp',
      'third_party/zlib/zlib.gyp',
@@ -374,9 +413,11 @@ Use system copy of libv8
      'webkit/activex_shim/activex_shim.gyp',
      'webkit/activex_shim_dll/activex_shim_dll.gyp',
      'webkit/build/action_csspropertynames.py',
---- a/src/webkit/tools/test_shell/test_shell.gypi
-+++ b/src/webkit/tools/test_shell/test_shell.gypi
-@@ -38,7 +38,7 @@
+Index: chromium-browser/src/webkit/tools/test_shell/test_shell.gypi
+===================================================================
+--- chromium-browser.orig/src/webkit/tools/test_shell/test_shell.gypi	2012-03-28 21:07:05.000000000 -0400
++++ chromium-browser/src/webkit/tools/test_shell/test_shell.gypi	2012-03-29 14:14:49.686546940 -0400
+@@ -46,7 +46,7 @@
          '<(DEPTH)/testing/gtest.gyp:gtest',
          '<(DEPTH)/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp:inspector_resources',
          '<(DEPTH)/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp:webkit',
@@ -385,18 +426,20 @@ Use system copy of libv8
          '<(DEPTH)/webkit/support/webkit_support.gyp:appcache',
          '<(DEPTH)/webkit/support/webkit_support.gyp:blob',
          '<(DEPTH)/webkit/support/webkit_support.gyp:database',
-@@ -355,7 +355,7 @@
+@@ -366,7 +366,7 @@
          '<(DEPTH)/testing/gmock.gyp:gmock',
          '<(DEPTH)/testing/gtest.gyp:gtest',
          '<(DEPTH)/third_party/leveldatabase/leveldatabase.gyp:leveldatabase',
 -        '<(DEPTH)/v8/tools/gyp/v8.gyp:v8',
 +        '<(DEPTH)/build/linux/system.gyp:v8',
+         '<(DEPTH)/webkit/support/webkit_support.gyp:webkit_user_agent',
        ],
        'sources': [
-         '../../../skia/ext/convolver_unittest.cc',
---- a/src/chrome/browser/ui/webui/options/chromeos/about_page_handler.cc
-+++ b/src/chrome/browser/ui/webui/options/chromeos/about_page_handler.cc
-@@ -32,7 +32,7 @@
+Index: chromium-browser/src/chrome/browser/ui/webui/options/chromeos/about_page_handler.cc
+===================================================================
+--- chromium-browser.orig/src/chrome/browser/ui/webui/options/chromeos/about_page_handler.cc	2012-03-28 21:08:16.000000000 -0400
++++ chromium-browser/src/chrome/browser/ui/webui/options/chromeos/about_page_handler.cc	2012-03-29 13:59:01.562474121 -0400
+@@ -36,7 +36,7 @@
  #include "grit/theme_resources.h"
  #include "ui/base/l10n/l10n_util.h"
  #include "ui/base/resource/resource_bundle.h"
@@ -405,8 +448,10 @@ Use system copy of libv8
  #include "webkit/glue/user_agent.h"
  #include "webkit/glue/webkit_glue.h"
  #include "webkit/glue/user_agent.h"
---- a/src/third_party/WebKit/Source/WebKit/chromium/src/WebTestingSupport.cpp
-+++ b/src/third_party/WebKit/Source/WebKit/chromium/src/WebTestingSupport.cpp
+Index: chromium-browser/src/third_party/WebKit/Source/WebKit/chromium/src/WebTestingSupport.cpp
+===================================================================
+--- chromium-browser.orig/src/third_party/WebKit/Source/WebKit/chromium/src/WebTestingSupport.cpp	2012-03-28 21:14:20.000000000 -0400
++++ chromium-browser/src/third_party/WebKit/Source/WebKit/chromium/src/WebTestingSupport.cpp	2012-03-29 13:59:01.566474071 -0400
 @@ -28,7 +28,7 @@
  
  #include "WebCoreTestSupport.h"
@@ -416,8 +461,10 @@ Use system copy of libv8
  
  namespace WebKit {
  
---- a/src/chrome/renderer/chrome_render_view_observer.cc
-+++ b/src/chrome/renderer/chrome_render_view_observer.cc
+Index: chromium-browser/src/chrome/renderer/chrome_render_view_observer.cc
+===================================================================
+--- chromium-browser.orig/src/chrome/renderer/chrome_render_view_observer.cc	2012-03-28 21:08:48.000000000 -0400
++++ chromium-browser/src/chrome/renderer/chrome_render_view_observer.cc	2012-03-29 13:59:01.566474071 -0400
 @@ -53,7 +53,7 @@
  #include "webkit/glue/image_decoder.h"
  #include "webkit/glue/image_resource_fetcher.h"
@@ -427,8 +474,10 @@ Use system copy of libv8
  
  using WebKit::WebAccessibilityObject;
  using WebKit::WebCString;
---- a/src/chrome/renderer/extensions/chrome_webstore_bindings.cc
-+++ b/src/chrome/renderer/extensions/chrome_webstore_bindings.cc
+Index: chromium-browser/src/chrome/renderer/extensions/chrome_webstore_bindings.cc
+===================================================================
+--- chromium-browser.orig/src/chrome/renderer/extensions/chrome_webstore_bindings.cc	2012-03-28 21:08:47.000000000 -0400
++++ chromium-browser/src/chrome/renderer/extensions/chrome_webstore_bindings.cc	2012-03-29 13:59:01.566474071 -0400
 @@ -16,7 +16,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebFrame.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebNode.h"
@@ -438,8 +487,10 @@ Use system copy of libv8
  
  using WebKit::WebDocument;
  using WebKit::WebElement;
---- a/src/chrome/renderer/extensions/event_bindings.cc
-+++ b/src/chrome/renderer/extensions/event_bindings.cc
+Index: chromium-browser/src/chrome/renderer/extensions/event_bindings.cc
+===================================================================
+--- chromium-browser.orig/src/chrome/renderer/extensions/event_bindings.cc	2012-03-28 21:08:47.000000000 -0400
++++ chromium-browser/src/chrome/renderer/extensions/event_bindings.cc	2012-03-29 13:59:01.566474071 -0400
 @@ -28,7 +28,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/platform/WebURL.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/platform/WebURLRequest.h"
@@ -449,19 +500,23 @@ Use system copy of libv8
  
  using WebKit::WebFrame;
  using WebKit::WebSecurityOrigin;
---- a/src/chrome/test/base/v8_unit_test.h
-+++ b/src/chrome/test/base/v8_unit_test.h
-@@ -11,7 +11,7 @@
- 
+Index: chromium-browser/src/chrome/test/base/v8_unit_test.h
+===================================================================
+--- chromium-browser.orig/src/chrome/test/base/v8_unit_test.h	2012-03-28 21:08:13.000000000 -0400
++++ chromium-browser/src/chrome/test/base/v8_unit_test.h	2012-03-29 13:59:01.570474021 -0400
+@@ -12,7 +12,7 @@
  #include "base/file_path.h"
+ #include "base/string_piece.h"
  #include "testing/gtest/include/gtest/gtest.h"
 -#include "v8/include/v8.h"
 +#include <v8.h>
  
- namespace base {
- class StringPiece;
---- a/src/content/renderer/mock_content_renderer_client.cc
-+++ b/src/content/renderer/mock_content_renderer_client.cc
+ // A superclass for unit tests that involve running JavaScript.  This class
+ // sets up V8 context and has methods that make it easy to execute scripts in
+Index: chromium-browser/src/content/renderer/mock_content_renderer_client.cc
+===================================================================
+--- chromium-browser.orig/src/content/renderer/mock_content_renderer_client.cc	2012-03-28 21:11:07.000000000 -0400
++++ chromium-browser/src/content/renderer/mock_content_renderer_client.cc	2012-03-29 13:59:01.570474021 -0400
 @@ -5,7 +5,7 @@
  #include "content/renderer/mock_content_renderer_client.h"
  
@@ -471,8 +526,10 @@ Use system copy of libv8
  
  namespace content {
  
---- a/src/third_party/v8-i18n/build/all.gyp
-+++ b/src/third_party/v8-i18n/build/all.gyp
+Index: chromium-browser/src/third_party/v8-i18n/build/all.gyp
+===================================================================
+--- chromium-browser.orig/src/third_party/v8-i18n/build/all.gyp	2012-03-28 21:11:32.000000000 -0400
++++ chromium-browser/src/third_party/v8-i18n/build/all.gyp	2012-03-29 13:59:01.574473971 -0400
 @@ -51,7 +51,7 @@
          '<(icu_path)/public/common',
        ],
@@ -482,8 +539,10 @@ Use system copy of libv8
          '<(icu_path)/icu.gyp:*',
          'api2c#host',
        ],
---- a/src/third_party/v8-i18n/include/extension.h
-+++ b/src/third_party/v8-i18n/include/extension.h
+Index: chromium-browser/src/third_party/v8-i18n/include/extension.h
+===================================================================
+--- chromium-browser.orig/src/third_party/v8-i18n/include/extension.h	2012-03-28 21:11:32.000000000 -0400
++++ chromium-browser/src/third_party/v8-i18n/include/extension.h	2012-03-29 13:59:01.574473971 -0400
 @@ -15,7 +15,7 @@
  #ifndef V8_I18N_INCLUDE_EXTENSION_H_
  #define V8_I18N_INCLUDE_EXTENSION_H_
@@ -493,8 +552,10 @@ Use system copy of libv8
  
  namespace v8_i18n {
  
---- a/src/third_party/v8-i18n/src/break-iterator.h
-+++ b/src/third_party/v8-i18n/src/break-iterator.h
+Index: chromium-browser/src/third_party/v8-i18n/src/break-iterator.h
+===================================================================
+--- chromium-browser.orig/src/third_party/v8-i18n/src/break-iterator.h	2012-03-28 21:11:32.000000000 -0400
++++ chromium-browser/src/third_party/v8-i18n/src/break-iterator.h	2012-03-29 13:59:01.578473921 -0400
 @@ -16,7 +16,7 @@
  #define V8_I18N_SRC_BREAK_ITERATOR_H_
  
@@ -504,8 +565,10 @@ Use system copy of libv8
  
  namespace U_ICU_NAMESPACE {
  class BreakIterator;
---- a/src/third_party/v8-i18n/src/collator.h
-+++ b/src/third_party/v8-i18n/src/collator.h
+Index: chromium-browser/src/third_party/v8-i18n/src/collator.h
+===================================================================
+--- chromium-browser.orig/src/third_party/v8-i18n/src/collator.h	2012-03-28 21:11:32.000000000 -0400
++++ chromium-browser/src/third_party/v8-i18n/src/collator.h	2012-03-29 13:59:01.578473921 -0400
 @@ -29,7 +29,7 @@
  #define V8_I18N_SRC_COLLATOR_H_
  
@@ -515,8 +578,10 @@ Use system copy of libv8
  
  namespace U_ICU_NAMESPACE {
  class Collator;
---- a/src/third_party/v8-i18n/src/datetime-format.h
-+++ b/src/third_party/v8-i18n/src/datetime-format.h
+Index: chromium-browser/src/third_party/v8-i18n/src/datetime-format.h
+===================================================================
+--- chromium-browser.orig/src/third_party/v8-i18n/src/datetime-format.h	2012-03-28 21:11:32.000000000 -0400
++++ chromium-browser/src/third_party/v8-i18n/src/datetime-format.h	2012-03-29 13:59:01.578473921 -0400
 @@ -16,7 +16,7 @@
  #define V8_I18N_SRC_DATETIME_FORMAT_H_
  
@@ -526,8 +591,10 @@ Use system copy of libv8
  
  namespace U_ICU_NAMESPACE {
  class SimpleDateFormat;
---- a/src/third_party/v8-i18n/src/language-matcher.h
-+++ b/src/third_party/v8-i18n/src/language-matcher.h
+Index: chromium-browser/src/third_party/v8-i18n/src/language-matcher.h
+===================================================================
+--- chromium-browser.orig/src/third_party/v8-i18n/src/language-matcher.h	2012-03-28 21:11:32.000000000 -0400
++++ chromium-browser/src/third_party/v8-i18n/src/language-matcher.h	2012-03-29 13:59:01.582473871 -0400
 @@ -16,7 +16,7 @@
  #define V8_I18N_SRC_LANGUAGE_MATCHER_H_
  
@@ -537,8 +604,10 @@ Use system copy of libv8
  
  namespace v8_i18n {
  
---- a/src/third_party/v8-i18n/src/number-format.h
-+++ b/src/third_party/v8-i18n/src/number-format.h
+Index: chromium-browser/src/third_party/v8-i18n/src/number-format.h
+===================================================================
+--- chromium-browser.orig/src/third_party/v8-i18n/src/number-format.h	2012-03-28 21:11:32.000000000 -0400
++++ chromium-browser/src/third_party/v8-i18n/src/number-format.h	2012-03-29 13:59:01.582473871 -0400
 @@ -16,7 +16,7 @@
  #define V8_I18N_SRC_NUMBER_FORMAT_H_
  
@@ -548,8 +617,10 @@ Use system copy of libv8
  
  namespace U_ICU_NAMESPACE {
  class DecimalFormat;
---- a/src/third_party/v8-i18n/src/utils.h
-+++ b/src/third_party/v8-i18n/src/utils.h
+Index: chromium-browser/src/third_party/v8-i18n/src/utils.h
+===================================================================
+--- chromium-browser.orig/src/third_party/v8-i18n/src/utils.h	2012-03-28 21:11:32.000000000 -0400
++++ chromium-browser/src/third_party/v8-i18n/src/utils.h	2012-03-29 13:59:01.582473871 -0400
 @@ -16,7 +16,7 @@
  #define V8_I18N_SRC_UTILS_H_
  
@@ -559,19 +630,10 @@ Use system copy of libv8
  
  namespace U_ICU_NAMESPACE {
  class UnicodeString;
---- a/src/v8/src/extensions/experimental/break-iterator.h
-+++ b/src/v8/src/extensions/experimental/break-iterator.h
-@@ -28,7 +28,7 @@
- #ifndef V8_EXTENSIONS_EXPERIMENTAL_BREAK_ITERATOR_H_
- #define V8_EXTENSIONS_EXPERIMENTAL_BREAK_ITERATOR_H_
- 
--#include "include/v8.h"
-+#include <v8.h>
- 
- #include "unicode/uversion.h"
- 
---- a/src/webkit/extensions/v8/gc_extension.cc
-+++ b/src/webkit/extensions/v8/gc_extension.cc
+Index: chromium-browser/src/webkit/extensions/v8/gc_extension.cc
+===================================================================
+--- chromium-browser.orig/src/webkit/extensions/v8/gc_extension.cc	2012-03-28 21:07:05.000000000 -0400
++++ chromium-browser/src/webkit/extensions/v8/gc_extension.cc	2012-03-29 13:59:01.582473871 -0400
 @@ -4,7 +4,7 @@
  
  #include "webkit/extensions/v8/gc_extension.h"
@@ -581,8 +643,10 @@ Use system copy of libv8
  
  const char kGCExtensionName[] = "v8/GCController";
  
---- a/src/webkit/extensions/v8/heap_profiler_extension.cc
-+++ b/src/webkit/extensions/v8/heap_profiler_extension.cc
+Index: chromium-browser/src/webkit/extensions/v8/heap_profiler_extension.cc
+===================================================================
+--- chromium-browser.orig/src/webkit/extensions/v8/heap_profiler_extension.cc	2012-03-28 21:07:05.000000000 -0400
++++ chromium-browser/src/webkit/extensions/v8/heap_profiler_extension.cc	2012-03-29 13:59:01.582473871 -0400
 @@ -5,7 +5,7 @@
  #include "webkit/extensions/v8/heap_profiler_extension.h"
  
@@ -592,9 +656,11 @@ Use system copy of libv8
  
  #if defined(USE_TCMALLOC) && !defined(OS_WIN)
  #include "third_party/tcmalloc/chromium/src/google/heap-profiler.h"
---- a/src/webkit/glue/webkitplatformsupport_impl.cc
-+++ b/src/webkit/glue/webkitplatformsupport_impl.cc
-@@ -46,7 +46,7 @@
+Index: chromium-browser/src/webkit/glue/webkitplatformsupport_impl.cc
+===================================================================
+--- chromium-browser.orig/src/webkit/glue/webkitplatformsupport_impl.cc	2012-03-28 21:07:05.000000000 -0400
++++ chromium-browser/src/webkit/glue/webkitplatformsupport_impl.cc	2012-03-29 13:59:01.582473871 -0400
+@@ -47,7 +47,7 @@
  #include "webkit/plugins/webplugininfo.h"
  
  #if defined(OS_LINUX)
@@ -603,19 +669,10 @@ Use system copy of libv8
  #endif
  
  using WebKit::WebAudioBus;
---- a/src/webkit/plugins/ppapi/ppb_var_impl.cc
-+++ b/src/webkit/plugins/ppapi/ppb_var_impl.cc
-@@ -17,7 +17,7 @@
- #include "webkit/plugins/ppapi/plugin_module.h"
- #include "webkit/plugins/ppapi/plugin_object.h"
- #include "webkit/plugins/ppapi/ppapi_plugin_instance.h"
--#include "v8/include/v8.h"
-+#include <v8.h>
- 
- using ppapi::NPObjectVar;
- using ppapi::PpapiGlobals;
---- a/src/webkit/support/test_webkit_platform_support.cc
-+++ b/src/webkit/support/test_webkit_platform_support.cc
+Index: chromium-browser/src/webkit/support/test_webkit_platform_support.cc
+===================================================================
+--- chromium-browser.orig/src/webkit/support/test_webkit_platform_support.cc	2012-03-28 21:07:06.000000000 -0400
++++ chromium-browser/src/webkit/support/test_webkit_platform_support.cc	2012-03-29 13:59:01.586473821 -0400
 @@ -33,7 +33,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebStorageNamespace.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/platform/WebString.h"
