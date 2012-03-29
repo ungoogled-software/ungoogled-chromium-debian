@@ -77,7 +77,8 @@ Build-Depends: cdbs,
 	python-simplejson,
 	libegl1-mesa-dev,
 	libgles2-mesa-dev,
-	subversion
+	subversion,
+	libudev-dev,
 Standards-Version: 3.9.2
 
 Package: chromium-browser
