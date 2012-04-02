@@ -442,6 +442,7 @@ clean::
 	rm -f debian/configure-stamp debian/stamp-makefile-build-*
 	rm -f *.cdbs-config_list $(subst_files)
 	rm -fr src/out src/Makefile
+	find src -name *.tmp -execdir rm -f {} \;
 	find src -name *.pyc -execdir rm -f {} \;
 	find src -name *.mk -execdir rm -f {} \;
 	find src -name *.Makefile -execdir rm -f {} \;
