@@ -22,3 +22,4 @@ nss-workaround.patch
 arm-no-float-abi.patch
 vpx.patch
 pulseaudio.patch
+glib.patch
