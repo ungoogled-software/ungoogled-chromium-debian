@@ -1,0 +1,81 @@
+description: fix pulseaudio messageloop comparisons
+author: Michael Gilbert <michael.s.gilbert@gmail.com>
+--- chromium-browser-18.0.1025.142~r129054.orig/src/media/audio/pulse/pulse_output.cc
++++ chromium-browser-18.0.1025.142~r129054/src/media/audio/pulse/pulse_output.cc
+@@ -126,7 +126,7 @@ void PulseAudioOutputStream::WriteReques
+   PulseAudioOutputStream* stream =
+       reinterpret_cast<PulseAudioOutputStream*>(stream_addr);
+ 
+-  DCHECK_EQ(stream->manager_->GetMessageLoop(), MessageLoop::current());
++  DCHECK_EQ(stream->manager_->GetMessageLoop(), MessageLoop::current()->message_loop_proxy());
+ 
+   stream->write_callback_handled_ = true;
+ 
+@@ -153,7 +153,7 @@ PulseAudioOutputStream::PulseAudioOutput
+       write_callback_handled_(false),
+       ALLOW_THIS_IN_INITIALIZER_LIST(weak_factory_(this)),
+       source_callback_(NULL) {
+-  DCHECK_EQ(manager_->GetMessageLoop(), MessageLoop::current());
++  DCHECK_EQ(manager_->GetMessageLoop(), MessageLoop::current()->message_loop_proxy());
+ 
+   // TODO(slock): Sanity check input values.
+ }
+@@ -167,7 +167,7 @@ PulseAudioOutputStream::~PulseAudioOutpu
+ }
+ 
+ bool PulseAudioOutputStream::Open() {
+-  DCHECK_EQ(manager_->GetMessageLoop(), MessageLoop::current());
++  DCHECK_EQ(manager_->GetMessageLoop(), MessageLoop::current()->message_loop_proxy());
+ 
+   // TODO(slock): Possibly move most of this to an OpenPlaybackDevice function
+   // in a new class 'pulse_util', like alsa_util.
+@@ -270,7 +270,7 @@ void PulseAudioOutputStream::Reset() {
+ }
+ 
+ void PulseAudioOutputStream::Close() {
+-  DCHECK_EQ(manager_->GetMessageLoop(), MessageLoop::current());
++  DCHECK_EQ(manager_->GetMessageLoop(), MessageLoop::current()->message_loop_proxy());
+ 
+   Reset();
+ 
+@@ -280,7 +280,7 @@ void PulseAudioOutputStream::Close() {
+ }
+ 
+ void PulseAudioOutputStream::WaitForWriteRequest() {
+-  DCHECK_EQ(manager_->GetMessageLoop(), MessageLoop::current());
++  DCHECK_EQ(manager_->GetMessageLoop(), MessageLoop::current()->message_loop_proxy());
+ 
+   if (stream_stopped_)
+     return;
+@@ -382,7 +382,7 @@ void PulseAudioOutputStream::WriteToStre
+ }
+ 
+ void PulseAudioOutputStream::Start(AudioSourceCallback* callback) {
+-  DCHECK_EQ(manager_->GetMessageLoop(), MessageLoop::current());
++  DCHECK_EQ(manager_->GetMessageLoop(), MessageLoop::current()->message_loop_proxy());
+   CHECK(callback);
+   DLOG_IF(ERROR, !playback_handle_)
+       << "Open() has not been called successfully";
+@@ -402,19 +402,19 @@ void PulseAudioOutputStream::Start(Audio
+ }
+ 
+ void PulseAudioOutputStream::Stop() {
+-  DCHECK_EQ(manager_->GetMessageLoop(), MessageLoop::current());
++  DCHECK_EQ(manager_->GetMessageLoop(), MessageLoop::current()->message_loop_proxy());
+ 
+   stream_stopped_ = true;
+ }
+ 
+ void PulseAudioOutputStream::SetVolume(double volume) {
+-  DCHECK_EQ(manager_->GetMessageLoop(), MessageLoop::current());
++  DCHECK_EQ(manager_->GetMessageLoop(), MessageLoop::current()->message_loop_proxy());
+ 
+   volume_ = static_cast<float>(volume);
+ }
+ 
+ void PulseAudioOutputStream::GetVolume(double* volume) {
+-  DCHECK_EQ(manager_->GetMessageLoop(), MessageLoop::current());
++  DCHECK_EQ(manager_->GetMessageLoop(), MessageLoop::current()->message_loop_proxy());
+ 
+   *volume = volume_;
+ }
