@@ -1,3 +1,35 @@
+chromium-browser (18.0.1025.142~r129054-1) unstable; urgency=low
+
+  * New stable release:
+    - [109574] Medium CVE-2011-3058: Bad interaction possibly leading to XSS
+      in EUC-JP. Credit to Masato Kinugawa.
+    - [112317] Medium CVE-2011-3059: Out-of-bounds read in SVG text handling.
+      Credit to Arthur Gerkis.
+    - [114056] Medium CVE-2011-3060: Out-of-bounds read in text fragment
+      handling. Credit to miaubiz.
+    - [116398] Medium CVE-2011-3061: SPDY proxy certificate checking error.
+      Credit to Leonidas Kontothanassis of Google.
+    - [116524] High CVE-2011-3062: Off-by-one in OpenType Sanitizer. Credit to
+      Mateusz Jurczyk of the Google Security Team.
+    - [117417] Low CVE-2011-3063: Validate navigation requests from the
+      renderer more carefully. Credit to kuzzcc, Sergey Glazunov, PinkiePie
+      and scarybeasts (Google Chrome Security Team).
+    - [117471] High CVE-2011-3064: Use-after-free in SVG clipping. Credit to
+      Atte Kettunen of OUSPG.
+    - [117588] High CVE-2011-3065: Memory corruption in Skia. Credit to
+      Omair.
+    - [117794] Medium CVE-2011-3057: Invalid read in v8. Credit to Christian
+      Holler.
+  * [19c4b51] include glib.h directly (closes: #666640)
+  * [d6e7094] remove .tmp files on clean
+  * [fd014ca] fix pulseaudio messageloop comparisons
+  * [6984cf7] build-depend on svn (required for upstream depot_tools checkout)
+  * [aae52af] refresh patches
+  * [102f9b7] depend on libv8 >= 3.8
+  * [bbd5511] build-depend on libudev-dev
+
+ -- Michael Gilbert <michael.s.gilbert@gmail.com>  Sun, 01 Apr 2012 20:02:53 -0400
+
 chromium-browser (17.0.963.83~r127885-1) unstable; urgency=high
 
   * New stable release:
