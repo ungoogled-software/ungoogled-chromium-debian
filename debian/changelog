@@ -1,3 +1,19 @@
+chromium-browser (18.0.1025.168~r134367-1) unstable; urgency=low
+
+  * New stable release:
+    - High CVE-2011-3078: Use after free in floats handling. Credit to
+      Google Chrome Security Team (Marty Barbella) and independent later
+      discovery by miaubiz.
+    - High CVE-2012-1521: Use after free in xml parser. Credit to Google
+      Chrome Security Team (SkyLined) and independent later discovery by
+      wushi of team509 reported through iDefense VCP (V-874rcfpq7z).
+    - Medium CVE-2011-3079: IPC validation failure. Credit to PinkiePie.
+    - Medium CVE-2011-3080: Race condition in sandbox IPC. Credit to Willem
+      Pinckaers of Matasano.
+    - High CVE-2011-3081: Use after free in floats handling. Credit to miaubiz
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 01 May 2012 19:20:31 +0200
+
 chromium-browser (18.0.1025.142~r129054-1) unstable; urgency=low
 
   * New stable release:
