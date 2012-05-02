@@ -12,7 +12,39 @@ chromium-browser (18.0.1025.168~r134367-1) unstable; urgency=low
       Pinckaers of Matasano.
     - High CVE-2011-3081: Use after free in floats handling. Credit to miaubiz
 
- -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 01 May 2012 19:20:31 +0200
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 02 May 2012 09:30:45 +0200
+
+chromium-browser (18.0.1025.151~r130497-1) unstable; urgency=medium
+
+  * new stable release:
+    - [106577] Medium CVE-2011-3066: Out-of-bounds read in Skia clipping.
+      Credit to miaubiz.
+    - [117583] Medium CVE-2011-3067: Cross-origin iframe replacement. Credit
+      to Sergey Glazunov.
+    - [117698] High CVE-2011-3068: Use-after-free in run-in handling. Credit
+      to miaubiz.
+    - [117728] High CVE-2011-3069: Use-after-free in line box handling.
+      Credit to miaubiz.
+    - [118185] High CVE-2011-3070: Use-after-free in v8 bindings. Credit to
+      Google Chrome Security Team (SkyLined).
+    - [118273] High CVE-2011-3071: Use-after-free in HTMLMediaElement. Credit
+      to pa_kt, reporting through HP TippingPoint ZDI (ZDI-CAN-1528).
+    - [118467] Low CVE-2011-3072: Cross-origin violation parenting pop-up
+      window.  Credit to Sergey Glazunov.
+    - [118593] High CVE-2011-3073: Use-after-free in SVG resource handling.
+      Credit to Arthur Gerkis.
+    - [119281] Medium CVE-2011-3074: Use-after-free in media handling. Credit
+      to Sławomir Błażek.
+    - [119525] High CVE-2011-3075: Use-after-free applying style command.
+      Credit to miaubiz.
+    - [120037] High CVE-2011-3076: Use-after-free in focus handling. Credit to
+      miaubiz.
+    - [120189] Medium CVE-2011-3077: Read-after-free in script bindings.
+      Credit to Google Chrome Security Team (Inferno).
+  * [85dfed9] build-depend on libglewmx-dev instead of versioned libglewmx1.5-dev
+  * medium urgency for security fixes
+
+ -- Michael Gilbert <michael.s.gilbert@gmail.com>  Thu, 05 Apr 2012 16:43:11 -0400
 
 chromium-browser (18.0.1025.142~r129054-1) unstable; urgency=low
 
