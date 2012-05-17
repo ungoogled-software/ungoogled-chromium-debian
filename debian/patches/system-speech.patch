@@ -1,9 +1,9 @@
 Use system speex
-Index: chromium-browser/src/build/linux/system.gyp
+Index: sid/src/build/linux/system.gyp
 ===================================================================
---- chromium-browser.orig/src/build/linux/system.gyp	2012-03-28 21:11:00.543271878 -0400
-+++ chromium-browser/src/build/linux/system.gyp	2012-03-29 13:57:24.643692557 -0400
-@@ -380,6 +380,26 @@
+--- sid.orig/src/build/linux/system.gyp	2012-05-16 11:32:28.000000000 +0200
++++ sid/src/build/linux/system.gyp	2012-05-16 15:53:44.934125458 +0200
+@@ -385,6 +385,26 @@
        ],
      },
      {
@@ -30,23 +30,23 @@ Index: chromium-browser/src/build/linux/system.gyp
        'target_name': 'gnome_keyring',
        'type': 'none',
        'conditions': [
-Index: chromium-browser/src/content/browser/speech/audio_encoder.cc
+Index: sid/src/content/browser/speech/audio_encoder.cc
 ===================================================================
---- chromium-browser.orig/src/content/browser/speech/audio_encoder.cc	2012-03-28 21:11:03.131239343 -0400
-+++ chromium-browser/src/content/browser/speech/audio_encoder.cc	2012-03-29 13:57:24.659692354 -0400
-@@ -10,7 +10,7 @@
- #include "base/stl_util.h"
+--- sid.orig/src/content/browser/speech/audio_encoder.cc	2012-05-16 11:32:00.000000000 +0200
++++ sid/src/content/browser/speech/audio_encoder.cc	2012-05-16 15:53:44.934125458 +0200
+@@ -11,7 +11,7 @@
  #include "base/string_number_conversions.h"
+ #include "content/browser/speech/audio_buffer.h"
  #include "third_party/flac/flac.h"
 -#include "third_party/speex/speex.h"
 +#include <speex/speex.h>
  
  using std::string;
- 
-Index: chromium-browser/src/content/content_browser.gypi
+ using speech::AudioChunk;
+Index: sid/src/content/content_browser.gypi
 ===================================================================
---- chromium-browser.orig/src/content/content_browser.gypi	2012-03-28 21:11:07.991178245 -0400
-+++ chromium-browser/src/content/content_browser.gypi	2012-03-29 13:57:24.675692152 -0400
+--- sid.orig/src/content/content_browser.gypi	2012-05-16 11:32:01.000000000 +0200
++++ sid/src/content/content_browser.gypi	2012-05-16 15:53:44.934125458 +0200
 @@ -12,7 +12,7 @@
      '../ppapi/ppapi_internal.gyp:ppapi_proxy',
      '../skia/skia.gyp:skia',

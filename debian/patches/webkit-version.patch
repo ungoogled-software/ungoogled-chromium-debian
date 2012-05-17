@@ -1,8 +1,8 @@
 description: debian-specific version parsing (for about dialog)
-Index: chromium-browser/src/webkit/build/webkit_version.py
+Index: sid/src/webkit/build/webkit_version.py
 ===================================================================
---- chromium-browser.orig/src/webkit/build/webkit_version.py	2012-03-28 21:07:06.182218195 -0400
-+++ chromium-browser/src/webkit/build/webkit_version.py	2012-03-29 13:57:39.203509514 -0400
+--- sid.orig/src/webkit/build/webkit_version.py	2012-05-16 11:31:56.000000000 +0200
++++ sid/src/webkit/build/webkit_version.py	2012-05-16 15:53:54.918125272 +0200
 @@ -61,6 +61,15 @@
        default_lastchange=None,
        directory=os.path.join(webkit_dir, version_file_dir),

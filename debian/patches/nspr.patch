@@ -1,8 +1,8 @@
 Include system copy of prtime.h
-Index: chromium-browser/src/base/pr_time_unittest.cc
+Index: sid/src/base/pr_time_unittest.cc
 ===================================================================
---- chromium-browser.orig/src/base/pr_time_unittest.cc	2012-03-28 21:11:12.000000000 -0400
-+++ chromium-browser/src/base/pr_time_unittest.cc	2012-03-29 12:40:18.697434130 -0400
+--- sid.orig/src/base/pr_time_unittest.cc	2012-05-16 11:32:29.000000000 +0200
++++ sid/src/base/pr_time_unittest.cc	2012-05-16 15:50:13.258129408 +0200
 @@ -4,7 +4,7 @@
  
  #include <time.h>
@@ -12,10 +12,10 @@ Index: chromium-browser/src/base/pr_time_unittest.cc
  #include "base/time.h"
  #include "testing/gtest/include/gtest/gtest.h"
  
-Index: chromium-browser/src/base/time.cc
+Index: sid/src/base/time.cc
 ===================================================================
---- chromium-browser.orig/src/base/time.cc	2012-03-28 21:11:10.000000000 -0400
-+++ chromium-browser/src/base/time.cc	2012-03-29 12:40:18.697434130 -0400
+--- sid.orig/src/base/time.cc	2012-05-16 11:32:29.000000000 +0200
++++ sid/src/base/time.cc	2012-05-16 15:50:13.258129408 +0200
 @@ -4,7 +4,7 @@
  
  #include "base/time.h"
@@ -25,12 +25,12 @@ Index: chromium-browser/src/base/time.cc
  
  #include "base/logging.h"
  
-Index: chromium-browser/src/chrome/browser/metrics/metrics_log.cc
+Index: sid/src/chrome/browser/metrics/metrics_log.cc
 ===================================================================
---- chromium-browser.orig/src/chrome/browser/metrics/metrics_log.cc	2012-03-28 21:08:38.000000000 -0400
-+++ chromium-browser/src/chrome/browser/metrics/metrics_log.cc	2012-03-29 12:40:18.697434130 -0400
-@@ -14,7 +14,7 @@
- #include "base/perftimer.h"
+--- sid.orig/src/chrome/browser/metrics/metrics_log.cc	2012-05-16 11:32:45.000000000 +0200
++++ sid/src/chrome/browser/metrics/metrics_log.cc	2012-05-16 15:50:13.258129408 +0200
+@@ -15,7 +15,7 @@
+ #include "base/string_number_conversions.h"
  #include "base/string_util.h"
  #include "base/sys_info.h"
 -#include "base/third_party/nspr/prtime.h"
@@ -38,10 +38,10 @@ Index: chromium-browser/src/chrome/browser/metrics/metrics_log.cc
  #include "base/time.h"
  #include "base/utf_string_conversions.h"
  #include "chrome/browser/autocomplete/autocomplete.h"
-Index: chromium-browser/src/base/base.gypi
+Index: sid/src/base/base.gypi
 ===================================================================
---- chromium-browser.orig/src/base/base.gypi	2012-03-28 21:11:11.000000000 -0400
-+++ chromium-browser/src/base/base.gypi	2012-03-29 12:40:18.697434130 -0400
+--- sid.orig/src/base/base.gypi	2012-05-16 11:32:29.000000000 +0200
++++ sid/src/base/base.gypi	2012-05-16 15:50:13.258129408 +0200
 @@ -17,7 +17,6 @@
            'third_party/dmg_fp/dtoa_wrapper.cc',
            'third_party/icu/icu_utf.cc',
@@ -50,10 +50,10 @@ Index: chromium-browser/src/base/base.gypi
            'third_party/nspr/prtime.h',
            'third_party/nspr/prcpucfg_linux.h',
            'third_party/xdg_mime/xdgmime.h',
-Index: chromium-browser/src/crypto/nss_util.cc
+Index: sid/src/crypto/nss_util.cc
 ===================================================================
---- chromium-browser.orig/src/crypto/nss_util.cc	2012-03-28 21:07:02.000000000 -0400
-+++ chromium-browser/src/crypto/nss_util.cc	2012-03-29 12:40:18.697434130 -0400
+--- sid.orig/src/crypto/nss_util.cc	2012-05-16 11:32:02.000000000 +0200
++++ sid/src/crypto/nss_util.cc	2012-05-16 15:50:13.258129408 +0200
 @@ -9,7 +9,7 @@
  #include <plarena.h>
  #include <prerror.h>
@@ -63,16 +63,16 @@ Index: chromium-browser/src/crypto/nss_util.cc
  #include <pk11pub.h>
  #include <secmod.h>
  
-Index: chromium-browser/src/net/base/x509_certificate_nss.cc
+Index: sid/src/net/base/x509_certificate_nss.cc
 ===================================================================
---- chromium-browser.orig/src/net/base/x509_certificate_nss.cc	2012-03-28 21:07:16.000000000 -0400
-+++ chromium-browser/src/net/base/x509_certificate_nss.cc	2012-03-29 12:40:18.697434130 -0400
-@@ -10,7 +10,7 @@
+--- sid.orig/src/net/base/x509_certificate_nss.cc	2012-05-16 11:32:04.000000000 +0200
++++ sid/src/net/base/x509_certificate_nss.cc	2012-05-16 15:50:42.262128867 +0200
+@@ -9,7 +9,7 @@
+ #include <keyhi.h>
  #include <nss.h>
  #include <pk11pub.h>
- #include <prerror.h>
 -#include <prtime.h>
 +#include <nspr/prtime.h>
  #include <secder.h>
- #include <secerr.h>
  #include <sechash.h>
+ 

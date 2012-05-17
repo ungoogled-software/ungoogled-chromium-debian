@@ -1,6 +1,8 @@
 Include system copy of expat.h
---- a/src/chrome/browser/autofill/autofill_xml_parser.h
-+++ b/src/chrome/browser/autofill/autofill_xml_parser.h
+Index: sid/src/chrome/browser/autofill/autofill_xml_parser.h
+===================================================================
+--- sid.orig/src/chrome/browser/autofill/autofill_xml_parser.h	2012-05-16 11:32:40.000000000 +0200
++++ sid/src/chrome/browser/autofill/autofill_xml_parser.h	2012-05-16 15:51:12.826128295 +0200
 @@ -12,7 +12,7 @@
  #include "base/basictypes.h"
  #include "chrome/browser/autofill/field_types.h"
@@ -10,8 +12,10 @@ Include system copy of expat.h
  #include "third_party/libjingle/source/talk/xmllite/xmlparser.h"
  
  // The base class that contains common functionality between
---- a/src/third_party/libjingle/source/talk/xmllite/xmlparser.h
-+++ b/src/third_party/libjingle/source/talk/xmllite/xmlparser.h
+Index: sid/src/third_party/libjingle/source/talk/xmllite/xmlparser.h
+===================================================================
+--- sid.orig/src/third_party/libjingle/source/talk/xmllite/xmlparser.h	2012-05-16 11:34:01.000000000 +0200
++++ sid/src/third_party/libjingle/source/talk/xmllite/xmlparser.h	2012-05-16 15:51:12.826128295 +0200
 @@ -32,9 +32,9 @@
  
  #include "talk/xmllite/xmlnsstack.h"
@@ -24,8 +28,10 @@ Include system copy of expat.h
  #endif  // EXPAT_RELATIVE_PATH
  
  struct XML_ParserStruct;
---- a/src/third_party/libjingle/source/talk/xmpp/xmppstanzaparser.cc
-+++ b/src/third_party/libjingle/source/talk/xmpp/xmppstanzaparser.cc
+Index: sid/src/third_party/libjingle/source/talk/xmpp/xmppstanzaparser.cc
+===================================================================
+--- sid.orig/src/third_party/libjingle/source/talk/xmpp/xmppstanzaparser.cc	2012-05-16 11:33:58.000000000 +0200
++++ sid/src/third_party/libjingle/source/talk/xmpp/xmppstanzaparser.cc	2012-05-16 15:51:12.826128295 +0200
 @@ -31,9 +31,9 @@
  #include "talk/base/common.h"
  #include "talk/xmpp/constants.h"
@@ -38,8 +44,10 @@ Include system copy of expat.h
  #endif
  
  namespace buzz {
---- a/src/third_party/skia/src/ports/SkXMLParser_expat.cpp
-+++ b/src/third_party/skia/src/ports/SkXMLParser_expat.cpp
+Index: sid/src/third_party/skia/src/ports/SkXMLParser_expat.cpp
+===================================================================
+--- sid.orig/src/third_party/skia/src/ports/SkXMLParser_expat.cpp	2012-05-16 11:34:17.000000000 +0200
++++ sid/src/third_party/skia/src/ports/SkXMLParser_expat.cpp	2012-05-16 15:51:12.826128295 +0200
 @@ -11,7 +11,7 @@
  #include "SkString.h"
  #include "SkStream.h"
@@ -49,8 +57,10 @@ Include system copy of expat.h
  
  #ifdef SK_BUILD_FOR_PPI
  #define CHAR_16_TO_9
---- a/src/third_party/skia/src/ports/SkXMLPullParser_expat.cpp
-+++ b/src/third_party/skia/src/ports/SkXMLPullParser_expat.cpp
+Index: sid/src/third_party/skia/src/ports/SkXMLPullParser_expat.cpp
+===================================================================
+--- sid.orig/src/third_party/skia/src/ports/SkXMLPullParser_expat.cpp	2012-05-16 11:34:17.000000000 +0200
++++ sid/src/third_party/skia/src/ports/SkXMLPullParser_expat.cpp	2012-05-16 15:51:12.830128295 +0200
 @@ -12,7 +12,7 @@
  #include "SkString.h"
  #include "SkStream.h"
@@ -60,8 +70,10 @@ Include system copy of expat.h
  
  static inline char* dupstr(SkChunkAlloc& chunk, const char src[], size_t len)
  {
---- a/src/third_party/libjingle/source/talk/xmllite/xmlbuilder.h
-+++ b/src/third_party/libjingle/source/talk/xmllite/xmlbuilder.h
+Index: sid/src/third_party/libjingle/source/talk/xmllite/xmlbuilder.h
+===================================================================
+--- sid.orig/src/third_party/libjingle/source/talk/xmllite/xmlbuilder.h	2012-05-16 11:34:01.000000000 +0200
++++ sid/src/third_party/libjingle/source/talk/xmllite/xmlbuilder.h	2012-05-16 15:51:12.830128295 +0200
 @@ -33,11 +33,7 @@
  #include "talk/base/scoped_ptr.h"
  #include "talk/xmllite/xmlparser.h"
