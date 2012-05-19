@@ -1,27 +1,9 @@
-From: Michael Gilbert <michael.s.gilbert@gmail.com>
-Date: Thu, 18 Aug 2011 17:45:23 -0400
-Subject: Fix build failure with cups >= 1.5.0
----
- .../service/cloud_print/print_system_cups.cc       |    1 +
- src/printing/backend/cups_helper.h                 |    1 +
- 2 files changed, 2 insertions(+), 0 deletions(-)
-
-diff --git a/src/chrome/service/cloud_print/print_system_cups.cc b/src/chrome/service/cloud_print/print_system_cups.cc
-index 54ee38fc..cdddac0d 100644
---- a/src/chrome/service/cloud_print/print_system_cups.cc
-+++ b/src/chrome/service/cloud_print/print_system_cups.cc
-@@ -5,6 +5,7 @@
- #include "chrome/service/cloud_print/print_system.h"
- 
- #include <cups/cups.h>
-+#include <cups/ppd.h>
- #include <dlfcn.h>
- #include <errno.h>
- #include <pthread.h>
-diff --git a/src/printing/backend/cups_helper.h b/src/printing/backend/cups_helper.h
-index ee1de9a0..388919d8 100644
---- a/src/printing/backend/cups_helper.h
-+++ b/src/printing/backend/cups_helper.h
+Description: Fix build failure due to cups 1.5 header changes
+Author: Michael Gilbert <michael.s.gilbert@gmail.com>
+Index: sid/src/printing/backend/cups_helper.h
+===================================================================
+--- sid.orig/src/printing/backend/cups_helper.h	2012-05-16 11:31:56.000000000 +0200
++++ sid/src/printing/backend/cups_helper.h	2012-05-16 15:53:57.270125228 +0200
 @@ -7,6 +7,7 @@
  #pragma once
  
@@ -30,3 +12,15 @@ index ee1de9a0..388919d8 100644
  
  #include "printing/printing_export.h"
  
+Index: sid/src/chrome/service/cloud_print/print_system_cups.cc
+===================================================================
+--- sid.orig/src/chrome/service/cloud_print/print_system_cups.cc	2012-05-16 11:33:16.000000000 +0200
++++ sid/src/chrome/service/cloud_print/print_system_cups.cc	2012-05-16 15:53:57.270125228 +0200
+@@ -5,6 +5,7 @@
+ #include "chrome/service/cloud_print/print_system.h"
+ 
+ #include <cups/cups.h>
++#include <cups/ppd.h>
+ #include <dlfcn.h>
+ #include <errno.h>
+ #include <pthread.h>

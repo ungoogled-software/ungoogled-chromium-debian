@@ -28,7 +28,7 @@ Build-Depends: cdbs,
 	ttf-kochi-gothic,
 	ttf-kochi-mincho,
 	libjpeg-dev,
-	libpng12-dev,
+	libpng-dev,
 	libbz2-dev,
 	zlib1g-dev,
 	libxml2-dev,
@@ -54,28 +54,31 @@ Build-Depends: cdbs,
 	yasm,
 	libprotobuf-dev,
 	protobuf-compiler,
-	libglewmx1.5-dev,
+	libglewmx-dev,
 	libvpx-dev,
 	libcups2-dev (>= 1.5.0),
 	libgnome-keyring-dev,
-	libgconf2-dev,
 	libspeex-dev,
 	hardening-wrapper,
 	libxt-dev,
 	libxtst-dev,
 	libpam0g-dev,
-	binutils-gold,
+	binutils-gold [!armel !armhf],
 	libflac-dev,
 	libwebp-dev,
 	autotools-dev,
-	libv8-dev (>= 3.5),
+	libv8-dev (>= 3.8),
 	libpulse-dev,
 	libavcodec-dev (>= 4:0.7.1),
 	libavformat-dev (>= 4:0.7.1),
 	libavutil-dev (>= 4:0.7.1),
 	scons,
 	libelf-dev,
-	python-simplejson
+	python-simplejson,
+	libegl1-mesa-dev,
+	libgles2-mesa-dev,
+	subversion,
+	libudev-dev,
 Standards-Version: 3.9.2
 
 Package: chromium-browser
@@ -130,10 +133,9 @@ Description: page inspector for the chromium-browser - transitional dummy packag
  This package contains 'inspector', transitional dummy package.
 
 Package: chromium
-Architecture: i386 amd64 armel
+Architecture: i386 amd64 armel armhf
 Depends: ${shlibs:Depends}, ${misc:Depends},
 	libnss3-1d (>= 3.12.3),
-	libvpx0 (>= 0.9.6),
 	xdg-utils,
 	chromium-inspector
 Suggests: chromium-l10n
@@ -151,7 +153,7 @@ Description: Google's open source chromium web browser
  This package contains the Chromium browser.
 
 Package: chromium-dbg
-Architecture: i386 amd64 armel
+Architecture: i386 amd64 armel armhf
 Section: debug
 Priority: extra
 Depends: ${shlibs:Depends}, ${misc:Depends}, chromium (= ${binary:Version})

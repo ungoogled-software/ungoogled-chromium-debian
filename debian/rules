@@ -73,17 +73,32 @@ GYP_DEFINES += werror=$(NULL)
 endif
 
 DEB_HOST_ARCH_CPU := $(shell dpkg-architecture -qDEB_HOST_ARCH_CPU)
+DEB_HOST_ARCH := $(shell dpkg-architecture -qDEB_HOST_ARCH)
 
 ifeq (arm,$(DEB_HOST_ARCH_CPU))
-AVOID_GCC_44 := 0
 GYP_DEFINES += \
-	arm_thumb=0 \
 	target_arch=arm \
 	disable_nacl=1 \
 	linux_use_tcmalloc=0 \
+	enable_webrtc=0 \
+	use_cups=1 \
+	$(NULL)
+ifeq (armel,$(DEB_HOST_ARCH))
+AVOID_GCC_44 := 0
+GYP_DEFINES += \
+	arm_thumb=0 \
 	armv7=0 \
 	arm_neon=0 \
 	$(NULL)
+endif
+ifeq (armhf,$(DEB_HOST_ARCH))
+GYP_DEFINES += \
+	arm_thumb=1 \
+	armv7=1 \
+	arm_neon=0 \
+	$(NULL)
+endif
+
 WANT_LZMA_DEBS := 0
 WANT_TESTS     := 0
 else
@@ -133,6 +148,10 @@ AVOID_GCC_44 ?= 0
 
 # Set this to use gcc 4.5 instead of 4.6
 AVOID_GCC_46 ?= 0
+
+# Set this to use gcc 4.6 instead of 4.7
+AVOID_GCC_47 ?= 1
+
 CC_VERSION   := $(shell gcc -dumpversion | cut -d. -f-2)
  
 ifeq (1/4.4,$(AVOID_GCC_44)/$(CC_VERSION))
@@ -145,6 +164,12 @@ endif
 ifeq (1/4.6,$(AVOID_GCC_46)/$(CC_VERSION))
 CC  := gcc-4.5
 CXX := g++-4.5
+BUILD_ARGS += CC=$(CC) CXX=$(CXX) CC.host=$(CC) CXX.host=$(CXX)
+endif
+
+ifeq (1/4.7,$(AVOID_GCC_47)/$(CC_VERSION))
+CC  := gcc-4.6
+CXX := g++-4.6
 BUILD_ARGS += CC=$(CC) CXX=$(CXX) CC.host=$(CC) CXX.host=$(CXX)
 endif
 
@@ -311,6 +336,9 @@ GYP_DEFINES += \
 	$(NULL)
 endif
 
+# Use pulseaudio
+GYP_DEFINES += use_pulseaudio=1
+
 # Build everything (like All), including test programs but minus things we don't
 # want (breakpad, courgette, ..) or don't need (the other small tools)
 BUILD_TARGETS := \
@@ -424,6 +452,7 @@ clean::
 	rm -f debian/configure-stamp debian/stamp-makefile-build-*
 	rm -f *.cdbs-config_list $(subst_files)
 	rm -fr src/out src/Makefile
+	find src -name *.tmp -execdir rm -f {} \;
 	find src -name *.pyc -execdir rm -f {} \;
 	find src -name *.mk -execdir rm -f {} \;
 	find src -name *.Makefile -execdir rm -f {} \;
@@ -796,7 +825,7 @@ gos-pack:
 	mv $(TMP_DIR)/tools/depot_tools $(TMP_DIR)/$(DEB_TAR_SRCDIR)/depot_tools
 	mkdir $(TMP_DIR)/$(DEBIAN_NAME)-$(VERSION)
 	mv $(TMP_DIR)/$(DEB_TAR_SRCDIR) $(TMP_DIR)/$(DEBIAN_NAME)-$(VERSION)/
-	cd $(TMP_DIR) && tar -c $(TAR_FLAGS) -f ../$(DEBIAN_NAME)_$(VERSION).orig.tar.$(TAR_EXT) --exclude=.svn $(DEBIAN_NAME)-$(VERSION)
+	cd $(TMP_DIR) && tar -c $(TAR_FLAGS) -f ../$(DEBIAN_NAME)_$(VERSION).orig.tar.$(TAR_EXT) --exclude=.svn --exclude=.git $(DEBIAN_NAME)-$(VERSION)
 	rm -rf $(TMP_DIR)
 	@echo "# Done (created $(DEBIAN_NAME)_$(VERSION).orig.tar.$(TAR_EXT))"
 	@ls -l $(DEBIAN_NAME)_$(VERSION).orig.tar.$(TAR_EXT)

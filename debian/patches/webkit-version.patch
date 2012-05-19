@@ -1,20 +1,9 @@
-From: Fabien Tassin <fta@ubuntu.com>
-Date: Fri, 25 Feb 2011 10:41:53 +0100
-Subject: Fix the Webkit version in about:version
-
-The build system expects the svn or git directories to be available at
-build time.
-
-Patch from Ubuntu, thanks to Fabien Tassin
----
- src/webkit/build/webkit_version.py |    9 +++++++++
- 1 files changed, 9 insertions(+), 0 deletions(-)
-
-diff --git a/src/webkit/build/webkit_version.py b/src/webkit/build/webkit_version.py
-index 7fdf9b32..b8c1af57 100755
---- a/src/webkit/build/webkit_version.py
-+++ b/src/webkit/build/webkit_version.py
-@@ -60,6 +60,15 @@ def GetWebKitRevision(webkit_dir, version_file):
+description: debian-specific version parsing (for about dialog)
+Index: sid/src/webkit/build/webkit_version.py
+===================================================================
+--- sid.orig/src/webkit/build/webkit_version.py	2012-05-16 11:31:56.000000000 +0200
++++ sid/src/webkit/build/webkit_version.py	2012-05-16 15:53:54.918125272 +0200
+@@ -61,6 +61,15 @@
        default_lastchange=None,
        directory=os.path.join(webkit_dir, version_file_dir),
        directory_regex_prior_to_src_url='webkit')

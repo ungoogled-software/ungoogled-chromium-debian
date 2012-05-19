@@ -1,17 +1,8 @@
-From: Giuseppe Iuculano <iuculano@debian.org>
-Date: Sat, 8 May 2010 11:30:40 +0200
-Subject: Include system copy of prtime.h
----
- src/base/pr_time_unittest.cc              |    2 +-
- src/base/time.cc                          |    2 +-
- src/chrome/browser/metrics/metrics_log.cc |    2 +-
- src/chrome/common/metrics_helpers.cc      |    2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/src/base/pr_time_unittest.cc b/src/base/pr_time_unittest.cc
-index 5c8bad1d..8a9697de 100644
---- a/src/base/pr_time_unittest.cc
-+++ b/src/base/pr_time_unittest.cc
+Include system copy of prtime.h
+Index: sid/src/base/pr_time_unittest.cc
+===================================================================
+--- sid.orig/src/base/pr_time_unittest.cc	2012-05-16 11:32:29.000000000 +0200
++++ sid/src/base/pr_time_unittest.cc	2012-05-16 15:50:13.258129408 +0200
 @@ -4,7 +4,7 @@
  
  #include <time.h>
@@ -21,10 +12,10 @@ index 5c8bad1d..8a9697de 100644
  #include "base/time.h"
  #include "testing/gtest/include/gtest/gtest.h"
  
-diff --git a/src/base/time.cc b/src/base/time.cc
-index 859810e7..996c33dc 100644
---- a/src/base/time.cc
-+++ b/src/base/time.cc
+Index: sid/src/base/time.cc
+===================================================================
+--- sid.orig/src/base/time.cc	2012-05-16 11:32:29.000000000 +0200
++++ sid/src/base/time.cc	2012-05-16 15:50:13.258129408 +0200
 @@ -4,7 +4,7 @@
  
  #include "base/time.h"
@@ -34,12 +25,12 @@ index 859810e7..996c33dc 100644
  
  #include "base/logging.h"
  
-diff --git a/src/chrome/browser/metrics/metrics_log.cc b/src/chrome/browser/metrics/metrics_log.cc
-index d0bffb0d..3702c326 100644
---- a/src/chrome/browser/metrics/metrics_log.cc
-+++ b/src/chrome/browser/metrics/metrics_log.cc
-@@ -13,7 +13,7 @@
- #include "base/perftimer.h"
+Index: sid/src/chrome/browser/metrics/metrics_log.cc
+===================================================================
+--- sid.orig/src/chrome/browser/metrics/metrics_log.cc	2012-05-16 11:32:45.000000000 +0200
++++ sid/src/chrome/browser/metrics/metrics_log.cc	2012-05-16 15:50:13.258129408 +0200
+@@ -15,7 +15,7 @@
+ #include "base/string_number_conversions.h"
  #include "base/string_util.h"
  #include "base/sys_info.h"
 -#include "base/third_party/nspr/prtime.h"
@@ -47,31 +38,22 @@ index d0bffb0d..3702c326 100644
  #include "base/time.h"
  #include "base/utf_string_conversions.h"
  #include "chrome/browser/autocomplete/autocomplete.h"
-diff --git a/src/chrome/common/metrics_helpers.cc b/src/chrome/common/metrics_helpers.cc
-index 599bf12a..ea993a0c 100644
---- a/src/chrome/common/metrics_helpers.cc
-+++ b/src/chrome/common/metrics_helpers.cc
-@@ -11,7 +11,7 @@
- #include "base/perftimer.h"
- #include "base/string_number_conversions.h"
- #include "base/sys_info.h"
--#include "base/third_party/nspr/prtime.h"
-+#include <nspr/prtime.h>
- #include "base/time.h"
- #include "base/utf_string_conversions.h"
- #include "chrome/common/logging_chrome.h"
---- a/src/base/base.gypi
-+++ b/src/base/base.gypi
-@@ -18,7 +18,6 @@
-           'third_party/dynamic_annotations/dynamic_annotations.h',
+Index: sid/src/base/base.gypi
+===================================================================
+--- sid.orig/src/base/base.gypi	2012-05-16 11:32:29.000000000 +0200
++++ sid/src/base/base.gypi	2012-05-16 15:50:13.258129408 +0200
+@@ -17,7 +17,6 @@
+           'third_party/dmg_fp/dtoa_wrapper.cc',
            'third_party/icu/icu_utf.cc',
            'third_party/icu/icu_utf.h',
 -          'third_party/nspr/prtime.cc',
            'third_party/nspr/prtime.h',
            'third_party/nspr/prcpucfg_linux.h',
            'third_party/xdg_mime/xdgmime.h',
---- a/src/crypto/nss_util.cc
-+++ b/src/crypto/nss_util.cc
+Index: sid/src/crypto/nss_util.cc
+===================================================================
+--- sid.orig/src/crypto/nss_util.cc	2012-05-16 11:32:02.000000000 +0200
++++ sid/src/crypto/nss_util.cc	2012-05-16 15:50:13.258129408 +0200
 @@ -9,7 +9,7 @@
  #include <plarena.h>
  #include <prerror.h>
@@ -81,14 +63,16 @@ index 599bf12a..ea993a0c 100644
  #include <pk11pub.h>
  #include <secmod.h>
  
---- a/src/net/base/x509_certificate_nss.cc
-+++ b/src/net/base/x509_certificate_nss.cc
+Index: sid/src/net/base/x509_certificate_nss.cc
+===================================================================
+--- sid.orig/src/net/base/x509_certificate_nss.cc	2012-05-16 11:32:04.000000000 +0200
++++ sid/src/net/base/x509_certificate_nss.cc	2012-05-16 15:50:42.262128867 +0200
 @@ -9,7 +9,7 @@
+ #include <keyhi.h>
  #include <nss.h>
  #include <pk11pub.h>
- #include <prerror.h>
 -#include <prtime.h>
 +#include <nspr/prtime.h>
  #include <secder.h>
- #include <secerr.h>
  #include <sechash.h>
+ 

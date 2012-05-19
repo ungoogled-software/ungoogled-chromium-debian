@@ -1,7 +1,9 @@
 Tell Chromium to look in /etc/chromium for the master_preferences file
---- a/src/chrome/common/chrome_paths.cc
-+++ b/src/chrome/common/chrome_paths.cc
-@@ -303,7 +303,7 @@ bool PathProvider(int key, FilePath* res
+Index: sid/src/chrome/common/chrome_paths.cc
+===================================================================
+--- sid.orig/src/chrome/common/chrome_paths.cc	2012-05-16 11:33:15.000000000 +0200
++++ sid/src/chrome/common/chrome_paths.cc	2012-05-16 15:51:15.254128250 +0200
+@@ -339,7 +339,7 @@
  #if defined(GOOGLE_CHROME_BUILD)
        cur = FilePath(FILE_PATH_LITERAL("/etc/opt/chrome/policies"));
  #else
@@ -10,14 +12,3 @@ Tell Chromium to look in /etc/chromium for the master_preferences file
  #endif
        break;
      }
---- a/src/chrome/browser/first_run/first_run.cc
-+++ b/src/chrome/browser/first_run/first_run.cc
-@@ -151,7 +151,7 @@ bool FirstRun::ProcessMasterPreferences(
-                                         MasterPrefs* out_prefs) {
-   DCHECK(!user_data_dir.empty());
- 
--  FilePath master_prefs = MasterPrefsPath();
-+  FilePath master_prefs = FilePath("/etc/chromium");
-   if (master_prefs.empty())
-     return true;
-   installer::MasterPreferences prefs(master_prefs);
