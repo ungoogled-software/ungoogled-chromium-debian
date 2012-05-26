@@ -136,7 +136,6 @@ Description: page inspector for the chromium-browser - transitional dummy packag
 Package: chromium
 Architecture: i386 amd64 armel armhf
 Depends: ${shlibs:Depends}, ${misc:Depends},
-	libnss3-1d (>= 3.12.3),
 	xdg-utils,
 	chromium-inspector
 Suggests: chromium-l10n
