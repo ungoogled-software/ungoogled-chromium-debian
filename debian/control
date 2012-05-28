@@ -79,6 +79,7 @@ Build-Depends: cdbs,
 	libgles2-mesa-dev,
 	subversion,
 	libudev-dev,
+	libssl-dev
 Standards-Version: 3.9.2
 
 Package: chromium-browser
