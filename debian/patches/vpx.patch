@@ -1,20 +1,20 @@
-Index: sid/src/remoting/remoting.gyp
+Index: exp/src/remoting/remoting.gyp
 ===================================================================
---- sid.orig/src/remoting/remoting.gyp	2012-05-16 11:31:55.000000000 +0200
-+++ sid/src/remoting/remoting.gyp	2012-05-17 15:01:36.878355621 +0200
-@@ -603,7 +603,7 @@
+--- exp.orig/src/remoting/remoting.gyp	2012-05-28 11:15:29.000000000 +0200
++++ exp/src/remoting/remoting.gyp	2012-05-28 11:16:36.962675697 +0200
+@@ -1029,7 +1029,7 @@
          '../ui/ui.gyp:ui',
          '../net/net.gyp:net',
          '../skia/skia.gyp:skia',
 -        '../third_party/libvpx/libvpx.gyp:libvpx',
 +        '../third_party/libvpx/libvpx.gyp:libvpx_include',
-         '../third_party/protobuf/protobuf.gyp:protobuf_lite',
+         '../build/linux/system.gyp:protobuf',
          '../third_party/zlib/zlib.gyp:zlib',
          '../media/media.gyp:yuv_convert',
-Index: sid/src/third_party/ffmpeg/ffmpeg.gyp
+Index: exp/src/third_party/ffmpeg/ffmpeg.gyp
 ===================================================================
---- sid.orig/src/third_party/ffmpeg/ffmpeg.gyp	2012-05-16 11:33:53.000000000 +0200
-+++ sid/src/third_party/ffmpeg/ffmpeg.gyp	2012-05-17 15:01:36.890355620 +0200
+--- exp.orig/src/third_party/ffmpeg/ffmpeg.gyp	2012-05-28 11:06:45.000000000 +0200
++++ exp/src/third_party/ffmpeg/ffmpeg.gyp	2012-05-28 11:15:48.230675556 +0200
 @@ -504,7 +504,7 @@
              ['OS == "linux" or OS == "solaris"', {
                'link_settings': {

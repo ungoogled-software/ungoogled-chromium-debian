@@ -1,0 +1,12 @@
+Index: sid/src/seccompsandbox/library.h
+===================================================================
+--- sid.orig/src/seccompsandbox/library.h	2012-05-16 11:33:34.000000000 +0200
++++ sid/src/seccompsandbox/library.h	2012-05-17 16:02:20.346317258 +0200
+@@ -12,6 +12,7 @@
+ #include <string>
+ #include <string.h>
+ #include <sys/mman.h>
++#include <sys/types.h>
+ 
+ #include "maps.h"
+ 

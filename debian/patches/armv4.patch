@@ -1,8 +1,8 @@
 Do not use armv4 incopatible code
-Index: sid/src/third_party/skia/include/core/SkMath.h
+Index: exp/src/third_party/skia/include/core/SkMath.h
 ===================================================================
---- sid.orig/src/third_party/skia/include/core/SkMath.h	2012-05-16 11:34:11.000000000 +0200
-+++ sid/src/third_party/skia/include/core/SkMath.h	2012-05-16 15:51:18.762128185 +0200
+--- exp.orig/src/third_party/skia/include/core/SkMath.h	2012-05-19 16:56:53.000000000 +0200
++++ exp/src/third_party/skia/include/core/SkMath.h	2012-05-19 19:22:56.206671202 +0200
 @@ -156,7 +156,7 @@
  #if defined(__arm__) \
    && !defined(__thumb__) \
@@ -12,11 +12,11 @@ Index: sid/src/third_party/skia/include/core/SkMath.h
      static inline int32_t SkMulS16(S16CPU x, S16CPU y) {
          SkASSERT((int16_t)x == x);
          SkASSERT((int16_t)y == y);
-Index: sid/src/build/common.gypi
+Index: exp/src/build/common.gypi
 ===================================================================
---- sid.orig/src/build/common.gypi	2012-05-16 11:32:28.000000000 +0200
-+++ sid/src/build/common.gypi	2012-05-16 15:51:18.766128185 +0200
-@@ -1949,6 +1949,7 @@
+--- exp.orig/src/build/common.gypi	2012-05-19 16:54:39.000000000 +0200
++++ exp/src/build/common.gypi	2012-05-19 19:22:56.206671202 +0200
+@@ -2064,6 +2064,7 @@
                    # silences those warnings, as they are not helpful and
                    # clutter legitimate warnings.
                    '-Wno-abi',
@@ -24,10 +24,10 @@ Index: sid/src/build/common.gypi
                  ],
                  'conditions': [
                    ['arm_thumb==1', {
-Index: sid/src/base/debug/debugger_posix.cc
+Index: exp/src/base/debug/debugger_posix.cc
 ===================================================================
---- sid.orig/src/base/debug/debugger_posix.cc	2012-05-16 11:32:28.000000000 +0200
-+++ sid/src/base/debug/debugger_posix.cc	2012-05-16 15:51:18.766128185 +0200
+--- exp.orig/src/base/debug/debugger_posix.cc	2012-05-19 16:54:40.000000000 +0200
++++ exp/src/base/debug/debugger_posix.cc	2012-05-19 19:22:56.206671202 +0200
 @@ -204,7 +204,7 @@
  } while (0)
  #else
@@ -37,11 +37,11 @@ Index: sid/src/base/debug/debugger_posix.cc
  #endif
  #else
  #define DEBUG_BREAK() asm("int3")
-Index: sid/src/third_party/skia/src/opts/SkBlitRow_opts_arm.cpp
+Index: exp/src/third_party/skia/src/opts/SkBlitRow_opts_arm.cpp
 ===================================================================
---- sid.orig/src/third_party/skia/src/opts/SkBlitRow_opts_arm.cpp	2012-05-16 11:34:11.000000000 +0200
-+++ sid/src/third_party/skia/src/opts/SkBlitRow_opts_arm.cpp	2012-05-16 15:51:18.766128185 +0200
-@@ -671,8 +671,8 @@
+--- exp.orig/src/third_party/skia/src/opts/SkBlitRow_opts_arm.cpp	2012-05-19 16:56:52.000000000 +0200
++++ exp/src/third_party/skia/src/opts/SkBlitRow_opts_arm.cpp	2012-05-19 19:22:56.206671202 +0200
+@@ -675,8 +675,8 @@
                    /* dst1_scale and dst2_scale*/
                    "lsr    r9, r5, #24                \n\t" /* src >> 24 */
                    "lsr    r10, r6, #24               \n\t" /* src >> 24 */
@@ -52,7 +52,7 @@ Index: sid/src/third_party/skia/src/opts/SkBlitRow_opts_arm.cpp
                    "lsr    r9, r9, #8                 \n\t" /* r9 >> 8 */
                    "lsr    r10, r10, #8               \n\t" /* r10 >> 8 */
                    "rsb    r9, r9, #256               \n\t" /* dst1_scale = r9 = 255 - r9 + 1 */
-@@ -741,7 +741,7 @@
+@@ -745,7 +745,7 @@
  
                    "lsr    r6, r5, #24                \n\t" /* src >> 24 */
                    "and    r8, r12, r5, lsr #8        \n\t" /* ag = r8 = r5 masked by r12 lsr by #8 */

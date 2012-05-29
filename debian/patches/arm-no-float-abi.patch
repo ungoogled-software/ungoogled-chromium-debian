@@ -1,12 +1,13 @@
-Index: sid/src/build/common.gypi
+Index: exp/src/build/common.gypi
 ===================================================================
---- sid.orig/src/build/common.gypi	2012-05-16 15:53:49.278125377 +0200
-+++ sid/src/build/common.gypi	2012-05-17 15:01:32.214355670 +0200
-@@ -1962,7 +1962,6 @@
-                     'cflags': [
-                       '-march=armv7-a',
-                       '-mtune=cortex-a8',
--                      '-mfloat-abi=softfp',
-                     ],
-                     'conditions': [
-                       ['arm_neon==1', {
+--- exp.orig/src/build/common.gypi	2012-05-19 19:23:03.000000000 +0200
++++ exp/src/build/common.gypi	2012-05-19 19:40:07.198682266 +0200
+@@ -723,7 +723,7 @@
+     'arm_fpu%': 'vfpv3',
+ 
+     # Set ARM float abi compilation flag.
+-    'arm_float_abi%': 'softfp',
++    #'arm_float_abi%': 'softfp',
+ 
+     # Enable new NPDevice API.
+     'enable_new_npdevice_api%': 0,

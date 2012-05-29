@@ -1,9 +1,9 @@
 Use system copy of libv8
-Index: sid/src/build/linux/system.gyp
+Index: exp/src/build/linux/system.gyp
 ===================================================================
---- sid.orig/src/build/linux/system.gyp	2012-05-16 15:53:49.000000000 +0200
-+++ sid/src/build/linux/system.gyp	2012-05-16 15:54:10.970124973 +0200
-@@ -405,6 +405,18 @@
+--- exp.orig/src/build/linux/system.gyp	2012-05-19 19:23:03.000000000 +0200
++++ exp/src/build/linux/system.gyp	2012-05-19 19:23:29.330671562 +0200
+@@ -404,6 +404,18 @@
        }]]
      },
      {
@@ -22,10 +22,10 @@ Index: sid/src/build/linux/system.gyp
        'target_name': 'gnome_keyring',
        'type': 'none',
        'conditions': [
-Index: sid/src/net/net.gyp
+Index: exp/src/net/net.gyp
 ===================================================================
---- sid.orig/src/net/net.gyp	2012-05-16 11:32:04.000000000 +0200
-+++ sid/src/net/net.gyp	2012-05-16 15:54:10.970124973 +0200
+--- exp.orig/src/net/net.gyp	2012-05-19 16:54:19.000000000 +0200
++++ exp/src/net/net.gyp	2012-05-19 19:23:29.330671562 +0200
 @@ -35,7 +35,7 @@
          '../third_party/icu/icu.gyp:icui18n',
          '../third_party/icu/icu.gyp:icuuc',
@@ -33,13 +33,13 @@ Index: sid/src/net/net.gyp
 -        '../v8/tools/gyp/v8.gyp:v8',
 +        '../build/linux/system.gyp:v8',
          'net_resources',
-         'ssl_false_start_blacklist_process#host',
        ],
-Index: sid/src/build/all.gyp
+       'sources': [
+Index: exp/src/build/all.gyp
 ===================================================================
---- sid.orig/src/build/all.gyp	2012-05-16 11:32:28.000000000 +0200
-+++ sid/src/build/all.gyp	2012-05-16 15:54:10.970124973 +0200
-@@ -51,7 +51,7 @@
+--- exp.orig/src/build/all.gyp	2012-05-19 16:54:39.000000000 +0200
++++ exp/src/build/all.gyp	2012-05-19 19:23:29.330671562 +0200
+@@ -52,7 +52,7 @@
          '../third_party/WebKit/Source/WebKit/chromium/All.gyp:*',
          '../third_party/WebKit/Source/WebKit/chromium/WebKit.gyp:generate_devtools_zip',
          '../third_party/zlib/zlib.gyp:*',
@@ -48,10 +48,10 @@ Index: sid/src/build/all.gyp
          '../webkit/support/webkit_support.gyp:*',
          '../webkit/webkit.gyp:*',
          'util/build_util.gyp:*',
-Index: sid/src/chrome/renderer/loadtimes_extension_bindings.cc
+Index: exp/src/chrome/renderer/loadtimes_extension_bindings.cc
 ===================================================================
---- sid.orig/src/chrome/renderer/loadtimes_extension_bindings.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/loadtimes_extension_bindings.cc	2012-05-16 15:54:10.974124974 +0200
+--- exp.orig/src/chrome/renderer/loadtimes_extension_bindings.cc	2012-05-19 16:55:01.000000000 +0200
++++ exp/src/chrome/renderer/loadtimes_extension_bindings.cc	2012-05-19 19:23:29.330671562 +0200
 @@ -9,7 +9,7 @@
  #include "base/time.h"
  #include "content/public/renderer/document_state.h"
@@ -61,10 +61,10 @@ Index: sid/src/chrome/renderer/loadtimes_extension_bindings.cc
  
  using WebKit::WebDataSource;
  using WebKit::WebFrame;
-Index: sid/src/net/proxy/proxy_resolver_v8.cc
+Index: exp/src/net/proxy/proxy_resolver_v8.cc
 ===================================================================
---- sid.orig/src/net/proxy/proxy_resolver_v8.cc	2012-05-16 11:32:02.000000000 +0200
-+++ sid/src/net/proxy/proxy_resolver_v8.cc	2012-05-16 15:54:10.974124974 +0200
+--- exp.orig/src/net/proxy/proxy_resolver_v8.cc	2012-05-19 16:54:17.000000000 +0200
++++ exp/src/net/proxy/proxy_resolver_v8.cc	2012-05-19 19:23:29.330671562 +0200
 @@ -24,7 +24,7 @@
  #include "net/proxy/proxy_resolver_js_bindings.h"
  #include "net/proxy/proxy_resolver_request_context.h"
@@ -74,10 +74,10 @@ Index: sid/src/net/proxy/proxy_resolver_v8.cc
  
  // Notes on the javascript environment:
  //
-Index: sid/src/webkit/glue/webkit_glue.cc
+Index: exp/src/webkit/glue/webkit_glue.cc
 ===================================================================
---- sid.orig/src/webkit/glue/webkit_glue.cc	2012-05-16 11:31:56.000000000 +0200
-+++ sid/src/webkit/glue/webkit_glue.cc	2012-05-16 15:54:10.974124974 +0200
+--- exp.orig/src/webkit/glue/webkit_glue.cc	2012-05-19 16:54:05.000000000 +0200
++++ exp/src/webkit/glue/webkit_glue.cc	2012-05-19 19:23:29.330671562 +0200
 @@ -45,7 +45,7 @@
  #if defined(OS_WIN)
  #include "third_party/WebKit/Source/WebKit/chromium/public/win/WebInputEventFactory.h"
@@ -87,10 +87,10 @@ Index: sid/src/webkit/glue/webkit_glue.cc
  #include "webkit/glue/glue_serialize.h"
  #include "webkit/glue/user_agent.h"
  
-Index: sid/src/webkit/tools/test_shell/listener_leak_test.cc
+Index: exp/src/webkit/tools/test_shell/listener_leak_test.cc
 ===================================================================
---- sid.orig/src/webkit/tools/test_shell/listener_leak_test.cc	2012-05-16 11:31:56.000000000 +0200
-+++ sid/src/webkit/tools/test_shell/listener_leak_test.cc	2012-05-16 15:54:10.974124974 +0200
+--- exp.orig/src/webkit/tools/test_shell/listener_leak_test.cc	2012-05-19 16:54:06.000000000 +0200
++++ exp/src/webkit/tools/test_shell/listener_leak_test.cc	2012-05-19 19:23:29.330671562 +0200
 @@ -8,8 +8,8 @@
  #include "base/string_number_conversions.h"
  #include "base/string_util.h"
@@ -102,10 +102,10 @@ Index: sid/src/webkit/tools/test_shell/listener_leak_test.cc
  #include "webkit/glue/webkit_glue.h"
  #include "webkit/tools/test_shell/test_shell.h"
  #include "webkit/tools/test_shell/test_shell_test.h"
-Index: sid/src/chrome/renderer/search_extension.cc
+Index: exp/src/chrome/renderer/search_extension.cc
 ===================================================================
---- sid.orig/src/chrome/renderer/search_extension.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/search_extension.cc	2012-05-16 15:54:10.974124974 +0200
+--- exp.orig/src/chrome/renderer/search_extension.cc	2012-05-19 16:55:01.000000000 +0200
++++ exp/src/chrome/renderer/search_extension.cc	2012-05-19 19:23:29.330671562 +0200
 @@ -11,7 +11,7 @@
  #include "chrome/renderer/searchbox.h"
  #include "content/public/renderer/render_view.h"
@@ -115,10 +115,10 @@ Index: sid/src/chrome/renderer/search_extension.cc
  
  using WebKit::WebFrame;
  using WebKit::WebView;
-Index: sid/src/webkit/glue/webkit_glue.gypi
+Index: exp/src/webkit/glue/webkit_glue.gypi
 ===================================================================
---- sid.orig/src/webkit/glue/webkit_glue.gypi	2012-05-16 11:31:56.000000000 +0200
-+++ sid/src/webkit/glue/webkit_glue.gypi	2012-05-17 14:37:06.618371100 +0200
+--- exp.orig/src/webkit/glue/webkit_glue.gypi	2012-05-19 16:54:05.000000000 +0200
++++ exp/src/webkit/glue/webkit_glue.gypi	2012-05-19 19:23:29.330671562 +0200
 @@ -132,7 +132,7 @@
          '<(DEPTH)/third_party/npapi/npapi.gyp:npapi',
          '<(DEPTH)/ui/gfx/gl/gl.gyp:gl',
@@ -128,7 +128,7 @@ Index: sid/src/webkit/glue/webkit_glue.gypi
          '<(webkit_src_dir)/Source/WebKit/chromium/WebKit.gyp:webkit',
          'fileapi',
          'webkit_media',
-@@ -541,7 +541,7 @@
+@@ -527,7 +527,7 @@
                 ],
                 'export_dependent_settings': [
                   '<(webkit_src_dir)/Source/WebKit/chromium/WebKit.gyp:webkit',
@@ -137,10 +137,10 @@ Index: sid/src/webkit/glue/webkit_glue.gypi
                 ],
              }],
            ],
-Index: sid/src/chrome/renderer/searchbox_extension.cc
+Index: exp/src/chrome/renderer/searchbox_extension.cc
 ===================================================================
---- sid.orig/src/chrome/renderer/searchbox_extension.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/searchbox_extension.cc	2012-05-16 15:54:10.974124974 +0200
+--- exp.orig/src/chrome/renderer/searchbox_extension.cc	2012-05-19 16:55:01.000000000 +0200
++++ exp/src/chrome/renderer/searchbox_extension.cc	2012-05-19 19:23:29.330671562 +0200
 @@ -15,7 +15,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebFrame.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebScriptSource.h"
@@ -150,11 +150,11 @@ Index: sid/src/chrome/renderer/searchbox_extension.cc
  
  using WebKit::WebFrame;
  using WebKit::WebScriptSource;
-Index: sid/src/v8/tools/gyp/v8.gyp
+Index: exp/src/v8/tools/gyp/v8.gyp
 ===================================================================
---- sid.orig/src/v8/tools/gyp/v8.gyp	2012-05-16 11:34:42.000000000 +0200
-+++ sid/src/v8/tools/gyp/v8.gyp	2012-05-16 15:54:10.974124974 +0200
-@@ -1001,7 +1001,7 @@
+--- exp.orig/src/v8/tools/gyp/v8.gyp	2012-05-19 16:57:28.000000000 +0200
++++ exp/src/v8/tools/gyp/v8.gyp	2012-05-19 19:23:29.330671562 +0200
+@@ -1006,7 +1006,7 @@
              }],
            ],
            'dependencies': [
@@ -163,11 +163,11 @@ Index: sid/src/v8/tools/gyp/v8.gyp
            ],
          },
        ],
-Index: sid/src/third_party/WebKit/Source/WebCore/WebCore.gyp/WebCore.gyp
+Index: exp/src/third_party/WebKit/Source/WebCore/WebCore.gyp/WebCore.gyp
 ===================================================================
---- sid.orig/src/third_party/WebKit/Source/WebCore/WebCore.gyp/WebCore.gyp	2012-05-16 11:36:21.000000000 +0200
-+++ sid/src/third_party/WebKit/Source/WebCore/WebCore.gyp/WebCore.gyp	2012-05-17 14:36:42.434371355 +0200
-@@ -1044,7 +1044,7 @@
+--- exp.orig/src/third_party/WebKit/Source/WebCore/WebCore.gyp/WebCore.gyp	2012-05-19 16:58:47.000000000 +0200
++++ exp/src/third_party/WebKit/Source/WebCore/WebCore.gyp/WebCore.gyp	2012-05-19 19:23:29.330671562 +0200
+@@ -1085,7 +1085,7 @@
          '<(chromium_src_dir)/third_party/libwebp/libwebp.gyp:libwebp',
          '<(chromium_src_dir)/third_party/npapi/npapi.gyp:npapi',
          '<(chromium_src_dir)/third_party/sqlite/sqlite.gyp:sqlite',
@@ -176,7 +176,7 @@ Index: sid/src/third_party/WebKit/Source/WebCore/WebCore.gyp/WebCore.gyp
          '<(libjpeg_gyp_path):libjpeg',
        ],
        'include_dirs': [
-@@ -1166,7 +1166,7 @@
+@@ -1211,7 +1211,7 @@
          '<(chromium_src_dir)/third_party/sqlite/sqlite.gyp:sqlite',
          '<(chromium_src_dir)/third_party/angle/src/build_angle.gyp:translator_glsl',
          '<(chromium_src_dir)/third_party/zlib/zlib.gyp:zlib',
@@ -185,7 +185,7 @@ Index: sid/src/third_party/WebKit/Source/WebCore/WebCore.gyp/WebCore.gyp
          '<(libjpeg_gyp_path):libjpeg',
        ],
        'export_dependent_settings': [
-@@ -1184,7 +1184,7 @@
+@@ -1229,7 +1229,7 @@
          '<(chromium_src_dir)/third_party/sqlite/sqlite.gyp:sqlite',
          '<(chromium_src_dir)/third_party/angle/src/build_angle.gyp:translator_glsl',
          '<(chromium_src_dir)/third_party/zlib/zlib.gyp:zlib',
@@ -194,7 +194,7 @@ Index: sid/src/third_party/WebKit/Source/WebCore/WebCore.gyp/WebCore.gyp
          '<(libjpeg_gyp_path):libjpeg',
        ],
        # This is needed for mac because of webkit_system_interface. It'd be nice
-@@ -1918,7 +1918,7 @@
+@@ -1980,7 +1980,7 @@
          '<(chromium_src_dir)/build/temp_gyp/googleurl.gyp:googleurl',
          '<(chromium_src_dir)/skia/skia.gyp:skia',
          '<(chromium_src_dir)/third_party/npapi/npapi.gyp:npapi',
@@ -203,7 +203,7 @@ Index: sid/src/third_party/WebKit/Source/WebCore/WebCore.gyp/WebCore.gyp
        ],
        'export_dependent_settings': [
          'webcore_bindings',
-@@ -1926,7 +1926,7 @@
+@@ -1988,7 +1988,7 @@
          '<(chromium_src_dir)/build/temp_gyp/googleurl.gyp:googleurl',
          '<(chromium_src_dir)/skia/skia.gyp:skia',
          '<(chromium_src_dir)/third_party/npapi/npapi.gyp:npapi',
@@ -212,10 +212,10 @@ Index: sid/src/third_party/WebKit/Source/WebCore/WebCore.gyp/WebCore.gyp
        ],
        'direct_dependent_settings': {
          'include_dirs': [
-Index: sid/src/third_party/WebKit/Tools/DumpRenderTree/chromium/DumpRenderTree.cpp
+Index: exp/src/third_party/WebKit/Tools/DumpRenderTree/chromium/DumpRenderTree.cpp
 ===================================================================
---- sid.orig/src/third_party/WebKit/Tools/DumpRenderTree/chromium/DumpRenderTree.cpp	2012-05-16 11:33:38.000000000 +0200
-+++ sid/src/third_party/WebKit/Tools/DumpRenderTree/chromium/DumpRenderTree.cpp	2012-05-16 15:54:10.974124974 +0200
+--- exp.orig/src/third_party/WebKit/Tools/DumpRenderTree/chromium/DumpRenderTree.cpp	2012-05-19 16:56:15.000000000 +0200
++++ exp/src/third_party/WebKit/Tools/DumpRenderTree/chromium/DumpRenderTree.cpp	2012-05-19 19:23:29.330671562 +0200
 @@ -33,8 +33,8 @@
  #include "TestShell.h"
  #include "WebCompositor.h"
@@ -227,11 +227,11 @@ Index: sid/src/third_party/WebKit/Tools/DumpRenderTree/chromium/DumpRenderTree.c
  #include <wtf/Vector.h>
  
  using namespace std;
-Index: sid/src/chrome/browser/task_manager/task_manager_resource_providers.cc
+Index: exp/src/chrome/browser/task_manager/task_manager_resource_providers.cc
 ===================================================================
---- sid.orig/src/chrome/browser/task_manager/task_manager_resource_providers.cc	2012-05-16 11:32:45.000000000 +0200
-+++ sid/src/chrome/browser/task_manager/task_manager_resource_providers.cc	2012-05-16 15:54:10.974124974 +0200
-@@ -55,7 +55,7 @@
+--- exp.orig/src/chrome/browser/task_manager/task_manager_resource_providers.cc	2012-05-19 16:54:55.000000000 +0200
++++ exp/src/chrome/browser/task_manager/task_manager_resource_providers.cc	2012-05-19 19:23:29.334671559 +0200
+@@ -58,7 +58,7 @@
  #include "third_party/sqlite/sqlite3.h"
  #include "ui/base/l10n/l10n_util.h"
  #include "ui/base/resource/resource_bundle.h"
@@ -240,11 +240,11 @@ Index: sid/src/chrome/browser/task_manager/task_manager_resource_providers.cc
  
  #if defined(OS_MACOSX)
  #include "skia/ext/skia_utils_mac.h"
-Index: sid/src/chrome/chrome_tests.gypi
+Index: exp/src/chrome/chrome_tests.gypi
 ===================================================================
---- sid.orig/src/chrome/chrome_tests.gypi	2012-05-16 11:33:16.000000000 +0200
-+++ sid/src/chrome/chrome_tests.gypi	2012-05-17 14:35:23.198372189 +0200
-@@ -1212,7 +1212,7 @@
+--- exp.orig/src/chrome/chrome_tests.gypi	2012-05-19 16:55:35.000000000 +0200
++++ exp/src/chrome/chrome_tests.gypi	2012-05-19 19:23:29.334671559 +0200
+@@ -999,7 +999,7 @@
          '../ui/ui.gyp:ui_resources',
          '../ui/ui.gyp:ui_resources_standard',
          '../ui/ui.gyp:ui_test_support',
@@ -253,7 +253,7 @@ Index: sid/src/chrome/chrome_tests.gypi
          'common/extensions/api/api.gyp:api',
          'chrome_resources.gyp:chrome_resources',
          'chrome_resources.gyp:chrome_strings',
-@@ -2158,7 +2158,7 @@
+@@ -2046,7 +2046,7 @@
          ['target_arch!="arm"', {
            'dependencies': [
              # build time dependency.
@@ -261,8 +261,8 @@ Index: sid/src/chrome/chrome_tests.gypi
 +            '../build/linux/system.gyp:v8',
            ],
          }],
-         ['use_aura==1', {
-@@ -2562,7 +2562,7 @@
+         ['enable_extensions==0', {
+@@ -2604,7 +2604,7 @@
          '../third_party/icu/icu.gyp:icui18n',
          '../third_party/icu/icu.gyp:icuuc',
          '../third_party/leveldatabase/leveldatabase.gyp:leveldatabase',
@@ -271,7 +271,7 @@ Index: sid/src/chrome/chrome_tests.gypi
          '../webkit/webkit.gyp:test_shell_test_support',
          # Runtime dependencies
          '../ppapi/ppapi_internal.gyp:ppapi_tests',
-@@ -3232,7 +3232,7 @@
+@@ -3324,7 +3324,7 @@
          ['target_arch!="arm"', {
            'dependencies': [
              # build time dependency.
@@ -280,7 +280,7 @@ Index: sid/src/chrome/chrome_tests.gypi
              # run time dependency
              '../webkit/webkit.gyp:copy_npapi_test_plugin',
            ],
-@@ -3275,7 +3275,7 @@
+@@ -3409,7 +3409,7 @@
          '../third_party/icu/icu.gyp:icui18n',
          '../third_party/icu/icu.gyp:icuuc',
          '../third_party/leveldatabase/leveldatabase.gyp:leveldatabase',
@@ -289,11 +289,11 @@ Index: sid/src/chrome/chrome_tests.gypi
          '../webkit/webkit.gyp:test_shell_test_support',
          # Runtime dependencies
          '../third_party/mesa/mesa.gyp:osmesa',
-Index: sid/src/chrome/renderer/chrome_render_process_observer.cc
+Index: exp/src/chrome/renderer/chrome_render_process_observer.cc
 ===================================================================
---- sid.orig/src/chrome/renderer/chrome_render_process_observer.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/chrome_render_process_observer.cc	2012-05-16 15:54:10.978124972 +0200
-@@ -41,7 +41,7 @@
+--- exp.orig/src/chrome/renderer/chrome_render_process_observer.cc	2012-05-19 16:55:01.000000000 +0200
++++ exp/src/chrome/renderer/chrome_render_process_observer.cc	2012-05-19 19:23:29.334671559 +0200
+@@ -43,7 +43,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebFrame.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebRuntimeFeatures.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebView.h"
@@ -302,23 +302,23 @@ Index: sid/src/chrome/renderer/chrome_render_process_observer.cc
  
  #if defined(OS_WIN)
  #include "base/win/iat_patch_function.h"
-Index: sid/src/chrome/renderer/extensions/extension_dispatcher.cc
+Index: exp/src/chrome/renderer/extensions/extension_dispatcher.cc
 ===================================================================
---- sid.orig/src/chrome/renderer/extensions/extension_dispatcher.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/extensions/extension_dispatcher.cc	2012-05-16 15:54:10.978124972 +0200
-@@ -51,7 +51,7 @@
+--- exp.orig/src/chrome/renderer/extensions/extension_dispatcher.cc	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/extension_dispatcher.cc	2012-05-19 19:23:29.334671559 +0200
+@@ -57,7 +57,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/platform/WebString.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/platform/WebURLRequest.h"
  #include "ui/base/resource/resource_bundle.h"
 -#include "v8/include/v8.h"
 +#include <v8.h>
  
- using content::RenderThread;
- using extensions::ChromePrivateCustomBindings;
-Index: sid/src/chrome/renderer/external_extension.cc
+ using WebKit::WebDataSource;
+ using WebKit::WebDocument;
+Index: exp/src/chrome/renderer/external_extension.cc
 ===================================================================
---- sid.orig/src/chrome/renderer/external_extension.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/external_extension.cc	2012-05-16 15:54:10.978124972 +0200
+--- exp.orig/src/chrome/renderer/external_extension.cc	2012-05-19 16:55:01.000000000 +0200
++++ exp/src/chrome/renderer/external_extension.cc	2012-05-19 19:23:29.334671559 +0200
 @@ -12,7 +12,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebDocument.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebFrame.h"
@@ -328,10 +328,10 @@ Index: sid/src/chrome/renderer/external_extension.cc
  
  using WebKit::WebFrame;
  using WebKit::WebView;
-Index: sid/src/chrome/renderer/translate_helper.cc
+Index: exp/src/chrome/renderer/translate_helper.cc
 ===================================================================
---- sid.orig/src/chrome/renderer/translate_helper.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/translate_helper.cc	2012-05-16 15:54:10.978124972 +0200
+--- exp.orig/src/chrome/renderer/translate_helper.cc	2012-05-19 16:55:01.000000000 +0200
++++ exp/src/chrome/renderer/translate_helper.cc	2012-05-19 19:23:29.334671559 +0200
 @@ -19,7 +19,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebScriptSource.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebView.h"
@@ -341,10 +341,10 @@ Index: sid/src/chrome/renderer/translate_helper.cc
  #include "webkit/glue/dom_operations.h"
  
  using WebKit::WebDocument;
-Index: sid/src/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp
+Index: exp/src/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp
 ===================================================================
---- sid.orig/src/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp	2012-05-16 11:34:16.000000000 +0200
-+++ sid/src/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp	2012-05-16 15:54:10.978124972 +0200
+--- exp.orig/src/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp	2012-05-19 16:56:54.000000000 +0200
++++ exp/src/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp	2012-05-19 19:23:29.334671559 +0200
 @@ -73,13 +73,13 @@
                  '<(chromium_src_dir)/third_party/icu/icu.gyp:icuuc',
                  '<(chromium_src_dir)/third_party/npapi/npapi.gyp:npapi',
@@ -361,7 +361,7 @@ Index: sid/src/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp
              ],
              'include_dirs': [
                  'public',
-@@ -726,7 +726,7 @@
+@@ -708,7 +708,7 @@
                                  '<(chromium_src_dir)/third_party/modp_b64/modp_b64.gyp:modp_b64',
                                  '<(chromium_src_dir)/third_party/ots/ots.gyp:ots',
                                  '<(chromium_src_dir)/third_party/zlib/zlib.gyp:zlib',
@@ -370,7 +370,7 @@ Index: sid/src/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp
                                  # We must not add webkit_support here because of cyclic dependency.
                              ],
                              'direct_dependent_settings': {
-@@ -736,7 +736,7 @@
+@@ -718,7 +718,7 @@
                              },
                              'export_dependent_settings': [
                                  '<(chromium_src_dir)/build/temp_gyp/googleurl.gyp:googleurl',
@@ -379,10 +379,10 @@ Index: sid/src/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp
                              ],
                              'include_dirs': [
                                  # WARNING: Do not view this particular case as a precedent for
-Index: sid/src/webkit/tools/test_shell/test_shell_webkit_init.cc
+Index: exp/src/webkit/tools/test_shell/test_shell_webkit_init.cc
 ===================================================================
---- sid.orig/src/webkit/tools/test_shell/test_shell_webkit_init.cc	2012-05-16 11:31:56.000000000 +0200
-+++ sid/src/webkit/tools/test_shell/test_shell_webkit_init.cc	2012-05-16 15:54:10.978124972 +0200
+--- exp.orig/src/webkit/tools/test_shell/test_shell_webkit_init.cc	2012-05-19 16:54:06.000000000 +0200
++++ exp/src/webkit/tools/test_shell/test_shell_webkit_init.cc	2012-05-19 19:23:29.334671559 +0200
 @@ -14,7 +14,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebScriptController.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebSecurityPolicy.h"
@@ -392,23 +392,23 @@ Index: sid/src/webkit/tools/test_shell/test_shell_webkit_init.cc
  #include "webkit/plugins/npapi/plugin_list.h"
  #include "webkit/plugins/webplugininfo.h"
  #include "webkit/tools/test_shell/simple_socket_stream_bridge.h"
-Index: sid/src/content/content_renderer.gypi
+Index: exp/src/content/content_renderer.gypi
 ===================================================================
---- sid.orig/src/content/content_renderer.gypi	2012-05-16 11:32:01.000000000 +0200
-+++ sid/src/content/content_renderer.gypi	2012-05-16 15:54:10.978124972 +0200
+--- exp.orig/src/content/content_renderer.gypi	2012-05-19 16:54:14.000000000 +0200
++++ exp/src/content/content_renderer.gypi	2012-05-19 19:30:49.966676288 +0200
 @@ -17,7 +17,7 @@
      '../third_party/npapi/npapi.gyp:npapi',
      '../third_party/WebKit/Source/WebKit/chromium/WebKit.gyp:webkit',
-     '../ui/gfx/surface/surface.gyp:surface',
+     '../ui/surface/surface.gyp:surface',
 -    '../v8/tools/gyp/v8.gyp:v8',
 +    '../build/linux/system.gyp:v8',
      '../webkit/support/webkit_support.gyp:webkit_media',
      '../webkit/support/webkit_support.gyp:webkit_gpu',
    ],
-Index: sid/src/third_party/WebKit/Source/ThirdParty/gyp/samples/samples
+Index: exp/src/third_party/WebKit/Source/ThirdParty/gyp/samples/samples
 ===================================================================
---- sid.orig/src/third_party/WebKit/Source/ThirdParty/gyp/samples/samples	2012-05-16 11:37:51.000000000 +0200
-+++ sid/src/third_party/WebKit/Source/ThirdParty/gyp/samples/samples	2012-05-16 15:54:10.978124972 +0200
+--- exp.orig/src/third_party/WebKit/Source/ThirdParty/gyp/samples/samples	2012-05-19 17:00:22.000000000 +0200
++++ exp/src/third_party/WebKit/Source/ThirdParty/gyp/samples/samples	2012-05-19 19:23:29.334671559 +0200
 @@ -38,7 +38,7 @@
      'third_party/npapi/npapi.gyp',
      'third_party/sqlite/sqlite.gyp',
@@ -418,10 +418,10 @@ Index: sid/src/third_party/WebKit/Source/ThirdParty/gyp/samples/samples
      'webkit/activex_shim/activex_shim.gyp',
      'webkit/activex_shim_dll/activex_shim_dll.gyp',
      'webkit/build/action_csspropertynames.py',
-Index: sid/src/webkit/tools/test_shell/test_shell.gypi
+Index: exp/src/webkit/tools/test_shell/test_shell.gypi
 ===================================================================
---- sid.orig/src/webkit/tools/test_shell/test_shell.gypi	2012-05-16 11:31:56.000000000 +0200
-+++ sid/src/webkit/tools/test_shell/test_shell.gypi	2012-05-16 15:54:10.978124972 +0200
+--- exp.orig/src/webkit/tools/test_shell/test_shell.gypi	2012-05-19 16:54:06.000000000 +0200
++++ exp/src/webkit/tools/test_shell/test_shell.gypi	2012-05-19 19:23:29.334671559 +0200
 @@ -46,7 +46,7 @@
          '<(DEPTH)/testing/gtest.gyp:gtest',
          '<(DEPTH)/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp:inspector_resources',
@@ -440,10 +440,10 @@ Index: sid/src/webkit/tools/test_shell/test_shell.gypi
          '<(DEPTH)/webkit/support/webkit_support.gyp:webkit_user_agent',
        ],
        'sources': [
-Index: sid/src/third_party/WebKit/Source/WebKit/chromium/src/WebTestingSupport.cpp
+Index: exp/src/third_party/WebKit/Source/WebKit/chromium/src/WebTestingSupport.cpp
 ===================================================================
---- sid.orig/src/third_party/WebKit/Source/WebKit/chromium/src/WebTestingSupport.cpp	2012-05-16 11:34:10.000000000 +0200
-+++ sid/src/third_party/WebKit/Source/WebKit/chromium/src/WebTestingSupport.cpp	2012-05-16 15:54:10.978124972 +0200
+--- exp.orig/src/third_party/WebKit/Source/WebKit/chromium/src/WebTestingSupport.cpp	2012-05-19 16:56:48.000000000 +0200
++++ exp/src/third_party/WebKit/Source/WebKit/chromium/src/WebTestingSupport.cpp	2012-05-19 19:23:29.334671559 +0200
 @@ -28,7 +28,7 @@
  
  #include "WebCoreTestSupport.h"
@@ -453,10 +453,10 @@ Index: sid/src/third_party/WebKit/Source/WebKit/chromium/src/WebTestingSupport.c
  
  namespace WebKit {
  
-Index: sid/src/chrome/renderer/chrome_render_view_observer.cc
+Index: exp/src/chrome/renderer/chrome_render_view_observer.cc
 ===================================================================
---- sid.orig/src/chrome/renderer/chrome_render_view_observer.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/chrome_render_view_observer.cc	2012-05-16 15:54:10.978124972 +0200
+--- exp.orig/src/chrome/renderer/chrome_render_view_observer.cc	2012-05-19 16:55:01.000000000 +0200
++++ exp/src/chrome/renderer/chrome_render_view_observer.cc	2012-05-19 19:23:29.334671559 +0200
 @@ -52,7 +52,7 @@
  #include "webkit/glue/image_decoder.h"
  #include "webkit/glue/image_resource_fetcher.h"
@@ -466,11 +466,11 @@ Index: sid/src/chrome/renderer/chrome_render_view_observer.cc
  
  using WebKit::WebAccessibilityObject;
  using WebKit::WebCString;
-Index: sid/src/chrome/renderer/extensions/event_bindings.cc
+Index: exp/src/chrome/renderer/extensions/event_bindings.cc
 ===================================================================
---- sid.orig/src/chrome/renderer/extensions/event_bindings.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/extensions/event_bindings.cc	2012-05-16 15:54:10.978124972 +0200
-@@ -30,7 +30,7 @@
+--- exp.orig/src/chrome/renderer/extensions/event_bindings.cc	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/event_bindings.cc	2012-05-19 19:23:29.334671559 +0200
+@@ -29,7 +29,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/platform/WebURL.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/platform/WebURLRequest.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebView.h"
@@ -479,10 +479,10 @@ Index: sid/src/chrome/renderer/extensions/event_bindings.cc
  
  using WebKit::WebFrame;
  using WebKit::WebSecurityOrigin;
-Index: sid/src/chrome/test/base/v8_unit_test.h
+Index: exp/src/chrome/test/base/v8_unit_test.h
 ===================================================================
---- sid.orig/src/chrome/test/base/v8_unit_test.h	2012-05-16 11:33:11.000000000 +0200
-+++ sid/src/chrome/test/base/v8_unit_test.h	2012-05-16 15:54:10.978124972 +0200
+--- exp.orig/src/chrome/test/base/v8_unit_test.h	2012-05-19 16:55:30.000000000 +0200
++++ exp/src/chrome/test/base/v8_unit_test.h	2012-05-19 19:23:29.334671559 +0200
 @@ -12,7 +12,7 @@
  #include "base/file_path.h"
  #include "base/string_piece.h"
@@ -492,10 +492,10 @@ Index: sid/src/chrome/test/base/v8_unit_test.h
  
  // A superclass for unit tests that involve running JavaScript.  This class
  // sets up V8 context and has methods that make it easy to execute scripts in
-Index: sid/src/content/renderer/mock_content_renderer_client.cc
+Index: exp/src/content/renderer/mock_content_renderer_client.cc
 ===================================================================
---- sid.orig/src/content/renderer/mock_content_renderer_client.cc	2012-05-16 11:32:01.000000000 +0200
-+++ sid/src/content/renderer/mock_content_renderer_client.cc	2012-05-16 15:54:10.978124972 +0200
+--- exp.orig/src/content/renderer/mock_content_renderer_client.cc	2012-05-19 16:54:13.000000000 +0200
++++ exp/src/content/renderer/mock_content_renderer_client.cc	2012-05-19 19:23:29.334671559 +0200
 @@ -5,7 +5,7 @@
  #include "content/renderer/mock_content_renderer_client.h"
  
@@ -505,10 +505,10 @@ Index: sid/src/content/renderer/mock_content_renderer_client.cc
  
  namespace content {
  
-Index: sid/src/third_party/v8-i18n/build/all.gyp
+Index: exp/src/third_party/v8-i18n/build/all.gyp
 ===================================================================
---- sid.orig/src/third_party/v8-i18n/build/all.gyp	2012-05-16 11:34:17.000000000 +0200
-+++ sid/src/third_party/v8-i18n/build/all.gyp	2012-05-16 15:54:10.978124972 +0200
+--- exp.orig/src/third_party/v8-i18n/build/all.gyp	2012-05-19 16:56:57.000000000 +0200
++++ exp/src/third_party/v8-i18n/build/all.gyp	2012-05-19 19:23:29.334671559 +0200
 @@ -50,7 +50,7 @@
          '<(v8_path)',
        ],
@@ -518,10 +518,10 @@ Index: sid/src/third_party/v8-i18n/build/all.gyp
          '<(icu_path)/icu.gyp:*',
          'api2c#host',
        ],
-Index: sid/src/third_party/v8-i18n/include/extension.h
+Index: exp/src/third_party/v8-i18n/include/extension.h
 ===================================================================
---- sid.orig/src/third_party/v8-i18n/include/extension.h	2012-05-16 11:34:17.000000000 +0200
-+++ sid/src/third_party/v8-i18n/include/extension.h	2012-05-16 15:54:10.978124972 +0200
+--- exp.orig/src/third_party/v8-i18n/include/extension.h	2012-05-19 16:56:57.000000000 +0200
++++ exp/src/third_party/v8-i18n/include/extension.h	2012-05-19 19:23:29.338671560 +0200
 @@ -15,7 +15,7 @@
  #ifndef V8_I18N_INCLUDE_EXTENSION_H_
  #define V8_I18N_INCLUDE_EXTENSION_H_
@@ -531,10 +531,10 @@ Index: sid/src/third_party/v8-i18n/include/extension.h
  
  namespace v8_i18n {
  
-Index: sid/src/third_party/v8-i18n/src/break-iterator.h
+Index: exp/src/third_party/v8-i18n/src/break-iterator.h
 ===================================================================
---- sid.orig/src/third_party/v8-i18n/src/break-iterator.h	2012-05-16 11:34:17.000000000 +0200
-+++ sid/src/third_party/v8-i18n/src/break-iterator.h	2012-05-16 15:54:10.978124972 +0200
+--- exp.orig/src/third_party/v8-i18n/src/break-iterator.h	2012-05-19 16:56:57.000000000 +0200
++++ exp/src/third_party/v8-i18n/src/break-iterator.h	2012-05-19 19:23:29.338671560 +0200
 @@ -16,7 +16,7 @@
  #define V8_I18N_SRC_BREAK_ITERATOR_H_
  
@@ -544,10 +544,10 @@ Index: sid/src/third_party/v8-i18n/src/break-iterator.h
  
  namespace U_ICU_NAMESPACE {
  class BreakIterator;
-Index: sid/src/third_party/v8-i18n/src/collator.h
+Index: exp/src/third_party/v8-i18n/src/collator.h
 ===================================================================
---- sid.orig/src/third_party/v8-i18n/src/collator.h	2012-05-16 11:34:17.000000000 +0200
-+++ sid/src/third_party/v8-i18n/src/collator.h	2012-05-16 15:54:10.978124972 +0200
+--- exp.orig/src/third_party/v8-i18n/src/collator.h	2012-05-19 16:56:57.000000000 +0200
++++ exp/src/third_party/v8-i18n/src/collator.h	2012-05-19 19:23:29.338671560 +0200
 @@ -29,7 +29,7 @@
  #define V8_I18N_SRC_COLLATOR_H_
  
@@ -557,10 +557,10 @@ Index: sid/src/third_party/v8-i18n/src/collator.h
  
  namespace U_ICU_NAMESPACE {
  class Collator;
-Index: sid/src/third_party/v8-i18n/src/datetime-format.h
+Index: exp/src/third_party/v8-i18n/src/datetime-format.h
 ===================================================================
---- sid.orig/src/third_party/v8-i18n/src/datetime-format.h	2012-05-16 11:34:17.000000000 +0200
-+++ sid/src/third_party/v8-i18n/src/datetime-format.h	2012-05-16 15:54:10.978124972 +0200
+--- exp.orig/src/third_party/v8-i18n/src/datetime-format.h	2012-05-19 16:56:57.000000000 +0200
++++ exp/src/third_party/v8-i18n/src/datetime-format.h	2012-05-19 19:23:29.338671560 +0200
 @@ -16,7 +16,7 @@
  #define V8_I18N_SRC_DATETIME_FORMAT_H_
  
@@ -570,10 +570,10 @@ Index: sid/src/third_party/v8-i18n/src/datetime-format.h
  
  namespace U_ICU_NAMESPACE {
  class SimpleDateFormat;
-Index: sid/src/third_party/v8-i18n/src/language-matcher.h
+Index: exp/src/third_party/v8-i18n/src/language-matcher.h
 ===================================================================
---- sid.orig/src/third_party/v8-i18n/src/language-matcher.h	2012-05-16 11:34:17.000000000 +0200
-+++ sid/src/third_party/v8-i18n/src/language-matcher.h	2012-05-16 15:54:10.982124972 +0200
+--- exp.orig/src/third_party/v8-i18n/src/language-matcher.h	2012-05-19 16:56:57.000000000 +0200
++++ exp/src/third_party/v8-i18n/src/language-matcher.h	2012-05-19 19:23:29.338671560 +0200
 @@ -16,7 +16,7 @@
  #define V8_I18N_SRC_LANGUAGE_MATCHER_H_
  
@@ -583,10 +583,10 @@ Index: sid/src/third_party/v8-i18n/src/language-matcher.h
  
  namespace v8_i18n {
  
-Index: sid/src/third_party/v8-i18n/src/number-format.h
+Index: exp/src/third_party/v8-i18n/src/number-format.h
 ===================================================================
---- sid.orig/src/third_party/v8-i18n/src/number-format.h	2012-05-16 11:34:17.000000000 +0200
-+++ sid/src/third_party/v8-i18n/src/number-format.h	2012-05-16 15:54:10.982124972 +0200
+--- exp.orig/src/third_party/v8-i18n/src/number-format.h	2012-05-19 16:56:57.000000000 +0200
++++ exp/src/third_party/v8-i18n/src/number-format.h	2012-05-19 19:23:29.338671560 +0200
 @@ -16,7 +16,7 @@
  #define V8_I18N_SRC_NUMBER_FORMAT_H_
  
@@ -596,10 +596,10 @@ Index: sid/src/third_party/v8-i18n/src/number-format.h
  
  namespace U_ICU_NAMESPACE {
  class DecimalFormat;
-Index: sid/src/third_party/v8-i18n/src/utils.h
+Index: exp/src/third_party/v8-i18n/src/utils.h
 ===================================================================
---- sid.orig/src/third_party/v8-i18n/src/utils.h	2012-05-16 11:34:17.000000000 +0200
-+++ sid/src/third_party/v8-i18n/src/utils.h	2012-05-16 15:54:10.982124972 +0200
+--- exp.orig/src/third_party/v8-i18n/src/utils.h	2012-05-19 16:56:57.000000000 +0200
++++ exp/src/third_party/v8-i18n/src/utils.h	2012-05-19 19:23:29.338671560 +0200
 @@ -16,7 +16,7 @@
  #define V8_I18N_SRC_UTILS_H_
  
@@ -609,36 +609,10 @@ Index: sid/src/third_party/v8-i18n/src/utils.h
  
  namespace U_ICU_NAMESPACE {
  class UnicodeString;
-Index: sid/src/webkit/extensions/v8/gc_extension.cc
+Index: exp/src/webkit/glue/webkitplatformsupport_impl.cc
 ===================================================================
---- sid.orig/src/webkit/extensions/v8/gc_extension.cc	2012-05-16 11:31:56.000000000 +0200
-+++ sid/src/webkit/extensions/v8/gc_extension.cc	2012-05-16 15:54:10.982124972 +0200
-@@ -4,7 +4,7 @@
- 
- #include "webkit/extensions/v8/gc_extension.h"
- 
--#include "v8/include/v8.h"
-+#include <v8.h>
- 
- const char kGCExtensionName[] = "v8/GCController";
- 
-Index: sid/src/webkit/extensions/v8/heap_profiler_extension.cc
-===================================================================
---- sid.orig/src/webkit/extensions/v8/heap_profiler_extension.cc	2012-05-16 11:31:56.000000000 +0200
-+++ sid/src/webkit/extensions/v8/heap_profiler_extension.cc	2012-05-16 15:54:10.982124972 +0200
-@@ -5,7 +5,7 @@
- #include "webkit/extensions/v8/heap_profiler_extension.h"
- 
- #include "base/basictypes.h"
--#include "v8/include/v8.h"
-+#include <v8.h>
- 
- #if defined(USE_TCMALLOC) && !defined(OS_WIN)
- #include "third_party/tcmalloc/chromium/src/gperftools/heap-profiler.h"
-Index: sid/src/webkit/glue/webkitplatformsupport_impl.cc
-===================================================================
---- sid.orig/src/webkit/glue/webkitplatformsupport_impl.cc	2012-05-16 11:31:56.000000000 +0200
-+++ sid/src/webkit/glue/webkitplatformsupport_impl.cc	2012-05-16 15:54:10.982124972 +0200
+--- exp.orig/src/webkit/glue/webkitplatformsupport_impl.cc	2012-05-19 16:54:05.000000000 +0200
++++ exp/src/webkit/glue/webkitplatformsupport_impl.cc	2012-05-19 19:23:29.338671560 +0200
 @@ -47,7 +47,7 @@
  #include "webkit/plugins/webplugininfo.h"
  
@@ -648,10 +622,10 @@ Index: sid/src/webkit/glue/webkitplatformsupport_impl.cc
  #endif
  
  using WebKit::WebAudioBus;
-Index: sid/src/webkit/support/test_webkit_platform_support.cc
+Index: exp/src/webkit/support/test_webkit_platform_support.cc
 ===================================================================
---- sid.orig/src/webkit/support/test_webkit_platform_support.cc	2012-05-16 11:31:56.000000000 +0200
-+++ sid/src/webkit/support/test_webkit_platform_support.cc	2012-05-16 15:54:10.982124972 +0200
+--- exp.orig/src/webkit/support/test_webkit_platform_support.cc	2012-05-19 16:54:06.000000000 +0200
++++ exp/src/webkit/support/test_webkit_platform_support.cc	2012-05-19 19:23:29.338671560 +0200
 @@ -32,7 +32,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebStorageNamespace.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/platform/WebString.h"
@@ -660,12 +634,12 @@ Index: sid/src/webkit/support/test_webkit_platform_support.cc
 +#include <v8.h>
  #include "webkit/appcache/web_application_cache_host_impl.h"
  #include "webkit/database/vfs_backend.h"
- #include "webkit/extensions/v8/gc_extension.h"
-Index: sid/src/chrome/chrome_browser.gypi
+ #include "webkit/glue/simple_webmimeregistry_impl.h"
+Index: exp/src/chrome/chrome_browser.gypi
 ===================================================================
---- sid.orig/src/chrome/chrome_browser.gypi	2012-05-16 11:33:16.000000000 +0200
-+++ sid/src/chrome/chrome_browser.gypi	2012-05-17 14:35:46.142371948 +0200
-@@ -56,7 +56,7 @@
+--- exp.orig/src/chrome/chrome_browser.gypi	2012-05-19 16:55:35.000000000 +0200
++++ exp/src/chrome/chrome_browser.gypi	2012-05-19 19:23:29.338671560 +0200
+@@ -58,7 +58,7 @@
          '../ui/ui.gyp:ui_resources',
          '../ui/ui.gyp:ui_resources_2x',
          '../ui/ui.gyp:ui_resources_standard',
@@ -674,10 +648,10 @@ Index: sid/src/chrome/chrome_browser.gypi
          '../webkit/support/webkit_support.gyp:appcache',
          '../webkit/support/webkit_support.gyp:blob',
          '../webkit/support/webkit_support.gyp:database',
-Index: sid/src/content/content_shell.gypi
+Index: exp/src/content/content_shell.gypi
 ===================================================================
---- sid.orig/src/content/content_shell.gypi	2012-05-16 11:32:01.000000000 +0200
-+++ sid/src/content/content_shell.gypi	2012-05-17 14:37:24.706370910 +0200
+--- exp.orig/src/content/content_shell.gypi	2012-05-19 16:54:14.000000000 +0200
++++ exp/src/content/content_shell.gypi	2012-05-19 19:23:29.338671560 +0200
 @@ -35,7 +35,7 @@
          '../skia/skia.gyp:skia',
          '../third_party/WebKit/Source/WebKit/chromium/WebKit.gyp:webkit',
@@ -687,11 +661,11 @@ Index: sid/src/content/content_shell.gypi
          '../webkit/support/webkit_support.gyp:appcache',
          '../webkit/support/webkit_support.gyp:database',
          '../webkit/support/webkit_support.gyp:fileapi',
-Index: sid/src/content/content_tests.gypi
+Index: exp/src/content/content_tests.gypi
 ===================================================================
---- sid.orig/src/content/content_tests.gypi	2012-05-16 11:32:01.000000000 +0200
-+++ sid/src/content/content_tests.gypi	2012-05-17 14:37:37.194370778 +0200
-@@ -185,7 +185,7 @@
+--- exp.orig/src/content/content_tests.gypi	2012-05-19 16:54:14.000000000 +0200
++++ exp/src/content/content_tests.gypi	2012-05-19 19:23:29.338671560 +0200
+@@ -189,7 +189,7 @@
          '../third_party/WebKit/Source/WebKit/chromium/WebKit.gyp:webkit',
          '../ui/gfx/gl/gl.gyp:gl',
          '../ui/ui.gyp:ui',
@@ -700,23 +674,23 @@ Index: sid/src/content/content_tests.gypi
          '../webkit/support/webkit_support.gyp:database',
          '../webkit/support/webkit_support.gyp:glue',
          '../webkit/support/webkit_support.gyp:quota',
-Index: sid/src/third_party/WebKit/Tools/DumpRenderTree/DumpRenderTree.gyp/DumpRenderTree.gyp
+Index: exp/src/third_party/WebKit/Tools/DumpRenderTree/DumpRenderTree.gyp/DumpRenderTree.gyp
 ===================================================================
---- sid.orig/src/third_party/WebKit/Tools/DumpRenderTree/DumpRenderTree.gyp/DumpRenderTree.gyp	2012-05-16 11:33:37.000000000 +0200
-+++ sid/src/third_party/WebKit/Tools/DumpRenderTree/DumpRenderTree.gyp/DumpRenderTree.gyp	2012-05-17 14:36:03.218371768 +0200
+--- exp.orig/src/third_party/WebKit/Tools/DumpRenderTree/DumpRenderTree.gyp/DumpRenderTree.gyp	2012-05-19 16:56:08.000000000 +0200
++++ exp/src/third_party/WebKit/Tools/DumpRenderTree/DumpRenderTree.gyp/DumpRenderTree.gyp	2012-05-19 19:31:51.750676947 +0200
 @@ -83,7 +83,7 @@
                  '<(source_dir)/WTF/WTF.gyp/WTF.gyp:wtf',
                  '<(chromium_src_dir)/build/temp_gyp/googleurl.gyp:googleurl',
                  '<(chromium_src_dir)/third_party/icu/icu.gyp:icuuc',
 -                '<(chromium_src_dir)/v8/tools/gyp/v8.gyp:v8',
 +                '<(chromium_src_dir)/build/linux/system.gyp:v8',
+                 '<(chromium_src_dir)/base/base.gyp:test_support_base',
                  '<(chromium_src_dir)/webkit/support/webkit_support.gyp:blob',
                  '<(chromium_src_dir)/webkit/support/webkit_support.gyp:webkit_support',
-                 '<(chromium_src_dir)/webkit/support/webkit_support.gyp:webkit_user_agent',
-Index: sid/src/v8/src/d8.gyp
+Index: exp/src/v8/src/d8.gyp
 ===================================================================
---- sid.orig/src/v8/src/d8.gyp	2012-05-16 11:34:42.000000000 +0200
-+++ sid/src/v8/src/d8.gyp	2012-05-17 14:31:08.910374867 +0200
+--- exp.orig/src/v8/src/d8.gyp	2012-05-19 16:57:28.000000000 +0200
++++ exp/src/v8/src/d8.gyp	2012-05-19 19:23:29.338671560 +0200
 @@ -35,7 +35,7 @@
        'target_name': 'd8',
        'type': 'executable',
@@ -726,10 +700,10 @@ Index: sid/src/v8/src/d8.gyp
        ],
        # Generated source files need this explicitly:
        'include_dirs+': [
-Index: sid/src/chrome/renderer/benchmarking_extension.cc
+Index: exp/src/chrome/renderer/benchmarking_extension.cc
 ===================================================================
---- sid.orig/src/chrome/renderer/benchmarking_extension.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/benchmarking_extension.cc	2012-05-17 14:39:04.818369856 +0200
+--- exp.orig/src/chrome/renderer/benchmarking_extension.cc	2012-05-19 16:55:01.000000000 +0200
++++ exp/src/chrome/renderer/benchmarking_extension.cc	2012-05-19 19:23:29.338671560 +0200
 @@ -11,7 +11,7 @@
  #include "content/public/common/content_switches.h"
  #include "content/public/renderer/render_thread.h"
@@ -739,10 +713,10 @@ Index: sid/src/chrome/renderer/benchmarking_extension.cc
  
  using WebKit::WebCache;
  
-Index: sid/src/chrome/renderer/extensions/chrome_v8_extension_handler.h
+Index: exp/src/chrome/renderer/extensions/chrome_v8_extension_handler.h
 ===================================================================
---- sid.orig/src/chrome/renderer/extensions/chrome_v8_extension_handler.h	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/extensions/chrome_v8_extension_handler.h	2012-05-17 14:39:30.514369585 +0200
+--- exp.orig/src/chrome/renderer/extensions/chrome_v8_extension_handler.h	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/chrome_v8_extension_handler.h	2012-05-19 19:23:29.338671560 +0200
 @@ -10,7 +10,7 @@
  
  #include "base/basictypes.h"
@@ -752,10 +726,10 @@ Index: sid/src/chrome/renderer/extensions/chrome_v8_extension_handler.h
  
  class ChromeV8Context;
  
-Index: sid/src/chrome/renderer/extensions/page_capture_custom_bindings.cc
+Index: exp/src/chrome/renderer/extensions/page_capture_custom_bindings.cc
 ===================================================================
---- sid.orig/src/chrome/renderer/extensions/page_capture_custom_bindings.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/extensions/page_capture_custom_bindings.cc	2012-05-17 14:40:39.986368854 +0200
+--- exp.orig/src/chrome/renderer/extensions/page_capture_custom_bindings.cc	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/page_capture_custom_bindings.cc	2012-05-19 19:23:29.338671560 +0200
 @@ -9,7 +9,7 @@
  #include "content/public/renderer/render_view.h"
  #include "grit/renderer_resources.h"
@@ -765,10 +739,10 @@ Index: sid/src/chrome/renderer/extensions/page_capture_custom_bindings.cc
  
  namespace extensions {
  
-Index: sid/src/chrome/renderer/extensions/web_request_custom_bindings.cc
+Index: exp/src/chrome/renderer/extensions/web_request_custom_bindings.cc
 ===================================================================
---- sid.orig/src/chrome/renderer/extensions/web_request_custom_bindings.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/extensions/web_request_custom_bindings.cc	2012-05-17 14:40:56.626368679 +0200
+--- exp.orig/src/chrome/renderer/extensions/web_request_custom_bindings.cc	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/web_request_custom_bindings.cc	2012-05-19 19:23:29.338671560 +0200
 @@ -8,7 +8,7 @@
  
  #include "base/string_number_conversions.h"
@@ -778,10 +752,10 @@ Index: sid/src/chrome/renderer/extensions/web_request_custom_bindings.cc
  
  namespace extensions {
  
-Index: sid/src/content/shell/layout_test_controller_bindings.h
+Index: exp/src/content/shell/layout_test_controller_bindings.h
 ===================================================================
---- sid.orig/src/content/shell/layout_test_controller_bindings.h	2012-05-16 11:32:01.000000000 +0200
-+++ sid/src/content/shell/layout_test_controller_bindings.h	2012-05-17 14:40:05.274369218 +0200
+--- exp.orig/src/content/shell/layout_test_controller_bindings.h	2012-05-19 16:54:13.000000000 +0200
++++ exp/src/content/shell/layout_test_controller_bindings.h	2012-05-19 19:23:29.338671560 +0200
 @@ -8,7 +8,7 @@
  
  #include "base/basictypes.h"
@@ -791,10 +765,10 @@ Index: sid/src/content/shell/layout_test_controller_bindings.h
  
  namespace content {
  
-Index: sid/src/content/shell/shell_content_renderer_client.cc
+Index: exp/src/content/shell/shell_content_renderer_client.cc
 ===================================================================
---- sid.orig/src/content/shell/shell_content_renderer_client.cc	2012-05-16 11:32:01.000000000 +0200
-+++ sid/src/content/shell/shell_content_renderer_client.cc	2012-05-17 14:39:47.374369408 +0200
+--- exp.orig/src/content/shell/shell_content_renderer_client.cc	2012-05-19 16:54:13.000000000 +0200
++++ exp/src/content/shell/shell_content_renderer_client.cc	2012-05-19 19:23:29.338671560 +0200
 @@ -6,7 +6,7 @@
  
  #include "content/shell/shell_render_process_observer.h"
@@ -804,24 +778,11 @@ Index: sid/src/content/shell/shell_content_renderer_client.cc
  
  namespace content {
  
-Index: sid/src/webkit/extensions/v8/playback_extension.cc
+Index: exp/src/chrome/browser/ui/webui/about_ui.cc
 ===================================================================
---- sid.orig/src/webkit/extensions/v8/playback_extension.cc	2012-05-16 11:31:56.000000000 +0200
-+++ sid/src/webkit/extensions/v8/playback_extension.cc	2012-05-17 14:40:24.314369019 +0200
-@@ -4,7 +4,7 @@
- 
- #include "webkit/extensions/v8/playback_extension.h"
- 
--#include "v8/include/v8.h"
-+#include <v8.h>
- 
- const char kPlaybackExtensionName[] = "v8/PlaybackMode";
- 
-Index: sid/src/chrome/browser/ui/webui/about_ui.cc
-===================================================================
---- sid.orig/src/chrome/browser/ui/webui/about_ui.cc	2012-05-16 11:32:46.000000000 +0200
-+++ sid/src/chrome/browser/ui/webui/about_ui.cc	2012-05-17 14:55:53.654359234 +0200
-@@ -64,7 +64,7 @@
+--- exp.orig/src/chrome/browser/ui/webui/about_ui.cc	2012-05-19 16:54:57.000000000 +0200
++++ exp/src/chrome/browser/ui/webui/about_ui.cc	2012-05-19 19:23:29.338671560 +0200
+@@ -65,7 +65,7 @@
  #include "net/base/net_util.h"
  #include "ui/base/l10n/l10n_util.h"
  #include "ui/base/resource/resource_bundle.h"
@@ -830,10 +791,10 @@ Index: sid/src/chrome/browser/ui/webui/about_ui.cc
  #include "webkit/glue/user_agent.h"
  #include "webkit/glue/webkit_glue.h"
  #include "webkit/plugins/webplugininfo.h"
-Index: sid/src/chrome/browser/ui/webui/help/help_handler.cc
+Index: exp/src/chrome/browser/ui/webui/help/help_handler.cc
 ===================================================================
---- sid.orig/src/chrome/browser/ui/webui/help/help_handler.cc	2012-05-16 11:32:46.000000000 +0200
-+++ sid/src/chrome/browser/ui/webui/help/help_handler.cc	2012-05-17 14:56:03.406359132 +0200
+--- exp.orig/src/chrome/browser/ui/webui/help/help_handler.cc	2012-05-19 16:54:56.000000000 +0200
++++ exp/src/chrome/browser/ui/webui/help/help_handler.cc	2012-05-19 19:23:29.342671561 +0200
 @@ -29,7 +29,7 @@
  #include "grit/google_chrome_strings.h"
  #include "ui/base/l10n/l10n_util.h"
@@ -843,10 +804,10 @@ Index: sid/src/chrome/browser/ui/webui/help/help_handler.cc
  #include "webkit/glue/user_agent.h"
  #include "webkit/glue/webkit_glue.h"
  
-Index: sid/src/chrome/common/profiling.cc
+Index: exp/src/chrome/common/profiling.cc
 ===================================================================
---- sid.orig/src/chrome/common/profiling.cc	2012-05-16 11:33:15.000000000 +0200
-+++ sid/src/chrome/common/profiling.cc	2012-05-17 14:49:26.098363314 +0200
+--- exp.orig/src/chrome/common/profiling.cc	2012-05-19 16:55:34.000000000 +0200
++++ exp/src/chrome/common/profiling.cc	2012-05-19 19:23:29.342671561 +0200
 @@ -13,7 +13,7 @@
  #include "base/string_util.h"
  #include "base/threading/thread.h"
@@ -856,10 +817,10 @@ Index: sid/src/chrome/common/profiling.cc
  
  namespace {
  std::string GetProfileName() {
-Index: sid/src/chrome/renderer/extensions/app_bindings.cc
+Index: exp/src/chrome/renderer/extensions/app_bindings.cc
 ===================================================================
---- sid.orig/src/chrome/renderer/extensions/app_bindings.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/extensions/app_bindings.cc	2012-05-17 14:56:12.686359035 +0200
+--- exp.orig/src/chrome/renderer/extensions/app_bindings.cc	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/app_bindings.cc	2012-05-19 19:23:29.342671561 +0200
 @@ -21,7 +21,7 @@
  #include "grit/renderer_resources.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebDocument.h"
@@ -869,24 +830,11 @@ Index: sid/src/chrome/renderer/extensions/app_bindings.cc
  
  using WebKit::WebFrame;
  using content::V8ValueConverter;
-Index: sid/src/chrome/renderer/extensions/chrome_private_custom_bindings.cc
+Index: exp/src/chrome/renderer/extensions/chrome_v8_context.cc
 ===================================================================
---- sid.orig/src/chrome/renderer/extensions/chrome_private_custom_bindings.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/extensions/chrome_private_custom_bindings.cc	2012-05-17 14:43:51.106366841 +0200
-@@ -12,7 +12,7 @@
- #include "chrome/renderer/extensions/extension_dispatcher.h"
- #include "grit/renderer_resources.h"
- #include "third_party/skia/include/core/SkBitmap.h"
--#include "v8/include/v8.h"
-+#include <v8.h>
- #include "webkit/glue/webkit_glue.h"
- 
- namespace extensions {
-Index: sid/src/chrome/renderer/extensions/chrome_v8_context.cc
-===================================================================
---- sid.orig/src/chrome/renderer/extensions/chrome_v8_context.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/extensions/chrome_v8_context.cc	2012-05-17 14:49:39.818363170 +0200
-@@ -13,7 +13,7 @@
+--- exp.orig/src/chrome/renderer/extensions/chrome_v8_context.cc	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/chrome_v8_context.cc	2012-05-19 19:23:29.342671561 +0200
+@@ -15,7 +15,7 @@
  #include "content/public/renderer/render_view.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebFrame.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebView.h"
@@ -895,10 +843,10 @@ Index: sid/src/chrome/renderer/extensions/chrome_v8_context.cc
  
  using extensions::Feature;
  
-Index: sid/src/chrome/renderer/extensions/chrome_v8_context.h
+Index: exp/src/chrome/renderer/extensions/chrome_v8_context.h
 ===================================================================
---- sid.orig/src/chrome/renderer/extensions/chrome_v8_context.h	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/extensions/chrome_v8_context.h	2012-05-17 14:56:45.286358691 +0200
+--- exp.orig/src/chrome/renderer/extensions/chrome_v8_context.h	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/chrome_v8_context.h	2012-05-19 19:23:29.342671561 +0200
 @@ -11,7 +11,7 @@
  #include "base/basictypes.h"
  #include "chrome/common/extensions/feature.h"
@@ -908,10 +856,10 @@ Index: sid/src/chrome/renderer/extensions/chrome_v8_context.h
  
  namespace WebKit {
  class WebFrame;
-Index: sid/src/chrome/renderer/extensions/chrome_v8_context_set.cc
+Index: exp/src/chrome/renderer/extensions/chrome_v8_context_set.cc
 ===================================================================
---- sid.orig/src/chrome/renderer/extensions/chrome_v8_context_set.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/extensions/chrome_v8_context_set.cc	2012-05-17 14:44:07.850366665 +0200
+--- exp.orig/src/chrome/renderer/extensions/chrome_v8_context_set.cc	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/chrome_v8_context_set.cc	2012-05-19 19:23:29.342671561 +0200
 @@ -13,7 +13,7 @@
  #include "content/public/renderer/render_thread.h"
  #include "content/public/renderer/v8_value_converter.h"
@@ -921,10 +869,10 @@ Index: sid/src/chrome/renderer/extensions/chrome_v8_context_set.cc
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebDocument.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebFrame.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/platform/WebURL.h"
-Index: sid/src/chrome/renderer/extensions/chrome_v8_context_set.h
+Index: exp/src/chrome/renderer/extensions/chrome_v8_context_set.h
 ===================================================================
---- sid.orig/src/chrome/renderer/extensions/chrome_v8_context_set.h	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/extensions/chrome_v8_context_set.h	2012-05-17 14:53:37.766360665 +0200
+--- exp.orig/src/chrome/renderer/extensions/chrome_v8_context_set.h	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/chrome_v8_context_set.h	2012-05-19 19:23:29.342671561 +0200
 @@ -10,7 +10,7 @@
  #include <string>
  
@@ -934,11 +882,11 @@ Index: sid/src/chrome/renderer/extensions/chrome_v8_context_set.h
  
  class ChromeV8Context;
  class GURL;
-Index: sid/src/chrome/renderer/extensions/chrome_v8_context_set_unittest.cc
+Index: exp/src/chrome/renderer/extensions/chrome_v8_context_set_unittest.cc
 ===================================================================
---- sid.orig/src/chrome/renderer/extensions/chrome_v8_context_set_unittest.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/extensions/chrome_v8_context_set_unittest.cc	2012-05-17 14:57:56.598357940 +0200
-@@ -8,7 +8,7 @@
+--- exp.orig/src/chrome/renderer/extensions/chrome_v8_context_set_unittest.cc	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/chrome_v8_context_set_unittest.cc	2012-05-19 19:23:29.342671561 +0200
+@@ -9,7 +9,7 @@
  #include "chrome/renderer/extensions/chrome_v8_context_set.h"
  #include "testing/gtest/include/gtest/gtest.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebFrame.h"
@@ -947,10 +895,10 @@ Index: sid/src/chrome/renderer/extensions/chrome_v8_context_set_unittest.cc
  
  TEST(ChromeV8ContextSet, Lifecycle) {
    MessageLoop loop;
-Index: sid/src/chrome/renderer/extensions/chrome_v8_extension.h
+Index: exp/src/chrome/renderer/extensions/chrome_v8_extension.h
 ===================================================================
---- sid.orig/src/chrome/renderer/extensions/chrome_v8_extension.h	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/extensions/chrome_v8_extension.h	2012-05-17 14:48:07.442364143 +0200
+--- exp.orig/src/chrome/renderer/extensions/chrome_v8_extension.h	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/chrome_v8_extension.h	2012-05-19 19:23:29.342671561 +0200
 @@ -11,7 +11,7 @@
  #include "base/string_piece.h"
  #include "chrome/renderer/extensions/chrome_v8_extension_handler.h"
@@ -960,23 +908,23 @@ Index: sid/src/chrome/renderer/extensions/chrome_v8_extension.h
  
  #include <map>
  #include <set>
-Index: sid/src/chrome/renderer/extensions/context_menus_custom_bindings.cc
+Index: exp/src/chrome/renderer/extensions/context_menus_custom_bindings.cc
 ===================================================================
---- sid.orig/src/chrome/renderer/extensions/context_menus_custom_bindings.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/extensions/context_menus_custom_bindings.cc	2012-05-17 14:54:02.214360408 +0200
-@@ -5,7 +5,7 @@
- #include "chrome/renderer/extensions/context_menus_custom_bindings.h"
- 
+--- exp.orig/src/chrome/renderer/extensions/context_menus_custom_bindings.cc	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/context_menus_custom_bindings.cc	2012-05-19 19:23:29.342671561 +0200
+@@ -7,7 +7,7 @@
+ #include "chrome/common/extensions/extension_messages.h"
+ #include "content/public/renderer/render_thread.h"
  #include "grit/renderer_resources.h"
 -#include "v8/include/v8.h"
 +#include <v8.h>
  
  namespace {
  
-Index: sid/src/chrome/renderer/extensions/experimental.socket_custom_bindings.cc
+Index: exp/src/chrome/renderer/extensions/experimental.socket_custom_bindings.cc
 ===================================================================
---- sid.orig/src/chrome/renderer/extensions/experimental.socket_custom_bindings.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/extensions/experimental.socket_custom_bindings.cc	2012-05-17 14:43:36.266366998 +0200
+--- exp.orig/src/chrome/renderer/extensions/experimental.socket_custom_bindings.cc	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/experimental.socket_custom_bindings.cc	2012-05-19 19:23:29.342671561 +0200
 @@ -9,7 +9,7 @@
  #include "chrome/common/extensions/extension_action.h"
  #include "chrome/renderer/extensions/extension_dispatcher.h"
@@ -986,23 +934,23 @@ Index: sid/src/chrome/renderer/extensions/experimental.socket_custom_bindings.cc
  
  namespace {
  
-Index: sid/src/chrome/renderer/extensions/extension_custom_bindings.cc
+Index: exp/src/chrome/renderer/extensions/extension_custom_bindings.cc
 ===================================================================
---- sid.orig/src/chrome/renderer/extensions/extension_custom_bindings.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/extensions/extension_custom_bindings.cc	2012-05-17 14:57:14.750358380 +0200
-@@ -19,7 +19,7 @@
- #include "third_party/WebKit/Source/WebKit/chromium/public/WebDocument.h"
+--- exp.orig/src/chrome/renderer/extensions/extension_custom_bindings.cc	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/extension_custom_bindings.cc	2012-05-19 19:35:36.774679368 +0200
+@@ -18,7 +18,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebFrame.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebView.h"
+ #include "webkit/glue/webkit_glue.h"
 -#include "v8/include/v8.h"
 +#include <v8.h>
- #include "webkit/glue/webkit_glue.h"
  
  namespace extensions {
-Index: sid/src/chrome/renderer/extensions/extension_dispatcher.h
+ 
+Index: exp/src/chrome/renderer/extensions/extension_dispatcher.h
 ===================================================================
---- sid.orig/src/chrome/renderer/extensions/extension_dispatcher.h	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/extensions/extension_dispatcher.h	2012-05-17 14:49:50.378363059 +0200
+--- exp.orig/src/chrome/renderer/extensions/extension_dispatcher.h	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/extension_dispatcher.h	2012-05-19 19:23:29.342671561 +0200
 @@ -19,7 +19,7 @@
  #include "chrome/renderer/extensions/chrome_v8_context_set.h"
  #include "chrome/renderer/extensions/v8_schema_registry.h"
@@ -1010,12 +958,12 @@ Index: sid/src/chrome/renderer/extensions/extension_dispatcher.h
 -#include "v8/include/v8.h"
 +#include <v8.h>
  
- class ModuleSystem;
+ class ExtensionRequestSender;
  class GURL;
-Index: sid/src/chrome/renderer/extensions/i18n_custom_bindings.cc
+Index: exp/src/chrome/renderer/extensions/i18n_custom_bindings.cc
 ===================================================================
---- sid.orig/src/chrome/renderer/extensions/i18n_custom_bindings.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/extensions/i18n_custom_bindings.cc	2012-05-17 14:56:33.286358818 +0200
+--- exp.orig/src/chrome/renderer/extensions/i18n_custom_bindings.cc	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/i18n_custom_bindings.cc	2012-05-19 19:23:29.342671561 +0200
 @@ -8,7 +8,7 @@
  #include "chrome/common/extensions/extension_message_bundle.h"
  #include "content/public/renderer/render_view.h"
@@ -1025,23 +973,23 @@ Index: sid/src/chrome/renderer/extensions/i18n_custom_bindings.cc
  
  namespace extensions {
  
-Index: sid/src/chrome/renderer/extensions/miscellaneous_bindings.cc
+Index: exp/src/chrome/renderer/extensions/miscellaneous_bindings.cc
 ===================================================================
---- sid.orig/src/chrome/renderer/extensions/miscellaneous_bindings.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/extensions/miscellaneous_bindings.cc	2012-05-17 14:57:46.462358048 +0200
-@@ -20,7 +20,7 @@
- #include "content/public/renderer/render_thread.h"
+--- exp.orig/src/chrome/renderer/extensions/miscellaneous_bindings.cc	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/miscellaneous_bindings.cc	2012-05-19 19:34:15.342678488 +0200
+@@ -21,7 +21,7 @@
  #include "content/public/renderer/render_view.h"
  #include "grit/renderer_resources.h"
+ #include "third_party/WebKit/Source/WebKit/chromium/public/WebScopedMicrotaskSuppression.h"
 -#include "v8/include/v8.h"
 +#include <v8.h>
  
  // Message passing API example (in a content script):
  // var extension =
-Index: sid/src/chrome/renderer/extensions/page_actions_custom_bindings.cc
+Index: exp/src/chrome/renderer/extensions/page_actions_custom_bindings.cc
 ===================================================================
---- sid.orig/src/chrome/renderer/extensions/page_actions_custom_bindings.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/extensions/page_actions_custom_bindings.cc	2012-05-17 14:54:11.766360307 +0200
+--- exp.orig/src/chrome/renderer/extensions/page_actions_custom_bindings.cc	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/page_actions_custom_bindings.cc	2012-05-19 19:23:29.342671561 +0200
 @@ -9,7 +9,7 @@
  #include "chrome/common/extensions/extension_action.h"
  #include "chrome/renderer/extensions/extension_dispatcher.h"
@@ -1051,23 +999,10 @@ Index: sid/src/chrome/renderer/extensions/page_actions_custom_bindings.cc
  
  namespace extensions {
  
-Index: sid/src/chrome/renderer/extensions/schema_generated_bindings.cc
+Index: exp/src/chrome/renderer/extensions/tabs_custom_bindings.cc
 ===================================================================
---- sid.orig/src/chrome/renderer/extensions/schema_generated_bindings.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/extensions/schema_generated_bindings.cc	2012-05-17 14:57:25.390358268 +0200
-@@ -42,7 +42,7 @@
- #include "third_party/skia/include/core/SkBitmap.h"
- #include "third_party/skia/include/core/SkColor.h"
- #include "ui/base/resource/resource_bundle.h"
--#include "v8/include/v8.h"
-+#include <v8.h>
- #include "webkit/glue/webkit_glue.h"
- 
- using content::RenderThread;
-Index: sid/src/chrome/renderer/extensions/tabs_custom_bindings.cc
-===================================================================
---- sid.orig/src/chrome/renderer/extensions/tabs_custom_bindings.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/extensions/tabs_custom_bindings.cc	2012-05-17 14:56:55.174358587 +0200
+--- exp.orig/src/chrome/renderer/extensions/tabs_custom_bindings.cc	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/tabs_custom_bindings.cc	2012-05-19 19:23:29.342671561 +0200
 @@ -11,7 +11,7 @@
  #include "chrome/renderer/extensions/extension_dispatcher.h"
  #include "content/public/renderer/render_view.h"
@@ -1077,10 +1012,10 @@ Index: sid/src/chrome/renderer/extensions/tabs_custom_bindings.cc
  
  namespace extensions {
  
-Index: sid/src/chrome/renderer/extensions/tts_custom_bindings.cc
+Index: exp/src/chrome/renderer/extensions/tts_custom_bindings.cc
 ===================================================================
---- sid.orig/src/chrome/renderer/extensions/tts_custom_bindings.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/extensions/tts_custom_bindings.cc	2012-05-17 14:57:36.854358149 +0200
+--- exp.orig/src/chrome/renderer/extensions/tts_custom_bindings.cc	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/tts_custom_bindings.cc	2012-05-19 19:23:29.342671561 +0200
 @@ -9,7 +9,7 @@
  #include "chrome/common/extensions/extension_action.h"
  #include "chrome/renderer/extensions/extension_dispatcher.h"
@@ -1090,10 +1025,10 @@ Index: sid/src/chrome/renderer/extensions/tts_custom_bindings.cc
  
  namespace extensions {
  
-Index: sid/src/chrome/renderer/extensions/v8_schema_registry.h
+Index: exp/src/chrome/renderer/extensions/v8_schema_registry.h
 ===================================================================
---- sid.orig/src/chrome/renderer/extensions/v8_schema_registry.h	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/extensions/v8_schema_registry.h	2012-05-17 14:56:22.566358930 +0200
+--- exp.orig/src/chrome/renderer/extensions/v8_schema_registry.h	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/v8_schema_registry.h	2012-05-19 19:23:29.342671561 +0200
 @@ -11,7 +11,7 @@
  #include <string>
  
@@ -1103,10 +1038,10 @@ Index: sid/src/chrome/renderer/extensions/v8_schema_registry.h
  
  namespace extensions {
  
-Index: sid/src/chrome/renderer/extensions/webstore_bindings.cc
+Index: exp/src/chrome/renderer/extensions/webstore_bindings.cc
 ===================================================================
---- sid.orig/src/chrome/renderer/extensions/webstore_bindings.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/extensions/webstore_bindings.cc	2012-05-17 14:53:49.834360538 +0200
+--- exp.orig/src/chrome/renderer/extensions/webstore_bindings.cc	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/webstore_bindings.cc	2012-05-19 19:23:29.342671561 +0200
 @@ -15,7 +15,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebElement.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebNode.h"
@@ -1116,10 +1051,10 @@ Index: sid/src/chrome/renderer/extensions/webstore_bindings.cc
  
  using WebKit::WebDocument;
  using WebKit::WebElement;
-Index: sid/src/chrome/renderer/module_system.h
+Index: exp/src/chrome/renderer/module_system.h
 ===================================================================
---- sid.orig/src/chrome/renderer/module_system.h	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/module_system.h	2012-05-17 14:54:21.334360206 +0200
+--- exp.orig/src/chrome/renderer/module_system.h	2012-05-19 16:55:01.000000000 +0200
++++ exp/src/chrome/renderer/module_system.h	2012-05-19 19:23:29.342671561 +0200
 @@ -10,7 +10,7 @@
  #include "base/memory/linked_ptr.h"
  #include "base/memory/scoped_ptr.h"
@@ -1129,23 +1064,23 @@ Index: sid/src/chrome/renderer/module_system.h
  
  #include <map>
  #include <string>
-Index: sid/src/chrome/renderer/native_handler.cc
+Index: exp/src/chrome/renderer/native_handler.cc
 ===================================================================
---- sid.orig/src/chrome/renderer/native_handler.cc	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/native_handler.cc	2012-05-17 14:54:31.310360102 +0200
-@@ -6,7 +6,7 @@
- 
+--- exp.orig/src/chrome/renderer/native_handler.cc	2012-05-19 16:55:01.000000000 +0200
++++ exp/src/chrome/renderer/native_handler.cc	2012-05-19 19:37:42.606680716 +0200
+@@ -7,7 +7,7 @@
  #include "base/memory/linked_ptr.h"
  #include "base/logging.h"
+ #include "chrome/renderer/module_system.h"
 -#include "v8/include/v8.h"
 +#include <v8.h>
  
  NativeHandler::NativeHandler()
      : object_template_(
-Index: sid/src/chrome/renderer/native_handler.h
+Index: exp/src/chrome/renderer/native_handler.h
 ===================================================================
---- sid.orig/src/chrome/renderer/native_handler.h	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/native_handler.h	2012-05-17 14:58:04.910357853 +0200
+--- exp.orig/src/chrome/renderer/native_handler.h	2012-05-19 16:55:01.000000000 +0200
++++ exp/src/chrome/renderer/native_handler.h	2012-05-19 19:23:29.342671561 +0200
 @@ -8,7 +8,7 @@
  
  #include "base/bind.h"
@@ -1155,10 +1090,10 @@ Index: sid/src/chrome/renderer/native_handler.h
  
  #include <string>
  #include <vector>
-Index: sid/src/chrome/renderer/resource_bundle_source_map.h
+Index: exp/src/chrome/renderer/resource_bundle_source_map.h
 ===================================================================
---- sid.orig/src/chrome/renderer/resource_bundle_source_map.h	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/resource_bundle_source_map.h	2012-05-17 14:43:20.850367160 +0200
+--- exp.orig/src/chrome/renderer/resource_bundle_source_map.h	2012-05-19 16:55:01.000000000 +0200
++++ exp/src/chrome/renderer/resource_bundle_source_map.h	2012-05-19 19:23:29.342671561 +0200
 @@ -11,7 +11,7 @@
  #include "base/string_piece.h"
  #include "chrome/renderer/module_system.h"
@@ -1168,10 +1103,10 @@ Index: sid/src/chrome/renderer/resource_bundle_source_map.h
  
  #include <map>
  #include <string>
-Index: sid/src/chrome/renderer/static_v8_external_string_resource.h
+Index: exp/src/chrome/renderer/static_v8_external_string_resource.h
 ===================================================================
---- sid.orig/src/chrome/renderer/static_v8_external_string_resource.h	2012-05-16 11:32:49.000000000 +0200
-+++ sid/src/chrome/renderer/static_v8_external_string_resource.h	2012-05-17 14:57:04.286358492 +0200
+--- exp.orig/src/chrome/renderer/static_v8_external_string_resource.h	2012-05-19 16:55:01.000000000 +0200
++++ exp/src/chrome/renderer/static_v8_external_string_resource.h	2012-05-19 19:23:29.342671561 +0200
 @@ -8,7 +8,7 @@
  
  #include "base/compiler_specific.h"
@@ -1181,10 +1116,10 @@ Index: sid/src/chrome/renderer/static_v8_external_string_resource.h
  
  // A very simple implementation of v8::ExternalAsciiStringResource that just
  // wraps a buffer. The buffer must outlive the v8 runtime instance this resource
-Index: sid/src/chrome/test/reliability/page_load_test.cc
+Index: exp/src/chrome/test/reliability/page_load_test.cc
 ===================================================================
---- sid.orig/src/chrome/test/reliability/page_load_test.cc	2012-05-16 11:33:11.000000000 +0200
-+++ sid/src/chrome/test/reliability/page_load_test.cc	2012-05-17 14:49:10.058363483 +0200
+--- exp.orig/src/chrome/test/reliability/page_load_test.cc	2012-05-19 16:55:30.000000000 +0200
++++ exp/src/chrome/test/reliability/page_load_test.cc	2012-05-19 19:23:29.342671561 +0200
 @@ -66,7 +66,7 @@
  #include "chrome/test/ui/ui_test.h"
  #include "net/base/net_util.h"
@@ -1194,10 +1129,10 @@ Index: sid/src/chrome/test/reliability/page_load_test.cc
  
  namespace {
  
-Index: sid/src/content/public/renderer/v8_value_converter.h
+Index: exp/src/content/public/renderer/v8_value_converter.h
 ===================================================================
---- sid.orig/src/content/public/renderer/v8_value_converter.h	2012-05-16 11:32:01.000000000 +0200
-+++ sid/src/content/public/renderer/v8_value_converter.h	2012-05-17 14:42:57.962367401 +0200
+--- exp.orig/src/content/public/renderer/v8_value_converter.h	2012-05-19 16:54:14.000000000 +0200
++++ exp/src/content/public/renderer/v8_value_converter.h	2012-05-19 19:23:29.342671561 +0200
 @@ -6,7 +6,7 @@
  #define CONTENT_PUBLIC_RENDERER_V8_VALUE_CONVERTER_H_
  
@@ -1207,36 +1142,36 @@ Index: sid/src/content/public/renderer/v8_value_converter.h
  
  namespace base {
  class Value;
-Index: sid/src/content/renderer/render_thread_impl.cc
+Index: exp/src/content/renderer/render_thread_impl.cc
 ===================================================================
---- sid.orig/src/content/renderer/render_thread_impl.cc	2012-05-16 11:32:01.000000000 +0200
-+++ sid/src/content/renderer/render_thread_impl.cc	2012-05-17 14:43:09.146367283 +0200
-@@ -79,7 +79,7 @@
+--- exp.orig/src/content/renderer/render_thread_impl.cc	2012-05-19 16:54:13.000000000 +0200
++++ exp/src/content/renderer/render_thread_impl.cc	2012-05-19 19:36:41.902680063 +0200
+@@ -80,7 +80,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/platform/WebString.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebView.h"
  #include "ui/base/ui_base_switches.h"
 -#include "v8/include/v8.h"
 +#include <v8.h>
- #include "webkit/extensions/v8/playback_extension.h"
  #include "webkit/glue/webkit_glue.h"
  
-Index: sid/src/content/renderer/render_view_impl.cc
+ // TODO(port)
+Index: exp/src/content/renderer/render_view_impl.cc
 ===================================================================
---- sid.orig/src/content/renderer/render_view_impl.cc	2012-05-16 11:32:01.000000000 +0200
-+++ sid/src/content/renderer/render_view_impl.cc	2012-05-17 14:59:24.870357011 +0200
-@@ -155,7 +155,7 @@
+--- exp.orig/src/content/renderer/render_view_impl.cc	2012-05-19 16:54:13.000000000 +0200
++++ exp/src/content/renderer/render_view_impl.cc	2012-05-19 19:23:29.346671563 +0200
+@@ -157,7 +157,7 @@
  #include "ui/gfx/native_widget_types.h"
  #include "ui/gfx/point.h"
  #include "ui/gfx/rect.h"
 -#include "v8/include/v8.h"
 +#include <v8.h>
  #include "webkit/appcache/web_application_cache_host_impl.h"
+ #include "webkit/dom_storage/dom_storage_types.h"
  #include "webkit/forms/form_data.h"
- #include "webkit/forms/form_field.h"
-Index: sid/src/content/renderer/v8_value_converter_impl.cc
+Index: exp/src/content/renderer/v8_value_converter_impl.cc
 ===================================================================
---- sid.orig/src/content/renderer/v8_value_converter_impl.cc	2012-05-16 11:32:01.000000000 +0200
-+++ sid/src/content/renderer/v8_value_converter_impl.cc	2012-05-17 14:58:46.238357418 +0200
+--- exp.orig/src/content/renderer/v8_value_converter_impl.cc	2012-05-19 16:54:13.000000000 +0200
++++ exp/src/content/renderer/v8_value_converter_impl.cc	2012-05-19 19:23:29.346671563 +0200
 @@ -9,7 +9,7 @@
  #include "base/logging.h"
  #include "base/memory/scoped_ptr.h"
@@ -1246,10 +1181,10 @@ Index: sid/src/content/renderer/v8_value_converter_impl.cc
  
  namespace content {
  
-Index: sid/src/content/renderer/v8_value_converter_impl_unittest.cc
+Index: exp/src/content/renderer/v8_value_converter_impl_unittest.cc
 ===================================================================
---- sid.orig/src/content/renderer/v8_value_converter_impl_unittest.cc	2012-05-16 11:32:01.000000000 +0200
-+++ sid/src/content/renderer/v8_value_converter_impl_unittest.cc	2012-05-17 14:59:11.374357152 +0200
+--- exp.orig/src/content/renderer/v8_value_converter_impl_unittest.cc	2012-05-19 16:54:13.000000000 +0200
++++ exp/src/content/renderer/v8_value_converter_impl_unittest.cc	2012-05-19 19:23:29.346671563 +0200
 @@ -8,7 +8,7 @@
  #include "base/values.h"
  #include "content/renderer/v8_value_converter_impl.h"
@@ -1259,11 +1194,11 @@ Index: sid/src/content/renderer/v8_value_converter_impl_unittest.cc
  
  class V8ValueConverterImplTest : public testing::Test {
   protected:
-Index: sid/src/content/renderer/web_intents_host.cc
+Index: exp/src/content/renderer/web_intents_host.cc
 ===================================================================
---- sid.orig/src/content/renderer/web_intents_host.cc	2012-05-16 11:32:01.000000000 +0200
-+++ sid/src/content/renderer/web_intents_host.cc	2012-05-17 14:58:36.070357525 +0200
-@@ -15,7 +15,7 @@
+--- exp.orig/src/content/renderer/web_intents_host.cc	2012-05-19 16:54:13.000000000 +0200
++++ exp/src/content/renderer/web_intents_host.cc	2012-05-19 19:23:29.346671563 +0200
+@@ -17,7 +17,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebView.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/platform/WebCString.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/platform/WebSerializedScriptValue.h"
@@ -1272,10 +1207,10 @@ Index: sid/src/content/renderer/web_intents_host.cc
  #include "webkit/glue/cpp_bound_class.h"
  
  using WebKit::WebBindings;
-Index: sid/src/third_party/WebKit/Tools/DumpRenderTree/chromium/LayoutTestController.cpp
+Index: exp/src/third_party/WebKit/Tools/DumpRenderTree/chromium/LayoutTestController.cpp
 ===================================================================
---- sid.orig/src/third_party/WebKit/Tools/DumpRenderTree/chromium/LayoutTestController.cpp	2012-05-16 11:33:38.000000000 +0200
-+++ sid/src/third_party/WebKit/Tools/DumpRenderTree/chromium/LayoutTestController.cpp	2012-05-17 15:00:05.770356581 +0200
+--- exp.orig/src/third_party/WebKit/Tools/DumpRenderTree/chromium/LayoutTestController.cpp	2012-05-19 16:56:15.000000000 +0200
++++ exp/src/third_party/WebKit/Tools/DumpRenderTree/chromium/LayoutTestController.cpp	2012-05-19 19:23:29.346671563 +0200
 @@ -61,7 +61,7 @@
  #include "platform/WebURL.h"
  #include "WebView.h"
@@ -1285,36 +1220,23 @@ Index: sid/src/third_party/WebKit/Tools/DumpRenderTree/chromium/LayoutTestContro
  #include "webkit/support/webkit_support.h"
  #include <algorithm>
  #include <cctype>
-Index: sid/src/webkit/extensions/v8/profiler_extension.cc
+Index: exp/src/webkit/media/webmediaplayer_impl.cc
 ===================================================================
---- sid.orig/src/webkit/extensions/v8/profiler_extension.cc	2012-05-16 11:31:56.000000000 +0200
-+++ sid/src/webkit/extensions/v8/profiler_extension.cc	2012-05-17 15:00:47.654356140 +0200
-@@ -5,7 +5,7 @@
- #include "webkit/extensions/v8/profiler_extension.h"
- 
- #include "build/build_config.h"
--#include "v8/include/v8.h"
-+#include <v8.h>
- 
- #if defined(USE_TCMALLOC) && defined(OS_POSIX) && !defined(OS_MACOSX)
- #include "third_party/tcmalloc/chromium/src/gperftools/profiler.h"
-Index: sid/src/webkit/media/webmediaplayer_impl.cc
-===================================================================
---- sid.orig/src/webkit/media/webmediaplayer_impl.cc	2012-05-16 11:31:55.000000000 +0200
-+++ sid/src/webkit/media/webmediaplayer_impl.cc	2012-05-17 14:59:54.174356703 +0200
-@@ -25,7 +25,7 @@
- #include "third_party/WebKit/Source/WebKit/chromium/public/platform/WebRect.h"
+--- exp.orig/src/webkit/media/webmediaplayer_impl.cc	2012-05-19 16:54:05.000000000 +0200
++++ exp/src/webkit/media/webmediaplayer_impl.cc	2012-05-19 19:23:29.346671563 +0200
+@@ -29,7 +29,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/platform/WebSize.h"
+ #include "third_party/WebKit/Source/WebKit/chromium/public/platform/WebString.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/platform/WebURL.h"
 -#include "v8/include/v8.h"
 +#include <v8.h>
  #include "webkit/media/buffered_data_source.h"
  #include "webkit/media/filter_helpers.h"
- #include "webkit/media/webmediaplayer_delegate.h"
-Index: sid/src/webkit/plugins/ppapi/message_channel.cc
+ #include "webkit/media/key_systems.h"
+Index: exp/src/webkit/plugins/ppapi/message_channel.cc
 ===================================================================
---- sid.orig/src/webkit/plugins/ppapi/message_channel.cc	2012-05-16 11:31:55.000000000 +0200
-+++ sid/src/webkit/plugins/ppapi/message_channel.cc	2012-05-17 15:00:14.990356484 +0200
+--- exp.orig/src/webkit/plugins/ppapi/message_channel.cc	2012-05-19 16:54:05.000000000 +0200
++++ exp/src/webkit/plugins/ppapi/message_channel.cc	2012-05-19 19:23:29.346671563 +0200
 @@ -21,7 +21,7 @@
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebNode.h"
  #include "third_party/WebKit/Source/WebKit/chromium/public/WebPluginContainer.h"
@@ -1324,3 +1246,133 @@ Index: sid/src/webkit/plugins/ppapi/message_channel.cc
  #include "webkit/plugins/ppapi/host_array_buffer_var.h"
  #include "webkit/plugins/ppapi/npapi_glue.h"
  #include "webkit/plugins/ppapi/ppapi_plugin_instance.h"
+Index: exp/src/chrome/renderer/extensions/api_definitions_natives.h
+===================================================================
+--- exp.orig/src/chrome/renderer/extensions/api_definitions_natives.h	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/api_definitions_natives.h	2012-05-19 19:33:35.886678071 +0200
+@@ -9,7 +9,7 @@
+ #include "chrome/renderer/extensions/chrome_v8_extension.h"
+ #include "chrome/renderer/extensions/extension_dispatcher.h"
+ 
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ namespace extensions {
+ 
+Index: exp/src/chrome/renderer/extensions/experimental.usb_custom_bindings.cc
+===================================================================
+--- exp.orig/src/chrome/renderer/extensions/experimental.usb_custom_bindings.cc	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/experimental.usb_custom_bindings.cc	2012-05-19 19:33:53.406678252 +0200
+@@ -5,7 +5,7 @@
+ #include "chrome/renderer/extensions/experimental.usb_custom_bindings.h"
+ 
+ #include "base/logging.h"
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ namespace {
+ 
+Index: exp/src/chrome/renderer/extensions/extension_request_sender.h
+===================================================================
+--- exp.orig/src/chrome/renderer/extensions/extension_request_sender.h	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/extension_request_sender.h	2012-05-19 19:35:11.870679095 +0200
+@@ -10,7 +10,7 @@
+ #include <map>
+ 
+ #include "base/memory/linked_ptr.h"
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ class ChromeV8ContextSet;
+ class ExtensionDispatcher;
+Index: exp/src/chrome/renderer/extensions/send_request_natives.h
+===================================================================
+--- exp.orig/src/chrome/renderer/extensions/send_request_natives.h	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/send_request_natives.h	2012-05-19 19:34:44.198678803 +0200
+@@ -9,7 +9,7 @@
+ #include "chrome/renderer/extensions/chrome_v8_extension.h"
+ #include "chrome/renderer/extensions/extension_dispatcher.h"
+ 
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ class ExtensionRequestSender;
+ 
+Index: exp/src/chrome/renderer/extensions/set_icon_natives.h
+===================================================================
+--- exp.orig/src/chrome/renderer/extensions/set_icon_natives.h	2012-05-19 16:55:00.000000000 +0200
++++ exp/src/chrome/renderer/extensions/set_icon_natives.h	2012-05-19 19:34:28.678678632 +0200
+@@ -9,7 +9,7 @@
+ #include "chrome/renderer/extensions/chrome_v8_extension.h"
+ #include "chrome/renderer/extensions/extension_dispatcher.h"
+ 
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ class ExtensionRequestSender;
+ 
+Index: exp/src/chrome/renderer/playback_extension.cc
+===================================================================
+--- exp.orig/src/chrome/renderer/playback_extension.cc	2012-05-19 16:55:01.000000000 +0200
++++ exp/src/chrome/renderer/playback_extension.cc	2012-05-19 19:36:59.774680256 +0200
+@@ -4,7 +4,7 @@
+ 
+ #include "chrome/renderer/playback_extension.h"
+ 
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ const char kPlaybackExtensionName[] = "v8/PlaybackMode";
+ 
+Index: exp/src/third_party/WebKit/Source/WebKit/chromium/WebKitUnitTests.gyp
+===================================================================
+--- exp.orig/src/third_party/WebKit/Source/WebKit/chromium/WebKitUnitTests.gyp	2012-05-19 16:56:54.000000000 +0200
++++ exp/src/third_party/WebKit/Source/WebKit/chromium/WebKitUnitTests.gyp	2012-05-19 19:31:13.006676553 +0200
+@@ -56,7 +56,7 @@
+             'dependencies': [
+                 'WebKit.gyp:webkit',
+                 '<(chromium_src_dir)/build/temp_gyp/googleurl.gyp:googleurl',
+-                '<(chromium_src_dir)/v8/tools/gyp/v8.gyp:v8',
++                '<(chromium_src_dir)/build/linux/system.gyp:v8',
+                 '<(chromium_src_dir)/testing/gtest.gyp:gtest',
+                 '<(chromium_src_dir)/testing/gmock.gyp:gmock',
+                 '<(chromium_src_dir)/base/base.gyp:base',
+Index: exp/src/third_party/WebKit/Tools/TestWebKitAPI/TestWebKitAPI.gyp/TestWebKitAPI.gyp
+===================================================================
+--- exp.orig/src/third_party/WebKit/Tools/TestWebKitAPI/TestWebKitAPI.gyp/TestWebKitAPI.gyp	2012-05-19 16:56:20.000000000 +0200
++++ exp/src/third_party/WebKit/Tools/TestWebKitAPI/TestWebKitAPI.gyp/TestWebKitAPI.gyp	2012-05-19 19:31:33.734676760 +0200
+@@ -57,7 +57,7 @@
+                 '<(source_dir)/WebKit/chromium/WebKit.gyp:webkit', 
+                 '<(source_dir)/WTF/WTF.gyp/WTF.gyp:wtf', 
+                 '<(chromium_src_dir)/build/temp_gyp/googleurl.gyp:googleurl',
+-                '<(chromium_src_dir)/v8/tools/gyp/v8.gyp:v8',
++                '<(chromium_src_dir)/build/linux/system.gyp:v8',
+                 '<(chromium_src_dir)/base/base.gyp:test_support_base', 
+                 '<(chromium_src_dir)/testing/gtest.gyp:gtest', 
+                 '<(chromium_src_dir)/testing/gmock.gyp:gmock', 
+Index: exp/src/third_party/v8-i18n/src/locale.h
+===================================================================
+--- exp.orig/src/third_party/v8-i18n/src/locale.h	2012-05-19 16:56:57.000000000 +0200
++++ exp/src/third_party/v8-i18n/src/locale.h	2012-05-19 19:38:02.998680935 +0200
+@@ -15,7 +15,7 @@
+ #ifndef V8_I18N_SRC_LOCALE_H_
+ #define V8_I18N_SRC_LOCALE_H_
+ 
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ namespace v8_i18n {
+ 
+Index: exp/src/webkit/support/gc_extension.cc
+===================================================================
+--- exp.orig/src/webkit/support/gc_extension.cc	2012-05-19 16:54:06.000000000 +0200
++++ exp/src/webkit/support/gc_extension.cc	2012-05-19 19:36:26.990679900 +0200
+@@ -4,7 +4,7 @@
+ 
+ #include "webkit/support/gc_extension.h"
+ 
+-#include "v8/include/v8.h"
++#include <v8.h>
+ 
+ const char kGCExtensionName[] = "v8/GCController";
+ 

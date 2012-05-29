@@ -1,24 +1,9 @@
-<<<<<<< HEAD
-From: Giuseppe Iuculano <iuculano@debian.org>
-Date: Sat, 8 May 2010 12:05:46 +0200
-Subject: Pull in nspr headers
----
- src/chrome/chrome_common.gypi |    5 +++++
- 1 files changed, 5 insertions(+), 0 deletions(-)
-
-diff --git a/src/chrome/chrome_common.gypi b/src/chrome/chrome_common.gypi
-index 1e0a23e5..062713b6 100644
---- a/src/chrome/chrome_common.gypi
-+++ b/src/chrome/chrome_common.gypi
-@@ -237,6 +237,11 @@
-=======
 webkit needs to call nss to pull in nspr headers
-Index: sid/src/chrome/chrome_common.gypi
+Index: exp/src/chrome/chrome_common.gypi
 ===================================================================
---- sid.orig/src/chrome/chrome_common.gypi	2012-05-16 11:33:16.000000000 +0200
-+++ sid/src/chrome/chrome_common.gypi	2012-05-16 15:51:06.398128415 +0200
-@@ -272,6 +272,11 @@
->>>>>>> master
+--- exp.orig/src/chrome/chrome_common.gypi	2012-05-19 19:20:45.046669795 +0200
++++ exp/src/chrome/chrome_common.gypi	2012-05-19 19:22:42.774671063 +0200
+@@ -283,6 +283,11 @@
              '<(DEPTH)/third_party/wtl/include',
            ]
          }],

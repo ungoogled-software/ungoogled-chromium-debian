@@ -16,9 +16,10 @@ webkit-version.patch
 #javascript-i18n.patch
 #icu.patch
 cups1.5.patch
-system_v8.patch
-#protobuf.patch
+#system_v8.patch
+protobuf.patch
 nss-workaround.patch
 arm-no-float-abi.patch
 vpx.patch
 pulseaudio.patch
+#gcc4.7.patch

@@ -6,10 +6,10 @@ bug and take down the renderer".
 
 Works around: http://bugs.debian.org/647992
 
-Index: sid/src/crypto/nss_util.cc
+Index: exp/src/crypto/nss_util.cc
 ===================================================================
---- sid.orig/src/crypto/nss_util.cc	2012-05-16 15:50:13.258129408 +0200
-+++ sid/src/crypto/nss_util.cc	2012-05-17 15:01:26.470355730 +0200
+--- exp.orig/src/crypto/nss_util.cc	2012-05-19 19:20:56.486669927 +0200
++++ exp/src/crypto/nss_util.cc	2012-05-19 19:38:40.734681338 +0200
 @@ -35,7 +35,6 @@
  #include "base/scoped_temp_dir.h"
  #include "base/stringprintf.h"
@@ -18,7 +18,7 @@ Index: sid/src/crypto/nss_util.cc
  #include "crypto/scoped_nss_types.h"
  
  #if defined(OS_CHROMEOS)
-@@ -723,18 +722,9 @@
+@@ -678,18 +677,9 @@
    // Use relative path to Search PATH for the library files.
    paths.push_back(FilePath());
  
@@ -38,7 +38,7 @@ Index: sid/src/crypto/nss_util.cc
    // A list of library files to load.
    std::vector<std::string> libs;
    libs.push_back("libsoftokn3.so");
-@@ -757,7 +747,7 @@
+@@ -712,7 +702,7 @@
    if (loaded == libs.size()) {
      VLOG(3) << "NSS libraries loaded.";
    } else {

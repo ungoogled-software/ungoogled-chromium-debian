@@ -1,14 +1,14 @@
 Use system speex
-Index: sid/src/build/linux/system.gyp
+Index: exp/src/build/linux/system.gyp
 ===================================================================
---- sid.orig/src/build/linux/system.gyp	2012-05-16 11:32:28.000000000 +0200
-+++ sid/src/build/linux/system.gyp	2012-05-16 15:53:44.934125458 +0200
-@@ -385,6 +385,26 @@
+--- exp.orig/src/build/linux/system.gyp	2012-05-28 18:51:10.830753663 +0200
++++ exp/src/build/linux/system.gyp	2012-05-28 18:53:22.658754037 +0200
+@@ -384,6 +384,26 @@
        ],
      },
      {
 +      'target_name': 'speex',
-+      'type': 'settings',
++      'type': 'none',
 +      'conditions': [
 +        ['_toolset=="target"', {
 +          'direct_dependent_settings': {
@@ -30,10 +30,10 @@ Index: sid/src/build/linux/system.gyp
        'target_name': 'gnome_keyring',
        'type': 'none',
        'conditions': [
-Index: sid/src/content/browser/speech/audio_encoder.cc
+Index: exp/src/content/browser/speech/audio_encoder.cc
 ===================================================================
---- sid.orig/src/content/browser/speech/audio_encoder.cc	2012-05-16 11:32:00.000000000 +0200
-+++ sid/src/content/browser/speech/audio_encoder.cc	2012-05-16 15:53:44.934125458 +0200
+--- exp.orig/src/content/browser/speech/audio_encoder.cc	2012-05-28 18:51:10.830753663 +0200
++++ exp/src/content/browser/speech/audio_encoder.cc	2012-05-28 18:52:49.182753940 +0200
 @@ -11,7 +11,7 @@
  #include "base/string_number_conversions.h"
  #include "content/browser/speech/audio_buffer.h"
@@ -43,10 +43,10 @@ Index: sid/src/content/browser/speech/audio_encoder.cc
  
  using std::string;
  using speech::AudioChunk;
-Index: sid/src/content/content_browser.gypi
+Index: exp/src/content/content_browser.gypi
 ===================================================================
---- sid.orig/src/content/content_browser.gypi	2012-05-16 11:32:01.000000000 +0200
-+++ sid/src/content/content_browser.gypi	2012-05-16 15:53:44.934125458 +0200
+--- exp.orig/src/content/content_browser.gypi	2012-05-28 18:51:10.830753663 +0200
++++ exp/src/content/content_browser.gypi	2012-05-28 18:52:49.186753941 +0200
 @@ -12,7 +12,7 @@
      '../ppapi/ppapi_internal.gyp:ppapi_proxy',
      '../skia/skia.gyp:skia',
@@ -55,4 +55,4 @@ Index: sid/src/content/content_browser.gypi
 +    '../build/linux/system.gyp:speex',
      '../third_party/WebKit/Source/WebKit/chromium/WebKit.gyp:webkit',
      '../third_party/zlib/zlib.gyp:zlib',
-     '../ui/gfx/surface/surface.gyp:surface',
+     '../ui/surface/surface.gyp:surface',

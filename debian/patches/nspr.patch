@@ -1,21 +1,21 @@
 Include system copy of prtime.h
-Index: sid/src/base/pr_time_unittest.cc
+Index: exp/src/base/pr_time_unittest.cc
 ===================================================================
---- sid.orig/src/base/pr_time_unittest.cc	2012-05-16 11:32:29.000000000 +0200
-+++ sid/src/base/pr_time_unittest.cc	2012-05-16 15:50:13.258129408 +0200
-@@ -4,7 +4,7 @@
- 
+--- exp.orig/src/base/pr_time_unittest.cc	2012-05-19 16:54:40.000000000 +0200
++++ exp/src/base/pr_time_unittest.cc	2012-05-19 19:18:03.918668070 +0200
+@@ -5,7 +5,7 @@
  #include <time.h>
  
+ #include "base/compiler_specific.h"
 -#include "base/third_party/nspr/prtime.h"
 +#include <nspr/prtime.h>
  #include "base/time.h"
  #include "testing/gtest/include/gtest/gtest.h"
  
-Index: sid/src/base/time.cc
+Index: exp/src/base/time.cc
 ===================================================================
---- sid.orig/src/base/time.cc	2012-05-16 11:32:29.000000000 +0200
-+++ sid/src/base/time.cc	2012-05-16 15:50:13.258129408 +0200
+--- exp.orig/src/base/time.cc	2012-05-19 16:54:40.000000000 +0200
++++ exp/src/base/time.cc	2012-05-19 19:17:29.718667704 +0200
 @@ -4,7 +4,7 @@
  
  #include "base/time.h"
@@ -25,23 +25,23 @@ Index: sid/src/base/time.cc
  
  #include "base/logging.h"
  
-Index: sid/src/chrome/browser/metrics/metrics_log.cc
+Index: exp/src/chrome/browser/metrics/metrics_log.cc
 ===================================================================
---- sid.orig/src/chrome/browser/metrics/metrics_log.cc	2012-05-16 11:32:45.000000000 +0200
-+++ sid/src/chrome/browser/metrics/metrics_log.cc	2012-05-16 15:50:13.258129408 +0200
-@@ -15,7 +15,7 @@
+--- exp.orig/src/chrome/browser/metrics/metrics_log.cc	2012-05-19 16:54:55.000000000 +0200
++++ exp/src/chrome/browser/metrics/metrics_log.cc	2012-05-19 19:17:29.718667704 +0200
+@@ -16,7 +16,7 @@
  #include "base/string_number_conversions.h"
  #include "base/string_util.h"
  #include "base/sys_info.h"
 -#include "base/third_party/nspr/prtime.h"
 +#include <nspr/prtime.h>
  #include "base/time.h"
+ #include "base/tracked_objects.h"
  #include "base/utf_string_conversions.h"
- #include "chrome/browser/autocomplete/autocomplete.h"
-Index: sid/src/base/base.gypi
+Index: exp/src/base/base.gypi
 ===================================================================
---- sid.orig/src/base/base.gypi	2012-05-16 11:32:29.000000000 +0200
-+++ sid/src/base/base.gypi	2012-05-16 15:50:13.258129408 +0200
+--- exp.orig/src/base/base.gypi	2012-05-19 16:54:40.000000000 +0200
++++ exp/src/base/base.gypi	2012-05-19 19:17:29.718667704 +0200
 @@ -17,7 +17,6 @@
            'third_party/dmg_fp/dtoa_wrapper.cc',
            'third_party/icu/icu_utf.cc',
@@ -50,10 +50,10 @@ Index: sid/src/base/base.gypi
            'third_party/nspr/prtime.h',
            'third_party/nspr/prcpucfg_linux.h',
            'third_party/xdg_mime/xdgmime.h',
-Index: sid/src/crypto/nss_util.cc
+Index: exp/src/crypto/nss_util.cc
 ===================================================================
---- sid.orig/src/crypto/nss_util.cc	2012-05-16 11:32:02.000000000 +0200
-+++ sid/src/crypto/nss_util.cc	2012-05-16 15:50:13.258129408 +0200
+--- exp.orig/src/crypto/nss_util.cc	2012-05-19 16:54:16.000000000 +0200
++++ exp/src/crypto/nss_util.cc	2012-05-19 19:17:29.718667704 +0200
 @@ -9,7 +9,7 @@
  #include <plarena.h>
  #include <prerror.h>
@@ -63,10 +63,10 @@ Index: sid/src/crypto/nss_util.cc
  #include <pk11pub.h>
  #include <secmod.h>
  
-Index: sid/src/net/base/x509_certificate_nss.cc
+Index: exp/src/net/base/x509_certificate_nss.cc
 ===================================================================
---- sid.orig/src/net/base/x509_certificate_nss.cc	2012-05-16 11:32:04.000000000 +0200
-+++ sid/src/net/base/x509_certificate_nss.cc	2012-05-16 15:50:42.262128867 +0200
+--- exp.orig/src/net/base/x509_certificate_nss.cc	2012-05-19 16:54:19.000000000 +0200
++++ exp/src/net/base/x509_certificate_nss.cc	2012-05-19 19:17:29.718667704 +0200
 @@ -9,7 +9,7 @@
  #include <keyhi.h>
  #include <nss.h>
@@ -75,4 +75,3 @@ Index: sid/src/net/base/x509_certificate_nss.cc
 +#include <nspr/prtime.h>
  #include <secder.h>
  #include <sechash.h>
- 

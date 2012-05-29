@@ -4,10 +4,10 @@ Author: Daniel Echeverry <epsilon77@gmail.com>
 Origin: vendor
 Last-Update: 2011-02-20
 
-Index: sid/src/chrome/app/resources/manpage.1.in
+Index: exp/src/chrome/app/resources/manpage.1.in
 ===================================================================
---- sid.orig/src/chrome/app/resources/manpage.1.in	2012-05-16 11:32:40.000000000 +0200
-+++ sid/src/chrome/app/resources/manpage.1.in	2012-05-16 15:53:52.390125319 +0200
+--- exp.orig/src/chrome/app/resources/manpage.1.in	2012-05-19 16:54:48.000000000 +0200
++++ exp/src/chrome/app/resources/manpage.1.in	2012-05-19 19:23:05.666671310 +0200
 @@ -1,5 +1,5 @@
 -." This file is processed by chrome.gyp to generate manpages in the
 -." build diretory.

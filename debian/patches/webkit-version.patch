@@ -1,8 +1,8 @@
 description: debian-specific version parsing (for about dialog)
-Index: sid/src/webkit/build/webkit_version.py
+Index: exp/src/webkit/build/webkit_version.py
 ===================================================================
---- sid.orig/src/webkit/build/webkit_version.py	2012-05-16 11:31:56.000000000 +0200
-+++ sid/src/webkit/build/webkit_version.py	2012-05-16 15:53:54.918125272 +0200
+--- exp.orig/src/webkit/build/webkit_version.py	2012-05-28 11:06:45.962674003 +0200
++++ exp/src/webkit/build/webkit_version.py	2012-05-28 11:07:27.026674121 +0200
 @@ -61,6 +61,15 @@
        default_lastchange=None,
        directory=os.path.join(webkit_dir, version_file_dir),

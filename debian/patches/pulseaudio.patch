@@ -1,10 +1,10 @@
 description: fix pulseaudio messageloop comparisons
 author: Michael Gilbert <michael.s.gilbert@gmail.com>
-Index: sid/src/media/audio/pulse/pulse_output.cc
+Index: exp/src/media/audio/pulse/pulse_output.cc
 ===================================================================
---- sid.orig/src/media/audio/pulse/pulse_output.cc	2012-05-16 11:31:54.000000000 +0200
-+++ sid/src/media/audio/pulse/pulse_output.cc	2012-05-17 15:01:40.098355587 +0200
-@@ -126,7 +126,7 @@
+--- exp.orig/src/media/audio/pulse/pulse_output.cc	2012-05-19 16:54:04.000000000 +0200
++++ exp/src/media/audio/pulse/pulse_output.cc	2012-05-19 19:40:16.138682353 +0200
+@@ -128,7 +128,7 @@
    PulseAudioOutputStream* stream =
        reinterpret_cast<PulseAudioOutputStream*>(stream_addr);
  
@@ -13,7 +13,7 @@ Index: sid/src/media/audio/pulse/pulse_output.cc
  
    stream->write_callback_handled_ = true;
  
-@@ -153,7 +153,7 @@
+@@ -155,7 +155,7 @@
        write_callback_handled_(false),
        ALLOW_THIS_IN_INITIALIZER_LIST(weak_factory_(this)),
        source_callback_(NULL) {
@@ -22,7 +22,7 @@ Index: sid/src/media/audio/pulse/pulse_output.cc
  
    // TODO(slock): Sanity check input values.
  }
-@@ -167,7 +167,7 @@
+@@ -169,7 +169,7 @@
  }
  
  bool PulseAudioOutputStream::Open() {
@@ -31,7 +31,7 @@ Index: sid/src/media/audio/pulse/pulse_output.cc
  
    // TODO(slock): Possibly move most of this to an OpenPlaybackDevice function
    // in a new class 'pulse_util', like alsa_util.
-@@ -270,7 +270,7 @@
+@@ -272,7 +272,7 @@
  }
  
  void PulseAudioOutputStream::Close() {
@@ -40,7 +40,7 @@ Index: sid/src/media/audio/pulse/pulse_output.cc
  
    Reset();
  
-@@ -280,7 +280,7 @@
+@@ -282,7 +282,7 @@
  }
  
  void PulseAudioOutputStream::WaitForWriteRequest() {
@@ -49,7 +49,7 @@ Index: sid/src/media/audio/pulse/pulse_output.cc
  
    if (stream_stopped_)
      return;
-@@ -382,7 +382,7 @@
+@@ -384,7 +384,7 @@
  }
  
  void PulseAudioOutputStream::Start(AudioSourceCallback* callback) {
@@ -58,7 +58,7 @@ Index: sid/src/media/audio/pulse/pulse_output.cc
    CHECK(callback);
    DLOG_IF(ERROR, !playback_handle_)
        << "Open() has not been called successfully";
-@@ -402,19 +402,19 @@
+@@ -404,19 +404,19 @@
  }
  
  void PulseAudioOutputStream::Stop() {

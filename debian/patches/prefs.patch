@@ -1,9 +1,9 @@
 Tell Chromium to look in /etc/chromium for the master_preferences file
-Index: sid/src/chrome/common/chrome_paths.cc
+Index: exp/src/chrome/common/chrome_paths.cc
 ===================================================================
---- sid.orig/src/chrome/common/chrome_paths.cc	2012-05-16 11:33:15.000000000 +0200
-+++ sid/src/chrome/common/chrome_paths.cc	2012-05-16 15:51:15.254128250 +0200
-@@ -339,7 +339,7 @@
+--- exp.orig/src/chrome/common/chrome_paths.cc	2012-05-19 16:55:34.000000000 +0200
++++ exp/src/chrome/common/chrome_paths.cc	2012-05-19 19:22:53.874671178 +0200
+@@ -346,7 +346,7 @@
  #if defined(GOOGLE_CHROME_BUILD)
        cur = FilePath(FILE_PATH_LITERAL("/etc/opt/chrome/policies"));
  #else
