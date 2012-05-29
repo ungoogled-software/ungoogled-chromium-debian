@@ -10,6 +10,7 @@ Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-chromium/pkg-chromium.git
 Homepage: http://code.google.com/chromium/
 Build-Depends: cdbs,
 	debhelper (>= 7),
+	g++-4.6,
 	pkg-config,
 	lsb-release,
 	lzma,
@@ -38,7 +39,7 @@ Build-Depends: cdbs,
 	libsqlite3-dev,
 	libasound2-dev,
 	libnss3-dev (>= 3.12.3),
-	libnspr4-dev,
+	libnspr4-dev (>= 2:4.9-2~),
 	libgl1-mesa-dri,
 	mesa-common-dev,
 	libgl1-mesa-dev,
@@ -136,7 +137,7 @@ Description: page inspector for the chromium-browser - transitional dummy packag
 Package: chromium
 Architecture: i386 amd64 armel armhf
 Depends: ${shlibs:Depends}, ${misc:Depends},
-	libnss3-1d (>= 3.12.3),
+	libnspr4 (>= 2:4.9-2~),
 	xdg-utils,
 	chromium-inspector
 Suggests: chromium-l10n
