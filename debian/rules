@@ -8,7 +8,7 @@ DEBIAN_DIST		:= $(shell lsb_release -ds | tr -d '()')
 DEBIAN_DIST_NAME	:= $(shell lsb_release -si)
 DEBIAN_DIST_VERSION	:= $(shell cat /etc/debian_version)
 MULTIARCH		:= $(shell dpkg-architecture -qDEB_BUILD_MULTIARCH)
-USE_SYSTEM_FFMPEG	:= 1
+USE_SYSTEM_FFMPEG	:= 0
 ifeq (1,$(USE_SYSTEM_FFMPEG))
 LIBAVCODEC_BASENAME	:= $(shell basename $$(ls -x /usr/lib/$(MULTIARCH)/libavcodec.so.* | cut -d ' ' -f 1))
 LIBAVFORMAT_BASENAME	:= $(shell basename $$(ls -x /usr/lib/$(MULTIARCH)/libavformat.so.* | cut -d ' ' -f 1))
@@ -33,7 +33,7 @@ WANT_SYSTEM_LIBS ?= 1
 WANT_SHARED_LIBS ?= 0
 WANT_TESTS       ?= 0
 WANT_SANDBOXING  ?= 1
-USE_SYSTEM_V8    ?= 1
+USE_SYSTEM_V8    ?= 0
 VERBOSE          ?= 0
 
 export DEB_BUILD_HARDENING=1
@@ -71,6 +71,9 @@ GYP_DEFINES += disable_nacl=1
 ifeq (,$(filter unstable development,$(DEBIAN_DIST)))
 GYP_DEFINES += werror=$(NULL)
 endif
+
+#disable tcmalloc
+GYP_DEFINES += linux_use_tcmalloc=0
 
 DEB_HOST_ARCH_CPU := $(shell dpkg-architecture -qDEB_HOST_ARCH_CPU)
 DEB_HOST_ARCH := $(shell dpkg-architecture -qDEB_HOST_ARCH)
