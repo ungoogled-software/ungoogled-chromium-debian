@@ -1,3 +1,33 @@
+chromium-browser (20.0.1132.21~r139451-1) experimental; urgency=low
+
+  [ Jonathan Nieder ]
+  * [70fc5ec] Refresh patches and add descriptions
+
+  [ Giuseppe Iuculano ]
+  * [8cb8e89] Use gcc 4.6 for the moment (Closes: #671994)
+
+  [ Jonathan Nieder ]
+  * [cd6baae] Build-Depends: g++-4.6
+  * [09908a2] Remove workaround for bug #651912, which seems to have been fixed in libnspr
+    (Closes: #661948)
+  * [58d631d] Remove hardcoded versioned dependency on libnss3-1d
+  * [c9e2e81] Require nspr4 >= 2:4.9-2 (Closes: #651912)
+
+  [ Giuseppe Iuculano ]
+  * [150b326] Added libssl-dev in B-depends
+  * [88ff66a] Refreshed patches
+  * [7e7de0c] Disable tcmalloc, use internal copy of ffmpeg and libv8
+  * [ca0f508] Updated patches
+  * [1343b0c] Fixed floating point exception  in protobuf internal copy.
+    Thanks to Andrew Chant
+  * [2b62b38] Disable protobuf patch
+  * [cae4c9c] updated vpx patch
+  * [7233f03] Start to fix build issues with gcc 4.7
+  * [b4e5b1d] Fix FTBFS when compiling with pulseaudio support
+  * [235e171] install all .pak files
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 01 Jun 2012 15:36:07 +0200
+
 chromium-browser (18.0.1025.168~r134367-1) unstable; urgency=low
 
   * New stable release:
