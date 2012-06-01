@@ -17,7 +17,7 @@ webkit-version.patch
 #icu.patch
 cups1.5.patch
 #system_v8.patch
-protobuf.patch
+#protobuf.patch
 arm-no-float-abi.patch
 vpx.patch
 pulseaudio.patch
