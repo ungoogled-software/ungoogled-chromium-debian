@@ -1,7 +1,7 @@
-Index: sid/src/seccompsandbox/library.h
+Index: exp/src/seccompsandbox/library.h
 ===================================================================
---- sid.orig/src/seccompsandbox/library.h	2012-05-16 11:33:34.000000000 +0200
-+++ sid/src/seccompsandbox/library.h	2012-05-17 16:02:20.346317258 +0200
+--- exp.orig/src/seccompsandbox/library.h	2012-06-01 10:23:40.622698259 +0200
++++ exp/src/seccompsandbox/library.h	2012-06-01 10:24:02.934698024 +0200
 @@ -12,6 +12,7 @@
  #include <string>
  #include <string.h>
@@ -10,3 +10,142 @@ Index: sid/src/seccompsandbox/library.h
  
  #include "maps.h"
  
+Index: exp/src/chrome/browser/policy/policy_path_parser_linux.cc
+===================================================================
+--- exp.orig/src/chrome/browser/policy/policy_path_parser_linux.cc	2012-06-01 10:23:40.622698259 +0200
++++ exp/src/chrome/browser/policy/policy_path_parser_linux.cc	2012-06-01 10:24:02.938698024 +0200
+@@ -1,3 +1,4 @@
++#include <unistd.h>
+ // Copyright (c) 2011 The Chromium Authors. All rights reserved.
+ // Use of this source code is governed by a BSD-style license that can be
+ // found in the LICENSE file.
+Index: exp/src/chrome/browser/search_engines/template_url_prepopulate_data.h
+===================================================================
+--- exp.orig/src/chrome/browser/search_engines/template_url_prepopulate_data.h	2012-06-01 10:23:40.622698259 +0200
++++ exp/src/chrome/browser/search_engines/template_url_prepopulate_data.h	2012-06-01 10:24:02.938698024 +0200
+@@ -9,6 +9,7 @@
+ #include <stddef.h>
+ #include <string>
+ #include <vector>
++#include <cstddef>
+ 
+ #include "base/string16.h"
+ #include "chrome/browser/search_engines/search_engine_type.h"
+Index: exp/src/gpu/command_buffer/common/types.h
+===================================================================
+--- exp.orig/src/gpu/command_buffer/common/types.h	2012-06-01 10:23:40.622698259 +0200
++++ exp/src/gpu/command_buffer/common/types.h	2012-06-01 10:24:02.938698024 +0200
+@@ -12,6 +12,7 @@
+ #endif
+ #include <cstddef>
+ #include <string>
++#include <cstddef>
+ 
+ typedef signed char         schar;
+ typedef signed char         int8;
+Index: exp/src/ipc/ipc_channel.h
+===================================================================
+--- exp.orig/src/ipc/ipc_channel.h	2012-06-01 10:23:40.622698259 +0200
++++ exp/src/ipc/ipc_channel.h	2012-06-01 10:24:02.938698024 +0200
+@@ -1,3 +1,4 @@
++#include <sys/types.h>
+ // Copyright (c) 2012 The Chromium Authors. All rights reserved.
+ // Use of this source code is governed by a BSD-style license that can be
+ // found in the LICENSE file.
+Index: exp/src/third_party/ots/src/os2.cc
+===================================================================
+--- exp.orig/src/third_party/ots/src/os2.cc	2012-06-01 10:23:40.622698259 +0200
++++ exp/src/third_party/ots/src/os2.cc	2012-06-01 10:24:02.938698024 +0200
+@@ -5,6 +5,7 @@
+ #include "os2.h"
+ 
+ #include "head.h"
++#include <cstddef>
+ 
+ // OS/2 - OS/2 and Windows Metrics
+ // http://www.microsoft.com/opentype/otspec/os2.htm
+Index: exp/src/third_party/tcmalloc/chromium/src/base/stl_allocator.h
+===================================================================
+--- exp.orig/src/third_party/tcmalloc/chromium/src/base/stl_allocator.h	2012-06-01 10:23:40.622698259 +0200
++++ exp/src/third_party/tcmalloc/chromium/src/base/stl_allocator.h	2012-06-01 10:24:02.938698024 +0200
+@@ -39,6 +39,7 @@
+ 
+ #include <stddef.h>   // for std::ptrdiff_t
+ #include <limits>
++#include <cstddef>
+ 
+ #include "base/logging.h"
+ 
+Index: exp/src/third_party/tcmalloc/chromium/src/base/vdso_support.h
+===================================================================
+--- exp.orig/src/third_party/tcmalloc/chromium/src/base/vdso_support.h	2012-06-01 10:23:40.622698259 +0200
++++ exp/src/third_party/tcmalloc/chromium/src/base/vdso_support.h	2012-06-01 10:24:02.938698024 +0200
+@@ -63,6 +63,7 @@
+ 
+ #define HAVE_VDSO_SUPPORT 1
+ 
++#include <cstddef>
+ #include <stdlib.h>     // for NULL
+ 
+ namespace base {
+Index: exp/src/third_party/tcmalloc/chromium/src/common.cc
+===================================================================
+--- exp.orig/src/third_party/tcmalloc/chromium/src/common.cc	2012-06-01 10:23:40.622698259 +0200
++++ exp/src/third_party/tcmalloc/chromium/src/common.cc	2012-06-01 10:24:02.938698024 +0200
+@@ -33,6 +33,7 @@
+ #include "config.h"
+ #include "common.h"
+ #include "system-alloc.h"
++#include <cstddef>
+ 
+ #if defined(HAVE_UNISTD_H) && defined(HAVE_GETPAGESIZE)
+ #include <unistd.h>                     // for getpagesize
+Index: exp/src/third_party/tcmalloc/chromium/src/symbolize.h
+===================================================================
+--- exp.orig/src/third_party/tcmalloc/chromium/src/symbolize.h	2012-06-01 10:23:40.622698259 +0200
++++ exp/src/third_party/tcmalloc/chromium/src/symbolize.h	2012-06-01 10:24:02.938698024 +0200
+@@ -40,6 +40,7 @@
+ #endif
+ #include <stddef.h>  // for NULL
+ #include <map>
++#include <cstddef>
+ 
+ using std::map;
+ 
+Index: exp/src/ui/gfx/codec/jpeg_codec.h
+===================================================================
+--- exp.orig/src/ui/gfx/codec/jpeg_codec.h	2012-06-01 10:23:40.622698259 +0200
++++ exp/src/ui/gfx/codec/jpeg_codec.h	2012-06-01 10:24:02.938698024 +0200
+@@ -8,6 +8,7 @@
+ 
+ #include <stddef.h>
+ #include <vector>
++#include <cstddef>
+ 
+ #include "ui/base/ui_export.h"
+ 
+Index: exp/src/ipc/ipc_platform_file.cc
+===================================================================
+--- exp.orig/src/ipc/ipc_platform_file.cc	2012-05-19 16:54:40.000000000 +0200
++++ exp/src/ipc/ipc_platform_file.cc	2012-06-01 11:04:43.814672322 +0200
+@@ -4,7 +4,7 @@
+ 
+ #include "ipc/ipc_platform_file.h"
+ 
+-#if defined(OS_ANDROID)
++#if defined(OS_POSIX)
+ #include <unistd.h>
+ #endif
+ 
+Index: exp/src/base/message_pump_libevent.cc
+===================================================================
+--- exp.orig/src/base/message_pump_libevent.cc	2012-05-19 16:54:40.000000000 +0200
++++ exp/src/base/message_pump_libevent.cc	2012-06-01 11:28:40.478657196 +0200
+@@ -6,6 +6,7 @@
+ 
+ #include <errno.h>
+ #include <fcntl.h>
++#include <unistd.h>
+ 
+ #include "base/auto_reset.h"
+ #include "base/compiler_specific.h"

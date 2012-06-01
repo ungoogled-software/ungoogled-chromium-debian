@@ -182,6 +182,10 @@ ifeq (0/4.6,$(AVOID_GCC_46)/$(CC_VERSION))
 GYP_DEFINES += werror=$(NULL)
 endif
 
+ifeq (0/4.7,$(AVOID_GCC_47)/$(CC_VERSION))
+GYP_DEFINES += werror=$(NULL)
+endif
+
 ifeq (4.4,$(CC_VERSION))
 GYP_DEFINES += no_strict_aliasing=1 gcc_version=44
 endif
