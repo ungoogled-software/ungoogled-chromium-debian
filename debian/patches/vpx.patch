@@ -1,13 +1,13 @@
 Index: exp/src/remoting/remoting.gyp
 ===================================================================
---- exp.orig/src/remoting/remoting.gyp	2012-05-29 14:22:19.000000000 +0200
-+++ exp/src/remoting/remoting.gyp	2012-05-29 14:23:06.154235589 +0200
+--- exp.orig/src/remoting/remoting.gyp	2012-05-29 19:07:29.000000000 +0200
++++ exp/src/remoting/remoting.gyp	2012-05-29 19:08:06.717826578 +0200
 @@ -1045,7 +1045,7 @@
          '../ui/ui.gyp:ui',
          '../net/net.gyp:net',
          '../skia/skia.gyp:skia',
 -        '../third_party/libvpx/libvpx.gyp:libvpx',
 +        '../third_party/libvpx/libvpx.gyp:libvpx_include',
-         '../build/linux/system.gyp:protobuf',
+         '../third_party/protobuf/protobuf.gyp:protobuf_lite',
          '../third_party/zlib/zlib.gyp:zlib',
          '../media/media.gyp:yuv_convert',
