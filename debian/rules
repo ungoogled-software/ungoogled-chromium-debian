@@ -64,6 +64,10 @@ GYP_DEFINES += proprietary_codecs=1
 # enable compile-time dependency on gnome-keyring
 GYP_DEFINES += use_gnome_keyring=1 linux_link_gnome_keyring=1
 
+# controlling the use of GConf (the classic GNOME configuration
+# and GIO, which contains GSettings (the new GNOME config system)
+GYP_DEFINES += use_gconf=1 use_gio=1
+
 #Disable nacl
 GYP_DEFINES += disable_nacl=1
 
