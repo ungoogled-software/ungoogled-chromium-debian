@@ -62,7 +62,7 @@ GYP_DEFINES = disable_sse2=1
 GYP_DEFINES += proprietary_codecs=1
 
 # enable compile-time dependency on gnome-keyring
-GYP_DEFINES += use_gnome_keyring=1
+GYP_DEFINES += use_gnome_keyring=1 linux_link_gnome_keyring=1
 
 #Disable nacl
 GYP_DEFINES += disable_nacl=1
