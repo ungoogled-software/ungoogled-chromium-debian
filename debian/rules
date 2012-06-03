@@ -156,7 +156,7 @@ AVOID_GCC_44 ?= 0
 AVOID_GCC_46 ?= 0
 
 # Set this to use gcc 4.6 instead of 4.7
-AVOID_GCC_47 ?= 1
+AVOID_GCC_47 ?= 0
 
 CC_VERSION   := $(shell gcc -dumpversion | cut -d. -f-2)
  
