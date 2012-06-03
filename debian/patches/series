@@ -21,4 +21,4 @@ cups1.5.patch
 arm-no-float-abi.patch
 vpx.patch
 pulseaudio.patch
-#gcc4.7.patch
+gcc4.7.patch
