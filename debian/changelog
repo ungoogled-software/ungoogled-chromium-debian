@@ -1,3 +1,16 @@
+chromium-browser (20.0.1132.21~r139451-2) experimental; urgency=low
+
+  * [1de8e21] Build depends on binutils-gold also in armel and armhf
+  * [5890c9b] Do not use third_party/gold as the linker. (Closes: #675563)
+  * [e883861] Strip third_party/gold from upstream tarball.
+    Thanks to Andrew Chant
+  * [c9ac368] Use gcc 4.7
+  * [7f1ad3e] link against libgnome-keyring instead of using dlopen()
+  * [57f6712] Added gcc 4.7 patch
+  * [2be55e4] Use GConf and GIO
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sun, 03 Jun 2012 17:01:46 +0200
+
 chromium-browser (20.0.1132.21~r139451-1) experimental; urgency=low
 
   [ Jonathan Nieder ]
