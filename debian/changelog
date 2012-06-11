@@ -1,3 +1,11 @@
+chromium-browser (20.0.1132.27~r140692-1) unstable; urgency=low
+
+  * New beta release.
+  * [e2adf90] Applied sqlite patch and fixed omnibox crash (Closes: #676636)
+  * [69cc508] Define arm_float_abi=soft for armel and arm_float_abi=hard for armhf
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Mon, 11 Jun 2012 17:54:51 +0200
+
 chromium-browser (20.0.1132.21~r139451-3) unstable; urgency=low
 
   * Upload to unstable.
