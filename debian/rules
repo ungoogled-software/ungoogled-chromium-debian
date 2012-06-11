@@ -96,6 +96,7 @@ GYP_DEFINES += \
 ifeq (armel,$(DEB_HOST_ARCH))
 AVOID_GCC_44 := 0
 GYP_DEFINES += \
+	arm_float_abi=soft \
 	arm_thumb=0 \
 	armv7=0 \
 	arm_neon=0 \
@@ -103,6 +104,7 @@ GYP_DEFINES += \
 endif
 ifeq (armhf,$(DEB_HOST_ARCH))
 GYP_DEFINES += \
+	arm_float_abi=hard \
 	arm_thumb=1 \
 	armv7=1 \
 	arm_neon=0 \
