@@ -22,3 +22,4 @@ arm-no-float-abi.patch
 vpx.patch
 pulseaudio.patch
 gcc4.7.patch
+sqlite.patch
