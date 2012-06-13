@@ -1,0 +1,17 @@
+Index: sid/src/third_party/WebKit/Source/WebCore/platform/audio/AudioArray.h
+===================================================================
+--- sid.orig/src/third_party/WebKit/Source/WebCore/platform/audio/AudioArray.h	2012-05-19 16:58:44.000000000 +0200
++++ sid/src/third_party/WebKit/Source/WebCore/platform/audio/AudioArray.h	2012-06-13 12:56:55.536076062 +0200
+@@ -60,8 +60,11 @@
+       
+         unsigned initialSize = sizeof(T) * n;
+ 
+-        // 16-byte alignment for 128bit SIMD.
++#if USE(WEBAUDIO_FFMPEG)
++	const size_t alignment = 32;
++#else
+         const size_t alignment = 16;
++#endif
+ 
+         if (m_allocation)
+             fastFree(m_allocation);
