@@ -103,6 +103,7 @@ GYP_DEFINES += \
 	$(NULL)
 endif
 ifeq (armhf,$(DEB_HOST_ARCH))
+BUILD_ARGS += -DUSE_EABI_HARDFLOAT 
 GYP_DEFINES += \
 	arm_float_abi=hard \
 	arm_thumb=1 \
