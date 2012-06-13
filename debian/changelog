@@ -1,8 +1,19 @@
+chromium-browser (20.0.1132.27~r140692-2) unstable; urgency=low
+
+  * [c0e9499] Improved sqlite patch.
+    Thanks to Andrew Chant (Closes: #676636)
+  * [62d276b] Backported: Use 32-byte alignment in AudioArray if using
+    WEBAUDIO_FFMPEG https://bugs.webkit.org/show_bug.cgi?id=87430
+  * [1183b6a] Added -DUSE_EABI_HARDFLOAT for armhf
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 13 Jun 2012 13:21:26 +0200
+
 chromium-browser (20.0.1132.27~r140692-1) unstable; urgency=low
 
   * New beta release.
   * [e2adf90] Applied sqlite patch and fixed omnibox crash (Closes: #676636)
-  * [69cc508] Define arm_float_abi=soft for armel and arm_float_abi=hard for armhf
+  * [69cc508] Define arm_float_abi=soft for armel and arm_float_abi=hard
+    for armhf
 
  -- Giuseppe Iuculano <iuculano@debian.org>  Mon, 11 Jun 2012 17:54:51 +0200
 
@@ -35,8 +46,8 @@ chromium-browser (20.0.1132.21~r139451-1) experimental; urgency=low
 
   [ Jonathan Nieder ]
   * [cd6baae] Build-Depends: g++-4.6
-  * [09908a2] Remove workaround for bug #651912, which seems to have been fixed in libnspr
-    (Closes: #661948)
+  * [09908a2] Remove workaround for bug #651912, which seems to have been fixed
+    in libnspr (Closes: #661948)
   * [58d631d] Remove hardcoded versioned dependency on libnss3-1d
   * [c9e2e81] Require nspr4 >= 2:4.9-2 (Closes: #651912)
 
