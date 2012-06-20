@@ -1,3 +1,13 @@
+chromium-browser (20.0.1132.34~r141824-1) unstable; urgency=low
+
+  * [29f002e] Add -DUSE_EABI_HARDFLOAT in gyp defines for armhf
+  * [3a003ca] Added some armel and armhf patches.
+    Thanks to Shawn
+  * [2f15044] Search te correct icon when minimised.
+    Thanks to Jonathan Nieder (Closes: #651455)
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 20 Jun 2012 19:05:50 +0200
+
 chromium-browser (20.0.1132.27~r140692-2) unstable; urgency=low
 
   * [c0e9499] Improved sqlite patch.

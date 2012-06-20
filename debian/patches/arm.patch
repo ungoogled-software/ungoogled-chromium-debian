@@ -1,0 +1,50 @@
+Index: sid/src/skia/skia.gyp
+===================================================================
+--- sid.orig/src/skia/skia.gyp	2012-05-19 16:54:19.000000000 +0200
++++ sid/src/skia/skia.gyp	2012-06-20 14:34:13.131318952 +0200
+@@ -1157,9 +1157,11 @@
+         [ 'target_arch == "arm" and armv7 != 1', {
+           'sources': [
+             '../third_party/skia/src/opts/SkBlitRow_opts_none.cpp',
++            '../third_party/skia/src/opts/opts_check_arm.cpp',
+           ],
+           'sources!': [
+             '../third_party/skia/src/opts/SkBlitRow_opts_arm.cpp',
++            '../third_party/skia/src/opts/SkUtils_opts_none.cpp',
+           ],
+         }],
+       ],
+Index: sid/src/ui/base/resource/data_pack.cc
+===================================================================
+--- sid.orig/src/ui/base/resource/data_pack.cc	2012-05-19 16:55:37.000000000 +0200
++++ sid/src/ui/base/resource/data_pack.cc	2012-06-20 14:38:32.507316901 +0200
+@@ -130,9 +130,11 @@
+   // 2) Verify the entries are within the appropriate bounds. There's an extra
+   // entry after the last item which gives us the length of the last item.
+   for (size_t i = 0; i < resource_count_ + 1; ++i) {
++    uint32 t;
+     const DataPackEntry* entry = reinterpret_cast<const DataPackEntry*>(
+         mmap_->data() + kHeaderLength + (i * sizeof(DataPackEntry)));
+-    if (entry->file_offset > mmap_->length()) {
++    memcpy(&t, &entry->file_offset, 32/8);
++    if (t > mmap_->length()) {
+       LOG(ERROR) << "Entry #" << i << " in data pack points off end of file. "
+                  << "Was the file corrupted?";
+       UMA_HISTOGRAM_ENUMERATION("DataPack.Load", ENTRY_NOT_FOUND,
+Index: sid/src/v8/src/arm/macro-assembler-arm.cc
+===================================================================
+--- sid.orig/src/v8/src/arm/macro-assembler-arm.cc	2012-05-19 16:57:27.000000000 +0200
++++ sid/src/v8/src/arm/macro-assembler-arm.cc	2012-06-20 14:35:27.339318363 +0200
+@@ -61,9 +61,9 @@
+ // We do not support thumb inter-working with an arm architecture not supporting
+ // the blx instruction (below v5t).  If you know what CPU you are compiling for
+ // you can use -march=armv7 or similar.
+-#if defined(USE_THUMB_INTERWORK) && !defined(CAN_USE_THUMB_INSTRUCTIONS)
+-# error "For thumb inter-working we require an architecture which supports blx"
+-#endif
++//#if defined(USE_THUMB_INTERWORK) && !defined(CAN_USE_THUMB_INSTRUCTIONS)
++//# error "For thumb inter-working we require an architecture which supports blx"
++//#endif
+ 
+ 
+ // Using bx does not yield better code, so use it only when required
