@@ -25,3 +25,4 @@ gcc4.7.patch
 sqlite.patch
 alignment.patch
 arm.patch
+icon.patch
