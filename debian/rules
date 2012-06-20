@@ -96,6 +96,7 @@ GYP_DEFINES += \
 ifeq (armel,$(DEB_HOST_ARCH))
 AVOID_GCC_44 := 0
 GYP_DEFINES += \
+	v8_use_arm_eabi_hardfloat=false \
 	arm_float_abi=soft \
 	arm_thumb=0 \
 	armv7=0 \
@@ -105,6 +106,8 @@ endif
 ifeq (armhf,$(DEB_HOST_ARCH))
 GYP_DEFINES += -DUSE_EABI_HARDFLOAT 
 GYP_DEFINES += \
+	v8_use_arm_eabi_hardfloat=true \
+	arm_fpu=vfpv3 \
 	arm_float_abi=hard \
 	arm_thumb=1 \
 	armv7=1 \
