@@ -1,3 +1,10 @@
+chromium-browser (20.0.1132.41~r143299-1) unstable; urgency=medium
+
+  * [98cf55e] Do not use binutils-gold in armel and armhf
+  * New beta release
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 22 Jun 2012 16:41:48 +0200
+
 chromium-browser (20.0.1132.34~r141824-1) unstable; urgency=low
 
   * [29f002e] Add -DUSE_EABI_HARDFLOAT in gyp defines for armhf
