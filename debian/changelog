@@ -1,3 +1,35 @@
+chromium-browser (20.0.1132.43~r143823-1) unstable; urgency=high
+
+  * New stable release
+   - Low CVE-2012-2815: Leak of iframe fragment id. Credit to Elie
+     Bursztein of Google.
+   - High CVE-2012-2817: Use-after-free in table section handling.
+     Credit to miaubiz.
+   - High CVE-2012-2818: Use-after-free in counter layout. Credit
+     to miaubiz.
+   - High CVE-2012-2819: Crash in texture handling. Credit to Ken "gets"
+     Russell of the Chromium development community.
+   - Medium CVE-2012-2820: Out-of-bounds read in SVG filter handling.
+     Credit to Atte Kettunen of OUSPG.
+   - Medium CVE-2012-2821: Autofill display problem. Credit to
+     "simonbrown60"
+   - High CVE-2012-2823: Use-after-free in SVG resource handling.
+     Credit to miaubiz.
+   - High CVE-2012-2824: Use-after-free in SVG painting. Credit to
+     miaubiz.
+   - Medium CVE-2012-2826: Out-of-bounds read in texture conversion.
+     Credit to Google Chrome Security Team (Inferno).
+   - High CVE-2012-2829: Use-after-free in first-letter handling.
+     Credit to miaubiz.
+   - High CVE-2012-2830: Wild pointer in array value setting.
+     Credit to miaubiz.
+   - [130356] High CVE-2012-2831: Use-after-free in SVG reference handling.
+     Credit to miaubiz.
+   - High CVE-2012-2834: Integer overflow in Matroska container.
+     Credit to Jüri Aedla.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 30 Jun 2012 14:33:40 +0200
+
 chromium-browser (20.0.1132.41~r143299-1) unstable; urgency=medium
 
   * [98cf55e] Do not use binutils-gold in armel and armhf
