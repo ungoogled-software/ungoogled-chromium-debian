@@ -11,3 +11,31 @@ Index: exp/src/remoting/remoting.gyp
          '../third_party/protobuf/protobuf.gyp:protobuf_lite',
          '../third_party/zlib/zlib.gyp:zlib',
          '../media/media.gyp:yuv_convert',
+Index: exp/src/third_party/libvpx/libvpx.gyp
+===================================================================
+--- exp.orig/src/third_party/libvpx/libvpx.gyp  2012-05-29 19:07:29.000000000 +0200
++++ exp/src/third_party/libvpx/libvpx.gyp       2012-05-29 19:08:06.717826578 +0200
+@@ -281,11 +281,17 @@
+     {
+       'target_name': 'libvpx_include',
+       'type': 'none',
+-      'direct_dependent_settings': {
+-        'include_dirs': [
+-          'source/libvpx',
+-        ],
+-      },
++      'conditions': [
++        ['_toolset=="target"', {
++          'link_settings': {
++            'ldflags': [
++              '<!@(pkg-config --libs-only-L --libs-only-other vpx)',
++            ],
++            'libraries': [
++              '<!@(pkg-config --libs-only-l vpx)',
++            ],
++          },
++      }]]
+     },
+     {
+       'target_name': 'libvpx_lib',
+
