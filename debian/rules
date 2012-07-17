@@ -23,11 +23,7 @@ DEB_BUILDDIR   := $(SRC_DIR)
 #BUILD_ARGS     := --keep-going
 
 WANT_LZMA_SRC    ?= 0
-ifneq (,$(findstring Ubuntu,$(DEBIAN_DIST)))
-WANT_LZMA_DEBS   ?= 1
-else
-WANT_LZMA_DEBS   ?= 0
-endif
+WANT_XZ_DEBS     ?= 1
 WANT_DEBUG       := 0
 WANT_SYSTEM_LIBS ?= 1
 WANT_SHARED_LIBS ?= 0
@@ -136,8 +132,8 @@ DEB_DH_INSTALLINIT_ARGS += --noscripts --onlyscripts
 DEB_DH_INSTALL_ARGS += --list-missing
 
 # Use lzma instead of gzip inside the debs (passed to dpkg-deb)
-ifeq (1,$(WANT_LZMA_DEBS))
-DEB_DH_BUILDDEB_ARGS += -- -Z lzma
+ifeq (1,$(WANT_XZ_DEBS))
+DEB_DH_BUILDDEB_ARGS += -- -Zxz
 endif
 
 ifeq (1,$(WANT_DEBUG))
