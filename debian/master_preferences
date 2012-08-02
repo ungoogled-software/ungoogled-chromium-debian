@@ -1,5 +1,8 @@
 {
   "distribution": {
+     "skip_first_run_ui": true,
+     "make_chrome_default": false,
+     "make_chrome_default_for_user": false,
      "create_all_shortcuts": true,
      "show_welcome_page": true
   },
