@@ -1,14 +1,17 @@
-Tell Chromium to look in /etc/chromium for the master_preferences file
-Index: exp/src/chrome/common/chrome_paths.cc
+Author:  Raymond Wooninck (tittiatcoke)
+Source: OpenSUSE (chromium-master-prefs-path.patch)
+Index: chromium/src/chrome/browser/first_run/first_run_linux.cc
 ===================================================================
---- exp.orig/src/chrome/common/chrome_paths.cc	2012-05-19 16:55:34.000000000 +0200
-+++ exp/src/chrome/common/chrome_paths.cc	2012-05-19 19:22:53.874671178 +0200
-@@ -346,7 +346,7 @@
- #if defined(GOOGLE_CHROME_BUILD)
-       cur = FilePath(FILE_PATH_LITERAL("/etc/opt/chrome/policies"));
- #else
--      cur = FilePath(FILE_PATH_LITERAL("/etc/chromium/policies"));
-+      cur = FilePath(FILE_PATH_LITERAL("/etc/chromium-browser/master_preferences"));
- #endif
-       break;
-     }
+--- chromium.orig/src/chrome/browser/first_run/first_run_linux.cc
++++ chromium/src/chrome/browser/first_run/first_run_linux.cc
+@@ -100,8 +100,7 @@ void AutoImport(
+ FilePath MasterPrefsPath() {
+   // The standard location of the master prefs is next to the chrome binary.
+   FilePath master_prefs;
+-  if (!PathService::Get(base::DIR_EXE, &master_prefs))
+-    return FilePath();
++  master_prefs = FilePath("/etc/chromium");
+   return master_prefs.AppendASCII(installer::kDefaultMasterPrefs);
+ }
+ 
+
