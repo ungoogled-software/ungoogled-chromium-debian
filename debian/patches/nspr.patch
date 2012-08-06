@@ -1,8 +1,8 @@
 Include system copy of prtime.h
-Index: exp/src/base/pr_time_unittest.cc
+Index: sid/src/base/pr_time_unittest.cc
 ===================================================================
---- exp.orig/src/base/pr_time_unittest.cc	2012-05-19 16:54:40.000000000 +0200
-+++ exp/src/base/pr_time_unittest.cc	2012-05-19 19:18:03.918668070 +0200
+--- sid.orig/src/base/pr_time_unittest.cc	2012-08-06 10:28:14.000000000 +0200
++++ sid/src/base/pr_time_unittest.cc	2012-08-06 12:12:18.157554839 +0200
 @@ -5,7 +5,7 @@
  #include <time.h>
  
@@ -12,23 +12,23 @@ Index: exp/src/base/pr_time_unittest.cc
  #include "base/time.h"
  #include "testing/gtest/include/gtest/gtest.h"
  
-Index: exp/src/base/time.cc
+Index: sid/src/base/time.cc
 ===================================================================
---- exp.orig/src/base/time.cc	2012-05-19 16:54:40.000000000 +0200
-+++ exp/src/base/time.cc	2012-05-19 19:17:29.718667704 +0200
-@@ -4,7 +4,7 @@
+--- sid.orig/src/base/time.cc	2012-08-06 10:28:14.000000000 +0200
++++ sid/src/base/time.cc	2012-08-06 12:12:18.157554839 +0200
+@@ -10,7 +10,7 @@
+ #endif
  
- #include "base/time.h"
  #include "base/sys_string_conversions.h"
 -#include "base/third_party/nspr/prtime.h"
 +#include <nspr/prtime.h>
  
  #include "base/logging.h"
  
-Index: exp/src/chrome/browser/metrics/metrics_log.cc
+Index: sid/src/chrome/browser/metrics/metrics_log.cc
 ===================================================================
---- exp.orig/src/chrome/browser/metrics/metrics_log.cc	2012-05-19 16:54:55.000000000 +0200
-+++ exp/src/chrome/browser/metrics/metrics_log.cc	2012-05-19 19:17:29.718667704 +0200
+--- sid.orig/src/chrome/browser/metrics/metrics_log.cc	2012-08-06 10:28:30.000000000 +0200
++++ sid/src/chrome/browser/metrics/metrics_log.cc	2012-08-06 12:12:18.161554837 +0200
 @@ -16,7 +16,7 @@
  #include "base/string_number_conversions.h"
  #include "base/string_util.h"
@@ -38,10 +38,10 @@ Index: exp/src/chrome/browser/metrics/metrics_log.cc
  #include "base/time.h"
  #include "base/tracked_objects.h"
  #include "base/utf_string_conversions.h"
-Index: exp/src/base/base.gypi
+Index: sid/src/base/base.gypi
 ===================================================================
---- exp.orig/src/base/base.gypi	2012-05-19 16:54:40.000000000 +0200
-+++ exp/src/base/base.gypi	2012-05-19 19:17:29.718667704 +0200
+--- sid.orig/src/base/base.gypi	2012-08-06 10:28:14.000000000 +0200
++++ sid/src/base/base.gypi	2012-08-06 12:12:18.161554837 +0200
 @@ -17,7 +17,6 @@
            'third_party/dmg_fp/dtoa_wrapper.cc',
            'third_party/icu/icu_utf.cc',
@@ -50,10 +50,10 @@ Index: exp/src/base/base.gypi
            'third_party/nspr/prtime.h',
            'third_party/nspr/prcpucfg_linux.h',
            'third_party/xdg_mime/xdgmime.h',
-Index: exp/src/crypto/nss_util.cc
+Index: sid/src/crypto/nss_util.cc
 ===================================================================
---- exp.orig/src/crypto/nss_util.cc	2012-05-19 16:54:16.000000000 +0200
-+++ exp/src/crypto/nss_util.cc	2012-05-19 19:17:29.718667704 +0200
+--- sid.orig/src/crypto/nss_util.cc	2012-08-06 10:27:56.000000000 +0200
++++ sid/src/crypto/nss_util.cc	2012-08-06 12:12:18.161554837 +0200
 @@ -9,7 +9,7 @@
  #include <plarena.h>
  #include <prerror.h>
@@ -63,10 +63,10 @@ Index: exp/src/crypto/nss_util.cc
  #include <pk11pub.h>
  #include <secmod.h>
  
-Index: exp/src/net/base/x509_certificate_nss.cc
+Index: sid/src/net/base/x509_certificate_nss.cc
 ===================================================================
---- exp.orig/src/net/base/x509_certificate_nss.cc	2012-05-19 16:54:19.000000000 +0200
-+++ exp/src/net/base/x509_certificate_nss.cc	2012-05-19 19:17:29.718667704 +0200
+--- sid.orig/src/net/base/x509_certificate_nss.cc	2012-08-06 10:27:59.000000000 +0200
++++ sid/src/net/base/x509_certificate_nss.cc	2012-08-06 12:12:18.161554837 +0200
 @@ -9,7 +9,7 @@
  #include <keyhi.h>
  #include <nss.h>
@@ -75,3 +75,4 @@ Index: exp/src/net/base/x509_certificate_nss.cc
 +#include <nspr/prtime.h>
  #include <secder.h>
  #include <sechash.h>
+ 

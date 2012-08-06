@@ -1,21 +1,8 @@
 Include system copy of expat.h
-Index: exp/src/chrome/browser/autofill/autofill_xml_parser.h
+Index: sid/src/third_party/libjingle/source/talk/xmllite/xmlparser.h
 ===================================================================
---- exp.orig/src/chrome/browser/autofill/autofill_xml_parser.h	2012-05-19 16:54:48.000000000 +0200
-+++ exp/src/chrome/browser/autofill/autofill_xml_parser.h	2012-05-19 19:22:50.558671144 +0200
-@@ -13,7 +13,7 @@
- #include "base/compiler_specific.h"
- #include "chrome/browser/autofill/field_types.h"
- #include "chrome/browser/autofill/form_structure.h"
--#include "third_party/expat/files/lib/expat.h"
-+#include <expat.h>
- #include "third_party/libjingle/source/talk/xmllite/xmlparser.h"
- 
- // The base class that contains common functionality between
-Index: exp/src/third_party/libjingle/source/talk/xmllite/xmlparser.h
-===================================================================
---- exp.orig/src/third_party/libjingle/source/talk/xmllite/xmlparser.h	2012-05-19 16:56:42.000000000 +0200
-+++ exp/src/third_party/libjingle/source/talk/xmllite/xmlparser.h	2012-05-19 19:22:50.558671144 +0200
+--- sid.orig/src/third_party/libjingle/source/talk/xmllite/xmlparser.h	2012-08-06 10:33:28.000000000 +0200
++++ sid/src/third_party/libjingle/source/talk/xmllite/xmlparser.h	2012-08-06 12:12:46.665553924 +0200
 @@ -32,9 +32,9 @@
  
  #include "talk/xmllite/xmlnsstack.h"
@@ -28,10 +15,10 @@ Index: exp/src/third_party/libjingle/source/talk/xmllite/xmlparser.h
  #endif  // EXPAT_RELATIVE_PATH
  
  struct XML_ParserStruct;
-Index: exp/src/third_party/libjingle/source/talk/xmpp/xmppstanzaparser.cc
+Index: sid/src/third_party/libjingle/source/talk/xmpp/xmppstanzaparser.cc
 ===================================================================
---- exp.orig/src/third_party/libjingle/source/talk/xmpp/xmppstanzaparser.cc	2012-05-19 16:56:39.000000000 +0200
-+++ exp/src/third_party/libjingle/source/talk/xmpp/xmppstanzaparser.cc	2012-05-19 19:22:50.558671144 +0200
+--- sid.orig/src/third_party/libjingle/source/talk/xmpp/xmppstanzaparser.cc	2012-08-06 10:33:25.000000000 +0200
++++ sid/src/third_party/libjingle/source/talk/xmpp/xmppstanzaparser.cc	2012-08-06 12:12:46.665553924 +0200
 @@ -31,9 +31,9 @@
  #include "talk/base/common.h"
  #include "talk/xmpp/constants.h"
@@ -44,10 +31,10 @@ Index: exp/src/third_party/libjingle/source/talk/xmpp/xmppstanzaparser.cc
  #endif
  
  namespace buzz {
-Index: exp/src/third_party/skia/src/ports/SkXMLParser_expat.cpp
+Index: sid/src/third_party/skia/src/ports/SkXMLParser_expat.cpp
 ===================================================================
---- exp.orig/src/third_party/skia/src/ports/SkXMLParser_expat.cpp	2012-05-19 16:57:00.000000000 +0200
-+++ exp/src/third_party/skia/src/ports/SkXMLParser_expat.cpp	2012-05-19 19:22:50.558671144 +0200
+--- sid.orig/src/third_party/skia/src/ports/SkXMLParser_expat.cpp	2012-08-06 10:30:16.000000000 +0200
++++ sid/src/third_party/skia/src/ports/SkXMLParser_expat.cpp	2012-08-06 12:12:46.665553924 +0200
 @@ -11,7 +11,7 @@
  #include "SkString.h"
  #include "SkStream.h"
@@ -57,10 +44,10 @@ Index: exp/src/third_party/skia/src/ports/SkXMLParser_expat.cpp
  
  #ifdef SK_BUILD_FOR_PPI
  #define CHAR_16_TO_9
-Index: exp/src/third_party/skia/src/ports/SkXMLPullParser_expat.cpp
+Index: sid/src/third_party/skia/src/ports/SkXMLPullParser_expat.cpp
 ===================================================================
---- exp.orig/src/third_party/skia/src/ports/SkXMLPullParser_expat.cpp	2012-05-19 16:57:00.000000000 +0200
-+++ exp/src/third_party/skia/src/ports/SkXMLPullParser_expat.cpp	2012-05-19 19:22:50.558671144 +0200
+--- sid.orig/src/third_party/skia/src/ports/SkXMLPullParser_expat.cpp	2012-08-06 10:30:16.000000000 +0200
++++ sid/src/third_party/skia/src/ports/SkXMLPullParser_expat.cpp	2012-08-06 12:12:46.665553924 +0200
 @@ -12,7 +12,7 @@
  #include "SkString.h"
  #include "SkStream.h"
@@ -70,10 +57,10 @@ Index: exp/src/third_party/skia/src/ports/SkXMLPullParser_expat.cpp
  
  static inline char* dupstr(SkChunkAlloc& chunk, const char src[], size_t len)
  {
-Index: exp/src/third_party/libjingle/source/talk/xmllite/xmlbuilder.h
+Index: sid/src/third_party/libjingle/source/talk/xmllite/xmlbuilder.h
 ===================================================================
---- exp.orig/src/third_party/libjingle/source/talk/xmllite/xmlbuilder.h	2012-05-19 16:56:42.000000000 +0200
-+++ exp/src/third_party/libjingle/source/talk/xmllite/xmlbuilder.h	2012-05-19 19:22:50.558671144 +0200
+--- sid.orig/src/third_party/libjingle/source/talk/xmllite/xmlbuilder.h	2012-08-06 10:33:28.000000000 +0200
++++ sid/src/third_party/libjingle/source/talk/xmllite/xmlbuilder.h	2012-08-06 12:12:46.665553924 +0200
 @@ -33,11 +33,7 @@
  #include "talk/base/scoped_ptr.h"
  #include "talk/xmllite/xmlparser.h"

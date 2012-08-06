@@ -1,8 +1,8 @@
 Use system speex
-Index: exp/src/build/linux/system.gyp
+Index: sid/src/build/linux/system.gyp
 ===================================================================
---- exp.orig/src/build/linux/system.gyp	2012-05-28 18:51:10.830753663 +0200
-+++ exp/src/build/linux/system.gyp	2012-05-28 18:53:22.658754037 +0200
+--- sid.orig/src/build/linux/system.gyp	2012-08-06 10:28:12.000000000 +0200
++++ sid/src/build/linux/system.gyp	2012-08-06 12:13:54.125551763 +0200
 @@ -384,6 +384,26 @@
        ],
      },
@@ -30,10 +30,10 @@ Index: exp/src/build/linux/system.gyp
        'target_name': 'gnome_keyring',
        'type': 'none',
        'conditions': [
-Index: exp/src/content/browser/speech/audio_encoder.cc
+Index: sid/src/content/browser/speech/audio_encoder.cc
 ===================================================================
---- exp.orig/src/content/browser/speech/audio_encoder.cc	2012-05-28 18:51:10.830753663 +0200
-+++ exp/src/content/browser/speech/audio_encoder.cc	2012-05-28 18:52:49.182753940 +0200
+--- sid.orig/src/content/browser/speech/audio_encoder.cc	2012-08-06 10:27:52.000000000 +0200
++++ sid/src/content/browser/speech/audio_encoder.cc	2012-08-06 12:13:54.125551763 +0200
 @@ -11,7 +11,7 @@
  #include "base/string_number_conversions.h"
  #include "content/browser/speech/audio_buffer.h"
@@ -43,16 +43,16 @@ Index: exp/src/content/browser/speech/audio_encoder.cc
  
  using std::string;
  using speech::AudioChunk;
-Index: exp/src/content/content_browser.gypi
+Index: sid/src/content/content_browser.gypi
 ===================================================================
---- exp.orig/src/content/content_browser.gypi	2012-05-28 18:51:10.830753663 +0200
-+++ exp/src/content/content_browser.gypi	2012-05-28 18:52:49.186753941 +0200
-@@ -12,7 +12,7 @@
+--- sid.orig/src/content/content_browser.gypi	2012-08-06 10:27:54.000000000 +0200
++++ sid/src/content/content_browser.gypi	2012-08-06 12:14:55.985549781 +0200
+@@ -13,7 +13,7 @@
      '../ppapi/ppapi_internal.gyp:ppapi_proxy',
      '../skia/skia.gyp:skia',
      '../third_party/flac/flac.gyp:libflac',
 -    '../third_party/speex/speex.gyp:libspeex',
 +    '../build/linux/system.gyp:speex',
-     '../third_party/WebKit/Source/WebKit/chromium/WebKit.gyp:webkit',
+     '<(webkit_src_dir)/Source/WebKit/chromium/WebKit.gyp:webkit',
      '../third_party/zlib/zlib.gyp:zlib',
      '../ui/surface/surface.gyp:surface',

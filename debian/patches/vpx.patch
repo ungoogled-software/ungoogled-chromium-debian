@@ -1,8 +1,8 @@
-Index: exp/src/remoting/remoting.gyp
+Index: sid/src/remoting/remoting.gyp
 ===================================================================
---- exp.orig/src/remoting/remoting.gyp	2012-05-29 19:07:29.000000000 +0200
-+++ exp/src/remoting/remoting.gyp	2012-05-29 19:08:06.717826578 +0200
-@@ -1045,7 +1045,7 @@
+--- sid.orig/src/remoting/remoting.gyp	2012-08-06 10:27:44.000000000 +0200
++++ sid/src/remoting/remoting.gyp	2012-08-06 12:15:16.629549120 +0200
+@@ -1031,7 +1031,7 @@
          '../ui/ui.gyp:ui',
          '../net/net.gyp:net',
          '../skia/skia.gyp:skia',
@@ -11,10 +11,10 @@ Index: exp/src/remoting/remoting.gyp
          '../third_party/protobuf/protobuf.gyp:protobuf_lite',
          '../third_party/zlib/zlib.gyp:zlib',
          '../media/media.gyp:yuv_convert',
-Index: exp/src/third_party/libvpx/libvpx.gyp
+Index: sid/src/third_party/libvpx/libvpx.gyp
 ===================================================================
---- exp.orig/src/third_party/libvpx/libvpx.gyp  2012-05-29 19:07:29.000000000 +0200
-+++ exp/src/third_party/libvpx/libvpx.gyp       2012-05-29 19:08:06.717826578 +0200
+--- sid.orig/src/third_party/libvpx/libvpx.gyp	2012-08-06 10:30:05.000000000 +0200
++++ sid/src/third_party/libvpx/libvpx.gyp	2012-08-06 12:15:16.665549120 +0200
 @@ -281,11 +281,17 @@
      {
        'target_name': 'libvpx_include',
@@ -38,4 +38,3 @@ Index: exp/src/third_party/libvpx/libvpx.gyp
      },
      {
        'target_name': 'libvpx_lib',
-
