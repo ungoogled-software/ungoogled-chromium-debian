@@ -1,3 +1,21 @@
+chromium-browser (20.0.1132.57~r145807-1) unstable; urgency=medium
+
+  [ Michael Gilbert ]
+  * New ustream stable security release:
+    - [129898] High CVE-2012-2842: Use-after-free in counter handling.  Credit
+      to miaubiz.
+    - [130595] High CVE-2012-2843: Use-after-free in layout height tracking.
+      Credit to miaubiz.
+    - [133450] High CVE-2012-2844: Bad object access with JavaScript in PDF.
+      Credit to Alexey Samsonov of Google.
+
+  [ Shawn Landden ]
+  * Revert "Do not use binutils-gold in armel and armhf".
+  * Update vpx patch to use system headers (Closes: #674728).
+  * Fixup skia fixup for <armv6.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 13 Jul 2012 15:31:11 -0400
+
 chromium-browser (20.0.1132.43~r143823-1) unstable; urgency=high
 
   * New stable release
