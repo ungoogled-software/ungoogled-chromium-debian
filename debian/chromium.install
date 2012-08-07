@@ -14,4 +14,5 @@ debian/tmp/usr/lib/chromium/pseudo_locales/fake-bidi.pak
 debian/chromium.desktop usr/share/applications
 debian/chromium.xml usr/share/gnome-control-center/default-apps
 debian/master_preferences etc/chromium
+debian/initial_bookmarks.html etc/chromium
 debian/presubj usr/share/bug/chromium
