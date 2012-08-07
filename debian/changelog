@@ -1,5 +1,13 @@
+chromium-browser (21.0.1180.57~r148591-2) UNRELEASED; urgency=low
+
+  [ Shawn Landden ]
+  * Add changelog entries for last upload.
+
+ -- Shawn Landden <shawnlandden@gmail.com>  Tue, 07 Aug 2012 14:56:54 -0700
+
 chromium-browser (21.0.1180.57~r148591-1) unstable; urgency=medium
 
+  [ Giuseppe Iuculano ]
   * [fd04758] Install demo extension
   * New upstream stable release:
     - Medium CVE-2012-2846: Cross-process interference in
@@ -25,6 +33,11 @@ chromium-browser (21.0.1180.57~r148591-1) unstable; urgency=medium
       Jeff Roberts of Google Security Team.
     - Medium CVE-2012-2860: Out-of-bounds access when clicking in date
       picker. Credit to Chamal de Silva.
+  [ Shawn Landden ]
+   * [0d2e43a9] Switch to xz/lzma2 compression for debs. (from lzma)
+   * [e3e9a801] replace incorrect prefs.patch with patch from OpenSUSE
+   * [faed2b9e] /etc/chromium/master_preferences: don't bug user for
+       Google account.
 
  -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 07 Aug 2012 10:55:17 +0200
 
