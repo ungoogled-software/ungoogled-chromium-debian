@@ -1,3 +1,33 @@
+chromium-browser (21.0.1180.57~r148591-1) unstable; urgency=medium
+
+  * [fd04758] Install demo extension
+  * New upstream stable release:
+    - Medium CVE-2012-2846: Cross-process interference in
+      renderers. Credit to Google Chrome Security Team (Julien Tinnes).
+    - Low CVE-2012-2847: Missing re-prompt to user upon excessive
+      downloads. Credit to Matt Austin of Aspect Security.
+    - Medium CVE-2012-2848: Overly broad file access granted after
+      drag+drop. Credit to Matt Austin of Aspect Security.
+    - Low CVE-2012-2849: Off-by-one read in GIF decoder. Credit to Atte
+      Kettunen of OUSPG.
+    - Medium CVE-2012-2853: webRequest can interfere with the Chrome Web
+      Store. Credit to Trev of Adblock.
+    - Low CVE-2012-2854: Leak of pointer values to WebUI renderers. Credit
+      to Nasko Oskov of the Chromium development community.
+    - High CVE-2012-2855: Use-after-free in PDF viewer. Credit to Mateusz
+      Jurczyk of Google Security Team, with contributions by Gynvael Coldwind of
+      Google Security Team.
+    - High CVE-2012-2857: Use-after-free in CSS DOM. Credit to
+    - Arthur Gerkis.
+    - High CVE-2012-2858: Buffer overflow in WebP decoder. Credit
+      to Jüri Aedla.
+    - Critical CVE-2012-2859: Crash in tab handling. Credit to
+      Jeff Roberts of Google Security Team.
+    - Medium CVE-2012-2860: Out-of-bounds access when clicking in date
+      picker. Credit to Chamal de Silva.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 07 Aug 2012 10:55:17 +0200
+
 chromium-browser (20.0.1132.57~r145807-1) unstable; urgency=medium
 
   [ Michael Gilbert ]
