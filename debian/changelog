@@ -1,9 +1,24 @@
-chromium-browser (21.0.1180.57~r148591-2) UNRELEASED; urgency=low
+chromium-browser (21.0.1180.75~r150248-1) unstable; urgency=medium
 
   [ Shawn Landden ]
-  * Add changelog entries for last upload.
+  * [b7c6ba3] update changelog to record changes in last upload
+  * [3c6a149] master_prefs: don't go straight to internet, don't prompt to change default browser
+  * [e441276] initial_bookmarks.html: add Debian support page
+  * [2bb621a] compress source tarball as xz (Closes: #676774)
 
- -- Shawn Landden <shawnlandden@gmail.com>  Tue, 07 Aug 2012 14:56:54 -0700
+  [ Giuseppe Iuculano ]
+  * New stable minor release fixing the following issues:
+    - REGRESSION: Rendering difference in Chrome 21 and 22 that affected on
+      Persian Wikipedia
+    - Some known crashes
+    - Audio objects are not "switched" immediately
+    - Print and Print Preview ignore paper size default in printer config
+    - Candidate windows is shown in wrong place in Retina display
+    - more of the choppy and distorted audio issues 
+    - Japanese characters showing in Chinese font 
+    - Sync invalidation notification broken after restart
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 10 Aug 2012 17:31:57 +0200
 
 chromium-browser (21.0.1180.57~r148591-1) unstable; urgency=medium
 
