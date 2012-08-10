@@ -22,7 +22,7 @@ LIB_DIR        := usr/lib/$(DEBIAN_NAME)
 DEB_BUILDDIR   := $(SRC_DIR)
 #BUILD_ARGS     := --keep-going
 
-WANT_LZMA_SRC    ?= 0
+WANT_XZ_SRC      ?= 1
 WANT_XZ_DEBS     ?= 1
 WANT_DEBUG       := 0
 WANT_SYSTEM_LIBS ?= 1
@@ -199,9 +199,9 @@ ifeq (4.4,$(CC_VERSION))
 GYP_DEFINES += no_strict_aliasing=1 gcc_version=44
 endif
 
-ifeq (1,$(WANT_LZMA_SRC))
-TAR_EXT   := lzma
-TAR_FLAGS := --lzma
+ifeq (1,$(WANT_XZ_SRC))
+TAR_EXT   := xz
+TAR_FLAGS := --xz
 DEB_TARBALL = $(wildcard *.tar.bz2 *.tar.$(TAR_EXT))
 else
 TAR_EXT   := bz2
