@@ -1,3 +1,22 @@
+chromium-browser (21.0.1180.89~r154005-1) unstable; urgency=high
+
+  * New stable security release:
+    - Medium CVE-2012-2865: Out-of-bounds read in line breaking. Credit to miaubiz.
+    - High CVE-2012-2866: Bad cast with run-ins. Credit to miaubiz.
+    - Low CVE-2012-2867: Browser crash with SPDY.
+    - Medium CVE-2012-2868: Race condition with workers and XHR.
+      Credit to miaubiz.
+    - High CVE-2012-2869: Avoid stale buffer in URL loading. Credit to
+      Fermin Serna of the Google Security Team.
+    - Low CVE-2012-2870: Lower severity memory management issues
+      in XPath. Credit to Nicolas Gregoire.
+    - High CVE-2012-2871: Bad cast in XSL transforms. Credit to
+      Nicolas Gregoire.
+    - Medium CVE-2012-2872: XSS in SSL interstitial. Credit to
+      Emmanuel Bronshtein.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 31 Aug 2012 11:24:58 +0200
+
 chromium-browser (21.0.1180.75~r150248-1) unstable; urgency=medium
 
   [ Shawn Landden ]
