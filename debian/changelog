@@ -1,3 +1,51 @@
+chromium-browser (22.0.1229.79~r158531-1) unstable; urgency=low
+
+  * New stable release:
+    - High CVE-2012-2889: UXSS in frame handling. Credit to
+      Sergey Glazunov.
+    - High CVE-2012-2886: UXSS in v8 bindings. Credit to Sergey
+      Glazunov.
+    - High CVE-2012-2881: DOM tree corruption with plug-ins. Credit
+      to Chamal de Silva.
+    - High CVE-2012-2876: Buffer overflow in SSE2 optimizations.
+      Credit to Atte Kettunen of OUSPG.
+    - High CVE-2012-2883: Out-of-bounds write in Skia. Credit to
+      Atte Kettunen of OUSPG.
+    - High CVE-2012-2887: Use-after-free in onclick handling.
+      Credit to Atte Kettunen of OUSPG.
+    - High CVE-2012-2888: Use-after-free in SVG text references.
+      Credit to miaubiz.
+    - High CVE-2012-2894: Crash in graphics context handling.
+      Credit to Sławomir Błażek.
+    - Medium CVE-2012-2877: Browser crash with extensions and modal
+      dialogs. Credit to Nir Moshe.
+    - Low CVE-2012-2879: DOM topology corruption. Credit to pawlkt.
+    - Medium CVE-2012-2884: Out-of-bounds read in Skia. Credit to
+      Atte Kettunen of OUSPG.
+    - High CVE-2012-2874: Out-of-bounds write in Skia. Credit to Google
+      Chrome Security Team (Inferno).
+    - High CVE-2012-2878: Use-after-free in plug-in handling. Credit to
+      Fermin Serna of Google Security Team.
+    - Medium CVE-2012-2880: Race condition in plug-in paint buffer. Credit
+      to Google Chrome Security Team (Cris Neckar).
+    - High CVE-2012-2882: Wild pointer in OGG container handling. Credit to
+      Google Chrome Security Team (Inferno).
+    - Medium CVE-2012-2885: Possible double free on exit. Credit to the
+      Chromium development community.
+    - Low CVE-2012-2891: Address leak over IPC. Credit to Lei Zhang of the
+      Chromium development community.
+    - Low CVE-2012-2892: Pop-up block bypass. Credit to Google Chrome
+      Security Team (Cris Neckar).
+    - High CVE-2012-2893: Double free in XSL transforms. Credit to Google
+      Chrome Security Team (Cris Neckar).
+  * [3de18b6] Use zlib internal copy. This is necessary due to the CRIME work
+     around. We can use the system zlib when chrome will remove
+     SPDY 2/3 support.
+  * [3b9811a] Updated patches
+  * [152902d] Install libvpx_obj_int_extract
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Mon, 01 Oct 2012 15:22:27 +0200
+
 chromium-browser (21.0.1180.89~r154005-1) unstable; urgency=high
 
   * New stable security release:
