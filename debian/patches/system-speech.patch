@@ -1,8 +1,8 @@
 Use system speex
 Index: sid/src/build/linux/system.gyp
 ===================================================================
---- sid.orig/src/build/linux/system.gyp	2012-08-06 10:28:12.000000000 +0200
-+++ sid/src/build/linux/system.gyp	2012-08-06 12:13:54.125551763 +0200
+--- sid.orig/src/build/linux/system.gyp	2012-09-26 07:50:42.000000000 +0200
++++ sid/src/build/linux/system.gyp	2012-09-26 11:05:25.706708180 +0200
 @@ -384,6 +384,26 @@
        ],
      },
@@ -32,8 +32,8 @@ Index: sid/src/build/linux/system.gyp
        'conditions': [
 Index: sid/src/content/browser/speech/audio_encoder.cc
 ===================================================================
---- sid.orig/src/content/browser/speech/audio_encoder.cc	2012-08-06 10:27:52.000000000 +0200
-+++ sid/src/content/browser/speech/audio_encoder.cc	2012-08-06 12:13:54.125551763 +0200
+--- sid.orig/src/content/browser/speech/audio_encoder.cc	2012-09-26 07:50:17.000000000 +0200
++++ sid/src/content/browser/speech/audio_encoder.cc	2012-09-26 11:05:25.710708180 +0200
 @@ -11,7 +11,7 @@
  #include "base/string_number_conversions.h"
  #include "content/browser/speech/audio_buffer.h"
@@ -45,14 +45,14 @@ Index: sid/src/content/browser/speech/audio_encoder.cc
  using speech::AudioChunk;
 Index: sid/src/content/content_browser.gypi
 ===================================================================
---- sid.orig/src/content/content_browser.gypi	2012-08-06 10:27:54.000000000 +0200
-+++ sid/src/content/content_browser.gypi	2012-08-06 12:14:55.985549781 +0200
-@@ -13,7 +13,7 @@
-     '../ppapi/ppapi_internal.gyp:ppapi_proxy',
-     '../skia/skia.gyp:skia',
-     '../third_party/flac/flac.gyp:libflac',
--    '../third_party/speex/speex.gyp:libspeex',
-+    '../build/linux/system.gyp:speex',
-     '<(webkit_src_dir)/Source/WebKit/chromium/WebKit.gyp:webkit',
-     '../third_party/zlib/zlib.gyp:zlib',
-     '../ui/surface/surface.gyp:surface',
+--- sid.orig/src/content/content_browser.gypi	2012-09-26 07:50:18.000000000 +0200
++++ sid/src/content/content_browser.gypi	2012-09-26 11:06:31.998706772 +0200
+@@ -917,7 +917,7 @@
+     }, { # OS!="android"
+       'dependencies': [
+         '../third_party/flac/flac.gyp:libflac',
+-        '../third_party/speex/speex.gyp:libspeex',
++        '../build/linux/system.gyp:speex',
+       ],
+     }],
+     ['OS=="mac"', {

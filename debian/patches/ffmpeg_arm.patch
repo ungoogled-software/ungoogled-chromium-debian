@@ -1,9 +1,9 @@
 description: ffmpeg compatibility on the arm arch
 Index: sid/src/third_party/ffmpeg/ffmpeg_generated.gypi
 ===================================================================
---- sid.orig/src/third_party/ffmpeg/ffmpeg_generated.gypi	2012-08-06 10:29:43.000000000 +0200
-+++ sid/src/third_party/ffmpeg/ffmpeg_generated.gypi	2012-08-06 12:13:43.805552095 +0200
-@@ -168,21 +168,14 @@
+--- sid.orig/src/third_party/ffmpeg/ffmpeg_generated.gypi	2012-09-26 07:52:28.000000000 +0200
++++ sid/src/third_party/ffmpeg/ffmpeg_generated.gypi	2012-09-26 11:04:55.566708822 +0200
+@@ -179,21 +179,14 @@
          'libavcodec/arm/dsputil_arm.S',
          'libavcodec/arm/dsputil_armv6.S',
          'libavcodec/arm/dsputil_init_arm.c',
@@ -23,5 +23,5 @@ Index: sid/src/third_party/ffmpeg/ffmpeg_generated.gypi
          'libavcodec/arm/simple_idct_arm.S',
 -        'libavcodec/arm/simple_idct_armv5te.S',
          'libavcodec/arm/simple_idct_armv6.S',
+         'libavcodec/arm/vp3dsp_init_arm.c',
          'libavcodec/arm/vp8_armv6.S',
-         'libavcodec/arm/vp8dsp_armv6.S',
