@@ -1,4 +1,4 @@
-chromium-browser (22.0.1229.79~r158531-1) unstable; urgency=low
+chromium-browser (22.0.1229.94~r161065-1) unstable; urgency=medium
 
   * New stable release:
     - High CVE-2012-2889: UXSS in frame handling. Credit to
@@ -38,6 +38,18 @@ chromium-browser (22.0.1229.79~r158531-1) unstable; urgency=low
       Security Team (Cris Neckar).
     - High CVE-2012-2893: Double free in XSL transforms. Credit to Google
       Chrome Security Team (Cris Neckar).
+    - High CVE-2012-2900: Crash in Skia text rendering.
+      Credit to Atte Kettunen of OUSPG.
+    - Critical CVE-2012-5108: Race condition in audio device
+      handling. Credit to Atte Kettunen of OUSPG.
+    - Medium CVE-2012-5109: OOB read in ICU regex. Credit to Arthur
+      Gerkis.
+    - Medium CVE-2012-5110: Out-of-bounds read in compositor. Credit to
+      Google Chrome Security Team (Inferno).
+    - Low CVE-2012-5111: Plug-in crash monitoring was missing for Pepper
+      plug-ins. Credit to Google Chrome Security Team (Chris Evans).
+    - Critical CVE-2012-5112: SVG use-after-free and IPC arbitrary file write.
+      Credit to Pinkie Pie.
   * [3de18b6] Use zlib internal copy. This is necessary due to the CRIME work
      around. We can use the system zlib when chrome will remove
      SPDY 2/3 support.
