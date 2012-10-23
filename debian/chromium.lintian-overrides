@@ -1,3 +1,5 @@
 chromium: embedded-library usr/lib/chromium/chromium: sqlite
+chromium: embedded-library usr/lib/chromium/libffmpegsumo.so: libavcodec
+chromium: embedded-library usr/lib/chromium/libffmpegsumo.so: libavutil
 chromium: statically-linked-binary usr/lib/chromium/nacl_irt_x86_64.nexe
 chromium: statically-linked-binary usr/lib/chromium/nacl_irt_x86_32.nexe
