@@ -1,13 +1,48 @@
-Index: sid/src/remoting/remoting.gyp
+Index: chromium-browser/src/third_party/libvpx/libvpx.gyp
 ===================================================================
---- sid.orig/src/remoting/remoting.gyp	2012-09-26 11:12:57.802698559 +0200
-+++ sid/src/remoting/remoting.gyp	2012-09-26 16:58:35.194257270 +0200
-@@ -1139,7 +1139,7 @@
-         '../ui/ui.gyp:ui',
-         '../net/net.gyp:net',
-         '../skia/skia.gyp:skia',
--        '../third_party/libvpx/libvpx.gyp:libvpx',
-+        '../third_party/libvpx/libvpx.gyp:libvpx_include',
-         '../third_party/protobuf/protobuf.gyp:protobuf_lite',
-         '../third_party/zlib/zlib.gyp:zlib',
-         '../media/media.gyp:yuv_convert',
+--- chromium-browser.orig/src/third_party/libvpx/libvpx.gyp	2012-10-28 00:39:46.934324915 -0400
++++ chromium-browser/src/third_party/libvpx/libvpx.gyp	2012-10-28 00:53:45.566289134 -0400
+@@ -3,6 +3,11 @@
+ # found in the LICENSE file.
+ {
+   'variables': {
++   'use_system_vpx%': 0,
++   },
++   'conditions': [
++   ['use_system_vpx==0',{
++    'variables':{
+     'conditions': [
+       ['os_posix==1', {
+         'asm_obj_extension': 'o',
+@@ -458,6 +463,31 @@
+       ]
+     },
+   ],
++  },{ # use_system_vpx==1
++    'targets': [
++      {
++        'target_name':'libvpx',
++        'type':'none',
++        'direct_dependent_settings': {
++          'cflags': [
++          '<!@(pkg-config --cflags vpx)',
++        ],
++        'defines': [
++          'USE_SYSTEM_VPX',
++        ],
++      },
++      'link_settings': {
++        'ldflags': [
++          '<!@(pkg-config --libs-only-L --libs-only-other vpx)',
++        ],
++        'libraries': [
++          '<!@(pkg-config --libs-only-l vpx)',
++        ],
++      },
++    },
++  ],
++ }],
++ ],
+ }
+ 
+ # Local Variables:

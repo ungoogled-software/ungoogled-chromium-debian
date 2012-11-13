@@ -1,3 +1,9 @@
+chromium-browser (22.0.1229.94~r161065-3) unstable; urgency=medium
+
+  * Use system vpx library again (resolves armel build failures).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 28 Oct 2012 00:55:58 -0400
+
 chromium-browser (22.0.1229.94~r161065-2) unstable; urgency=medium
 
   * [574d76c] Override the lintian flag: embedded-library
