@@ -78,6 +78,10 @@ endif
 #disable tcmalloc
 GYP_DEFINES += linux_use_tcmalloc=0
 
+# Use explicit library dependencies instead of dlopen.
+# This makes breakages easier to detect by revdep-rebuild.
+GYP_DEFINES += linux_link_gsettings=1
+
 DEB_HOST_ARCH_CPU := $(shell dpkg-architecture -qDEB_HOST_ARCH_CPU)
 DEB_HOST_ARCH := $(shell dpkg-architecture -qDEB_HOST_ARCH)
 
