@@ -826,7 +826,11 @@ ifneq (,$(STRIPPED_SYSTEM_LIB_DIRS))
 endif
 endif
 	# Remove binaries
-	cd $(TMP_DDIR)/src && find . -type f \( -iname \*.exe -o -iname \*.dll -o -iname \*.pdb -o -name \*.o -o -name \*.a -o -name \*.dylib \) -exec rm -fv {} \; > REMOVED-bin_only.txt
+	cd $(TMP_DDIR)/src && find . -type f \( -iname \*.exe -o -iname \*.dll -o -iname \*.pdb -o -name \*.o -o -name \*.a -o -name \*.dylib -o -name \*.so -o -name \*.so.\* \) -ls -delete > REMOVED-bin_only.txt
+	wc -l $(TMP_DDIR)/src/REMOVED-*.txt
+
+	# Remove cache files and backups
+	cd $(TMP_DDIR)/src && find . -type f \( -iname \*.bak -o -iname \*.orig -o -iname \*.cache \) -ls -delete > REMOVED-ephemera.txt
 	wc -l $(TMP_DDIR)/src/REMOVED-*.txt
 	
 gos-pack: TMP_DIR  = $(TMP_DDIR)
@@ -839,7 +843,7 @@ gos-pack: REVISION = $(shell cd $(TMP_DIR)/src && svn log --xml --limit 1 | grep
 gos-pack: VERSION  = $(shell cut -d= -f2 $(TMP_DIR)/src/chrome/VERSION | sed -e 's,$$,.,' | tr -d '\n' | sed -e 's/.$$//')~svn$(REVISION)
 else
 gos-pack: REVISION = $(shell cd $(TMP_DIR)/src && svn log --xml --limit 1 | grep '^ *revision=' | cut -d'"' -f2)
-gos-pack: VERSION  = $(shell cut -d= -f2 $(TMP_DIR)/src/chrome/VERSION | sed -e 's,$$,.,' | tr -d '\n' | sed -e 's/.$$//')~r$(REVISION)
+gos-pack: VERSION  = $(shell cut -d= -f2 $(TMP_DIR)/src/chrome/VERSION | sed -e 's,$$,.,' | tr -d '\n' | sed -e 's/.$$//')
 endif
 endif
 gos-pack:
