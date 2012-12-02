@@ -634,7 +634,7 @@ CHROMIUM_URL := http://src.chromium.org/svn/trunk/src
 CHROMIUM_RLZ := http://src.chromium.org/svn/releases
 DEPS_URL     := http://src.chromium.org/svn/trunk/deps/third_party
 GREEN_REV_URL := http://chromium-status.appspot.com/lkgr
-CHANNELS_URL  := http://omahaproxy.appspot.com/
+CHANNELS_URL  := http://omahaproxy.appspot.com/all
 
 # See Staying Green More Of The Time at http://dev.chromium.org/developers/how-tos/get-the-code
 USE_GREEN_REV ?= 0
