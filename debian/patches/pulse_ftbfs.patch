@@ -1,7 +1,7 @@
 Index: sid/src/media/audio/pulse/pulse_output.cc
 ===================================================================
---- sid.orig/src/media/audio/pulse/pulse_output.cc	2013-01-11 11:03:04.000000000 +0100
-+++ sid/src/media/audio/pulse/pulse_output.cc	2013-01-11 13:50:15.602768027 +0100
+--- sid.orig/src/media/audio/pulse/pulse_output.cc	2013-01-29 17:08:01.000000000 +0100
++++ sid/src/media/audio/pulse/pulse_output.cc	2013-02-06 13:38:14.129887904 +0100
 @@ -86,7 +86,7 @@
  
    // All channel maps have the same size array of channel positions.

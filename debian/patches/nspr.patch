@@ -1,8 +1,8 @@
 Include system copy of prtime.h
 Index: sid/src/base/pr_time_unittest.cc
 ===================================================================
---- sid.orig/src/base/pr_time_unittest.cc	2013-01-11 11:03:38.000000000 +0100
-+++ sid/src/base/pr_time_unittest.cc	2013-01-11 12:57:06.590733818 +0100
+--- sid.orig/src/base/pr_time_unittest.cc	2013-01-29 17:08:55.000000000 +0100
++++ sid/src/base/pr_time_unittest.cc	2013-02-06 13:35:27.481891891 +0100
 @@ -5,7 +5,7 @@
  #include <time.h>
  
@@ -14,8 +14,8 @@ Index: sid/src/base/pr_time_unittest.cc
  
 Index: sid/src/base/time.cc
 ===================================================================
---- sid.orig/src/base/time.cc	2013-01-11 11:03:38.000000000 +0100
-+++ sid/src/base/time.cc	2013-01-11 12:57:06.590733818 +0100
+--- sid.orig/src/base/time.cc	2013-01-29 17:08:55.000000000 +0100
++++ sid/src/base/time.cc	2013-02-06 13:35:27.485891889 +0100
 @@ -12,7 +12,7 @@
  #include <limits>
  
@@ -27,8 +27,8 @@ Index: sid/src/base/time.cc
  
 Index: sid/src/chrome/browser/metrics/metrics_log.cc
 ===================================================================
---- sid.orig/src/chrome/browser/metrics/metrics_log.cc	2013-01-11 11:03:57.000000000 +0100
-+++ sid/src/chrome/browser/metrics/metrics_log.cc	2013-01-11 12:57:06.590733818 +0100
+--- sid.orig/src/chrome/browser/metrics/metrics_log.cc	2013-01-29 17:09:15.000000000 +0100
++++ sid/src/chrome/browser/metrics/metrics_log.cc	2013-02-06 13:35:27.485891889 +0100
 @@ -16,7 +16,7 @@
  #include "base/string_number_conversions.h"
  #include "base/string_util.h"
@@ -40,8 +40,8 @@ Index: sid/src/chrome/browser/metrics/metrics_log.cc
  #include "base/utf_string_conversions.h"
 Index: sid/src/base/base.gypi
 ===================================================================
---- sid.orig/src/base/base.gypi	2013-01-11 11:03:38.000000000 +0100
-+++ sid/src/base/base.gypi	2013-01-11 12:57:06.594733817 +0100
+--- sid.orig/src/base/base.gypi	2013-01-29 17:08:55.000000000 +0100
++++ sid/src/base/base.gypi	2013-02-06 13:35:27.485891889 +0100
 @@ -17,7 +17,6 @@
            'third_party/dmg_fp/dtoa_wrapper.cc',
            'third_party/icu/icu_utf.cc',
@@ -52,8 +52,8 @@ Index: sid/src/base/base.gypi
            'third_party/xdg_mime/xdgmime.h',
 Index: sid/src/crypto/nss_util.cc
 ===================================================================
---- sid.orig/src/crypto/nss_util.cc	2013-01-11 11:03:17.000000000 +0100
-+++ sid/src/crypto/nss_util.cc	2013-01-11 12:57:06.594733817 +0100
+--- sid.orig/src/crypto/nss_util.cc	2013-01-29 17:08:19.000000000 +0100
++++ sid/src/crypto/nss_util.cc	2013-02-06 13:35:27.485891889 +0100
 @@ -9,7 +9,7 @@
  #include <plarena.h>
  #include <prerror.h>
@@ -65,8 +65,8 @@ Index: sid/src/crypto/nss_util.cc
  
 Index: sid/src/net/base/x509_certificate_nss.cc
 ===================================================================
---- sid.orig/src/net/base/x509_certificate_nss.cc	2013-01-11 11:03:21.000000000 +0100
-+++ sid/src/net/base/x509_certificate_nss.cc	2013-01-11 12:57:06.594733817 +0100
+--- sid.orig/src/net/base/x509_certificate_nss.cc	2013-01-29 17:08:22.000000000 +0100
++++ sid/src/net/base/x509_certificate_nss.cc	2013-02-06 13:35:27.485891889 +0100
 @@ -9,7 +9,7 @@
  #include <keyhi.h>
  #include <nss.h>
