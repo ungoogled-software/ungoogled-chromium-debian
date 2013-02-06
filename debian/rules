@@ -701,6 +701,13 @@ STRIPPED_DIRS := \
 	tools/wine_valgrind \
 	v8/test/cctest \
 	webkit/data/layout_tests \
+	native_client/toolchain/linux_x86/info \
+	native_client/toolchain/linux_x86/man \
+	native_client/toolchain/linux_x86/share/info \
+	native_client/toolchain/linux_x86/x86_64-nacl/share/info \
+	native_client/toolchain/linux_x86_newlib/info \
+	native_client/toolchain/linux_x86_newlib/man \
+	native_client/toolchain/linux_x86_newlib/share/info \
 	$(NULL)
 
 # There are directories we want to strip, but that are unnecessarily required by the build-system
