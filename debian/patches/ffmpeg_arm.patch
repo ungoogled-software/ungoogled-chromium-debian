@@ -1,27 +1,59 @@
 description: ffmpeg compatibility on the arm arch
 Index: sid/src/third_party/ffmpeg/ffmpeg_generated.gypi
 ===================================================================
---- sid.orig/src/third_party/ffmpeg/ffmpeg_generated.gypi	2012-09-26 07:52:28.000000000 +0200
-+++ sid/src/third_party/ffmpeg/ffmpeg_generated.gypi	2012-09-26 11:04:55.566708822 +0200
-@@ -179,21 +179,14 @@
-         'libavcodec/arm/dsputil_arm.S',
-         'libavcodec/arm/dsputil_armv6.S',
-         'libavcodec/arm/dsputil_init_arm.c',
--        'libavcodec/arm/dsputil_init_armv5te.c',
-         'libavcodec/arm/dsputil_init_armv6.c',
--        'libavcodec/arm/dsputil_init_vfp.c',
--        'libavcodec/arm/dsputil_vfp.S',
-         'libavcodec/arm/fft_fixed_init_arm.c',
-         'libavcodec/arm/fft_init_arm.c',
-         'libavcodec/arm/fmtconvert_init_arm.c',
--        'libavcodec/arm/fmtconvert_vfp.S',
-         'libavcodec/arm/h264pred_init_arm.c',
-         'libavcodec/arm/jrevdct_arm.S',
-         'libavcodec/arm/mpegvideo_arm.c',
--        'libavcodec/arm/mpegvideo_armv5te.c',
--        'libavcodec/arm/mpegvideo_armv5te_s.S',
-         'libavcodec/arm/simple_idct_arm.S',
--        'libavcodec/arm/simple_idct_armv5te.S',
-         'libavcodec/arm/simple_idct_armv6.S',
-         'libavcodec/arm/vp3dsp_init_arm.c',
-         'libavcodec/arm/vp8_armv6.S',
+--- sid.orig/src/third_party/ffmpeg/ffmpeg_generated.gypi	2013-01-11 11:05:31.000000000 +0100
++++ sid/src/third_party/ffmpeg/ffmpeg_generated.gypi	2013-01-11 13:00:47.726736191 +0100
+@@ -314,53 +314,41 @@
+       ['(target_arch == "arm" or (target_arch == "arm" and arm_neon == 1)) and (1) and (1)', {
+         'c_sources': [
+           'libavcodec/arm/dsputil_init_arm.c',
+-          'libavcodec/arm/dsputil_init_armv5te.c',
+           'libavcodec/arm/dsputil_init_armv6.c',
+-          'libavcodec/arm/dsputil_init_vfp.c',
+           'libavcodec/arm/fft_fixed_init_arm.c',
+           'libavcodec/arm/fft_init_arm.c',
+           'libavcodec/arm/fmtconvert_init_arm.c',
+           'libavcodec/arm/h264pred_init_arm.c',
+           'libavcodec/arm/mpegvideo_arm.c',
+-          'libavcodec/arm/mpegvideo_armv5te.c',
+           'libavcodec/arm/vp3dsp_init_arm.c',
+           'libavcodec/arm/vp8dsp_init_arm.c',
+           'libavcodec/arm/vp8dsp_init_armv6.c',
+           'libavutil/arm/cpu.c',
+           'libavutil/arm/float_dsp_init_arm.c',
+-          'libavutil/arm/float_dsp_init_vfp.c',
+         ],
+         'asm_sources': [
+           'libavcodec/arm/dsputil_arm.S',
+           'libavcodec/arm/dsputil_armv6.S',
+-          'libavcodec/arm/dsputil_vfp.S',
+           'libavcodec/arm/fmtconvert_vfp.S',
+           'libavcodec/arm/jrevdct_arm.S',
+-          'libavcodec/arm/mpegvideo_armv5te_s.S',
+           'libavcodec/arm/simple_idct_arm.S',
+-          'libavcodec/arm/simple_idct_armv5te.S',
+           'libavcodec/arm/simple_idct_armv6.S',
+           'libavcodec/arm/vp8_armv6.S',
+           'libavcodec/arm/vp8dsp_armv6.S',
+-          'libavutil/arm/float_dsp_vfp.S',
+         ],
+         'converter_outputs': [
+           '<(shared_generated_dir)/libavcodec/arm/dsputil_init_arm.c',
+-          '<(shared_generated_dir)/libavcodec/arm/dsputil_init_armv5te.c',
+           '<(shared_generated_dir)/libavcodec/arm/dsputil_init_armv6.c',
+-          '<(shared_generated_dir)/libavcodec/arm/dsputil_init_vfp.c',
+           '<(shared_generated_dir)/libavcodec/arm/fft_fixed_init_arm.c',
+           '<(shared_generated_dir)/libavcodec/arm/fft_init_arm.c',
+           '<(shared_generated_dir)/libavcodec/arm/fmtconvert_init_arm.c',
+           '<(shared_generated_dir)/libavcodec/arm/h264pred_init_arm.c',
+           '<(shared_generated_dir)/libavcodec/arm/mpegvideo_arm.c',
+-          '<(shared_generated_dir)/libavcodec/arm/mpegvideo_armv5te.c',
+           '<(shared_generated_dir)/libavcodec/arm/vp3dsp_init_arm.c',
+           '<(shared_generated_dir)/libavcodec/arm/vp8dsp_init_arm.c',
+           '<(shared_generated_dir)/libavcodec/arm/vp8dsp_init_armv6.c',
+           '<(shared_generated_dir)/libavutil/arm/cpu.c',
+           '<(shared_generated_dir)/libavutil/arm/float_dsp_init_arm.c',
+-          '<(shared_generated_dir)/libavutil/arm/float_dsp_init_vfp.c',
+         ],
+       }],  # (target_arch == "arm" or (target_arch == "arm" and arm_neon == 1)) and (1) and (1)
+       ['(1) and (1) and (1)', {

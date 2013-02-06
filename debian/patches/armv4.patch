@@ -1,9 +1,9 @@
 Do not use armv4 incopatible code
 Index: sid/src/build/common.gypi
 ===================================================================
---- sid.orig/src/build/common.gypi	2012-09-26 07:50:42.000000000 +0200
-+++ sid/src/build/common.gypi	2012-09-26 11:00:38.602714290 +0200
-@@ -2207,6 +2207,7 @@
+--- sid.orig/src/build/common.gypi	2013-01-11 11:03:36.000000000 +0100
++++ sid/src/build/common.gypi	2013-01-11 12:57:28.558734052 +0100
+@@ -2399,6 +2399,7 @@
                    # silences those warnings, as they are not helpful and
                    # clutter legitimate warnings.
                    '-Wno-abi',
@@ -13,8 +13,8 @@ Index: sid/src/build/common.gypi
                    ['arm_thumb==1', {
 Index: sid/src/base/debug/debugger_posix.cc
 ===================================================================
---- sid.orig/src/base/debug/debugger_posix.cc	2012-09-26 07:50:43.000000000 +0200
-+++ sid/src/base/debug/debugger_posix.cc	2012-09-26 11:00:38.606714290 +0200
+--- sid.orig/src/base/debug/debugger_posix.cc	2013-01-11 11:03:38.000000000 +0100
++++ sid/src/base/debug/debugger_posix.cc	2013-01-11 12:57:28.562734054 +0100
 @@ -220,7 +220,7 @@
  } while (0)
  #else
@@ -22,5 +22,5 @@ Index: sid/src/base/debug/debugger_posix.cc
 -#define DEBUG_BREAK() asm("bkpt 0")
 +#define DEBUG_BREAK() asm("nop")
  #endif
- #else
- #define DEBUG_BREAK() asm("int3")
+ #elif defined(ARCH_CPU_MIPS_FAMILY)
+ #define DEBUG_BREAK() asm("break 2")

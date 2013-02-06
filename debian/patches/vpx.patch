@@ -1,7 +1,7 @@
-Index: chromium-browser/src/third_party/libvpx/libvpx.gyp
+Index: sid/src/third_party/libvpx/libvpx.gyp
 ===================================================================
---- chromium-browser.orig/src/third_party/libvpx/libvpx.gyp	2012-10-28 00:39:46.934324915 -0400
-+++ chromium-browser/src/third_party/libvpx/libvpx.gyp	2012-10-28 00:53:45.566289134 -0400
+--- sid.orig/src/third_party/libvpx/libvpx.gyp	2012-11-08 08:58:51.000000000 +0100
++++ sid/src/third_party/libvpx/libvpx.gyp	2012-11-13 10:39:00.600405842 +0100
 @@ -3,6 +3,11 @@
  # found in the LICENSE file.
  {
@@ -14,7 +14,7 @@ Index: chromium-browser/src/third_party/libvpx/libvpx.gyp
      'conditions': [
        ['os_posix==1', {
          'asm_obj_extension': 'o',
-@@ -458,6 +463,31 @@
+@@ -506,6 +511,31 @@
        ]
      },
    ],

@@ -1,7 +1,7 @@
 Index: sid/src/chrome/browser/search_engines/template_url_prepopulate_data.h
 ===================================================================
---- sid.orig/src/chrome/browser/search_engines/template_url_prepopulate_data.h	2012-09-26 07:51:08.000000000 +0200
-+++ sid/src/chrome/browser/search_engines/template_url_prepopulate_data.h	2012-09-26 11:12:44.010698853 +0200
+--- sid.orig/src/chrome/browser/search_engines/template_url_prepopulate_data.h	2013-01-11 11:04:05.000000000 +0100
++++ sid/src/chrome/browser/search_engines/template_url_prepopulate_data.h	2013-01-11 13:06:59.210740171 +0100
 @@ -8,6 +8,7 @@
  #include <stddef.h>
  #include <string>
@@ -12,8 +12,8 @@ Index: sid/src/chrome/browser/search_engines/template_url_prepopulate_data.h
  #include "chrome/browser/search_engines/search_engine_type.h"
 Index: sid/src/gpu/command_buffer/common/types.h
 ===================================================================
---- sid.orig/src/gpu/command_buffer/common/types.h	2012-09-26 07:50:10.000000000 +0200
-+++ sid/src/gpu/command_buffer/common/types.h	2012-09-26 11:12:44.014698853 +0200
+--- sid.orig/src/gpu/command_buffer/common/types.h	2013-01-11 11:03:07.000000000 +0100
++++ sid/src/gpu/command_buffer/common/types.h	2013-01-11 13:06:59.214740170 +0100
 @@ -12,6 +12,7 @@
  #endif
  #include <cstddef>
@@ -24,8 +24,8 @@ Index: sid/src/gpu/command_buffer/common/types.h
  typedef signed char         int8;
 Index: sid/src/ipc/ipc_channel.h
 ===================================================================
---- sid.orig/src/ipc/ipc_channel.h	2012-09-26 07:50:43.000000000 +0200
-+++ sid/src/ipc/ipc_channel.h	2012-09-26 11:12:44.014698853 +0200
+--- sid.orig/src/ipc/ipc_channel.h	2013-01-11 11:03:38.000000000 +0100
++++ sid/src/ipc/ipc_channel.h	2013-01-11 13:06:59.214740170 +0100
 @@ -1,3 +1,4 @@
 +#include <sys/types.h>
  // Copyright (c) 2012 The Chromium Authors. All rights reserved.
@@ -33,8 +33,8 @@ Index: sid/src/ipc/ipc_channel.h
  // found in the LICENSE file.
 Index: sid/src/third_party/ots/src/os2.cc
 ===================================================================
---- sid.orig/src/third_party/ots/src/os2.cc	2012-09-26 07:52:42.000000000 +0200
-+++ sid/src/third_party/ots/src/os2.cc	2012-09-26 11:12:44.014698853 +0200
+--- sid.orig/src/third_party/ots/src/os2.cc	2013-01-11 11:05:36.000000000 +0100
++++ sid/src/third_party/ots/src/os2.cc	2013-01-11 13:06:59.214740170 +0100
 @@ -5,6 +5,7 @@
  #include "os2.h"
  
@@ -45,11 +45,11 @@ Index: sid/src/third_party/ots/src/os2.cc
  // http://www.microsoft.com/opentype/otspec/os2.htm
 Index: sid/src/third_party/tcmalloc/chromium/src/base/stl_allocator.h
 ===================================================================
---- sid.orig/src/third_party/tcmalloc/chromium/src/base/stl_allocator.h	2012-09-26 07:50:24.000000000 +0200
-+++ sid/src/third_party/tcmalloc/chromium/src/base/stl_allocator.h	2012-09-26 11:12:44.014698853 +0200
+--- sid.orig/src/third_party/tcmalloc/chromium/src/base/stl_allocator.h	2013-01-11 11:03:24.000000000 +0100
++++ sid/src/third_party/tcmalloc/chromium/src/base/stl_allocator.h	2013-01-11 13:06:59.214740170 +0100
 @@ -39,6 +39,7 @@
  
- #include <stddef.h>   // for std::ptrdiff_t
+ #include <stddef.h>   // for ptrdiff_t
  #include <limits>
 +#include <cstddef>
  
@@ -57,8 +57,8 @@ Index: sid/src/third_party/tcmalloc/chromium/src/base/stl_allocator.h
  
 Index: sid/src/third_party/tcmalloc/chromium/src/base/vdso_support.h
 ===================================================================
---- sid.orig/src/third_party/tcmalloc/chromium/src/base/vdso_support.h	2012-09-26 07:50:24.000000000 +0200
-+++ sid/src/third_party/tcmalloc/chromium/src/base/vdso_support.h	2012-09-26 11:12:44.014698853 +0200
+--- sid.orig/src/third_party/tcmalloc/chromium/src/base/vdso_support.h	2013-01-11 11:03:24.000000000 +0100
++++ sid/src/third_party/tcmalloc/chromium/src/base/vdso_support.h	2013-01-11 13:06:59.214740170 +0100
 @@ -63,6 +63,7 @@
  
  #define HAVE_VDSO_SUPPORT 1
@@ -69,8 +69,8 @@ Index: sid/src/third_party/tcmalloc/chromium/src/base/vdso_support.h
  namespace base {
 Index: sid/src/third_party/tcmalloc/chromium/src/common.cc
 ===================================================================
---- sid.orig/src/third_party/tcmalloc/chromium/src/common.cc	2012-09-26 07:50:24.000000000 +0200
-+++ sid/src/third_party/tcmalloc/chromium/src/common.cc	2012-09-26 11:12:44.014698853 +0200
+--- sid.orig/src/third_party/tcmalloc/chromium/src/common.cc	2013-01-11 11:03:24.000000000 +0100
++++ sid/src/third_party/tcmalloc/chromium/src/common.cc	2013-01-11 13:06:59.214740170 +0100
 @@ -33,6 +33,7 @@
  #include "config.h"
  #include "common.h"
@@ -81,9 +81,9 @@ Index: sid/src/third_party/tcmalloc/chromium/src/common.cc
  #include <unistd.h>                     // for getpagesize
 Index: sid/src/third_party/tcmalloc/chromium/src/symbolize.h
 ===================================================================
---- sid.orig/src/third_party/tcmalloc/chromium/src/symbolize.h	2012-09-26 07:50:24.000000000 +0200
-+++ sid/src/third_party/tcmalloc/chromium/src/symbolize.h	2012-09-26 11:12:44.014698853 +0200
-@@ -40,6 +40,7 @@
+--- sid.orig/src/third_party/tcmalloc/chromium/src/symbolize.h	2013-01-11 11:03:24.000000000 +0100
++++ sid/src/third_party/tcmalloc/chromium/src/symbolize.h	2013-01-11 13:06:59.214740170 +0100
+@@ -39,6 +39,7 @@
  #endif
  #include <stddef.h>  // for NULL
  #include <map>
@@ -93,8 +93,8 @@ Index: sid/src/third_party/tcmalloc/chromium/src/symbolize.h
  
 Index: sid/src/ui/gfx/codec/jpeg_codec.h
 ===================================================================
---- sid.orig/src/ui/gfx/codec/jpeg_codec.h	2012-09-26 07:51:52.000000000 +0200
-+++ sid/src/ui/gfx/codec/jpeg_codec.h	2012-09-26 11:12:44.014698853 +0200
+--- sid.orig/src/ui/gfx/codec/jpeg_codec.h	2013-01-11 11:04:43.000000000 +0100
++++ sid/src/ui/gfx/codec/jpeg_codec.h	2013-01-11 13:06:59.218740174 +0100
 @@ -7,6 +7,7 @@
  
  #include <stddef.h>
