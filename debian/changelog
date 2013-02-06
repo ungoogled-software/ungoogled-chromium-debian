@@ -124,6 +124,7 @@ chromium-browser (24.0.1312.68-1) unstable; urgency=high
     (Closes: #695703)
   * [31ea388] Fixed Homepage field.
     Thanks to Dmitry Shachnev (Closes: #686561)
+  * [d509e07] Override the lintian flag: embedded-library usr/lib/chromium/chromium: libpng
 
  -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 06 Feb 2013 15:34:17 +0100
 
