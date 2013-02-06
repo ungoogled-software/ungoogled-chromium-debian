@@ -53,6 +53,12 @@ endif
 # Disable SSE2
 GYP_DEFINES = disable_sse2=1
 
+#Debian Chromium Api Key
+GYP_DEFINES += google_api_key='AIzaSyCkfPOPZXDKNn8hhgu3JrA62wIgC93d44k'
+GYP_DEFINES += google_default_client_id='811574891467.apps.googleusercontent.com'
+GYP_DEFINES += google_default_client_secret='kdloedMFGdGla2P1zacGjAQh'
+
+
 # Enable all codecs for HTML5 in chromium, depending on which ffmpeg sumo lib
 # is installed, the set of usable codecs (at runtime) will still vary
 GYP_DEFINES += proprietary_codecs=1
