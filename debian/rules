@@ -341,7 +341,7 @@ ifeq (1,$(WANT_SYSTEM_LIBS))
 GYP_DEFINES += \
 	use_system_bzip2=1 \
 	use_system_libjpeg=1 \
-	use_system_libpng=1 \
+	use_system_libpng=0 \
 	use_system_sqlite=$(USE_SYSTEM_SQLITE) \
 	use_system_libxml=1 \
 	use_system_libxslt=1 \
@@ -350,7 +350,7 @@ GYP_DEFINES += \
 	use_system_icu=0 \
 	use_system_yasm=1 \
 	use_system_ffmpeg=$(USE_SYSTEM_FFMPEG) \
-	use_system_vpx=1 \
+	use_system_libvpx=1 \
 	use_system_xdg_utils=1 \
 	use_system_flac=1 \
 	use_system_libwebp=0 \
