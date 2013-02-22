@@ -1,9 +1,9 @@
 Do not use armv4 incopatible code
 Index: sid/src/build/common.gypi
 ===================================================================
---- sid.orig/src/build/common.gypi	2013-01-29 17:08:52.000000000 +0100
-+++ sid/src/build/common.gypi	2013-02-06 13:35:41.489891556 +0100
-@@ -2399,6 +2399,7 @@
+--- sid.orig/src/build/common.gypi	2013-02-22 11:22:56.000000000 +0100
++++ sid/src/build/common.gypi	2013-02-22 13:16:14.915093970 +0100
+@@ -2558,6 +2558,7 @@
                    # silences those warnings, as they are not helpful and
                    # clutter legitimate warnings.
                    '-Wno-abi',
@@ -13,9 +13,9 @@ Index: sid/src/build/common.gypi
                    ['arm_thumb==1', {
 Index: sid/src/base/debug/debugger_posix.cc
 ===================================================================
---- sid.orig/src/base/debug/debugger_posix.cc	2013-01-29 17:08:54.000000000 +0100
-+++ sid/src/base/debug/debugger_posix.cc	2013-02-06 13:35:41.493891554 +0100
-@@ -220,7 +220,7 @@
+--- sid.orig/src/base/debug/debugger_posix.cc	2013-02-22 11:22:57.000000000 +0100
++++ sid/src/base/debug/debugger_posix.cc	2013-02-22 13:16:14.919093970 +0100
+@@ -230,7 +230,7 @@
  } while (0)
  #else
  // ARM && !ANDROID

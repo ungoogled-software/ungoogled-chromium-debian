@@ -1,8 +1,8 @@
 description: ffmpeg compatibility on the arm arch
 Index: sid/src/third_party/ffmpeg/ffmpeg_generated.gypi
 ===================================================================
---- sid.orig/src/third_party/ffmpeg/ffmpeg_generated.gypi	2013-01-29 17:10:53.000000000 +0100
-+++ sid/src/third_party/ffmpeg/ffmpeg_generated.gypi	2013-02-06 13:35:44.513891482 +0100
+--- sid.orig/src/third_party/ffmpeg/ffmpeg_generated.gypi	2013-02-22 11:25:04.000000000 +0100
++++ sid/src/third_party/ffmpeg/ffmpeg_generated.gypi	2013-02-22 13:16:24.671093738 +0100
 @@ -314,53 +314,41 @@
        ['(target_arch == "arm" or (target_arch == "arm" and arm_neon == 1)) and (1) and (1)', {
          'c_sources': [

@@ -1,9 +1,9 @@
 Use system speex
 Index: sid/src/build/linux/system.gyp
 ===================================================================
---- sid.orig/src/build/linux/system.gyp	2013-01-29 17:08:52.000000000 +0100
-+++ sid/src/build/linux/system.gyp	2013-02-06 13:35:48.473891387 +0100
-@@ -384,6 +384,26 @@
+--- sid.orig/src/build/linux/system.gyp	2013-02-22 11:22:56.000000000 +0100
++++ sid/src/build/linux/system.gyp	2013-02-22 13:16:27.135093679 +0100
+@@ -492,6 +492,26 @@
        ],
      },
      {
@@ -32,8 +32,8 @@ Index: sid/src/build/linux/system.gyp
        'conditions': [
 Index: sid/src/content/browser/speech/audio_encoder.cc
 ===================================================================
---- sid.orig/src/content/browser/speech/audio_encoder.cc	2013-01-29 17:08:16.000000000 +0100
-+++ sid/src/content/browser/speech/audio_encoder.cc	2013-02-06 13:35:48.473891387 +0100
+--- sid.orig/src/content/browser/speech/audio_encoder.cc	2013-02-22 11:22:20.000000000 +0100
++++ sid/src/content/browser/speech/audio_encoder.cc	2013-02-22 13:16:27.139093679 +0100
 @@ -11,7 +11,7 @@
  #include "base/string_number_conversions.h"
  #include "content/browser/speech/audio_buffer.h"
@@ -45,9 +45,9 @@ Index: sid/src/content/browser/speech/audio_encoder.cc
  namespace {
 Index: sid/src/content/content_browser.gypi
 ===================================================================
---- sid.orig/src/content/content_browser.gypi	2013-01-29 17:08:17.000000000 +0100
-+++ sid/src/content/content_browser.gypi	2013-02-06 13:35:48.473891387 +0100
-@@ -1026,7 +1026,7 @@
+--- sid.orig/src/content/content_browser.gypi	2013-02-22 11:22:27.000000000 +0100
++++ sid/src/content/content_browser.gypi	2013-02-22 13:16:27.139093679 +0100
+@@ -1064,7 +1064,7 @@
      }, { # OS!="android"
        'dependencies': [
          '../third_party/flac/flac.gyp:libflac',

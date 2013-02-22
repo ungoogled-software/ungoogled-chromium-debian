@@ -6,8 +6,8 @@ Last-Update: 2011-02-20
 
 Index: sid/src/chrome/app/resources/manpage.1.in
 ===================================================================
---- sid.orig/src/chrome/app/resources/manpage.1.in	2013-01-29 17:09:06.000000000 +0100
-+++ sid/src/chrome/app/resources/manpage.1.in	2013-02-06 13:36:22.265890579 +0100
+--- sid.orig/src/chrome/app/resources/manpage.1.in	2013-02-22 11:23:08.000000000 +0100
++++ sid/src/chrome/app/resources/manpage.1.in	2013-02-22 13:16:29.767093616 +0100
 @@ -1,5 +1,5 @@
 -." This file is processed by chrome.gyp to generate manpages in the
 -." build diretory.

@@ -22,4 +22,3 @@ arm-no-float-abi.patch
 gcc4.7.patch
 arm.patch
 icon.patch
-pulse_ftbfs.patch
