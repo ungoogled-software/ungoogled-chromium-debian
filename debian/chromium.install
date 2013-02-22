@@ -5,6 +5,7 @@ debian/tmp/usr/lib/chromium/*.pak
 debian/tmp/usr/lib/chromium/resources/extension/demo/library.js
 debian/tmp/usr/lib/chromium/content_resources.pak
 debian/tmp/usr/lib/chromium/locales/*
+debian/tmp/usr/lib/chromium/remoting_locales
 #debian/tmp/usr/lib/chromium/ffmpegsumo_nolink
 #debian/tmp/usr/lib/chromium/libppGoogleNaClPluginChrome.so
 debian/tmp/usr/lib/chromium/lib*
