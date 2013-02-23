@@ -1,3 +1,53 @@
+chromium-browser (25.0.1364.97-1) unstable; urgency=low
+
+  * New stable release:
+    - High CVE-2013-0879: Memory corruption with web audio
+      node. Credit to Atte Kettunen of OUSPG.
+    - High CVE-2013-0880: Use-after-free in database handling.
+      Credit to Chamal de Silva.
+    - Medium CVE-2013-0881: Bad read in Matroska handling. Credit to
+      Atte Kettunen of OUSPG.
+    - High CVE-2013-0882: Bad memory access with excessive SVG
+      parameters. Credit to Renata Hodovan.
+    - Medium CVE-2013-0883: Bad read in Skia. Credit to Atte
+      Kettunen of OUSPG.
+    - Low CVE-2013-0884: Inappropriate load of NaCl. Credit to Google
+      Chrome Security Team (Chris Evans).
+    - Medium CVE-2013-0885: Too many API permissions granted to web store.
+    - Low CVE-2013-0887: Developer tools process has too many
+      permissions and places too much trust in the connected server.
+    - Medium CVE-2013-0888: Out-of-bounds read in Skia. Credit to Google
+      Chrome Security Team (Inferno).
+    - Low CVE-2013-0889: Tighten user gesture check for dangerous file
+      downloads.
+    - High CVE-2013-0890: Memory safety issues across the IPC
+      layer. Credit to Google Chrome Security Team (Chris Evans).
+    - High CVE-2013-0891: Integer overflow in blob handling. Credit to
+      Google Chrome Security Team (Jüri Aedla).
+    - Medium CVE-2013-0892: Lower severity issues across the IPC layer.
+      Credit to Google Chrome Security Team (Chris Evans).
+    - Medium CVE-2013-0893: Race condition in media handling. Credit to
+      Andrew Scherkus of the Chromium development community.
+    - High CVE-2013-0894: Buffer overflow in vorbis decoding. Credit to
+      Google Chrome Security Team (Inferno).
+    - High CVE-2013-0895: Incorrect path handling in file
+      copying. Credit to Google Chrome Security Team (Jüri Aedla).
+    - High CVE-2013-0896: Memory management issues in plug-in message
+      handling. Credit to Google Chrome Security Team (Cris Neckar).
+    - High CVE-2013-0898: Use-after-free in URL handling. Credit to
+      Alexander Potapenko of the Chromium development community.
+    - Low CVE-2013-0899: Integer overflow in Opus handling. Credit to
+      Google Chrome Security Team (Jüri Aedla).
+    - Medium CVE-2013-0900: Race condition in ICU. Credit to Google Chrome
+      Security Team (Inferno).
+  * [a5f15ae] Added libpci-dev to B-depends
+  * [ace2b7a] Refreshed patches
+  * [32c84fa] Install remoting_locales
+  * [f868804] Do not enable NEON on ARM, thanks Ubuntu.
+  * [d1a3e36] Ignore stamp files in missing checks
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 23 Feb 2013 11:45:07 +0100
+
 chromium-browser (24.0.1312.68-1) unstable; urgency=high
 
   * New stable release:
