@@ -1,3 +1,30 @@
+chromium-browser (25.0.1364.152-1) unstable; urgency=high
+
+  * [8761d73] Remove armel and armhf. We cannot support them in wheezy
+  * New stable security release:
+    - High CVE-2013-0902: Use-after-free in frame loader. Credit to
+      Chamal de Silva.
+    - High CVE-2013-0903: Use-after-free in browser navigation
+      handling. Credit to "chromium.khalil".
+    - High CVE-2013-0904: Memory corruption in Web Audio.
+      Credit to Atte Kettunen of OUSPG.
+    - High CVE-2013-0905: Use-after-free with SVG animations.
+      Credit to Atte Kettunen of OUSPG.
+    - High CVE-2013-0906: Memory corruption in Indexed DB. Credit to Google
+      Chrome Security Team (Jüri Aedla).
+    - Medium CVE-2013-0907: Race condition in media thread handling. Credit
+      to Andrew Scherkus of the Chromium development community.
+    - Medium CVE-2013-0908: Incorrect handling of bindings for extension
+      processes.
+    - Low CVE-2013-0909: Referer leakage with XSS Auditor. Credit to Egor
+      Homakov.
+    - Medium CVE-2013-0910: Mediate renderer -> browser plug-in loads more
+      strictly. Credit to Google Chrome Security Team (Chris Evans).
+    - High CVE-2013-0911: Possible path traversal in database handling.
+      Credit to Google Chrome Security Team (Jüri Aedla).
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Tue, 05 Mar 2013 11:14:34 +0100
+
 chromium-browser (25.0.1364.97-1) unstable; urgency=low
 
   * New stable release:
