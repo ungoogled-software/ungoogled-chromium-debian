@@ -1,3 +1,11 @@
+chromium-browser (25.0.1364.160-1) unstable; urgency=high
+
+  * New stable security release:
+    - High CVE-2013-0912: Type confusion in WebKit. Credit to Nils and Jon of
+      MWR Labs.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 08 Mar 2013 03:46:20 +0000
+
 chromium-browser (25.0.1364.152-1) unstable; urgency=high
 
   * [8761d73] Remove armel and armhf. We cannot support them in wheezy
