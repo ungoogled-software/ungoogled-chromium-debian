@@ -1,8 +1,8 @@
 Index: sid/src/build/common.gypi
 ===================================================================
---- sid.orig/src/build/common.gypi	2013-02-22 13:16:14.915093970 +0100
-+++ sid/src/build/common.gypi	2013-02-22 13:16:37.555093429 +0100
-@@ -868,7 +868,7 @@
+--- sid.orig/src/build/common.gypi	2013-03-30 17:36:33.403742676 +0100
++++ sid/src/build/common.gypi	2013-03-30 17:41:56.039734959 +0100
+@@ -911,7 +911,7 @@
      'arm_fpu%': 'vfpv3',
  
      # Set ARM float abi compilation flag.

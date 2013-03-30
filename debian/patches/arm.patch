@@ -1,7 +1,7 @@
 Index: sid/src/ui/base/resource/data_pack.cc
 ===================================================================
---- sid.orig/src/ui/base/resource/data_pack.cc	2013-02-22 11:24:12.000000000 +0100
-+++ sid/src/ui/base/resource/data_pack.cc	2013-02-22 13:16:57.311092957 +0100
+--- sid.orig/src/ui/base/resource/data_pack.cc	2013-03-16 09:37:22.000000000 +0100
++++ sid/src/ui/base/resource/data_pack.cc	2013-03-30 17:42:01.131734837 +0100
 @@ -146,9 +146,11 @@
    // 2) Verify the entries are within the appropriate bounds. There's an extra
    // entry after the last item which gives us the length of the last item.
@@ -17,8 +17,8 @@ Index: sid/src/ui/base/resource/data_pack.cc
        UMA_HISTOGRAM_ENUMERATION("DataPack.Load", ENTRY_NOT_FOUND,
 Index: sid/src/v8/src/arm/macro-assembler-arm.cc
 ===================================================================
---- sid.orig/src/v8/src/arm/macro-assembler-arm.cc	2013-02-22 11:25:35.000000000 +0100
-+++ sid/src/v8/src/arm/macro-assembler-arm.cc	2013-02-22 13:16:57.315092957 +0100
+--- sid.orig/src/v8/src/arm/macro-assembler-arm.cc	2013-03-16 09:39:00.000000000 +0100
++++ sid/src/v8/src/arm/macro-assembler-arm.cc	2013-03-30 17:42:01.131734837 +0100
 @@ -61,9 +61,9 @@
  // We do not support thumb inter-working with an arm architecture not supporting
  // the blx instruction (below v5t).  If you know what CPU you are compiling for
