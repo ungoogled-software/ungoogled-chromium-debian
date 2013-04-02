@@ -88,6 +88,9 @@ GYP_DEFINES += linux_use_tcmalloc=0
 # This makes breakages easier to detect by revdep-rebuild.
 GYP_DEFINES += linux_link_gsettings=1
 
+# Disable breakpad crash reporting
+GYP_DEFINES += linux_breakpad=0
+
 DEB_HOST_ARCH_CPU := $(shell dpkg-architecture -qDEB_HOST_ARCH_CPU)
 DEB_HOST_ARCH := $(shell dpkg-architecture -qDEB_HOST_ARCH)
 
@@ -356,11 +359,12 @@ GYP_DEFINES += \
 	use_system_icu=0 \
 	use_system_yasm=1 \
 	use_system_ffmpeg=$(USE_SYSTEM_FFMPEG) \
-	use_system_libvpx=1 \
+	use_system_libvpx=0 \
 	use_system_xdg_utils=1 \
 	use_system_flac=1 \
 	use_system_libwebp=0 \
 	use_system_speex=1 \
+	linux_link_libspeechd=1 \
 	$(NULL)
 endif
 
