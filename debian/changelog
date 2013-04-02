@@ -1,3 +1,34 @@
+chromium-browser (26.0.1410.43-1) unstable; urgency=medium
+
+  * New stable release:
+    - High CVE-2013-0916: Use-after-free in Web Audio. Credit to Atte Kettunen
+      of OUSPG.
+    - Low CVE-2013-0917: Out-of-bounds read in URL loader. Credit to Google
+      Chrome Security Team (Cris Neckar).
+    - Low CVE-2013-0918: Do not navigate dev tools upon drag and drop. Credit
+      to Vsevolod Vlasov of the Chromium development community.
+    - Medium CVE-2013-0919: Use-after-free with pop-up windows in extensions.
+      Credit to Google Chrome Security Team (Mustafa Emre Acer).
+    - Medium CVE-2013-0920: Use-after-free in extension bookmarks API. Credit
+      to Google Chrome Security Team (Mustafa Emre Acer).
+    - High CVE-2013-0921: Ensure isolated web sites run in their own processes.
+    - Low CVE-2013-0922: Avoid HTTP basic auth brute force attempts. Credit to
+      “t3553r”.
+    - Medium CVE-2013-0923: Memory safety issues in the USB Apps API. Credit to
+      Google Chrome Security Team (Mustafa Emre Acer).
+    - Low CVE-2013-0924: Check an extension’s permissions API usage again file
+      permissions. Credit to Benjamin Kalman of the Chromium development
+      community.
+    - Low CVE-2013-0925: Avoid leaking URLs to extensions without the tabs
+      permissions. Credit to Michael Vrable of Google.
+    - Medium CVE-2013-0926: Avoid pasting active tags in certain situations.
+      Credit to Subho Halder, Aditya Gupta, and Dev Kar of xys3c.
+  * Use embedded libvpx for vp9 support, which chromium now requires.
+  * Add libspeechd-dev build-dependency.
+  * Disable breakpad crash reporting.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 30 Mar 2013 14:44:33 +0000
+
 chromium-browser (25.0.1364.160-1) unstable; urgency=high
 
   * New stable security release:
