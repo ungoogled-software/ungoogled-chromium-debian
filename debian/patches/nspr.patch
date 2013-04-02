@@ -1,8 +1,8 @@
 Include system copy of prtime.h
-Index: sid/src/base/pr_time_unittest.cc
+Index: chromium-browser/src/base/pr_time_unittest.cc
 ===================================================================
---- sid.orig/src/base/pr_time_unittest.cc	2013-02-22 11:22:57.000000000 +0100
-+++ sid/src/base/pr_time_unittest.cc	2013-02-22 13:12:18.243099632 +0100
+--- chromium-browser.orig/src/base/pr_time_unittest.cc	2013-03-30 14:55:16.652387438 +0000
++++ chromium-browser/src/base/pr_time_unittest.cc	2013-03-30 14:55:16.640387437 +0000
 @@ -5,7 +5,7 @@
  #include <time.h>
  
@@ -12,54 +12,54 @@ Index: sid/src/base/pr_time_unittest.cc
  #include "base/time.h"
  #include "testing/gtest/include/gtest/gtest.h"
  
-Index: sid/src/base/time.cc
+Index: chromium-browser/src/base/time.cc
 ===================================================================
---- sid.orig/src/base/time.cc	2013-02-22 11:22:57.000000000 +0100
-+++ sid/src/base/time.cc	2013-02-22 13:12:18.243099632 +0100
+--- chromium-browser.orig/src/base/time.cc	2013-03-30 14:55:16.652387438 +0000
++++ chromium-browser/src/base/time.cc	2013-03-30 14:55:44.116387204 +0000
 @@ -12,7 +12,7 @@
  #include <limits>
  
- #include "base/sys_string_conversions.h"
+ #include "base/strings/sys_string_conversions.h"
 -#include "base/third_party/nspr/prtime.h"
 +#include <nspr/prtime.h>
  
  #include "base/logging.h"
  
-Index: sid/src/chrome/browser/metrics/metrics_log.cc
+Index: chromium-browser/src/chrome/browser/metrics/metrics_log.cc
 ===================================================================
---- sid.orig/src/chrome/browser/metrics/metrics_log.cc	2013-02-22 11:23:17.000000000 +0100
-+++ sid/src/chrome/browser/metrics/metrics_log.cc	2013-02-22 13:12:18.247099632 +0100
-@@ -16,7 +16,7 @@
- #include "base/string_number_conversions.h"
+--- chromium-browser.orig/src/chrome/browser/metrics/metrics_log.cc	2013-03-30 14:55:16.652387438 +0000
++++ chromium-browser/src/chrome/browser/metrics/metrics_log.cc	2013-03-30 14:55:16.644387438 +0000
+@@ -19,7 +19,7 @@
  #include "base/string_util.h"
+ #include "base/strings/string_number_conversions.h"
  #include "base/sys_info.h"
 -#include "base/third_party/nspr/prtime.h"
 +#include <nspr/prtime.h>
  #include "base/time.h"
  #include "base/tracked_objects.h"
  #include "base/utf_string_conversions.h"
-Index: sid/src/base/base.gypi
+Index: chromium-browser/src/base/base.gypi
 ===================================================================
---- sid.orig/src/base/base.gypi	2013-02-22 11:22:57.000000000 +0100
-+++ sid/src/base/base.gypi	2013-02-22 13:12:18.247099632 +0100
-@@ -17,7 +17,6 @@
-           'third_party/dmg_fp/dtoa_wrapper.cc',
-           'third_party/icu/icu_utf.cc',
-           'third_party/icu/icu_utf.h',
+--- chromium-browser.orig/src/base/base.gypi	2013-03-30 14:55:16.652387438 +0000
++++ chromium-browser/src/base/base.gypi	2013-03-30 14:56:24.860387023 +0000
+@@ -25,7 +25,6 @@
+           'third_party/nspr/prcpucfg_openbsd.h',
+           'third_party/nspr/prcpucfg_solaris.h',
+           'third_party/nspr/prcpucfg_win.h',
 -          'third_party/nspr/prtime.cc',
            'third_party/nspr/prtime.h',
-           'third_party/nspr/prcpucfg_linux.h',
+           'third_party/nspr/prtypes.h',
            'third_party/xdg_mime/xdgmime.h',
-Index: sid/src/net/base/x509_certificate_nss.cc
+Index: chromium-browser/src/net/base/x509_certificate_nss.cc
 ===================================================================
---- sid.orig/src/net/base/x509_certificate_nss.cc	2013-02-22 11:22:32.000000000 +0100
-+++ sid/src/net/base/x509_certificate_nss.cc	2013-02-22 13:12:18.247099632 +0100
+--- chromium-browser.orig/src/net/base/x509_certificate_nss.cc	2013-03-30 14:55:16.652387438 +0000
++++ chromium-browser/src/net/base/x509_certificate_nss.cc	2013-03-30 14:56:54.568387012 +0000
 @@ -9,7 +9,7 @@
  #include <keyhi.h>
  #include <nss.h>
  #include <pk11pub.h>
 -#include <prtime.h>
 +#include <nspr/prtime.h>
+ #include <seccomon.h>
  #include <secder.h>
  #include <sechash.h>
- 

@@ -1,9 +1,9 @@
 Do not use armv4 incopatible code
-Index: sid/src/build/common.gypi
+Index: chromium-browser/src/build/common.gypi
 ===================================================================
---- sid.orig/src/build/common.gypi	2013-02-22 11:22:56.000000000 +0100
-+++ sid/src/build/common.gypi	2013-02-22 13:16:14.915093970 +0100
-@@ -2558,6 +2558,7 @@
+--- chromium-browser.orig/src/build/common.gypi	2013-03-30 15:01:40.836384122 +0000
++++ chromium-browser/src/build/common.gypi	2013-03-30 15:01:40.828384122 +0000
+@@ -2662,6 +2662,7 @@
                    # silences those warnings, as they are not helpful and
                    # clutter legitimate warnings.
                    '-Wno-abi',
@@ -11,10 +11,10 @@ Index: sid/src/build/common.gypi
                  ],
                  'conditions': [
                    ['arm_thumb==1', {
-Index: sid/src/base/debug/debugger_posix.cc
+Index: chromium-browser/src/base/debug/debugger_posix.cc
 ===================================================================
---- sid.orig/src/base/debug/debugger_posix.cc	2013-02-22 11:22:57.000000000 +0100
-+++ sid/src/base/debug/debugger_posix.cc	2013-02-22 13:16:14.919093970 +0100
+--- chromium-browser.orig/src/base/debug/debugger_posix.cc	2013-03-30 15:01:40.836384122 +0000
++++ chromium-browser/src/base/debug/debugger_posix.cc	2013-03-30 15:01:40.832384122 +0000
 @@ -230,7 +230,7 @@
  } while (0)
  #else

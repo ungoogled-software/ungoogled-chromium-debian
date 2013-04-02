@@ -1,9 +1,9 @@
 Use system speex
-Index: sid/src/build/linux/system.gyp
+Index: chromium-browser/src/build/linux/system.gyp
 ===================================================================
---- sid.orig/src/build/linux/system.gyp	2013-02-22 11:22:56.000000000 +0100
-+++ sid/src/build/linux/system.gyp	2013-02-22 13:16:27.135093679 +0100
-@@ -492,6 +492,26 @@
+--- chromium-browser.orig/src/build/linux/system.gyp	2013-03-30 15:03:35.028383135 +0000
++++ chromium-browser/src/build/linux/system.gyp	2013-03-30 15:03:35.024383136 +0000
+@@ -619,6 +619,26 @@
        ],
      },
      {
@@ -30,24 +30,24 @@ Index: sid/src/build/linux/system.gyp
        'target_name': 'gnome_keyring',
        'type': 'none',
        'conditions': [
-Index: sid/src/content/browser/speech/audio_encoder.cc
+Index: chromium-browser/src/content/browser/speech/audio_encoder.cc
 ===================================================================
---- sid.orig/src/content/browser/speech/audio_encoder.cc	2013-02-22 11:22:20.000000000 +0100
-+++ sid/src/content/browser/speech/audio_encoder.cc	2013-02-22 13:16:27.139093679 +0100
+--- chromium-browser.orig/src/content/browser/speech/audio_encoder.cc	2013-03-30 15:03:35.028383135 +0000
++++ chromium-browser/src/content/browser/speech/audio_encoder.cc	2013-03-30 15:06:23.812381682 +0000
 @@ -11,7 +11,7 @@
  #include "base/string_number_conversions.h"
  #include "content/browser/speech/audio_buffer.h"
- #include "third_party/flac/flac.h"
--#include "third_party/speex/speex.h"
+ #include "third_party/flac/include/FLAC/stream_encoder.h"
+-#include "third_party/speex/include/speex/speex.h"
 +#include <speex/speex.h>
  
  namespace content {
  namespace {
-Index: sid/src/content/content_browser.gypi
+Index: chromium-browser/src/content/content_browser.gypi
 ===================================================================
---- sid.orig/src/content/content_browser.gypi	2013-02-22 11:22:27.000000000 +0100
-+++ sid/src/content/content_browser.gypi	2013-02-22 13:16:27.139093679 +0100
-@@ -1064,7 +1064,7 @@
+--- chromium-browser.orig/src/content/content_browser.gypi	2013-03-30 15:03:35.028383135 +0000
++++ chromium-browser/src/content/content_browser.gypi	2013-03-30 15:03:35.028383135 +0000
+@@ -1097,7 +1097,7 @@
      }, { # OS!="android"
        'dependencies': [
          '../third_party/flac/flac.gyp:libflac',
