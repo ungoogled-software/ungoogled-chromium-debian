@@ -1,7 +1,7 @@
-Index: sid/src/build/common.gypi
+Index: chromium-browser/src/build/common.gypi
 ===================================================================
---- sid.orig/src/build/common.gypi	2013-03-30 17:36:33.403742676 +0100
-+++ sid/src/build/common.gypi	2013-03-30 17:41:56.039734959 +0100
+--- chromium-browser.orig/src/build/common.gypi	2013-03-30 15:06:48.084381472 +0000
++++ chromium-browser/src/build/common.gypi	2013-03-30 15:06:48.080381472 +0000
 @@ -911,7 +911,7 @@
      'arm_fpu%': 'vfpv3',
  

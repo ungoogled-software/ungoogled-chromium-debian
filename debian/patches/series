@@ -4,7 +4,7 @@ nss.patch
 expat.patch
 prefs.patch
 armv4.patch
-ffmpeg_arm.patch
+#ffmpeg_arm.patch
 system-speech.patch
 #glew.patch
 fix-manpage.patch
