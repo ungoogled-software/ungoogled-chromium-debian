@@ -1,8 +1,8 @@
-Index: sid/src/chrome/browser/ui/gtk/gtk_util.cc
+Index: chromium/src/chrome/browser/ui/gtk/gtk_util.cc
 ===================================================================
---- sid.orig/src/chrome/browser/ui/gtk/gtk_util.cc	2013-03-16 09:36:23.000000000 +0100
-+++ sid/src/chrome/browser/ui/gtk/gtk_util.cc	2013-03-30 17:42:03.475734781 +0100
-@@ -51,7 +51,7 @@
+--- chromium.orig/src/chrome/browser/ui/gtk/gtk_util.cc	2013-05-22 03:15:59.425474873 +0000
++++ chromium/src/chrome/browser/ui/gtk/gtk_util.cc	2013-05-22 03:15:59.421474874 +0000
+@@ -54,7 +54,7 @@
  #if defined(GOOGLE_CHROME_BUILD)
  static const char* kIconName = "google-chrome";
  #else

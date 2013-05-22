@@ -1,26 +1,13 @@
 Do not use armv4 incopatible code
-Index: sid/src/build/common.gypi
+Index: chromium/src/build/common.gypi
 ===================================================================
---- chromium-browser.orig/src/build/common.gypi	2013-03-30 15:01:40.836384122 +0000
-+++ chromium-browser/src/build/common.gypi	2013-03-30 15:01:40.828384122 +0000
-@@ -2662,6 +2662,7 @@
+--- chromium.orig/src/build/common.gypi	2013-05-22 03:14:34.821477965 +0000
++++ chromium/src/build/common.gypi	2013-05-22 03:14:34.817477965 +0000
+@@ -2745,6 +2745,7 @@
                    # silences those warnings, as they are not helpful and
                    # clutter legitimate warnings.
                    '-Wno-abi',
 +                  '-fno-tree-sink',
                  ],
                  'conditions': [
-                   ['arm_thumb==1', {
-Index: sid/src/base/debug/debugger_posix.cc
-===================================================================
---- chromium-browser.orig/src/base/debug/debugger_posix.cc	2013-03-30 15:01:40.836384122 +0000
-+++ chromium-browser/src/base/debug/debugger_posix.cc	2013-03-30 15:01:40.832384122 +0000
-@@ -230,7 +230,7 @@
- } while (0)
- #else
- // ARM && !ANDROID
--#define DEBUG_BREAK() asm("bkpt 0")
-+#define DEBUG_BREAK() asm("nop")
- #endif
- #elif defined(ARCH_CPU_MIPS_FAMILY)
- #define DEBUG_BREAK() asm("break 2")
+                   ['arm_thumb==1 and android_webview_build==0', {

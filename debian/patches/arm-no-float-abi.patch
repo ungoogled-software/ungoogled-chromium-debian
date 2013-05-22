@@ -1,13 +1,13 @@
-Index: chromium-browser/src/build/common.gypi
+Index: chromium/src/build/common.gypi
 ===================================================================
---- chromium-browser.orig/src/build/common.gypi	2013-03-30 15:06:48.084381472 +0000
-+++ chromium-browser/src/build/common.gypi	2013-03-30 15:06:48.080381472 +0000
-@@ -911,7 +911,7 @@
+--- chromium.orig/src/build/common.gypi	2013-05-22 03:15:43.553475451 +0000
++++ chromium/src/build/common.gypi	2013-05-22 03:15:43.549475453 +0000
+@@ -919,7 +919,7 @@
      'arm_fpu%': 'vfpv3',
  
      # Set ARM float abi compilation flag.
 -    'arm_float_abi%': 'softfp',
 +    #'arm_float_abi%': 'softfp',
  
-     # Enable new NPDevice API.
-     'enable_new_npdevice_api%': 0,
+     # Enable use of OpenMAX DL FFT routines.
+     'use_openmax_dl_fft%': '<(use_openmax_dl_fft)',
