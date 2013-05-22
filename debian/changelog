@@ -1,3 +1,34 @@
+chromium-browser (27.0.1453.93-1) unstable; urgency=low
+
+  * New stable release:
+    - High CVE-2013-2837: Use-after-free in SVG. Credit to Sławomir Błażek.
+    - Medium CVE-2013-2838: Out-of-bounds read in v8. Credit to Christian
+      Holler.
+    - High CVE-2013-2839: Bad cast in clipboard handling. Credit to Jon of MWR
+      InfoSecurity.
+    - High CVE-2013-2840: Use-after-free in media loader. Credit to Nils of
+      MWR InfoSecurity.
+    - High CVE-2013-2841: Use-after-free in Pepper resource handling. Credit
+      to Chamal de Silva.
+    - High CVE-2013-2842: Use-after-free in widget handling. Credit to Cyril
+      Cattiaux.
+    - High CVE-2013-2843: Use-after-free in speech handling. Credit to Khalil
+      Zhani.
+    - High CVE-2013-2844: Use-after-free in style resolution. Credit to Sachin
+      Shinde (@cons0ul).
+    - High CVE-2013-2845: Memory safety issues in Web Audio. Credit to Atte
+      Kettunen of OUSPG.
+    - High CVE-2013-2846: Use-after-free in media loader. Credit to Chamal de
+      Silva.
+    - High CVE-2013-2847: Use-after-free race condition with workers. Credit
+      to Collin Payne.
+    - Medium CVE-2013-2848: Possible data extraction with XSS Auditor. Credit
+      to Egor Homakov.
+    - Low CVE-2013-2849: Possible XSS with drag+drop or copy+paste. Credit to
+      Mario Heiderich.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Wed, 22 May 2013 03:03:49 +0000
+
 chromium-browser (26.0.1410.43-1) unstable; urgency=medium
 
   * New stable release:
