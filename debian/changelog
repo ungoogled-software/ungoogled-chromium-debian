@@ -1,3 +1,32 @@
+chromium-browser (27.0.1453.110-1) unstable; urgency=low
+
+  * New stable release:
+    - Medium CVE-2013-2855: Memory corruption in dev tools API.
+      Credit to "daniel.zulla".
+    - High CVE-2013-2856: Use-after-free in input handling. Credit
+      to miaubiz.
+    - High CVE-2013-2857: Use-after-free in image handling. Credit
+      to miaubiz.
+    - High CVE-2013-2858: Use-after-free in HTML5 Audio. Credit to
+      "cdel921".
+    - High CVE-2013-2859: Cross-origin namespace pollution. Credit
+      to "bobbyholley".
+    - High CVE-2013-2860: Use-after-free with workers accessing
+      database APIs. Credit to Collin Payne.
+    - High CVE-2013-2861: Use-after-free with SVG. Credit to
+      miaubiz.
+    - High CVE-2013-2862: Memory corruption in Skia GPU handling.
+      Credit to Atte Kettunen of OUSPG.
+    - Critical CVE-2013-2863: Memory corruption in SSL socket handling.
+      Credit to Sebastien Marchand of the Chromium development community.
+    - High CVE-2013-2864: Bad free in PDF viewer. Credit to Mateusz
+      Jurczyk, with contributions by Gynvael Coldwind, both from Google Security
+      Team.
+    - High CVE-2013-2865: Various fixes from internal audits, fuzzing and
+      other initiatives.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 05 Jun 2013 17:00:28 +0200
+
 chromium-browser (27.0.1453.93-1) unstable; urgency=low
 
   * New stable release:
