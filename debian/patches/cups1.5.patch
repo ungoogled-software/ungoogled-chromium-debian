@@ -2,8 +2,8 @@ Description: Fix build failure due to cups 1.5 header changes
 Author: Michael Gilbert <michael.s.gilbert@gmail.com>
 Index: sid/src/printing/backend/cups_helper.h
 ===================================================================
---- sid.orig/src/printing/backend/cups_helper.h	2013-03-16 09:35:30.000000000 +0100
-+++ sid/src/printing/backend/cups_helper.h	2013-03-30 17:41:53.611735017 +0100
+--- sid.orig/src/printing/backend/cups_helper.h	2013-06-24 11:48:42.972039352 +0200
++++ sid/src/printing/backend/cups_helper.h	2013-06-24 11:48:42.964039352 +0200
 @@ -6,6 +6,7 @@
  #define PRINTING_BACKEND_CUPS_HELPER_H_
  
@@ -14,8 +14,8 @@ Index: sid/src/printing/backend/cups_helper.h
  
 Index: sid/src/chrome/service/cloud_print/print_system_cups.cc
 ===================================================================
---- sid.orig/src/chrome/service/cloud_print/print_system_cups.cc	2013-03-16 09:37:20.000000000 +0100
-+++ sid/src/chrome/service/cloud_print/print_system_cups.cc	2013-03-30 17:41:53.615735017 +0100
+--- sid.orig/src/chrome/service/cloud_print/print_system_cups.cc	2013-06-24 11:48:42.972039352 +0200
++++ sid/src/chrome/service/cloud_print/print_system_cups.cc	2013-06-24 11:48:42.968039352 +0200
 @@ -5,6 +5,7 @@
  #include "chrome/service/cloud_print/print_system.h"
  

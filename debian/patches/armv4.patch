@@ -1,13 +1,13 @@
 Do not use armv4 incopatible code
-Index: chromium/src/build/common.gypi
+Index: sid/src/build/common.gypi
 ===================================================================
---- chromium.orig/src/build/common.gypi	2013-05-22 03:14:34.821477965 +0000
-+++ chromium/src/build/common.gypi	2013-05-22 03:14:34.817477965 +0000
-@@ -2745,6 +2745,7 @@
+--- sid.orig/src/build/common.gypi	2013-06-24 11:48:31.368039228 +0200
++++ sid/src/build/common.gypi	2013-06-24 11:48:31.364039228 +0200
+@@ -2924,6 +2924,7 @@
                    # silences those warnings, as they are not helpful and
                    # clutter legitimate warnings.
                    '-Wno-abi',
 +                  '-fno-tree-sink',
                  ],
                  'conditions': [
-                   ['arm_thumb==1 and android_webview_build==0', {
+                   ['arm_arch!=""', {

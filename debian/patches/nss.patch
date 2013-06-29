@@ -1,9 +1,9 @@
 webkit needs to call nss to pull in nspr headers
-Index: chromium/src/chrome/chrome_common.gypi
+Index: sid/src/chrome/chrome_common.gypi
 ===================================================================
---- chromium.orig/src/chrome/chrome_common.gypi	2013-05-22 03:08:57.793490276 +0000
-+++ chromium/src/chrome/chrome_common.gypi	2013-05-22 03:08:57.793490276 +0000
-@@ -490,6 +490,11 @@
+--- sid.orig/src/chrome/chrome_common.gypi	2013-06-29 17:15:15.753983583 +0200
++++ sid/src/chrome/chrome_common.gypi	2013-06-29 17:15:15.745983583 +0200
+@@ -514,6 +514,11 @@
              'common/crash_keys.h',
            ],
          }],
@@ -15,3 +15,19 @@ Index: chromium/src/chrome/chrome_common.gypi
          ['toolkit_uses_gtk == 1', {
            'dependencies': [
              '../build/linux/system.gyp:gtk',
+Index: sid/src/net/third_party/nss/ssl/bodge/secitem_array.c
+===================================================================
+--- sid.orig/src/net/third_party/nss/ssl/bodge/secitem_array.c	2013-06-18 09:52:14.000000000 +0200
++++ sid/src/net/third_party/nss/ssl/bodge/secitem_array.c	2013-06-29 17:16:04.153985017 +0200
+@@ -13,11 +13,6 @@
+ 
+ typedef struct SECItemArrayStr SECItemArray;
+ 
+-struct SECItemArrayStr {
+-    SECItem *items;
+-    unsigned int len;
+-};
+-
+ SECItemArray *
+ SECITEM_AllocArray(PLArenaPool *arena, SECItemArray *array, unsigned int len)
+ {

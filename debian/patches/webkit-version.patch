@@ -1,11 +1,11 @@
 description: debian-specific version parsing (for about dialog)
 Index: sid/src/webkit/build/webkit_version.py
 ===================================================================
---- sid.orig/src/webkit/build/webkit_version.py	2013-03-16 09:35:29.000000000 +0100
-+++ sid/src/webkit/build/webkit_version.py	2013-03-30 17:41:51.355735071 +0100
-@@ -61,6 +61,15 @@
+--- sid.orig/src/webkit/build/webkit_version.py	2013-06-24 11:48:39.708039317 +0200
++++ sid/src/webkit/build/webkit_version.py	2013-06-24 11:48:39.700039317 +0200
+@@ -31,6 +31,15 @@
        default_lastchange=None,
-       directory=os.path.join(webkit_dir, version_file_dir),
+       directory=webkit_src_dir,
        directory_regex_prior_to_src_url='webkit')
 +  if version_info.url is None or version_info.url == 'unknown':
 +    # parse the DEPS file

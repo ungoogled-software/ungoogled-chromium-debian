@@ -18,7 +18,6 @@ webkit-version.patch
 cups1.5.patch
 #system_v8.patch
 #protobuf.patch
-arm-no-float-abi.patch
 gcc4.7.patch
 arm.patch
 icon.patch
