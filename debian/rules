@@ -32,8 +32,8 @@ WANT_TESTS       ?= 0
 WANT_SANDBOXING  ?= 1
 USE_SYSTEM_V8    ?= 0
 
-#export DEB_BUILD_HARDENING=1
-export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+# enable build hardening options (pie disabled due to ffmpeg linking issue)
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all,-pie
 DPKG_EXPORT_BUILDFLAGS = 1
 include /usr/share/dpkg/buildflags.mk
 
