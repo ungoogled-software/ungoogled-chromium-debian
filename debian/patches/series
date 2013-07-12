@@ -22,3 +22,4 @@ gcc4.7.patch
 arm.patch
 icon.patch
 arm-neon.patch
+gcc4.8.patch

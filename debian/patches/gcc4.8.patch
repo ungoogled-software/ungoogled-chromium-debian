@@ -1,0 +1,19 @@
+Index: chromium-browser-27.0.1453.110/src/build/common.gypi
+===================================================================
+--- chromium-browser-27.0.1453.110.orig/src/build/common.gypi	2013-07-07 20:05:38.000000000 +0000
++++ chromium-browser-27.0.1453.110/src/build/common.gypi	2013-07-07 21:46:50.761236936 +0000
+@@ -2653,6 +2653,14 @@
+           },
+         },
+         'conditions': [
++          [ 'gcc_version>=48', {
++            'cflags': [
++              '-Wno-unused-local-typedefs',
++            ],
++            'cflags_cc': [
++              '-fpermissive',
++            ],
++          }],
+           ['target_arch=="ia32"', {
+             'target_conditions': [
+               ['_toolset=="target"', {
