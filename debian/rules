@@ -1,4 +1,5 @@
 #!/usr/bin/make -f
+export DH_VERBOSE = 1
 
 DEBIAN_NAME		:= chromium
 DEBIAN_VERSION		:= $(shell dpkg-parsechangelog | sed -n 's/^Version: *\(.*\)$$/\1/ p')
@@ -30,7 +31,6 @@ WANT_SHARED_LIBS ?= 0
 WANT_TESTS       ?= 0
 WANT_SANDBOXING  ?= 1
 USE_SYSTEM_V8    ?= 0
-VERBOSE          ?= 0
 
 #export DEB_BUILD_HARDENING=1
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all
@@ -166,7 +166,7 @@ endif
 BUILD_ARGS += BUILDTYPE=$(BUILD_TYPE)
 
 # Verbose?
-ifeq (1,$(VERBOSE))
+ifeq (1,$(DH_VERBOSE))
 BUILD_ARGS += V=1
 endif
 
