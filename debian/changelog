@@ -1,3 +1,16 @@
+chromium-browser (27.0.1453.110-2) unstable; urgency=low
+
+  [ Michael Gilbert ]
+  * Use default gcc.
+  * Enable verbose build.
+  * Support gcc 4.8 (closes: #701256).
+  * Disable pie hardening flag due to ffmpeg linking issue.
+
+  [ Giuseppe Iuculano ]
+  * Remove hardening-wrapper and switch to dpkg-buildflags.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 07 Jul 2013 20:06:05 +0000
+
 chromium-browser (27.0.1453.110-1) unstable; urgency=low
 
   * New stable release:
