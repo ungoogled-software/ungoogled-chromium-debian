@@ -219,6 +219,8 @@ ifeq (4.4,$(CC_VERSION))
 GYP_DEFINES += no_strict_aliasing=1 gcc_version=44
 endif
 
+GYP_DEFINES += werror=$(NULL)
+
 ifeq (1,$(WANT_XZ_SRC))
 TAR_EXT   := xz
 TAR_FLAGS := --xz
