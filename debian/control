@@ -80,7 +80,8 @@ Build-Depends: cdbs,
 	subversion,
 	libudev-dev,
 	libssl-dev,
-	libpci-dev
+	libpci-dev,
+	chrpath
 Standards-Version: 3.9.2
 
 Package: chromium-browser
