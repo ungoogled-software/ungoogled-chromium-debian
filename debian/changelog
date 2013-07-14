@@ -1,3 +1,41 @@
+chromium-browser (28.0.1500.71-1) unstable; urgency=medium
+
+  [ Michael Gilbert ]
+  * New upstream stable release:
+    - Low CVE-2013-2867: Block pop-unders in various scenarios.
+    - High CVE-2013-2879: Confusion setting up sign-in and sync. Credit to
+      Andrey Labunets.
+    - Medium CVE-2013-2868: Incorrect sync of NPAPI extension component. Credit
+      to Andrey Labunets.
+    - Medium CVE-2013-2869: Out-of-bounds read in JPEG2000 handling. Credit to
+      Felix Groebert of Google Security Team.
+    - Critical CVE-2013-2870: Use-after-free with network sockets. Credit to
+      Collin Payne.
+    - Medium CVE-2013-2853: Man-in-the-middle attack against HTTP in SSL.
+      Credit to Antoine Delignat-Lavaud and Karthikeyan Bhargavan from Prosecco
+      at INRIA Paris.
+    - High CVE-2013-2871: Use-after-free in input handling. Credit to miaubiz.
+    - High CVE-2013-2873: Use-after-free in resource loading. Credit to
+      miaubiz.
+    - Medium CVE-2013-2875: Out-of-bounds-read in SVG. Credit to miaubiz.
+    - Medium CVE-2013-2876: Extensions permissions confusion with
+      interstitials.  Credit to Dev Akhawe.
+    - Low CVE-2013-2877: Out-of-bounds read in XML parsing. Credit to Aki Helin
+      of OUSPG.
+    - None: Remove the “viewsource” attribute on iframes. Credit to Collin
+      Jackson.
+    - Medium CVE-2013-2878: Out-of-bounds read in text handling. Credit to Atte
+      Kettunen of OUSPG.
+    - High CVE-2013-2880: Various fixes from internal audits, fuzzing and other
+      initiatives. Credit to Chrome 28 team.
+  * Install mksnapshot.
+
+  [ Shawn Landden ]
+  * Enable armhf.
+  * Build with system libwebp when version >= 0.3.0.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 12 Jul 2013 15:19:18 +0000
+
 chromium-browser (27.0.1453.110-2) unstable; urgency=low
 
   [ Michael Gilbert ]
