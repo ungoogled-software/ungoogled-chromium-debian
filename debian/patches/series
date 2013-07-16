@@ -10,16 +10,11 @@ system-speech.patch
 fix-manpage.patch
 webkit-version.patch
 #ffmpeg.patch
-#gcc46.patch
 #vpx.patch
 #protobuf.patch
 #javascript-i18n.patch
 #icu.patch
-cups1.5.patch
 #system_v8.patch
-#protobuf.patch
-gcc4.7.patch
 arm.patch
 icon.patch
 arm-neon.patch
-gcc4.8.patch
