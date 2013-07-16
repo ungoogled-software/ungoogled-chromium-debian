@@ -57,14 +57,10 @@ endif
 # Disable SSE2
 GYP_DEFINES = disable_sse2=1
 
-#Disable breakpad
-GYP_DEFINES += linux_breakpad=0
-
 #Debian Chromium Api Key
 GYP_DEFINES += google_api_key='AIzaSyCkfPOPZXDKNn8hhgu3JrA62wIgC93d44k'
 GYP_DEFINES += google_default_client_id='811574891467.apps.googleusercontent.com'
 GYP_DEFINES += google_default_client_secret='kdloedMFGdGla2P1zacGjAQh'
-
 
 # Enable all codecs for HTML5 in chromium, depending on which ffmpeg sumo lib
 # is installed, the set of usable codecs (at runtime) will still vary
@@ -82,11 +78,6 @@ GYP_DEFINES += disable_nacl=1
 
 # do not use third_party/gold as the linker.
 GYP_DEFINES += linux_use_gold_binary=0 linux_use_gold_flags=0
-
-# Only keep -Werror when building for the Debian or Ubuntu development branches
-ifeq (,$(filter unstable development,$(DEBIAN_DIST)))
-GYP_DEFINES += werror=$(NULL)
-endif
 
 #disable tcmalloc
 GYP_DEFINES += linux_use_tcmalloc=0
@@ -110,7 +101,6 @@ GYP_DEFINES += \
 	use_cups=1 \
 	$(NULL)
 ifeq (armel,$(DEB_HOST_ARCH))
-AVOID_GCC_44 := 0
 GYP_DEFINES += \
 	v8_use_arm_eabi_hardfloat=false \
 	arm_float_abi=soft \
@@ -175,50 +165,7 @@ ifeq (1,$(WANT_SHARED_LIBS))
 GYP_DEFINES += library=shared_library
 endif
 
-# Set this to use gcc 4.3 instead of 4.4
-AVOID_GCC_44 ?= 0
-
-# Set this to use gcc 4.5 instead of 4.6
-AVOID_GCC_46 ?= 0
-
-# Set this to use gcc 4.6 instead of 4.7
-AVOID_GCC_47 ?= 0
-
-CC_VERSION   := $(shell gcc -dumpversion | cut -d. -f-2)
- 
-ifeq (1/4.4,$(AVOID_GCC_44)/$(CC_VERSION))
-CC  := gcc-4.3
-CXX := g++-4.3
-BUILD_ARGS += CC=$(CC) CXX=$(CXX) CC.host=$(CC) CXX.host=$(CXX) LINK.host=$(CXX)
-endif
-
-
-ifeq (1/4.6,$(AVOID_GCC_46)/$(CC_VERSION))
-CC  := gcc-4.5
-CXX := g++-4.5
-BUILD_ARGS += CC=$(CC) CXX=$(CXX) CC.host=$(CC) CXX.host=$(CXX) LINK.host=$(CXX)
-endif
-
-ifeq (1/4.7,$(AVOID_GCC_47)/$(CC_VERSION))
-CC  := gcc-4.6
-CXX := g++-4.6
-GYP_DEFINES += werror=$(NULL)
-GYP_DEFINES += gcc_version=46
-BUILD_ARGS += CC=$(CC) CXX=$(CXX) CC.host=$(CC) CXX.host=$(CXX) LINK.host=$(CXX)
-endif
-
-ifeq (0/4.6,$(AVOID_GCC_46)/$(CC_VERSION))
-GYP_DEFINES += werror=$(NULL)
-endif
-
-ifeq (0/4.7,$(AVOID_GCC_47)/$(CC_VERSION))
-GYP_DEFINES += werror=$(NULL)
-endif
-
-ifeq (4.4,$(CC_VERSION))
-GYP_DEFINES += no_strict_aliasing=1 gcc_version=44
-endif
-
+# Always ignore compiler warnings
 GYP_DEFINES += werror=$(NULL)
 
 ifeq (1,$(WANT_XZ_SRC))
