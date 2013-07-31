@@ -1,3 +1,20 @@
+chromium-browser (28.0.1500.95-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - Medium CVE-2013-2881: Origin bypass in frame handling. Credit to Karthik
+      Bhargavan.
+    - High CVE-2013-2882: Type confusion in V8. Credit to Cloudfuzzer.
+    - High CVE-2013-2883: Use-after-free in MutationObserver. Credit to
+      Cloudfuzzer.
+    - High CVE-2013-2884: Use-after-free in DOM. Credit to Ivan Fratric of
+      Google Security Team.
+    - High CVE-2013-2885: Use-after-free in input handling. Credit to Ivan
+      Fratric of Google Security Team.
+    - High CVE-2013-2886: Various fixes from internal audits, fuzzing and other
+      initiatives.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Tue, 30 Jul 2013 20:34:19 +0000
+
 chromium-browser (28.0.1500.71-2) unstable; urgency=medium
 
   * Disable armhf.
