@@ -1,0 +1,37 @@
+diff --git a/src/build/common.gypi b/src/build/common.gypi
+index 5312173..134f880 100644
+--- a/src/build/common.gypi
++++ b/src/build/common.gypi
+@@ -635,31 +635,6 @@
+           'enable_settings_app%': 0,
+         }],
+ 
+-        ['OS=="linux" and target_arch=="arm" and chromeos==0', {
+-          # Set some defaults for arm/linux chrome builds
+-          'linux_breakpad%': 0,
+-          'linux_use_tcmalloc%': 0,
+-          # sysroot needs to be an absolute path otherwise it generates
+-          # incorrect results when passed to pkg-config
+-          'sysroot%': '<!(cd <(DEPTH) && pwd -P)/arm-sysroot',
+-        }], # OS=="linux" and target_arch=="arm" and chromeos==0
+-
+-        ['linux_lsb_release=="12.04"', {
+-          'conditions': [
+-            ['target_arch=="x64"', {
+-              'sysroot%': '<!(cd <(DEPTH) && pwd -P)/chrome/installer/linux/internal/debian_wheezy_amd64-sysroot',
+-            }],
+-            ['target_arch=="ia32"', {
+-              'sysroot%': '<!(cd <(DEPTH) && pwd -P)/chrome/installer/linux/internal/debian_wheezy_i386-sysroot',
+-            }],
+-        ],
+-        }], # linux_lsb_release=="12.04"
+-
+-        ['target_arch=="mipsel"', {
+-          'sysroot%': '<!(cd <(DEPTH) && pwd -P)/mipsel-sysroot/sysroot',
+-          'CXX%': '<!(cd <(DEPTH) && pwd -P)/mipsel-sysroot/bin/mipsel-linux-gnu-gcc',
+-        }],
+-
+         # Whether tests targets should be run, archived or just have the
+         # dependencies verified. All the tests targets have the '_run' suffix,
+         # e.g. base_unittests_run runs the target base_unittests. The test
+
