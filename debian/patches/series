@@ -18,3 +18,4 @@ webkit-version.patch
 arm.patch
 icon.patch
 arm-neon.patch
+dont-assume-cross-compile-on-arm.patch
