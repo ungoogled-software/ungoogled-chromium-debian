@@ -81,7 +81,7 @@ Build-Depends: cdbs,
 	libudev-dev,
 	libssl-dev,
 	libpci-dev
-Standards-Version: 3.9.2
+Standards-Version: 3.9.4
 
 Package: chromium-browser
 Architecture: all
