@@ -1,0 +1,15 @@
+Index: chromium/src/build/common.gypi
+===================================================================
+--- chromium.orig/src/build/common.gypi	2013-07-30 20:36:37.139951931 +0000
++++ chromium/src/build/common.gypi	2013-07-31 20:34:42.028799258 +0000
+@@ -2263,6 +2263,10 @@
+               # Don't warn about printf format problems.
+               # This is off by default in gcc but on in Ubuntu's gcc(!).
+               '-Wno-format',
++              '-fuse-ld=gold',
++            ],
++            'ldflags': [
++              '-fuse-ld=gold',
+             ],
+             'cflags_cc!': [
+               # TODO(fischman): remove this.

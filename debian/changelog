@@ -1,3 +1,10 @@
+chromium-browser (28.0.1500.95-2) unstable; urgency=medium
+
+  * Use -fuse-ld=gold instead of binutils-gold.
+  * Drop libv8-dev build-dependency.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Wed, 31 Jul 2013 20:22:33 +0000
+
 chromium-browser (28.0.1500.95-1) unstable; urgency=medium
 
   * New upstream stable release:
