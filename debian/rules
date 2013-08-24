@@ -2,6 +2,7 @@
 export DH_VERBOSE = 1
 
 DEBIAN_NAME		:= chromium
+SOURCE_NAME		:= chromium-browser
 DEBIAN_VERSION		:= $(shell dpkg-parsechangelog | sed -n 's/^Version: *\(.*\)$$/\1/ p')
 DEBIAN_UPSTREAM_VERSION	:= $(shell echo $(DEBIAN_VERSION) | sed 's/^\(.*\)-[^-]*$$/\1/')
 DEBIAN_REVISION		:= $(shell echo $(DEBIAN_VERSION) | sed 's/^.*r\([^-]*\)-.*/\1/')
@@ -830,9 +831,9 @@ gos-pack:
 	# Pack
 	if [ src != $(DEB_TAR_SRCDIR) ] ; then mv $(TMP_DIR)/src $(TMP_DIR)/$(DEB_TAR_SRCDIR) ; fi
 	mv $(TMP_DIR)/tools/depot_tools $(TMP_DIR)/$(DEB_TAR_SRCDIR)/depot_tools
-	mkdir $(TMP_DIR)/$(DEBIAN_NAME)-$(VERSION)
-	mv $(TMP_DIR)/$(DEB_TAR_SRCDIR) $(TMP_DIR)/$(DEBIAN_NAME)-$(VERSION)/
-	cd $(TMP_DIR) && tar -c $(TAR_FLAGS) -f ../$(DEBIAN_NAME)_$(VERSION).orig.tar.$(TAR_EXT) --exclude=.svn --exclude=.git $(DEBIAN_NAME)-$(VERSION)
+	mkdir $(TMP_DIR)/$(SOURCE_NAME)-$(VERSION)
+	mv $(TMP_DIR)/$(DEB_TAR_SRCDIR) $(TMP_DIR)/$(SOURCE_NAME)-$(VERSION)/
+	cd $(TMP_DIR) && tar -c $(TAR_FLAGS) -f ../$(SOURCE_NAME)_$(VERSION).orig.tar.$(TAR_EXT) --exclude=.svn --exclude=.git $(SOURCE_NAME)-$(VERSION)
 	rm -rf $(TMP_DIR)
-	@echo "# Done (created $(DEBIAN_NAME)_$(VERSION).orig.tar.$(TAR_EXT))"
-	@ls -l $(DEBIAN_NAME)_$(VERSION).orig.tar.$(TAR_EXT)
+	@echo "# Done (created $(SOURCE_NAME)_$(VERSION).orig.tar.$(TAR_EXT))"
+	@ls -l $(SOURCE_NAME)_$(VERSION).orig.tar.$(TAR_EXT)
