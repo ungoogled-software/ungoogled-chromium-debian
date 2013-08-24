@@ -76,6 +76,7 @@ Build-Depends: cdbs,
 	libegl1-mesa-dev,
 	libgles2-mesa-dev,
 	subversion,
+	git,
 	libudev-dev,
 	libssl-dev,
 	libpci-dev
