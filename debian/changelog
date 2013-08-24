@@ -1,3 +1,9 @@
+chromium-browser (28.0.1500.95-3) unstable; urgency=medium
+
+  * Fix placement of -fuse-ld=gold in ldflags.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 01 Aug 2013 16:38:05 +0000
+
 chromium-browser (28.0.1500.95-2) unstable; urgency=medium
 
   * Use -fuse-ld=gold instead of binutils-gold.
