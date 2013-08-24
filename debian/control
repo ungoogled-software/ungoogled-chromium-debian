@@ -5,7 +5,7 @@ Maintainer: Debian Chromium Maintainers <pkg-chromium-maint@lists.alioth.debian.
 Uploaders:
  Giuseppe Iuculano <iuculano@debian.org>,
  Michael Gilbert <michael.s.gilbert@gmail.com>
-Vcs-Git: git://git.debian.org/git/pkg-chromium/pkg-chromium.git
+Vcs-Git: git://anonscm.debian.org/git/pkg-chromium/pkg-chromium.git
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-chromium/pkg-chromium.git
 Homepage: http://www.chromium.org/Home
 Build-Depends: cdbs,
@@ -79,7 +79,7 @@ Build-Depends: cdbs,
 	libudev-dev,
 	libssl-dev,
 	libpci-dev
-Standards-Version: 3.9.2
+Standards-Version: 3.9.4
 
 Package: chromium-browser
 Architecture: all
@@ -133,7 +133,7 @@ Description: page inspector for the chromium-browser - transitional dummy packag
  This package contains 'inspector', transitional dummy package.
 
 Package: chromium
-Architecture: i386 amd64
+Architecture: i386 amd64 armhf
 Depends: ${shlibs:Depends}, ${misc:Depends},
 	libnspr4 (>= 2:4.9-2~),
 	xdg-utils,
@@ -153,7 +153,7 @@ Description: Google's open source chromium web browser
  This package contains the Chromium browser.
 
 Package: chromium-dbg
-Architecture: i386 amd64
+Architecture: i386 amd64 armhf
 Section: debug
 Priority: extra
 Depends: ${shlibs:Depends}, ${misc:Depends}, chromium (= ${binary:Version})
