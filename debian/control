@@ -134,7 +134,7 @@ Description: page inspector for the chromium-browser - transitional dummy packag
  This package contains 'inspector', transitional dummy package.
 
 Package: chromium
-Architecture: i386 amd64 armhf
+Architecture: i386 amd64
 Depends: ${shlibs:Depends}, ${misc:Depends},
 	libnspr4 (>= 2:4.9-2~),
 	xdg-utils,
@@ -154,7 +154,7 @@ Description: Google's open source chromium web browser
  This package contains the Chromium browser.
 
 Package: chromium-dbg
-Architecture: i386 amd64 armhf
+Architecture: i386 amd64
 Section: debug
 Priority: extra
 Depends: ${shlibs:Depends}, ${misc:Depends}, chromium (= ${binary:Version})
