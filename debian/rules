@@ -808,6 +808,10 @@ endif
 	# Remove cache files and backups
 	cd $(TMP_DDIR)/src && find . -type f \( -iname \*.bak -o -iname \*.orig -o -iname \*.cache \) -ls -delete > REMOVED-ephemera.txt
 	wc -l $(TMP_DDIR)/src/REMOVED-*.txt
+
+       # Remove known files that have non-free licenses
+       cd $(TMP_DDIR)/src && find . -name bfd.info -ls -delete > REMOVED-nonfree.txt
+       wc -l $(TMP_DDIR)/src/REMOVED-*.txt
 	
 gos-pack: TMP_DIR  = $(TMP_DDIR)
 ifneq (,$(DEBIAN_TAG))
