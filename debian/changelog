@@ -1,3 +1,31 @@
+chromium-browser (29.0.1547.57-1) unstable; urgency=medium
+
+  [ Michael Gilbert ]
+  * New upstream stable release:
+    - High CVE-2013-2900: Incomplete path sanitization in file handling. Credit
+      to Krystian Bigaj.
+    - Low CVE-2013-2905: Information leak via overly broad permissions on
+      shared memory files. Credit to Christian Jaeger.
+    - High CVE-2013-2901: Integer overflow in ANGLE. Credit to Alex Chapman.
+    - High CVE-2013-2902: Use after free in XSLT. Credit to cloudfuzzer.
+    - High CVE-2013-2903: Use after free in media element. Credit to
+      cloudfuzzer.
+    - High CVE-2013-2904: Use after free in document parsing. Credit to
+      cloudfuzzer.
+    - CVE-2013-2887: Various fixes from internal audits, fuzzing and other
+      initiatives (Chrome 29).
+  * Remove unused webkit layout tests (closes: 720446).
+  * Use source package name for get-orig-source rule.
+  * Remove gfdl documentation (closes: #708860).
+  * Build-depend on git.
+  
+  [ Shawn Landden ]
+  * New standards version.
+  * Use canonical VCS url.
+  * Always use system includes rather than ones of a chroot.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 24 Aug 2013 20:14:52 +0000
+
 chromium-browser (28.0.1500.95-3) unstable; urgency=medium
 
   * Fix placement of -fuse-ld=gold in ldflags.
