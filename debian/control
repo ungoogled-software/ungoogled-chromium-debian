@@ -10,7 +10,6 @@ Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-chromium/pkg-chromium.git
 Homepage: http://www.chromium.org/Home
 Build-Depends: cdbs,
 	debhelper (>= 7),
-	g++,
 	pkg-config,
 	lsb-release,
 	gyp (>= 0.1~svn1119),
