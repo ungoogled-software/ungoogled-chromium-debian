@@ -1,3 +1,15 @@
+chromium-browser (29.0.1547.57-2) unstable; urgency=medium
+
+  * Mark chromium-inspector as multi-arch: foreign (closes: #695229).
+  * Use system libpng (closes: #699918).
+  * Fix copyright file syntax error.
+  * Drop implicit g++ dependency.
+  * Add some lintian overrides.
+  * Update my email address.
+  * Remove unsafe symlink.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 25 Aug 2013 02:15:35 +0000
+
 chromium-browser (29.0.1547.57-1) unstable; urgency=medium
 
   [ Michael Gilbert ]
