@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Debian Chromium Maintainers <pkg-chromium-maint@lists.alioth.debian.org>
 Uploaders:
  Giuseppe Iuculano <iuculano@debian.org>,
- Michael Gilbert <michael.s.gilbert@gmail.com>
+ Michael Gilbert <mgilbert@debian.org>
 Vcs-Git: git://anonscm.debian.org/git/pkg-chromium/pkg-chromium.git
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-chromium/pkg-chromium.git
 Homepage: http://www.chromium.org/Home
