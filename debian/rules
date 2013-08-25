@@ -816,6 +816,9 @@ endif
 
 	# Remove unused webkit layout tests
 	rm -rf $(TMP_DDIR)/src/third_party/WebKit/LayoutTests
+
+	# Remove unsafe symlink
+	rm -rf src/native_client/toolchain/pnacl_linux_x86/newlib/sysroot/sys-include
 	
 gos-pack: TMP_DIR  = $(TMP_DDIR)
 ifneq (,$(DEBIAN_TAG))
