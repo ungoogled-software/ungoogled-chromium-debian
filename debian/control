@@ -182,6 +182,7 @@ Description: chromium-browser language packages
 
 Package: chromium-inspector
 Architecture: all
+Multi-Arch: foreign
 Depends: ${misc:Depends}
 Recommends: chromium (>= 10)
 Conflicts: chromium (<< ${source:Version}), chromium-browser-inspector (<< 10.0.648.82~r75062-1~)
