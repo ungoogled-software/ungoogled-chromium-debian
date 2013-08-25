@@ -4,10 +4,10 @@ Author: Chad Miller <chad.miller@canonical.com>
 Bug-Chromium: 154107
 Bug-Ubuntu: 1084852
 
-Index: sid/src/third_party/webrtc/modules/audio_coding/codecs/isac/fix/source/isacfix.gypi
+Index: chromium/src/third_party/webrtc/modules/audio_coding/codecs/isac/fix/source/isacfix.gypi
 ===================================================================
---- sid.orig/src/third_party/webrtc/modules/audio_coding/codecs/isac/fix/source/isacfix.gypi	2013-06-24 11:51:46.204041318 +0200
-+++ sid/src/third_party/webrtc/modules/audio_coding/codecs/isac/fix/source/isacfix.gypi	2013-06-24 11:51:46.196041318 +0200
+--- chromium.orig/src/third_party/webrtc/modules/audio_coding/codecs/isac/fix/source/isacfix.gypi	2013-08-24 20:12:59.749818889 +0000
++++ chromium/src/third_party/webrtc/modules/audio_coding/codecs/isac/fix/source/isacfix.gypi	2013-08-24 20:12:59.745818890 +0000
 @@ -72,7 +72,7 @@
              'WEBRTC_LINUX',
            ],
@@ -17,13 +17,13 @@ Index: sid/src/third_party/webrtc/modules/audio_coding/codecs/isac/fix/source/is
            'dependencies': [ 'isac_neon', ],
            'sources': [
              'lattice_armv7.S',
-Index: sid/src/third_party/webrtc/system_wrappers/source/cpu_features.cc
+Index: chromium/src/third_party/webrtc/system_wrappers/source/cpu_features.cc
 ===================================================================
---- sid.orig/src/third_party/webrtc/system_wrappers/source/cpu_features.cc	2013-06-24 11:51:46.204041318 +0200
-+++ sid/src/third_party/webrtc/system_wrappers/source/cpu_features.cc	2013-06-24 11:51:46.196041318 +0200
+--- chromium.orig/src/third_party/webrtc/system_wrappers/source/cpu_features.cc	2013-08-24 20:12:59.749818889 +0000
++++ chromium/src/third_party/webrtc/system_wrappers/source/cpu_features.cc	2013-08-24 20:12:59.749818889 +0000
 @@ -18,6 +18,47 @@
  
- #include "typedefs.h"
+ #include "webrtc/typedefs.h"
  
 +#include <elf.h>
 +#ifdef __arm__

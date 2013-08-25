@@ -8,7 +8,6 @@ armv4.patch
 system-speech.patch
 #glew.patch
 fix-manpage.patch
-webkit-version.patch
 #ffmpeg.patch
 #vpx.patch
 #protobuf.patch
@@ -19,4 +18,3 @@ arm.patch
 icon.patch
 arm-neon.patch
 gold-linker.patch
-dont-assume-cross-compile-on-arm.patch

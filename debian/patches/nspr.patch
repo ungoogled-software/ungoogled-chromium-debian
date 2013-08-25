@@ -1,8 +1,8 @@
 Include system copy of prtime.h
-Index: sid/src/base/pr_time_unittest.cc
+Index: chromium/src/base/pr_time_unittest.cc
 ===================================================================
---- sid.orig/src/base/pr_time_unittest.cc	2013-06-24 11:46:01.748037623 +0200
-+++ sid/src/base/pr_time_unittest.cc	2013-06-24 11:46:01.740037623 +0200
+--- chromium.orig/src/base/pr_time_unittest.cc	2013-08-24 20:06:45.077832579 +0000
++++ chromium/src/base/pr_time_unittest.cc	2013-08-24 20:06:44.985832582 +0000
 @@ -5,7 +5,7 @@
  #include <time.h>
  
@@ -12,10 +12,10 @@ Index: sid/src/base/pr_time_unittest.cc
  #include "base/time.h"
  #include "testing/gtest/include/gtest/gtest.h"
  
-Index: sid/src/base/time.cc
+Index: chromium/src/base/time.cc
 ===================================================================
---- sid.orig/src/base/time.cc	2013-06-24 11:46:01.748037623 +0200
-+++ sid/src/base/time.cc	2013-06-24 11:46:01.740037623 +0200
+--- chromium.orig/src/base/time.cc	2013-08-24 20:06:45.077832579 +0000
++++ chromium/src/base/time.cc	2013-08-24 20:06:45.009832582 +0000
 @@ -12,7 +12,7 @@
  #include <limits>
  
@@ -25,23 +25,23 @@ Index: sid/src/base/time.cc
  
  #include "base/logging.h"
  
-Index: sid/src/chrome/browser/metrics/metrics_log.cc
+Index: chromium/src/chrome/browser/metrics/metrics_log.cc
 ===================================================================
---- sid.orig/src/chrome/browser/metrics/metrics_log.cc	2013-06-24 11:46:01.748037623 +0200
-+++ sid/src/chrome/browser/metrics/metrics_log.cc	2013-06-24 11:46:01.744037623 +0200
+--- chromium.orig/src/chrome/browser/metrics/metrics_log.cc	2013-08-24 20:06:45.077832579 +0000
++++ chromium/src/chrome/browser/metrics/metrics_log.cc	2013-08-24 20:06:45.009832582 +0000
 @@ -20,7 +20,7 @@
- #include "base/string_util.h"
- #include "base/strings/string_number_conversions.h"
+ #include "base/strings/string_util.h"
+ #include "base/strings/utf_string_conversions.h"
  #include "base/sys_info.h"
 -#include "base/third_party/nspr/prtime.h"
 +#include <nspr/prtime.h>
  #include "base/time.h"
  #include "base/tracked_objects.h"
- #include "base/utf_string_conversions.h"
-Index: sid/src/base/base.gypi
+ #include "chrome/browser/autocomplete/autocomplete_input.h"
+Index: chromium/src/base/base.gypi
 ===================================================================
---- sid.orig/src/base/base.gypi	2013-06-24 11:46:01.748037623 +0200
-+++ sid/src/base/base.gypi	2013-06-24 11:46:01.744037623 +0200
+--- chromium.orig/src/base/base.gypi	2013-08-24 20:06:45.077832579 +0000
++++ chromium/src/base/base.gypi	2013-08-24 20:06:45.029832581 +0000
 @@ -25,7 +25,6 @@
            'third_party/nspr/prcpucfg_openbsd.h',
            'third_party/nspr/prcpucfg_solaris.h',
@@ -50,16 +50,16 @@ Index: sid/src/base/base.gypi
            'third_party/nspr/prtime.h',
            'third_party/nspr/prtypes.h',
            'third_party/xdg_mime/xdgmime.h',
-Index: sid/src/chrome/common/metrics/metrics_log_base.cc
+Index: chromium/src/chrome/common/metrics/metrics_log_base.cc
 ===================================================================
---- sid.orig/src/chrome/common/metrics/metrics_log_base.cc	2013-06-18 09:53:32.000000000 +0200
-+++ sid/src/chrome/common/metrics/metrics_log_base.cc	2013-06-24 11:47:51.052038795 +0200
-@@ -13,7 +13,7 @@
- #include "base/strings/string_number_conversions.h"
+--- chromium.orig/src/chrome/common/metrics/metrics_log_base.cc	2013-08-24 20:06:45.077832579 +0000
++++ chromium/src/chrome/common/metrics/metrics_log_base.cc	2013-08-24 20:07:00.265832024 +0000
+@@ -14,7 +14,7 @@
+ #include "base/strings/utf_string_conversions.h"
  #include "base/sys_byteorder.h"
  #include "base/sys_info.h"
 -#include "base/third_party/nspr/prtime.h"
 +#include <nspr/prtime.h>
- #include "base/utf_string_conversions.h"
  #include "chrome/common/chrome_version_info.h"
  #include "chrome/common/logging_chrome.h"
+ #include "chrome/common/metrics/proto/histogram_event.pb.h"
