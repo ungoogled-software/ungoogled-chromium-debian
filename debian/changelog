@@ -1,3 +1,14 @@
+chromium-browser (29.0.1547.57-3) unstable; urgency=medium
+
+  * Drop transitional packages (closes: #684369).
+  * Fix another copyright file syntax error.
+  * Remove libav build dependencies.
+  * Fix lintian override syntax.
+  * Fix version control URL.
+  * Use system vpx.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Tue, 27 Aug 2013 01:01:35 +0000
+
 chromium-browser (29.0.1547.57-2) unstable; urgency=medium
 
   * Mark chromium-inspector as multi-arch: foreign (closes: #695229).
