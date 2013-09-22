@@ -1,8 +1,8 @@
-diff --git a/src/build/common.gypi b/src/build/common.gypi
-index 5312173..134f880 100644
---- a/src/build/common.gypi
-+++ b/src/build/common.gypi
-@@ -635,31 +635,6 @@
+Index: chromium/src/build/common.gypi
+===================================================================
+--- chromium.orig/src/build/common.gypi	2013-09-22 00:59:08.577305642 +0000
++++ chromium/src/build/common.gypi	2013-09-22 01:00:10.917303364 +0000
+@@ -634,31 +634,6 @@
            'enable_settings_app%': 0,
          }],
  
@@ -18,10 +18,10 @@ index 5312173..134f880 100644
 -        ['linux_lsb_release=="12.04"', {
 -          'conditions': [
 -            ['target_arch=="x64"', {
--              'sysroot%': '<!(cd <(DEPTH) && pwd -P)/chrome/installer/linux/internal/debian_wheezy_amd64-sysroot'
+-              'sysroot%': '<!(cd <(DEPTH) && pwd -P)/chrome/installer/linux/debian_wheezy_amd64-sysroot',
 -            }],
 -            ['target_arch=="ia32"', {
--              'sysroot%': '<!(cd <(DEPTH) && pwd -P)/chrome/installer/linux/internal/debian_wheezy_i386-sysroot',
+-              'sysroot%': '<!(cd <(DEPTH) && pwd -P)/chrome/installer/linux/debian_wheezy_i386-sysroot',
 -            }],
 -        ],
 -        }], # linux_lsb_release=="12.04"
@@ -34,5 +34,3 @@ index 5312173..134f880 100644
          # Whether tests targets should be run, archived or just have the
          # dependencies verified. All the tests targets have the '_run' suffix,
          # e.g. base_unittests_run runs the target base_unittests. The test
-
-

@@ -1,3 +1,10 @@
+chromium-browser (29.0.1547.57-3+exp1) experimental; urgency=low
+
+  [ Shawn Landden ]
+  * Enable arm support.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 22 Sep 2013 00:34:12 +0000
+
 chromium-browser (29.0.1547.57-3) unstable; urgency=medium
 
   * Drop transitional packages (closes: #684369).

@@ -18,5 +18,5 @@ arm.patch
 icon.patch
 arm-neon.patch
 gold-linker.patch
-dont-assume-cross-compile.patch
 
+dont-assume-cross-compile.patch
