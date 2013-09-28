@@ -80,7 +80,7 @@ Build-Depends:
 Standards-Version: 3.9.4
 
 Package: chromium
-Architecture: i386 amd64 armhf
+Architecture: i386 amd64
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
@@ -112,7 +112,7 @@ Description: Google's open source chromium web browser
  This package contains the Chromium browser.
 
 Package: chromium-dbg
-Architecture: i386 amd64 armhf
+Architecture: i386 amd64
 Section: debug
 Priority: extra
 Depends:
