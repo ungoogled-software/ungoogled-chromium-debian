@@ -1,3 +1,9 @@
-* Add an 'install' target to scons: see http://code.google.com/p/chromium/issues/detail?id=4451
+* Switch to the official chromium source tarballs
+  - http://gsdview.appspot.com/chromium-browser-official/
+  - these packages are ~160 MB vs. 600 MB with the existing get-orig-source rules
+* Switch to debhelper 9 and simplified debian/rules
+* Fix existing lintian warnings/errors
+  - Move images out of /usr/lib
+* Add an 'install' target to scons:
+  - http://code.google.com/p/chromium/issues/detail?id=4451
 * Run the test suite
-* Use system libv8
