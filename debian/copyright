@@ -1875,7 +1875,6 @@ Files: src/chrome_frame/tools/test/page_cycler/cf_cycler.py
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved.
  Use of this source code is governed by a BSD-style license that can be
  found in the LICENSE file.
-:
 License: global BSD-style Chromium
 
 Files: src/depot_tools/gclient_utils.py
@@ -13118,7 +13117,6 @@ Files: src/third_party/cld/base/string_util.h
 Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved.
  Use of this source code is governed by a BSD-style license that can be
  found in the LICENSE file.
-:
 License: global BSD-style Chromium
 
 Files: src/third_party/cld/base/basictypes.h

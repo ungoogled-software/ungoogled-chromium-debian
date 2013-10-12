@@ -1,6 +1,8 @@
 #!/usr/bin/make -f
+export DH_VERBOSE = 1
 
 DEBIAN_NAME		:= chromium
+SOURCE_NAME		:= chromium-browser
 DEBIAN_VERSION		:= $(shell dpkg-parsechangelog | sed -n 's/^Version: *\(.*\)$$/\1/ p')
 DEBIAN_UPSTREAM_VERSION	:= $(shell echo $(DEBIAN_VERSION) | sed 's/^\(.*\)-[^-]*$$/\1/')
 DEBIAN_REVISION		:= $(shell echo $(DEBIAN_VERSION) | sed 's/^.*r\([^-]*\)-.*/\1/')
@@ -23,17 +25,15 @@ DEB_BUILDDIR   := $(SRC_DIR)
 #BUILD_ARGS     := --keep-going
 
 WANT_XZ_SRC      ?= 1
-WANT_XZ_DEBS     ?= 1
 WANT_DEBUG       := 0
 WANT_SYSTEM_LIBS ?= 1
 WANT_SHARED_LIBS ?= 0
 WANT_TESTS       ?= 0
 WANT_SANDBOXING  ?= 1
 USE_SYSTEM_V8    ?= 0
-VERBOSE          ?= 0
 
-#export DEB_BUILD_HARDENING=1
-export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+# enable build hardening options (pie disabled due to ffmpeg linking issue)
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all,-pie
 DPKG_EXPORT_BUILDFLAGS = 1
 include /usr/share/dpkg/buildflags.mk
 
@@ -57,14 +57,10 @@ endif
 # Disable SSE2
 GYP_DEFINES = disable_sse2=1
 
-#Disable breakpad
-GYP_DEFINES += linux_breakpad=0
-
 #Debian Chromium Api Key
 GYP_DEFINES += google_api_key='AIzaSyCkfPOPZXDKNn8hhgu3JrA62wIgC93d44k'
 GYP_DEFINES += google_default_client_id='811574891467.apps.googleusercontent.com'
 GYP_DEFINES += google_default_client_secret='kdloedMFGdGla2P1zacGjAQh'
-
 
 # Enable all codecs for HTML5 in chromium, depending on which ffmpeg sumo lib
 # is installed, the set of usable codecs (at runtime) will still vary
@@ -82,11 +78,6 @@ GYP_DEFINES += disable_nacl=1
 
 # do not use third_party/gold as the linker.
 GYP_DEFINES += linux_use_gold_binary=0 linux_use_gold_flags=0
-
-# Only keep -Werror when building for the Debian or Ubuntu development branches
-ifeq (,$(filter unstable development,$(DEBIAN_DIST)))
-GYP_DEFINES += werror=$(NULL)
-endif
 
 #disable tcmalloc
 GYP_DEFINES += linux_use_tcmalloc=0
@@ -110,7 +101,6 @@ GYP_DEFINES += \
 	use_cups=1 \
 	$(NULL)
 ifeq (armel,$(DEB_HOST_ARCH))
-AVOID_GCC_44 := 0
 GYP_DEFINES += \
 	v8_use_arm_eabi_hardfloat=false \
 	arm_float_abi=soft \
@@ -131,7 +121,6 @@ GYP_DEFINES += \
 	$(NULL)
 endif
 
-WANT_LZMA_DEBS := 0
 WANT_TESTS     := 0
 else
 ifeq (amd64,$(DEB_HOST_ARCH_CPU))
@@ -151,11 +140,6 @@ DEB_DH_INSTALLINIT_ARGS += --noscripts --onlyscripts
 # don't miss installing newly added files in new upstream releases
 DEB_DH_INSTALL_ARGS += --list-missing
 
-# Use lzma instead of gzip inside the debs (passed to dpkg-deb)
-ifeq (1,$(WANT_XZ_DEBS))
-DEB_DH_BUILDDEB_ARGS += -- -Zxz
-endif
-
 ifeq (1,$(WANT_DEBUG))
 BUILD_TYPE := Debug
 else
@@ -166,7 +150,7 @@ endif
 BUILD_ARGS += BUILDTYPE=$(BUILD_TYPE)
 
 # Verbose?
-ifeq (1,$(VERBOSE))
+ifeq (1,$(DH_VERBOSE))
 BUILD_ARGS += V=1
 endif
 
@@ -175,49 +159,8 @@ ifeq (1,$(WANT_SHARED_LIBS))
 GYP_DEFINES += library=shared_library
 endif
 
-# Set this to use gcc 4.3 instead of 4.4
-AVOID_GCC_44 ?= 0
-
-# Set this to use gcc 4.5 instead of 4.6
-AVOID_GCC_46 ?= 0
-
-# Set this to use gcc 4.6 instead of 4.7
-AVOID_GCC_47 ?= 0
-
-CC_VERSION   := $(shell gcc -dumpversion | cut -d. -f-2)
- 
-ifeq (1/4.4,$(AVOID_GCC_44)/$(CC_VERSION))
-CC  := gcc-4.3
-CXX := g++-4.3
-BUILD_ARGS += CC=$(CC) CXX=$(CXX) CC.host=$(CC) CXX.host=$(CXX) LINK.host=$(CXX)
-endif
-
-
-ifeq (1/4.6,$(AVOID_GCC_46)/$(CC_VERSION))
-CC  := gcc-4.5
-CXX := g++-4.5
-BUILD_ARGS += CC=$(CC) CXX=$(CXX) CC.host=$(CC) CXX.host=$(CXX) LINK.host=$(CXX)
-endif
-
-ifeq (1/4.7,$(AVOID_GCC_47)/$(CC_VERSION))
-CC  := gcc-4.6
-CXX := g++-4.6
+# Always ignore compiler warnings
 GYP_DEFINES += werror=$(NULL)
-GYP_DEFINES += gcc_version=46
-BUILD_ARGS += CC=$(CC) CXX=$(CXX) CC.host=$(CC) CXX.host=$(CXX) LINK.host=$(CXX)
-endif
-
-ifeq (0/4.6,$(AVOID_GCC_46)/$(CC_VERSION))
-GYP_DEFINES += werror=$(NULL)
-endif
-
-ifeq (0/4.7,$(AVOID_GCC_47)/$(CC_VERSION))
-GYP_DEFINES += werror=$(NULL)
-endif
-
-ifeq (4.4,$(CC_VERSION))
-GYP_DEFINES += no_strict_aliasing=1 gcc_version=44
-endif
 
 ifeq (1,$(WANT_XZ_SRC))
 TAR_EXT   := xz
@@ -360,7 +303,7 @@ ifeq (1,$(WANT_SYSTEM_LIBS))
 GYP_DEFINES += \
 	use_system_bzip2=1 \
 	use_system_libjpeg=1 \
-	use_system_libpng=0 \
+	use_system_libpng=1 \
 	use_system_sqlite=$(USE_SYSTEM_SQLITE) \
 	use_system_libxml=1 \
 	use_system_libxslt=1 \
@@ -369,7 +312,7 @@ GYP_DEFINES += \
 	use_system_icu=0 \
 	use_system_yasm=1 \
 	use_system_ffmpeg=$(USE_SYSTEM_FFMPEG) \
-	use_system_libvpx=0 \
+	use_system_libvpx=1 \
 	use_system_xdg_utils=1 \
 	use_system_flac=1 \
 	use_system_libwebp=$(USE_SYSTEM_LIBWEBP) \
@@ -859,6 +802,16 @@ endif
 	# Remove cache files and backups
 	cd $(TMP_DDIR)/src && find . -type f \( -iname \*.bak -o -iname \*.orig -o -iname \*.cache \) -ls -delete > REMOVED-ephemera.txt
 	wc -l $(TMP_DDIR)/src/REMOVED-*.txt
+
+	# Remove known files that have non-free licenses
+	cd $(TMP_DDIR)/src && find . -name bfd.info -ls -delete > REMOVED-nonfree.txt
+	wc -l $(TMP_DDIR)/src/REMOVED-*.txt
+
+	# Remove unused webkit layout tests
+	rm -rf $(TMP_DDIR)/src/third_party/WebKit/LayoutTests
+
+	# Remove unsafe symlink
+	rm -rf src/native_client/toolchain/pnacl_linux_x86/newlib/sysroot/sys-include
 	
 gos-pack: TMP_DIR  = $(TMP_DDIR)
 ifneq (,$(DEBIAN_TAG))
@@ -877,9 +830,9 @@ gos-pack:
 	# Pack
 	if [ src != $(DEB_TAR_SRCDIR) ] ; then mv $(TMP_DIR)/src $(TMP_DIR)/$(DEB_TAR_SRCDIR) ; fi
 	mv $(TMP_DIR)/tools/depot_tools $(TMP_DIR)/$(DEB_TAR_SRCDIR)/depot_tools
-	mkdir $(TMP_DIR)/$(DEBIAN_NAME)-$(VERSION)
-	mv $(TMP_DIR)/$(DEB_TAR_SRCDIR) $(TMP_DIR)/$(DEBIAN_NAME)-$(VERSION)/
-	cd $(TMP_DIR) && tar -c $(TAR_FLAGS) -f ../$(DEBIAN_NAME)_$(VERSION).orig.tar.$(TAR_EXT) --exclude=.svn --exclude=.git $(DEBIAN_NAME)-$(VERSION)
+	mkdir $(TMP_DIR)/$(SOURCE_NAME)-$(VERSION)
+	mv $(TMP_DIR)/$(DEB_TAR_SRCDIR) $(TMP_DIR)/$(SOURCE_NAME)-$(VERSION)/
+	cd $(TMP_DIR) && tar -c $(TAR_FLAGS) -f ../$(SOURCE_NAME)_$(VERSION).orig.tar.$(TAR_EXT) --exclude=.svn --exclude=.git $(SOURCE_NAME)-$(VERSION)
 	rm -rf $(TMP_DIR)
-	@echo "# Done (created $(DEBIAN_NAME)_$(VERSION).orig.tar.$(TAR_EXT))"
-	@ls -l $(DEBIAN_NAME)_$(VERSION).orig.tar.$(TAR_EXT)
+	@echo "# Done (created $(SOURCE_NAME)_$(VERSION).orig.tar.$(TAR_EXT))"
+	@ls -l $(SOURCE_NAME)_$(VERSION).orig.tar.$(TAR_EXT)

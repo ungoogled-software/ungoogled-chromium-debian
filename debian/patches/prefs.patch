@@ -1,10 +1,10 @@
 Author:  Raymond Wooninck (tittiatcoke)
 Source: OpenSUSE (chromium-master-prefs-path.patch)
-Index: sid/src/chrome/browser/first_run/first_run_linux.cc
+Index: chromium/src/chrome/browser/first_run/first_run_linux.cc
 ===================================================================
---- sid.orig/src/chrome/browser/first_run/first_run_linux.cc	2013-06-24 11:48:28.200039194 +0200
-+++ sid/src/chrome/browser/first_run/first_run_linux.cc	2013-06-24 11:48:28.196039194 +0200
-@@ -65,9 +65,7 @@
+--- chromium.orig/src/chrome/browser/first_run/first_run_linux.cc	2013-08-24 20:10:46.793823747 +0000
++++ chromium/src/chrome/browser/first_run/first_run_linux.cc	2013-08-24 20:10:46.789823747 +0000
+@@ -33,9 +33,7 @@
  
  base::FilePath MasterPrefsPath() {
    // The standard location of the master prefs is next to the chrome binary.
