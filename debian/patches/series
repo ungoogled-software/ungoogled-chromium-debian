@@ -18,3 +18,4 @@ arm.patch
 icon.patch
 arm-neon.patch
 gold-linker.patch
+third-party-cookies-off-by-default.patch
