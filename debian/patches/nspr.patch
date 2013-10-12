@@ -1,47 +1,21 @@
 Include system copy of prtime.h
-Index: chromium/src/base/pr_time_unittest.cc
+Index: sid/src/chrome/browser/metrics/metrics_log.cc
 ===================================================================
---- chromium.orig/src/base/pr_time_unittest.cc	2013-08-24 20:06:45.077832579 +0000
-+++ chromium/src/base/pr_time_unittest.cc	2013-08-24 20:06:44.985832582 +0000
-@@ -5,7 +5,7 @@
- #include <time.h>
- 
- #include "base/compiler_specific.h"
--#include "base/third_party/nspr/prtime.h"
-+#include <nspr/prtime.h>
- #include "base/time.h"
- #include "testing/gtest/include/gtest/gtest.h"
- 
-Index: chromium/src/base/time.cc
-===================================================================
---- chromium.orig/src/base/time.cc	2013-08-24 20:06:45.077832579 +0000
-+++ chromium/src/base/time.cc	2013-08-24 20:06:45.009832582 +0000
-@@ -12,7 +12,7 @@
- #include <limits>
- 
- #include "base/strings/sys_string_conversions.h"
--#include "base/third_party/nspr/prtime.h"
-+#include <nspr/prtime.h>
- 
- #include "base/logging.h"
- 
-Index: chromium/src/chrome/browser/metrics/metrics_log.cc
-===================================================================
---- chromium.orig/src/chrome/browser/metrics/metrics_log.cc	2013-08-24 20:06:45.077832579 +0000
-+++ chromium/src/chrome/browser/metrics/metrics_log.cc	2013-08-24 20:06:45.009832582 +0000
-@@ -20,7 +20,7 @@
+--- sid.orig/src/chrome/browser/metrics/metrics_log.cc	2013-10-12 16:27:35.488492546 +0200
++++ sid/src/chrome/browser/metrics/metrics_log.cc	2013-10-12 16:29:00.749840789 +0200
+@@ -21,7 +21,7 @@
  #include "base/strings/string_util.h"
  #include "base/strings/utf_string_conversions.h"
  #include "base/sys_info.h"
 -#include "base/third_party/nspr/prtime.h"
 +#include <nspr/prtime.h>
- #include "base/time.h"
+ #include "base/time/time.h"
  #include "base/tracked_objects.h"
  #include "chrome/browser/autocomplete/autocomplete_input.h"
-Index: chromium/src/base/base.gypi
+Index: sid/src/base/base.gypi
 ===================================================================
---- chromium.orig/src/base/base.gypi	2013-08-24 20:06:45.077832579 +0000
-+++ chromium/src/base/base.gypi	2013-08-24 20:06:45.029832581 +0000
+--- sid.orig/src/base/base.gypi	2013-10-12 16:27:35.488492546 +0200
++++ sid/src/base/base.gypi	2013-10-12 16:27:35.484494546 +0200
 @@ -25,7 +25,6 @@
            'third_party/nspr/prcpucfg_openbsd.h',
            'third_party/nspr/prcpucfg_solaris.h',
@@ -50,16 +24,29 @@ Index: chromium/src/base/base.gypi
            'third_party/nspr/prtime.h',
            'third_party/nspr/prtypes.h',
            'third_party/xdg_mime/xdgmime.h',
-Index: chromium/src/chrome/common/metrics/metrics_log_base.cc
+Index: sid/src/base/time/pr_time_unittest.cc
 ===================================================================
---- chromium.orig/src/chrome/common/metrics/metrics_log_base.cc	2013-08-24 20:06:45.077832579 +0000
-+++ chromium/src/chrome/common/metrics/metrics_log_base.cc	2013-08-24 20:07:00.265832024 +0000
-@@ -14,7 +14,7 @@
- #include "base/strings/utf_string_conversions.h"
- #include "base/sys_byteorder.h"
- #include "base/sys_info.h"
+--- sid.orig/src/base/time/pr_time_unittest.cc	2013-10-12 10:33:49.000000000 +0200
++++ sid/src/base/time/pr_time_unittest.cc	2013-10-12 16:29:39.378516904 +0200
+@@ -5,7 +5,7 @@
+ #include <time.h>
+ 
+ #include "base/compiler_specific.h"
 -#include "base/third_party/nspr/prtime.h"
 +#include <nspr/prtime.h>
- #include "chrome/common/chrome_version_info.h"
- #include "chrome/common/logging_chrome.h"
- #include "chrome/common/metrics/proto/histogram_event.pb.h"
+ #include "base/time/time.h"
+ #include "testing/gtest/include/gtest/gtest.h"
+ 
+Index: sid/src/base/time/time.cc
+===================================================================
+--- sid.orig/src/base/time/time.cc	2013-10-12 10:33:49.000000000 +0200
++++ sid/src/base/time/time.cc	2013-10-12 16:30:11.562416992 +0200
+@@ -10,7 +10,7 @@
+ #include "base/float_util.h"
+ #include "base/logging.h"
+ #include "base/strings/sys_string_conversions.h"
+-#include "base/third_party/nspr/prtime.h"
++#include <nspr/prtime.h>
+ 
+ namespace base {
+ 

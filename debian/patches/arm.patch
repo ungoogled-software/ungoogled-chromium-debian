@@ -1,7 +1,7 @@
 Index: sid/src/ui/base/resource/data_pack.cc
 ===================================================================
---- sid.orig/src/ui/base/resource/data_pack.cc	2013-06-24 11:51:04.360040869 +0200
-+++ sid/src/ui/base/resource/data_pack.cc	2013-06-24 11:51:04.352040869 +0200
+--- sid.orig/src/ui/base/resource/data_pack.cc	2013-10-12 16:35:04.850312830 +0200
++++ sid/src/ui/base/resource/data_pack.cc	2013-10-12 16:35:04.846312830 +0200
 @@ -147,9 +147,11 @@
    // 2) Verify the entries are within the appropriate bounds. There's an extra
    // entry after the last item which gives us the length of the last item.

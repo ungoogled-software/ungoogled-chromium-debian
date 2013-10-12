@@ -1,11 +1,11 @@
 webkit needs to call nss to pull in nspr headers
-Index: chromium/src/chrome/chrome_common.gypi
+Index: sid/src/chrome/chrome_common.gypi
 ===================================================================
---- chromium.orig/src/chrome/chrome_common.gypi	2013-08-24 20:10:40.793823967 +0000
-+++ chromium/src/chrome/chrome_common.gypi	2013-08-24 20:10:40.777823967 +0000
-@@ -540,6 +540,11 @@
-             'common/crash_keys.h',
-           ],
+--- sid.orig/src/chrome/chrome_common.gypi	2013-10-12 16:30:47.608385096 +0200
++++ sid/src/chrome/chrome_common.gypi	2013-10-12 16:30:47.600389094 +0200
+@@ -607,6 +607,11 @@
+               'common/local_discovery/service_discovery_client.h',
+             ]
          }],
 +        ['OS=="linux"', {
 +          'include_dirs': [

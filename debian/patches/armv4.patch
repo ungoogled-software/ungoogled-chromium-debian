@@ -1,9 +1,9 @@
 Do not use armv4 incopatible code
-Index: chromium/src/build/common.gypi
+Index: sid/src/build/common.gypi
 ===================================================================
---- chromium.orig/src/build/common.gypi	2013-08-24 20:10:50.661823606 +0000
-+++ chromium/src/build/common.gypi	2013-08-24 20:10:50.661823606 +0000
-@@ -2961,6 +2961,7 @@
+--- sid.orig/src/build/common.gypi	2013-10-12 16:34:55.630312804 +0200
++++ sid/src/build/common.gypi	2013-10-12 16:34:55.626312804 +0200
+@@ -3026,6 +3026,7 @@
                    # silences those warnings, as they are not helpful and
                    # clutter legitimate warnings.
                    '-Wno-abi',
