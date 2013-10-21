@@ -1,3 +1,70 @@
+chromium-browser (30.0.1599.101-1) unstable; urgency=low
+
+  [ Giuseppe Iuculano ]
+  * New stable release:
+    - High CVE-2013-2925: Use after free in XHR. Credit to Atte Kettunen of
+      OUSPG.
+    - High CVE-2013-2926: Use after free in editing. Credit to
+      cloudfuzzer.
+    - High CVE-2013-2927: Use after free in forms. Credit to
+      cloudfuzzer.
+    - CVE-2013-2928: Various fixes from internal audits, fuzzing and other
+      initiatives.
+    - Medium CVE-2013-2906: Races in Web Audio.
+      Credit to Atte Kettunen of OUSPG.
+    - Medium CVE-2013-2907: Out of bounds read in Window.prototype object.
+      Credit to Boris Zbarsky.
+    - Medium CVE-2013-2908: Address bar spoofing related to the "204
+      No Content" status code. Credit to Chamal de Silva.
+    - High CVE-2013-2909: Use after free in inline-block
+      rendering. Credit to Atte Kettunen of OUSPG. 
+    - Medium CVE-2013-2910: Use-after-free in Web Audio. Credit to
+      Byoungyoung Lee of Georgia Tech Information Security Center (GTISC).
+    - High CVE-2013-2911: Use-after-free in XSLT. Credit to Atte
+      Kettunen of OUSPG.
+    - High CVE-2013-2912: Use-after-free in PPAPI. Credit to Chamal
+      de Silva and 41.w4r10r(at)garage4hackers.com.
+    - High CVE-2013-2913: Use-after-free in XML document parsing.
+      Credit to cloudfuzzer. 
+    - High CVE-2013-2914: Use after free in the Windows color
+      chooser dialog. Credit to Khalil Zhani. 
+    - Low CVE-2013-2915: Address bar spoofing via a malformed scheme.
+      Credit to Wander Groeneveld. 
+    - High CVE-2013-2916: Address bar spoofing related to the "204
+      No Content” status code. Credit to Masato Kinugawa.
+    - Medium CVE-2013-2917: Out of bounds read in Web Audio. Credit
+      to Byoungyoung Lee and Tielei Wang of Georgia Tech Information
+      Security Center (GTISC). 
+    - High CVE-2013-2918: Use-after-free in DOM. Credit to
+      Byoungyoung Lee of Georgia Tech Information Security Center (GTISC).
+    - High CVE-2013-2919: Memory corruption in V8. Credit to Adam
+      Haile of Concrete Data. 
+    - Medium CVE-2013-2920: Out of bounds read in URL parsing. Credit to
+      Atte Kettunen of OUSPG.
+    - High CVE-2013-2921: Use-after-free in resource loader. Credit
+      to Byoungyoung Lee and Tielei Wang of Georgia Tech Information
+      Security Center (GTISC). 
+    - High CVE-2013-2922: Use-after-free in template element. Credit
+      to Jon Butler. 
+    - CVE-2013-2923: Various fixes from internal audits, fuzzing and other
+      initiatives (Chrome 30).
+    - Medium CVE-2013-2924: Use-after-free in ICU. Upstream bug here.
+
+  * [6651f1c] Added chrpath to build-depends
+  * [3c88b20] Refreshed Patches for version 30
+  * [743a0a6] Make default of third-party cookies the most secure for users.
+    Thanks to Chad Miller
+  * [9507f07] Do not install remoting_locales/en-US.pak
+  * [64b895b] Move chrome_sandbox to chrome-sandbox, chromium reads that file
+
+  [ Shawn Landden ]
+  * [6d027f1] rules: dpkg compresses .deb files with xz by default now
+
+  [ Michael Gilbert ]
+  * [18341ce] add some TODO tasks
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Mon, 21 Oct 2013 13:06:14 +0200
+
 chromium-browser (29.0.1547.57-3) unstable; urgency=medium
 
   * Drop transitional packages (closes: #684369).
