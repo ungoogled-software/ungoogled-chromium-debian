@@ -372,7 +372,7 @@ GYP_DEFINES += \
 	$(NULL)
 
 # needed to preserve the suid and make the sandbox happy
-DEB_FIXPERMS_EXCLUDE := $(DEBIAN_NAME)-sandbox
+DEB_FIXPERMS_EXCLUDE := chrome-sandbox
 endif
 
 # use system v8
@@ -467,7 +467,7 @@ endif
 	# as chromium dereferences all symlinks before starting its children
 	# making the Gnome System Monitor confused with icons
 	mv debian/tmp/$(LIB_DIR)/chrome debian/tmp/$(LIB_DIR)/$(DEBIAN_NAME)
-	mv debian/tmp/$(LIB_DIR)/chrome_sandbox debian/tmp/$(LIB_DIR)/$(DEBIAN_NAME)-sandbox
+	mv debian/tmp/$(LIB_DIR)/chrome_sandbox debian/tmp/$(LIB_DIR)/chrome-sandbox
 	# Manpage
 	mv debian/tmp/$(LIB_DIR)/chrome.1 debian/tmp/$(LIB_DIR)/chromium.1
 	dh_installman -pchromium debian/tmp/$(LIB_DIR)/chromium.1
@@ -486,9 +486,9 @@ binary-install/$(DEBIAN_NAME)::
 	mkdir -p $(CURDIR)/debian/$(DEBIAN_NAME)/usr/share/icons/hicolor/scalable/apps
 	cp -a $(CURDIR)/debian/$(DEBIAN_NAME).svg $(CURDIR)/debian/$(DEBIAN_NAME)/usr/share/icons/hicolor/scalable/apps
 ifeq (1,$(WANT_SANDBOXING))
-	chmod 4755 $(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(DEBIAN_NAME)-sandbox
+	chmod 4755 $(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/chrome-sandbox
 else
-	rm -vf $(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(DEBIAN_NAME)-sandbox
+	rm -vf $(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/chrome-sandbox
 endif
 	# Locales: only keep en-US in the main deb
 	cd $(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/locales && \
