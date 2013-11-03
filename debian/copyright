@@ -20765,7 +20765,7 @@ License: BSL-1
  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  DEALINGS IN THE SOFTWARE.
 
-License GPL-2+
+License: GPL-2+
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation; either version 2 of the License, or
@@ -20783,7 +20783,7 @@ License GPL-2+
  On debian/ubuntu the full license text can be found here:
  /usr/share/common-licenses/GPL-2
 
-License GPL (v3 or later)
+License: GPL (v3 or later)
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation, either version 3 of the License, or

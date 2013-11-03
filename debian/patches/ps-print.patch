@@ -1,0 +1,12 @@
+description: add ps printing capability
+author: Salvatore Bonaccorso
+--- a/src/chrome/browser/printing/print_dialog_gtk.cc
++++ b/src/chrome/browser/printing/print_dialog_gtk.cc
+@@ -241,6 +241,7 @@
+   // Since we only generate PDF, only show printers that support PDF.
+   // TODO(thestig) Add more capabilities to support?
+   GtkPrintCapabilities cap = static_cast<GtkPrintCapabilities>(
++      GTK_PRINT_CAPABILITY_GENERATE_PS |
+       GTK_PRINT_CAPABILITY_GENERATE_PDF |
+       GTK_PRINT_CAPABILITY_PAGE_SET |
+       GTK_PRINT_CAPABILITY_COPIES |

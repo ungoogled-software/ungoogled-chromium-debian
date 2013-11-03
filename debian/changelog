@@ -1,3 +1,15 @@
+chromium-browser (30.0.1599.101-2) unstable; urgency=medium
+
+  * Use system zlib.
+  * Remove arm patches.
+  * Update lintian overrides.
+  * Remove an unsafe symlink.
+  * Remove icu build dependency.
+  * Support poststript printing (closes: #717722).
+  * Use fonts-ipafont instead of ttf-kochi (closes: #725800).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 02 Nov 2013 21:25:50 +0000
+
 chromium-browser (30.0.1599.101-1) unstable; urgency=low
 
   [ Giuseppe Iuculano ]

@@ -3,7 +3,6 @@ nspr.patch
 nss.patch
 expat.patch
 prefs.patch
-armv4.patch
 #ffmpeg_arm.patch
 system-speech.patch
 #glew.patch
@@ -14,8 +13,7 @@ fix-manpage.patch
 #javascript-i18n.patch
 #icu.patch
 #system_v8.patch
-arm.patch
 icon.patch
-arm-neon.patch
 gold-linker.patch
 third-party-cookies-off-by-default.patch
+ps-print.patch
