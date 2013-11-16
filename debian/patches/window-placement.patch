@@ -1,0 +1,17 @@
+Subject: Prevent windows from jumping to front for new tabs
+From: Tony Houghton <h@realh.co.uk>
+Bug: https://code.google.com/p/chromium/issues/detail?id=297679
+Bug-Debian: http://bugs.debian.org/725350
+Index: chromium/src/chrome/browser/ui/gtk/browser_window_gtk.cc
+===================================================================
+--- chromium.orig/src/chrome/browser/ui/gtk/browser_window_gtk.cc	2013-11-11 15:16:00.873091406 -0500
++++ chromium/src/chrome/browser/ui/gtk/browser_window_gtk.cc	2013-11-11 15:16:00.873091406 -0500
+@@ -580,7 +580,7 @@
+   // browser instead if we don't explicitly set it here.
+   BrowserList::SetLastActive(browser());
+ 
+-  gtk_window_present(window_);
++  gtk_widget_show(GTK_WIDGET(window_));
+   if (show_state_after_show_ == ui::SHOW_STATE_MAXIMIZED) {
+     gtk_window_maximize(window_);
+     show_state_after_show_ = ui::SHOW_STATE_NORMAL;

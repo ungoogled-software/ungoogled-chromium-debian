@@ -1917,20 +1917,12 @@ Files: src/depot_tools/third_party/__init__.py
 Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
-Files: src/depot_tools/third_party/pymox/stubout_test.py
-Copyright: UNKNOWN:
-License: *No copyright* Apache-2.0
-
-Files: src/depot_tools/third_party/pymox/setup.py, src/depot_tools/third_party/pymox/stubout_testee.py
-Copyright: UNKNOWN:
-License: *No copyright* UNKNOWN
-
-Files: src/depot_tools/third_party/pymox/mox.py, src/depot_tools/third_party/pymox/mox_test.py, src/depot_tools/third_party/pymox/mox_test_helper.py, src/depot_tools/third_party/pymox/stubout.py
-Copyright: Copyright: 2008 Google Inc:
+Files: src/depot_tools/third_party/pymox/*
+Copyright: Copyright 2008 Google Inc.
 License: Apache-2.0
 
 Files: src/depot_tools/third_party/repo/progress.py
-Copyright: Copyright: 2009 The Android Open Source Project:
+Copyright: Copyright: 2009 The Android Open Source Project
 License: Apache-2.0
 
 Files: src/depot_tools/third_party/simplejson/__init__.py, src/depot_tools/third_party/simplejson/decoder.py, src/depot_tools/third_party/simplejson/encoder.py, src/depot_tools/third_party/simplejson/ordered_dict.py, src/depot_tools/third_party/simplejson/scanner.py, src/depot_tools/third_party/simplejson/tool.py

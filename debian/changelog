@@ -1,3 +1,48 @@
+chromium-browser (31.0.1650.57-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - Medium-Critical CVE-2013-2931: Various fixes from internal audits,
+      fuzzing and other initiatives.
+    - Medium CVE-2013-6621: Use after free related to speech input elements.
+      Credit to Khalil Zhani.
+    - High CVE-2013-6622: Use after free related to media elements. Credit to
+      cloudfuzzer.
+    - High CVE-2013-6623: Out of bounds read in SVG. Credit to miaubiz.
+    - High CVE-2013-6624: Use after free related to “id” attribute strings.
+      Credit to Jon Butler.
+    - High CVE-2013-6625: Use after free in DOM ranges. Credit to cloudfuzzer.
+    - Low CVE-2013-6626: Address bar spoofing related to interstitial warnings.
+      Credit to Chamal de Silva.
+    - High CVE-2013-6627: Out of bounds read in HTTP parsing. Credit to
+      skylined.
+    - Medium CVE-2013-6628: Issue with certificates not being checked during
+      TLS renegotiation. Credit to Antoine Delignat-Lavaud and Karthikeyan
+      Bhargavan from Prosecco of INRIA Paris.
+    - Medium CVE-2013-6629: Read of uninitialized memory in libjpeg and
+      libjpeg-turbo. Credit to Michal Zalewski of Google.
+    - Medium CVE-2013-6630: Read of uninitialized memory in libjpeg-turbo.
+      Credit to Michal Zalewski of Google.
+    - High CVE-2013-6631: Use after free in libjingle. Credit to Patrik Höglund
+      of the Chromium project.
+    - Critical CVE-2013-6632: Multiple memory corruption issues. Credit to
+      Pinkie Pie.
+  * Disable promos by default (closes: #634101).
+  * Set WANT_TESTS=0 if WANT_TESTS=1 fails (closes: #589654).
+  * Maintain window ordering when new tabs are opened (closes: #725350).
+  * Install chromium-inspector files to /usr/share instead of /usr/lib.
+  * Don't remove third party libraries from the upstream tarball.
+  * Remove non-default compression selections from debian/rules.
+  * Build with breakpad crash reporting.
+  * Fix some lintian warnings.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Wed, 13 Nov 2013 07:44:55 +0000
+
+chromium-browser (30.0.1599.101-3) unstable; urgency=medium
+
+  * Fix sandbox installation path (closes: #728823).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 07 Nov 2013 04:24:55 +0000
+
 chromium-browser (30.0.1599.101-2) unstable; urgency=medium
 
   * Use system zlib.

@@ -153,6 +153,8 @@ Recommends:
  chromium (>= 10),
 Conflicts:
  chromium (<< ${source:Version}),
+Replaces:
+ chromium (<< 31.0.1650.48-1),
 Description: page inspector for the chromium browser
  Chromium is an open-source browser project that aims to build a safer, faster,
  and more stable way for all Internet users to experience the web.

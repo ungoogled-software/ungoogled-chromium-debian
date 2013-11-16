@@ -1,5 +1,6 @@
-chromium: embedded-library usr/lib/chromium/chromium: sqlite
-chromium: embedded-library usr/lib/chromium/libffmpegsumo.so: libavcodec
-chromium: embedded-library usr/lib/chromium/libffmpegsumo.so: libavutil
-chromium: setuid-binary usr/lib/chromium/chrome-sandbox 4755 root/root
-chromium: shlib-with-non-pic-code usr/lib/chromium/libffmpegsumo.so
+embedded-library usr/lib/chromium/chromium: libpng
+embedded-library usr/lib/chromium/chromium: sqlite
+embedded-library usr/lib/chromium/libffmpegsumo.so: libavcodec
+embedded-library usr/lib/chromium/libffmpegsumo.so: libavutil
+setuid-binary usr/lib/chromium/chrome-sandbox 4755 root/root
+shlib-with-non-pic-code usr/lib/chromium/libffmpegsumo.so

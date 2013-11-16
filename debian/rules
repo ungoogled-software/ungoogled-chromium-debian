@@ -22,9 +22,7 @@ DEB_TAR_SRCDIR := src
 SRC_DIR        := $(CURDIR)/$(DEB_TAR_SRCDIR)
 LIB_DIR        := usr/lib/$(DEBIAN_NAME)
 DEB_BUILDDIR   := $(SRC_DIR)
-#BUILD_ARGS     := --keep-going
 
-WANT_XZ_SRC      ?= 1
 WANT_DEBUG       := 0
 WANT_SYSTEM_LIBS ?= 1
 WANT_SHARED_LIBS ?= 0
@@ -85,9 +83,6 @@ GYP_DEFINES += linux_use_tcmalloc=0
 # Use explicit library dependencies instead of dlopen.
 # This makes breakages easier to detect by revdep-rebuild.
 GYP_DEFINES += linux_link_gsettings=1
-
-# disable breakpad crash reporting
-GYP_DEFINES += linux_breakpad=0
 
 DEB_HOST_ARCH_CPU := $(shell dpkg-architecture -qDEB_HOST_ARCH_CPU)
 DEB_HOST_ARCH := $(shell dpkg-architecture -qDEB_HOST_ARCH)
@@ -161,15 +156,6 @@ endif
 
 # Always ignore compiler warnings
 GYP_DEFINES += werror=$(NULL)
-
-ifeq (1,$(WANT_XZ_SRC))
-TAR_EXT   := xz
-TAR_FLAGS := --xz
-DEB_TARBALL = $(wildcard *.tar.bz2 *.tar.$(TAR_EXT))
-else
-TAR_EXT   := bz2
-TAR_FLAGS := -j
-endif
 
 include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/class/makefile.mk
@@ -348,7 +334,6 @@ TESTS_TARGETS := \
 	wav_ola_test \
 	$(NULL)
 
-ifeq (1,$(WANT_TESTS))
 INSTALL_EXCLUDE_FILES += \
 	$(TESTS_TARGETS) \
 	test_shell.pak \
@@ -358,7 +343,6 @@ INSTALL_EXCLUDE_FILES += \
 INSTALL_EXCLUDE_DIRS += \
 	app_unittests_strings \
 	$(NULL)
-endif
 
 ifeq (1,$(WANT_SANDBOXING))
 GYP_DEFINES += \
@@ -469,6 +453,9 @@ endif
 	rm -f debian/tmp/$(LIB_DIR)/chromium.1
 	strip debian/tmp/usr/lib/chromium/nacl_irt_x86_32.nexe || true
 	strip debian/tmp/usr/lib/chromium/nacl_irt_x86_64.nexe || true
+	# move inspector files into /usr/share
+	mkdir -p $(CURDIR)/debian/tmp/usr/share
+	mv $(CURDIR)/debian/tmp/$(LIB_DIR)/resources/inspector $(CURDIR)/debian/tmp/usr/share/chromium-inspector
 
 binary-install/$(DEBIAN_NAME)::
 	mkdir -p $(CURDIR)/debian/$(DEBIAN_NAME)/usr/share/pixmaps
@@ -496,8 +483,6 @@ ifneq (i386,$(DEB_HOST_ARCH_CPU))
 	# to drop the -l10n files from debian/tmp to make 'compare' happy
 	cd $(CURDIR)/debian/tmp/$(LIB_DIR)/locales && \
 	  rm $(filter-out en-US.pak,$(notdir $(wildcard $(CURDIR)/debian/tmp/$(LIB_DIR)/locales/*)))
-	# same for inspector
-	rm -rf $(CURDIR)/debian/tmp/$(LIB_DIR)/resources/inspector/*
 endif
 ifeq (1,$(USE_SYSTEM_FFMPEG))
 	# Install symlinks to system ffmpeg libs
@@ -600,7 +585,6 @@ USE_GREEN_REV ?= 0
 STRIP_TARBALL ?= 1
 
 STRIPPED_DIRS_FROM_CO := \
-	src/breakpad/src \
 	src/tools/gyp \
 	src/chrome/tools/test/reference_build \
 	src/chrome/tools/test/reference_build/chrome_linux \
@@ -668,19 +652,6 @@ ALMOST_STRIPPED_DIRS := \
 	courgette \
 	third_party/gles2_book \
 	$(NULL)
-
-ifeq (1,$(WANT_SYSTEM_LIBS))
-# Directories that will be dropped if the corresponding system lib are enabled in GYP_DEFINES
-# We need to keep some files (like *.gyp) so we can't use STRIPPED_DIRS
-# We can't drop third_party/zlib because we don't have contrib/minizip/*zip.h, and
-# third_party/sqlite because it's a conditional build (see USE_SYSTEM_SQLITE)
-STRIPPED_SYSTEM_LIB_DIRS += \
-	third_party/bzip2 \
-	third_party/libjpeg \
-	third_party/libpng \
-	third_party/libxslt \
-	$(NULL)
-endif
 
 STRIP_SYSTEM_DIRS = \
 	($(foreach DIR,$(1),$(if $(findstring use_system_$(notdir $(DIR))=1,$(GYP_DEFINES)),\
@@ -786,9 +757,6 @@ ifneq (,$(ALMOST_STRIPPED_DIRS))
 	# Strip listed dirs almost completely (keep *.gyp and README.chromium)
 	$(call ALMOST_STRIP_DIRS,$(ALMOST_STRIPPED_DIRS),$(TMP_DDIR)/src) | grep -vE '/\.svn(/|.$$)' >> $(TMP_DDIR)/src/REMOVED-stripped.txt
 endif
-ifneq (,$(STRIPPED_SYSTEM_LIB_DIRS))
-	$(call STRIP_SYSTEM_DIRS,$(STRIPPED_SYSTEM_LIB_DIRS),$(TMP_DDIR)/src) | grep -vE '/\.svn(/|.$$)' >> $(TMP_DDIR)/src/REMOVED-stripped.txt
-endif
 endif
 	# Remove binaries
 	cd $(TMP_DDIR)/src && find . -type f \( -iname \*.exe -o -iname \*.dll -o -iname \*.pdb -o -name \*.o -o -name \*.a -o -name \*.dylib -o -name \*.so -o -name \*.so.\* \) -ls -delete > REMOVED-bin_only.txt
@@ -828,7 +796,6 @@ gos-pack:
 	mv $(TMP_DIR)/tools/depot_tools $(TMP_DIR)/$(DEB_TAR_SRCDIR)/depot_tools
 	mkdir $(TMP_DIR)/$(SOURCE_NAME)-$(VERSION)
 	mv $(TMP_DIR)/$(DEB_TAR_SRCDIR) $(TMP_DIR)/$(SOURCE_NAME)-$(VERSION)/
-	cd $(TMP_DIR) && tar -c $(TAR_FLAGS) -f ../$(SOURCE_NAME)_$(VERSION).orig.tar.$(TAR_EXT) --exclude=.svn --exclude=.git $(SOURCE_NAME)-$(VERSION)
+	cd $(TMP_DIR) && tar cJf ../../$(SOURCE_NAME)_$(VERSION).orig.tar.xz \
+		--exclude=.svn --exclude=.git $(SOURCE_NAME)-$(VERSION)
 	rm -rf $(TMP_DIR)
-	@echo "# Done (created $(SOURCE_NAME)_$(VERSION).orig.tar.$(TAR_EXT))"
-	@ls -l $(SOURCE_NAME)_$(VERSION).orig.tar.$(TAR_EXT)
