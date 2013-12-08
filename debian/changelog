@@ -1,3 +1,22 @@
+chromium-browser (31.0.1650.63-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - Medium CVE-2013-6634: Session fixation in sync related to 302 redirects.
+      Credit to Andrey Labunets.
+    - High CVE-2013-6635: Use-after-free in editing. Credit to cloudfuzzer.
+    - Medium CVE-2013-6636: Address bar spoofing related to modal dialogs.
+      Credit to Bas Venis.
+    - CVE-2013-6637: Various fixes from internal audits, fuzzing and other
+      initiatives.
+    - Medium CVE-2013-6638: Buffer overflow in v8. This issue was fixed in v8
+      version 3.22.24.7. Credit to Jakob Kummerow of the Chromium project.
+    - High CVE-2013-6639: Out of bounds write in v8. This issue was fixed in v8
+      version 3.22.24.7. Credit to Jakob Kummerow of the Chromium project.
+    - Medium CVE-2013-6640: Out of bounds read in v8. This issue was fixed in
+      v8 version 3.22.24.7. Credit to Jakob Kummerow of the Chromium project.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 05 Dec 2013 14:05:22 +0000
+
 chromium-browser (31.0.1650.57-1) unstable; urgency=medium
 
   * New upstream stable release:
