@@ -1,21 +1,21 @@
 Include system copy of prtime.h
-Index: chromium/src/chrome/browser/metrics/metrics_log.cc
+Index: sid/src/chrome/browser/metrics/metrics_log.cc
 ===================================================================
---- chromium.orig/src/chrome/browser/metrics/metrics_log.cc	2013-11-13 07:50:26.980675623 +0000
-+++ chromium/src/chrome/browser/metrics/metrics_log.cc	2013-11-13 07:52:01.556672167 +0000
-@@ -21,7 +21,7 @@
+--- sid.orig/src/chrome/browser/metrics/metrics_log.cc	2014-02-02 19:27:05.936401666 +0100
++++ sid/src/chrome/browser/metrics/metrics_log.cc	2014-02-02 19:27:38.964401761 +0100
+@@ -20,7 +20,7 @@
+ #include "base/strings/string_util.h"
  #include "base/strings/utf_string_conversions.h"
  #include "base/sys_info.h"
- #include "base/test/perftimer.h"
 -#include "base/third_party/nspr/prtime.h"
 +#include <nspr/prtime.h>
  #include "base/time/time.h"
  #include "base/tracked_objects.h"
  #include "chrome/browser/autocomplete/autocomplete_input.h"
-Index: chromium/src/base/base.gypi
+Index: sid/src/base/base.gypi
 ===================================================================
---- chromium.orig/src/base/base.gypi	2013-11-13 07:50:26.980675623 +0000
-+++ chromium/src/base/base.gypi	2013-11-13 07:50:26.928675625 +0000
+--- sid.orig/src/base/base.gypi	2014-02-02 19:27:05.936401666 +0100
++++ sid/src/base/base.gypi	2014-02-02 19:27:05.932401666 +0100
 @@ -25,7 +25,6 @@
            'third_party/nspr/prcpucfg_openbsd.h',
            'third_party/nspr/prcpucfg_solaris.h',
@@ -24,10 +24,10 @@ Index: chromium/src/base/base.gypi
            'third_party/nspr/prtime.h',
            'third_party/nspr/prtypes.h',
            'third_party/xdg_mime/xdgmime.h',
-Index: chromium/src/base/time/pr_time_unittest.cc
+Index: sid/src/base/time/pr_time_unittest.cc
 ===================================================================
---- chromium.orig/src/base/time/pr_time_unittest.cc	2013-11-13 07:50:26.980675623 +0000
-+++ chromium/src/base/time/pr_time_unittest.cc	2013-11-13 07:50:26.928675625 +0000
+--- sid.orig/src/base/time/pr_time_unittest.cc	2014-02-02 19:27:05.936401666 +0100
++++ sid/src/base/time/pr_time_unittest.cc	2014-02-02 19:27:05.932401666 +0100
 @@ -5,7 +5,7 @@
  #include <time.h>
  
@@ -37,13 +37,13 @@ Index: chromium/src/base/time/pr_time_unittest.cc
  #include "base/time/time.h"
  #include "testing/gtest/include/gtest/gtest.h"
  
-Index: chromium/src/base/time/time.cc
+Index: sid/src/base/time/time.cc
 ===================================================================
---- chromium.orig/src/base/time/time.cc	2013-11-13 07:50:26.980675623 +0000
-+++ chromium/src/base/time/time.cc	2013-11-13 07:51:53.344672467 +0000
-@@ -9,8 +9,8 @@
- 
+--- sid.orig/src/base/time/time.cc	2014-02-02 19:27:05.936401666 +0100
++++ sid/src/base/time/time.cc	2014-02-02 19:27:05.932401666 +0100
+@@ -10,8 +10,8 @@
  #include "base/float_util.h"
+ #include "base/lazy_instance.h"
  #include "base/logging.h"
 -#include "base/third_party/nspr/prtime.h"
 -#include "base/third_party/nspr/prtypes.h"

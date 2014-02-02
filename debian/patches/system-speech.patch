@@ -1,9 +1,9 @@
 Use system speex
-Index: chromium/src/build/linux/system.gyp
+Index: sid/src/build/linux/system.gyp
 ===================================================================
---- chromium.orig/src/build/linux/system.gyp	2013-11-13 07:52:17.688671578 +0000
-+++ chromium/src/build/linux/system.gyp	2013-11-13 07:52:17.676671578 +0000
-@@ -699,6 +699,26 @@
+--- sid.orig/src/build/linux/system.gyp	2014-02-02 19:27:59.064401818 +0100
++++ sid/src/build/linux/system.gyp	2014-02-02 19:27:59.060401818 +0100
+@@ -337,6 +337,26 @@
        ],
      },
      {
@@ -30,10 +30,10 @@ Index: chromium/src/build/linux/system.gyp
        'target_name': 'gnome_keyring',
        'type': 'none',
        'conditions': [
-Index: chromium/src/content/browser/speech/audio_encoder.cc
+Index: sid/src/content/browser/speech/audio_encoder.cc
 ===================================================================
---- chromium.orig/src/content/browser/speech/audio_encoder.cc	2013-11-13 07:52:17.688671578 +0000
-+++ chromium/src/content/browser/speech/audio_encoder.cc	2013-11-13 07:52:17.676671578 +0000
+--- sid.orig/src/content/browser/speech/audio_encoder.cc	2014-02-02 19:27:59.064401818 +0100
++++ sid/src/content/browser/speech/audio_encoder.cc	2014-02-02 19:27:59.060401818 +0100
 @@ -11,7 +11,7 @@
  #include "base/strings/string_number_conversions.h"
  #include "content/browser/speech/audio_buffer.h"
@@ -43,10 +43,10 @@ Index: chromium/src/content/browser/speech/audio_encoder.cc
  
  namespace content {
  namespace {
-Index: chromium/src/content/content_browser.gypi
+Index: sid/src/content/content_browser.gypi
 ===================================================================
---- chromium.orig/src/content/content_browser.gypi	2013-11-13 07:52:17.688671578 +0000
-+++ chromium/src/content/content_browser.gypi	2013-11-13 07:52:17.684671578 +0000
+--- sid.orig/src/content/content_browser.gypi	2014-02-02 19:27:59.064401818 +0100
++++ sid/src/content/content_browser.gypi	2014-02-02 19:27:59.060401818 +0100
 @@ -1555,7 +1555,7 @@
      }, {  # input_speech==1
        'dependencies': [
@@ -55,4 +55,4 @@ Index: chromium/src/content/content_browser.gypi
 +        '../build/linux/system.gyp:speex',
        ],
      }],
-     ['linux_use_libgps==1', {
+   ],

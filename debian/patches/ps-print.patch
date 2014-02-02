@@ -1,10 +1,10 @@
 description: add ps printing capability
 author: Salvatore Bonaccorso
-Index: chromium/src/chrome/browser/printing/print_dialog_gtk.cc
+Index: sid/src/chrome/browser/printing/print_dialog_gtk.cc
 ===================================================================
---- chromium.orig/src/chrome/browser/printing/print_dialog_gtk.cc	2013-11-13 07:52:35.136670940 +0000
-+++ chromium/src/chrome/browser/printing/print_dialog_gtk.cc	2013-11-13 07:52:35.136670940 +0000
-@@ -269,6 +269,7 @@
+--- sid.orig/src/chrome/browser/printing/print_dialog_gtk.cc	2014-02-02 19:28:13.932401861 +0100
++++ sid/src/chrome/browser/printing/print_dialog_gtk.cc	2014-02-02 19:28:13.928401861 +0100
+@@ -245,6 +245,7 @@
    // Since we only generate PDF, only show printers that support PDF.
    // TODO(thestig) Add more capabilities to support?
    GtkPrintCapabilities cap = static_cast<GtkPrintCapabilities>(

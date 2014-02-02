@@ -1,8 +1,8 @@
-Index: chromium/src/build/common.gypi
+Index: sid/src/build/common.gypi
 ===================================================================
---- chromium.orig/src/build/common.gypi	2013-11-13 07:52:27.196671230 +0000
-+++ chromium/src/build/common.gypi	2013-11-13 07:52:27.196671230 +0000
-@@ -2371,6 +2371,7 @@
+--- sid.orig/src/build/common.gypi	2014-02-02 19:28:07.272401842 +0100
++++ sid/src/build/common.gypi	2014-02-02 19:28:07.268401842 +0100
+@@ -2402,6 +2402,7 @@
                # Don't warn about printf format problems.
                # This is off by default in gcc but on in Ubuntu's gcc(!).
                '-Wno-format',
@@ -10,7 +10,7 @@ Index: chromium/src/build/common.gypi
              ],
              'cflags_cc!': [
                # TODO(fischman): remove this.
-@@ -2759,6 +2760,7 @@
+@@ -2794,6 +2795,7 @@
          'ldflags': [
            '-Wl,-z,now',
            '-Wl,-z,relro',
