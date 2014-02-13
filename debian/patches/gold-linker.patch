@@ -1,7 +1,7 @@
 Index: sid/src/build/common.gypi
 ===================================================================
---- sid.orig/src/build/common.gypi	2014-02-02 19:28:07.272401842 +0100
-+++ sid/src/build/common.gypi	2014-02-02 19:28:07.268401842 +0100
+--- sid.orig/src/build/common.gypi	2014-02-13 15:44:58.979430699 +0100
++++ sid/src/build/common.gypi	2014-02-13 15:44:58.975430699 +0100
 @@ -2402,6 +2402,7 @@
                # Don't warn about printf format problems.
                # This is off by default in gcc but on in Ubuntu's gcc(!).

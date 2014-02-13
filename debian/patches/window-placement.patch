@@ -4,8 +4,8 @@ Bug: https://code.google.com/p/chromium/issues/detail?id=297679
 Bug-Debian: http://bugs.debian.org/725350
 Index: sid/src/chrome/browser/ui/gtk/browser_window_gtk.cc
 ===================================================================
---- sid.orig/src/chrome/browser/ui/gtk/browser_window_gtk.cc	2014-02-02 19:28:17.496401871 +0100
-+++ sid/src/chrome/browser/ui/gtk/browser_window_gtk.cc	2014-02-02 19:28:17.492401871 +0100
+--- sid.orig/src/chrome/browser/ui/gtk/browser_window_gtk.cc	2014-02-13 15:45:04.239430531 +0100
++++ sid/src/chrome/browser/ui/gtk/browser_window_gtk.cc	2014-02-13 15:45:04.235430531 +0100
 @@ -579,7 +579,7 @@
    // browser instead if we don't explicitly set it here.
    BrowserList::SetLastActive(browser());

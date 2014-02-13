@@ -2,8 +2,8 @@ Author:  Raymond Wooninck (tittiatcoke)
 Source: OpenSUSE (chromium-master-prefs-path.patch)
 Index: sid/src/chrome/browser/first_run/first_run_internal_linux.cc
 ===================================================================
---- sid.orig/src/chrome/browser/first_run/first_run_internal_linux.cc	2014-02-02 19:27:56.240401810 +0100
-+++ sid/src/chrome/browser/first_run/first_run_internal_linux.cc	2014-02-02 19:27:56.236401810 +0100
+--- sid.orig/src/chrome/browser/first_run/first_run_internal_linux.cc	2014-02-13 15:44:51.439430941 +0100
++++ sid/src/chrome/browser/first_run/first_run_internal_linux.cc	2014-02-13 15:44:51.435430941 +0100
 @@ -19,9 +19,7 @@
  
  base::FilePath MasterPrefsPath() {

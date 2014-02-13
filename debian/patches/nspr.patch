@@ -1,8 +1,8 @@
 Include system copy of prtime.h
 Index: sid/src/chrome/browser/metrics/metrics_log.cc
 ===================================================================
---- sid.orig/src/chrome/browser/metrics/metrics_log.cc	2014-02-02 19:27:05.936401666 +0100
-+++ sid/src/chrome/browser/metrics/metrics_log.cc	2014-02-02 19:27:38.964401761 +0100
+--- sid.orig/src/chrome/browser/metrics/metrics_log.cc	2014-02-13 15:44:38.435431358 +0100
++++ sid/src/chrome/browser/metrics/metrics_log.cc	2014-02-13 15:44:38.427431358 +0100
 @@ -20,7 +20,7 @@
  #include "base/strings/string_util.h"
  #include "base/strings/utf_string_conversions.h"
@@ -14,8 +14,8 @@ Index: sid/src/chrome/browser/metrics/metrics_log.cc
  #include "chrome/browser/autocomplete/autocomplete_input.h"
 Index: sid/src/base/base.gypi
 ===================================================================
---- sid.orig/src/base/base.gypi	2014-02-02 19:27:05.936401666 +0100
-+++ sid/src/base/base.gypi	2014-02-02 19:27:05.932401666 +0100
+--- sid.orig/src/base/base.gypi	2014-02-13 15:44:38.435431358 +0100
++++ sid/src/base/base.gypi	2014-02-13 15:44:38.427431358 +0100
 @@ -25,7 +25,6 @@
            'third_party/nspr/prcpucfg_openbsd.h',
            'third_party/nspr/prcpucfg_solaris.h',
@@ -26,8 +26,8 @@ Index: sid/src/base/base.gypi
            'third_party/xdg_mime/xdgmime.h',
 Index: sid/src/base/time/pr_time_unittest.cc
 ===================================================================
---- sid.orig/src/base/time/pr_time_unittest.cc	2014-02-02 19:27:05.936401666 +0100
-+++ sid/src/base/time/pr_time_unittest.cc	2014-02-02 19:27:05.932401666 +0100
+--- sid.orig/src/base/time/pr_time_unittest.cc	2014-02-13 15:44:38.435431358 +0100
++++ sid/src/base/time/pr_time_unittest.cc	2014-02-13 15:44:38.431431358 +0100
 @@ -5,7 +5,7 @@
  #include <time.h>
  
@@ -39,8 +39,8 @@ Index: sid/src/base/time/pr_time_unittest.cc
  
 Index: sid/src/base/time/time.cc
 ===================================================================
---- sid.orig/src/base/time/time.cc	2014-02-02 19:27:05.936401666 +0100
-+++ sid/src/base/time/time.cc	2014-02-02 19:27:05.932401666 +0100
+--- sid.orig/src/base/time/time.cc	2014-02-13 15:44:38.435431358 +0100
++++ sid/src/base/time/time.cc	2014-02-13 15:44:38.431431358 +0100
 @@ -10,8 +10,8 @@
  #include "base/float_util.h"
  #include "base/lazy_instance.h"

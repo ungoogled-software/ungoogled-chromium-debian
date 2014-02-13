@@ -1,8 +1,8 @@
 webkit needs to call nss to pull in nspr headers
 Index: sid/src/chrome/chrome_common.gypi
 ===================================================================
---- sid.orig/src/chrome/chrome_common.gypi	2014-02-02 19:27:49.660401791 +0100
-+++ sid/src/chrome/chrome_common.gypi	2014-02-02 19:27:49.660401791 +0100
+--- sid.orig/src/chrome/chrome_common.gypi	2014-02-13 15:44:46.043431114 +0100
++++ sid/src/chrome/chrome_common.gypi	2014-02-13 15:44:46.035431114 +0100
 @@ -540,6 +540,11 @@
                'common/local_discovery/local_discovery_messages.h',
              ]
