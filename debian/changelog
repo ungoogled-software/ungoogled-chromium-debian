@@ -1,3 +1,25 @@
+chromium-browser (32.0.1700.123-1) unstable; urgency=medium
+
+  * [a7cf72b] Refreshed Patches
+  * [0da7fc2] Added libdrm-dev and libcap-dev in build-deps
+  * New stable release:
+    - High CVE-2013-6649: Use-after-free in SVG images. Credit to
+      Atte Kettunen of OUSPG.
+    - High CVE-2013-6650: Memory corruption in V8. This issue was
+      fixed in v8 version 3.22.24.16. Credit to Christian Holler.
+    - High CVE-2013-6646: Use-after-free in web workers. Credit to
+      Collin Payne.
+    - High CVE-2013-6641: Use-after-free related to forms. Credit to
+      Atte Kettunen of OUSPG.
+    - High CVE-2013-6643: Unprompted sync with an attacker’s Google
+      account. Credit to Joao Lucas Melo Brasio.
+    - CVE-2013-6645 Use-after-free related to speech input elements.
+      Credit to Khalil Zhani.
+    - CVE-2013-6644: Various fixes from internal audits, fuzzing and other
+      initiatives.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 13 Feb 2014 19:36:17 +0100
+
 chromium-browser (31.0.1650.63-1) unstable; urgency=medium
 
   * New upstream stable release:
