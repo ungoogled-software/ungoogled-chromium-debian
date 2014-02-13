@@ -74,6 +74,8 @@ Build-Depends:
  libudev-dev,
  libssl-dev,
  libpci-dev,
+ libcap-dev,
+ libdrm-dev
 Standards-Version: 3.9.4
 
 Package: chromium
