@@ -1,0 +1,13 @@
+description: set chromedriver version as undefined
+
+--- a/src/chrome/test/chromedriver/embed_version_in_cpp.py	2014-02-16 03:10:19.731438807 +0000
++++ b/src/chrome/test/chromedriver/embed_version_in_cpp.py	2014-02-16 03:10:59.339438710 +0000
+@@ -25,7 +25,7 @@
+   options, args = parser.parse_args()
+ 
+   version = open(options.version_file, 'r').read().strip()
+-  revision = lastchange.FetchVersionInfo(None).revision
++  revision = "undefined"
+   if revision:
+     version += '.' + revision.strip()
+ 

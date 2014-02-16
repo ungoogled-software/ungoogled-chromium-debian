@@ -167,3 +167,15 @@ Description: page inspector for the chromium browser
  .
  This package contains 'inspector', allowing web developers to inspect any
  element of a web page at runtime (HTML, JavaScript, CSS, ..).
+
+Package: chromedriver
+Architecture: i386 amd64
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+ chromium (= ${binary:Version}),
+Description: WebDriver driver for chromium browser
+ Chromedriver serves as a bridge between the chromium web browser and the
+ selenium webdriver.
+ .
+ See http://code.google.com/p/selenium/wiki/ChromeDriver for details.

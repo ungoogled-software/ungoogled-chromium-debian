@@ -1,6 +1,7 @@
 debian/tmp/etc
 debian/tmp/usr/bin
-debian/tmp/usr/lib/chromium/chrom*
+debian/tmp/usr/lib/chromium/chromium
+debian/tmp/usr/lib/chromium/chrome-sandbox
 debian/tmp/usr/lib/chromium/*.pak
 debian/tmp/usr/lib/chromium/resources/extension/demo/library.js
 debian/tmp/usr/lib/chromium/content_resources.pak

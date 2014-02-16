@@ -310,6 +310,7 @@ GYP_DEFINES += use_pulseaudio=1
 BUILD_TARGETS := \
 	chrome \
 	chrome_sandbox \
+	chromedriver \
 	$(NULL)
 
 TESTS_TARGETS := \
