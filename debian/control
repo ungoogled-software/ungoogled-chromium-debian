@@ -80,7 +80,7 @@ Build-Depends:
  libjs-excanvas,
  libjs-jquery-tablesorter,
  libjs-jquery-flot | libjs-flot,
-Standards-Version: 3.9.4
+Standards-Version: 3.9.5
 
 Package: chromium
 Architecture: i386 amd64
