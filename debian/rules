@@ -394,9 +394,27 @@ debian/configure-stamp:
 	# Populate the LASTCHANGE file template as we no longer have the VCS
 	# files at this point
 	echo "$(DEBIAN_REVISION)" > $(SRC_DIR)/build/LASTCHANGE.in
-	# BUILD_ARGS=$(BUILD_ARGS)
 	cp -p /usr/share/misc/config.guess src/third_party/yasm/source/patched-yasm/config
 	cp -p /usr/share/misc/config.sub src/third_party/yasm/source/patched-yasm/config
+	# replace sourceless libjs-flot files
+	ln -sf /usr/share/javascript/jquery/jquery.min.js src/third_party/flot/jquery.min.js
+	ln -sf /usr/share/javascript/excanvas/excanvas.min.js src/third_party/flot/excanvas.min.js
+	ln -sf /usr/share/javascript/jquery-flot/jquery.colorhelpers.min.js src/third_party/flot/jquery.colorhelpers.min.js
+	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.min.js src/third_party/flot/jquery.flot.min.js
+	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.canvas.min.js src/third_party/flot/jquery.flot.canvas.min.js
+	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.categories.min.js src/third_party/flot/jquery.flot.categories.min.js
+	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.crosshair.min.js src/third_party/flot/jquery.flot.crosshair.min.js
+	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.errorbars.min.js src/third_party/flot/jquery.flot.errorbars.min.js
+	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.fillbetween.min.js src/third_party/flot/jquery.flot.fillbetween.min.js
+	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.image.min.js src/third_party/flot/jquery.flot.image.min.js
+	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.pie.min.js src/third_party/flot/jquery.flot.pie.min.js
+	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.resize.min.js src/third_party/flot/jquery.flot.resize.min.js
+	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.selection.min.js src/third_party/flot/jquery.flot.selection.min.js
+	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.stack.min.js src/third_party/flot/jquery.flot.stack.min.js
+	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.min.js src/third_party/flot/jquery.flot.min.js
+	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.symbol.min.js src/third_party/flot/jquery.flot.symbol.min.js
+	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.threshold.min.js src/third_party/flot/jquery.flot.threshold.min.js
+	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.time.min.js src/third_party/flot/jquery.flot.time.min.js
 
 common-build-arch common-build-indep:: debian/stamp-makefile-build-perf
 debian/stamp-makefile-build-perf: debian/stamp-makefile-build
@@ -425,6 +443,8 @@ clean::
 	rm -f src/v8/tools/gyp/v8.log
 	rm -f src/third_party/yasm/source/patched-yasm/config/config.guess
 	rm -f src/third_party/yasm/source/patched-yasm/config/config.sub
+	# remove sourceless flot files
+	rm -f src/third_party/flot/*
 
 # Install: there's no install rules in scons yet, do it manually
 common-install-prehook-impl::

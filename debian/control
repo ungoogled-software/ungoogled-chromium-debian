@@ -75,7 +75,11 @@ Build-Depends:
  libssl-dev,
  libpci-dev,
  libcap-dev,
- libdrm-dev
+ libdrm-dev,
+ libjs-jquery,
+ libjs-excanvas,
+ libjs-jquery-tablesorter,
+ libjs-jquery-flot | libjs-flot,
 Standards-Version: 3.9.4
 
 Package: chromium
