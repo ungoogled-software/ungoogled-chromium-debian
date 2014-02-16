@@ -1,3 +1,11 @@
+chromium-browser (32.0.1700.123-2) unstable; urgency=medium
+
+  * Build with system libjs-jquery-flot.
+  * Build chromedriver (closes: #725130).
+    - Thanks to Vincent Bernat and Adrian Lang.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 16 Feb 2014 02:32:18 +0000
+
 chromium-browser (32.0.1700.123-1) unstable; urgency=medium
 
   * [a7cf72b] Refreshed Patches
