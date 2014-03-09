@@ -1,3 +1,12 @@
+chromium-browser (32.0.1700.123-3) unstable; urgency=medium
+
+  * Remove a lot of sourceless files.
+  * Suggest mozplugger (closes: #626400).
+  * Use file's -E option (closes: #740476).
+  * Capitalize Chromium in descriptions (closes: #632928, #715802).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 16 Feb 2014 18:50:06 +0000
+
 chromium-browser (32.0.1700.123-2) unstable; urgency=medium
 
   * Build with system libjs-jquery-flot.

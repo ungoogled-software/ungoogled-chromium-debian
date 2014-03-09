@@ -446,6 +446,19 @@ clean::
 	rm -f src/third_party/yasm/source/patched-yasm/config/config.sub
 	# remove sourceless flot files
 	rm -f src/third_party/flot/*
+	# remove webkit tests that aren't used and contain sourceless files
+	rm -rf src/third_party/WebKit/ManualTests
+	rm -rf src/third_party/WebKit/PerformanceTests
+	# remove depot_tools, which are only used during checkout
+	rm -rf src/depot_tools
+	# remove webdriver test data that contains sourceless files
+	rm -rf src/third_party/webdriver/test_data
+	# remove extension examples that contain sourceless files
+	rm -rf src/chrome/common/extensions/docs/examples/extensions
+	# remove coverage testing that contains sourceless files
+	rm -rf src/third_party/WebKit/Tools/Scripts/webkitpy/thirdparty/coverage
+	# remove prebuilt Promise.js.min
+	rm -f src/third_party/trace-viewer/third_party/Promises/polyfill/bin/Promise.min.js
 
 # Install: there's no install rules in scons yet, do it manually
 common-install-prehook-impl::
