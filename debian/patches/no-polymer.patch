@@ -1,0 +1,23 @@
+description: don't use sourceless polymer.js.min (bug #735355)
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- chromium.orig/src/ui/keyboard/keyboard_ui_controller.cc	2014-03-09 14:31:25.007045650 -0400
++++ chromium/src/ui/keyboard/keyboard_ui_controller.cc	2014-03-09 19:59:10.850106905 -0400
+@@ -83,7 +83,6 @@
+   source->AddResourcePath("layouts/system-qwerty.html",
+                           IDR_KEYBOARD_LAYOUTS_SYSTEM_QWERTY);
+   source->AddResourcePath("main.js", IDR_KEYBOARD_MAIN_JS);
+-  source->AddResourcePath("polymer.min.js", IDR_KEYBOARD_POLYMER);
+   source->AddResourcePath("voice_input.js", IDR_KEYBOARD_VOICE_INPUT_JS);
+ 
+   // These files are specific to the WebUI version
+--- chromium.orig/src/ui/keyboard/keyboard_util.cc	2014-03-09 14:31:25.027045649 -0400
++++ chromium/src/ui/keyboard/keyboard_util.cc	2014-03-09 19:58:40.206107694 -0400
+@@ -237,7 +237,6 @@
+     {"keyboard/main.js", IDR_KEYBOARD_MAIN_JS},
+     {"keyboard/manifest.json", IDR_KEYBOARD_MANIFEST},
+     {"keyboard/main.css", IDR_KEYBOARD_MAIN_CSS},
+-    {"keyboard/polymer.min.js", IDR_KEYBOARD_POLYMER},
+     {"keyboard/voice_input.js", IDR_KEYBOARD_VOICE_INPUT_JS},
+   };
+   static const size_t kKeyboardResourcesSize = arraysize(kKeyboardResources);

@@ -1,3 +1,9 @@
+chromium-browser (32.0.1700.123-4) unstable; urgency=medium
+
+  * Remove polymer.js.min.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 09 Mar 2014 22:30:14 +0000
+
 chromium-browser (32.0.1700.123-3) unstable; urgency=medium
 
   * Remove a lot of sourceless files.

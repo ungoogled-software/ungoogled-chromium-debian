@@ -459,6 +459,9 @@ clean::
 	rm -rf src/third_party/WebKit/Tools/Scripts/webkitpy/thirdparty/coverage
 	# remove prebuilt Promise.js.min
 	rm -f src/third_party/trace-viewer/third_party/Promises/polyfill/bin/Promise.min.js
+	# remove polymer.min.js
+	rm -f src/third_party/polymer/polymer.min.js
+	rm -f src/ui/keyboard/resources/polymer.min.js
 
 # Install: there's no install rules in scons yet, do it manually
 common-install-prehook-impl::

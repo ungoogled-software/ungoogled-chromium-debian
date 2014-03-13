@@ -21,3 +21,4 @@ window-placement.patch
 no-promo.patch
 chromedriver-revision.patch
 file-5.17.patch
+no-polymer.patch
