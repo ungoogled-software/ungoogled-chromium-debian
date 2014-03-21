@@ -1,16 +1,16 @@
 Index: sid/src/build/common.gypi
 ===================================================================
---- sid.orig/src/build/common.gypi	2014-02-13 15:44:58.979430699 +0100
-+++ sid/src/build/common.gypi	2014-02-13 15:44:58.975430699 +0100
-@@ -2402,6 +2402,7 @@
+--- sid.orig/src/build/common.gypi	2014-03-14 17:20:05.892905826 +0100
++++ sid/src/build/common.gypi	2014-03-14 17:20:05.884905826 +0100
+@@ -2489,6 +2489,7 @@
                # Don't warn about printf format problems.
                # This is off by default in gcc but on in Ubuntu's gcc(!).
                '-Wno-format',
 +              '-fuse-ld=gold',
              ],
              'cflags_cc!': [
-               # TODO(fischman): remove this.
-@@ -2794,6 +2795,7 @@
+               # Necessary because llvm.org/PR10448 is WONTFIX (crbug.com/90453).
+@@ -2895,6 +2896,7 @@
          'ldflags': [
            '-Wl,-z,now',
            '-Wl,-z,relro',

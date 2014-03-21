@@ -1,8 +1,10 @@
 description: file >= 5.17 needs -E option to error on non-existent files
 author: Christoph Beidl <debian.axhn@manchmal.in-ulm.de>
 
---- a/src/build/linux/python_arch.sh
-+++ b/src/build/linux/python_arch.sh
+Index: sid/src/build/linux/python_arch.sh
+===================================================================
+--- sid.orig/src/build/linux/python_arch.sh	2014-03-14 17:20:21.712905872 +0100
++++ sid/src/build/linux/python_arch.sh	2014-03-14 17:20:21.708905872 +0100
 @@ -10,7 +10,7 @@
  #  python_arch.sh /path/to/sysroot/usr/lib/libpython2.4.so.1.0
  #
