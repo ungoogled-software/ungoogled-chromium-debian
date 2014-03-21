@@ -1,0 +1,15 @@
+Index: sid/src/build/gyp_chromium
+===================================================================
+--- sid.orig/src/build/gyp_chromium	2014-03-12 10:11:40.000000000 +0100
++++ sid/src/build/gyp_chromium	2014-03-14 18:33:43.564918455 +0100
+@@ -245,8 +245,8 @@
+ 
+   supplemental_includes = GetSupplementalFiles()
+ 
+-  if not RunGN(supplemental_includes):
+-    sys.exit(1)
++  #if not RunGN(supplemental_includes):
++  #  sys.exit(1)
+ 
+   args.extend(
+       ['-I' + i for i in additional_include_files(supplemental_includes, args)])
