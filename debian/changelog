@@ -1,3 +1,48 @@
+chromium-browser (33.0.1750.152-1) unstable; urgency=high
+
+  * [641361a] Disable new GN stuff
+  * [43cea90] Refreshed patches
+  * New stable release:
+    - High CVE-2014-1713: Use-after-free in Blink bindings
+    - High CVE-2014-1714: Windows clipboard vulnerability
+    - High CVE-2014-1705: Memory corruption in V8
+    - High CVE-2014-1715: Directory traversal issue
+    - High CVE-2014-1700: Use-after-free in speech. Credit to Chamal de Silva.
+    - High CVE-2014-1701: UXSS in events. Credit to aidanhs.
+    - High CVE-2014-1702: Use-after-free in web database.
+      Credit to Collin Payne.
+    - High CVE-2014-1703: Potential sandbox escape due to a use-after-free
+      in web sockets.
+    - CVE-2014-1704: Multiple vulnerabilities in V8 fixed in version 3.23.17.18
+    - High CVE-2013-6663: Use-after-free in svg images. Credit to Atte
+      Kettunen of OUSPG.
+    - High CVE-2013-6664: Use-after-free in speech recognition.
+      Credit to Khalil Zhani.
+    - High CVE-2013-6665: Heap buffer overflow in software
+      rendering. Credit to cloudfuzzer.
+    - Medium CVE-2013-6666: Chrome allows requests in flash header request.
+      Credit to netfuzzerr.
+    - CVE-2013-6667: Various fixes from internal audits, fuzzing and other
+      initiatives.
+    - CVE-2013-6668: Multiple vulnerabilities in V8 fixed in version 3.24.35.10
+    - High CVE-2013-6653: Use-after-free related to web contents.
+      Credit to Khalil Zhani.
+    - High CVE-2013-6654: Bad cast in SVG. Credit to TheShow3511.
+    - High CVE-2013-6655: Use-after-free in layout. Credit to cloudfuzzer.
+    - High CVE-2013-6656: Information leak in XSS auditor. Credit to NeexEmil.
+    - Medium CVE-2013-6657: Information leak in XSS auditor. Credit to NeexEmil
+    - Medium CVE-2013-6658: Use-after-free in layout. Credit to cloudfuzzer.
+    - Medium CVE-2013-6659: Issue with certificates validation in
+      TLS handshake. Credit to Antoine Delignat-Lavaud and Karthikeyan Bhargavan
+      from Prosecco, Inria Paris.
+    - Low CVE-2013-6660: Information leak in drag and drop. Credit to
+      bishopjeffreys.
+    - Low-High CVE-2013-6661: Various fixes from internal audits, fuzzing
+      and other initiatives. Of these, seven are fixes for issues that could
+      have allowed for sandbox escapes from compromised renderers.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 21 Mar 2014 17:20:44 +0100
+
 chromium-browser (32.0.1700.123-4) unstable; urgency=medium
 
   * Remove polymer.js.min.
