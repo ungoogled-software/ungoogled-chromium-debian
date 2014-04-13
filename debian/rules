@@ -444,24 +444,6 @@ clean::
 	rm -f src/v8/tools/gyp/v8.log
 	rm -f src/third_party/yasm/source/patched-yasm/config/config.guess
 	rm -f src/third_party/yasm/source/patched-yasm/config/config.sub
-	# remove sourceless flot files
-	rm -f src/third_party/flot/*
-	# remove webkit tests that aren't used and contain sourceless files
-	rm -rf src/third_party/WebKit/ManualTests
-	rm -rf src/third_party/WebKit/PerformanceTests
-	# remove depot_tools, which are only used during checkout
-	rm -rf src/depot_tools
-	# remove webdriver test data that contains sourceless files
-	rm -rf src/third_party/webdriver/test_data
-	# remove extension examples that contain sourceless files
-	rm -rf src/chrome/common/extensions/docs/examples/extensions
-	# remove coverage testing that contains sourceless files
-	rm -rf src/third_party/WebKit/Tools/Scripts/webkitpy/thirdparty/coverage
-	# remove prebuilt Promise.js.min
-	rm -f src/third_party/trace-viewer/third_party/Promises/polyfill/bin/Promise.min.js
-	# remove polymer.min.js
-	rm -f src/third_party/polymer/polymer.min.js
-	rm -f src/ui/keyboard/resources/polymer.min.js
 
 # Install: there's no install rules in scons yet, do it manually
 common-install-prehook-impl::
@@ -813,6 +795,30 @@ endif
 	# Remove unsafe symlinks
 	rm -rf src/native_client/toolchain/pnacl_linux_x86/newlib/sysroot/sys-include
 	rm -rf src/third_party/mesa/src/src/gallium/state_trackers/d3d1x/w32api
+
+	# remove sourceless flot files
+	rm -f src/third_party/flot/*
+	# remove webkit tests that aren't used and contain sourceless files
+	rm -rf src/third_party/WebKit/ManualTests
+	rm -rf src/third_party/WebKit/PerformanceTests
+	# remove depot_tools, which are only used during checkout
+	rm -rf src/depot_tools
+	# remove webdriver test data that contains sourceless files
+	rm -rf src/third_party/webdriver/test_data
+	# remove extension examples that contain sourceless files
+	rm -rf src/chrome/common/extensions/docs/examples/extensions
+	# remove coverage testing that contains sourceless files
+	rm -rf src/third_party/WebKit/Tools/Scripts/webkitpy/thirdparty/coverage
+	# remove prebuilt Promise.js.min
+	rm -f src/third_party/trace-viewer/third_party/Promises/polyfill/bin/Promise.min.js
+	# remove sourceless polymer.min.js
+	rm -f src/third_party/polymer/polymer.min.js
+	rm -f src/ui/keyboard/resources/polymer.min.js
+	# remove sourceless bidichecker and trace
+	rm -rf src/third_party/bidichecker
+	rm -rf src/tools/trace
+	# remove sourceless chromeVox
+	rm -f src/chrome/third_party/chromevox/*.js
 	
 gos-pack: TMP_DIR  = $(TMP_DDIR)
 ifneq (,$(DEBIAN_TAG))
