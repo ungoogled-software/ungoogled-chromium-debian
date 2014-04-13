@@ -1,3 +1,31 @@
+chromium-browser (34.0.1847.116-1) unstable; urgency=high
+
+  * New upstream stable release:
+    - High CVE-2014-1716: UXSS in V8. Credit to Anonymous.
+    - High CVE-2014-1717: OOB access in V8. Credit to Anonymous.
+    - High CVE-2014-1718: Integer overflow in compositor. Credit to Aaron
+      Staple.
+    - High CVE-2014-1719: Use-after-free in web workers. Credit to Collin
+      Payne.
+    - High CVE-2014-1720: Use-after-free in DOM. Credit to cloudfuzzer.
+    - High CVE-2014-1721: Memory corruption in V8. Credit to Christian Holler.
+    - High CVE-2014-1722: Use-after-free in rendering. Credit to miaubiz.
+    - High CVE-2014-1723: Url confusion with RTL characters. Credit to George
+      McBay.
+    - High CVE-2014-1724: Use-after-free in speech. Credit to Atte Kettunen.
+    - Medium CVE-2014-1725: OOB read with window property. Credit to
+      Anonymous.
+    - Medium CVE-2014-1726: Local cross-origin bypass. Credit to Jann Horn.
+    - Medium CVE-2014-1727: Use-after-free in forms. Credit to Khalil Zhani.
+    - CVE-2014-1728: Various fixes from internal audits, fuzzing and other
+      initiatives.
+    - CVE-2014-1729: Multiple vulnerabilities in V8 fixed in version
+      3.24.35.22.
+  * Remove sourceless javascript files (closes: #735355).
+  * Remove sourceless swf files (closes: #735344).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 11 Apr 2014 01:42:04 +0000
+
 chromium-browser (33.0.1750.152-1) unstable; urgency=high
 
   * [641361a] Disable new GN stuff
