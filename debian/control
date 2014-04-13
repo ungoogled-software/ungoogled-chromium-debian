@@ -79,7 +79,6 @@ Build-Depends:
  libjs-jquery,
  libjs-excanvas,
  libjs-jquery-flot | libjs-flot,
- file (>= 1:5.17),
 Standards-Version: 3.9.5
 
 Package: chromium
