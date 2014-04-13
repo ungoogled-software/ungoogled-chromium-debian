@@ -1,5 +1,6 @@
 debian/tmp/etc
 debian/tmp/usr/bin
+
 debian/tmp/usr/lib/chromium/chromium
 debian/tmp/usr/lib/chromium/chrome-sandbox
 debian/tmp/usr/lib/chromium/*.pak
@@ -7,16 +8,16 @@ debian/tmp/usr/lib/chromium/resources/extension/demo/library.js
 debian/tmp/usr/lib/chromium/content_resources.pak
 debian/tmp/usr/lib/chromium/locales/*
 debian/tmp/usr/lib/chromium/remoting_locales
-#debian/tmp/usr/lib/chromium/ffmpegsumo_nolink
-#debian/tmp/usr/lib/chromium/libppGoogleNaClPluginChrome.so
 debian/tmp/usr/lib/chromium/lib*
-#debian/tmp/usr/lib/chromium/ssl_false_start_blacklist_process
-#debian/tmp/usr/lib/chromium/nacl_irt_*
 debian/tmp/usr/lib/chromium/mksnapshot.*
 debian/tmp/usr/lib/chromium/pseudo_locales/fake-bidi.pak
-#debian/tmp/usr/lib/chromium/remoting_locales/en-US.pak
+debian/tmp/usr/lib/chromium/icudtl.dat
+
 debian/chromium.desktop usr/share/applications
+
 debian/chromium.xml usr/share/gnome-control-center/default-apps
-debian/master_preferences etc/chromium
+
 debian/initial_bookmarks.html etc/chromium
+debian/master_preferences etc/chromium
+
 debian/presubj usr/share/bug/chromium

@@ -475,6 +475,8 @@ endif
 	# move inspector files into /usr/share
 	mkdir -p $(CURDIR)/debian/tmp/usr/share
 	mv $(CURDIR)/debian/tmp/$(LIB_DIR)/resources/inspector $(CURDIR)/debian/tmp/usr/share/chromium-inspector
+	# remove unnecessary file
+	rm -f $(CURDIR)/debian/tmp/$(LIB_DIR)/.landmines
 
 binary-install/$(DEBIAN_NAME)::
 	mkdir -p $(CURDIR)/debian/$(DEBIAN_NAME)/usr/share/pixmaps
