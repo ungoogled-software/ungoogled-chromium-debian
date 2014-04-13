@@ -1,9 +1,9 @@
 Use system speex
-Index: sid/src/build/linux/system.gyp
+Index: chromium/src/build/linux/system.gyp
 ===================================================================
---- sid.orig/src/build/linux/system.gyp	2014-03-14 17:19:59.160905807 +0100
-+++ sid/src/build/linux/system.gyp	2014-03-14 17:19:59.156905807 +0100
-@@ -337,6 +337,26 @@
+--- chromium.orig/src/build/linux/system.gyp	2014-04-11 01:43:12.108279422 +0000
++++ chromium/src/build/linux/system.gyp	2014-04-11 01:43:12.104279422 +0000
+@@ -332,6 +332,26 @@
        ],
      },
      {
@@ -30,10 +30,10 @@ Index: sid/src/build/linux/system.gyp
        'target_name': 'gnome_keyring',
        'type': 'none',
        'conditions': [
-Index: sid/src/content/browser/speech/audio_encoder.cc
+Index: chromium/src/content/browser/speech/audio_encoder.cc
 ===================================================================
---- sid.orig/src/content/browser/speech/audio_encoder.cc	2014-03-14 17:19:59.160905807 +0100
-+++ sid/src/content/browser/speech/audio_encoder.cc	2014-03-14 17:19:59.156905807 +0100
+--- chromium.orig/src/content/browser/speech/audio_encoder.cc	2014-04-11 01:43:12.108279422 +0000
++++ chromium/src/content/browser/speech/audio_encoder.cc	2014-04-11 01:43:12.104279422 +0000
 @@ -11,7 +11,7 @@
  #include "base/strings/string_number_conversions.h"
  #include "content/browser/speech/audio_buffer.h"
@@ -43,11 +43,11 @@ Index: sid/src/content/browser/speech/audio_encoder.cc
  
  namespace content {
  namespace {
-Index: sid/src/content/content_browser.gypi
+Index: chromium/src/content/content_browser.gypi
 ===================================================================
---- sid.orig/src/content/content_browser.gypi	2014-03-14 17:19:59.160905807 +0100
-+++ sid/src/content/content_browser.gypi	2014-03-14 17:19:59.156905807 +0100
-@@ -1627,7 +1627,7 @@
+--- chromium.orig/src/content/content_browser.gypi	2014-04-11 01:43:12.108279422 +0000
++++ chromium/src/content/content_browser.gypi	2014-04-11 01:43:12.104279422 +0000
+@@ -1639,7 +1639,7 @@
      }, {  # input_speech==1
        'dependencies': [
          '../third_party/flac/flac.gyp:libflac',

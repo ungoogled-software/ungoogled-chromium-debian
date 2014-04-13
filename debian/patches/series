@@ -20,5 +20,4 @@ ps-print.patch
 window-placement.patch
 no-promo.patch
 chromedriver-revision.patch
-file-5.17.patch
 disable-gn.patch

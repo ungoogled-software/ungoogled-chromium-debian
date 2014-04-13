@@ -1,15 +1,24 @@
-Index: sid/src/build/gyp_chromium
+description: disable RunGN
+
+Index: chromium/src/build/gyp_chromium
 ===================================================================
---- sid.orig/src/build/gyp_chromium	2014-03-12 10:11:40.000000000 +0100
-+++ sid/src/build/gyp_chromium	2014-03-14 18:33:43.564918455 +0100
-@@ -245,8 +245,8 @@
+--- chromium.orig/src/build/gyp_chromium	2014-04-11 01:47:45.796272377 +0000
++++ chromium/src/build/gyp_chromium	2014-04-11 01:57:42.008257029 +0000
+@@ -39,8 +39,6 @@
+ sys.path.insert(1, os.path.join(chrome_src, 'third_party', 'WebKit',
+     'Source', 'build', 'scripts'))
+ 
+-import find_depot_tools
+-
+ # On Windows, Psyco shortens warm runs of build/gyp_chromium by about
+ # 20 seconds on a z600 machine with 12 GB of RAM, from 90 down to 70
+ # seconds.  Conversely, memory usage of build/gyp_chromium with Psyco
+@@ -477,8 +475,6 @@
+     args.append('--check')
  
    supplemental_includes = GetSupplementalFiles()
- 
 -  if not RunGN(supplemental_includes):
 -    sys.exit(1)
-+  #if not RunGN(supplemental_includes):
-+  #  sys.exit(1)
- 
    args.extend(
        ['-I' + i for i in additional_include_files(supplemental_includes, args)])
+ 

@@ -2,11 +2,11 @@ Subject: Prevent windows from jumping to front for new tabs
 From: Tony Houghton <h@realh.co.uk>
 Bug: https://code.google.com/p/chromium/issues/detail?id=297679
 Bug-Debian: http://bugs.debian.org/725350
-Index: sid/src/chrome/browser/ui/gtk/browser_window_gtk.cc
+Index: chromium/src/chrome/browser/ui/gtk/browser_window_gtk.cc
 ===================================================================
---- sid.orig/src/chrome/browser/ui/gtk/browser_window_gtk.cc	2014-03-14 17:20:14.156905850 +0100
-+++ sid/src/chrome/browser/ui/gtk/browser_window_gtk.cc	2014-03-14 17:20:14.148905850 +0100
-@@ -579,7 +579,7 @@
+--- chromium.orig/src/chrome/browser/ui/gtk/browser_window_gtk.cc	2014-04-11 01:43:31.348278927 +0000
++++ chromium/src/chrome/browser/ui/gtk/browser_window_gtk.cc	2014-04-11 01:43:31.344278927 +0000
+@@ -577,7 +577,7 @@
    // browser instead if we don't explicitly set it here.
    BrowserList::SetLastActive(browser());
  
