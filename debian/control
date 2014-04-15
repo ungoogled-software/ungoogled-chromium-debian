@@ -79,6 +79,7 @@ Build-Depends:
  libjs-jquery,
  libjs-excanvas,
  libjs-jquery-flot | libjs-flot,
+ libgcrypt20-dev | libgcrypt11-dev,
 Standards-Version: 3.9.5
 
 Package: chromium
