@@ -1,3 +1,9 @@
+chromium-browser (34.0.1847.116-2) unstable; urgency=medium
+
+  * Add libgcrypt build-dependency.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Tue, 15 Apr 2014 00:22:36 +0000
+
 chromium-browser (34.0.1847.116-1) unstable; urgency=high
 
   * New upstream stable release:
