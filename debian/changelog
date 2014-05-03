@@ -1,3 +1,22 @@
+chromium-browser (34.0.1847.132-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - High CVE-2014-1730: Type confusion in V8. Credit to Anonymous.
+    - High CVE-2014-1731: Type confusion in DOM. Credit to John Butler.
+    - High CVE-2014-1736: Integer overflow in V8.  Credit to SkyLined working
+      with HP's Zero Day Initiative
+    - Medium CVE-2014-1732: Use-after-free in Speech Recognition. Credit to
+      Khalil Zhani
+    - Medium CVE-2014-1733: Compiler bug in Seccomp-BPF. Credit to Jed Davis
+    - CVE-2014-1734: Various fixes from internal audits, fuzzing and other
+      initiatives.
+    - CVE-2014-1735: Multiple vulnerabilities in V8 fixed in version
+      3.24.35.33.
+  * Add libkrb5-dev build-dependency (closes: #745794).
+  * Remove non-free file (closes: #745397).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 26 Apr 2014 18:03:53 +0000
+
 chromium-browser (34.0.1847.116-2) unstable; urgency=medium
 
   * Add libgcrypt build-dependency.

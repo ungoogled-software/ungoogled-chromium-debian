@@ -821,6 +821,8 @@ endif
 	rm -rf src/tools/trace
 	# remove sourceless chromeVox
 	rm -f src/chrome/third_party/chromevox/*.js
+	# remove non-free rfc
+	rm -f src/third_party/libsrtp/srtp/doc/rfc3711.txt
 	
 gos-pack: TMP_DIR  = $(TMP_DDIR)
 ifneq (,$(DEBIAN_TAG))

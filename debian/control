@@ -71,6 +71,7 @@ Build-Depends:
  libgles2-mesa-dev,
  subversion,
  git,
+ libkrb5-dev,
  libudev-dev,
  libssl-dev,
  libpci-dev,
