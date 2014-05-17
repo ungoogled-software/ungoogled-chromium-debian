@@ -1,3 +1,14 @@
+chromium-browser (34.0.1847.137-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - High CVE-2014-1740: Use-after-free in WebSockets. Credit to Collin
+      Payne.
+    - High CVE-2014-1741: Integer overflow in DOM ranges. Credit to John
+      Butler.
+    - High CVE-2014-1742: Use-after-free in editing. Credit to cloudfuzzer.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 17 May 2014 13:06:30 +0000
+
 chromium-browser (34.0.1847.132-1) unstable; urgency=medium
 
   * New upstream stable release:
