@@ -79,6 +79,13 @@ GYP_DEFINES += linux_use_gold_binary=0 linux_use_gold_flags=0
 
 # disable tcmalloc
 GYP_DEFINES += linux_use_tcmalloc=0
+GYP_DEFINES += use_allocator=none
+
+# don't use ash or ozone
+GYP_DEFINES += use_ash=0 use_ozone=0
+
+# avoid mojo, which requires ninja to build
+GYP_DEFINES += use_mojo=0
 
 # Use explicit library dependencies instead of dlopen.
 # This makes breakages easier to detect by revdep-rebuild.
@@ -390,7 +397,7 @@ ifneq (,$(GYP_DEFINES))
 debian/configure-stamp: GYP_ENV += GYP_DEFINES="$(GYP_DEFINES)"
 endif
 debian/configure-stamp:
-	cd $(SRC_DIR) && $(GYP_ENV) python build/gyp_chromium --no-circular-check build/all.gyp
+	cd $(SRC_DIR) && $(GYP_ENV) python build/gyp_chromium --check --debug=includes
 	touch $@
 	# Populate the LASTCHANGE file template as we no longer have the VCS
 	# files at this point
@@ -444,6 +451,7 @@ clean::
 	rm -f src/v8/tools/gyp/v8.log
 	rm -f src/third_party/yasm/source/patched-yasm/config/config.guess
 	rm -f src/third_party/yasm/source/patched-yasm/config/config.sub
+	rm -f src/third_party/flot/*.js
 
 # Install: there's no install rules in scons yet, do it manually
 common-install-prehook-impl::
