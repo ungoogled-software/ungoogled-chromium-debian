@@ -1,3 +1,19 @@
+chromium-browser (35.0.1916.114-1) unstable; urgency=high
+
+  * New upstream stable release:
+    - CVE-2014-1743: Use-after-free in styles. Credit to cloudfuzzer.
+    - CVE-2014-1744: Integer overflow in audio. Credit to Aaron Staple.
+    - CVE-2014-1745: Use-after-free in SVG. Credit to Atte Kettunen.
+    - CVE-2014-1746: Out-of-bounds read in media filters. Credit to
+      Holger Fuhrmannek.
+    - CVE-2014-1747: UXSS with local MHTML file. Credit to packagesu.
+    - CVE-2014-1748: UI spoofing with scrollbar. Credit to Jordan Milne.
+    - CVE-2014-1749: Various fixes from internal audits, fuzzing and other
+      initiatives.
+    - CVE-2014-3152: Integer underflow in V8 fixed in version 3.25.28.16.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Wed, 21 May 2014 23:15:51 +0000
+
 chromium-browser (34.0.1847.137-1) unstable; urgency=medium
 
   * New upstream stable release:
