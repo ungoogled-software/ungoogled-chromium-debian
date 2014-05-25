@@ -1,8 +1,8 @@
 Index: chromium/src/build/common.gypi
 ===================================================================
---- chromium.orig/src/build/common.gypi	2014-04-11 01:43:22.228279161 +0000
-+++ chromium/src/build/common.gypi	2014-04-11 01:43:22.224279162 +0000
-@@ -2537,6 +2537,7 @@
+--- chromium.orig/src/build/common.gypi
++++ chromium/src/build/common.gypi
+@@ -2656,6 +2656,7 @@
                # Don't warn about printf format problems.
                # This is off by default in gcc but on in Ubuntu's gcc(!).
                '-Wno-format',
@@ -10,7 +10,7 @@ Index: chromium/src/build/common.gypi
              ],
              'cflags_cc!': [
                # Necessary because llvm.org/PR10448 is WONTFIX (crbug.com/90453).
-@@ -2953,6 +2954,7 @@
+@@ -3087,6 +3088,7 @@
          'ldflags': [
            '-Wl,-z,now',
            '-Wl,-z,relro',

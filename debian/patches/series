@@ -20,4 +20,7 @@ ps-print.patch
 window-placement.patch
 no-promo.patch
 chromedriver-revision.patch
-disable-gn.patch
+
+make-support/gyp.patch
+make-support/mojo.patch
+make-support/opus.patch

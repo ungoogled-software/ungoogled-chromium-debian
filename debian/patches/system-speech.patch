@@ -1,9 +1,9 @@
 Use system speex
 Index: chromium/src/build/linux/system.gyp
 ===================================================================
---- chromium.orig/src/build/linux/system.gyp	2014-04-11 01:43:12.108279422 +0000
-+++ chromium/src/build/linux/system.gyp	2014-04-11 01:43:12.104279422 +0000
-@@ -332,6 +332,26 @@
+--- chromium.orig/src/build/linux/system.gyp
++++ chromium/src/build/linux/system.gyp
+@@ -585,6 +585,26 @@
        ],
      },
      {
@@ -32,8 +32,8 @@ Index: chromium/src/build/linux/system.gyp
        'conditions': [
 Index: chromium/src/content/browser/speech/audio_encoder.cc
 ===================================================================
---- chromium.orig/src/content/browser/speech/audio_encoder.cc	2014-04-11 01:43:12.108279422 +0000
-+++ chromium/src/content/browser/speech/audio_encoder.cc	2014-04-11 01:43:12.104279422 +0000
+--- chromium.orig/src/content/browser/speech/audio_encoder.cc
++++ chromium/src/content/browser/speech/audio_encoder.cc
 @@ -11,7 +11,7 @@
  #include "base/strings/string_number_conversions.h"
  #include "content/browser/speech/audio_buffer.h"
@@ -45,9 +45,9 @@ Index: chromium/src/content/browser/speech/audio_encoder.cc
  namespace {
 Index: chromium/src/content/content_browser.gypi
 ===================================================================
---- chromium.orig/src/content/content_browser.gypi	2014-04-11 01:43:12.108279422 +0000
-+++ chromium/src/content/content_browser.gypi	2014-04-11 01:43:12.104279422 +0000
-@@ -1639,7 +1639,7 @@
+--- chromium.orig/src/content/content_browser.gypi
++++ chromium/src/content/content_browser.gypi
+@@ -1729,7 +1729,7 @@
      }, {  # input_speech==1
        'dependencies': [
          '../third_party/flac/flac.gyp:libflac',

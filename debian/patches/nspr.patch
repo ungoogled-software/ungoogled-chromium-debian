@@ -1,8 +1,8 @@
 Include system copy of prtime.h
 Index: chromium/src/chrome/browser/metrics/metrics_log.cc
 ===================================================================
---- chromium.orig/src/chrome/browser/metrics/metrics_log.cc	2014-04-11 01:42:59.284279752 +0000
-+++ chromium/src/chrome/browser/metrics/metrics_log.cc	2014-04-11 01:42:59.252279753 +0000
+--- chromium.orig/src/chrome/browser/metrics/metrics_log.cc
++++ chromium/src/chrome/browser/metrics/metrics_log.cc
 @@ -22,7 +22,7 @@
  #include "base/strings/string_util.h"
  #include "base/strings/utf_string_conversions.h"
@@ -14,20 +14,21 @@ Index: chromium/src/chrome/browser/metrics/metrics_log.cc
  #include "chrome/browser/autocomplete/autocomplete_input.h"
 Index: chromium/src/base/base.gypi
 ===================================================================
---- chromium.orig/src/base/base.gypi	2014-04-11 01:42:59.284279752 +0000
-+++ chromium/src/base/base.gypi	2014-04-11 01:42:59.252279753 +0000
-@@ -26,7 +26,6 @@
-           'third_party/nspr/prcpucfg_openbsd.h',
-           'third_party/nspr/prcpucfg_solaris.h',
-           'third_party/nspr/prcpucfg_win.h',
+--- chromium.orig/src/base/base.gypi
++++ chromium/src/base/base.gypi
+@@ -18,8 +18,6 @@
+           'third_party/dmg_fp/dtoa_wrapper.cc',
+           'third_party/icu/icu_utf.cc',
+           'third_party/icu/icu_utf.h',
 -          'third_party/nspr/prtime.cc',
-           'third_party/nspr/prtime.h',
-           'third_party/nspr/prtypes.h',
+-          'third_party/nspr/prtime.h',
+           'third_party/superfasthash/superfasthash.c',
            'third_party/xdg_mime/xdgmime.h',
+           'allocator/allocator_extension.cc',
 Index: chromium/src/base/time/pr_time_unittest.cc
 ===================================================================
---- chromium.orig/src/base/time/pr_time_unittest.cc	2014-04-11 01:42:59.284279752 +0000
-+++ chromium/src/base/time/pr_time_unittest.cc	2014-04-11 01:42:59.252279753 +0000
+--- chromium.orig/src/base/time/pr_time_unittest.cc
++++ chromium/src/base/time/pr_time_unittest.cc
 @@ -5,7 +5,7 @@
  #include <time.h>
  
@@ -39,16 +40,15 @@ Index: chromium/src/base/time/pr_time_unittest.cc
  
 Index: chromium/src/base/time/time.cc
 ===================================================================
---- chromium.orig/src/base/time/time.cc	2014-04-11 01:42:59.284279752 +0000
-+++ chromium/src/base/time/time.cc	2014-04-11 01:42:59.252279753 +0000
-@@ -10,8 +10,8 @@
+--- chromium.orig/src/base/time/time.cc
++++ chromium/src/base/time/time.cc
+@@ -10,7 +10,8 @@
  #include "base/float_util.h"
  #include "base/lazy_instance.h"
  #include "base/logging.h"
 -#include "base/third_party/nspr/prtime.h"
--#include "base/third_party/nspr/prtypes.h"
++
 +#include <nspr/prtime.h>
-+#include <nspr/prtypes.h>
  
  namespace base {
  
