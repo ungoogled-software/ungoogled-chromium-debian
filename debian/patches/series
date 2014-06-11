@@ -14,12 +14,13 @@ fix-manpage.patch
 #icu.patch
 #system_v8.patch
 icon.patch
-gold-linker.patch
 third-party-cookies-off-by-default.patch
 ps-print.patch
 window-placement.patch
 no-promo.patch
 chromedriver-revision.patch
+
+linker-flags.patch
 
 make-support/gyp.patch
 make-support/mojo.patch

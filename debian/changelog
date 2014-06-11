@@ -1,3 +1,10 @@
+chromium-browser (35.0.1916.114-2) unstable; urgency=medium
+
+  * Add flags to avoid memory exhaustion while linking on i386
+    (closes: #746034).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Tue, 27 May 2014 03:09:00 +0000
+
 chromium-browser (35.0.1916.114-1) unstable; urgency=high
 
   * New upstream stable release:
