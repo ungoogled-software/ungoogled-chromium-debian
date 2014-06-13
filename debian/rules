@@ -52,6 +52,10 @@ ifneq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
 WANT_TESTS := 0
 endif
 
+# Hardcode gcc 4.8 to avoid issues caused by >= 4.9
+export CC=gcc-4.8
+export CXX=g++-4.8
+
 # Disable SSE2
 GYP_DEFINES = disable_sse2=1
 

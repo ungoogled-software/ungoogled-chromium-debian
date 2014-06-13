@@ -21,6 +21,7 @@ no-promo.patch
 chromedriver-revision.patch
 
 linker-flags.patch
+no-sse2.patch
 
 make-support/gyp.patch
 make-support/mojo.patch

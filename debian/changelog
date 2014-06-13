@@ -1,3 +1,22 @@
+chromium-browser (35.0.1916.153-2) unstable; urgency=medium
+
+  * Avoid gcc 4.9 (closes: #751294)
+
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 12 Jun 2014 01:11:09 +0000
+
+chromium-browser (35.0.1916.153-1) unstable; urgency=high
+
+  * New upstream stable release:
+    - CVE-2014-3154: Use-after-free in filesystem api. Credit to Collin Payne.
+    - CVE-2014-3155: Out-of-bounds read in SPDY. Credit to James March, Daniel
+      Sommermann and Alan Frindell of Facebook.
+    - CVE-2014-3156: Buffer overflow in clipboard. Credit to Atte Kettunen.
+    - CVE-2014-3157: Heap overflow in media.
+  * Don't set sse2 compiler flags on i386 (closes: #750361).
+  * Prefer libgcrypt11 (closes: #750304).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Wed, 11 Jun 2014 02:31:22 +0000
+
 chromium-browser (35.0.1916.114-2) unstable; urgency=medium
 
   * Add flags to avoid memory exhaustion while linking on i386
