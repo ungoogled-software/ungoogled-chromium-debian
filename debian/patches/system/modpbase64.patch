@@ -1,0 +1,62 @@
+description: use system modpbase64 and update for >= 3.x api
+
+--- a/third_party/modp_b64/modp_b64.gyp
++++ b/third_party/modp_b64/modp_b64.gyp
+@@ -6,16 +6,13 @@
+   'targets': [
+     {
+       'target_name': 'modp_b64',
+-      'type': 'static_library',
++      'type': 'none',
+       'toolsets': ['host', 'target'],
+-      'sources': [
+-        'modp_b64.cc',
+-        'modp_b64.h',
+-        'modp_b64_data.h',
+-      ],
+-      'include_dirs': [
+-        '../..',
+-      ],
++      'link_settings': {
++        'libraries': [
++          '<!@(pkg-config --libs-only-l stringencoders)',
++        ],
++      },
+     },
+   ],
+   'conditions': [
+--- a/base/base64.cc
++++ b/base/base64.cc
+@@ -4,7 +4,7 @@
+ 
+ #include "base/base64.h"
+ 
+-#include "third_party/modp_b64/modp_b64.h"
++#include <modp_b64.h>
+ 
+ namespace base {
+ 
+@@ -13,7 +13,11 @@ void Base64Encode(const StringPiece& inp
+   temp.resize(modp_b64_encode_len(input.size()));  // makes room for null byte
+ 
+   // modp_b64_encode_len() returns at least 1, so temp[0] is safe to use.
+-  size_t output_size = modp_b64_encode(&(temp[0]), input.data(), input.size());
++  int output_size = modp_b64_encode(&(temp[0]), input.data(), input.size());
++  if (output_size < 0) {
++    printf( "error: base64 encoding issue\n" );
++    exit(1);
++  }
+ 
+   temp.resize(output_size);  // strips off null byte
+   output->swap(temp);
+@@ -25,8 +29,8 @@ bool Base64Decode(const StringPiece& inp
+ 
+   // does not null terminate result since result is binary data!
+   size_t input_size = input.size();
+-  size_t output_size = modp_b64_decode(&(temp[0]), input.data(), input_size);
+-  if (output_size == MODP_B64_ERROR)
++  int output_size = modp_b64_decode(&(temp[0]), input.data(), input_size);
++  if (output_size < 0)
+     return false;
+ 
+   temp.resize(output_size);

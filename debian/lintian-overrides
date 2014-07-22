@@ -1,2 +1,0 @@
-chromium binary: setuid-binary usr/lib/chromium/chromium-sandbox
-chromium binary: shlib-with-non-pic-code usr/lib/chromium/libffmpegsumo.so

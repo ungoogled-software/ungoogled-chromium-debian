@@ -1,0 +1,107 @@
+Index: chromium/build/all.gyp
+===================================================================
+--- chromium.orig/build/all.gyp
++++ chromium/build/all.gyp
+@@ -52,7 +52,6 @@
+             '../android_webview/android_webview.gyp:android_webview_apk',
+             '../chrome/chrome.gyp:chrome_shell_apk',
+             '../remoting/remoting.gyp:remoting_apk',
+-            '../tools/telemetry/telemetry.gyp:*#host',
+             # TODO(nyquist) This should instead by a target for sync when all of
+             # the sync-related code for Android has been upstreamed.
+             # See http://crbug.com/159203
+@@ -102,8 +101,6 @@
+             '../third_party/ots/ots.gyp:*',
+             '../third_party/qcms/qcms.gyp:*',
+             '../tools/gn/gn.gyp:*',
+-            '../tools/perf/clear_system_cache/clear_system_cache.gyp:*',
+-            '../tools/telemetry/telemetry.gyp:*',
+             '../v8/tools/gyp/v8.gyp:*',
+             '../webkit/renderer/compositor_bindings/compositor_bindings_tests.gyp:*',
+             '<(libjpeg_gyp_path):*',
+@@ -285,7 +282,6 @@
+             '../third_party/cacheinvalidation/cacheinvalidation.gyp:cacheinvalidation_unittests',
+             '../third_party/libaddressinput/libaddressinput.gyp:libaddressinput_unittests',
+             '../third_party/libphonenumber/libphonenumber.gyp:libphonenumber_unittests',
+-            '../tools/telemetry/telemetry.gyp:*',
+             '../webkit/renderer/compositor_bindings/compositor_bindings_tests.gyp:webkit_compositor_bindings_unittests',
+           ],
+         }],
+@@ -461,8 +457,6 @@
+             '../chrome/chrome.gyp:performance_browser_tests',
+             '../chrome/chrome.gyp:sync_performance_tests',
+             '../media/media.gyp:media_perftests',
+-            '../tools/perf/clear_system_cache/clear_system_cache.gyp:*',
+-            '../tools/telemetry/telemetry.gyp:*',
+           ],
+           'conditions': [
+             ['OS!="ios" and OS!="win"', {
+@@ -498,7 +492,6 @@
+             '../gpu/gles2_conform_support/gles2_conform_test.gyp:gles2_conform_test',
+             '../gpu/gpu.gyp:gl_tests',
+             '../gpu/gpu.gyp:angle_unittests',
+-            '../tools/telemetry/telemetry.gyp:*',
+           ],
+           'conditions': [
+             ['OS!="ios" and OS!="win"', {
+@@ -533,7 +526,6 @@
+             '../gpu/gles2_conform_support/gles2_conform_test.gyp:gles2_conform_test',
+             '../gpu/gpu.gyp:gl_tests',
+             '../gpu/gpu.gyp:angle_unittests',
+-            '../tools/telemetry/telemetry.gyp:*',
+           ],
+           'conditions': [
+             ['OS!="ios" and OS!="win"', {
+@@ -863,8 +855,6 @@
+             '../third_party/cacheinvalidation/cacheinvalidation.gyp:cacheinvalidation_unittests',
+             '../third_party/libaddressinput/libaddressinput.gyp:libaddressinput_unittests',
+             '../third_party/libphonenumber/libphonenumber.gyp:libphonenumber_unittests',
+-            '../tools/perf/clear_system_cache/clear_system_cache.gyp:*',
+-            '../tools/telemetry/telemetry.gyp:*',
+             '../ui/gfx/gfx.gyp:gfx_unittests',
+             '../ui/ui_unittests.gyp:ui_unittests',
+             '../url/url.gyp:url_unittests',
+@@ -898,8 +888,6 @@
+             '../third_party/cacheinvalidation/cacheinvalidation.gyp:cacheinvalidation_unittests',
+             '../third_party/libaddressinput/libaddressinput.gyp:libaddressinput_unittests',
+             '../third_party/libphonenumber/libphonenumber.gyp:libphonenumber_unittests',
+-            '../tools/perf/clear_system_cache/clear_system_cache.gyp:*',
+-            '../tools/telemetry/telemetry.gyp:*',
+             '../ui/gfx/gfx.gyp:gfx_unittests',
+             '../ui/ui_unittests.gyp:ui_unittests',
+             '../url/url.gyp:url_unittests',
+@@ -1004,8 +992,6 @@
+             '../third_party/cacheinvalidation/cacheinvalidation.gyp:cacheinvalidation_unittests',
+             '../third_party/libaddressinput/libaddressinput.gyp:libaddressinput_unittests',
+             '../third_party/libphonenumber/libphonenumber.gyp:libphonenumber_unittests',
+-            '../tools/perf/clear_system_cache/clear_system_cache.gyp:*',
+-            '../tools/telemetry/telemetry.gyp:*',
+             '../ui/events/events.gyp:events_unittests',
+             '../ui/gfx/gfx.gyp:gfx_unittests',
+             '../ui/ui_unittests.gyp:ui_unittests',
+Index: chromium/chrome/chrome_tests.gypi
+===================================================================
+--- chromium.orig/chrome/chrome_tests.gypi
++++ chromium/chrome/chrome_tests.gypi
+@@ -2899,21 +2899,6 @@
+             'tab_capture_performance_tests.isolate',
+           ],
+         },
+-        {
+-          'target_name': 'telemetry_gpu_test_run',
+-          'type': 'none',
+-          'dependencies': [
+-            'chrome_run',
+-            '../tools/telemetry/telemetry.gyp:bitmaptools#host',
+-          ],
+-          'includes': [
+-            '../build/isolate.gypi',
+-            'telemetry_gpu_test.isolate',
+-          ],
+-          'sources': [
+-            'telemetry_gpu_test.isolate',
+-          ],
+-        },
+       ],
+     }],
+     ['OS=="win"', {

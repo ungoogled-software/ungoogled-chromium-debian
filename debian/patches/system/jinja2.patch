@@ -1,0 +1,32 @@
+description: avoid third party jinja and markupsafe to pick up system versions
+
+--- a/third_party/WebKit/Source/build/scripts/scripts.gypi
++++ b/third_party/WebKit/Source/build/scripts/scripts.gypi
+@@ -3,8 +3,6 @@
+         'scripts_for_in_files': [
+             # jinja2/__init__.py contains version string, so sufficient as
+             # dependency for whole jinja2 package
+-            '<(DEPTH)/third_party/jinja2/__init__.py',
+-            '<(DEPTH)/third_party/markupsafe/__init__.py',  # jinja2 dep
+             'hasher.py',
+             'in_file.py',
+             'in_generator.py',
+--- a/third_party/WebKit/Source/bindings/generated_bindings.gyp
++++ b/third_party/WebKit/Source/bindings/generated_bindings.gyp
+@@ -121,8 +121,6 @@
+     # Python source
+     'jinja_module_files': [
+       # jinja2/__init__.py contains version string, so sufficient for package
+-      '<(DEPTH)/third_party/jinja2/__init__.py',
+-      '<(DEPTH)/third_party/markupsafe/__init__.py',  # jinja2 dep
+     ],
+     'idl_lexer_parser_files': [
+       # PLY (Python Lex-Yacc)
+@@ -343,7 +341,6 @@
+       # Update that regex if command line changes (other than changing flags)
+       'action': [
+         'python',
+-        '-S',  # skip 'import site' to speed up startup
+         'scripts/idl_compiler.py',
+         '--output-dir',
+         '<(bindings_output_dir)',

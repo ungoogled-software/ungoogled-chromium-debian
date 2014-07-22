@@ -1,0 +1,516 @@
+Index: chromium/base/base.gyp
+===================================================================
+--- chromium.orig/base/base.gyp
++++ chromium/base/base.gyp
+@@ -115,7 +115,6 @@
+             'debug/stack_trace_posix.cc',
+           ],
+           'includes': [
+-            '../build/android/cpufeatures.gypi',
+           ],
+         }],
+         ['OS == "android" and _toolset == "target" and android_webview_build == 0', {
+@@ -1275,7 +1274,6 @@
+               'android/java/templates/native_libraries_array.h'
+             ],
+           },
+-          'includes': [ '../build/android/java_cpp_template.gypi' ],
+         },
+         {
+           'target_name': 'base_java',
+@@ -1323,7 +1321,6 @@
+             'package_name': 'org/chromium/base',
+             'template_deps': ['android/application_state_list.h'],
+           },
+-          'includes': [ '../build/android/java_cpp_template.gypi' ],
+         },
+         {
+           'target_name': 'base_java_memory_pressure_level_list',
+@@ -1335,7 +1332,6 @@
+             'package_name': 'org/chromium/base',
+             'template_deps': ['memory/memory_pressure_level_list.h'],
+           },
+-          'includes': [ '../build/android/java_cpp_template.gypi' ],
+         },
+         {
+           'target_name': 'base_java_test_support',
+Index: chromium/build/all.gyp
+===================================================================
+--- chromium.orig/build/all.gyp
++++ chromium/build/all.gyp
+@@ -709,7 +709,6 @@
+             '../breakpad/breakpad.gyp:symupload#host',
+             '../breakpad/breakpad.gyp:minidump_dump#host',
+             '../breakpad/breakpad.gyp:minidump_stackwalk#host',
+-            '../build/android/tests/multiple_proguards/multiple_proguards.gyp:multiple_proguards_test_apk',
+             '../cc/cc_tests.gyp:cc_perftests_apk',
+             '../cc/cc_tests.gyp:cc_unittests',
+             '../chrome/chrome.gyp:unit_tests',
+Index: chromium/chrome/chrome_tests.gypi
+===================================================================
+--- chromium.orig/chrome/chrome_tests.gypi
++++ chromium/chrome/chrome_tests.gypi
+@@ -2748,7 +2748,6 @@
+           'dependencies': [
+             'chrome_shell_uiautomator_tests_java',
+           ],
+-          'includes': [ '../build/uiautomator_test.gypi' ],
+         },
+         {
+           'target_name': 'chrome_java_test_support',
+Index: chromium/build/java_apk.gypi
+===================================================================
+--- chromium.orig/build/java_apk.gypi
++++ chromium/build/java_apk.gypi
+@@ -224,7 +224,6 @@
+               '<@(linker_input_libraries)',
+             ],
+           },
+-          'includes': ['../build/android/write_ordered_libraries.gypi'],
+         },
+         {
+           'action_name': 'native_libraries_template_data_<(_target_name)',
+@@ -309,7 +308,6 @@
+             ],
+             'stamp': '<(strip_stamp)'
+           },
+-          'includes': ['../build/android/strip_native_libraries.gypi'],
+         },
+       ],
+       'conditions': [
+@@ -325,7 +323,6 @@
+           ],
+           'actions': [
+             {
+-              'includes': ['../build/android/push_libraries.gypi'],
+             },
+             {
+               'action_name': 'create device library symlinks',
+@@ -367,7 +364,6 @@
+                     'output_apk_path': '<(unsigned_standalone_apk_path)',
+                     'libraries_top_dir%': '<(libraries_top_dir)',
+                   },
+-                  'includes': [ 'android/create_standalone_apk_action.gypi' ],
+                 },
+               ],
+             }],
+@@ -389,7 +385,6 @@
+             'input_apk_path': '<(unsigned_standalone_apk_path)',
+             'output_apk_path': '<(final_apk_path)',
+           },
+-          'includes': [ 'android/finalize_apk_action.gypi']
+         },
+       ],
+     }],
+@@ -412,7 +407,6 @@
+             # resource_ids is unneeded since we don't generate .h headers.
+             'grit_resource_ids': '',
+           },
+-          'includes': ['../build/grit_action.gypi'],
+         },
+       ],
+     }],
+@@ -424,7 +418,6 @@
+             'input_apk_path': '<(unsigned_apk_path)',
+             'output_apk_path': '<(incomplete_apk_path)',
+           },
+-          'includes': [ 'android/finalize_apk_action.gypi']
+         },
+         {
+           'action_name': 'apk_install_<(_target_name)',
+@@ -569,7 +562,6 @@
+       'outputs': [
+         '<(lint_stamp)',
+       ],
+-      'includes': [ 'android/lint_action.gypi' ],
+     },
+     {
+       'action_name': 'instr_classes_<(_target_name)',
+@@ -586,7 +578,6 @@
+       'outputs': [
+         '<(instr_stamp)',
+       ],
+-      'includes': [ 'android/instr_action.gypi' ],
+     },
+     {
+       'action_name': 'jar_<(_target_name)',
+@@ -666,7 +657,6 @@
+         ['proguard_enabled == "true"', { 'inputs': [ '<(obfuscate_stamp)' ] },
+                                        { 'inputs': [ '<(instr_stamp)' ] }],
+       ],
+-      'includes': [ 'android/dex_action.gypi' ],
+     },
+     {
+       'action_name': 'ant package resources',
+Index: chromium/chrome/chrome_browser.gypi
+===================================================================
+--- chromium.orig/chrome/chrome_browser.gypi
++++ chromium/chrome/chrome_browser.gypi
+@@ -3648,7 +3648,6 @@
+             'package_name': 'org/chromium/chrome/browser',
+             'template_deps': ['browser/android/activity_type_id_list.h'],
+           },
+-          'includes': [ '../build/android/java_cpp_template.gypi' ],
+         },
+         {
+           'target_name': 'app_banner_metrics_ids_java',
+@@ -3660,7 +3659,6 @@
+             'package_name': 'org/chromium/chrome/browser/banners',
+             'template_deps': ['browser/android/banners/app_banner_metrics_id_list.h'],
+           },
+-          'includes': [ '../build/android/java_cpp_template.gypi' ],
+         },
+         {
+           'target_name': 'resource_id_java',
+@@ -3672,7 +3670,6 @@
+             'package_name': 'org/chromium/chrome/browser',
+             'template_deps': ['browser/android/resource_id.h'],
+           },
+-          'includes': [ '../build/android/java_cpp_template.gypi' ],
+         },
+         {
+           'target_name': 'profile_sync_service_model_type_selection_java',
+@@ -3684,7 +3681,6 @@
+             'package_name': 'org/chromium/chrome/browser/sync',
+             'template_deps': ['browser/sync/profile_sync_service_model_type_selection_android.h'],
+           },
+-          'includes': [ '../build/android/java_cpp_template.gypi' ],
+         },
+         {
+           'target_name': 'toolbar_model_security_levels_java',
+@@ -3696,7 +3692,6 @@
+             'package_name': 'org/chromium/chrome/browser/ui/toolbar',
+             'template_deps': ['browser/ui/toolbar/toolbar_model_security_level_list.h'],
+           },
+-          'includes': [ '../build/android/java_cpp_template.gypi' ],
+         },
+         {
+           'target_name': 'tab_load_status_java',
+@@ -3708,7 +3703,6 @@
+             'package_name': 'org/chromium/chrome/browser',
+             'template_deps': ['browser/android/tab_load_status.h'],
+           },
+-          'includes': [ '../build/android/java_cpp_template.gypi' ],
+         },
+       ],
+      },
+Index: chromium/components/cronet.gypi
+===================================================================
+--- chromium.orig/components/cronet.gypi
++++ chromium/components/cronet.gypi
+@@ -30,7 +30,6 @@
+             'package_name': 'org/chromium/cronet',
+             'template_deps': ['cronet/android/org_chromium_net_UrlRequest_error_list.h'],
+           },
+-          'includes': [ '../build/android/java_cpp_template.gypi' ],
+         },
+         {
+           'target_name': 'cronet_url_request_priority_list',
+@@ -42,7 +41,6 @@
+             'package_name': 'org/chromium/cronet',
+             'template_deps': ['cronet/android/org_chromium_net_UrlRequest_priority_list.h'],
+           },
+-          'includes': [ '../build/android/java_cpp_template.gypi' ],
+         },
+         {
+           'target_name': 'libcronet',
+Index: chromium/content/content.gyp
+===================================================================
+--- chromium.orig/content/content.gyp
++++ chromium/content/content.gyp
+@@ -456,7 +456,6 @@
+             'package_name': 'org/chromium/content/browser',
+             'template_deps': ['browser/android/gesture_event_type_list.h'],
+           },
+-          'includes': [ '../build/android/java_cpp_template.gypi' ],
+         },
+         {
+           'target_name': 'page_transition_types_java',
+@@ -468,7 +467,6 @@
+             'package_name': 'org/chromium/content/browser',
+             'template_deps': ['public/common/page_transition_types_list.h'],
+           },
+-          'includes': [ '../build/android/java_cpp_template.gypi' ],
+         },
+         {
+           'target_name': 'popup_item_type_java',
+@@ -480,7 +478,6 @@
+             'package_name': 'org/chromium/content/browser/input',
+             'template_deps': ['browser/android/popup_item_type_list.h'],
+           },
+-          'includes': [ '../build/android/java_cpp_template.gypi' ],
+         },
+         {
+           'target_name': 'result_codes_java',
+@@ -492,7 +489,6 @@
+             'package_name': 'org/chromium/content/common',
+             'template_deps': ['public/common/result_codes_list.h'],
+           },
+-          'includes': [ '../build/android/java_cpp_template.gypi' ],
+         },
+         {
+           'target_name': 'speech_recognition_error_java',
+@@ -504,7 +500,6 @@
+             'package_name': 'org/chromium/content/browser',
+             'template_deps': ['public/common/speech_recognition_error_list.h'],
+           },
+-          'includes': [ '../build/android/java_cpp_template.gypi' ],
+         },
+         {
+           'target_name': 'top_controls_state_java',
+@@ -516,7 +511,6 @@
+             'package_name': 'org/chromium/content/common',
+             'template_deps': ['public/common/top_controls_state_list.h'],
+           },
+-          'includes': [ '../build/android/java_cpp_template.gypi' ],
+         },
+         {
+           'target_name': 'screen_orientation_values_java',
+@@ -528,7 +522,6 @@
+             'package_name': 'org/chromium/content/common',
+             'template_deps': ['public/common/screen_orientation_values_list.h'],
+           },
+-          'includes': [ '../build/android/java_cpp_template.gypi' ],
+         },
+         {
+           'target_name': 'java_set_jni_headers',
+Index: chromium/media/media.gyp
+===================================================================
+--- chromium.orig/media/media.gyp
++++ chromium/media/media.gyp
+@@ -1663,7 +1663,6 @@
+             'package_name': 'org/chromium/media',
+             'template_deps': ['video/capture/android/imageformat_list.h'],
+           },
+-          'includes': [ '../build/android/java_cpp_template.gypi' ],
+         },
+       ],
+     }],
+Index: chromium/net/net.gyp
+===================================================================
+--- chromium.orig/net/net.gyp
++++ chromium/net/net.gyp
+@@ -1546,7 +1546,6 @@
+             'package_name': 'org/chromium/net',
+             'template_deps': ['base/net_error_list.h'],
+           },
+-          'includes': [ '../build/android/java_cpp_template.gypi' ],
+         },
+         {
+           'target_name': 'certificate_mime_types_java',
+@@ -1558,7 +1557,6 @@
+             'package_name': 'org/chromium/net',
+             'template_deps': ['base/mime_util_certificate_type_list.h'],
+           },
+-          'includes': [ '../build/android/java_cpp_template.gypi' ],
+         },
+         {
+           'target_name': 'cert_verify_status_android_java',
+@@ -1570,7 +1568,6 @@
+             'package_name': 'org/chromium/net',
+             'template_deps': ['android/cert_verify_status_android_list.h'],
+           },
+-          'includes': [ '../build/android/java_cpp_template.gypi' ],
+         },
+         {
+           'target_name': 'private_key_types_java',
+@@ -1582,7 +1579,6 @@
+             'package_name': 'org/chromium/net',
+             'template_deps': ['android/private_key_type_list.h'],
+           },
+-          'includes': [ '../build/android/java_cpp_template.gypi' ],
+         },
+       ],
+     }],
+Index: chromium/build/java.gypi
+===================================================================
+--- chromium.orig/build/java.gypi
++++ chromium/build/java.gypi
+@@ -167,7 +167,6 @@
+                 # resource_ids is unneeded since we don't generate .h headers.
+                 'grit_resource_ids': '',
+               },
+-              'includes': ['../build/grit_action.gypi'],
+             },
+           ],
+         }],
+@@ -314,7 +313,6 @@
+       'outputs': [
+         '<(lint_stamp)',
+       ],
+-      'includes': [ 'android/lint_action.gypi' ],
+     },
+     {
+       'action_name': 'jar_<(_target_name)',
+@@ -350,7 +348,6 @@
+       'inputs': [
+         '<(jar_path)',
+       ],
+-      'includes': [ 'android/instr_action.gypi' ],
+     },
+     {
+       'action_name': 'jar_toc_<(_target_name)',
+@@ -381,7 +378,6 @@
+         'dex_input_paths': [ '<(jar_final_path)' ],
+         'output_path': '<(dex_path)',
+       },
+-      'includes': [ 'android/dex_action.gypi' ],
+     },
+   ],
+ }
+Index: chromium/crypto/crypto.gyp
+===================================================================
+--- chromium.orig/crypto/crypto.gyp
++++ chromium/crypto/crypto.gyp
+@@ -53,7 +53,6 @@
+         }],
+         [ 'OS == "android"', {
+             'includes': [
+-              '../build/android/cpufeatures.gypi',
+             ],
+         }],
+         [ 'os_bsd==1', {
+Index: chromium/content/content_app.gypi
+===================================================================
+--- chromium.orig/content/content_app.gypi
++++ chromium/content/content_app.gypi
+@@ -55,7 +55,6 @@
+         '../skia/skia.gyp:skia',
+       ],
+       'includes': [
+-        '../build/android/cpufeatures.gypi',
+       ],
+     }],
+     ['OS=="ios"', {
+Index: chromium/content/content_child.gypi
+===================================================================
+--- chromium.orig/content/content_child.gypi
++++ chromium/content/content_child.gypi
+@@ -238,7 +238,6 @@
+     ],
+     ['OS=="android"', {
+       'includes': [
+-        '../build/android/cpufeatures.gypi',
+       ],
+     }],
+     ['enable_plugins==0', {
+Index: chromium/content/content_renderer.gypi
+===================================================================
+--- chromium.orig/content/content_renderer.gypi
++++ chromium/content/content_renderer.gypi
+@@ -590,7 +590,6 @@
+         '../third_party/libphonenumber/libphonenumber.gyp:libphonenumber',
+       ],
+       'includes': [
+-        '../build/android/cpufeatures.gypi',
+       ],
+     }, {
+       'sources!': [
+Index: chromium/skia/skia_library.gypi
+===================================================================
+--- chromium.orig/skia/skia_library.gypi
++++ chromium/skia/skia_library.gypi
+@@ -180,9 +180,6 @@
+       'sources': [
+         '../third_party/skia/src/core/SkUtilsArm.cpp',
+       ],
+-      'includes': [
+-        '../build/android/cpufeatures.gypi',
+-      ],
+     }],
+     [ 'target_arch == "arm" or target_arch == "arm64" or \
+        target_arch == "mipsel"', {
+Index: chromium/third_party/libvpx/libvpx.gyp
+===================================================================
+--- chromium.orig/third_party/libvpx/libvpx.gyp
++++ chromium/third_party/libvpx/libvpx.gyp
+@@ -334,7 +334,6 @@
+             }],
+             ['OS == "android"', {
+               'includes': [
+-                '../../build/android/cpufeatures.gypi',
+               ],
+             }],
+             ['chromeos == 1', {
+Index: chromium/chrome/browser/ui/webui/memory_internals/memory_internals_proxy.cc
+===================================================================
+--- chromium.orig/chrome/browser/ui/webui/memory_internals/memory_internals_proxy.cc
++++ chromium/chrome/browser/ui/webui/memory_internals/memory_internals_proxy.cc
+@@ -20,8 +20,6 @@
+ #include "chrome/browser/profiles/profile.h"
+ #include "chrome/browser/profiles/profile_manager.h"
+ #include "chrome/browser/renderer_host/chrome_render_message_filter.h"
+-#include "chrome/browser/ui/android/tab_model/tab_model.h"
+-#include "chrome/browser/ui/android/tab_model/tab_model_list.h"
+ #include "chrome/browser/ui/browser.h"
+ #include "chrome/browser/ui/browser_iterator.h"
+ #include "chrome/browser/ui/tab_contents/tab_contents_iterator.h"
+@@ -37,6 +35,11 @@
+ #include "content/public/browser/web_contents.h"
+ #include "content/public/browser/web_ui.h"
+ 
++#if defined(OS_ANDROID)
++#include "chrome/browser/ui/android/tab_model/tab_model.h"
++#include "chrome/browser/ui/android/tab_model/tab_model_list.h"
++#endif
++
+ #if defined(ENABLE_FULL_PRINTING)
+ #include "chrome/browser/printing/background_printing_manager.h"
+ #endif
+Index: chromium/chrome/browser/ui/webui/password_manager_internals/password_manager_internals_ui.cc
+===================================================================
+--- chromium.orig/chrome/browser/ui/webui/password_manager_internals/password_manager_internals_ui.cc
++++ chromium/chrome/browser/ui/webui/password_manager_internals/password_manager_internals_ui.cc
+@@ -13,8 +13,6 @@
+ #include "base/values.h"
+ #include "chrome/browser/password_manager/chrome_password_manager_client.h"
+ #include "chrome/browser/profiles/profile.h"
+-#include "chrome/browser/ui/android/tab_model/tab_model.h"
+-#include "chrome/browser/ui/android/tab_model/tab_model_list.h"
+ #include "chrome/browser/ui/tab_contents/tab_contents_iterator.h"
+ #include "chrome/common/url_constants.h"
+ #include "content/public/browser/browser_context.h"
+@@ -25,6 +23,11 @@
+ #include "grit/password_manager_internals_resources.h"
+ #include "net/base/escape.h"
+ 
++#if defined(OS_ANDROID)
++#include "chrome/browser/ui/android/tab_model/tab_model.h"
++#include "chrome/browser/ui/android/tab_model/tab_model_list.h"
++#endif
++
+ using content::BrowserContext;
+ using content::WebContents;
+ 
+Index: chromium/components/components.gyp
+===================================================================
+--- chromium.orig/components/components.gyp
++++ chromium/components/components.gyp
+@@ -54,7 +54,6 @@
+         'sessions.gypi',
+         'storage_monitor.gypi',
+         'visitedlink.gypi',
+-        'web_contents_delegate_android.gypi',
+         'web_modal.gypi',
+       ],
+     }],
+Index: chromium/third_party/cacheinvalidation/cacheinvalidation.gyp
+===================================================================
+--- chromium.orig/third_party/cacheinvalidation/cacheinvalidation.gyp
++++ chromium/third_party/cacheinvalidation/cacheinvalidation.gyp
+@@ -212,7 +212,6 @@
+             '<(proto_in_dir)/java_client.proto',
+             '<(proto_in_dir)/types.proto',
+           ],
+-          'includes': [ '../../build/protoc_java.gypi' ],
+         },
+         {
+           'target_name': 'cacheinvalidation_example_proto_java',
+@@ -224,7 +223,6 @@
+           'sources': [
+             '<(proto_in_dir)/example_listener.proto',
+           ],
+-          'includes': [ '../../build/protoc_java.gypi' ],
+         },
+         {
+           'target_name': 'cacheinvalidation_javalib',

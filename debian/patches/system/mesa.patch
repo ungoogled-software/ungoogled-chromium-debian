@@ -1,0 +1,12 @@
+description: system mesa work in progress
+
+--- a/build/all.gyp
++++ b/build/all.gyp
+@@ -96,7 +96,6 @@
+             '../third_party/libwebp/libwebp.gyp:*',
+             '../third_party/libxslt/libxslt.gyp:*',
+             '../third_party/lzma_sdk/lzma_sdk.gyp:*',
+-            '../third_party/mesa/mesa.gyp:*',
+             '../third_party/modp_b64/modp_b64.gyp:*',
+             '../third_party/npapi/npapi.gyp:*',
+             '../third_party/ots/ots.gyp:*',

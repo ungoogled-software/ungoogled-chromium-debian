@@ -1,6 +1,8 @@
-chromium: embedded-library usr/lib/chromium/chromium: sqlite
-chromium: embedded-library usr/lib/chromium/libffmpegsumo.so: libavcodec
-chromium: embedded-library usr/lib/chromium/libffmpegsumo.so: libavutil
-chromium: statically-linked-binary usr/lib/chromium/nacl_irt_x86_64.nexe
-chromium: statically-linked-binary usr/lib/chromium/nacl_irt_x86_32.nexe
-chromium: embedded-library usr/lib/chromium/chromium: libpng
+# sandbox is intentionally suid
+setuid-binary usr/lib/chromium/chrome-sandbox 4755 root/root
+# ffmpeg doesn't support pic
+shlib-with-non-pic-code usr/lib/chromium/libffmpegsumo.so
+# currently unavoidable embedded libraries
+embedded-library usr/lib/chromium/libffmpegsumo.so: libavcodec
+embedded-library usr/lib/chromium/libffmpegsumo.so: libavutil
+embedded-library usr/lib/chromium/chromium: sqlite

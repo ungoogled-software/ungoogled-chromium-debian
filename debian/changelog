@@ -1,9 +1,415 @@
-chromium-browser (29.0.1547.57-3+exp1) experimental; urgency=low
+chromium-browser (36.0.1985.125-0) experimental; urgency=medium
+
+  * New upstream beta release.
+  * Disable Google API keys warning.
+  * Remove more files from the upstream tarball.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Wed, 16 Jul 2014 00:49:19 +0000
+
+chromium-browser (36.0.1985.103-1) experimental; urgency=medium
+
+  * New upstream beta release.
+  * Remove android folders.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 12 Jul 2014 21:38:26 +0000
+
+chromium-browser (36.0.1985.98-1) experimental; urgency=medium
+
+  * New upstream beta release.
+  * Remove more files from the upstream tarball.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 06 Jul 2014 04:05:56 +0000
+
+chromium-browser (36.0.1985.97-1) experimental; urgency=medium
+
+  * New upstream beta release.
+  * Use system srtp, modpbase64, zlib, and minizip.
+  * Remove srtp files from the upstream tarball (closes: #753826).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 06 Jul 2014 00:06:57 +0000
+
+chromium-browser (36.0.1985.84-1) experimental; urgency=medium
+
+  * New upstream beta release.
+  * Remove more files from the upstream tarball.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 21 Jun 2014 23:41:14 +0000
+
+chromium-browser (36.0.1985.67-1) experimental; urgency=medium
+
+  * New upstream beta release.
+  * More verbose linking output.
+  * Fix unwanted output (closes: #751359).
+  * More robust fix for older processors (closes: #750361).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Wed, 18 Jun 2014 00:18:47 +0000
+
+chromium-browser (36.0.1985.49-1) experimental; urgency=medium
+
+  * New upstream beta release.
+  * Remove more files from the upstream tarball.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 08 Jun 2014 01:49:51 +0000
+
+chromium-browser (36.0.1985.36-1) experimental; urgency=medium
+
+  * Use system libre2.
+  * Remove more files from the upstream tarball.
+  * Don't set sse2 compiler flags on i386 (closes: #750361).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 07 Jun 2014 22:00:14 +0000
+
+chromium-browser (36.0.1985.35-1) experimental; urgency=medium
+
+  * Remove more files from the upstream tarball.
+  * Only include TODO.Debian once (closes: #750568).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 05 Jun 2014 20:21:28 +0000
+
+chromium-browser (36.0.1985.32-1) experimental; urgency=medium
+
+  * New upstream beta release.
+  * Add icon to menu entry (closes: #703307).
+  * Remove third_party/wtl (closes: #647529).
+  * Update package descriptions (closes: #749673).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 31 May 2014 19:05:32 +0000
+
+chromium-browser (36.0.1985.18-2) experimental; urgency=medium
+
+  * Add libexif-dev build dependency.
+  * Add flags to avoid memory exhaustion while linking on i386.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Mon, 26 May 2014 23:43:25 +0000
+
+chromium-browser (36.0.1985.18-1) experimental; urgency=medium
+
+  * New upstream beta release.
+  * Build with gcc 4.9.
+  * Rebuild the packaging from scratch using the "lite" upstream packages,
+    ninja instead of make, debhelper 9 instead of cdbs, and simplified
+    debian/rules.
+  * Use system versions of icu, png, jpeg, opus, snappy, and jsoncpp.
+  * No longer provide get-current-source rule (closes: #585814).
+  * Add a README.debian document with information about chromium-inspector
+    and command-line flags (closes: #629505, #649812).
+  * Add protobuf-compiler, ninja-build, bison, and gperf build dependencies
+    (closes: #748673).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 25 May 2014 03:39:39 +0000
+
+chromium-browser (35.0.1916.114-1) unstable; urgency=high
+
+  * New upstream stable release:
+    - CVE-2014-1743: Use-after-free in styles. Credit to cloudfuzzer.
+    - CVE-2014-1744: Integer overflow in audio. Credit to Aaron Staple.
+    - CVE-2014-1745: Use-after-free in SVG. Credit to Atte Kettunen.
+    - CVE-2014-1746: Out-of-bounds read in media filters. Credit to
+      Holger Fuhrmannek.
+    - CVE-2014-1747: UXSS with local MHTML file. Credit to packagesu.
+    - CVE-2014-1748: UI spoofing with scrollbar. Credit to Jordan Milne.
+    - CVE-2014-1749: Various fixes from internal audits, fuzzing and other
+      initiatives.
+    - CVE-2014-3152: Integer underflow in V8 fixed in version 3.25.28.16.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Wed, 21 May 2014 23:15:51 +0000
+
+chromium-browser (34.0.1847.137-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - High CVE-2014-1740: Use-after-free in WebSockets. Credit to Collin
+      Payne.
+    - High CVE-2014-1741: Integer overflow in DOM ranges. Credit to John
+      Butler.
+    - High CVE-2014-1742: Use-after-free in editing. Credit to cloudfuzzer.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 17 May 2014 13:06:30 +0000
+
+chromium-browser (34.0.1847.132-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - High CVE-2014-1730: Type confusion in V8. Credit to Anonymous.
+    - High CVE-2014-1731: Type confusion in DOM. Credit to John Butler.
+    - High CVE-2014-1736: Integer overflow in V8.  Credit to SkyLined working
+      with HP's Zero Day Initiative
+    - Medium CVE-2014-1732: Use-after-free in Speech Recognition. Credit to
+      Khalil Zhani
+    - Medium CVE-2014-1733: Compiler bug in Seccomp-BPF. Credit to Jed Davis
+    - CVE-2014-1734: Various fixes from internal audits, fuzzing and other
+      initiatives.
+    - CVE-2014-1735: Multiple vulnerabilities in V8 fixed in version
+      3.24.35.33.
+  * Add libkrb5-dev build-dependency (closes: #745794).
+  * Remove non-free file (closes: #745397).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 26 Apr 2014 18:03:53 +0000
+
+chromium-browser (34.0.1847.116-2) unstable; urgency=medium
+
+  * Add libgcrypt build-dependency.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Tue, 15 Apr 2014 00:22:36 +0000
+
+chromium-browser (34.0.1847.116-1) unstable; urgency=high
+
+  * New upstream stable release:
+    - High CVE-2014-1716: UXSS in V8. Credit to Anonymous.
+    - High CVE-2014-1717: OOB access in V8. Credit to Anonymous.
+    - High CVE-2014-1718: Integer overflow in compositor. Credit to Aaron
+      Staple.
+    - High CVE-2014-1719: Use-after-free in web workers. Credit to Collin
+      Payne.
+    - High CVE-2014-1720: Use-after-free in DOM. Credit to cloudfuzzer.
+    - High CVE-2014-1721: Memory corruption in V8. Credit to Christian Holler.
+    - High CVE-2014-1722: Use-after-free in rendering. Credit to miaubiz.
+    - High CVE-2014-1723: Url confusion with RTL characters. Credit to George
+      McBay.
+    - High CVE-2014-1724: Use-after-free in speech. Credit to Atte Kettunen.
+    - Medium CVE-2014-1725: OOB read with window property. Credit to
+      Anonymous.
+    - Medium CVE-2014-1726: Local cross-origin bypass. Credit to Jann Horn.
+    - Medium CVE-2014-1727: Use-after-free in forms. Credit to Khalil Zhani.
+    - CVE-2014-1728: Various fixes from internal audits, fuzzing and other
+      initiatives.
+    - CVE-2014-1729: Multiple vulnerabilities in V8 fixed in version
+      3.24.35.22.
+  * Remove sourceless javascript files (closes: #735355).
+  * Remove sourceless swf files (closes: #735344).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 11 Apr 2014 01:42:04 +0000
+
+chromium-browser (33.0.1750.152-1) unstable; urgency=high
+
+  * [641361a] Disable new GN stuff
+  * [43cea90] Refreshed patches
+  * New stable release:
+    - High CVE-2014-1713: Use-after-free in Blink bindings
+    - High CVE-2014-1714: Windows clipboard vulnerability
+    - High CVE-2014-1705: Memory corruption in V8
+    - High CVE-2014-1715: Directory traversal issue
+    - High CVE-2014-1700: Use-after-free in speech. Credit to Chamal de Silva.
+    - High CVE-2014-1701: UXSS in events. Credit to aidanhs.
+    - High CVE-2014-1702: Use-after-free in web database.
+      Credit to Collin Payne.
+    - High CVE-2014-1703: Potential sandbox escape due to a use-after-free
+      in web sockets.
+    - CVE-2014-1704: Multiple vulnerabilities in V8 fixed in version 3.23.17.18
+    - High CVE-2013-6663: Use-after-free in svg images. Credit to Atte
+      Kettunen of OUSPG.
+    - High CVE-2013-6664: Use-after-free in speech recognition.
+      Credit to Khalil Zhani.
+    - High CVE-2013-6665: Heap buffer overflow in software
+      rendering. Credit to cloudfuzzer.
+    - Medium CVE-2013-6666: Chrome allows requests in flash header request.
+      Credit to netfuzzerr.
+    - CVE-2013-6667: Various fixes from internal audits, fuzzing and other
+      initiatives.
+    - CVE-2013-6668: Multiple vulnerabilities in V8 fixed in version 3.24.35.10
+    - High CVE-2013-6653: Use-after-free related to web contents.
+      Credit to Khalil Zhani.
+    - High CVE-2013-6654: Bad cast in SVG. Credit to TheShow3511.
+    - High CVE-2013-6655: Use-after-free in layout. Credit to cloudfuzzer.
+    - High CVE-2013-6656: Information leak in XSS auditor. Credit to NeexEmil.
+    - Medium CVE-2013-6657: Information leak in XSS auditor. Credit to NeexEmil
+    - Medium CVE-2013-6658: Use-after-free in layout. Credit to cloudfuzzer.
+    - Medium CVE-2013-6659: Issue with certificates validation in
+      TLS handshake. Credit to Antoine Delignat-Lavaud and Karthikeyan Bhargavan
+      from Prosecco, Inria Paris.
+    - Low CVE-2013-6660: Information leak in drag and drop. Credit to
+      bishopjeffreys.
+    - Low-High CVE-2013-6661: Various fixes from internal audits, fuzzing
+      and other initiatives. Of these, seven are fixes for issues that could
+      have allowed for sandbox escapes from compromised renderers.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 21 Mar 2014 17:20:44 +0100
+
+chromium-browser (32.0.1700.123-4) unstable; urgency=medium
+
+  * Remove polymer.js.min.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 09 Mar 2014 22:30:14 +0000
+
+chromium-browser (32.0.1700.123-3) unstable; urgency=medium
+
+  * Remove a lot of sourceless files.
+  * Suggest mozplugger (closes: #626400).
+  * Use file's -E option (closes: #740476).
+  * Capitalize Chromium in descriptions (closes: #632928, #715802).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 16 Feb 2014 18:50:06 +0000
+
+chromium-browser (32.0.1700.123-2) unstable; urgency=medium
+
+  * Build with system libjs-jquery-flot.
+  * Build chromedriver (closes: #725130).
+    - Thanks to Vincent Bernat and Adrian Lang.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 16 Feb 2014 02:32:18 +0000
+
+chromium-browser (32.0.1700.123-1) unstable; urgency=medium
+
+  * [a7cf72b] Refreshed Patches
+  * [0da7fc2] Added libdrm-dev and libcap-dev in build-deps
+  * New stable release:
+    - High CVE-2013-6649: Use-after-free in SVG images. Credit to
+      Atte Kettunen of OUSPG.
+    - High CVE-2013-6650: Memory corruption in V8. This issue was
+      fixed in v8 version 3.22.24.16. Credit to Christian Holler.
+    - High CVE-2013-6646: Use-after-free in web workers. Credit to
+      Collin Payne.
+    - High CVE-2013-6641: Use-after-free related to forms. Credit to
+      Atte Kettunen of OUSPG.
+    - High CVE-2013-6643: Unprompted sync with an attacker’s Google
+      account. Credit to Joao Lucas Melo Brasio.
+    - CVE-2013-6645 Use-after-free related to speech input elements.
+      Credit to Khalil Zhani.
+    - CVE-2013-6644: Various fixes from internal audits, fuzzing and other
+      initiatives.
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Thu, 13 Feb 2014 19:36:17 +0100
+
+chromium-browser (31.0.1650.63-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - Medium CVE-2013-6634: Session fixation in sync related to 302 redirects.
+      Credit to Andrey Labunets.
+    - High CVE-2013-6635: Use-after-free in editing. Credit to cloudfuzzer.
+    - Medium CVE-2013-6636: Address bar spoofing related to modal dialogs.
+      Credit to Bas Venis.
+    - CVE-2013-6637: Various fixes from internal audits, fuzzing and other
+      initiatives.
+    - Medium CVE-2013-6638: Buffer overflow in v8. This issue was fixed in v8
+      version 3.22.24.7. Credit to Jakob Kummerow of the Chromium project.
+    - High CVE-2013-6639: Out of bounds write in v8. This issue was fixed in v8
+      version 3.22.24.7. Credit to Jakob Kummerow of the Chromium project.
+    - Medium CVE-2013-6640: Out of bounds read in v8. This issue was fixed in
+      v8 version 3.22.24.7. Credit to Jakob Kummerow of the Chromium project.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 05 Dec 2013 14:05:22 +0000
+
+chromium-browser (31.0.1650.57-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - Medium-Critical CVE-2013-2931: Various fixes from internal audits,
+      fuzzing and other initiatives.
+    - Medium CVE-2013-6621: Use after free related to speech input elements.
+      Credit to Khalil Zhani.
+    - High CVE-2013-6622: Use after free related to media elements. Credit to
+      cloudfuzzer.
+    - High CVE-2013-6623: Out of bounds read in SVG. Credit to miaubiz.
+    - High CVE-2013-6624: Use after free related to “id” attribute strings.
+      Credit to Jon Butler.
+    - High CVE-2013-6625: Use after free in DOM ranges. Credit to cloudfuzzer.
+    - Low CVE-2013-6626: Address bar spoofing related to interstitial warnings.
+      Credit to Chamal de Silva.
+    - High CVE-2013-6627: Out of bounds read in HTTP parsing. Credit to
+      skylined.
+    - Medium CVE-2013-6628: Issue with certificates not being checked during
+      TLS renegotiation. Credit to Antoine Delignat-Lavaud and Karthikeyan
+      Bhargavan from Prosecco of INRIA Paris.
+    - Medium CVE-2013-6629: Read of uninitialized memory in libjpeg and
+      libjpeg-turbo. Credit to Michal Zalewski of Google.
+    - Medium CVE-2013-6630: Read of uninitialized memory in libjpeg-turbo.
+      Credit to Michal Zalewski of Google.
+    - High CVE-2013-6631: Use after free in libjingle. Credit to Patrik Höglund
+      of the Chromium project.
+    - Critical CVE-2013-6632: Multiple memory corruption issues. Credit to
+      Pinkie Pie.
+  * Disable promos by default (closes: #634101).
+  * Set WANT_TESTS=0 if WANT_TESTS=1 fails (closes: #589654).
+  * Maintain window ordering when new tabs are opened (closes: #725350).
+  * Install chromium-inspector files to /usr/share instead of /usr/lib.
+  * Don't remove third party libraries from the upstream tarball.
+  * Remove non-default compression selections from debian/rules.
+  * Build with breakpad crash reporting.
+  * Fix some lintian warnings.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Wed, 13 Nov 2013 07:44:55 +0000
+
+chromium-browser (30.0.1599.101-3) unstable; urgency=medium
+
+  * Fix sandbox installation path (closes: #728823).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 07 Nov 2013 04:24:55 +0000
+
+chromium-browser (30.0.1599.101-2) unstable; urgency=medium
+
+  * Use system zlib.
+  * Remove arm patches.
+  * Update lintian overrides.
+  * Remove an unsafe symlink.
+  * Remove icu build dependency.
+  * Support poststript printing (closes: #717722).
+  * Use fonts-ipafont instead of ttf-kochi (closes: #725800).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 02 Nov 2013 21:25:50 +0000
+
+chromium-browser (30.0.1599.101-1) unstable; urgency=low
+
+  [ Giuseppe Iuculano ]
+  * New stable release:
+    - High CVE-2013-2925: Use after free in XHR. Credit to Atte Kettunen of
+      OUSPG.
+    - High CVE-2013-2926: Use after free in editing. Credit to
+      cloudfuzzer.
+    - High CVE-2013-2927: Use after free in forms. Credit to
+      cloudfuzzer.
+    - CVE-2013-2928: Various fixes from internal audits, fuzzing and other
+      initiatives.
+    - Medium CVE-2013-2906: Races in Web Audio.
+      Credit to Atte Kettunen of OUSPG.
+    - Medium CVE-2013-2907: Out of bounds read in Window.prototype object.
+      Credit to Boris Zbarsky.
+    - Medium CVE-2013-2908: Address bar spoofing related to the "204
+      No Content" status code. Credit to Chamal de Silva.
+    - High CVE-2013-2909: Use after free in inline-block
+      rendering. Credit to Atte Kettunen of OUSPG. 
+    - Medium CVE-2013-2910: Use-after-free in Web Audio. Credit to
+      Byoungyoung Lee of Georgia Tech Information Security Center (GTISC).
+    - High CVE-2013-2911: Use-after-free in XSLT. Credit to Atte
+      Kettunen of OUSPG.
+    - High CVE-2013-2912: Use-after-free in PPAPI. Credit to Chamal
+      de Silva and 41.w4r10r(at)garage4hackers.com.
+    - High CVE-2013-2913: Use-after-free in XML document parsing.
+      Credit to cloudfuzzer. 
+    - High CVE-2013-2914: Use after free in the Windows color
+      chooser dialog. Credit to Khalil Zhani. 
+    - Low CVE-2013-2915: Address bar spoofing via a malformed scheme.
+      Credit to Wander Groeneveld. 
+    - High CVE-2013-2916: Address bar spoofing related to the "204
+      No Content” status code. Credit to Masato Kinugawa.
+    - Medium CVE-2013-2917: Out of bounds read in Web Audio. Credit
+      to Byoungyoung Lee and Tielei Wang of Georgia Tech Information
+      Security Center (GTISC). 
+    - High CVE-2013-2918: Use-after-free in DOM. Credit to
+      Byoungyoung Lee of Georgia Tech Information Security Center (GTISC).
+    - High CVE-2013-2919: Memory corruption in V8. Credit to Adam
+      Haile of Concrete Data. 
+    - Medium CVE-2013-2920: Out of bounds read in URL parsing. Credit to
+      Atte Kettunen of OUSPG.
+    - High CVE-2013-2921: Use-after-free in resource loader. Credit
+      to Byoungyoung Lee and Tielei Wang of Georgia Tech Information
+      Security Center (GTISC). 
+    - High CVE-2013-2922: Use-after-free in template element. Credit
+      to Jon Butler. 
+    - CVE-2013-2923: Various fixes from internal audits, fuzzing and other
+      initiatives (Chrome 30).
+    - Medium CVE-2013-2924: Use-after-free in ICU. Upstream bug here.
+
+  * [6651f1c] Added chrpath to build-depends
+  * [3c88b20] Refreshed Patches for version 30
+  * [743a0a6] Make default of third-party cookies the most secure for users.
+    Thanks to Chad Miller
+  * [9507f07] Do not install remoting_locales/en-US.pak
+  * [64b895b] Move chrome_sandbox to chrome-sandbox, chromium reads that file
 
   [ Shawn Landden ]
-  * Enable arm support.
+  * [6d027f1] rules: dpkg compresses .deb files with xz by default now
 
- -- Michael Gilbert <mgilbert@debian.org>  Sun, 22 Sep 2013 00:34:12 +0000
+  [ Michael Gilbert ]
+  * [18341ce] add some TODO tasks
+
+ -- Giuseppe Iuculano <iuculano@debian.org>  Mon, 21 Oct 2013 13:06:14 +0200
 
 chromium-browser (29.0.1547.57-3) unstable; urgency=medium
 
