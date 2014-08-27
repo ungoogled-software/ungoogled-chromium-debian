@@ -1,0 +1,47 @@
+description: use prtime.h from /usr/include/nspr
+
+--- a/chrome/browser/metrics/metrics_log.cc
++++ b/chrome/browser/metrics/metrics_log.cc
+@@ -22,7 +22,7 @@
+ #include "base/strings/string_util.h"
+ #include "base/strings/utf_string_conversions.h"
+ #include "base/sys_info.h"
+-#include "base/third_party/nspr/prtime.h"
++#include <nspr/prtime.h>
+ #include "base/time/time.h"
+ #include "base/tracked_objects.h"
+ #include "chrome/browser/autocomplete/autocomplete_input.h"
+--- a/base/base.gypi
++++ b/base/base.gypi
+@@ -18,8 +18,6 @@
+           'third_party/dmg_fp/dtoa_wrapper.cc',
+           'third_party/icu/icu_utf.cc',
+           'third_party/icu/icu_utf.h',
+-          'third_party/nspr/prtime.cc',
+-          'third_party/nspr/prtime.h',
+           'third_party/superfasthash/superfasthash.c',
+           'third_party/xdg_mime/xdgmime.h',
+           'allocator/allocator_extension.cc',
+--- a/base/time/pr_time_unittest.cc
++++ b/base/time/pr_time_unittest.cc
+@@ -5,7 +5,7 @@
+ #include <time.h>
+ 
+ #include "base/compiler_specific.h"
+-#include "base/third_party/nspr/prtime.h"
++#include <nspr/prtime.h>
+ #include "base/time/time.h"
+ #include "testing/gtest/include/gtest/gtest.h"
+ 
+--- a/base/time/time.cc
++++ b/base/time/time.cc
+@@ -10,7 +10,8 @@
+ #include "base/float_util.h"
+ #include "base/lazy_instance.h"
+ #include "base/logging.h"
+-#include "base/third_party/nspr/prtime.h"
++
++#include <nspr/prtime.h>
+ 
+ namespace base {
+ 

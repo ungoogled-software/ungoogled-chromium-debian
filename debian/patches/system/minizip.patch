@@ -1,0 +1,61 @@
+description: only use system zip/minizip gyp files
+
+--- a/chrome/chrome_browser.gypi
++++ b/chrome/chrome_browser.gypi
+@@ -77,7 +77,6 @@
+         '../third_party/libjingle/libjingle.gyp:libjingle',
+         '../third_party/libxml/libxml.gyp:libxml',
+         '../third_party/widevine/cdm/widevine_cdm.gyp:widevine_cdm_version_h',
+-        '../third_party/zlib/google/zip.gyp:zip',
+         '../third_party/zlib/zlib.gyp:minizip',
+         '../third_party/zlib/zlib.gyp:zlib',
+         '../ui/base/strings/ui_strings.gyp:ui_strings',
+--- a/chrome/chrome_common.gypi
++++ b/chrome/chrome_common.gypi
+@@ -53,7 +53,8 @@
+         '<(DEPTH)/third_party/icu/icu.gyp:icuuc',
+         '<(DEPTH)/third_party/libxml/libxml.gyp:libxml',
+         '<(DEPTH)/third_party/sqlite/sqlite.gyp:sqlite',
+-        '<(DEPTH)/third_party/zlib/google/zip.gyp:zip',
++        '<(DEPTH)/third_party/zlib/zlib.gyp:minizip',
++        '<(DEPTH)/third_party/zlib/zlib.gyp:zip',
+         '<(DEPTH)/ui/resources/ui_resources.gyp:ui_resources',
+         '<(DEPTH)/url/url.gyp:url_lib',
+       ],
+--- a/components/feedback.gypi
++++ b/components/feedback.gypi
+@@ -11,7 +11,8 @@
+         '../base/base.gyp:base',
+         '../content/content.gyp:content_common',
+         '../net/net.gyp:net',
+-        '../third_party/zlib/google/zip.gyp:zip',
++        '../third_party/zlib/zlib.gyp:minizip',
++        '../third_party/zlib/zlib.gyp:zip',
+         'components.gyp:keyed_service_core',
+         'feedback_proto',
+       ],
+--- a/content/content_browser.gypi
++++ b/content/content_browser.gypi
+@@ -11,8 +11,9 @@
+     '../skia/skia.gyp:skia',
+     '../sql/sql.gyp:sql',
+     '../third_party/re2/re2.gyp:re2',
+-    '../third_party/zlib/google/zip.gyp:zip',
+     '../third_party/zlib/zlib.gyp:zlib',
++    '../third_party/zlib/zlib.gyp:minizip',
++    '../third_party/zlib/zlib.gyp:zip',
+     '../third_party/WebKit/public/blink_headers.gyp:blink_headers',
+     '../ui/accessibility/accessibility.gyp:accessibility',
+     '../ui/accessibility/accessibility.gyp:ax_gen',
+--- a/chrome/chrome_tests.gypi
++++ b/chrome/chrome_tests.gypi
+@@ -564,7 +564,8 @@
+         '../crypto/crypto.gyp:crypto',
+         '../net/net.gyp:http_server',
+         '../net/net.gyp:net',
+-        '../third_party/zlib/google/zip.gyp:zip',
++        '../third_party/zlib/zlib.gyp:minizip',
++        '../third_party/zlib/zlib.gyp:zip',
+         '../ui/base/ui_base.gyp:ui_base',
+         '../ui/events/events.gyp:events_base',
+         '../ui/gfx/gfx.gyp:gfx',

@@ -1,0 +1,199 @@
+Index: chromium/chrome/browser/chrome_content_browser_client.cc
+===================================================================
+--- chromium.orig/chrome/browser/chrome_content_browser_client.cc
++++ chromium/chrome/browser/chrome_content_browser_client.cc
+@@ -96,7 +96,6 @@
+ #include "chrome/common/render_messages.h"
+ #include "chrome/common/url_constants.h"
+ #include "chrome/installer/util/google_update_settings.h"
+-#include "chromeos/chromeos_constants.h"
+ #include "components/cdm/browser/cdm_message_filter_android.h"
+ #include "components/cloud_devices/common/cloud_devices_switches.h"
+ #include "components/nacl/browser/nacl_browser.h"
+@@ -171,6 +170,7 @@
+ #include "chrome/browser/chromeos/login/user_manager.h"
+ #include "chrome/browser/chromeos/system/input_device_settings.h"
+ #include "chromeos/chromeos_switches.h"
++#include "chromeos/chromeos_constants.h"
+ #elif defined(OS_LINUX)
+ #include "chrome/browser/chrome_browser_main_linux.h"
+ #elif defined(OS_ANDROID)
+Index: chromium/chrome/browser/ui/webui/options/browser_options_handler.cc
+===================================================================
+--- chromium.orig/chrome/browser/ui/webui/options/browser_options_handler.cc
++++ chromium/chrome/browser/ui/webui/options/browser_options_handler.cc
+@@ -70,7 +70,6 @@
+ #include "chrome/common/net/url_fixer_upper.h"
+ #include "chrome/common/pref_names.h"
+ #include "chrome/common/url_constants.h"
+-#include "chromeos/chromeos_switches.h"
+ #include "components/signin/core/browser/signin_manager.h"
+ #include "content/public/browser/browser_thread.h"
+ #include "content/public/browser/download_manager.h"
+@@ -117,6 +116,7 @@
+ #include "chrome/browser/ui/browser_window.h"
+ #include "chromeos/dbus/dbus_thread_manager.h"
+ #include "chromeos/dbus/power_manager_client.h"
++#include "chromeos/chromeos_switches.h"
+ #include "components/policy/core/common/policy_map.h"
+ #include "components/policy/core/common/policy_namespace.h"
+ #include "components/policy/core/common/policy_service.h"
+Index: chromium/chrome/browser/diagnostics/sqlite_diagnostics.cc
+===================================================================
+--- chromium.orig/chrome/browser/diagnostics/sqlite_diagnostics.cc
++++ chromium/chrome/browser/diagnostics/sqlite_diagnostics.cc
+@@ -16,7 +16,6 @@
+ #include "base/strings/utf_string_conversions.h"
+ #include "chrome/common/chrome_constants.h"
+ #include "chrome/common/chrome_paths.h"
+-#include "chromeos/chromeos_constants.h"
+ #include "components/webdata/common/webdata_constants.h"
+ #include "content/public/common/content_constants.h"
+ #include "sql/connection.h"
+@@ -25,6 +24,10 @@
+ #include "webkit/browser/database/database_tracker.h"
+ #include "webkit/common/appcache/appcache_interfaces.h"
+ 
++#if defined(OS_CHROMEOS)
++#include "chromeos/chromeos_constants.h"
++#endif
++
+ namespace diagnostics {
+ 
+ namespace {
+Index: chromium/chrome/browser/profiles/profile_impl_io_data.cc
+===================================================================
+--- chromium.orig/chrome/browser/profiles/profile_impl_io_data.cc
++++ chromium/chrome/browser/profiles/profile_impl_io_data.cc
+@@ -4,6 +4,10 @@
+ 
+ #include "chrome/browser/profiles/profile_impl_io_data.h"
+ 
++#if defined(OS_CHROMEOS)
++#include "chrome/browser/chromeos/profiles/profile_helper.h"
++#endif
++
+ #include "base/bind.h"
+ #include "base/command_line.h"
+ #include "base/logging.h"
+@@ -16,7 +20,6 @@
+ #include "base/threading/sequenced_worker_pool.h"
+ #include "base/threading/worker_pool.h"
+ #include "chrome/browser/chrome_notification_types.h"
+-#include "chrome/browser/chromeos/profiles/profile_helper.h"
+ #include "chrome/browser/custom_handlers/protocol_handler_registry.h"
+ #include "chrome/browser/custom_handlers/protocol_handler_registry_factory.h"
+ #include "chrome/browser/io_thread.h"
+Index: chromium/chrome/browser/renderer_host/pepper/pepper_platform_verification_message_filter.cc
+===================================================================
+--- chromium.orig/chrome/browser/renderer_host/pepper/pepper_platform_verification_message_filter.cc
++++ chromium/chrome/browser/renderer_host/pepper/pepper_platform_verification_message_filter.cc
+@@ -15,7 +15,9 @@
+ #include "ppapi/host/ppapi_host.h"
+ #include "ppapi/proxy/ppapi_messages.h"
+ 
++#if defined(OS_CHROMEOS)
+ using chromeos::attestation::PlatformVerificationFlow;
++#endif
+ 
+ namespace chrome {
+ 
+@@ -50,6 +52,7 @@ int32_t PepperPlatformVerificationMessag
+   return PP_ERROR_FAILED;
+ }
+ 
++#if defined(OS_CHROMEOS)
+ int32_t PepperPlatformVerificationMessageFilter::OnChallengePlatform(
+     ppapi::host::HostMessageContext* context,
+     const std::string& service_id,
+@@ -108,5 +111,6 @@ void PepperPlatformVerificationMessageFi
+                 std::vector<uint8_t>(signature.begin(), signature.end()),
+                 platform_key_certificate));
+ }
++#endif
+ 
+ }  // namespace chrome
+Index: chromium/chrome/browser/renderer_host/pepper/pepper_platform_verification_message_filter.h
+===================================================================
+--- chromium.orig/chrome/browser/renderer_host/pepper/pepper_platform_verification_message_filter.h
++++ chromium/chrome/browser/renderer_host/pepper/pepper_platform_verification_message_filter.h
+@@ -5,7 +5,10 @@
+ #ifndef CHROME_BROWSER_RENDERER_HOST_PEPPER_PEPPER_PLATFORM_VERIFICATION_MESSAGE_FILTER_H_
+ #define CHROME_BROWSER_RENDERER_HOST_PEPPER_PEPPER_PLATFORM_VERIFICATION_MESSAGE_FILTER_H_
+ 
++#if defined(OS_CHROMEOS)
+ #include "chrome/browser/chromeos/attestation/platform_verification_flow.h"
++#endif
++
+ #include "ppapi/c/pp_instance.h"
+ #include "ppapi/host/resource_message_filter.h"
+ 
+@@ -38,6 +41,7 @@ class PepperPlatformVerificationMessageF
+       const IPC::Message& msg,
+       ppapi::host::HostMessageContext* context) OVERRIDE;
+ 
++#if defined(OS_CHROMEOS)
+   int32_t OnChallengePlatform(ppapi::host::HostMessageContext* context,
+                               const std::string& service_id,
+                               const std::vector<uint8_t>& challenge);
+@@ -50,13 +54,14 @@ class PepperPlatformVerificationMessageF
+       const std::string& signature,
+       const std::string& platform_key_certificate);
+ 
++  // Must only be accessed on the UI thread.
++  scoped_refptr<chromeos::attestation::PlatformVerificationFlow> pv_;
++#endif
++
+   // Used to lookup the WebContents associated with this PP_Instance.
+   int render_process_id_;
+   int render_frame_id_;
+ 
+-  // Must only be accessed on the UI thread.
+-  scoped_refptr<chromeos::attestation::PlatformVerificationFlow> pv_;
+-
+   DISALLOW_COPY_AND_ASSIGN(PepperPlatformVerificationMessageFilter);
+ };
+ 
+Index: chromium/chrome/common/extensions/api/api.gyp
+===================================================================
+--- chromium.orig/chrome/common/extensions/api/api.gyp
++++ chromium/chrome/common/extensions/api/api.gyp
+@@ -23,11 +23,9 @@
+         'non_compiled_schema_files': [
+           'adview.json',
+           'browsing_data.json',
+-          'chromeos_info_private.json',
+           'extension.json',
+           'idltest.idl',
+           'infobars.json',
+-          'media_player_private.json',
+           'music_manager_private.idl',
+           'principals_private.idl',
+           'top_sites.json',
+@@ -66,14 +64,10 @@
+               'dial.idl',
+               'downloads.idl',
+               'downloads_internal.idl',
+-              'echo_private.json',
+               'enterprise_platform_keys_private.json',
+               'events.json',
+               'feedback_private.idl',
+-              'file_browser_private.idl',
+               'file_system.idl',
+-              'file_system_provider.idl',
+-              'file_system_provider_internal.idl',
+               'font_settings.json',
+               'gcm.json',
+               'hangouts_private.idl',
+@@ -159,11 +153,7 @@
+             'schema_files': [
+               'accessibility_features.json',
+               'diagnostics.idl',
+-              'file_browser_handler_internal.json',
+-              'first_run_private.json',
+               'log_private.idl',
+-              'wallpaper.json',
+-              'wallpaper_private.json',
+               'webcam_private.idl',
+             ],
+           }],

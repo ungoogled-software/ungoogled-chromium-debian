@@ -13,6 +13,7 @@ debian/tmp/usr/lib/chromium/mksnapshot.*
 debian/tmp/usr/lib/chromium/pseudo_locales/fake-bidi.pak
 debian/tmp/usr/lib/chromium/icudtl.dat
 
+debian/presubj usr/share/bug/chromium
 debian/chromium.desktop usr/share/applications
 
 debian/chromium.xml usr/share/gnome-control-center/default-apps
@@ -20,4 +21,19 @@ debian/chromium.xml usr/share/gnome-control-center/default-apps
 debian/initial_bookmarks.html etc/chromium
 debian/master_preferences etc/chromium
 
-debian/presubj usr/share/bug/chromium
+debian/master_preferences usr/lib/chromium
+debian/initial_bookmarks.html usr/lib/chromium
+
+out/Release/*.pak usr/lib/chromium
+out/Release/pseudo_locales usr/lib/chromium
+out/Release/resources/en-US.pak usr/lib/chromium/locales
+out/Release/libvpx_obj_int_extract usr/lib/chromium
+
+out/Release/*.so usr/lib/chromium
+
+out/Release/chromium usr/lib/chromium
+out/Release/chrome-sandbox usr/lib/chromium
+
+out/Release/chromium.xpm usr/share/pixmaps
+
+third_party/icu/icudtl.dat usr/lib/chromium

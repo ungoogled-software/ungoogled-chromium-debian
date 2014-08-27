@@ -1,0 +1,255 @@
+Index: chromium/ash/ash.gyp
+===================================================================
+--- chromium.orig/ash/ash.gyp
++++ chromium/ash/ash.gyp
+@@ -8,7 +8,6 @@
+     'grit_out_dir': '<(SHARED_INTERMEDIATE_DIR)/chrome',
+   },
+   'includes': [
+-    'ash_resources.gypi',
+   ],
+   'targets': [
+     {
+@@ -43,8 +42,6 @@
+         '../ui/web_dialogs/web_dialogs.gyp:web_dialogs',
+         '../ui/wm/wm.gyp:wm',
+         '../url/url.gyp:url_lib',
+-        'ash_strings.gyp:ash_strings',
+-        'ash_resources',
+       ],
+       'defines': [
+         'ASH_IMPLEMENTATION',
+@@ -756,9 +753,6 @@
+         '../ui/views/views.gyp:views',
+         '../ui/web_dialogs/web_dialogs.gyp:web_dialogs',
+         '../url/url.gyp:url_lib',
+-        'ash_strings.gyp:ash_strings',
+-        'ash',
+-        'ash_resources',
+       ],
+       'defines': [
+         'ASH_WITH_CONTENT_IMPLEMENTATION',
+@@ -784,8 +778,6 @@
+         '../ui/accessibility/accessibility.gyp:ax_gen',
+         '../ui/app_list/app_list.gyp:app_list_test_support',
+         '../ui/views/views.gyp:views_test_support',
+-        'ash',
+-        'ash_resources',
+       ],
+       'sources': [
+         'desktop_background/desktop_background_controller_test_api.cc',
+@@ -895,11 +887,6 @@
+         '../ui/web_dialogs/web_dialogs.gyp:web_dialogs_test_support',
+         '../ui/wm/wm.gyp:wm',
+         '../url/url.gyp:url_lib',
+-        'ash_strings.gyp:ash_strings',
+-        'ash',
+-        'ash_resources',
+-        'ash_test_support',
+-        'ash_with_content',
+       ],
+       'sources': [
+         'accelerators/accelerator_commands_unittest.cc',
+@@ -1116,10 +1103,6 @@
+         '../ui/views/examples/examples.gyp:views_examples_with_content_lib',
+         '../ui/views/views.gyp:views',
+         '../ui/views/views.gyp:views_test_support',
+-        'ash',
+-        'ash_resources',
+-        'ash_strings.gyp:ash_strings',
+-        'ash_with_content',
+       ],
+       'sources': [
+         '../content/app/startup_helper_win.cc',
+Index: chromium/chrome/chrome_browser_ui.gypi
+===================================================================
+--- chromium.orig/chrome/chrome_browser_ui.gypi
++++ chromium/chrome/chrome_browser_ui.gypi
+@@ -2646,9 +2646,6 @@
+             'browser/ui/views/touch_uma/touch_uma_ash.cc',
+           ],
+           'dependencies': [
+-            '../ash/ash.gyp:ash',
+-            '../ash/ash.gyp:ash_with_content',
+-            '../ash/ash_strings.gyp:ash_strings',
+           ],
+         }, { # use_ash==0
+           'sources': [
+@@ -2696,7 +2693,6 @@
+           ],
+           'dependencies': [
+             # aura uses some of ash resources.
+-            '../ash/ash.gyp:ash_resources',
+             '../ui/aura/aura.gyp:aura',
+             '../ui/keyboard/keyboard.gyp:keyboard',
+             '../ui/keyboard/keyboard.gyp:keyboard_resources',
+Index: chromium/chrome/browser/ui/host_desktop.cc
+===================================================================
+--- chromium.orig/chrome/browser/ui/host_desktop.cc
++++ chromium/chrome/browser/ui/host_desktop.cc
+@@ -8,8 +8,11 @@
+ #include <windows.h>
+ #endif
+ 
++#if defined(USE_ASH)
+ #include "ash/shell.h"
+ #include "chrome/browser/ui/ash/ash_util.h"
++#endif
++
+ #include "chrome/browser/ui/aura/active_desktop_monitor.h"
+ #include "chrome/browser/ui/browser.h"
+ #include "chrome/browser/ui/browser_list.h"
+Index: chromium/chrome/browser/ui/views/frame/browser_frame.cc
+===================================================================
+--- chromium.orig/chrome/browser/ui/views/frame/browser_frame.cc
++++ chromium/chrome/browser/ui/views/frame/browser_frame.cc
+@@ -4,7 +4,6 @@
+ 
+ #include "chrome/browser/ui/views/frame/browser_frame.h"
+ 
+-#include "ash/shell.h"
+ #include "base/command_line.h"
+ #include "base/debug/leak_annotations.h"
+ #include "base/i18n/rtl.h"
+@@ -40,6 +39,7 @@
+ #endif
+ 
+ #if defined(USE_ASH)
++#include "ash/shell.h"
+ #include "chrome/browser/ui/ash/ash_init.h"
+ #endif
+ 
+Index: chromium/chrome/browser/about_flags.cc
+===================================================================
+--- chromium.orig/chrome/browser/about_flags.cc
++++ chromium/chrome/browser/about_flags.cc
+@@ -10,7 +10,6 @@
+ #include <set>
+ #include <utility>
+ 
+-#include "ash/ash_switches.h"
+ #include "base/command_line.h"
+ #include "base/memory/singleton.h"
+ #include "base/strings/string_number_conversions.h"
+Index: chromium/chrome/browser/ui/views/screen_capture_notification_ui_views.cc
+===================================================================
+--- chromium.orig/chrome/browser/ui/views/screen_capture_notification_ui_views.cc
++++ chromium/chrome/browser/ui/views/screen_capture_notification_ui_views.cc
+@@ -4,7 +4,10 @@
+ 
+ #include "chrome/browser/ui/screen_capture_notification_ui.h"
+ 
++#if defined(USE_ASH)
+ #include "ash/shell.h"
++#endif
++
+ #include "chrome/app/chrome_dll_resource.h"
+ #include "chrome/browser/ui/views/chrome_views_export.h"
+ #include "grit/generated_resources.h"
+Index: chromium/chrome/browser/lifetime/application_lifetime.cc
+===================================================================
+--- chromium.orig/chrome/browser/lifetime/application_lifetime.cc
++++ chromium/chrome/browser/lifetime/application_lifetime.cc
+@@ -4,7 +4,10 @@
+ 
+ #include "chrome/browser/lifetime/application_lifetime.h"
+ 
++#if defined(USE_ASH)
+ #include "ash/shell.h"
++#endif
++
+ #include "base/bind.h"
+ #include "base/command_line.h"
+ #include "base/debug/trace_event.h"
+Index: chromium/chrome/browser/profiles/avatar_menu.cc
+===================================================================
+--- chromium.orig/chrome/browser/profiles/avatar_menu.cc
++++ chromium/chrome/browser/profiles/avatar_menu.cc
+@@ -4,7 +4,11 @@
+ 
+ #include "chrome/browser/profiles/avatar_menu.h"
+ 
++#if defined(USE_ASH)
+ #include "ash/ash_switches.h"
++#include "chrome/browser/ui/ash/chrome_shell_delegate.h"
++#endif
++
+ #include "base/bind.h"
+ #include "base/i18n/case_conversion.h"
+ #include "base/metrics/field_trial.h"
+@@ -18,7 +22,6 @@
+ #include "chrome/browser/profiles/profile_metrics.h"
+ #include "chrome/browser/profiles/profile_window.h"
+ #include "chrome/browser/profiles/profiles_state.h"
+-#include "chrome/browser/ui/ash/chrome_shell_delegate.h"
+ #include "chrome/browser/ui/browser.h"
+ #include "chrome/browser/ui/browser_dialogs.h"
+ #include "chrome/browser/ui/host_desktop.h"
+Index: chromium/chrome/browser/extensions/api/desktop_capture/desktop_capture_api.cc
+===================================================================
+--- chromium.orig/chrome/browser/extensions/api/desktop_capture/desktop_capture_api.cc
++++ chromium/chrome/browser/extensions/api/desktop_capture/desktop_capture_api.cc
+@@ -4,6 +4,10 @@
+ 
+ #include "chrome/browser/extensions/api/desktop_capture/desktop_capture_api.h"
+ 
++#if defined(USE_ASH)
++#include "chrome/browser/ui/ash/ash_util.h"
++#endif
++
+ #include "base/command_line.h"
+ #include "base/compiler_specific.h"
+ #include "base/strings/utf_string_conversions.h"
+@@ -12,7 +16,6 @@
+ #include "chrome/browser/media/desktop_streams_registry.h"
+ #include "chrome/browser/media/media_capture_devices_dispatcher.h"
+ #include "chrome/browser/media/native_desktop_media_list.h"
+-#include "chrome/browser/ui/ash/ash_util.h"
+ #include "chrome/common/chrome_switches.h"
+ #include "chrome/common/extensions/api/tabs.h"
+ #include "content/public/browser/render_process_host.h"
+Index: chromium/chrome/browser/ui/views/chrome_views_delegate_aura.cc
+===================================================================
+--- chromium.orig/chrome/browser/ui/views/chrome_views_delegate_aura.cc
++++ chromium/chrome/browser/ui/views/chrome_views_delegate_aura.cc
+@@ -4,7 +4,9 @@
+ 
+ #include "chrome/browser/ui/views/chrome_views_delegate.h"
+ 
++#if defined(USE_ASH)
+ #include "chrome/browser/ui/ash/ash_util.h"
++#endif
+ 
+ views::Widget::InitParams::WindowOpacity
+ ChromeViewsDelegate::GetOpacityForInitParams(
+Index: chromium/chrome/browser/ui/views/desktop_media_picker_views.cc
+===================================================================
+--- chromium.orig/chrome/browser/ui/views/desktop_media_picker_views.cc
++++ chromium/chrome/browser/ui/views/desktop_media_picker_views.cc
+@@ -4,10 +4,13 @@
+ 
+ #include "chrome/browser/media/desktop_media_picker.h"
+ 
++#if defined(USE_ASH)
++#include "chrome/browser/ui/ash/ash_util.h"
++#endif
++
+ #include "base/callback.h"
+ #include "chrome/browser/media/desktop_media_list.h"
+ #include "chrome/browser/media/desktop_media_list_observer.h"
+-#include "chrome/browser/ui/ash/ash_util.h"
+ #include "content/public/browser/browser_thread.h"
+ #include "grit/generated_resources.h"
+ #include "ui/aura/window_tree_host.h"
+Index: chromium/chrome/browser/sync/sync_global_error_factory.cc
+===================================================================
+--- chromium.orig/chrome/browser/sync/sync_global_error_factory.cc
++++ chromium/chrome/browser/sync/sync_global_error_factory.cc
+@@ -4,7 +4,6 @@
+ 
+ #include "chrome/browser/sync/sync_global_error_factory.h"
+ 
+-#include "ash/shell.h"
+ #include "chrome/browser/browser_process.h"
+ #include "chrome/browser/profiles/profile.h"
+ #include "chrome/browser/sync/profile_sync_service.h"

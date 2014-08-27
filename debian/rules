@@ -1,860 +1,167 @@
 #!/usr/bin/make -f
-export DH_VERBOSE = 1
 
-DEBIAN_NAME		:= chromium
-SOURCE_NAME		:= chromium-browser
-DEBIAN_VERSION		:= $(shell dpkg-parsechangelog | sed -n 's/^Version: *\(.*\)$$/\1/ p')
-DEBIAN_UPSTREAM_VERSION	:= $(shell echo $(DEBIAN_VERSION) | sed 's/^\(.*\)-[^-]*$$/\1/')
-DEBIAN_REVISION		:= $(shell echo $(DEBIAN_VERSION) | sed 's/^.*r\([^-]*\)-.*/\1/')
-DEBIAN_DIST		:= $(shell lsb_release -ds | tr -d '()')
-DEBIAN_DIST_NAME	:= $(shell lsb_release -si)
-DEBIAN_DIST_VERSION	:= $(shell cat /etc/debian_version)
-MULTIARCH		:= $(shell dpkg-architecture -qDEB_BUILD_MULTIARCH)
-USE_SYSTEM_FFMPEG	:= 0
-ifeq (1,$(USE_SYSTEM_FFMPEG))
-LIBAVCODEC_BASENAME	:= $(shell basename $$(ls -x /usr/lib/$(MULTIARCH)/libavcodec.so.* | cut -d ' ' -f 1))
-LIBAVFORMAT_BASENAME	:= $(shell basename $$(ls -x /usr/lib/$(MULTIARCH)/libavformat.so.* | cut -d ' ' -f 1))
-LIBAVUTIL_BASENAME	:= $(shell basename $$(ls -x /usr/lib/$(MULTIARCH)/libavutil.so.* | cut -d ' ' -f 1))
+# enable verbose build messages
+export DH_VERBOSE=1
+
+# enable all build hardening flags
+export DEB_BUILD_MAINT_OPTIONS=hardening=+all
+
+# linker flags to avoid memory allocation issues on i386
+export LDFLAGS+=-Wl,--no-keep-memory -Wl,--reduce-memory-overheads -Wl,--hash-size=7919
+
+# more verbose linker output
+export LDFLAGS+=-Wl,--trace -Wl,--stats
+
+# package data fields
+package=$(shell dpkg-parsechangelog --show-field=source)
+version=$(shell dpkg-parsechangelog --show-field=version | sed s/-.*//)
+
+# upstream tarball info
+url=https://gsdview.appspot.com/chromium-browser-official
+tarball=chromium-$(version)-lite.tar.xz
+
+# treat all warnings as errors
+defines=werror=
+
+# disabled features
+defines+=use_ash=0 \
+         use_ozone=0 \
+	 use_gconf=0 \
+	 use_allocator=none \
+         use_gnome_keyring=0 \
+	 linux_breakpad=0 \
+         linux_use_libgps=0 \
+         linux_use_gold_flags=0 \
+         linux_use_bundled_gold=0 \
+	 linux_use_bundled_binutils=0 \
+         remoting=0 \
+	 disable_nacl=1 \
+         enable_webrtc=0 \
+         enable_remoting_host=0 \
+
+# enabled features
+defines+=use_pulseaudio=1 \
+	 linux_link_libpci=1 \
+         linux_link_gsettings=1 \
+         linux_link_libspeechd=1 \
+	 icu_use_data_file_flag=1 \
+
+# system libraries to use
+defines+=use_system_icu=1 \
+	 use_system_re2=1 \
+         use_system_yasm=1 \
+         use_system_opus=1 \
+	 use_system_zlib=1 \
+         use_system_speex=1 \
+         use_system_expat=1 \
+         use_system_snappy=1 \
+         use_system_libpng=1 \
+         use_system_libxml=1 \
+         use_system_libjpeg=1 \
+         use_system_libwebp=1 \
+         use_system_libxslt=1 \
+	 use_system_libsrtp=1 \
+         use_system_jsoncpp=1 \
+         use_system_libevent=1 \
+         use_system_protobuf=1 \
+	 use_system_harfbuzz=1 \
+         use_system_xdg_utils=1 \
+
+# embedded libraries (0 is the default, so using comments to make some notes about the issues)
+#  use_system_libusb=0 requires modified source that exposes libusb_interrupt_handle_event api
+#  use_system_libvpx=0 requires modified source that exposes different api
+#  use_system_sqlite=0 build fails
+#  use_system_ffmpeg=0 build fails
+#  can't use system nss since net/third_party/nss is heavily patched
+#  can't use system ots (open text *summarizer*) since that's not google's ots (open text *sanitizer*)
+
+# make gyp a little more informative
+options+=--check \
+         --debug=includes \
+
+# avoid the need for a special src directory (--depth=. seems to require --no-parallel)
+options+=--depth=. \
+         --no-parallel \
+
+# handle parallel build options
+ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
+njobs=-j$(patsubst parallel=%,%,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
 endif
 
-# DEB_TAR_SRCDIR has to be 'src' as this is what gyp expects :(
-DEB_TAR_SRCDIR := src
-SRC_DIR        := $(CURDIR)/$(DEB_TAR_SRCDIR)
-LIB_DIR        := usr/lib/$(DEBIAN_NAME)
-DEB_BUILDDIR   := $(SRC_DIR)
-
-WANT_DEBUG       := 0
-WANT_SYSTEM_LIBS ?= 1
-WANT_SHARED_LIBS ?= 0
-WANT_TESTS       ?= 0
-WANT_SANDBOXING  ?= 1
-USE_SYSTEM_V8    ?= 0
-
-# enable build hardening options (pie disabled due to ffmpeg linking issue)
-export DEB_BUILD_MAINT_OPTIONS = hardening=+all,-pie
-DPKG_EXPORT_BUILDFLAGS = 1
-include /usr/share/dpkg/buildflags.mk
-
-#use DEB_BUILD_OPTIONS's parallel=n option (see Policy 4.9.1)
-ifneq (,$(findstring parallel,$(DEB_BUILD_OPTIONS)))
-PARALLEL_JOBS := $(shell echo $(DEB_BUILD_OPTIONS) | \
-	sed -e 's/.*parallel=\([0-9]\+\).*/\1/')
-ifeq ($(DEB_BUILD_OPTIONS),$(PARALLEL_JOBS))
-PARALLEL_JOBS := $(shell if [ -f /proc/cpuinfo ]; \
-	then echo `cat /proc/cpuinfo | grep 'processor' | wc -l`; \
-	else echo 1; fi)
-endif
-NJOBS := -j$(PARALLEL_JOBS)
-DEB_MAKE_ENVVARS := MAKEFLAGS=$(NJOBS)
-endif
-
-ifneq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
-WANT_TESTS := 0
-endif
-
-# Hardcode gcc 4.8 to avoid issues caused by >= 4.9
-export CC=gcc-4.8
-export CXX=g++-4.8
-
-# Disable SSE2
-GYP_DEFINES = disable_sse2=1
-
-#Debian Chromium Api Key
-GYP_DEFINES += google_api_key='AIzaSyCkfPOPZXDKNn8hhgu3JrA62wIgC93d44k'
-GYP_DEFINES += google_default_client_id='811574891467.apps.googleusercontent.com'
-GYP_DEFINES += google_default_client_secret='kdloedMFGdGla2P1zacGjAQh'
-
-# Enable all codecs for HTML5 in chromium, depending on which ffmpeg sumo lib
-# is installed, the set of usable codecs (at runtime) will still vary
-GYP_DEFINES += proprietary_codecs=1
-
-# enable compile-time dependency on gnome-keyring
-GYP_DEFINES += use_gnome_keyring=1 linux_link_gnome_keyring=1
-
-# controlling the use of GConf (the classic GNOME configuration
-# and GIO, which contains GSettings (the new GNOME config system)
-GYP_DEFINES += use_gconf=1 use_gio=1
-
-# disable native client (nacl)
-GYP_DEFINES += disable_nacl=1
-
-# do not use embedded third_party/gold as the linker.
-GYP_DEFINES += linux_use_gold_binary=0 linux_use_gold_flags=0
-
-# disable tcmalloc
-GYP_DEFINES += linux_use_tcmalloc=0
-GYP_DEFINES += use_allocator=none
-
-# don't use ash or ozone
-GYP_DEFINES += use_ash=0 use_ozone=0
-
-# avoid mojo, which requires ninja to build
-GYP_DEFINES += use_mojo=0
-
-# Use explicit library dependencies instead of dlopen.
-# This makes breakages easier to detect by revdep-rebuild.
-GYP_DEFINES += linux_link_gsettings=1
-
-DEB_HOST_ARCH_CPU := $(shell dpkg-architecture -qDEB_HOST_ARCH_CPU)
-DEB_HOST_ARCH := $(shell dpkg-architecture -qDEB_HOST_ARCH)
-
-ifeq (arm,$(DEB_HOST_ARCH_CPU))
-GYP_DEFINES += \
-	target_arch=arm \
-	disable_nacl=1 \
-	linux_use_tcmalloc=0 \
-	enable_webrtc=0 \
-	use_cups=1 \
-	$(NULL)
-ifeq (armel,$(DEB_HOST_ARCH))
-GYP_DEFINES += \
-	v8_use_arm_eabi_hardfloat=false \
-	arm_float_abi=soft \
-	arm_thumb=0 \
-	armv7=0 \
-	arm_neon=0 \
-	$(NULL)
-endif
-ifeq (armhf,$(DEB_HOST_ARCH))
-GYP_DEFINES += -DUSE_EABI_HARDFLOAT 
-GYP_DEFINES += \
-	v8_use_arm_eabi_hardfloat=true \
-	arm_fpu=vfpv3 \
-	arm_float_abi=hard \
-	arm_thumb=1 \
-	armv7=1 \
-	arm_neon=0 \
-	$(NULL)
-endif
-
-WANT_TESTS     := 0
-else
-ifeq (amd64,$(DEB_HOST_ARCH_CPU))
-GYP_DEFINES += target_arch=x64
-else
-ifeq (i386,$(DEB_HOST_ARCH_CPU))
-GYP_DEFINES += target_arch=ia32
-else
-$(warning unsupported target arch $(DEB_HOST_ARCH_CPU) - continuing anyway)
-endif
-endif
-endif
-
-# Don't let dh_installinit install *.default in /etc/default
-DEB_DH_INSTALLINIT_ARGS += --noscripts --onlyscripts
-
-# don't miss installing newly added files in new upstream releases
-DEB_DH_INSTALL_ARGS += --list-missing
-
-ifeq (1,$(WANT_DEBUG))
-BUILD_TYPE := Debug
-else
-BUILD_TYPE := Release
-# Add symbols
-BUILD_ARGS += SYMBOLS=1
-endif
-BUILD_ARGS += BUILDTYPE=$(BUILD_TYPE)
-
-# Verbose?
-ifeq (1,$(DH_VERBOSE))
-BUILD_ARGS += V=1
-endif
-
-# Shared libraries
-ifeq (1,$(WANT_SHARED_LIBS))
-GYP_DEFINES += library=shared_library
-endif
-
-# Always ignore compiler warnings
-GYP_DEFINES += werror=$(NULL)
-
-include /usr/share/cdbs/1/rules/debhelper.mk
-include /usr/share/cdbs/1/class/makefile.mk
-
-INSTALL_EXCLUDE_DIRS = \
-	lib \
-	lib.target \
-	obj \
-	obj.target \
-	obj.host \
-	opt \
-	dbg \
-	plugins \
-	'*.d' \
-	.deps \
-	calendar_app \
-	docs_app \
-	gmail_app \
-	pyproto \
-	DumpRenderTree_resources \
-	$(NULL)
-
-INSTALL_EXCLUDE_FILES = \
-	.sconsign.dblite \
-	linker.lock \
-	convert_dict \
-	chrome-wrapper \
-	product_logo_48.png \
-	libnpapi_layout_test_plugin.so \
-	libnpapi_test_plugin.so \
-	mksnapshot \
-	ncdecode_table \
-	ncdecode_tablegen \
-	springboard_gen \
-	timestats \
-	tramp_gen \
-	protoc \
-	libppapi_tests.so \
-	*.d \
-	genmacro \
-	genmodule \
-	genperf \
-	genstring \
-	genversion \
-	re2c \
-	yasm \
-	$(NULL)
-
-# List of tests
-# - prefix the name with a "-" to disable the test suite completely and
-#   append a reason after a ":"
-# - prefix the name with a "@" to run the test suite in xvfb-run (fake
-#   X server for machines with no display hardware and no physical input
-#   devices).
-# - to disable one or more tests within a given testsuite,
-#   append the names of the tests (using the Google Test filter syntax)
-#   or call the gtfilter macro
-ifeq (1,$(WANT_TESTS))
-gtfilter = -$(shell echo $(SKIP_$(1)) | tr ' ' :)
-
-# tests we can't pass because we don't have enough permissions
-SKIP_base_unittests := \
-	StatsTableTest.* \
-	SysInfoTest.GetPrimaryDisplayDimensions \
-	$(NULL)
-
-SKIP_page_cycler_tests := \
-	PageCyclerTest.* \
-	PageCyclerReferenceTest.* \
-	$(NULL)
-
-SKIP_ui_tests := \
-	WorkerTest.MultipleWorkers \
-	WorkerTest.IncognitoSharedWorkers \
-	$(NULL)
-
-# tests we can't pass because we need to access internet (~61 out of 987 tests)
-SKIP_net_unittests := \
-	HttpNetworkLayerTest.GoogleGET \
-	TelnetServerTest.* \
-	PageCyclerTest.* \
-	URLRequestTestHTTP.* \
-	URLRequestTest.QuitTest \
-	URLRequestTest.DoNotSendCookies \
-	URLRequestTest.DoNotSaveCookies \
-	HTTPSRequestTest.* \
-	URLRequestTestFTP.* \
-	SSLClientSocketTest.* \
-	ProxyScriptFetcherTest.* \
-	ListenSocketTest.* \
-	$(NULL)
-
-TESTS ?= \
-	@app_unittests:-FontTest.LoadArial \
-	base_unittests:$(call gtfilter,base_unittests) \
-	googleurl_unittests \
-	ipc_tests \
-	media_unittests \
-	net_perftests \
-	net_unittests:$(call gtfilter,net_unittests) \
-	@page_cycler_tests:$(call gtfilter,page_cycler_tests) \
-	perf_tests \
-	printing_unittests \
-	@startup_tests \
-	@test_shell_tests \
-	@ui_tests:$(call gtfilter,ui_tests) \
-	unit_tests \
-	$(NULL)
-endif
-
-# FFmpeg-mt
-ifeq (1,$(USE_SYSTEM_FFMPEG))
-GYP_DEFINES += build_ffmpegsumo=0
-else
-GYP_DEFINES += ffmpeg_branding=Chrome
-endif
-
-USE_SYSTEM_SQLITE := $(shell pkg-config 'sqlite3 >= 3.6.1' && echo 1 || echo 0)
-USE_SYSTEM_SQLITE := 0
-
-USE_SYSTEM_LIBWEBP := $(shell pkg-config 'libwebp >= 0.3.0' && echo 1 || echo 0)
-USE_SYSTEM_LIBWEBP := 0
-
-# System libs
-ifeq (1,$(WANT_SYSTEM_LIBS))
-GYP_DEFINES += \
-	use_system_bzip2=1 \
-	use_system_libjpeg=1 \
-	use_system_libpng=1 \
-	use_system_sqlite=$(USE_SYSTEM_SQLITE) \
-	use_system_libxml=1 \
-	use_system_libxslt=1 \
-	use_system_zlib=1 \
-	use_system_libevent=1 \
-	use_system_icu=0 \
-	use_system_yasm=1 \
-	use_system_ffmpeg=$(USE_SYSTEM_FFMPEG) \
-	use_system_libvpx=1 \
-	use_system_xdg_utils=1 \
-	use_system_flac=1 \
-	use_system_libwebp=$(USE_SYSTEM_LIBWEBP) \
-	use_system_speex=1 \
-	linux_link_libspeechd=1 \
-	$(NULL)
-endif
-
-# Use pulseaudio
-GYP_DEFINES += use_pulseaudio=1
-
-# Build everything (like All), including test programs but minus things we don't
-# want (breakpad, courgette, ..) or don't need (the other small tools)
-BUILD_TARGETS := \
-	chrome \
-	chrome_sandbox \
-	chromedriver \
-	$(NULL)
-
-TESTS_TARGETS := \
-	app_unittests \
-	base_unittests \
-	browser_tests \
-	googleurl_unittests \
-	ipc_tests \
-	media_unittests \
-	memory_test \
-	net_perftests \
-	net_unittests \
-	page_cycler_tests \
-	perf_tests \
-	printing_unittests \
-	startup_tests \
-	tab_switching_test \
-	test_shell_tests \
-	ui_tests \
-	unit_tests \
-	url_fetch_test \
-	wav_ola_test \
-	$(NULL)
-
-INSTALL_EXCLUDE_FILES += \
-	$(TESTS_TARGETS) \
-	test_shell.pak \
-	xdisplaycheck \
-	$(NULL)
-
-INSTALL_EXCLUDE_DIRS += \
-	app_unittests_strings \
-	$(NULL)
-
-ifeq (1,$(WANT_SANDBOXING))
-GYP_DEFINES += \
-	linux_sandbox_path=/$(LIB_DIR)/$(DEBIAN_NAME)-sandbox \
-	linux_sandbox_chrome_path=/$(LIB_DIR)/$(DEBIAN_NAME) \
-	$(NULL)
-
-# needed to preserve the suid and make the sandbox happy
-DEB_FIXPERMS_EXCLUDE := chrome-sandbox
-endif
-
-# use system v8
-ifeq (1,$(USE_SYSTEM_V8))
-GYP_DEFINES += \
-	javascript_engine=v8 \
-	$(NULL)
-endif
-
-######
-DO = (touch r1; echo '$(1)'; $(1); touch r2 ; T1=`date -r r1 +%s` ; T2=`date -r r2 +%s`; echo "PERF: '$(2)' built in "`expr $$T2 - $$T1`" sec"; rm -f r1 r2;)
-
-subst_files = \
-	debian/$(DEBIAN_NAME).sh \
-	$(NULL)
-
-%:: %.in
-	sed -e 's|@BUILD_DIST@|$(DEBIAN_DIST_NAME) $(DEBIAN_DIST_VERSION)|g' \
-	    -e 's|@BUILD_DIST_NAME@|$(DEBIAN_DIST_NAME)|g' \
-	    -e 's|@BUILD_DIST_VERSION)@|$(DEBIAN_DIST_VERSION)|g' \
-	    < $< > $@
-
-pre-build:: $(subst_files)
-ifneq (,$(findstring Ubuntu,$(DEBIAN_DIST)))
-	sed -ri '/const PrepopulatedEngine google = \{/,/\}\;/ { s/sourceid=chrome\&/&client=ubuntu\&channel=cs\&/g; }' \
-		src/chrome/browser/search_engines/template_url_prepopulate_data.cc
-endif
-
-DEB_MAKE_BUILD_TARGET := $(BUILD_ARGS) $(BUILD_TARGETS)
-
-configure/$(DEBIAN_NAME):: debian/configure-stamp
-
-debian/configure-stamp: GYP_ENV = GYP_GENERATORS=make
-ifneq (,$(GYP_DEFINES))
-debian/configure-stamp: GYP_ENV += GYP_DEFINES="$(GYP_DEFINES)"
-endif
-debian/configure-stamp:
-	cd $(SRC_DIR) && $(GYP_ENV) python build/gyp_chromium --check --debug=includes
-	touch $@
-	# Populate the LASTCHANGE file template as we no longer have the VCS
-	# files at this point
-	echo "$(DEBIAN_REVISION)" > $(SRC_DIR)/build/LASTCHANGE.in
-	cp -p /usr/share/misc/config.guess src/third_party/yasm/source/patched-yasm/config
-	cp -p /usr/share/misc/config.sub src/third_party/yasm/source/patched-yasm/config
-	# replace sourceless libjs-flot files
-	ln -sf /usr/share/javascript/jquery/jquery.min.js src/third_party/flot/jquery.min.js
-	ln -sf /usr/share/javascript/excanvas/excanvas.min.js src/third_party/flot/excanvas.min.js
-	ln -sf /usr/share/javascript/jquery-flot/jquery.colorhelpers.min.js src/third_party/flot/jquery.colorhelpers.min.js
-	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.min.js src/third_party/flot/jquery.flot.min.js
-	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.canvas.min.js src/third_party/flot/jquery.flot.canvas.min.js
-	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.categories.min.js src/third_party/flot/jquery.flot.categories.min.js
-	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.crosshair.min.js src/third_party/flot/jquery.flot.crosshair.min.js
-	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.errorbars.min.js src/third_party/flot/jquery.flot.errorbars.min.js
-	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.fillbetween.min.js src/third_party/flot/jquery.flot.fillbetween.min.js
-	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.image.min.js src/third_party/flot/jquery.flot.image.min.js
-	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.pie.min.js src/third_party/flot/jquery.flot.pie.min.js
-	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.resize.min.js src/third_party/flot/jquery.flot.resize.min.js
-	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.selection.min.js src/third_party/flot/jquery.flot.selection.min.js
-	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.stack.min.js src/third_party/flot/jquery.flot.stack.min.js
-	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.min.js src/third_party/flot/jquery.flot.min.js
-	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.symbol.min.js src/third_party/flot/jquery.flot.symbol.min.js
-	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.threshold.min.js src/third_party/flot/jquery.flot.threshold.min.js
-	ln -sf /usr/share/javascript/jquery-flot/jquery.flot.time.min.js src/third_party/flot/jquery.flot.time.min.js
-
-common-build-arch common-build-indep:: debian/stamp-makefile-build-perf
-debian/stamp-makefile-build-perf: debian/stamp-makefile-build
-	@T2=`date +%s`; T1=`date -r debian/configure-stamp +%s`; echo "PERF: '$(BUILD_TARGETS)' built in "`expr $$T2 - $$T1`" sec"
-	touch $@
-
-# we don't want all the test binaries linked at the same time when using -jX (X > 2)
-# Each ld takes ~1.5GB of memory. So run make for each target separatly to workaround that
-ifeq (1,$(WANT_TESTS))
-common-build-arch common-build-indep:: debian/stamp-makefile-build-tests
-debian/stamp-makefile-build-tests: debian/stamp-makefile-build
-	@$(foreach target,$(TESTS_TARGETS),$(call DO,$(DEB_MAKE_INVOKE) $(BUILD_ARGS) $(target),$(target));)
-	touch $@
-endif
-
-clean::
-	rm -f debian/configure-stamp debian/stamp-makefile-build-*
-	rm -f *.cdbs-config_list $(subst_files)
-	rm -fr src/out src/Makefile
-	find src -name *.tmp -execdir rm -f {} \;
-	find src -name *.pyc -execdir rm -f {} \;
-	find src -name *.mk -execdir rm -f {} \;
-	find src -name *.Makefile -execdir rm -f {} \;
-	rm -f src/build/LASTCHANGE.in
-	rm -f src/third_party/WebKit/Source/WebCore/WebCore.gyp/idls_list_temp_file.tmp
-	rm -f src/v8/tools/gyp/v8.log
-	rm -f src/third_party/yasm/source/patched-yasm/config/config.guess
-	rm -f src/third_party/yasm/source/patched-yasm/config/config.sub
-	rm -f src/third_party/flot/*.js
-
-# Install: there's no install rules in scons yet, do it manually
-common-install-prehook-impl::
-	mkdir -p debian/tmp/$(LIB_DIR)
-	( cd $(SRC_DIR)/out/$(BUILD_TYPE) && tar $(foreach excl,$(INSTALL_EXCLUDE_DIRS),--exclude=$(excl)) -cf - . ) | \
-	( cd debian/tmp/$(LIB_DIR) && tar xvf - )
-	cd debian/tmp/$(LIB_DIR) && rm -f $(INSTALL_EXCLUDE_FILES)
-	# Launcher script
-	mkdir -p debian/tmp/usr/bin
-ifneq (,$(findstring Debian,$(DEBIAN_DIST)))
-	sed -ri 's:'CHROME_VERSION_EXTRA=Ubuntu':'CHROME_VERSION_EXTRA=Debian':' debian/$(DEBIAN_NAME).sh
-endif
-	cp -a debian/$(DEBIAN_NAME).sh debian/tmp/usr/bin/$(DEBIAN_NAME)
-	chmod 755 debian/tmp/usr/bin/$(DEBIAN_NAME)
-	# Preferences
-	mkdir -p debian/tmp/etc/$(DEBIAN_NAME)
-	cp -a debian/$(DEBIAN_NAME).default debian/tmp/etc/$(DEBIAN_NAME)/default
-	# Rename the binary from chrome to $(DEBIAN_NAME), this is required
-	# as chromium dereferences all symlinks before starting its children
-	# making the Gnome System Monitor confused with icons
-	mv debian/tmp/$(LIB_DIR)/chrome debian/tmp/$(LIB_DIR)/$(DEBIAN_NAME)
-	mv debian/tmp/$(LIB_DIR)/chrome_sandbox debian/tmp/$(LIB_DIR)/chrome-sandbox
-	# Manpage
-	mv debian/tmp/$(LIB_DIR)/chrome.1 debian/tmp/$(LIB_DIR)/chromium.1
-	dh_installman -pchromium debian/tmp/$(LIB_DIR)/chromium.1
-	rm -f debian/tmp/$(LIB_DIR)/chromium.1
-	strip debian/tmp/usr/lib/chromium/nacl_irt_x86_32.nexe || true
-	strip debian/tmp/usr/lib/chromium/nacl_irt_x86_64.nexe || true
-	# move inspector files into /usr/share
-	mkdir -p $(CURDIR)/debian/tmp/usr/share
-	mv $(CURDIR)/debian/tmp/$(LIB_DIR)/resources/inspector $(CURDIR)/debian/tmp/usr/share/chromium-inspector
-	# remove unnecessary file
-	rm -f $(CURDIR)/debian/tmp/$(LIB_DIR)/.landmines
-
-binary-install/$(DEBIAN_NAME)::
-	mkdir -p $(CURDIR)/debian/$(DEBIAN_NAME)/usr/share/pixmaps
-	cp -a src/chrome/app/theme/chromium/product_logo_48.png $(CURDIR)/debian/$(DEBIAN_NAME)/usr/share/pixmaps/$(DEBIAN_NAME).png
-	for size in 16 22 24 32 48 64 128 256 ; do \
-	  mkdir -p $(CURDIR)/debian/$(DEBIAN_NAME)/usr/share/icons/hicolor/$${size}x$${size}/apps ; \
-	  cp -a src/chrome/app/theme/chromium/product_logo_$$size.png  \
-	    $(CURDIR)/debian/$(DEBIAN_NAME)/usr/share/icons/hicolor/$${size}x$${size}/apps/$(DEBIAN_NAME).png ; \
-	done
-	mkdir -p $(CURDIR)/debian/$(DEBIAN_NAME)/usr/share/icons/hicolor/scalable/apps
-	cp -a $(CURDIR)/debian/$(DEBIAN_NAME).svg $(CURDIR)/debian/$(DEBIAN_NAME)/usr/share/icons/hicolor/scalable/apps
-ifeq (1,$(WANT_SANDBOXING))
-	chmod 4755 $(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/chrome-sandbox
-else
-	rm -vf $(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/chrome-sandbox
-endif
-	# Locales: only keep en-US in the main deb
-	cd $(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/locales && \
-	  rm -f $(filter-out en-US.pak,$(notdir $(wildcard $(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/locales/*)))
-	# DEB_ARCH_PACKAGES=$(DEB_ARCH_PACKAGES)
-	# DEB_INDEP_PACKAGES=$(DEB_INDEP_PACKAGES)
-ifneq (i386,$(DEB_HOST_ARCH_CPU))
-	# DEB_HOST_ARCH_CPU=$(DEB_HOST_ARCH_CPU)
-	# We assume we're *not* doing the "Architecture: all" packages so we need
-	# to drop the -l10n files from debian/tmp to make 'compare' happy
-	cd $(CURDIR)/debian/tmp/$(LIB_DIR)/locales && \
-	  rm $(filter-out en-US.pak,$(notdir $(wildcard $(CURDIR)/debian/tmp/$(LIB_DIR)/locales/*)))
-endif
-ifeq (1,$(USE_SYSTEM_FFMPEG))
-	# Install symlinks to system ffmpeg libs
-	ln -sf "../$(MULTIARCH)/$(LIBAVCODEC_BASENAME)" \
-		"$(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(LIBAVCODEC_BASENAME)"
-	ln -sf "../$(MULTIARCH)/$(LIBAVFORMAT_BASENAME)" \
-		"$(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(LIBAVFORMAT_BASENAME)"
-	ln -sf "../$(MULTIARCH)/$(LIBAVUTIL_BASENAME)" \
-		"$(CURDIR)/debian/$(DEBIAN_NAME)/$(LIB_DIR)/$(LIBAVUTIL_BASENAME)"
-endif
-
-binary-install/$(DEBIAN_NAME)-l10n::
-	rm $(CURDIR)/debian/$(DEBIAN_NAME)-l10n/$(LIB_DIR)/locales/en-US.pak
-
-# Tests
-ifeq (1,$(WANT_TESTS))
-binary-post-install/$(DEBIAN_NAME)::
-	######################### TESTS ######################################
-	# Run all possible tests from the chromium testsuite
-	# Buildd doesn't allow network accesses so the corresponding
-	# tests have to be skipped
-	@chmod u+x $(CURDIR)/debian/run-test.sh
-	@mkdir -p debian/test-results
-	@T1=`date +%s`; cd $(SRC_DIR)/out/$(BUILD_TYPE) && \
-	for test in $(TESTS) ; do \
-		tname=`echo "$$test" | sed -e 's/^[-@]\?\([^:]*\).*/\1/'` ; \
-		filter=`echo "$$test" | sed -e 's/^[^-][^:]*://' | grep -v -- "$$test"` ; \
-		echo "==========================================================================" ; \
-		if [ Z"`echo $$test | sed -e 's/^-.*//'`" = Z ] ; then \
-			echo "Skipped '$$tname', reason: "`echo $$test | sed -e 's/^[^:]*://'` ; \
-			continue ; \
-		fi ; \
-		OPT="" ; \
-		if [ Z"`echo $$test | sed -e 's/^@.*//'`" = Z ] ; then \
-			OPT=-x ; \
-		fi ; \
-		$(CURDIR)/debian/run-test.sh $$OPT ./$$tname $(CURDIR)/debian/test-results/ $$filter || true ; \
-		echo "==========================================================================" ; \
-		echo ; \
-	done; \
-	T2=`date +%s`; echo "PERF: all tests run in "`expr $$T2 - $$T1`" sec"
-endif
-
-# Compare
-PKG_DIRS = $(addprefix debian/,$(shell grep ^Package debian/control | cut -d' ' -f2))
-
-binary-predeb/$(DEBIAN_NAME):: compare
-
-compare:
-	# Look for duplicates, fail if we find any
-	@DUPES=`find $(PKG_DIRS) -type f -print | grep -v /DEBIAN/ | cut -d/ -f3- | sort | uniq -c | grep -vE '^  *1 '` ; \
-	if [ "Z$$DUPES" != Z ] ; then \
-	  echo " => Found duplicates:\n $$DUPES" ; \
-	  exit 1 ; \
-	else \
-	  echo " => No duplicate found" ; \
-	fi
-	# Find missing
-	@find $(PKG_DIRS) -type f -print | grep -v /DEBIAN/ | grep -vE '(/usr/lib/debug|/test-results/|/locales/|/inspector/)' | \
-	  grep $(LIB_DIR) | cut -d/ -f5- | sort > /tmp/pkg-$$$$.indebs ; \
-	find debian/tmp/$(LIB_DIR) -type f -print | cut -d/ -f5- | grep -vE '(\.log$$|/locales/|/inspector/|\.stamp$$)' | sort > /tmp/pkg-$$$$.inhammer ; \
-	diff -u /tmp/pkg-$$$$.inhammer /tmp/pkg-$$$$.indebs ; \
-	if [ $$? -eq 0 ] ; then \
-	  echo " => All fine" ; \
-	else \
-	  echo " => Found differences, please investigate" ; \
-	  exit 1 ; \
-	fi ; \
-	rm -f /tmp/pkg-$$$$.inhammer /tmp/pkg-$$$$.indebs
-
-binary-makedeb-IMPL/$(DEBIAN_NAME)::
-	dh_gencontrol -p$(DEBIAN_NAME)
-ifeq (1,$(USE_SYSTEM_FFMPEG))
-	# Manually insert ffmpeg libs shlib deps for chromium since the
-	# libs are dlopened.
-	sed "s/^Depends:.*$$/&, $$(sh debian/var_info LIBAVCODEC_DEPENDS)/" \
-		-i "debian/$(DEBIAN_NAME)/DEBIAN/control"
-	sed "s/^Depends:.*$$/&, $$(sh debian/var_info LIBAVFORMAT_DEPENDS)/" \
-		-i "debian/$(DEBIAN_NAME)/DEBIAN/control"
-	sed "s/^Depends:.*$$/&, $$(sh debian/var_info LIBAVUTIL_DEPENDS)/" \
-		-i "debian/$(DEBIAN_NAME)/DEBIAN/control"
-endif
-	dh_md5sums -p$(DEBIAN_NAME)
-	dh_builddeb -p$(DEBIAN_NAME)
-
-
-###############################################################################################
-
-# Tarball (get-orig-source & get-current-source)
-GCLIENT_URL  := http://src.chromium.org/svn/trunk/tools/depot_tools
-CHROMIUM_URL := http://src.chromium.org/svn/trunk/src
-CHROMIUM_RLZ := http://src.chromium.org/svn/releases
-DEPS_URL     := http://src.chromium.org/svn/trunk/deps/third_party
-GREEN_REV_URL := http://chromium-status.appspot.com/lkgr
-CHANNELS_URL  := http://omahaproxy.appspot.com/all
-
-# See Staying Green More Of The Time at http://dev.chromium.org/developers/how-tos/get-the-code
-USE_GREEN_REV ?= 0
-
-STRIP_TARBALL ?= 1
-
-STRIPPED_DIRS_FROM_CO := \
-	src/tools/gyp \
-	src/chrome/tools/test/reference_build \
-	src/chrome/tools/test/reference_build/chrome_linux \
-	src/webkit/data/layout_tests/LayoutTests \
-	src/third_party/WebKit/LayoutTests \
-	src/third_party/ffmpeg/binaries/chromium/linux/ia32 \
-	src/third_party/ffmpeg/binaries/chromium/linux/ia32_dbg \
-	src/third_party/ffmpeg/binaries/chromium/linux/x64 \
-	src/third_party/ffmpeg/binaries/chromium/linux/x64_dbg \
-	$(NULL)
-
-# stuff we don't have access to and shouldn't be in DEPS
-STRIPPED_DIRS_FROM_CO += \
-	src/chrome/app/theme/google_chrome \
-	src/chrome/installer/linux \
-	$(NULL)
-
-# prefix with _ those that we can't remove (just yet) because of the gclient
-# hooks (see build/all.gyp) or of some unneeded deps/includes
-STRIPPED_DIRS := \
-	chrome/test/data/safe_browsing/old \
-	chrome/test/data/firefox2_nss_mac \
-	chrome/third_party/wtl/ \
-	gears \
-	google_update \
-	o3d \
-	third_party/boost \
-	third_party/bsdiff \
-	third_party/bspatch \
-	third_party/ffmpeg/binaries \
-	third_party/fuzzymatch \
-	third_party/gles_book_examples \
-	third_party/gold \
-	third_party/hunspell/dictionaries \
-	third_party/icu/mac \
-	third_party/lcov \
-	third_party/lighttpd \
-	third_party/nspr \
-	third_party/nss \
-	third_party/ocmock \
-	third_party/pthread \
-	third_party/pyftpdlib \
-	third_party/simplejson \
-	third_party/scons \
-	_third_party/tcmalloc \
-	tools/symsrc \
-	tools/site_compare \
-	tools/stats_viewer \
-	tools/valgrind \
-	tools/wine_valgrind \
-	v8/test/cctest \
-	webkit/data/layout_tests \
-	native_client/toolchain/linux_x86/info \
-	native_client/toolchain/linux_x86/man \
-	native_client/toolchain/linux_x86/share/info \
-	native_client/toolchain/linux_x86/x86_64-nacl/share/info \
-	native_client/toolchain/linux_x86_newlib/info \
-	native_client/toolchain/linux_x86_newlib/man \
-	native_client/toolchain/linux_x86_newlib/share/info \
-	$(NULL)
-
-# There are directories we want to strip, but that are unnecessarily required by the build-system
-# So we drop everything but the gyp/gypi files and README.chromium (to see what that dir contained)
-ALMOST_STRIPPED_DIRS := \
-	courgette \
-	third_party/gles2_book \
-	$(NULL)
-
-STRIP_SYSTEM_DIRS = \
-	($(foreach DIR,$(1),$(if $(findstring use_system_$(notdir $(DIR))=1,$(GYP_DEFINES)),\
-	  (cd $(2)/$(dir $(DIR)) && \
-	  find $(notdir $(DIR)) -depth -mindepth 1 \! \( -name \*.gyp -o -name \*.gypi -o -name README.chromium -o -name \*.patch \) -print -delete );)))
-
-ALMOST_STRIP_DIRS = \
-	($(foreach DIR,$(1),(cd $(2)/$(dir $(DIR)) && \
-	  find $(notdir $(DIR)) -depth -mindepth 1 \! \( -name \*.gyp -o -name \*.gypi -o -name README.chromium \) -print -delete );))
-
-TMP_DDIR     := $(DEBIAN_NAME)-$(shell echo $$$$)
-ifeq (,$(LOCAL_BRANCH))
-TMP_DIR      := $(TMP_DDIR)
-else
-TMP_DIR      := $(LOCAL_BRANCH)
-endif
-
-get-orig-source: REVISION = $(NULL)
-get-orig-source: TAG      = $(NULL)
-ifneq (,$(DEBIAN_TAG))
-get-orig-source: TAG      = $(DEBIAN_TAG)
-else
-ifneq (,$(DEBIAN_REV))
-get-orig-source: REVISION = --revision src@$(DEBIAN_REV)
-else
-# Doing either the dev or beta or stable channel
-ifneq (,$(CHANNEL))
-ifneq (,$(filter-out stable beta dev Stable Beta Dev,$(CHANNEL)))
-# Assume it's a version
-get-orig-source: VERS          = $(CHANNEL)
-else
-get-orig-source: VERS          = $(shell wget -qO - $(CHANNELS_URL) | grep -i '^linux,$(CHANNEL)' | cut -d, -f3)
-endif
-get-orig-source: CHROMIUM_URL  = $(CHROMIUM_RLZ)/$(VERS)
-get-orig-source: USE_GREEN_REV = 0
-endif
-endif
-endif
-get-orig-source: gos-all
-
-get-current-source: TAG      = $(NULL)
-get-current-source: REVISION = --revision src@$(DEBIAN_REVISION)
-ifneq (,$(DEBIAN_REV))
-get-current-source: REVISION = --revision src@$(DEBIAN_REV)
-endif
-get-current-source: gos-all
-
-gos-all: gos-co gos-pack
-gos-co:
-ifneq (,$(CHANNEL))
-	@if [ Z$(VERS) = Z ] ; then \
-	  echo "Error: Cannot parse $(CHANNELS_URL) to get the release version for channel $(CHANNEL)" ; \
-	  exit 1 ; \
-	fi
-endif
-ifneq (,$(TAG))
-	$(error gclient doesn\'t support tags. We need to tweak CHROMIUM_URL. Abort)
-endif
-ifeq (,$(LOCAL_BRANCH))
-	rm -rf $(TMP_DIR)
-endif
-	@if [ ! -d $(TMP_DIR) ] ; then echo mkdir $(TMP_DIR); mkdir $(TMP_DIR) ; fi
-	@if [ ! -d $(TMP_DIR)/tools/depot_tools ] ; then \
-	  echo svn co $(GCLIENT_URL) $(TMP_DIR)/tools/depot_tools ; \
-	  svn co $(GCLIENT_URL) $(TMP_DIR)/tools/depot_tools ; \
-	else \
-	  echo svn update $(TMP_DIR)/tools/depot_tools ; \
-	  svn update $(TMP_DIR)/tools/depot_tools ; \
-	fi
-	rm -f $(TMP_DIR)/.gclient
-ifeq (1,$(USE_GREEN_REV)$(REVISION))
-	cd $(TMP_DIR) && ./tools/depot_tools/gclient config $(CHROMIUM_URL) $(GREEN_REV_URL)
-else
-	cd $(TMP_DIR) && ./tools/depot_tools/gclient config $(CHROMIUM_URL)
-endif
-ifeq (1,$(STRIP_TARBALL))
-ifneq (,$(STRIPPED_DIRS_FROM_CO))
-	# Add exclusions in .gclient for $(STRIPPED_DIRS_FROM_CO)
-	@for excl in $(STRIPPED_DIRS_FROM_CO) ; do \
-	  perl -i -pe 's,("custom_deps"\s*:\s*{),$$1\n      "'$$excl'": None\,,' $(TMP_DIR)/.gclient ; \
-	done
-	grep -Ev '^($$|[[:blank:]]*#)' $(TMP_DIR)/.gclient
-endif
-endif
-	# Checkout (drop the previous content and retry if gclient failed, see http://crbug.com/39954)
-	cd $(TMP_DIR) && ./tools/depot_tools/gclient update --nohooks $(REVISION) || \
-	  ( rm -rf $(foreach dir,src [0-9]*,$(wildcard $(TMP_DIR)/$(dir))) ; ./tools/depot_tools/gclient update --nohooks $(REVISION) )
-	# For NaCL, run the hooks, but not the gyp ones
-	( cd $(TMP_DIR) ; \
-		SDIR=`grep '"name"' .gclient | cut -d\" -f4` ; \
-		perl -i~ -pe 's%(.python., .src/build/gyp_chromium.)%"echo", "#disabled#", $$1%' $$SDIR/DEPS; \
-		./tools/depot_tools/gclient runhooks ; \
-		mv $$SDIR/DEPS~ $$SDIR/DEPS ; )
-
-ifneq (,$(LOCAL_BRANCH))
-	rm -rf $(TMP_DDIR)
-	cp -la $(TMP_DIR) $(TMP_DDIR)
-endif
-ifeq (1,$(STRIP_TARBALL))
-	# Strip tarball from some big directories not needed on the linux platform
-	cd $(TMP_DDIR)/src && rm -rfv $(STRIPPED_DIRS) | grep -vE '/\.svn(/|.$$)' > REMOVED-stripped.txt
-ifneq (,$(ALMOST_STRIPPED_DIRS))
-	# Strip listed dirs almost completely (keep *.gyp and README.chromium)
-	$(call ALMOST_STRIP_DIRS,$(ALMOST_STRIPPED_DIRS),$(TMP_DDIR)/src) | grep -vE '/\.svn(/|.$$)' >> $(TMP_DDIR)/src/REMOVED-stripped.txt
-endif
-endif
-	# Remove binaries
-	cd $(TMP_DDIR)/src && find . -type f \( -iname \*.exe -o -iname \*.dll -o -iname \*.pdb -o -name \*.o -o -name \*.a -o -name \*.dylib -o -name \*.so -o -name \*.so.\* \) -ls -delete > REMOVED-bin_only.txt
-	wc -l $(TMP_DDIR)/src/REMOVED-*.txt
-
-	# Remove cache files and backups
-	cd $(TMP_DDIR)/src && find . -type f \( -iname \*.bak -o -iname \*.orig -o -iname \*.cache \) -ls -delete > REMOVED-ephemera.txt
-	wc -l $(TMP_DDIR)/src/REMOVED-*.txt
-
-	# Remove known files that have non-free licenses
-	cd $(TMP_DDIR)/src && find . -name bfd.info -ls -delete > REMOVED-nonfree.txt
-	wc -l $(TMP_DDIR)/src/REMOVED-*.txt
-
-	# Remove unused webkit layout tests
-	rm -rf $(TMP_DDIR)/src/third_party/WebKit/LayoutTests
-
-	# Remove unsafe symlinks
-	rm -rf src/native_client/toolchain/pnacl_linux_x86/newlib/sysroot/sys-include
-	rm -rf src/third_party/mesa/src/src/gallium/state_trackers/d3d1x/w32api
-
-	# remove sourceless flot files
-	rm -f src/third_party/flot/*
-	# remove webkit tests that aren't used and contain sourceless files
-	rm -rf src/third_party/WebKit/ManualTests
-	rm -rf src/third_party/WebKit/PerformanceTests
-	# remove depot_tools, which are only used during checkout
-	rm -rf src/depot_tools
-	# remove webdriver test data that contains sourceless files
-	rm -rf src/third_party/webdriver/test_data
-	# remove extension examples that contain sourceless files
-	rm -rf src/chrome/common/extensions/docs/examples/extensions
-	# remove coverage testing that contains sourceless files
-	rm -rf src/third_party/WebKit/Tools/Scripts/webkitpy/thirdparty/coverage
-	# remove prebuilt Promise.js.min
-	rm -f src/third_party/trace-viewer/third_party/Promises/polyfill/bin/Promise.min.js
-	# remove sourceless polymer.min.js
-	rm -f src/third_party/polymer/polymer.min.js
-	rm -f src/ui/keyboard/resources/polymer.min.js
-	# remove sourceless bidichecker and trace
-	rm -rf src/third_party/bidichecker
-	rm -rf src/tools/trace
-	# remove sourceless chromeVox
-	rm -f src/chrome/third_party/chromevox/*.js
-	# remove non-free rfc
-	rm -f src/third_party/libsrtp/srtp/doc/rfc3711.txt
+# paths to files needed by flot
+flotpaths=/usr/share/javascript/jquery/*min.js \
+          /usr/share/javascript/jquery-flot/*min.js \
+
+%:
+	dh $@ --parallel
+
+override_dh_auto_configure:
+	for file in $(flotpaths); do ln -sf $$file third_party/flot; done
+	GYP_DEFINES="$(defines)" ./build/gyp_chromium $(options)
 	
-gos-pack: TMP_DIR  = $(TMP_DDIR)
-ifneq (,$(DEBIAN_TAG))
-gos-pack: VERSION  = $(shell echo $(DEBIAN_TAG) | cut -d= -f2)
-else
-ifeq (,$(CHANNEL))
-gos-pack: REVISION = $(shell cd $(TMP_DIR)/src && svn log --xml --limit 1 | grep -E '^( *revision=|<date>)' | tr -d '\n' | \
-	             sed -e 's/.*"\([0-9]*\)".*>\(....\)-\(..\)-\(..\)T.*/\2\3\4r\1/')
-gos-pack: VERSION  = $(shell cut -d= -f2 $(TMP_DIR)/src/chrome/VERSION | sed -e 's,$$,.,' | tr -d '\n' | sed -e 's/.$$//')~svn$(REVISION)
-else
-gos-pack: REVISION = $(shell cd $(TMP_DIR)/src && svn log --xml --limit 1 | grep '^ *revision=' | cut -d'"' -f2)
-gos-pack: VERSION  = $(shell cut -d= -f2 $(TMP_DIR)/src/chrome/VERSION | sed -e 's,$$,.,' | tr -d '\n' | sed -e 's/.$$//')
-endif
-endif
-gos-pack:
-	# Pack
-	if [ src != $(DEB_TAR_SRCDIR) ] ; then mv $(TMP_DIR)/src $(TMP_DIR)/$(DEB_TAR_SRCDIR) ; fi
-	mv $(TMP_DIR)/tools/depot_tools $(TMP_DIR)/$(DEB_TAR_SRCDIR)/depot_tools
-	mkdir $(TMP_DIR)/$(SOURCE_NAME)-$(VERSION)
-	mv $(TMP_DIR)/$(DEB_TAR_SRCDIR) $(TMP_DIR)/$(SOURCE_NAME)-$(VERSION)/
-	cd $(TMP_DIR) && tar cJf ../../$(SOURCE_NAME)_$(VERSION).orig.tar.xz \
-		--exclude=.svn --exclude=.git $(SOURCE_NAME)-$(VERSION)
-	rm -rf $(TMP_DIR)
+override_dh_auto_build:
+	ninja $(njobs) -C out/Release chrome chrome_sandbox chromedriver 
+	mv out/Release/chrome out/Release/chromium || true
+	mv out/Release/chrome.1 out/Release/chromium.1 || true
+	mv out/Release/locales/en-US.pak out/Release/resources || true
+	mv out/Release/chrome_sandbox out/Release/chrome-sandbox || true
+	cp chrome/app/theme/chromium/product_logo_32.xpm out/Release/chromium.xpm || true
+	chmod 4755 out/Release/chrome-sandbox # suid sandbox
+
+override_dh_auto_install:
+	dh_auto_install
+	echo "Any files placed in this directory will be sourced prior to executing chromium." \
+	    > debian/chromium/etc/chromium.d/README
+	sed 's|@BUILD_DIST@|$(shell cat /etc/debian_version)|' \
+	    < debian/scripts/chromium.in > debian/chromium/usr/bin/chromium
+
+override_dh_fixperms:
+	dh_fixperms --exclude chrome-sandbox
+
+override_dh_strip:
+	dh_strip --dbg-package=chromium-dbg
+
+override_dh_clean:
+	dh_clean
+	./debian/scripts/build-removals
+
+get-orig-source: 
+	# fetch the upstream source
+	cd .. && wget --progress=bar:force -c $(url)/$(tarball) 2>&1 | tail -f -n +13
+	# fetch its hashes
+	cd .. && wget --progress=bar:force -c $(url)/$(tarball).hashes 2>&1 | tail -f -n +13
+	# extract the hashes 
+	grep sha256 ../$(tarball).hashes | cut -d\  -f5,3 > ../$(tarball).sha256sum
+	grep sha512 ../$(tarball).hashes | cut -d\  -f5,3 > ../$(tarball).sha512sum
+	# verify hashes
+	cd .. && sha256sum -c $(tarball).sha256sum
+	cd .. && sha512sum -c $(tarball).sha512sum
+	# extract the source
+	cd .. && tar xf $(tarball) --overwrite
+	# generate old file list
+	cd ../chromium-$(version) && find . | sort > ../chromium-$(version).old
+	# remove unwanted third_party bundles
+	cp ../chromium-$(version)/third_party/icu/icu.isolate .
+	cp ../chromium-$(version)/third_party/icu/source/data/in/icudtl.dat .
+	cd ../chromium-$(version)/third_party && for setting in $(defines); do \
+	    dir=$$(echo $$setting | grep use_system_.*=1 | sed 's/use_system_\(.*\)=1/\1/' | tr _ -); \
+	    test -z $$dir || find $$dir -mindepth 1 -maxdepth 1 ! -name \*.gyp\* -a ! -name chromium -a ! -name google -execdir rm -rf {} \; 2>/dev/null; \
+	    test -z $$dir || cp ../build/linux/unbundle/$$dir.gyp $$dir 2>/dev/null || true; \
+	    test -z $$dir || rmdir $$dir --ignore-fail-on-non-empty; \
+	    done
+	mv icu.isolate icudtl.dat ../chromium-$(version)/third_party/icu
+	# remove unwanted files from the upstream source
+	cd ../chromium-$(version) && $(CURDIR)/debian/scripts/upstream-removals
+	# remove files that are removed when cleaning
+	cd ../chromium-$(version) && $(CURDIR)/debian/scripts/build-removals
+	# generate new file list
+	cd ../chromium-$(version) && find . | sort > ../chromium-$(version).new
+	# record file removals list
+	cd .. && diff -u chromium-$(version).old chromium-$(version).new \
+	    > chromium-$(version)/UPSTREAM-REMOVALS.txt || true
+	xz --force --extreme -9 ../chromium-$(version)/UPSTREAM-REMOVALS.txt
+	# create orig tarball (use -0 for fast compression/decompression)
+	rm -rf ../$(package)_$(version).orig.tar*
+	cd .. && tar cf $(package)_$(version).orig.tar chromium-$(version)
+	cd .. && xz -0 $(package)_$(version).orig.tar
+	@echo "successfully created ../$(package)_$(version).orig.tar.xz"

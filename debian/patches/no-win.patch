@@ -1,0 +1,182 @@
+Index: chromium/ui/app_list/views/app_list_view.cc
+===================================================================
+--- chromium.orig/ui/app_list/views/app_list_view.cc
++++ chromium/ui/app_list/views/app_list_view.cc
+@@ -8,7 +8,6 @@
+ 
+ #include "base/command_line.h"
+ #include "base/strings/string_util.h"
+-#include "base/win/windows_version.h"
+ #include "ui/app_list/app_list_constants.h"
+ #include "ui/app_list/app_list_model.h"
+ #include "ui/app_list/app_list_view_delegate.h"
+@@ -43,6 +42,7 @@
+ #include "ui/aura/window_tree_host.h"
+ #if defined(OS_WIN)
+ #include "ui/base/win/shell.h"
++#include "base/win/windows_version.h"
+ #endif
+ #if !defined(OS_CHROMEOS)
+ #include "ui/views/widget/desktop_aura/desktop_native_widget_aura.h"
+Index: chromium/content/app/content_main_runner.cc
+===================================================================
+--- chromium.orig/content/app/content_main_runner.cc
++++ chromium/content/app/content_main_runner.cc
+@@ -45,10 +45,8 @@
+ #include "ipc/ipc_descriptors.h"
+ #include "ipc/ipc_switches.h"
+ #include "media/base/media.h"
+-#include "sandbox/win/src/sandbox_types.h"
+ #include "ui/base/ui_base_paths.h"
+ #include "ui/base/ui_base_switches.h"
+-#include "ui/gfx/win/dpi.h"
+ 
+ #if defined(USE_TCMALLOC)
+ #include "third_party/tcmalloc/chromium/src/gperftools/malloc_extension.h"
+@@ -69,6 +67,8 @@
+ #endif
+ 
+ #if defined(OS_WIN)
++#include "ui/gfx/win/dpi.h"
++#include "sandbox/win/src/sandbox_types.h"
+ #include <atlbase.h>
+ #include <atlapp.h>
+ #include <malloc.h>
+Index: chromium/chrome/browser/ui/views/create_application_shortcut_view.cc
+===================================================================
+--- chromium.orig/chrome/browser/ui/views/create_application_shortcut_view.cc
++++ chromium/chrome/browser/ui/views/create_application_shortcut_view.cc
+@@ -6,11 +6,14 @@
+ 
+ #include <algorithm>
+ 
++#if defined(OS_WIN)
++#include "base/win/windows_version.h"
++#endif
++
+ #include "base/bind.h"
+ #include "base/bind_helpers.h"
+ #include "base/prefs/pref_service.h"
+ #include "base/strings/utf_string_conversions.h"
+-#include "base/win/windows_version.h"
+ #include "chrome/browser/extensions/tab_helper.h"
+ #include "chrome/browser/favicon/favicon_util.h"
+ #include "chrome/browser/profiles/profile.h"
+Index: chromium/chrome/browser/component_updater/component_updater_configurator.cc
+===================================================================
+--- chromium.orig/chrome/browser/component_updater/component_updater_configurator.cc
++++ chromium/chrome/browser/component_updater/component_updater_configurator.cc
+@@ -8,10 +8,13 @@
+ #include <string>
+ #include <vector>
+ 
++#if defined(OS_WIN)
++#include "base/win/windows_version.h"
++#endif
++
+ #include "base/command_line.h"
+ #include "base/compiler_specific.h"
+ #include "base/strings/string_util.h"
+-#include "base/win/windows_version.h"
+ #include "build/build_config.h"
+ #include "chrome/browser/component_updater/component_patcher.h"
+ #include "chrome/common/chrome_switches.h"
+Index: chromium/chrome/browser/component_updater/component_updater_utils.cc
+===================================================================
+--- chromium.orig/chrome/browser/component_updater/component_updater_utils.cc
++++ chromium/chrome/browser/component_updater/component_updater_utils.cc
+@@ -6,6 +6,10 @@
+ 
+ #include <cmath>
+ 
++#if defined(OS_WIN)
++#include "base/win/windows_version.h"
++#endif
++
+ #include "base/file_util.h"
+ #include "base/files/file_path.h"
+ #include "base/guid.h"
+@@ -14,7 +18,6 @@
+ #include "base/strings/string_util.h"
+ #include "base/strings/stringprintf.h"
+ #include "base/sys_info.h"
+-#include "base/win/windows_version.h"
+ #include "chrome/browser/component_updater/component_updater_service.h"
+ #include "chrome/browser/component_updater/crx_update_item.h"
+ #include "chrome/browser/omaha_query_params/omaha_query_params.h"
+Index: chromium/chrome/browser/component_updater/pnacl/pnacl_component_installer.cc
+===================================================================
+--- chromium.orig/chrome/browser/component_updater/pnacl/pnacl_component_installer.cc
++++ chromium/chrome/browser/component_updater/pnacl/pnacl_component_installer.cc
+@@ -7,6 +7,10 @@
+ #include <string>
+ #include <vector>
+ 
++#if defined(OS_WIN)
++#include "base/win/windows_version.h"
++#endif
++
+ #include "base/atomicops.h"
+ #include "base/base_paths.h"
+ #include "base/bind.h"
+@@ -22,7 +26,6 @@
+ #include "base/strings/string_util.h"
+ #include "base/values.h"
+ #include "base/version.h"
+-#include "base/win/windows_version.h"
+ #include "build/build_config.h"
+ #include "chrome/browser/browser_process.h"
+ #include "chrome/browser/component_updater/component_updater_service.h"
+Index: chromium/chrome/browser/ui/views/profiles/new_avatar_button.cc
+===================================================================
+--- chromium.orig/chrome/browser/ui/views/profiles/new_avatar_button.cc
++++ chromium/chrome/browser/ui/views/profiles/new_avatar_button.cc
+@@ -4,7 +4,10 @@
+ 
+ #include "chrome/browser/ui/views/profiles/new_avatar_button.h"
+ 
++#if defined(OS_WIN)
+ #include "base/win/windows_version.h"
++#endif
++
+ #include "chrome/browser/browser_process.h"
+ #include "chrome/browser/profiles/profile_manager.h"
+ #include "chrome/browser/profiles/profiles_state.h"
+Index: chromium/chrome/browser/ui/views/screen_capture_notification_ui_views.cc
+===================================================================
+--- chromium.orig/chrome/browser/ui/views/screen_capture_notification_ui_views.cc
++++ chromium/chrome/browser/ui/views/screen_capture_notification_ui_views.cc
+@@ -198,6 +198,7 @@ gfx::NativeViewId ScreenCaptureNotificat
+   set_background(views::Background::CreateSolidBackground(GetNativeTheme()->
+       GetSystemColor(ui::NativeTheme::kColorId_DialogBackground)));
+ 
++#if defined(OS_WIN)
+   gfx::Screen* screen = gfx::Screen::GetNativeScreen();
+   // TODO(sergeyu): Move the notification to the display being captured when
+   // per-display screen capture is supported.
+@@ -214,7 +215,6 @@ gfx::NativeViewId ScreenCaptureNotificat
+   // This has to be called after Show() to have effect.
+   widget->SetOpacity(0xFF * kWindowAlphaValue);
+ 
+-#if defined(OS_WIN)
+   return gfx::NativeViewId(views::HWNDForWidget(widget));
+ #else
+   return 0;
+Index: chromium/chrome/browser/omaha_query_params/omaha_query_params.cc
+===================================================================
+--- chromium.orig/chrome/browser/omaha_query_params/omaha_query_params.cc
++++ chromium/chrome/browser/omaha_query_params/omaha_query_params.cc
+@@ -4,9 +4,12 @@
+ 
+ #include "chrome/browser/omaha_query_params/omaha_query_params.h"
+ 
++#if defined(OS_WIN)
++#include "base/win/windows_version.h"
++#endif
++
+ #include "base/compiler_specific.h"
+ #include "base/strings/stringprintf.h"
+-#include "base/win/windows_version.h"
+ #include "chrome/browser/browser_process.h"
+ #include "chrome/common/chrome_version_info.h"
+ 
