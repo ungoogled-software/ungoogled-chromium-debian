@@ -7,7 +7,7 @@ no-win.patch
 no-flac.patch
 
 disable/sse2.patch
-#disable/google-api-warning.patch
+disable/google-api-warning.patch
 
 system/nspr.patch
 system/valgrind.patch

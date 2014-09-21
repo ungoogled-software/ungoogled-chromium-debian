@@ -2,11 +2,9 @@ description: don't set sse2 compiler flags on i386
 author: Michael Gilbert <mgilbert@debian.org>
 debian-bug: http://bugs.debian.org/750361
 
-Index: sid/build/common.gypi
-===================================================================
---- sid.orig/build/common.gypi
-+++ sid/build/common.gypi
-@@ -3536,8 +3536,6 @@
+--- a/build/common.gypi
++++ b/build/common.gypi
+@@ -3391,8 +3391,6 @@
                  # http://crbug.com/313032 for an example where this has "bit"
                  # us in the past.
                  'cflags': [
@@ -15,10 +13,8 @@ Index: sid/build/common.gypi
                    '-mmmx',  # Allows mmintrin.h for MMX intrinsics.
                    '-m32',
                  ],
-Index: sid/third_party/qcms/qcms.gyp
-===================================================================
---- sid.orig/third_party/qcms/qcms.gyp
-+++ sid/third_party/qcms/qcms.gyp
+--- a/third_party/qcms/qcms.gyp
++++ b/third_party/qcms/qcms.gyp
 @@ -31,7 +31,7 @@
        'msvs_disabled_warnings': [ 4018 ],
  

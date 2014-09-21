@@ -1,7 +1,7 @@
-Index: sid/breakpad/breakpad.gyp
+Index: chromium/breakpad/breakpad.gyp
 ===================================================================
---- sid.orig/breakpad/breakpad.gyp
-+++ sid/breakpad/breakpad.gyp
+--- chromium.orig/breakpad/breakpad.gyp
++++ chromium/breakpad/breakpad.gyp
 @@ -789,7 +789,6 @@
                'breakpad/breakpad.gyp',
              ],
@@ -10,10 +10,10 @@ Index: sid/breakpad/breakpad.gyp
            'actions': [
              {
                'action_name': 'compile breakpad utilities',
-Index: sid/third_party/protobuf/protobuf.gyp
+Index: chromium/third_party/protobuf/protobuf.gyp
 ===================================================================
---- sid.orig/third_party/protobuf/protobuf.gyp
-+++ sid/third_party/protobuf/protobuf.gyp
+--- chromium.orig/third_party/protobuf/protobuf.gyp
++++ chromium/third_party/protobuf/protobuf.gyp
 @@ -53,7 +53,6 @@
                # normal protoc target under the condition that "OS==iOS".
                'target_name': 'compile_protoc',
@@ -22,10 +22,10 @@ Index: sid/third_party/protobuf/protobuf.gyp
                'actions': [
                  {
                    'action_name': 'compile protoc',
-Index: sid/chrome/common/chrome_paths.cc
+Index: chromium/chrome/common/chrome_paths.cc
 ===================================================================
---- sid.orig/chrome/common/chrome_paths.cc
-+++ sid/chrome/common/chrome_paths.cc
+--- chromium.orig/chrome/common/chrome_paths.cc
++++ chromium/chrome/common/chrome_paths.cc
 @@ -7,7 +7,6 @@
  #include "base/file_util.h"
  #include "base/lazy_instance.h"
@@ -42,10 +42,10 @@ Index: sid/chrome/common/chrome_paths.cc
  #include "base/mac/foundation_util.h"
  #endif
  
-Index: sid/content/common/content_paths.cc
+Index: chromium/content/common/content_paths.cc
 ===================================================================
---- sid.orig/content/common/content_paths.cc
-+++ sid/content/common/content_paths.cc
+--- chromium.orig/content/common/content_paths.cc
++++ chromium/content/common/content_paths.cc
 @@ -5,9 +5,12 @@
  #include "content/public/common/content_paths.h"
  
@@ -60,10 +60,10 @@ Index: sid/content/common/content_paths.cc
  namespace content {
  
  bool PathProvider(int key, base::FilePath* result) {
-Index: sid/sandbox/sandbox.gyp
+Index: chromium/sandbox/sandbox.gyp
 ===================================================================
---- sid.orig/sandbox/sandbox.gyp
-+++ sid/sandbox/sandbox.gyp
+--- chromium.orig/sandbox/sandbox.gyp
++++ chromium/sandbox/sandbox.gyp
 @@ -17,11 +17,6 @@
          'linux/sandbox_linux.gypi',
        ],
@@ -76,10 +76,10 @@ Index: sid/sandbox/sandbox.gyp
      [ 'OS!="win" and OS!="mac" and OS!="linux" and OS!="android"', {
        # A 'default' to accomodate the "sandbox" target.
        'targets': [
-Index: sid/chrome/browser/resources/bookmark_manager/css/bmm.css
+Index: chromium/chrome/browser/resources/bookmark_manager/css/bmm.css
 ===================================================================
---- sid.orig/chrome/browser/resources/bookmark_manager/css/bmm.css
-+++ sid/chrome/browser/resources/bookmark_manager/css/bmm.css
+--- chromium.orig/chrome/browser/resources/bookmark_manager/css/bmm.css
++++ chromium/chrome/browser/resources/bookmark_manager/css/bmm.css
 @@ -187,17 +187,6 @@ html[dir=rtl] list > .folder > .label {
        url('../../../../../ui/resources/default_200_percent/common/folder_closed_rtl.png') 2x);
  }
@@ -98,20 +98,20 @@ Index: sid/chrome/browser/resources/bookmark_manager/css/bmm.css
  .main {
    -webkit-flex: 1;
    display: -webkit-flex;
-Index: sid/content/browser/renderer_host/render_process_host_impl.cc
+Index: chromium/content/browser/renderer_host/render_process_host_impl.cc
 ===================================================================
---- sid.orig/content/browser/renderer_host/render_process_host_impl.cc
-+++ sid/content/browser/renderer_host/render_process_host_impl.cc
-@@ -94,7 +94,6 @@
+--- chromium.orig/content/browser/renderer_host/render_process_host_impl.cc
++++ chromium/content/browser/renderer_host/render_process_host_impl.cc
+@@ -91,7 +91,6 @@
  #include "content/browser/renderer_host/render_widget_helper.h"
  #include "content/browser/renderer_host/render_widget_host_impl.h"
  #include "content/browser/renderer_host/socket_stream_dispatcher_host.h"
 -#include "content/browser/renderer_host/text_input_client_message_filter.h"
  #include "content/browser/renderer_host/websocket_dispatcher_host.h"
  #include "content/browser/resolve_proxy_msg_helper.h"
- #include "content/browser/service_worker/service_worker_context_wrapper.h"
-@@ -162,6 +161,10 @@
- #include "content/common/gpu/client/gpu_memory_buffer_impl_io_surface.h"
+ #include "content/browser/screen_orientation/screen_orientation_dispatcher_host.h"
+@@ -153,6 +152,10 @@
+ #include "content/browser/media/android/browser_demuxer_android.h"
  #endif
  
 +#if defined(OS_MACOSX)
@@ -119,25 +119,25 @@ Index: sid/content/browser/renderer_host/render_process_host_impl.cc
 +#endif
 +
  #if defined(OS_WIN)
- #include "base/strings/string_number_conversions.h"
  #include "base/win/scoped_com_initializer.h"
-Index: sid/content/content_browser.gypi
+ #include "content/common/font_cache_dispatcher_win.h"
+Index: chromium/content/content_browser.gypi
 ===================================================================
---- sid.orig/content/content_browser.gypi
-+++ sid/content/content_browser.gypi
-@@ -1020,8 +1020,6 @@
-       'browser/renderer_host/socket_stream_host.h',
-       'browser/renderer_host/text_input_client_mac.h',
-       'browser/renderer_host/text_input_client_mac.mm',
--      'browser/renderer_host/text_input_client_message_filter.h',
--      'browser/renderer_host/text_input_client_message_filter.mm',
-       'browser/renderer_host/ui_events_helper.cc',
-       'browser/renderer_host/ui_events_helper.h',
-       'browser/renderer_host/web_input_event_aura.cc',
-Index: sid/content/renderer/text_input_client_observer.cc
+--- chromium.orig/content/content_browser.gypi
++++ chromium/content/content_browser.gypi
+@@ -1122,8 +1122,6 @@
+     'browser/renderer_host/socket_stream_host.h',
+     'browser/renderer_host/text_input_client_mac.h',
+     'browser/renderer_host/text_input_client_mac.mm',
+-    'browser/renderer_host/text_input_client_message_filter.h',
+-    'browser/renderer_host/text_input_client_message_filter.mm',
+     'browser/renderer_host/ui_events_helper.cc',
+     'browser/renderer_host/ui_events_helper.h',
+     'browser/renderer_host/web_input_event_aura.cc',
+Index: chromium/content/renderer/text_input_client_observer.cc
 ===================================================================
---- sid.orig/content/renderer/text_input_client_observer.cc
-+++ sid/content/renderer/text_input_client_observer.cc
+--- chromium.orig/content/renderer/text_input_client_observer.cc
++++ chromium/content/renderer/text_input_client_observer.cc
 @@ -13,9 +13,12 @@
  #include "third_party/WebKit/public/platform/WebString.h"
  #include "third_party/WebKit/public/web/WebLocalFrame.h"

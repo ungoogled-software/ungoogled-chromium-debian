@@ -1,9 +1,7 @@
 description: use system modpbase64 and update for >= 3.x api
 
-Index: sid/third_party/modp_b64/modp_b64.gyp
-===================================================================
---- sid.orig/third_party/modp_b64/modp_b64.gyp
-+++ sid/third_party/modp_b64/modp_b64.gyp
+--- a/third_party/modp_b64/modp_b64.gyp
++++ b/third_party/modp_b64/modp_b64.gyp
 @@ -6,16 +6,13 @@
    'targets': [
      {
@@ -27,10 +25,8 @@ Index: sid/third_party/modp_b64/modp_b64.gyp
      },
    ],
    'conditions': [
-Index: sid/base/base64.cc
-===================================================================
---- sid.orig/base/base64.cc
-+++ sid/base/base64.cc
+--- a/base/base64.cc
++++ b/base/base64.cc
 @@ -4,7 +4,7 @@
  
  #include "base/base64.h"
