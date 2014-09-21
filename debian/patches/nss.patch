@@ -1,0 +1,17 @@
+webkit needs to call nss to pull in nspr headers
+Index: chromium/src/chrome/chrome_common.gypi
+===================================================================
+--- chromium.orig/src/chrome/chrome_common.gypi
++++ chromium/src/chrome/chrome_common.gypi
+@@ -483,6 +483,11 @@
+               'common/local_discovery/local_discovery_messages.h',
+             ]
+         }],
++        ['OS=="linux"', {
++          'include_dirs': [
++            '/usr/include/nspr',
++          ],
++        }],
+         ['toolkit_uses_gtk == 1', {
+           'dependencies': [
+             '../build/linux/system.gyp:gtk',

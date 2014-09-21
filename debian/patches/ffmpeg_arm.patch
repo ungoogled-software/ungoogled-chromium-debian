@@ -1,0 +1,70 @@
+description: ffmpeg compatibility on the arm arch
+Index: sid/src/third_party/ffmpeg/ffmpeg_generated.gypi
+===================================================================
+--- sid.orig/src/third_party/ffmpeg/ffmpeg_generated.gypi	2013-03-16 09:38:07.000000000 +0100
++++ sid/src/third_party/ffmpeg/ffmpeg_generated.gypi	2013-03-30 17:40:15.887737358 +0100
+@@ -114,19 +114,16 @@
+           'libavcodec/arm/h264dsp_init_arm.c',
+           'libavcodec/arm/mpegaudiodsp_init_arm.c',
+           'libavcodec/arm/mpegvideo_arm.c',
+-          'libavcodec/arm/mpegvideo_armv5te.c',
+           'libavcodec/arm/sbrdsp_init_arm.c',
+         ],
+         'asm_sources': [
+           'libavcodec/arm/mpegaudiodsp_fixed_armv6.S',
+-          'libavcodec/arm/mpegvideo_armv5te_s.S',
+         ],
+         'converter_outputs': [
+           '<(shared_generated_dir)/libavcodec/arm/aacpsdsp_init_arm.c',
+           '<(shared_generated_dir)/libavcodec/arm/h264dsp_init_arm.c',
+           '<(shared_generated_dir)/libavcodec/arm/mpegaudiodsp_init_arm.c',
+           '<(shared_generated_dir)/libavcodec/arm/mpegvideo_arm.c',
+-          '<(shared_generated_dir)/libavcodec/arm/mpegvideo_armv5te.c',
+           '<(shared_generated_dir)/libavcodec/arm/sbrdsp_init_arm.c',
+         ],
+       }],  # (target_arch == "arm" or (target_arch == "arm" and arm_neon == 1)) and (ffmpeg_branding == "Chrome" or ffmpeg_branding == "ChromeOS") and (1)
+@@ -321,9 +318,7 @@
+       ['(target_arch == "arm" or (target_arch == "arm" and arm_neon == 1)) and (1) and (1)', {
+         'c_sources': [
+           'libavcodec/arm/dsputil_init_arm.c',
+-          'libavcodec/arm/dsputil_init_armv5te.c',
+           'libavcodec/arm/dsputil_init_armv6.c',
+-          'libavcodec/arm/dsputil_init_vfp.c',
+           'libavcodec/arm/fft_fixed_init_arm.c',
+           'libavcodec/arm/fft_init_arm.c',
+           'libavcodec/arm/fmtconvert_init_arm.c',
+@@ -333,26 +328,19 @@
+           'libavcodec/arm/vp8dsp_init_armv6.c',
+           'libavutil/arm/cpu.c',
+           'libavutil/arm/float_dsp_init_arm.c',
+-          'libavutil/arm/float_dsp_init_vfp.c',
+         ],
+         'asm_sources': [
+           'libavcodec/arm/dsputil_arm.S',
+           'libavcodec/arm/dsputil_armv6.S',
+-          'libavcodec/arm/dsputil_vfp.S',
+-          'libavcodec/arm/fmtconvert_vfp.S',
+           'libavcodec/arm/jrevdct_arm.S',
+           'libavcodec/arm/simple_idct_arm.S',
+-          'libavcodec/arm/simple_idct_armv5te.S',
+           'libavcodec/arm/simple_idct_armv6.S',
+           'libavcodec/arm/vp8_armv6.S',
+           'libavcodec/arm/vp8dsp_armv6.S',
+-          'libavutil/arm/float_dsp_vfp.S',
+         ],
+         'converter_outputs': [
+           '<(shared_generated_dir)/libavcodec/arm/dsputil_init_arm.c',
+-          '<(shared_generated_dir)/libavcodec/arm/dsputil_init_armv5te.c',
+           '<(shared_generated_dir)/libavcodec/arm/dsputil_init_armv6.c',
+-          '<(shared_generated_dir)/libavcodec/arm/dsputil_init_vfp.c',
+           '<(shared_generated_dir)/libavcodec/arm/fft_fixed_init_arm.c',
+           '<(shared_generated_dir)/libavcodec/arm/fft_init_arm.c',
+           '<(shared_generated_dir)/libavcodec/arm/fmtconvert_init_arm.c',
+@@ -362,7 +350,6 @@
+           '<(shared_generated_dir)/libavcodec/arm/vp8dsp_init_armv6.c',
+           '<(shared_generated_dir)/libavutil/arm/cpu.c',
+           '<(shared_generated_dir)/libavutil/arm/float_dsp_init_arm.c',
+-          '<(shared_generated_dir)/libavutil/arm/float_dsp_init_vfp.c',
+         ],
+       }],  # (target_arch == "arm" or (target_arch == "arm" and arm_neon == 1)) and (1) and (1)
+       ['(1) and (1) and (1)', {

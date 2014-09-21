@@ -1,0 +1,56 @@
+Allow chromium-browser to be built with ffmpeg-0.5.1.
+This patch is not meant to be submitted upstream.
+==========================================================================
+--- a/src/media/ffmpeg/file_protocol.cc
++++ b/src/media/ffmpeg/file_protocol.cc
+@@ -80,5 +80,4 @@ URLProtocol kFFmpegFileProtocol = {
+   NULL,  // *next
+   NULL,  // url_read_pause
+   NULL,  // url_read_seek
+-  &GetHandle
+ };
+--- a/src/media/filters/ffmpeg_audio_decoder.cc
++++ b/src/media/filters/ffmpeg_audio_decoder.cc
+@@ -106,10 +106,11 @@ void FFmpegAudioDecoder::DoDecode(Buffer
+ 
+   int16_t* output_buffer = reinterpret_cast<int16_t*>(output_buffer_.get());
+   int output_buffer_size = kOutputBufferSize;
+-  int result = avcodec_decode_audio3(codec_context_,
++  int result = avcodec_decode_audio2(codec_context_,
+                                      output_buffer,
+                                      &output_buffer_size,
+-                                     &packet);
++                                     packet.data,
++                                     packet.size);
+ 
+   // TODO(ajwong): Consider if kOutputBufferSize should just be an int instead
+   // of a size_t.
+--- a/src/media/filters/ffmpeg_video_decode_engine.cc
++++ b/src/media/filters/ffmpeg_video_decode_engine.cc
+@@ -78,7 +78,8 @@ void FFmpegVideoDecodeEngine::DecodeFram
+   // to let FFmpeg allocate the structure via avcodec_alloc_frame().
+   int frame_decoded = 0;
+   int result =
+-      avcodec_decode_video2(codec_context_, yuv_frame, &frame_decoded, &packet);
++      avcodec_decode_video(codec_context_, yuv_frame, &frame_decoded,
++                           packet.data, packet.size);
+ 
+   // Log the problem if we can't decode a video frame and exit early.
+   if (result < 0) {
+--- a/src/third_party/ffmpeg/avcodec-52.sigs
++++ b/src/third_party/ffmpeg/avcodec-52.sigs
+@@ -8,12 +8,11 @@ AVCodec *avcodec_find_decoder(enum Codec
+ AVFrame *avcodec_alloc_frame(void);
+ int av_get_bits_per_sample_format(enum SampleFormat sample_fmt);
+ int av_new_packet(AVPacket *pkt, int size);
+-int avcodec_decode_audio3(AVCodecContext *avctx, int16_t *samples, int *frame_size_ptr, AVPacket *avpkt);
+-int avcodec_decode_video2(AVCodecContext *avctx, AVFrame *picture, int *got_picture_ptr, AVPacket *avpkt);
++int avcodec_decode_audio2(AVCodecContext *avctx, int16_t *samples, int *frame_size_ptr, const uint8_t *buf, int buf_size);
++int avcodec_decode_video(AVCodecContext *avctx, AVFrame *picture, int *got_picture_ptr, const uint8_t *buf, int buf_size);
+ int avcodec_open(AVCodecContext *avctx, AVCodec *codec);
+ int avcodec_close(AVCodecContext *avctx);
+ int avcodec_thread_init(AVCodecContext *s, int thread_count);
+-void av_free_packet(AVPacket *pkt);
+ void av_init_packet(AVPacket *pkt);
+ int av_dup_packet(AVPacket *pkt);
+ void avcodec_flush_buffers(AVCodecContext *avctx);

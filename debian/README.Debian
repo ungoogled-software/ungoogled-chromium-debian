@@ -1,0 +1,15 @@
+Chromium for Debian
+====================
+
+Please read the file /usr/share/bug/chromium/presubj for information
+you may want to know if you will report a bug.
+
+DOWNGRADE
+-----------------------------
+
+Some people have complained that after downgrading chromium, all tabs
+are sad.
+Unfortunately, Chromium does not allow downgrading. To avoid this issue
+you need to backup your ~/.config/chromium
+
+ -- Giuseppe Iuculano <iuculano@debian.org>, Sun, 30 Jan 2011 13:48:27 +0200

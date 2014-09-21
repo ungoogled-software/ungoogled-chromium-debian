@@ -1,0 +1,24 @@
+# -*- sh -*-
+# This file is used as a way to replace text in certain files. Main reason is
+# to get shlib information for the different ffmpeg libraries used by
+# chromium.
+
+case "$1" in
+    LIBAVCODEC_DEPENDS)
+        LIBAVCODEC_DEPENDS=$(cat /var/lib/dpkg/info/libavcodec*.shlibs | \
+          sed 's/^[^[:space:]]\+\?[[:space:]]\+\?[^[:space:]]\+\?[[:space:]]\+\?\(.*\)$/\1/')
+        printf "$LIBAVCODEC_DEPENDS"
+        ;;
+    LIBAVFORMAT_DEPENDS)
+        LIBAVFORMAT_DEPENDS=$(cat /var/lib/dpkg/info/libavformat*.shlibs | \
+          sed 's/^[^[:space:]]\+\?[[:space:]]\+\?[^[:space:]]\+\?[[:space:]]\+\?\(.*\)$/\1/')
+        printf "$LIBAVFORMAT_DEPENDS"
+        ;;
+    LIBAVUTIL_DEPENDS)
+        LIBAVUTIL_DEPENDS=$(cat /var/lib/dpkg/info/libavutil*.shlibs | \
+          sed 's/^[^[:space:]]\+\?[[:space:]]\+\?[^[:space:]]\+\?[[:space:]]\+\?\(.*\)$/\1/')
+        printf "$LIBAVUTIL_DEPENDS"
+        ;;
+esac
+
+exit 0

@@ -1,0 +1,13 @@
+Index: chromium/src/chrome/browser/ui/gtk/gtk_util.cc
+===================================================================
+--- chromium.orig/src/chrome/browser/ui/gtk/gtk_util.cc	2014-04-11 01:43:18.260279264 +0000
++++ chromium/src/chrome/browser/ui/gtk/gtk_util.cc	2014-04-11 01:43:18.256279264 +0000
+@@ -56,7 +56,7 @@
+ #if defined(GOOGLE_CHROME_BUILD)
+ static const char* kIconName = "google-chrome";
+ #else
+-static const char* kIconName = "chromium-browser";
++static const char* kIconName = "chromium";
+ #endif
+ 
+ const char kBoldLabelMarkup[] = "<span weight='bold'>%s</span>";
