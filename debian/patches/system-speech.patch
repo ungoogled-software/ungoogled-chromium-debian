@@ -1,9 +1,8 @@
-Use system speex
-Index: chromium/src/build/linux/system.gyp
-===================================================================
---- chromium.orig/src/build/linux/system.gyp
-+++ chromium/src/build/linux/system.gyp
-@@ -585,6 +585,26 @@
+description: use system speex
+
+--- a/build/linux/system.gyp
++++ b/build/linux/system.gyp
+@@ -641,6 +641,26 @@
        ],
      },
      {
@@ -30,10 +29,8 @@ Index: chromium/src/build/linux/system.gyp
        'target_name': 'gnome_keyring',
        'type': 'none',
        'conditions': [
-Index: chromium/src/content/browser/speech/audio_encoder.cc
-===================================================================
---- chromium.orig/src/content/browser/speech/audio_encoder.cc
-+++ chromium/src/content/browser/speech/audio_encoder.cc
+--- a/content/browser/speech/audio_encoder.cc
++++ b/content/browser/speech/audio_encoder.cc
 @@ -11,7 +11,7 @@
  #include "base/strings/string_number_conversions.h"
  #include "content/browser/speech/audio_buffer.h"
@@ -43,12 +40,10 @@ Index: chromium/src/content/browser/speech/audio_encoder.cc
  
  namespace content {
  namespace {
-Index: chromium/src/content/content_browser.gypi
-===================================================================
---- chromium.orig/src/content/content_browser.gypi
-+++ chromium/src/content/content_browser.gypi
-@@ -1729,7 +1729,7 @@
-     }, {  # input_speech==1
+--- a/content/content_browser.gypi
++++ b/content/content_browser.gypi
+@@ -1750,7 +1750,7 @@
+     ['input_speech==1', {
        'dependencies': [
          '../third_party/flac/flac.gyp:libflac',
 -        '../third_party/speex/speex.gyp:libspeex',

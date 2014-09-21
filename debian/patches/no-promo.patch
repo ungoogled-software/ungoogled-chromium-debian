@@ -1,11 +1,10 @@
 author: Michael Gilbert <mgilbert@debian.org>
 description: disable the ad promo system by default
 bug-debian: http://bugs.debian.org/634101
-Index: chromium/src/chrome/browser/ui/app_list/app_list_service.cc
-===================================================================
---- chromium.orig/src/chrome/browser/ui/app_list/app_list_service.cc
-+++ chromium/src/chrome/browser/ui/app_list/app_list_service.cc
-@@ -103,7 +103,7 @@ void AppListService::RegisterPrefs(PrefR
+
+--- a/chrome/browser/ui/app_list/app_list_service.cc
++++ b/chrome/browser/ui/app_list/app_list_service.cc
+@@ -102,7 +102,7 @@ void AppListService::RegisterPrefs(PrefR
    // Identifies whether we should show the app launcher promo or not.
    // Note that a field trial also controls the showing, so the promo won't show
    // unless the pref is set AND the field trial is set to a proper group.

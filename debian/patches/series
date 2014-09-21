@@ -1,22 +1,10 @@
-#ffmpegfix.patch
 nspr.patch
-nss.patch
 expat.patch
 prefs.patch
-#ffmpeg_arm.patch
 system-speech.patch
-#glew.patch
 fix-manpage.patch
-#ffmpeg.patch
-#vpx.patch
-#protobuf.patch
-#javascript-i18n.patch
-#icu.patch
-#system_v8.patch
-icon.patch
 third-party-cookies-off-by-default.patch
 ps-print.patch
-window-placement.patch
 no-promo.patch
 chromedriver-revision.patch
 
@@ -24,5 +12,5 @@ linker-flags.patch
 no-sse2.patch
 
 make-support/gyp.patch
-make-support/mojo.patch
 make-support/opus.patch
+make-support/mojo.patch

@@ -1,10 +1,8 @@
 Description: Make default of third-party cookies the most secure for users.
 Author: Chad Miller <chad.miller@canonical.com>
 
-Index: sid/src/chrome/browser/content_settings/cookie_settings.cc
-===================================================================
---- sid.orig/src/chrome/browser/content_settings/cookie_settings.cc	2014-03-14 17:20:09.640905837 +0100
-+++ sid/src/chrome/browser/content_settings/cookie_settings.cc	2014-03-14 17:20:09.636905837 +0100
+--- a/chrome/browser/content_settings/cookie_settings.cc	2014-03-14 17:20:09.640905837 +0100
++++ b/chrome/browser/content_settings/cookie_settings.cc	2014-03-14 17:20:09.636905837 +0100
 @@ -70,7 +70,7 @@
      user_prefs::PrefRegistrySyncable* registry) {
    registry->RegisterBooleanPref(

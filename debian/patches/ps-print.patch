@@ -1,10 +1,9 @@
 description: add ps printing capability
 author: Salvatore Bonaccorso
-Index: sid/src/chrome/browser/printing/print_dialog_gtk.cc
-===================================================================
---- sid.orig/src/chrome/browser/printing/print_dialog_gtk.cc	2014-03-14 17:20:12.120905844 +0100
-+++ sid/src/chrome/browser/printing/print_dialog_gtk.cc	2014-03-14 17:20:12.116905844 +0100
-@@ -245,6 +245,7 @@
+
+--- a/chrome/browser/ui/libgtk2ui/print_dialog_gtk2.cc
++++ b/chrome/browser/ui/libgtk2ui/print_dialog_gtk2.cc
+@@ -336,6 +336,7 @@ void PrintDialogGtk2::ShowDialog(
    // Since we only generate PDF, only show printers that support PDF.
    // TODO(thestig) Add more capabilities to support?
    GtkPrintCapabilities cap = static_cast<GtkPrintCapabilities>(

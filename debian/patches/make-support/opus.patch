@@ -1,12 +1,16 @@
 description: # gets interpreted as a comment, leading to compile errors (not a documented gcc option anyway)
 
---- a/src/third_party/opus/opus.gyp
-+++ b/src/third_party/opus/opus.gyp
-@@ -54,7 +54,6 @@
+--- a/third_party/opus/opus.gyp
++++ b/third_party/opus/opus.gyp
+@@ -59,11 +59,9 @@
+           # Suppress a warning given by opus_decoder.c that tells us
+           # optimizations are turned off.
            'cflags': [
-             # Suppress a warning given by opus_decoder.c that tells us
-             # optimizations are turned off.
 -            '-Wno-#pragma-messages',
            ],
+           'xcode_settings': {
+             'WARNING_CFLAGS': [
+-              '-Wno-#pragma-messages',
+             ],
+           },
          }],
-         ['use_opus_fixed_point==0', {

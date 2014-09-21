@@ -1,5 +1,5 @@
---- a/src/chrome/browser/ui/webui/options/chromeos/system_settings_provider.h
-+++ b/src/chrome/browser/ui/webui/options/chromeos/system_settings_provider.h
+--- a/chrome/browser/ui/webui/options/chromeos/system_settings_provider.h
++++ b/chrome/browser/ui/webui/options/chromeos/system_settings_provider.h
 @@ -10,7 +10,7 @@
  #include "base/string16.h"
  #include "chrome/browser/chromeos/cros_settings_provider.h"
@@ -9,8 +9,8 @@
  
  class Value;
  class ListValue;
---- a/src/app/app_base.gypi
-+++ b/src/app/app_base.gypi
+--- a/app/app_base.gypi
++++ b/app/app_base.gypi
 @@ -17,8 +17,7 @@
          '../ui/ui.gyp:ui_gfx',
          '../net/net.gyp:net',
@@ -21,8 +21,8 @@
          '../third_party/libpng/libpng.gyp:libpng',
          '../third_party/sqlite/sqlite.gyp:sqlite',
          '../third_party/zlib/zlib.gyp:zlib',
---- a/src/app/app.gyp
-+++ b/src/app/app.gyp
+--- a/app/app.gyp
++++ b/app/app.gyp
 @@ -22,8 +22,7 @@
          '../skia/skia.gyp:skia',
          '../testing/gmock.gyp:gmock',
@@ -33,8 +33,8 @@
          '../third_party/libpng/libpng.gyp:libpng',
          '../third_party/zlib/zlib.gyp:zlib',
          '../ui/ui.gyp:ui_base',
---- a/src/base/base.gyp
-+++ b/src/base/base.gyp
+--- a/base/base.gyp
++++ b/base/base.gyp
 @@ -16,8 +16,7 @@
        'msvs_guid': '968F3222-9798-4D21-BE08-15ECB5EF2994',
        'dependencies': [
@@ -55,8 +55,8 @@
        ],
        'conditions': [
          ['toolkit_uses_gtk==1', {
---- a/src/build/all.gyp
-+++ b/src/build/all.gyp
+--- a/build/all.gyp
++++ b/build/all.gyp
 @@ -34,7 +34,6 @@
          '../third_party/codesighs/codesighs.gyp:*',
          '../third_party/ffmpeg/ffmpeg.gyp:*',
@@ -65,8 +65,8 @@
          '../third_party/libpng/libpng.gyp:*',
          '../third_party/libwebp/libwebp.gyp:*',
          '../third_party/libxml/libxml.gyp:*',
---- a/src/build/linux/system.gyp
-+++ b/src/build/linux/system.gyp
+--- a/build/linux/system.gyp
++++ b/build/linux/system.gyp
 @@ -360,6 +360,26 @@
        }]]
      },
@@ -94,8 +94,8 @@
        'target_name': 'gnome-keyring',
        'type': 'settings',
        'conditions': [
---- a/src/build/temp_gyp/googleurl.gyp
-+++ b/src/build/temp_gyp/googleurl.gyp
+--- a/build/temp_gyp/googleurl.gyp
++++ b/build/temp_gyp/googleurl.gyp
 @@ -14,9 +14,7 @@
        'msvs_guid': 'EF5E94AB-B646-4E5B-A058-52EF07B8351C',
        'dependencies': [
@@ -116,8 +116,8 @@
        ],
        'sources': [
          '../../googleurl/src/gurl_unittest.cc',
---- a/src/chrome/chrome_browser.gypi
-+++ b/src/chrome/chrome_browser.gypi
+--- a/chrome/chrome_browser.gypi
++++ b/chrome/chrome_browser.gypi
 @@ -39,8 +39,7 @@
          '../third_party/bzip2/bzip2.gyp:bzip2',
          '../third_party/expat/expat.gyp:expat',
@@ -128,8 +128,8 @@
          '../third_party/libjingle/libjingle.gyp:libjingle',
          '../third_party/libphonenumber/libphonenumber.gyp:libphonenumber',
          '../third_party/libphonenumber/libphonenumber.gyp:phonenumber_proto',
---- a/src/chrome/chrome_common.gypi
-+++ b/src/chrome/chrome_common.gypi
+--- a/chrome/chrome_common.gypi
++++ b/chrome/chrome_common.gypi
 @@ -124,8 +124,7 @@
          '../printing/printing.gyp:printing',
          '../skia/skia.gyp:skia',
@@ -150,8 +150,8 @@
        ],
        'conditions': [
          ['os_posix == 1 and OS != "mac"', {
---- a/src/chrome/chrome.gyp
-+++ b/src/chrome/chrome.gyp
+--- a/chrome/chrome.gyp
++++ b/chrome/chrome.gyp
 @@ -427,8 +427,7 @@
          'theme_resources',
          'theme_resources_standard',
@@ -180,8 +180,8 @@
              '../third_party/libpng/libpng.gyp:*',
              '../third_party/libwebp/libwebp.gyp:*',
              '../third_party/libxslt/libxslt.gyp:*',
---- a/src/chrome/chrome_renderer.gypi
-+++ b/src/chrome/chrome_renderer.gypi
+--- a/chrome/chrome_renderer.gypi
++++ b/chrome/chrome_renderer.gypi
 @@ -21,8 +21,7 @@
          '../skia/skia.gyp:skia',
          '../third_party/cld/cld.gyp:cld',
@@ -192,8 +192,8 @@
          '../third_party/npapi/npapi.gyp:npapi',
          '../third_party/WebKit/Source/WebKit/chromium/WebKit.gyp:webkit',
          '../ui/gfx/surface/surface.gyp:surface',
---- a/src/chrome/chrome_tests.gypi
-+++ b/src/chrome/chrome_tests.gypi
+--- a/chrome/chrome_tests.gypi
++++ b/chrome/chrome_tests.gypi
 @@ -437,7 +437,7 @@
          '../net/net.gyp:net_resources',
          '../net/net.gyp:net_test_support',
@@ -283,8 +283,8 @@
          # Runtime dependencies
          '../third_party/mesa/mesa.gyp:osmesa',
        ],
---- a/src/chrome/default_plugin/default_plugin.gyp
-+++ b/src/chrome/default_plugin/default_plugin.gyp
+--- a/chrome/default_plugin/default_plugin.gyp
++++ b/chrome/default_plugin/default_plugin.gyp
 @@ -14,8 +14,7 @@
          ':default_plugin_resources',
          '<(DEPTH)/base/base.gyp:base',
@@ -295,8 +295,8 @@
          '<(DEPTH)/third_party/libxml/libxml.gyp:libxml',
          '<(DEPTH)/third_party/npapi/npapi.gyp:npapi',
          '<(DEPTH)/webkit/support/webkit_support.gyp:webkit_resources',
---- a/src/chrome_frame/chrome_frame.gyp
-+++ b/src/chrome_frame/chrome_frame.gyp
+--- a/chrome_frame/chrome_frame.gyp
++++ b/chrome_frame/chrome_frame.gyp
 @@ -392,8 +392,7 @@
          '../net/net.gyp:net_test_support',
          '../skia/skia.gyp:skia',
@@ -307,8 +307,8 @@
          'chrome_frame_npapi',
          'chrome_frame_ie',
          'chrome_tab_idl',
---- a/src/content/content_common.gypi
-+++ b/src/content/content_common.gypi
+--- a/content/content_common.gypi
++++ b/content/content_common.gypi
 @@ -11,7 +11,7 @@
          '../base/base.gyp:base',
          '../ipc/ipc.gyp:ipc',
@@ -318,8 +318,8 @@
          '../third_party/npapi/npapi.gyp:npapi',
          '../third_party/WebKit/Source/WebKit/chromium/WebKit.gyp:webkit',
          '../ui/gfx/gl/gl.gyp:gl',
---- a/src/content/content_renderer.gypi
-+++ b/src/content/content_renderer.gypi
+--- a/content/content_renderer.gypi
++++ b/content/content_renderer.gypi
 @@ -14,8 +14,7 @@
          '../ppapi/ppapi_internal.gyp:ppapi_proxy',
          '../skia/skia.gyp:skia',
@@ -330,8 +330,8 @@
          '../third_party/libjingle/libjingle.gyp:libjingle',
          '../third_party/libjingle/libjingle.gyp:libjingle_p2p',
          '../third_party/npapi/npapi.gyp:npapi',
---- a/src/net/net.gyp
-+++ b/src/net/net.gyp
+--- a/net/net.gyp
++++ b/net/net.gyp
 @@ -17,8 +17,7 @@
          '../build/temp_gyp/googleurl.gyp:googleurl',
          '../crypto/crypto.gyp:crypto',
@@ -361,8 +361,8 @@
              ],
            },
          ],
---- a/src/printing/printing.gyp
-+++ b/src/printing/printing.gyp
+--- a/printing/printing.gyp
++++ b/printing/printing.gyp
 @@ -16,8 +16,7 @@
          '../base/base.gyp:base_i18n',
          '../build/temp_gyp/googleurl.gyp:googleurl',
@@ -373,8 +373,8 @@
        ],
        'msvs_guid': '9E5416B9-B91B-4029-93F4-102C1AD5CAF4',
        'include_dirs': [
---- a/src/skia/skia.gyp
-+++ b/src/skia/skia.gyp
+--- a/skia/skia.gyp
++++ b/skia/skia.gyp
 @@ -766,7 +766,7 @@
              '../build/linux/system.gyp:fontconfig',
              '../build/linux/system.gyp:freetype2',
@@ -384,8 +384,8 @@
            ],
            'cflags': [
              '-Wno-unused',
---- a/src/third_party/cld/cld.gyp
-+++ b/src/third_party/cld/cld.gyp
+--- a/third_party/cld/cld.gyp
++++ b/third_party/cld/cld.gyp
 @@ -8,7 +8,7 @@
        'target_name': 'cld',
        'type': 'static_library',
@@ -395,8 +395,8 @@
        ],
        'include_dirs': [
          '.',
---- a/src/third_party/harfbuzz-ng/harfbuzz.gyp
-+++ b/src/third_party/harfbuzz-ng/harfbuzz.gyp
+--- a/third_party/harfbuzz-ng/harfbuzz.gyp
++++ b/third_party/harfbuzz-ng/harfbuzz.gyp
 @@ -60,7 +60,7 @@
        },
        'dependencies': [
@@ -406,8 +406,8 @@
        ],
      },
    ],
---- a/src/third_party/hunspell/hunspell.gyp
-+++ b/src/third_party/hunspell/hunspell.gyp
+--- a/third_party/hunspell/hunspell.gyp
++++ b/third_party/hunspell/hunspell.gyp
 @@ -10,7 +10,7 @@
        'msvs_guid': 'D5E8DCB2-9C61-446F-8BEE-B18CA0E0936E',
        'dependencies': [
@@ -417,8 +417,8 @@
        ],
        'defines': [
          'HUNSPELL_STATIC',
---- a/src/third_party/libxml/libxml.gyp
-+++ b/src/third_party/libxml/libxml.gyp
+--- a/third_party/libxml/libxml.gyp
++++ b/third_party/libxml/libxml.gyp
 @@ -163,11 +163,11 @@
              'src/include',
            ],
@@ -433,8 +433,8 @@
            ],
            'direct_dependent_settings': {
              'defines': [
---- a/src/third_party/sqlite/sqlite.gyp
-+++ b/src/third_party/sqlite/sqlite.gyp
+--- a/third_party/sqlite/sqlite.gyp
++++ b/third_party/sqlite/sqlite.gyp
 @@ -97,8 +97,7 @@
              'src/src',
            ],
@@ -454,8 +454,8 @@
              'sqlite',
            ],
            'sources': [
---- a/src/third_party/WebKit/Source/JavaScriptCore/JavaScriptCore.gyp/JavaScriptCore.gyp
-+++ b/src/third_party/WebKit/Source/JavaScriptCore/JavaScriptCore.gyp/JavaScriptCore.gyp
+--- a/third_party/WebKit/Source/JavaScriptCore/JavaScriptCore.gyp/JavaScriptCore.gyp
++++ b/third_party/WebKit/Source/JavaScriptCore/JavaScriptCore.gyp/JavaScriptCore.gyp
 @@ -97,8 +97,7 @@
        'msvs_guid': 'AA8A5A85-592B-4357-BC60-E0E91E026AF6',
        'dependencies': [
@@ -476,8 +476,8 @@
        ],
        'msvs_disabled_warnings': [4127, 4355, 4510, 4512, 4610, 4706],
        'conditions': [
---- a/src/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp
-+++ b/src/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp
+--- a/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp
++++ b/third_party/WebKit/Source/WebKit/chromium/WebKit.gyp
 @@ -607,7 +607,7 @@
                                  '<(chromium_src_dir)/build/temp_gyp/googleurl.gyp:googleurl',
                                  '<(chromium_src_dir)/testing/gtest.gyp:gtest',
@@ -496,8 +496,8 @@
                  '<(chromium_src_dir)/third_party/mesa/mesa.gyp:osmesa',
                  '<(chromium_src_dir)/webkit/support/webkit_support.gyp:blob',
                  '<(chromium_src_dir)/webkit/support/webkit_support.gyp:webkit_support',
---- a/src/ui/ui_base.gypi
-+++ b/src/ui/ui_base.gypi
+--- a/ui/ui_base.gypi
++++ b/ui/ui_base.gypi
 @@ -10,14 +10,12 @@
        'dependencies': [
          '../base/base.gyp:base',
@@ -515,8 +515,8 @@
        ],
        'sources': [
          'base/accessibility/accessibility_types.h',
---- a/src/ui/ui_gfx.gypi
-+++ b/src/ui/ui_gfx.gypi
+--- a/ui/ui_gfx.gypi
++++ b/ui/ui_gfx.gypi
 @@ -44,8 +44,7 @@
          '../base/base.gyp:base',
          '../base/base.gyp:base_i18n',
@@ -527,8 +527,8 @@
          '../third_party/libpng/libpng.gyp:libpng',
          '../third_party/zlib/zlib.gyp:zlib',
          'gfx_resources',
---- a/src/views/views.gyp
-+++ b/src/views/views.gyp
+--- a/views/views.gyp
++++ b/views/views.gyp
 @@ -66,8 +66,7 @@
          '../app/app.gyp:app_resources',
          '../base/base.gyp:base',
@@ -569,8 +569,8 @@
          'views',
        ],
        'include_dirs': [
---- a/src/webkit/glue/webkit_glue.gypi
-+++ b/src/webkit/glue/webkit_glue.gypi
+--- a/webkit/glue/webkit_glue.gypi
++++ b/webkit/glue/webkit_glue.gypi
 @@ -118,8 +118,7 @@
          '<(DEPTH)/ppapi/ppapi_internal.gyp:ppapi_shared',
          '<(DEPTH)/printing/printing.gyp:printing',
@@ -581,8 +581,8 @@
          '<(DEPTH)/third_party/npapi/npapi.gyp:npapi',
          'webkit_resources',
          'webkit_strings',
---- a/src/webkit/tools/test_shell/test_shell.gypi
-+++ b/src/webkit/tools/test_shell/test_shell.gypi
+--- a/webkit/tools/test_shell/test_shell.gypi
++++ b/webkit/tools/test_shell/test_shell.gypi
 @@ -559,7 +559,7 @@
            'mac_bundle': 1,
            'msvs_guid': '0D04AEC1-6B68-492C-BCCF-808DFD69ABC6',
@@ -592,8 +592,8 @@
              'npapi_test_common',
            ],
            'sources': [
---- a/src/chrome/chrome_installer_util.gypi
-+++ b/src/chrome/chrome_installer_util.gypi
+--- a/chrome/chrome_installer_util.gypi
++++ b/chrome/chrome_installer_util.gypi
 @@ -103,8 +103,7 @@
              '<(DEPTH)/base/third_party/dynamic_annotations/dynamic_annotations.gyp:dynamic_annotations',
              '<(DEPTH)/courgette/courgette.gyp:courgette_lib',
@@ -604,8 +604,8 @@
              '<(DEPTH)/third_party/lzma_sdk/lzma_sdk.gyp:lzma_sdk',
            ],
            'sources': [
---- a/src/ppapi/ppapi_shared.gypi
-+++ b/src/ppapi/ppapi_shared.gypi
+--- a/ppapi/ppapi_shared.gypi
++++ b/ppapi/ppapi_shared.gypi
 @@ -13,7 +13,7 @@
          '../base/third_party/dynamic_annotations/dynamic_annotations.gyp:dynamic_annotations',
          '../build/temp_gyp/googleurl.gyp:googleurl',
@@ -615,8 +615,8 @@
          '../ui/gfx/surface/surface.gyp:surface',
        ],
        'include_dirs': [
---- a/src/third_party/libphonenumber/libphonenumber.gyp
-+++ b/src/third_party/libphonenumber/libphonenumber.gyp
+--- a/third_party/libphonenumber/libphonenumber.gyp
++++ b/third_party/libphonenumber/libphonenumber.gyp
 @@ -32,8 +32,7 @@
      'target_name': 'libphonenumber',
      'type': 'static_library',
@@ -637,8 +637,8 @@
        '../protobuf/protobuf.gyp:protobuf_lite',
        '../../base/base.gyp:base',
        '../../base/base.gyp:test_support_base',
---- a/src/v8/src/extensions/experimental/experimental.gyp
-+++ b/src/v8/src/extensions/experimental/experimental.gyp
+--- a/v8/src/extensions/experimental/experimental.gyp
++++ b/v8/src/extensions/experimental/experimental.gyp
 @@ -56,7 +56,7 @@
          '../..',
        ],

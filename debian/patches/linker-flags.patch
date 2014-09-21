@@ -1,8 +1,8 @@
 description: flags to avoid memory exhaustion while linking on i386
 
---- a/src/build/common.gypi
-+++ a/src/build/common.gypi
-@@ -3153,6 +3153,8 @@
+--- a/build/common.gypi
++++ b/build/common.gypi
+@@ -3287,6 +3287,8 @@
          'ldflags': [
            '-Wl,-z,now',
            '-Wl,-z,relro',

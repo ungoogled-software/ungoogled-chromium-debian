@@ -9,7 +9,6 @@ debian/tmp/usr/lib/chromium/content_resources.pak
 debian/tmp/usr/lib/chromium/locales/*
 debian/tmp/usr/lib/chromium/remoting_locales
 debian/tmp/usr/lib/chromium/lib*
-debian/tmp/usr/lib/chromium/mksnapshot.*
 debian/tmp/usr/lib/chromium/pseudo_locales/fake-bidi.pak
 debian/tmp/usr/lib/chromium/icudtl.dat
 

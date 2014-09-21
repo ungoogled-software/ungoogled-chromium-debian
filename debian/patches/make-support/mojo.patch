@@ -1,8 +1,17 @@
 description: manually strip out mojo since use_mojo=0 by itself isn't enough
 
---- a/src/build/all.gyp
-+++ b/src/build/all.gyp
-@@ -79,7 +79,6 @@
+--- a/build/all.gyp
++++ b/build/all.gyp
+@@ -46,8 +46,6 @@
+         ['OS=="android"', {
+           'dependencies': [
+             '../content/content_shell_and_tests.gyp:content_shell_apk',
+-            '../mojo/mojo.gyp:mojo_shell_apk',
+-            '../mojo/mojo.gyp:mojo_test_apk',
+             '<@(android_app_targets)',
+             'android_builder_tests',
+             '../android_webview/android_webview.gyp:android_webview_apk',
+@@ -81,7 +79,6 @@
              '../jingle/jingle.gyp:*',
              '../media/cast/cast.gyp:*',
              '../media/media.gyp:*',
@@ -10,7 +19,7 @@ description: manually strip out mojo since use_mojo=0 by itself isn't enough
              '../ppapi/ppapi.gyp:*',
              '../ppapi/ppapi_internal.gyp:*',
              '../ppapi/tools/ppapi_tools.gyp:*',
-@@ -283,7 +282,6 @@
+@@ -281,7 +278,6 @@
              '../jingle/jingle.gyp:jingle_unittests',
              '../media/cast/cast.gyp:cast_unittests',
              '../media/media.gyp:media_unittests',
@@ -18,47 +27,11 @@ description: manually strip out mojo since use_mojo=0 by itself isn't enough
              '../ppapi/ppapi_internal.gyp:ppapi_unittests',
              '../remoting/remoting.gyp:remoting_unittests',
              '../third_party/WebKit/public/all.gyp:all_blink',
---- a/src/content/content.gyp
-+++ b/src/content/content.gyp
-@@ -22,11 +22,6 @@
-     ],
-   },
-   'conditions': [
--    ['use_mojo==1', {
--      'includes': [
--        'content_common_mojo_bindings.gypi',
--      ],
--    }],
-     ['OS != "ios"', {
-       'includes': [
-         '../build/win_precompile.gypi',
---- a/src/content/content_tests.gypi
-+++ b/src/content/content_tests.gypi
-@@ -923,27 +923,6 @@
-           ],
-         },
-         {
--          'target_name': 'web_ui_test_mojo_bindings',
--          'type': 'static_library',
--          'dependencies': [
--            '../mojo/mojo.gyp:mojo_bindings',
--            '../mojo/mojo.gyp:mojo_system',
--          ],
--          'sources': [
--            'test/data/web_ui_test_mojo_bindings.mojom',
--          ],
--          # TODO(sky): this shouldn't be necessary. It's working around a bug in
--          # gyp.
--          'variables': {
--            'mojom_base_output_dir': 'content',
--          },
--          'includes': [ '../mojo/public/bindings/mojom_bindings_generator.gypi' ],
--          'export_dependent_settings': [
--            '../mojo/mojo.gyp:mojo_bindings',
--            '../mojo/mojo.gyp:mojo_system',
--          ],
--        },
--        {
-           'target_name': 'content_browsertests',
-           'type': '<(gtest_target_type)',
-           'dependencies': [
+@@ -1044,7 +1040,6 @@
+             '../ipc/ipc.gyp:ipc_tests',
+             '../jingle/jingle.gyp:jingle_unittests',
+             '../media/media.gyp:media_unittests',
+-            '../mojo/mojo.gyp:mojo',
+             '../net/net.gyp:net_unittests',
+             '../google_apis/gcm/gcm.gyp:gcm_unit_tests',
+             '../gpu/gpu.gyp:gpu_unittests',

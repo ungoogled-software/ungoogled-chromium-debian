@@ -7,4 +7,6 @@ if dpkg-maintscript-helper supports mv_conffile 2>/dev/null; then
 	dpkg-maintscript-helper mv_conffile /etc/chromium-browser/master_preferences /etc/chromium/master_preferences 10.0.648.82~r75062-0 -- "$@"
 fi
 
+rm -f /etc/chromium/default /etc/chromium/initial_bookmarks.html /etc/chromium/master_preferences
+
 #DEBHELPER#

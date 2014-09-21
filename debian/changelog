@@ -1,3 +1,43 @@
+chromium-browser (37.0.2062.120-1) unstable; urgency=medium
+
+  * New upstream stable release (closes: #761090):
+    - CVE-2014-3160: Same-Origin-Policy bypass in SVG. Credit to Christian
+      Schneider.
+    - CVE-2014-3162: Various fixes from internal audits, fuzzing and other
+      initiatives.
+    - CVE-2014-3165: Use-after-free in web sockets. Credit to Collin Payne.
+    - CVE-2014-3166: Information disclosure in SPDY. Credit to Antoine
+      Delignat-Lavaud.
+    - CVE-2014-3167: Various fixes from internal audits, fuzzing and other
+      initiatives.
+    - CVE-2014-3168: Use-after-free in SVG. Credit to cloudfuzzer.
+    - CVE-2014-3169: Use-after-free in DOM. Credit to Andrzej Dyjak.
+    - CVE-2014-3170: Extension permission dialog spoofing. Credit to Rob Wu.
+    - CVE-2014-3171: Use-after-free in bindings. Credit to cloudfuzzer.
+    - CVE-2014-3172: Issue related to extension debugging. Credit to Eli Grey.
+    - CVE-2014-3173: Uninitialized memory read in WebGL. Credit to jmuizelaar.
+    - CVE-2014-3174: Uninitialized memory read in Web Audio. Credit to Atte
+      Kettunen from OUSPG.
+    - CVE-2014-3175: Various fixes from internal audits, fuzzing and other
+      initiatives.
+    - CVE-2014-3176: A special reward to lokihardt@asrt for a combination of
+      bugs in V8, IPC, sync, and extensions that can lead to remote code
+      execution outside of the sandbox.
+    - CVE-2014-3177: A special reward to lokihardt@asrt for a combination of
+      bugs in V8, IPC, sync, and extensions that can lead to remote code
+      execution outside of the sandbox.
+    - CVE-2014-3178: Use-after-free in rendering. Credit to miaubiz.
+    - CVE-2014-3179: Various fixes from internal audits, fuzzing and other
+      initiatives.
+    - Fixes segfault in angle with gcc 4.9 (closes: #751652).
+    - Includes an embedded pdf viewer (closes: #667591).
+  * Use pristine upstream that doesn't have pre-built nacl (closes: #753761).
+  * Correct webbrowser spelling in the desktop file (closes: #758143).
+  * Remove leftover conffiles (closes: #751848).
+  * Build using gcc 4.9 (closes: #754182).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Wed, 13 Aug 2014 22:56:16 +0000
+
 chromium-browser (35.0.1916.153-2) unstable; urgency=medium
 
   * Avoid gcc 4.9 (closes: #751294)
