@@ -1,8 +1,8 @@
-Index: chromium/content/content_browser.gypi
+Index: sid/content/content_browser.gypi
 ===================================================================
---- chromium.orig/content/content_browser.gypi
-+++ chromium/content/content_browser.gypi
-@@ -1706,7 +1706,6 @@
+--- sid.orig/content/content_browser.gypi
++++ sid/content/content_browser.gypi
+@@ -1747,7 +1747,6 @@
      }],
      ['input_speech==1', {
        'dependencies': [
@@ -10,10 +10,10 @@ Index: chromium/content/content_browser.gypi
          '../third_party/speex/speex.gyp:libspeex',
        ],
      }],
-Index: chromium/content/browser/speech/audio_encoder.cc
+Index: sid/content/browser/speech/audio_encoder.cc
 ===================================================================
---- chromium.orig/content/browser/speech/audio_encoder.cc
-+++ chromium/content/browser/speech/audio_encoder.cc
+--- sid.orig/content/browser/speech/audio_encoder.cc
++++ sid/content/browser/speech/audio_encoder.cc
 @@ -10,96 +10,11 @@
  #include "base/stl_util.h"
  #include "base/strings/string_number_conversions.h"
@@ -120,10 +120,10 @@ Index: chromium/content/browser/speech/audio_encoder.cc
    return new SpeexEncoder(sampling_rate, bits_per_sample);
  }
  
-Index: chromium/content/browser/speech/audio_encoder.h
+Index: sid/content/browser/speech/audio_encoder.h
 ===================================================================
---- chromium.orig/content/browser/speech/audio_encoder.h
-+++ chromium/content/browser/speech/audio_encoder.h
+--- sid.orig/content/browser/speech/audio_encoder.h
++++ sid/content/browser/speech/audio_encoder.h
 @@ -20,7 +20,6 @@ class AudioChunk;
  class AudioEncoder {
   public:
@@ -132,10 +132,10 @@ Index: chromium/content/browser/speech/audio_encoder.h
      CODEC_SPEEX,
    };
  
-Index: chromium/content/browser/speech/google_one_shot_remote_engine.cc
+Index: sid/content/browser/speech/google_one_shot_remote_engine.cc
 ===================================================================
---- chromium.orig/content/browser/speech/google_one_shot_remote_engine.cc
-+++ chromium/content/browser/speech/google_one_shot_remote_engine.cc
+--- sid.orig/content/browser/speech/google_one_shot_remote_engine.cc
++++ sid/content/browser/speech/google_one_shot_remote_engine.cc
 @@ -34,7 +34,7 @@ const char* const kConfidenceString = "c
  const int kWebServiceStatusNoError = 0;
  const int kWebServiceStatusNoSpeech = 4;
@@ -145,11 +145,11 @@ Index: chromium/content/browser/speech/google_one_shot_remote_engine.cc
  
  bool ParseServerResponse(const std::string& response_body,
                           SpeechRecognitionResult* result,
-Index: chromium/content/browser/speech/google_streaming_remote_engine.cc
+Index: sid/content/browser/speech/google_streaming_remote_engine.cc
 ===================================================================
---- chromium.orig/content/browser/speech/google_streaming_remote_engine.cc
-+++ chromium/content/browser/speech/google_streaming_remote_engine.cc
-@@ -35,7 +35,7 @@ const char kWebServiceBaseUrl[] =
+--- sid.orig/content/browser/speech/google_streaming_remote_engine.cc
++++ sid/content/browser/speech/google_streaming_remote_engine.cc
+@@ -34,7 +34,7 @@ const char kWebServiceBaseUrl[] =
      "https://www.google.com/speech-api/full-duplex/v1";
  const char kDownstreamUrl[] = "/down?";
  const char kUpstreamUrl[] = "/up?";

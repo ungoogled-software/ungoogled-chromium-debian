@@ -1,7 +1,9 @@
 description: avoid intended comments that are actually manpage errors
 
---- a/chrome/app/resources/manpage.1.in
-+++ b/chrome/app/resources/manpage.1.in
+Index: sid/chrome/app/resources/manpage.1.in
+===================================================================
+--- sid.orig/chrome/app/resources/manpage.1.in
++++ sid/chrome/app/resources/manpage.1.in
 @@ -1,5 +1,3 @@
 -." This file is processed by chrome.gyp to generate manpages in the
 -." build diretory.

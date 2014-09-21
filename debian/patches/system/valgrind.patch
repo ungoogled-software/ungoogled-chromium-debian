@@ -1,7 +1,9 @@
 description: use system valgrind headers
 
---- a/base/third_party/dynamic_annotations/dynamic_annotations.c
-+++ b/base/third_party/dynamic_annotations/dynamic_annotations.c
+Index: sid/base/third_party/dynamic_annotations/dynamic_annotations.c
+===================================================================
+--- sid.orig/base/third_party/dynamic_annotations/dynamic_annotations.c
++++ sid/base/third_party/dynamic_annotations/dynamic_annotations.c
 @@ -39,7 +39,7 @@
  
  #ifdef __GNUC__
@@ -11,8 +13,10 @@ description: use system valgrind headers
  #endif
  
  /* Compiler-based ThreadSanitizer defines
---- a/base/tracked_objects.cc
-+++ b/base/tracked_objects.cc
+Index: sid/base/tracked_objects.cc
+===================================================================
+--- sid.orig/base/tracked_objects.cc
++++ sid/base/tracked_objects.cc
 @@ -16,9 +16,10 @@
  #include "base/process/process_handle.h"
  #include "base/profiler/alternate_timer.h"
@@ -25,8 +29,10 @@ description: use system valgrind headers
  using base::TimeDelta;
  
  namespace base {
---- a/sandbox/linux/services/credentials.cc
-+++ b/sandbox/linux/services/credentials.cc
+Index: sid/sandbox/linux/services/credentials.cc
+===================================================================
+--- sid.orig/sandbox/linux/services/credentials.cc
++++ sid/sandbox/linux/services/credentials.cc
 @@ -22,9 +22,10 @@
  #include "base/posix/eintr_wrapper.h"
  #include "base/strings/string_number_conversions.h"
@@ -39,8 +45,10 @@ description: use system valgrind headers
  namespace {
  
  bool IsRunningOnValgrind() { return RUNNING_ON_VALGRIND; }
---- a/sandbox/linux/services/broker_process.cc
-+++ b/sandbox/linux/services/broker_process.cc
+Index: sid/sandbox/linux/services/broker_process.cc
+===================================================================
+--- sid.orig/sandbox/linux/services/broker_process.cc
++++ sid/sandbox/linux/services/broker_process.cc
 @@ -27,10 +27,11 @@
  #include "base/posix/eintr_wrapper.h"
  #include "base/posix/unix_domain_socket_linux.h"
@@ -54,8 +62,10 @@ description: use system valgrind headers
  #if defined(OS_ANDROID) && !defined(MSG_CMSG_CLOEXEC)
  #define MSG_CMSG_CLOEXEC 0x40000000
  #endif
---- a/net/spdy/spdy_framer.cc
-+++ b/net/spdy/spdy_framer.cc
+Index: sid/net/spdy/spdy_framer.cc
+===================================================================
+--- sid.orig/net/spdy/spdy_framer.cc
++++ sid/net/spdy/spdy_framer.cc
 @@ -7,12 +7,13 @@
  #include "base/lazy_instance.h"
  #include "base/memory/scoped_ptr.h"
@@ -68,20 +78,22 @@ description: use system valgrind headers
  
 +#include <valgrind/memcheck.h>
 +
+ using base::StringPiece;
  using std::string;
  using std::vector;
- 
---- a/v8/src/ia32/cpu-ia32.cc
-+++ b/v8/src/ia32/cpu-ia32.cc
+Index: sid/v8/src/ia32/cpu-ia32.cc
+===================================================================
+--- sid.orig/v8/src/ia32/cpu-ia32.cc
++++ sid/v8/src/ia32/cpu-ia32.cc
 @@ -5,7 +5,7 @@
  // CPU specific code for ia32 independent of OS goes here.
  
  #ifdef __GNUC__
--#include "third_party/valgrind/valgrind.h"
+-#include "src/third_party/valgrind/valgrind.h"
 +#include <valgrind/valgrind.h>
  #endif
  
- #include "v8.h"
+ #include "src/v8.h"
 @@ -34,7 +34,8 @@ void CPU::FlushICache(void* start, size_
    // solution is to run valgrind with --smc-check=all, but this comes at a big
    // performance cost.  We can notify valgrind to invalidate its cache.
@@ -92,17 +104,19 @@ description: use system valgrind headers
    USE(res);
  #endif
  }
---- a/v8/src/x64/cpu-x64.cc
-+++ b/v8/src/x64/cpu-x64.cc
+Index: sid/v8/src/x64/cpu-x64.cc
+===================================================================
+--- sid.orig/v8/src/x64/cpu-x64.cc
++++ sid/v8/src/x64/cpu-x64.cc
 @@ -5,7 +5,7 @@
  // CPU specific code for x64 independent of OS goes here.
  
  #if defined(__GNUC__) && !defined(__MINGW64__)
--#include "third_party/valgrind/valgrind.h"
+-#include "src/third_party/valgrind/valgrind.h"
 +#include <valgrind/valgrind.h>
  #endif
  
- #include "v8.h"
+ #include "src/v8.h"
 @@ -34,7 +34,8 @@ void CPU::FlushICache(void* start, size_
    // solution is to run valgrind with --smc-check=all, but this comes at a big
    // performance cost.  We can notify valgrind to invalidate its cache.
@@ -113,10 +127,12 @@ description: use system valgrind headers
    USE(res);
  #endif
  }
---- a/sandbox/linux/tests/unit_tests.cc
-+++ b/sandbox/linux/tests/unit_tests.cc
-@@ -13,10 +13,11 @@
- 
+Index: sid/sandbox/linux/tests/unit_tests.cc
+===================================================================
+--- sid.orig/sandbox/linux/tests/unit_tests.cc
++++ sid/sandbox/linux/tests/unit_tests.cc
+@@ -14,10 +14,11 @@
+ #include "base/debug/leak_annotations.h"
  #include "base/file_util.h"
  #include "base/posix/eintr_wrapper.h"
 -#include "base/third_party/valgrind/valgrind.h"
