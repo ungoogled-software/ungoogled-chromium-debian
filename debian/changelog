@@ -1,3 +1,10 @@
+chromium-browser (37.0.2062.120-2) unstable; urgency=medium
+
+  * Build with clang instead of gcc.
+  * Add libexif-dev build dependency.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 21 Sep 2014 22:57:11 +0000
+
 chromium-browser (37.0.2062.120-1) unstable; urgency=medium
 
   * New upstream stable release (closes: #761090):

@@ -14,3 +14,4 @@ no-sse2.patch
 make-support/gyp.patch
 make-support/opus.patch
 make-support/mojo.patch
+clang.patch

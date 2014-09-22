@@ -29,8 +29,9 @@ WANT_TESTS       ?= 0
 WANT_SANDBOXING  ?= 1
 USE_SYSTEM_V8    ?= 0
 
-# enable build hardening options (pie disabled due to ffmpeg linking issue)
-export DEB_BUILD_MAINT_OPTIONS = hardening=+all,-pie
+# enable build hardening options (pie disabled due to ffmpeg linking issue,
+# stackprotectorstrong disabled since its not supported by clang 3.4)
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all,-pie,-stackprotectorstrong
 DPKG_EXPORT_BUILDFLAGS = 1
 include /usr/share/dpkg/buildflags.mk
 
@@ -55,6 +56,10 @@ endif
 GYP_DEFINES += google_api_key='AIzaSyCkfPOPZXDKNn8hhgu3JrA62wIgC93d44k'
 GYP_DEFINES += google_default_client_id='811574891467.apps.googleusercontent.com'
 GYP_DEFINES += google_default_client_secret='kdloedMFGdGla2P1zacGjAQh'
+
+# Use clang instead of gcc.
+GYP_DEFINES += clang=1
+GYP_DEFINES += clang_use_chrome_plugins=0
 
 # Enable all codecs for HTML5 in chromium, depending on which ffmpeg sumo lib
 # is installed, the set of usable codecs (at runtime) will still vary
