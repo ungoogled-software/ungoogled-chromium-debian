@@ -3,7 +3,6 @@
 export DH_VERBOSE = 1
 
 DEBIAN_NAME		:= chromium
-SOURCE_NAME		:= chromium-browser
 DEBIAN_VERSION		:= $(shell dpkg-parsechangelog | sed -n 's/^Version: *\(.*\)$$/\1/ p')
 DEBIAN_REVISION		:= $(shell echo $(DEBIAN_VERSION) | sed 's/^.*r\([^-]*\)-.*/\1/')
 DEBIAN_DIST		:= $(shell lsb_release -ds | tr -d '()')
@@ -29,9 +28,8 @@ WANT_TESTS       ?= 0
 WANT_SANDBOXING  ?= 1
 USE_SYSTEM_V8    ?= 0
 
-# enable build hardening options (pie disabled due to ffmpeg linking issue,
-# stackprotectorstrong disabled since its not supported by clang 3.4)
-export DEB_BUILD_MAINT_OPTIONS = hardening=+all,-pie,-stackprotectorstrong
+# enable build hardening options (pie disabled due to ffmpeg linking issue)
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all,-pie
 DPKG_EXPORT_BUILDFLAGS = 1
 include /usr/share/dpkg/buildflags.mk
 
@@ -72,6 +70,9 @@ GYP_DEFINES += use_gnome_keyring=1 linux_link_gnome_keyring=1
 # and GIO, which contains GSettings (the new GNOME config system)
 GYP_DEFINES += use_gconf=1 use_gio=1
 
+# enable HiDPI support
+GYP_DEFINES += enable_hidpi=1
+
 # disable native client (nacl)
 GYP_DEFINES += disable_nacl=1
 
@@ -79,7 +80,6 @@ GYP_DEFINES += disable_nacl=1
 GYP_DEFINES += linux_use_gold_binary=0 linux_use_gold_flags=0
 
 # disable tcmalloc
-GYP_DEFINES += linux_use_tcmalloc=0
 GYP_DEFINES += use_allocator=none
 
 # don't use ozone

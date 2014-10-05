@@ -1,9 +1,0 @@
-chromium-browser (10.0.648.127~r76697-1) unstable; urgency=low
-   
-  The Debian package 'chromium-browser' was renamed to 'chromium'.
-  chromium-browser, chromium-browser-l10n, chromium-browser-inspector,
-  chromium-browser-dbg package are now transitional dummy packages, you can
-  remove them:
-    apt-get purge chromium-browser*
-
- -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 11 Mar 2011 14:50:08 +0100

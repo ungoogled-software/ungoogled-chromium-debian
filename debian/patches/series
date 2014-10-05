@@ -2,7 +2,7 @@ nspr.patch
 expat.patch
 prefs.patch
 system-speech.patch
-fix-manpage.patch
+manpage.patch
 third-party-cookies-off-by-default.patch
 ps-print.patch
 no-promo.patch
@@ -10,8 +10,8 @@ chromedriver-revision.patch
 
 linker-flags.patch
 no-sse2.patch
+clang.patch
 
 make-support/gyp.patch
 make-support/opus.patch
 make-support/mojo.patch
-clang.patch

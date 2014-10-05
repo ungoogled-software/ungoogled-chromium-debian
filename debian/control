@@ -10,6 +10,7 @@ Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-chromium/pkg-chromium.git
 Homepage: http://www.chromium.org/Home
 Build-Depends:
  cdbs,
+ clang (>= 3.5),
  debhelper (>= 7),
  pkg-config,
  lsb-release,
@@ -21,7 +22,6 @@ Build-Depends:
  flex,
  gperf,
  wdiff,
- clang,
  coreutils (>= 7.5) | timeout,
  xvfb,
  x11-apps,
@@ -90,27 +90,22 @@ Architecture: i386 amd64
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
- libnspr4 (>= 2:4.9-2~),
  xdg-utils,
- chromium-inspector,
 Suggests:
- mozplugger,
  chromium-l10n,
+ chromium-inspector,
 Provides:
  www-browser,
  gnome-www-browser,
- chromium-testsuite,
 Replaces:
- chromium-testsuite,
  chromium-codecs-ffmpeg,
  chromium-codecs-ffmpeg-extra,
 Conflicts:
- chromium-testsuite,
  chromium-codecs-ffmpeg,
  chromium-codecs-ffmpeg-extra,
-Description: A web browser built for speed, simplicity, and security
- Chromium is an open-source browser project that aims to build a safer, faster,
- and more stable way for all Internet users to experience the web.
+Description: chromium web browser
+ Web browser that aims to build a safer, faster, and more stable internet
+ browsing experience.
  .
  This package contains the web browser component.
 
@@ -121,15 +116,9 @@ Priority: extra
 Depends:
  ${misc:Depends},
  chromium (= ${binary:Version}),
-Provides:
- chromium-testsuite-dbg
-Replaces:
- chromium-testsuite-dbg
-Conflicts:
- chromium-testsuite-dbg
-Description: Debugging symbols for the chromium web browser
- Chromium is an open-source browser project that aims to build a safer, faster,
- and more stable way for all Internet users to experience the web.
+Description: debugging symbols for chromium
+ Web browser that aims to build a safer, faster, and more stable internet
+ browsing experience.
  .
  This package contains the debugging symbols.
 
@@ -140,9 +129,9 @@ Depends:
  ${misc:Depends},
  chromium (>= ${source:Version}),
  chromium (<< ${source:Version}.1~),
-Description: chromium-browser language packages
- Chromium is an open-source browser project that aims to build a safer, faster,
- and more stable way for all Internet users to experience the web.
+Description: chromium language packages
+ Web browser that aims to build a safer, faster, and more stable internet
+ browsing experience.
  .
  This package contains language packages for:
  am, ar, bg, bn, ca, cs, da, de, el, en-GB, es-419, es, et, fi, fil, fr, gu, he,
@@ -155,17 +144,17 @@ Multi-Arch: foreign
 Depends:
  ${misc:Depends},
 Recommends:
- chromium (>= 10),
+ chromium,
 Conflicts:
  chromium (<< ${source:Version}),
 Replaces:
  chromium (<< 31.0.1650.48-1),
-Description: page inspector for the Chromium browser
- Chromium is an open-source browser project that aims to build a safer, faster,
- and more stable way for all Internet users to experience the web.
+Description: page inspector for chromium
+ Web browser that aims to build a safer, faster, and more stable internet
+ browsing experience.
  .
  This package contains the 'inspector', which enables web developers to inspect
- elements of a web page at runtime (HTML, JavaScript, CSS, ..).
+ elements of a web page at runtime (HTML, JavaScript, CSS, etc.).
 
 Package: chromedriver
 Architecture: i386 amd64
@@ -173,7 +162,7 @@ Depends:
  ${misc:Depends},
  ${shlibs:Depends},
  chromium (= ${binary:Version}),
-Description: WebDriver driver for Chromium browser
+Description: WebDriver for chromium
  Chromedriver serves as a bridge between the chromium web browser and the
  selenium webdriver.
  .
