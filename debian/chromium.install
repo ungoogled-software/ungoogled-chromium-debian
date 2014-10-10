@@ -1,22 +1,15 @@
-debian/tmp/etc
-debian/tmp/usr/bin
+out/Release/chromium usr/lib/chromium
+out/Release/chrome-sandbox usr/lib/chromium
 
-debian/tmp/usr/lib/chromium/chromium
-debian/tmp/usr/lib/chromium/chrome-sandbox
-debian/tmp/usr/lib/chromium/*.pak
-debian/tmp/usr/lib/chromium/resources/extension/demo/library.js
-debian/tmp/usr/lib/chromium/content_resources.pak
-debian/tmp/usr/lib/chromium/locales/*
-debian/tmp/usr/lib/chromium/remoting_locales
-debian/tmp/usr/lib/chromium/lib*
-debian/tmp/usr/lib/chromium/pseudo_locales/fake-bidi.pak
-debian/tmp/usr/lib/chromium/icudtl.dat
+out/Release/lib* usr/lib/chromium
+out/Release/*.pak usr/lib/chromium
+out/Release/icudtl.dat usr/lib/chromium
 
-debian/chromium.desktop usr/share/applications
-
-debian/chromium.xml usr/share/gnome-control-center/default-apps
-
-debian/initial_bookmarks.html etc/chromium
-debian/master_preferences etc/chromium
+out/Release/resources/*.pak usr/lib/chromium/locales
 
 debian/presubj usr/share/bug/chromium
+
+debian/initial_bookmarks.html usr/lib/chromium
+debian/master_preferences usr/lib/chromium
+
+debian/chromium.xml usr/share/gnome-control-center/default-apps

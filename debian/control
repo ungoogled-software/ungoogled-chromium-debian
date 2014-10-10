@@ -9,80 +9,81 @@ Vcs-Git: git://anonscm.debian.org/pkg-chromium/pkg-chromium.git
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-chromium/pkg-chromium.git
 Homepage: http://www.chromium.org/Home
 Build-Depends:
- cdbs,
  clang (>= 3.5),
- debhelper (>= 7),
+ debhelper (>= 9),
+ gyp,
+ python3,
  pkg-config,
- lsb-release,
- gyp (>= 0.1~svn1119),
- patchutils (>= 0.2.25),
- python,
- bison,
+ ninja-build,
+ python-jinja2,
+ ca-certificates,
+ protobuf-compiler,
  wget,
  flex,
- gperf,
- wdiff,
- coreutils (>= 7.5) | timeout,
+ yasm,
  xvfb,
+ wdiff,
+ gperf,
+ bison,
+ valgrind,
+ xz-utils,
  x11-apps,
  xfonts-base,
- fonts-ipafont-gothic,
- fonts-ipafont-mincho,
- libexif-dev,
- libjpeg-dev,
- libpng-dev,
- libbz2-dev,
- libxml2-dev,
- libxslt1-dev,
- lzma-dev,
- libhunspell-dev,
- libsqlite3-dev,
- libasound2-dev,
- libnss3-dev (>= 3.12.3),
- libnspr4-dev (>= 2:4.9-2~),
- libgl1-mesa-dri,
- mesa-common-dev,
+ libglewmx-dev,
  libgl1-mesa-dev,
  libglu1-mesa-dev,
- libxss-dev,
- libglib2.0-dev,
- libgtk2.0-dev,
- libdbus-glib-1-dev,
- libgconf2-dev,
- libevent-dev (>= 1.4.13),
- yasm,
- libprotobuf-dev,
- protobuf-compiler,
- libglewmx-dev,
- libvpx-dev,
- libcups2-dev (>= 1.5.0),
- libgnome-keyring-dev,
- libspeex-dev,
- libspeechd-dev,
- libxt-dev,
- libxtst-dev,
- libpam0g-dev,
- libflac-dev,
- libwebp-dev,
- autotools-dev,
- libpulse-dev,
- scons,
- libelf-dev,
- python-simplejson,
  libegl1-mesa-dev,
  libgles2-mesa-dev,
- subversion,
- git,
- libkrb5-dev,
- libudev-dev,
+ mesa-common-dev,
+ libgtk2.0-dev,
+ libglib2.0-dev,
+ libxt-dev,
+ libre2-dev,
+ libpng-dev,
+ libxss-dev,
+ libelf-dev,
+ libvpx-dev,
  libssl-dev,
  libpci-dev,
  libcap-dev,
  libdrm-dev,
+ libusb-dev,
+ libicu-dev,
+ libkrb5-dev,
+ libexif-dev,
+ libudev-dev,
+ libopus-dev,
+ libwebp-dev,
+ libjpeg-dev,
+ libxtst-dev,
+ libsrtp-dev,
+ libxml2-dev,
+ libxslt1-dev,
+ libpulse-dev,
+ libspeex-dev,
+ libpam0g-dev,
+ libsnappy-dev,
+ libgconf2-dev,
+ libasound2-dev,
+ libjsoncpp-dev,
+ libspeechd-dev,
+ libminizip-dev,
+ libprotobuf-dev,
+ libhunspell-dev,
+ libmodpbase64-dev,
+ libnss3-dev (>= 3.12.3),
+ libnspr4-dev (>= 2:4.9),
+ libcups2-dev (>= 1.5.0),
+ libevent-dev (>= 1.4.13),
  libjs-jquery,
  libjs-excanvas,
- libjs-jquery-flot | libjs-flot,
+ libjs-jquery-flot,
  libgcrypt11-dev | libgcrypt20-dev,
+ fonts-ipafont-gothic,
+ fonts-ipafont-mincho,
+Built-Using:
+ libjs-jquery,
+ libjs-jquery-flot,
 Standards-Version: 3.9.5
 
 Package: chromium
@@ -97,13 +98,7 @@ Suggests:
 Provides:
  www-browser,
  gnome-www-browser,
-Replaces:
- chromium-codecs-ffmpeg,
- chromium-codecs-ffmpeg-extra,
-Conflicts:
- chromium-codecs-ffmpeg,
- chromium-codecs-ffmpeg-extra,
-Description: chromium web browser
+Description: web browser
  Web browser that aims to build a safer, faster, and more stable internet
  browsing experience.
  .
@@ -116,8 +111,8 @@ Priority: extra
 Depends:
  ${misc:Depends},
  chromium (= ${binary:Version}),
-Description: debugging symbols for chromium
- Web browser that aims to build a safer, faster, and more stable internet
+Description: web browser - debugging symbols
+ A web browser that aims to build a safer, faster, and more stable internet
  browsing experience.
  .
  This package contains the debugging symbols.
@@ -128,8 +123,7 @@ Section: localization
 Depends:
  ${misc:Depends},
  chromium (>= ${source:Version}),
- chromium (<< ${source:Version}.1~),
-Description: chromium language packages
+Description: web browser - language packs
  Web browser that aims to build a safer, faster, and more stable internet
  browsing experience.
  .
@@ -145,11 +139,9 @@ Depends:
  ${misc:Depends},
 Recommends:
  chromium,
-Conflicts:
- chromium (<< ${source:Version}),
 Replaces:
  chromium (<< 31.0.1650.48-1),
-Description: page inspector for chromium
+Description: web browser - page inspection support
  Web browser that aims to build a safer, faster, and more stable internet
  browsing experience.
  .
@@ -162,8 +154,11 @@ Depends:
  ${misc:Depends},
  ${shlibs:Depends},
  chromium (= ${binary:Version}),
-Description: WebDriver for chromium
- Chromedriver serves as a bridge between the chromium web browser and the
- selenium webdriver.
+Description: web browser - WebDriver support
+ Web browser that aims to build a safer, faster, and more stable internet
+ browsing experience.
+ .
+ This package provides a bridge between the browser component and the selenium
+ automatic webdriver.
  .
  See http://code.google.com/p/selenium/wiki/ChromeDriver for details.

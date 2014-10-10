@@ -12,6 +12,4 @@ linker-flags.patch
 no-sse2.patch
 clang.patch
 
-make-support/gyp.patch
-make-support/opus.patch
-make-support/mojo.patch
+missing-include.patch
