@@ -17,8 +17,8 @@ Include system copy of expat.h
 --- a/third_party/libjingle/source/talk/xmpp/xmppstanzaparser.cc
 +++ b/third_party/libjingle/source/talk/xmpp/xmppstanzaparser.cc
 @@ -31,9 +31,9 @@
- #include "talk/base/common.h"
  #include "talk/xmpp/constants.h"
+ #include "webrtc/base/common.h"
  #ifdef EXPAT_RELATIVE_PATH
 -#include "expat.h"
 +#include <expat.h>
@@ -31,8 +31,8 @@ Include system copy of expat.h
 --- a/third_party/libjingle/source/talk/xmllite/xmlbuilder.h
 +++ b/third_party/libjingle/source/talk/xmllite/xmlbuilder.h
 @@ -33,11 +33,7 @@
- #include "talk/base/scoped_ptr.h"
  #include "talk/xmllite/xmlparser.h"
+ #include "webrtc/base/scoped_ptr.h"
  
 -#ifdef EXPAT_RELATIVE_PATH
 -#include "expat.h"

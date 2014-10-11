@@ -4,7 +4,7 @@ debian-bug: http://bugs.debian.org/750361
 
 --- a/build/common.gypi
 +++ b/build/common.gypi
-@@ -3538,8 +3538,6 @@
+@@ -3655,8 +3655,6 @@
                  # http://crbug.com/313032 for an example where this has "bit"
                  # us in the past.
                  'cflags': [

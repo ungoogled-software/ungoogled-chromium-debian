@@ -2,7 +2,7 @@ description: use system speex
 
 --- a/build/linux/system.gyp
 +++ b/build/linux/system.gyp
-@@ -641,6 +641,26 @@
+@@ -649,6 +649,26 @@
        ],
      },
      {
@@ -42,12 +42,12 @@ description: use system speex
  namespace {
 --- a/content/content_browser.gypi
 +++ b/content/content_browser.gypi
-@@ -1750,7 +1750,7 @@
-     ['input_speech==1', {
+@@ -1837,7 +1837,7 @@
+     ['enable_web_speech==1', {
        'dependencies': [
          '../third_party/flac/flac.gyp:libflac',
 -        '../third_party/speex/speex.gyp:libspeex',
 +        '../build/linux/system.gyp:speex',
        ],
      }],
-     ['OS == "win"', {
+     ['enable_web_speech==0 and OS=="android"', {
