@@ -1,7 +1,7 @@
 out/Release/chromium usr/lib/chromium
 out/Release/chrome-sandbox usr/lib/chromium
 
-out/Release/lib* usr/lib/chromium
+out/Release/*.so usr/lib/chromium
 out/Release/*.pak usr/lib/chromium
 out/Release/icudtl.dat usr/lib/chromium
 
@@ -13,3 +13,13 @@ debian/initial_bookmarks.html usr/lib/chromium
 debian/master_preferences usr/lib/chromium
 
 debian/chromium.xml usr/share/gnome-control-center/default-apps
+
+debian/chromium.desktop usr/share/applications
+
+chrome/app/theme/chromium/product_logo_48.png usr/share/pixmaps/chromium.png
+chrome/app/theme/chromium/product_logo_22.png usr/share/icons/hicolor/22x22/apps
+chrome/app/theme/chromium/product_logo_24.png usr/share/icons/hicolor/24x24/apps
+chrome/app/theme/chromium/product_logo_48.png usr/share/icons/hicolor/48x48/apps
+chrome/app/theme/chromium/product_logo_64.png usr/share/icons/hicolor/64x64/apps
+chrome/app/theme/chromium/product_logo_128.png usr/share/icons/hicolor/128x128/apps
+chrome/app/theme/chromium/product_logo_256.png usr/share/icons/hicolor/256x256/apps

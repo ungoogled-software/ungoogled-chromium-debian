@@ -1,11 +1,12 @@
-Format: http://anonscm.debian.org/viewvc/dep/web/deps/dep5.mdwn?revision=202
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0
+Source: http://www.chromium.org/Home
 Upstream-Name: chromium
-Source: http://src.chromium.org/viewvc/chrome/
 
 Files: debian/*
-Copyright: 2009-2010, Fabien Tassin <fta@ubuntu.com>
-           2010, Giuseppe Iuculano <iuculano@debian.org>
-License: BSD (guessed)
+Copyright: 2009-2010 Fabien Tassin <fta@ubuntu.com>
+           2010-2014 Giuseppe Iuculano <iuculano@debian.org>
+           2012-2014 Michael Gilbert <mgilbert@debian.org>
+License: BSD
 
 Files: debian/patches/*
 Copyright: 2009, the patch authors

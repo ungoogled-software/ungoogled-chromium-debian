@@ -1,3 +1,32 @@
+chromium-browser (38.0.2125.101-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - CVE-2014-3188: A special thanks to Jüri Aedla for a combination of V8
+      and IPC bugs that can lead to remote code execution outside of the
+      sandbox.
+    - CVE-2014-3189: Out-of-bounds read in PDFium. Credit to cloudfuzzer.
+    - CVE-2014-3190: Use-after-free in Events. Credit to cloudfuzzer, Chen
+      Zhang.
+    - CVE-2014-3191: Use-after-free in Rendering. Credit to cloudfuzzer.
+    - CVE-2014-3192: Use-after-free in DOM. Credit to cloudfuzzer.
+    - CVE-2014-3193: Type confusion in Session Management.  Credit to miaubiz.
+    - CVE-2014-3194: Use-after-free in Web Workers. Credit to Collin Payne.
+    - CVE-2014-3195: Information Leak in V8. Credit to Jüri Aedla.
+    - CVE-2014-3196: Permissions bypass in Windows Sandbox.  Credit to James
+      Forshaw.
+    - CVE-2014-3197: Information Leak in XSS Auditor. Credit to Takeshi
+      Terada.
+    - CVE-2014-3198: Out-of-bounds read in PDFium. Credit to Atte Kettunen.
+    - CVE-2014-3199: Release Assert in V8 bindings. Credit to Collin Payne.
+    - CVE-2014-3200: Various fixes from internal audits, fuzzing and other
+      initiatives (Chrome 38).
+    - Improved support for HiDPI displays (closes: #763421).
+  * Add libgnome-keyring-dev build dependency (closes: #764548).
+  * Install desktop file and icons again (closes: #764373).
+  * Correctly handle old conffiles (closes: #764180).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 10 Oct 2014 00:49:02 +0000
+
 chromium-browser (37.0.2062.120-4) unstable; urgency=medium
 
   * Merge changes from the experimental branch.
