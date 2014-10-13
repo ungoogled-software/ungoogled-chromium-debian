@@ -33,8 +33,8 @@ defines+=use_ozone=0 \
          enable_remoting_host=0 \
 
 # enabled features
-defines+=enable_hidpi=1 \
-         enable_webrtc=1 \
+defines+=enable_webrtc=1 \
+         use_gio=1 \
          use_pulseaudio=1 \
          use_gnome_keyring=1 \
          linux_link_libpci=1 \
@@ -58,12 +58,15 @@ defines+=use_system_re2=1 \
          use_system_libsrtp=1 \
          use_system_jsoncpp=1 \
          use_system_libevent=1 \
-         use_system_protobuf=1 \
          use_system_harfbuzz=1 \
          use_system_xdg_utils=1 \
 
 # enable proprietary codecs
 defines+=proprietary_codecs=1 \
+         ffmpeg_branding=Chrome \
+
+# use embedded protobuf for now (bug #764911)
+defines+=use_system_protobuf=0 \
 
 # icu
 defines+=use_system_icu=0 \
@@ -108,15 +111,23 @@ override_dh_auto_build:
 	mv out/Release/chrome.1 out/Release/chromium.1 || true
 	mv out/Release/locales/en-US.pak out/Release/resources || true
 	mv out/Release/chrome_sandbox out/Release/chrome-sandbox || true
-	cp chrome/app/theme/chromium/product_logo_32.xpm out/Release/chromium.xpm || true
 	chmod 4755 out/Release/chrome-sandbox # suid sandbox
 
 override_dh_auto_install:
 	dh_auto_install
 	echo "Any files placed in this directory will be sourced prior to executing chromium." \
 	    > debian/chromium/etc/chromium.d/README
+	# update launcher script with build information
 	sed 's|@BUILD_DIST@|$(shell cat /etc/debian_version)|' \
-	    < debian/scripts/chromium.in > debian/chromium/usr/bin/chromium
+	    < debian/scripts/chromium > debian/chromium/usr/bin/chromium
+	# move icons into /usr/share
+	for file in $(shell find chrome/app/theme/chromium -name product_logo_[0-9]* -a ! -name *mono*); do \
+	    ext=$$(echo $$file | cut -d\. -f2); \
+	    siz=$$(echo $$file | cut -d_ -f3 | sed s/\.$$ext//); \
+	    dst=debian/chromium/usr/share/icons/hicolor/$$siz\x$$siz; \
+	    mkdir -p $$dst; \
+	    cp $$file $$dst/chromium.$$ext; \
+	    done
 
 override_dh_fixperms:
 	dh_fixperms --exclude chrome-sandbox

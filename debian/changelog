@@ -1,3 +1,13 @@
+chromium-browser (38.0.2125.101-2) unstable; urgency=medium
+
+  * Disable HiDPI (closes: #764883).
+  * Fix conffile handling (closes: #764769).
+  * Correct icon installation logic (closes: #764828).
+  * Use embedded protobuf code copy (closes: #764911).
+  * Support larger set of html5 video formats again (closes: #764793).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 12 Oct 2014 21:34:26 +0000
+
 chromium-browser (38.0.2125.101-1) unstable; urgency=medium
 
   * New upstream stable release:

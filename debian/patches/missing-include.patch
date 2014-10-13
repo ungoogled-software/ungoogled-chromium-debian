@@ -1,0 +1,10 @@
+--- a/media/cast/logging/encoding_event_subscriber.cc
++++ b/media/cast/logging/encoding_event_subscriber.cc
+@@ -6,6 +6,7 @@
+ 
+ #include <cstring>
+ #include <utility>
++#include <algorithm>
+ 
+ #include "base/logging.h"
+ #include "media/cast/logging/proto/proto_utils.h"
