@@ -1,3 +1,18 @@
+chromium-browser (38.0.2125.101-4) unstable; urgency=medium
+
+  * Provide information about lack of support for non-sse2 systems.
+  * Include a new package providing Google's API keys (closes: #748867).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 19 Oct 2014 21:12:49 +0000
+
+chromium-browser (38.0.2125.101-3) unstable; urgency=medium
+
+  * Ignore dpkg files in /etc/chromium.d (closes: #765959).
+  * Remove trailing maintscript arguments (closes: #765528).
+  * Use libjpeg-dev instead of libjpeg8-dev (closes: #765821).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 17 Oct 2014 21:27:05 +0000
+
 chromium-browser (38.0.2125.101-2) unstable; urgency=medium
 
   * Disable HiDPI (closes: #764883).

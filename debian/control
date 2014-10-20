@@ -55,9 +55,9 @@ Build-Depends:
  libwebp-dev,
  libxtst-dev,
  libsrtp-dev,
+ libjpeg-dev,
  libxml2-dev,
  libxslt1-dev,
- libjpeg8-dev,
  libpulse-dev,
  libspeex-dev,
  libpam0g-dev,
@@ -91,6 +91,8 @@ Depends:
  ${misc:Depends},
  ${shlibs:Depends},
  xdg-utils,
+Recommends:
+ chromium-apikeys,
 Suggests:
  chromium-l10n,
  chromium-inspector,
@@ -146,6 +148,19 @@ Description: web browser - page inspection support
  .
  This package contains the 'inspector', which enables web developers to inspect
  elements of a web page at runtime (HTML, JavaScript, CSS, etc.).
+
+Package: chromium-apikeys
+Architecture: all
+Depends:
+ ${misc:Depends},
+ chromium,
+Description: web browser - Google API keys
+ Web browser that aims to build a safer, faster, and more stable internet
+ browsing experience.
+ .
+ This package provides keys to Google's API for services like sync and gmail
+ and only needs to be installed if you use the "app" interface to those
+ services.
 
 Package: chromedriver
 Architecture: i386 amd64

@@ -23,9 +23,18 @@ usage () {
   echo " See 'man chromium' for more details"
 }
 
+# Check whether this system supports sse2
+if test -z "$(grep sse2 /proc/cpuinfo)"; then
+  echo "The hardware on this system lacks support for the sse2 instruction set."
+  echo "The upstream chromium project no longer supports this configuration."
+  echo "For more information, please read and possibly provide input to their"
+  echo "bug tracking system at http://crbug.com/348761."
+  exit 1
+fi
+
 # Source additional settings
 for file in /etc/chromium.d/*; do
-  test $file = /etc/chromium.d/README || . $file
+  test $file = /etc/chromium.d/README || expr $file : .*\.dpkg > /dev/null || . $file
 done
 
 # Set CHROME_VERSION_EXTRA visible in the About dialog and in about:version
