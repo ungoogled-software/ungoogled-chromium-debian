@@ -1,3 +1,9 @@
+chromium-browser (39.0.2171.71-2) unstable; urgency=medium
+
+  * Add missing test to chromium.preinst (closes: #771684).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Tue, 02 Dec 2014 01:30:33 +0000
+
 chromium-browser (39.0.2171.71-1) unstable; urgency=medium
 
   * New upstream stable release:
