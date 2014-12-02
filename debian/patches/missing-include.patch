@@ -1,7 +1,7 @@
 --- a/media/cast/logging/encoding_event_subscriber.cc
 +++ b/media/cast/logging/encoding_event_subscriber.cc
-@@ -6,6 +6,7 @@
- 
+@@ -7,6 +7,7 @@
+ #include <algorithm>
  #include <cstring>
  #include <utility>
 +#include <algorithm>
