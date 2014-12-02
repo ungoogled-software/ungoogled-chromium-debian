@@ -1,9 +1,27 @@
-chromium-browser (38.0.2125.101-4) unstable; urgency=medium
+chromium-browser (39.0.2171.71-1) unstable; urgency=medium
 
-  * Provide information about lack of support for non-sse2 systems.
-  * Include a new package providing Google's API keys (closes: #748867).
+  * New upstream stable release:
+    - CVE-2014-3566: SSLv3 support is now disabled by default.
+    - CVE-2014-7899: Address bar spoofing. Credit to Eli Grey.
+    - CVE-2014-7900: Use-after-free in pdfium. Credit to Atte Kettunen.
+    - CVE-2014-7901: Integer overflow in pdfium. Credit to cloudfuzzer.
+    - CVE-2014-7902: Use-after-free in pdfium. Credit to cloudfuzzer.
+    - CVE-2014-7903: Buffer overflow in pdfium. Credit to cloudfuzzer.
+    - CVE-2014-7904: Buffer overflow in Skia. Credit to Atte Kettunen.
+    - CVE-2014-7905: Flaw allowing navigation to intents that do not have the
+      BROWSABLE category. Credit to WangTao(neobyte).
+    - CVE-2014-7906: Use-after-free in pepper plugins. Credit to Chen Zhang.
+    - CVE-2014-0574: Double-free in Flash. Credit to biloulehibou.
+    - CVE-2014-7907: Use-after-free in blink. Credit to Chen Zhang.
+    - CVE-2014-7908: Integer overflow in media. Credit to Christoph Diehl.
+    - CVE-2014-7909: Uninitialized memory read in Skia. Credit to miaubiz.
+  * Display info about upstream ending support for non-sse2 (closes: #769836).
+  * Remove non-free RFCs from the upstream tarball (closes: #771640).
+  * Include a conf file for Google's API keys (closes: #748867).
+  * Handle dangling chromium icon directory (closes: #766420).
+  * Install icons into the correct path (closes: #767697).
 
- -- Michael Gilbert <mgilbert@debian.org>  Sun, 19 Oct 2014 21:12:49 +0000
+ -- Michael Gilbert <mgilbert@debian.org>  Mon, 01 Dec 2014 01:13:44 +0000
 
 chromium-browser (38.0.2125.101-3) unstable; urgency=medium
 

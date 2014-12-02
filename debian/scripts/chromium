@@ -23,12 +23,15 @@ usage () {
   echo " See 'man chromium' for more details"
 }
 
+nosse2="\
+The hardware on this system lacks support for the sse2 instruction set.
+The upstream chromium project no longer supports this configuration.
+For more information, please read and possibly provide input to their
+bug tracking system at http://crbug.com/348761."
+
 # Check whether this system supports sse2
 if test -z "$(grep sse2 /proc/cpuinfo)"; then
-  echo "The hardware on this system lacks support for the sse2 instruction set."
-  echo "The upstream chromium project no longer supports this configuration."
-  echo "For more information, please read and possibly provide input to their"
-  echo "bug tracking system at http://crbug.com/348761."
+  xmessage "$nosse2"
   exit 1
 fi
 

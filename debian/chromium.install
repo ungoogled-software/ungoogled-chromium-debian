@@ -15,3 +15,5 @@ debian/initial_bookmarks.html usr/lib/chromium
 debian/chromium.xml usr/share/gnome-control-center/default-apps
 
 debian/chromium.desktop usr/share/applications
+
+debian/apikeys etc/chromium.d
