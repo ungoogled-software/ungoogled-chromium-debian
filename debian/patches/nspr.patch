@@ -24,10 +24,10 @@ Include system copy of prtime.h
  
 --- a/base/time/time.cc
 +++ b/base/time/time.cc
-@@ -10,7 +10,8 @@
- #include "base/float_util.h"
+@@ -13,7 +13,8 @@
  #include "base/lazy_instance.h"
  #include "base/logging.h"
+ #include "base/strings/stringprintf.h"
 -#include "base/third_party/nspr/prtime.h"
 +
 +#include <nspr/prtime.h>

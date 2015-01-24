@@ -17,7 +17,7 @@ Include system copy of expat.h
 --- a/third_party/libjingle/source/talk/xmpp/xmppstanzaparser.cc
 +++ b/third_party/libjingle/source/talk/xmpp/xmppstanzaparser.cc
 @@ -31,9 +31,9 @@
- #include "talk/xmpp/constants.h"
+ #include "webrtc/libjingle/xmpp/constants.h"
  #include "webrtc/base/common.h"
  #ifdef EXPAT_RELATIVE_PATH
 -#include "expat.h"

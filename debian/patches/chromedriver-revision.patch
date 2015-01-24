@@ -1,13 +1,13 @@
 description: set chromedriver version as undefined
 
---- chromium.orig/chrome/test/chromedriver/embed_version_in_cpp.py	2014-04-11 01:43:42.224278647 +0000
-+++ chromium/chrome/test/chromedriver/embed_version_in_cpp.py	2014-04-11 01:43:42.220278647 +0000
-@@ -25,7 +25,7 @@
+--- a/chrome/test/chromedriver/embed_version_in_cpp.py
++++ b/chrome/test/chromedriver/embed_version_in_cpp.py
+@@ -26,7 +26,7 @@ def main():
    options, args = parser.parse_args()
  
    version = open(options.version_file, 'r').read().strip()
 -  revision = lastchange.FetchVersionInfo(None).revision
 +  revision = "undefined"
-   if revision:
-     version += '.' + revision.strip()
  
+   if revision:
+     match = re.match('([0-9a-fA-F]+)(-refs/heads/master@{#(\d+)})?', revision)
