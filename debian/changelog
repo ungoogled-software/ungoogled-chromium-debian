@@ -1,3 +1,38 @@
+chromium-browser (40.0.2214.91-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - CVE-2014-7923: Memory corruption in ICU. Credit to yangdingning.
+    - CVE-2014-7924: Use-after-free in IndexedDB. Credit to Collin Payne.
+    - CVE-2014-7925: Use-after-free in WebAudio. Credit to mark.buer.
+    - CVE-2014-7926: Memory corruption in ICU. Credit to yangdingning.
+    - CVE-2014-7927: Memory corruption in V8. Credit to Christian Holler.
+    - CVE-2014-7928: Memory corruption in V8. Credit to Christian Holler.
+    - CVE-2014-7929: Use-after-free in DOM. Credit to cloudfuzzer.
+    - CVE-2014-7930: Use-after-free in DOM. Credit to cloudfuzzer.
+    - CVE-2014-7931: Memory corruption in V8. Credit to cloudfuzzer.
+    - CVE-2014-7932: Use-after-free in DOM. Credit to Atte Kettunen.
+    - CVE-2014-7933: Use-after-free in FFmpeg. Credit to aohelin.
+    - CVE-2014-7934: Use-after-free in DOM. Credit to cloudfuzzer.
+    - CVE-2014-7935: Use-after-free in Speech. Credit to Khalil Zhani.
+    - CVE-2014-7936: Use-after-free in Views. Credit to Christoph Diehl.
+    - CVE-2014-7937: Use-after-free in FFmpeg. Credit to Atte Kettunen.
+    - CVE-2014-7938: Memory corruption in Fonts. Credit to Atte Kettunen.
+    - CVE-2014-7939: Same-origin-bypass in V8. Credit to Takeshi Terada.
+    - CVE-2014-7940: Uninitialized-value in ICU. Credit to miaubiz.
+    - CVE-2014-7941: Out-of-bounds read in UI. Credit to Atte Kettunen and
+      Christoph Diehl.
+    - CVE-2014-7942: Uninitialized-value in Fonts. Credit to miaubiz.
+    - CVE-2014-7943: Out-of-bounds read in Skia. Credit to Atte Kettunen.
+    - CVE-2014-7944: Out-of-bounds read in PDFium. Credit to cloudfuzzer.
+    - CVE-2014-7945: Out-of-bounds read in PDFium. Credit to cloudfuzzer.
+    - CVE-2014-7946: Out-of-bounds read in Fonts. Credit to miaubiz.
+    - CVE-2014-7947: Out-of-bounds read in PDFium. Credit to fuzztercluck.
+    - CVE-2014-7948: Caching error in AppCache. Credit to jiayaoqijia.
+    - CVE-2015-1205: Various fixes from internal audits, fuzzing and other
+      initiatives.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 22 Jan 2015 04:42:18 +0000
+
 chromium-browser (39.0.2171.71-2) unstable; urgency=medium
 
   * Add missing test to chromium.preinst (closes: #771684).
