@@ -1,3 +1,15 @@
+chromium-browser (40.0.2214.111-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - CVE-2015-1209: Use-after-free in DOM. Credit to Maksymillian Motyl.
+    - CVE-2015-1210: Cross-origin-bypass in V8 bindings. Credit to anonymous.
+    - CVE-2015-1211: Privilege escalation using service workers.  Credit to
+      anonymous.
+    - CVE-2015-1212: Various fixes from internal audits, fuzzing and other
+      initiatives.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 13 Feb 2015 02:32:16 +0000
+
 chromium-browser (40.0.2214.91-1) unstable; urgency=medium
 
   * New upstream stable release:
