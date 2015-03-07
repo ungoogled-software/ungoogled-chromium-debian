@@ -1,3 +1,40 @@
+chromium-browser (41.0.2272.76-2) unstable; urgency=medium
+
+  * Install v8 natives and snapshot blob files (closes: #779717).
+    - Thanks to Jason Rhinelander.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 06 Mar 2015 00:59:50 +0000
+
+chromium-browser (41.0.2272.76-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - CVE-2015-1212: Out-of-bounds write in media. Credit to anonymous.
+    - CVE-2015-1213: Out-of-bounds write in skia filters. Credit to
+      cloudfuzzer.
+    - CVE-2015-1214: Out-of-bounds write in skia filters. Credit to
+      cloudfuzzer.
+    - CVE-2015-1215: Out-of-bounds write in skia filters. Credit to
+      cloudfuzzer.
+    - CVE-2015-1216: Use-after-free in v8 bindings. Credit to anonymous.
+    - CVE-2015-1217: Type confusion in v8 bindings. Credit to anonymous.
+    - CVE-2015-1218: Use-after-free in dom. Credit to cloudfuzzer.
+    - CVE-2015-1219: Integer overflow in webgl. Credit to Chen Zhang.
+    - CVE-2015-1220: Use-after-free in gif decoder. Credit to Aki Helin.
+    - CVE-2015-1221: Use-after-free in web databases. Credit to Collin Payne.
+    - CVE-2015-1222: Use-after-free in service workers. Credit to Collin Payne.
+    - CVE-2015-1223: Use-after-free in dom. Credit to Maksymillian Motyl.
+    - CVE-2015-1224: Out-of-bounds read in vpxdecoder. Credit to Aki Helin.
+    - CVE-2015-1225: Out-of-bounds read in pdfium. Credit to cloudfuzzer.
+    - CVE-2015-1226: Validation issue in debugger. Credit to Rob Wu.
+    - CVE-2015-1227: Uninitialized value in blink. Credit to Christoph Diehl.
+    - CVE-2015-1228: Uninitialized value in rendering. Credit to miaubiz.
+    - CVE-2015-1229: Cookie injection via proxies. Credit to iliwoy.
+    - CVE-2015-1230: Type confusion in v8. Credit to Skylined.
+    - CVE-2015-1231: Various fixes from internal audits, fuzzing and other
+      initiatives.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Wed, 04 Mar 2015 00:11:46 +0000
+
 chromium-browser (40.0.2214.111-1) unstable; urgency=medium
 
   * New upstream stable release:
