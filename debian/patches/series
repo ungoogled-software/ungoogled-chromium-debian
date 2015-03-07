@@ -5,7 +5,6 @@ disable/promo.patch
 disable/google-api-warning.patch
 
 nspr.patch
-expat.patch
 prefs.patch
 system-speech.patch
 third-party-cookies-off-by-default.patch
