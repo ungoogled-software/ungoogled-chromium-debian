@@ -42,7 +42,7 @@ description: use system speex
  namespace {
 --- a/content/content_browser.gypi
 +++ b/content/content_browser.gypi
-@@ -1919,7 +1919,7 @@
+@@ -1935,7 +1935,7 @@
      ['enable_web_speech==1', {
        'dependencies': [
          '../third_party/flac/flac.gyp:libflac',

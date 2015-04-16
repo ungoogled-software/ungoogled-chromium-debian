@@ -2,15 +2,15 @@ Include system copy of prtime.h
 
 --- a/base/base.gypi
 +++ b/base/base.gypi
-@@ -18,8 +18,6 @@
-           'third_party/dmg_fp/dtoa_wrapper.cc',
+@@ -598,8 +598,6 @@
+           'third_party/dmg_fp/g_fmt.cc',
            'third_party/icu/icu_utf.cc',
            'third_party/icu/icu_utf.h',
 -          'third_party/nspr/prtime.cc',
 -          'third_party/nspr/prtime.h',
            'third_party/superfasthash/superfasthash.c',
            'third_party/xdg_mime/xdgmime.h',
-           'allocator/allocator_extension.cc',
+           'thread_task_runner_handle.cc',
 --- a/base/time/pr_time_unittest.cc
 +++ b/base/time/pr_time_unittest.cc
 @@ -6,7 +6,7 @@
