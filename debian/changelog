@@ -1,3 +1,23 @@
+chromium-browser (42.0.2311.90-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - CVE-2015-1235: Cross-origin-bypass in HTML parser. Credit to anonymous.
+    - CVE-2015-1236: Cross-origin-bypass in Blink. Credit to Amitay Dobo.
+    - CVE-2015-1237: Use-after-free in IPC. Credit to Khalil Zhani.
+    - CVE-2015-1238: Out-of-bounds write in Skia. Credit to cloudfuzzer.
+    - CVE-2015-1240: Out-of-bounds read in WebGL. Credit to w3bd3vil.
+    - CVE-2015-1241: Tap-Jacking. Credit to Phillip Moon and Matt Weston.
+    - CVE-2015-1242: Type confusion in V8. Credit to fcole@onshape.com.
+    - CVE-2015-1244: HSTS bypass in WebSockets. Credit to Mike Ruddy.
+    - CVE-2015-1245: Use-after-free in PDFium. Credit to Khalil Zhani.
+    - CVE-2015-1246: Out-of-bounds read in Blink. Credit to Atte Kettunen.
+    - CVE-2015-1247: Scheme issues in OpenSearch. Credit to Jann Horn.
+    - CVE-2015-1248: SafeBrowsing bypass. Credit to Vittorio Gambaletta.
+    - CVE-2015-1249: Various fixes from internal audits, fuzzing and other
+      initiatives.  Also multiple issues in v8 4.2.77.14.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 16 Apr 2015 00:12:00 +0000
+
 chromium-browser (41.0.2272.118-1) unstable; urgency=medium
 
   * New upstream stable release:
