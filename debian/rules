@@ -143,8 +143,8 @@ override_dh_auto_clean:
 	rm -rf out Makefile third_party/flot/*
 	find . -name \*.mk -execdir rm -rf {} \;
 	find . -name \*.pyc -execdir rm -rf {} \;
-	#find . -name config.sub -execdir rm -rf {} \;
-	#find . -name config.guess -execdir rm -rf {} \;
+	find . -name config.sub -execdir rm -rf {} \;
+	find . -name config.guess -execdir rm -rf {} \;
 
 ###################### upstream source downloading ############################
 

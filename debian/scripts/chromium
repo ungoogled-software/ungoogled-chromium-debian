@@ -9,7 +9,7 @@
 APPNAME=chromium
 LIBDIR=/usr/lib/chromium
 GDB=/usr/bin/gdb
-BUILD_DIST="@BUILD_DIST@"
+BUILD_DIST="Debian @BUILD_DIST@"
 
 usage () {
   echo "$APPNAME [-h|--help] [-g|--debug] [--temp-profile] [options] [URL]"

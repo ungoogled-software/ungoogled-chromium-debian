@@ -1,3 +1,19 @@
+chromium-browser (42.0.2311.90-2) unstable; urgency=medium
+
+  * Update debian/copyright.
+  * Drop some unused patches.
+  * Drop chromium-inspector package.
+  * Remove Giuseppe from the uploaders.
+    - Many thanks for the prior contributions.
+  * Fix built on text (closes: #782052).
+  * Fix path to master_preferences (closes: #777708).
+  * Disable default browser warning (closes: #777265).
+  * Conflict with libgl1-mesa-swx11 (closes: #776388).
+  * Add MHTML mimetype to chromium.desktop (closes: #769039).
+  * Tighten chromium-l10n versioned dependency (closes: #781505).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 26 Apr 2015 18:49:52 +0000
+
 chromium-browser (42.0.2311.90-1) unstable; urgency=medium
 
   * New upstream stable release:
