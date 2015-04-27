@@ -6,10 +6,11 @@
 #  Fabien Tassin <fta@sofaraway.org>
 # License: GPLv2 or later
 
-APPNAME=chromium
-LIBDIR=/usr/lib/chromium
 GDB=/usr/bin/gdb
-BUILD_DIST="Debian @BUILD_DIST@"
+LIBDIR=/usr/lib/chromium
+BUILD_DIST="@BUILD_DIST@"
+
+APPNAME=`basename $0`
 
 usage () {
   echo "$APPNAME [-h|--help] [-g|--debug] [--temp-profile] [options] [URL]"
@@ -41,12 +42,8 @@ for file in /etc/chromium.d/*; do
 done
 
 # Set CHROME_VERSION_EXTRA visible in the About dialog and in about:version
-DIST="Debian `cat /etc/debian_version`"
-if [ "$DIST" = "$BUILD_DIST" ] ; then
-  export CHROME_VERSION_EXTRA="$DIST"
-else
-  export CHROME_VERSION_EXTRA="Built on $BUILD_DIST, running on $DIST"
-fi
+DIST=`cat /etc/debian_version`
+export CHROME_VERSION_EXTRA="Built on Debian $BUILD_DIST, running on Debian $DIST"
 
 want_debug=0
 want_temp_profile=0
