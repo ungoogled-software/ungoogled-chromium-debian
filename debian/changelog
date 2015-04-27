@@ -1,5 +1,11 @@
 chromium-browser (42.0.2311.90-3) UNRELEASED; urgency=medium
 
+  [ Shawn Landden ]
+  * First run
+    - No welcome page ( https://www.google.com/intl/en/chrome/browser/welcome.html )
+  * Turn off safebrowsing
+  * Turn off pinging Google on 404 and other HTTP errors (when server doesn't send page)
+  [ Michael Gilbert ]
   * Simplify build information.
 
  -- Michael Gilbert <mgilbert@debian.org>  Mon, 27 Apr 2015 00:48:11 +0000
