@@ -1,15 +1,19 @@
-chromium-browser (42.0.2311.90-3) UNRELEASED; urgency=medium
+chromium-browser (42.0.2311.135-1) unstable; urgency=medium
+
+  [ Michael Gilbert ]
+  * Remove some unneeded files from the upstream tarball.
+  * Move default configuration files to /usr/share/chromium.
+  * New upstream stable release:
+    - CVE-2015-1243: Use-after-free in DOM. Credit to Saif El-Sherei.
+    - CVE-2015-1250: Various fixes from internal audits, fuzzing and other
+      initiatives.
 
   [ Shawn Landden ]
-  * Supress first run welcome page
-     - ( https://www.google.com/intl/en/chrome/browser/welcome.html )
-  * Turn off safebrowsing
-  * Turn off pinging Google on 404 and other HTTP errors (when server doesn't send page)
-  * Move master_preferences back to /etc/chromium to match SuSe
-  [ Michael Gilbert ]
-  * Simplify build information.
+  * Supress first run welcome page.
+  * Turn off safebrowsing.
+  * Turn off pinging Google on 404 and other HTTP errors.
 
- -- Michael Gilbert <mgilbert@debian.org>  Mon, 27 Apr 2015 00:48:11 +0000
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 30 Apr 2015 01:08:53 +0000
 
 chromium-browser (42.0.2311.90-2) unstable; urgency=medium
 

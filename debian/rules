@@ -100,6 +100,7 @@ flotpaths=/usr/share/javascript/jquery/*min.js \
 
 # files to exclude from the upstream tarball
 excluded=native_client/NOTICE \
+	 third_party/flot/* \
 	 third_party/libsrtp/srtp/doc/rfc3711.txt \
 
 %:
@@ -140,11 +141,10 @@ override_dh_strip:
 	dh_strip --dbg-package=chromium-dbg
 
 override_dh_auto_clean:
+	rm -f third_party/mesa/src/src/gallium/state_trackers/d3d1x/w32api
 	rm -rf out Makefile third_party/flot/*
 	find . -name \*.mk -execdir rm -rf {} \;
 	find . -name \*.pyc -execdir rm -rf {} \;
-	find . -name config.sub -execdir rm -rf {} \;
-	find . -name config.guess -execdir rm -rf {} \;
 
 ###################### upstream source downloading ############################
 
@@ -153,5 +153,7 @@ version=$(shell dpkg-parsechangelog --show-field=version | sed s/-.*//)
 tarball=chromium-$(version).tar.xz
 
 get-orig-source:
-	cd .. && wget -c $(url)/$(tarball)
-	mk-origtargz $(shell for f in $(excluded); do echo --exclude-file $$f; done) ../$(tarball)
+	wget -c $(url)/$(tarball) -O ../$(tarball) && \
+	    x=$$(tar tf ../$(tarball) --strip-components=1 | grep -e config\.sub) && \
+	    y=$$(for f in $(excluded) $$x; do echo --exclude-file $$f; done) && \
+	    mk-origtargz $$y ../$(tarball)

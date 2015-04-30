@@ -1,7 +1,7 @@
 {
   "distribution": {
      "import_bookmarks": false,
-     "import_bookmarks_from_file": "/etc/chromium/initial_bookmarks.html",
+     "import_bookmarks_from_file": "/usr/share/chromium/initial_bookmarks.html",
      "skip_first_run_ui": true,
      "show_welcome_page": false,
      "suppress_first_run_default_browser_prompt": true,
@@ -25,4 +25,3 @@
     "enabled": false
   },
 }
-

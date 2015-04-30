@@ -7,7 +7,7 @@ disable/third-party-cookies.patch
 disable/default-browser-warning.patch
 
 nspr.patch
-prefs.patch
+master-preferences.patch
 system-speech.patch
 ps-print.patch
 chromedriver-revision.patch
