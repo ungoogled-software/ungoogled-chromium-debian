@@ -6,11 +6,11 @@
 #  Fabien Tassin <fta@sofaraway.org>
 # License: GPLv2 or later
 
-GDB=/usr/bin/gdb
-LIBDIR=/usr/lib/chromium
-BUILD_DIST="@BUILD_DIST@"
+APPNAME=chromium
 
-APPNAME=`basename $0`
+GDB=/usr/bin/gdb
+LIBDIR=/usr/lib/$APPNAME
+BUILD_DIST="@BUILD_DIST@"
 
 usage () {
   echo "$APPNAME [-h|--help] [-g|--debug] [--temp-profile] [options] [URL]"
@@ -41,7 +41,12 @@ for file in /etc/chromium.d/*; do
   test $file = /etc/chromium.d/README || expr $file : .*\.dpkg > /dev/null || . $file
 done
 
-# Set CHROME_VERSION_EXTRA visible in the About dialog and in about:version
+# Use the /usr/bin helper script for generated launchers
+if test -z "$CHROME_WRAPPER"; then
+    export CHROME_WRAPPER="/usr/bin/$APPNAME"
+fi
+
+# Set CHROME_VERSION_EXTRA text, which is displayed in the About dialog
 DIST=`cat /etc/debian_version`
 export CHROME_VERSION_EXTRA="Built on Debian $BUILD_DIST, running on Debian $DIST"
 

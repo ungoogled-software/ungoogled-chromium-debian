@@ -154,6 +154,6 @@ tarball=chromium-$(version).tar.xz
 
 get-orig-source:
 	wget -c $(url)/$(tarball) -O ../$(tarball) && \
-	    x=$$(tar tf ../$(tarball) --strip-components=1 | grep -e config\.sub) && \
+	    x=$$(tar tf ../$(tarball) --strip-components=1 | grep -e config\.sub -e config\.guess) && \
 	    y=$$(for f in $(excluded) $$x; do echo --exclude-file $$f; done) && \
 	    mk-origtargz $$y ../$(tarball)
