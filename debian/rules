@@ -33,7 +33,8 @@ defines+=use_ozone=0 \
          enable_remoting_host=0 \
 
 # enabled features
-defines+=enable_webrtc=1 \
+defines+=enable_hidpi=1 \
+         enable_webrtc=1 \
          use_gio=1 \
          use_pulseaudio=1 \
          use_gnome_keyring=1 \
@@ -102,6 +103,7 @@ flotpaths=/usr/share/javascript/jquery/*min.js \
 excluded=native_client/NOTICE \
 	 third_party/flot/* \
 	 third_party/libsrtp/srtp/doc/rfc3711.txt \
+	 third_party/mesa/src/src/gallium/state_trackers/d3d1x/w32api \
 
 %:
 	dh $@ --parallel
@@ -118,7 +120,7 @@ override_dh_auto_build:
 	mv out/Release/chrome_sandbox out/Release/chrome-sandbox || true
 	chmod 4755 out/Release/chrome-sandbox # suid sandbox
 
-override_dh_auto_install:
+override_dh_auto_install-arch:
 	dh_auto_install
 	echo "Any files placed in this directory will be sourced prior to executing chromium." \
 	    > debian/chromium/etc/chromium.d/README
@@ -140,8 +142,10 @@ override_dh_fixperms:
 override_dh_strip:
 	dh_strip --dbg-package=chromium-dbg
 
+override_dh_gencontrol:
+	dh_gencontrol -- -VBuilt-Using="$(shell dpkg-query -f '$${source:Package} (= $${source:Version}), ' -W libjs-jquery libjs-jquery-flot)"
+
 override_dh_auto_clean:
-	rm -f third_party/mesa/src/src/gallium/state_trackers/d3d1x/w32api
 	rm -rf out Makefile third_party/flot/*
 	find . -name \*.mk -execdir rm -rf {} \;
 	find . -name \*.pyc -execdir rm -rf {} \;
@@ -154,6 +158,6 @@ tarball=chromium-$(version).tar.xz
 
 get-orig-source:
 	wget -c $(url)/$(tarball) -O ../$(tarball) && \
-	    x=$$(tar tf ../$(tarball) --strip-components=1 | grep -e config\.sub -e config\.guess) && \
+	    x=$$(tar tf ../$(tarball) --strip-components=1 | grep -e config\.sub -e config\.guess -e \*.mk) && \
 	    y=$$(for f in $(excluded) $$x; do echo --exclude-file $$f; done) && \
 	    mk-origtargz $$y ../$(tarball)

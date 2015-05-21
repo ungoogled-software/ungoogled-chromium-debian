@@ -1,3 +1,30 @@
+chromium-browser (43.0.2357.65-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - CVE-2015-1252: Sandbox escape in Chrome. Credit to anonymous.
+    - CVE-2015-1253: Cross-origin bypass in DOM. Credit to anonymous.
+    - CVE-2015-1254: Cross-origin bypass in Editing. Credit to
+      armin@rawsec.net.
+    - CVE-2015-1255: Use-after-free in WebAudio. Credit to Khalil Zhani.
+    - CVE-2015-1256: Use-after-free in SVG. Credit to Atte Kettunen.
+    - CVE-2015-1251: Use-after-free in Speech. Credit to SkyLined.
+    - CVE-2015-1257: Container-overflow in SVG. Credit to miaubiz.
+    - CVE-2015-1258: Negative-size parameter in Libvpx.  Credit to cloudfuzzer
+    - CVE-2015-1259: Uninitialized value in PDFium. Credit to Atte Kettunen.
+    - CVE-2015-1260: Use-after-free in WebRTC. Credit to Khalil Zhani.
+    - CVE-2015-1261: URL bar spoofing. Credit to Juho Nurminen.
+    - CVE-2015-1262: Uninitialized value in Blink. Credit to miaubiz.
+    - CVE-2015-1263: Insecure download of spellcheck dictionary.  Credit to
+      Mike Ruddy.
+    - CVE-2015-1264: Cross-site scripting in bookmarks. Credit to K0r3Ph1L.
+    - Fix for gzip file downloading (closes: #677948).
+    - Fix for bookmark navigation (closes: #756211).
+  * Enable HiDPI (closes: #763421).
+  * Make chromium-l10n binnmuable.
+  * Fix Built-Using fields.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 09 May 2015 22:37:06 +0000
+
 chromium-browser (42.0.2311.135-2) unstable; urgency=medium
 
   * Remove src/ prefix in debian/copyright.

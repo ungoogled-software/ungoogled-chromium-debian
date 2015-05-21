@@ -79,13 +79,11 @@ Build-Depends:
  libgcrypt20-dev,
  fonts-ipafont-gothic,
  fonts-ipafont-mincho,
-Built-Using:
- libjs-jquery,
- libjs-jquery-flot,
 Standards-Version: 3.9.6
 
 Package: chromium
 Architecture: i386 amd64
+Built-Using: ${Built-Using}
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
@@ -108,6 +106,7 @@ Package: chromium-dbg
 Architecture: i386 amd64
 Section: debug
 Priority: extra
+Built-Using: ${Built-Using}
 Depends:
  ${misc:Depends},
  chromium (= ${binary:Version}),
@@ -122,7 +121,7 @@ Architecture: all
 Section: localization
 Depends:
  ${misc:Depends},
- chromium (= ${source:Version}),
+ chromium (>= ${source:Version}), chromium (<< ${source:Version}.1~),
 Description: web browser - language packs
  Web browser that aims to build a safer, faster, and more stable internet
  browsing experience.

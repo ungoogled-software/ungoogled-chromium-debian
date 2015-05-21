@@ -1,6 +1,3 @@
 usr/bin
 
 etc/chromium.d
-
-usr/lib/chromium/plugins
-usr/lib/chromium/resources
