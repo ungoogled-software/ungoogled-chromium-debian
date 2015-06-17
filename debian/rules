@@ -99,12 +99,6 @@ endif
 flotpaths=/usr/share/javascript/jquery/*min.js \
           /usr/share/javascript/jquery-flot/*min.js \
 
-# files to exclude from the upstream tarball
-excluded=native_client/NOTICE \
-	 third_party/flot/* \
-	 third_party/libsrtp/srtp/doc/rfc3711.txt \
-	 third_party/mesa/src/src/gallium/state_trackers/d3d1x/w32api \
-
 %:
 	dh $@ --parallel
 
@@ -140,24 +134,25 @@ override_dh_fixperms:
 	dh_fixperms --exclude chrome-sandbox
 
 override_dh_strip:
-	dh_strip --dbg-package=chromium-dbg
+	dh_strip --dbg-package chromium-dbg
 
 override_dh_gencontrol:
 	dh_gencontrol -- -VBuilt-Using="$(shell dpkg-query -f '$${source:Package} (= $${source:Version}), ' -W libjs-jquery libjs-jquery-flot)"
 
 override_dh_auto_clean:
-	rm -rf out Makefile third_party/flot/*
-	find . -name \*.mk -execdir rm -rf {} \;
-	find . -name \*.pyc -execdir rm -rf {} \;
+	rm -rf out
+	dh_auto_clean
 
 ###################### upstream source downloading ############################
 
 url=https://gsdview.appspot.com/chromium-browser-official
-version=$(shell dpkg-parsechangelog --show-field=version | sed s/-.*//)
+version=$(shell dpkg-parsechangelog -S Version | sed s/-.*//)
 tarball=chromium-$(version).tar.xz
 
 get-orig-source:
-	wget -c $(url)/$(tarball) -O ../$(tarball) && \
-	    x=$$(tar tf ../$(tarball) --strip-components=1 | grep -e config\.sub -e config\.guess -e \*.mk) && \
-	    y=$$(for f in $(excluded) $$x; do echo --exclude-file $$f; done) && \
-	    mk-origtargz $$y ../$(tarball)
+	wget -c $(url)/$(tarball) -O ../$(tarball)
+	mk-origtargz ../$(tarball)
+	tar tf ../$(tarball) | sort > ../chromium.upstream
+	tar tf ../chromium-browser_$(version).orig.tar.xz | sort > ../chromium.orig
+	diff -u ../chromium.upstream ../chromium.orig | \
+	    tee ../chromium-browser_$(version).files-removed

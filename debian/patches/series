@@ -2,6 +2,7 @@ manpage.patch
 clang.patch
 
 disable/promo.patch
+disable/hotword.patch
 disable/google-api-warning.patch
 disable/third-party-cookies.patch
 disable/default-browser-warning.patch
@@ -11,4 +12,3 @@ master-preferences.patch
 system-speech.patch
 ps-print.patch
 chromedriver-revision.patch
-

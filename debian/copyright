@@ -1,6 +1,23 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0
 Source: http://www.chromium.org/Home
 Upstream-Name: chromium
+Files-Excluded:
+ .gn
+ .DEPS.git
+ .clang-format
+ *.mk
+ *.swf
+ *config.sub
+ *config.guess
+ *jquery*.min.js
+ native_client/NOTICE
+ third_party/bidichecker
+ third_party/swig/linux
+ third_party/flot/*.js
+ third_party/webgl/src/sdk
+ third_party/webgl/src/other
+ third_party/libsrtp/srtp/doc/rfc3711.txt
+ third_party/mesa/src/src/gallium/state_trackers/d3d1x/w32api
 
 Files: debian/*
 Copyright:
