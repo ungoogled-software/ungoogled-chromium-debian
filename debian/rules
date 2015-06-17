@@ -31,6 +31,7 @@ defines+=use_ozone=0 \
          remoting=0 \
          disable_nacl=1 \
          enable_remoting_host=0 \
+         enable_prod_wallet_service=0 \
 
 # enabled features
 defines+=enable_hidpi=1 \
