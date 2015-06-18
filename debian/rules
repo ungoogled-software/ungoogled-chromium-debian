@@ -51,7 +51,6 @@ defines+=use_system_re2=1 \
          use_system_zlib=1 \
          use_system_speex=1 \
          use_system_expat=1 \
-         use_system_snappy=1 \
          use_system_libpng=1 \
          use_system_libxml=1 \
          use_system_libjpeg=1 \
@@ -142,6 +141,7 @@ override_dh_gencontrol:
 
 override_dh_auto_clean:
 	rm -rf out
+	find . -name \*.pyc -execdir rm -rf {} \;
 	dh_auto_clean
 
 ###################### upstream source downloading ############################

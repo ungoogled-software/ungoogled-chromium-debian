@@ -12,3 +12,5 @@ master-preferences.patch
 system-speech.patch
 ps-print.patch
 chromedriver-revision.patch
+
+system/snappy.patch

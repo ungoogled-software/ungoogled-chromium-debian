@@ -1,3 +1,12 @@
+chromium-browser (43.0.2357.124-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Disable wallet extension.
+  * Remove more sourceless files.
+  * Remove no longer files included from debian/copright.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Wed, 17 Jun 2015 03:00:44 +0000
+
 chromium-browser (43.0.2357.81-1) unstable; urgency=medium
 
   * New upstream release fixing missing icon (closes: #786490).
