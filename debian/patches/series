@@ -5,6 +5,7 @@ disable/promo.patch
 disable/hotword.patch
 disable/google-api-warning.patch
 disable/third-party-cookies.patch
+disable/external-components.patch
 disable/default-browser-warning.patch
 
 nspr.patch

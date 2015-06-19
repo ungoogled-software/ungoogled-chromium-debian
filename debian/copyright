@@ -24,6 +24,7 @@ Files-Excluded:
  third_party/snappy/src
  third_party/libsrtp/srtp/doc/rfc3711.txt
  third_party/mesa/src/src/gallium/state_trackers/d3d1x/w32api
+ base/third_party/nspr
 
 Files: debian/*
 Copyright:
@@ -227,34 +228,6 @@ License: ICU-License
 Files: base/third_party/icu/*
 Copyright: Copyright: \ / 1999-2004gInternational Business Machines:
 License: ICU-License
-
-Files: base/third_party/nspr/prcpucfg.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD (guessed)
-
-Files: base/third_party/nspr/*
-Copyright: Copyright: 1998-2000:
-License: MPL-1.1 GPL (unversioned/unknown version)
-
-Files: base/third_party/nspr/*
-Copyright: Copyright: 2007 Google Inc */ / 1998-2000:
-License: MPL-1.1 GPL (unversioned/unknown version)
-
-Files: base/third_party/nss/*
-Copyright: Copyright: 1994-2000:
-License: MPL-1.1 GPL (unversioned/unknown version)
-
-Files: base/third_party/nss/*
-Copyright: Copyright: 2002:
-License: MPL-1.1 GPL (unversioned/unknown version)
-
-Files: base/third_party/purify/*
-Copyright: Copyright: IBM Corporation. 2006g2006. All Rights Reserved:
-License: Public domain
-
-Files: base/third_party/purify/*
-Copyright: UNKNOWN:
-License: Public domain
 
 Files: base/third_party/symbolize/demangle.ccgbase/third_party/symbolize/demangle.h base/third_party/symbolize/symbolize.cc base/third_party/symbolize/symbolize.h
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2006gGoogle Inc:
@@ -592,10 +565,6 @@ Files: chrome/browser/dom_ui/app_launcher_ui.ccgchrome/browser/dom_ui/app_launch
 Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
-Files: chrome/browser/download/download_exe.cc
-Copyright: Copyright: 1998-1999 / 2006-2008 The Chromium Authors. All rights reserved:
-License: MPL-1.1 GPL (unversioned/unknown version)
-
 Files: chrome/browser/download/download_file.ccgchrome/browser/download/download_file.h chrome/browser/download/download_item_model.h chrome/browser/download/download_request_manager.cc chrome/browser/download/download_request_manager_unittest.cc chrome/browser/download/download_uitest.cc chrome/browser/download/save_file.cc chrome/browser/download/save_file.h chrome/browser/download/save_file_manager.cc chrome/browser/download/save_file_manager.h chrome/browser/download/save_item.cc chrome/browser/download/save_item.h chrome/browser/download/save_package.h chrome/browser/download/save_package_unittest.cc chrome/browser/download/save_page_uitest.cc chrome/browser/download/save_types.h
 Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
@@ -724,47 +693,19 @@ Files: chrome/browser/history/expire_history_backend.ccgchrome/browser/history/e
 Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
-Files: chrome/browser/importer/nss_decryptor_system_nss.cc
-Copyright: Copyright: 2009 The Chromium Authors. All rights reserved / 1994-2000:
-License: MPL-1.1
+Files: chrome/browser/importer/*
+Copyright: Netscape
+License: MPL 1.1 / GPL-2+ / LGPL-2.1+
 
-Files: chrome/browser/importer/firefox_profile_lock_win.cc
-Copyright: Copyright: 2002 / 2008 The Chromium Authors. All rights reserved:
-License: MPL-1.1 GPL (unversioned/unknown version)
-
-Files: chrome/browser/importer/mork_reader.ccgchrome/browser/importer/mork_reader.h
-Copyright: Copyright: 2006:
-License: MPL-1.1 GPL (unversioned/unknown version)
-
-Files: chrome/browser/importer/nss_decryptor.ccgchrome/browser/importer/nss_decryptor_mac.h chrome/browser/importer/nss_decryptor_win.h
-Copyright: Copyright: 2009 The Chromium Authors. All rights reserved / 1994-2000:
-License: MPL-1.1 GPL (unversioned/unknown version)
-
-Files: chrome/browser/importer/firefox_profile_lock.ccgchrome/browser/importer/firefox_profile_lock.h chrome/browser/importer/firefox_profile_lock_posix.cc
-Copyright: Copyright: 2009 The Chromium Authors. All rights reserved / 2002:
-License: MPL-1.1 GPL (unversioned/unknown version)
-
-Files: chrome/browser/importer/firefox_importer_unittest.ccgchrome/browser/importer/ie_importer.cc chrome/browser/importer/ie_importer.h chrome/browser/importer/toolbar_importer_unittest.cc
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: global BSD-style Chromium
-
-Files: chrome/browser/importer/firefox_importer_unittest_messages_internal.hgchrome/browser/importer/firefox_importer_unittest_utils.h chrome/browser/importer/firefox_importer_unittest_utils_mac.cc chrome/browser/importer/firefox_importer_utils.cc chrome/browser/importer/firefox_importer_utils.h chrome/browser/importer/firefox_importer_utils_linux.cc chrome/browser/importer/firefox_importer_utils_win.cc chrome/browser/importer/firefox_profile_lock_unittest.cc chrome/browser/importer/nss_decryptor.h chrome/browser/importer/nss_decryptor_system_nss.h chrome/browser/importer/nss_decryptor_win.cc
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: global BSD-style Chromium
-
-Files: chrome/browser/importer/firefox2_importer.ccgchrome/browser/importer/firefox2_importer.h chrome/browser/importer/firefox3_importer.cc chrome/browser/importer/firefox3_importer.h chrome/browser/importer/importer.cc chrome/browser/importer/importer.h chrome/browser/importer/importer_bridge.cc chrome/browser/importer/importer_bridge.h chrome/browser/importer/importer_data_types.h chrome/browser/importer/importer_list.cc chrome/browser/importer/importer_list.h chrome/browser/importer/importer_unittest.cc chrome/browser/importer/safari_importer.h chrome/browser/importer/toolbar_importer.cc chrome/browser/importer/toolbar_importer.h
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: global BSD-style Chromium
-
-Files: chrome/browser/in_process_webkit/browser_webkitclient_impl.ccgchrome/browser/in_process_webkit/browser_webkitclient_impl.h chrome/browser/in_process_webkit/webkit_thread.cc chrome/browser/in_process_webkit/webkit_thread.h
+Files: chrome/browser/in_process_webkit/browser_webkitclient_impl.cc chrome/browser/in_process_webkit/browser_webkitclient_impl.h chrome/browser/in_process_webkit/webkit_thread.cc chrome/browser/in_process_webkit/webkit_thread.h
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved.  Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
-Files: chrome/browser/in_process_webkit/dom_storage_dispatcher_host_unittest.ccgchrome/browser/in_process_webkit/dom_storage_uitest.cc chrome/browser/in_process_webkit/webkit_context_unittest.cc chrome/browser/in_process_webkit/webkit_thread_unittest.cc
+Files: chrome/browser/in_process_webkit/dom_storage_dispatcher_host_unittest.cc chrome/browser/in_process_webkit/dom_storage_uitest.cc chrome/browser/in_process_webkit/webkit_context_unittest.cc chrome/browser/in_process_webkit/webkit_thread_unittest.cc
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
-Files: chrome/browser/in_process_webkit/dom_storage_dispatcher_host.hgchrome/browser/in_process_webkit/dom_storage_namespace.cc chrome/browser/in_process_webkit/dom_storage_namespace.h
+Files: chrome/browser/in_process_webkit/dom_storage_dispatcher_host.h chrome/browser/in_process_webkit/dom_storage_namespace.cc chrome/browser/in_process_webkit/dom_storage_namespace.h
 Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved.  Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
@@ -1572,53 +1513,9 @@ Files: gfx/codec/*
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
-Files: googleurl/PRESUBMIT.pyggoogleurl/PRESUBMIT_unittest.py
-Copyright: Copyright: 2009 The Chromium Authors. All rights reserved:
-License: BSD (guessed)
-
-Files: googleurl/base/basictypes.h
-Copyright: Copyright: 2001 - 2003 Google Inc. All Rights Reserved:
-License: BSD (guessed)
-
-Files: googleurl/base/scoped_ptr.h
-Copyright: Copyright: 2001g2002 Peter Dimov / Greg Colvin and Beman Dawes 1998 1999:
-License: BSD (guessed)
-
-Files: googleurl/base/logging.h
-Copyright: Copyright: 2006 Google Inc. All Rights Reserved:
-License: BSD (guessed)
-
-Files: googleurl/base/string16.ccggoogleurl/base/string16.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2006-2008 The Chromium Authors. All rights reserved:
-License: BSD (guessed)
-
-Files: googleurl/base/logging.cc
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2007gGoogle Inc:
-License: BSD (guessed)
-
-Files: googleurl/gurl_unittest.cc
-Copyright: Copyright: 2007 Google Inc. All Rights Reserved:
-License: BSD (guessed)
-
-Files: googleurl/url_test_utils.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2007 Google Inc:
-License: BSD (guessed)
-
-Files: googleurl/gurl.ccggoogleurl/gurl.h googleurl/gurl_test_main.cc googleurl/url_canon.h googleurl/url_canon_etc.cc googleurl/url_canon_fileurl.cc googleurl/url_canon_host.cc googleurl/url_canon_icu.cc googleurl/url_canon_icu.h googleurl/url_canon_internal.cc googleurl/url_canon_internal.h googleurl/url_canon_internal_file.h googleurl/url_canon_path.cc googleurl/url_canon_pathurl.cc googleurl/url_canon_query.cc googleurl/url_canon_relative.cc googleurl/url_canon_stdstring.h googleurl/url_canon_stdurl.cc googleurl/url_canon_unittest.cc googleurl/url_file.h googleurl/url_parse.h googleurl/url_parse_file.cc googleurl/url_parse_internal.h googleurl/url_parse_unittest.cc googleurl/url_util.cc googleurl/url_util.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2007gGoogle Inc:
-License: BSD (guessed)
-
-Files: googleurl/url_canon_ip.hggoogleurl/url_canon_mailtourl.cc googleurl/url_util_unittest.cc
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD (guessed)
-
-Files: googleurl/url_canon_ip.cc
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc:
-License: BSD (guessed)
-
-Files: googleurl/url_parse.cc
-Copyright: Copyright: 1998:
-License: MPL-1.1 GPL (unversioned/unknown version)
+Files: url/*
+Copyright: Copyright 2013 The Chromium Authors. All rights reserved.
+License: global BSD-style Chromium
 
 Files: gpu/command_buffer/build_gles2_cmd_buffer.py
 Copyright: Copyright (c) 2006-2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
@@ -1844,10 +1741,6 @@ Files: media/tools/player_x11/gl_video_renderer.ccgmedia/tools/player_x11/gl_vid
 Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
-Files: media/tools/qt_faststart/qt_faststart.c
-Copyright: UNKNOWN:
-License: Public domain
-
 Files: media/tools/wav_ola_test/wav_ola_test.cc
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
@@ -1868,10 +1761,6 @@ Files: native_client/common/console/console.ccgnative_client/common/console/cons
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
 License: BSD (guessed)
 
-Files: native_client/documentation/check.sh
-Copyright: UNKNOWN:
-License: BSD (guessed)
-
 Files: native_client/site_scons/http_download.pygnative_client/site_scons/site_init.py native_client/site_scons/sync_tgz.py native_client/site_scons/usage_log.py
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc:
 License: BSD (guessed)
@@ -1882,10 +1771,6 @@ License: BSD (guessed)
 
 Files: native_client/site_scons/site_tools/atlmfc_vc80.pygnative_client/site_scons/site_tools/code_coverage.py native_client/site_scons/site_tools/code_signing.py native_client/site_scons/site_tools/collada_dom.py native_client/site_scons/site_tools/command_output.py native_client/site_scons/site_tools/component_bits.py native_client/site_scons/site_tools/component_builders.py native_client/site_scons/site_tools/component_setup.py native_client/site_scons/site_tools/component_targets.py native_client/site_scons/site_tools/component_targets_msvs.py native_client/site_scons/site_tools/component_targets_xml.py native_client/site_scons/site_tools/defer.py native_client/site_scons/site_tools/directx_9_0_c.py native_client/site_scons/site_tools/directx_9_18_944_0_partial.py native_client/site_scons/site_tools/distcc.py native_client/site_scons/site_tools/environment_tools.py native_client/site_scons/site_tools/gather_inputs.py native_client/site_scons/site_tools/naclsdk.py native_client/site_scons/site_tools/publish.py native_client/site_scons/site_tools/replace_strings.py native_client/site_scons/site_tools/replicate.py native_client/site_scons/site_tools/sdl.py native_client/site_scons/site_tools/seven_zip.py native_client/site_scons/site_tools/target_debug.py native_client/site_scons/site_tools/target_optimized.py native_client/site_scons/site_tools/target_platform_linux.py native_client/site_scons/site_tools/target_platform_mac.py native_client/site_scons/site_tools/target_platform_windows.py native_client/site_scons/site_tools/visual_studio_solution.py native_client/site_scons/site_tools/windows_hard_link.py
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc:
-License: BSD (guessed)
-
-Files: native_client/site_scons/site_tools/uuid.py
-Copyright: UNKNOWN:
 License: BSD (guessed)
 
 Files: native_client/site_scons/site_tools/concat_source.py
@@ -1972,10 +1857,6 @@ Files: native_client/shared/npruntime/audio.ccgnative_client/shared/npruntime/au
 Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
 License: BSD (guessed)
 
-Files: native_client/shared/npruntime/npmodule.cc
-Copyright: UNKNOWN:
-License: BSD (guessed)
-
 Files: native_client/shared/platform/nacl_check.cgnative_client/shared/platform/nacl_check.h native_client/shared/platform/nacl_global_secure_random.c native_client/shared/platform/nacl_global_secure_random.h native_client/shared/platform/nacl_host_desc.h native_client/shared/platform/nacl_host_desc_common.c native_client/shared/platform/nacl_host_dir.h native_client/shared/platform/nacl_interruptible_condvar.c native_client/shared/platform/nacl_interruptible_condvar.h native_client/shared/platform/nacl_interruptible_mutex.c native_client/shared/platform/nacl_interruptible_mutex.h native_client/shared/platform/nacl_log.c native_client/shared/platform/nacl_log.h native_client/shared/platform/nacl_secure_random.h native_client/shared/platform/nacl_secure_random_base.h native_client/shared/platform/nacl_secure_random_common.c native_client/shared/platform/nacl_semaphore.h native_client/shared/platform/nacl_sync.cc native_client/shared/platform/nacl_sync.h native_client/shared/platform/nacl_sync_checked.c native_client/shared/platform/nacl_sync_checked.h native_client/shared/platform/nacl_threads.h native_client/shared/platform/nacl_time.h native_client/shared/platform/nacl_timestamp.h native_client/shared/platform/time.cc native_client/shared/platform/time.h
 Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
 License: BSD (guessed)
@@ -2024,141 +1905,9 @@ Files: native_client/shared/utils/debugging.hgnative_client/shared/utils/flags.c
 Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
 License: BSD (guessed)
 
-Files: native_client/third_party/libxt/autogen.sh
-Copyright: UNKNOWN:
-License: BSD (guessed)
-
-Files: native_client/third_party/libxt/ltmain.sh
-Copyright: Copyright: 1996g1997 1998 1999 2000 2001 2003 2004 2005:
-License: GPL-2+ GENERATED FILE
-
-Files: native_client/third_party/libxt/include/X11/VarargsI.h
-Copyright: Copyright: 1985g1986 1987 1988 1989 1998 The Open Group:
-License: BSD (guessed)
-
-Files: native_client/third_party/libxt/include/X11/PassivGraI.h
-Copyright: Copyright: 1987g1988 1989 by Digital Equipment Corporation Maynard / 1987 1988 1989 1998 The Open Group / 1988 by Hewlett-Packard Company:
-License: BSD (guessed)
-
-Files: native_client/third_party/libxt/include/X11/InitialI.hgnative_client/third_party/libxt/include/X11/Intrinsic.h native_client/third_party/libxt/include/X11/IntrinsicI.h native_client/third_party/libxt/include/X11/IntrinsicP.h native_client/third_party/libxt/include/X11/ObjectP.h native_client/third_party/libxt/include/X11/ResourceI.h native_client/third_party/libxt/include/X11/SelectionI.h native_client/third_party/libxt/include/X11/ShellP.h native_client/third_party/libxt/include/X11/Xtos.h
-Copyright: Copyright: 1987g1988 1994 1998 The Open Group / 1987 1988 by Digital Equipment Corporation Maynard Massachusetts:
-License: BSD (guessed)
-
-Files: native_client/third_party/libxt/include/X11/CallbackI.hgnative_client/third_party/libxt/include/X11/Composite.h native_client/third_party/libxt/include/X11/CompositeP.h native_client/third_party/libxt/include/X11/ConstrainP.h native_client/third_party/libxt/include/X11/Constraint.h native_client/third_party/libxt/include/X11/ConvertI.h native_client/third_party/libxt/include/X11/Core.h native_client/third_party/libxt/include/X11/CoreP.h native_client/third_party/libxt/include/X11/EventI.h native_client/third_party/libxt/include/X11/Object.h native_client/third_party/libxt/include/X11/RectObj.h native_client/third_party/libxt/include/X11/RectObjP.h native_client/third_party/libxt/include/X11/TranslateI.h native_client/third_party/libxt/include/X11/Vendor.h native_client/third_party/libxt/include/X11/VendorP.h
-Copyright: Copyright: 1987g1988 1998 The Open Group / 1987 1988 by Digital Equipment Corporation Maynard Massachusetts:
-License: BSD (guessed)
-
-Files: native_client/third_party/libxt/include/X11/HookObjI.h
-Copyright: Copyright: 1994g1998 The Open Group:
-License: BSD (guessed)
-
-Files: native_client/third_party/libxt/include/X11/ThreadsI.h
-Copyright: Copyright: no- / 1993 by Sun MicrosystemsgInc. Mountain View CA / 1994 1998 The Open Group:
-License: BSD (guessed)
-
-Files: native_client/third_party/libxt/include/X11/CreateI.hgnative_client/third_party/libxt/include/X11/ShellI.h
-Copyright: UNKNOWN:
-License: BSD (guessed)
-
-Files: native_client/third_party/libxt/include/X11/ResConfigP.h
-Copyright: Copyright: 1987g1988 1998 The Open Group / International Business Machines Corp. 1992,1997:
-License: Expat
-
-Files: native_client/third_party/libxt/VarCreate.c
-Copyright: Copyright: 1885g1986 1987 1988 1989 1994 1998 The Open Group / 1993 by Sun Microsystems Inc. Mountain View CA:
-License: BSD (guessed)
-
-Files: native_client/third_party/libxt/Varargs.c
-Copyright: Copyright: 1985g1986 1987 1988 1989 1994 1998 The Open Group:
-License: BSD (guessed)
-
-Files: native_client/third_party/libxt/Pointer.c
-Copyright: Copyright: 1987g1988 1989 by Digital Equipment Corporation Maynard / 1987 1988 1989 1998 The Open Group / 1988 by Hewlett-Packard Company:
-License: BSD (guessed)
-
-Files: native_client/third_party/libxt/GCManager.c
-Copyright: Copyright: 1987g1988 1990 by Digital Equipment Corporation Maynard Massachusetts / 1987 1988 1990 1994 1998 The Open Group / 1993 by Sun Microsystems Inc. Mountain View CA:
-License: BSD (guessed)
-
-Files: native_client/third_party/libxt/Popup.c
-Copyright: Copyright: 1987g1988 1994 1998 The Open Group / 1987 1988 by Digital Equipment Corporation Maynard Massachusetts:
-License: BSD (guessed)
-
-Files: native_client/third_party/libxt/Converters.cgnative_client/third_party/libxt/Create.c native_client/third_party/libxt/Destroy.c native_client/third_party/libxt/Geometry.c native_client/third_party/libxt/Initialize.c native_client/third_party/libxt/Intrinsic.c native_client/third_party/libxt/Manage.c native_client/third_party/libxt/Object.c native_client/third_party/libxt/Resources.c native_client/third_party/libxt/Selection.c native_client/third_party/libxt/SetValues.c native_client/third_party/libxt/Shell.c native_client/third_party/libxt/TMkey.c native_client/third_party/libxt/TMstate.c
-Copyright: Copyright: 1987g1988 1994 1998 The Open Group / 1993 by Sun Microsystems Inc. Mountain View CA / 1987 1988 by Digital Equipment Corporation Maynard Massachusetts:
-License: BSD (guessed)
-
-Files: native_client/third_party/libxt/Keyboard.c
-Copyright: Copyright: 1987g1988 1994 1998 The Open Group / 1993 by Sun Microsystems Inc. Mountain View CA / 1987 1988 1989 by Digital Equipment Corporation Maynard Massachusetts / 1988 by Hewlett-Packard Company:
-License: BSD (guessed)
-
-Files: native_client/third_party/libxt/ArgList.cgnative_client/third_party/libxt/PopupCB.c native_client/third_party/libxt/RectObj.c native_client/third_party/libxt/Vendor.c
-Copyright: Copyright: 1987g1988 1998 The Open Group / 1987 1988 by Digital Equipment Corporation Maynard Massachusetts:
-License: BSD (guessed)
-
-Files: native_client/third_party/libxt/Constraint.c
-Copyright: Copyright: 1987g1988 1998 The Open Group / 1987 1988 by Digital Equipment Corporation Maynard Massachusetts / 1993 by Sun Microsystems Inc. Mountain View CA:
-License: BSD (guessed)
-
-Files: native_client/third_party/libxt/ActionHook.cgnative_client/third_party/libxt/Alloc.c native_client/third_party/libxt/Callback.c native_client/third_party/libxt/ClickTime.c native_client/third_party/libxt/Composite.c native_client/third_party/libxt/Convert.c native_client/third_party/libxt/Core.c native_client/third_party/libxt/Display.c native_client/third_party/libxt/Error.c native_client/third_party/libxt/Event.c native_client/third_party/libxt/GetActKey.c native_client/third_party/libxt/GetResList.c native_client/third_party/libxt/GetValues.c native_client/third_party/libxt/SetSens.c native_client/third_party/libxt/TMaction.c native_client/third_party/libxt/TMgrab.c native_client/third_party/libxt/TMparse.c native_client/third_party/libxt/TMprint.c
-Copyright: Copyright: 1987g1988 1998 The Open Group / 1993 by Sun Microsystems Inc. Mountain View CA / 1987 1988 by Digital Equipment Corporation Maynard Massachusetts:
-License: BSD (guessed)
-
-Files: native_client/third_party/libxt/sharedlib.c
-Copyright: Copyright: 1989g1994 1998 The Open Group:
-License: BSD (guessed)
-
-Files: native_client/third_party/libxt/Functions.c
-Copyright: Copyright: 1993 by Sun MicrosystemsgInc. Mountain View CA / 1985 1986 1987 1988 1989 1994 1998 The Open Group:
-License: BSD (guessed)
-
-Files: native_client/third_party/libxt/VarGet.c
-Copyright: Copyright: 1993 by Sun MicrosystemsgInc. Mountain View CA / 1985 1986 1987 1988 1989 1998 The Open Group:
-License: BSD (guessed)
-
-Files: native_client/third_party/libxt/NextEvent.c
-Copyright: Copyright: 1993 by Sun MicrosystemsgInc. Mountain View CA / 1987 1988 by Digital Equipment Corporation Maynard Massachusetts / 1987 1988 1994 1998 2001 The Open Group:
-License: BSD (guessed)
-
-Files: native_client/third_party/libxt/EventUtil.c
-Copyright: Copyright: 1993 by Sun MicrosystemsgInc. Mountain View CA / 1987 1988 1989 by Digital Equipment Corporation Maynard Massachusetts / 1987 1988 1989 1998 The Open Group / 1988 by Hewlett-Packard Company:
-License: BSD (guessed)
-
-Files: native_client/third_party/libxt/PassivGrab.c
-Copyright: Copyright: 1993 by Sun MicrosystemsgInc. Mountain View CA / 1987 1988 1989 1990 1994 1998 The Open Group / 1987 1988 1989,1990 by Digital Equipment Corporation Maynard Massachusetts / 1988 by Hewlett-Packard Company:
-License: BSD (guessed)
-
-Files: native_client/third_party/libxt/HookObj.cgnative_client/third_party/libxt/Hooks.c
-Copyright: Copyright: 1994g1998 The Open Group:
-License: BSD (guessed)
-
-Files: native_client/third_party/libxt/Threads.c
-Copyright: Copyright: no- / 1993 by Sun MicrosystemsgInc. Mountain View CA / 1994 1998 The Open Group:
-License: BSD (guessed)
-
-Files: native_client/third_party/libxt/*
-Copyright: Copyright: 1987g1988 1998 The Open Group / International Business Machines Corp. 1992,1997:
-License: Expat
-
-Files: native_client/third_party/libxt/*
-Copyright: Copyright: 1989g1994 1998 The Open Group / holder / 1993 Sun Microsystems Inc. All rights reserved / HOLDER OR:
-License: Expat
-
-Files: native_client/third_party/libxt/util/makestrs.c
-Copyright: Copyright: 1991g1998 The Open Group:
-License: BSD (guessed)
-
-Files: native_client/third_party/npapi/files/include/npupp.h
-Copyright: Copyright: 1998:
-License: MPL-1.1 GPL (unversioned/unknown version)
-
-Files: native_client/third_party/valgrind/memcheck.hgnative_client/third_party/valgrind/valgrind.h
+Files: native_client/src/third_party/valgrind/memcheck.hgnative_client/third_party/valgrind/valgrind.h
 Copyright: Copyright: 2000-2009 Julian Seward. All rights reserved:
 License: BSD (guessed)
-
-Files: native_client/third_party_mod/npapi_plugin/np_entry.ccgnative_client/third_party_mod/npapi_plugin/npn_gate.cc
-Copyright: Copyright: 1998:
-License: GPL (unversioned/unknown version)
 
 Files: native_client/trusted/base/nacl_base_array_size_test.cgnative_client/trusted/base/nacl_base_assert_is_array_test.c native_client/trusted/base/nacl_base_test.c native_client/trusted/base/nacl_min_max_test.c
 Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
@@ -2176,9 +1925,9 @@ Files: native_client/trusted/desc/nacl_desc_effector_trusted_mem.cgnative_client
 Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
 License: BSD (guessed)
 
-Files: native_client/trusted/desc/nrd_xfer_test.sh
-Copyright: UNKNOWN:
-License: BSD (guessed)
+Files: native_client/src/trusted/desc/nrd_xfer.*
+Copyright: Copyright 2013 The Chromium Authors. All rights reserved.
+License: global style BSD
 
 Files: native_client/trusted/desc/linux/nacl_desc.cgnative_client/trusted/desc/linux/nacl_desc_sysv_shm.c native_client/trusted/desc/linux/nacl_desc_sysv_shm.h
 Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
@@ -2257,11 +2006,7 @@ Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc:
 License: BSD (guessed)
 
 Files: native_client/trusted/plugin/srpc/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD (guessed)
-
-Files: native_client/trusted/plugin/srpc/*
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
+Copyright: Copyright: 2008-2009 The Native Client Authors. All rights reserved:
 License: BSD (guessed)
 
 Files: native_client/trusted/sandbox/linux/nacl_registers.ccgnative_client/trusted/sandbox/linux/nacl_registers.h native_client/trusted/sandbox/linux/nacl_sandbox.cc native_client/trusted/sandbox/linux/nacl_sandbox.h native_client/trusted/sandbox/linux/nacl_sandbox_main.cc native_client/trusted/sandbox/linux/nacl_syscall_checker.cc native_client/trusted/sandbox/linux/nacl_syscall_checker.h native_client/trusted/sandbox/linux/nacl_syscall_def.cc native_client/trusted/sandbox/linux/nacl_syscall_def.h native_client/trusted/sandbox/linux/nacl_syscall_filter.cc native_client/trusted/sandbox/linux/nacl_syscall_filter.h
@@ -2322,10 +2067,6 @@ License: BSD (guessed)
 
 Files: native_client/trusted/service_runtime/arch/x86/sel_ldr_x86.hgnative_client/trusted/service_runtime/arch/x86/sel_rt.h
 Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD (guessed)
-
-Files: native_client/trusted/service_runtime/arch/x86/output-wrapper.sh
-Copyright: UNKNOWN:
 License: BSD (guessed)
 
 Files: native_client/trusted/service_runtime/arch/x86_32/*
@@ -2508,14 +2249,6 @@ Files: native_client/tests/breakpad/*
 Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
 License: BSD (guessed)
 
-Files: native_client/tests/breakpad/*
-Copyright: UNKNOWN:
-License: BSD (guessed)
-
-Files: native_client/tests/bundle_size/bundle_size.c
-Copyright: UNKNOWN:
-License: BSD (guessed)
-
 Files: native_client/tests/cdom_perf/ccdomtable.ccgnative_client/tests/cdom_perf/cdomshm.c native_client/tests/cdom_perf/cdomshm.h native_client/tests/cdom_perf/cdomtable.c
 Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
 License: BSD (guessed)
@@ -2582,10 +2315,6 @@ License: BSD (guessed)
 
 Files: native_client/tests/imc_shm_mmap/imc_shm_mmap_test.c
 Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD (guessed)
-
-Files: native_client/tests/libc_free_hello_world/libc_free_hello_world.c
-Copyright: UNKNOWN:
 License: BSD (guessed)
 
 Files: native_client/tests/life/*
@@ -2661,12 +2390,8 @@ Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
 License: BSD (guessed)
 
 Files: native_client/tests/nrd_xfer/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD (guessed)
-
-Files: native_client/tests/nrd_xfer/*
-Copyright: UNKNOWN:
-License: BSD (guessed)
+Copyright: Copyright: 2008 The Native Client Authors. All rights reserved
+License: global style BSD
 
 Files: native_client/tests/nthread_nice/*
 Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
@@ -2680,37 +2405,9 @@ Files: native_client/tests/null/null.c
 Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
 License: BSD (guessed)
 
-Files: native_client/tests/nullptr/nullptr.c
-Copyright: UNKNOWN:
-License: BSD (guessed)
-
-Files: native_client/tests/pepper_plugin/event_handler.hgnative_client/tests/pepper_plugin/plugin_object.h
-Copyright: Copyright: 2006g2007 Apple Inc. All rights reserved:
-License: FreeBSD (guessed)
-
-Files: native_client/tests/pepper_plugin/event_handler.ccgnative_client/tests/pepper_plugin/plugin_object.cc
-Copyright: Copyright: 2006g2007 2008 Apple Inc. All rights reserved:
-License: FreeBSD (guessed)
-
-Files: native_client/tests/pepper_plugin/test_object.ccgnative_client/tests/pepper_plugin/test_object.h
-Copyright: Copyright: 2007 Apple Inc. All rights reserved:
-License: FreeBSD (guessed)
-
-Files: native_client/tests/pepper_plugin/md5.h
-Copyright: Copyright: 2006-2009 The Chromium Authors. All rights reserved:
-License: BSD (guessed)
-
-Files: native_client/tests/pepper_plugin/gles2_demo_cc.ccgnative_client/tests/pepper_plugin/gles2_demo_cc.h
-Copyright: Copyright: 2009 The Chromium Authors. All rights reserved:
-License: BSD (guessed)
-
-Files: native_client/tests/pepper_plugin/main.cc
-Copyright: UNKNOWN:
-License: BSD (guessed)
-
-Files: native_client/tests/pepper_plugin/md5.cc
-Copyright: Copyright: 2006 Google Inc. All Rights Reserved / is claimed:
-License: Public domain
+Files: native_client/tests/nullptr/*
+Copyright: Copyright (c) 2011 The Native Client Authors. All rights reserved.
+License: global style BSD
 
 Files: native_client/tests/photo/*
 Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
@@ -2725,8 +2422,8 @@ Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
 License: BSD (guessed)
 
 Files: native_client/tests/python_version/python_version.py
-Copyright: UNKNOWN:
-License: BSD (guessed)
+Copyright: Copyright (c) 2011 The Native Client Authors. All rights reserved.
+License: global style BSD
 
 Files: native_client/tests/quake/nacl_file.c
 Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
@@ -2764,16 +2461,12 @@ Files: native_client/tests/sysbasic/sysbasic.cgnative_client/tests/sysbasic/tls_
 Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
 License: BSD (guessed)
 
-Files: native_client/tests/syscall_return_sandboxing/syscall_return_sandboxing.c
-Copyright: UNKNOWN:
-License: BSD (guessed)
+Files: native_client/tests/syscall_return_sandboxing/*
+Copyright: Copyright (c) 2013 The Native Client Authors. All rights reserved.
+License: global style BSD
 
 Files: native_client/tests/syscalls/*
 Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD (guessed)
-
-Files: native_client/tests/syscalls/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
 License: BSD (guessed)
 
 Files: native_client/tests/threads/thread_test.c
@@ -2805,8 +2498,8 @@ Copyright: Copyright: 2009gGoogle Inc / 2009 The Native Client Authors. All righ
 License: BSD (guessed)
 
 Files: native_client/tests/tools/sigpipe_tool_test.c
-Copyright: UNKNOWN:
-License: BSD (guessed)
+Copyright: Copyright (c) 2011 The Native Client Authors. All rights reserved.
+License: global style BSD
 
 Files: native_client/tests/tparty/tparty.sh
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
@@ -2860,30 +2553,6 @@ Files: native_client/tools/generate_bad_x86_64_nexes.py
 Copyright: Copyright: 2010 The Native Client Authors. All rights reserved. Use:
 License: GENERATED FILE
 
-Files: native_client/tools/llvm/llvm-fake.pygnative_client/tools/llvm/toolchain-creator.sh native_client/tools/llvm/trusted-toolchain-creator.sh native_client/tools/llvm/untrusted-toolchain-creator.sh
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD (guessed)
-
-Files: native_client/tools/llvm/qemu_tool.sh
-Copyright: Copyright: 2009gGoogle Inc / 2009 The Native Client Authors. All rights reserved:
-License: BSD (guessed)
-
-Files: native_client/tools/llvm/cc_unsandboxed_x86.shgnative_client/tools/llvm/tools.sh
-Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
-License: BSD (guessed)
-
-Files: native_client/tools/llvm/build-phase1-llvmgcc.shgnative_client/tools/llvm/build-phase2-llvmgcc.sh
-Copyright: Copyright: was subsequently transferred to LLVM:
-License: BSD (guessed)
-
-Files: native_client/tools/llvm/configure-build-install.shgnative_client/tools/llvm/setup_arm_newlib.sh native_client/tools/llvm/setup_arm_trusted_toolchain.sh native_client/tools/llvm/setup_arm_untrusted_toolchain.sh
-Copyright: UNKNOWN:
-License: BSD (guessed)
-
-Files: native_client/tools/llvm/arm_examples/hello.c
-Copyright: UNKNOWN:
-License: BSD (guessed)
-
 Files: native_client/tools/tests/hello_world_gdb.c
 Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
 License: BSD (guessed)
@@ -2913,20 +2582,8 @@ Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
 License: BSD (guessed)
 
 Files: net/base/*
-Copyright: Copyright: 2009 The Chromium Authors. All rights reserved:
-License: GENERATED FILE
-
-Files: net/base/*
-Copyright: Copyright: 2010 The Chromium Authors. All rights reserved:
-License: GENERATED FILE
-
-Files: net/base/*
-Copyright: Copyright: 2006:
-License: MPL-1.1 GPL (unversioned/unknown version)
-
-Files: net/base/*
-Copyright: Copyright: 2010 The Chromium Authors. All rights reserved / 2003:
-License: MPL-1.1 GPL (unversioned/unknown version)
+Copyright: Copyright: 2009-2014 The Chromium Authors. All rights reserved:
+License: global style BSD
 
 Files: net/base/auth.hgnet/base/cert_status_flags.h net/base/completion_callback.h net/base/cookie_monster_perftest.cc net/base/cookie_monster_unittest.cc net/base/data_url.cc net/base/data_url.h net/base/data_url_unittest.cc net/base/directory_lister_unittest.cc net/base/ev_root_ca_metadata.cc net/base/ev_root_ca_metadata.h net/base/filter.cc net/base/filter.h net/base/filter_unittest.cc net/base/gzip_filter.cc net/base/gzip_filter.h net/base/gzip_filter_unittest.cc net/base/gzip_header.cc net/base/gzip_header.h net/base/host_resolver.cc net/base/host_resolver_impl.h net/base/listen_socket.cc net/base/listen_socket.h net/base/listen_socket_unittest.cc net/base/load_flags.h net/base/load_states.h net/base/mime_util_unittest.cc net/base/net_errors.cc net/base/net_errors.h net/base/net_module.cc net/base/net_module.h net/base/net_util_posix.cc net/base/net_util_win.cc net/base/platform_mime_util.h net/base/platform_mime_util_linux.cc net/base/platform_mime_util_mac.cc net/base/platform_mime_util_win.cc net/base/registry_controlled_domain_unittest.cc net/base/sdch_filter.cc net/base/sdch_filter.h net/base/sdch_filter_unittest.cc net/base/ssl_config_service_win.cc net/base/ssl_config_service_win_unittest.cc net/base/ssl_info.h net/base/telnet_server.cc net/base/telnet_server.h net/base/telnet_server_unittest.cc net/base/test_certificate_data.h net/base/test_completion_callback.h net/base/test_completion_callback_unittest.cc net/base/winsock_init.cc net/base/winsock_init.h net/base/x509_certificate.cc net/base/x509_certificate.h net/base/x509_certificate_mac.cc net/base/x509_certificate_nss.cc net/base/x509_certificate_unittest.cc net/base/x509_certificate_win.cc
 Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
@@ -3016,21 +2673,21 @@ Files: net/http/*
 Copyright: Copyright: 2010 The Chromium Authors. All rights reserved:
 License: GENERATED FILE
 
-Files: net/http/http_chunked_decoder.ccgnet/http/http_chunked_decoder.h
-Copyright: Copyright: 2001:
-License: MPL-1.1 GPL (unversioned/unknown version)
+Files: net/http/http_chunked_decoder.*
+Copyright: Netscape
+License: MPL-1.1 / GPL-2+ / LGPL-2.1+
 
-Files: net/http/md4.ccgnet/http/md4.h
-Copyright: Copyright: 2003:
-License: MPL-1.1 GPL (unversioned/unknown version)
+Files: net/http/md4.*
+Copyright: IBM Corporation 2003
+License: MPL-1.1 / GPL-2+ / LGPL-2.1+
 
 Files: net/http/des.cc
-Copyright: Copyright: 2009 The Chromium Authors. All rights reserved / 2003:
-License: MPL-1.1 GPL (unversioned/unknown version)
+Copyright: IBM Corporation 2003
+License: MPL-1.1 / GPL-2+ / LGPL-2.1+
 
 Files: net/http/http_auth_handler_ntlm_portable.cc
-Copyright: Copyright: 2010 The Chromium Authors. All rights reserved / 2003:
-License: MPL-1.1 GPL (unversioned/unknown version)
+Copyright: IBM Corporation 2003
+License: MPL-1.1 / GPL-2+ / LGPL-2.1+
 
 Files: net/http/http_version.h
 Copyright: Copyright: 2006-2008 The Chromium Authors. All rights reserved:
@@ -3065,8 +2722,8 @@ Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of 
 License: global BSD-style Chromium
 
 Files: net/proxy/proxy_resolver_script.h
-Copyright: Copyright: 1998:
-License: MPL-1.1 GPL (unversioned/unknown version)
+Copyright: Copyright: 1998 Netscape
+License: MPL-1.1 / GPL-2+ / LGPL-2.1+
 
 Files: net/proxy/proxy_config.ccgnet/proxy/proxy_config.h net/proxy/proxy_config_service.h net/proxy/proxy_config_service_win.cc net/proxy/proxy_config_service_win.h net/proxy/proxy_info.cc net/proxy/proxy_info.h net/proxy/proxy_list.cc net/proxy/proxy_list.h net/proxy/proxy_list_unittest.cc net/proxy/proxy_resolver_winhttp.cc net/proxy/proxy_resolver_winhttp.h net/proxy/proxy_retry_info.h net/proxy/proxy_service.cc net/proxy/proxy_service_unittest.cc
 Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
@@ -3093,8 +2750,8 @@ Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of 
 License: global BSD-style Chromium
 
 Files: net/socket/ssl_client_socket_nss.cc
-Copyright: Copyright: 2006-2009 The Chromium Authors. All rights reserved / 2000:
-License: MPL-1.1 GPL (unversioned/unknown version)
+Copyright: Copyright 2000 Netscape
+License: MPL-1.1 / GPL-2+ / LGPL-2.1+
 
 Files: net/socket/client_socket_factory.ccgnet/socket/client_socket_factory.h net/socket/socket.h net/socket/ssl_client_socket_unittest.cc net/socket/ssl_test_util.h net/socket/tcp_client_socket_libevent.cc net/socket/tcp_client_socket_win.cc
 Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
@@ -3133,7 +2790,7 @@ Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of 
 License: global BSD-style Chromium
 
 Files: net/third_party/nss/ssl/authcert.cgnet/third_party/nss/ssl/cmpcert.c net/third_party/nss/ssl/nsskea.c net/third_party/nss/ssl/os2_err.c net/third_party/nss/ssl/os2_err.h net/third_party/nss/ssl/preenc.h net/third_party/nss/ssl/prelib.c net/third_party/nss/ssl/ssl.h net/third_party/nss/ssl/ssl3con.c net/third_party/nss/ssl/ssl3ecc.c net/third_party/nss/ssl/ssl3ext.c net/third_party/nss/ssl/ssl3gthr.c net/third_party/nss/ssl/ssl3prot.h net/third_party/nss/ssl/sslauth.c net/third_party/nss/ssl/sslcon.c net/third_party/nss/ssl/ssldef.c net/third_party/nss/ssl/sslenum.c net/third_party/nss/ssl/sslerr.c net/third_party/nss/ssl/sslerr.h net/third_party/nss/ssl/sslgathr.c net/third_party/nss/ssl/sslimpl.h net/third_party/nss/ssl/sslnonce.c net/third_party/nss/ssl/sslproto.h net/third_party/nss/ssl/sslreveal.c net/third_party/nss/ssl/sslsecur.c net/third_party/nss/ssl/sslsnce.c net/third_party/nss/ssl/sslsock.c net/third_party/nss/ssl/sslt.h net/third_party/nss/ssl/ssltrace.c net/third_party/nss/ssl/unix_err.c net/third_party/nss/ssl/unix_err.h net/third_party/nss/ssl/win32err.c net/third_party/nss/ssl/win32err.h
-Copyright: Copyright: 1994-2000:
+Copyright: Copyright: 1994-2000
 License: MPL-1.1 GPL (unversioned/unknown version)
 
 Files: net/third_party/nss/ssl/derive.c
@@ -3277,8 +2934,8 @@ Copyright: Copyright: 2008 Google Inc:
 License: Apache-2.0
 
 Files: sdch/open-vcdiff/src/codetablewriter_interface.h
-Copyright: 2008 Google Inc. All Rights Reserved:
-License: UNKNOWN
+Copyright: 2008 Google Inc. All Rights Reserved.
+License: Apache-2.0
 
 Files: sdch/open-vcdiff/adler32.c
 Copyright: Copyright: 1995-2004 Mark Adler:
@@ -4332,14 +3989,6 @@ Files: third_party/WebKit/JavaScriptCore/runtime/Lookup.h
 Copyright: Copyright: 2003g2006 2007 2008 2009 Apple Inc. All rights reserved / 1999-2000 Harri Porten (porten@kde.org):
 License: LGPL-2.0+ GENERATED FILE
 
-Files: third_party/WebKit/JavaScriptCore/runtime/DateConversion.h
-Copyright: Copyright: 2009 Google Inc. All rights reserved / 1999-2000 Harri Porten (porten@kde.org) / 2006g2007 Apple Inc. All rights reserved / 1998:
-License: MPL-1.1 GPL (unversioned/unknown version)
-
-Files: third_party/WebKit/JavaScriptCore/runtime/DateConversion.cpp
-Copyright: Copyright: 2009 Google Inc. All rights reserved / 1999-2000 Harri Porten (porten@kde.org) / 2006g2007 Apple Inc. All rights reserved / 1998:
-License: MPL-1.1 GPL (unversioned/unknown version) LGPL-2.1+
-
 Files: third_party/WebKit/JavaScriptCore/tests/mozilla/mkhtml.plgthird_party/WebKit/JavaScriptCore/tests/mozilla/runtests.pl
 Copyright: UNKNOWN:
 License: FreeBSD (guessed)/LGPL-2.0+/LGPL-2.1+
@@ -4586,11 +4235,11 @@ License: LGPL-2.0+ GENERATED FILE
 
 Files: third_party/WebKit/JavaScriptCore/wtf/DateMath.h
 Copyright: Copyright: 2009 Google Inc. All rights reserved / 1999-2000 Harri Porten (porten@kde.org) / 2006g2007 Apple Inc. All rights reserved / 1998:
-License: MPL-1.1 GPL (unversioned/unknown version)
+License: MPL-1.1 / GPL-2+ / LGPL-2.1+
 
 Files: third_party/WebKit/JavaScriptCore/wtf/DateMath.cpp
 Copyright: Copyright: 2009 Google Inc. All rights reserved / HOLDERS AND CONTRIBUTORS / 2006-2008 the V8 project authors. All rights reserved / 2007-2009 Torch MobilegInc / 1999-2000 Harri Porten (porten@kde.org) / 2006 2007 Apple Inc. All rights reserved / 1998:
-License: MPL-1.1 BSD (guessed) GPL (unversioned/unknown version) LGPL-2.1+
+License: MPL-1.1 / GPL-2+ / LGPL-2.1+
 
 Files: third_party/WebKit/JavaScriptCore/wtf/android/AndroidThreading.hgthird_party/WebKit/JavaScriptCore/wtf/android/MainThreadAndroid.cpp
 Copyright: Copyright: HOLDERS ``AS IS'' AND ANY / OWNER OR / 2009gThe Android Open Source Project:
@@ -5487,10 +5136,6 @@ License: LGPL-2.0+
 Files: third_party/WebKit/WebCore/bridge/npruntime_internal.h
 Copyright: Copyright: 2007-2008 Collabora Ltd. All rights reserved:
 License: LGPL-2.1+
-
-Files: third_party/WebKit/WebCore/bridge/npapi.h
-Copyright: Copyright: 1998:
-License: MPL-1.1 GPL (unversioned/unknown version)
 
 Files: third_party/WebKit/WebCore/bridge/c/c_class.hgthird_party/WebKit/WebCore/bridge/c/c_instance.h
 Copyright: Copyright: 2003 Apple ComputergInc. All rights reserved:
@@ -6834,7 +6479,7 @@ License: LGPL-2.0+
 
 Files: third_party/WebKit/WebCore/html/HTMLDocument.cpp
 Copyright: Copyright: 1999 Lars Knoll (knoll@kde.org) / 1999 Antti Koivisto (koivisto@kde.org) / 2002 Netscape Communications Corporation / 2003g2004 2005 2006 2007 2008 Apple Inc. All rights reserved:
-License: MPL-1.1 GPL (unversioned/unknown version) LGPL-2.0+
+License: MPL-1.1 / GPL-2+ / LGPL-2.0+
 
 Files: third_party/WebKit/WebCore/html/canvas/CanvasGradient.h
 Copyright: Copyright: 2006g2007 2008 Apple Computer Inc. All rights reserved / 2007 Alp Toker <alp@atoker.com>:
@@ -7826,7 +7471,7 @@ License: LGPL-2.0+
 
 Files: third_party/WebKit/WebCore/platform/Arena.cppgthird_party/WebKit/WebCore/platform/Arena.h
 Copyright: Copyright: 2003-6 Apple Computer / 1998-2000 Netscape Communications Corporation:
-License: MPL-1.1 GPL (unversioned/unknown version) LGPL-2.1+
+License: MPL-1.1 / GPL-2+ / LGPL-2.1+
 
 Files: third_party/WebKit/WebCore/platform/android/CursorAndroid.cpp
 Copyright: Copyright: 2004g2006 Apple Computer Inc. All rights reserved / 2009 The Android Open Source Project:
@@ -9244,14 +8889,6 @@ Files: third_party/WebKit/WebCore/platform/gtk/ScrollbarGtk.cpp
 Copyright: Copyright: 2010 Gustavo Noronha Silva <gns@gnome.org> / 2007g2009 Holger Hans Peter Freyther zecke@selfish.org:
 License: LGPL-2.0+
 
-Files: third_party/WebKit/WebCore/platform/gtk/*
-Copyright: Copyright: 2001:
-License: MPL-1.1 GPL (unversioned/unknown version)
-
-Files: third_party/WebKit/WebCore/platform/gtk/*
-Copyright: Copyright: 2002:
-License: MPL-1.1 GPL (unversioned/unknown version)
-
 Files: third_party/WebKit/WebCore/platform/haiku/MIMETypeRegistryHaiku.cpp
 Copyright: Copyright: 2006 Apple ComputergInc. All rights reserved / 2006 Zack Rusin <zack@kde.org> / 2007 Trolltech ASA:
 License: FreeBSD (guessed)
@@ -9341,12 +8978,9 @@ Copyright: Copyright: 2006 Apple ComputergInc. All rights reserved:
 License: FreeBSD (guessed)
 
 Files: third_party/WebKit/WebCore/platform/image-decoders/gif/*
-Copyright: Copyright: 1998:
-License: MPL-1.1 GPL (unversioned/unknown version)
-
-Files: third_party/WebKit/WebCore/platform/image-decoders/gif/*
-Copyright: Copyright: is the property of CompuServe / is the property of / 1998:
-License: MPL-1.1 GPL (unversioned/unknown version)
+Copyright: Copyright 1998 Netscape
+License: MPL-1.1 / GPL-2+ / LGPL-2.1+
+MPL-1.1 GPL (unversioned/unknown version)
 
 Files: third_party/WebKit/WebCore/platform/image-decoders/haiku/ImageDecoderHaiku.cpp
 Copyright: Copyright: 2010 Stephan Aßmusg<superstippi@gmx.de> / 2006 Apple Computer Inc. All rights reserved:
@@ -16066,10 +15700,6 @@ Files: tools/grit/grit/node/__init__.pygtools/grit/grit/node/base.py tools/grit/
 Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
-Files: tools/grit/grit/node/custom/__init__.py
-Copyright: Copyright: 2004 Google Inc:
-License: UNKNOWN
-
 Files: tools/grit/grit/node/custom/filename.pygtools/grit/grit/node/custom/filename_unittest.py
 Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
@@ -16574,9 +16204,9 @@ Files: webkit/glue/webcursor_gtk_data.h
 Copyright: Copyright: 2007 Christian Dywan <christian@twotoasts.de> / 2001 Tim Copperfield <timecop@network.email.ne.jp> / is below:
 License: LGPL-2.0+
 
-Files: webkit/glue/multipart_response_delegate.h
+Files: content/child/multipart_response_delegate/*
 Copyright: Copyright: 1998 / 2006-2009 The Chromium Authors. All rights reserved:
-License: MPL-1.1 GPL (unversioned/unknown version)
+License: MPL-1.1 / GPL-2+ / LGPL-2.1+
 
 Files: webkit/glue/alt_error_page_resource_fetcher.ccgwebkit/glue/bookmarklet_unittest.cc webkit/glue/context_menu_unittest.cc webkit/glue/cpp_binding_example.cc webkit/glue/cpp_binding_example.h webkit/glue/cpp_bound_class.cc webkit/glue/cpp_bound_class.h webkit/glue/cpp_bound_class_unittest.cc webkit/glue/cpp_variant.cc webkit/glue/cpp_variant.h webkit/glue/cpp_variant_unittest.cc webkit/glue/dom_operations.h webkit/glue/dom_operations_unittest.cc webkit/glue/dom_serializer_unittest.cc webkit/glue/glue_serialize.h webkit/glue/glue_serialize_unittest.cc webkit/glue/iframe_redirect_unittest.cc webkit/glue/image_decoder.h webkit/glue/image_resource_fetcher.cc webkit/glue/image_resource_fetcher.h webkit/glue/mimetype_unittest.cc webkit/glue/multipart_response_delegate.cc webkit/glue/multipart_response_delegate_unittest.cc webkit/glue/npruntime_util.h webkit/glue/password_form.h webkit/glue/password_form_dom_manager.cc webkit/glue/password_form_dom_manager.h webkit/glue/regular_expression_unittest.cc webkit/glue/resource_fetcher.cc webkit/glue/resource_fetcher.h webkit/glue/resource_fetcher_unittest.cc webkit/glue/resource_loader_bridge.h webkit/glue/resource_type.h webkit/glue/unittest_test_server.h webkit/glue/webaccessibility.cc webkit/glue/webaccessibility.h webkit/glue/webaccessibilitymanager.h webkit/glue/webcookie.h webkit/glue/webcursor.cc webkit/glue/webcursor.h webkit/glue/webdropdata.cc webkit/glue/webdropdata.h webkit/glue/webframe_unittest.cc webkit/glue/webpasswordautocompletelistener_impl.cc webkit/glue/webpasswordautocompletelistener_impl.h webkit/glue/webpreferences.h webkit/glue/webview_unittest.cc webkit/glue/window_open_disposition.h
 Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:

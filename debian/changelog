@@ -1,3 +1,11 @@
+chromium-browser (43.0.2357.124-2) unstable; urgency=medium
+
+  * More updates to debian/copyright.
+  * Disable all external component loading.
+  * Set flag to avoid hidden items in the about:extensions dialog.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 19 Jun 2015 05:31:48 +0000
+
 chromium-browser (43.0.2357.124-1) unstable; urgency=medium
 
   * New upstream release.
