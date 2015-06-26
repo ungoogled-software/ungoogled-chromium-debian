@@ -17,11 +17,12 @@
   "bookmark_bar": {
      "show_on_all_tabs": true
   },
-  "homepage": "http://www.debian.org"
   "safebrowsing": {
     "enabled": false
   },
   "alternate_error_pages": {
     "enabled": false
   },
+  "homepage": "http://www.debian.org",
+  "AudioCaptureAllowed" : false
 }

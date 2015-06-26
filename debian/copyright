@@ -3,20 +3,23 @@ Source: http://www.chromium.org/Home
 Upstream-Name: chromium
 Files-Excluded:
  .gn
- .DEPS.git
  .clang-format
  *.mk
  *.so
+ *.bak
  *.swf
+ *BUILD.gn
  *config.sub
  *config.guess
  *jquery*.min.js
  native_client/NOTICE
+ third_party/cld
  third_party/android*
  third_party/bidichecker
  third_party/swig/linux
  third_party/flot/*.js
  third_party/yasm/source
+ third_party/skia/platform_tools
  third_party/webgl/src/sdk
  third_party/webgl/src/other
  third_party/expat/files
@@ -2569,10 +2572,6 @@ Files: native_client/tools/tests/libs_present_stub.ccgnative_client/tools/tests/
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc:
 License: BSD (guessed)
 
-Files: native_client/tools/tests/ldscripts/elf_nacl.xs
-Copyright: UNKNOWN:
-License: BSD (guessed)
-
 Files: native_client/tools/xray/hashtable.cgnative_client/tools/xray/stringpool.c native_client/tools/xray/symtable.c native_client/tools/xray/xray.c native_client/tools/xray/xray.h native_client/tools/xray/xray_priv.h
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
 License: BSD (guessed)
@@ -2621,28 +2620,8 @@ Files: net/base/address_family.hgnet/base/address_list.cc net/base/address_list.
 Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
-Files: net/disk_cache/hash.cc
-Copyright: UNKNOWN:
-License: Paul Hsieh's Public Domain Option
-
-Files: net/disk_cache/addr.hgnet/disk_cache/addr_unittest.cc net/disk_cache/backend_impl.cc net/disk_cache/backend_impl.h net/disk_cache/block_files.cc net/disk_cache/block_files.h net/disk_cache/block_files_unittest.cc net/disk_cache/cache_util.h net/disk_cache/cache_util_posix.cc net/disk_cache/cache_util_win.cc net/disk_cache/disk_cache.h net/disk_cache/disk_cache_perftest.cc net/disk_cache/errors.h net/disk_cache/eviction.cc net/disk_cache/eviction.h net/disk_cache/file.h net/disk_cache/file_block.h net/disk_cache/file_lock.cc net/disk_cache/file_lock.h net/disk_cache/file_posix.cc net/disk_cache/file_win.cc net/disk_cache/hash.h net/disk_cache/mapped_file.h net/disk_cache/mapped_file_posix.cc net/disk_cache/mapped_file_unittest.cc net/disk_cache/mapped_file_win.cc net/disk_cache/mem_rankings.cc net/disk_cache/mem_rankings.h net/disk_cache/rankings.cc net/disk_cache/rankings.h net/disk_cache/stats.cc net/disk_cache/stats.h net/disk_cache/storage_block-inl.h net/disk_cache/storage_block.h net/disk_cache/storage_block_unittest.cc net/disk_cache/stress_cache.cc net/disk_cache/trace.cc net/disk_cache/trace.h
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: global BSD-style Chromium
-
-Files: net/disk_cache/disk_cache_test_util.ccgnet/disk_cache/disk_cache_test_util.h net/disk_cache/disk_format.h net/disk_cache/entry_impl.cc net/disk_cache/entry_impl.h net/disk_cache/mem_backend_impl.cc net/disk_cache/mem_backend_impl.h net/disk_cache/mem_entry_impl.cc net/disk_cache/mem_entry_impl.h
-Copyright: Copyright (c) 2006-2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: global BSD-style Chromium
-
-Files: net/disk_cache/backend_unittest.ccgnet/disk_cache/disk_cache_test_base.cc net/disk_cache/disk_cache_test_base.h net/disk_cache/entry_unittest.cc
+Files: net/disk_cache/*
 Copyright: Copyright (c) 2006-2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: global BSD-style Chromium
-
-Files: net/disk_cache/stats_histogram.ccgnet/disk_cache/stats_histogram.h
-Copyright: Copyright (c) 2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: global BSD-style Chromium
-
-Files: net/disk_cache/addr.ccgnet/disk_cache/bitmap.cc net/disk_cache/bitmap.h net/disk_cache/bitmap_unittest.cc net/disk_cache/histogram_macros.h net/disk_cache/sparse_control.cc net/disk_cache/sparse_control.h
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
 Files: net/ftp/ftp_auth_cache.ccgnet/ftp/ftp_auth_cache.h
@@ -2789,33 +2768,9 @@ Files: net/spdy/*
 Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
-Files: net/third_party/nss/ssl/authcert.cgnet/third_party/nss/ssl/cmpcert.c net/third_party/nss/ssl/nsskea.c net/third_party/nss/ssl/os2_err.c net/third_party/nss/ssl/os2_err.h net/third_party/nss/ssl/preenc.h net/third_party/nss/ssl/prelib.c net/third_party/nss/ssl/ssl.h net/third_party/nss/ssl/ssl3con.c net/third_party/nss/ssl/ssl3ecc.c net/third_party/nss/ssl/ssl3ext.c net/third_party/nss/ssl/ssl3gthr.c net/third_party/nss/ssl/ssl3prot.h net/third_party/nss/ssl/sslauth.c net/third_party/nss/ssl/sslcon.c net/third_party/nss/ssl/ssldef.c net/third_party/nss/ssl/sslenum.c net/third_party/nss/ssl/sslerr.c net/third_party/nss/ssl/sslerr.h net/third_party/nss/ssl/sslgathr.c net/third_party/nss/ssl/sslimpl.h net/third_party/nss/ssl/sslnonce.c net/third_party/nss/ssl/sslproto.h net/third_party/nss/ssl/sslreveal.c net/third_party/nss/ssl/sslsecur.c net/third_party/nss/ssl/sslsnce.c net/third_party/nss/ssl/sslsock.c net/third_party/nss/ssl/sslt.h net/third_party/nss/ssl/ssltrace.c net/third_party/nss/ssl/unix_err.c net/third_party/nss/ssl/unix_err.h net/third_party/nss/ssl/win32err.c net/third_party/nss/ssl/win32err.h
-Copyright: Copyright: 1994-2000
-License: MPL-1.1 GPL (unversioned/unknown version)
-
-Files: net/third_party/nss/ssl/derive.c
-Copyright: Copyright: 1994-2005:
-License: MPL-1.1 GPL (unversioned/unknown version)
-
-Files: net/third_party/nss/ssl/sslinfo.cgnet/third_party/nss/ssl/sslmutex.c net/third_party/nss/ssl/sslmutex.h net/third_party/nss/ssl/sslver.c
-Copyright: Copyright: 2001:
-License: MPL-1.1 GPL (unversioned/unknown version)
-
-Files: net/third_party/nss/ssl/bodge/alghmac.hgnet/third_party/nss/ssl/bodge/blapi.h net/third_party/nss/ssl/bodge/secure_memcmp.c
-Copyright: Copyright: 1994-2000:
-License: MPL-1.1 GPL (unversioned/unknown version)
-
-Files: net/third_party/nss/ssl/bodge/genload.cgnet/third_party/nss/ssl/bodge/loader.c net/third_party/nss/ssl/bodge/loader.h
-Copyright: Copyright: 2000:
-License: MPL-1.1 GPL (unversioned/unknown version)
-
-Files: net/third_party/nss/ssl/bodge/nssrenam.h
-Copyright: Copyright: 2001:
-License: MPL-1.1 GPL (unversioned/unknown version)
-
-Files: net/third_party/nss/ssl/bodge/ec.h
-Copyright: Copyright: 2003:
-License: MPL-1.1 GPL (unversioned/unknown version)
+Files: net/third_party/nss/*
+Copyright: Copyright 1994-2004 Netscape
+License: MPL-2.0
 
 Files: net/tools/crash_cache/crash_cache.cc
 Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
@@ -4281,10 +4236,6 @@ Files: third_party/WebKit/JavaScriptCore/wtf/gtk/MainThreadGtk.cppgthird_party/W
 Copyright: Copyright: 2007g2008 Apple Inc. All rights reserved / 2007 Justin Haygood (jhaygood@reaktix.com):
 License: BSD (guessed)
 
-Files: third_party/WebKit/JavaScriptCore/wtf/haiku/MainThreadHaiku.cpp
-Copyright: Copyright: 2009 Maxime Simon / 2007 Kevin Ollivier:
-License: BSD (guessed)
-
 Files: third_party/WebKit/JavaScriptCore/wtf/qt/*
 Copyright: Copyright: 2007 Apple Inc. All rights reserved / 2007 Justin Haygood (jhaygood@reaktix.com):
 License: BSD (guessed)
@@ -4599,10 +4550,6 @@ License: FreeBSD (guessed)
 
 Files: third_party/WebKit/WebCore/bindings/js/ScriptControllerBrew.cpp
 Copyright: Copyright: 2008 Apple ComputergInc / 2009 Company 100 Inc:
-License: FreeBSD (guessed)
-
-Files: third_party/WebKit/WebCore/bindings/js/ScriptControllerHaiku.cppgthird_party/WebKit/WebCore/bindings/js/ScriptControllerWx.cpp
-Copyright: Copyright: 2008 Apple ComputergInc. All rights reserved:
 License: FreeBSD (guessed)
 
 Files: third_party/WebKit/WebCore/bindings/js/JSCSSStyleDeclarationCustom.hgthird_party/WebKit/WebCore/bindings/js/JSConsoleCustom.cpp third_party/WebKit/WebCore/bindings/js/JSCustomPositionCallback.cpp third_party/WebKit/WebCore/bindings/js/JSCustomPositionCallback.h third_party/WebKit/WebCore/bindings/js/JSCustomPositionErrorCallback.cpp third_party/WebKit/WebCore/bindings/js/JSCustomPositionErrorCallback.h third_party/WebKit/WebCore/bindings/js/JSDOMGlobalObject.h third_party/WebKit/WebCore/bindings/js/JSDocumentFragmentCustom.cpp third_party/WebKit/WebCore/bindings/js/JSEventTarget.cpp third_party/WebKit/WebCore/bindings/js/JSEventTarget.h third_party/WebKit/WebCore/bindings/js/JSGeolocationCustom.cpp third_party/WebKit/WebCore/bindings/js/JSHTMLAppletElementCustom.h third_party/WebKit/WebCore/bindings/js/JSHTMLEmbedElementCustom.h third_party/WebKit/WebCore/bindings/js/JSHTMLObjectElementCustom.h third_party/WebKit/WebCore/bindings/js/JSHistoryCustom.h third_party/WebKit/WebCore/bindings/js/JSImageDataCustom.cpp third_party/WebKit/WebCore/bindings/js/JSJavaScriptCallFrameCustom.cpp third_party/WebKit/WebCore/bindings/js/JSLocationCustom.h third_party/WebKit/WebCore/bindings/js/JSMessageChannelConstructor.cpp third_party/WebKit/WebCore/bindings/js/JSMessageChannelConstructor.h third_party/WebKit/WebCore/bindings/js/JSStorageCustom.cpp third_party/WebKit/WebCore/bindings/js/JSStorageCustom.h third_party/WebKit/WebCore/bindings/js/JSTextCustom.cpp third_party/WebKit/WebCore/bindings/js/JSWebKitCSSMatrixConstructor.cpp third_party/WebKit/WebCore/bindings/js/JSWebKitCSSMatrixConstructor.h third_party/WebKit/WebCore/bindings/js/JavaScriptProfile.cpp third_party/WebKit/WebCore/bindings/js/JavaScriptProfile.h third_party/WebKit/WebCore/bindings/js/JavaScriptProfileNode.cpp third_party/WebKit/WebCore/bindings/js/JavaScriptProfileNode.h third_party/WebKit/WebCore/bindings/js/WorkerScriptController.cpp third_party/WebKit/WebCore/bindings/js/WorkerScriptController.h
@@ -6029,10 +5976,6 @@ Files: third_party/WebKit/WebCore/editing/gtk/SelectionControllerGtk.cpp
 Copyright: Copyright: 2009 Igalia S.L:
 License: LGPL-2.0+
 
-Files: third_party/WebKit/WebCore/editing/haiku/EditorHaiku.cpp
-Copyright: Copyright: 2007 Ryan Leavengood <leavengood@gmail.com>:
-License: FreeBSD (guessed)
-
 Files: third_party/WebKit/WebCore/editing/qt/EditorQt.cpp
 Copyright: Copyright: 2006 Apple Inc. All rights reserved / 2006 Zack Rusin <zack@kde.org>:
 License: FreeBSD (guessed)
@@ -7193,18 +7136,6 @@ Files: third_party/WebKit/WebCore/page/gtk/*
 Copyright: Copyright: 2007 Apple Inc. All rights reserved:
 License: FreeBSD (guessed)
 
-Files: third_party/WebKit/WebCore/page/haiku/DragControllerHaiku.cpp
-Copyright: Copyright: 2007 Apple Inc. All rights reserved / 2007 Ryan Leavengood <leavengood@gmail.com>:
-License: FreeBSD (guessed)
-
-Files: third_party/WebKit/WebCore/page/haiku/FrameHaiku.cpp
-Copyright: Copyright: 2007 Ryan Leavengood <leavengood@gmail.com>:
-License: FreeBSD (guessed)
-
-Files: third_party/WebKit/WebCore/page/haiku/EventHandlerHaiku.cpp
-Copyright: Copyright: 2010 Stephan Aßmus <superstippi@gmx.de> / 2007 Ryan Leavengood <leavengood@gmail.com> / 2009 Maxime Simon <simon.maxime@gmail.com> / 2006 Zack Rusin <zack@kde.org>:
-License: FreeBSD (guessed)
-
 Files: third_party/WebKit/WebCore/page/mac/WebCoreKeyboardUIMode.h
 Copyright: Copyright: 2003 Apple ComputergInc. All rights reserved:
 License: FreeBSD (guessed)
@@ -8345,54 +8276,6 @@ Files: third_party/WebKit/WebCore/platform/graphics/gtk/FontCustomPlatformDataPa
 Copyright: Copyright: 2008 Alp Toker <alp@atoker.com>:
 License: LGPL-2.0+
 
-Files: third_party/WebKit/WebCore/platform/graphics/haiku/GlyphPageTreeNodeHaiku.cpp
-Copyright: Copyright: 2006 Dirk Mueller <mueller@kde.org> / 2007 Ryan Leavengood <leavengood@gmail.com> / 2006 George Staikos <staikos@kde.org> / 2006 Zack Rusin <zack@kde.org>:
-License: FreeBSD (guessed)
-
-Files: third_party/WebKit/WebCore/platform/graphics/haiku/ColorHaiku.cppgthird_party/WebKit/WebCore/platform/graphics/haiku/FloatPointHaiku.cpp third_party/WebKit/WebCore/platform/graphics/haiku/FontHaiku.cpp third_party/WebKit/WebCore/platform/graphics/haiku/GraphicsContextHaiku.cpp third_party/WebKit/WebCore/platform/graphics/haiku/IntPointHaiku.cpp third_party/WebKit/WebCore/platform/graphics/haiku/IntRectHaiku.cpp third_party/WebKit/WebCore/platform/graphics/haiku/IntSizeHaiku.cpp third_party/WebKit/WebCore/platform/graphics/haiku/PathHaiku.cpp
-Copyright: Copyright: 2007 Ryan Leavengood <leavengood@gmail.com>:
-License: FreeBSD (guessed)
-
-Files: third_party/WebKit/WebCore/platform/graphics/haiku/ImageBufferData.hgthird_party/WebKit/WebCore/platform/graphics/haiku/ImageBufferHaiku.cpp
-Copyright: Copyright: 2009 Maxime Simon <simon.maxime@gmail.com>:
-License: FreeBSD (guessed)
-
-Files: third_party/WebKit/WebCore/platform/graphics/haiku/StillImageHaiku.cppgthird_party/WebKit/WebCore/platform/graphics/haiku/StillImageHaiku.h
-Copyright: Copyright: 2010 Stephan Aßmus <superstippi@gmx.de>:
-License: FreeBSD (guessed)
-
-Files: third_party/WebKit/WebCore/platform/graphics/haiku/ImageHaiku.cpp
-Copyright: Copyright: 2010 Stephan Aßmus <superstippi@gmx.de> / 2006 Simon Hausmann <hausmann@kde.org> / 2006 Dirk Mueller <mueller@kde.org> / 2008 Andrea Anzani <andrea.anzani@gmail.com> / 2007 Ryan Leavengood <leavengood@gmail.com> / 2006 Zack Rusin <zack@kde.org>:
-License: FreeBSD (guessed)
-
-Files: third_party/WebKit/WebCore/platform/graphics/haiku/FloatRectHaiku.cpp
-Copyright: Copyright: 2010 Stephan Aßmus <superstippi@gmx.de> / 2007 Ryan Leavengood <leavengood@gmail.com>:
-License: FreeBSD (guessed)
-
-Files: third_party/WebKit/WebCore/platform/graphics/haiku/GradientHaiku.cpp
-Copyright: Copyright: 2010 Stephan Aßmus <superstippi@gmx.de> / 2008 Kevin Ollivier <kevino@theolliviers.com> All rights reserved / 2009 Maxime Simon <simon.maxime@theolliviers.com>:
-License: FreeBSD (guessed)
-
-Files: third_party/WebKit/WebCore/platform/graphics/haiku/*
-Copyright: Copyright: 2006 Dirk Mueller <mueller@kde.org> / 2007 Ryan Leavengood <leavengood@gmail.com>:
-License: BSD (guessed)
-
-Files: third_party/WebKit/WebCore/platform/graphics/haiku/*
-Copyright: Copyright: 2009 Maxime Simon <simon.maxime@gmail.com> All rights reserved / 2006 Apple ComputergInc. All rights reserved:
-License: BSD (guessed)
-
-Files: third_party/WebKit/WebCore/platform/graphics/haiku/FontCustomPlatformData.cppgthird_party/WebKit/WebCore/platform/graphics/haiku/FontCustomPlatformData.h
-Copyright: Copyright: 2008 Alp Toker <alp@atoker.com>:
-License: LGPL-2.0+
-
-Files: third_party/WebKit/WebCore/platform/graphics/haiku/*
-Copyright: Copyright: 2006 Dirk Mueller <mueller@kde.org> / 2007 Ryan Leavengood <leavengood@gmail.com> / 2006 Apple ComputergInc / 2009 Maxime Simon <simon.maxime@gmail.com> / 2006 Nikolas Zimmermann <zimmermann@kde.org> / 2006 Zack Rusin <zack@kde.org>:
-License: LGPL-2.0+ (with incorrect FSF address)
-
-Files: third_party/WebKit/WebCore/platform/graphics/haiku/*
-Copyright: Copyright: 2007 Ryan Leavengood <leavengood@gmail.com>:
-License: LGPL-2.0+ (with incorrect FSF address)
-
 Files: third_party/WebKit/WebCore/platform/graphics/mac/FontComplexTextMac.cpp
 Copyright: Copyright: 2006g2007 2008 2009 Apple Inc. All rights reserved:
 License: FreeBSD (guessed)
@@ -8889,74 +8772,6 @@ Files: third_party/WebKit/WebCore/platform/gtk/ScrollbarGtk.cpp
 Copyright: Copyright: 2010 Gustavo Noronha Silva <gns@gnome.org> / 2007g2009 Holger Hans Peter Freyther zecke@selfish.org:
 License: LGPL-2.0+
 
-Files: third_party/WebKit/WebCore/platform/haiku/MIMETypeRegistryHaiku.cpp
-Copyright: Copyright: 2006 Apple ComputergInc. All rights reserved / 2006 Zack Rusin <zack@kde.org> / 2007 Trolltech ASA:
-License: FreeBSD (guessed)
-
-Files: third_party/WebKit/WebCore/platform/haiku/TemporaryLinkStubs.cpp
-Copyright: Copyright: 2006 Dirk Mueller <mueller@kde.org> / 2007 Ryan Leavengood <leavengood@gmail.com> / 2006 Michael Emmel mike.emmel@gmail.com / 2006 George Staikos <staikos@kde.org> / 2006 Apple ComputergInc. All rights reserved / 2009 Maxime Simon <simon.maxime@gmail.com> / 2006 Nikolas Zimmermann <zimmermann@kde.org>:
-License: FreeBSD (guessed)
-
-Files: third_party/WebKit/WebCore/platform/haiku/ClipboardHaiku.cppgthird_party/WebKit/WebCore/platform/haiku/ClipboardHaiku.h third_party/WebKit/WebCore/platform/haiku/DragDataHaiku.cpp third_party/WebKit/WebCore/platform/haiku/DragImageHaiku.cpp
-Copyright: Copyright: 2007 Apple Inc. All rights reserved / 2007 Ryan Leavengood <leavengood@gmail.com>:
-License: FreeBSD (guessed)
-
-Files: third_party/WebKit/WebCore/platform/haiku/CursorHaiku.cppgthird_party/WebKit/WebCore/platform/haiku/ScreenHaiku.cpp third_party/WebKit/WebCore/platform/haiku/SoundHaiku.cpp third_party/WebKit/WebCore/platform/haiku/WidgetHaiku.cpp
-Copyright: Copyright: 2007 Ryan Leavengood <leavengood@gmail.com>:
-License: FreeBSD (guessed)
-
-Files: third_party/WebKit/WebCore/platform/haiku/CookieJarHaiku.cpp
-Copyright: Copyright: 2007 Ryan Leavengood <leavengood@gmail.com> / 2006 George Staikos <staikos@kde.org>:
-License: FreeBSD (guessed)
-
-Files: third_party/WebKit/WebCore/platform/haiku/ContextMenuHaiku.cppgthird_party/WebKit/WebCore/platform/haiku/ContextMenuItemHaiku.cpp third_party/WebKit/WebCore/platform/haiku/PasteboardHaiku.cpp
-Copyright: Copyright: 2007 Ryan Leavengood <leavengood@gmail.com> / 2006 Zack Rusin <zack@kde.org>:
-License: FreeBSD (guessed)
-
-Files: third_party/WebKit/WebCore/platform/haiku/ScrollbarThemeHaiku.cppgthird_party/WebKit/WebCore/platform/haiku/ScrollbarThemeHaiku.h
-Copyright: Copyright: 2008 Apple Inc. All Rights Reserved / 2009 Maxime Simon <simon.maxime@gmail.com> All Rights Reserved:
-License: FreeBSD (guessed)
-
-Files: third_party/WebKit/WebCore/platform/haiku/EventLoopHaiku.cpp
-Copyright: Copyright: 2009 Maxime Simon:
-License: FreeBSD (guessed)
-
-Files: third_party/WebKit/WebCore/platform/haiku/LocalizedStringsHaiku.cppgthird_party/WebKit/WebCore/platform/haiku/LoggingHaiku.cpp third_party/WebKit/WebCore/platform/haiku/SharedBufferHaiku.cpp third_party/WebKit/WebCore/platform/haiku/SharedTimerHaiku.cpp
-Copyright: Copyright: 2009 Maxime Simon <simon.maxime@gmail.com>:
-License: FreeBSD (guessed)
-
-Files: third_party/WebKit/WebCore/platform/haiku/FileSystemHaiku.cpp
-Copyright: Copyright: 2010 Stephan Aßmus <superstippi@gmx.de> / 2007 Ryan Leavengood <leavengood@gmail.com>:
-License: FreeBSD (guessed)
-
-Files: third_party/WebKit/WebCore/platform/haiku/PlatformMouseEventHaiku.cppgthird_party/WebKit/WebCore/platform/haiku/PlatformWheelEventHaiku.cpp
-Copyright: Copyright: 2010 Stephan Aßmus <superstippi@gmx.de> / 2007 Ryan Leavengood <leavengood@gmail.com> / 2009 Maxime Simon <simon.maxime@gmail.com>:
-License: FreeBSD (guessed)
-
-Files: third_party/WebKit/WebCore/platform/haiku/PlatformKeyboardEventHaiku.cpp
-Copyright: Copyright: 2010 Stephan Aßmus <superstippi@gmx.de> / 2008 Andrea Anzani <andrea.anzani@gmail.com> / 2007 Ryan Leavengood <leavengood@gmail.com>:
-License: FreeBSD (guessed)
-
-Files: third_party/WebKit/WebCore/platform/haiku/RenderThemeHaiku.cpp
-Copyright: Copyright: 2006 Dirk Mueller <mueller@kde.org> / 2007 Ryan Leavengood <leavengood@gmail.com> / 2009 Maxime Simon <simon.maxime@gmail.com>:
-License: LGPL-2.0+ (with incorrect FSF address)
-
-Files: third_party/WebKit/WebCore/platform/haiku/SearchPopupMenuHaiku.cpp
-Copyright: Copyright: 2007 Ryan Leavengood <leavengood@gmail.com>:
-License: LGPL-2.0+ (with incorrect FSF address)
-
-Files: third_party/WebKit/WebCore/platform/haiku/FileChooserHaiku.cpp
-Copyright: Copyright: 2007 Ryan Leavengood <leavengood@gmail.com> / 2006 Nikolas Zimmermann <zimmermann@kde.org>:
-License: LGPL-2.0+ (with incorrect FSF address)
-
-Files: third_party/WebKit/WebCore/platform/haiku/RenderThemeHaiku.h
-Copyright: Copyright: 2009 Maxime Simon <simon.maxime@gmail.com>:
-License: LGPL-2.0+ (with incorrect FSF address)
-
-Files: third_party/WebKit/WebCore/platform/haiku/PopupMenuHaiku.cpp
-Copyright: Copyright: 2010 Stephan Aßmus <superstippi@gmx.de>:
-License: LGPL-2.0+ (with incorrect FSF address)
-
 Files: third_party/WebKit/WebCore/platform/image-decoders/ImageDecoder.h
 Copyright: Copyright: 2009 Nokia Corporation and/or its subsidiary(-ies) / Research In Motion Limited 2009-2010. All rights reserved / 2006 Apple ComputergInc. All rights reserved / 2008-2009 Torch Mobile Inc:
 License: FreeBSD (guessed)
@@ -8980,31 +8795,18 @@ License: FreeBSD (guessed)
 Files: third_party/WebKit/WebCore/platform/image-decoders/gif/*
 Copyright: Copyright 1998 Netscape
 License: MPL-1.1 / GPL-2+ / LGPL-2.1+
-MPL-1.1 GPL (unversioned/unknown version)
-
-Files: third_party/WebKit/WebCore/platform/image-decoders/haiku/ImageDecoderHaiku.cpp
-Copyright: Copyright: 2010 Stephan Aßmusg<superstippi@gmx.de> / 2006 Apple Computer Inc. All rights reserved:
-License: FreeBSD (guessed)
 
 Files: third_party/WebKit/WebCore/platform/image-decoders/ico/ICOImageDecoder.cppgthird_party/WebKit/WebCore/platform/image-decoders/ico/ICOImageDecoder.h
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008g2009 Google Inc. All rights reserved:
 License: BSD (guessed)
 
-Files: third_party/WebKit/WebCore/platform/image-decoders/jpeg/JPEGImageDecoder.h
-Copyright: Copyright: 2006 Apple ComputergInc. All rights reserved / 2008-2009 Torch Mobile Inc:
-License: FreeBSD (guessed)
+Files: third_party/WebKit/WebCore/platform/image-decoders/jpeg/JPEGImageDecoder.*
+Copyright: Copyright: 2001-6 mozilla.org / 2007-2009 Torch Mobileg Inc / 2006 Apple Computer Inc
+License: MPL-1.1 / LGPL-2.1+
 
-Files: third_party/WebKit/WebCore/platform/image-decoders/jpeg/JPEGImageDecoder.cpp
-Copyright: Copyright: 2001-6 mozilla.org / 2007-2009 Torch MobilegInc / 2006 Apple Computer Inc:
-License: MPL-1.1 GPL (unversioned/unknown version) LGPL-2.1+
-
-Files: third_party/WebKit/WebCore/platform/image-decoders/png/PNGImageDecoder.h
-Copyright: Copyright: 2006 Apple ComputergInc. All rights reserved:
-License: FreeBSD (guessed)
-
-Files: third_party/WebKit/WebCore/platform/image-decoders/png/PNGImageDecoder.cpp
-Copyright: Copyright: 2007-2009 Torch MobilegInc / Research In Motion Limited 2009-2010. All rights reserved / 2006 Apple Computer Inc / 2001 mozilla.org:
-License: MPL-1.1 GPL (unversioned/unknown version) LGPL-2.1+
+Files: third_party/WebKit/Source/platform/image-decoders/png/PNGImageDecoder.*
+Copyright: Copyright: 2007-2009 Torch MobilegInc / Research In Motion Limited 2009-2010. All rights reserved / 2006 Apple Computer Inc / 2001 mozilla.org
+License: MPL-1.1 / LGPL-2.1+
 
 Files: third_party/WebKit/WebCore/platform/image-decoders/qt/RGBA32BufferQt.cpp
 Copyright: Copyright: 2009 Holger Hans Peter Freyther / 2008g2009 Google Inc / 2006 Apple Computer Inc. All rights reserved:
@@ -9690,57 +9492,21 @@ Files: third_party/WebKit/WebCore/platform/text/Base64.cpp
 Copyright: Copyright: 2007g2008 Apple Inc. All rights reserved / 2006 Alexey Proskuryakov <ap@webkit.org> / 1996-1999 / 2000-2001 Dawit Alemayehu <adawit@kde.org>:
 License: LGPL (v2)
 
-Files: third_party/WebKit/WebCore/platform/text/UnicodeRange.cppgthird_party/WebKit/WebCore/platform/text/UnicodeRange.h
-Copyright: Copyright: 1998 Netscape Communications Corporation / 2007 Apple ComputergInc:
-License: MPL-1.1 GPL (unversioned/unknown version) LGPL-2.1+
+Files: ./third_party/WebKit/Source/platform/text/UnicodeRange.*
+Copyright: Copyright: 1998 Netscape Communications Corporation / 2007 Apple Computer Inc
+License: MPL-1.1 / LGPL-2.1+
 
-Files: third_party/WebKit/WebCore/platform/text/android/TextBreakIteratorInternalICU.cpp
-Copyright: Copyright: HOLDERS ``AS IS'' AND ANY / 2007gThe Android Open Source Project:
+Files: third_party/WebKit/WebCore/platform/text/android/TextBreakIteratorInternalICU.*
+Copyright: 2007 Apple Inc. / 2008-2009 Google Inc.
 License: FreeBSD (guessed)
 
-Files: third_party/WebKit/WebCore/platform/text/brew/TextBreakIteratorInternalICUBrew.cpp
-Copyright: Copyright: 2010 Company 100gInc:
-License: LGPL-2.0+ (with incorrect FSF address)
-
 Files: third_party/WebKit/WebCore/platform/text/cf/*
-Copyright: Copyright: 2006 Apple ComputergInc:
+Copyright: Copyright: 2006-2009 Apple Inc. All rights reserved
 License: LGPL-2.0+
-
-Files: third_party/WebKit/WebCore/platform/text/cf/*
-Copyright: Copyright: 2006g2009 Apple Inc. All rights reserved:
-License: LGPL-2.0+
-
-Files: third_party/WebKit/WebCore/platform/text/chromium/TextBreakIteratorInternalICUChromium.cpp
-Copyright: Copyright: 2007 Apple Inc. All rights reserved / 2008g2009 Google Inc:
-License: LGPL-2.0+ (with incorrect FSF address)
-
-Files: third_party/WebKit/WebCore/platform/text/efl/TextBreakIteratorInternalICUEfl.cpp
-Copyright: Copyright: 2009-2010 Samsung Electronics / 2009-2010 ProFUSION embedded systems / 2007 Alp Toker <alp@atoker.com>:
-License: LGPL-2.0+
-
-Files: third_party/WebKit/WebCore/platform/text/gtk/*
-Copyright: Copyright: 2008 Jürg Billeter <j@bitron.ch> / 2004g2006 2007 Apple Inc. All rights reserved / 2006 Alexey Proskuryakov <ap@nypop.com> / 2009 Dominik Röttsches <dominik.roettsches@access-company.com>:
-License: FreeBSD (guessed)
 
 Files: third_party/WebKit/WebCore/platform/text/gtk/*
 Copyright: Copyright: 2008 Jürg Billeter <j@bitron.ch> / 2006 Alexey Proskuryakov <ap@nypop.com> / 2004g2006 2007 2008 Apple Inc. All rights reserved / 2009 Dominik Röttsches <dominik.roettsches@access-company.com>:
 License: FreeBSD (guessed)
-
-Files: third_party/WebKit/WebCore/platform/text/gtk/*
-Copyright: Copyright: 2007 Alp Toker <alp@atoker.com>:
-License: LGPL-2.0+
-
-Files: third_party/WebKit/WebCore/platform/text/gtk/*
-Copyright: Copyright: 2007 Apple Inc. All rights reserved / 2008 Jürg Billeter <j@bitron.ch> / 2006 Lars Knoll <lars@trolltech.com> / 2008 Dominik Röttsches <dominik.roettsches@access-company.com>:
-License: LGPL-2.0+
-
-Files: third_party/WebKit/WebCore/platform/text/haiku/StringHaiku.cpp
-Copyright: Copyright: 2007 Ryan Leavengood <leavengood@gmail.com>:
-License: FreeBSD (guessed)
-
-Files: third_party/WebKit/WebCore/platform/text/haiku/TextBreakIteratorInternalICUHaiku.cpp
-Copyright: Copyright: 2007 Apple Inc. All rights reserved:
-License: LGPL-2.0+ (with incorrect FSF address)
 
 Files: third_party/WebKit/WebCore/platform/text/mac/CharsetData.h
 Copyright: Copyright: 2003g2006 Apple Computer Inc. All rights reserved:
@@ -10093,14 +9859,6 @@ License: FreeBSD (guessed)
 Files: third_party/WebKit/WebCore/plugins/gtk/PluginDataGtk.cpp
 Copyright: Copyright: 2006g2007 Apple Inc. All rights reserved / 2008 Nokia Corporation and/or its subsidiary(-ies) / 2008 Collabora Ltd. All rights reserved:
 License: LGPL-2.0+
-
-Files: third_party/WebKit/WebCore/plugins/gtk/gtk2xtbin.cgthird_party/WebKit/WebCore/plugins/gtk/gtk2xtbin.h third_party/WebKit/WebCore/plugins/gtk/xembed.h
-Copyright: Copyright: 2002:
-License: MPL-1.1 GPL (unversioned/unknown version)
-
-Files: third_party/WebKit/WebCore/plugins/mac/*
-Copyright: Copyright: 2006g2007 Apple Inc. All rights reserved / 2008 Nokia Corporation and/or its subsidiary(-ies) / 2008 Collabora Ltd. All rights reserved:
-License: FreeBSD (guessed)
 
 Files: third_party/WebKit/WebCore/plugins/mac/*
 Copyright: Copyright: 2006g2007 Apple Inc. All rights reserved / 2009 Girish Ramakrishnan <girish@forwardbias.in> / 2008 Nokia Corporation and/or its subsidiary(-ies) / 2008 Collabora Ltd. All rights reserved:
@@ -10721,26 +10479,6 @@ License: LGPL-2.0+
 Files: third_party/WebKit/WebCore/rendering/*
 Copyright: Copyright: 2009 Kenneth Rohde Christiansen / 2006g2007 Apple Inc:
 License: LGPL-2.0+
-
-Files: third_party/WebKit/WebCore/rendering/ScrollBehavior.cpp
-Copyright: Copyright: 1998 Netscape Communications Corporation / 2006g2007 2008 Apple Inc. All rights reserved:
-License: MPL-1.1 GPL (unversioned/unknown version) LGPL-2.1+
-
-Files: third_party/WebKit/WebCore/rendering/RenderMarquee.cpp
-Copyright: Copyright: 1998 Netscape Communications Corporation / 2006g2007 2008 Apple Inc. All rights reserved / 2009 Torch Mobile Inc. All rights reserved. (http://www.torchmobile.com/):
-License: MPL-1.1 GPL (unversioned/unknown version) LGPL-2.1+
-
-Files: third_party/WebKit/WebCore/rendering/RenderLayer.cpp
-Copyright: Copyright: 1998 Netscape Communications Corporation / 2006g2007 2008 2009 2010 Apple Inc. All rights reserved:
-License: MPL-1.1 GPL (unversioned/unknown version) LGPL-2.1+
-
-Files: third_party/WebKit/WebCore/rendering/RenderArena.cppgthird_party/WebKit/WebCore/rendering/RenderArena.h third_party/WebKit/WebCore/rendering/RenderMarquee.h
-Copyright: Copyright: 2003 Apple ComputergInc / 1998 Netscape Communications Corporation:
-License: MPL-1.1 GPL (unversioned/unknown version) LGPL-2.1+
-
-Files: third_party/WebKit/WebCore/rendering/RenderLayer.hgthird_party/WebKit/WebCore/rendering/ScrollBehavior.h
-Copyright: Copyright: 2003g2009 Apple Inc. All rights reserved / 1998 Netscape Communications Corporation:
-License: MPL-1.1 GPL (unversioned/unknown version) LGPL-2.1+
 
 Files: third_party/WebKit/WebCore/rendering/style/LineClampValue.h
 Copyright: Copyright: 2009 Apple Inc. All rights reserved:
@@ -11410,10 +11148,6 @@ Files: third_party/WebKit/WebKit/chromium/WebGeolocationServiceBridgeImpl.h
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2010gGoogle Inc. All rights reserved:
 License: BSD (guessed)
 
-Files: third_party/WebKit/WebKit/chromium/WebPasswordFormUtils.cpp
-Copyright: Copyright: 2003:
-License: MPL-1.1 GPL (unversioned/unknown version)
-
 Files: third_party/WebKit/WebKit/chromium/WebMediaPlayerClientImpl.cpp
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
@@ -11658,10 +11392,6 @@ Files: third_party/WebKit/WebKitTools/Scripts/webkitpy/thirdparty/*
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2007-2009 Michael Foord / 2003-2009gMichael Foord:
 License: FreeBSD (guessed)
 
-Files: third_party/WebKit/WebKitTools/Scripts/webkitpy/thirdparty/BeautifulSoup.py
-Copyright: Copyright: 2004-2009gLeonard Richardson:
-License: UNKNOWN
-
 Files: third_party/WebKit/WebKitTools/Scripts/webkitpy/thirdparty/pywebsocket/setup.py
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc:
 License: BSD (guessed)
@@ -11772,10 +11502,6 @@ Files: third_party/cld/encodings/lang_enc.h
 Copyright: Copyright (c) 2006-2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
 
-Files: third_party/cld/encodings/compact_lang_det/subsetsequence_unittest.cc
-Copyright: Copyright: 2008 Google Inc. All Rights Reserved:
-License: UNKNOWN
-
 Files: third_party/cld/encodings/compact_lang_det/*
 Copyright: Copyright (c) 2006-2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
@@ -11783,10 +11509,6 @@ License: global BSD-style Chromium
 Files: third_party/cld/encodings/compact_lang_det/*
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: global BSD-style Chromium
-
-Files: third_party/cld/encodings/compact_lang_det/generated/compact_lang_det_generated_ctjkvz_0.cc
-Copyright: Copyright: 2009 Google Inc:
-License: UNKNOWN
 
 Files: third_party/cld/encodings/compact_lang_det/generated/compact_lang_det_generated_cjkbis_0.ccgthird_party/cld/encodings/compact_lang_det/generated/compact_lang_det_generated_ctjkvz.cc third_party/cld/encodings/compact_lang_det/generated/compact_lang_det_generated_longwords8_0.cc
 Copyright: Copyright (c) 2006-2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
@@ -11803,10 +11525,6 @@ License: global BSD-style Chromium
 Files: third_party/cld/encodings/compact_lang_det/win/cld_utf8statetable.h
 Copyright: Copyright: 2006-2009 The Chromium Authors. All rights reserved:
 License: GENERATED FILE
-
-Files: third_party/cld/encodings/compact_lang_det/win/cld_utf8utils_google3.cc
-Copyright: Copyright: 2009 Google Inc. All Rights Reserved:
-License: UNKNOWN
 
 Files: third_party/cld/encodings/compact_lang_det/win/*
 Copyright: Copyright (c) 2006-2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
@@ -11841,8 +11559,8 @@ Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of 
 License: global BSD-style Chromium
 
 Files: third_party/codesighs/*
-Copyright: Copyright: 2002:
-License: MPL-1.1 GPL (unversioned/unknown version)
+Copyright: Copyright 2002 Netscape
+License: MPL-1.1 / GPL-2+ / LGPL-2.1+
 
 Files: third_party/ffmpeg/*
 Copyright: Copyright: 2009 The Chromium Authors. All rights reserved:
@@ -11863,78 +11581,6 @@ License: FreeBSD (guessed) Expat
 Files: third_party/glew/glew.c
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS "AS IS" / 2002-2008gMarcelo E. Magallon <mmagallo[]debian org> / OWNER OR CONTRIBUTORS BE / 2002-2008 Milan Ikits <milan ikits[]ieee org> / 2002 Lev Povalahev:
 License: FreeBSD (guessed)
-
-Files: third_party/harfbuzz/autogen.shgthird_party/harfbuzz/config.h
-Copyright: UNKNOWN:
-License: harfbuzz-License
-
-Files: third_party/harfbuzz/contrib/harfbuzz-freetype.cgthird_party/harfbuzz/contrib/harfbuzz-freetype.h third_party/harfbuzz/contrib/harfbuzz-unicode-glib.c third_party/harfbuzz/contrib/harfbuzz-unicode-tables.c third_party/harfbuzz/contrib/harfbuzz-unicode.c third_party/harfbuzz/contrib/harfbuzz-unicode.h
-Copyright: UNKNOWN:
-License: harfbuzz-License
-
-Files: third_party/harfbuzz/contrib/tables/category-parse.pygthird_party/harfbuzz/contrib/tables/category-properties.h third_party/harfbuzz/contrib/tables/combining-class-parse.py third_party/harfbuzz/contrib/tables/combining-properties.h third_party/harfbuzz/contrib/tables/grapheme-break-parse.py third_party/harfbuzz/contrib/tables/grapheme-break-properties.h third_party/harfbuzz/contrib/tables/mirroring-parse.py third_party/harfbuzz/contrib/tables/mirroring-properties.h third_party/harfbuzz/contrib/tables/script-properties.h third_party/harfbuzz/contrib/tables/scripts-parse.py third_party/harfbuzz/contrib/tables/unicode_parse_common.py
-Copyright: UNKNOWN:
-License: harfbuzz-License
-
-Files: third_party/harfbuzz/harfbuzz-stream-private.h
-Copyright: Copyright: ( (error = ) != 0 ) / HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIESgINCLUDING / 2006 Behdad Esfahbod / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 1998-2004 David Turner and Werner Lemberg:
-License: harfbuzz-License
-
-Files: third_party/harfbuzz/harfbuzz-dump.cgthird_party/harfbuzz/harfbuzz-dump.h
-Copyright: Copyright: 2000g2007 Red Hat Inc / HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES INCLUDING / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO:
-License: harfbuzz-License
-
-Files: third_party/harfbuzz/harfbuzz-buffer-private.hgthird_party/harfbuzz/harfbuzz-buffer.c third_party/harfbuzz/harfbuzz-buffer.h
-Copyright: Copyright: 2004,2007 Red HatgInc / HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES INCLUDING / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 1998-2004 David Turner and Werner Lemberg:
-License: harfbuzz-License
-
-Files: third_party/harfbuzz/harfbuzz-stream.c
-Copyright: Copyright: 2005 David Turner / HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIESgINCLUDING / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 2007 Red Hat Inc / 2008 Nokia Corporation and/or its subsidiary(-ies):
-License: harfbuzz-License
-
-Files: third_party/harfbuzz/harfbuzz-stream.h
-Copyright: Copyright: 2005 David Turner / HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIESgINCLUDING / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 2008 Nokia Corporation and/or its subsidiary(-ies):
-License: harfbuzz-License
-
-Files: third_party/harfbuzz/harfbuzz.c
-Copyright: Copyright: HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIESgINCLUDING / 2006 Behdad Esfahbod / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO:
-License: harfbuzz-License
-
-Files: third_party/harfbuzz/harfbuzz-gdef-private.hgthird_party/harfbuzz/harfbuzz-gdef.c third_party/harfbuzz/harfbuzz-gdef.h third_party/harfbuzz/harfbuzz-gpos-private.h third_party/harfbuzz/harfbuzz-gpos.h third_party/harfbuzz/harfbuzz-gsub-private.h third_party/harfbuzz/harfbuzz-gsub.h third_party/harfbuzz/harfbuzz-impl.h third_party/harfbuzz/harfbuzz-open-private.h third_party/harfbuzz/harfbuzz-open.c third_party/harfbuzz/harfbuzz-open.h third_party/harfbuzz/harfbuzz.h
-Copyright: Copyright: HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIESgINCLUDING / 2006 Behdad Esfahbod / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 1998-2004 David Turner and Werner Lemberg:
-License: harfbuzz-License
-
-Files: third_party/harfbuzz/harfbuzz-gpos.cgthird_party/harfbuzz/harfbuzz-gsub.c
-Copyright: Copyright: HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIESgINCLUDING / 2006 Behdad Esfahbod / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 2007 Red Hat Inc / 1998-2004 David Turner and Werner Lemberg:
-License: harfbuzz-License
-
-Files: third_party/harfbuzz/harfbuzz-dump-main.c
-Copyright: Copyright: HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIESgINCLUDING / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 2000 Red Hat Inc:
-License: harfbuzz-License
-
-Files: third_party/harfbuzz/harfbuzz-shape.h
-Copyright: Copyright: HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIESgINCLUDING / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 2006 Red Hat Inc:
-License: harfbuzz-License
-
-Files: third_party/harfbuzz/harfbuzz-global.h
-Copyright: Copyright: HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIESgINCLUDING / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 2007 Red Hat Inc / 2008 Nokia Corporation and/or its subsidiary(-ies):
-License: harfbuzz-License
-
-Files: third_party/harfbuzz/harfbuzz-impl.c
-Copyright: Copyright: HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIESgINCLUDING / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 2007 Red Hat Inc / 2008 Nokia Corporation and/or its subsidiary(-ies) / 1998-2004 David Turner and Werner Lemberg:
-License: harfbuzz-License
-
-Files: third_party/harfbuzz/harfbuzz-arabic.cgthird_party/harfbuzz/harfbuzz-external.h third_party/harfbuzz/harfbuzz-hangul.c third_party/harfbuzz/harfbuzz-hebrew.c third_party/harfbuzz/harfbuzz-indic.cpp third_party/harfbuzz/harfbuzz-khmer.c third_party/harfbuzz/harfbuzz-myanmar.c third_party/harfbuzz/harfbuzz-shaper-all.cpp third_party/harfbuzz/harfbuzz-shaper-private.h third_party/harfbuzz/harfbuzz-shaper.cpp third_party/harfbuzz/harfbuzz-shaper.h third_party/harfbuzz/harfbuzz-thai.c third_party/harfbuzz/harfbuzz-tibetan.c
-Copyright: Copyright: HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIESgINCLUDING / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 2008 Nokia Corporation and/or its subsidiary(-ies):
-License: harfbuzz-License
-
-Files: third_party/harfbuzz/tests/linebreaking/harfbuzz-qt.cppgthird_party/harfbuzz/tests/linebreaking/main.cpp
-Copyright: Copyright: HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIESgINCLUDING / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 2008 Nokia Corporation and/or its subsidiary(-ies):
-License: harfbuzz-License
-
-Files: third_party/harfbuzz/tests/shaping/main.cpp
-Copyright: Copyright: HOLDER BE LIABLE TO ANY PARTY FOR / HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIESgINCLUDING / HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH / HOLDER HAS NO OBLIGATION TO / 2008 Nokia Corporation and/or its subsidiary(-ies):
-License: harfbuzz-License
 
 Files: third_party/hunspell/google/bdict.hgthird_party/hunspell/google/bdict_reader.cc third_party/hunspell/google/bdict_reader.h third_party/hunspell/google/bdict_writer.cc third_party/hunspell/google/bdict_writer.h third_party/hunspell/google/hunspell_tests.cc
 Copyright: Copyright: 2008 Google Inc. All Rights Reserved:
@@ -14468,44 +14114,44 @@ Files: third_party/modp_b64/*
 Copyright: 2005-2006 Nick Galbreath
 License: BSD (guessed)
 
-Files: third_party/mozilla/include/NSPasteboard+Utils.hgthird_party/mozilla/include/NSScreen+Utils.h third_party/mozilla/include/NSString+Utils.h third_party/mozilla/include/NSURL+Utils.h third_party/mozilla/include/NSWorkspace+Utils.h
-Copyright: Copyright: 2002:
-License: MPL-1.1 GPL (unversioned/unknown version)
+Files: third_party/mozilla/*
+Copyright: Copyright 2002 Netscape
+License: MPL-1.1 / GPL-2+ / LGPL-2.1+
 
 Files: third_party/npapi/bindings/npruntime.h
-Copyright: Copyright: 2004gApple Computer Inc. and The Mozilla Foundation:
+Copyright: Copyright: 2004 Apple Computer Inc. and The Mozilla Foundation
 License: BSD (guessed)
 
-Files: third_party/npapi/bindings/npapi.hg third_party/npapi/bindings/npapi_x11.h
-Copyright: Copyright: 1998:
-License: MPL-1.1 GPL (unversioned/unknown version)
+Files: third_party/npapi/bindings/npapi.h third_party/npapi/bindings/npapi_x11.h
+Copyright: Copyright 1998 Netscape
+License: MPL-1.1 / GPL-2+ / LGPL-2.1+
 
 Files: third_party/npapi/bindings/npapi_extensions.h
-Copyright: Copyright (c) 2006-2009 The Chromium Authors. All rights reserved.  * Use of this source code is governed by a BSD-style license that can be  * found in the LICENSE file.:
+Copyright: Copyright (c) 2006-2009 The Chromium Authors. All rights reserved.
 License: global BSD-style Chromium
 
 Files: third_party/npapi/bindings/npapi_extensions_private.h
-Copyright: Copyright (c) 2006-2010 The Chromium Authors. All rights reserved.  * Use of this source code is governed by a BSD-style license that can be  * found in the LICENSE file.:
+Copyright: Copyright (c) 2006-2010 The Chromium Authors. All rights reserved.
 License: global BSD-style Chromium
 
 Files: third_party/npapi/bindings/nphostapi.h
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved.
 License: global BSD-style Chromium
 
 Files: third_party/openmax/omx_stub.cc
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved.
 License: global BSD-style Chromium
 
-Files: third_party/openmax/il/OMX_Audio.hgthird_party/openmax/il/OMX_Component.h third_party/openmax/il/OMX_ContentPipe.h third_party/openmax/il/OMX_Core.h third_party/openmax/il/OMX_IVCommon.h third_party/openmax/il/OMX_Image.h third_party/openmax/il/OMX_Index.h third_party/openmax/il/OMX_Other.h third_party/openmax/il/OMX_Types.h third_party/openmax/il/OMX_Video.h
+Files: third_party/openmax/il/OMX_Audio.h third_party/openmax/il/OMX_Component.h third_party/openmax/il/OMX_ContentPipe.h third_party/openmax/il/OMX_Core.h third_party/openmax/il/OMX_IVCommon.h third_party/openmax/il/OMX_Image.h third_party/openmax/il/OMX_Index.h third_party/openmax/il/OMX_Other.h third_party/openmax/il/OMX_Types.h third_party/openmax/il/OMX_Video.h
 Copyright: Copyright: 2008 The Khronos Group Inc / HOLDERS BE LIABLE FOR ANY:
 License: Expat
 
-Files: third_party/ots/include/opentype-sanitiser.hgthird_party/ots/include/ots-memory-stream.h
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+Files: third_party/ots/include/opentype-sanitiser.h third_party/ots/include/ots-memory-stream.h
+Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved.
 License: global BSD-style Chromium
 
 Files: third_party/ots/cff.ccgthird_party/ots/cff.h third_party/ots/cmap.cc third_party/ots/cmap.h third_party/ots/cvt.cc third_party/ots/cvt.h third_party/ots/fpgm.cc third_party/ots/fpgm.h third_party/ots/gasp.cc third_party/ots/gasp.h third_party/ots/glyf.cc third_party/ots/glyf.h third_party/ots/hdmx.cc third_party/ots/hdmx.h third_party/ots/head.cc third_party/ots/head.h third_party/ots/hhea.cc third_party/ots/hhea.h third_party/ots/hmtx.cc third_party/ots/hmtx.h third_party/ots/kern.cc third_party/ots/kern.h third_party/ots/loca.cc third_party/ots/loca.h third_party/ots/ltsh.cc third_party/ots/ltsh.h third_party/ots/maxp.cc third_party/ots/maxp.h third_party/ots/name.cc third_party/ots/os2.cc third_party/ots/os2.h third_party/ots/ots.cc third_party/ots/ots.h third_party/ots/post.cc third_party/ots/post.h third_party/ots/prep.cc third_party/ots/prep.h third_party/ots/vdmx.cc third_party/ots/vdmx.h third_party/ots/vorg.cc third_party/ots/vorg.h
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved.
 License: global BSD-style Chromium
 
 Files: third_party/ots/*
@@ -15301,8 +14947,8 @@ Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc:
 License: BSD (guessed)
 
 Files: third_party/tcmalloc/chromium/base/vdso_support.h
-Copyright: Copyright: 2008 Google Inc. All Rights Reserved:
-License: UNKNOWN
+Copyright: Copyright 2008 Google Inc. All Rights Reserved.
+License: BSD-3-Clause
 
 Files: third_party/tcmalloc/chromium/google/tcmalloc.h
 Copyright: Copyright: 2007gGoogle Inc / HOLDERS AND CONTRIBUTORS:
@@ -15352,9 +14998,9 @@ Files: third_party/tcmalloc/chromium/tests/*
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2005gGoogle Inc:
 License: BSD (guessed) GENERATED FILE
 
-Files: third_party/tcmalloc/chromium/tests/page_heap_test.ccgthird_party/tcmalloc/chromium/tests/profile-handler_unittest.cc third_party/tcmalloc/chromium/tests/raw_printer_test.cc third_party/tcmalloc/chromium/tests/stack_trace_table_test.cc
-Copyright: Copyright: 2009 Google Inc. All Rights Reserved:
-License: UNKNOWN
+Files: third_party/tcmalloc/chromium/tests/page_heap_test.cc third_party/tcmalloc/chromium/tests/profile-handler_unittest.cc third_party/tcmalloc/chromium/tests/raw_printer_test.cc third_party/tcmalloc/chromium/tests/stack_trace_table_test.cc
+Copyright: Copyright: 2009 Google Inc. All Rights Reserved.
+License: BSD-3-Clause
 
 Files: third_party/tcmalloc/chromium/windows/*
 Copyright: Copyright: 2007gGoogle Inc / HOLDERS AND CONTRIBUTORS:
@@ -15428,10 +15074,6 @@ Files: third_party/tcmalloc/vendor/base/spinlock_linux-inl.hgthird_party/tcmallo
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc:
 License: BSD (guessed)
 
-Files: third_party/tcmalloc/vendor/base/vdso_support.h
-Copyright: Copyright: 2008 Google Inc. All Rights Reserved:
-License: UNKNOWN
-
 Files: third_party/tcmalloc/vendor/google/*
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2005gGoogle Inc:
 License: BSD (guessed)
@@ -15476,10 +15118,6 @@ Files: third_party/tcmalloc/vendor/tests/*
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2005gGoogle Inc:
 License: BSD (guessed) GENERATED FILE
 
-Files: third_party/tcmalloc/vendor/tests/page_heap_test.ccgthird_party/tcmalloc/vendor/tests/profile-handler_unittest.cc third_party/tcmalloc/vendor/tests/raw_printer_test.cc third_party/tcmalloc/vendor/tests/stack_trace_table_test.cc
-Copyright: Copyright: 2009 Google Inc. All Rights Reserved:
-License: UNKNOWN
-
 Files: third_party/tcmalloc/vendor/windows/*
 Copyright: Copyright: 2007gGoogle Inc / HOLDERS AND CONTRIBUTORS:
 License: BSD (guessed)
@@ -15492,23 +15130,7 @@ Files: third_party/tcmalloc/vendor/windows/google/tcmalloc.h
 Copyright: Copyright: 2003gGoogle Inc / HOLDERS AND CONTRIBUTORS:
 License: BSD (guessed)
 
-Files: third_party/tlslite/make_release.pygthird_party/tlslite/setup.py
-Copyright: UNKNOWN:
-License: Public domain
-
-Files: third_party/tlslite/scripts/tls.pygthird_party/tlslite/scripts/tlsdb.py
-Copyright: UNKNOWN:
-License: Public domain
-
-Files: third_party/tlslite/test/httpsserver.pygthird_party/tlslite/test/twistedclient.py third_party/tlslite/test/twistedserver.py
-Copyright: UNKNOWN:
-License: Public domain
-
 Files: third_party/tlslite/tlslite/BaseDB.pygthird_party/tlslite/tlslite/Checker.py third_party/tlslite/tlslite/FileObject.py third_party/tlslite/tlslite/HandshakeSettings.py third_party/tlslite/tlslite/Session.py third_party/tlslite/tlslite/SessionCache.py third_party/tlslite/tlslite/SharedKeyDB.py third_party/tlslite/tlslite/TLSConnection.py third_party/tlslite/tlslite/TLSRecordLayer.py third_party/tlslite/tlslite/VerifierDB.py third_party/tlslite/tlslite/X509.py third_party/tlslite/tlslite/X509CertChain.py third_party/tlslite/tlslite/__init__.py third_party/tlslite/tlslite/api.py third_party/tlslite/tlslite/constants.py third_party/tlslite/tlslite/errors.py third_party/tlslite/tlslite/mathtls.py third_party/tlslite/tlslite/messages.py
-Copyright: UNKNOWN:
-License: Public domain
-
-Files: third_party/tlslite/tlslite/integration/AsyncStateMachine.pygthird_party/tlslite/tlslite/integration/ClientHelper.py third_party/tlslite/tlslite/integration/HTTPTLSConnection.py third_party/tlslite/tlslite/integration/IMAP4_TLS.py third_party/tlslite/tlslite/integration/IntegrationHelper.py third_party/tlslite/tlslite/integration/POP3_TLS.py third_party/tlslite/tlslite/integration/SMTP_TLS.py third_party/tlslite/tlslite/integration/TLSAsyncDispatcherMixIn.py third_party/tlslite/tlslite/integration/TLSSocketServerMixIn.py third_party/tlslite/tlslite/integration/TLSTwistedProtocolWrapper.py third_party/tlslite/tlslite/integration/XMLRPCTransport.py third_party/tlslite/tlslite/integration/__init__.py
 Copyright: UNKNOWN:
 License: Public domain
 
@@ -15536,76 +15158,8 @@ Files: third_party/xdg-utils/tests/xdg-utils-usecases/data/mime_launch.sh
 Copyright: UNKNOWN:
 License: Expat
 
-Files: third_party/zlib/mozzconf.h
-Copyright: Copyright: 2004:
-License: MPL-1.1 GPL (unversioned/unknown version)
-
-Files: third_party/zlib/compress.cgthird_party/zlib/uncompr.c
-Copyright: Copyright: 1995-2003 Jean-loup Gailly:
-License: zlib/libpng
-
-Files: third_party/zlib/inffast.h
-Copyright: Copyright: 1995-2003 Mark Adler:
-License: zlib/libpng
-
-Files: third_party/zlib/deflate.h
-Copyright: Copyright: 1995-2004 Jean-loup Gailly:
-License: zlib/libpng
-
-Files: third_party/zlib/adler32.cgthird_party/zlib/inffast.c third_party/zlib/inflate.h
-Copyright: Copyright: 1995-2004 Mark Adler:
-License: zlib/libpng
-
-Files: third_party/zlib/gzio.cgthird_party/zlib/trees.c third_party/zlib/zconf.h third_party/zlib/zutil.c third_party/zlib/zutil.h
-Copyright: Copyright: 1995-2005 Jean-loup Gailly:
-License: zlib/libpng
-
-Files: third_party/zlib/deflate.c
-Copyright: Copyright: 1995-2005 Jean-loup Gailly "; / 1995-2005 Jean-loup Gailly / string in the executable of your product:
-License: zlib/libpng
-
-Files: third_party/zlib/zlib.h
-Copyright: Copyright: 1995-2005 Jean-loup Gailly and Mark Adler:
-License: zlib/libpng
-
-Files: third_party/zlib/crc32.cgthird_party/zlib/infback.c third_party/zlib/inflate.c third_party/zlib/inftrees.h
-Copyright: Copyright: 1995-2005 Mark Adler:
-License: zlib/libpng
-
-Files: third_party/zlib/inftrees.c
-Copyright: Copyright: 1995-2005 Mark Adler / 1995-2005 Mark Adler "; / string in the executable of your product:
-License: zlib/libpng
-
-Files: third_party/zlib/crc32.hgthird_party/zlib/inffixed.h third_party/zlib/trees.h
-Copyright: UNKNOWN:
-License: zlib/libpng
-
-Files: third_party/zlib/contrib/minizip/ioapi.cgthird_party/zlib/contrib/minizip/ioapi.h third_party/zlib/contrib/minizip/iowin32.c third_party/zlib/contrib/minizip/iowin32.h third_party/zlib/contrib/minizip/miniunz.c third_party/zlib/contrib/minizip/minizip.c third_party/zlib/contrib/minizip/unzip.h third_party/zlib/contrib/minizip/zip.c third_party/zlib/contrib/minizip/zip.h
-Copyright: Copyright: 1998-2005 Gilles Vollant:
-License: zlib/libpng
-
-Files: third_party/zlib/contrib/minizip/unzip.c
-Copyright: Copyright: 1998-2005 Gilles Vollant / 1990-2000 Info-ZIP. All rights reserved:
-License: zlib/libpng
-
-Files: third_party/zlib/contrib/minizip/crypt.h
-Copyright: Copyright: 1998-2005 Gilles Vollant / ^ (b)) & 0xff))) ^ ( >> 8)):
-License: zlib/libpng
-
-Files: third_party/zlib/contrib/minizip/mztools.cgthird_party/zlib/contrib/minizip/mztools.h
-Copyright: UNKNOWN:
-License: zlib/libpng
-
 Files: tools/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: global BSD-style Chromium
-
-Files: tools/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: global BSD-style Chromium
-
-Files: tools/checkbins/checkbins.py
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+Copyright: Copyright (c) 2009-2010 The Chromium Authors.
 License: global BSD-style Chromium
 
 Files: tools/checkdeps/checkdeps.py

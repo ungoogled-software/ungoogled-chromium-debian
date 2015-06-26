@@ -1,3 +1,22 @@
+chromium-browser (43.0.2357.130-1) unstable; urgency=medium
+
+  * New upstream security release:
+    - CVE-2015-1266: Scheme validation error in WebUI. Credit to anonymous.
+    - CVE-2015-1268: Cross-origin bypass in Blink. Credit to Mariusz Mlynski.
+    - CVE-2015-1267: Cross-origin bypass in Blink. Credit to anonymous.
+    - CVE-2015-1269: Normalization error in HSTS/HPKP preload list. Credit to
+      Mike Ruddy.
+  * Don't build the Google Now extension.
+  * More updates to debian/copyright.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Tue, 23 Jun 2015 21:43:54 +0000
+
+chromium-browser (43.0.2357.124-3) unstable; urgency=medium
+
+  * Fix syntax error in default-flags (closes: #789310).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 19 Jun 2015 22:04:28 +0000
+
 chromium-browser (43.0.2357.124-2) unstable; urgency=medium
 
   * More updates to debian/copyright.

@@ -30,6 +30,7 @@ defines+=use_ozone=0 \
          linux_use_bundled_binutils=0 \
          remoting=0 \
          disable_nacl=1 \
+	 enable_google_now=0 \
          enable_remoting_host=0 \
          enable_prod_wallet_service=0 \
 
@@ -141,7 +142,7 @@ override_dh_gencontrol:
 
 override_dh_auto_clean:
 	rm -rf out
-	find . -name \*.pyc -execdir rm -rf {} \;
+	find . -name \*.pyc -execdir rm -f {} \;
 	dh_auto_clean
 
 ###################### upstream source downloading ############################
@@ -149,11 +150,12 @@ override_dh_auto_clean:
 url=https://gsdview.appspot.com/chromium-browser-official
 version=$(shell dpkg-parsechangelog -S Version | sed s/-.*//)
 tarball=chromium-$(version).tar.xz
+removed=chromium-browser_$(version).files-removed
 
 get-orig-source:
-	wget -c $(url)/$(tarball) -O ../$(tarball)
-	mk-origtargz ../$(tarball)
+	wget -nv --show-progress -c $(url)/$(tarball) -O ../$(tarball)
+	mk-origtargz ../$(tarball) | tee ../$(removed)
+	echo >> ../$(removed)
 	tar tf ../$(tarball) | sort > ../chromium.upstream
 	tar tf ../chromium-browser_$(version).orig.tar.xz | sort > ../chromium.orig
-	diff -u ../chromium.upstream ../chromium.orig | \
-	    tee ../chromium-browser_$(version).files-removed
+	diff -u ../chromium.upstream ../chromium.orig >> ../$(removed) || true
