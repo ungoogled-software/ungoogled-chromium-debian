@@ -16,7 +16,6 @@ Files-Excluded:
  third_party/cld
  third_party/android*
  third_party/bidichecker
- third_party/swig/linux
  third_party/flot/*.js
  third_party/yasm/source
  third_party/skia/platform_tools
@@ -24,7 +23,6 @@ Files-Excluded:
  third_party/webgl/src/other
  third_party/expat/files
  third_party/libxml/src
- third_party/snappy/src
  third_party/libsrtp/srtp/doc/rfc3711.txt
  third_party/mesa/src/src/gallium/state_trackers/d3d1x/w32api
  base/third_party/nspr

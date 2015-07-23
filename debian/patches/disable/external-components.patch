@@ -1,6 +1,6 @@
 --- a/chrome/browser/extensions/external_component_loader.cc
 +++ b/chrome/browser/extensions/external_component_loader.cc
-@@ -49,6 +49,9 @@ bool ExternalComponentLoader::IsModifiab
+@@ -51,6 +51,9 @@ bool ExternalComponentLoader::IsModifiab
  
  void ExternalComponentLoader::StartLoading() {
    prefs_.reset(new base::DictionaryValue());

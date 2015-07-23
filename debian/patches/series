@@ -2,7 +2,6 @@ manpage.patch
 clang.patch
 
 disable/promo.patch
-disable/hotword.patch
 disable/google-api-warning.patch
 disable/third-party-cookies.patch
 disable/external-components.patch
@@ -14,4 +13,3 @@ chromedriver-revision.patch
 
 system/nspr.patch
 system/speex.patch
-system/snappy.patch
