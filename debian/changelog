@@ -1,3 +1,10 @@
+chromium-browser (44.0.2403.107-1) unstable; urgency=medium
+
+  * New upstream stable release.
+  * More updates to debian/copyright.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 26 Jul 2015 01:41:55 +0000
+
 chromium-browser (44.0.2403.89-1) unstable; urgency=medium
 
   * New upstream stable release:
