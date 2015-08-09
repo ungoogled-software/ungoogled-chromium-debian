@@ -1,3 +1,12 @@
+chromium-browser (44.0.2403.107-2) unstable; urgency=medium
+
+  * More updates to debian/copyright.
+  * Add some more instructions for bug presubmission.
+  * Remove no longer needed mainscript and preinst scripts.
+  * Use chromium.png in the desktop launcher (closes: #794818).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 08 Aug 2015 23:03:26 +0000
+
 chromium-browser (44.0.2403.107-1) unstable; urgency=medium
 
   * New upstream stable release.
