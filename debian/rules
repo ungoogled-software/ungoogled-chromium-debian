@@ -54,6 +54,7 @@ defines+=use_system_re2=1 \
          use_system_expat=1 \
          use_system_libpng=1 \
          use_system_libxml=1 \
+         use_system_ffmpeg=1 \
          use_system_libjpeg=1 \
          use_system_libwebp=1 \
          use_system_libxslt=1 \
@@ -79,7 +80,6 @@ defines+=use_system_icu=0 \
 #  use_system_libusb=0 requires modified source that exposes libusb_interrupt_handle_event api
 #  use_system_libvpx=0 requires modified source that exposes different api
 #  use_system_sqlite=0 build fails
-#  use_system_ffmpeg=0 build fails
 #  can't use system nss since net/third_party/nss is heavily patched
 #  can't use system ots (open text *summarizer*) since that's not google's ots (open text *sanitizer*)
 

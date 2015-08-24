@@ -1,3 +1,12 @@
+chromium-browser (44.0.2403.157-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - GPU process race condition fixed (closes: #794472).
+  * Use system ffmpeg (closes: #763632):
+    - Thanks to Andreas Cadhalpun.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 23 Aug 2015 22:43:20 +0000
+
 chromium-browser (44.0.2403.107-2) unstable; urgency=medium
 
   * More updates to debian/copyright.

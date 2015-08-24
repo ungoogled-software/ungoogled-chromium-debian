@@ -1,8 +1,6 @@
 # sandbox is intentionally suid
 setuid-binary usr/lib/chromium/chrome-sandbox 4755 root/root
 # currently unavoidable embedded libraries
-embedded-library usr/lib/chromium/chromium: libavcodec
-embedded-library usr/lib/chromium/chromium: libavutil
 embedded-library usr/lib/chromium/chromium: sqlite
 embedded-library usr/lib/chromium/chromium: libpng
 # temporarily accepting these code copies

@@ -1,5 +1,4 @@
 manpage.patch
-clang.patch
 
 disable/promo.patch
 disable/google-api-warning.patch
@@ -13,3 +12,5 @@ chromedriver-revision.patch
 
 system/nspr.patch
 system/speex.patch
+system/clang.patch
+system/ffmpeg.patch
