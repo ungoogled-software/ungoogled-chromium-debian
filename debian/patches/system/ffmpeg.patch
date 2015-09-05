@@ -30,7 +30,7 @@ Last-Update: <2015-07-26>
  #include <libavutil/imgutils.h>
 --- a/media/filters/ffmpeg_demuxer.cc
 +++ b/media/filters/ffmpeg_demuxer.cc
-@@ -834,24 +834,6 @@ void FFmpegDemuxer::OnFindStreamInfoDone
+@@ -843,24 +843,6 @@ void FFmpegDemuxer::OnFindStreamInfoDone
    // If no estimate is found, the stream entry will be kInfiniteDuration().
    std::vector<base::TimeDelta> start_time_estimates(format_context->nb_streams,
                                                      kInfiniteDuration());
@@ -106,7 +106,7 @@ Last-Update: <2015-07-26>
              'sender/h264_vt_encoder_unittest.cc',
 --- a/media/media.gyp
 +++ b/media/media.gyp
-@@ -610,7 +610,7 @@
+@@ -628,7 +628,7 @@
          }],
          ['media_use_ffmpeg==1', {
            'dependencies': [
@@ -115,7 +115,7 @@ Last-Update: <2015-07-26>
            ],
          }, {  # media_use_ffmpeg==0
            # Exclude the sources that depend on ffmpeg.
-@@ -1226,7 +1226,7 @@
+@@ -1256,7 +1256,7 @@
          }],
          ['media_use_ffmpeg==1', {
            'dependencies': [
@@ -124,7 +124,7 @@ Last-Update: <2015-07-26>
            ],
          }, {  # media_use_ffmpeg== 0
            'sources!': [
-@@ -1351,7 +1351,7 @@
+@@ -1382,7 +1382,7 @@
          }],
          ['media_use_ffmpeg==1', {
            'dependencies': [
@@ -133,7 +133,7 @@ Last-Update: <2015-07-26>
            ],
          }, {  # media_use_ffmpeg==0
            'sources!': [
-@@ -1822,7 +1822,7 @@
+@@ -1843,7 +1843,7 @@
              '../base/base.gyp:test_support_base',
              '../testing/gmock.gyp:gmock',
              '../testing/gtest.gyp:gtest',
@@ -175,7 +175,7 @@ Last-Update: <2015-07-26>
        ],
 --- a/third_party/WebKit/Source/platform/blink_platform.gyp
 +++ b/third_party/WebKit/Source/platform/blink_platform.gyp
-@@ -401,7 +401,7 @@
+@@ -406,7 +406,7 @@
            '<(DEPTH)/third_party/ffmpeg',
          ],
          'dependencies': [
@@ -186,7 +186,7 @@ Last-Update: <2015-07-26>
        ['"WTF_USE_WEBAUDIO_OPENMAX_DL_FFT=1" in feature_defines', {
 --- a/content/content_tests.gypi
 +++ b/content/content_tests.gypi
-@@ -1530,7 +1530,7 @@
+@@ -1569,7 +1569,7 @@
              }, {
                'dependencies': [
                  # Runtime dependencis.
