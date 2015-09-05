@@ -1,3 +1,24 @@
+chromium-browser (45.0.2454.85-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - CVE-2015-1291: Cross-origin bypass in DOM. Credit to anonymous.
+    - CVE-2015-1292: Cross-origin bypass in ServiceWorker. Credit to Mariusz
+      Mlynski.
+    - CVE-2015-1293: Cross-origin bypass in DOM. Credit to Mariusz Mlynski.
+    - CVE-2015-1294: Use-after-free in Skia. Credit to cloudfuzzer.
+    - CVE-2015-1295: Use-after-free in Printing. Credit to anonymous.
+    - CVE-2015-1296: Character spoofing in omnibox. Credit to zcorpan.
+    - CVE-2015-1297: Permission scoping error in WebRequest. Credit to
+      Alexander Kashev.
+    - CVE-2015-1298: URL validation error in extensions. Credit to Rob Wu.
+    - CVE-2015-1299: Use-after-free in Blink. Credit to taro.suzuki.dev.
+    - CVE-2015-1300: Information leak in Blink. Credit to cgvwzq.
+    - CVE-2015-1301: Various fixes from internal audits, fuzzing and other
+      initiatives.
+    - Multiple vulnerabilities in the libv8 library (updated to 4.5.103.29).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Tue, 01 Sep 2015 22:07:59 +0000
+
 chromium-browser (44.0.2403.157-1) unstable; urgency=medium
 
   * New upstream stable release:
