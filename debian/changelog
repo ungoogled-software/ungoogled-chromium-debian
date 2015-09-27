@@ -1,3 +1,11 @@
+chromium-browser (45.0.2454.101-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - CVE-2015-1303: Cross-origin bypass in DOM. Credit to Mariusz Mlynski.
+    - CVE-2015-1304: Cross-origin bypass in V8. Credit to Mariusz Mlynski.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 26 Sep 2015 15:57:23 +0000
+
 chromium-browser (45.0.2454.85-1) unstable; urgency=medium
 
   * New upstream stable release:
