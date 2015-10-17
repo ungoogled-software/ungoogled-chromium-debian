@@ -1,3 +1,22 @@
+chromium-browser (46.0.2490.71-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - CVE-2015-6755: Cross-origin bypass in Blink. Credit to Mariusz Mlynski.
+    - CVE-2015-6756: Use-after-free in PDFium. Credit to anonymous.
+    - CVE-2015-6757: Use-after-free in ServiceWorker. Credit to Collin Payne.
+    - CVE-2015-6758: Bad-cast in PDFium. Credit to Atte Kettunen of OUSPG.
+    - CVE-2015-6759: Information leakage in LocalStorage. Credit to Muneaki
+      Nishimura.
+    - CVE-2015-6760: Improper error handling in libANGLE. Credit to Ronald
+      Crane, an independent security researcher.
+    - CVE-2015-6762: CORS bypass via CSS fonts. Credit to Muneaki Nishimura.
+    - CVE-2015-6763: Various fixes from internal audits, fuzzing and other
+      initiatives.
+    - Multiple vulnerabilities in V8 fixed at the tip of the 4.6 branch
+      (currently 4.6.85.23).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 16 Oct 2015 01:43:28 +0000
+
 chromium-browser (45.0.2454.101-1) unstable; urgency=medium
 
   * New upstream stable release:

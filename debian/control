@@ -58,7 +58,6 @@ Build-Depends:
  libxml2-dev,
  libxslt1-dev,
  libpulse-dev,
- libspeex-dev,
  libpam0g-dev,
  libsnappy-dev,
  libgconf2-dev,

@@ -13,6 +13,7 @@ Files-Excluded:
  *config.sub
  *config.guess
  *jquery*.min.js
+ tools/emacs
  native_client/NOTICE
  third_party/cld
  third_party/android*
