@@ -1,3 +1,36 @@
+chromium-browser (47.0.2526.73-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - CVE-2015-1302: Information leak in PDF viewer. Credit to Rob Wu.
+    - CVE-2015-6765: Use-after-free in AppCache. Credit to anonymous.
+    - CVE-2015-6766: Use-after-free in AppCache. Credit to anonymous.
+    - CVE-2015-6767: Use-after-free in AppCache. Credit to anonymous.
+    - CVE-2015-6768: Cross-origin bypass in DOM. Credit to Mariusz Mlynski.
+    - CVE-2015-6769: Cross-origin bypass in core. Credit to Mariusz Mlynski.
+    - CVE-2015-6770: Cross-origin bypass in DOM. Credit to Mariusz Mlynski.
+    - CVE-2015-6771: Out of bounds access in v8. Credit to anonymous.
+    - CVE-2015-6772: Cross-origin bypass in DOM. Credit to Mariusz Mlynski.
+    - CVE-2015-6764: Out of bounds access in v8. Credit to Guang Gong.
+    - CVE-2015-6773: Out of bounds access in Skia. Credit to cloudfuzzer.
+    - CVE-2015-6774: Use-after-free in Extensions. Credit to anonymous.
+    - CVE-2015-6775: Type confusion in PDFium. Credit to Atte Kettunen.
+    - CVE-2015-6776: Out of bounds access in PDFium. Credit to Hanno Böck.
+    - CVE-2015-6777: Use-after-free in DOM. Credit to Long Liu.
+    - CVE-2015-6778: Out of bounds access in PDFium. Credit to Karl Skomski.
+    - CVE-2015-6779: Scheme bypass in PDFium. Credit to Til Jasper Ullrich.
+    - CVE-2015-6780: Use-after-free in Infobars. Credit to Khalil Zhani.
+    - CVE-2015-6781: Integer overflow in Sfntly. Credit to miaubiz.
+    - CVE-2015-6782: Content spoofing in Omnibox. Credit to Luan Herrera.
+    - CVE-2015-6784: Escaping issue in saved pages. Credit to Inti De
+      Ceukelaire.
+    - CVE-2015-6785: Wildcard matching issue in CSP. Credit to Michael
+      Ficarra.
+    - CVE-2015-6786: Scheme bypass in CSP. Credit to Michael Ficarra.
+  * Lengthen GPU timeout (closes: #781940).
+  * Enable accelerated video decoding (closes: #793815).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 03 Dec 2015 00:59:47 +0000
+
 chromium-browser (46.0.2490.71-1) unstable; urgency=medium
 
   * New upstream stable release:
