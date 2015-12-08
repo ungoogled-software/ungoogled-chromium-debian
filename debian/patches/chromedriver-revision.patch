@@ -3,7 +3,7 @@ description: set chromedriver version as undefined
 --- a/chrome/test/chromedriver/embed_version_in_cpp.py
 +++ b/chrome/test/chromedriver/embed_version_in_cpp.py
 @@ -26,7 +26,7 @@ def main():
-   options, args = parser.parse_args()
+   options, _ = parser.parse_args()
  
    version = open(options.version_file, 'r').read().strip()
 -  revision = lastchange.FetchVersionInfo(None).revision

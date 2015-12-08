@@ -2,7 +2,7 @@ Include system copy of prtime.h
 
 --- a/base/base.gypi
 +++ b/base/base.gypi
-@@ -621,8 +621,6 @@
+@@ -622,8 +622,6 @@
            'third_party/dmg_fp/g_fmt.cc',
            'third_party/icu/icu_utf.cc',
            'third_party/icu/icu_utf.h',

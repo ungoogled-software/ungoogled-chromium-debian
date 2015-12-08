@@ -7,10 +7,13 @@ disable/external-components.patch
 disable/default-browser-warning.patch
 
 ps-print.patch
+gpu-timeout.patch
 master-preferences.patch
 chromedriver-revision.patch
 
 system/nspr.patch
 system/clang.patch
+system/vaapi.patch
 system/ffmpeg.patch
+
 webui.patch

@@ -30,7 +30,7 @@ Last-Update: <2015-07-26>
  #include <libavutil/imgutils.h>
 --- a/media/filters/ffmpeg_demuxer.cc
 +++ b/media/filters/ffmpeg_demuxer.cc
-@@ -944,24 +944,6 @@ void FFmpegDemuxer::OnFindStreamInfoDone
+@@ -1013,24 +1013,6 @@ void FFmpegDemuxer::OnFindStreamInfoDone
    // If no estimate is found, the stream entry will be kInfiniteDuration().
    std::vector<base::TimeDelta> start_time_estimates(format_context->nb_streams,
                                                      kInfiniteDuration());
@@ -57,7 +57,7 @@ Last-Update: <2015-07-26>
    AudioDecoderConfig audio_config;
 --- a/build/all.gyp
 +++ b/build/all.gyp
-@@ -136,7 +136,7 @@
+@@ -135,7 +135,7 @@
              '../third_party/WebKit/public/all.gyp:*',
              '../third_party/cacheinvalidation/cacheinvalidation.gyp:*',
              '../third_party/codesighs/codesighs.gyp:*',
@@ -77,7 +77,7 @@ Last-Update: <2015-07-26>
          '<(DEPTH)/third_party/libyuv/libyuv.gyp:libyuv',
          '<(DEPTH)/third_party/mt19937ar/mt19937ar.gyp:mt19937ar',
          '<(DEPTH)/ui/gfx/gfx.gyp:gfx_geometry',
-@@ -221,7 +221,7 @@
+@@ -223,7 +223,7 @@
          '<(DEPTH)/net/net.gyp:net_test_support',
          '<(DEPTH)/media/media.gyp:media',
          '<(DEPTH)/testing/gtest.gyp:gtest',
@@ -86,7 +86,7 @@ Last-Update: <2015-07-26>
          '<(DEPTH)/third_party/opus/opus.gyp:opus',
          '<(DEPTH)/ui/gfx/gfx.gyp:gfx_geometry',
        ],
-@@ -244,7 +244,7 @@
+@@ -246,7 +246,7 @@
          '<(DEPTH)/net/net.gyp:net_test_support',
          '<(DEPTH)/media/media.gyp:media',
          '<(DEPTH)/testing/gtest.gyp:gtest',
@@ -95,7 +95,7 @@ Last-Update: <2015-07-26>
          '<(DEPTH)/third_party/opus/opus.gyp:opus',
          '<(DEPTH)/ui/gfx/gfx.gyp:gfx_geometry',
        ],
-@@ -357,7 +357,7 @@
+@@ -359,7 +359,7 @@
              '<(DEPTH)/base/base.gyp:test_support_base',
              '<(DEPTH)/testing/gmock.gyp:gmock',
              '<(DEPTH)/testing/gtest.gyp:gtest',
@@ -106,7 +106,7 @@ Last-Update: <2015-07-26>
              'sender/h264_vt_encoder_unittest.cc',
 --- a/media/media.gyp
 +++ b/media/media.gyp
-@@ -635,7 +635,7 @@
+@@ -642,7 +642,7 @@
          }],
          ['media_use_ffmpeg==1', {
            'dependencies': [
@@ -115,7 +115,7 @@ Last-Update: <2015-07-26>
            ],
          }, {  # media_use_ffmpeg==0
            # Exclude the sources that depend on ffmpeg.
-@@ -1306,7 +1306,7 @@
+@@ -1330,7 +1330,7 @@
          }],
          ['media_use_ffmpeg==1', {
            'dependencies': [
@@ -124,7 +124,7 @@ Last-Update: <2015-07-26>
            ],
          }, {  # media_use_ffmpeg==0
            'sources!': [
-@@ -1449,7 +1449,7 @@
+@@ -1471,7 +1471,7 @@
          }],
          ['media_use_ffmpeg==1', {
            'dependencies': [
@@ -133,7 +133,7 @@ Last-Update: <2015-07-26>
            ],
          }, {  # media_use_ffmpeg==0
            'sources!': [
-@@ -1914,7 +1914,7 @@
+@@ -1940,7 +1940,7 @@
              '../base/base.gyp:test_support_base',
              '../testing/gmock.gyp:gmock',
              '../testing/gtest.gyp:gtest',
@@ -155,7 +155,7 @@ Last-Update: <2015-07-26>
                  'cdm/ppapi/external_clear_key/ffmpeg_cdm_audio_decoder.cc',
 --- a/third_party/WebKit/Source/core/core.gyp
 +++ b/third_party/WebKit/Source/core/core.gyp
-@@ -381,7 +381,7 @@
+@@ -383,7 +383,7 @@
              ],
            },
            'dependencies': [
@@ -164,7 +164,7 @@ Last-Update: <2015-07-26>
            ],
          }],
         ['"WTF_USE_WEBAUDIO_OPENMAX_DL_FFT=1" in feature_defines', {
-@@ -397,7 +397,7 @@
+@@ -399,7 +399,7 @@
          # Windows shared builder needs extra help for linkage
          ['OS=="win" and "WTF_USE_WEBAUDIO_FFMPEG=1" in feature_defines', {
            'export_dependent_settings': [
@@ -186,7 +186,7 @@ Last-Update: <2015-07-26>
        ['"WTF_USE_WEBAUDIO_OPENMAX_DL_FFT=1" in feature_defines', {
 --- a/content/content_tests.gypi
 +++ b/content/content_tests.gypi
-@@ -1581,7 +1581,7 @@
+@@ -1619,7 +1619,7 @@
              }, {
                'dependencies': [
                  # Runtime dependencis.
