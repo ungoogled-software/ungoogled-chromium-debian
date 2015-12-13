@@ -13,7 +13,7 @@ chromedriver-revision.patch
 
 system/nspr.patch
 system/clang.patch
-system/vaapi.patch
+# system/vaapi.patch
 system/ffmpeg.patch
 
 webui.patch
