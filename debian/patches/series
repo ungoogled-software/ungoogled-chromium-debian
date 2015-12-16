@@ -8,6 +8,7 @@ disable/default-browser-warning.patch
 
 ps-print.patch
 gpu-timeout.patch
+fullscreen-ui.patch
 master-preferences.patch
 chromedriver-revision.patch
 
