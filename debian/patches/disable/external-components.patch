@@ -1,6 +1,6 @@
 --- a/chrome/browser/extensions/external_component_loader.cc
 +++ b/chrome/browser/extensions/external_component_loader.cc
-@@ -35,6 +35,9 @@ ExternalComponentLoader::~ExternalCompon
+@@ -38,6 +38,9 @@ ExternalComponentLoader::~ExternalCompon
  
  void ExternalComponentLoader::StartLoading() {
    prefs_.reset(new base::DictionaryValue());
