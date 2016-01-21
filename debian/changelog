@@ -1,3 +1,22 @@
+chromium-browser (48.0.2564.82-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - CVE-2016-1612: Bad cast in V8. Credit to cloudfuzzer.
+    - CVE-2016-1613: Use-after-free in PDFium. Credit to anonymous.
+    - CVE-2016-1614: Information leak in Blink. Credit to Christoph Diehl.
+    - CVE-2016-1615: Origin confusion in Omnibox. Credit to Ron Masas.
+    - CVE-2016-1616: URL Spoofing. Credit to Luan Herrera.
+    - CVE-2016-1617: History sniffing with HSTS and CSP. Credit to jenuis.
+    - CVE-2016-1618: Weak random number generator in Blink. Credit to Aaron
+      Toponce.
+    - CVE-2016-1619: Out-of-bounds read in PDFium. Credit to Keve Nagy.
+    - CVE-2016-1620: Various fixes from internal audits, fuzzing and other
+      initiatives.
+    - Multiple vulnerabilities in V8 fixed at the tip of the 4.8 branch
+      (currently 4.8.271.17).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 21 Jan 2016 00:06:10 +0000
+
 chromium-browser (47.0.2526.111-1) unstable; urgency=medium
 
   * New upstream stable release:
