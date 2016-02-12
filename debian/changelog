@@ -1,3 +1,10 @@
+chromium-browser (48.0.2564.82-2) unstable; urgency=medium
+
+  * Build with gcc instead of clang.
+  * Use ld.gold to avoid memory exhaustion while linking (closes: #812569).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 24 Jan 2016 21:35:33 +0000
+
 chromium-browser (48.0.2564.82-1) unstable; urgency=medium
 
   * New upstream stable release:
