@@ -1,3 +1,19 @@
+chromium-browser (48.0.2564.116-1) unstable; urgency=medium
+
+  * New stable security release:
+    - CVE-2016-1622: Same-origin bypass in Extensions. Credit to anonymous.
+    - CVE-2016-1623: Same-origin bypass in DOM. Credit to Mariusz Mlynski.
+    - CVE-2016-1624: Buffer overflow in Brotli. Credit to lukezli.
+    - CVE-2016-1625: Navigation bypass in Chrome Instant. Credit to Jann Horn.
+    - CVE-2016-1626: Out-of-bounds read in PDFium. Credit to anonymous.
+    - CVE-2016-1627: Various fixes from internal audits, fuzzing and other
+      initiatives.
+    - CVE-2016-1628: Out-of-bounds read in PDFium. Credit to anonymous.
+    - CVE-2016-1629: Same-origin bypass in Blink and Sandbox escape in Chrome.
+      Credit to anonymous.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 12 Feb 2016 02:53:42 +0000
+
 chromium-browser (48.0.2564.82-2) unstable; urgency=medium
 
   * Build with gcc instead of clang.
