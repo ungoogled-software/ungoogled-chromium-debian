@@ -1,3 +1,34 @@
+chromium-browser (49.0.2623.75-2) unstable; urgency=medium
+
+  * Update standards version.
+  * Add libffi-dev build dependency.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 04 Mar 2016 00:14:12 +0000
+
+chromium-browser (49.0.2623.75-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - CVE-2016-1630: Same-origin bypass in Blink. Credit to Mariusz Mlynski.
+    - CVE-2016-1631: Same-origin bypass in Pepper Plugin. Credit to Mariusz
+      Mlynski.
+    - CVE-2016-1632: Bad cast in Extensions. Credit to anonymous.
+    - CVE-2016-1633: Use-after-free in Blink. Credit to cloudfuzzer.
+    - CVE-2016-1634: Use-after-free in Blink. Credit to cloudfuzzer.
+    - CVE-2016-1635: Use-after-free in Blink. Credit to Rob Wu.
+    - CVE-2016-1636: SRI Validation Bypass. Credit to ryan@cyph.com.
+    - CVE-2015-8126: Out-of-bounds access in libpng. Credit to joerg.bornemann.
+    - CVE-2016-1637: Information Leak in Skia. Credit to Keve Nagy.
+    - CVE-2016-1638: WebAPI Bypass. Credit to Rob Wu.
+    - CVE-2016-1639: Use-after-free in WebRTC. Credit to Khalil Zhani.
+    - CVE-2016-1640: Origin confusion in Extensions UI. Credit to Luan Herrera.
+    - CVE-2016-1641: Use-after-free in Favicon. Credit to Atte Kettunen.
+    - CVE-2016-1642: Various fixes from internal audits, fuzzing and other
+      initiatives.
+    - Multiple vulnerabilities in libv8 (version 4.9.385.26).
+  * Set use_sysroot=0 to continue using system libraries.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Wed, 02 Mar 2016 23:47:54 +0000
+
 chromium-browser (48.0.2564.116-1) unstable; urgency=medium
 
   * New stable security release:

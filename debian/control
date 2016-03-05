@@ -8,7 +8,6 @@ Vcs-Git: git://anonscm.debian.org/pkg-chromium/pkg-chromium.git
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-chromium/pkg-chromium.git
 Homepage: http://www.chromium.org/Home
 Build-Depends:
- clang (>= 3.5),
  debhelper (>= 9),
  gyp,
  python3,
@@ -46,6 +45,7 @@ Build-Depends:
  libdrm-dev,
  libusb-dev,
  libicu-dev,
+ libffi-dev,
  libkrb5-dev,
  libexif-dev,
  libudev-dev,
@@ -81,7 +81,7 @@ Build-Depends:
  libgcrypt20-dev,
  fonts-ipafont-gothic,
  fonts-ipafont-mincho,
-Standards-Version: 3.9.6
+Standards-Version: 3.9.7
 
 Package: chromium
 Architecture: i386 amd64
