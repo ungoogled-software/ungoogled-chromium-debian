@@ -26,7 +26,6 @@ Files-Excluded:
  third_party/expat/files
  third_party/libxml/src
  third_party/*rjsmin/bench
- third_party/libsrtp/srtp/doc/rfc3711.txt
  third_party/mesa/src/src/gallium/state_trackers/d3d1x/w32api
  base/third_party/nspr
 
