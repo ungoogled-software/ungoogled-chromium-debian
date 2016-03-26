@@ -1,3 +1,15 @@
+chromium-browser (49.0.2623.108-1) unstable; urgency=medium
+
+  * New upstream security release:
+    - CVE-2016-1646: Out-of-bounds read in V8. Credit to Wen Xu.
+    - CVE-2016-1647: Use-after-free in Navigation. Credit to anonymous.
+    - CVE-2016-1648: Use-after-free in Extensions. Credit to anonymous.
+    - CVE-2016-1649: Buffer overflow in libANGLE. Credit to lokihardt.
+    - CVE-2016-1650: Various fixes from internal audits, fuzzing and other
+      initiatives.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 12 Mar 2016 20:12:03 +0000
+
 chromium-browser (49.0.2623.87-1) unstable; urgency=medium
 
   * New upstream security release:
