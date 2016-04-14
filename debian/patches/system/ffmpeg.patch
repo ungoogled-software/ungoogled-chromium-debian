@@ -17,7 +17,7 @@ Last-Update: <2015-07-26>
  #include <libavutil/imgutils.h>
 --- a/media/filters/ffmpeg_demuxer.cc
 +++ b/media/filters/ffmpeg_demuxer.cc
-@@ -875,7 +875,11 @@ void FFmpegDemuxer::Initialize(DemuxerHo
+@@ -874,7 +874,11 @@ void FFmpegDemuxer::Initialize(DemuxerHo
    // this does not increase the amount of data downloaded.  The default value
    // is 5 AV_TIME_BASE units (1 second each), which prevents some oddly muxed
    // streams from being detected properly; this value was chosen arbitrarily.
@@ -29,7 +29,7 @@ Last-Update: <2015-07-26>
  
    // Open the AVFormatContext using our glue layer.
    CHECK(blocking_thread_.Start());
-@@ -1035,24 +1039,6 @@ void FFmpegDemuxer::OnFindStreamInfoDone
+@@ -1034,24 +1038,6 @@ void FFmpegDemuxer::OnFindStreamInfoDone
    // If no estimate is found, the stream entry will be kInfiniteDuration().
    std::vector<base::TimeDelta> start_time_estimates(format_context->nb_streams,
                                                      kInfiniteDuration());
@@ -56,7 +56,7 @@ Last-Update: <2015-07-26>
    AudioDecoderConfig audio_config;
 --- a/build/all.gyp
 +++ b/build/all.gyp
-@@ -144,7 +144,7 @@
+@@ -150,7 +150,7 @@
              '../third_party/WebKit/public/all.gyp:*',
              '../third_party/cacheinvalidation/cacheinvalidation.gyp:*',
              '../third_party/codesighs/codesighs.gyp:*',
@@ -87,7 +87,7 @@ Last-Update: <2015-07-26>
              'sender/h264_vt_encoder_unittest.cc',
 --- a/media/media.gyp
 +++ b/media/media.gyp
-@@ -684,7 +684,7 @@
+@@ -620,7 +620,7 @@
          }],
          ['media_use_ffmpeg==1', {
            'dependencies': [
@@ -96,7 +96,7 @@ Last-Update: <2015-07-26>
            ],
          }, {  # media_use_ffmpeg==0
            # Exclude the sources that depend on ffmpeg.
-@@ -1357,7 +1357,7 @@
+@@ -1304,7 +1304,7 @@
          }],
          ['media_use_ffmpeg==1', {
            'dependencies': [
@@ -105,7 +105,7 @@ Last-Update: <2015-07-26>
            ],
          }, {  # media_use_ffmpeg==0
            'sources!': [
-@@ -1521,7 +1521,7 @@
+@@ -1453,7 +1453,7 @@
          }],
          ['media_use_ffmpeg==1', {
            'dependencies': [
@@ -114,7 +114,7 @@ Last-Update: <2015-07-26>
            ],
          }],
        ],
-@@ -2022,7 +2022,7 @@
+@@ -1974,7 +1974,7 @@
              '../base/base.gyp:test_support_base',
              '../testing/gmock.gyp:gmock',
              '../testing/gtest.gyp:gtest',
@@ -136,7 +136,7 @@ Last-Update: <2015-07-26>
                  'cdm/ppapi/external_clear_key/ffmpeg_cdm_audio_decoder.cc',
 --- a/third_party/WebKit/Source/core/core.gyp
 +++ b/third_party/WebKit/Source/core/core.gyp
-@@ -339,7 +339,7 @@
+@@ -256,7 +256,7 @@
              ],
            },
            'dependencies': [
@@ -145,7 +145,7 @@ Last-Update: <2015-07-26>
            ],
          }],
         ['"WTF_USE_WEBAUDIO_OPENMAX_DL_FFT=1" in feature_defines', {
-@@ -355,7 +355,7 @@
+@@ -272,7 +272,7 @@
          # Windows shared builder needs extra help for linkage
          ['OS=="win" and "WTF_USE_WEBAUDIO_FFMPEG=1" in feature_defines', {
            'export_dependent_settings': [
@@ -156,7 +156,7 @@ Last-Update: <2015-07-26>
        ],
 --- a/third_party/WebKit/Source/platform/blink_platform.gyp
 +++ b/third_party/WebKit/Source/platform/blink_platform.gyp
-@@ -358,7 +358,7 @@
+@@ -376,7 +376,7 @@
            '<(DEPTH)/third_party/ffmpeg',
          ],
          'dependencies': [
@@ -167,7 +167,7 @@ Last-Update: <2015-07-26>
        ['"WTF_USE_WEBAUDIO_OPENMAX_DL_FFT=1" in feature_defines', {
 --- a/content/content_tests.gypi
 +++ b/content/content_tests.gypi
-@@ -1631,7 +1631,7 @@
+@@ -1676,7 +1676,7 @@
              }, {
                'dependencies': [
                  # Runtime dependencis.
