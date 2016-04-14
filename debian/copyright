@@ -2,14 +2,12 @@ Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0
 Source: http://www.chromium.org/Home
 Upstream-Name: chromium
 Files-Excluded:
- .gn
  .clang-format
  *.mk
  *.so
  *.bak
  *.elf
  *.swf
- *BUILD.gn
  *config.sub
  *config.guess
  *jquery*.min.js
@@ -33,7 +31,7 @@ Files: debian/*
 Copyright:
  2009-2010 Fabien Tassin <fta@ubuntu.com>
  2010-2014 Giuseppe Iuculano <iuculano@debian.org>
- 2012-2015 Michael Gilbert <mgilbert@debian.org>
+ 2012-2016 Michael Gilbert <mgilbert@debian.org>
 License: BSD-3-clause
 
 Files: *

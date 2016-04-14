@@ -1,3 +1,20 @@
+chromium-browser (50.0.2661.75-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - CVE-2016-1652: Universal XSS in extension bindings. Credit to anonymous.
+    - CVE-2016-1653: Out-of-bounds write in V8. Credit to Choongwoo Han.
+    - CVE-2016-1651: Out-of-bounds read in Pdfium JPEG2000 decoding.
+    - CVE-2016-1654: Uninitialized memory read in media.  Credit to Atte
+      Kettunen.
+    - CVE-2016-1655: Use-after-free related to extensions.  Credit to Rob Wu.
+    - CVE-2016-1657: Address bar spoofing. Credit to Luan Herrera.
+    - CVE-2016-1658: Potential leak of sensitive information to malicious
+      extensions. Credit to Antonio Sanso.
+    - CVE-2015-1659: Various fixes from internal audits, fuzzing and other
+      initiatives.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 14 Apr 2016 01:04:58 +0000
+
 chromium-browser (49.0.2623.108-1) unstable; urgency=medium
 
   * New upstream security release:
