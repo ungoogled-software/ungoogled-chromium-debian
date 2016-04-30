@@ -61,7 +61,7 @@ Build-Depends:
  libsnappy-dev,
  libgconf2-dev,
  libavutil-dev,
- libavcodec-dev,
+ libavcodec-dev (>= 7:3.0),
  libavformat-dev,
  libasound2-dev,
  libsqlite3-dev,

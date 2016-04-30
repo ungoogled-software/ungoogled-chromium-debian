@@ -1,3 +1,10 @@
+chromium-browser (50.0.2661.75-2) unstable; urgency=medium
+
+  * Fix problem with linking to ffmpeg (closes: #821154).
+    - Thanks to Sebastian Ramacher.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 23 Apr 2016 00:55:40 +0000
+
 chromium-browser (50.0.2661.75-1) unstable; urgency=medium
 
   * New upstream stable release:
