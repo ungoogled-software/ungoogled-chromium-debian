@@ -1,3 +1,18 @@
+chromium-browser (50.0.2661.94-1) unstable; urgency=medium
+
+  * New upstream security release:
+    - CVE-2016-1660: Out-of-bounds write in Blink. Credit to Atte Kettunen.
+    - CVE-2016-1661: Memory corruption in cross-process frames. Credit to Wadih
+      Matar.
+    - CVE-2016-1662: Use-after-free in extensions. Credit to Rob Wu.
+    - CVE-2016-1663: Use-after-free in Blink’s V8 bindings. Credit to anonymous.
+    - CVE-2016-1664: Address bar spoofing. Credit to Wadih Matar.
+    - CVE-2016-1665: Information leak in V8. Credit to gksgudtjr456.
+    - CVE-2016-1666: Various fixes from internal audits, fuzzing and other
+      initiatives.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 30 Apr 2016 03:39:44 +0000
+
 chromium-browser (50.0.2661.75-2) unstable; urgency=medium
 
   * Fix problem with linking to ffmpeg (closes: #821154).
