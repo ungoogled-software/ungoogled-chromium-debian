@@ -7,7 +7,7 @@ Last-Update: <2015-07-26>
 
 --- a/media/ffmpeg/ffmpeg_common.h
 +++ b/media/ffmpeg/ffmpeg_common.h
-@@ -38,7 +38,6 @@
+@@ -39,7 +39,6 @@ extern "C" {
  MSVC_PUSH_DISABLE_WARNING(4244);
  #include <libavcodec/avcodec.h>
  #include <libavformat/avformat.h>
@@ -17,7 +17,7 @@ Last-Update: <2015-07-26>
  #include <libavutil/imgutils.h>
 --- a/media/filters/ffmpeg_demuxer.cc
 +++ b/media/filters/ffmpeg_demuxer.cc
-@@ -1034,24 +1038,6 @@
+@@ -1092,24 +1092,6 @@ void FFmpegDemuxer::OnFindStreamInfoDone
    // If no estimate is found, the stream entry will be kInfiniteDuration().
    std::vector<base::TimeDelta> start_time_estimates(format_context->nb_streams,
                                                      kInfiniteDuration());
@@ -40,11 +40,11 @@ Last-Update: <2015-07-26>
 -    }
 -  }
  
+   scoped_ptr<MediaTracks> media_tracks(new MediaTracks());
    AVStream* audio_stream = NULL;
-   AudioDecoderConfig audio_config;
 --- a/build/all.gyp
 +++ b/build/all.gyp
-@@ -150,7 +150,7 @@
+@@ -147,7 +147,7 @@
              '../third_party/WebKit/public/all.gyp:*',
              '../third_party/cacheinvalidation/cacheinvalidation.gyp:*',
              '../third_party/codesighs/codesighs.gyp:*',
@@ -55,7 +55,7 @@ Last-Update: <2015-07-26>
              '../third_party/libusb/libusb.gyp:*',
 --- a/media/cast/cast_testing.gypi
 +++ b/media/cast/cast_testing.gypi
-@@ -63,7 +63,7 @@
+@@ -61,7 +61,7 @@
          # details.  http://crbug.com/558714
          ['OS!="android" and chromecast==0', {
            'dependencies': [
@@ -64,7 +64,7 @@ Last-Update: <2015-07-26>
            ],
            'sources': [
              'test/fake_media_source.cc',
-@@ -166,7 +166,7 @@
+@@ -164,7 +164,7 @@
              'cast_test_utility',
              '<(DEPTH)/testing/gmock.gyp:gmock',
              '<(DEPTH)/testing/gtest.gyp:gtest',
@@ -75,7 +75,7 @@ Last-Update: <2015-07-26>
              'sender/h264_vt_encoder_unittest.cc',
 --- a/media/media.gyp
 +++ b/media/media.gyp
-@@ -620,7 +620,7 @@
+@@ -637,7 +637,7 @@
          }],
          ['media_use_ffmpeg==1', {
            'dependencies': [
@@ -84,7 +84,7 @@ Last-Update: <2015-07-26>
            ],
          }, {  # media_use_ffmpeg==0
            # Exclude the sources that depend on ffmpeg.
-@@ -1304,7 +1304,7 @@
+@@ -1270,7 +1270,7 @@
          }],
          ['media_use_ffmpeg==1', {
            'dependencies': [
@@ -93,7 +93,7 @@ Last-Update: <2015-07-26>
            ],
          }, {  # media_use_ffmpeg==0
            'sources!': [
-@@ -1453,7 +1453,7 @@
+@@ -1413,7 +1413,7 @@
          }],
          ['media_use_ffmpeg==1', {
            'dependencies': [
@@ -102,7 +102,7 @@ Last-Update: <2015-07-26>
            ],
          }],
        ],
-@@ -1974,7 +1974,7 @@
+@@ -1937,7 +1937,7 @@
              '../base/base.gyp:test_support_base',
              '../testing/gmock.gyp:gmock',
              '../testing/gtest.gyp:gtest',
@@ -124,7 +124,7 @@ Last-Update: <2015-07-26>
                  'cdm/ppapi/external_clear_key/ffmpeg_cdm_audio_decoder.cc',
 --- a/third_party/WebKit/Source/core/core.gyp
 +++ b/third_party/WebKit/Source/core/core.gyp
-@@ -256,7 +256,7 @@
+@@ -254,7 +254,7 @@
              ],
            },
            'dependencies': [
@@ -133,7 +133,7 @@ Last-Update: <2015-07-26>
            ],
          }],
         ['"WTF_USE_WEBAUDIO_OPENMAX_DL_FFT=1" in feature_defines', {
-@@ -272,7 +272,7 @@
+@@ -270,7 +270,7 @@
          # Windows shared builder needs extra help for linkage
          ['OS=="win" and "WTF_USE_WEBAUDIO_FFMPEG=1" in feature_defines', {
            'export_dependent_settings': [
@@ -144,7 +144,7 @@ Last-Update: <2015-07-26>
        ],
 --- a/third_party/WebKit/Source/platform/blink_platform.gyp
 +++ b/third_party/WebKit/Source/platform/blink_platform.gyp
-@@ -376,7 +376,7 @@
+@@ -352,7 +352,7 @@
            '<(DEPTH)/third_party/ffmpeg',
          ],
          'dependencies': [
@@ -155,15 +155,15 @@ Last-Update: <2015-07-26>
        ['"WTF_USE_WEBAUDIO_OPENMAX_DL_FFT=1" in feature_defines', {
 --- a/content/content_tests.gypi
 +++ b/content/content_tests.gypi
-@@ -1676,7 +1676,7 @@
-             }, {
-               'dependencies': [
-                 # Runtime dependencis.
--                '../third_party/ffmpeg/ffmpeg.gyp:ffmpeg',
-+                '../build/linux/unbundle/ffmpeg.gyp:ffmpeg',
-                 '../third_party/mesa/mesa.gyp:osmesa',
-               ],
-             }],
+@@ -1545,7 +1545,7 @@
+         }, {
+           'dependencies': [
+             # Runtime dependencis.
+-            '../third_party/ffmpeg/ffmpeg.gyp:ffmpeg',
++            '../build/linux/unbundle/ffmpeg.gyp:ffmpeg',
+             '../third_party/mesa/mesa.gyp:osmesa',
+           ],
+         }],
 --- a/third_party/webrtc/modules/video_coding/codecs/h264/h264.gypi
 +++ b/third_party/webrtc/modules/video_coding/codecs/h264/h264.gypi
 @@ -38,7 +38,7 @@
@@ -192,7 +192,7 @@ Last-Update: <2015-07-26>
  #include "webrtc/base/checks.h"
 --- a/third_party/webrtc/modules/video_coding/codecs/h264/h264_decoder_impl.h
 +++ b/third_party/webrtc/modules/video_coding/codecs/h264/h264_decoder_impl.h
-@@ -15,7 +15,7 @@
+@@ -17,7 +17,7 @@
  #include "webrtc/modules/video_coding/codecs/h264/include/h264.h"
  
  extern "C" {
@@ -200,7 +200,7 @@ Last-Update: <2015-07-26>
 +#include <libavcodec/avcodec.h>
  }  // extern "C"
  
- #include "webrtc/base/scoped_ptr.h"
+ #include "webrtc/common_video/include/i420_buffer_pool.h"
 --- a/tools/gyp/tools/emacs/testdata/media.gyp
 +++ b/tools/gyp/tools/emacs/testdata/media.gyp
 @@ -299,7 +299,7 @@
