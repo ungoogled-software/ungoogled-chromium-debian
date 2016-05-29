@@ -1,3 +1,52 @@
+chromium-browser (51.0.2704.63-2) unstable; urgency=medium
+
+  * Fix libspeechd build error.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 29 May 2016 01:42:46 +0000
+
+chromium-browser (51.0.2704.63-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - CVE-2016-1667: Same origin bypass in DOM. Credit to Mariusz Mlynski.
+    - CVE-2016-1668: Same origin bypass in Blink V8 bindings. Credit to
+      Mariusz Mlynski.
+    - CVE-2016-1669: Buffer overflow in V8. Credit to Choongwoo Han.
+    - CVE-2016-1670: Race condition in loader. Credit to anonymous.
+    - CVE-2016-1672: Cross-origin bypass in extension bindings. Credit to
+      Mariusz Mlynski.
+    - CVE-2016-1673: Cross-origin bypass in Blink. Credit to Mariusz Mlynski.
+    - CVE-2016-1674: Cross-origin bypass in extensions. Credit to Mariusz
+      Mlynski.
+    - CVE-2016-1675: Cross-origin bypass in Blink. Credit to Mariusz Mlynski.
+    - CVE-2016-1676: Cross-origin bypass in extension bindings. Credit to Rob
+      Wu.
+    - CVE-2016-1677: Type confusion in V8. Credit to Guang Gong.
+    - CVE-2016-1678: Heap overflow in V8. Credit to Christian Holler.
+    - CVE-2016-1679: Heap use-after-free in V8 bindings. Credit to Rob Wu.
+    - CVE-2016-1680: Heap use-after-free in Skia. Credit to Atte Kettunen.
+    - CVE-2016-1681: Heap overflow in PDFium. Credit to Aleksandar Nikolic.
+    - CVE-2016-1682: CSP bypass for ServiceWorker. Credit to KingstonTime.
+    - CVE-2016-1683: Out-of-bounds access in libxslt. Credit to Nicolas
+      Gregoire.
+    - CVE-2016-1684: Integer overflow in libxslt. Credit to Nicolas Gregoire.
+    - CVE-2016-1685: Out-of-bounds read in PDFium. Credit to Ke Liu.
+    - CVE-2016-1686: Out-of-bounds read in PDFium. Credit to Ke Liu.
+    - CVE-2016-1687: Information leak in extensions. Credit to Rob Wu.
+    - CVE-2016-1688: Out-of-bounds read in V8. Credit to Max Korenko.
+    - CVE-2016-1689: Heap buffer overflow in media. Credit to Atte Kettunen.
+    - CVE-2016-1690: Heap use-after-free in Autofill. Credit to Rob Wu.
+    - CVE-2016-1691: Heap buffer-overflow in Skia. Credit to Atte Kettunen.
+    - CVE-2016-1692: Limited cross-origin bypass in ServiceWorker. Credit to
+      Til Jasper Ullrich.
+    - CVE-2016-1693: HTTP Download of Software Removal Tool. Credit to Khalil
+      Zhani.
+    - CVE-2016-1694: HPKP pins removed on cache clearance. Credit to Ryan
+      Lester and Bryant Zadegan.
+    - CVE-2016-1695: Various fixes from internal audits, fuzzing and other
+      initiatives.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 27 May 2016 01:52:42 +0000
+
 chromium-browser (50.0.2661.94-1) unstable; urgency=medium
 
   * New upstream security release:

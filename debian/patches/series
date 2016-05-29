@@ -18,3 +18,4 @@ system/clang.patch
 system/ffmpeg.patch
 
 webui.patch
+system/speechd.patch

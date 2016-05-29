@@ -59,7 +59,6 @@ defines+=use_system_re2=1 \
          use_system_expat=1 \
          use_system_libpng=1 \
          use_system_libxml=1 \
-         use_system_ffmpeg=1 \
          use_system_libjpeg=1 \
          use_system_libwebp=1 \
          use_system_libxslt=1 \

@@ -66,7 +66,7 @@ Build-Depends:
  libasound2-dev,
  libsqlite3-dev,
  libjsoncpp-dev,
- libspeechd-dev,
+ libspeechd-dev (>= 0.8.4),
  libminizip-dev,
  libhunspell-dev,
  libmodpbase64-dev,
