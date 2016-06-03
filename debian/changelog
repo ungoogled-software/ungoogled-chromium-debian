@@ -1,3 +1,20 @@
+chromium-browser (51.0.2704.79-1) unstable; urgency=medium
+
+  * New upstream security release:
+    - CVE-2016-1696: Cross-origin bypass in Extension bindings. Credit to
+      anonymous.
+    - CVE-2016-1697: Cross-origin bypass in Blink. Credit to
+      Mariusz Mlynski.
+    - CVE-2016-1698: Information leak in Extension bindings.  Credit to
+      Rob Wu.
+    - CVE-2016-1699: Parameter sanitization failure in DevTools. Credit to
+      Gregory Panakkal.
+    - CVE-2016-1700: Use-after-free in Extensions. Credit to Rob Wu.
+    - CVE-2016-1701: Use-after-free in Autofill. Credit to Rob Wu.
+    - CVE-2016-1702: Out-of-bounds read in Skia. Credit to cloudfuzzer.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 02 Jun 2016 23:55:13 +0000
+
 chromium-browser (51.0.2704.63-2) unstable; urgency=medium
 
   * Fix libspeechd build error.
