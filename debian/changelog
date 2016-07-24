@@ -1,3 +1,32 @@
+chromium-browser (52.0.2743.82-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - CVE-2016-1704: Various fixes from internal audits, fuzzing and other
+      initiatives.
+    - CVE-2016-1705: Various fixes from internal audits, fuzzing and other
+      initiatives.
+    - CVE-2016-1706: Sandbox escape in PPAPI. Credit to Pinkie Pie
+    - CVE-2016-1707: URL spoofing on iOS. Credit to xisigr.
+    - CVE-2016-1708: Use-after-free in Extensions. Credit to Adam Varsan
+    - CVE-2016-1709: Heap-buffer-overflow in sfntly. Credit to ChenQin.
+    - CVE-2016-1710: Same-origin bypass in Blink. Credit to Mariusz Mlynski
+    - CVE-2016-1711: Same-origin bypass in Blink. Credit to Mariusz Mlynski
+    - CVE-2016-5127: Use-after-free in Blink. Credit to cloudfuzzer
+    - CVE-2016-5128: Same-origin bypass in V8. Credit to Anonymous
+    - CVE-2016-5129: Memory corruption in V8. Credit to Jeonghoon Shin
+    - CVE-2016-5130: URL spoofing. Credit to Wadih Matar
+    - CVE-2016-5131: Use-after-free in libxml. Credit to Nick Wellnhofer
+    - CVE-2016-5132: Limited same-origin bypass in Service Workers. Credit to
+      Ben Kelly
+    - CVE-2016-5133: Origin confusion in proxy authentication. Credit to Patch
+      Eudor
+    - CVE-2016-5134: URL leakage via PAC script. Credit to Paul Stone
+    - CVE-2016-5135: Content-Security-Policy bypass. Credit to ShenYeYinJiu
+    - CVE-2016-5136: Use after free in extensions. Credit to Rob Wu
+    - CVE-2016-5137: History sniffing with HSTS and CSP. Credit to Xiaoyin Liu
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 23 Jul 2016 03:56:18 +0000
+
 chromium-browser (51.0.2704.79-1) unstable; urgency=medium
 
   * New upstream security release:
@@ -412,7 +441,7 @@ chromium-browser (43.0.2357.124-1) unstable; urgency=medium
   * New upstream release.
   * Disable wallet extension.
   * Remove more sourceless files.
-  * Remove no longer files included from debian/copright.
+  * Remove files no longer included from debian/copright.
 
  -- Michael Gilbert <mgilbert@debian.org>  Wed, 17 Jun 2015 03:00:44 +0000
 
