@@ -6,6 +6,10 @@ disable/third-party-cookies.patch
 disable/external-components.patch
 disable/default-browser-warning.patch
 
+gtk3.patch
+gtk3theme.patch
+
+khronos.patch
 ps-print.patch
 gpu-timeout.patch
 master-preferences.patch
@@ -16,5 +20,3 @@ system/nspr.patch
 system/clang.patch
 # system/vaapi.patch
 system/ffmpeg.patch
-
-webui.patch

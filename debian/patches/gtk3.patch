@@ -1,0 +1,58 @@
+description: avoid gtk2 includes
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/build/linux/system.gyp
++++ b/build/linux/system.gyp
+@@ -106,6 +106,10 @@
+             }],
+           ],
+         },
++      ],
++    }],
++    [ 'use_gtk3==0', {
++      'targets': [
+         {
+           'target_name': 'gdk',
+           'type': 'none',
+--- a/remoting/remoting_host.gypi
++++ b/remoting/remoting_host.gypi
+@@ -69,7 +69,7 @@
+                     '../build/linux/system.gyp:xtst',
+                   ],
+                 }],
+-                ['chromeos==0 and use_ozone==0', {
++                ['chromeos==0 and use_ozone==0 and use_gtk3==0', {
+                   'dependencies': [
+                     # use GTK on Linux, even for Aura builds.
+                     '../build/linux/system.gyp:gtk2',
+@@ -650,7 +650,7 @@
+                 'host/it2me/it2me_native_messaging_host_main.h',
+               ],
+               'conditions': [
+-                ['OS=="linux" and chromeos==0 and use_ozone==0', {
++                ['OS=="linux" and chromeos==0 and use_ozone==0 and use_gtk3==0', {
+                   'dependencies': [
+                     # Always use GTK on Linux, even for Aura builds.
+                     '../build/linux/system.gyp:gtk2',
+--- a/chrome/chrome_tests.gypi
++++ b/chrome/chrome_tests.gypi
+@@ -1719,7 +1719,7 @@
+         }, {  # Everything but desktop Linux.
+           'sources': [ '<@(chrome_interactive_ui_test_non_desktop_linux_sources)' ],
+         }],
+-        ['OS=="linux" and chromeos==0 and use_ozone==0', {
++        ['OS=="linux" and chromeos==0 and use_ozone==0 and use_gtk3==0', {
+           'sources': [ 'browser/ui/libgtk2ui/select_file_dialog_interactive_uitest.cc' ],
+           'dependencies': [ '../build/linux/system.gyp:gtk2' ],
+         }],
+--- a/gpu/gles2_conform_support/gles2_conform_test.gyp
++++ b/gpu/gles2_conform_support/gles2_conform_test.gyp
+@@ -130,7 +130,7 @@
+           'conditions': [
+             ['OS=="linux"', {
+               'conditions': [
+-                [ 'chromeos==0', {
++                [ 'chromeos==0 and use_gtk3==0', {
+                   'dependencies': ['../../build/linux/system.gyp:gtk2']
+                 }],
+               ],

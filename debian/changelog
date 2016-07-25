@@ -1,3 +1,11 @@
+chromium-browser (52.0.2743.82-3) unstable; urgency=medium
+
+  * Fix a few lintian warnings.
+  * Use gtk3 backend instead of gtk2.
+  * Launch as a single process when debugging to get useful symbol info.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 30 Jul 2016 04:07:46 +0000
+
 chromium-browser (52.0.2743.82-2) unstable; urgency=medium
 
   * Bump standards version.
