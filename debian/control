@@ -43,7 +43,6 @@ Build-Depends:
  libpci-dev,
  libcap-dev,
  libdrm-dev,
- libusb-dev,
  libicu-dev,
  libffi-dev,
  libkrb5-dev,
@@ -69,6 +68,7 @@ Build-Depends:
  libspeechd-dev (>= 0.8.4),
  libminizip-dev,
  libhunspell-dev,
+ libusb-1.0-0-dev,
  libmodpbase64-dev,
  libgnome-keyring-dev,
  libnss3-dev (>= 3.12.3),
@@ -81,7 +81,7 @@ Build-Depends:
  libgcrypt20-dev,
  fonts-ipafont-gothic,
  fonts-ipafont-mincho,
-Standards-Version: 3.9.7
+Standards-Version: 3.9.8
 
 Package: chromium
 Architecture: i386 amd64
@@ -91,6 +91,7 @@ Depends:
  ${shlibs:Depends},
  x11-utils,
  xdg-utils,
+ libnettle6,
 Recommends:
  fonts-liberation,
 Suggests:
