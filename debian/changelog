@@ -1,3 +1,12 @@
+chromium-browser (52.0.2743.82-4) unstable; urgency=medium
+
+  * Remove menu file.
+  * Build with fastbuild=2.
+  * Disable background networking features.
+  * Link against system harfbuzz library again.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 30 Jul 2016 21:25:30 +0000
+
 chromium-browser (52.0.2743.82-3) unstable; urgency=medium
 
   * Fix a few lintian warnings.

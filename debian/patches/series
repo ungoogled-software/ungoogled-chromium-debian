@@ -1,6 +1,8 @@
 manpage.patch
 
+disable/pings.patch
 disable/promo.patch
+disable/extension-updater.patch
 disable/google-api-warning.patch
 disable/third-party-cookies.patch
 disable/external-components.patch
@@ -20,3 +22,4 @@ system/nspr.patch
 system/clang.patch
 # system/vaapi.patch
 system/ffmpeg.patch
+system/harfbuzz.patch

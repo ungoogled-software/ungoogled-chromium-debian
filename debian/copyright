@@ -26,7 +26,11 @@ Files-Excluded:
  third_party/libxml/src
  third_party/*rjsmin/bench
  third_party/mesa/src/src/gallium/state_trackers/d3d1x/w32api
+ base/test/data
  base/third_party/nspr
+
+# dirs that should be removed, but the jessie package still needs them
+# third_party/harfbuzz-ng/src
 
 Files: debian/*
 Copyright:
