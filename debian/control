@@ -10,6 +10,7 @@ Homepage: http://www.chromium.org/Home
 Build-Depends:
  debhelper (>= 9),
  gyp,
+ g++-5,
  python3,
  pkg-config,
  ninja-build,

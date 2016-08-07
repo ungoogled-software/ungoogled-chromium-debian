@@ -1,3 +1,30 @@
+chromium-browser (52.0.2743.116-2) unstable; urgency=medium
+
+  * Fix syntax error in debian/copyright.
+  * Include compiler info in the build log.
+  * Add information about debugging to README.debian.
+  * Build with gcc 5 during the gcc 6 transition (closes: #833501).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 07 Aug 2016 01:05:40 +0000
+
+chromium-browser (52.0.2743.116-1) unstable; urgency=medium
+
+  * New upstream security release:
+    - CVE-2016-5141 Address bar spoofing. Credit to Sergey Glazunov
+    - CVE-2016-5142 Use-after-free in Blink. Credit to Sergey Glazunov
+    - CVE-2016-5139 Heap overflow in pdfium. Credit to GiWan Go
+    - CVE-2016-5140 Heap overflow in pdfium. Credit to Ke Liu
+    - CVE-2016-5145 Same origin bypass for images in Blink. Credit to Sergey
+      Glazunov
+    - CVE-2016-5143 Parameter sanitization failure in DevTools. Credit to
+      Gregory Panakkal
+    - CVE-2016-5144 Parameter sanitization failure in DevTools. Credit to
+      Gregory Panakkal
+    - CVE-2016-5146: Various fixes from internal audits, fuzzing and other
+      initiatives.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 04 Aug 2016 13:01:42 +0000
+
 chromium-browser (52.0.2743.82-4) unstable; urgency=medium
 
   * Remove menu file.

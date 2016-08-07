@@ -14,3 +14,18 @@ entry bar to a selected search provider, can be disabled by setting
 "Make default" in the Default search settings dialog:
 
 chrome://settings/searchEngines
+
+Debugging
+=========
+To produce meaningful debugging information, please install the chromium-dbgsym
+package and launch chromium with the "-g" flag.
+
+$ chromium -g
+
+Information about installing dbgsym packages can be found on the Debian wiki:
+
+http://wiki.debian.org/AutomaticDebugPackages
+
+More information about debugging chromium can also be found on the Debian wiki:
+
+http://wiki.debian.org/Chromium/Debugging

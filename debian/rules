@@ -16,6 +16,10 @@ export LDFLAGS+=-Wl,--stats
 export CFLAGS+=-fuse-ld=gold
 export CXXFLAGS+=-fuse-ld=gold
 
+# hard code gcc 5 as the compiler during the gcc 6 transition (see #833501)
+export CC=gcc-5
+export CXX=g++-5
+
 # treat all warnings as errors
 defines=werror=
 
@@ -113,6 +117,8 @@ flotpaths=/usr/share/javascript/jquery/*min.js \
 	dh $@ --parallel
 
 override_dh_auto_configure:
+	# output compiler information
+	$(CXX) --version
 	# https://groups.google.com/a/chromium.org/d/topic/chromium-packagers/9JX1N2nf4PU/discussion
 	touch chrome/test/data/webui/i18n_process_css_test.html
 	# use system flot
