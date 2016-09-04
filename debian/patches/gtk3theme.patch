@@ -15,7 +15,7 @@ origin: https://bugs.archlinux.org/task/47682
    // Hack for default color
    if (color.alpha == 0.0)
      color = {1, 1, 1, 1};
-@@ -510,8 +515,11 @@ GtkWidget* NativeThemeGtk2::GetEntry() c
+@@ -507,8 +512,11 @@ GtkWidget* NativeThemeGtk2::GetEntry() c
  GtkWidget* NativeThemeGtk2::GetLabel() const {
    static GtkWidget* fake_label = NULL;
  

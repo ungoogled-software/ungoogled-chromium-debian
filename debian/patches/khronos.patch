@@ -21,7 +21,7 @@ author: Michael Gilbert <mgilbert@debian.org>
              '../gpu/gpu.gyp:gpu_unittests',
 --- a/build/gn_migration.gypi
 +++ b/build/gn_migration.gypi
-@@ -384,7 +384,6 @@
+@@ -383,7 +383,6 @@
              '../extensions/extensions_tests.gyp:extensions_unittests',
              '../gin/gin.gyp:gin_shell',
              '../gpu/gles2_conform_support/gles2_conform_test.gyp:gles2_conform_test',  # TODO(GYP) crbug.com/471920
