@@ -1,3 +1,34 @@
+chromium-browser (53.0.2785.89-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - CVE-2016-5147: Universal XSS in Blink. Credit to anonymous
+    - CVE-2016-5148: Universal XSS in Blink. Credit to anonymous
+    - CVE-2016-5149: Script injection in extensions. Credit to Max Justicz
+    - CVE-2016-5150: Use after free in Blink. Credit to anonymous
+    - CVE-2016-5151: Use after free in PDFium. Credit to anonymous
+    - CVE-2016-5152: Heap overflow in PDFium. Credit to GiWan Go of Stealien
+    - CVE-2016-5153: Use after destruction in Blink. Credit to Atte Kettunen
+    - CVE-2016-5154: Heap overflow in PDFium. Credit to anonymous
+    - CVE-2016-5155: Address bar spoofing. Credit to anonymous
+    - CVE-2016-5156: Use after free in event bindings. Credit to jinmo123
+    - CVE-2016-5157: Heap overflow in PDFium. Credit to anonymous
+    - CVE-2016-5158: Heap overflow in PDFium. Credit to GiWan Go
+    - CVE-2016-5159: Heap overflow in PDFium. Credit to GiWan Go
+    - CVE-2016-5160: Extensions web accessible resources bypass. Credit to
+      @l33terally
+    - CVE-2016-5161: Type confusion in Blink.
+    - CVE-2016-5162: Extensions web accessible resources bypass. Credit to
+      Nicolas Golubovic
+    - CVE-2016-5163: Address bar spoofing. Credit to Rafay Baloch
+    - CVE-2016-5164: Universal XSS using DevTools. Credit to anonymous
+    - CVE-2016-5165: Script injection in DevTools. Credit to Gregory Panakkal
+    - CVE-2016-5166: SMB Relay Attack via Save Page As. Credit to Gregory
+      Panakkal
+    - CVE-2016-5167: Various fixes from internal audits, fuzzing and other
+      initiatives.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 03 Sep 2016 16:30:44 +0000
+
 chromium-browser (52.0.2743.116-2) unstable; urgency=medium
 
   * Fix syntax error in debian/copyright.
