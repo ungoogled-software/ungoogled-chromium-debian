@@ -11,6 +11,8 @@ disable/default-browser-warning.patch
 gtk3.patch
 gtk3theme.patch
 
+glibc2.24.patch
+
 khronos.patch
 ps-print.patch
 gpu-timeout.patch

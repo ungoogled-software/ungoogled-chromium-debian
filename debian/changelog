@@ -1,3 +1,10 @@
+chromium-browser (53.0.2785.92-1) unstable; urgency=medium
+
+  * New upstream stable release.
+  * Support building with glibc 2.24 (closes: #836611).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 04 Sep 2016 19:33:10 +0000
+
 chromium-browser (53.0.2785.89-1) unstable; urgency=medium
 
   * New upstream stable release:
