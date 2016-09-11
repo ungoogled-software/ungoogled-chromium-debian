@@ -1,3 +1,10 @@
+chromium-browser (53.0.2785.92-2) unstable; urgency=medium
+
+  * Build with gcc 6 (closes: #835943).
+  * Add versioned harfbuzz dependency (closes: #833953).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Tue, 06 Sep 2016 00:53:14 +0000
+
 chromium-browser (53.0.2785.92-1) unstable; urgency=medium
 
   * New upstream stable release.

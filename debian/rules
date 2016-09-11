@@ -16,10 +16,6 @@ export LDFLAGS+=-Wl,--stats
 export CFLAGS+=-fuse-ld=gold
 export CXXFLAGS+=-fuse-ld=gold
 
-# hard code gcc 5 as the compiler during the gcc 6 transition (see #833501)
-export CC=gcc-5
-export CXX=g++-5
-
 # treat all warnings as errors
 defines=werror=
 

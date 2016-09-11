@@ -10,7 +10,6 @@ Homepage: http://www.chromium.org/Home
 Build-Depends:
  debhelper (>= 9),
  gyp,
- g++-5,
  python3,
  pkg-config,
  ninja-build,
@@ -70,6 +69,7 @@ Build-Depends:
  libspeechd-dev (>= 0.8.4),
  libminizip-dev,
  libhunspell-dev,
+ libharfbuzz-dev (>= 1.2.7),
  libusb-1.0-0-dev,
  libmodpbase64-dev,
  libgnome-keyring-dev,
