@@ -12,6 +12,10 @@ export LDFLAGS+=-Wl,--no-keep-memory -Wl,--reduce-memory-overheads -Wl,--hash-si
 # more verbose linker output
 export LDFLAGS+=-Wl,--stats
 
+# avoid error in v8's garbage collector (see http://gcc.gnu.org/bugzilla/show_bug.cgi?id=68853)
+export CFLAGS+=-fno-delete-null-pointer-checks
+export CXXFLAGS+=-fno-delete-null-pointer-checks
+
 # use the gold linker to avoid memory exhaustion issues at link time
 export CFLAGS+=-fuse-ld=gold
 export CXXFLAGS+=-fuse-ld=gold

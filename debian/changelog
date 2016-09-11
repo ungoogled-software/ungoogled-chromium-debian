@@ -1,3 +1,9 @@
+chromium-browser (53.0.2785.92-3) unstable; urgency=medium
+
+  * Add -fno-delete-null-pointer checks to the build flags (closes: #833501).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 11 Sep 2016 14:47:55 +0000
+
 chromium-browser (53.0.2785.92-2) unstable; urgency=medium
 
   * Build with gcc 6 (closes: #835943).
