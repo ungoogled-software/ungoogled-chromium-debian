@@ -1,3 +1,16 @@
+chromium-browser (53.0.2785.113-1) unstable; urgency=medium
+
+  * New upstream security release:
+    - CVE-2016-5170: Use after free in Blink. Credit to Anonymous
+    - CVE-2016-5171: Use after free in Blink. Credit to Anonymous
+    - CVE-2016-5172: Arbitrary Memory Read in v8. Credit to Choongwoo Han
+    - CVE-2016-5173: Extension resource access. Credit to Anonymous
+    - CVE-2016-5174: Popup not correctly suppressed. Credit to Andrey Kovalev
+    - CVE-2016-5175: Various fixes from internal audits, fuzzing and other
+      initiatives.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Tue, 13 Sep 2016 23:12:03 +0000
+
 chromium-browser (53.0.2785.92-3) unstable; urgency=medium
 
   * Add -fno-delete-null-pointer checks to the build flags (closes: #833501).
