@@ -1,3 +1,15 @@
+chromium-browser (53.0.2785.143-1) unstable; urgency=medium
+
+  * New upstream security release:
+    - CVE-2016-5177: Use after free in V8. Credit to Anonymous
+    - CVE-2016-5178: Various fixes from internal audits, fuzzing and other
+      initiatives.
+  * Change StartupWMClass in the desktop file to chromium (closes: #813079).
+  * Support building with cups 2.2 (closes: #839377).
+  * Update debian/copyright.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 01 Oct 2016 11:08:42 +0000
+
 chromium-browser (53.0.2785.113-1) unstable; urgency=medium
 
   * New upstream security release:

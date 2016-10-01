@@ -11,6 +11,7 @@ disable/default-browser-warning.patch
 gtk3.patch
 gtk3theme.patch
 
+cups2.2.patch
 glibc2.24.patch
 
 khronos.patch

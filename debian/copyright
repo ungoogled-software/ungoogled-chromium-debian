@@ -51,17 +51,17 @@ Files: base/*
 Copyright: Copyright: 2009 The Chromium Authors. All rights reserved / 2006 Michael Emmel mike.emmel@gmail.com. All rights reserved / 2008-2009 Google Inc / 2008 Collabora Ltd. All rights reserved / 2006 Michael Emmel mike.emmel@gmail.com / 2006 2007 Apple Inc. All rights reserved / 2007 Holger Hans Peter Freyther / 2008 2009 Google Inc:
 License: FreeBSD (guessed)
 
-Files: base/md5.cc
-Copyright: Copyright: 2006 Google Inc. All Rights Reserved / is claimed:
-License: public-domain
+Files: base/md5.cc base/md5.h
+Copyright: Copyright 2011 The Chromium Authors. All rights reserved.
+License: BSD-3-clause
 
 Files: base/version.h
-Copyright: Copyright: 2012 The Chromium Authors. All rights reserved.
-License: global BSD-style
+Copyright: Copyright 2012 The Chromium Authors. All rights reserved.
+License: BSD-3-clause
 
 Files: base/i18n/icu_string_conversions.cc
 Copyright: Copyright: 2009 The Chromium Authors. All rights reserved / holder / 1995-2006 International Business Machines Corporation / HOLDER OR HOLDERS:
-License: Expat
+License: MIT
 
 Files: base/json/*
 Copyright: Copyright (c) 2006-2013 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
@@ -69,18 +69,18 @@ License: BSD-3-clause
 
 Files: base/third_party/dmg_fp/g_fmt.cc
 Copyright: Copyright: 1991g1996 by Lucent Technologies:
-License: Expat
+License: MIT
 
 Files: base/third_party/dmg_fp/dtoa.cc
 Copyright: Copyright: 1991g2000 2001 by Lucent Technologies:
-License: Expat
+License: MIT
 
 Files: base/third_party/dmg_fp/dmg_fp.h
-Copyright: Copyright: 2008 The Chromium Authors. All rights reserved:
-License: Expat
+Copyright: Copyright 2008 The Chromium Authors. All rights reserved
+License: MIT
 
 Files: base/third_party/icu/*
-Copyright: Copyright: 1999-2006 International Business Machines:
+Copyright: Copyright 1999-2016 International Business Machines
 License: ICU
 
 Files: base/third_party/valgrind/valgrind.h
@@ -105,7 +105,7 @@ License: LGPL-2.0+
 
 Files: base/third_party/xdg_user_dirs/xdg_user_dir_lookup.ccgbase/third_party/xdg_user_dirs/xdg_user_dir_lookup.h
 Copyright: Copyright: 2007 Red Hatginc / HOLDERS:
-License: Expat
+License: MIT
 
 Files: breakpad/linux/breakpad_googletest_includes.hgbreakpad/linux/generate-test-dump.cc
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc:
@@ -509,7 +509,7 @@ License: BSD-3-clause
 
 Files: chrome/browser/importer/*
 Copyright: Netscape
-License: MPL 1.1 / GPL-2+ / LGPL-2.1+
+License: MPL-1.1 or GPL-2+ or LGPL-2.1+
 
 Files: chrome/browser/in_process_webkit/browser_webkitclient_impl.cc chrome/browser/in_process_webkit/browser_webkitclient_impl.h chrome/browser/in_process_webkit/webkit_thread.cc chrome/browser/in_process_webkit/webkit_thread.h
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved.  Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
@@ -1273,7 +1273,7 @@ License: FreeBSD (guessed)
 
 Files: chrome/test/data/dromaeo/store.php
 Copyright: Copyright: 2010 John Resig:
-License: Expat
+License: MIT
 
 Files: gfx/canvas.ccggfx/canvas.h gfx/color_utils_unittest.cc gfx/favicon_size.h gfx/font.h gfx/font_gtk.cc gfx/font_skia.cc gfx/font_unittest.cc gfx/font_win.cc gfx/icon_util.cc gfx/icon_util.h gfx/insets.h gfx/path_gtk.cc gfx/path_win.cc gfx/point.cc gfx/rect_unittest.cc gfx/size.cc
 Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
@@ -2389,19 +2389,19 @@ License: BSD-3-clause
 
 Files: net/http/http_chunked_decoder.*
 Copyright: Netscape
-License: MPL-1.1 / GPL-2+ / LGPL-2.1+
+License: MPL-1.1 or GPL-2+ or LGPL-2.1+
 
 Files: net/http/md4.*
 Copyright: IBM Corporation 2003
-License: MPL-1.1 / GPL-2+ / LGPL-2.1+
+License: MPL-1.1 or GPL-2+ or LGPL-2.1+
 
 Files: net/http/des.cc
 Copyright: IBM Corporation 2003
-License: MPL-1.1 / GPL-2+ / LGPL-2.1+
+License: MPL-1.1 or GPL-2+ or LGPL-2.1+
 
 Files: net/http/http_auth_handler_ntlm_portable.cc
 Copyright: IBM Corporation 2003
-License: MPL-1.1 / GPL-2+ / LGPL-2.1+
+License: MPL-1.1 or GPL-2+ or LGPL-2.1+
 
 Files: net/http/http_atom_list.hgnet/http/http_chunked_decoder_unittest.cc net/http/http_request_info.h net/http/http_transaction_factory.h net/http/http_transaction_unittest.cc net/http/http_util.cc net/http/http_vary_data.cc net/http/http_vary_data_unittest.cc
 Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
@@ -2433,7 +2433,7 @@ License: BSD-3-clause
 
 Files: net/proxy/proxy_resolver_script.h
 Copyright: Copyright: 1998 Netscape
-License: MPL-1.1 / GPL-2+ / LGPL-2.1+
+License: MPL-1.1 or GPL-2+ or LGPL-2.1+
 
 Files: net/proxy/proxy_config.ccgnet/proxy/proxy_config.h net/proxy/proxy_config_service.h net/proxy/proxy_config_service_win.cc net/proxy/proxy_config_service_win.h net/proxy/proxy_info.cc net/proxy/proxy_info.h net/proxy/proxy_list.cc net/proxy/proxy_list.h net/proxy/proxy_list_unittest.cc net/proxy/proxy_resolver_winhttp.cc net/proxy/proxy_resolver_winhttp.h net/proxy/proxy_retry_info.h net/proxy/proxy_service.cc net/proxy/proxy_service_unittest.cc
 Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
@@ -2461,7 +2461,7 @@ License: BSD-3-clause
 
 Files: net/socket/ssl_client_socket_nss.cc
 Copyright: Copyright 2000 Netscape
-License: MPL-1.1 / GPL-2+ / LGPL-2.1+
+License: MPL-1.1 or GPL-2+ or LGPL-2.1+
 
 Files: net/socket/client_socket_factory.ccgnet/socket/client_socket_factory.h net/socket/socket.h net/socket/ssl_client_socket_unittest.cc net/socket/ssl_test_util.h net/socket/tcp_client_socket_libevent.cc net/socket/tcp_client_socket_win.cc
 Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
@@ -2615,17 +2615,9 @@ Files: sdch/open-vcdiff/src/codetablewriter_interface.h
 Copyright: 2008 Google Inc. All Rights Reserved.
 License: Apache-2.0
 
-Files: sdch/open-vcdiff/adler32.c
-Copyright: Copyright: 1995-2004 Mark Adler:
-License: zlib/libpng
-
-Files: sdch/open-vcdiff/zconf.h
-Copyright: Copyright: 1995-2005 Jean-loup Gailly:
-License: zlib/libpng
-
-Files: sdch/open-vcdiff/zlib.h
-Copyright: Copyright: 1995-2005 Jean-loup Gailly and Mark Adler:
-License: zlib/libpng
+Files: sdch/open-vcdiff/src/zlib/*
+Copyright: Copyright 1995-2005 Jean-loup Gailly and Mark Adler
+License: zlib
 
 Files: sdch/open-vcdiff/gflags/gflags.h
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2006gGoogle Inc:
@@ -2921,7 +2913,7 @@ License: BSD-3-clause
 
 Files: third_party/WebKit/Source/platform/image-decoders/png/PNGImageDecoder.*
 Copyright: Copyright: 2007-2009 Torch Mobile Inc / Research In Motion Limited 2009-2010. All rights reserved / 2006 Apple Computer Inc / 2001 mozilla.org
-License: MPL-1.1 / LGPL-2.1+
+License: MPL-1.1 or LGPL-2.1+
 
 Files: third_party/WebKit/WebKit/chromium/public/WebAccessibilityCache.hgthird_party/WebKit/WebKit/chromium/public/WebAccessibilityObject.h third_party/WebKit/WebKit/chromium/public/WebAccessibilityRole.h third_party/WebKit/WebKit/chromium/public/WebAnimationController.h third_party/WebKit/WebKit/chromium/public/WebApplicationCacheHost.h third_party/WebKit/WebKit/chromium/public/WebApplicationCacheHostClient.h third_party/WebKit/WebKit/chromium/public/WebBindings.h third_party/WebKit/WebKit/chromium/public/WebCString.h third_party/WebKit/WebKit/chromium/public/WebCache.h third_party/WebKit/WebKit/chromium/public/WebCanvas.h third_party/WebKit/WebKit/chromium/public/WebClipboard.h third_party/WebKit/WebKit/chromium/public/WebColor.h third_party/WebKit/WebKit/chromium/public/WebColorName.h third_party/WebKit/WebKit/chromium/public/WebCommonWorkerClient.h third_party/WebKit/WebKit/chromium/public/WebCompositionCommand.h third_party/WebKit/WebKit/chromium/public/WebConsoleMessage.h third_party/WebKit/WebKit/chromium/public/WebContextMenuData.h third_party/WebKit/WebKit/chromium/public/WebCookie.h third_party/WebKit/WebKit/chromium/public/WebCrossOriginPreflightResultCache.h third_party/WebKit/WebKit/chromium/public/WebCursorInfo.h third_party/WebKit/WebKit/chromium/public/WebData.h third_party/WebKit/WebKit/chromium/public/WebDataSource.h third_party/WebKit/WebKit/chromium/public/WebDatabase.h third_party/WebKit/WebKit/chromium/public/WebDatabaseObserver.h third_party/WebKit/WebKit/chromium/public/WebDevToolsAgent.h third_party/WebKit/WebKit/chromium/public/WebDevToolsAgentClient.h third_party/WebKit/WebKit/chromium/public/WebDevToolsFrontend.h third_party/WebKit/WebKit/chromium/public/WebDevToolsFrontendClient.h third_party/WebKit/WebKit/chromium/public/WebDevToolsMessageData.h third_party/WebKit/WebKit/chromium/public/WebDocument.h third_party/WebKit/WebKit/chromium/public/WebDragData.h third_party/WebKit/WebKit/chromium/public/WebDragOperation.h third_party/WebKit/WebKit/chromium/public/WebEditingAction.h third_party/WebKit/WebKit/chromium/public/WebElement.h third_party/WebKit/WebKit/chromium/public/WebFileChooserCompletion.h third_party/WebKit/WebKit/chromium/public/WebFindOptions.h third_party/WebKit/WebKit/chromium/public/WebFontCache.h third_party/WebKit/WebKit/chromium/public/WebFormElement.h third_party/WebKit/WebKit/chromium/public/WebFrame.h third_party/WebKit/WebKit/chromium/public/WebHTTPBody.h third_party/WebKit/WebKit/chromium/public/WebHTTPHeaderVisitor.h third_party/WebKit/WebKit/chromium/public/WebHistoryItem.h third_party/WebKit/WebKit/chromium/public/WebImage.h third_party/WebKit/WebKit/chromium/public/WebInputElement.h third_party/WebKit/WebKit/chromium/public/WebInputEvent.h third_party/WebKit/WebKit/chromium/public/WebKit.h third_party/WebKit/WebKit/chromium/public/WebKitClient.h third_party/WebKit/WebKit/chromium/public/WebLocalizedString.h third_party/WebKit/WebKit/chromium/public/WebMediaPlayer.h third_party/WebKit/WebKit/chromium/public/WebMediaPlayerAction.h third_party/WebKit/WebKit/chromium/public/WebMediaPlayerClient.h third_party/WebKit/WebKit/chromium/public/WebMenuItemInfo.h third_party/WebKit/WebKit/chromium/public/WebMessagePortChannel.h third_party/WebKit/WebKit/chromium/public/WebMessagePortChannelClient.h third_party/WebKit/WebKit/chromium/public/WebMimeRegistry.h third_party/WebKit/WebKit/chromium/public/WebNavigationPolicy.h third_party/WebKit/WebKit/chromium/public/WebNavigationType.h third_party/WebKit/WebKit/chromium/public/WebNode.h third_party/WebKit/WebKit/chromium/public/WebNodeCollection.h third_party/WebKit/WebKit/chromium/public/WebNodeList.h third_party/WebKit/WebKit/chromium/public/WebNonCopyable.h third_party/WebKit/WebKit/chromium/public/WebNotification.h third_party/WebKit/WebKit/chromium/public/WebNotificationPermissionCallback.h third_party/WebKit/WebKit/chromium/public/WebNotificationPresenter.h third_party/WebKit/WebKit/chromium/public/WebPageSerializer.h third_party/WebKit/WebKit/chromium/public/WebPageSerializerClient.h third_party/WebKit/WebKit/chromium/public/WebPasswordAutocompleteListener.h third_party/WebKit/WebKit/chromium/public/WebPasswordFormData.h third_party/WebKit/WebKit/chromium/public/WebPlugin.h third_party/WebKit/WebKit/chromium/public/WebPluginContainer.h third_party/WebKit/WebKit/chromium/public/WebPluginListBuilder.h third_party/WebKit/WebKit/chromium/public/WebPluginParams.h third_party/WebKit/WebKit/chromium/public/WebPoint.h third_party/WebKit/WebKit/chromium/public/WebPopupMenu.h third_party/WebKit/WebKit/chromium/public/WebPopupMenuInfo.h third_party/WebKit/WebKit/chromium/public/WebRange.h third_party/WebKit/WebKit/chromium/public/WebRect.h third_party/WebKit/WebKit/chromium/public/WebRegularExpression.h third_party/WebKit/WebKit/chromium/public/WebRuntimeFeatures.h third_party/WebKit/WebKit/chromium/public/WebScreenInfo.h third_party/WebKit/WebKit/chromium/public/WebScriptController.h third_party/WebKit/WebKit/chromium/public/WebScriptSource.h third_party/WebKit/WebKit/chromium/public/WebSearchableFormData.h third_party/WebKit/WebKit/chromium/public/WebSecurityPolicy.h third_party/WebKit/WebKit/chromium/public/WebSettings.h third_party/WebKit/WebKit/chromium/public/WebSharedWorker.h third_party/WebKit/WebKit/chromium/public/WebSharedWorkerRepository.h third_party/WebKit/WebKit/chromium/public/WebSize.h third_party/WebKit/WebKit/chromium/public/WebSocketStreamError.h third_party/WebKit/WebKit/chromium/public/WebSocketStreamHandle.h third_party/WebKit/WebKit/chromium/public/WebSocketStreamHandleClient.h third_party/WebKit/WebKit/chromium/public/WebStorageArea.h third_party/WebKit/WebKit/chromium/public/WebStorageEventDispatcher.h third_party/WebKit/WebKit/chromium/public/WebStorageNamespace.h third_party/WebKit/WebKit/chromium/public/WebString.h third_party/WebKit/WebKit/chromium/public/WebTextAffinity.h third_party/WebKit/WebKit/chromium/public/WebTextCaseSensitivity.h third_party/WebKit/WebKit/chromium/public/WebTextDirection.h third_party/WebKit/WebKit/chromium/public/WebURL.h third_party/WebKit/WebKit/chromium/public/WebURLError.h third_party/WebKit/WebKit/chromium/public/WebURLLoader.h third_party/WebKit/WebKit/chromium/public/WebURLRequest.h third_party/WebKit/WebKit/chromium/public/WebURLResponse.h third_party/WebKit/WebKit/chromium/public/WebVector.h third_party/WebKit/WebKit/chromium/public/WebView.h third_party/WebKit/WebKit/chromium/public/WebViewClient.h third_party/WebKit/WebKit/chromium/public/WebWidget.h third_party/WebKit/WebKit/chromium/public/WebWidgetClient.h third_party/WebKit/WebKit/chromium/public/WebWorker.h third_party/WebKit/WebKit/chromium/public/WebWorkerClient.h
 Copyright: Copyright: 2009 Google Inc. All rights reserved / HOLDERS AND CONTRIBUTORS:
@@ -3399,27 +3391,15 @@ License: BSD-3-clause
 
 Files: third_party/codesighs/*
 Copyright: Copyright 2002 Netscape
-License: MPL-1.1 / GPL-2+ / LGPL-2.1+
+License: MPL-1.1 or GPL-2+ or LGPL-2.1+
 
 Files: third_party/ffmpeg/*
 Copyright: FFMPEG developers.
 License: GPL-2+
 
-Files: third_party/glew/include/GL/wglew.h
-Copyright: Copyright: 2007 The Khronos Group Inc / HOLDERS AND CONTRIBUTORS "AS IS" / 2002-2008gMarcelo E. Magallon <mmagallo[]debian org> / OWNER OR CONTRIBUTORS BE / 2002-2008 Milan Ikits <milan ikits[]ieee org> / 2002 Lev Povalahev / HOLDERS BE LIABLE FOR ANY:
-License: FreeBSD (guessed)
-
-Files: third_party/glew/include/GL/glew.hgthird_party/glew/include/GL/glxew.h
-Copyright: Copyright: 2007 The Khronos Group Inc / HOLDERS AND CONTRIBUTORS "AS IS" / 2002-2008gMarcelo E. Magallon <mmagallo[]debian org> / 1999-2007 Brian Paul All Rights Reserved / OWNER OR CONTRIBUTORS BE / 2002-2008 Milan Ikits <milan ikits[]ieee org> / 2002 Lev Povalahev:
-License: FreeBSD (guessed) Expat
-
-Files: third_party/glew/glew.c
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS "AS IS" / 2002-2008gMarcelo E. Magallon <mmagallo[]debian org> / OWNER OR CONTRIBUTORS BE / 2002-2008 Milan Ikits <milan ikits[]ieee org> / 2002 Lev Povalahev:
-License: FreeBSD (guessed)
-
 Files: third_party/hunspell/google/bdict.hgthird_party/hunspell/google/bdict_reader.cc third_party/hunspell/google/bdict_reader.h third_party/hunspell/google/bdict_writer.cc third_party/hunspell/google/bdict_writer.h third_party/hunspell/google/hunspell_tests.cc
 Copyright: Copyright: 2008 Google Inc. All Rights Reserved:
-License: MPL-1.1 or GPL-2.0 or LGPL-2.1 tri-license
+License: MPL-1.1 or GPL-2.0 or LGPL-2.1
 
 Files: third_party/hunspell/hunspell/phonet.cxxgthird_party/hunspell/hunspell/phonet.hxx
 Copyright: Copyright: 2000 Bjoern Jacke:
@@ -3431,2163 +3411,15 @@ License: MPL-1.1 or GPL-2.0 or LGPL-2.1
 
 Files: third_party/hunspell/parsers/*
 Copyright: Copyright: 2002gLaszlo Nemeth:
-License: MPL-1.1 or GPL-2.0 or LGPL-2.1 tri-license
+License: MPL-1.1 or GPL-2.0 or LGPL-2.1
 
 Files: third_party/hunspell/parsers/*
 Copyright: UNKNOWN:
-License: MPL-1.1 or GPL-2.0 or LGPL-2.1 tri-license
+License: MPL-1.1 or GPL-2.0 or LGPL-2.1
 
 Files: third_party/hunspell/tests/test.sh
 Copyright: UNKNOWN:
-License: MPL-1.1 or GPL-2.0 or LGPL-2.1 tri-license
-
-Files: third_party/icu/public/common/unicode/utf16.h
-Copyright: Copyright: !U_IS_SURROGATE / 1999-2008gInternational Business Machines / ((&0xfffffc00)==0xd800):
-License: ICU
-
-Files: third_party/icu/public/common/unicode/locid.h
-Copyright: Copyright: 1996-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/normlzr.h
-Copyright: Copyright: 1996-2006gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/caniter.h
-Copyright: Copyright: 1996-2006gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/resbund.hgthird_party/icu/public/common/unicode/unorm.h
-Copyright: Copyright: 1996-2007gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/utypes.h
-Copyright: Copyright: 1996-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/ubrk.h
-Copyright: Copyright: 1996-2009gInternational Business Machines Corporation and others:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/chariter.hgthird_party/icu/public/common/unicode/urep.h
-Copyright: Copyright: 1997-2005gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/parsepos.h
-Copyright: Copyright: 1997-2005gInternational Business Machines Corporation and others. All Rights Reserved:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/ppalmos.h
-Copyright: Copyright: 1997-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/brkiter.h
-Copyright: Copyright: 1997-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/plinux.hgthird_party/icu/public/common/unicode/pmac.h third_party/icu/public/common/unicode/putil.h third_party/icu/public/common/unicode/pwin32.h third_party/icu/public/common/unicode/uchar.h third_party/icu/public/common/unicode/uloc.h third_party/icu/public/common/unicode/ures.h third_party/icu/public/common/unicode/uscript.h
-Copyright: Copyright: 1997-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/docmain.h
-Copyright: Copyright: 1997-2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/schriter.hgthird_party/icu/public/common/unicode/uchriter.h
-Copyright: Copyright: 1998-2005gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/unistr.hgthird_party/icu/public/common/unicode/ustring.h
-Copyright: Copyright: 1998-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/utf32.h
-Copyright: Copyright: 1999-2001gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/parseerr.h
-Copyright: Copyright: 1999-2005gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/rep.h
-Copyright: Copyright: 1999-2005gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/dbbi.h
-Copyright: Copyright: 1999-2006 IBM Corp. All rights reserved:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/umisc.h
-Copyright: Copyright: 1999-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/unifilt.h
-Copyright: Copyright: 1999-2006gInternational Business Machines Corporation and others:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/utf8.h
-Copyright: Copyright: 1999-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/rbbi.h
-Copyright: Copyright: 1999-2008 International Business Machines Corporation *:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/ubidi.hgthird_party/icu/public/common/unicode/udata.h third_party/icu/public/common/unicode/umachine.h third_party/icu/public/common/unicode/utf.h
-Copyright: Copyright: 1999-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/ucnv.hgthird_party/icu/public/common/unicode/ucnv_err.h
-Copyright: Copyright: 1999-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/uniset.h
-Copyright: Copyright: 1999-2009gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/ucnv_cb.h
-Copyright: Copyright: 2000-2004gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/symtable.h
-Copyright: Copyright: 2000-2005gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/ushape.h
-Copyright: Copyright: 2000-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/stringpiece.h
-Copyright: Copyright: 2001 and onwards Google Inc / 2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/uclean.h
-Copyright: Copyright: 2001-2005gInternational Business Machines *:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/unimatch.h
-Copyright: Copyright: 2001-2005gInternational Business Machines Corporation and others. All Rights Reserved:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/unifunct.h
-Copyright: Copyright: 2002-2005gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/uiter.h
-Copyright: Copyright: 2002-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/strenum.h
-Copyright: Copyright: 2002-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/usetiter.hgthird_party/icu/public/common/unicode/utf_old.h
-Copyright: Copyright: 2002-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/uconfig.hgthird_party/icu/public/common/unicode/uenum.h third_party/icu/public/common/unicode/uobject.h third_party/icu/public/common/unicode/urename.h third_party/icu/public/common/unicode/uset.h
-Copyright: Copyright: 2002-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/ucat.h
-Copyright: Copyright: 2003-2004gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/utrace.h
-Copyright: Copyright: 2003-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/uidna.h
-Copyright: Copyright: 2003-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/usprep.h
-Copyright: Copyright: 2003-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/utext.h
-Copyright: Copyright: 2004-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/udeprctd.hgthird_party/icu/public/common/unicode/udraft.h third_party/icu/public/common/unicode/uintrnal.h third_party/icu/public/common/unicode/uobslete.h third_party/icu/public/common/unicode/usystem.h
-Copyright: Copyright: 2004-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/ucasemap.h
-Copyright: Copyright: 2005-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/bytestream.h
-Copyright: Copyright: 2007 Google Inc. All Rights Reserved / 2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/ucnvsel.h
-Copyright: Copyright: 2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/dtintrv.h
-Copyright: Copyright: 2008-2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/errorcode.hgthird_party/icu/public/common/unicode/std_string.h
-Copyright: Copyright: 2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/common/unicode/uversion.h
-Copyright: Copyright: 2009gInternational Business Machines Corporation and others. All Rights Reserved. " / string / 2000-2009 International Business Machines:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/umsg.h
-Copyright: Copyright: 1996-2006gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/udat.h
-Copyright: Copyright: 1996-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/bmsearch.hgthird_party/icu/public/i18n/unicode/coll.h third_party/icu/public/i18n/unicode/colldata.h
-Copyright: Copyright: 1996-2009gInternational Business Machines *:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/tblcoll.hgthird_party/icu/public/i18n/unicode/ucal.h
-Copyright: Copyright: 1996-2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/bms.h
-Copyright: Copyright: 1996-2009gInternational Business Machines Corporation and Others:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/ucol.h
-Copyright: Copyright: 1996-2009gInternational Business Machines Corporation and others:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/utrans.h
-Copyright: Copyright: 1997-2005gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/fieldpos.hgthird_party/icu/public/i18n/unicode/fmtable.h
-Copyright: Copyright: 1997-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/format.h
-Copyright: Copyright: 1997-2006gInternational Business Machines Corporation and others:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/choicfmt.hgthird_party/icu/public/i18n/unicode/coleitr.h third_party/icu/public/i18n/unicode/dtfmtsym.h
-Copyright: Copyright: 1997-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/calendar.hgthird_party/icu/public/i18n/unicode/datefmt.h third_party/icu/public/i18n/unicode/dcfmtsym.h third_party/icu/public/i18n/unicode/decimfmt.h
-Copyright: Copyright: 1997-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/simpletz.h
-Copyright: Copyright: 1997-2009gInternational Business Machines *:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/timezone.h
-Copyright: Copyright: 1997-2009gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/gregocal.hgthird_party/icu/public/i18n/unicode/numfmt.h third_party/icu/public/i18n/unicode/rbnf.h third_party/icu/public/i18n/unicode/unum.h
-Copyright: Copyright: 1997-2009gInternational Business Machines Corporation and others:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/smpdtfmt.h
-Copyright: Copyright: 1997-2009gInternational Business Machines Corporation and others. All Rights Reserved:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/translit.h
-Copyright: Copyright: 1999-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/search.hgthird_party/icu/public/i18n/unicode/stsearch.h third_party/icu/public/i18n/unicode/usearch.h
-Copyright: Copyright: 2001-2008 IBM and others. All rights reserved:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/ucoleitr.h
-Copyright: Copyright: 2001-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/unirepl.h
-Copyright: Copyright: 2002-2005gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/regex.hgthird_party/icu/public/i18n/unicode/ucurr.h
-Copyright: Copyright: 2002-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/ulocdata.h
-Copyright: Copyright: 2003-2009gInternational Business Machines *:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/utmscale.h
-Copyright: Copyright: 2004 - 2008gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/curramt.hgthird_party/icu/public/i18n/unicode/currunit.h third_party/icu/public/i18n/unicode/measfmt.h third_party/icu/public/i18n/unicode/measunit.h third_party/icu/public/i18n/unicode/measure.h
-Copyright: Copyright: 2004-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/uregex.h
-Copyright: Copyright: 2004-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/ucsdet.h
-Copyright: Copyright: 2005-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/basictz.hgthird_party/icu/public/i18n/unicode/dtrule.h third_party/icu/public/i18n/unicode/rbtz.h third_party/icu/public/i18n/unicode/tzrule.h third_party/icu/public/i18n/unicode/tztrans.h
-Copyright: Copyright: 2007-2008gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/udatpg.h
-Copyright: Copyright: 2007-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/dtptngen.hgthird_party/icu/public/i18n/unicode/plurfmt.h
-Copyright: Copyright: 2007-2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/vtzone.h
-Copyright: Copyright: 2007-2009gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/msgfmt.h
-Copyright: Copyright: 2007-2009gInternational Business Machines Corporation and others. All Rights Reserved:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/tmutfmt.h
-Copyright: Copyright: 2008gGoogle International Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/uspoof.h
-Copyright: Copyright: 2008-2009gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/dtitvinf.hgthird_party/icu/public/i18n/unicode/plurrule.h
-Copyright: Copyright: 2008-2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/dtitvfmt.h
-Copyright: Copyright: 2008-2009gInternational Business Machines Corporation and others. All Rights Reserved:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/tmunit.hgthird_party/icu/public/i18n/unicode/tmutamt.h
-Copyright: Copyright: 2009gGoogle International Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/numsys.h
-Copyright: Copyright: 2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/public/i18n/unicode/currpinf.h
-Copyright: Copyright: 2009gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/common/{utrie2.c}
-Copyright: Copyright: && fromLSCP) { / || fromLSCP)) { / 2001-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/uloc_tag.c
-Copyright: Copyright: ((>='A' && <='Z') || (>='a' && <='z')) / (>='0' && <='9') / 2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/locmap.h
-Copyright: Copyright: 1996-2004gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/normlzr.cpp
-Copyright: Copyright: 1996-2005gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/common/caniter.cpp
-Copyright: Copyright: 1996-2006gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/common/ubrk.cppgthird_party/icu/source/common/unorm.cpp
-Copyright: Copyright: 1996-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/locmap.c
-Copyright: Copyright: 1996-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/ucnv_bld.c
-Copyright: Copyright: 1996-2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/common/cstring.cgthird_party/icu/source/common/mutex.h
-Copyright: Copyright: 1997-2003gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/uhash_us.cpp
-Copyright: Copyright: 1997-2004gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/cstring.h
-Copyright: Copyright: 1997-2005gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/cpputils.hgthird_party/icu/source/common/hash.h third_party/icu/source/common/resbund_cnv.cpp third_party/icu/source/common/umath.c third_party/icu/source/common/ures_cnv.c
-Copyright: Copyright: 1997-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/cmemory.hgthird_party/icu/source/common/locid.cpp third_party/icu/source/common/putilimp.h third_party/icu/source/common/resbund.cpp third_party/icu/source/common/umutex.c third_party/icu/source/common/umutex.h third_party/icu/source/common/uscript.c third_party/icu/source/common/utypes.c
-Copyright: Copyright: 1997-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/brkiter.cpp
-Copyright: Copyright: 1997-2008gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/common/putil.cgthird_party/icu/source/common/uhash.c third_party/icu/source/common/uhash.h third_party/icu/source/common/uloc.c
-Copyright: Copyright: 1997-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/uresbund.c
-Copyright: Copyright: 1997-2009gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/common/ucnvdisp.cgthird_party/icu/source/common/ustr_cnv.c
-Copyright: Copyright: 1998-2004gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/uchriter.cpp
-Copyright: Copyright: 1998-2004gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/common/ucnv_err.c
-Copyright: Copyright: 1998-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/schriter.cpp
-Copyright: Copyright: 1998-2007gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/common/ucnv.c
-Copyright: Copyright: 1998-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/ustring.c
-Copyright: Copyright: 1998-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/usc_impl.h
-Copyright: Copyright: 1999-2002gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/ucmndata.h
-Copyright: Copyright: 1999-2003gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/chariter.cppgthird_party/icu/source/common/ucnv_cnv.c third_party/icu/source/common/udatamem.c third_party/icu/source/common/udatamem.h third_party/icu/source/common/uinvchar.h third_party/icu/source/common/umapfile.h third_party/icu/source/common/ustr_cnv.h
-Copyright: Copyright: 1999-2004gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/rbbidata.h
-Copyright: Copyright: 1999-2005,2008 International Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/ucnv_io.hgthird_party/icu/source/common/uinvchar.c third_party/icu/source/common/utf_impl.c
-Copyright: Copyright: 1999-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/uresdata.h
-Copyright: Copyright: 1999-2006gInternational Business Machines *:
-License: ICU
-
-Files: third_party/icu/source/common/ubidiimp.hgthird_party/icu/source/common/ubidiln.c third_party/icu/source/common/umapfile.c third_party/icu/source/common/unistr_case.cpp third_party/icu/source/common/unistr_props.cpp
-Copyright: Copyright: 1999-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/rbbi.cppgthird_party/icu/source/common/rbbidata.cpp
-Copyright: Copyright: 1999-2008 International Business Machines Corporation *:
-License: ICU
-
-Files: third_party/icu/source/common/ubidi_props_data.cgthird_party/icu/source/common/ucase_props_data.c third_party/icu/source/common/uchar_props_data.c third_party/icu/source/common/ucmndata.c third_party/icu/source/common/ucnv_io.c third_party/icu/source/common/uniset.cpp third_party/icu/source/common/uniset_props.cpp third_party/icu/source/common/unorm_props_data.c third_party/icu/source/common/ustr_imp.h third_party/icu/source/common/uvectr32.h
-Copyright: Copyright: 1999-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/uvectr32.cpp
-Copyright: Copyright: 1999-2008gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/common/ucnv_bld.h
-Copyright: Copyright: 1999-2009 International Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/ubidi.cgthird_party/icu/source/common/ucnv_cnv.h third_party/icu/source/common/ucnv_imp.h third_party/icu/source/common/udata.c third_party/icu/source/common/unames.c third_party/icu/source/common/unistr_cnv.cpp third_party/icu/source/common/usc_impl.c third_party/icu/source/common/uvector.h
-Copyright: Copyright: 1999-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/uresdata.c
-Copyright: Copyright: 1999-2009gInternational Business Machines Corporation *:
-License: ICU
-
-Files: third_party/icu/source/common/unistr.cppgthird_party/icu/source/common/uvector.cpp
-Copyright: Copyright: 1999-2009gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/common/ucnv_cb.c
-Copyright: Copyright: 2000-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/ucnvlat1.cgthird_party/icu/source/common/ucnvmbcs.h
-Copyright: Copyright: 2000-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/ubidiwrt.c
-Copyright: Copyright: 2000-2007gInternational Business Machines / needs the same number of code units as c:
-License: ICU
-
-Files: third_party/icu/source/common/ucnv2022.cgthird_party/icu/source/common/ucnv_lmb.c third_party/icu/source/common/ucnvhz.c third_party/icu/source/common/ucnvisci.c third_party/icu/source/common/ucnvmbcs.c third_party/icu/source/common/ucnvscsu.c third_party/icu/source/common/uresimp.h third_party/icu/source/common/ushape.c
-Copyright: Copyright: 2000-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/cwchar.cgthird_party/icu/source/common/cwchar.h
-Copyright: Copyright: 2001gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/charstr.hgthird_party/icu/source/common/unifilt.cpp
-Copyright: Copyright: 2001-2004gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/servlk.cppgthird_party/icu/source/common/servls.cpp third_party/icu/source/common/servnotf.h
-Copyright: Copyright: 2001-2004gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/common/rbbisetb.h
-Copyright: Copyright: 2001-2005gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/servlkf.cppgthird_party/icu/source/common/servloc.h third_party/icu/source/common/servrbf.cpp third_party/icu/source/common/servslkf.cpp
-Copyright: Copyright: 2001-2005gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/common/unormcmp.cppgthird_party/icu/source/common/ustr_wcs.c third_party/icu/source/common/ustrfmt.c third_party/icu/source/common/ustrfmt.h third_party/icu/source/common/util_props.cpp
-Copyright: Copyright: 2001-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/ucln_cmn.cgthird_party/icu/source/common/ucln_cmn.h
-Copyright: Copyright: 2001-2006gInternational Business Machines *:
-License: ICU
-
-Files: third_party/icu/source/common/rbbinode.h
-Copyright: Copyright: 2001-2006gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/common/servnotf.cpp
-Copyright: Copyright: 2001-2006gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/common/util.h
-Copyright: Copyright: 2001-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/ucln.hgthird_party/icu/source/common/uinit.c
-Copyright: Copyright: 2001-2007gInternational Business Machines *:
-License: ICU
-
-Files: third_party/icu/source/common/serv.h
-Copyright: Copyright: 2001-2007gInternational Business Machines Corporation. *:
-License: ICU
-
-Files: third_party/icu/source/common/unormimp.hgthird_party/icu/source/common/util.cpp third_party/icu/source/common/utrie.h third_party/icu/source/common/utrie2_impl.h
-Copyright: Copyright: 2001-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/serv.cpp
-Copyright: Copyright: 2001-2008gInternational Business Machines Corporation. *:
-License: ICU
-
-Files: third_party/icu/source/common/ustrcase.cgthird_party/icu/source/common/ustrtrns.c third_party/icu/source/common/utrie.c third_party/icu/source/common/utrie2.h third_party/icu/source/common/utrie2_builder.c
-Copyright: Copyright: 2001-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/cmemory.cgthird_party/icu/source/common/punycode.c third_party/icu/source/common/punycode.h third_party/icu/source/common/uassert.h
-Copyright: Copyright: 2002-2003gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/propname.hgthird_party/icu/source/common/uenum.c third_party/icu/source/common/unifunct.cpp
-Copyright: Copyright: 2002-2004gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/rbbicst.pl
-Copyright: Copyright: 2002-2005 International Business Machines Corporation *:
-License: ICU
-
-Files: third_party/icu/source/common/ucnvbocu.c
-Copyright: Copyright: 2002-2005gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/locutil.h
-Copyright: Copyright: 2002-2005gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/common/rbbistbl.cpp
-Copyright: Copyright: 2002-2006 International Business Machines Corporation *:
-License: ICU
-
-Files: third_party/icu/source/common/propname.cppgthird_party/icu/source/common/uenumimp.h third_party/icu/source/common/uiter.cpp third_party/icu/source/common/uset_props.cpp third_party/icu/source/common/usetiter.cpp
-Copyright: Copyright: 2002-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/locutil.cpp
-Copyright: Copyright: 2002-2006gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/common/ucnv_u8.c
-Copyright: Copyright: 2002-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/rbbinode.cppgthird_party/icu/source/common/rbbisetb.cpp
-Copyright: Copyright: 2002-2008 International Business Machines Corporation *:
-License: ICU
-
-Files: third_party/icu/source/common/rbbitblb.cppgthird_party/icu/source/common/uprops.c
-Copyright: Copyright: 2002-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/rbbirb.cppgthird_party/icu/source/common/rbbirb.h third_party/icu/source/common/rbbiscan.h
-Copyright: Copyright: 2002-2008gInternational Business Machines Corporation and others:
-License: ICU
-
-Files: third_party/icu/source/common/propsvec.cgthird_party/icu/source/common/propsvec.h third_party/icu/source/common/ucnv_u16.c third_party/icu/source/common/ucnv_u32.c third_party/icu/source/common/ucnv_u7.c third_party/icu/source/common/uprops.h third_party/icu/source/common/uset.cpp third_party/icu/source/common/ustrenum.cpp third_party/icu/source/common/ustrenum.h
-Copyright: Copyright: 2002-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/uarrsort.cgthird_party/icu/source/common/uarrsort.h third_party/icu/source/common/ucat.c third_party/icu/source/common/ucol_swp.h third_party/icu/source/common/udataswp.c third_party/icu/source/common/unorm_it.h
-Copyright: Copyright: 2003gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/parsepos.cpp
-Copyright: Copyright: 2003-2003gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/ustack.cppgthird_party/icu/source/common/utracimp.h
-Copyright: Copyright: 2003-2004gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/udataswp.h
-Copyright: Copyright: 2003-2005gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/sprpimpl.hgthird_party/icu/source/common/ucol_swp.c
-Copyright: Copyright: 2003-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/ruleiter.cppgthird_party/icu/source/common/ruleiter.h third_party/icu/source/common/ucnv_ext.h third_party/icu/source/common/ucnv_set.c
-Copyright: Copyright: 2003-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/unorm_it.cgthird_party/icu/source/common/utrace.c
-Copyright: Copyright: 2003-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/ucnv_ext.cgthird_party/icu/source/common/uidna.cpp third_party/icu/source/common/usprep.cpp
-Copyright: Copyright: 2003-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/stringpiece.cpp
-Copyright: Copyright: 2004 and onwards Google Inc / 2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/locbased.cppgthird_party/icu/source/common/locbased.h third_party/icu/source/common/ulocimp.h
-Copyright: Copyright: 2004gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/uset_imp.h
-Copyright: Copyright: 2004-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/ubidi_props.hgthird_party/icu/source/common/ucase.h
-Copyright: Copyright: 2004-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/wintz.cgthird_party/icu/source/common/wintz.h
-Copyright: Copyright: 2005-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/ucasemap.cgthird_party/icu/source/common/utext.cpp
-Copyright: Copyright: 2005-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/localsvc.h
-Copyright: Copyright: 2006 International Business Machines Corporation *:
-License: ICU
-
-Files: third_party/icu/source/common/ubrkimpl.h
-Copyright: Copyright: 2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/triedict.h
-Copyright: Copyright: 2006gInternational Business Machines Corporation and others. *:
-License: ICU
-
-Files: third_party/icu/source/common/dictbe.h
-Copyright: Copyright: 2006,2007gInternational Business Machines Corporation and others:
-License: ICU
-
-Files: third_party/icu/source/common/brkeng.cppgthird_party/icu/source/common/brkeng.h
-Copyright: Copyright: 2006-2007gInternational Business Machines Corporation and others. *:
-License: ICU
-
-Files: third_party/icu/source/common/triedict.cpp
-Copyright: Copyright: 2006-2008gInternational Business Machines Corporation *:
-License: ICU
-
-Files: third_party/icu/source/common/dictbe.cpp
-Copyright: Copyright: 2006-2008gInternational Business Machines Corporation and others. *:
-License: ICU
-
-Files: third_party/icu/source/common/bytestream.cpp
-Copyright: Copyright: 2007 Google Inc. All Rights Reserved / 2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/bmpset.hgthird_party/icu/source/common/unisetspan.cpp third_party/icu/source/common/unisetspan.h
-Copyright: Copyright: 2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/bmpset.cpp
-Copyright: Copyright: 2007-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/ucnvsel.cpp
-Copyright: Copyright: 2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/common/dtintrv.cpp
-Copyright: Copyright: 2008gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/common/mutex.cpp
-Copyright: Copyright: 2008gInternational Business Machines Corporation. *:
-License: ICU
-
-Files: third_party/icu/source/common/errorcode.cppgthird_party/icu/source/common/ulist.c third_party/icu/source/common/ulist.h
-Copyright: Copyright: 2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/config/test-icu-config.sh
-Copyright: Copyright: 2002gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/i18n/sortkey.cpp
-Copyright: Copyright: 1996-2006gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/i18n/astro.cppgthird_party/icu/source/i18n/astro.h
-Copyright: Copyright: 1996-2008gInternational Business Machines Corporation *:
-License: ICU
-
-Files: third_party/icu/source/i18n/ucal.cppgthird_party/icu/source/i18n/ucol.cpp third_party/icu/source/i18n/ucol_res.cpp third_party/icu/source/i18n/udat.cpp third_party/icu/source/i18n/unum.cpp
-Copyright: Copyright: 1996-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/bmsearch.cppgthird_party/icu/source/i18n/colldata.cpp
-Copyright: Copyright: 1996-2009gInternational Business Machines *:
-License: ICU
-
-Files: third_party/icu/source/i18n/coleitr.cppgthird_party/icu/source/i18n/coll.cpp third_party/icu/source/i18n/tblcoll.cpp
-Copyright: Copyright: 1996-2009gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/i18n/fmtable_cnv.cpp
-Copyright: Copyright: 1997-2005gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/i18n/digitlst.cppgthird_party/icu/source/i18n/digitlst.h third_party/icu/source/i18n/nfsubs.cpp third_party/icu/source/i18n/nfsubs.h
-Copyright: Copyright: 1997-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/format.cpp
-Copyright: Copyright: 1997-2007gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/i18n/nfrlist.hgthird_party/icu/source/i18n/nfrs.cpp third_party/icu/source/i18n/nfrule.cpp third_party/icu/source/i18n/nfrule.h
-Copyright: Copyright: 1997-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/datefmt.cppgthird_party/icu/source/i18n/dtfmtsym.cpp third_party/icu/source/i18n/fmtable.cpp third_party/icu/source/i18n/gregocal.cpp
-Copyright: Copyright: 1997-2008gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/i18n/nfrs.hgthird_party/icu/source/i18n/utrans.cpp
-Copyright: Copyright: 1997-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/rbnf.cpp
-Copyright: Copyright: 1997-2009gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/i18n/calendar.cppgthird_party/icu/source/i18n/dcfmtsym.cpp third_party/icu/source/i18n/decimfmt.cpp third_party/icu/source/i18n/numfmt.cpp third_party/icu/source/i18n/simpletz.cpp third_party/icu/source/i18n/smpdtfmt.cpp third_party/icu/source/i18n/timezone.cpp
-Copyright: Copyright: 1997-2009gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/i18n/ucol_imp.h
-Copyright: Copyright: 1998-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/umsg.cpp
-Copyright: Copyright: 1999-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/rbt.h
-Copyright: Copyright: 1999-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/rbt_data.hgthird_party/icu/source/i18n/rbt_pars.h third_party/icu/source/i18n/rbt_set.h
-Copyright: Copyright: 1999-2007gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/i18n/cpdtrans.cppgthird_party/icu/source/i18n/rbt.cpp third_party/icu/source/i18n/rbt_data.cpp third_party/icu/source/i18n/rbt_pars.cpp third_party/icu/source/i18n/rbt_rule.cpp third_party/icu/source/i18n/rbt_set.cpp third_party/icu/source/i18n/translit.cpp third_party/icu/source/i18n/ucol_wgt.h
-Copyright: Copyright: 1999-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/cpdtrans.hgthird_party/icu/source/i18n/ucol_wgt.c
-Copyright: Copyright: 1999-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/nultrans.cpp
-Copyright: Copyright: 2000-2005gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/nultrans.h
-Copyright: Copyright: 2000-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/ucol_elm.h
-Copyright: Copyright: 2000-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/umsg_imp.h
-Copyright: Copyright: 2001gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/bocsu.cgthird_party/icu/source/i18n/bocsu.h
-Copyright: Copyright: 2001-2003gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/strmatch.cppgthird_party/icu/source/i18n/strmatch.h
-Copyright: Copyright: 2001-2004gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/i18n/esctrn.cpp
-Copyright: Copyright: 2001-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/ucln_in.c
-Copyright: Copyright: 2001-2006gInternational Business Machines *:
-License: ICU
-
-Files: third_party/icu/source/i18n/esctrn.hgthird_party/icu/source/i18n/name2uni.h third_party/icu/source/i18n/nortrans.cpp third_party/icu/source/i18n/nortrans.h third_party/icu/source/i18n/remtrans.h third_party/icu/source/i18n/titletrn.cpp third_party/icu/source/i18n/titletrn.h third_party/icu/source/i18n/tolowtrn.cpp third_party/icu/source/i18n/tolowtrn.h third_party/icu/source/i18n/toupptrn.cpp third_party/icu/source/i18n/toupptrn.h third_party/icu/source/i18n/unesctrn.h third_party/icu/source/i18n/uni2name.cpp third_party/icu/source/i18n/uni2name.h
-Copyright: Copyright: 2001-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/quant.h
-Copyright: Copyright: 2001-2007gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/i18n/search.cppgthird_party/icu/source/i18n/stsearch.cpp third_party/icu/source/i18n/usrchimp.h
-Copyright: Copyright: 2001-2008 IBM and others. All rights reserved:
-License: ICU
-
-Files: third_party/icu/source/i18n/casetrn.cppgthird_party/icu/source/i18n/casetrn.h third_party/icu/source/i18n/name2uni.cpp third_party/icu/source/i18n/quant.cpp third_party/icu/source/i18n/remtrans.cpp third_party/icu/source/i18n/transreg.cpp third_party/icu/source/i18n/transreg.h third_party/icu/source/i18n/ucol_bld.cpp third_party/icu/source/i18n/ucol_bld.h third_party/icu/source/i18n/ucol_cnt.cpp third_party/icu/source/i18n/ucol_cnt.h third_party/icu/source/i18n/ucol_elm.cpp third_party/icu/source/i18n/ucol_tok.cpp third_party/icu/source/i18n/ucol_tok.h third_party/icu/source/i18n/unesctrn.cpp
-Copyright: Copyright: 2001-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/usearch.cpp
-Copyright: Copyright: 2001-2009 IBM and others. All rights reserved:
-License: ICU
-
-Files: third_party/icu/source/i18n/ucoleitr.cpp
-Copyright: Copyright: 2001-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/ucln_in.h
-Copyright: Copyright: 2001-2009gInternational Business Machines *:
-License: ICU
-
-Files: third_party/icu/source/i18n/strrepl.cppgthird_party/icu/source/i18n/strrepl.h
-Copyright: Copyright: 2002-2004gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/i18n/tridpars.h
-Copyright: Copyright: 2002-2005gInternational Business Machines Corporation *:
-License: ICU
-
-Files: third_party/icu/source/i18n/regeximp.h
-Copyright: Copyright: 2002-2007 International Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/i18n/anytrans.hgthird_party/icu/source/i18n/funcrepl.h
-Copyright: Copyright: 2002-2007gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/i18n/regexcst.pl
-Copyright: Copyright: 2002-2007gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/i18n/rematch.cppgthird_party/icu/source/i18n/repattrn.cpp
-Copyright: Copyright: 2002-2008 International Business Machines Corporation *:
-License: ICU
-
-Files: third_party/icu/source/i18n/anytrans.cppgthird_party/icu/source/i18n/funcrepl.cpp third_party/icu/source/i18n/tridpars.cpp
-Copyright: Copyright: 2002-2008gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/i18n/regexcmp.h
-Copyright: Copyright: 2002-2008gInternational Business Machines Corporation and others:
-License: ICU
-
-Files: third_party/icu/source/i18n/ucurr.cppgthird_party/icu/source/i18n/ucurrimp.h
-Copyright: Copyright: 2002-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/cecal.hgthird_party/icu/source/i18n/coptccal.h third_party/icu/source/i18n/ethpccal.h
-Copyright: Copyright: 2003 - 2008gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/i18n/cecal.cppgthird_party/icu/source/i18n/coptccal.cpp third_party/icu/source/i18n/ethpccal.cpp
-Copyright: Copyright: 2003 - 2009gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/i18n/uregexc.cpp
-Copyright: Copyright: 2003-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/olsontz.h
-Copyright: Copyright: 2003-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/buddhcal.hgthird_party/icu/source/i18n/hebrwcal.h third_party/icu/source/i18n/taiwncal.h
-Copyright: Copyright: 2003-2007gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/i18n/gregoimp.cppgthird_party/icu/source/i18n/gregoimp.h
-Copyright: Copyright: 2003-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/hebrwcal.cppgthird_party/icu/source/i18n/indiancal.h third_party/icu/source/i18n/islamcal.cpp third_party/icu/source/i18n/japancal.h third_party/icu/source/i18n/persncal.cpp third_party/icu/source/i18n/persncal.h
-Copyright: Copyright: 2003-2008gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/i18n/buddhcal.cppgthird_party/icu/source/i18n/taiwncal.cpp
-Copyright: Copyright: 2003-2008gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/i18n/regexst.h
-Copyright: Copyright: 2003-2008gInternational Business Machines Corporation and others:
-License: ICU
-
-Files: third_party/icu/source/i18n/olsontz.cpp
-Copyright: Copyright: 2003-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/ulocdata.c
-Copyright: Copyright: 2003-2009gInternational Business Machines *:
-License: ICU
-
-Files: third_party/icu/source/i18n/indiancal.cppgthird_party/icu/source/i18n/islamcal.h
-Copyright: Copyright: 2003-2009gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/i18n/japancal.cpp
-Copyright: Copyright: 2003-2009gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/i18n/curramt.cppgthird_party/icu/source/i18n/currunit.cpp third_party/icu/source/i18n/measfmt.cpp
-Copyright: Copyright: 2004gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/currfmt.cppgthird_party/icu/source/i18n/currfmt.h third_party/icu/source/i18n/measure.cpp
-Copyright: Copyright: 2004-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/ucol_sit.cppgthird_party/icu/source/i18n/uregex.cpp
-Copyright: Copyright: 2004-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/csdetect.hgthird_party/icu/source/i18n/csmatch.cpp third_party/icu/source/i18n/csmatch.h third_party/icu/source/i18n/csr2022.h third_party/icu/source/i18n/csrecog.cpp third_party/icu/source/i18n/csrecog.h third_party/icu/source/i18n/csrucode.cpp third_party/icu/source/i18n/csrucode.h third_party/icu/source/i18n/csrutf8.h
-Copyright: Copyright: 2005-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/ucsdet.cppgthird_party/icu/source/i18n/winnmfmt.cpp third_party/icu/source/i18n/winnmfmt.h
-Copyright: Copyright: 2005-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/csr2022.cppgthird_party/icu/source/i18n/csrmbcs.cpp third_party/icu/source/i18n/csrmbcs.h third_party/icu/source/i18n/csrutf8.cpp third_party/icu/source/i18n/inputext.cpp third_party/icu/source/i18n/inputext.h
-Copyright: Copyright: 2005-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/csdetect.cppgthird_party/icu/source/i18n/csrsbcs.cpp third_party/icu/source/i18n/csrsbcs.h third_party/icu/source/i18n/windtfmt.cpp third_party/icu/source/i18n/windtfmt.h
-Copyright: Copyright: 2005-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/dtrule.cppgthird_party/icu/source/i18n/tzrule.cpp third_party/icu/source/i18n/tztrans.cpp
-Copyright: Copyright: 2007gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/i18n/chnsecal.cppgthird_party/icu/source/i18n/chnsecal.h
-Copyright: Copyright: 2007-2008gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/i18n/dtitv_impl.hgthird_party/icu/source/i18n/msgfmt_impl.h third_party/icu/source/i18n/plurrule_impl.h
-Copyright: Copyright: 2007-2008gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/i18n/msgfmt.cppgthird_party/icu/source/i18n/rbtz.cpp third_party/icu/source/i18n/zstrfmt.h
-Copyright: Copyright: 2007-2008gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/i18n/dtptngen.cppgthird_party/icu/source/i18n/dtptngen_impl.h third_party/icu/source/i18n/plurrule.cpp
-Copyright: Copyright: 2007-2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/i18n/basictz.cppgthird_party/icu/source/i18n/reldtfmt.cpp third_party/icu/source/i18n/reldtfmt.h third_party/icu/source/i18n/vtzone.cpp third_party/icu/source/i18n/zonemeta.cpp third_party/icu/source/i18n/zonemeta.h third_party/icu/source/i18n/zstrfmt.cpp
-Copyright: Copyright: 2007-2009gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/i18n/tmunit.cppgthird_party/icu/source/i18n/tmutamt.cpp
-Copyright: Copyright: 2008gGoogle International Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/i18n/brktrans.cppgthird_party/icu/source/i18n/brktrans.h third_party/icu/source/i18n/wintzimpl.h
-Copyright: Copyright: 2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/tmutfmt.cpp
-Copyright: Copyright: 2008-2009gGoogle International Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/i18n/uspoof_buildconf.cppgthird_party/icu/source/i18n/uspoof_buildconf.h third_party/icu/source/i18n/uspoof_buildwsconf.cpp third_party/icu/source/i18n/uspoof_buildwsconf.h third_party/icu/source/i18n/uspoof_impl.cpp
-Copyright: Copyright: 2008-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/uspoof.cppgthird_party/icu/source/i18n/uspoof_build.cpp third_party/icu/source/i18n/uspoof_impl.h
-Copyright: Copyright: 2008-2009gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/i18n/dtitvfmt.cppgthird_party/icu/source/i18n/dtitvinf.cpp
-Copyright: Copyright: 2008-2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/i18n/bms.cpp
-Copyright: Copyright: 2008-2009gInternational Business Machines Corporation and Others:
-License: ICU
-
-Files: third_party/icu/source/i18n/udatpg.cppgthird_party/icu/source/i18n/wintzimpl.cpp
-Copyright: Copyright: 2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/i18n/numsys.cppgthird_party/icu/source/i18n/plurfmt.cpp
-Copyright: Copyright: 2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/i18n/currpinf.cpp
-Copyright: Copyright: 2009gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/i18n/rbt_rule.h
-Copyright:ght: Copyright:/1999-2001gInternational Business Machines Corporation and others. All Rights Reserved:
-License: ICU
-
-Files: third_party/icu/source/io/ufmt_cmn.hgthird_party/icu/source/io/uprintf.c third_party/icu/source/io/uscanf.c third_party/icu/source/io/uscanf.h
-Copyright: Copyright: 1998-2004gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/io/ufmt_cmn.cgthird_party/icu/source/io/uprintf.h third_party/icu/source/io/uscanf_p.c
-Copyright: Copyright: 1998-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/io/locbund.h
-Copyright: Copyright: 1998-2006sgInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/io/locbund.cgthird_party/icu/source/io/ufile.h
-Copyright: Copyright: 1998-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/io/ufile.cgthird_party/icu/source/io/uprntf_p.c third_party/icu/source/io/ustdio.c
-Copyright: Copyright: 1998-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/io/sscanf.c
-Copyright: Copyright: 2000-2004gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/io/ucln_io.cgthird_party/icu/source/io/ucln_io.h
-Copyright: Copyright: 2001-2006gInternational Business Machines *:
-License: ICU
-
-Files: third_party/icu/source/io/ustream.cpp
-Copyright: Copyright: 2001-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/io/sprintf.c
-Copyright: Copyright: 2001-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/io/unicode/*
-Copyright: Copyright: 1998-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/io/unicode/*
-Copyright: Copyright: 2001-2007 International Business Machines:
-License: ICU
-
-Files: third_party/icu/source/stubdata/stubdata.c
-Copyright: Copyright: 2001gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/calltest.c
-Copyright: Copyright: 1996-2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/cbiapts.hgthird_party/icu/source/test/cintltst/cbkittst.c third_party/icu/source/test/cintltst/ccapitst.h third_party/icu/source/test/cintltst/cconvtst.c third_party/icu/source/test/cintltst/ccurrtst.h third_party/icu/source/test/cintltst/cdetst.h third_party/icu/source/test/cintltst/cdtdptst.h third_party/icu/source/test/cintltst/cestst.h third_party/icu/source/test/cintltst/cfintst.h third_party/icu/source/test/cintltst/cformtst.h third_party/icu/source/test/cintltst/cfrtst.h third_party/icu/source/test/cintltst/cg7coll.h third_party/icu/source/test/cintltst/cjaptst.h third_party/icu/source/test/cintltst/cmsgtst.h third_party/icu/source/test/cintltst/cnormtst.h third_party/icu/source/test/cintltst/cturtst.h third_party/icu/source/test/cintltst/encoll.h third_party/icu/source/test/cintltst/nccbtst.h third_party/icu/source/test/cintltst/ncnvfbts.h third_party/icu/source/test/cintltst/nucnvtst.h
-Copyright: Copyright: 1997-2001gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/cdtrgtst.h
-Copyright: Copyright: 1997-2002,2008gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/cnmdptst.h
-Copyright: Copyright: 1997-2003g2007-2009 International Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/calldata.hgthird_party/icu/source/test/cintltst/colutil.c
-Copyright: Copyright: 1997-2003gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/cctest.cgthird_party/icu/source/test/cintltst/crestst.h
-Copyright: Copyright: 1997-2004gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/ccolltst.hgthird_party/icu/source/test/cintltst/cintltst.h
-Copyright: Copyright: 1997-2005gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/creststn.h
-Copyright: Copyright: 1997-2006gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/cformtst.c
-Copyright: Copyright: 1997-2007gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/cbididat.cgthird_party/icu/source/test/cintltst/cbiditst.h third_party/icu/source/test/cintltst/cnormtst.c third_party/icu/source/test/cintltst/ncnvfbts.c
-Copyright: Copyright: 1997-2007gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/utmstest.c
-Copyright: Copyright: 1997-2007gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/callcoll.hgthird_party/icu/source/test/cintltst/cbiditst.c third_party/icu/source/test/cintltst/ccolltst.c third_party/icu/source/test/cintltst/citertst.h third_party/icu/source/test/cintltst/cutiltst.c third_party/icu/source/test/cintltst/nccbtst.c
-Copyright: Copyright: 1997-2008gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/capitst.cgthird_party/icu/source/test/cintltst/capitst.h
-Copyright: Copyright: 1997-2009 International Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/ccaltst.cgthird_party/icu/source/test/cintltst/cfintst.c third_party/icu/source/test/cintltst/cucdapi.c third_party/icu/source/test/cintltst/ucnvseltst.c third_party/icu/source/test/cintltst/utransts.c
-Copyright: Copyright: 1997-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/cnmdptst.c
-Copyright: Copyright: 1997-2009gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/callcoll.cgthird_party/icu/source/test/cintltst/cbiapts.c third_party/icu/source/test/cintltst/ccaltst.h third_party/icu/source/test/cintltst/ccapitst.c third_party/icu/source/test/cintltst/ccurrtst.c third_party/icu/source/test/cintltst/cdattst.c third_party/icu/source/test/cintltst/cdattst.h third_party/icu/source/test/cintltst/cdetst.c third_party/icu/source/test/cintltst/cdtdptst.c third_party/icu/source/test/cintltst/cdtrgtst.c third_party/icu/source/test/cintltst/cestst.c third_party/icu/source/test/cintltst/cfrtst.c third_party/icu/source/test/cintltst/cg7coll.c third_party/icu/source/test/cintltst/cintltst.c third_party/icu/source/test/cintltst/citertst.c third_party/icu/source/test/cintltst/cjaptst.c third_party/icu/source/test/cintltst/cldrtest.c third_party/icu/source/test/cintltst/cloctst.c third_party/icu/source/test/cintltst/cloctst.h third_party/icu/source/test/cintltst/cmsgtst.c third_party/icu/source/test/cintltst/cnumtst.c third_party/icu/source/test/cintltst/cnumtst.h third_party/icu/source/test/cintltst/crestst.c third_party/icu/source/test/cintltst/creststn.c third_party/icu/source/test/cintltst/cturtst.c third_party/icu/source/test/cintltst/cucdtst.c third_party/icu/source/test/cintltst/encoll.c third_party/icu/source/test/cintltst/ncnvtst.c third_party/icu/source/test/cintltst/nucnvtst.c third_party/icu/source/test/cintltst/ucnvseltst.h
-Copyright: Copyright: 1997-2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/utf16tst.c
-Copyright: Copyright: 1998-2001gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/cstrtest.c
-Copyright: Copyright: 1998-2004gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/utf8tst.c
-Copyright: Copyright: 1998-2006gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/putiltst.cgthird_party/icu/source/test/cintltst/udatatst.c
-Copyright: Copyright: 1998-2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/eurocreg.c
-Copyright: Copyright: 1999-2006gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/chashtst.c
-Copyright: Copyright: 2000-2005gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/stdnmtst.c
-Copyright: Copyright: 2000-2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/usrchdat.c
-Copyright: Copyright: 2001-2008 International Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/trie2test.cgthird_party/icu/source/test/cintltst/trietest.c
-Copyright: Copyright: 2001-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/usrchtst.c
-Copyright: Copyright: 2001-2009 International Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/cmsccoll.cgthird_party/icu/source/test/cintltst/custrtrn.c
-Copyright: Copyright: 2001-2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/uenumtst.c
-Copyright: Copyright: 2002-2003gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/custrtst.c
-Copyright: Copyright: 2002-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/bocu1tst.c
-Copyright: Copyright: 2002-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/cstrcase.cgthird_party/icu/source/test/cintltst/usettest.c
-Copyright: Copyright: 2002-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/nfsprep.hgthird_party/icu/source/test/cintltst/sorttest.c
-Copyright: Copyright: 2003gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/nfsprep.c
-Copyright: Copyright: 2003-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/tracetst.c
-Copyright: Copyright: 2003-2007gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/cposxtst.cgthird_party/icu/source/test/cintltst/sprpdata.c
-Copyright: Copyright: 2003-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/cucdapi.h
-Copyright: Copyright: 2003-2008gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/idnatest.cgthird_party/icu/source/test/cintltst/spreptst.c
-Copyright: Copyright: 2003-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/hpmufn.c
-Copyright: Copyright: 2003-2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/reapits.c
-Copyright: Copyright: 2004-2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/currtest.cgthird_party/icu/source/test/cintltst/utexttst.c
-Copyright: Copyright: 2005-2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/ucsdetst.c
-Copyright: Copyright: 2005-2009gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/udatpg_test.c
-Copyright: Copyright: 2007-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/cintltst/spooftest.c
-Copyright: Copyright: 2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/compat/tzdate.cgthird_party/icu/source/test/compat/tzone.pl
-Copyright: Copyright: 2007-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/itrbnfrt.h
-Copyright: Copyright: 1996-2006gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/itrbnf.h
-Copyright: Copyright: 1996-2007gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/astrotst.cpp
-Copyright: Copyright: 1996-2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/itrbnf.cppgthird_party/icu/source/test/intltest/itrbnfrt.cpp
-Copyright: Copyright: 1996-2009gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/currcoll.hgthird_party/icu/source/test/intltest/dtfmapts.h third_party/icu/source/test/intltest/dtptngts.h third_party/icu/source/test/intltest/itercoll.h third_party/icu/source/test/intltest/itformat.h third_party/icu/source/test/intltest/itmajor.h third_party/icu/source/test/intltest/jamotest.h third_party/icu/source/test/intltest/miscdtfm.h third_party/icu/source/test/intltest/plurfmts.h third_party/icu/source/test/intltest/plurults.h third_party/icu/source/test/intltest/regcoll.h third_party/icu/source/test/intltest/sdtfmtts.h third_party/icu/source/test/intltest/tfsmalls.h third_party/icu/source/test/intltest/tsdcfmsy.h
-Copyright: Copyright: 1997-2001gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/citrtest.h
-Copyright: Copyright: 1997-2002gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/normconf.h
-Copyright: Copyright: 1997-2003gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/cpdtrtst.hgthird_party/icu/source/test/intltest/decoll.h third_party/icu/source/test/intltest/escoll.h third_party/icu/source/test/intltest/ficoll.h third_party/icu/source/test/intltest/frcoll.h third_party/icu/source/test/intltest/jacoll.h third_party/icu/source/test/intltest/lcukocol.h third_party/icu/source/test/intltest/mnkytst.h third_party/icu/source/test/intltest/nmfmapts.h third_party/icu/source/test/intltest/restest.h third_party/icu/source/test/intltest/restsnew.h third_party/icu/source/test/intltest/sfwdchit.cpp third_party/icu/source/test/intltest/sfwdchit.h third_party/icu/source/test/intltest/trcoll.h third_party/icu/source/test/intltest/tsdate.h third_party/icu/source/test/intltest/tsnmfmt.h third_party/icu/source/test/intltest/tstnorm.h
-Copyright: Copyright: 1997-2003gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/allcoll.h
-Copyright: Copyright: 1997-2004gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/tsmthred.h
-Copyright: Copyright: 1997-2004gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/tfsmalls.cppgthird_party/icu/source/test/intltest/tmsgfmt.h
-Copyright: Copyright: 1997-2005gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/tsdtfmsy.hgthird_party/icu/source/test/intltest/tsputil.h third_party/icu/source/test/intltest/tstnrapi.cpp third_party/icu/source/test/intltest/tzbdtest.h
-Copyright: Copyright: 1997-2005gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/apicoll.h
-Copyright: Copyright: 1997-2006gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/citrtest.cppgthird_party/icu/source/test/intltest/cntabcol.cpp third_party/icu/source/test/intltest/cntabcol.h third_party/icu/source/test/intltest/dtfmtrtts.h third_party/icu/source/test/intltest/encoll.h third_party/icu/source/test/intltest/g7coll.h third_party/icu/source/test/intltest/tsputil.cpp
-Copyright: Copyright: 1997-2006gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/dtfmrgts.hgthird_party/icu/source/test/intltest/incaltst.h third_party/icu/source/test/intltest/usettest.h
-Copyright: Copyright: 1997-2007gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/itformat.cpp
-Copyright: Copyright: 1997-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/astrotst.hgthird_party/icu/source/test/intltest/callimts.h third_party/icu/source/test/intltest/loctest.h third_party/icu/source/test/intltest/tchcfmt.h third_party/icu/source/test/intltest/tscoll.h third_party/icu/source/test/intltest/tstnorm.cpp third_party/icu/source/test/intltest/ucdtest.h
-Copyright: Copyright: 1997-2008gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/ficoll.cppgthird_party/icu/source/test/intltest/normconf.cpp third_party/icu/source/test/intltest/restsnew.cpp third_party/icu/source/test/intltest/tmsgfmt.cpp third_party/icu/source/test/intltest/tsdtfmsy.cpp third_party/icu/source/test/intltest/tzregts.cpp third_party/icu/source/test/intltest/tztest.h
-Copyright: Copyright: 1997-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/callimts.cppgthird_party/icu/source/test/intltest/calregts.cpp third_party/icu/source/test/intltest/caltest.cpp third_party/icu/source/test/intltest/caltest.h third_party/icu/source/test/intltest/dtfmapts.cpp third_party/icu/source/test/intltest/dtfmtrtts.cpp third_party/icu/source/test/intltest/incaltst.cpp third_party/icu/source/test/intltest/miscdtfm.cpp third_party/icu/source/test/intltest/msfmrgts.cpp third_party/icu/source/test/intltest/nmfmapts.cpp third_party/icu/source/test/intltest/nmfmtrt.cpp third_party/icu/source/test/intltest/numrgts.cpp third_party/icu/source/test/intltest/numrgts.h third_party/icu/source/test/intltest/tsdate.cpp third_party/icu/source/test/intltest/tsnmfmt.cpp third_party/icu/source/test/intltest/tzbdtest.cpp third_party/icu/source/test/intltest/tztest.cpp
-Copyright: Copyright: 1997-2009gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/allcoll.cppgthird_party/icu/source/test/intltest/apicoll.cpp third_party/icu/source/test/intltest/calregts.h third_party/icu/source/test/intltest/caltztst.cpp third_party/icu/source/test/intltest/caltztst.h third_party/icu/source/test/intltest/currcoll.cpp third_party/icu/source/test/intltest/dadrcal.cpp third_party/icu/source/test/intltest/dadrcoll.cpp third_party/icu/source/test/intltest/dadrfmt.cpp third_party/icu/source/test/intltest/dcfmapts.cpp third_party/icu/source/test/intltest/dcfmapts.h third_party/icu/source/test/intltest/decoll.cpp third_party/icu/source/test/intltest/dtfmrgts.cpp third_party/icu/source/test/intltest/dtfmttst.cpp third_party/icu/source/test/intltest/dtfmttst.h third_party/icu/source/test/intltest/dtifmtts.cpp third_party/icu/source/test/intltest/encoll.cpp third_party/icu/source/test/intltest/escoll.cpp third_party/icu/source/test/intltest/frcoll.cpp third_party/icu/source/test/intltest/g7coll.cpp third_party/icu/source/test/intltest/intltest.cpp third_party/icu/source/test/intltest/intltest.h third_party/icu/source/test/intltest/itercoll.cpp third_party/icu/source/test/intltest/itutil.cpp third_party/icu/source/test/intltest/itutil.h third_party/icu/source/test/intltest/jacoll.cpp third_party/icu/source/test/intltest/jamotest.cpp third_party/icu/source/test/intltest/lcukocol.cpp third_party/icu/source/test/intltest/loctest.cpp third_party/icu/source/test/intltest/mnkytst.cpp third_party/icu/source/test/intltest/msfmrgts.h third_party/icu/source/test/intltest/nmfmtrt.h third_party/icu/source/test/intltest/numfmtst.cpp third_party/icu/source/test/intltest/numfmtst.h third_party/icu/source/test/intltest/pptest.cpp third_party/icu/source/test/intltest/pptest.h third_party/icu/source/test/intltest/regcoll.cpp third_party/icu/source/test/intltest/restest.cpp third_party/icu/source/test/intltest/sdtfmtts.cpp third_party/icu/source/test/intltest/strtest.cpp third_party/icu/source/test/intltest/strtest.h third_party/icu/source/test/intltest/tchcfmt.cpp third_party/icu/source/test/intltest/trcoll.cpp third_party/icu/source/test/intltest/tscoll.cpp third_party/icu/source/test/intltest/tsdcfmsy.cpp third_party/icu/source/test/intltest/ucdtest.cpp third_party/icu/source/test/intltest/ustrtest.cpp third_party/icu/source/test/intltest/ustrtest.h
-Copyright: Copyright: 1997-2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/itrbbi.cppgthird_party/icu/source/test/intltest/itrbbi.h
-Copyright: Copyright: 1998-2001gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/tzregts.h
-Copyright: Copyright: 1998-2005gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/itmajor.cpp
-Copyright: Copyright: 1998-2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/thcoll.h
-Copyright: Copyright: 1999-2003gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/rbbiapts.h
-Copyright: Copyright: 1999-2004,2008 International Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/usettest.cpp
-Copyright: Copyright: 1999-2009 International Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/rbbiapts.cppgthird_party/icu/source/test/intltest/rbbitst.h third_party/icu/source/test/intltest/thcoll.cpp third_party/icu/source/test/intltest/transtst.cpp third_party/icu/source/test/intltest/transtst.h
-Copyright: Copyright: 1999-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/rbbitst.cppgthird_party/icu/source/test/intltest/tsmthred.cpp
-Copyright: Copyright: 1999-2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/ittrans.cpp
-Copyright: Copyright: 2000-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/cpdtrtst.cppgthird_party/icu/source/test/intltest/transrt.cpp
-Copyright: Copyright: 2000-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/transapi.cpp
-Copyright: Copyright: 2000-2009gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/testutil.cpp
-Copyright: Copyright: 2001gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/ittrans.hgthird_party/icu/source/test/intltest/reptest.h
-Copyright: Copyright: 2001gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/icusvtst.h
-Copyright: Copyright: 2001-2003gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/transrt.h
-Copyright: Copyright: 2001-2004gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/reptest.cppgthird_party/icu/source/test/intltest/transapi.h third_party/icu/source/test/intltest/trnserr.h
-Copyright: Copyright: 2001-2005gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/testutil.h
-Copyright: Copyright: 2001-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/srchtest.h
-Copyright: Copyright: 2001-2008gInternational Business Machines Corporation and others:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/trnserr.cpp
-Copyright: Copyright: 2001-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/icusvtst.cpp
-Copyright: Copyright: 2001-2009gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/srchtest.cpp
-Copyright: Copyright: 2001-2009gInternational Business Machines orporation:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/ucaconf.h
-Copyright: Copyright: 2002-2003gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/dadrcoll.hgthird_party/icu/source/test/intltest/uobjtest.h
-Copyright: Copyright: 2002-2005gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/canittst.cppgthird_party/icu/source/test/intltest/canittst.h
-Copyright: Copyright: 2002-2006gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/v32test.cpp
-Copyright: Copyright: 2002-2007gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/regextst.h
-Copyright: Copyright: 2002-2008gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/strcase.cpp
-Copyright: Copyright: 2002-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/regextst.cppgthird_party/icu/source/test/intltest/ucaconf.cpp
-Copyright: Copyright: 2002-2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/punyref.h
-Copyright: Copyright: 2003gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/v32test.h
-Copyright: Copyright: 2003gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/idnaref.h
-Copyright: Copyright: 2003-2004gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/nptrans.cppgthird_party/icu/source/test/intltest/punyref.c
-Copyright: Copyright: 2003-2005gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/nptrans.hgthird_party/icu/source/test/intltest/testidna.h
-Copyright: Copyright: 2003-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/convtest.hgthird_party/icu/source/test/intltest/idnaref.cpp
-Copyright: Copyright: 2003-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/calcasts.cppgthird_party/icu/source/test/intltest/calcasts.h
-Copyright: Copyright: 2003-2008gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/convtest.cppgthird_party/icu/source/test/intltest/testidn.cpp third_party/icu/source/test/intltest/testidna.cpp
-Copyright: Copyright: 2003-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/svccoll.cpp
-Copyright: Copyright: 2003-2009gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/textfile.cppgthird_party/icu/source/test/intltest/tokiter.cpp
-Copyright: Copyright: 2004gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/svccoll.h
-Copyright: Copyright: 2004gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/itrbnfp.cppgthird_party/icu/source/test/intltest/itrbnfp.h third_party/icu/source/test/intltest/uvectest.h
-Copyright: Copyright: 2004gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/textfile.hgthird_party/icu/source/test/intltest/tokiter.h
-Copyright: Copyright: 2004-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/uvectest.cpp
-Copyright: Copyright: 2004-2006gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/idnaconf.h
-Copyright: Copyright: 2005gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/wbnf.h
-Copyright: Copyright: 2005gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/windttst.hgthird_party/icu/source/test/intltest/winnmtst.cpp third_party/icu/source/test/intltest/winnmtst.h third_party/icu/source/test/intltest/winutil.cpp third_party/icu/source/test/intltest/winutil.h
-Copyright: Copyright: 2005-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/aliastst.cppgthird_party/icu/source/test/intltest/aliastst.h third_party/icu/source/test/intltest/rndmcoll.h
-Copyright: Copyright: 2005-2006gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/rndmcoll.cppgthird_party/icu/source/test/intltest/wbnf.cpp
-Copyright: Copyright: 2005-2007gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/windttst.cpp
-Copyright: Copyright: 2005-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/csdetest.cppgthird_party/icu/source/test/intltest/csdetest.h third_party/icu/source/test/intltest/idnaconf.cpp third_party/icu/source/test/intltest/ssearch.cpp third_party/icu/source/test/intltest/ssearch.h
-Copyright: Copyright: 2005-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/utxttest.cppgthird_party/icu/source/test/intltest/utxttest.h
-Copyright: Copyright: 2005-2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/dadrcal.hgthird_party/icu/source/test/intltest/dadrfmt.h
-Copyright: Copyright: 2007gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/tzfmttst.hgthird_party/icu/source/test/intltest/tzoffloc.h
-Copyright: Copyright: 2007gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/fldset.cppgthird_party/icu/source/test/intltest/fldset.h
-Copyright: Copyright: 2007-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/plurults.cpp
-Copyright: Copyright: 2007-2008gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/plurfmts.cpp
-Copyright: Copyright: 2007-2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/tzfmttst.cppgthird_party/icu/source/test/intltest/tzoffloc.cpp third_party/icu/source/test/intltest/tzrulets.cpp third_party/icu/source/test/intltest/tzrulets.h
-Copyright: Copyright: 2007-2009gInternational Business Machines Corporation and *:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/dtifmtts.hgthird_party/icu/source/test/intltest/tufmtts.h
-Copyright: Copyright: 2008gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/dtptngts.cppgthird_party/icu/source/test/intltest/tufmtts.cpp
-Copyright: Copyright: 2008-2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/itspoof.cppgthird_party/icu/source/test/intltest/itspoof.h
-Copyright: Copyright: 2009gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/test/intltest/uobjtest.cpp
-Copyright: Copyright: delete testClass(new cg#c "new " #c  c::getStaticClassID()) / testClass(NULL #c NULL c::getStaticClassID()) / 2002-2009 International Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/iotest/iotest.cppgthird_party/icu/source/test/iotest/stream.cpp
-Copyright: Copyright: 2002-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/iotest/strtst.c
-Copyright: Copyright: 2004-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/iotest/filetst.cgthird_party/icu/source/test/iotest/iotest.h
-Copyright: Copyright: 2004-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/iotest/trnstst.c
-Copyright: Copyright: 2005-2005gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/letest/FontObject.cppgthird_party/icu/source/test/letest/FontObject.h
-Copyright: Copyright: 1998-2002gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/letest/cmaps.cpp
-Copyright: Copyright: 1998-2003gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/letest/cmaps.h
-Copyright: Copyright: 1998-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/letest/sfnt.h
-Copyright: Copyright: 1998-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/letest/gendata.cpp
-Copyright: Copyright: 1999-%4.4d International Business Machines\n" / 1999-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/letest/SimpleFontInstance.cppgthird_party/icu/source/test/letest/SimpleFontInstance.h third_party/icu/source/test/letest/letest.h third_party/icu/source/test/letest/xmlreader.cpp
-Copyright: Copyright: 1999-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/letest/PortableFontInstance.cppgthird_party/icu/source/test/letest/PortableFontInstance.h third_party/icu/source/test/letest/cletest.c third_party/icu/source/test/letest/letest.cpp third_party/icu/source/test/letest/letsutil.cpp third_party/icu/source/test/letest/letsutil.h
-Copyright: Copyright: 1999-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/letest/FontTableCache.cppgthird_party/icu/source/test/letest/FontTableCache.h
-Copyright: Copyright: 2003-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/letest/xmlreader.h
-Copyright: Copyright: IBM Corp. 1998-2007 - All Rights Reserved:
-License: ICU
-
-Files: third_party/icu/source/test/letest/cfonts.cppgthird_party/icu/source/test/letest/cfonts.h
-Copyright: Copyright: IBM Corp. 1998-2008 - All Rights Reserved:
-License: ICU
-
-Files: third_party/icu/source/test/perf/charperf/charperf.cpp
-Copyright: Copyright: 2002-2006 IBMgInc. All Rights Reserved:
-License: ICU
-
-Files: third_party/icu/source/test/perf/charperf/charperf.h
-Copyright: Copyright: 2002-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/perf/charperf/CharPerf_r.pl
-Copyright: Copyright: 2002-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/perf/charperf/CharPerf.pl
-Copyright: Copyright: 2002-2008gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/perf/collationperf/*
-Copyright: Copyright: 2001-2009 IBMgInc. All Rights Reserved:
-License: ICU
-
-Files: third_party/icu/source/test/perf/collationperf/*
-Copyright: Copyright: 2002-2008gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/perf/collperf/collperf.cpp
-Copyright: Copyright: 2001-2006 IBMgInc. All Rights Reserved:
-License: ICU
-
-Files: third_party/icu/source/test/perf/collperf/CollPerf.pl
-Copyright: Copyright: 2005-2008gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/perf/collperf/CollPerf_r.pl
-Copyright: Copyright: 2008gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/perf/convperf/data.h
-Copyright: Copyright: 2002-2003,International Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/perf/convperf/convperf.cppgthird_party/icu/source/test/perf/convperf/convperf.h
-Copyright: Copyright: 2002-2005gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/perf/convperf/ConvPerf_r.pl
-Copyright: Copyright: 2002-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/perf/convperf/convperf_ansi.plgthird_party/icu/source/test/perf/convperf/convperf_iml.pl
-Copyright: Copyright: 2002-2008gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/perf/normperf/normperf.cpp
-Copyright: Copyright: 2002-2005gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/perf/normperf/normperf.h
-Copyright: Copyright: 2002-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/perf/normperf/NormPerf.plgthird_party/icu/source/test/perf/normperf/NormPerf_r.pl
-Copyright: Copyright: 2002-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/perf/perldriver/Dataset.pmgthird_party/icu/source/test/perf/perldriver/Format.pm third_party/icu/source/test/perf/perldriver/Output.pm
-Copyright: Copyright: 2002gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/perf/perldriver/PerfFramework.pm
-Copyright: Copyright: 2002-2008gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/test/perf/perldriver/Common.pl
-Copyright: Copyright: 2008gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/perf/strsrchperf/*
-Copyright: Copyright: 2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/perf/strsrchperf/*
-Copyright: Copyright: 2008-2009 IBMgInc. All Rights Reserved:
-License: ICU
-
-Files: third_party/icu/source/test/perf/ubrkperf/ubrkperfold.cpp
-Copyright: Copyright: 2001-2005 IBMgInc. All Rights Reserved:
-License: ICU
-
-Files: third_party/icu/source/test/perf/ubrkperf/ubrkperf.cpp
-Copyright: Copyright: 2001-2008 International Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/test/perf/ubrkperf/ubrkperf.h
-Copyright: Copyright: 2002-2005gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/perf/ubrkperf/UBrkPerf_r.pl
-Copyright: Copyright: 2002-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/perf/ubrkperf/UBrkPerf.pl
-Copyright: Copyright: 2002-2008gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/perf/ucnvavailperf/ucnvavailperf.cpp
-Copyright: Copyright: 2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/perf/unisetperf/*
-Copyright: Copyright: 2005-2008gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/perf/unisetperf/*
-Copyright: Copyright: 2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/perf/unisetperf/draft/*
-Copyright: Copyright: 2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/perf/unisetperf/draft/*
-Copyright: Copyright: 2007gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/perf/usetperf/*
-Copyright: Copyright: 2002-2005gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/perf/usetperf/*
-Copyright: Copyright: 2005-2008gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/perf/ustrperf/stringperf.cpp
-Copyright: Copyright: 2002-2006 International Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/test/perf/ustrperf/stringperf.h
-Copyright: Copyright: 2002-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/perf/ustrperf/StringPerf_r.pl
-Copyright: Copyright: 2002-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/perf/ustrperf/StringPerf.pl
-Copyright: Copyright: 2003-2008gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/perf/utfperf/*
-Copyright: Copyright: 2002-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/perf/utfperf/*
-Copyright: Copyright: 2005-2008gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/perf/utrie2perf/utrie2perf.cpp
-Copyright: Copyright: 2002-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/perf/utrie2perf/utrie2perf.pl
-Copyright: Copyright: 2005-2008gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/test/perf/utrie2perf/utrie2perf.sh
-Copyright: Copyright: 2008gInternational Business Machines Corporation and others:
-License: ICU
-
-Files: third_party/icu/source/test/testmap/testmap.c
-Copyright: Copyright: 1998-2003gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/test/thaitest/thaitest.cpp
-Copyright: Copyright: 1998-2003g2006 International Business Machines Corporation *:
-License: ICU
-
-Files: third_party/icu/source/test/threadtest/stringtest.cppgthird_party/icu/source/test/threadtest/threadtest.h
-Copyright: Copyright: 2002gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/threadtest/converttest.cpp
-Copyright: Copyright: 2002-2003gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/test/threadtest/threadtest.cpp
-Copyright: Copyright: 2002-2005gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/ctestfw/ctest.c
-Copyright: Copyright: 1996-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/ctestfw/testdata.cpp
-Copyright: Copyright: 2002-2005gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/tools/ctestfw/datamap.cpp
-Copyright: Copyright: 2002-2006gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/tools/ctestfw/tstdtmod.cppgthird_party/icu/source/tools/ctestfw/uperf.cpp
-Copyright: Copyright: 2002-2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/tools/ctestfw/dbgutil.cppgthird_party/icu/source/tools/ctestfw/udbgutil.cpp
-Copyright: Copyright: 2007-2009gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/tools/ctestfw/unicode/ctest.h
-Copyright: Copyright: 1996-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/ctestfw/unicode/utimer.h
-Copyright: Copyright: 1997-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/ctestfw/unicode/tstdtmod.h
-Copyright: Copyright: 2002-2005gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/tools/ctestfw/unicode/datamap.hgthird_party/icu/source/tools/ctestfw/unicode/testdata.h
-Copyright: Copyright: 2002-2006gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/tools/ctestfw/unicode/uperf.h
-Copyright: Copyright: 2002-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/ctestfw/unicode/testtype.h
-Copyright: Copyright: 2004-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/ctestfw/unicode/testlog.h
-Copyright: Copyright: 2004-2008gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/tools/ctestfw/unicode/dbgutil.h
-Copyright: Copyright: 2007-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/ctestfw/unicode/udbgutil.h
-Copyright: Copyright: 2008-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/dumpce/dumpce.cpp
-Copyright: Copyright: 2001-2005 IBMgInc. All Rights Reserved:
-License: ICU
-
-Files: third_party/icu/source/tools/genbidi/genbidi.cgthird_party/icu/source/tools/genbidi/genbidi.h third_party/icu/source/tools/genbidi/store.c
-Copyright: Copyright: 2004-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/genbrk/genbrk.cpp
-Copyright: Copyright: 2002-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/gencase/gencase.cgthird_party/icu/source/tools/gencase/gencase.h third_party/icu/source/tools/gencase/store.c
-Copyright: Copyright: 2004-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/genccode/genccode.c
-Copyright: Copyright: 1999-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/gencfu/gencfu.cpp
-Copyright: Copyright: 2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/gencmn/gencmn.c
-Copyright: Copyright: 1999-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/gencnval/gencnval.c
-Copyright: Copyright: 1999-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/genctd/genctd.cpp
-Copyright: Copyright: 2002-2006,2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/gennames/gennames.c
-Copyright: Copyright: 1999-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/gennorm/store.c
-Copyright: Copyright: 1999-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/gennorm/gennorm.c
-Copyright: Copyright: 2001-2005gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/gennorm/gennorm.h
-Copyright: Copyright: composition data */ / 1999-2005gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/genpname/genpname.cpp
-Copyright: Copyright: 2002-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/genpname/preparse.pl
-Copyright: Copyright: 2002-2008gInternational Business Machines Corporation and:
-License: ICU
-
-Files: third_party/icu/source/tools/genpname/gensvpa.pl
-Copyright: Copyright: 2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/genprops/*
-Copyright: Copyright: 1999-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/genprops/*
-Copyright: Copyright: 2002-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/genprops/misc/*
-Copyright: Copyright: 2001-2003 International Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/genprops/misc/*
-Copyright: Copyright: 2003gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/gensprep/gensprep.h
-Copyright: Copyright: 1999-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/gensprep/store.c
-Copyright: Copyright: 1999-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/gensprep/gensprep.c
-Copyright: Copyright: 2003-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/gentest/gentest.c
-Copyright: Copyright: 1999-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/gentest/gentest.h
-Copyright: Copyright: 2003-2004gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/gentest/genres32.c
-Copyright: Copyright: 2003-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/genuca/*
-Copyright: Copyright: 2000-2004gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/genuca/*
-Copyright: Copyright: 2000-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/icupkg/icupkg.cpp
-Copyright: Copyright: 2005-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/icuswap/icuswap.cpp
-Copyright: Copyright: 2003-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/makeconv/ucnvstat.c
-Copyright: Copyright: 1998-2006gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/makeconv/makeconv.c
-Copyright: Copyright: 1998-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/makeconv/makeconv.h
-Copyright: Copyright: 2000-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/makeconv/genmbcs.h
-Copyright: Copyright: 2000-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/makeconv/genmbcs.c
-Copyright: Copyright: 2000-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/makeconv/gencnvex.c
-Copyright: Copyright: 2003-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/memcheck/ICUMemCheck.pl
-Copyright: Copyright: 2004-2006gInternational Business Machines Corporation:
-License: ICU
-
-Files: third_party/icu/source/tools/pkgdata/*
-Copyright: Copyright: 2000-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/pkgdata/*
-Copyright: Copyright: 2000-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/toolutil/filestrm.cgthird_party/icu/source/tools/toolutil/filestrm.h
-Copyright: Copyright: 1997-2005gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/toolutil/ucbuf.cgthird_party/icu/source/tools/toolutil/ucbuf.h
-Copyright: Copyright: 1998-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/toolutil/unewdata.c
-Copyright: Copyright: 1999,2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/toolutil/unewdata.h
-Copyright: Copyright: 1999-2000gInternational Business Machines / statement) that will be:
-License: ICU
-
-Files: third_party/icu/source/tools/toolutil/package.cppgthird_party/icu/source/tools/toolutil/toolutil.c
-Copyright: Copyright: 1999-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/toolutil/uoptions.cgthird_party/icu/source/tools/toolutil/uoptions.h
-Copyright: Copyright: 2000gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/toolutil/uparse.h
-Copyright: Copyright: 2000-2004gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/toolutil/uparse.c
-Copyright: Copyright: 2000-2007gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/toolutil/ucmstate.c
-Copyright: Copyright: 2003-2005gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/toolutil/pkgitems.cpp
-Copyright: Copyright: 2003-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/toolutil/ucm.cgthird_party/icu/source/tools/toolutil/ucm.h
-Copyright: Copyright: 2003-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/toolutil/xmlparser.h
-Copyright: Copyright: 2004-2005gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/toolutil/xmlparser.cpp
-Copyright: Copyright: 2004-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/toolutil/pkg_imp.hgthird_party/icu/source/tools/toolutil/swapimpl.h
-Copyright: Copyright: 2005gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/toolutil/writesrc.cgthird_party/icu/source/tools/toolutil/writesrc.h
-Copyright: Copyright: 2005-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/toolutil/package.hgthird_party/icu/source/tools/toolutil/swapimpl.cpp
-Copyright: Copyright: 2005-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/toolutil/pkg_gencmn.cgthird_party/icu/source/tools/toolutil/pkg_gencmn.h
-Copyright: Copyright: 2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/toolutil/pkg_genc.hgthird_party/icu/source/tools/toolutil/pkg_icu.cpp third_party/icu/source/tools/toolutil/pkg_icu.h
-Copyright: Copyright: 2008-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/toolutil/filetools.cppgthird_party/icu/source/tools/toolutil/filetools.h third_party/icu/source/tools/toolutil/flagparser.c third_party/icu/source/tools/toolutil/flagparser.h third_party/icu/source/tools/toolutil/pkg_genc.c third_party/icu/source/tools/toolutil/platform_xopen_source_extended.h
-Copyright: Copyright: 2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/toolutil/toolutil.h
-Copyright: Copyright: generation / 1999-2009gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/tzcode/asctime.cg third_party/icu/source/tools/tzcode/ialloc.c third_party/icu/source/tools/tzcode/localtime.c third_party/icu/source/tools/tzcode/private.h third_party/icu/source/tools/tzcode/scheck.c third_party/icu/source/tools/tzcode/tzfile.h
-Copyright: 1996-2006 Arthur David Olson
-License: Public-domain
-
-Files: third_party/icu/source/tools/tzcode/tz2icu.h
-Copyright: Copyright: 2003-2004gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/tzcode/tz2icu.cpp
-Copyright: Copyright: 2003-2008gInternational Business Machines:
-License: ICU
-
-Files: third_party/icu/source/tools/tzcode/icuzdump.cpp
-Copyright: Copyright: 2007gInternational Business Machines:
-License: ICU
+License: MPL-1.1 or GPL-2.0 or LGPL-2.1
 
 Files: third_party/libevent/log.c
 Copyright: Copyright: 1993 / 2000 Dug Song <dugsong@monkey.org> / 2005 Nick Mathewson <nickm@freehaven.net>:
@@ -5701,89 +3533,25 @@ Files: third_party/libevent/test/regress.gen.hgthird_party/libevent/test/test-eo
 Copyright: UNKNOWN:
 License: BSD-3-clause
 
-Files: third_party/libjingle/files/talk/base/asyncfile.hgthird_party/libjingle/files/talk/base/asyncpacketsocket.cc third_party/libjingle/files/talk/base/asyncpacketsocket.h third_party/libjingle/files/talk/base/asyncsocket.h third_party/libjingle/files/talk/base/asynctcpsocket.cc third_party/libjingle/files/talk/base/asynctcpsocket.h third_party/libjingle/files/talk/base/asyncudpsocket.cc third_party/libjingle/files/talk/base/asyncudpsocket.h third_party/libjingle/files/talk/base/basicdefs.h third_party/libjingle/files/talk/base/basictypes.h third_party/libjingle/files/talk/base/bytebuffer.cc third_party/libjingle/files/talk/base/bytebuffer.h third_party/libjingle/files/talk/base/byteorder.h third_party/libjingle/files/talk/base/common.cc third_party/libjingle/files/talk/base/common.h third_party/libjingle/files/talk/base/criticalsection.h third_party/libjingle/files/talk/base/cryptstring.h third_party/libjingle/files/talk/base/diskcache.cc third_party/libjingle/files/talk/base/diskcache.h third_party/libjingle/files/talk/base/event.h third_party/libjingle/files/talk/base/firewallsocketserver.cc third_party/libjingle/files/talk/base/firewallsocketserver.h third_party/libjingle/files/talk/base/helpers.cc third_party/libjingle/files/talk/base/helpers.h third_party/libjingle/files/talk/base/host.cc third_party/libjingle/files/talk/base/host.h third_party/libjingle/files/talk/base/httpbase.cc third_party/libjingle/files/talk/base/httpbase.h third_party/libjingle/files/talk/base/httpclient.cc third_party/libjingle/files/talk/base/httpclient.h third_party/libjingle/files/talk/base/httpcommon-inl.h third_party/libjingle/files/talk/base/httpcommon.cc third_party/libjingle/files/talk/base/httpcommon.h third_party/libjingle/files/talk/base/httpserver.cc third_party/libjingle/files/talk/base/httpserver.h third_party/libjingle/files/talk/base/logging.cc third_party/libjingle/files/talk/base/logging.h third_party/libjingle/files/talk/base/messagequeue.cc third_party/libjingle/files/talk/base/messagequeue.h third_party/libjingle/files/talk/base/natserver.cc third_party/libjingle/files/talk/base/natserver.h third_party/libjingle/files/talk/base/natserver_main.cc third_party/libjingle/files/talk/base/natsocketfactory.cc third_party/libjingle/files/talk/base/natsocketfactory.h third_party/libjingle/files/talk/base/nattypes.cc third_party/libjingle/files/talk/base/nattypes.h third_party/libjingle/files/talk/base/network.cc third_party/libjingle/files/talk/base/network.h third_party/libjingle/files/talk/base/openssladapter.h third_party/libjingle/files/talk/base/pathutils.cc third_party/libjingle/files/talk/base/pathutils.h third_party/libjingle/files/talk/base/physicalsocketserver.cc third_party/libjingle/files/talk/base/physicalsocketserver.h third_party/libjingle/files/talk/base/proxyinfo.cc third_party/libjingle/files/talk/base/proxyinfo.h third_party/libjingle/files/talk/base/schanneladapter.cc third_party/libjingle/files/talk/base/schanneladapter.h third_party/libjingle/files/talk/base/sec_buffer.h third_party/libjingle/files/talk/base/socket.h third_party/libjingle/files/talk/base/socketadapters.cc third_party/libjingle/files/talk/base/socketadapters.h third_party/libjingle/files/talk/base/socketaddress.cc third_party/libjingle/files/talk/base/socketaddress.h third_party/libjingle/files/talk/base/socketaddresspair.cc third_party/libjingle/files/talk/base/socketaddresspair.h third_party/libjingle/files/talk/base/socketfactory.h third_party/libjingle/files/talk/base/socketpool.cc third_party/libjingle/files/talk/base/socketpool.h third_party/libjingle/files/talk/base/socketserver.h third_party/libjingle/files/talk/base/ssladapter.cc third_party/libjingle/files/talk/base/ssladapter.h third_party/libjingle/files/talk/base/stl_decl.h third_party/libjingle/files/talk/base/stream.cc third_party/libjingle/files/talk/base/stream.h third_party/libjingle/files/talk/base/stringdigest.cc third_party/libjingle/files/talk/base/stringdigest.h third_party/libjingle/files/talk/base/stringencode.cc third_party/libjingle/files/talk/base/stringencode.h third_party/libjingle/files/talk/base/stringutils.cc third_party/libjingle/files/talk/base/stringutils.h third_party/libjingle/files/talk/base/testclient.cc third_party/libjingle/files/talk/base/testclient.h third_party/libjingle/files/talk/base/thread.cc third_party/libjingle/files/talk/base/thread.h third_party/libjingle/files/talk/base/time.cc third_party/libjingle/files/talk/base/time.h third_party/libjingle/files/talk/base/virtualsocketserver.cc third_party/libjingle/files/talk/base/virtualsocketserver.h third_party/libjingle/files/talk/base/win32.h third_party/libjingle/files/talk/base/win32window.cc third_party/libjingle/files/talk/base/win32window.h third_party/libjingle/files/talk/base/winfirewall.cc third_party/libjingle/files/talk/base/winfirewall.h third_party/libjingle/files/talk/base/winping.cc third_party/libjingle/files/talk/base/winping.h
-Copyright: Copyright: 2004--2005gGoogle Inc:
-License: BSD-3-clause
-
-Files: third_party/libjingle/files/talk/base/autodetectproxy.ccgthird_party/libjingle/files/talk/base/fileutils.cc third_party/libjingle/files/talk/base/fileutils.h third_party/libjingle/files/talk/base/socketstream.h third_party/libjingle/files/talk/base/streamutils.cc third_party/libjingle/files/talk/base/streamutils.h third_party/libjingle/files/talk/base/task.cc third_party/libjingle/files/talk/base/task.h third_party/libjingle/files/talk/base/taskrunner.cc third_party/libjingle/files/talk/base/taskrunner.h third_party/libjingle/files/talk/base/unixfilesystem.cc third_party/libjingle/files/talk/base/unixfilesystem.h third_party/libjingle/files/talk/base/win32filesystem.cc third_party/libjingle/files/talk/base/win32filesystem.h
-Copyright: Copyright: 2004--2006gGoogle Inc:
-License: BSD-3-clause
-
-Files: third_party/libjingle/files/talk/base/convert.h
-Copyright: Copyright: 2007gGoogle Inc:
-License: BSD-3-clause
-
-Files: third_party/libjingle/files/talk/base/winsock_initializer.ccgthird_party/libjingle/files/talk/base/winsock_initializer.h
-Copyright: Copyright: 2009gGoogle Inc:
-License: BSD-3-clause
-
-Files: third_party/libjingle/files/talk/base/md5.hgthird_party/libjingle/files/talk/base/md5c.c
-Copyright: Copyright: is claimed:
-License: public-domain
-
-Files: third_party/libjingle/files/talk/base/base64.ccgthird_party/libjingle/files/talk/base/base64.h
-Copyright: Copyright: 1999gBob Withers - bwit@pobox.com:
-License: global BSD-style libjingle
-
-Files: third_party/libjingle/files/talk/base/diskcache_win32.hgthird_party/libjingle/files/talk/base/diskcachestd.cc third_party/libjingle/files/talk/base/diskcachestd.h
-Copyright: Copyright: 2006 Google Inc. All rights reserved:
-License: global BSD-style libjingle
-
-Files: third_party/libjingle/files/talk/base/virtualsocket_unittest.cc
-Copyright: Copyright: 2006gGoogle Inc:
-License: global BSD-style libjingle
-
-Files: third_party/libjingle/files/talk/base/scoped_ptr.h
-Copyright: Copyright: Greg Colvin and Beman Dawes 1998g1999 / 2001 2002 Peter Dimov:
-License: global BSD-style libjingle
-
-Files: third_party/libjingle/files/talk/base/Equifax_Secure_Global_eBusiness_CA-1.hgthird_party/libjingle/files/talk/base/asynchttprequest.cc third_party/libjingle/files/talk/base/asynchttprequest.h third_party/libjingle/files/talk/base/autodetectproxy.h third_party/libjingle/files/talk/base/diskcache_win32.cc third_party/libjingle/files/talk/base/linked_ptr.h third_party/libjingle/files/talk/base/nat_unittest.cc third_party/libjingle/files/talk/base/openssladapter.cc third_party/libjingle/files/talk/base/proxydetect.cc third_party/libjingle/files/talk/base/proxydetect.h third_party/libjingle/files/talk/base/signalthread.cc third_party/libjingle/files/talk/base/signalthread.h third_party/libjingle/files/talk/base/sigslot.h third_party/libjingle/files/talk/base/tarstream.cc third_party/libjingle/files/talk/base/tarstream.h third_party/libjingle/files/talk/base/urlencode.cc third_party/libjingle/files/talk/base/urlencode.h
-Copyright: UNKNOWN:
-License: global BSD-style libjingle
-
-Files: third_party/libjingle/files/talk/xmllite/qname.ccgthird_party/libjingle/files/talk/xmllite/qname.h third_party/libjingle/files/talk/xmllite/xmlbuilder.cc third_party/libjingle/files/talk/xmllite/xmlbuilder.h third_party/libjingle/files/talk/xmllite/xmlconstants.cc third_party/libjingle/files/talk/xmllite/xmlconstants.h third_party/libjingle/files/talk/xmllite/xmlelement.cc third_party/libjingle/files/talk/xmllite/xmlelement.h third_party/libjingle/files/talk/xmllite/xmlnsstack.cc third_party/libjingle/files/talk/xmllite/xmlnsstack.h third_party/libjingle/files/talk/xmllite/xmlparser.cc third_party/libjingle/files/talk/xmllite/xmlparser.h third_party/libjingle/files/talk/xmllite/xmlprinter.cc third_party/libjingle/files/talk/xmllite/xmlprinter.h
-Copyright: Copyright: 2004--2005gGoogle Inc:
-License: BSD-3-clause
-
-Files: third_party/libjingle/files/talk/xmpp/*
-Copyright: Copyright: 2004--2005gGoogle Inc:
-License: BSD-3-clause
-
-Files: third_party/libjingle/files/talk/xmpp/*
-Copyright: Copyright: 2004--2006gGoogle Inc:
-License: BSD-3-clause
-
-Files: third_party/libjingle/overrides/config.h
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: third_party/libjingle/overrides/talk/base/*
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: third_party/libjingle/overrides/talk/base/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
 Files: third_party/lzma_sdk/7zCrc.cgthird_party/lzma_sdk/7zCrc.h third_party/lzma_sdk/Alloc.c third_party/lzma_sdk/Alloc.h third_party/lzma_sdk/Types.h
 Copyright: UNKNOWN:
-License: public-domain
+License: Public-domain
 
 Files: third_party/lzma_sdk/Archive/7z/7zAlloc.cgthird_party/lzma_sdk/Archive/7z/7zAlloc.h third_party/lzma_sdk/Archive/7z/7zBuffer.c third_party/lzma_sdk/Archive/7z/7zBuffer.h third_party/lzma_sdk/Archive/7z/7zDecode.c third_party/lzma_sdk/Archive/7z/7zDecode.h third_party/lzma_sdk/Archive/7z/7zExtract.c third_party/lzma_sdk/Archive/7z/7zExtract.h third_party/lzma_sdk/Archive/7z/7zHeader.c third_party/lzma_sdk/Archive/7z/7zHeader.h third_party/lzma_sdk/Archive/7z/7zIn.c third_party/lzma_sdk/Archive/7z/7zIn.h third_party/lzma_sdk/Archive/7z/7zItem.c third_party/lzma_sdk/Archive/7z/7zItem.h third_party/lzma_sdk/Archive/7z/7zMethodID.c third_party/lzma_sdk/Archive/7z/7zMethodID.h
 Copyright: UNKNOWN:
-License: public-domain
+License: Public-domain
 
 Files: third_party/lzma_sdk/Compress/Branch/BranchTypes.hgthird_party/lzma_sdk/Compress/Branch/BranchX86.c third_party/lzma_sdk/Compress/Branch/BranchX86.h third_party/lzma_sdk/Compress/Branch/BranchX86_2.c third_party/lzma_sdk/Compress/Branch/BranchX86_2.h
 Copyright: UNKNOWN:
-License: public-domain
+License: Public-domain
 
 Files: third_party/lzma_sdk/Compress/Lzma/*
 Copyright: Copyright: 1999-2006 Igor Pavlov (2006-05-01):
-License: public-domain
+License: Public-domain
 
 Files: third_party/lzma_sdk/Compress/Lzma/*
 Copyright: UNKNOWN:
-License: public-domain
+License: Public-domain
 
 Files: third_party/modp_b64/*
 Copyright: 2005-2006 Nick Galbreath
@@ -5791,7 +3559,7 @@ License: BSD-3-clause
 
 Files: third_party/mozilla/*
 Copyright: Copyright 2002 Netscape
-License: MPL-1.1 / GPL-2+ / LGPL-2.1+
+License: MPL-1.1 or GPL-2+ or LGPL-2.1+
 
 Files: third_party/npapi/bindings/npruntime.h
 Copyright: Copyright: 2004 Apple Computer Inc. and The Mozilla Foundation
@@ -5799,7 +3567,7 @@ License: BSD-3-clause
 
 Files: third_party/npapi/bindings/npapi.h third_party/npapi/bindings/npapi_x11.h
 Copyright: Copyright 1998 Netscape
-License: MPL-1.1 / GPL-2+ / LGPL-2.1+
+License: MPL-1.1 or GPL-2+ or LGPL-2.1+
 
 Files: third_party/npapi/bindings/npapi_extensions.h
 Copyright: Copyright (c) 2006-2009 The Chromium Authors. All rights reserved.
@@ -5819,7 +3587,7 @@ License: BSD-3-clause
 
 Files: third_party/openmax/il/OMX_Audio.h third_party/openmax/il/OMX_Component.h third_party/openmax/il/OMX_ContentPipe.h third_party/openmax/il/OMX_Core.h third_party/openmax/il/OMX_IVCommon.h third_party/openmax/il/OMX_Image.h third_party/openmax/il/OMX_Index.h third_party/openmax/il/OMX_Other.h third_party/openmax/il/OMX_Types.h third_party/openmax/il/OMX_Video.h
 Copyright: Copyright: 2008 The Khronos Group Inc / HOLDERS BE LIABLE FOR ANY:
-License: Expat
+License: MIT
 
 Files: third_party/ots/include/opentype-sanitiser.h third_party/ots/include/ots-memory-stream.h
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved.
@@ -6106,7 +3874,7 @@ Copyright: Copyright: 2009 The Android Open Source Project:
 License: Apache-2.0
 
 Files: third_party/skia/include/core/SkTRegistry.h
-Copyright: Copyright: 2009gThe Android Open Source Project:
+Copyright: Copyright 2009 The Android Open Source Project
 License: Apache-2.0
 
 Files: third_party/skia/include/core/SkBlitRow.hgthird_party/skia/include/core/SkDrawing.h third_party/skia/include/core/SkLineClipper.h third_party/skia/include/core/SkShape.h third_party/skia/include/core/SkSize.h
@@ -6114,8 +3882,8 @@ Copyright: UNKNOWN:
 License: Apache-2.0
 
 Files: third_party/skia/include/core/SkColorFilter.h
-Copyright: Copyright: 2006 The Android Open Source Project:
-License: global BSD
+Copyright: Copyright 2006 The Android Open Source Project
+License: BSD-3-clause
 
 Files: third_party/skia/include/effects/Sk1DPathEffect.hgthird_party/skia/include/effects/Sk2DPathEffect.h third_party/skia/include/effects/SkAvoidXfermode.h third_party/skia/include/effects/SkBlurMaskFilter.h third_party/skia/include/effects/SkCornerPathEffect.h third_party/skia/include/effects/SkDashPathEffect.h third_party/skia/include/effects/SkDiscretePathEffect.h third_party/skia/include/effects/SkEmbossMaskFilter.h third_party/skia/include/effects/SkGradientShader.h third_party/skia/include/effects/SkLayerRasterizer.h third_party/skia/include/effects/SkPorterDuff.h third_party/skia/include/effects/SkTableMaskFilter.h third_party/skia/include/effects/SkTransparentShader.h
 Copyright: Copyright: 2006 The Android Open Source Project:
@@ -6399,59 +4167,59 @@ License: GPL-2+
 
 Files: third_party/sqlite/*
 Copyright: Copyright: 2007 Google Inc. All Rights Reserved:
-License: public-domain
+License: Public-domain
 
 Files: third_party/sqlite/*
 Copyright: UNKNOWN:
-License: public-domain
+License: Public-domain
 
 Files: third_party/sqlite/ext/async/*
 Copyright: UNKNOWN:
-License: public-domain
+License: Public-domain
 
 Files: third_party/sqlite/ext/fts1/fts1.cgthird_party/sqlite/ext/fts1/fts1_tokenizer1.c third_party/sqlite/ext/fts1/fulltext.c third_party/sqlite/ext/fts1/simple_tokenizer.c
 Copyright: Copyright: to this source code:
-License: public-domain
+License: Public-domain
 
 Files: third_party/sqlite/ext/fts1/ft_hash.cgthird_party/sqlite/ext/fts1/ft_hash.h third_party/sqlite/ext/fts1/fts1_hash.c third_party/sqlite/ext/fts1/fts1_hash.h third_party/sqlite/ext/fts1/fts1_porter.c
 Copyright: Copyright: to this source code. In place of:
-License: public-domain
+License: Public-domain
 
 Files: third_party/sqlite/ext/fts1/fts1.hgthird_party/sqlite/ext/fts1/fulltext.h
 Copyright: UNKNOWN:
-License: public-domain
+License: Public-domain
 
 Files: third_party/sqlite/ext/fts2/fts2.cgthird_party/sqlite/ext/fts2/fts2.h third_party/sqlite/ext/fts2/fts2_hash.c third_party/sqlite/ext/fts2/fts2_hash.h third_party/sqlite/ext/fts2/fts2_icu.c third_party/sqlite/ext/fts2/fts2_porter.c third_party/sqlite/ext/fts2/fts2_tokenizer.c third_party/sqlite/ext/fts2/fts2_tokenizer1.c
 Copyright: Copyright: to this source code. In place of:
-License: public-domain
+License: Public-domain
 
 Files: third_party/sqlite/ext/fts3/fts3.cgthird_party/sqlite/ext/fts3/fts3.h third_party/sqlite/ext/fts3/fts3_expr.c third_party/sqlite/ext/fts3/fts3_expr.h third_party/sqlite/ext/fts3/fts3_hash.c third_party/sqlite/ext/fts3/fts3_hash.h third_party/sqlite/ext/fts3/fts3_icu.c third_party/sqlite/ext/fts3/fts3_porter.c third_party/sqlite/ext/fts3/fts3_tokenizer.c third_party/sqlite/ext/fts3/fts3_tokenizer1.c
 Copyright: Copyright: to this source code. In place of:
-License: public-domain
+License: Public-domain
 
 Files: third_party/sqlite/ext/icu/icu.cgthird_party/sqlite/ext/icu/sqliteicu.h
 Copyright: Copyright: to this source code. In place of:
-License: public-domain
+License: Public-domain
 
 Files: third_party/sqlite/ext/rtree/rtree.cgthird_party/sqlite/ext/rtree/rtree.h
 Copyright: Copyright: to this source code. In place of:
-License: public-domain
+License: Public-domain
 
 Files: third_party/sqlite/preprocessed/parse.c
 Copyright: Copyright: to this source code:
-License: public-domain
+License: Public-domain
 
 Files: third_party/sqlite/preprocessed/sqlite3.h
 Copyright: Copyright: to this source code. In place of:
-License: public-domain
+License: Public-domain
 
 Files: third_party/sqlite/preprocessed/parse.h
 Copyright: UNKNOWN:
-License: public-domain
+License: Public-domain
 
 Files: third_party/sqlite/src/src/printf.c
 Copyright: UNKNOWN:
-License: public-domain
+License: Public-domain
 
 Files: third_party/sqlite/os_symbian.cc
 Copyright: Copyright: 2008gGoogle Inc:
@@ -6459,39 +4227,39 @@ License: BSD-3-clause
 
 Files: third_party/sqlite/complete.c
 Copyright: Copyright: (((c=C)>=0x42 && sqlite3IsEbcdicIdChar[c-0x40])) / to this source code. In place of / (((c=C)&0x80)!=0 || (c>0x1f && sqlite3IsAsciiIdChar[c-0x20])):
-License: public-domain
+License: Public-domain
 
 Files: third_party/sqlite/shell_icu_linux.cgthird_party/sqlite/shell_icu_win.c
 Copyright: Copyright: 2007 Google Inc. All Rights Reserved:
-License: public-domain
+License: Public-domain
 
 Files: third_party/sqlite/test_md5.c
 Copyright: Copyright: is claimed:
-License: public-domain
+License: Public-domain
 
 Files: third_party/sqlite/lempar.c
 Copyright: Copyright: to this source code:
-License: public-domain
+License: Public-domain
 
 Files: third_party/sqlite/alter.cgthird_party/sqlite/analyze.c third_party/sqlite/attach.c third_party/sqlite/auth.c third_party/sqlite/backup.c third_party/sqlite/bitvec.c third_party/sqlite/btmutex.c third_party/sqlite/btree.c third_party/sqlite/btree.h third_party/sqlite/btreeInt.h third_party/sqlite/callback.c third_party/sqlite/date.c third_party/sqlite/delete.c third_party/sqlite/expr.c third_party/sqlite/fault.c third_party/sqlite/func.c third_party/sqlite/global.c third_party/sqlite/hash.c third_party/sqlite/hash.h third_party/sqlite/hwtime.h third_party/sqlite/insert.c third_party/sqlite/journal.c third_party/sqlite/legacy.c third_party/sqlite/loadext.c third_party/sqlite/main.c third_party/sqlite/malloc.c third_party/sqlite/mem0.c third_party/sqlite/mem1.c third_party/sqlite/mem2.c third_party/sqlite/mem3.c third_party/sqlite/mem5.c third_party/sqlite/memjournal.c third_party/sqlite/mutex.c third_party/sqlite/mutex.h third_party/sqlite/mutex_noop.c third_party/sqlite/mutex_os2.c third_party/sqlite/mutex_unix.c third_party/sqlite/mutex_w32.c third_party/sqlite/notify.c third_party/sqlite/os.c third_party/sqlite/os.h third_party/sqlite/os_common.h third_party/sqlite/os_os2.c third_party/sqlite/os_unix.c third_party/sqlite/os_win.c third_party/sqlite/pager.c third_party/sqlite/pager.h third_party/sqlite/pcache.c third_party/sqlite/pcache.h third_party/sqlite/pcache1.c third_party/sqlite/pragma.c third_party/sqlite/prepare.c third_party/sqlite/random.c third_party/sqlite/resolve.c third_party/sqlite/rowset.c third_party/sqlite/select.c third_party/sqlite/shell.c third_party/sqlite/sqlite3ext.h third_party/sqlite/sqliteInt.h third_party/sqlite/sqliteLimit.h third_party/sqlite/status.c third_party/sqlite/table.c third_party/sqlite/tclsqlite.c third_party/sqlite/test2.c third_party/sqlite/test3.c third_party/sqlite/test4.c third_party/sqlite/test5.c third_party/sqlite/test6.c third_party/sqlite/test7.c third_party/sqlite/test8.c third_party/sqlite/test9.c third_party/sqlite/test_async.c third_party/sqlite/test_autoext.c third_party/sqlite/test_backup.c third_party/sqlite/test_btree.c third_party/sqlite/test_config.c third_party/sqlite/test_devsym.c third_party/sqlite/test_func.c third_party/sqlite/test_hexio.c third_party/sqlite/test_init.c third_party/sqlite/test_journal.c third_party/sqlite/test_loadext.c third_party/sqlite/test_malloc.c third_party/sqlite/test_mutex.c third_party/sqlite/test_onefile.c third_party/sqlite/test_osinst.c third_party/sqlite/test_pcache.c third_party/sqlite/test_schema.c third_party/sqlite/test_server.c third_party/sqlite/test_tclvar.c third_party/sqlite/test_thread.c third_party/sqlite/test_wsd.c third_party/sqlite/tokenize.c third_party/sqlite/trigger.c third_party/sqlite/update.c third_party/sqlite/utf.c third_party/sqlite/util.c third_party/sqlite/vacuum.c third_party/sqlite/vdbe.c third_party/sqlite/vdbe.h third_party/sqlite/vdbeInt.h third_party/sqlite/vdbeapi.c third_party/sqlite/vdbeaux.c third_party/sqlite/vdbeblob.c third_party/sqlite/vdbemem.c third_party/sqlite/vtab.c third_party/sqlite/walker.c third_party/sqlite/where.c
 Copyright: Copyright: to this source code. In place of:
-License: public-domain
+License: Public-domain
 
 Files: third_party/sqlite/test/*
 Copyright: Copyright: to this source code. In place of:
-License: public-domain
+License: Public-domain
 
 Files: third_party/sqlite/test/*
 Copyright: UNKNOWN:
-License: public-domain
+License: Public-domain
 
 Files: third_party/sqlite/tool/*
 Copyright: Copyright: to this source code:
-License: public-domain
+License: Public-domain
 
 Files: third_party/sqlite/tool/*
 Copyright: UNKNOWN:
-License: public-domain
+License: Public-domain
 
 Files: third_party/swig/*
 Copyright: 1995-1998 The University of Utah and the Regents of the University of California, 1998-2005 University of Chicago, 2005-2006 Arizona Board of Regents (University of Arizona)
@@ -6727,31 +4495,31 @@ License: BSD-3-clause
 
 Files: third_party/tlslite/tlslite/BaseDB.pygthird_party/tlslite/tlslite/Checker.py third_party/tlslite/tlslite/FileObject.py third_party/tlslite/tlslite/HandshakeSettings.py third_party/tlslite/tlslite/Session.py third_party/tlslite/tlslite/SessionCache.py third_party/tlslite/tlslite/SharedKeyDB.py third_party/tlslite/tlslite/TLSConnection.py third_party/tlslite/tlslite/TLSRecordLayer.py third_party/tlslite/tlslite/VerifierDB.py third_party/tlslite/tlslite/X509.py third_party/tlslite/tlslite/X509CertChain.py third_party/tlslite/tlslite/__init__.py third_party/tlslite/tlslite/api.py third_party/tlslite/tlslite/constants.py third_party/tlslite/tlslite/errors.py third_party/tlslite/tlslite/mathtls.py third_party/tlslite/tlslite/messages.py
 Copyright: UNKNOWN:
-License: public-domain
+License: Public-domain
 
 Files: third_party/tlslite/tlslite/utils/AES.pygthird_party/tlslite/tlslite/utils/ASN1Parser.py third_party/tlslite/tlslite/utils/Cryptlib_AES.py third_party/tlslite/tlslite/utils/Cryptlib_RC4.py third_party/tlslite/tlslite/utils/Cryptlib_TripleDES.py third_party/tlslite/tlslite/utils/OpenSSL_AES.py third_party/tlslite/tlslite/utils/OpenSSL_RC4.py third_party/tlslite/tlslite/utils/OpenSSL_RSAKey.py third_party/tlslite/tlslite/utils/OpenSSL_TripleDES.py third_party/tlslite/tlslite/utils/PyCrypto_AES.py third_party/tlslite/tlslite/utils/PyCrypto_RC4.py third_party/tlslite/tlslite/utils/PyCrypto_RSAKey.py third_party/tlslite/tlslite/utils/PyCrypto_TripleDES.py third_party/tlslite/tlslite/utils/Python_AES.py third_party/tlslite/tlslite/utils/Python_RC4.py third_party/tlslite/tlslite/utils/Python_RSAKey.py third_party/tlslite/tlslite/utils/RC4.py third_party/tlslite/tlslite/utils/RSAKey.py third_party/tlslite/tlslite/utils/TripleDES.py third_party/tlslite/tlslite/utils/__init__.py third_party/tlslite/tlslite/utils/cipherfactory.py third_party/tlslite/tlslite/utils/codec.py third_party/tlslite/tlslite/utils/compat.py third_party/tlslite/tlslite/utils/cryptomath.py third_party/tlslite/tlslite/utils/dateFuncs.py third_party/tlslite/tlslite/utils/entropy.c third_party/tlslite/tlslite/utils/hmac.py third_party/tlslite/tlslite/utils/jython_compat.py third_party/tlslite/tlslite/utils/keyfactory.py third_party/tlslite/tlslite/utils/rijndael.py third_party/tlslite/tlslite/utils/win32prng.c third_party/tlslite/tlslite/utils/xmltools.py
 Copyright: UNKNOWN:
-License: public-domain
+License: Public-domain
 
 Files: third_party/wtl/include/atlapp.hgthird_party/wtl/include/atlcrack.h third_party/wtl/include/atlctrls.h third_party/wtl/include/atlctrlw.h third_party/wtl/include/atlctrlx.h third_party/wtl/include/atlddx.h third_party/wtl/include/atldlgs.h third_party/wtl/include/atlfind.h third_party/wtl/include/atlframe.h third_party/wtl/include/atlgdi.h third_party/wtl/include/atlmisc.h third_party/wtl/include/atlprint.h third_party/wtl/include/atlres.h third_party/wtl/include/atlresce.h third_party/wtl/include/atlscrl.h third_party/wtl/include/atlsplit.h third_party/wtl/include/atltheme.h third_party/wtl/include/atluser.h third_party/wtl/include/atlwince.h third_party/wtl/include/atlwinx.h
-Copyright: Copyright (C) Microsoft Corporation. All rights reserved.  This file is a part of the Windows Template Library. The use and distribution terms for this software are covered by the Microsoft Permissive License (Ms-PL) which can be found in the file:
+Copyright: Copyright (C) Microsoft Corporation. All rights reserved.
 License: Ms-PL
 
 Files: third_party/xdg-utils/tests/doc_gen.pl
 Copyright: UNKNOWN:
-License: Expat
+License: MIT
 
 Files: third_party/xdg-utils/tests/include/tempfile.shgthird_party/xdg-utils/tests/include/testassertions.sh third_party/xdg-utils/tests/include/testcontrol.sh third_party/xdg-utils/tests/include/testfuncs.sh
 Copyright: UNKNOWN:
-License: Expat
+License: MIT
 
 Files: third_party/xdg-utils/tests/xdg-desktop-menu/data/shinythings_example/install-webmirror.sh
 Copyright: UNKNOWN:
-License: Expat
+License: MIT
 
 Files: third_party/xdg-utils/tests/xdg-utils-usecases/data/mime_launch.sh
 Copyright: UNKNOWN:
-License: Expat
+License: MIT
 
 Files: tools/*
 Copyright: Copyright (c) 2009-2010 The Chromium Authors.
@@ -7036,10 +4804,6 @@ License: FreeBSD (guessed)
 Files: v8/mips/builtins-mips.ccgv8/mips/codegen-mips-inl.h v8/mips/codegen-mips.cc v8/mips/codegen-mips.h v8/mips/constants-mips.cc v8/mips/constants-mips.h v8/mips/cpu-mips.cc v8/mips/debug-mips.cc v8/mips/disasm-mips.cc v8/mips/fast-codegen-mips.cc v8/mips/frames-mips.cc v8/mips/frames-mips.h v8/mips/full-codegen-mips.cc v8/mips/ic-mips.cc v8/mips/jump-target-mips.cc v8/mips/macro-assembler-mips.cc v8/mips/macro-assembler-mips.h v8/mips/register-allocator-mips-inl.h v8/mips/register-allocator-mips.cc v8/mips/register-allocator-mips.h v8/mips/simulator-mips.cc v8/mips/simulator-mips.h v8/mips/stub-cache-mips.cc v8/mips/virtual-frame-mips.cc v8/mips/virtual-frame-mips.h
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2010 the V8 project authors. All rights reserved:
 License: BSD-3-clause
-
-Files: v8/third_party/dtoa/dtoa.c
-Copyright: Copyright: 1991g2000 2001 by Lucent Technologies:
-License: Expat
 
 Files: v8/third_party/valgrind/valgrind.h
 Copyright: Copyright: 2000-2007 Julian Seward. All rights reserved:
@@ -7335,7 +5099,7 @@ License: LGPL-2.0+
 
 Files: content/child/multipart_response_delegate/*
 Copyright: Copyright: 1998 / 2006-2009 The Chromium Authors. All rights reserved:
-License: MPL-1.1 / GPL-2+ / LGPL-2.1+
+License: MPL-1.1 or GPL-2+ or LGPL-2.1+
 
 Files: webkit/glue/alt_error_page_resource_fetcher.ccgwebkit/glue/bookmarklet_unittest.cc webkit/glue/context_menu_unittest.cc webkit/glue/cpp_binding_example.cc webkit/glue/cpp_binding_example.h webkit/glue/cpp_bound_class.cc webkit/glue/cpp_bound_class.h webkit/glue/cpp_bound_class_unittest.cc webkit/glue/cpp_variant.cc webkit/glue/cpp_variant.h webkit/glue/cpp_variant_unittest.cc webkit/glue/dom_operations.h webkit/glue/dom_operations_unittest.cc webkit/glue/dom_serializer_unittest.cc webkit/glue/glue_serialize.h webkit/glue/glue_serialize_unittest.cc webkit/glue/iframe_redirect_unittest.cc webkit/glue/image_decoder.h webkit/glue/image_resource_fetcher.cc webkit/glue/image_resource_fetcher.h webkit/glue/mimetype_unittest.cc webkit/glue/multipart_response_delegate.cc webkit/glue/multipart_response_delegate_unittest.cc webkit/glue/npruntime_util.h webkit/glue/password_form.h webkit/glue/password_form_dom_manager.cc webkit/glue/password_form_dom_manager.h webkit/glue/regular_expression_unittest.cc webkit/glue/resource_fetcher.cc webkit/glue/resource_fetcher.h webkit/glue/resource_fetcher_unittest.cc webkit/glue/resource_loader_bridge.h webkit/glue/resource_type.h webkit/glue/unittest_test_server.h webkit/glue/webaccessibility.cc webkit/glue/webaccessibility.h webkit/glue/webaccessibilitymanager.h webkit/glue/webcookie.h webkit/glue/webcursor.cc webkit/glue/webcursor.h webkit/glue/webdropdata.cc webkit/glue/webdropdata.h webkit/glue/webframe_unittest.cc webkit/glue/webpasswordautocompletelistener_impl.cc webkit/glue/webpasswordautocompletelistener_impl.h webkit/glue/webpreferences.h webkit/glue/webview_unittest.cc webkit/glue/window_open_disposition.h
 Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
@@ -8080,59 +5844,8 @@ License: MPL-1.1
  use the text of this Exhibit A rather than the text found in the
  Original Code Source Code for Your Modifications.]
 
-License: Paul Hsieh's public-domain Option
- Unless covered by another accompanying license, source code shown on my
- website can be used freely under the derivative license, (and may be
- distributed under a public domain license, whether compiled into another
- program or not, for example) however the font, comments, colors or any
- layout details associated to that source code in its exposition are covered
- by the exposition license.
- .
- Extracted from: http://www.azillionmonkeys.com/qed/weblicense.html
-
-License: SGI Free Software B License (v2.0)
- SGI FREE SOFTWARE LICENSE B (Version 2.0, Sept. 18, 2008)
- Copyright (C) [dates of first publication] Silicon Graphics, Inc. All Rights Reserved.
- Permission is hereby granted, free of charge, to any person obtaining a copy of this
- software and associated documentation files (the "Software"), to deal in the Software
- without restriction, including without limitation the rights to use, copy, modify, merge,
- publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to
- whom the Software is furnished to do so, subject to the following conditions:
- The above copyright notice including the dates of first publication and either this
- permission notice or a reference to http://oss.sgi.com/projects/FreeB/ shall be included in
- all copies or substantial portions of the Software.
- .
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- NONINFRINGEMENT. IN NO EVENT SHALL SILICON GRAPHICS, INC. BE
- LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
- ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
- IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
- IN THE SOFTWARE.
- .
- Except as contained in this notice, the name of Silicon Graphics, Inc. shall not be used in
- advertising or otherwise to promote the sale, use or other dealings in this Software
- without prior written authorization from Silicon Graphics, Inc.
-
-License: harfbuzz-License
- Permission is hereby granted, without written agreement and without
- license or royalty fees, to use, copy, modify, and distribute this
- software and its documentation for any purpose, provided that the
- above copyright notice and the following two paragraphs appear in
- all copies of this software.
- .
- IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE TO ANY PARTY FOR
- DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES
- ARISING OUT OF THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN
- IF THE COPYRIGHT HOLDER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
- DAMAGE.
- .
- THE COPYRIGHT HOLDER SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING,
- BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- FITNESS FOR A PARTICULAR PURPOSE.  THE SOFTWARE PROVIDED HEREUNDER IS
- ON AN "AS IS" BASIS, AND THE COPYRIGHT HOLDER HAS NO OBLIGATION TO
- PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
+License: Public-domain
+ This software is in the public domain.
 
 License: Apple-license
  IMPORTANT:  This Apple software is supplied to you by Apple Computer, Inc. ("Apple") in
@@ -8165,3 +5878,474 @@ License: Apple-license
  REPRODUCTION, MODIFICATION AND/OR DISTRIBUTION OF THE APPLE SOFTWARE, HOWEVER CAUSED AND
  WHETHER UNDER THEORY OF CONTRACT, TORT (INCLUDING NEGLIGENCE), STRICT LIABILITY OR
  OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+License: MPL-2.0
+ 1. Definitions
+ -------------
+ .
+ 1.1. "Contributor"
+     means each individual or legal entity that creates, contributes to
+     the creation of, or owns Covered Software.
+ .
+ 1.2. "Contributor Version"
+     means the combination of the Contributions of others (if any) used
+     by a Contributor and that particular Contributor's Contribution.
+ .
+ 1.3. "Contribution"
+     means Covered Software of a particular Contributor.
+ .
+ 1.4. "Covered Software"
+     means Source Code Form to which the initial Contributor has attached
+     the notice in Exhibit A, the Executable Form of such Source Code
+     Form, and Modifications of such Source Code Form, in each case
+     including portions thereof.
+ .
+ 1.5. "Incompatible With Secondary Licenses"
+     means
+ .
+     (a) that the initial Contributor has attached the notice described
+         in Exhibit B to the Covered Software; or
+ .
+     (b) that the Covered Software was made available under the terms of
+         version 1.1 or earlier of the License, but not also under the
+         terms of a Secondary License.
+ .
+ 1.6. "Executable Form"
+     means any form of the work other than Source Code Form.
+ .
+ 1.7. "Larger Work"
+     means a work that combines Covered Software with other material, in 
+     a separate file or files, that is not Covered Software.
+ .
+ 1.8. "License"
+     means this document.
+ .
+ 1.9. "Licensable"
+     means having the right to grant, to the maximum extent possible,
+     whether at the time of the initial grant or subsequently, any and
+     all of the rights conveyed by this License.
+ .
+ 1.10. "Modifications"
+     means any of the following:
+ .
+     (a) any file in Source Code Form that results from an addition to,
+         deletion from, or modification of the contents of Covered
+         Software; or
+ .
+     (b) any new file in Source Code Form that contains any Covered
+         Software.
+ .
+ 1.11. "Patent Claims" of a Contributor
+     means any patent claim(s), including without limitation, method,
+     process, and apparatus claims, in any patent Licensable by such
+     Contributor that would be infringed, but for the grant of the
+     License, by the making, using, selling, offering for sale, having
+     made, import, or transfer of either its Contributions or its
+     Contributor Version.
+ .
+ 1.12. "Secondary License"
+     means either the GNU General Public License, Version 2.0, the GNU
+     Lesser General Public License, Version 2.1, the GNU Affero General
+     Public License, Version 3.0, or any later versions of those
+     licenses.
+ .
+ 1.13. "Source Code Form"
+     means the form of the work preferred for making modifications.
+ .
+ 1.14. "You" (or "Your")
+     means an individual or a legal entity exercising rights under this
+     License. For legal entities, "You" includes any entity that
+     controls, is controlled by, or is under common control with You. For
+     purposes of this definition, "control" means (a) the power, direct
+     or indirect, to cause the direction or management of such entity,
+     whether by contract or otherwise, or (b) ownership of more than
+     fifty percent (50%) of the outstanding shares or beneficial
+     ownership of such entity.
+ .
+ 2. License Grants and Conditions
+ --------------------------------
+ .
+ 2.1. Grants
+ .
+ Each Contributor hereby grants You a world-wide, royalty-free,
+ non-exclusive license:
+ .
+ (a) under intellectual property rights (other than patent or trademark)
+     Licensable by such Contributor to use, reproduce, make available,
+     modify, display, perform, distribute, and otherwise exploit its
+     Contributions, either on an unmodified basis, with Modifications, or
+     as part of a Larger Work; and
+ .
+ (b) under Patent Claims of such Contributor to make, use, sell, offer
+     for sale, have made, import, and otherwise transfer either its
+     Contributions or its Contributor Version.
+ .
+ 2.2. Effective Date
+ .
+ The licenses granted in Section 2.1 with respect to any Contribution
+ become effective for each Contribution on the date the Contributor first
+ distributes such Contribution.
+ .
+ 2.3. Limitations on Grant Scope
+ .
+ The licenses granted in this Section 2 are the only rights granted under
+ this License. No additional rights or licenses will be implied from the
+ distribution or licensing of Covered Software under this License.
+ Notwithstanding Section 2.1(b) above, no patent license is granted by a
+ Contributor:
+ .
+ (a) for any code that a Contributor has removed from Covered Software;
+     or
+ .
+ (b) for infringements caused by: (i) Your and any other third party's
+     modifications of Covered Software, or (ii) the combination of its
+     Contributions with other software (except as part of its Contributor
+     Version); or
+ .
+ (c) under Patent Claims infringed by Covered Software in the absence of
+     its Contributions.
+ .
+ This License does not grant any rights in the trademarks, service marks,
+ or logos of any Contributor (except as may be necessary to comply with
+ the notice requirements in Section 3.4).
+ .
+ 2.4. Subsequent Licenses
+ .
+ No Contributor makes additional grants as a result of Your choice to
+ distribute the Covered Software under a subsequent version of this
+ License (see Section 10.2) or under the terms of a Secondary License (if
+ permitted under the terms of Section 3.3).
+ .
+ 2.5. Representation
+ .
+ Each Contributor represents that the Contributor believes its
+ Contributions are its original creation(s) or it has sufficient rights
+ to grant the rights to its Contributions conveyed by this License.
+ .
+ 2.6. Fair Use
+ .
+ This License is not intended to limit any rights You have under
+ applicable copyright doctrines of fair use, fair dealing, or other
+ equivalents.
+ .
+ 2.7. Conditions
+ .
+ Sections 3.1, 3.2, 3.3, and 3.4 are conditions of the licenses granted
+ in Section 2.1.
+ .
+ 3. Responsibilities
+ -------------------
+ .
+ 3.1. Distribution of Source Form
+ .
+ All distribution of Covered Software in Source Code Form, including any
+ Modifications that You create or to which You contribute, must be under
+ the terms of this License. You must inform recipients that the Source
+ Code Form of the Covered Software is governed by the terms of this
+ License, and how they can obtain a copy of this License. You may not
+ attempt to alter or restrict the recipients' rights in the Source Code
+ Form.
+ .
+ 3.2. Distribution of Executable Form
+ .
+ If You distribute Covered Software in Executable Form then:
+ .
+ (a) such Covered Software must also be made available in Source Code
+     Form, as described in Section 3.1, and You must inform recipients of
+     the Executable Form how they can obtain a copy of such Source Code
+     Form by reasonable means in a timely manner, at a charge no more
+     than the cost of distribution to the recipient; and
+ .
+ (b) You may distribute such Executable Form under the terms of this
+     License, or sublicense it under different terms, provided that the
+     license for the Executable Form does not attempt to limit or alter
+     the recipients' rights in the Source Code Form under this License.
+ .
+ 3.3. Distribution of a Larger Work
+ .
+ You may create and distribute a Larger Work under terms of Your choice,
+ provided that You also comply with the requirements of this License for
+ the Covered Software. If the Larger Work is a combination of Covered
+ Software with a work governed by one or more Secondary Licenses, and the
+ Covered Software is not Incompatible With Secondary Licenses, this
+ License permits You to additionally distribute such Covered Software
+ under the terms of such Secondary License(s), so that the recipient of
+ the Larger Work may, at their option, further distribute the Covered
+ Software under the terms of either this License or such Secondary
+ License(s).
+ .
+ 3.4. Notices
+ .
+ You may not remove or alter the substance of any license notices
+ (including copyright notices, patent notices, disclaimers of warranty,
+ or limitations of liability) contained within the Source Code Form of
+ the Covered Software, except that You may alter any license notices to
+ the extent required to remedy known factual inaccuracies.
+ .
+ 3.5. Application of Additional Terms
+ .
+ You may choose to offer, and to charge a fee for, warranty, support,
+ indemnity or liability obligations to one or more recipients of Covered
+ Software. However, You may do so only on Your own behalf, and not on
+ behalf of any Contributor. You must make it absolutely clear that any
+ such warranty, support, indemnity, or liability obligation is offered by
+ You alone, and You hereby agree to indemnify every Contributor for any
+ liability incurred by such Contributor as a result of warranty, support,
+ indemnity or liability terms You offer. You may include additional
+ disclaimers of warranty and limitations of liability specific to any
+ jurisdiction.
+ .
+ 4. Inability to Comply Due to Statute or Regulation
+ ---------------------------------------------------
+ .
+ If it is impossible for You to comply with any of the terms of this
+ License with respect to some or all of the Covered Software due to
+ statute, judicial order, or regulation then You must: (a) comply with
+ the terms of this License to the maximum extent possible; and (b)
+ describe the limitations and the code they affect. Such description must
+ be placed in a text file included with all distributions of the Covered
+ Software under this License. Except to the extent prohibited by statute
+ or regulation, such description must be sufficiently detailed for a
+ recipient of ordinary skill to be able to understand it.
+ .
+ 5. Termination
+ --------------
+ .
+ 5.1. The rights granted under this License will terminate automatically
+ if You fail to comply with any of its terms. However, if You become
+ compliant, then the rights granted under this License from a particular
+ Contributor are reinstated (a) provisionally, unless and until such
+ Contributor explicitly and finally terminates Your grants, and (b) on an
+ ongoing basis, if such Contributor fails to notify You of the
+ non-compliance by some reasonable means prior to 60 days after You have
+ come back into compliance. Moreover, Your grants from a particular
+ Contributor are reinstated on an ongoing basis if such Contributor
+ notifies You of the non-compliance by some reasonable means, this is the
+ first time You have received notice of non-compliance with this License
+ from such Contributor, and You become compliant prior to 30 days after
+ Your receipt of the notice.
+ .
+ 5.2. If You initiate litigation against any entity by asserting a patent
+ infringement claim (excluding declaratory judgment actions,
+ counter-claims, and cross-claims) alleging that a Contributor Version
+ directly or indirectly infringes any patent, then the rights granted to
+ You by any and all Contributors for the Covered Software under Section
+ 2.1 of this License shall terminate.
+ .
+ 5.3. In the event of termination under Sections 5.1 or 5.2 above, all
+ end user license agreements (excluding distributors and resellers) which
+ have been validly granted by You or Your distributors under this License
+ prior to termination shall survive termination.
+ .
+ ************************************************************************
+ *                                                                      *
+ *  6. Disclaimer of Warranty                                           *
+ *  -------------------------                                           *
+ *                                                                      *
+ *  Covered Software is provided under this License on an "as is"       *
+ *  basis, without warranty of any kind, either expressed, implied, or  *
+ *  statutory, including, without limitation, warranties that the       *
+ *  Covered Software is free of defects, merchantable, fit for a        *
+ *  particular purpose or non-infringing. The entire risk as to the     *
+ *  quality and performance of the Covered Software is with You.        *
+ *  Should any Covered Software prove defective in any respect, You     *
+ *  (not any Contributor) assume the cost of any necessary servicing,   *
+ *  repair, or correction. This disclaimer of warranty constitutes an   *
+ *  essential part of this License. No use of any Covered Software is   *
+ *  authorized under this License except under this disclaimer.         *
+ *                                                                      *
+ ************************************************************************
+ .
+ ************************************************************************
+ *                                                                      *
+ *  7. Limitation of Liability                                          *
+ *  --------------------------                                          *
+ *                                                                      *
+ *  Under no circumstances and under no legal theory, whether tort      *
+ *  (including negligence), contract, or otherwise, shall any           *
+ *  Contributor, or anyone who distributes Covered Software as          *
+ *  permitted above, be liable to You for any direct, indirect,         *
+ *  special, incidental, or consequential damages of any character      *
+ *  including, without limitation, damages for lost profits, loss of    *
+ *  goodwill, work stoppage, computer failure or malfunction, or any    *
+ *  and all other commercial damages or losses, even if such party      *
+ *  shall have been informed of the possibility of such damages. This   *
+ *  limitation of liability shall not apply to liability for death or   *
+ *  personal injury resulting from such party's negligence to the       *
+ *  extent applicable law prohibits such limitation. Some               *
+ *  jurisdictions do not allow the exclusion or limitation of           *
+ *  incidental or consequential damages, so this exclusion and          *
+ *  limitation may not apply to You.                                    *
+ *                                                                      *
+ ************************************************************************
+ .
+ 8. Litigation
+ -------------
+ .
+ Any litigation relating to this License may be brought only in the
+ courts of a jurisdiction where the defendant maintains its principal
+ place of business and such litigation shall be governed by laws of that
+ jurisdiction, without reference to its conflict-of-law provisions.
+ Nothing in this Section shall prevent a party's ability to bring
+ cross-claims or counter-claims.
+ .
+ 9. Miscellaneous
+ ----------------
+ .
+ This License represents the complete agreement concerning the subject
+ matter hereof. If any provision of this License is held to be
+ unenforceable, such provision shall be reformed only to the extent
+ necessary to make it enforceable. Any law or regulation which provides
+ that the language of a contract shall be construed against the drafter
+ shall not be used to construe this License against a Contributor.
+ .
+ 10. Versions of the License
+ ---------------------------
+ .
+ 10.1. New Versions
+ .
+ Mozilla Foundation is the license steward. Except as provided in Section
+ 10.3, no one other than the license steward has the right to modify or
+ publish new versions of this License. Each version will be given a
+ distinguishing version number.
+ .
+ 10.2. Effect of New Versions
+ .
+ You may distribute the Covered Software under the terms of the version
+ of the License under which You originally received the Covered Software,
+ or under the terms of any subsequent version published by the license
+ steward.
+ .
+ 10.3. Modified Versions
+ .
+ If you create software not governed by this License, and you want to
+ create a new license for such software, you may create and use a
+ modified version of this License if you rename the license and remove
+ any references to the name of the license steward (except to note that
+ such modified license differs from this License).
+ .
+ 10.4. Distributing Source Code Form that is Incompatible With Secondary
+ Licenses
+ .
+ If You choose to distribute Source Code Form that is Incompatible With
+ Secondary Licenses under the terms of this version of the License, the
+ notice described in Exhibit B of this License must be attached.
+ .
+ Exhibit A - Source Code Form License Notice
+ -------------------------------------------
+ .
+   This Source Code Form is subject to the terms of the Mozilla Public
+   License, v. 2.0. If a copy of the MPL was not distributed with this
+   file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ .
+ If it is not possible or desirable to put the notice in a particular
+ file, then You may include the notice in a location (such as a LICENSE
+ file in a relevant directory) where a recipient would be likely to look
+ for such a notice.
+ .
+ You may add additional accurate notices of copyright ownership.
+ .
+ Exhibit B - "Incompatible With Secondary Licenses" Notice
+ ---------------------------------------------------------
+ .
+   This Source Code Form is "Incompatible With Secondary Licenses", as
+   defined by the Mozilla Public License, v. 2.0.
+
+License: Ms-PL
+ This license governs use of the accompanying software. If you use the software,
+ you accept this license. If you do not accept the license, do not use the
+ software.
+ .
+ .
+ 1. Definitions
+ .
+ The terms "reproduce," "reproduction," "derivative works," and "distribution"
+ have the same meaning here as under U.S. copyright law.
+ .
+ A "contribution" is the original software, or any additions or changes to the
+ software.
+ .
+ A "contributor" is any person that distributes its contribution under this
+ license.
+ .
+ "Licensed patents" are a contributor’s patent claims that read directly on its
+ contribution.
+ .
+ .
+ 2. Grant of Rights
+ .
+ (A) Copyright Grant- Subject to the terms of this license, including the
+ license conditions and limitations in section 3, each contributor grants you a
+ non-exclusive, worldwide, royalty-free copyright license to reproduce its
+ contribution, prepare derivative works of its contribution, and distribute its
+ contribution or any derivative works that you create.
+ .
+ (B) Patent Grant- Subject to the terms of this license, including the license
+ conditions and limitations in section 3, each contributor grants you a
+ non-exclusive, worldwide, royalty-free license under its licensed patents to
+ make, have made, use, sell, offer for sale, import, and/or otherwise dispose of
+ its contribution in the software or derivative works of the contribution in the
+ software.
+ .
+ .
+ 3. Conditions and Limitations
+ .
+ (A) No Trademark License- This license does not grant you rights to use any
+ contributors’ name, logo, or trademarks.
+ .
+ (B) If you bring a patent claim against any contributor over patents that you
+ claim are infringed by the software, your patent license from such contributor
+ to the software ends automatically.
+ .
+ (C) If you distribute any portion of the software, you must retain all
+ copyright, patent, trademark, and attribution notices that are present in the
+ software.
+ .
+ (D) If you distribute any portion of the software in source code form, you may
+ do so only under this license by including a complete copy of this license with
+ your distribution. If you distribute any portion of the software in compiled or
+ object code form, you may only do so under a license that complies with this
+ license.
+ .
+ (E) The software is licensed "as-is." You bear the risk of using it. The
+ contributors give no express warranties, guarantees or conditions. You may have
+ additional consumer rights under your local laws which this license cannot
+ change. To the extent permitted under your local laws, the contributors exclude
+ the implied warranties of merchantability, fitness for a particular purpose and
+ non-infringement.
+
+License: zlib
+ This software is provided 'as-is', without any express or implied
+ warranty.  In no event will the authors be held liable for any damages
+ arising from the use of this software.
+ .
+ Permission is granted to anyone to use this software for any purpose,
+ including commercial applications, and to alter it and redistribute it
+ freely, subject to the following restrictions:
+ .
+ 1. The origin of this software must not be misrepresented; you must not
+    claim that you wrote the original software. If you use this software
+    in a product, an acknowledgment in the product documentation would be
+    appreciated but is not required.
+ 2. Altered source versions must be plainly marked as such, and must not be
+    misrepresented as being the original software.
+ 3. This notice may not be removed or altered from any source distribution.
+
+License: MIT
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ THE SOFTWARE.
