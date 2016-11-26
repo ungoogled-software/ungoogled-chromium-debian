@@ -16,93 +16,44 @@ export LDFLAGS+=-Wl,--stats
 export CFLAGS+=-fno-delete-null-pointer-checks
 export CXXFLAGS+=-fno-delete-null-pointer-checks
 
-# use the gold linker to avoid memory exhaustion issues at link time
-export CFLAGS+=-fuse-ld=gold
-export CXXFLAGS+=-fuse-ld=gold
-
-# treat all warnings as errors
-defines=werror=
-
 # build with gcc instead of clang
-defines+=clang=0
-defines+=clang_use_chrome_plugins=
+defines=is_clang=false clang_use_chrome_plugins=false
+
+# set the appropriate cpu architecture
+ifeq (i386,$(shell dpkg-architecture -qDEB_HOST_ARCH))
+defines+=host_cpu=\"x86\"
+endif
+ifeq (amd64,$(shell dpkg-architecture -qDEB_HOST_ARCH))
+defines+=host_cpu=\"x64\"
+endif
 
 # disabled features
-defines+=use_ozone=0 \
-         use_gconf=0 \
-         use_sysroot=0 \
-         use_allocator=none \
-         linux_breakpad=0 \
-         linux_use_libgps=0 \
-         linux_use_gold_flags=0 \
-         linux_use_bundled_gold=0 \
-         linux_use_bundled_binutils=0 \
-         remoting=0 \
-         disable_nacl=1 \
-	 enable_google_now=0 \
-         enable_remoting_host=0 \
-         enable_prod_wallet_service=0 \
+defines+=is_debug=false \
+         use_gtk3=false \
+         use_ozone=false \
+         use_gconf=false \
+         use_sysroot=false \
+         use_gnome_keyring=false \
+         treat_warnings_as_errors=false \
+         enable_nacl=false \
+         enable_nacl_nonsfi=false \
+         enable_google_now=false \
+         enable_hangout_services_extension=false \
+         enable_iterator_debugging=false \
+         gold_path=\"\" \
+         linux_use_bundled_binutils=false \
 
 # enabled features
-defines+=enable_hidpi=1 \
-         enable_webrtc=1 \
-         fastbuild=2 \
-         use_gio=1 \
-         use_gtk3=1 \
-         use_pulseaudio=1 \
-         use_gnome_keyring=1 \
-         linux_link_libpci=1 \
-         linux_link_gsettings=1 \
-         linux_link_libspeechd=1 \
-         linux_link_pulseaudio=1 \
-         linux_link_gnome_keyring=1 \
-
-# system libraries to use
-defines+=use_system_re2=1 \
-         use_system_yasm=1 \
-         use_system_opus=1 \
-         use_system_zlib=1 \
-         use_system_speex=1 \
-         use_system_expat=1 \
-         use_system_libpng=1 \
-         use_system_libxml=1 \
-         use_system_libusb=1 \
-         use_system_libjpeg=1 \
-         use_system_libwebp=1 \
-         use_system_libxslt=1 \
-         use_system_jsoncpp=1 \
-         use_system_libevent=1 \
-         use_system_harfbuzz=1 \
-         use_system_xdg_utils=1 \
-
-# enable proprietary codecs
-defines+=proprietary_codecs=1 \
-         ffmpeg_branding=Chrome \
-
-# use embedded protobuf for now (bug #764911)
-defines+=use_system_protobuf=0 \
-
-# icu
-defines+=use_system_icu=0 \
-         #icu_use_data_file_flag=0 \
-         #want_separate_host_toolset=0 \
-
-# reduce the size of debugging symbols
-# defines+=remove_webcore_debug_symbols=1
+defines+=use_gio=true \
+         use_gold=true \
+         use_pulseaudio=true \
+         link_pulseaudio=true \
+         proprietary_codecs=true \
+         ffmpeg_branding=\"Chrome\" \
 
 # some notes about embedded libraries
-#  use_system_libvpx=0 need to run unbundler
-#  use_system_sqlite=0 build fails
 #  can't use system nss since net/third_party/nss is heavily patched
 #  can't use system ots (open text *summarizer*) since that's not google's ots (open text *sanitizer*)
-
-# make gyp a little more informative
-options+=--check \
-         --debug=includes \
-
-# avoid the need for a special src directory (--depth=. seems to require --no-parallel)
-options+=--depth=. \
-         --no-parallel \
 
 # handle parallel build options
 ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
@@ -123,11 +74,16 @@ override_dh_auto_configure:
 	touch chrome/test/data/webui/i18n_process_css_test.html
 	# use system flot
 	for file in $(flotpaths); do ln -sf $$file third_party/flot; done
+	# strip out system third_party libraries
+	./debian/scripts/unbundle
+	# build gn
+	./tools/gn/bootstrap/bootstrap.py -v -s
 	# configure
-	GYP_DEFINES="$(defines)" ./build/gyp_chromium $(options)
+	./out/Release/gn gen out/Release --args="$(defines)"
 
 override_dh_auto_build-arch:
-	ninja $(njobs) -C out/Release chrome chrome_sandbox chromedriver
+	./out/Release/gn gen out/Release --args="$(defines)"
+	ninja -v $(njobs) -C out/Release chrome chrome_sandbox chromedriver
 	mv out/Release/chrome out/Release/chromium || true
 	mv out/Release/chrome.1 out/Release/chromium.1 || true
 	mv out/Release/chrome_sandbox out/Release/chrome-sandbox || true
@@ -135,7 +91,7 @@ override_dh_auto_build-arch:
 	chmod 4755 out/Release/chrome-sandbox # suid sandbox
 
 override_dh_auto_build-indep:
-	ninja $(njobs) -C out/Release packed_resources
+	ninja -v $(njobs) -C out/Release packed_resources
 	rm -f out/Release/locales/en-US.pak
 
 override_dh_auto_install-arch:

@@ -8,21 +8,17 @@ disable/third-party-cookies.patch
 disable/external-components.patch
 disable/default-browser-warning.patch
 
-gtk3.patch
-gtk3theme.patch
+# gtk3theme.patch
 
-cups2.2.patch
 glibc2.24.patch
 
-khronos.patch
 ps-print.patch
 gpu-timeout.patch
 master-preferences.patch
 chromedriver-revision.patch
 
-# system/jpeg.patch
+system/vpx.patch
 system/nspr.patch
+system/event.patch
 system/clang.patch
-# system/vaapi.patch
 system/ffmpeg.patch
-system/harfbuzz.patch

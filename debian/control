@@ -9,7 +9,6 @@ Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-chromium/pkg-chromium.git
 Homepage: http://www.chromium.org/Home
 Build-Depends:
  debhelper (>= 9),
- gyp,
  python3,
  pkg-config,
  ninja-build,
@@ -46,6 +45,7 @@ Build-Depends:
  libffi-dev,
  libkrb5-dev,
  libexif-dev,
+ libflac-dev,
  libudev-dev,
  libopus-dev,
  libwebp-dev,
@@ -53,7 +53,7 @@ Build-Depends:
  libsrtp-dev,
  libjpeg-dev,
  libxml2-dev,
- libgtk-3-dev,
+ libgtk2.0-dev,
  libxslt1-dev,
  libpulse-dev,
  libpam0g-dev,

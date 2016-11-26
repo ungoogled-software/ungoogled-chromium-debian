@@ -14,7 +14,6 @@ Files-Excluded:
  tools/emacs
  tools/perf/page_sets/tough_scheduling_cases/*.min.js
  native_client/NOTICE
- third_party/cld
  third_party/android*
  third_party/bidichecker
  third_party/flot/*.js
@@ -26,8 +25,20 @@ Files-Excluded:
  third_party/libxml/src
  third_party/*rjsmin/bench
  third_party/mesa/src/src/gallium/state_trackers/d3d1x/w32api
+ third_party/libxslt/compile
+ third_party/libxslt/COPYING
+ third_party/libxslt/depcomp
+ third_party/libxslt/install-sh
+ third_party/libxslt/missing
+ third_party/libxslt/libexslt
+ third_party/libxslt/libxslt
+ third_party/libxslt/mac
+ third_party/libxslt/win32
+ third_party/catapult/tracing/test_data
  base/test/data
  base/third_party/nspr
+ third_party/binutils
+ v8/third_party/binutils
 
 # dirs that should be removed, but the jessie package still needs them
 # third_party/harfbuzz-ng/src
@@ -49,7 +60,7 @@ License: BSD-3-clause
 
 Files: base/*
 Copyright: Copyright: 2009 The Chromium Authors. All rights reserved / 2006 Michael Emmel mike.emmel@gmail.com. All rights reserved / 2008-2009 Google Inc / 2008 Collabora Ltd. All rights reserved / 2006 Michael Emmel mike.emmel@gmail.com / 2006 2007 Apple Inc. All rights reserved / 2007 Holger Hans Peter Freyther / 2008 2009 Google Inc:
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: base/md5.cc base/md5.h
 Copyright: Copyright 2011 The Chromium Authors. All rights reserved.
@@ -1269,7 +1280,7 @@ License: BSD-3-clause
 
 Files: chrome/test/data/dromaeo/JSON.php
 Copyright: Copyright: 2005 Michal Migurski:
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: chrome/test/data/dromaeo/store.php
 Copyright: Copyright: 2010 John Resig:
@@ -2961,15 +2972,15 @@ License: BSD-3-clause
 
 Files: third_party/WebKit/WebKit/chromium/StorageAreaProxy.cpp
 Copyright: Copyright: 2008 Apple Inc / 2009 Google Inc. All Rights Reserved:
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: third_party/WebKit/WebKit/chromium/StorageAreaProxy.hgthird_party/WebKit/WebKit/chromium/StorageNamespaceProxy.cpp third_party/WebKit/WebKit/chromium/StorageNamespaceProxy.h
 Copyright: Copyright: 2009 Google Inc. All Rights Reserved:
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: third_party/WebKit/WebKit/chromium/EditorClientImpl.cpp
 Copyright: Copyright: 2010 GooglegInc. All rights reserved / 2006 2007 Apple Inc. All rights reserved:
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: third_party/WebKit/WebKit/chromium/ApplicationCacheHost.cppgthird_party/WebKit/WebKit/chromium/AssertMatchingEnums.cpp third_party/WebKit/WebKit/chromium/BackForwardListClientImpl.cpp third_party/WebKit/WebKit/chromium/BackForwardListClientImpl.h third_party/WebKit/WebKit/chromium/ChromeClientImpl.cpp third_party/WebKit/WebKit/chromium/ChromeClientImpl.h third_party/WebKit/WebKit/chromium/ChromiumBridge.cpp third_party/WebKit/WebKit/chromium/ChromiumCurrentTime.cpp third_party/WebKit/WebKit/chromium/ChromiumThreading.cpp third_party/WebKit/WebKit/chromium/ContextMenuClientImpl.cpp third_party/WebKit/WebKit/chromium/ContextMenuClientImpl.h third_party/WebKit/WebKit/chromium/DOMUtilitiesPrivate.cpp third_party/WebKit/WebKit/chromium/DOMUtilitiesPrivate.h third_party/WebKit/WebKit/chromium/DragClientImpl.cpp third_party/WebKit/WebKit/chromium/DragClientImpl.h third_party/WebKit/WebKit/chromium/EditorClientImpl.h third_party/WebKit/WebKit/chromium/FrameLoaderClientImpl.cpp third_party/WebKit/WebKit/chromium/FrameLoaderClientImpl.h third_party/WebKit/WebKit/chromium/GraphicsContext3D.cpp third_party/WebKit/WebKit/chromium/InspectorClientImpl.cpp third_party/WebKit/WebKit/chromium/InspectorClientImpl.h third_party/WebKit/WebKit/chromium/LocalizedStrings.cpp third_party/WebKit/WebKit/chromium/MediaPlayerPrivateChromium.cpp third_party/WebKit/WebKit/chromium/NotificationPresenterImpl.cpp third_party/WebKit/WebKit/chromium/NotificationPresenterImpl.h third_party/WebKit/WebKit/chromium/PlatformMessagePortChannel.cpp third_party/WebKit/WebKit/chromium/PlatformMessagePortChannel.h third_party/WebKit/WebKit/chromium/ResourceHandle.cpp third_party/WebKit/WebKit/chromium/SharedWorkerRepository.cpp third_party/WebKit/WebKit/chromium/SocketStreamHandle.cpp third_party/WebKit/WebKit/chromium/StorageEventDispatcherChromium.cpp third_party/WebKit/WebKit/chromium/StorageEventDispatcherImpl.cpp third_party/WebKit/WebKit/chromium/StorageEventDispatcherImpl.h third_party/WebKit/WebKit/chromium/WebAccessibilityCache.cpp third_party/WebKit/WebKit/chromium/WebAccessibilityCacheImpl.cpp third_party/WebKit/WebKit/chromium/WebAccessibilityCacheImpl.h third_party/WebKit/WebKit/chromium/WebAccessibilityObject.cpp third_party/WebKit/WebKit/chromium/WebAnimationControllerImpl.cpp third_party/WebKit/WebKit/chromium/WebAnimationControllerImpl.h third_party/WebKit/WebKit/chromium/WebBindings.cpp third_party/WebKit/WebKit/chromium/WebCString.cpp third_party/WebKit/WebKit/chromium/WebCache.cpp third_party/WebKit/WebKit/chromium/WebColor.cpp third_party/WebKit/WebKit/chromium/WebCrossOriginPreflightResultCache.cpp third_party/WebKit/WebKit/chromium/WebCursorInfo.cpp third_party/WebKit/WebKit/chromium/WebData.cpp third_party/WebKit/WebKit/chromium/WebDataSourceImpl.cpp third_party/WebKit/WebKit/chromium/WebDataSourceImpl.h third_party/WebKit/WebKit/chromium/WebDatabase.cpp third_party/WebKit/WebKit/chromium/WebDevToolsAgentPrivate.h third_party/WebKit/WebKit/chromium/WebDocument.cpp third_party/WebKit/WebKit/chromium/WebDragData.cpp third_party/WebKit/WebKit/chromium/WebElement.cpp third_party/WebKit/WebKit/chromium/WebEntities.cpp third_party/WebKit/WebKit/chromium/WebEntities.h third_party/WebKit/WebKit/chromium/WebFileChooserCompletionImpl.cpp third_party/WebKit/WebKit/chromium/WebFileChooserCompletionImpl.h third_party/WebKit/WebKit/chromium/WebFontCache.cpp third_party/WebKit/WebKit/chromium/WebFormElement.cpp third_party/WebKit/WebKit/chromium/WebFrameImpl.cpp third_party/WebKit/WebKit/chromium/WebFrameImpl.h third_party/WebKit/WebKit/chromium/WebHTTPBody.cpp third_party/WebKit/WebKit/chromium/WebHistoryItem.cpp third_party/WebKit/WebKit/chromium/WebImageCG.cpp third_party/WebKit/WebKit/chromium/WebImageSkia.cpp third_party/WebKit/WebKit/chromium/WebInputElement.cpp third_party/WebKit/WebKit/chromium/WebInputEvent.cpp third_party/WebKit/WebKit/chromium/WebInputEventConversion.cpp third_party/WebKit/WebKit/chromium/WebInputEventConversion.h third_party/WebKit/WebKit/chromium/WebKit.cpp third_party/WebKit/WebKit/chromium/WebMediaPlayerClientImpl.h third_party/WebKit/WebKit/chromium/WebNode.cpp third_party/WebKit/WebKit/chromium/WebNodeCollection.cpp third_party/WebKit/WebKit/chromium/WebNodeList.cpp third_party/WebKit/WebKit/chromium/WebNotification.cpp third_party/WebKit/WebKit/chromium/WebPageSerializer.cpp third_party/WebKit/WebKit/chromium/WebPageSerializerImpl.cpp third_party/WebKit/WebKit/chromium/WebPageSerializerImpl.h third_party/WebKit/WebKit/chromium/WebPasswordFormData.cpp third_party/WebKit/WebKit/chromium/WebPasswordFormUtils.h third_party/WebKit/WebKit/chromium/WebPluginContainerImpl.cpp third_party/WebKit/WebKit/chromium/WebPluginContainerImpl.h third_party/WebKit/WebKit/chromium/WebPluginListBuilderImpl.cpp third_party/WebKit/WebKit/chromium/WebPluginListBuilderImpl.h third_party/WebKit/WebKit/chromium/WebPluginLoadObserver.cpp third_party/WebKit/WebKit/chromium/WebPluginLoadObserver.h third_party/WebKit/WebKit/chromium/WebPopupMenuImpl.cpp third_party/WebKit/WebKit/chromium/WebPopupMenuImpl.h third_party/WebKit/WebKit/chromium/WebRange.cpp third_party/WebKit/WebKit/chromium/WebRegularExpression.cpp third_party/WebKit/WebKit/chromium/WebRuntimeFeatures.cpp third_party/WebKit/WebKit/chromium/WebScriptController.cpp third_party/WebKit/WebKit/chromium/WebSearchableFormData.cpp third_party/WebKit/WebKit/chromium/WebSecurityPolicy.cpp third_party/WebKit/WebKit/chromium/WebSettingsImpl.cpp third_party/WebKit/WebKit/chromium/WebSettingsImpl.h third_party/WebKit/WebKit/chromium/WebSharedWorkerImpl.cpp third_party/WebKit/WebKit/chromium/WebSharedWorkerImpl.h third_party/WebKit/WebKit/chromium/WebStorageAreaImpl.cpp third_party/WebKit/WebKit/chromium/WebStorageAreaImpl.h third_party/WebKit/WebKit/chromium/WebStorageEventDispatcherImpl.cpp third_party/WebKit/WebKit/chromium/WebStorageEventDispatcherImpl.h third_party/WebKit/WebKit/chromium/WebStorageNamespaceImpl.cpp third_party/WebKit/WebKit/chromium/WebStorageNamespaceImpl.h third_party/WebKit/WebKit/chromium/WebString.cpp third_party/WebKit/WebKit/chromium/WebURL.cpp third_party/WebKit/WebKit/chromium/WebURLError.cpp third_party/WebKit/WebKit/chromium/WebURLRequest.cpp third_party/WebKit/WebKit/chromium/WebURLRequestPrivate.h third_party/WebKit/WebKit/chromium/WebURLResponse.cpp third_party/WebKit/WebKit/chromium/WebURLResponsePrivate.h third_party/WebKit/WebKit/chromium/WebWorkerBase.cpp third_party/WebKit/WebKit/chromium/WebWorkerClientImpl.cpp third_party/WebKit/WebKit/chromium/WebWorkerClientImpl.h third_party/WebKit/WebKit/chromium/WebWorkerImpl.cpp third_party/WebKit/WebKit/chromium/WebWorkerImpl.h third_party/WebKit/WebKit/chromium/WrappedResourceRequest.h third_party/WebKit/WebKit/chromium/WrappedResourceResponse.h
 Copyright: Copyright: 2009 Google Inc. All rights reserved / HOLDERS AND CONTRIBUTORS:
@@ -3029,7 +3040,7 @@ License: BSD-3-clause
 
 Files: third_party/WebKit/WebKitTools/Scripts/update-sources-list.py
 Copyright: Copyright: 2007 Kevin Ollivier All rights reserved:
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: third_party/WebKit/WebKitTools/Scripts/SpacingHeuristics.pm
 Copyright: Copyright: 2006 Apple ComputergInc. All rights reserved:
@@ -3053,11 +3064,11 @@ License: BSD-3-clause
 
 Files: third_party/WebKit/WebKitTools/Scripts/webkitperl/VCSUtils_unittest/*
 Copyright: Copyright: 2010 Apple Inc. All rights reserved:
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: third_party/WebKit/WebKitTools/Scripts/webkitperl/VCSUtils_unittest/*
 Copyright: Copyright: 2010 Chris Jerdonek (chris.jerdonek@gmail.com):
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: third_party/WebKit/WebKitTools/Scripts/webkitperl/VCSUtils_unittest/fixChangeLogPatch.plgthird_party/WebKit/WebKitTools/Scripts/webkitperl/VCSUtils_unittest/generatePatchCommand.pl third_party/WebKit/WebKitTools/Scripts/webkitperl/VCSUtils_unittest/runPatchCommand.pl
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009g2010 Chris Jerdonek (chris.jerdonek@gmail.com):
@@ -3073,7 +3084,7 @@ License: BSD-3-clause
 
 Files: third_party/WebKit/WebKitTools/Scripts/webkitpy/style_references.py
 Copyright: Copyright: 2010 Chris Jerdonek (cjerdonek@webkit.org):
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: third_party/WebKit/WebKitTools/Scripts/webkitpy/common/checkout/scm.py
 Copyright: Copyright: 2009 Apple Inc. All rights reserved / HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc. All rights reserved:
@@ -3128,8 +3139,8 @@ Copyright: Copyright: 2010 Google Inc. All rights reserved / HOLDERS AND CONTRIB
 License: BSD-3-clause
 
 Files: third_party/WebKit/WebKitTools/Scripts/webkitpy/common/system/logtesting.pygthird_party/WebKit/WebKitTools/Scripts/webkitpy/common/system/logutils.py third_party/WebKit/WebKitTools/Scripts/webkitpy/common/system/logutils_unittest.py third_party/WebKit/WebKitTools/Scripts/webkitpy/common/system/ospath.py third_party/WebKit/WebKitTools/Scripts/webkitpy/common/system/ospath_unittest.py
-Copyright: Copyright: 2010 Chris Jerdonek (cjerdonek@webkit.org):
-License: FreeBSD (guessed)
+Copyright: Copyright 2010 Chris Jerdonek (cjerdonek@webkit.org)
+License: BSD-3-clause
 
 Files: third_party/WebKit/WebKitTools/Scripts/webkitpy/common/system/deprecated_logging.pygthird_party/WebKit/WebKitTools/Scripts/webkitpy/common/system/executive.py
 Copyright: Copyright: 2009 Apple Inc. All rights reserved / HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc. All rights reserved:
@@ -3169,7 +3180,7 @@ License: BSD-3-clause
 
 Files: third_party/WebKit/WebKitTools/Scripts/webkitpy/layout_tests/port/base.pygthird_party/WebKit/WebKitTools/Scripts/webkitpy/layout_tests/port/mac.py third_party/WebKit/WebKitTools/Scripts/webkitpy/layout_tests/port/passing.py third_party/WebKit/WebKitTools/Scripts/webkitpy/layout_tests/port/server_process.py third_party/WebKit/WebKitTools/Scripts/webkitpy/layout_tests/port/test.py
 Copyright: Copyright: 2010 Google Inc. All rights reserved / HOLDERS AND CONTRIBUTORS:
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: third_party/WebKit/WebKitTools/Scripts/webkitpy/layout_tests/port/__init__.pygthird_party/WebKit/WebKitTools/Scripts/webkitpy/layout_tests/port/apache_http_server.py third_party/WebKit/WebKitTools/Scripts/webkitpy/layout_tests/port/chromium.py third_party/WebKit/WebKitTools/Scripts/webkitpy/layout_tests/port/chromium_linux.py third_party/WebKit/WebKitTools/Scripts/webkitpy/layout_tests/port/chromium_mac.py third_party/WebKit/WebKitTools/Scripts/webkitpy/layout_tests/port/chromium_win.py third_party/WebKit/WebKitTools/Scripts/webkitpy/layout_tests/port/factory.py third_party/WebKit/WebKitTools/Scripts/webkitpy/layout_tests/port/http_server.py third_party/WebKit/WebKitTools/Scripts/webkitpy/layout_tests/port/http_server_base.py third_party/WebKit/WebKitTools/Scripts/webkitpy/layout_tests/port/mac_unittest.py third_party/WebKit/WebKitTools/Scripts/webkitpy/layout_tests/port/websocket_server.py
 Copyright: Copyright: 2010 Google Inc. All rights reserved / HOLDERS AND CONTRIBUTORS:
@@ -3181,15 +3192,15 @@ License: BSD-3-clause
 
 Files: third_party/WebKit/WebKitTools/Scripts/webkitpy/python24/versioning.pygthird_party/WebKit/WebKitTools/Scripts/webkitpy/python24/versioning_unittest.py
 Copyright: Copyright: 2010 Chris Jerdonek (cjerdonek@webkit.org):
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: third_party/WebKit/WebKitTools/Scripts/webkitpy/style/*
 Copyright: Copyright: 2010 Chris Jerdonek (chris.jerdonek@gmail.com):
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: third_party/WebKit/WebKitTools/Scripts/webkitpy/style/*
 Copyright: Copyright: 2010 Chris Jerdonek (cjerdonek@webkit.org):
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: third_party/WebKit/WebKitTools/Scripts/webkitpy/style/*
 Copyright: Copyright: 2009 Google Inc. All rights reserved / 2009 Apple Inc. All rights reserved / HOLDERS AND CONTRIBUTORS / 2009 Torch Mobile Inc / 2010 Chris Jerdonek (chris.jerdonek@gmail.com):
@@ -3201,7 +3212,7 @@ License: BSD-3-clause
 
 Files: third_party/WebKit/WebKitTools/Scripts/webkitpy/style/processors/common.pygthird_party/WebKit/WebKitTools/Scripts/webkitpy/style/processors/common_unittest.py third_party/WebKit/WebKitTools/Scripts/webkitpy/style/processors/python.py third_party/WebKit/WebKitTools/Scripts/webkitpy/style/processors/python_unittest.py
 Copyright: Copyright: 2010 Chris Jerdonek (cjerdonek@webkit.org):
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: third_party/WebKit/WebKitTools/Scripts/webkitpy/style/processors/text_unittest.py
 Copyright: Copyright: 2009 Google Inc. All rights reserved / HOLDERS AND CONTRIBUTORS:
@@ -3217,15 +3228,15 @@ License: BSD-3-clause
 
 Files: third_party/WebKit/WebKitTools/Scripts/webkitpy/test/main.py
 Copyright: Copyright: 2010 Chris Jerdonek (cjerdonek@webkit.org):
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: third_party/WebKit/WebKitTools/Scripts/webkitpy/thirdparty/*
 Copyright: Copyright: 2010 Chris Jerdonek (cjerdonek@webkit.org):
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: third_party/WebKit/WebKitTools/Scripts/webkitpy/thirdparty/*
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2007-2009 Michael Foord / 2003-2009gMichael Foord:
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: third_party/WebKit/WebKitTools/Scripts/webkitpy/thirdparty/pywebsocket/setup.py
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc:
@@ -3253,7 +3264,7 @@ License: BSD-3-clause
 
 Files: third_party/WebKit/WebKitTools/Scripts/webkitpy/tool/commands_references.pygthird_party/WebKit/WebKitTools/Scripts/webkitpy/tool/steps_references.py
 Copyright: Copyright: 2010 Chris Jerdonek (cjerdonek@webkit.org):
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: third_party/WebKit/WebKitTools/Scripts/webkitpy/tool/comments.pygthird_party/WebKit/WebKitTools/Scripts/webkitpy/tool/grammar.py third_party/WebKit/WebKitTools/Scripts/webkitpy/tool/multicommandtool.py
 Copyright: Copyright: 2009 Google Inc. All rights reserved / 2009 Apple Inc. All rights reserved / HOLDERS AND CONTRIBUTORS:
@@ -4671,7 +4682,7 @@ License: BSD-3-clause
 
 Files: tools/traceline/traceline/assembler.h
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS "AS / 2009 The Chromium Authors. All rights reserved / 2006-2008 the V8 project authors. All rights reserved / OWNER OR / 1994-2006 Sun Microsystems Inc:
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: tools/traceline/traceline/assembler_unittest.ccgtools/traceline/traceline/assembler_unittest.sh tools/traceline/traceline/dump_syscalls_idarub.rb tools/traceline/traceline/logging.h tools/traceline/traceline/main.cc tools/traceline/traceline/rdtsc.h tools/traceline/traceline/sym_resolver.h tools/traceline/traceline/syscall_map.h
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
@@ -4715,7 +4726,7 @@ License: BSD-3-clause
 
 Files: v8/assembler.ccgv8/assembler.h
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS "AS / 2006-2009 the V8 project authors. All rights reserved / OWNER OR / 1994-2006 Sun Microsystems Inc:
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: v8/counters.ccgv8/counters.h v8/disasm.h v8/dtoa-config.c v8/global-handles.h v8/unicode-inl.h v8/unicode.cc v8/unicode.h v8/v8-counters.cc v8/v8-counters.h
 Copyright: Copyright: 2007-2008 the V8 project authors. All rights reserved / HOLDERS AND CONTRIBUTORS:
@@ -4763,11 +4774,11 @@ License: BSD-3-clause
 
 Files: v8/ia32/*
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS "AS / 2006-2008 the V8 project authors. All rights reserved / OWNER OR / 1994-2006 Sun Microsystems Inc:
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: v8/ia32/*
 Copyright: Copyright: OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECTgINDIRECT / HOLDERS AND CONTRIBUTORS / 2006-2008 the V8 project authors. All rights reserved / 1994-2006 Sun Microsystems Inc:
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: v8/ia32/disasm-ia32.cc
 Copyright: Copyright: 2007-2008 the V8 project authors. All rights reserved / HOLDERS AND CONTRIBUTORS:
@@ -4799,7 +4810,7 @@ License: BSD-3-clause
 
 Files: v8/mips/assembler-mips-inl.hgv8/mips/assembler-mips.cc v8/mips/assembler-mips.h
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS "AS / 2010 the V8 project authors. All rights reserved / OWNER OR / 1994-2006 Sun Microsystems Inc:
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: v8/mips/builtins-mips.ccgv8/mips/codegen-mips-inl.h v8/mips/codegen-mips.cc v8/mips/codegen-mips.h v8/mips/constants-mips.cc v8/mips/constants-mips.h v8/mips/cpu-mips.cc v8/mips/debug-mips.cc v8/mips/disasm-mips.cc v8/mips/fast-codegen-mips.cc v8/mips/frames-mips.cc v8/mips/frames-mips.h v8/mips/full-codegen-mips.cc v8/mips/ic-mips.cc v8/mips/jump-target-mips.cc v8/mips/macro-assembler-mips.cc v8/mips/macro-assembler-mips.h v8/mips/register-allocator-mips-inl.h v8/mips/register-allocator-mips.cc v8/mips/register-allocator-mips.h v8/mips/simulator-mips.cc v8/mips/simulator-mips.h v8/mips/stub-cache-mips.cc v8/mips/virtual-frame-mips.cc v8/mips/virtual-frame-mips.h
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2010 the V8 project authors. All rights reserved:
@@ -4811,7 +4822,7 @@ License: BSD-3-clause
 
 Files: v8/x64/assembler-x64.h
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS "AS / 2006-2009 the V8 project authors. All rights reserved / OWNER OR / 1994-2006 Sun Microsystems Inc:
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: v8/x64/*
 Copyright: Copyright: 2009 the V8 project authors. All rights reserved / HOLDERS AND CONTRIBUTORS:
@@ -5039,7 +5050,7 @@ License: BSD-3-clause
 
 Files: webkit/appcache/manifest_parser.ccgwebkit/appcache/manifest_parser.h
 Copyright: Copyright: 2009 The Chromium Authors. All rights reserved / 2008 Apple Inc. All Rights Reserved:
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: webkit/appcache/*
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
@@ -5203,19 +5214,19 @@ License: APPLE-license
 
 Files: webkit/tools/npapi_layout_test_plugin/PluginObject.h
 Copyright: Copyright: 2006g2007 Apple Inc. All rights reserved:
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: webkit/tools/npapi_layout_test_plugin/PluginObject.cpp
 Copyright: Copyright: 2006g2007 2008 Apple Inc. All rights reserved:
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: webkit/tools/npapi_layout_test_plugin/TestObject.cppgwebkit/tools/npapi_layout_test_plugin/TestObject.h
 Copyright: Copyright: 2007 Apple Inc. All rights reserved:
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: webkit/tools/test_shell/test_shell.h
 Copyright: Copyright: 2006 Apple ComputergInc. All rights reserved:
-License: FreeBSD (guessed)
+License: BSD-3-clause
 
 Files: webkit/tools/test_shell/accessibility_ui_element.ccgwebkit/tools/test_shell/drag_delegate.h webkit/tools/test_shell/drop_delegate.cc webkit/tools/test_shell/drop_delegate.h webkit/tools/test_shell/event_sending_controller.h webkit/tools/test_shell/layout_test_controller_unittest.cc webkit/tools/test_shell/node_leak_test.cc webkit/tools/test_shell/plugin_tests.cc webkit/tools/test_shell/run_all_tests.cc webkit/tools/test_shell/simple_resource_loader_bridge.cc webkit/tools/test_shell/simple_resource_loader_bridge.h webkit/tools/test_shell/test_navigation_controller.cc webkit/tools/test_shell/test_navigation_controller.h webkit/tools/test_shell/test_shell_gtk.cc webkit/tools/test_shell/test_shell_main.cc webkit/tools/test_shell/test_shell_request_context.h webkit/tools/test_shell/test_shell_switches.cc webkit/tools/test_shell/test_shell_switches.h webkit/tools/test_shell/test_shell_test.cc webkit/tools/test_shell/test_shell_test.h webkit/tools/test_shell/text_input_controller.h webkit/tools/test_shell/text_input_controller_unittest.cc webkit/tools/test_shell/webview_host.h webkit/tools/test_shell/webview_host_gtk.cc webkit/tools/test_shell/webview_host_win.cc webkit/tools/test_shell/webwidget_host.h webkit/tools/test_shell/webwidget_host_gtk.cc
 Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
@@ -5298,31 +5309,6 @@ License: BSD-3-clause
  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-License: FreeBSD (guessed)
- Redistribution and use in source and binary forms, with or without
- modification, are permitted provided that the following conditions
- are met:
- 1. Redistributions of source code must retain the above copyright
-    notice(s), this list of conditions and the following disclaimer as
-    the first lines of this file unmodified other than the possible
-    addition of one or more copyright notices.
- 2. Redistributions in binary form must reproduce the above copyright
-    notice(s), this list of conditions and the following disclaimer in
-    the documentation and/or other materials provided with the
-    distribution.
- .
- THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER(S) ``AS IS'' AND ANY
- EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT HOLDER(S) BE
- LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
- BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
- OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 License: BSL-1
  Boost Software License - Version 1.0 - August 17th, 2003
@@ -6349,3 +6335,9 @@ License: MIT
  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
+
+License: GPL-2.0
+ See /usr/share/common-licenses/GPL-2.
+
+License: LGPL-2.1
+ See /usr/share/common-licenses/LGPL-2.1.

@@ -1,3 +1,36 @@
+chromium-browser (54.0.2840.101-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - CVE-2016-5181: Universal XSS in Blink. Credit to Anonymous
+    - CVE-2016-5182: Heap overflow in Blink. Credit to Giwan Go
+    - CVE-2016-5183: Use after free in PDFium. Credit to Anonymous
+    - CVE-2016-5184: Use after free in PDFium. Credit to Anonymous
+    - CVE-2016-5185: Use after free in Blink. Credit to cloudfuzzer
+    - CVE-2016-5187: URL spoofing. Credit to Luan Herrera
+    - CVE-2016-5188: UI spoofing. Credit to Luan Herrera
+    - CVE-2016-5192: Cross-origin bypass in Blink. Credit to
+      haojunhou@gmail.com
+    - CVE-2016-5189: URL spoofing. Credit to xisigr
+    - CVE-2016-5186: Out of bounds read in DevTools. Credit to Abdulrahman
+      Alqabandi
+    - CVE-2016-5191: Universal XSS in Bookmarks. Credit to Gareth Hughes
+    - CVE-2016-5190: Use after free in Internals. Credit to Atte Kettunen
+    - CVE-2016-5193: Scheme bypass. Credit to Yuyang ZHOU
+    - CVE-2016-5194: Various fixes from internal audits, fuzzing and other
+      initiatives
+    - CVE-2016-5198: Out of bounds memory access in V8. Credit to Tencent Keen
+      Security Lab
+    - CVE-2016-5200: Out of bounds memory access in V8. Credit to Choongwoo Han
+    - CVE-2016-5201: Info leak in extensions. Credit to Rob Wu
+    - CVE-2016-5202: Various fixes from internal audits, fuzzing and other
+      initiatives
+  * Remove libxslt symlinks from the upstream taball.
+  * Drop cups patch that's been applied upstream.
+  * Build using gn and drop gyp dependency.
+  * Update debian/copyright.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 18 Nov 2016 01:36:36 +0000
+
 chromium-browser (53.0.2785.143-1) unstable; urgency=medium
 
   * New upstream security release:
@@ -203,9 +236,6 @@ chromium-browser (51.0.2704.63-1) unstable; urgency=medium
     - CVE-2016-1680: Heap use-after-free in Skia. Credit to Atte Kettunen.
     - CVE-2016-1681: Heap overflow in PDFium. Credit to Aleksandar Nikolic.
     - CVE-2016-1682: CSP bypass for ServiceWorker. Credit to KingstonTime.
-    - CVE-2016-1683: Out-of-bounds access in libxslt. Credit to Nicolas
-      Gregoire.
-    - CVE-2016-1684: Integer overflow in libxslt. Credit to Nicolas Gregoire.
     - CVE-2016-1685: Out-of-bounds read in PDFium. Credit to Ke Liu.
     - CVE-2016-1686: Out-of-bounds read in PDFium. Credit to Ke Liu.
     - CVE-2016-1687: Information leak in extensions. Credit to Rob Wu.
