@@ -16,3 +16,4 @@ third_party/re2/BUILD.gn
 third_party/snappy/BUILD.gn
 third_party/yasm/yasm_assemble.gni
 third_party/zlib/BUILD.gn
+third_party/icu/BUILD.gn

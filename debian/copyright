@@ -34,7 +34,9 @@ Files-Excluded:
  third_party/libxslt/libxslt
  third_party/libxslt/mac
  third_party/libxslt/win32
+ third_party/libxslt/linux
  third_party/catapult/tracing/test_data
+ third_party/google_input_tools/src/chrome/os/inputview/_locales/*.js
  base/test/data
  base/third_party/nspr
  third_party/binutils

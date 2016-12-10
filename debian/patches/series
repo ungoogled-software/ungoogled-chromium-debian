@@ -14,11 +14,12 @@ glibc2.24.patch
 
 ps-print.patch
 gpu-timeout.patch
+build-flags.patch
 master-preferences.patch
 chromedriver-revision.patch
 
+system/icu.patch
 system/vpx.patch
 system/nspr.patch
 system/event.patch
-system/clang.patch
 system/ffmpeg.patch

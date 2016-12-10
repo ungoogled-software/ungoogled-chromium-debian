@@ -6,18 +6,14 @@ export DH_VERBOSE=1
 # enable all build hardening flags
 export DEB_BUILD_MAINT_OPTIONS=hardening=+all
 
-# linker flags to avoid memory allocation issues on i386
-export LDFLAGS+=-Wl,--no-keep-memory -Wl,--reduce-memory-overheads -Wl,--hash-size=7919
-
-# more verbose linker output
-export LDFLAGS+=-Wl,--stats
-
-# avoid error in v8's garbage collector (see http://gcc.gnu.org/bugzilla/show_bug.cgi?id=68853)
-export CFLAGS+=-fno-delete-null-pointer-checks
-export CXXFLAGS+=-fno-delete-null-pointer-checks
-
 # build with gcc instead of clang
 defines=is_clang=false clang_use_chrome_plugins=false
+
+# more verbose linker output
+defines+=target_extra_ldflags=\"-Wl,--stats\"
+
+# avoid error in v8's garbage collector (see http://gcc.gnu.org/bugzilla/show_bug.cgi?id=68853)
+defines+=target_extra_cxxflags=\"-fno-delete-null-pointer-checks\"
 
 # set the appropriate cpu architecture
 ifeq (i386,$(shell dpkg-architecture -qDEB_HOST_ARCH))

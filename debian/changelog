@@ -1,3 +1,40 @@
+chromium-browser (55.0.2883.75-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - CVE-2016-9651: Private property access in V8. Credit to Guang Gong
+    - CVE-2016-5208: Universal XSS in Blink. Credit to Mariusz Mlynski
+    - CVE-2016-5207: Universal XSS in Blink. Credit to Mariusz Mlynski
+    - CVE-2016-5206: Same-origin bypass in PDFium. Credit to Rob Wu
+    - CVE-2016-5205: Universal XSS in Blink. Credit to Anonymous
+    - CVE-2016-5204: Universal XSS in Blink. Credit to Mariusz Mlynski
+    - CVE-2016-5209: Out of bounds write in Blink. Credit to Giwan Go
+    - CVE-2016-5203: Use after free in PDFium. Credit to Anonymous
+    - CVE-2016-5210: Out of bounds write in PDFium. Credit to Ke Liu
+    - CVE-2016-5212: Local file disclosure in DevTools. Credit to Khalil Zhani
+    - CVE-2016-5211: Use after free in PDFium. Credit to Anonymous
+    - CVE-2016-5213: Use after free in V8. Credit to Khalil Zhani
+    - CVE-2016-5214: File download protection bypass. Credit to Jonathan Birch
+      and MSVR
+    - CVE-2016-5216: Use after free in PDFium. Credit to Anonymous
+    - CVE-2016-5215: Use after free in Webaudio. Credit to Looben Yang
+    - CVE-2016-5217: Use of unvalidated data in PDFium. Credit to Rob Wu
+    - CVE-2016-5218: Address spoofing in Omnibox. Credit to Abdulrahman
+      Alqabandi
+    - CVE-2016-5219: Use after free in V8. Credit to Rob Wu
+    - CVE-2016-5221: Integer overflow in ANGLE. Credit to Tim Becker
+    - CVE-2016-5220: Local file access in PDFium. Credit to Rob Wu
+    - CVE-2016-5222: Address spoofing in Omnibox. Credit to xisigr
+    - CVE-2016-9650: CSP Referrer disclosure. Credit to Jakub Żoczek
+    - CVE-2016-5223: Integer overflow in PDFium. Credit to Hwiwon Lee
+    - CVE-2016-5226: Limited XSS in Blink. Credit to Jun Kokatsu
+    - CVE-2016-5225: CSP bypass in Blink. Credit to Scott Helme
+    - CVE-2016-5224: Same-origin bypass in SVG. Credit to Roeland Krak
+    - CVE-2016-9652: Various fixes from internal audits, fuzzing and other
+      initiatives
+  * Make it possible to pass build flags into gn (closes: #845785).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 02 Dec 2016 02:06:59 +0000
+
 chromium-browser (54.0.2840.101-1) unstable; urgency=medium
 
   * New upstream stable release:

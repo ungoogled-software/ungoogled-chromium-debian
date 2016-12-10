@@ -3,7 +3,6 @@ out/Release/chrome-sandbox usr/lib/chromium
 
 out/Release/*.bin usr/lib/chromium
 out/Release/*.pak usr/lib/chromium
-out/Release/icudtl.dat usr/lib/chromium
 
 out/Release/resources/en-US.pak usr/lib/chromium/locales
 
