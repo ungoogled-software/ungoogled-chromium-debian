@@ -1,3 +1,10 @@
+chromium-browser (55.0.2883.75-2) unstable; urgency=medium
+
+  * Don't set FF_API_CONVERGENCE_DURATION since it is not a part of ffmpeg's
+    public API, and when defined leads to crashes (closes: #846648).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 10 Dec 2016 22:24:06 +0000
+
 chromium-browser (55.0.2883.75-1) unstable; urgency=medium
 
   * New upstream stable release:
