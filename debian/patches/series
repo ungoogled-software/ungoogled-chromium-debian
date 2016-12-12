@@ -23,3 +23,7 @@ system/vpx.patch
 system/nspr.patch
 system/event.patch
 system/ffmpeg.patch
+
+arm64-gcc-toolchain.patch
+arm64-gn.patch
+
