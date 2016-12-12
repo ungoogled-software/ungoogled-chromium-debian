@@ -86,7 +86,7 @@ Build-Depends:
 Standards-Version: 3.9.8
 
 Package: chromium
-Architecture: i386 amd64
+Architecture: i386 amd64 arm64 armhf
 Built-Using: ${Built-Using}
 Depends:
  ${misc:Depends},
@@ -125,7 +125,7 @@ Description: web browser - language packs
  ro, ru, sk, sl, sr, sv, sw, ta, te, th, tr, uk, vi, zh-CN, zh-TW
 
 Package: chromedriver
-Architecture: i386 amd64
+Architecture: i386 amd64 arm64 armhf
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
