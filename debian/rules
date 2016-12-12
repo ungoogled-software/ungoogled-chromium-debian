@@ -15,12 +15,20 @@ defines+=target_extra_ldflags=\"-Wl,--stats\"
 # avoid error in v8's garbage collector (see http://gcc.gnu.org/bugzilla/show_bug.cgi?id=68853)
 defines+=target_extra_cxxflags=\"-fno-delete-null-pointer-checks\"
 
+DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+
 # set the appropriate cpu architecture
-ifeq (i386,$(shell dpkg-architecture -qDEB_HOST_ARCH))
+ifeq (i386,$(DEB_HOST_ARCH))
 defines+=host_cpu=\"x86\"
 endif
-ifeq (amd64,$(shell dpkg-architecture -qDEB_HOST_ARCH))
+ifeq (amd64,$(DEB_HOST_ARCH))
 defines+=host_cpu=\"x64\"
+endif
+ifeq (arm64,$(DEB_HOST_ARCH))
+defines+=host_cpu=\"arm64\"
+endif
+ifeq (armhf,$(DEB_HOST_ARCH))
+defines+=host_cpu=\"arm\"
 endif
 
 # disabled features
