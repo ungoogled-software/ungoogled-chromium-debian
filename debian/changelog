@@ -1,3 +1,17 @@
+chromium-browser (55.0.2883.75-2+exp2) experimental; urgency=medium
+
+  * Set arm_use_neon=false on armhf until we enable a neon-supporting
+    buildd in Debian.
+
+ -- Riku Voipio <riku.voipio@linaro.org>  Thu, 15 Dec 2016 14:34:45 +0200
+
+chromium-browser (55.0.2883.75-2+exp1) experimental; urgency=medium
+
+  * Add patches from upstream for gn builds on arm64
+  * Enable arm64/armhf builds
+
+ -- Riku Voipio <riku.voipio@linaro.org>  Mon, 12 Dec 2016 14:04:19 +0200
+
 chromium-browser (55.0.2883.75-2) unstable; urgency=medium
 
   * Don't set FF_API_CONVERGENCE_DURATION since it is not a part of ffmpeg's
