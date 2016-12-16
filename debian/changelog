@@ -1,3 +1,9 @@
+chromium-browser (55.0.2883.75-2+exp3) experimental; urgency=medium
+
+  * Correct typo from last build 
+
+ -- Riku Voipio <riku.voipio@linaro.org>  Fri, 16 Dec 2016 14:31:37 +0200
+
 chromium-browser (55.0.2883.75-2+exp2) experimental; urgency=medium
 
   * Set arm_use_neon=false on armhf until we enable a neon-supporting
