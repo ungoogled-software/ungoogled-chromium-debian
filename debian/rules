@@ -28,7 +28,7 @@ ifeq (arm64,$(DEB_HOST_ARCH))
 defines+=host_cpu=\"arm64\"
 endif
 ifeq (armhf,$(DEB_HOST_ARCH))
-defines+=host_cpu=\"arm \
+defines+=host_cpu=\"arm\" \
          arm_use_neon=false \
 
 endif
