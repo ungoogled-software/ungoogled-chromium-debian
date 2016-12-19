@@ -93,7 +93,6 @@ Depends:
  ${shlibs:Depends},
  x11-utils,
  xdg-utils,
- libnettle6,
 Recommends:
  fonts-liberation,
 Suggests:
@@ -102,6 +101,7 @@ Provides:
  www-browser,
  gnome-www-browser,
 Conflicts:
+ libnettle4,
  libgl1-mesa-swx11,
 Description: web browser
  Web browser that aims to build a safer, faster, and more stable internet

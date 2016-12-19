@@ -1,6 +1,16 @@
+chromium-browser (55.0.2883.75-3) unstable; urgency=medium
+
+  * Merge experimental branch.
+  * Respect parallel setting in DEB_BUILD_OPTIONS while bootstrapping gn.
+  * Conflict libnettle4 rather than depend on libnettle6 (closes: #841213).
+  * Disable builtin media router since it only works with official Google
+    Chrome builds, not chromium (closes: #833477).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 18 Dec 2016 23:14:18 +0000
+
 chromium-browser (55.0.2883.75-2+exp3) experimental; urgency=medium
 
-  * Correct typo from last build 
+  * Correct typo from last build.
 
  -- Riku Voipio <riku.voipio@linaro.org>  Fri, 16 Dec 2016 14:31:37 +0200
 

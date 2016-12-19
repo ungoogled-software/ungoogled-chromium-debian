@@ -29,8 +29,7 @@ defines+=host_cpu=\"arm64\"
 endif
 ifeq (armhf,$(DEB_HOST_ARCH))
 defines+=host_cpu=\"arm\" \
-         arm_use_neon=false \
-
+         arm_use_neon=false
 endif
 
 # disabled features
@@ -76,20 +75,18 @@ flotpaths=/usr/share/javascript/jquery/*min.js \
 override_dh_auto_configure:
 	# output compiler information
 	$(CXX) --version
-	# https://groups.google.com/a/chromium.org/d/topic/chromium-packagers/9JX1N2nf4PU/discussion
-	touch chrome/test/data/webui/i18n_process_css_test.html
 	# use system flot
 	for file in $(flotpaths); do ln -sf $$file third_party/flot; done
 	# strip out system third_party libraries
 	./debian/scripts/unbundle
 	# build gn
-	./tools/gn/bootstrap/bootstrap.py -v -s
+	./tools/gn/bootstrap/bootstrap.py -s $(njobs)
 	# configure
 	./out/Release/gn gen out/Release --args="$(defines)"
 
 override_dh_auto_build-arch:
 	./out/Release/gn gen out/Release --args="$(defines)"
-	ninja -v $(njobs) -C out/Release chrome chrome_sandbox chromedriver
+	ninja $(njobs) -C out/Release chrome chrome_sandbox chromedriver
 	mv out/Release/chrome out/Release/chromium || true
 	mv out/Release/chrome.1 out/Release/chromium.1 || true
 	mv out/Release/chrome_sandbox out/Release/chrome-sandbox || true
@@ -97,7 +94,7 @@ override_dh_auto_build-arch:
 	chmod 4755 out/Release/chrome-sandbox # suid sandbox
 
 override_dh_auto_build-indep:
-	ninja -v $(njobs) -C out/Release packed_resources
+	ninja $(njobs) -C out/Release packed_resources
 	rm -f out/Release/locales/en-US.pak
 
 override_dh_auto_install-arch:
