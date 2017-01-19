@@ -167,6 +167,7 @@ Description: web browser - WebDriver support
 Package: chromedriver
 Architecture: i386 amd64 arm64 armhf
 Depends:
+ ${misc:Depends},
  chromium-driver (= ${binary:Version}),
 Description: web browser - WebDriver support transitional package
  Web browser that aims to build a safer, faster, and more stable internet

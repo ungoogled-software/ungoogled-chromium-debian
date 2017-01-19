@@ -1,3 +1,10 @@
+chromium-browser (55.0.2883.75-5) unstable; urgency=medium
+
+  * Fix new lintian warnings.
+  * Fix quoting error in run script (closes: #851634).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 19 Jan 2017 01:19:24 +0000
+
 chromium-browser (55.0.2883.75-4) unstable; urgency=medium
 
   * Add chromium-shell package.

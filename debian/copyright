@@ -6554,7 +6554,7 @@ License: LGPL-2+
 
 Files: third_party/WebKit/Source/devtools/front_end/*
 Copyright: Marijn Haverbeke and others
-License: Expat
+License: MIT
 
 Files: third_party/WebKit/Source/core/layout/ScrollAlignment.cpp
        third_party/WebKit/Source/core/layout/ScrollAlignment.h
@@ -6593,7 +6593,7 @@ Copyright: 2009-2014, Florent Xicluna <florent.xicluna@gmail.com>
            2006-2009, Johann C. Rocholl <johann@rocholl.net>
            2014, Marijn Haverbeke <marijnh@gmail.com> and others
            2010, Timothy Farrell
-License: Expat
+License: MIT
 
 Files: third_party/WebKit/Source/core/layout/TableLayoutAlgorithm.h
        third_party/WebKit/Source/core/layout/TableLayoutAlgorithmAuto.cpp
@@ -6625,7 +6625,7 @@ License: Apache-2.0
 Files: third_party/WebKit/Tools/Scripts/webkitpy/thirdparty/coverage/htmlfiles/jquery.hotkeys.js
 Copyright: 2010, John Resig
            2010, The Dojo Foundation
-License: GPL-2
+License: GPL-2.0
 
 Files: third_party/WebKit/Source/wtf/DateMath.cpp
 Copyright: 2010, &yet, LLC <nate@andyet.net>
@@ -9490,8 +9490,27 @@ License: MIT
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
 
+License: ISC
+ Permission to use, copy, modify, and distribute this software for any
+ purpose with or without fee is hereby granted, provided that the above
+ copyright notice and this permission notice appear in all copies.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS" AND ISC DISCLAIMS ALL WARRANTIES
+ WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+ MERCHANTABILITY AND FITNESS.  IN NO EVENT SHALL ISC BE LIABLE FOR
+ ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT
+ OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
 License: GPL-2.0
  See /usr/share/common-licenses/GPL-2.
+
+License: LGPL-2
+ See /usr/share/common-licenses/LGPL-2.
+
+License: LGPL-2+
+ See /usr/share/common-licenses/LGPL-2.
 
 License: LGPL-2.1
  See /usr/share/common-licenses/LGPL-2.1.
