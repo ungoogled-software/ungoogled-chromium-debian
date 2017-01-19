@@ -53,6 +53,7 @@ defines+=use_gio=true \
          use_gold=true \
          use_pulseaudio=true \
          link_pulseaudio=true \
+         enable_widevine=true \
          proprietary_codecs=true \
          ffmpeg_branding=\"Chrome\" \
 
@@ -86,9 +87,10 @@ override_dh_auto_configure:
 
 override_dh_auto_build-arch:
 	./out/Release/gn gen out/Release --args="$(defines)"
-	ninja $(njobs) -C out/Release chrome chrome_sandbox chromedriver
+	ninja $(njobs) -C out/Release chrome chrome_sandbox content_shell chromedriver
 	mv out/Release/chrome out/Release/chromium || true
 	mv out/Release/chrome.1 out/Release/chromium.1 || true
+	mv out/Release/content_shell out/Release/chromium-shell || true
 	mv out/Release/chrome_sandbox out/Release/chrome-sandbox || true
 	mv out/Release/locales/en-US.pak out/Release/resources || true
 	chmod 4755 out/Release/chrome-sandbox # suid sandbox

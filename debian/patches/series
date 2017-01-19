@@ -1,12 +1,9 @@
 manpage.patch
 
-disable/pings.patch
 disable/promo.patch
-disable/extension-updater.patch
 disable/google-api-warning.patch
 disable/third-party-cookies.patch
 disable/external-components.patch
-disable/default-browser-warning.patch
 
 # gtk3theme.patch
 
@@ -18,6 +15,7 @@ gpu-timeout.patch
 build-flags.patch
 master-preferences.patch
 
+widevine-revision.patch
 chromedriver-revision.patch
 
 system/icu.patch
@@ -28,4 +26,3 @@ system/ffmpeg.patch
 
 arm64-gcc-toolchain.patch
 arm64-gn.patch
-

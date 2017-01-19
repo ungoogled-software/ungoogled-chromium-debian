@@ -3,10 +3,8 @@ Subject: GN: Add Arm64 Linux support
  Add Arm64 linux support be able to build GN binary for native arm64 builds.
 Origin: upstream, https://chromium.googlesource.com/chromium/src.git/+/b9a43ab09791a1dcfd185141f71627c3b8d437db
 
-Index: chromium-browser-54.0.2840.101/tools/gn/args.cc
-===================================================================
---- chromium-browser-54.0.2840.101.orig/tools/gn/args.cc
-+++ chromium-browser-54.0.2840.101/tools/gn/args.cc
+--- a/tools/gn/args.cc
++++ b/tools/gn/args.cc
 @@ -268,6 +268,7 @@ void Args::SetSystemVarsLocked(Scope* de
    static const char kX86[] = "x86";
    static const char kX64[] = "x64";

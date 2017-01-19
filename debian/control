@@ -97,6 +97,9 @@ Recommends:
  fonts-liberation,
 Suggests:
  chromium-l10n,
+ chromium-shell,
+ chromium-driver,
+ chromium-widevine,
 Provides:
  www-browser,
  gnome-www-browser,
@@ -124,7 +127,31 @@ Description: web browser - language packs
  hi, hr, hu, id, it, ja, kn, ko, lt, lv, ml, mr, nb, nl, pl, pt-BR, pt-PT,
  ro, ru, sk, sl, sr, sv, sw, ta, te, th, tr, uk, vi, zh-CN, zh-TW
 
-Package: chromedriver
+Package: chromium-shell
+Architecture: i386 amd64 arm64 armhf
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Description: web browser - minimal shell
+ Web browser that aims to build a safer, faster, and more stable internet
+ browsing experience.
+ .
+ This package provides a minimal version of the chromium user interface
+ (the content shell).
+
+Package: chromium-widevine
+Architecture: i386 amd64 arm64 armhf
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+ chromium (= ${binary:Version}),
+Description: web browser - widevine content decryption support
+ Web browser that aims to build a safer, faster, and more stable internet
+ browsing experience.
+ .
+ This package provides support for the widevine content decryption module.
+
+Package: chromium-driver
 Architecture: i386 amd64 arm64 armhf
 Depends:
  ${misc:Depends},
@@ -136,3 +163,13 @@ Description: web browser - WebDriver support
  .
  This package provides a bridge between the browser component and the selenium
  automatic webdriver.
+
+Package: chromedriver
+Architecture: i386 amd64 arm64 armhf
+Depends:
+ chromium-driver (= ${binary:Version}),
+Description: web browser - WebDriver support transitional package
+ Web browser that aims to build a safer, faster, and more stable internet
+ browsing experience.
+ .
+ This is a transitional package and can be safely removed.

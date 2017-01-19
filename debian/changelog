@@ -1,3 +1,21 @@
+chromium-browser (55.0.2883.75-4) unstable; urgency=medium
+
+  * Add chromium-shell package.
+  * Rename chromedriver package to chromium-driver.
+  * Add chromium-widevine package (closes: #838515).
+    - Thanks to Felix Geyer.
+  * Add initial upstream metadata (closes: #848228).
+  * Set more options at runtime instead of build time.
+  * Install chromedriver to /usr/bin (closes: #845312).
+  * Update webkit copyright information (closes: #849264).
+    - Thanks to Sandro Knauß.
+  * Better handling of browser extensions (closes: #841401).
+    - Only support locally installed extensions by default.
+    - Add new command line flag --enable-remote-extensions, which bypasses the
+      new default, allowing remote extensions and automatic updating.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Mon, 02 Jan 2017 02:44:11 +0000
+
 chromium-browser (55.0.2883.75-3) unstable; urgency=medium
 
   * Merge experimental branch.

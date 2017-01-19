@@ -15,9 +15,10 @@ BUILD_DIST="@BUILD_DIST@"
 usage () {
   echo "$APPNAME [-h|--help] [-g|--debug] [--temp-profile] [options] [URL]"
   echo
-  echo "        -g or --debug           Start within $GDB"
-  echo "        -h or --help            This help screen"
-  echo "        --temp-profile          Start with a new and temporary profile"
+  echo "        -g or --debug              Start within $GDB"
+  echo "        -h or --help               This help screen"
+  echo "        --temp-profile             Start with a new and temporary profile"
+  echo "        --enable-remote-extensions Allow extensions from remote sites
   echo
   echo " Other supported options are:"
   MANWIDTH=80 man chromium | sed -e '1,/OPTIONS/d; /ENVIRONMENT/,$d'
@@ -59,6 +60,7 @@ export CHROME_VERSION_EXTRA="built on Debian $BUILD_DIST, running on Debian $DIS
 
 want_debug=0
 want_temp_profile=0
+want_remote_extensions=0
 while [ $# -gt 0 ]; do
   case "$1" in
     -h | --help | -help )
@@ -70,6 +72,9 @@ while [ $# -gt 0 ]; do
     --temp-profile )
       want_temp_profile=1
       shift ;;
+    --enable-remote-extensions )
+      want_remote_extensions=1
+      shift ;;
     -- ) # Stop option prcessing
       shift
       break ;;
@@ -77,6 +82,11 @@ while [ $# -gt 0 ]; do
       break ;;
   esac
 done
+
+# Whitelist installed extensions that are specified via --load-extension
+if [ $want_remote_extensions -eq 0 ]; then
+  export CHROMIUM_FLAGS="$CHROMIUM_FLAGS --disable-extensions-except=$(echo $CHROMIUM_FLAGS | tr ' ' \\n | grep \\-\\-load-extension | cut -d= -f2 | tr \\n ,)"
+fi
 
 if [ $want_temp_profile -eq 1 ] ; then
   TEMP_PROFILE=`mktemp -d`
