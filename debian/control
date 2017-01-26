@@ -105,6 +105,7 @@ Provides:
  gnome-www-browser,
 Conflicts:
  libnettle4,
+ libsecret-1-0 (<< 0.18),
  libgl1-mesa-swx11,
 Description: web browser
  Web browser that aims to build a safer, faster, and more stable internet
@@ -140,6 +141,7 @@ Description: web browser - minimal shell
  (the content shell).
 
 Package: chromium-widevine
+Section: contrib/web
 Architecture: i386 amd64 arm64 armhf
 Depends:
  ${misc:Depends},

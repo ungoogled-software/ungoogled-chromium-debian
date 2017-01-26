@@ -1,28 +1,25 @@
 manpage.patch
+master-preferences.patch
+
+gn/parallel.patch
+gn/buildflags.patch
+
+gn/arm64.patch
+gn/arm64-toolchain.patch
 
 disable/promo.patch
 disable/google-api-warning.patch
 disable/third-party-cookies.patch
 disable/external-components.patch
 
-# gtk3theme.patch
-
-glibc2.24.patch
-
-gn.patch
-ps-print.patch
-gpu-timeout.patch
-build-flags.patch
-master-preferences.patch
-
-widevine-revision.patch
-chromedriver-revision.patch
+fixes/ps-print.patch
+fixes/glibc2.24.patch
+fixes/gpu-timeout.patch
+fixes/widevine-revision.patch
+fixes/chromedriver-revision.patch
 
 system/icu.patch
 system/vpx.patch
 system/nspr.patch
 system/event.patch
 system/ffmpeg.patch
-
-arm64-gcc-toolchain.patch
-arm64-gn.patch

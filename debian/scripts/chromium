@@ -60,7 +60,6 @@ export CHROME_VERSION_EXTRA="built on Debian $BUILD_DIST, running on Debian $DIS
 
 want_debug=0
 want_temp_profile=0
-want_remote_extensions=0
 while [ $# -gt 0 ]; do
   case "$1" in
     -h | --help | -help )
@@ -73,7 +72,7 @@ while [ $# -gt 0 ]; do
       want_temp_profile=1
       shift ;;
     --enable-remote-extensions )
-      want_remote_extensions=1
+      CHROMIUM_FLAGS="$CHROMIUM_FLAGS --enable-remote-extensions"
       shift ;;
     -- ) # Stop option prcessing
       shift
@@ -84,7 +83,7 @@ while [ $# -gt 0 ]; do
 done
 
 # Whitelist installed extensions that are specified via --load-extension
-if [ $want_remote_extensions -eq 0 ]; then
+if [ -z "$(echo $CHROMIUM_FLAGS | grep \\-\\-enable-remote-extensions)" ]; then
   export CHROMIUM_FLAGS="$CHROMIUM_FLAGS --disable-extensions-except=$(echo $CHROMIUM_FLAGS | tr ' ' \\n | grep \\-\\-load-extension | cut -d= -f2 | tr \\n ,)"
 fi
 

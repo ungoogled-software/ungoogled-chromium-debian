@@ -1,3 +1,13 @@
+chromium-browser (55.0.2883.75-6) unstable; urgency=medium
+
+  * Organize patches.
+  * Move widevine package to contrib (closes: #851917).
+  * Conflict with very old versions of libsecret (closes: #838864).
+  * Support --enable-remote-extensions option passed through CHROMIUM_FLAGS
+    (closes: #851927).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 22 Jan 2017 00:47:28 +0000
+
 chromium-browser (55.0.2883.75-5) unstable; urgency=medium
 
   * Fix new lintian warnings.
