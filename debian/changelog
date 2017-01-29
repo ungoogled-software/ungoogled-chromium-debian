@@ -1,3 +1,33 @@
+chromium-browser (56.0.2924.76-1) experimental; urgency=medium
+
+  * New upstream stable release:
+    - CVE-2017-5007: Universal XSS in Blink. Credit to Mariusz Mlynski
+    - CVE-2017-5006: Universal XSS in Blink. Credit to Mariusz Mlynski
+    - CVE-2017-5008: Universal XSS in Blink. Credit to Mariusz Mlynski
+    - CVE-2017-5010: Universal XSS in Blink. Credit to Mariusz Mlynski
+    - CVE-2017-5011: Unauthorised file access in Devtools. Credit to Khalil
+      Zhani
+    - CVE-2017-5009: Out of bounds memory access in WebRTC. Credit to Sean
+      Stanek and Chip Bradford
+    - CVE-2017-5012: Heap overflow in V8. Credit to Gergely Nagy
+    - CVE-2017-5013: Address spoofing in Omnibox. Credit to Haosheng Wang
+    - CVE-2017-5014: Heap overflow in Skia. Credit to sweetchip
+    - CVE-2017-5015: Address spoofing in Omnibox. Credit to Armin Razmdjou
+    - CVE-2017-5019: Use after free in Renderer. Credit to Wadih Matar
+    - CVE-2017-5016: UI spoofing in Blink. Credit to Haosheng Wang
+    - CVE-2017-5017: Uninitialised memory access in webm video. Credit to
+      danberm
+    - CVE-2017-5018: Universal XSS in chrome://apps. Credit to Rob Wu
+    - CVE-2017-5020: Universal XSS in chrome://downloads. Credit to Rob Wu
+    - CVE-2017-5021: Use after free in Extensions. Credit to Rob Wu
+    - CVE-2017-5022: Bypass of Content Security Policy in Blink. Credit to
+      PKAV Team.
+    - CVE-2017-5023: Type confusion in metrics. Credit to the UK's National
+      Cyber Security Centre (NCSC)
+    - CVE-2017-5026: UI spoofing. Credit to Ronni Skansing
+
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 26 Jan 2017 01:42:21 +0000
+
 chromium-browser (55.0.2883.75-6) unstable; urgency=medium
 
   * Organize patches.
