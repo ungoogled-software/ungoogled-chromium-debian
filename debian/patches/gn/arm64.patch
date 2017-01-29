@@ -5,14 +5,14 @@ Origin: upstream, https://chromium.googlesource.com/chromium/src.git/+/b9a43ab09
 
 --- a/tools/gn/args.cc
 +++ b/tools/gn/args.cc
-@@ -268,6 +268,7 @@ void Args::SetSystemVarsLocked(Scope* de
+@@ -266,6 +266,7 @@ void Args::SetSystemVarsLocked(Scope* de
    static const char kX86[] = "x86";
    static const char kX64[] = "x64";
    static const char kArm[] = "arm";
 +  static const char kArm64[] = "arm64";
    static const char kMips[] = "mipsel";
-   const char* arch = nullptr;
- 
+   static const char kS390X[] = "s390x";
+   static const char kPPC64[] = "ppc64";
 @@ -280,6 +281,8 @@ void Args::SetSystemVarsLocked(Scope* de
      arch = kX64;
    else if (os_arch.substr(0, 3) == "arm")
@@ -21,4 +21,4 @@ Origin: upstream, https://chromium.googlesource.com/chromium/src.git/+/b9a43ab09
 +    arch = kArm64;
    else if (os_arch == "mips")
      arch = kMips;
-   else
+   else if (os_arch == "s390x")
