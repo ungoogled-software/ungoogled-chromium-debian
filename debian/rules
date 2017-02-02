@@ -29,7 +29,7 @@ defines+=host_cpu=\"arm64\"
 endif
 ifeq (armhf,$(DEB_HOST_ARCH))
 defines+=host_cpu=\"arm\" \
-         arm_use_neon=false
+	 arm_use_neon=false
 endif
 
 # disabled features

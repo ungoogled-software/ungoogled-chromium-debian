@@ -1,3 +1,10 @@
+chromium-browser (56.0.2924.76-2) experimental; urgency=medium
+
+  * Backport upstream bugfix for non-NEON builds, closes: #853108
+  * Fix seccomp sandboxing on arm64 platforms with DRI3
+
+ -- Riku Voipio <riku.voipio@linaro.org>  Thu, 02 Feb 2017 09:37:05 +0200
+
 chromium-browser (56.0.2924.76-1) experimental; urgency=medium
 
   * New upstream stable release:
