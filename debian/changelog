@@ -1,3 +1,9 @@
+chromium-browser (56.0.2924.76-4) unstable; urgency=medium
+
+  * Do not create a dbgsym package for widevine (closes: #855529).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 19 Feb 2017 20:17:38 +0000
+
 chromium-browser (56.0.2924.76-3) unstable; urgency=medium
 
   * Upload to unstable.
