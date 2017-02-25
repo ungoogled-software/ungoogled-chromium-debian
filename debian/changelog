@@ -1,3 +1,13 @@
+chromium-browser (56.0.2924.76-5) unstable; urgency=medium
+
+  * Configure with fieldtrial_testing_like_official_build=true to avoid
+    building with experimental features enabled (closes: #855434).
+  * Do not disable background networking when remote extensions are enabled,
+    since that option also blocks updates to extensions (closes: #841401).
+    - Thanks to Tarmo Huuhka.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 25 Feb 2017 21:41:02 +0000
+
 chromium-browser (56.0.2924.76-4) unstable; urgency=medium
 
   * Do not create a dbgsym package for widevine (closes: #855529).

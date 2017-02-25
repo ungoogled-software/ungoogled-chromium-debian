@@ -84,6 +84,7 @@ done
 
 # Whitelist installed extensions that are specified via --load-extension
 if [ -z "$(echo $CHROMIUM_FLAGS | grep \\-\\-enable-remote-extensions)" ]; then
+  export CHROMIUM_FLAGS="$CHROMIUM_FLAGS --disable-background-networking"
   export CHROMIUM_FLAGS="$CHROMIUM_FLAGS --disable-extensions-except=$(echo $CHROMIUM_FLAGS | tr ' ' \\n | grep \\-\\-load-extension | cut -d= -f2 | tr \\n ,)"
 fi
 

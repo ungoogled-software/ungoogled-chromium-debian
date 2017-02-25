@@ -56,6 +56,7 @@ defines+=use_gio=true \
          enable_widevine=true \
          proprietary_codecs=true \
          ffmpeg_branding=\"Chrome\" \
+         fieldtrial_testing_like_official_build=true \
 
 # some notes about embedded libraries
 #  can't use system nss since net/third_party/nss is heavily patched
