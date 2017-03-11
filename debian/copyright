@@ -25,6 +25,9 @@ Files-Excluded:
  third_party/expat/files
  third_party/libxml/src
  third_party/*rjsmin/bench
+ third_party/snappy/src/testdata
+ third_party/skia/third_party/yasm
+ third_party/WebKit/PerformanceTests
  third_party/mesa/src/src/gallium/state_trackers/d3d1x/w32api
  third_party/libxslt/compile
  third_party/libxslt/COPYING

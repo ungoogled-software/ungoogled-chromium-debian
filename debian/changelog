@@ -1,3 +1,32 @@
+chromium-browser (57.0.2987.98-1) unstable; urgency=medium
+
+  * New upstream stable release.
+    - CVE-2017-5030: Memory corruption in V8. Credit to Brendon Tiszka
+    - CVE-2017-5031: Use after free in ANGLE. Credit to Looben Yang
+    - CVE-2017-5032: Out of bounds write in PDFium. Credit to Ashfaq Ansari
+    - CVE-2017-5029: Integer overflow in libxslt. Credit to Holger Fuhrmannek
+    - CVE-2017-5034: Use after free in PDFium. Credit to Ke Liu
+    - CVE-2017-5035: Incorrect security UI in Omnibox. Credit to Enzo Aguado
+    - CVE-2017-5036: Use after free in PDFium. Credit to Anonymous
+    - CVE-2017-5037: Multiple out of bounds writes in ChunkDemuxer. Credit to
+      Yongke Wang
+    - CVE-2017-5039: Use after free in PDFium. Credit to jinmo123
+    - CVE-2017-5040: Information disclosure in V8. Credit to Choongwoo Han
+    - CVE-2017-5041: Address spoofing in Omnibox. Credit to Jordi Chancel
+    - CVE-2017-5033: Bypass of Content Security Policy in Blink. Credit to
+      Nicolai Grødum
+    - CVE-2017-5042: Incorrect handling of cookies in Cast. Credit to Mike
+      Ruddy
+    - CVE-2017-5038: Use after free in GuestView. Credit to Anonymous
+    - CVE-2017-5043: Use after free in GuestView. Credit to Anonymous
+    - CVE-2017-5044: Heap overflow in Skia. Credit to Kushal Arvind Shah
+    - CVE-2017-5045: Information disclosure in XSS Auditor. Credit to Dhaval
+      Kapil
+    - CVE-2017-5046: Information disclosure in Blink. Credit to Masato Kinugawa
+  * Drop arm and MADV_FREE patches, which are now applied upstream.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 10 Mar 2017 22:00:06 +0000
+
 chromium-browser (56.0.2924.76-5) unstable; urgency=medium
 
   * Configure with fieldtrial_testing_like_official_build=true to avoid

@@ -4,20 +4,15 @@ master-preferences.patch
 gn/parallel.patch
 gn/buildflags.patch
 
-gn/arm64.patch
-gn/arm64-toolchain.patch
-
 disable/promo.patch
 disable/google-api-warning.patch
 disable/third-party-cookies.patch
 disable/external-components.patch
 
 fixes/ps-print.patch
-fixes/glibc2.24.patch
 fixes/gpu-timeout.patch
 fixes/widevine-revision.patch
 fixes/chromedriver-revision.patch
-fixes/opus-no-neon.patch
 fixes/arm64-seccomp-memfd.patch
 
 system/icu.patch
