@@ -1,3 +1,14 @@
+chromium-browser (57.0.2987.133-1) unstable; urgency=medium
+
+  * New upstream security update.
+    - CVE-2017-5055: Use after free in printing. Credit to Wadih Matar
+    - CVE-2017-5054: Heap buffer overflow in V8. Credit to Nicolas Trippar
+    - CVE-2017-5052: Bad cast in Blink. Credit to JeongHoon Shin
+    - CVE-2017-5056: Use after free in Blink. Credit to anonymous
+    - CVE-2017-5053: Out of bounds memory access in V8. Credit to Team Sniper
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 07 Apr 2017 01:07:17 +0000
+
 chromium-browser (57.0.2987.98-1) unstable; urgency=medium
 
   * New upstream stable release.
