@@ -1,6 +1,7 @@
 manpage.patch
 master-preferences.patch
 
+gn/callback.patch
 gn/parallel.patch
 gn/buildflags.patch
 
@@ -13,7 +14,6 @@ fixes/ps-print.patch
 fixes/gpu-timeout.patch
 fixes/widevine-revision.patch
 fixes/chromedriver-revision.patch
-fixes/arm64-seccomp-memfd.patch
 
 system/icu.patch
 system/vpx.patch

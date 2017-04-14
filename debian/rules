@@ -38,6 +38,7 @@ defines+=is_debug=false \
          use_ozone=false \
          use_gconf=false \
          use_sysroot=false \
+         use_vulcanize=false \
          use_gnome_keyring=false \
          treat_warnings_as_errors=false \
          enable_nacl=false \

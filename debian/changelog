@@ -1,3 +1,14 @@
+chromium-browser (58.0.3029.68-1) experimental; urgency=medium
+
+  * New upstream beta release.
+    - Drop arm patch, now applied upstream.
+    - Add missing file needed to be able to build gn.
+    - Update vpx.patch to continue using the system library.
+    - Set use_vulcanize=false to avoid bringing in the entire nodejs ecosystem.
+  * Enable remote extensions by default (closes: #856183).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 07 Apr 2017 04:51:22 +0000
+
 chromium-browser (57.0.2987.133-1) unstable; urgency=medium
 
   * New upstream security update.

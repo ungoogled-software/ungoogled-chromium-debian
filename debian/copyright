@@ -44,7 +44,17 @@ Files-Excluded:
  base/test/data
  base/third_party/nspr
  third_party/binutils
+ v8/benchmarks/regexp.js
  v8/third_party/binutils
+ third_party/node
+ third_party/mocha/mocha.js
+ third_party/chaijs/chai.js
+ third_party/catapult/third_party/flot
+ third_party/catapult/third_party/chai
+ third_party/catapult/third_party/mocha
+ third_party/webgl/src/conformance-suites
+ third_party/WebKit/Source/devtools/devtools-node-modules
+ third_party/catapult/tracing/tracing/extras/chrome/cc/layer_tree_host_impl_test_data.js
 
 # dirs that should be removed, but the jessie package still needs them
 # third_party/harfbuzz-ng/src
