@@ -1,3 +1,23 @@
+chromium-browser (58.0.3029.81-1) unstable; urgency=medium
+
+  * New upstream stable release.
+    - CVE-2017-5057: Type confusion in PDFium. Credit to Guang Gong.
+    - CVE-2017-5058: Heap use after free in Print Preview. Credit to Khalil
+      Zhani
+    - CVE-2017-5059: Type confusion in Blink. Credit to SkyLined
+    - CVE-2017-5060: URL spoofing in Omnibox. Credit to Xudong Zheng
+    - CVE-2017-5061: URL spoofing in Omnibox. Credit to Haosheng Wang
+    - CVE-2017-5062: Use after free in Chrome Apps. Credit to anonymous
+    - CVE-2017-5063: Heap overflow in Skia. Credit to Sweetchip
+    - CVE-2017-5064: Use after free in Blink. Credit to Wadih Matar
+    - CVE-2017-5065: Incorrect UI in Blink. Credit to Khalil Zhani
+    - CVE-2017-5066: Incorrect signature handing in Networking. Credit to
+      chenchu
+    - CVE-2017-5067: URL spoofing in Omnibox. Credit to Khalil Zhani
+    - CVE-2017-5069: Cross-origin bypass in Blink. Credit to Michael Reizelman
+
+ -- Michael Gilbert <mgilbert@debian.org>  Wed, 19 Apr 2017 23:20:29 +0000
+
 chromium-browser (58.0.3029.68-1) experimental; urgency=medium
 
   * New upstream beta release.

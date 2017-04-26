@@ -54,6 +54,7 @@ Files-Excluded:
  third_party/catapult/third_party/mocha
  third_party/webgl/src/conformance-suites
  third_party/WebKit/Source/devtools/devtools-node-modules
+ third_party/catapult/third_party/vinn/third_party/v8
  third_party/catapult/tracing/tracing/extras/chrome/cc/layer_tree_host_impl_test_data.js
 
 # dirs that should be removed, but the jessie package still needs them
