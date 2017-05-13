@@ -1,3 +1,19 @@
+chromium-browser (59.0.3071.47-1) experimental; urgency=medium
+
+  * New upstream beta release.
+  * Simplify approach for disabling vp9.
+  * Fix incomplete new interfaces to system ICU library.
+  * Remove XML_PARSE_NOXXE flag since system libxml2 does not yet support it.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 13 May 2017 16:09:05 +0000
+
+chromium-browser (58.0.3029.96-1) unstable; urgency=medium
+
+  * New upstream security release.
+    - CVE-2017-5068: Race condition in WebRTC. Credit to Philipp Hancke
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 07 May 2017 00:36:22 +0000
+
 chromium-browser (58.0.3029.81-1) unstable; urgency=medium
 
   * New upstream stable release.

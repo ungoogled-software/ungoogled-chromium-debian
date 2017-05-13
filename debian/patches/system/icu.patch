@@ -1,6 +1,9 @@
+description: maintain compatibility with system icu library
+author: Michael Gilbert <mgilbert@debian.org>
+
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -811,8 +811,7 @@ group("gn_only") {
+@@ -676,8 +676,7 @@ group("gn_all") {
      deps += [ "//ui/ozone/demo" ]
    }
  
@@ -10,3 +13,196 @@
      deps += [
        "//testing/libfuzzer/fuzzers",
        "//testing/libfuzzer/tests:libfuzzer_tests",
+--- a/third_party/WebKit/Source/platform/wtf/text/TextCodecICU.cpp
++++ b/third_party/WebKit/Source/platform/wtf/text/TextCodecICU.cpp
+@@ -71,8 +71,8 @@ void TextCodecICU::RegisterEncodingNames
+     const char* primary_standard = "HTML";
+     const char* secondary_standard = "MIME";
+ #else
+-    const char* primaryStandard = "MIME";
+-    const char* secondaryStandard = "IANA";
++    const char* primary_standard = "MIME";
++    const char* secondary_standard = "IANA";
+ #endif
+     const char* standard_name =
+         ucnv_getStandardName(name, primary_standard, &error);
+@@ -94,20 +94,20 @@ void TextCodecICU::RegisterEncodingNames
+ //    encoding for encoding GB_2312-80 and several others. So, we need to
+ //    override this behavior, too.
+ #if defined(USING_SYSTEM_ICU)
+-    if (!strcmp(standardName, "GB2312") || !strcmp(standardName, "GB_2312-80"))
+-      standardName = "GBK";
++    if (!strcmp(standard_name, "GB2312") || !strcmp(standard_name, "GB_2312-80"))
++      standard_name = "GBK";
+     // Similarly, EUC-KR encodings all map to an extended version, but
+     // per HTML5, the canonical name still should be EUC-KR.
+-    else if (!strcmp(standardName, "EUC-KR") ||
+-             !strcmp(standardName, "KSC_5601") ||
+-             !strcmp(standardName, "cp1363"))
+-      standardName = "EUC-KR";
++    else if (!strcmp(standard_name, "EUC-KR") ||
++             !strcmp(standard_name, "KSC_5601") ||
++             !strcmp(standard_name, "cp1363"))
++      standard_name = "EUC-KR";
+     // And so on.
+-    else if (!strcasecmp(standardName, "iso-8859-9"))
++    else if (!strcasecmp(standard_name, "iso-8859-9"))
+       // This name is returned in different case by ICU 3.2 and 3.6.
+-      standardName = "windows-1254";
+-    else if (!strcmp(standardName, "TIS-620"))
+-      standardName = "windows-874";
++      standard_name = "windows-1254";
++    else if (!strcmp(standard_name, "TIS-620"))
++      standard_name = "windows-874";
+ #endif
+ 
+     registrar(standard_name, standard_name);
+@@ -272,7 +272,7 @@ void TextCodecICU::CreateICUConverter()
+   DCHECK(!converter_icu_);
+ 
+ #if defined(USING_SYSTEM_ICU)
+-  const char* name = m_encoding.name();
++  const char* name = encoding_.GetName();
+   m_needsGBKFallbacks =
+       name[0] == 'G' && name[1] == 'B' && name[2] == 'K' && !name[3];
+ #endif
+@@ -393,16 +393,16 @@ String TextCodecICU::Decode(const char*
+   // Chrome's copy of ICU does not have the issue described below.
+   return result.ToString();
+ #else
+-  String resultString = result.toString();
++  String resultString = result.ToString();
+ 
+   // <http://bugs.webkit.org/show_bug.cgi?id=17014>
+   // Simplified Chinese pages use the code A3A0 to mean "full-width space", but
+   // ICU decodes it as U+E5E5.
+-  if (!strcmp(m_encoding.name(), "GBK")) {
+-    if (!strcasecmp(m_encoding.name(), "gb18030"))
+-      resultString.replace(0xE5E5, ideographicSpaceCharacter);
++  if (!strcmp(encoding_.GetName(), "GBK")) {
++    if (!strcasecmp(encoding_.GetName(), "gb18030"))
++      resultString.Replace(0xE5E5, ideographicSpaceCharacter);
+     // Make GBK compliant to the encoding spec and align with GB18030
+-    resultString.replace(0x01F9, 0xE7C8);
++    resultString.Replace(0x01F9, 0xE7C8);
+     // FIXME: Once https://www.w3.org/Bugs/Public/show_bug.cgi?id=28740#c3
+     // is resolved, add U+1E3F => 0xE7C7.
+   }
+@@ -506,7 +506,7 @@ static void gbkCallbackEscape(const void
+     ucnv_cbFromUWriteUChars(fromUArgs, &source, source + 1, 0, err);
+     return;
+   }
+-  numericEntityCallback(context, fromUArgs, codeUnits, length, codePoint,
++  NumericEntityCallback(context, fromUArgs, codeUnits, length, codePoint,
+                         reason, err);
+ }
+ 
+@@ -525,7 +525,7 @@ static void gbkCssEscapedEntityCallack(c
+       ucnv_cbFromUWriteUChars(fromUArgs, &source, source + 1, 0, err);
+       return;
+     }
+-    cssEscapedEntityCallback(context, fromUArgs, codeUnits, length, codePoint,
++    CssEscapedEntityCallback(context, fromUArgs, codeUnits, length, codePoint,
+                              reason, err);
+     return;
+   }
+@@ -548,7 +548,7 @@ static void gbkUrlEscapedEntityCallack(c
+       ucnv_cbFromUWriteUChars(fromUArgs, &source, source + 1, 0, err);
+       return;
+     }
+-    urlEscapedEntityCallback(context, fromUArgs, codeUnits, length, codePoint,
++    UrlEscapedEntityCallback(context, fromUArgs, codeUnits, length, codePoint,
+                              reason, err);
+     return;
+   }
+@@ -622,7 +622,7 @@ CString TextCodecICU::EncodeInternal(con
+                             0, 0, &err);
+ #else
+       ucnv_setFromUCallBack(
+-          m_converterICU, m_needsGBKFallbacks ? gbkCallbackSubstitute
++          converter_icu_, m_needsGBKFallbacks ? gbkCallbackSubstitute
+                                               : UCNV_FROM_U_CALLBACK_SUBSTITUTE,
+           0, 0, 0, &err);
+ #endif
+@@ -633,8 +633,8 @@ CString TextCodecICU::EncodeInternal(con
+                             &err);
+ #else
+       ucnv_setFromUCallBack(
+-          m_converterICU,
+-          m_needsGBKFallbacks ? gbkCallbackEscape : numericEntityCallback, 0, 0,
++          converter_icu_,
++          m_needsGBKFallbacks ? gbkCallbackEscape : NumericEntityCallback, 0, 0,
+           0, &err);
+ #endif
+       break;
+@@ -643,9 +643,9 @@ CString TextCodecICU::EncodeInternal(con
+       ucnv_setFromUCallBack(converter_icu_, UrlEscapedEntityCallback, 0, 0, 0,
+                             &err);
+ #else
+-      ucnv_setFromUCallBack(m_converterICU,
++      ucnv_setFromUCallBack(converter_icu_,
+                             m_needsGBKFallbacks ? gbkUrlEscapedEntityCallack
+-                                                : urlEscapedEntityCallback,
++                                                : UrlEscapedEntityCallback,
+                             0, 0, 0, &err);
+ #endif
+       break;
+@@ -654,9 +654,9 @@ CString TextCodecICU::EncodeInternal(con
+       ucnv_setFromUCallBack(converter_icu_, CssEscapedEntityCallback, 0, 0, 0,
+                             &err);
+ #else
+-      ucnv_setFromUCallBack(m_converterICU,
++      ucnv_setFromUCallBack(converter_icu_,
+                             m_needsGBKFallbacks ? gbkCssEscapedEntityCallack
+-                                                : cssEscapedEntityCallback,
++                                                : CssEscapedEntityCallback,
+                             0, 0, 0, &err);
+ #endif
+       break;
+--- a/third_party/WebKit/Source/platform/text/CharacterPropertyDataGenerator.cpp
++++ b/third_party/WebKit/Source/platform/text/CharacterPropertyDataGenerator.cpp
+@@ -20,7 +20,7 @@
+ namespace blink {
+ 
+ #if defined(USING_SYSTEM_ICU)
+-static void generate(FILE*) {}
++static void Generate(FILE*) {}
+ #else
+ 
+ const UChar32 kMaxCodepoint = 0x10FFFF;
+--- a/third_party/WebKit/Source/platform/text/CharacterEmoji.cpp
++++ b/third_party/WebKit/Source/platform/text/CharacterEmoji.cpp
+@@ -192,26 +192,26 @@ static void applyPatternAndFreeze(icu::U
+   DCHECK_EQ(err, U_ZERO_ERROR);
+ }
+ 
+-bool Character::isEmoji(UChar32 ch) {
+-  return Character::isEmojiTextDefault(ch) ||
+-         Character::isEmojiEmojiDefault(ch);
++bool Character::IsEmoji(UChar32 ch) {
++  return Character::IsEmojiTextDefault(ch) ||
++         Character::IsEmojiEmojiDefault(ch);
+ }
+ 
+-bool Character::isEmojiTextDefault(UChar32 ch) {
++bool Character::IsEmojiTextDefault(UChar32 ch) {
+   DEFINE_STATIC_LOCAL(icu::UnicodeSet, emojiTextSet, ());
+   if (emojiTextSet.isEmpty())
+     applyPatternAndFreeze(&emojiTextSet, kEmojiTextPattern);
+-  return emojiTextSet.contains(ch) && !isEmojiEmojiDefault(ch);
++  return emojiTextSet.contains(ch) && !IsEmojiEmojiDefault(ch);
+ }
+ 
+-bool Character::isEmojiEmojiDefault(UChar32 ch) {
++bool Character::IsEmojiEmojiDefault(UChar32 ch) {
+   DEFINE_STATIC_LOCAL(icu::UnicodeSet, emojiEmojiSet, ());
+   if (emojiEmojiSet.isEmpty())
+     applyPatternAndFreeze(&emojiEmojiSet, kEmojiEmojiPattern);
+   return emojiEmojiSet.contains(ch);
+ }
+ 
+-bool Character::isEmojiModifierBase(UChar32 ch) {
++bool Character::IsEmojiModifierBase(UChar32 ch) {
+   DEFINE_STATIC_LOCAL(icu::UnicodeSet, emojieModifierBaseSet, ());
+   if (emojieModifierBaseSet.isEmpty())
+     applyPatternAndFreeze(&emojieModifierBaseSet, kEmojiModifierBasePattern);

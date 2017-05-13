@@ -14,7 +14,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "webrtc/base/task_queue_posix.h"
 --- a/tools/gn/bootstrap/bootstrap.py
 +++ b/tools/gn/bootstrap/bootstrap.py
-@@ -573,29 +573,9 @@ def write_gn_ninja(path, root_gen_dir, o
+@@ -578,29 +578,9 @@ def write_gn_ninja(path, root_gen_dir, o
          'base/time/time_posix.cc',
          'base/trace_event/heap_profiler_allocation_register_posix.cc',
      ])
@@ -45,7 +45,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      ldflags.extend(['-pthread'])
  
      static_libraries['xdg_user_dirs'] = {
-@@ -620,13 +600,6 @@ def write_gn_ninja(path, root_gen_dir, o
+@@ -627,13 +607,6 @@ def write_gn_ninja(path, root_gen_dir, o
          'base/threading/platform_thread_linux.cc',
          'base/trace_event/malloc_dump_provider.cc',
      ])
@@ -59,7 +59,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
    if is_mac:
      static_libraries['base']['sources'].extend([
-@@ -655,12 +628,6 @@ def write_gn_ninja(path, root_gen_dir, o
+@@ -663,12 +636,6 @@ def write_gn_ninja(path, root_gen_dir, o
          'base/threading/platform_thread_mac.mm',
          'base/trace_event/malloc_dump_provider.cc',
      ])

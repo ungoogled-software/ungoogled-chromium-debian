@@ -40,6 +40,7 @@ defines+=is_debug=false \
          use_sysroot=false \
          use_vulcanize=false \
          use_gnome_keyring=false \
+         rtc_libvpx_build_vp9=false \
          treat_warnings_as_errors=false \
          enable_nacl=false \
          enable_nacl_nonsfi=false \

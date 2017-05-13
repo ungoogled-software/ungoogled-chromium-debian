@@ -1,0 +1,14 @@
+description: dma-buf.h is not provided by linux-libc-dev until version 4.11 in debian
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/ui/gfx/linux/client_native_pixmap_dmabuf.cc
++++ b/ui/gfx/linux/client_native_pixmap_dmabuf.cc
+@@ -17,7 +17,7 @@
+ #include "base/strings/stringprintf.h"
+ #include "base/trace_event/trace_event.h"
+ 
+-#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 6, 0)
++#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 11, 0)
+ #include <linux/types.h>
+ 
+ struct local_dma_buf_sync {

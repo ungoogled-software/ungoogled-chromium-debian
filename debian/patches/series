@@ -1,7 +1,6 @@
 manpage.patch
 master-preferences.patch
 
-gn/callback.patch
 gn/parallel.patch
 gn/buildflags.patch
 
@@ -10,6 +9,7 @@ disable/google-api-warning.patch
 disable/third-party-cookies.patch
 disable/external-components.patch
 
+fixes/dma.patch
 fixes/ps-print.patch
 fixes/gpu-timeout.patch
 fixes/widevine-revision.patch
@@ -19,4 +19,5 @@ system/icu.patch
 system/vpx.patch
 system/nspr.patch
 system/event.patch
+system/libxml.patch
 system/ffmpeg.patch
