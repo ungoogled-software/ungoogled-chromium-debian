@@ -1,3 +1,9 @@
+chromium-browser (59.0.3071.61-1) experimental; urgency=medium
+
+  * New upstream beta release.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 21 May 2017 19:34:39 +0000
+
 chromium-browser (59.0.3071.47-1) experimental; urgency=medium
 
   * New upstream beta release.
