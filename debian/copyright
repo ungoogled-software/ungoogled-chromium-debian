@@ -65,6 +65,14 @@ Files-Excluded:
  third_party/catapult/third_party/vinn/third_party/parse5/lib/tokenization/named_entity_trie.js
  third_party/catapult/tracing/third_party/gl-matrix/spec/gl-matrix/mat3-spec.js
  third_party/deqp/src/framework/delibs/coding_guidelines/prettify.js
+ third_party/dom_distiller_js/dist/js/domdistiller_wrapped.js
+ third_party/catapult/tracing/third_party/chai/chai.js
+ ios
+ tools/android
+ third_party/catapult/third_party/vinn/third_party/parse5/parse5.js
+ third_party/libphonenumber/dist/javascript/i18n/phonenumbers/metadata.js
+ third_party/libphonenumber/dist/javascript/i18n/phonenumbers/metadatalite.js
+ tools/perf/page_sets/webrtc_cases/adapter.js
 
 # dirs that should be removed, but the jessie package still needs them
 # third_party/harfbuzz-ng/src
