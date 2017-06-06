@@ -1,3 +1,30 @@
+chromium-browser (59.0.3071.86-1) unstable; urgency=medium
+
+  * New upstream stable release.
+    - CVE-2017-5070: Type confusion in V8. Reported by Zhao Qixun
+    - CVE-2017-5071: Out of bounds read in V8. Reported by Choongwoo Han
+    - CVE-2017-5072: Address spoofing in Omnibox. Reported by Rayyan Bijoora
+    - CVE-2017-5073: Use after free in print preview. Reported by Khalil Zhani
+    - CVE-2017-5074: Use after free in Apps Bluetooth. Reported by anonymous
+    - CVE-2017-5075: Information leak in CSP reporting. Reported by Emmanuel
+      Gil Peyrot
+    - CVE-2017-5076: Address spoofing in Omnibox. Reported by Samuel Erb
+    - CVE-2017-5077: Heap buffer overflow in Skia. Reported by Sweetchip
+    - CVE-2017-5078: Possible command injection in mailto handling. Reported
+      by Jose Carlos Exposito Bueno
+    - CVE-2017-5079: UI spoofing in Blink. Reported by Khalil Zhani
+    - CVE-2017-5080: Use after free in credit card autofill. Reported by
+      Khalil Zhani
+    - CVE-2017-5081: Extension verification bypass. Reported by Andrey Kovalev
+    - CVE-2017-5082: Insufficient hardening in credit card editor. Reported by
+      Nightwatch Cybersecurity Research
+    - CVE-2017-5083: UI spoofing in Blink. Reported by Khalil Zhani
+    - CVE-2017-5085: Inappropriate javascript execution on WebUI pages.
+      Reported by Zhiyang Zeng
+    - CVE-2017-5086: Address spoofing in Omnibox. Reported by Rayyan Bijoora
+
+ -- Michael Gilbert <mgilbert@debian.org>  Mon, 05 Jun 2017 23:09:28 +0000
+
 chromium-browser (59.0.3071.71-1) experimental; urgency=medium
 
   * New upstream beta release.
