@@ -1,3 +1,13 @@
+chromium-browser (59.0.3071.104-1) unstable; urgency=medium
+
+  * New upstream security release.
+    - CVE-2017-5087: Sandbox Escape in IndexedDB. Reported by Ned Williamson
+    - CVE-2017-5088: Out of bounds read in V8. Reported by Xiling Gong
+    - CVE-2017-5089: Domain spoofing in Omnibox. Reported by Michał Bentkowski
+  * Update get-orig-source to support really long arguments to tar --delete.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 17 Jun 2017 20:03:49 +0000
+
 chromium-browser (59.0.3071.86-1) unstable; urgency=medium
 
   * New upstream stable release.
