@@ -1,3 +1,18 @@
+chromium-browser (60.0.3112.72-1) unstable; urgency=medium
+
+  * New upstream beta release.
+    - Adds support for gcc 6.4 (closes: #868926).
+  * Update to debhelper version 10.
+  * Update to standards version 4.0.0.
+  * Only include pak files that are needed.
+  * Drop chromedriver transitional package.
+  * Drop ffmpeg.patch, now applied upstream.
+  * Drop libgnome-keyring-dev build dependency (closes: #867917).
+  * Install chromium-shell to /usr/lib/chromium (closes: #864565).
+    - Thanks to Bert Schulze.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 22 Jul 2017 16:41:59 +0000
+
 chromium-browser (59.0.3071.104-1) unstable; urgency=medium
 
   * New upstream security release.

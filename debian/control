@@ -8,7 +8,7 @@ Vcs-Git: git://anonscm.debian.org/pkg-chromium/pkg-chromium.git
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-chromium/pkg-chromium.git
 Homepage: http://www.chromium.org/Home
 Build-Depends:
- debhelper (>= 9),
+ debhelper (>= 10),
  python3,
  pkg-config,
  ninja-build,
@@ -74,7 +74,6 @@ Build-Depends:
  libharfbuzz-dev (>= 1.2.7),
  libusb-1.0-0-dev,
  libmodpbase64-dev,
- libgnome-keyring-dev,
  libnss3-dev (>= 3.12.3),
  libnspr4-dev (>= 2:4.9),
  libcups2-dev (>= 1.5.0),
@@ -85,7 +84,7 @@ Build-Depends:
  libgcrypt20-dev,
  fonts-ipafont-gothic,
  fonts-ipafont-mincho,
-Standards-Version: 3.9.8
+Standards-Version: 4.0.0
 
 Package: chromium
 Architecture: i386 amd64 arm64 armhf
@@ -93,8 +92,7 @@ Built-Using: ${Built-Using}
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
- x11-utils,
- xdg-utils,
+ chromium-common (= ${binary:Version}),
 Recommends:
  fonts-liberation,
 Suggests:
@@ -135,6 +133,7 @@ Architecture: i386 amd64 arm64 armhf
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
+ chromium-common (= ${binary:Version}),
 Description: web browser - minimal shell
  Web browser that aims to build a safer, faster, and more stable internet
  browsing experience.
@@ -168,13 +167,19 @@ Description: web browser - WebDriver support
  This package provides a bridge between the browser component and the selenium
  automatic webdriver.
 
-Package: chromedriver
+Package: chromium-common
 Architecture: i386 amd64 arm64 armhf
 Depends:
  ${misc:Depends},
- chromium-driver (= ${binary:Version}),
-Description: web browser - WebDriver support transitional package
+ x11-utils,
+ xdg-utils,
+Breaks:
+ chromium (<< 60.0.3112.72-1),
+Replaces:
+ chromium (<< 60.0.3112.72-1),
+Description: web browser - common resources used by the chromium packages
  Web browser that aims to build a safer, faster, and more stable internet
  browsing experience.
  .
- This is a transitional package and can be safely removed.
+ This package contains resources that are in common to different chromium
+ packages.
