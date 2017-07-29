@@ -1,3 +1,35 @@
+chromium-browser (60.0.3112.78-1) unstable; urgency=medium
+
+  * New upstream stable release:
+    - CVE-2017-5091: Use after free in IndexedDB. Reported by Ned Williamson
+    - CVE-2017-5092: Use after free in PPAPI. Reported by Yu Zhou, Yuan Deng
+    - CVE-2017-5093: UI spoofing in Blink. Reported by Luan Herrera
+    - CVE-2017-5094: Type confusion in extensions. Reported by Anonymous
+    - CVE-2017-5095: Out-of-bounds write in PDFium. Reported by Anonymous
+    - CVE-2017-5096: User information leak via Android intents. Reported by
+      Takeshi Terada
+    - CVE-2017-5097: Out-of-bounds read in Skia. Reported by Anonymous
+    - CVE-2017-5098: Use after free in V8. Reported by Jihoon Kim
+    - CVE-2017-5099: Out-of-bounds write in PPAPI. Reported by Yuan Deng, Yu
+      Zhou
+    - CVE-2017-5100: Use after free in Chrome Apps. Reported by Anonymous
+    - CVE-2017-5101: URL spoofing in OmniBox. Reported by Luan Herrera
+    - CVE-2017-5102: Uninitialized use in Skia. Reported by Anonymous
+    - CVE-2017-5103: Uninitialized use in Skia. Reported by Anonymous
+    - CVE-2017-5104: UI spoofing in browser. Reported by Khalil Zhani
+    - CVE-2017-7000: Pointer disclosure in SQLite. Reported by Chaitin Security
+      Research Lab
+    - CVE-2017-5105: URL spoofing in OmniBox. Reported by Rayyan Bijoora
+    - CVE-2017-5106: URL spoofing in OmniBox. Reported by Jack Zac
+    - CVE-2017-5107: User information leak via SVG. Reported by David
+      Kohlbrenner
+    - CVE-2017-5108: Type confusion in PDFium. Reported by Guang Gong
+    - CVE-2017-5109: UI spoofing in browser. Reported by José María Acuña
+      Morgado
+    - CVE-2017-5110: UI spoofing in payments dialog. Reported by xisigr
+
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 27 Jul 2017 03:22:03 +0000
+
 chromium-browser (60.0.3112.72-1) unstable; urgency=medium
 
   * New upstream beta release.
