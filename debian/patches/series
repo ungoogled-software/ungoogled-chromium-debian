@@ -17,6 +17,7 @@ fixes/ps-print.patch
 fixes/gpu-timeout.patch
 fixes/declaration.patch
 fixes/widevine-revision.patch
+fixes/connection-message.patch
 fixes/chromedriver-revision.patch
 
 system/icu.patch

@@ -57,6 +57,7 @@ Build-Depends:
  libgtk-3-dev,
  libgtk2.0-dev,
  libxslt1-dev,
+ liblcms2-dev,
  libpulse-dev,
  libpam0g-dev,
  libsnappy-dev,
@@ -84,7 +85,7 @@ Build-Depends:
  libgcrypt20-dev,
  fonts-ipafont-gothic,
  fonts-ipafont-mincho,
-Standards-Version: 4.0.0
+Standards-Version: 4.1.0
 
 Package: chromium
 Architecture: i386 amd64 arm64 armhf

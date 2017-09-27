@@ -1,3 +1,35 @@
+chromium-browser (61.0.3163.100-2) unstable; urgency=medium
+
+  * Add liblcms2-dev as a build dependency (closes: #876804).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Tue, 26 Sep 2017 12:54:35 +0000
+
+chromium-browser (61.0.3163.100-1) unstable; urgency=medium
+
+  * New upstream stable release (closes: #876030).
+    - CVE-2017-5111: Use after free in PDFium. Reported by Luật Nguyễn
+    - CVE-2017-5112: Heap buffer overflow in WebGL. Reported by Tobias Kleini
+    - CVE-2017-5113: Heap buffer overflow in Skia. Reported by Anonymous
+    - CVE-2017-5114: Memory lifecycle issue in PDFium. Reported by Ke Liu
+    - CVE-2017-5115: Type confusion in V8. Reported by Marco Giovannini
+    - CVE-2017-5116: Type confusion in V8. Reported by Anonymous
+    - CVE-2017-5117: Use of uninitialized value in Skia. Reported by Tobias
+      Klein
+    - CVE-2017-5118: Bypass of Content Security Policy in Blink. Reported by
+      WenXu Wu
+    - CVE-2017-5119: Use of uninitialized value in Skia. Reported by Anonymous
+    - CVE-2017-5120: Potential HTTPS downgrade during redirect navigation.
+      Reported by Xiaoyin Liu
+    - CVE-2017-5121: Out-of-bounds access in V8. Reported by Jordan Rabet
+    - CVE-2017-5122: Out-of-bounds access in V8. Reported by Choongwoo Han
+    - Adds support for gcc7 (closes: #853347).
+  * Update standards version.
+  * Use system libstdc++ instead of chromium's bundled custom libc++.
+  * Improve error message when network is unreachable (closes: #864539).
+  * Fix a mistake that lead to unstripped binary files (closes: #870531).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 24 Sep 2017 20:26:02 +0000
+
 chromium-browser (60.0.3112.78-1) unstable; urgency=medium
 
   * New upstream stable release:

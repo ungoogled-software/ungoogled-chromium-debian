@@ -37,25 +37,34 @@ defines+=is_debug=false \
          use_ozone=false \
          use_gconf=false \
          use_sysroot=false \
+         use_openh264=false \
+         use_kerberos=false \
          use_vulcanize=false \
+         use_custom_libcxx=false \
          use_gnome_keyring=false \
+         use_unofficial_version_number=false \
          rtc_libvpx_build_vp9=false \
          treat_warnings_as_errors=false \
          enable_nacl=false \
          enable_nacl_nonsfi=false \
          enable_google_now=false \
+         enable_reading_list=false \
          enable_hangout_services_extension=false \
          enable_iterator_debugging=false \
+         goma_dir=\"\" \
          gold_path=\"\" \
          linux_use_bundled_binutils=false \
 
 # enabled features
-defines+=use_gio=true \
-         use_gold=true \
+defines+=use_gold=true \
          use_pulseaudio=true \
          link_pulseaudio=true \
          enable_widevine=true \
-	 use_system_freetype=true \
+         use_jumbo_build=true \
+         use_system_zlib=true \
+         use_system_lcms2=true \
+         use_system_freetype=true \
+         optimize_for_size=true \
          proprietary_codecs=true \
          ffmpeg_branding=\"Chrome\" \
          fieldtrial_testing_like_official_build=true \
@@ -76,6 +85,9 @@ flotpaths=/usr/share/javascript/jquery/*min.js \
 %:
 	dh $@
 
+out/Release/gn:
+	./tools/gn/bootstrap/bootstrap.py -s $(njobs)
+
 override_dh_auto_configure:
 	# output compiler information
 	$(CXX) --version
@@ -86,12 +98,8 @@ override_dh_auto_configure:
 	./debian/scripts/unbundle
 	mkdir -p third_party/freetype/src/src/psnames
 	mv pstables.h third_party/freetype/src/src/psnames
-	# build gn
-	./tools/gn/bootstrap/bootstrap.py -s $(njobs)
-	# configure
-	./out/Release/gn gen out/Release --args="$(defines)"
 
-override_dh_auto_build-arch:
+override_dh_auto_build-arch: out/Release/gn
 	./out/Release/gn gen out/Release --args="$(defines)"
 	ninja $(njobs) -C out/Release chrome chrome_sandbox content_shell chromedriver
 	mv out/Release/chrome out/Release/chromium || true
@@ -101,7 +109,8 @@ override_dh_auto_build-arch:
 	mv out/Release/locales/en-US.pak out/Release/resources || true
 	chmod 4755 out/Release/chrome-sandbox # suid sandbox
 
-override_dh_auto_build-indep:
+override_dh_auto_build-indep: out/Release/gn
+	./out/Release/gn gen out/Release --args="$(defines)"
 	ninja $(njobs) -C out/Release packed_resources
 	rm -f out/Release/locales/en-US.pak
 
@@ -128,6 +137,8 @@ override_dh_fixperms:
 override_dh_strip:
 	# skip dbgsym package for widevine to prevent duplication of the src package
 	dh_strip -pchromium-widevine --no-automatic-dbgsym
+	# execute dh_strip on all of the remaining packages
+	dh_strip --remaining-packages
 
 override_dh_gencontrol:
 	dh_gencontrol -- -VBuilt-Using="$(shell dpkg-query -f '$${source:Package} (= $${source:Version}), ' -W libjs-jquery libjs-jquery-flot)"
