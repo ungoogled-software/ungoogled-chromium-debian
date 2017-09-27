@@ -3,8 +3,8 @@ origin: implementation from chromium 59.0.3071.86
 
 --- a/chrome/browser/ui/libgtkui/gtk_ui.cc
 +++ b/chrome/browser/ui/libgtkui/gtk_ui.cc
-@@ -315,13 +315,55 @@ gfx::FontRenderParams GetGtkFontRenderPa
-   return params;
+@@ -1048,12 +1048,54 @@ void GtkUi::ResetStyle() {
+   native_theme_->NotifyObservers();
  }
  
 +float GtkDpiToScaleFactor(int dpi) {
@@ -40,7 +40,7 @@ origin: implementation from chromium 59.0.3071.86
 +  return GtkDpiToScaleFactor(gtk_dpi);
 +}
 +
- float GetRawDeviceScaleFactor() {
+ float GtkUi::GetRawDeviceScaleFactor() {
    if (display::Display::HasForceDeviceScaleFactor())
      return display::Display::GetForcedDeviceScaleFactor();
  
@@ -53,9 +53,8 @@ origin: implementation from chromium 59.0.3071.86
 +      scale = 1;
 +  }
 +#else
-   gint scale = gdk_screen_get_monitor_scale_factor(
-       screen, gdk_screen_get_primary_monitor(screen));
+   gint scale = gtk_widget_get_scale_factor(fake_window_);
 +#endif
    gdouble resolution = gdk_screen_get_resolution(screen);
-   return resolution <= 0 ? scale : resolution * scale / kDefaultDPI;
- }
+   const float scale_factor =
+       resolution <= 0 ? scale : resolution * scale / kDefaultDPI;

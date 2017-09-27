@@ -1,17 +1,21 @@
 manpage.patch
 master-preferences.patch
 
+gn/profiler.patch
+gn/safemath.patch
 gn/parallel.patch
 gn/buildflags.patch
-gn/scheduler.patch
 
 disable/promo.patch
 disable/google-api-warning.patch
 disable/third-party-cookies.patch
 disable/external-components.patch
 
+fixes/atk.patch
+fixes/mojo.patch
 fixes/ps-print.patch
 fixes/gpu-timeout.patch
+fixes/declaration.patch
 fixes/widevine-revision.patch
 fixes/chromedriver-revision.patch
 
@@ -19,5 +23,4 @@ system/icu.patch
 system/vpx.patch
 system/nspr.patch
 system/event.patch
-system/libxml.patch
 system/gtk2.patch

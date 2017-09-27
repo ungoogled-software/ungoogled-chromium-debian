@@ -1,0 +1,11 @@
+--- a/tools/gn/bootstrap/bootstrap.py
++++ b/tools/gn/bootstrap/bootstrap.py
+@@ -534,7 +534,7 @@ def write_gn_ninja(path, root_gen_dir, o
+       'base/trace_event/heap_profiler_allocation_context_tracker.cc',
+       'base/trace_event/heap_profiler_allocation_register.cc',
+       'base/trace_event/heap_profiler_event_filter.cc',
+-      'base/trace_event/heap_profiler_event_writer.cc',
++      'base/trace_event/heap_profiler_heap_dump_writer.cc',
+       'base/trace_event/heap_profiler_serialization_state.cc',
+       'base/trace_event/heap_profiler_stack_frame_deduplicator.cc',
+       'base/trace_event/heap_profiler_type_name_deduplicator.cc',
