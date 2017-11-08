@@ -1,3 +1,16 @@
+chromium-browser (62.0.3202.89-1) unstable; urgency=medium
+
+  * New upstream security release.
+    - CVE-2017-15398: Stack buffer overflow in QUIC. Reported by Ned
+      Williamson
+    - CVE-2017-15399: Use after free in V8. Reported by Zhao Qixun
+  * Revert new dependency on gconf.
+  * Link against system lcms2 library (closes: #879153).
+  * Disable device notifications by default (closes: #856571).
+  * Remove icon extension from the desktop file (closes: #860256).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Tue, 07 Nov 2017 02:22:17 +0000
+
 chromium-browser (62.0.3202.75-1) unstable; urgency=medium
 
   * New upstream stable release (closes: #879451).

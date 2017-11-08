@@ -11,6 +11,7 @@ disable/fuzzers.patch
 disable/google-api-warning.patch
 disable/third-party-cookies.patch
 disable/external-components.patch
+disable/device-notifications.patch
 
 fixes/mojo.patch
 fixes/crc32.patch
@@ -23,5 +24,7 @@ fixes/chromedriver-revision.patch
 
 system/icu.patch
 system/vpx.patch
+system/gtk2.patch
 system/nspr.patch
+system/lcms2.patch
 system/event.patch
