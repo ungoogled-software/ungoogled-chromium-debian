@@ -4,16 +4,8 @@ forwarded: http://code.google.com/p/chromium/issues/detail?id=73591
 
 --- a/chrome/app/resources/manpage.1.in
 +++ b/chrome/app/resources/manpage.1.in
-@@ -1,5 +1,5 @@
--." This file is processed by chrome.gyp to generate manpages in the
--." build diretory.
-+.\" This file is processed by chrome.gyp to generate manpages in the
-+.\" build diretory.
- .TH @@FILENAME@@ 1 "" "" "USER COMMANDS"
- 
- .SH NAME
 @@ -20,6 +20,23 @@ This manpage only describes invocation,
- @@NAME@@ has hundreds of undocumented command-line flags that are added
+ @@MENUNAME@@ has hundreds of undocumented command-line flags that are added
  and removed at the whim of the developers.  Here, we document relatively
  stable flags.
 +
@@ -27,7 +19,7 @@ forwarded: http://code.google.com/p/chromium/issues/detail?id=73591
 +
 +.TP
 +\fB\-\-temp-profile\fR
-+Use a throw-away/temporary profile for this session.
++Use a throw-away/temporary profile for this session.  This creates an entirely new user profile temporarily.  It is not the same as incognito mode.
 +
 +.TP
 +\fB\-\-enable-remote-extensions\fR
@@ -44,3 +36,26 @@ forwarded: http://code.google.com/p/chromium/issues/detail?id=73591
  <http://library.gnome.org/devel/gtk/stable/gtk-x11.html>
  
  .SH ENVIRONMENT
+@@ -159,12 +177,21 @@ Default directory for cache data.  (Why?
+ <http://standards.freedesktop.org/basedir-spec/latest/> .)
+ 
+ .SH BUGS
+-Bug tracker:
++Debian bug tracker:
++.IP
++http://bugs.debian.org/chromium-browser
++.PP
++Upstream bug tracker:
+ .IP
+ http://code.google.com/p/chromium/issues/list
+ .PP
+ Be sure to do your search within "All Issues" before reporting bugs,
+ and be sure to pick the "Defect on Linux" template when filing a new one.
++.PP
++If your bug is specific to Debian, please submit it only to the Debian bug
++tracker.
++.IP
++http://www.debian.org/Bugs/Reporting
+ 
+ .SH AUTHOR
+ The Chromium team \- <http://www.chromium.org>

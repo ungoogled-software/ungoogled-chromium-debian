@@ -61,7 +61,6 @@ Build-Depends:
  libpulse-dev,
  libpam0g-dev,
  libsnappy-dev,
- libgconf2-dev,
  libavutil-dev,
  libavcodec-dev (>= 7:3.0),
  libavformat-dev,
@@ -135,6 +134,10 @@ Depends:
  ${misc:Depends},
  ${shlibs:Depends},
  chromium-common (= ${binary:Version}),
+Breaks:
+ chromium (<< ${binary:Version}),
+Replaces:
+ chromium (<< ${binary:Version}),
 Description: web browser - minimal shell
  Web browser that aims to build a safer, faster, and more stable internet
  browsing experience.
@@ -175,9 +178,9 @@ Depends:
  x11-utils,
  xdg-utils,
 Breaks:
- chromium (<< 60.0.3112.72-1),
+ chromium (<< ${binary:Version}),
 Replaces:
- chromium (<< 60.0.3112.72-1),
+ chromium (<< ${binary:Version}),
 Description: web browser - common resources used by the chromium packages
  Web browser that aims to build a safer, faster, and more stable internet
  browsing experience.

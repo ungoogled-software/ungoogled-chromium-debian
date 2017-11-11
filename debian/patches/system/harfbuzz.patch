@@ -1,0 +1,11 @@
+--- a/third_party/BUILD.gn
++++ b/third_party/BUILD.gn
+@@ -69,7 +69,7 @@ component("freetype_harfbuzz") {
+     public_deps += [ "//third_party/freetype:freetype_source" ]
+   }
+   if (use_system_harfbuzz) {
+-    public_configs += [ "//third_party/harfbuzz-ng:harfbuzz_from_pkgconfig" ]
++    public_configs += [ "//third_party/harfbuzz-ng:system_harfbuzz" ]
+   } else {
+     public_deps += [ "//third_party/harfbuzz-ng:harfbuzz_source" ]
+   }

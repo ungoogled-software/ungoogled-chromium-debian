@@ -2,7 +2,6 @@ manpage.patch
 master-preferences.patch
 
 gn/parallel.patch
-gn/bootstrap.patch
 gn/narrowing.patch
 gn/buildflags.patch
 
@@ -14,7 +13,8 @@ disable/external-components.patch
 disable/device-notifications.patch
 
 fixes/mojo.patch
-fixes/crc32.patch
+fixes/webrtc.patch
+fixes/optimize.patch
 fixes/chromecast.patch
 fixes/ps-print.patch
 fixes/gpu-timeout.patch
@@ -28,3 +28,4 @@ system/gtk2.patch
 system/nspr.patch
 system/lcms2.patch
 system/event.patch
+system/harfbuzz.patch

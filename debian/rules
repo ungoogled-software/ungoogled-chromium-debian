@@ -39,12 +39,12 @@ defines+=is_debug=false \
          use_sysroot=false \
          use_openh264=false \
          use_kerberos=false \
-         use_vulcanize=false \
          use_custom_libcxx=false \
          use_gnome_keyring=false \
          use_unofficial_version_number=false \
          rtc_libvpx_build_vp9=false \
          treat_warnings_as_errors=false \
+         optimize_webui=false \
          enable_nacl=false \
          enable_nacl_nonsfi=false \
          enable_google_now=false \
@@ -64,6 +64,7 @@ defines+=use_gold=true \
          use_system_zlib=true \
          use_system_lcms2=true \
          use_system_freetype=true \
+         use_system_harfbuzz=true \
          optimize_for_size=true \
          proprietary_codecs=true \
          ffmpeg_branding=\"Chrome\" \
@@ -123,7 +124,7 @@ override_dh_auto_install-arch:
 	sed 's|@BUILD_DIST@|$(shell cat /etc/debian_version)|' \
 	    < debian/scripts/chromium > debian/chromium/usr/bin/chromium
 	# move icons into /usr/share
-	for file in $(shell find chrome/app/theme/chromium -name product_logo_[0-9]* -a ! -name *mono*); do \
+	for file in $(shell find chrome/app/theme -name product_logo_[0-9]*.png -a ! -name *mono*); do \
 	    ext=$$(echo $$file | cut -d\. -f2); \
 	    siz=$$(echo $$file | cut -d_ -f3 | sed s/\.$$ext//); \
 	    dst=debian/chromium/usr/share/icons/hicolor/$$siz\x$$siz/apps; \

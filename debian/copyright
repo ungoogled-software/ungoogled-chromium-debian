@@ -73,6 +73,7 @@ Files-Excluded:
  third_party/libphonenumber/dist/javascript/i18n/phonenumbers/metadata.js
  third_party/libphonenumber/dist/javascript/i18n/phonenumbers/metadatalite.js
  tools/perf/page_sets/webrtc_cases/adapter.js
+ third_party/pdfium/third_party/lcms
 
 # dirs that should be removed, but the jessie package still needs them
 # third_party/harfbuzz-ng/src

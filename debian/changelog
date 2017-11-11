@@ -1,3 +1,13 @@
+chromium-browser (63.0.3239.30-1) experimental; urgency=medium
+
+  * New upstream beta release.
+  * Install 16 and 32 pixel png icon files (closes: #857071).
+  * Improve description for --temp-profile (closes: #881040).
+  * Document Debian bug reports in the manpage (closes: #880965).
+  * Stricter breaks/replaces to support security uploads (closes: #877970).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Wed, 08 Nov 2017 01:54:47 +0000
+
 chromium-browser (62.0.3202.89-1) unstable; urgency=medium
 
   * New upstream security release.
