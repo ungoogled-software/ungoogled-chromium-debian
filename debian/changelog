@@ -1,3 +1,13 @@
+chromium-browser (63.0.3239.40-1) experimental; urgency=medium
+
+  * New upstream beta release.
+  * Disable chromium signin feature.
+  * Fix error in icon installation script.
+  * Update to the latest standards version.
+  * Indicate that the package can be built without root.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 12 Nov 2017 05:36:26 +0000
+
 chromium-browser (63.0.3239.30-1) experimental; urgency=medium
 
   * New upstream beta release.

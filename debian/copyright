@@ -5,15 +5,18 @@ Files-Excluded:
  .clang-format
  *.mk
  *.so
- *.bak
  *.elf
  *.swf
  *config.sub
  *config.guess
  *jquery*.min.js
+ buildtools
  tools/emacs
  tools/perf/page_sets/tough_scheduling_cases/*.min.js
  native_client/NOTICE
+ third_party/icu
+ third_party/libxslt
+ third_party/eu-strip
  third_party/android*
  third_party/bidichecker
  third_party/flot/*.js
@@ -23,22 +26,10 @@ Files-Excluded:
  third_party/webgl/src/sdk
  third_party/webgl/src/other
  third_party/expat/files
- third_party/libxml/src
  third_party/*rjsmin/bench
  third_party/snappy/src/testdata
- third_party/skia/third_party/yasm
  third_party/WebKit/PerformanceTests
  third_party/mesa/src/src/gallium/state_trackers/d3d1x/w32api
- third_party/libxslt/compile
- third_party/libxslt/COPYING
- third_party/libxslt/depcomp
- third_party/libxslt/install-sh
- third_party/libxslt/missing
- third_party/libxslt/libexslt
- third_party/libxslt/libxslt
- third_party/libxslt/mac
- third_party/libxslt/win32
- third_party/libxslt/linux
  third_party/catapult/tracing/test_data
  third_party/google_input_tools/src/chrome/os/inputview/_locales/*.js
  base/test/data
@@ -46,14 +37,17 @@ Files-Excluded:
  third_party/binutils
  v8/benchmarks/regexp.js
  v8/third_party/binutils
+ third_party/libxml/mac
+ third_party/libxml/linux
+ third_party/libxml/win32
  third_party/node
  third_party/mocha/mocha.js
  third_party/chaijs/chai.js
+ third_party/devtools-node-modules
  third_party/catapult/third_party/flot
  third_party/catapult/third_party/chai
  third_party/catapult/third_party/mocha
  third_party/webgl/src/conformance-suites
- third_party/WebKit/Source/devtools/devtools-node-modules
  third_party/catapult/third_party/vinn/third_party/v8
  third_party/catapult/tracing/tracing/extras/chrome/cc/layer_tree_host_impl_test_data.js
  third_party/accessibility-audit/axs_testing.js
@@ -73,7 +67,7 @@ Files-Excluded:
  third_party/libphonenumber/dist/javascript/i18n/phonenumbers/metadata.js
  third_party/libphonenumber/dist/javascript/i18n/phonenumbers/metadatalite.js
  tools/perf/page_sets/webrtc_cases/adapter.js
- third_party/pdfium/third_party/lcms
+ third_party/pdfium/third_party/eu-strip
 
 # dirs that should be removed, but the jessie package still needs them
 # third_party/harfbuzz-ng/src
