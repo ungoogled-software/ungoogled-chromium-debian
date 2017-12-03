@@ -2,16 +2,16 @@
   "distribution": {
      "import_bookmarks": false,
      "import_bookmarks_from_file": "/usr/share/chromium/initial_bookmarks.html",
-     "skip_first_run_ui": true,
-     "show_welcome_page": false,
-     "suppress_first_run_default_browser_prompt": true,
      "make_chrome_default": false,
      "make_chrome_default_for_user": false,
+     "verbose_logging": true,
+     "skip_first_run_ui": true,
      "create_all_shortcuts": true,
-     "show_welcome_page": false
+     "suppress_first_run_default_browser_prompt": true
   },
   "browser": {
      "show_home_button": true,
+     "has_seen_welcome_page" : true,
      "check_default_browser" : false
   },
   "bookmark_bar": {
@@ -20,9 +20,17 @@
   "safebrowsing": {
     "enabled": false
   },
+  "dns_prefetching": {
+    "enabled": false
+  },
   "alternate_error_pages": {
     "enabled": false
   },
-  "homepage": "http://www.debian.org",
-  "AudioCaptureAllowed" : false
+  "hardware": {
+    "audio_capture_enabled": false
+  },
+  "default_apps": "noinstall",
+  "hide_web_store_icon": true,
+  "homepage_is_newtabpage": true,
+  "homepage": "https://www.debian.org"
 }

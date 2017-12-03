@@ -1,0 +1,37 @@
+description: restore manpage build process
+origin: upstream chromium before version 63
+
+--- a/chrome/BUILD.gn
++++ b/chrome/BUILD.gn
+@@ -1762,6 +1762,31 @@ if (enable_resource_whitelist_generation
+ }
+ 
+ if (is_linux) {
++  action("manpage") {
++    name = "Chromium"
++    filename = "chromium-browser"
++    confdir = "chromium"
++
++    script = "//chrome/tools/build/linux/sed.py"
++    infile = "app/resources/manpage.1.in"
++    inputs = [
++      infile,
++    ]
++
++    outfile = "$root_out_dir/chromium.1"
++    outputs = [
++      outfile,
++    ]
++
++    args = [
++      rebase_path(infile, root_build_dir),
++      rebase_path(outfile, root_build_dir),
++      "-e s/@@NAME@@/$name/",
++      "-e s/@@FILENAME@@/$filename/",
++      "-e s/@@CONFDIR@@/$confdir/",
++    ]
++  }
++
+   if (is_official_build) {
+     action("linux_symbols") {
+       script = "//build/linux/dump_app_syms.py"

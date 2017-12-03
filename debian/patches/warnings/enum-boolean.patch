@@ -1,0 +1,18 @@
+description: fix gcc warning about enum constant used in a boolean context
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/third_party/WebKit/Source/platform/wtf/text/TextCodec.h
++++ b/third_party/WebKit/Source/platform/wtf/text/TextCodec.h
+@@ -71,9 +71,9 @@ enum FlushBehavior {
+   kDataEOF
+ };
+ 
+-static_assert(!kDoNotFlush, "DoNotFlush should be falsy");
+-static_assert(kFetchEOF, "FetchEOF should be truthy");
+-static_assert(kDataEOF, "DataEOF should be truthy");
++static_assert(kDoNotFlush == 0, "DoNotFlush should be falsy");
++static_assert(kFetchEOF != 0, "FetchEOF should be truthy");
++static_assert(kDataEOF != 0, "DataEOF should be truthy");
+ 
+ class WTF_EXPORT TextCodec {
+   WTF_MAKE_NONCOPYABLE(TextCodec);

@@ -1,0 +1,15 @@
+description: remove the user profile (avatar) menu from the title bar
+author: Michael Gilbert <mgilbert@debian.org>
+upstream-bug: http://crbug.com/513899
+
+--- a/chrome/browser/profiles/avatar_menu.cc
++++ b/chrome/browser/profiles/avatar_menu.cc
+@@ -91,7 +91,7 @@ bool AvatarMenu::ShouldShowAvatarMenu()
+   // TODO: Eliminate this ifdef. Add a delegate interface for the menu which
+   // would also help remove the Browser dependency in AvatarMenuActions
+   // implementations.
+-#if defined(OS_CHROMEOS)
++#if 1
+   // On ChromeOS the menu will not be shown.
+   return false;
+ #else

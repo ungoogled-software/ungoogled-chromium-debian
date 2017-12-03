@@ -27,13 +27,11 @@ ifeq (arm64,$(DEB_HOST_ARCH))
 defines+=host_cpu=\"arm64\"
 endif
 ifeq (armhf,$(DEB_HOST_ARCH))
-defines+=host_cpu=\"arm\" \
-	 arm_use_neon=false
+defines+=host_cpu=\"arm\" arm_use_neon=false
 endif
 
 # disabled features
 defines+=is_debug=false \
-         use_gtk3=false \
          use_gconf=false \
          use_ozone=false \
          use_sysroot=false \
@@ -57,6 +55,7 @@ defines+=is_debug=false \
 
 # enabled features
 defines+=use_gold=true \
+         use_gtk3=true \
          use_pulseaudio=true \
          link_pulseaudio=true \
          enable_widevine=true \
@@ -103,12 +102,13 @@ override_dh_auto_configure:
 override_dh_auto_build-arch: out/Release/gn
 	./out/Release/gn gen out/Release --args="$(defines)"
 	ninja $(njobs) -C out/Release chrome chrome_sandbox content_shell chromedriver
-	mv out/Release/chrome out/Release/chromium || true
-	mv out/Release/chrome.1 out/Release/chromium.1 || true
-	mv out/Release/content_shell out/Release/chromium-shell || true
-	mv out/Release/chrome_sandbox out/Release/chrome-sandbox || true
-	mv out/Release/locales/en-US.pak out/Release/resources || true
+	cp out/Release/chrome out/Release/chromium
+	cp out/Release/content_shell out/Release/chromium-shell
+	cp out/Release/chrome_sandbox out/Release/chrome-sandbox
+	cp out/Release/locales/en-US.pak out/Release/resources
 	chmod 4755 out/Release/chrome-sandbox # suid sandbox
+	sed -e s/@@PACKAGE@@/chromium/g -e s/@@MENUNAME@@/chromium/g \
+	    < chrome/app/resources/manpage.1.in > out/Release/chromium.1
 
 override_dh_auto_build-indep: out/Release/gn
 	./out/Release/gn gen out/Release --args="$(defines)"

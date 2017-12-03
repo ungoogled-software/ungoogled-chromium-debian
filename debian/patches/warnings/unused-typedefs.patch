@@ -1,0 +1,14 @@
+description: fix typo in unused-local-typedefs flag
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/build/config/linux/atk/BUILD.gn
++++ b/build/config/linux/atk/BUILD.gn
+@@ -37,7 +37,7 @@ config("atk") {
+ 
+   cflags = [
+     # glib uses the pre-c++11 typedef-as-static_assert hack.
+-    "-Wno-unused-local-typedef",
++    "-Wno-unused-local-typedefs",
+ 
+     # G_DEFINE_TYPE automatically generates a *get_instance_private
+     # inline function after glib 2.37. That's unused. Prevent to

@@ -1,4 +1,5 @@
 manpage.patch
+manpage-build.patch
 master-preferences.patch
 
 gn/parallel.patch
@@ -8,6 +9,8 @@ gn/buildflags.patch
 disable/promo.patch
 disable/signin.patch
 disable/fuzzers.patch
+disable/avatar-menu.patch
+disable/welcome-page.patch
 disable/google-api-warning.patch
 disable/third-party-cookies.patch
 disable/external-components.patch
@@ -22,6 +25,10 @@ fixes/gpu-timeout.patch
 fixes/widevine-revision.patch
 fixes/connection-message.patch
 fixes/chromedriver-revision.patch
+
+warnings/comment.patch
+warnings/enum-boolean.patch
+warnings/unused-typedefs.patch
 
 system/icu.patch
 system/vpx.patch

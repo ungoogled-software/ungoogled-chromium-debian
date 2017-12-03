@@ -1,3 +1,13 @@
+chromium-browser (63.0.3239.84-1) unstable; urgency=medium
+
+  * New upstream stable release.
+  * Update standards version to 4.1.2.
+  * Stricter default master preferences.
+  * Avoid showing the welcome page (closes: #857767).
+  * Switch from gtk2 to gtk3 again (closes: #883364).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 03 Dec 2017 16:05:00 +0000
+
 chromium-browser (63.0.3239.40-1) experimental; urgency=medium
 
   * New upstream beta release.
