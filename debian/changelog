@@ -1,6 +1,29 @@
 chromium-browser (63.0.3239.84-1) unstable; urgency=medium
 
   * New upstream stable release.
+    - CVE-2017-15407: Out of bounds write in QUIC. Reported by Ned Williamson
+    - CVE-2017-15408: Heap buffer overflow in PDFium. Reported by Ke Liu
+    - CVE-2017-15409: Out of bounds write in Skia. Reported by Anonymous
+    - CVE-2017-15410: Use after free in PDFium. Reported by Luật Nguyễn
+    - CVE-2017-15411: Use after free in PDFium. Reported by Luật Nguyễn
+    - CVE-2017-15413: Type confusion in WebAssembly. Reported by Gaurav Dewan
+    - CVE-2017-15415: Pointer information disclosure in IPC call. Reported by
+      Viktor Brange
+    - CVE-2017-15416: Out of bounds read in Blink. Reported by Ned Williamson
+    - CVE-2017-15417: Cross origin information disclosure in Skia . Reported by
+      Max May
+    - CVE-2017-15418: Use of uninitialized value in Skia. Reported by Kushal
+      Arvind Shah
+    - CVE-2017-15419: Cross origin leak of redirect URL in Blink. Reported by
+      Jun Kokatsu
+    - CVE-2017-15420: URL spoofing in Omnibox. Reported by WenXu Wu
+    - CVE-2017-15423: Issue with SPAKE implementation in BoringSSL. Reported by
+      Greg Hudson
+    - CVE-2017-15424: URL Spoof in Omnibox. Reported by Khalil Zhani
+    - CVE-2017-15425: URL Spoof in Omnibox. Reported by xisigr
+    - CVE-2017-15426: URL Spoof in Omnibox. Reported by WenXu Wu
+    - CVE-2017-15427: Insufficient blocking of JavaScript in Omnibox. Reported
+      by Junaid Farhan
   * Update standards version to 4.1.2.
   * Stricter default master preferences.
   * Avoid showing the welcome page (closes: #857767).
