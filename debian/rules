@@ -37,6 +37,7 @@ defines+=is_debug=false \
          use_sysroot=false \
          use_openh264=false \
          use_kerberos=false \
+         use_jumbo_build=false \
          use_custom_libcxx=false \
          use_gnome_keyring=false \
          use_unofficial_version_number=false \
@@ -59,7 +60,6 @@ defines+=use_gold=true \
          use_pulseaudio=true \
          link_pulseaudio=true \
          enable_widevine=true \
-         use_jumbo_build=true \
          use_system_zlib=true \
          use_system_lcms2=true \
          use_system_freetype=true \

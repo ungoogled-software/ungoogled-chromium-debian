@@ -1,3 +1,45 @@
+chromium-browser (64.0.3282.119-1) unstable; urgency=medium
+
+  * New upstream stable release.
+    - CVE-2017-15420: URL spoofing in Omnibox. Reported by Drew Springall
+    - CVE-2017-15429: UXSS in V8. Reported by Anonymous
+    - CVE-2018-6031: Use after free in PDFium. Reported by Anonymous
+    - CVE-2018-6032: Same origin bypass in Shared Worker. Reported by Jun
+      Kokatsu
+    - CVE-2018-6033: Race when opening downloaded files. Reported by Juho
+      Nurminen
+    - CVE-2018-6034: Integer overflow in Blink. Reported by Tobias Klein
+    - CVE-2018-6035: Insufficient isolation of devtools from extensions.
+      Reported by Rob Wu
+    - CVE-2018-6036: Integer underflow in WebAssembly. Reported by The UK's
+      National Cyber Security Centre
+    - CVE-2018-6037: Insufficient user gesture requirements in autofill.
+      Reported by Paul Stone
+    - CVE-2018-6038: Heap buffer overflow in WebGL. Reported by cloudfuzzer
+    - CVE-2018-6039: XSS in DevTools. Reported by Juho Nurminen
+    - CVE-2018-6040: Content security policy bypass. Reported by WenXu Wu
+    - CVE-2018-6041: URL spoof in Navigation. Reported by Luan Herrera
+    - CVE-2018-6042: URL spoof in OmniBox. Reported by Khalil Zhani
+    - CVE-2018-6043: Insufficient escaping with external URL handlers. Reported
+      by 0x09AL
+    - CVE-2018-6045: Insufficient isolation of devtools from extensions.
+      Reported by Rob Wu
+    - CVE-2018-6046: Insufficient isolation of devtools from extensions.
+      Reported by Rob Wu
+    - CVE-2018-6047: Cross origin URL leak in WebGL. Reported by Masato
+      Kinugawa
+    - CVE-2018-6048: Referrer policy bypass in Blink. Reported by Jun Kokatsu
+    - CVE-2018-6049: UI spoof in Permissions. Reported by WenXu Wu
+    - CVE-2018-6050: URL spoof in OmniBox. Reported by Jonathan Kew
+    - CVE-2018-6051: Referrer leak in XSS Auditor. Reported by Antonio Sanso
+    - CVE-2018-6052: Incomplete no-referrer policy implementation. Reported by
+      Tanner Emek
+    - CVE-2018-6053: Leak of page thumbnails in New Tab Page. Reported by Asset
+      Kabdenov
+    - CVE-2018-6054: Use after free in WebUI. Reported by Rob Wu
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 28 Jan 2018 01:00:12 +0000
+
 chromium-browser (63.0.3239.84-1) unstable; urgency=medium
 
   * New upstream stable release.
