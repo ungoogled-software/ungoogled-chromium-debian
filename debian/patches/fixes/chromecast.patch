@@ -4,7 +4,7 @@ bug-debian: http://bugs.debian.org/878244
 
 --- a/extensions/common/feature_switch.cc
 +++ b/extensions/common/feature_switch.cc
-@@ -52,7 +52,7 @@ class CommonSwitches {
+@@ -50,7 +50,7 @@ class CommonSwitches {
                           FeatureSwitch::DEFAULT_ENABLED),
          load_media_router_component_extension(
              kLoadMediaRouterComponentExtensionFlag,

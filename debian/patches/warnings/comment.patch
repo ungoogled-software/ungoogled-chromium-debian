@@ -1,9 +1,9 @@
-description: fix gcc warning about a multi-line comment
+description: fix gcc warnings about multi-line comments
 author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/content/browser/frame_host/render_frame_host_impl.h
 +++ b/content/browser/frame_host/render_frame_host_impl.h
-@@ -997,11 +997,13 @@ class CONTENT_EXPORT RenderFrameHostImpl
+@@ -1046,11 +1046,13 @@ class CONTENT_EXPORT RenderFrameHostImpl
    // local roots which are under this frame and their first ancestor which is a
    // local root is either this frame or this frame's local root. For instance,
    // in a frame tree such as:
@@ -17,3 +17,27 @@ author: Michael Gilbert <mgilbert@debian.org>
    // RFHs at nodes B, E, D, C, and F are all local roots in the given frame tree
    // under the root at A0, but only B, C, and E are considered immediate local
    // roots of A0. Note that this will exclude any speculative or pending RFHs.
+--- a/media/video/video_encode_accelerator.h
++++ b/media/video/video_encode_accelerator.h
+@@ -161,7 +161,7 @@ class MEDIA_EXPORT VideoEncodeAccelerato
+   // handed back to the client, and afterwards the |flush_callback| will be
+   // called. The FlushCallback takes a boolean argument: |true| indicates the
+   // flush is complete; |false| indicates the flush is cancelled due to errors
+-  // or destruction. The client should not invoke Flush() or Encode() while the\
++  // or destruction. The client should not invoke Flush() or Encode() while the
+   // previous Flush() is not finished yet.
+   virtual void Flush(FlushCallback flush_callback);
+ 
+--- a/content/browser/webauth/register_response_data.h
++++ b/content/browser/webauth/register_response_data.h
+@@ -19,8 +19,8 @@
+ namespace content {
+ 
+ // See figure 2:
+-// https://fidoalliance.org/specs/fido-v2.0-rd-20170927/ \
+-// fido-client-to-authenticator-protocol-v2.0-rd-20170927.html#using-the- \
++// https://fidoalliance.org/specs/fido-v2.0-rd-20170927/
++// fido-client-to-authenticator-protocol-v2.0-rd-20170927.html#using-the-
+ // ctap2-authenticatormakecredential-command-with-ctap1-u2f-authenticators
+ class CONTENT_EXPORT RegisterResponseData {
+  public:

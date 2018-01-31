@@ -1,23 +1,22 @@
 manpage.patch
-manpage-build.patch
 master-preferences.patch
 
 gn/parallel.patch
 gn/narrowing.patch
 gn/buildflags.patch
 
-disable/promo.patch
+disable/fonts.patch
 disable/signin.patch
 disable/fuzzers.patch
 disable/avatar-menu.patch
 disable/welcome-page.patch
 disable/google-api-warning.patch
 disable/third-party-cookies.patch
-disable/external-components.patch
 disable/device-notifications.patch
 
 fixes/mojo.patch
-fixes/webrtc.patch
+fixes/angle.patch
+fixes/includes.patch
 fixes/optimize.patch
 fixes/chromecast.patch
 fixes/ps-print.patch

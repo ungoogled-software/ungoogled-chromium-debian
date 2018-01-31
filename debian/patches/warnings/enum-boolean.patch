@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/third_party/WebKit/Source/platform/wtf/text/TextCodec.h
 +++ b/third_party/WebKit/Source/platform/wtf/text/TextCodec.h
-@@ -71,9 +71,9 @@ enum FlushBehavior {
+@@ -68,9 +68,9 @@ enum FlushBehavior {
    kDataEOF
  };
  
@@ -15,4 +15,4 @@ author: Michael Gilbert <mgilbert@debian.org>
 +static_assert(kDataEOF != 0, "DataEOF should be truthy");
  
  class WTF_EXPORT TextCodec {
-   WTF_MAKE_NONCOPYABLE(TextCodec);
+   USING_FAST_MALLOC(TextCodec);

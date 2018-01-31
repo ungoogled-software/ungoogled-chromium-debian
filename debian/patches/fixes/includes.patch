@@ -1,0 +1,27 @@
+description: include statements needed to be able to build with gcc
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/cc/paint/raw_memory_transfer_cache_entry.cc
++++ b/cc/paint/raw_memory_transfer_cache_entry.cc
+@@ -4,6 +4,8 @@
+ 
+ #include "cc/paint/raw_memory_transfer_cache_entry.h"
+ 
++#include <string.h>
++
+ namespace cc {
+ 
+ ClientRawMemoryTransferCacheEntry::ClientRawMemoryTransferCacheEntry(
+description: add missing include needed for call to round
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/third_party/webrtc/p2p/base/port.cc
++++ b/third_party/webrtc/p2p/base/port.cc
+@@ -12,6 +12,7 @@
+ 
+ #include <math.h>
+ 
++#include <cmath>
+ #include <algorithm>
+ #include <vector>
+ 
