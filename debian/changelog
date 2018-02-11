@@ -1,3 +1,9 @@
+chromium-browser (64.0.3282.119-2) unstable; urgency=medium
+
+  * Drop chromecast patch (closes: #884173).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 11 Feb 2018 03:00:09 +0000
+
 chromium-browser (64.0.3282.119-1) unstable; urgency=medium
 
   * New upstream stable release.
