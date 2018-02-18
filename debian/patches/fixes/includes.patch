@@ -1,27 +1,25 @@
 description: include statements needed to be able to build with gcc
 author: Michael Gilbert <mgilbert@debian.org>
 
---- a/cc/paint/raw_memory_transfer_cache_entry.cc
-+++ b/cc/paint/raw_memory_transfer_cache_entry.cc
-@@ -4,6 +4,8 @@
+--- a/chrome/browser/vr/sample_queue.cc
++++ b/chrome/browser/vr/sample_queue.cc
+@@ -2,6 +2,8 @@
+ // Use of this source code is governed by a BSD-style license that can be
+ // found in the LICENSE file.
  
- #include "cc/paint/raw_memory_transfer_cache_entry.h"
- 
-+#include <string.h>
++#include <algorithm>
 +
- namespace cc {
+ #include "chrome/browser/vr/sample_queue.h"
  
- ClientRawMemoryTransferCacheEntry::ClientRawMemoryTransferCacheEntry(
-description: add missing include needed for call to round
-author: Michael Gilbert <mgilbert@debian.org>
-
---- a/third_party/webrtc/p2p/base/port.cc
-+++ b/third_party/webrtc/p2p/base/port.cc
-@@ -12,6 +12,7 @@
- 
- #include <math.h>
+ namespace vr {
+--- a/components/assist_ranker/ranker_example_util.cc
++++ b/components/assist_ranker/ranker_example_util.cc
+@@ -2,6 +2,8 @@
+ // Use of this source code is governed by a BSD-style license that can be
+ // found in the LICENSE file.
  
 +#include <cmath>
- #include <algorithm>
- #include <vector>
- 
++
+ #include "components/assist_ranker/ranker_example_util.h"
+ #include "base/bit_cast.h"
+ #include "base/format_macros.h"

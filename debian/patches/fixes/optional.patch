@@ -1,0 +1,477 @@
+description: some classes don't yet support optional.h from chromium 65, so use optional.h from chromium 64
+author: chromium 64 authors
+
+--- a/base/optional.h
++++ b/base/optional.h
+@@ -6,7 +6,6 @@
+ #define BASE_OPTIONAL_H_
+ 
+ #include <type_traits>
+-#include <utility>
+ 
+ #include "base/logging.h"
+ 
+@@ -33,29 +32,28 @@ constexpr nullopt_t nullopt(0);
+ namespace internal {
+ 
+ template <typename T, bool = std::is_trivially_destructible<T>::value>
+-struct OptionalStorageBase {
++struct OptionalStorage {
+   // Initializing |empty_| here instead of using default member initializing
+   // to avoid errors in g++ 4.8.
+-  constexpr OptionalStorageBase() : empty_('\0') {}
++  constexpr OptionalStorage() : empty_('\0') {}
++
++  constexpr explicit OptionalStorage(const T& value)
++      : is_null_(false), value_(value) {}
++
++  constexpr explicit OptionalStorage(T&& value)
++      : is_null_(false), value_(std::move(value)) {}
+ 
+   template <class... Args>
+-  constexpr explicit OptionalStorageBase(in_place_t, Args&&... args)
++  constexpr explicit OptionalStorage(base::in_place_t, Args&&... args)
+       : is_null_(false), value_(std::forward<Args>(args)...) {}
+ 
+   // When T is not trivially destructible we must call its
+   // destructor before deallocating its memory.
+-  ~OptionalStorageBase() {
++  ~OptionalStorage() {
+     if (!is_null_)
+       value_.~T();
+   }
+ 
+-  template <class... Args>
+-  void Init(Args&&... args) {
+-    DCHECK(is_null_);
+-    ::new (&value_) T(std::forward<Args>(args)...);
+-    is_null_ = false;
+-  }
+-
+   bool is_null_ = true;
+   union {
+     // |empty_| exists so that the union will always be initialized, even when
+@@ -67,26 +65,25 @@ struct OptionalStorageBase {
+ };
+ 
+ template <typename T>
+-struct OptionalStorageBase<T, true /* trivially destructible */> {
++struct OptionalStorage<T, true> {
+   // Initializing |empty_| here instead of using default member initializing
+   // to avoid errors in g++ 4.8.
+-  constexpr OptionalStorageBase() : empty_('\0') {}
++  constexpr OptionalStorage() : empty_('\0') {}
++
++  constexpr explicit OptionalStorage(const T& value)
++      : is_null_(false), value_(value) {}
++
++  constexpr explicit OptionalStorage(T&& value)
++      : is_null_(false), value_(std::move(value)) {}
+ 
+   template <class... Args>
+-  constexpr explicit OptionalStorageBase(in_place_t, Args&&... args)
++  constexpr explicit OptionalStorage(base::in_place_t, Args&&... args)
+       : is_null_(false), value_(std::forward<Args>(args)...) {}
+ 
+   // When T is trivially destructible (i.e. its destructor does nothing) there
+   // is no need to call it. Explicitly defaulting the destructor means it's not
+   // user-provided. Those two together make this destructor trivial.
+-  ~OptionalStorageBase() = default;
+-
+-  template <class... Args>
+-  void Init(Args&&... args) {
+-    DCHECK(is_null_);
+-    ::new (&value_) T(std::forward<Args>(args)...);
+-    is_null_ = false;
+-  }
++  ~OptionalStorage() = default;
+ 
+   bool is_null_ = true;
+   union {
+@@ -98,155 +95,6 @@ struct OptionalStorageBase<T, true /* tr
+   };
+ };
+ 
+-// Implement conditional constexpr copy and move constructors. These are
+-// constexpr if is_trivially_{copy,move}_constructible<T>::value is true
+-// respectively. If each is true, the corresponding constructor is defined as
+-// "= default;", which generates a constexpr constructor (In this case,
+-// the condition of constexpr-ness is satisfied because the base class also has
+-// compiler generated constexpr {copy,move} constructors). Note that
+-// placement-new is prohibited in constexpr.
+-template <typename T,
+-          bool = std::is_trivially_copy_constructible<T>::value,
+-          bool = std::is_trivially_move_constructible<T>::value>
+-struct OptionalStorage : OptionalStorageBase<T> {
+-  // This is no trivially {copy,move} constructible case. Other cases are
+-  // defined below as specializations.
+-
+-  // Accessing the members of template base class requires explicit
+-  // declaration.
+-  using OptionalStorageBase<T>::is_null_;
+-  using OptionalStorageBase<T>::value_;
+-  using OptionalStorageBase<T>::Init;
+-
+-  // Inherit constructors (specifically, the in_place constructor).
+-  using OptionalStorageBase<T>::OptionalStorageBase;
+-
+-  // User defined constructor deletes the default constructor.
+-  // Define it explicitly.
+-  OptionalStorage() = default;
+-
+-  OptionalStorage(const OptionalStorage& other) {
+-    if (!other.is_null_)
+-      Init(other.value_);
+-  }
+-
+-  OptionalStorage(OptionalStorage&& other) {
+-    if (!other.is_null_)
+-      Init(std::move(other.value_));
+-  }
+-};
+-
+-template <typename T>
+-struct OptionalStorage<T,
+-                       true /* trivially copy constructible */,
+-                       false /* trivially move constructible */>
+-    : OptionalStorageBase<T> {
+-  using OptionalStorageBase<T>::is_null_;
+-  using OptionalStorageBase<T>::value_;
+-  using OptionalStorageBase<T>::Init;
+-  using OptionalStorageBase<T>::OptionalStorageBase;
+-
+-  OptionalStorage() = default;
+-  OptionalStorage(const OptionalStorage& other) = default;
+-
+-  OptionalStorage(OptionalStorage&& other) {
+-    if (!other.is_null_)
+-      Init(std::move(other.value_));
+-  }
+-};
+-
+-template <typename T>
+-struct OptionalStorage<T,
+-                       false /* trivially copy constructible */,
+-                       true /* trivially move constructible */>
+-    : OptionalStorageBase<T> {
+-  using OptionalStorageBase<T>::is_null_;
+-  using OptionalStorageBase<T>::value_;
+-  using OptionalStorageBase<T>::Init;
+-  using OptionalStorageBase<T>::OptionalStorageBase;
+-
+-  OptionalStorage() = default;
+-  OptionalStorage(OptionalStorage&& other) = default;
+-
+-  OptionalStorage(const OptionalStorage& other) {
+-    if (!other.is_null_)
+-      Init(other.value_);
+-  }
+-};
+-
+-template <typename T>
+-struct OptionalStorage<T,
+-                       true /* trivially copy constructible */,
+-                       true /* trivially move constructible */>
+-    : OptionalStorageBase<T> {
+-  // If both trivially {copy,move} constructible are true, it is not necessary
+-  // to use user-defined constructors. So, just inheriting constructors
+-  // from the base class works.
+-  using OptionalStorageBase<T>::OptionalStorageBase;
+-};
+-
+-// Base class to support conditionally usable copy-/move- constructors
+-// and assign operators.
+-template <typename T>
+-class OptionalBase {
+-  // This class provides implementation rather than public API, so everything
+-  // should be hidden. Often we use composition, but we cannot in this case
+-  // because of C++ language restriction.
+- protected:
+-  constexpr OptionalBase() = default;
+-  constexpr OptionalBase(const OptionalBase& other) = default;
+-  constexpr OptionalBase(OptionalBase&& other) = default;
+-
+-  template <class... Args>
+-  constexpr explicit OptionalBase(in_place_t, Args&&... args)
+-      : storage_(in_place, std::forward<Args>(args)...) {}
+-
+-  ~OptionalBase() = default;
+-
+-  OptionalBase& operator=(const OptionalBase& other) {
+-    if (other.storage_.is_null_) {
+-      FreeIfNeeded();
+-      return *this;
+-    }
+-
+-    InitOrAssign(other.storage_.value_);
+-    return *this;
+-  }
+-
+-  OptionalBase& operator=(OptionalBase&& other) {
+-    if (other.storage_.is_null_) {
+-      FreeIfNeeded();
+-      return *this;
+-    }
+-
+-    InitOrAssign(std::move(other.storage_.value_));
+-    return *this;
+-  }
+-
+-  void InitOrAssign(const T& value) {
+-    if (storage_.is_null_)
+-      storage_.Init(value);
+-    else
+-      storage_.value_ = value;
+-  }
+-
+-  void InitOrAssign(T&& value) {
+-    if (storage_.is_null_)
+-      storage_.Init(std::move(value));
+-    else
+-      storage_.value_ = std::move(value);
+-  }
+-
+-  void FreeIfNeeded() {
+-    if (storage_.is_null_)
+-      return;
+-    storage_.value_.~T();
+-    storage_.is_null_ = true;
+-  }
+-
+-  OptionalStorage<T> storage_;
+-};
+-
+ }  // namespace internal
+ 
+ // base::Optional is a Chromium version of the C++17 optional class:
+@@ -256,56 +104,67 @@ class OptionalBase {
+ // https://chromium.googlesource.com/chromium/src/+/master/docs/optional.md
+ //
+ // These are the differences between the specification and the implementation:
++// - The constructor and emplace method using initializer_list are not
++//   implemented because 'initializer_list' is banned from Chromium.
+ // - Constructors do not use 'constexpr' as it is a C++14 extension.
+ // - 'constexpr' might be missing in some places for reasons specified locally.
+ // - No exceptions are thrown, because they are banned from Chromium.
+ // - All the non-members are in the 'base' namespace instead of 'std'.
+ template <typename T>
+-class Optional : public internal::OptionalBase<T> {
++class Optional {
+  public:
+   using value_type = T;
+ 
+-  // Defer default/copy/move constructor implementation to OptionalBase.
+-  // TODO(hidehiko): Implement conditional enabling.
+-  constexpr Optional() = default;
+-  constexpr Optional(const Optional& other) = default;
+-  constexpr Optional(Optional&& other) = default;
++  constexpr Optional() {}
+ 
+-  constexpr Optional(nullopt_t) {}
++  constexpr Optional(base::nullopt_t) {}
+ 
+-  constexpr Optional(const T& value)
+-      : internal::OptionalBase<T>(in_place, value) {}
++  // TODO(dcheng): Make these constexpr iff T is trivially constructible.
++  Optional(const Optional& other) {
++    if (!other.storage_.is_null_)
++      Init(other.value());
++  }
+ 
+-  constexpr Optional(T&& value)
+-      : internal::OptionalBase<T>(in_place, std::move(value)) {}
++  Optional(Optional&& other) {
++    if (!other.storage_.is_null_)
++      Init(std::move(other.value()));
++  }
+ 
+-  template <class... Args>
+-  constexpr explicit Optional(in_place_t, Args&&... args)
+-      : internal::OptionalBase<T>(in_place, std::forward<Args>(args)...) {}
++  constexpr Optional(const T& value) : storage_(value) {}
+ 
+-  template <
+-      class U,
+-      class... Args,
+-      class = std::enable_if_t<std::is_constructible<value_type,
+-                                                     std::initializer_list<U>&,
+-                                                     Args...>::value>>
+-  constexpr explicit Optional(in_place_t,
+-                              std::initializer_list<U> il,
+-                              Args&&... args)
+-      : internal::OptionalBase<T>(in_place, il, std::forward<Args>(args)...) {}
++  constexpr Optional(T&& value) : storage_(std::move(value)) {}
+ 
+-  ~Optional() = default;
++  template <class... Args>
++  constexpr explicit Optional(base::in_place_t, Args&&... args)
++      : storage_(base::in_place, std::forward<Args>(args)...) {}
+ 
+-  // Defer copy-/move- assign operator implementation to OptionalBase.
+-  // TOOD(hidehiko): Implement conditional enabling.
+-  Optional& operator=(const Optional& other) = default;
+-  Optional& operator=(Optional&& other) = default;
++  ~Optional() = default;
+ 
+-  Optional& operator=(nullopt_t) {
++  Optional& operator=(base::nullopt_t) {
+     FreeIfNeeded();
+     return *this;
+   }
+ 
++  Optional& operator=(const Optional& other) {
++    if (other.storage_.is_null_) {
++      FreeIfNeeded();
++      return *this;
++    }
++
++    InitOrAssign(other.value());
++    return *this;
++  }
++
++  Optional& operator=(Optional&& other) {
++    if (other.storage_.is_null_) {
++      FreeIfNeeded();
++      return *this;
++    }
++
++    InitOrAssign(std::move(other.value()));
++    return *this;
++  }
++
+   template <class U>
+   typename std::enable_if<std::is_same<std::decay_t<U>, T>::value,
+                           Optional&>::type
+@@ -384,10 +243,10 @@ class Optional : public internal::Option
+ 
+     if (storage_.is_null_ != other.storage_.is_null_) {
+       if (storage_.is_null_) {
+-        storage_.Init(std::move(other.storage_.value_));
++        Init(std::move(other.storage_.value_));
+         other.FreeIfNeeded();
+       } else {
+-        other.storage_.Init(std::move(storage_.value_));
++        other.Init(std::move(storage_.value_));
+         FreeIfNeeded();
+       }
+       return;
+@@ -405,27 +264,51 @@ class Optional : public internal::Option
+   template <class... Args>
+   void emplace(Args&&... args) {
+     FreeIfNeeded();
+-    storage_.Init(std::forward<Args>(args)...);
++    Init(std::forward<Args>(args)...);
+   }
+ 
+-  template <
+-      class U,
+-      class... Args,
+-      class = std::enable_if_t<std::is_constructible<value_type,
+-                                                     std::initializer_list<U>&,
+-                                                     Args...>::value>>
+-  T& emplace(std::initializer_list<U> il, Args&&... args) {
+-    FreeIfNeeded();
+-    storage_.Init(il, std::forward<Args>(args)...);
+-    return storage_.value_;
++ private:
++  void Init(const T& value) {
++    DCHECK(storage_.is_null_);
++    new (&storage_.value_) T(value);
++    storage_.is_null_ = false;
+   }
+ 
+- private:
+-  // Accessing template base class's protected member needs explicit
+-  // declaration to do so.
+-  using internal::OptionalBase<T>::FreeIfNeeded;
+-  using internal::OptionalBase<T>::InitOrAssign;
+-  using internal::OptionalBase<T>::storage_;
++  void Init(T&& value) {
++    DCHECK(storage_.is_null_);
++    new (&storage_.value_) T(std::move(value));
++    storage_.is_null_ = false;
++  }
++
++  template <class... Args>
++  void Init(Args&&... args) {
++    DCHECK(storage_.is_null_);
++    new (&storage_.value_) T(std::forward<Args>(args)...);
++    storage_.is_null_ = false;
++  }
++
++  void InitOrAssign(const T& value) {
++    if (storage_.is_null_)
++      Init(value);
++    else
++      storage_.value_ = value;
++  }
++
++  void InitOrAssign(T&& value) {
++    if (storage_.is_null_)
++      Init(std::move(value));
++    else
++      storage_.value_ = std::move(value);
++  }
++
++  void FreeIfNeeded() {
++    if (storage_.is_null_)
++      return;
++    storage_.value_.~T();
++    storage_.is_null_ = true;
++  }
++
++  internal::OptionalStorage<T> storage_;
+ };
+ 
+ // Here after defines comparation operators. The definition follows
+--- a/services/network/public/cpp/cors/cors.cc
++++ b/services/network/public/cpp/cors/cors.cc
+@@ -42,10 +42,10 @@ base::Optional<mojom::CORSError> CheckAc
+ 
+   // Check Suborigins, unless the Access-Control-Allow-Origin is '*', which
+   // implies that all Suborigins are okay as well.
+-  bool allow_all_origins = allow_origin_header == kAsterisk;
++  bool allow_all_origins = allow_origin_header.value() == kAsterisk;
+   if (!origin.suborigin().empty() && !allow_all_origins) {
+-    if (allow_suborigin_header != kAsterisk &&
+-        allow_suborigin_header != origin.suborigin()) {
++    if (allow_suborigin_header.value() != kAsterisk &&
++        allow_suborigin_header.value() != origin.suborigin()) {
+       return mojom::CORSError::kSubOriginMismatch;
+     }
+   }
+@@ -103,7 +103,7 @@ base::Optional<mojom::CORSError> CheckAc
+     // https://fetch.spec.whatwg.org/#http-access-control-allow-credentials.
+     // This check should be case sensitive.
+     // See also https://fetch.spec.whatwg.org/#http-new-header-syntax.
+-    if (allow_credentials_header != kLowerCaseTrue)
++    if (allow_credentials_header.value() != kLowerCaseTrue)
+       return mojom::CORSError::kDisallowCredentialsNotSetToTrue;
+   }
+   return base::nullopt;
+--- a/third_party/WebKit/Source/core/input/ContextMenuAllowedScope.h
++++ b/third_party/WebKit/Source/core/input/ContextMenuAllowedScope.h
+@@ -12,10 +12,10 @@
+ namespace blink {
+ 
+ class CORE_EXPORT ContextMenuAllowedScope {
++ public:
+   STACK_ALLOCATED();
+   DISALLOW_COPY_AND_ASSIGN(ContextMenuAllowedScope);
+ 
+- public:
+   ContextMenuAllowedScope();
+   ~ContextMenuAllowedScope();
+ 
+--- a/third_party/WebKit/Source/platform/wtf/Allocator.h
++++ b/third_party/WebKit/Source/platform/wtf/Allocator.h
+@@ -78,7 +78,8 @@ class __thisIsHereToForceASemicolonAfter
+   void* operator new(size_t, void*) = delete
+ 
+ #else
+-#define STACK_ALLOCATED() DISALLOW_NEW()
++#define STACK_ALLOCATED()
++//DISALLOW_NEW()
+ #endif
+ 
+ // Provides customizable overrides of fastMalloc/fastFree and operator

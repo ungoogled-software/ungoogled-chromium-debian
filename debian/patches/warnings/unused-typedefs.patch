@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/build/config/linux/atk/BUILD.gn
 +++ b/build/config/linux/atk/BUILD.gn
-@@ -42,7 +42,7 @@ config("atk") {
+@@ -40,7 +40,7 @@ config("atk") {
  
    cflags = [
      # glib uses the pre-c++11 typedef-as-static_assert hack.

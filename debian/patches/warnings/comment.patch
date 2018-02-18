@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/content/browser/frame_host/render_frame_host_impl.h
 +++ b/content/browser/frame_host/render_frame_host_impl.h
-@@ -1046,11 +1046,13 @@ class CONTENT_EXPORT RenderFrameHostImpl
+@@ -1027,11 +1027,13 @@ class CONTENT_EXPORT RenderFrameHostImpl
    // local roots which are under this frame and their first ancestor which is a
    // local root is either this frame or this frame's local root. For instance,
    // in a frame tree such as:
@@ -28,16 +28,21 @@ author: Michael Gilbert <mgilbert@debian.org>
    // previous Flush() is not finished yet.
    virtual void Flush(FlushCallback flush_callback);
  
---- a/content/browser/webauth/register_response_data.h
-+++ b/content/browser/webauth/register_response_data.h
-@@ -19,8 +19,8 @@
- namespace content {
+--- a/third_party/WebKit/Source/core/css/cssom/CSSNumericValue.cpp
++++ b/third_party/WebKit/Source/core/css/cssom/CSSNumericValue.cpp
+@@ -127,6 +127,7 @@ CSSNumericValue* CalcToNumericValue(cons
+   DCHECK_EQ(root.GetType(), CSSCalcExpressionNode::kCssCalcBinaryOperation);
+   CSSNumericValueVector values;
  
- // See figure 2:
--// https://fidoalliance.org/specs/fido-v2.0-rd-20170927/ \
--// fido-client-to-authenticator-protocol-v2.0-rd-20170927.html#using-the- \
-+// https://fidoalliance.org/specs/fido-v2.0-rd-20170927/
-+// fido-client-to-authenticator-protocol-v2.0-rd-20170927.html#using-the-
- // ctap2-authenticatormakecredential-command-with-ctap1-u2f-authenticators
- class CONTENT_EXPORT RegisterResponseData {
-  public:
++  /*
+   // For cases like calc(1 + 2 + 3), the calc expression tree looks like:
+   //       +
+   //      / \
+@@ -139,6 +140,7 @@ CSSNumericValue* CalcToNumericValue(cons
+   //      /|\
+   //     1 2 3
+   //
++  */
+   // So when the left child has the same operator as its parent, we can combine
+   // the two nodes. We keep moving down the left side of the tree as long as the
+   // current node and the root can be combined, collecting the right child of

@@ -15,11 +15,12 @@ disable/third-party-cookies.patch
 disable/device-notifications.patch
 
 fixes/mojo.patch
-fixes/angle.patch
 fixes/includes.patch
+fixes/optional.patch
 fixes/optimize.patch
 fixes/ps-print.patch
 fixes/gpu-timeout.patch
+fixes/duplicate-name.patch
 fixes/widevine-revision.patch
 fixes/connection-message.patch
 fixes/chromedriver-revision.patch
@@ -27,6 +28,8 @@ fixes/chromedriver-revision.patch
 warnings/comment.patch
 warnings/enum-boolean.patch
 warnings/unused-typedefs.patch
+warnings/unused-variable.patch
+warnings/null-destination.patch
 
 system/icu.patch
 system/vpx.patch
@@ -34,4 +37,5 @@ system/gtk2.patch
 system/nspr.patch
 system/lcms2.patch
 system/event.patch
+system/ffmpeg.patch
 system/harfbuzz.patch
