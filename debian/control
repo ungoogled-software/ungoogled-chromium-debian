@@ -177,6 +177,8 @@ Depends:
  ${misc:Depends},
  x11-utils,
  xdg-utils,
+Recommends:
+ libu2f-udev,
 Breaks:
  chromium (<< ${binary:Version}),
 Replaces:

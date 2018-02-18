@@ -22,7 +22,7 @@ Files-Excluded:
  third_party/flot/*.js
  third_party/yasm/source
  third_party/skia/platform_tools
- third_party/skia/resources/icc_profiles/srgb_lab_pcs.icc
+ third_party/skia/resources/icc_profiles
  third_party/webgl/src/sdk
  third_party/webgl/src/other
  third_party/expat/files

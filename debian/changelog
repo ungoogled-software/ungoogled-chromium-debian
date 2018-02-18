@@ -1,3 +1,12 @@
+chromium-browser (65.0.3325.73-1) experimental; urgency=medium
+
+  * New upstream beta release.
+  * Recommend libu2f-udev (closes: #890239).
+  * Add support ffmpeg 3.5 (closes: #888387).
+  * Remove icc_profiles from the upstream tarball.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 18 Feb 2018 02:22:56 +0000
+
 chromium-browser (64.0.3282.119-2) unstable; urgency=medium
 
   * Drop chromecast patch (closes: #884173).

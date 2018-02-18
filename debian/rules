@@ -13,7 +13,7 @@ defines=is_clang=false clang_use_chrome_plugins=false
 defines+=target_extra_ldflags=\"-Wl,--stats\"
 
 # avoid error in v8's garbage collector (see http://gcc.gnu.org/bugzilla/show_bug.cgi?id=68853)
-defines+=target_extra_cxxflags=\"-fno-delete-null-pointer-checks -Wno-deprecated-declarations\"
+defines+=target_extra_cxxflags=\"-fno-delete-null-pointer-checks -Wno-deprecated-declarations -Wno-dangling-else\"
 
 # set the appropriate cpu architecture
 DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
@@ -32,7 +32,6 @@ endif
 
 # disabled features
 defines+=is_debug=false \
-         use_gconf=false \
          use_ozone=false \
          use_sysroot=false \
          use_openh264=false \
@@ -94,10 +93,7 @@ override_dh_auto_configure:
 	# use system flot
 	for file in $(flotpaths); do ln -sf $$file third_party/flot; done
 	# strip out system third_party libraries
-	cp third_party/freetype/src/src/psnames/pstables.h .
 	./debian/scripts/unbundle
-	mkdir -p third_party/freetype/src/src/psnames
-	mv pstables.h third_party/freetype/src/src/psnames
 
 override_dh_auto_build-arch: out/Release/gn
 	./out/Release/gn gen out/Release --args="$(defines)"

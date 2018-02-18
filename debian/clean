@@ -9,7 +9,6 @@ chrome/test/data/webui/i18n_process_css_test.html
 
 third_party/ffmpeg/BUILD.gn
 third_party/flac/BUILD.gn
-third_party/harfbuzz-ng/BUILD.gn
 base/third_party/libevent/BUILD.gn
 build/secondary/third_party/libjpeg_turbo/BUILD.gn
 third_party/libdrm/BUILD.gn
@@ -25,3 +24,7 @@ third_party/zlib/BUILD.gn
 third_party/icu/BUILD.gn
 third_party/opus/BUILD.gn
 third_party/freetype/BUILD.gn
+third_party/fontconfig/BUILD.gn
+third_party/harfbuzz-ng/harfbuzz.gni
+
+build/config/freetype/freetype.gni
