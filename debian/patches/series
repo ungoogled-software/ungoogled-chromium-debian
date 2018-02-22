@@ -24,6 +24,7 @@ fixes/duplicate-name.patch
 fixes/widevine-revision.patch
 fixes/connection-message.patch
 fixes/chromedriver-revision.patch
+fixes/skia_buildfix.patch
 
 warnings/comment.patch
 warnings/enum-boolean.patch
