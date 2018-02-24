@@ -12,8 +12,8 @@ defines=is_clang=false clang_use_chrome_plugins=false
 # more verbose linker output
 defines+=target_extra_ldflags=\"-Wl,--stats\"
 
-# avoid error in v8's garbage collector (see http://gcc.gnu.org/bugzilla/show_bug.cgi?id=68853)
-defines+=target_extra_cxxflags=\"-fno-delete-null-pointer-checks -Wno-deprecated-declarations -Wno-dangling-else\"
+# extra flags to reduce warnings that aren't very useful
+defines+=target_extra_cxxflags=\"-Wno-deprecated-declarations -Wno-dangling-else\"
 
 # set the appropriate cpu architecture
 DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)

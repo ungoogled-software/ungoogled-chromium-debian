@@ -13,11 +13,14 @@ Files-Excluded:
  buildtools
  tools/emacs
  tools/perf/page_sets/tough_scheduling_cases/*.min.js
- native_client/NOTICE
+ native_client*
+ android_webview
  third_party/icu
+ third_party/llvm
  third_party/libxslt
  third_party/eu-strip
  third_party/android*
+ third_party/depot_tools
  third_party/bidichecker
  third_party/flot/*.js
  third_party/yasm/source
@@ -36,6 +39,7 @@ Files-Excluded:
  base/third_party/nspr
  third_party/binutils
  v8/benchmarks/regexp.js
+ v8/third_party/eu-strip
  v8/third_party/binutils
  third_party/libxml/mac
  third_party/libxml/linux
@@ -68,19 +72,20 @@ Files-Excluded:
  third_party/libphonenumber/dist/javascript/i18n/phonenumbers/metadatalite.js
  tools/perf/page_sets/webrtc_cases/adapter.js
  third_party/pdfium/third_party/eu-strip
+ components/test/data/payments
 
 # dirs that should be removed, but the jessie package still needs them
 # third_party/harfbuzz-ng/src
+
+Files: *
+Copyright: The Chromium Authors. All rights reserved.
+License: BSD-3-clause
 
 Files: debian/*
 Copyright:
  2009-2010 Fabien Tassin <fta@ubuntu.com>
  2010-2014 Giuseppe Iuculano <iuculano@debian.org>
- 2012-2017 Michael Gilbert <mgilbert@debian.org>
-License: BSD-3-clause
-
-Files: *
-Copyright: The Chromium Authors. All rights reserved.
+ 2012-2018 Michael Gilbert <mgilbert@debian.org>
 License: BSD-3-clause
 
 Files: PRESUBMIT.py

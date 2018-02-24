@@ -1,15 +1,23 @@
-chromium-browser (65.0.3325.73-2) UNRELEASED; urgency=medium
+chromium-browser (65.0.3325.74-1) experimental; urgency=medium
 
+  [ Michael Gilbert ]
+  * New upstream release.
+  * Update to debhelper 11.
+  * Update standards version.
+  * Remove third_party/llvm from the upstream tarball.
+  * Drop -fno-delete-null-pointer from debian/rules, applied upstream now.
+
+  [ Riku Voipio ]
   * Fix skia build on arm64, (closes: #891062)
   * Set some armhf specific gn args to help linking
 
- -- Riku Voipio <riku.voipio@linaro.org>  Thu, 22 Feb 2018 15:59:42 +0200
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 24 Feb 2018 02:36:40 +0000
 
 chromium-browser (65.0.3325.73-1) experimental; urgency=medium
 
   * New upstream beta release.
   * Recommend libu2f-udev (closes: #890239).
-  * Add support ffmpeg 3.5 (closes: #888387).
+  * Add support for ffmpeg 4.0 (closes: #888387).
   * Remove icc_profiles from the upstream tarball.
 
  -- Michael Gilbert <mgilbert@debian.org>  Sun, 18 Feb 2018 02:22:56 +0000

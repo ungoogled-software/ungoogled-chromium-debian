@@ -34,7 +34,6 @@ warnings/null-destination.patch
 
 system/icu.patch
 system/vpx.patch
-system/gtk2.patch
 system/nspr.patch
 system/lcms2.patch
 system/event.patch

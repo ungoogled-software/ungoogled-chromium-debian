@@ -9,7 +9,7 @@ Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-chromium/pkg-chromium.git
 Homepage: http://www.chromium.org/Home
 Rules-Requires-Root: no
 Build-Depends:
- debhelper (>= 10),
+ debhelper (>= 11),
  python3,
  pkg-config,
  ninja-build,
@@ -84,7 +84,7 @@ Build-Depends:
  libgcrypt20-dev,
  fonts-ipafont-gothic,
  fonts-ipafont-mincho,
-Standards-Version: 4.1.2
+Standards-Version: 4.1.3
 
 Package: chromium
 Architecture: i386 amd64 arm64 armhf
