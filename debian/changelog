@@ -1,3 +1,10 @@
+chromium-browser (65.0.3325.85-1) experimental; urgency=medium
+
+  * New upstream beta release.
+  * Remove third_party/ffmpeg from the upstream tarball.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 24 Feb 2018 08:17:44 +0000
+
 chromium-browser (65.0.3325.74-1) experimental; urgency=medium
 
   [ Michael Gilbert ]
