@@ -75,6 +75,7 @@ Files-Excluded:
  third_party/catapult/tracing/third_party/chai/chai.js
  ios
  tools/android
+ third_party/webrtc/examples
  third_party/catapult/third_party/vinn/third_party/parse5/parse5.js
  third_party/libphonenumber/dist/javascript/i18n/phonenumbers/metadata.js
  third_party/libphonenumber/dist/javascript/i18n/phonenumbers/metadatalite.js

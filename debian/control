@@ -7,7 +7,7 @@ Uploaders:
 Vcs-Git: git://anonscm.debian.org/pkg-chromium/pkg-chromium.git
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-chromium/pkg-chromium.git
 Homepage: http://www.chromium.org/Home
-Rules-Requires-Root: no
+Rules-Requires-Root: binary-targets
 Build-Depends:
  debhelper (>= 11),
  python3,
@@ -39,7 +39,7 @@ Build-Depends:
  libpng-dev,
  libxss-dev,
  libelf-dev,
- libvpx-dev,
+ libvpx-dev (>= 1.7.0),
  libpci-dev,
  libcap-dev,
  libdrm-dev,
@@ -66,13 +66,13 @@ Build-Depends:
  libavformat-dev,
  libglib2.0-dev,
  libasound2-dev,
- libsqlite3-dev,
  libjsoncpp-dev,
  libspeechd-dev (>= 0.8.4),
  libminizip-dev,
  libhunspell-dev,
  libharfbuzz-dev (>= 1.2.7),
  libusb-1.0-0-dev,
+ libopenjp2-7-dev,
  libmodpbase64-dev,
  libnss3-dev (>= 3.12.3),
  libnspr4-dev (>= 2:4.9),

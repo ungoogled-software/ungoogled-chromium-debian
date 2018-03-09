@@ -1,3 +1,46 @@
+chromium-browser (65.0.3325.146-1) unstable; urgency=medium
+
+  * New upstream stable release release.
+    - CVE-2018-6056: Incorrect derived class instantiation in V8. Reported by
+      lokihardt
+    - CVE-2018-6060: Use after free in Blink. Reported by Omair
+    - CVE-2018-6061: Race condition in V8. Reported by Guang Gong
+    - CVE-2018-6062: Heap buffer overflow in Skia. Reported by Anonymous
+    - CVE-2018-6057: Incorrect permissions on shared memory. Reported by Gal
+      Beniamini
+    - CVE-2018-6063: Incorrect permissions on shared memory. Reported by Gal
+      Beniamini
+    - CVE-2018-6064: Type confusion in V8. Reported by lokihardt
+    - CVE-2018-6065: Integer overflow in V8. Reported by Mark Brand
+    - CVE-2018-6066: Same Origin Bypass via canvas. Reported by Masato Kinugawa
+    - CVE-2018-6067: Buffer overflow in Skia. Reported by Ned Williamson
+    - CVE-2018-6068: Object lifecycle issues in Chrome Custom Tab. Reported by
+      Luan Herrera
+    - CVE-2018-6069: Stack buffer overflow in Skia. Reported by Wanglu &
+      Yangkang
+    - CVE-2018-6070: CSP bypass through extensions. Reported by Rob Wu
+    - CVE-2018-6071: Heap bufffer overflow in Skia. Reported by Anonymous
+    - CVE-2018-6072: Integer overflow in PDFium. Reported by Atte Kettunen
+    - CVE-2018-6073: Heap bufffer overflow in WebGL. Reported by Omair
+    - CVE-2018-6074: Mark-of-the-Web bypass. Reported by Abdulrahman Alqabandi
+    - CVE-2018-6075: Overly permissive cross origin downloads. Reported by Inti
+      De Ceukelaire
+    - CVE-2018-6076: Incorrect handling of URL fragment identifiers in Blink.
+      Reported by Mateusz Krzeszowiec
+    - CVE-2018-6077: Timing attack using SVG filters. Reported by Khalil Zhani
+    - CVE-2018-6078: URL Spoof in OmniBox. Reported by Khalil Zhani
+    - CVE-2018-6079: Information disclosure via texture data in WebGL. Reported
+      by Ivars Atteka
+    - CVE-2018-6080: Information disclosure in IPC call. Reported by Gal
+      Beniamini
+    - CVE-2018-6081: XSS in interstitials. Reported by Rob Wu
+    - CVE-2018-6082: Circumvention of port blocking. Reported by WenXu Wu
+    - CVE-2018-6083: Incorrect processing of AppManifests. Reported by Jun
+      Kokatsu
+  * Enable support for vp9 (closes: #891831).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Mon, 05 Mar 2018 01:26:31 +0000
+
 chromium-browser (65.0.3325.85-1) experimental; urgency=medium
 
   * New upstream beta release.
@@ -1890,7 +1933,7 @@ chromium-browser (30.0.1599.101-1) unstable; urgency=low
     - Medium CVE-2013-2908: Address bar spoofing related to the "204
       No Content" status code. Credit to Chamal de Silva.
     - High CVE-2013-2909: Use after free in inline-block
-      rendering. Credit to Atte Kettunen of OUSPG. 
+      rendering. Credit to Atte Kettunen of OUSPG.
     - Medium CVE-2013-2910: Use-after-free in Web Audio. Credit to
       Byoungyoung Lee of Georgia Tech Information Security Center (GTISC).
     - High CVE-2013-2911: Use-after-free in XSLT. Credit to Atte
@@ -1898,27 +1941,27 @@ chromium-browser (30.0.1599.101-1) unstable; urgency=low
     - High CVE-2013-2912: Use-after-free in PPAPI. Credit to Chamal
       de Silva and 41.w4r10r(at)garage4hackers.com.
     - High CVE-2013-2913: Use-after-free in XML document parsing.
-      Credit to cloudfuzzer. 
+      Credit to cloudfuzzer.
     - High CVE-2013-2914: Use after free in the Windows color
-      chooser dialog. Credit to Khalil Zhani. 
+      chooser dialog. Credit to Khalil Zhani.
     - Low CVE-2013-2915: Address bar spoofing via a malformed scheme.
-      Credit to Wander Groeneveld. 
+      Credit to Wander Groeneveld.
     - High CVE-2013-2916: Address bar spoofing related to the "204
       No Content” status code. Credit to Masato Kinugawa.
     - Medium CVE-2013-2917: Out of bounds read in Web Audio. Credit
       to Byoungyoung Lee and Tielei Wang of Georgia Tech Information
-      Security Center (GTISC). 
+      Security Center (GTISC).
     - High CVE-2013-2918: Use-after-free in DOM. Credit to
       Byoungyoung Lee of Georgia Tech Information Security Center (GTISC).
     - High CVE-2013-2919: Memory corruption in V8. Credit to Adam
-      Haile of Concrete Data. 
+      Haile of Concrete Data.
     - Medium CVE-2013-2920: Out of bounds read in URL parsing. Credit to
       Atte Kettunen of OUSPG.
     - High CVE-2013-2921: Use-after-free in resource loader. Credit
       to Byoungyoung Lee and Tielei Wang of Georgia Tech Information
-      Security Center (GTISC). 
+      Security Center (GTISC).
     - High CVE-2013-2922: Use-after-free in template element. Credit
-      to Jon Butler. 
+      to Jon Butler.
     - CVE-2013-2923: Various fixes from internal audits, fuzzing and other
       initiatives (Chrome 30).
     - Medium CVE-2013-2924: Use-after-free in ICU. Upstream bug here.
@@ -1981,7 +2024,7 @@ chromium-browser (29.0.1547.57-1) unstable; urgency=medium
   * Use source package name for get-orig-source rule.
   * Remove gfdl documentation (closes: #708860).
   * Build-depend on git.
-  
+
   [ Shawn Landden ]
   * New standards version.
   * Use canonical VCS url.
@@ -2266,42 +2309,42 @@ chromium-browser (24.0.1312.68-1) unstable; urgency=high
     - Medium CVE-2013-0842: Problems with NULL characters embedded in
       paths. Credit to Google Chrome Security Team (Jüri Aedla).
     - High CVE-2012-5145: Use-after-free in SVG layout. Credit to
-      Atte Kettunen of OUSPG. 
+      Atte Kettunen of OUSPG.
     - High CVE-2012-5146: Same origin policy bypass with malformed
-      URL. Credit to Erling A Ellingsen and Subodh Iyengar, both of Facebook. 
+      URL. Credit to Erling A Ellingsen and Subodh Iyengar, both of Facebook.
     - High CVE-2012-5147: Use-after-free in DOM handling. Credit to
-      José A. Vázquez. 
+      José A. Vázquez.
     - Medium CVE-2012-5148: Missing filename sanitization in hyphenation
-      support. Credit to Google Chrome Security Team (Justin Schuh). 
+      support. Credit to Google Chrome Security Team (Justin Schuh).
     - High CVE-2012-5149: Integer overflow in audio IPC handling. Credit to
-      Google Chrome Security Team (Chris Evans). 
+      Google Chrome Security Team (Chris Evans).
     - High CVE-2012-5150: Use-after-free when seeking video. Credit to
-      Google Chrome Security Team (Inferno). 
+      Google Chrome Security Team (Inferno).
     - High CVE-2012-5151: Integer overflow in PDF JavaScript. Credit to
       Mateusz Jurczyk, with contribution from Gynvael Coldwind, both of Google
-      Security Team. 
+      Security Team.
     - Medium CVE-2012-5152: Out-of-bounds read when seeking video. Credit
-      to Google Chrome Security Team (Inferno). 
+      to Google Chrome Security Team (Inferno).
     - High CVE-2012-5153: Out-of-bounds stack access in v8. Credit to
-      Andreas Rossberg of the Chromium development community. 
+      Andreas Rossberg of the Chromium development community.
     - High CVE-2013-0829: Corruption of database metadata leading to
-      incorrect file access. Credit to Google Chrome Security Team (Jüri Aedla). 
+      incorrect file access. Credit to Google Chrome Security Team (Jüri Aedla).
     - Low CVE-2013-0831: Possible path traversal from extension process.
-      Credit to Google Chrome Security Team (Tom Sepez). 
+      Credit to Google Chrome Security Team (Tom Sepez).
     - [160380] Medium CVE-2013-0832: Use-after-free with printing. Credit to Google
-      Chrome Security Team (Cris Neckar). 
+      Chrome Security Team (Cris Neckar).
     - Medium CVE-2013-0833: Out-of-bounds read with printing. Credit to
-      Google Chrome Security Team (Cris Neckar). 
+      Google Chrome Security Team (Cris Neckar).
     - Medium CVE-2013-0834: Out-of-bounds read with glyph handling. Credit
-      to Google Chrome Security Team (Cris Neckar). 
+      to Google Chrome Security Team (Cris Neckar).
     - Low CVE-2013-0835: Browser crash with geolocation. Credit to Arthur
-      Gerkis. 
+      Gerkis.
     - High CVE-2013-0836: Crash in v8 garbage collection. Credit to Google
-      Chrome Security Team (Cris Neckar). 
+      Chrome Security Team (Cris Neckar).
     - Medium CVE-2013-0837: Crash in extension tab handling. Credit to Tom
-      Nielsen. 
+      Nielsen.
     - Low CVE-2013-0838: Tighten permissions on shared memory
-      segments. Credit to Google Chrome Security Team (Chris Palmer). 
+      segments. Credit to Google Chrome Security Team (Chris Palmer).
     - High CVE-2012-5139: Use-after-free with visibility events.
       Credit to Chamal de Silva.
     - High CVE-2012-5140: Use-after-free in URL loader. Credit to
@@ -2492,8 +2535,8 @@ chromium-browser (21.0.1180.75~r150248-1) unstable; urgency=medium
     - Audio objects are not "switched" immediately
     - Print and Print Preview ignore paper size default in printer config
     - Candidate windows is shown in wrong place in Retina display
-    - more of the choppy and distorted audio issues 
-    - Japanese characters showing in Chinese font 
+    - more of the choppy and distorted audio issues
+    - Japanese characters showing in Chinese font
     - Sync invalidation notification broken after restart
 
  -- Giuseppe Iuculano <iuculano@debian.org>  Fri, 10 Aug 2012 17:31:57 +0200
@@ -3083,7 +3126,7 @@ chromium-browser (14.0.835.202~r103287-1) unstable; urgency=low
       bindings. Credit to Sergey Glazunov.
     - High CVE-2011-2881: Memory corruption with v8 hidden objects.
       Credit to Sergey Glazunov.
-    - Critical CVE-2011-3873: Memory corruption in shader translator. 
+    - Critical CVE-2011-3873: Memory corruption in shader translator.
 
  -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 05 Oct 2011 11:15:53 +0200
 
@@ -3148,9 +3191,9 @@ chromium-browser (14.0.835.163~r101024-1) unstable; urgency=low
       Credit to Sergey Glazunov.
     - Medium CVE-2011-2864: Out-of-bounds read with Tibetan characters.
       Credit to Google Chrome Security Team (Inferno).
-    - Medium CVE-2011-2858: Out-of-bounds read with triangle arrays. 
+    - Medium CVE-2011-2858: Out-of-bounds read with triangle arrays.
       Credit to Google Chrome Security Team (Inferno).
-    - Low CVE-2011-2874: Failure to pin a self-signed cert for a session. 
+    - Low CVE-2011-2874: Failure to pin a self-signed cert for a session.
       Credit to Nishant Yadant of VMware and Craig Chamberlain (@randomuserid).
     - High CVE-2011-2875: Type confusion in v8 object sealing.
       Credit to Christian Holler.
@@ -3514,7 +3557,7 @@ chromium-browser (10.0.648.133~r77742-1) unstable; urgency=high
 chromium-browser (10.0.648.127~r76697-1) unstable; urgency=low
 
   * New stable version
-  * Refreshed patches 
+  * Refreshed patches
 
  -- Giuseppe Iuculano <iuculano@debian.org>  Wed, 09 Mar 2011 23:04:13 +0100
 
@@ -3554,7 +3597,7 @@ chromium-browser (9.0.597.107~r75357-1) unstable; urgency=low
     - [71296] High Stale pointer in SVG animations. Credit to miaubiz.
     - [71386] High Stale nodes in XHTML. Credit to wushi of team509.
     - [71388] High Crash in textarea handling. Credit to wushi of team509.
-    - [71595] High Stale pointer in device orientation. Credit to 
+    - [71595] High Stale pointer in device orientation. Credit to
       Sergey Glazunov.
     - [71717] Medium Out-of-bounds read in WebGL. Credit to miaubiz.
     - [71855] High Integer overflow in textarea handling. Credit to miaubiz.
@@ -3612,7 +3655,7 @@ chromium-browser (9.0.597.83~r72435-1) unstable; urgency=low
 
   [ Giuseppe Iuculano ]
   * New beta version.
-  * Added a README.Debian and warn about downgrading (Closes: #605548) 
+  * Added a README.Debian and warn about downgrading (Closes: #605548)
   * honor DEB_BUILD_OPTIONS=nocheck, thanks to Jonathan Nieder
     (Closes: #589653)
   * Avoid "cannot access" messagges when using ffmpeg internal copy. Thanks to
@@ -3692,16 +3735,16 @@ chromium-browser (6.0.472.63~r59945-5) unstable; urgency=high
 
   * Backported security patches from stable:
     - High Bad pointer handling in node iteration. Credit to Sergey Glazunov.
-    - High Stale pointer with CSS + canvas. Credit to Sergey Glazunov. 
+    - High Stale pointer with CSS + canvas. Credit to Sergey Glazunov.
     - High Stale pointer with CSS + cursors. Credit to Jan Tošovský.
     - High Stale pointer with SVG use element. Credited anonymously; plus
       indepdent discovery by miaubiz.
-    - High Vorbis decoder buffer overflows. Credit to David Warren of CERT. 
-    - High Bad cast in anchor handling. Credit to Sergey Glazunov. 
-    - High Bad cast in video handling. Credit to Sergey Glazunov. 
+    - High Vorbis decoder buffer overflows. Credit to David Warren of CERT.
+    - High Bad cast in anchor handling. Credit to Sergey Glazunov.
+    - High Bad cast in video handling. Credit to Sergey Glazunov.
     - High Stale rendering node after DOM node removal. Credit to Martin
       Barbella; plus independent discovery by Google Chrome Security Team
-      (SkyLined). 
+      (SkyLined).
 
  -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 15 Jan 2011 12:04:52 +0100
 
@@ -3710,7 +3753,7 @@ chromium-browser (6.0.472.63~r59945-4) unstable; urgency=high
   * Backported security patches from stable:
     - [64-bit Linux only] High Bad validation for message deserialization on
       64-bit builds. Credit to Lei Zhang of the Chromium development community.
-    - Low Browser crash with NULL pointer in web worker handling. Credit to 
+    - Low Browser crash with NULL pointer in web worker handling. Credit to
       Nathan Weizenbaum of Google.
     - Medium Out-of-bounds read in CSS parsing. Credit to Chris Rohlf.
     - High Stale pointers in cursor handling. Credit to Sławomir Błażek and
@@ -3726,7 +3769,7 @@ chromium-browser (6.0.472.63~r59945-3) unstable; urgency=high
     - High Use after free in history handling. Credit to Stefan Troger.
     - Medium Make sure the “dangerous file types” list is uptodate with the
       Windows platforms. Credit to Billy Rios of the Google Security Team.
-    - High Crash due to bad indexing with malformed video. Credit to miaubiz. 
+    - High Crash due to bad indexing with malformed video. Credit to miaubiz.
     - High Use after free with SVG animations. Credit to Sławomir Błażek.
     - Medium Use after free in mouse dragging event handling. Credit to kuzzcc.
 
@@ -3785,7 +3828,7 @@ chromium-browser (6.0.472.62~r59676-1) unstable; urgency=low
       of MindedSecurity.
   * Add translations for the "Name" field in the desktop file, and fix
     some "Comment" / "GenericName". Thanks to the Ubuntu translation team.
-  * Build with PIE (Position Independent Executable) 
+  * Build with PIE (Position Independent Executable)
 
  -- Giuseppe Iuculano <iuculano@debian.org>  Sat, 18 Sep 2010 16:48:44 +0200
 
@@ -3962,7 +4005,7 @@ chromium-browser (5.0.375.99~r51029-1) unstable; urgency=low
   * New stable version, this release fixes the following security
     issues:
     - [42396] Low OOB read with WebGL. Credit to Sergey Glazunov; Google Chrome
-      Security Team (SkyLined). 
+      Security Team (SkyLined).
     - [42575] [42980] Medium Isolate sandboxed iframes more strongly. Credit to
       sirdarckcat of Google Security Team.
     - [43488] High Memory corruption with invalid SVGs. Credit to Aki Hekin of
@@ -4006,7 +4049,7 @@ chromium-browser (5.0.375.86~r49890-2) unstable; urgency=low
   * Partially revert info in about:version, it has significant impact in
     first-run performance
   * Build and use the custom ffmpeg copy, when ffmpeg 0.6 will be uploaded in
-    unstable chromium will use the system copy of ffmpeg. (Closes: #581507) 
+    unstable chromium will use the system copy of ffmpeg. (Closes: #581507)
   * Install libffmpegsumo
   * Add a replace and conflict entry for chromium-codecs-ffmpeg and
     chromium-codecs-ffmpeg-extra. This is necessary for people who used or
@@ -4036,9 +4079,9 @@ chromium-browser (5.0.375.86~r49890-1) unstable; urgency=low
     - [45267] High Memory error in video handling. Credit to Google Chrome
       Security Team (Cris Neckar).
     - [46126] High Stale pointer in x509-user-cert response. Credit to Rodrigo
-      Marcos of SECFORCE. 
+      Marcos of SECFORCE.
     - Drop the XLIB_SKIP_ARGB_VISUALS workaround as it creates regressions.
-      See http://crbug.com/46439 
+      See http://crbug.com/46439
   * Use /usr/bin/chromium-browser in chromium-browser.xml (Closes: #580582)
 
   [ Fabien Tassin ]
@@ -4084,7 +4127,7 @@ chromium-browser (5.0.375.70~r48679-1) unstable; urgency=low
     with a Gdk-ERROR when gtk2 is built with RGBA support (like in Maverick).
     (LP: #584959)
     - update debian/chromium-browser.sh
-  
+
   [ Giuseppe Iuculano ]
   * New upstream stable release, this release fixes the following security
     issues:
@@ -4123,7 +4166,7 @@ chromium-browser (5.0.375.38~r46659-2) unstable; urgency=low
   * Unbreak get-orig-source when it needs to drop its cache after a channel jump
     (replace brace expansion - which is a bashism - with proper $(wildcard))
     - update debian/rules
-  
+
   [ Giuseppe Iuculano ]
   * chromium-browser-inspector: demoted chromium-browser to Recommend and
     avoid circular dependency (Closes: #581743)
@@ -4141,7 +4184,7 @@ chromium-browser (5.0.375.38~r46659-2) unstable; urgency=low
   * Removed libc6-dev-i386 [amd64] and g++-multilib [amd64] from Build-Depends
     - update debian/control
   * Install a presubj bug file
-    - update debian/chromium-browser.install 
+    - update debian/chromium-browser.install
     - add debian/presubj
   * Forget zoom levels set/changed in incognito mode
     - add debian/patches/zoom_incognito.patch
@@ -4206,7 +4249,7 @@ chromium-browser (5.0.375.29~r46008-2) experimental; urgency=low
     - update debian/patches/add_enable_sse2_flag.patch
     - update debian/patches/series
   * Added a Debian menu file (Closes: #580591)
-    - add debian/chromium-browser.menu 
+    - add debian/chromium-browser.menu
   * Use system yasm
     - update debian/rules
     - update debian/control
@@ -4373,7 +4416,7 @@ chromium-browser (5.0.342.7~r42476-0ubuntu1) lucid; urgency=low
   * Rename chromium-codecs-ffmpeg-nonfree into chromium-codecs-ffmpeg-extra
     and move the two codecs back to Depends (LP: #537617, #513776)
     - update debian/control
- 
+
  -- Fabien Tassin <fta@ubuntu.com>  Thu, 25 Mar 2010 08:22:40 +0100
 
 chromium-browser (5.0.307.11~r39572-0ubuntu1) lucid; urgency=low

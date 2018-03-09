@@ -44,7 +44,6 @@ defines+=is_debug=false \
          use_custom_libcxx=false \
          use_gnome_keyring=false \
          use_unofficial_version_number=false \
-         rtc_libvpx_build_vp9=false \
          treat_warnings_as_errors=false \
          optimize_webui=false \
          enable_nacl=false \
