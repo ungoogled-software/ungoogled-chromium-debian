@@ -1,3 +1,11 @@
+chromium-browser (65.0.3325.146-2) unstable; urgency=medium
+
+  * Fix a few gcc build warnings.
+  * Apply upstream's fix for a bug in gcc7's handling of non-copyable types
+    (closes: #890954).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 10 Mar 2018 00:36:33 +0000
+
 chromium-browser (65.0.3325.146-1) unstable; urgency=medium
 
   * New upstream stable release release.

@@ -1,0 +1,16 @@
+description: fix gcc warning about comparison of different enumerated types
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/third_party/skia/include/core/SkShader.h
++++ b/third_party/skia/include/core/SkShader.h
+@@ -60,9 +60,7 @@ public:
+ #endif
+     };
+ 
+-    enum {
+-        kTileModeCount = kMirror_TileMode + 1
+-    };
++    static const int kTileModeCount = kMirror_TileMode + 1;
+ 
+     /**
+      *  Returns the local matrix.

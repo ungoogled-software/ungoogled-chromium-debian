@@ -1,0 +1,14 @@
+description: return type was missing when the desktop environment was not known
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/chrome/browser/ui/libgtkui/app_indicator_icon.cc
++++ b/chrome/browser/ui/libgtkui/app_indicator_icon.cc
+@@ -99,6 +99,8 @@ bool ShouldUseLibAppIndicator() {
+     case base::nix::DESKTOP_ENVIRONMENT_XFCE:
+       return false;
+   }
++  // Return false for an unknown environment.
++  return false;
+ }
+ 
+ void EnsureMethodsLoaded() {

@@ -1,3 +1,6 @@
+description: cast enums to int for use as printf arguments
+author: Michael Gilbert <mgilbert@debian.org>
+
 --- a/ui/gfx/ipc/buffer_types/gfx_param_traits.cc
 +++ b/ui/gfx/ipc/buffer_types/gfx_param_traits.cc
 @@ -30,7 +30,7 @@ bool ParamTraits<gfx::BufferUsageAndForm
@@ -5,7 +8,7 @@
      const gfx::BufferUsageAndFormat& p,
      std::string* l) {
 -  l->append(base::StringPrintf("(%d, %d)", p.usage, p.format));
-+  l->append(base::StringPrintf("(%p, %d)", p.usage, p.format));
++  l->append(base::StringPrintf("(%d, %d)", (int)p.usage, (int)p.format));
  }
  
  }  // namespace IPC

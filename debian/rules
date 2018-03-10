@@ -13,7 +13,7 @@ defines=is_clang=false clang_use_chrome_plugins=false
 defines+=target_extra_ldflags=\"-Wl,--stats\"
 
 # extra flags to reduce warnings that aren't very useful
-defines+=target_extra_cxxflags=\"-Wno-deprecated-declarations -Wno-dangling-else\"
+defines+=target_extra_cxxflags=\"-Wno-deprecated-declarations -Wno-dangling-else -Wno-unused-function -Wno-unused-variable -Wno-unused-but-set-variable\"
 
 # set the appropriate cpu architecture
 DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
