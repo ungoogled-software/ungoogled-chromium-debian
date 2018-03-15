@@ -21,7 +21,7 @@ fixes/optimize.patch
 fixes/ps-print.patch
 fixes/gpu-timeout.patch
 fixes/duplicate-name.patch
-fixes/incomplete-type.patch
+fixes/incomplete-types.patch
 fixes/widevine-revision.patch
 fixes/connection-message.patch
 fixes/chromedriver-revision.patch

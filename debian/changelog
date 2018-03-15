@@ -1,3 +1,9 @@
+chromium-browser (65.0.3325.146-4) unstable; urgency=medium
+
+  * Fix another incomplete type build error (closes: #892891).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 15 Mar 2018 01:22:51 +0000
+
 chromium-browser (65.0.3325.146-3) unstable; urgency=medium
 
   * Fix incomplete type build error.
