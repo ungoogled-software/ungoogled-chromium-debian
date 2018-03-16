@@ -1,6 +1,7 @@
 manpage.patch
 master-preferences.patch
 
+gn/libcxx.patch
 gn/parallel.patch
 gn/narrowing.patch
 gn/buildflags.patch
@@ -15,18 +16,19 @@ disable/third-party-cookies.patch
 disable/device-notifications.patch
 
 fixes/mojo.patch
-fixes/includes.patch
 fixes/optional.patch
 fixes/optimize.patch
 fixes/ps-print.patch
 fixes/gpu-timeout.patch
 fixes/duplicate-name.patch
+fixes/overloaded-call.patch
 fixes/incomplete-types.patch
 fixes/widevine-revision.patch
 fixes/connection-message.patch
 fixes/chromedriver-revision.patch
 fixes/skia_buildfix.patch
 
+warnings/friend.patch
 warnings/printf.patch
 warnings/comment.patch
 warnings/attribute.patch
@@ -36,11 +38,9 @@ warnings/enum-compare.patch
 warnings/sequence-point.patch
 warnings/initialization.patch
 warnings/unused-typedefs.patch
-warnings/unused-variable.patch
 warnings/null-destination.patch
 
 system/icu.patch
 system/nspr.patch
 system/event.patch
 system/ffmpeg.patch
-system/harfbuzz.patch

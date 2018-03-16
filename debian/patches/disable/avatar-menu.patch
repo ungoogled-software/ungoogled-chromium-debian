@@ -4,7 +4,7 @@ upstream-bug: http://crbug.com/513899
 
 --- a/chrome/browser/profiles/avatar_menu.cc
 +++ b/chrome/browser/profiles/avatar_menu.cc
-@@ -91,7 +91,7 @@ bool AvatarMenu::ShouldShowAvatarMenu()
+@@ -94,7 +94,7 @@ bool AvatarMenu::ShouldShowAvatarMenu()
    // TODO: Eliminate this ifdef. Add a delegate interface for the menu which
    // would also help remove the Browser dependency in AvatarMenuActions
    // implementations.

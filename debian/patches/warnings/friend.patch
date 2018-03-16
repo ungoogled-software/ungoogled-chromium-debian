@@ -1,0 +1,14 @@
+description: classes implicitly friend themselves
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/services/network/network_service.h
++++ b/services/network/network_service.h
+@@ -104,8 +104,6 @@ class COMPONENT_EXPORT(NETWORK_SERVICE)
+  private:
+   class MojoNetLog;
+ 
+-  friend class NetworkService;
+-
+   // service_manager::Service implementation.
+   void OnBindInterface(const service_manager::BindSourceInfo& source_info,
+                        const std::string& interface_name,

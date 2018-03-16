@@ -1,19 +1,25 @@
-description: more buffer padding is used by ffmpeg 3.5
-author: Michael Gilbert <mgilbert@debian.org>
-bug-debian: http://bugs.debian.org/888387
+description: system ffmpeg build still relies on old ffmpeg_features label
+author: chromium 65 authors
 
---- a/media/base/decoder_buffer.h
-+++ b/media/base/decoder_buffer.h
-@@ -37,7 +37,12 @@ class MEDIA_EXPORT DecoderBuffer
-     : public base::RefCountedThreadSafe<DecoderBuffer> {
-  public:
-   enum {
-+#if LIBAVCODEC_VERSION_MAJOR < 58
-     kPaddingSize = 32,
-+#else
-+    kPaddingSize = 64,
-+#endif
-+
- #if defined(ARCH_CPU_ARM_FAMILY)
-     kAlignmentSize = 16
- #else
+--- a/build/linux/unbundle/ffmpeg.gn
++++ b/build/linux/unbundle/ffmpeg.gn
+@@ -14,8 +14,8 @@ pkg_config("system_ffmpeg") {
+   ]
+ }
+ 
+-buildflag_header("ffmpeg_buildflags") {
+-  header = "ffmpeg_buildflags.h"
++buildflag_header("ffmpeg_features") {
++  header = "ffmpeg_features.h"
+   flags = [ "USE_SYSTEM_FFMPEG=true" ]
+ }
+ 
+@@ -30,7 +30,7 @@ shim_headers("ffmpeg_shim") {
+ 
+ source_set("ffmpeg") {
+   deps = [
+-    ":ffmpeg_buildflags",
++    ":ffmpeg_features",
+     ":ffmpeg_shim",
+   ]
+   public_configs = [ ":system_ffmpeg" ]
