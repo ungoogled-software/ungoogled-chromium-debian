@@ -32,14 +32,13 @@ warnings/friend.patch
 warnings/printf.patch
 warnings/comment.patch
 warnings/attribute.patch
-warnings/return-type.patch
 warnings/enum-boolean.patch
-warnings/enum-compare.patch
 warnings/sequence-point.patch
 warnings/initialization.patch
 warnings/unused-typedefs.patch
 warnings/null-destination.patch
 
+system/vpx.patch
 system/icu.patch
 system/nspr.patch
 system/event.patch

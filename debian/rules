@@ -36,6 +36,7 @@ endif
 
 # disabled features
 defines+=is_debug=false \
+         use_allocator=\"none\" \
          use_ozone=false \
          use_sysroot=false \
          use_openh264=false \

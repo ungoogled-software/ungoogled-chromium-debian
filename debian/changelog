@@ -1,3 +1,10 @@
+chromium-browser (66.0.3359.22-1) experimental; urgency=medium
+
+  * New upstream release.
+    - Fixes swiftshader library loading error (closes: #864606).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Mon, 19 Mar 2018 01:04:11 +0000
+
 chromium-browser (65.0.3325.146-4) unstable; urgency=medium
 
   * Fix another incomplete type build error (closes: #892891).
