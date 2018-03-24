@@ -11,8 +11,8 @@ author: chromium 65 authors
 -        pkt->data.frame.height[layer_id.spatial_layer_id];
 -    encoded_image_._encodedWidth =
 -        pkt->data.frame.width[layer_id.spatial_layer_id];
-+    encoded_image_._encodedHeight = raw->d_h;
-+    encoded_image_._encodedWidth = raw->d_w;
++    encoded_image_._encodedHeight = raw_->d_h;
++    encoded_image_._encodedWidth = raw_->d_w;
      encoded_image_.timing_.flags = TimingFrameFlags::kInvalid;
      int qp = -1;
      vpx_codec_control(encoder_, VP8E_GET_LAST_QUANTIZER, &qp);
