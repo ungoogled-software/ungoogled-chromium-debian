@@ -19,6 +19,7 @@ fixes/mojo.patch
 fixes/optional.patch
 fixes/optimize.patch
 fixes/ps-print.patch
+fixes/inspector.patch
 fixes/gpu-timeout.patch
 fixes/duplicate-name.patch
 fixes/overloaded-call.patch
@@ -43,3 +44,4 @@ system/icu.patch
 system/nspr.patch
 system/event.patch
 system/ffmpeg.patch
+system/openjpeg.patch

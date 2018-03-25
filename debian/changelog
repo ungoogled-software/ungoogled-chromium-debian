@@ -1,3 +1,9 @@
+chromium-browser (66.0.3359.22-3) experimental; urgency=medium
+
+  * Build pdfium using the system openjpeg library.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 24 Mar 2018 22:53:20 +0000
+
 chromium-browser (66.0.3359.22-2) experimental; urgency=medium
 
   * Fix typo in vpx patch.
