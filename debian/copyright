@@ -7,23 +7,41 @@ Files-Excluded:
  *.so
  *.elf
  *.swf
+ *.orig
  *config.sub
  *config.guess
  *jquery*.min.js
  buildtools
+ ui/chromeos
+ chrome/browser/resources/chromeos
+ chrome/browser/resources/default_apps
  tools/emacs
+ tools/perf/measurements/test_data
  tools/perf/page_sets/tough_scheduling_cases/*.min.js
  native_client*
  android_webview
  third_party/icu
+ third_party/flac
  third_party/llvm
  third_party/libxslt
  third_party/eu-strip
+ third_party/freetype
  third_party/android*
  third_party/depot_tools
  third_party/bidichecker
  third_party/flot/*.js
  third_party/yasm/source
+ third_party/zlib/adler*
+ third_party/zlib/crc32*
+ third_party/zlib/deflate*
+ third_party/zlib/gzguts*
+ third_party/zlib/in*
+ third_party/zlib/names*
+ third_party/zlib/trees*
+ third_party/zlib/x86*
+ third_party/zlib/z*
+ third_party/zlib/contrib
+ third_party/zlib/patches
  third_party/skia/platform_tools
  third_party/skia/resources/icc_profiles
  third_party/ffmpeg/doc
@@ -43,18 +61,19 @@ Files-Excluded:
  third_party/mesa/src/src/gallium/state_trackers/d3d1x/w32api
  third_party/catapult/tracing/test_data
  third_party/google_input_tools/src/chrome/os/inputview/_locales/*.js
+ v8/third_party
+ v8/benchmarks/regexp.js
  base/test/data
  base/third_party/nspr
+ base/third_party/libevent
  third_party/binutils
- v8/benchmarks/regexp.js
- v8/third_party/eu-strip
- v8/third_party/binutils
  third_party/libxml/mac
  third_party/libxml/linux
  third_party/libxml/win32
  third_party/node
  third_party/mocha/mocha.js
  third_party/chaijs/chai.js
+ third_party/swiftshader/third_party/LLVM
  third_party/devtools-node-modules
  third_party/catapult/third_party/flot
  third_party/catapult/third_party/chai

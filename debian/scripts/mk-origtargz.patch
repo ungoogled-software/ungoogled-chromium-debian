@@ -1,6 +1,6 @@
 --- a/debian/scripts/mk-origtargz	2017-10-27 12:52:18.000000000 +0000
 +++ b/debian/scripts/mk-origtargz	2017-11-26 23:39:05.818091051 +0000
-@@ -550,6 +550,11 @@
+@@ -551,6 +551,11 @@
  }
  
  if ($deletecount) {

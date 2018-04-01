@@ -16,7 +16,6 @@ Build-Depends:
  ninja-build,
  python-jinja2,
  ca-certificates,
- time,
  wget,
  flex,
  yasm,
