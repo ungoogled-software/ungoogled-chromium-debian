@@ -1,0 +1,16 @@
+description: gcc6 constexpr error
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/third_party/WebKit/Source/core/loader/IdlenessDetector.cpp
++++ b/third_party/WebKit/Source/core/loader/IdlenessDetector.cpp
+@@ -15,8 +15,8 @@
+ 
+ namespace blink {
+ 
+-const TimeDelta IdlenessDetector::kNetworkQuietWindow;
+-const TimeDelta IdlenessDetector::kNetworkQuietWatchdog;
++constexpr TimeDelta IdlenessDetector::kNetworkQuietWindow;
++constexpr TimeDelta IdlenessDetector::kNetworkQuietWatchdog;
+ 
+ void IdlenessDetector::Shutdown() {
+   Stop();

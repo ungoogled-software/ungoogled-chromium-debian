@@ -19,11 +19,14 @@ fixes/mojo.patch
 fixes/optional.patch
 fixes/optimize.patch
 fixes/ps-print.patch
+fixes/constexpr.patch
 fixes/inspector.patch
+fixes/wtf-vector.patch
 fixes/gpu-timeout.patch
 fixes/duplicate-name.patch
 fixes/overloaded-call.patch
 fixes/incomplete-types.patch
+fixes/inconsistent-this.patch
 fixes/widevine-revision.patch
 fixes/connection-message.patch
 fixes/chromedriver-revision.patch

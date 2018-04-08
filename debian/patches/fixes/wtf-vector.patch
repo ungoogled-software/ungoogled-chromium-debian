@@ -1,0 +1,19 @@
+description: gcc before 7.3.0-10 handles Optional<WTF::Vector<T>> incorrectly
+origin: derived from fix for std::vector in base/template_util.h
+
+--- a/third_party/WebKit/Source/platform/wtf/Vector.h
++++ b/third_party/WebKit/Source/platform/wtf/Vector.h
+@@ -1995,6 +1995,13 @@ Vector<T, inlineCapacity, Allocator>::Tr
+ 
+ }  // namespace WTF
+ 
++#include "base/template_util.h"
++
++namespace base {
++template <typename T>
++struct is_trivially_copy_constructible<WTF::Vector<T>> : std::false_type {};
++}
++
+ using WTF::Vector;
+ 
+ #endif  // WTF_Vector_h

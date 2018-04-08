@@ -6,14 +6,27 @@ export DH_VERBOSE=1
 # enable all build hardening flags
 export DEB_BUILD_MAINT_OPTIONS=hardening=+all
 
-# build with gcc instead of clang
-defines=is_clang=false clang_use_chrome_plugins=false
+# build using a stretch-like environment (to reduce backporting effort)
+export AR=ar
+export NM=nm
+export CC=gcc-6
+export CXX=g++-6
 
 # more verbose linker output
-defines+=target_extra_ldflags=\"-Wl,--stats\"
+export LDFLAGS+=-Wl,--stats
 
 # extra flags to reduce warnings that aren't very useful
-defines+=target_extra_cxxflags=\"-Wno-deprecated-declarations -Wno-dangling-else -Wno-unused-function -Wno-unused-variable -Wno-unused-but-set-variable\"
+export CXXFLAGS+=-Wno-unused-function \
+                 -Wno-unused-variable \
+                 -Wno-unused-but-set-variable \
+                 -Wno-deprecated-declarations \
+
+# disable clang options
+defines=is_clang=false clang_use_chrome_plugins=false
+
+# build using system toolchain
+defines+=host_toolchain=\"//build/toolchain/linux/unbundle:default\"
+defines+=custom_toolchain=\"//build/toolchain/linux/unbundle:default\"
 
 # set the appropriate cpu architecture
 DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
@@ -98,6 +111,7 @@ override_dh_auto_configure:
 	# use system flot
 	for file in $(flotpaths); do ln -sf $$file third_party/flot; done
 	# strip out system third_party libraries
+	rm -f base/third_party/libevent/BUILD.gn
 	./debian/scripts/unbundle
 
 override_dh_auto_build-arch: out/Release/gn

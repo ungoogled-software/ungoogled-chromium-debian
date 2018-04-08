@@ -1,9 +1,15 @@
-chromium-browser (66.0.3359.26-2) UNRELEASED; urgency=medium
+chromium-browser (66.0.3359.26-2) unstable; urgency=medium
 
+  [ Michael Gilbert ]
+  * Build using gcc6.
+  * Move version control to salsa.debian.org.
+  * Change maintainer address to chromium-browser@tracker.debian.org.
+
+  [ Riku Voipio ]
   * [arm64/armhf] Fix neon autodetection with patch from upstream
   * [armhf] drop debug symbols
 
- -- Riku Voipio <riku.voipio@linaro.org>  Fri, 06 Apr 2018 15:51:24 +0300
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 08 Apr 2018 03:11:08 +0000
 
 chromium-browser (66.0.3359.26-1) experimental; urgency=medium
 
