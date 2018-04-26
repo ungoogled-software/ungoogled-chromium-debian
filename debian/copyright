@@ -13,20 +13,27 @@ Files-Excluded:
  *jquery*.min.js
  buildtools
  ui/chromeos
+ chrome/android
  chrome/browser/resources/chromeos
  chrome/browser/resources/default_apps
+ chrome/test/data/webui/i18n_process_css_test.html
  tools/emacs
  tools/perf/measurements/test_data
  tools/perf/page_sets/tough_scheduling_cases/*.min.js
  native_client*
  android_webview
  third_party/icu
+ third_party/ink
  third_party/flac
  third_party/llvm
+ third_party/libvpx
+ third_party/libdrm
  third_party/libxslt
  third_party/eu-strip
  third_party/freetype
  third_party/android*
+ third_party/chromite
+ third_party/fontconfig
  third_party/depot_tools
  third_party/bidichecker
  third_party/flot/*.js

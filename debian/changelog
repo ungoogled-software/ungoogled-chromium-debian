@@ -1,3 +1,56 @@
+chromium-browser (66.0.3359.117-1) unstable; urgency=medium
+
+  * New upstream stable release.
+    - CVE-2018-6085: Use after free in Disk Cache. Reported by Ned Williamson
+    - CVE-2018-6086: Use after free in Disk Cache. Reported by Ned Williamson
+    - CVE-2018-6087: Use after free in WebAssembly. Reported by Anonymous
+    - CVE-2018-6088: Use after free in PDFium. Reported by Anonymous
+    - CVE-2018-6089: Same origin policy bypass in Service Worker. Reported by
+      Rob Wu
+    - CVE-2018-6090: Heap buffer overflow in Skia. Reported by ZhanJia Song
+    - CVE-2018-6091: Incorrect handling of plug-ins by Service Worker.
+      Reported by Jun Kokatsu
+    - CVE-2018-6092: Integer overflow in WebAssembly. Reported by Natalie
+      Silvanovich
+    - CVE-2018-6093: Same origin bypass in Service Worker. Reported by Jun
+      Kokatsu
+    - CVE-2018-6094: Exploit hardening regression in Oilpan. Reported by Chris
+      Rohlf
+    - CVE-2018-6095: Lack of meaningful user interaction requirement before
+      file upload. Reported by Abdulrahman Alqabandi
+    - CVE-2018-6096: Fullscreen UI spoof. Reported by WenXu Wu
+    - CVE-2018-6097: Fullscreen UI spoof. Reported by xisigr
+    - CVE-2018-6098: URL spoof in Omnibox. Reported by Khalil Zhani
+    - CVE-2018-6099: CORS bypass in ServiceWorker. Reported by Jun Kokatsu
+    - CVE-2018-6100: URL spoof in Omnibox. Reported by Lnyas Zhang
+    - CVE-2018-6101: Insufficient protection of remote debugging prototol in
+      DevTools . Reported by Rob Wu
+    - CVE-2018-6102: URL spoof in Omnibox. Reported by Khalil Zhani
+    - CVE-2018-6103: UI spoof in Permissions. Reported by Khalil Zhani
+    - CVE-2018-6104: URL spoof in Omnibox. Reported by Khalil Zhani
+    - CVE-2018-6105: URL spoof in Omnibox. Reported by Khalil Zhani
+    - CVE-2018-6106: Incorrect handling of promises in V8. Reported by
+      lokihardt
+    - CVE-2018-6107: URL spoof in Omnibox. Reported by Khalil Zhani
+    - CVE-2018-6108: URL spoof in Omnibox. Reported by Khalil Zhani
+    - CVE-2018-6109: Incorrect handling of files by FileAPI. Reported by
+      Dominik Weber
+    - CVE-2018-6110: Incorrect handling of plaintext files via file:// .
+      Reported by Wenxiang Qian
+    - CVE-2018-6111: Heap-use-after-free in DevTools. Reported by Khalil Zhani
+    - CVE-2018-6112: Incorrect URL handling in DevTools. Reported by Rob Wu
+    - CVE-2018-6113: URL spoof in Navigation. Reported by Khalil Zhani
+    - CVE-2018-6114: CSP bypass. Reported by Lnyas Zhang
+    - CVE-2018-6115: SmartScreen bypass in downloads. Reported by James Feher
+    - CVE-2018-6116: Incorrect low memory handling in WebAssembly. Reported by
+      Chengdu Security Response Center
+    - CVE-2018-6117: Confusing autofill settings. Reported by Spencer Dailey
+    - Fixes proxy time out error (closes: #892994).
+    - Removes not implemented messages (closes: #893799).
+  * Remove third_party/chromite from the upstream tarball (closes: #895076).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 26 Apr 2018 01:27:39 +0000
+
 chromium-browser (66.0.3359.26-2) unstable; urgency=medium
 
   [ Michael Gilbert ]
