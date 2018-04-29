@@ -26,6 +26,7 @@ fixes/gpu-timeout.patch
 fixes/duplicate-name.patch
 fixes/overloaded-call.patch
 fixes/incomplete-types.patch
+fixes/ambiguous-aliases.patch
 fixes/inconsistent-this.patch
 fixes/widevine-revision.patch
 fixes/connection-message.patch
@@ -49,5 +50,3 @@ system/nspr.patch
 system/event.patch
 system/ffmpeg.patch
 system/openjpeg.patch
-
-add-missing-blink-tools.patch

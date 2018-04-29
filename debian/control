@@ -94,6 +94,7 @@ Depends:
  ${shlibs:Depends},
  chromium-common (= ${binary:Version}),
 Recommends:
+ libgl1-mesa-dri,
  fonts-liberation,
 Suggests:
  chromium-l10n,

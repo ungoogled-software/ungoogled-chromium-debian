@@ -1,3 +1,12 @@
+chromium-browser (66.0.3359.139-1) unstable; urgency=medium
+
+  * New upstream security release.
+    - CVE-2018-6118: Use after free in Media Cache. Reported by Ned Williamson
+  * Enable jumbo build.
+  * Recommend libgl1-mesa-dri.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 28 Apr 2018 02:44:15 +0000
+
 chromium-browser (66.0.3359.117-1) unstable; urgency=medium
 
   * New upstream stable release.
