@@ -1,0 +1,29 @@
+--- a/BUILD.gn
++++ b/BUILD.gn
+@@ -671,7 +671,6 @@ group("gn_all") {
+       "//third_party/angle:libEGL",
+       "//third_party/angle:libGLESv2",
+       "//third_party/leveldatabase:leveldb_test_targets",
+-      "//third_party/libjpeg_turbo:simd",
+       "//third_party/opus:opus_compare",
+       "//third_party/opus:opus_demo",
+       "//third_party/opus:test_opus_api",
+@@ -695,7 +694,6 @@ group("gn_all") {
+       if (enable_nacl) {
+         deps += [ "//native_client/src/trusted/platform_qualify:vcpuid" ]
+       }
+-      deps += [ "//third_party/libjpeg_turbo:simd_asm" ]
+     }
+     if (is_linux && current_toolchain == host_toolchain) {
+       deps += [ "//v8:v8_shell" ]
+--- a/build/linux/unbundle/replace_gn_files.py
++++ b/build/linux/unbundle/replace_gn_files.py
+@@ -25,7 +25,7 @@ REPLACEMENTS = {
+   'icu': 'third_party/icu/BUILD.gn',
+   'libdrm': 'third_party/libdrm/BUILD.gn',
+   'libevent': 'base/third_party/libevent/BUILD.gn',
+-  'libjpeg': 'third_party/libjpeg.gni',
++  'libjpeg': 'third_party/libjpeg/BUILD.gn',
+   'libpng': 'third_party/libpng/BUILD.gn',
+   'libvpx': 'third_party/libvpx/BUILD.gn',
+   'libwebp': 'third_party/libwebp/BUILD.gn',

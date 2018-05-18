@@ -1,0 +1,14 @@
+description: fix return type warning
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/chrome/browser/ui/webui/discards/discards_ui.cc
++++ b/chrome/browser/ui/webui/discards/discards_ui.cc
+@@ -44,7 +44,7 @@ mojom::LifecycleUnitVisibility GetLifecy
+     case content::Visibility::VISIBLE:
+       return mojom::LifecycleUnitVisibility::VISIBLE;
+   }
+-#if defined(COMPILER_MSVC)
++#if 1
+   NOTREACHED();
+   return mojom::LifecycleUnitVisibility::VISIBLE;
+ #endif

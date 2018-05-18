@@ -3,12 +3,11 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/build/config/linux/atk/BUILD.gn
 +++ b/build/config/linux/atk/BUILD.gn
-@@ -40,7 +40,7 @@ config("atk") {
+@@ -47,6 +47,6 @@ config("atk") {
  
-   cflags = [
+   if (is_clang) {
      # glib uses the pre-c++11 typedef-as-static_assert hack.
--    "-Wno-unused-local-typedef",
-+    "-Wno-unused-local-typedefs",
- 
-     # G_DEFINE_TYPE automatically generates a *get_instance_private
-     # inline function after glib 2.37. That's unused. Prevent to
+-    cflags += [ "-Wno-unused-local-typedef" ]
++    cflags += [ "-Wno-unused-local-typedefs" ]
+   }
+ }

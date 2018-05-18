@@ -1,8 +1,8 @@
 description: fix gcc warning about enum constant used in a boolean context
 author: Michael Gilbert <mgilbert@debian.org>
 
---- a/third_party/WebKit/Source/platform/wtf/text/TextCodec.h
-+++ b/third_party/WebKit/Source/platform/wtf/text/TextCodec.h
+--- a/third_party/blink/renderer/platform/wtf/text/text_codec.h
++++ b/third_party/blink/renderer/platform/wtf/text/text_codec.h
 @@ -68,9 +68,9 @@ enum FlushBehavior {
    kDataEOF
  };
