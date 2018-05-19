@@ -58,6 +58,7 @@ defines+=is_debug=false \
          use_gnome_keyring=false \
          use_unofficial_version_number=false \
          treat_warnings_as_errors=false \
+         remove_webcore_debug_symbols=true \
          optimize_webui=false \
          enable_nacl=false \
          enable_nacl_nonsfi=false \
@@ -81,6 +82,7 @@ defines+=use_gold=true \
          use_system_harfbuzz=true \
          use_jumbo_build=true \
          jumbo_file_merge_limit=20 \
+         concurrent_links=1 \
          optimize_for_size=true \
          proprietary_codecs=true \
          ffmpeg_branding=\"Chrome\" \

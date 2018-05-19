@@ -1,3 +1,12 @@
+chromium-browser (66.0.3359.181-1) unstable; urgency=medium
+
+  * New upstream security release.
+    - CVE-2018-6120: Heap buffer overflow in PDFium. Reported by Zhou Aiting
+    - CVE-2018-6121: Privilege Escalation in extensions.
+    - CVE-2018-6122: Type confusion in V8.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 18 May 2018 21:08:59 +0000
+
 chromium-browser (66.0.3359.139-1) unstable; urgency=medium
 
   * New upstream security release.
