@@ -6,6 +6,9 @@ export DH_VERBOSE=1
 # enable all build hardening flags
 export DEB_BUILD_MAINT_OPTIONS=hardening=+all
 
+# indicate that binary targets do not require root
+export DEB_RULES_REQUIRES_ROOT=no
+
 # build using a stretch-like environment (to reduce backporting effort)
 export AR=ar
 export NM=nm
@@ -54,6 +57,7 @@ defines+=is_debug=false \
          use_sysroot=false \
          use_openh264=false \
          use_kerberos=false \
+         use_libjpeg_turbo=false \
          use_custom_libcxx=false \
          use_gnome_keyring=false \
          use_unofficial_version_number=false \
@@ -78,10 +82,11 @@ defines+=use_gold=true \
          enable_widevine=true \
          use_system_zlib=true \
          use_system_lcms2=true \
+         use_system_libjpeg=true \
          use_system_freetype=true \
          use_system_harfbuzz=true \
          use_jumbo_build=true \
-         jumbo_file_merge_limit=20 \
+         jumbo_file_merge_limit=15 \
          concurrent_links=1 \
          optimize_for_size=true \
          proprietary_codecs=true \
@@ -146,12 +151,6 @@ override_dh_auto_install-arch:
 
 override_dh_fixperms:
 	dh_fixperms --exclude chrome-sandbox
-
-override_dh_strip:
-	# skip dbgsym package for widevine to prevent duplication of the src package
-	dh_strip -pchromium-widevine --no-automatic-dbgsym
-	# execute dh_strip on all of the remaining packages
-	dh_strip --remaining-packages
 
 override_dh_gencontrol:
 	dh_gencontrol -- -VBuilt-Using="$(shell dpkg-query -f '$${source:Package} (= $${source:Version}), ' -W libjs-jquery libjs-jquery-flot)"

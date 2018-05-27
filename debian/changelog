@@ -1,3 +1,14 @@
+chromium-browser (67.0.3396.48-1) experimental; urgency=medium
+
+  * New upstream beta release.
+  * Indicate that binary rules do not require root.
+  * Change maintainer address to chromium-browser@packages.debian.org.
+  * Drop widevine adapter package, no longer supported upstream (chromium
+    should automatically detect and use libwidevinecdm.so without the extra
+    adapter library now).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 19 May 2018 03:30:20 +0000
+
 chromium-browser (66.0.3359.181-1) unstable; urgency=medium
 
   * New upstream security release.
