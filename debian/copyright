@@ -13,10 +13,16 @@ Files-Excluded:
  *jquery*.min.js
  buildtools
  ui/chromeos
- chrome/android
  chromeos/third_party
+ chrome/android
+ chrome/install_static
+ chrome/common/extensions/docs
  chrome/browser/resources/chromeos
  chrome/browser/resources/default_apps
+ chrome/test/data/android
+ chrome/test/data/chromeos
+ chrome/test/data/extensions
+ chrome/test/data/chromeproxy
  chrome/test/data/webui/i18n_process_css_test.html
  tools/emacs
  tools/perf/measurements/test_data
@@ -30,14 +36,20 @@ Files-Excluded:
  third_party/llvm
  third_party/libvpx
  third_party/libdrm
+ third_party/WebKit
+ third_party/snappy
+ third_party/libjpeg
  third_party/libxslt
  third_party/eu-strip
  third_party/freetype
  third_party/android*
  third_party/chromite
+ third_party/test_fonts
  third_party/fontconfig
  third_party/depot_tools
  third_party/bidichecker
+ third_party/libjpeg_turbo
+ third_party/win_build_output
  third_party/flot/*.js
  third_party/yasm/source
  third_party/zlib/adler*
@@ -68,9 +80,9 @@ Files-Excluded:
  third_party/apache-win32
  third_party/apache-portable-runtime
  third_party/snappy/src/testdata
- third_party/WebKit/PerformanceTests
- third_party/mesa/src/src/gallium/state_trackers/d3d1x/w32api
  third_party/catapult/tracing/test_data
+ third_party/mesa/src/src/gallium/state_trackers/d3d1x/w32api
+ third_party/blink/renderer/platform/text_codec_fuzzer_seed_corpus
  third_party/google_input_tools/src/chrome/os/inputview/_locales/*.js
  v8/third_party
  v8/benchmarks/regexp.js
