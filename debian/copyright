@@ -30,16 +30,20 @@ Files-Excluded:
  tools/perf/page_sets/tough_scheduling_cases/*.min.js
  native_client*
  android_webview
+ third_party/re2
  third_party/icu
  third_party/ink
+ third_party/opus
  third_party/flac
  third_party/llvm
+ third_party/libpng
  third_party/libvpx
  third_party/libdrm
  third_party/WebKit
  third_party/snappy
  third_party/libjpeg
  third_party/libxslt
+ third_party/libwebp
  third_party/eu-strip
  third_party/freetype
  third_party/android*

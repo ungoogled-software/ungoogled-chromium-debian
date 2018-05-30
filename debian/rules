@@ -24,6 +24,13 @@ export CXXFLAGS+=-Wno-unused-function \
                  -Wno-unused-but-set-variable \
                  -Wno-deprecated-declarations \
 
+# ignore warnings that are not supported well until gcc 8
+export CXXFLAGS+=-Wno-attributes \
+                 -Wno-subobject-linkage \
+
+# ignore warnings due to gcc bug (https://gcc.gnu.org/bugzilla/show_bug.cgi?id=84055)
+export CXXFLAGS+=-Wno-ignored-attributes
+
 # disable clang options
 defines=is_clang=false clang_use_chrome_plugins=false
 
@@ -43,11 +50,7 @@ ifeq (arm64,$(DEB_HOST_ARCH))
 defines+=host_cpu=\"arm64\"
 endif
 ifeq (armhf,$(DEB_HOST_ARCH))
-defines+=host_cpu=\"arm\" \
-		 arm_use_neon=false \
-		 blink_symbol_level=0 \
-		 symbol_level=0 \
-
+defines+=host_cpu=\"arm\" arm_use_neon=false symbol_level=0
 endif
 
 # disabled features
@@ -75,7 +78,8 @@ defines+=is_debug=false \
          linux_use_bundled_binutils=false \
 
 # enabled features
-defines+=use_gold=true \
+defines+=use_gio=true \
+         use_gold=true \
          use_gtk3=true \
          use_pulseaudio=true \
          link_pulseaudio=true \

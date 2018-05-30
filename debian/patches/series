@@ -8,6 +8,7 @@ gn/buildflags.patch
 
 disable/signin.patch
 disable/fuzzers.patch
+disable/openh264.patch
 disable/welcome-page.patch
 disable/google-api-warning.patch
 disable/third-party-cookies.patch
@@ -29,7 +30,9 @@ fixes/skia_buildfix.patch
 warnings/printf.patch
 warnings/comment.patch
 warnings/attribute.patch
+warnings/multichar.patch
 warnings/return-type.patch
+warnings/enum-compare.patch
 warnings/enum-boolean.patch
 warnings/sequence-point.patch
 warnings/initialization.patch

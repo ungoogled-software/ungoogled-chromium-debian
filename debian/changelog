@@ -1,3 +1,10 @@
+chromium-browser (67.0.3396.57-1) experimental; urgency=medium
+
+  * New upstream beta release.
+  * Ignore more compiler warnings.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Tue, 29 May 2018 13:06:17 +0000
+
 chromium-browser (67.0.3396.56-1) experimental; urgency=medium
 
   * New upstream beta release.
