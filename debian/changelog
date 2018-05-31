@@ -1,3 +1,44 @@
+chromium-browser (67.0.3396.62-1) unstable; urgency=medium
+
+  * New upstream stable release.
+    - CVE-2018-6123: Use after free in Blink. Reported by Looben Yang
+    - CVE-2018-6124: Type confusion in Blink. Reported by Guang Gong
+    - CVE-2018-6125: Overly permissive policy in WebUSB. Reported by Yubico
+    - CVE-2018-6126: Heap buffer overflow in Skia. Reported by Ivan Fratric
+    - CVE-2018-6127: Use after free in indexedDB. Reported by Looben Yang
+    - CVE-2018-6128: uXSS in Chrome on iOS. Reported by Tomasz Bojarski
+    - CVE-2018-6129: Out of bounds memory access in WebRTC. Reported by Natalie
+      Silvanovich
+    - CVE-2018-6130: Out of bounds memory access in WebRTC. Reported by Natalie
+      Silvanovich
+    - CVE-2018-6131: Incorrect mutability protection in WebAssembly. Reported
+      by Natalie Silvanovich
+    - CVE-2018-6132: Use of uninitialized memory in WebRTC. Reported by Ronald
+      E. Crane
+    - CVE-2018-6133: URL spoof in Omnibox. Reported by Khalil Zhani
+    - CVE-2018-6134: Referrer Policy bypass in Blink. Reported by Jun Kokatsu
+    - CVE-2018-6135: UI spoofing in Blink. Reported by Jasper Rebane
+    - CVE-2018-6136: Out of bounds memory access in V8. Reported by Peter Wong
+    - CVE-2018-6137: Leak of visited status of page in Blink. Reported by
+      Michael Smith
+    - CVE-2018-6138: Overly permissive policy in Extensions. Reported by
+      François Lajeunesse-Robert
+    - CVE-2018-6139: Restrictions bypass in the debugger extension API.
+      Reported by Rob Wu
+    - CVE-2018-6140: Restrictions bypass in the debugger extension API.
+      Reported by Rob Wu
+    - CVE-2018-6141: Heap buffer overflow in Skia. Reported by Yangkang
+    - CVE-2018-6142: Out of bounds memory access in V8. Reported by Choongwoo
+      Han
+    - CVE-2018-6143: Out of bounds memory access in V8. Reported by Guang Gong
+    - CVE-2018-6144: Out of bounds memory access in PDFium. Reported by pdknsk
+    - CVE-2018-6145: Incorrect escaping of MathML in Blink. Reported by Masato
+      Kinugawa
+    - CVE-2018-6147: Password fields not taking advantage of OS protections in
+      Views. Reported by Michail Pishchagin
+
+ -- Michael Gilbert <mgilbert@debian.org>  Wed, 30 May 2018 13:03:02 +0000
+
 chromium-browser (67.0.3396.57-1) experimental; urgency=medium
 
   * New upstream beta release.
