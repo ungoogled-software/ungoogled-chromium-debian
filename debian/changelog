@@ -1,3 +1,9 @@
+chromium-browser (67.0.3396.62-2) unstable; urgency=medium
+
+  * Fix build on arm64/armhf
+
+ -- Riku Voipio <riku.voipio@linaro.org>  Fri, 08 Jun 2018 15:37:05 +0300
+
 chromium-browser (67.0.3396.62-1) unstable; urgency=medium
 
   * New upstream stable release.
