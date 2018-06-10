@@ -23,6 +23,7 @@ fixes/inspector.patch
 fixes/gpu-timeout.patch
 fixes/ambiguous-aliases.patch
 fixes/widevine-revision.patch
+fixes/include-collisions.patch
 fixes/connection-message.patch
 fixes/chromedriver-revision.patch
 fixes/skia_buildfix.patch
@@ -37,6 +38,7 @@ warnings/enum-compare.patch
 warnings/enum-boolean.patch
 warnings/sequence-point.patch
 warnings/initialization.patch
+warnings/macro-redefined.patch
 warnings/unused-typedefs.patch
 warnings/null-destination.patch
 warnings/misleading-indentation.patch
