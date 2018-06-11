@@ -1,3 +1,9 @@
+chromium-browser (68.0.3440.7-1) experimental; urgency=medium
+
+  * New upstream development release.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 10 Jun 2018 23:44:14 +0000
+
 chromium-browser (67.0.3396.79-1) unstable; urgency=medium
 
   * New upstream security release.

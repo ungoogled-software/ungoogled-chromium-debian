@@ -5,6 +5,7 @@ Files-Excluded:
  .clang-format
  *.mk
  *.so
+ *.pyc
  *.elf
  *.swf
  *.orig
@@ -69,6 +70,10 @@ Files-Excluded:
  third_party/zlib/patches
  third_party/skia/platform_tools
  third_party/skia/resources/icc_profiles
+ third_party/libxml/src
+ third_party/openh264/src
+ third_party/harfbuzz-ng/src
+ third_party/harfbuzz-ng/fuzz
  third_party/webgl/src/sdk
  third_party/webgl/src/other
  third_party/expat/files
@@ -80,7 +85,11 @@ Files-Excluded:
  third_party/mesa/src/src/gallium/state_trackers/d3d1x/w32api
  third_party/blink/renderer/platform/text_codec_fuzzer_seed_corpus
  third_party/google_input_tools/src/chrome/os/inputview/_locales/*.js
- v8/third_party
+ v8/third_party/binutils
+ v8/third_party/colorama
+ v8/third_party/eu-strip
+ v8/third_party/googletest
+ v8/third_party/inspector_protocol
  v8/benchmarks/regexp.js
  base/test/data
  base/third_party/nspr
