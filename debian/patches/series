@@ -3,37 +3,42 @@ debianization/master-preferences.patch
 
 gn/libcxx.patch
 gn/parallel.patch
-gn/narrowing.patch
-gn/buildflags.patch
 
-disable/signin.patch
-disable/fuzzers.patch
-disable/openh264.patch
-disable/welcome-page.patch
-disable/google-api-warning.patch
-disable/third-party-cookies.patch
-disable/device-notifications.patch
+arm/skia.patch
+arm/crashpad.patch
 
 fixes/mojo.patch
+fixes/sizet.patch
 fixes/widevine.patch
 fixes/optimize.patch
 fixes/ps-print.patch
 fixes/namespace.patch
 fixes/inspector.patch
 fixes/gpu-timeout.patch
+fixes/stringpiece.patch
+fixes/map-insertion.patch
+fixes/missing-includes.patch
 fixes/ambiguous-aliases.patch
 fixes/widevine-revision.patch
 fixes/include-collisions.patch
 fixes/connection-message.patch
 fixes/chromedriver-revision.patch
-fixes/skia_buildfix.patch
-fixes/crashpad_buildfix.patch
+
+disable/signin.patch
+disable/android.patch
+disable/fuzzers.patch
+disable/openh264.patch
+disable/perfetto.patch
+disable/convertutf.patch
+disable/welcome-page.patch
+disable/google-api-warning.patch
+disable/third-party-cookies.patch
+disable/device-notifications.patch
 
 warnings/printf.patch
 warnings/comment.patch
 warnings/attribute.patch
 warnings/multichar.patch
-warnings/return-type.patch
 warnings/enum-compare.patch
 warnings/enum-boolean.patch
 warnings/sequence-point.patch
@@ -41,11 +46,12 @@ warnings/initialization.patch
 warnings/macro-redefined.patch
 warnings/unused-typedefs.patch
 warnings/null-destination.patch
-warnings/misleading-indentation.patch
 
 system/vpx.patch
+system/vpx2.patch
 system/icu.patch
 system/jpeg.patch
+system/webp.patch
 system/nspr.patch
 system/event.patch
 system/ffmpeg.patch

@@ -1,0 +1,29 @@
+--- a/components/bookmarks/browser/bookmark_storage.h
++++ b/components/bookmarks/browser/bookmark_storage.h
+@@ -18,6 +18,7 @@
+ #include "base/memory/ref_counted.h"
+ #include "base/memory/weak_ptr.h"
+ #include "components/bookmarks/browser/bookmark_node.h"
++#include "components/bookmarks/browser/url_index.h"
+ #include "components/bookmarks/browser/titled_url_index.h"
+ 
+ namespace base {
+@@ -29,7 +30,7 @@ namespace bookmarks {
+ class BookmarkClient;
+ class BookmarkModel;
+ class BookmarkNode;
+-class UrlIndex;
++#include "components/bookmarks/browser/url_index.h"
+ 
+ // A list of BookmarkPermanentNodes that owns them.
+ using BookmarkPermanentNodeList =
+--- a/services/network/public/cpp/cors/cors_legacy.h
++++ b/services/network/public/cpp/cors/cors_legacy.h
+@@ -5,6 +5,7 @@
+ #ifndef SERVICES_NETWORK_PUBLIC_CPP_CORS_CORS_LEGACY_H_
+ #define SERVICES_NETWORK_PUBLIC_CPP_CORS_CORS_LEGACY_H_
+ 
++#include <string>
+ #include <vector>
+ 
+ #include "base/component_export.h"

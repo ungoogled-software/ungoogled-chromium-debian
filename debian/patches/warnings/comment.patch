@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/content/browser/frame_host/render_frame_host_impl.h
 +++ b/content/browser/frame_host/render_frame_host_impl.h
-@@ -1095,11 +1095,13 @@ class CONTENT_EXPORT RenderFrameHostImpl
+@@ -1103,11 +1103,13 @@ class CONTENT_EXPORT RenderFrameHostImpl
    // local roots which are under this frame and their first ancestor which is a
    // local root is either this frame or this frame's local root. For instance,
    // in a frame tree such as:

@@ -1,4 +1,4 @@
-description: crashpad relies on multicharacter integer assigments
+description: crashpad relies on multicharacter integer assignments
 author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/third_party/crashpad/crashpad/build/BUILD.gn

@@ -1,6 +1,6 @@
 --- a/chrome/browser/ui/views/tabs/new_tab_button.cc
 +++ b/chrome/browser/ui/views/tabs/new_tab_button.cc
-@@ -528,12 +528,14 @@ SkColor NewTabButton::GetButtonFillColor
+@@ -491,12 +491,14 @@ SkColor NewTabButton::GetButtonFillColor
          ui::NativeTheme::kColorId_ProminentButtonColor);
    }
  
