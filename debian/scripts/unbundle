@@ -23,7 +23,7 @@ def strip(path):
                 else:
                     os.remove(removal)
 
-keepers = ('openh264','libjpeg')
+keepers = ('openh264','libjpeg','ffmpeg')
 
 for lib,rule in replace_gn_files.REPLACEMENTS.items():
     if lib not in keepers:
