@@ -24,6 +24,10 @@ export CXXFLAGS+=-Wno-unused-function \
                  -Wno-unused-but-set-variable \
                  -Wno-deprecated-declarations \
 
+# ignore warnings for minor mistakes that are too common
+export CXXFLAGS+=-Wno-return-type \
+                 -Wno-misleading-indentation \
+
 # ignore warnings that are not supported well until gcc 8
 export CXXFLAGS+=-Wno-attributes \
                  -Wno-subobject-linkage \
@@ -187,6 +191,7 @@ get-orig-source:
 	tar xf ../$(tarball)
 	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
 	while read line; do rm -rf $$line; done < $(removed)
+	cd $(extract) && ../debian/scripts/check-upstream
 	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
 	test ! -e $(origtxz) || rm -f $(origtxz)
 	tar cf - $(extract) | xz -5 -T $(njobs) - > $(origtxz)

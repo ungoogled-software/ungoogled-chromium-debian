@@ -1,3 +1,10 @@
+chromium-browser (68.0.3440.17-1) experimental; urgency=medium
+
+  * New upstream beta release.
+  * Recommend upower and notification-daemon.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Mon, 11 Jun 2018 04:40:58 +0000
+
 chromium-browser (68.0.3440.7-1) experimental; urgency=medium
 
   * New upstream development release.

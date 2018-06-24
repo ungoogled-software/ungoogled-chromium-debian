@@ -20,6 +20,7 @@ fixes/map-insertion.patch
 fixes/missing-includes.patch
 fixes/ambiguous-aliases.patch
 fixes/widevine-revision.patch
+fixes/widevine-locations.patch
 fixes/include-collisions.patch
 fixes/connection-message.patch
 fixes/chromedriver-revision.patch
@@ -29,7 +30,6 @@ disable/android.patch
 disable/fuzzers.patch
 disable/openh264.patch
 disable/perfetto.patch
-disable/convertutf.patch
 disable/welcome-page.patch
 disable/google-api-warning.patch
 disable/third-party-cookies.patch

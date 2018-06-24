@@ -5,8 +5,9 @@ Files-Excluded:
  .clang-format
  *.mk
  *.so
- *.pyc
  *.elf
+ *.exe
+ *.pyc
  *.swf
  *.orig
  *config.sub
@@ -26,14 +27,17 @@ Files-Excluded:
  chrome/test/data/chromeproxy
  chrome/test/data/webui/i18n_process_css_test.html
  tools/emacs
+ tools/perf/page_sets
  tools/perf/measurements/test_data
  tools/perf/page_sets/maps_perf_test
  tools/perf/page_sets/tough_scheduling_cases/*.min.js
+ tools/page_cycler/acid3
  native_client*
  android_webview
  third_party/re2
  third_party/icu
  third_party/ink
+ third_party/deqp
  third_party/opus
  third_party/flac
  third_party/llvm
@@ -68,6 +72,8 @@ Files-Excluded:
  third_party/zlib/z*
  third_party/zlib/contrib
  third_party/zlib/patches
+ third_party/skia/tools/gyp
+ third_party/skia/site/user/api
  third_party/skia/platform_tools
  third_party/skia/resources/icc_profiles
  third_party/libxml/src
@@ -78,11 +84,15 @@ Files-Excluded:
  third_party/webgl/src/other
  third_party/expat/files
  third_party/*rjsmin/bench
+ third_party/perfetto
  third_party/apache-win32
  third_party/apache-portable-runtime
  third_party/snappy/src/testdata
  third_party/catapult/tracing/test_data
+ third_party/catapult/third_party/coverage
  third_party/mesa/src/src/gallium/state_trackers/d3d1x/w32api
+ third_party/blink/perf_tests
+ third_party/blink/manual_tests
  third_party/blink/renderer/platform/text_codec_fuzzer_seed_corpus
  third_party/google_input_tools/src/chrome/os/inputview/_locales/*.js
  v8/third_party/binutils
@@ -128,7 +138,8 @@ Files-Excluded:
  third_party/libphonenumber/dist/javascript/i18n/phonenumbers/metadatalite.js
  tools/perf/page_sets/webrtc_cases/adapter.js
  third_party/pdfium/third_party/eu-strip
- components/test/data/payments
+ components/test/data
+ components/test/android
 
 # dirs that should be removed, but the jessie package still needs them
 # third_party/harfbuzz-ng/src

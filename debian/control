@@ -10,7 +10,7 @@ Homepage: http://www.chromium.org/Home
 Rules-Requires-Root: no
 Build-Depends:
  debhelper (>= 11),
- g++-6,
+ g++-6 (>= 6.4.0-18),
  python3,
  pkg-config,
  ninja-build,
@@ -93,9 +93,6 @@ Depends:
  ${misc:Depends},
  ${shlibs:Depends},
  chromium-common (= ${binary:Version}),
-Recommends:
- libgl1-mesa-dri,
- fonts-liberation,
 Suggests:
  chromium-l10n,
  chromium-shell,
@@ -165,7 +162,11 @@ Depends:
  x11-utils,
  xdg-utils,
 Recommends:
+ upower,
  libu2f-udev,
+ libgl1-mesa-dri,
+ fonts-liberation,
+ notification-daemon,
 Breaks:
  chromium (<< ${binary:Version}),
 Replaces:
