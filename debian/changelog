@@ -1,3 +1,11 @@
+chromium-browser (67.0.3396.87-1) unstable; urgency=medium
+
+  * New upstream security release.
+    - CVE-2018-6149: Out of bounds write in V8. Reported by Yu Zhou and
+      Jundong Xie
+
+ -- Michael Gilbert <mgilbert@debian.org>  Tue, 19 Jun 2018 12:13:46 +0000
+
 chromium-browser (67.0.3396.79-2) unstable; urgency=medium
 
   * Use embedded ffmpeg code copy (closes: #900533).

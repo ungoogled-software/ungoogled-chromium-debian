@@ -1,0 +1,11 @@
+--- a/BUILD.gn
++++ b/BUILD.gn
+@@ -648,7 +648,7 @@ group("gn_all") {
+     }
+   }
+ 
+-  if (is_mac || is_linux || is_android) {
++  if (false) {
+     deps += [ "//third_party/perfetto:all" ]
+   }
+ 
