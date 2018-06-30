@@ -27,3 +27,5 @@ third_party/harfbuzz-ng/harfbuzz.gni
 third_party/yasm/yasm_assemble.gni
 
 build/config/freetype/freetype.gni
+
+third_party/yasm/run_yasm.py

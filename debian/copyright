@@ -19,6 +19,7 @@ Files-Excluded:
  ios
  buildtools
  ui/chromeos
+ base/mac
  base/test/data
  base/third_party/nspr
  base/third_party/libevent
@@ -44,6 +45,7 @@ Files-Excluded:
  tools/page_cycler/acid3
  components/test/data
  components/test/android
+ components/drive/chromeos
  components/cbor/cbor_reader_fuzzer_corpus
  native_client*
  android_webview
@@ -66,6 +68,7 @@ Files-Excluded:
  third_party/freetype
  third_party/android*
  third_party/chromite
+ third_party/tcmalloc
  third_party/lzma_sdk
  third_party/test_fonts
  third_party/fontconfig
@@ -90,6 +93,14 @@ Files-Excluded:
  third_party/skia/site/user/api
  third_party/skia/platform_tools
  third_party/skia/resources/icc_profiles
+ third_party/ffmpeg/doc
+ third_party/ffmpeg/lib*
+ third_party/ffmpeg/tests
+ third_party/ffmpeg/tools
+ third_party/ffmpeg/fftools
+ third_party/ffmpeg/compat
+ third_party/ffmpeg/config*
+ third_party/ffmpeg/chromium
  third_party/libxml/src
  third_party/openh264/src
  third_party/harfbuzz-ng/src
@@ -147,6 +158,7 @@ Files-Excluded:
  third_party/webrtc/examples
  third_party/webrtc/third_party
  third_party/pdfium/third_party/eu-strip
+ third_party/pdfium/third_party/libpng16
  third_party/pdfium/third_party/libopenjpeg20
  third_party/boringssl/crypto_test_data.cc
  third_party/boringssl/src/crypto/cipher_extra/test

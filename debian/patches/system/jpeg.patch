@@ -1,3 +1,6 @@
+description: use system jpeg library
+author: Michael Gilbert <mgilbert@debian.org>
+
 --- a/BUILD.gn
 +++ b/BUILD.gn
 @@ -682,7 +682,6 @@ group("gn_all") {
