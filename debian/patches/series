@@ -25,6 +25,7 @@ fixes/widevine-locations.patch
 fixes/include-collisions.patch
 fixes/connection-message.patch
 fixes/chromedriver-revision.patch
+fixes/gcc_skcms_ice.patch
 
 disable/signin.patch
 disable/android.patch
