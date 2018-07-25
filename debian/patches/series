@@ -6,6 +6,7 @@ gn/parallel.patch
 
 arm/skia.patch
 arm/crashpad.patch
+arm/gcc_skcms_ice.patch
 
 fixes/mojo.patch
 fixes/sizet.patch
@@ -25,7 +26,6 @@ fixes/widevine-locations.patch
 fixes/include-collisions.patch
 fixes/connection-message.patch
 fixes/chromedriver-revision.patch
-fixes/gcc_skcms_ice.patch
 
 disable/signin.patch
 disable/android.patch
