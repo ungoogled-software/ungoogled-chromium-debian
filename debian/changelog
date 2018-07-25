@@ -1,3 +1,37 @@
+chromium-browser (68.0.3440.42-1) experimental; urgency=medium
+
+  * New upstream beta release.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 30 Jun 2018 17:46:03 +0000
+
+chromium-browser (68.0.3440.33-1) experimental; urgency=medium
+
+  * New upstream beta release.
+  * Build using upstream's "lite" tarball.
+  * Restore decoder initialization from chromium 66 to maintain compatibility
+    with ffmpeg 3.4 (closes: #900533).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 29 Jun 2018 20:48:51 +0000
+
+chromium-browser (68.0.3440.25-1) experimental; urgency=medium
+
+  * New upstream beta release.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 24 Jun 2018 16:32:18 +0000
+
+chromium-browser (68.0.3440.17-1) experimental; urgency=medium
+
+  * New upstream beta release.
+  * Recommend upower and notification-daemon.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Mon, 11 Jun 2018 04:40:58 +0000
+
+chromium-browser (68.0.3440.7-1) experimental; urgency=medium
+
+  * New upstream development release.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 10 Jun 2018 23:44:14 +0000
+
 chromium-browser (67.0.3396.87-1) unstable; urgency=medium
 
   * New upstream security release.
@@ -34,7 +68,6 @@ chromium-browser (67.0.3396.62-1) unstable; urgency=medium
     - CVE-2018-6125: Overly permissive policy in WebUSB. Reported by Yubico
     - CVE-2018-6126: Heap buffer overflow in Skia. Reported by Ivan Fratric
     - CVE-2018-6127: Use after free in indexedDB. Reported by Looben Yang
-    - CVE-2018-6128: uXSS in Chrome on iOS. Reported by Tomasz Bojarski
     - CVE-2018-6129: Out of bounds memory access in WebRTC. Reported by Natalie
       Silvanovich
     - CVE-2018-6130: Out of bounds memory access in WebRTC. Reported by Natalie
