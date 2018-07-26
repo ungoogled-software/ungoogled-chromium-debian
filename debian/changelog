@@ -1,3 +1,51 @@
+chromium-browser (68.0.3440.75-1) unstable; urgency=medium
+
+  * New upstream stable release.
+    - CVE-2018-4117: Cross origin information leak in Blink. Reported by
+      AhsanEjaz
+    - CVE-2018-6044: Request privilege escalation in Extensions . Reported by
+      Rob Wu
+    - CVE-2018-6150: Cross origin information disclosure in Service Workers.
+      Reported by Rob Wu
+    - CVE-2018-6151: Bad cast in DevTools. Reported by Rob Wu
+    - CVE-2018-6152: Local file write in DevTools. Reported by Rob Wu
+    - CVE-2018-6153: Stack buffer overflow in Skia. Reported by Zhen Zhou
+    - CVE-2018-6154: Heap buffer overflow in WebGL. Reported by Omair
+    - CVE-2018-6155: Use after free in WebRTC. Reported by Natalie Silvanovich
+    - CVE-2018-6156: Heap buffer overflow in WebRTC. Reported by Natalie
+      Silvanovich
+    - CVE-2018-6157: Type confusion in WebRTC. Reported by Natalie Silvanovich
+    - CVE-2018-6158: Use after free in Blink. Reported by Zhe Jin
+    - CVE-2018-6159: Same origin policy bypass in ServiceWorker. Reported by
+      Jun Kokatsu
+    - CVE-2018-6161: Same origin policy bypass in WebAudio. Reported by Jun
+      Kokatsu
+    - CVE-2018-6162: Heap buffer overflow in WebGL. Reported by Omair
+    - CVE-2018-6163: URL spoof in Omnibox. Reported by Khalil Zhani
+    - CVE-2018-6164: Same origin policy bypass in ServiceWorker. Reported by
+      Jun Kokatsu
+    - CVE-2018-6165: URL spoof in Omnibox. Reported by evi1m0
+    - CVE-2018-6166: URL spoof in Omnibox. Reported by Lnyas Zhang
+    - CVE-2018-6167: URL spoof in Omnibox. Reported by Lnyas Zhang
+    - CVE-2018-6168: CORS bypass in Blink. Reported by Gunes Acar and Danny Y.
+      Huang
+    - CVE-2018-6169: Permissions bypass in extension installation . Reported by
+      Sam P
+    - CVE-2018-6170: Type confusion in PDFium. Reported by Anonymous
+    - CVE-2018-6171: Use after free in WebBluetooth.
+    - CVE-2018-6172: URL spoof in Omnibox. Reported by Khalil Zhani
+    - CVE-2018-6173: URL spoof in Omnibox. Reported by Khalil Zhani
+    - CVE-2018-6174: Integer overflow in SwiftShader. Reported by Mark Brand
+    - CVE-2018-6175: URL spoof in Omnibox. Reported by Khalil Zhani
+    - CVE-2018-6176: Local user privilege escalation in Extensions. Reported by
+      Jann Horn
+    - CVE-2018-6177: Cross origin information leak in Blink. Reported by Ron
+      Masas
+    - CVE-2018-6178: UI spoof in Extensions. Reported by Khalil Zhani
+    - CVE-2018-6179: Local file information leak in Extensions.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Wed, 25 Jul 2018 00:28:20 +0000
+
 chromium-browser (68.0.3440.42-1) experimental; urgency=medium
 
   * New upstream beta release.
