@@ -31,7 +31,7 @@ origin: chromium 66 authors
    g_is_cdm_module_initialized = true;
 --- a/media/filters/ffmpeg_glue.cc
 +++ b/media/filters/ffmpeg_glue.cc
-@@ -63,6 +63,10 @@ static int64_t AVIOSeekOperation(void* o
+@@ -63,7 +63,13 @@ static int64_t AVIOSeekOperation(void* o
    return new_offset;
  }
  
@@ -40,8 +40,11 @@ origin: chromium 66 authors
 +}
 +
  FFmpegGlue::FFmpegGlue(FFmpegURLProtocol* protocol) {
++  InitializeFFmpeg();
++
    // Initialize an AVIOContext using our custom read and seek operations.  Don't
    // keep pointers to the buffer since FFmpeg may reallocate it on the fly.  It
+   // will be cleaned up
 --- a/media/filters/ffmpeg_glue.h
 +++ b/media/filters/ffmpeg_glue.h
 @@ -59,6 +59,8 @@ class MEDIA_EXPORT FFmpegURLProtocol {

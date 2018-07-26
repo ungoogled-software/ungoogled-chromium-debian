@@ -1,3 +1,9 @@
+chromium-browser (68.0.3440.75-2) unstable; urgency=medium
+
+  * Restore a mistakenly omitted call to InitializeFFmpeg (closes: #902909).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 26 Jul 2018 00:37:11 +0000
+
 chromium-browser (68.0.3440.75-1) unstable; urgency=medium
 
   * New upstream stable release.
