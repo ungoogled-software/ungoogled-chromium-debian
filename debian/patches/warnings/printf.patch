@@ -12,3 +12,54 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  }  // namespace IPC
+--- a/content/browser/service_worker/service_worker_object_host.cc
++++ b/content/browser/service_worker/service_worker_object_host.cc
+@@ -179,7 +179,7 @@ ServiceWorkerObjectHost::ServiceWorkerOb
+   DCHECK(context_->GetLiveRegistration(version_->registration_id()));
+   version_->AddObserver(this);
+   AddToDebugLog(base::StringPrintf("ObjCtor:prov=%p,type=%d,this=%p",
+-                                   provider_host_, provider_type_, this));
++                                   provider_host_, (int)provider_type_, this));
+   bindings_.set_connection_error_handler(base::BindRepeating(
+       &ServiceWorkerObjectHost::OnConnectionError, base::Unretained(this)));
+ }
+@@ -188,7 +188,7 @@ ServiceWorkerObjectHost::~ServiceWorkerO
+   // TODO(crbug.com/838410): These CHECKs are temporary debugging for the linked
+   // bug.
+   AddToDebugLog(base::StringPrintf("ObjDtor:prov=%p,type=%d,this=%p",
+-                                   provider_host_, provider_type_, this));
++                                   provider_host_, (int)provider_type_, this));
+   CHECK(BrowserThread::CurrentlyOn(BrowserThread::IO));
+   if (in_dtor_) {
+     CrashOnDoubleDelete();
+--- a/content/browser/service_worker/service_worker_provider_host.cc
++++ b/content/browser/service_worker/service_worker_provider_host.cc
+@@ -272,7 +272,7 @@ ServiceWorkerProviderHost::~ServiceWorke
+     // Just log when hosts isn't empty. It'd be too noisy to record all provider
+     // ctor/dtor otherwise.
+     ServiceWorkerObjectHost::AddToDebugLog(
+-        base::StringPrintf("ProvDtor:prov=%p,type=%d", this, info_->type));
++        base::StringPrintf("ProvDtor:prov=%p,type=%d", this, (int)info_->type));
+   }
+ 
+   if (context_)
+--- a/content/browser/web_package/signed_exchange_handler.cc
++++ b/content/browser/web_package/signed_exchange_handler.cc
+@@ -484,7 +484,7 @@ void SignedExchangeHandler::OnCertVerify
+         base::StringPrintf(
+             "OCSP check failed. response status: %d, revocation status: %d",
+             cert_verify_result_.ocsp_result.response_status,
+-            cert_verify_result_.ocsp_result.revocation_status),
++            (int)cert_verify_result_.ocsp_result.revocation_status),
+         std::make_pair(0 /* signature_index */,
+                        SignedExchangeError::Field::kSignatureCertUrl));
+     RunErrorCallback(net::ERR_INVALID_SIGNED_EXCHANGE);
+@@ -499,7 +499,7 @@ void SignedExchangeHandler::OnCertVerify
+         base::StringPrintf(
+             "CT verification failed. result: %s, policy compliance: %d",
+             net::ErrorToShortString(ct_result).c_str(),
+-            ct_verify_result.policy_compliance),
++            (int)ct_verify_result.policy_compliance),
+         std::make_pair(0 /* signature_index */,
+                        SignedExchangeError::Field::kSignatureCertUrl));
+     RunErrorCallback(net::ERR_INVALID_SIGNED_EXCHANGE);

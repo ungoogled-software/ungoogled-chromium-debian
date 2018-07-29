@@ -1,21 +1,54 @@
---- a/chrome/browser/ui/views/tabs/new_tab_button.cc
-+++ b/chrome/browser/ui/views/tabs/new_tab_button.cc
-@@ -491,12 +491,14 @@ SkColor NewTabButton::GetButtonFillColor
-         ui::NativeTheme::kColorId_ProminentButtonColor);
-   }
- 
-+  int integer = ThemeProperties::COLOR_BACKGROUND_TAB;
-+  if (ui::MaterialDesignController::IsTouchOptimizedUiEnabled()) {
-+    integer = ThemeProperties::COLOR_TOOLBAR;
-+  }
-+
-   const ui::ThemeProvider* theme_provider = GetThemeProvider();
-   DCHECK(theme_provider);
--  return theme_provider->GetColor(
--      ui::MaterialDesignController::IsTouchOptimizedUiEnabled()
--          ? ThemeProperties::COLOR_TOOLBAR
--          : ThemeProperties::COLOR_BACKGROUND_TAB);
-+  return theme_provider->GetColor(integer);
+description: fix gcc warnings about enum comparisons
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/chrome/browser/ui/views/frame/browser_non_client_frame_view.cc
++++ b/chrome/browser/ui/views/frame/browser_non_client_frame_view.cc
+@@ -128,9 +128,9 @@ SkColor BrowserNonClientFrameView::GetTa
+ SkColor BrowserNonClientFrameView::GetTabBackgroundColor(TabState state) const {
+   if (state == TAB_INACTIVE && MD::IsRefreshUi())
+     return GetFrameColor();
+-  const auto color_id = state == TAB_ACTIVE
+-                            ? ThemeProperties::COLOR_TOOLBAR
+-                            : ThemeProperties::COLOR_BACKGROUND_TAB;
++  int color_id = ThemeProperties::COLOR_BACKGROUND_TAB;
++  if (state == TAB_ACTIVE)
++    color_id = ThemeProperties::COLOR_TOOLBAR;
+   return GetThemeOrDefaultColor(color_id);
  }
  
- void NewTabButton::InitButtonIcons() {
+--- a/chrome/browser/ui/views/passwords/password_generation_popup_view_views.cc
++++ b/chrome/browser/ui/views/passwords/password_generation_popup_view_views.cc
+@@ -42,11 +42,12 @@ class PasswordGenerationPopupViewViews::
+     BuildColumnSet(layout);
+     layout->StartRow(views::GridLayout::kFixedSize, 0);
+ 
++    int text_style = STYLE_SECONDARY;
++    if (state == PasswordGenerationPopupController::kOfferGeneration)
++      text_style = views::style::STYLE_PRIMARY;
+     views::Label* suggestion_label = new views::Label(
+         suggestion, ChromeTextContext::CONTEXT_BODY_TEXT_LARGE,
+-        state == PasswordGenerationPopupController::kOfferGeneration
+-            ? views::style::STYLE_PRIMARY
+-            : STYLE_SECONDARY);
++        text_style);
+     layout->AddView(suggestion_label);
+ 
+     DCHECK(!password_label_);
+--- a/ui/aura/hit_test_data_provider_aura.cc
++++ b/ui/aura/hit_test_data_provider_aura.cc
+@@ -50,11 +50,10 @@ base::Optional<viz::HitTestRegionList> H
+     return base::nullopt;
+ 
+   base::Optional<viz::HitTestRegionList> hit_test_region_list(base::in_place);
+-  hit_test_region_list->flags =
+-      event_targeting_policy ==
+-              ui::mojom::EventTargetingPolicy::DESCENDANTS_ONLY
+-          ? viz::HitTestRegionFlags::kHitTestIgnore
+-          : viz::HitTestRegionFlags::kHitTestMine;
++  hit_test_region_list->flags = viz::HitTestRegionFlags::kHitTestMine;
++  if (event_targeting_policy ==
++              ui::mojom::EventTargetingPolicy::DESCENDANTS_ONLY)
++    hit_test_region_list->flags = viz::HitTestRegionFlags::kHitTestIgnore;
+   // TODO(crbug.com/805416): Use pixels instead of DIP units for bounds.
+   hit_test_region_list->bounds = window_->bounds();
+ 
