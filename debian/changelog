@@ -1,3 +1,11 @@
+chromium-browser (69.0.3497.12-1) experimental; urgency=medium
+
+  * New upstream development release.
+    - Fixes an error that can occur on pages containing xml (closes: #865592).
+  * Install swiftshader libraries to /usr/lib/chromium (closes: #901831).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 29 Jul 2018 09:30:34 +0000
+
 chromium-browser (68.0.3440.75-2) unstable; urgency=medium
 
   * Restore a mistakenly omitted call to InitializeFFmpeg (closes: #902909).

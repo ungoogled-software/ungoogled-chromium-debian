@@ -1,1 +1,12 @@
 files
+*.log
+*.substvars
+
+.debhelper
+debhelper-build-stamp
+
+chromium
+chromium-l10n
+chromium-shell
+chromium-driver
+chromium-common
