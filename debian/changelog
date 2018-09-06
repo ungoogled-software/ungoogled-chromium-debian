@@ -1,3 +1,38 @@
+chromium-browser (69.0.3497.81-1) unstable; urgency=medium
+
+  * New upstream stable release.
+    - CVE-2018-16065: Out of bounds write in V8. Reported by Brendon Tiszka
+    - CVE-2018-16066: Out of bounds read in Blink. Reported by cloudfuzzer
+    - CVE-2018-16067: Out of bounds read in WebAudio. Reported by Zhe Jin
+    - CVE-2018-16068: Out of bounds write in Mojo. Reported by Mark Brand
+    - CVE-2018-16069: Out of bounds read in SwiftShader. Reported by Mark Brand
+    - CVE-2018-16070: Integer overflow in Skia. Reported by Ivan Fratric
+    - CVE-2018-16071: Use after free in WebRTC. Reported by Natalie Silvanovich
+    - CVE-2018-16073: Site Isolation bypass after tab restore. Reported by Jun
+      Kokatsu
+    - CVE-2018-16074: Site Isolation bypass using Blob URLS. Reported by Jun
+      Kokatsu
+    - CVE-2018-16075: Local file access in Blink. Reported by Pepe Vila
+    - CVE-2018-16076: Out of bounds read in PDFium. Reported by Aleksandar
+      Nikolic
+    - CVE-2018-16077: Content security policy bypass in Blink. Reported by
+      Manuel Caballero
+    - CVE-2018-16078: Credit card information leak in Autofill. Reported by
+      Cailan Sacks
+    - CVE-2018-16079: URL spoof in permission dialogs. Reported by Markus
+      Vervier and Michele Orrù
+    - CVE-2018-16080: URL spoof in full screen mode. Reported by Khalil Zhani
+    - CVE-2018-16081: Local file access in DevTools. Reported by Jann Horn
+    - CVE-2018-16082: Stack buffer overflow in SwiftShader. Reported by Omair
+    - CVE-2018-16083: Out of bounds read in WebRTC. Reported by Natalie
+      Silvanovich
+    - CVE-2018-16084: User confirmation bypass in external protocol handling.
+      Reported by Jun Kokatsu
+    - CVE-2018-16085: Use after free in Memory Instrumentation. Reported by
+      Roman Kuksin
+
+ -- Michael Gilbert <mgilbert@debian.org>  Wed, 05 Sep 2018 00:01:50 +0000
+
 chromium-browser (69.0.3497.12-1) experimental; urgency=medium
 
   * New upstream development release.
