@@ -50,3 +50,4 @@ system/event.patch
 system/ffmpeg34.patch
 system/openjpeg.patch
 system/fontconfig.patch
+disable/swiftshader.patch

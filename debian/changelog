@@ -1,3 +1,11 @@
+chromium-browser (69.0.3497.81-2) unstable; urgency=medium
+
+  * Disable swiftshader.
+  * Move file needed for the armhf build to where it is expected.
+  * Document disabled built-in extensions in README.debian (closes: #886358).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 06 Sep 2018 01:45:12 +0000
+
 chromium-browser (69.0.3497.81-1) unstable; urgency=medium
 
   * New upstream stable release.

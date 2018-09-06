@@ -15,6 +15,20 @@ entry bar to a selected search provider, can be disabled by setting
 
 chrome://settings/searchEngines
 
+Built-in Extensions
+===================
+
+The debian package disables most built-in upstream extensions by default
+since users have stated concern about enabled features that they have not
+specifically requested.  This includes things like Google Hangouts, etc.
+
+There are two exceptions, the pdfium extension for viewing pdf files
+directly in the browser and the two-factor authentication extension.
+
+If you would like to use one of the upstream built-ins that are currently
+disabled, please edit debian/rules to enable it and rebuild the package
+from source.  See debian bug #886358 for more information.
+
 Debugging
 =========
 To produce meaningful debugging information, please install the chromium-dbgsym
