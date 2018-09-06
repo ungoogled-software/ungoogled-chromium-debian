@@ -1,24 +1,9 @@
 description: fix gcc warnings about enum comparisons
 author: Michael Gilbert <mgilbert@debian.org>
 
---- a/chrome/browser/ui/views/frame/browser_non_client_frame_view.cc
-+++ b/chrome/browser/ui/views/frame/browser_non_client_frame_view.cc
-@@ -128,9 +128,9 @@ SkColor BrowserNonClientFrameView::GetTa
- SkColor BrowserNonClientFrameView::GetTabBackgroundColor(TabState state) const {
-   if (state == TAB_INACTIVE && MD::IsRefreshUi())
-     return GetFrameColor();
--  const auto color_id = state == TAB_ACTIVE
--                            ? ThemeProperties::COLOR_TOOLBAR
--                            : ThemeProperties::COLOR_BACKGROUND_TAB;
-+  int color_id = ThemeProperties::COLOR_BACKGROUND_TAB;
-+  if (state == TAB_ACTIVE)
-+    color_id = ThemeProperties::COLOR_TOOLBAR;
-   return GetThemeOrDefaultColor(color_id);
- }
- 
 --- a/chrome/browser/ui/views/passwords/password_generation_popup_view_views.cc
 +++ b/chrome/browser/ui/views/passwords/password_generation_popup_view_views.cc
-@@ -42,11 +42,12 @@ class PasswordGenerationPopupViewViews::
+@@ -43,11 +43,12 @@ class PasswordGenerationPopupViewViews::
      BuildColumnSet(layout);
      layout->StartRow(views::GridLayout::kFixedSize, 0);
  

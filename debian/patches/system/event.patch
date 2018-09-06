@@ -25,11 +25,11 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "build/build_config.h"
 --- a/tools/gn/build/gen.py
 +++ b/tools/gn/build/gen.py
-@@ -294,6 +294,7 @@ def WriteGNNinja(path, options, linux_sy
-         cflags.append('--sysroot=' + linux_sysroot)
-         ldflags.append('--sysroot=' + linux_sysroot)
-       libs.extend([
-+          '-levent',
-           '-lnspr4',
-           '-lgcc_s',
+@@ -377,6 +377,7 @@ def WriteGNNinja(path, platform, host, o
            '-lpthread',
+           # Additional system libraries that are used.
+           '-lnspr4',
++          '-levent',
+       ])
+     elif platform.is_darwin():
+       min_mac_version_flag = '-mmacosx-version-min=10.9'

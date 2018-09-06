@@ -20,7 +20,6 @@ fixes/ownership-error.patch
 fixes/widevine-revision.patch
 fixes/widevine-locations.patch
 fixes/connection-message.patch
-fixes/chromedriver-revision.patch
 
 disable/signin.patch
 disable/android.patch
