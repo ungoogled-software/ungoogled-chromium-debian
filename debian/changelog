@@ -1,3 +1,9 @@
+chromium-browser (69.0.3497.81-3) unstable; urgency=medium
+
+  * Move another file needed for the armhf build to where it is expected.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 07 Sep 2018 00:06:13 +0000
+
 chromium-browser (69.0.3497.81-2) unstable; urgency=medium
 
   * Disable swiftshader.
