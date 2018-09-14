@@ -37,7 +37,6 @@ warnings/multichar.patch
 warnings/enum-compare.patch
 warnings/sequence-point.patch
 warnings/initialization.patch
-warnings/macro-redefined.patch
 warnings/unused-typedefs.patch
 warnings/null-destination.patch
 

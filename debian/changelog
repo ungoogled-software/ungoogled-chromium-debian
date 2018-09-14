@@ -1,3 +1,11 @@
+chromium-browser (69.0.3497.92-1) unstable; urgency=medium
+
+  * New upstream security release.
+    - Function signature mismatch in WebAssembly. Reported by Kevin Cheung
+    - URL Spoofing in Omnibox. Reported by evi1m0
+
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 13 Sep 2018 03:12:53 +0000
+
 chromium-browser (69.0.3497.81-3) unstable; urgency=medium
 
   * Move another file needed for the armhf build to where it is expected.
