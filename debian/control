@@ -84,7 +84,7 @@ Build-Depends:
  libgcrypt20-dev,
  fonts-ipafont-gothic,
  fonts-ipafont-mincho,
-Standards-Version: 4.1.4
+Standards-Version: 4.2.1
 
 Package: chromium
 Architecture: i386 amd64 arm64 armhf
@@ -100,6 +100,9 @@ Suggests:
 Provides:
  www-browser,
  gnome-www-browser,
+Breaks:
+ chromium-lwn4chrome (<= 1.0-2),
+ chromium-tt-rss-notifier (<= 0.5.2-2),
 Conflicts:
  libnettle4,
  libsecret-1-0 (<< 0.18),

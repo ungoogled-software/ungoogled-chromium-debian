@@ -1,3 +1,16 @@
+chromium-browser (69.0.3497.100-1) unstable; urgency=medium
+
+  * New upstream stable release.
+  * Update standards version to 4.2.1.
+  * Clarify debugging section in README.debian (closes: #910842).
+  * Remove ConvertUTF from the upstream tarball (closes: #900596).
+  * Load all extensions installed to /usr/share/chromium/extensions.
+    - Thanks to Michael Meskes (closes: #890392).
+  * Remove audio_capture_enable setting from the default preferences
+    (closes: #884887).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 13 Oct 2018 02:35:46 +0000
+
 chromium-browser (69.0.3497.92-1) unstable; urgency=medium
 
   * New upstream security release.

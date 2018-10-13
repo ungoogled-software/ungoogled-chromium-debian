@@ -1,3 +1,16 @@
+chromium-browser (69.0.3497.100-1) unstable; urgency=medium
+
+  * All local extensions that are installed to /usr/share/chromium/extensions
+    will now be loaded and enabled automatically.
+  * Some extension packages used to do this manually with a file in
+    /etc/chromium.d. This conflicts with the new approach, so those packages
+    need to be updated to account for this.
+  * External extensions were enabled by default in an upload prior to the
+    release of stretch and will remain this way for the buster release.  A
+    future upload following the release of buster will disable this.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 13 Oct 2018 03:22:43 +0000
+
 chromium-browser (55.0.2883.75-4) unstable; urgency=medium
 
   * External extensions are now disabled by default.  Chromium will only load

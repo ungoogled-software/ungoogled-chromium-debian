@@ -26,6 +26,7 @@ disable/android.patch
 disable/fuzzers.patch
 disable/openh264.patch
 disable/perfetto.patch
+disable/swiftshader.patch
 disable/welcome-page.patch
 disable/google-api-warning.patch
 disable/third-party-cookies.patch
@@ -48,5 +49,5 @@ system/zlib.patch
 system/event.patch
 system/ffmpeg34.patch
 system/openjpeg.patch
+system/convertutf.patch
 system/fontconfig.patch
-disable/swiftshader.patch
