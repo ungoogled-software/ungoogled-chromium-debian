@@ -1,3 +1,9 @@
+chromium-browser (70.0.3538.54-1) unstable; urgency=medium
+
+  * New upstream beta release.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 13 Oct 2018 04:18:08 +0000
+
 chromium-browser (69.0.3497.100-1) unstable; urgency=medium
 
   * New upstream stable release.

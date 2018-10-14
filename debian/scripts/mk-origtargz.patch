@@ -1,6 +1,6 @@
---- a/debian/scripts/mk-origtargz	2017-10-27 12:52:18.000000000 +0000
-+++ b/debian/scripts/mk-origtargz	2017-11-26 23:39:05.818091051 +0000
-@@ -551,6 +551,11 @@
+--- a/debian/scripts/mk-origtargz	2018-10-04 23:00:11.000000000 +0000
++++ b/debian/scripts/mk-origtargz	2018-10-13 04:33:21.242847631 +0000
+@@ -568,6 +568,11 @@
  }
  
  if ($deletecount) {
@@ -9,6 +9,6 @@
 +    }
 +    exit 0;
 +
-     $destfilebase = sprintf "%s_%s%s.%s.tar", $package, $version, $suffix, $orig;
-     $destfiletar = sprintf "%s/%s", $destdir, $destfilebase;
-     $destfile = sprintf "%s.%s", $destfiletar, $destext;
+     $destfilebase = sprintf "%s_%s%s.%s.tar", $package, $version, $suffix,
+       $orig;
+     $destfiletar = sprintf "%s/%s", $destdir,     $destfilebase;

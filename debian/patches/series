@@ -13,10 +13,14 @@ fixes/widevine.patch
 fixes/optimize.patch
 fixes/ps-print.patch
 fixes/as-needed.patch
+fixes/constexpr.patch
 fixes/inspector.patch
+fixes/namespace.patch
+fixes/constructor.patch
 fixes/gpu-timeout.patch
 fixes/empty-array.patch
 fixes/ownership-error.patch
+fixes/member-assignment.patch
 fixes/widevine-revision.patch
 fixes/widevine-locations.patch
 fixes/connection-message.patch

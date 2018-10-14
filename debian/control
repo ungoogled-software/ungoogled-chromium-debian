@@ -10,6 +10,7 @@ Homepage: http://www.chromium.org/Home
 Rules-Requires-Root: no
 Build-Depends:
  debhelper (>= 11),
+ devscripts (>= 2.18.6),
  g++-6 (>= 6.4.0-18),
  python3,
  pkg-config,

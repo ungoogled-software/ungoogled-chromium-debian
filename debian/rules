@@ -75,8 +75,8 @@ defines+=is_debug=false \
          enable_swiftshader=false \
          enable_nacl=false \
          enable_nacl_nonsfi=false \
-         enable_google_now=false \
          enable_reading_list=false \
+         enable_one_click_signin=false \
          enable_hangout_services_extension=false \
          enable_iterator_debugging=false \
          goma_dir=\"\" \
@@ -86,7 +86,6 @@ defines+=is_debug=false \
 # enabled features
 defines+=use_gio=true \
          use_gold=true \
-         use_gtk3=true \
          use_pulseaudio=true \
          link_pulseaudio=true \
          enable_widevine=true \
