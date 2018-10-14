@@ -1,3 +1,10 @@
+chromium-browser (70.0.3538.54-2) unstable; urgency=medium
+
+  * The master_preferences files has been moved from /usr/share/chromium to
+    /etc/chromium to support system level configuration of default options.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 14 Oct 2018 23:34:04 +0000
+
 chromium-browser (69.0.3497.100-1) unstable; urgency=medium
 
   * All local extensions that are installed to /usr/share/chromium/extensions

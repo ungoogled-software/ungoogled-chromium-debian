@@ -1,3 +1,10 @@
+chromium-browser (70.0.3538.54-2) unstable; urgency=medium
+
+  * Build with gcc 8 (closes: #901368).
+  * Move the master preferences file to /etc/chromium (closes: #891232).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 14 Oct 2018 00:49:46 +0000
+
 chromium-browser (70.0.3538.54-1) unstable; urgency=medium
 
   * New upstream beta release.

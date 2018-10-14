@@ -9,11 +9,11 @@ export DEB_BUILD_MAINT_OPTIONS=hardening=+all
 # indicate that binary targets do not require root
 export DEB_RULES_REQUIRES_ROOT=no
 
-# build using a stretch-like environment (to reduce backporting effort)
+# default to gcc when compiler environment variables are unset
 export AR=ar
 export NM=nm
-export CC=gcc-6
-export CXX=g++-6
+export CC?=gcc
+export CXX?=g++
 
 # more verbose linker output
 export LDFLAGS+=-Wl,--stats
@@ -152,9 +152,6 @@ override_dh_auto_build-indep: out/Release/gn
 
 override_dh_auto_install-arch:
 	dh_auto_install
-	# create /etc/chromium.d README file
-	echo "Any files placed in this directory will be sourced prior to executing chromium." \
-	    > debian/chromium/etc/chromium.d/README
 	# update launcher script with build information
 	sed 's|@BUILD_DIST@|$(shell cat /etc/debian_version)|' \
 	    < debian/scripts/chromium > debian/chromium/usr/bin/chromium

@@ -8,13 +8,14 @@ out/Release/resources/en-US.pak usr/lib/chromium/locales
 
 debian/presubj usr/share/bug/chromium
 
-debian/master_preferences usr/share/chromium
 debian/initial_bookmarks.html usr/share/chromium
 
 debian/chromium.xml usr/share/gnome-control-center/default-apps
 
 debian/chromium.desktop usr/share/applications
 
-debian/apikeys etc/chromium.d
-debian/extensions etc/chromium.d
-debian/default-flags etc/chromium.d
+debian/etc/chromium etc
+debian/etc/README etc/chromium.d
+debian/etc/apikeys etc/chromium.d
+debian/etc/extensions etc/chromium.d
+debian/etc/default-flags etc/chromium.d
