@@ -55,3 +55,4 @@ system/ffmpeg34.patch
 system/openjpeg.patch
 system/convertutf.patch
 system/fontconfig.patch
+fixes/alignof.patch

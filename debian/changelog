@@ -1,3 +1,34 @@
+chromium-browser (70.0.3538.67-1) unstable; urgency=medium
+
+  * New upstream stable release.
+    - CVE-2018-17462: Sandbox escape in AppCache. Reported by Ned Williamson
+      and Niklas Baumstark
+    - CVE-2018-17463: Remote code execution in V8. Reported by Ned Williamson
+      and Niklas Baumstark
+    - Heap buffer overflow in Little CMS in PDFium. Reported by Quang Nguyễn
+    - CVE-2018-17464: URL spoof in Omnibox. Reported by xisigr
+    - CVE-2018-17465: Use after free in V8. Reported by Lin Zuojian
+    - CVE-2018-17466: Memory corruption in Angle. Reported by Omair
+    - CVE-2018-17467: URL spoof in Omnibox. Reported by Khalil Zhani
+    - CVE-2018-17468: Cross-origin URL disclosure in Blink. Reported by James
+      Lee
+    - CVE-2018-17469: Heap buffer overflow in PDFium. Reported by Zhen Zhou
+    - CVE-2018-17470: Memory corruption in GPU Internals. Reported by Zhe Jin
+    - CVE-2018-17471: Security UI occlusion in full screen mode. Reported by
+      Lnyas Zhang
+    - CVE-2018-17473: URL spoof in Omnibox. Reported by Khalil Zhani
+    - CVE-2018-17474: Use after free in Blink. Reported by Zhe Jin
+    - CVE-2018-17475: URL spoof in Omnibox. Reported by Vladimir Metnew
+    - CVE-2018-17476: Security UI occlusion in full screen mode. Reported by
+      Khalil Zhani
+    - CVE-2018-5179: Lack of limits on update() in ServiceWorker. Reported by
+      Yannic Bonenberger
+    - CVE-2018-17477: UI spoof in Extensions. Reported by Aaron Muir Hamilton
+  * Fix build failure on i386.
+  * Fix installation path of the master preferences file (closes: #911056).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Tue, 16 Oct 2018 12:36:22 +0000
+
 chromium-browser (70.0.3538.54-2) unstable; urgency=medium
 
   * Build with gcc 8 (closes: #901368).
