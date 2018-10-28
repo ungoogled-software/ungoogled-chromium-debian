@@ -9,6 +9,7 @@ arm/gcc_skcms_ice.patch
 
 fixes/mojo.patch
 fixes/sizet.patch
+fixes/alignof.patch
 fixes/widevine.patch
 fixes/optimize.patch
 fixes/ps-print.patch
@@ -55,4 +56,5 @@ system/ffmpeg34.patch
 system/openjpeg.patch
 system/convertutf.patch
 system/fontconfig.patch
-fixes/alignof.patch
+
+system/gtk2.patch

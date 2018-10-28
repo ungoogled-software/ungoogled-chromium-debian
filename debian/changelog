@@ -1,3 +1,9 @@
+chromium-browser (70.0.3538.67-2) unstable; urgency=medium
+
+  * Restore support for building with gtk2.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Tue, 23 Oct 2018 01:11:35 +0000
+
 chromium-browser (70.0.3538.67-1) unstable; urgency=medium
 
   * New upstream stable release.
