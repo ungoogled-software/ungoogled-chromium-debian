@@ -10,5 +10,6 @@ chromium-l10n
 chromium-shell
 chromium-driver
 chromium-common
+chromium-sandbox
 
 scripts/mk-origtargz

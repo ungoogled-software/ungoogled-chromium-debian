@@ -168,6 +168,7 @@ Recommends:
  upower,
  libu2f-udev,
  libgl1-mesa-dri,
+ chromium-sandbox,
  fonts-liberation,
  notification-daemon,
 Breaks:
@@ -180,3 +181,17 @@ Description: web browser - common resources used by the chromium packages
  .
  This package contains resources that are in common to different chromium
  packages.
+
+Package: chromium-sandbox
+Architecture: i386 amd64 arm64 armhf
+Depends:
+ ${misc:Depends},
+Breaks:
+ chromium (<< ${binary:Version}),
+Replaces:
+ chromium (<< ${binary:Version}),
+Description: web browser - setuid security sandbox for chromium
+ Web browser that aims to build a safer, faster, and more stable internet
+ browsing experience.
+ .
+ This package contains the setuid chromium sandbox.

@@ -1,3 +1,10 @@
+chromium-browser (70.0.3538.67-3) unstable; urgency=medium
+
+  * Fix a compiler warning.
+  * Move the setuid sandbox into a separate package (closes: #839277).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 03 Nov 2018 17:30:16 +0000
+
 chromium-browser (70.0.3538.67-2) unstable; urgency=medium
 
   * Restore support for building with gtk2.

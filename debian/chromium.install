@@ -1,5 +1,4 @@
 out/Release/chromium usr/lib/chromium
-out/Release/chrome-sandbox usr/lib/chromium
 
 out/Release/chrome_*.pak usr/lib/chromium
 out/Release/resources.pak usr/lib/chromium

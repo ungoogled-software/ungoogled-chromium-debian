@@ -45,16 +45,16 @@ warnings/sequence-point.patch
 warnings/initialization.patch
 warnings/unused-typedefs.patch
 warnings/null-destination.patch
+warnings/explicit-constructor.patch
 
 system/vpx.patch
 system/icu.patch
 system/jpeg.patch
 system/nspr.patch
 system/zlib.patch
+system/gtk2.patch
 system/event.patch
 system/ffmpeg34.patch
 system/openjpeg.patch
 system/convertutf.patch
 system/fontconfig.patch
-
-system/gtk2.patch
