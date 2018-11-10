@@ -1,5 +1,4 @@
 debian/files
-debian/scripts/mk-origtargz
 
 Makefile
 third_party/flot/*.js

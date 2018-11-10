@@ -27,8 +27,6 @@ Files-Excluded:
  chrome/android
  chrome/install_static
  chrome/common/extensions/docs
- chrome/browser/resources/chromeos
- chrome/browser/resources/default_apps
  chrome/test/data/android
  chrome/test/data/chromeos
  chrome/test/data/extensions
@@ -50,7 +48,6 @@ Files-Excluded:
  components/drive/chromeos
  components/cbor/cbor_reader_fuzzer_corpus
  native_client*
- android_webview
  third_party/re2
  third_party/icu
  third_party/ink

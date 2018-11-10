@@ -1,3 +1,0 @@
-#!/bin/sh
-
-find . -type f -not -empty -not -path "./out/*" -not -path "./.git/*" -exec du -h {} \; | sort -h

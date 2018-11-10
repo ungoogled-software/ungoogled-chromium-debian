@@ -9,11 +9,11 @@ export DEB_BUILD_MAINT_OPTIONS=hardening=+all
 # indicate that binary targets do not require root
 export DEB_RULES_REQUIRES_ROOT=no
 
-# build using a stretch-like environment (to reduce backporting effort)
-export AR=ar
-export NM=nm
-export CC=gcc-6
-export CXX=g++-6
+# use system LLVM via unbundling
+export AR=llvm-ar-6.0
+export NM=llvm-nm-6.0
+export CC=clang-6.0
+export CXX=clang++-6.0
 
 # more verbose linker output
 export LDFLAGS+=-Wl,--stats
@@ -22,26 +22,10 @@ export LDFLAGS+=-Wl,--stats
 export CXXFLAGS+=-Wno-pedantic \
                  -Wno-unused-function \
                  -Wno-unused-variable \
-                 -Wno-unused-but-set-variable \
                  -Wno-deprecated-declarations \
 
 # ignore warnings for minor mistakes that are too common
 export CXXFLAGS+=-Wno-return-type \
-                 -Wno-misleading-indentation \
-
-# ignore warnings that are not supported well until gcc 8
-export CXXFLAGS+=-Wno-attributes \
-                 -Wno-subobject-linkage \
-
-# ignore warnings due to gcc bug (https://gcc.gnu.org/bugzilla/show_bug.cgi?id=84055)
-export CXXFLAGS+=-Wno-ignored-attributes
-
-# disable clang options
-defines=is_clang=false clang_use_chrome_plugins=false
-
-# build using system toolchain
-defines+=host_toolchain=\"//build/toolchain/linux/unbundle:default\"
-defines+=custom_toolchain=\"//build/toolchain/linux/unbundle:default\"
 
 # set the appropriate cpu architecture
 DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
@@ -55,53 +39,13 @@ ifeq (arm64,$(DEB_HOST_ARCH))
 defines+=host_cpu=\"arm64\"
 endif
 ifeq (armhf,$(DEB_HOST_ARCH))
-defines+=host_cpu=\"arm\" arm_use_neon=false symbol_level=0
+defines+=host_cpu=\"arm\" arm_use_neon=false
 endif
 
-# disabled features
-defines+=is_debug=false \
-         use_allocator=\"none\" \
-         use_ozone=false \
-         use_sysroot=false \
-         use_openh264=false \
-         use_kerberos=false \
-         use_libjpeg_turbo=true \
-         use_custom_libcxx=false \
-         use_gnome_keyring=false \
-         use_unofficial_version_number=false \
-         treat_warnings_as_errors=false \
-         remove_webcore_debug_symbols=true \
-         optimize_webui=false \
-         enable_swiftshader=false \
-         enable_nacl=false \
-         enable_nacl_nonsfi=false \
-         enable_google_now=false \
-         enable_reading_list=false \
-         enable_hangout_services_extension=false \
-         enable_iterator_debugging=false \
-         goma_dir=\"\" \
-         gold_path=\"\" \
-         linux_use_bundled_binutils=false \
+config_bundle=debian/scripts/ungoogled-chromium/config_bundles/$(shell cat debian/ungoogled-config-bundle)
 
-# enabled features
-defines+=use_gio=true \
-         use_gold=true \
-         use_gtk3=true \
-         use_pulseaudio=true \
-         link_pulseaudio=true \
-         enable_widevine=true \
-         use_system_zlib=true \
-         use_system_lcms2=true \
-         use_system_libjpeg=true \
-         use_system_freetype=true \
-         use_system_harfbuzz=true \
-         use_jumbo_build=true \
-         jumbo_file_merge_limit=12 \
-         concurrent_links=1 \
-         optimize_for_size=true \
-         proprietary_codecs=true \
-         ffmpeg_branding=\"Chrome\" \
-         fieldtrial_testing_like_official_build=true \
+# add gn flags from config bundle
+defines+=$(shell debian/scripts/get-gnargs-shell $(config_bundle))
 
 # some notes about embedded libraries
 #  can't use system nss since net/third_party/nss is heavily patched
@@ -117,53 +61,67 @@ endif
 flotpaths=/usr/share/javascript/jquery/*min.js \
           /usr/share/javascript/jquery-flot/*min.js \
 
+buildkit_cli=debian/scripts/ungoogled-chromium/run_buildkit_cli.py
+domsubcache=debian/scripts/ungoogled-chromium/domsubcache.tar.gz
+
 %:
 	dh $@
 
 out/Release/gn:
+	mkdir -p out/Release || true
 	cp base/numerics/safe_conversions_arm_impl.h base/numerics/safe_math_arm_impl.h tools/gn/base/numerics
-	./tools/gn/bootstrap/bootstrap.py -j$(njobs)
+	./tools/gn/bootstrap/bootstrap.py -o out/Release/gn -j$(njobs)
 
 override_dh_auto_configure:
 	# output compiler information
 	$(CXX) --version
-	# use system flot
-	for file in $(flotpaths); do ln -sf $$file third_party/flot; done
 	# put yasm script in the location expected by gn
 	ln -sf ../pdfium/third_party/yasm/run_yasm.py third_party/yasm
 	# strip out system third_party libraries
-	rm -f base/third_party/libevent/BUILD.gn build/config/freetype/freetype.gni
+	# NOTE: Removing base/third_party/libevent/BUILD.gn and build/config/freetype/freetype.gni in scripts/unbundle
 	./debian/scripts/unbundle
+	# apply domain substitution
+	if [ ! -e $(domsubcache) ]; then python3 -B $(buildkit_cli) domains apply -b $(config_bundle) -c $(domsubcache) ./; fi
+	# use system flot
+	for file in $(flotpaths); do ln -sf $$file third_party/flot; done
 
 override_dh_auto_build-arch: out/Release/gn
-	./out/Release/gn gen out/Release --args="$(defines)"
+	./out/Release/gn gen out/Release --args="$(defines)" --fail-on-unused-args
 	ninja -j$(njobs) -C out/Release chrome chrome_sandbox content_shell chromedriver
+
+override_dh_auto_build-indep: out/Release/gn
+	./out/Release/gn gen out/Release --args="$(defines)" --fail-on-unused-args
+	ninja -j$(njobs) -C out/Release packed_resources
+	rm -f out/Release/locales/en-US.pak
+
+override_dh_prep:
+	# building is done by this step; remove domain substitution
+	if [ -e $(domsubcache) ]; then python3 -B $(buildkit_cli) domains revert -c $(domsubcache) ./; fi
+	dh_prep
+
+override_dh_auto_install-arch:
 	cp out/Release/chrome out/Release/chromium
 	cp out/Release/content_shell out/Release/chromium-shell
 	cp out/Release/chrome_sandbox out/Release/chrome-sandbox
 	cp out/Release/locales/en-US.pak out/Release/resources
 	chmod 4755 out/Release/chrome-sandbox # suid sandbox
-	sed -e s/@@PACKAGE@@/chromium/g -e s/@@MENUNAME@@/chromium/g \
+	sed -e s/@@PACKAGE@@/chromium/g -e s/@@MENUNAME@@/Chromium/g \
 	    < chrome/app/resources/manpage.1.in > out/Release/chromium.1
-
-override_dh_auto_build-indep: out/Release/gn
-	./out/Release/gn gen out/Release --args="$(defines)"
-	ninja -j$(njobs) -C out/Release packed_resources
-	rm -f out/Release/locales/en-US.pak
-
-override_dh_auto_install-arch:
 	dh_auto_install
 	# create /etc/chromium.d README file
 	echo "Any files placed in this directory will be sourced prior to executing chromium." \
-	    > debian/chromium/etc/chromium.d/README
+	    > debian/ungoogled-chromium/etc/chromium.d/README
 	# update launcher script with build information
-	sed 's|@BUILD_DIST@|$(shell cat /etc/debian_version)|' \
-	    < debian/scripts/chromium > debian/chromium/usr/bin/chromium
+	sed 's|@BUILD_DIST@|$(shell printf "%s %s/%s" $(shell lsb_release -si) $(shell lsb_release -sc) $(shell lsb_release -sr))|' \
+	    < debian/scripts/chromium > debian/ungoogled-chromium/usr/bin/chromium
 	# move icons into /usr/share
 	./debian/scripts/icons
 
 override_dh_fixperms:
 	dh_fixperms --exclude chrome-sandbox
+
+override_dh_strip:
+	dh_strip --no-automatic-dbgsym # Do not build any debug packages
 
 override_dh_gencontrol:
 	dh_gencontrol -- -VBuilt-Using="$(shell dpkg-query -f '$${source:Package} (= $${source:Version}), ' -W libjs-jquery libjs-jquery-flot)"
@@ -178,14 +136,15 @@ override_dh_auto_clean:
 url=https://gsdview.appspot.com/chromium-browser-official
 version=$(shell dpkg-parsechangelog -S Version | sed s/-.*//)
 extract=chromium-$(version)
-tarfile=$(extract)-lite.tar
+tarfile=$(extract).tar
 tarball=$(tarfile).xz
-debvers=../chromium-browser_$(version)
+debvers=../ungoogled-chromium-browser_$(version)
 origtxz=$(debvers).orig.tar.xz
 removed=$(debvers).files-removed
 seconds=$(debvers).seconds
 
 get-orig-source:
+	if [ ! -e debian/patches ]; then python3 -B $(buildkit_cli) patches export -b $(config_bundle) debian/patches/; fi
 	wget -nv --show-progress -c $(url)/$(tarball) -O ../$(tarball)
 	cp /usr/bin/mk-origtargz debian/scripts
 	patch -p1 < debian/scripts/mk-origtargz.patch
@@ -194,6 +153,7 @@ get-orig-source:
 	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
 	test ! -e $(extract) || rm -rf $(extract)
 	tar xf ../$(tarball)
+	python3 -B $(buildkit_cli) prune -b $(config_bundle) $(extract)
 	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
 	while read line; do rm -rf $$line; done < $(removed)
 	cd $(extract) && ../debian/scripts/check-upstream
@@ -204,3 +164,11 @@ get-orig-source:
 	rm -rf $(extract)
 	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds | tee seconds
 	@mv -f seconds $(seconds)
+	find debian/scripts/ungoogled-chromium/ -name __pycache__ -type d -exec rm -r {} +
+
+setup-local-src:
+	mkdir ../download_cache || true
+	python3 -B $(buildkit_cli) downloads retrieve -b $(config_bundle) -c ../download_cache
+	python3 -B $(buildkit_cli) downloads unpack -b $(config_bundle) -c ../download_cache ./
+	python3 -B $(buildkit_cli) prune -b $(config_bundle) ./
+	python3 -B $(buildkit_cli) patches export -b $(config_bundle) debian/patches/

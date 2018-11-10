@@ -10,7 +10,6 @@ APPNAME=chromium
 
 GDB=/usr/bin/gdb
 LIBDIR=/usr/lib/$APPNAME
-BUILD_DIST="@BUILD_DIST@"
 
 usage () {
   echo "$APPNAME [-h|--help] [-g|--debug] [--temp-profile] [options] [URL]"
@@ -55,8 +54,18 @@ fi
 export CHROME_DESKTOP="chromium.desktop"
 
 # Set CHROME_VERSION_EXTRA text, which is displayed in the About dialog
-DIST=`cat /etc/debian_version`
-export CHROME_VERSION_EXTRA="built on Debian $BUILD_DIST, running on Debian $DIST"
+DIST=`printf "%s %s/%s" $(lsb_release -si) $(lsb_release -sc) $(lsb_release -sr)`
+BUILD_DIST="@BUILD_DIST@"
+export CHROME_VERSION_EXTRA="built on $BUILD_DIST, running on $DIST"
+
+# Add LIBDIR to LD_LIBRARY_PATH to load libffmpeg.so (if built as a component)
+if [ -z "${LD_LIBRARY_PATH:+nonempty}" ] ; then
+    LD_LIBRARY_PATH=$LIBDIR
+else
+    LD_LIBRARY_PATH=$LIBDIR:$LD_LIBRARY_PATH
+fi
+
+export LD_LIBRARY_PATH
 
 want_debug=0
 want_temp_profile=0
@@ -81,12 +90,6 @@ while [ $# -gt 0 ]; do
       break ;;
   esac
 done
-
-# Whitelist installed extensions that are specified via --load-extension
-if [ -z "$(echo $CHROMIUM_FLAGS | grep \\-\\-enable-remote-extensions)" ]; then
-  export CHROMIUM_FLAGS="$CHROMIUM_FLAGS --disable-background-networking"
-  export CHROMIUM_FLAGS="$CHROMIUM_FLAGS --disable-extensions-except=$(echo $CHROMIUM_FLAGS | tr ' ' \\n | grep \\-\\-load-extension | cut -d= -f2 | tr \\n ,)"
-fi
 
 if [ $want_temp_profile -eq 1 ] ; then
   TEMP_PROFILE=`mktemp -d`

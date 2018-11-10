@@ -1,21 +1,23 @@
-Source: chromium-browser
+Source: ungoogled-chromium-browser
 Section: web
 Priority: optional
-Maintainer: Debian Chromium Team <chromium-browser@packages.debian.org>
-Uploaders:
- Michael Gilbert <mgilbert@debian.org>, Riku Voipio <riku.voipio@linaro.org>
-Vcs-Git: https://salsa.debian.org/chromium-team/chromium.git
-Vcs-Browser: https://salsa.debian.org/chromium-team/chromium
-Homepage: http://www.chromium.org/Home
+Maintainer: ungoogled-chromium Maintainers <github@null.invalid>
+Vcs-Git: https://github.com/Eloston/ungoogled-chromium.git
+Vcs-Browser: https://github.com/Eloston/ungoogled-chromium
+Homepage: https://github.com/Eloston/ungoogled-chromium
 Rules-Requires-Root: no
 Build-Depends:
  debhelper (>= 11),
- g++-6 (>= 6.4.0-18),
+ clang-6.0,
+ lld-6.0,
+ llvm-6.0-dev,
+ python,
  python3,
  pkg-config,
  ninja-build,
  python-jinja2,
  ca-certificates,
+ gsettings-desktop-schemas-dev,
  wget,
  flex,
  yasm,
@@ -27,7 +29,7 @@ Build-Depends:
  xz-utils,
  x11-apps,
  xfonts-base,
- libglewmx-dev,
+ libglew-dev,
  libgl1-mesa-dev,
  libglu1-mesa-dev,
  libegl1-mesa-dev,
@@ -62,15 +64,15 @@ Build-Depends:
  libpam0g-dev,
  libsnappy-dev,
  libavutil-dev,
- libavcodec-dev (>= 7:3.0),
+ libavcodec-dev (>= 7),
  libavformat-dev,
  libglib2.0-dev,
  libasound2-dev,
  libjsoncpp-dev,
- libspeechd-dev (>= 0.8.4),
+ libspeechd-dev (>= 0.8.3),
  libminizip-dev,
  libhunspell-dev,
- libharfbuzz-dev (>= 1.2.7),
+ libharfbuzz-dev,
  libusb-1.0-0-dev,
  libopenjp2-7-dev,
  libmodpbase64-dev,
@@ -82,21 +84,20 @@ Build-Depends:
  libjs-excanvas,
  libjs-jquery-flot,
  libgcrypt20-dev,
- fonts-ipafont-gothic,
- fonts-ipafont-mincho,
+ libva-dev,
 Standards-Version: 4.1.4
 
-Package: chromium
+Package: ungoogled-chromium
 Architecture: i386 amd64 arm64 armhf
 Built-Using: ${Built-Using}
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
- chromium-common (= ${binary:Version}),
+ ungoogled-chromium-common (= ${binary:Version}),
 Suggests:
- chromium-l10n,
- chromium-shell,
- chromium-driver,
+ ungoogled-chromium-l10n,
+ ungoogled-chromium-shell,
+ ungoogled-chromium-driver,
 Provides:
  www-browser,
  gnome-www-browser,
@@ -104,18 +105,29 @@ Conflicts:
  libnettle4,
  libsecret-1-0 (<< 0.18),
  libgl1-mesa-swx11,
+Replaces:
+ chromium,
+ chromium-browser,
+Breaks:
+ chromium,
+ chromium-browser,
 Description: web browser
  Web browser that aims to build a safer, faster, and more stable internet
  browsing experience.
  .
  This package contains the web browser component.
 
-Package: chromium-l10n
+Package: ungoogled-chromium-l10n
 Architecture: all
 Section: localization
 Depends:
  ${misc:Depends},
- chromium (>= ${source:Version}), chromium (<< ${source:Version}.1~),
+ ungoogled-chromium (>= ${source:Version}),
+ ungoogled-chromium (<< ${source:Version}.1~),
+Replaces:
+ chromium-l10n,
+Breaks:
+ chromium-l10n,
 Description: web browser - language packs
  Web browser that aims to build a safer, faster, and more stable internet
  browsing experience.
@@ -125,16 +137,16 @@ Description: web browser - language packs
  hi, hr, hu, id, it, ja, kn, ko, lt, lv, ml, mr, nb, nl, pl, pt-BR, pt-PT,
  ro, ru, sk, sl, sr, sv, sw, ta, te, th, tr, uk, vi, zh-CN, zh-TW
 
-Package: chromium-shell
+Package: ungoogled-chromium-shell
 Architecture: i386 amd64 arm64 armhf
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
- chromium-common (= ${binary:Version}),
-Breaks:
- chromium (<< ${binary:Version}),
+ ungoogled-chromium-common (= ${binary:Version}),
 Replaces:
- chromium (<< ${binary:Version}),
+ chromium-shell,
+Breaks:
+ chromium-shell,
 Description: web browser - minimal shell
  Web browser that aims to build a safer, faster, and more stable internet
  browsing experience.
@@ -142,20 +154,27 @@ Description: web browser - minimal shell
  This package provides a minimal version of the chromium user interface
  (the content shell).
 
-Package: chromium-driver
+Package: ungoogled-chromium-driver
 Architecture: i386 amd64 arm64 armhf
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
- chromium (= ${binary:Version}),
+ ungoogled-chromium (= ${binary:Version}),
+Replaces:
+ chromedriver,
+ chromium-driver,
+Breaks:
+ chromium-driver,
 Description: web browser - WebDriver support
  Web browser that aims to build a safer, faster, and more stable internet
  browsing experience.
  .
  This package provides a bridge between the browser component and the selenium
  automatic webdriver.
+ .
+ See http://code.google.com/p/selenium/wiki/ChromeDriver for details.
 
-Package: chromium-common
+Package: ungoogled-chromium-common
 Architecture: i386 amd64 arm64 armhf
 Depends:
  ${misc:Depends},
@@ -164,16 +183,19 @@ Depends:
 Recommends:
  upower,
  libu2f-udev,
+ libva1,
  libgl1-mesa-dri,
  fonts-liberation,
  notification-daemon,
 Breaks:
- chromium (<< ${binary:Version}),
+ ungoogled-chromium (<< 60.0.3112.72-1),
+ chromium-common,
 Replaces:
- chromium (<< ${binary:Version}),
-Description: web browser - common resources used by the chromium packages
+ ungoogled-chromium (<< 60.0.3112.72-1),
+ chromium-common,
+Description: web browser - common resources used by ungoogled-chromium packages
  Web browser that aims to build a safer, faster, and more stable internet
  browsing experience.
  .
- This package contains resources that are in common to different chromium
- packages.
+ This package contains resources that are in common to different
+ ungoogled-chromium packages.
