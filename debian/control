@@ -5,9 +5,8 @@ Maintainer: ungoogled-chromium Maintainers <github@null.invalid>
 Vcs-Git: https://github.com/Eloston/ungoogled-chromium.git
 Vcs-Browser: https://github.com/Eloston/ungoogled-chromium
 Homepage: https://github.com/Eloston/ungoogled-chromium
-Rules-Requires-Root: no
 Build-Depends:
- debhelper (>= 11),
+ debhelper (>= 9),
  clang-6.0,
  lld-6.0,
  llvm-6.0-dev,
@@ -41,7 +40,6 @@ Build-Depends:
  libpng-dev,
  libxss-dev,
  libelf-dev,
- libvpx-dev (>= 1.7.0),
  libpci-dev,
  libcap-dev,
  libdrm-dev,
@@ -49,7 +47,6 @@ Build-Depends:
  libffi-dev,
  libkrb5-dev,
  libexif-dev,
- libflac-dev,
  libudev-dev,
  libopus-dev,
  libwebp-dev,
@@ -69,12 +66,11 @@ Build-Depends:
  libglib2.0-dev,
  libasound2-dev,
  libjsoncpp-dev,
- libspeechd-dev (>= 0.8.3),
+ libspeechd-dev,
  libminizip-dev,
  libhunspell-dev,
  libharfbuzz-dev,
  libusb-1.0-0-dev,
- libopenjp2-7-dev,
  libmodpbase64-dev,
  libnss3-dev (>= 3.12.3),
  libnspr4-dev (>= 2:4.9),
@@ -84,8 +80,7 @@ Build-Depends:
  libjs-excanvas,
  libjs-jquery-flot,
  libgcrypt20-dev,
- libva-dev,
-Standards-Version: 4.1.4
+Standards-Version: 4.1.2
 
 Package: ungoogled-chromium
 Architecture: i386 amd64 arm64 armhf
@@ -183,7 +178,6 @@ Depends:
 Recommends:
  upower,
  libu2f-udev,
- libva1,
  libgl1-mesa-dri,
  fonts-liberation,
  notification-daemon,

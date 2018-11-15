@@ -1,4 +1,4 @@
-ungoogled-chromium-browser ($ungoog{chromium_version}-$ungoog{release_revision}~buster) buster; urgency=medium
+ungoogled-chromium-browser ($ungoog{chromium_version}-$ungoog{release_revision}~portable) stable; urgency=medium
 
   * Built against $ungoog{current_commit_or_tag}
 
