@@ -54,7 +54,6 @@ Files-Excluded:
  third_party/re2
  third_party/icu
  third_party/ink
- third_party/deqp
  third_party/opus
  third_party/flac
  third_party/llvm
@@ -95,6 +94,8 @@ Files-Excluded:
  third_party/skia/site/user/api
  third_party/skia/platform_tools
  third_party/skia/resources/icc_profiles
+ third_party/skia/src/compute/hs/cl/intel/gen8/u32/hs_kernels.bin
+ third_party/skia/src/compute/hs/cl/intel/gen8/u64/hs_kernels.bin
  third_party/ffmpeg/doc
  third_party/ffmpeg/lib*
  third_party/ffmpeg/tests
@@ -116,7 +117,6 @@ Files-Excluded:
  third_party/sfntly/src/cpp/ext/redist
  third_party/crashpad/crashpad/handler/win
  third_party/crashpad/crashpad/snapshot/elf/elf_image_reader_fuzzer_corpus
- third_party/mesa/src/src/gallium/state_trackers/d3d1x/w32api
  third_party/blink/renderer/devtools/scripts/closure
  third_party/blink/renderer/platform/text_codec_fuzzer_seed_corpus
  third_party/google_input_tools/src/chrome/os/inputview/_locales/*.js

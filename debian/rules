@@ -36,6 +36,13 @@ export CXXFLAGS+=-Wno-attributes \
 # ignore warnings due to gcc bug (https://gcc.gnu.org/bugzilla/show_bug.cgi?id=84055)
 export CXXFLAGS+=-Wno-ignored-attributes
 
+# ingore new gcc 8 warnings that aren't yet handled upstream
+export CXXFLAGS+=-Wno-address \
+                 -Wno-dangling-else \
+                 -Wno-class-memaccess \
+                 -Wno-invalid-offsetof \
+                 -Wno-packed-not-aligned \
+
 # disable clang options
 defines=is_clang=false clang_use_chrome_plugins=false
 
@@ -174,7 +181,7 @@ override_dh_auto_clean:
 url=https://gsdview.appspot.com/chromium-browser-official
 version=$(shell dpkg-parsechangelog -S Version | sed s/-.*//)
 extract=chromium-$(version)
-tarfile=$(extract)-lite.tar
+tarfile=$(extract).tar
 tarball=$(tarfile).xz
 debvers=../chromium-browser_$(version)
 origtxz=$(debvers).orig.tar.xz
@@ -183,10 +190,10 @@ seconds=$(debvers).seconds
 
 get-orig-source:
 	wget -nv --show-progress -c $(url)/$(tarball) -O ../$(tarball)
-	cp /usr/bin/mk-origtargz debian/scripts
+	cp /usr/share/perl5/Devscripts/MkOrigtargz.pm debian/scripts/mk-origtargz
 	patch -p1 < debian/scripts/mk-origtargz.patch
 	date +%s > $(seconds)
-	./debian/scripts/mk-origtargz ../$(tarball) > $(removed)
+	perl debian/scripts/mk-origtargz ../$(tarball) > $(removed)
 	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
 	test ! -e $(extract) || rm -rf $(extract)
 	tar xf ../$(tarball)

@@ -1,7 +1,9 @@
 debianization/manpage.patch
+debianization/sandbox.patch
 debianization/master-preferences.patch
 
 gn/libcxx.patch
+gn/sysroot.patch
 gn/parallel.patch
 
 arm/skia.patch
@@ -55,6 +57,7 @@ system/zlib.patch
 system/gtk2.patch
 system/event.patch
 system/ffmpeg34.patch
+system/harfbuzz.patch
 system/openjpeg.patch
 system/convertutf.patch
 system/fontconfig.patch

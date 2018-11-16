@@ -58,3 +58,13 @@ Additional information about debugging chromium can also be found on the Debian
 wiki, but it is often out of date:
 
 http://wiki.debian.org/Chromium/Debugging
+
+Running as Root
+===============
+
+First of all, this is a very bad idea for a large number of reasons, so please
+do not do this unless you really know what you are doing. However, if you want
+to accept the risks, you can use the --no-sandbox command line argument to be
+able to run chromium as root:
+
+# chromium --no-sandbox

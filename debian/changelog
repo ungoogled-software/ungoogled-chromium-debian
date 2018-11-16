@@ -1,3 +1,17 @@
+chromium-browser (70.0.3538.102-1) unstable; urgency=medium
+
+  * New upstream security release.
+    - CVE-2018-17478: Out of bounds memory access in V8.  Reported by
+      cloudfuzzer
+  * Fix new lintian warnings.
+  * Drop libjs-excanvas build dependency.
+  * Add support for building with harfbuzz 2.1.1.
+  * Document how to run chromium as root (closes: #838534).
+  * Output debian specific instructions when no working sandbox is available.
+  * Do not rely on transitive recommendation for the sandbox (closes: #913116).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 16 Nov 2018 03:12:53 +0000
+
 chromium-browser (70.0.3538.67-3) unstable; urgency=medium
 
   * Fix a compiler warning.

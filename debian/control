@@ -10,7 +10,7 @@ Homepage: http://www.chromium.org/Home
 Rules-Requires-Root: no
 Build-Depends:
  debhelper (>= 11),
- devscripts (>= 2.18.6),
+ devscripts (>= 2.18.9),
  python3,
  pkg-config,
  ninja-build,
@@ -70,7 +70,7 @@ Build-Depends:
  libspeechd-dev (>= 0.8.4),
  libminizip-dev,
  libhunspell-dev,
- libharfbuzz-dev (>= 1.2.7),
+ libharfbuzz-dev (>= 2.1.1),
  libusb-1.0-0-dev,
  libopenjp2-7-dev,
  libmodpbase64-dev,
@@ -79,7 +79,6 @@ Build-Depends:
  libcups2-dev (>= 1.5.0),
  libevent-dev (>= 1.4.13),
  libjs-jquery,
- libjs-excanvas,
  libjs-jquery-flot,
  libgcrypt20-dev,
  fonts-ipafont-gothic,
@@ -93,6 +92,8 @@ Depends:
  ${misc:Depends},
  ${shlibs:Depends},
  chromium-common (= ${binary:Version}),
+Recommends:
+ chromium-sandbox,
 Suggests:
  chromium-l10n,
  chromium-shell,
@@ -186,6 +187,7 @@ Package: chromium-sandbox
 Architecture: i386 amd64 arm64 armhf
 Depends:
  ${misc:Depends},
+ ${shlibs:Depends},
 Breaks:
  chromium (<< ${binary:Version}),
 Replaces:
