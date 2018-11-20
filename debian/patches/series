@@ -12,6 +12,7 @@ arm/gcc_skcms_ice.patch
 fixes/mojo.patch
 fixes/sizet.patch
 fixes/alignof.patch
+fixes/polymer.patch
 fixes/widevine.patch
 fixes/optimize.patch
 fixes/ps-print.patch

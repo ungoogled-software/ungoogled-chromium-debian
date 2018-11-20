@@ -1,3 +1,10 @@
+chromium-browser (70.0.3538.110-1) unstable; urgency=medium
+
+  * New upstream security release.
+    - CVE-2018-17479: Use-after-free in GPU.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Tue, 20 Nov 2018 00:45:46 +0000
+
 chromium-browser (70.0.3538.102-1) unstable; urgency=medium
 
   * New upstream security release.
