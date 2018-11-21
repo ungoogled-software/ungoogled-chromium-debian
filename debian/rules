@@ -84,6 +84,8 @@ override_dh_auto_configure:
 	if [ ! -e $(domsubcache) ]; then python3 -B $(buildkit_cli) domains apply -b $(config_bundle) -c $(domsubcache) ./; fi
 	# use system flot
 	for file in $(flotpaths); do ln -sf $$file third_party/flot; done
+	# use polymer from chromium's top level third_party directory
+	ln -sf ../../../../third_party/polymer/v1_0/components-chromium third_party/catapult/third_party/polymer/components
 
 override_dh_auto_build-arch: out/Release/gn
 	./out/Release/gn gen out/Release --args="$(defines)" --fail-on-unused-args
@@ -108,9 +110,6 @@ override_dh_auto_install-arch:
 	sed -e s/@@PACKAGE@@/chromium/g -e s/@@MENUNAME@@/Chromium/g \
 	    < chrome/app/resources/manpage.1.in > out/Release/chromium.1
 	dh_auto_install
-	# create /etc/chromium.d README file
-	echo "Any files placed in this directory will be sourced prior to executing chromium." \
-	    > debian/ungoogled-chromium/etc/chromium.d/README
 	# update launcher script with build information
 	sed 's|@BUILD_DIST@|$(shell printf "%s %s/%s" $(shell lsb_release -si) $(shell lsb_release -sc) $(shell lsb_release -sr))|' \
 	    < debian/scripts/chromium > debian/ungoogled-chromium/usr/bin/chromium
@@ -146,10 +145,10 @@ seconds=$(debvers).seconds
 get-orig-source:
 	if [ ! -e debian/patches ]; then python3 -B $(buildkit_cli) patches export -b $(config_bundle) debian/patches/; fi
 	wget -nv --show-progress -c $(url)/$(tarball) -O ../$(tarball)
-	cp /usr/bin/mk-origtargz debian/scripts
+	cp /usr/share/perl5/Devscripts/MkOrigtargz.pm debian/scripts/mk-origtargz
 	patch -p1 < debian/scripts/mk-origtargz.patch
 	date +%s > $(seconds)
-	./debian/scripts/mk-origtargz ../$(tarball) > $(removed)
+	perl debian/scripts/mk-origtargz ../$(tarball) > $(removed)
 	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
 	test ! -e $(extract) || rm -rf $(extract)
 	tar xf ../$(tarball)

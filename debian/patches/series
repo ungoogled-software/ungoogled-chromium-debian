@@ -1,7 +1,9 @@
 debianization/manpage.patch
+debianization/sandbox.patch
 debianization/master-preferences.patch
 
 gn/libcxx.patch
+gn/sysroot.patch
 gn/parallel.patch
 
 arm/skia.patch
@@ -9,14 +11,20 @@ arm/gcc_skcms_ice.patch
 
 fixes/mojo.patch
 fixes/sizet.patch
+fixes/alignof.patch
+fixes/polymer.patch
 fixes/widevine.patch
 fixes/optimize.patch
 fixes/ps-print.patch
 fixes/as-needed.patch
+fixes/constexpr.patch
 fixes/inspector.patch
+fixes/namespace.patch
+fixes/constructor.patch
 fixes/gpu-timeout.patch
 fixes/empty-array.patch
 fixes/ownership-error.patch
+fixes/member-assignment.patch
 fixes/widevine-revision.patch
 fixes/widevine-locations.patch
 fixes/connection-message.patch
@@ -26,6 +34,7 @@ disable/android.patch
 disable/fuzzers.patch
 disable/openh264.patch
 disable/perfetto.patch
+disable/swiftshader.patch
 disable/welcome-page.patch
 disable/google-api-warning.patch
 disable/third-party-cookies.patch
@@ -39,14 +48,17 @@ warnings/sequence-point.patch
 warnings/initialization.patch
 warnings/unused-typedefs.patch
 warnings/null-destination.patch
+warnings/explicit-constructor.patch
 
 system/vpx.patch
 system/icu.patch
 system/jpeg.patch
 system/nspr.patch
 system/zlib.patch
+system/gtk2.patch
 system/event.patch
 system/ffmpeg34.patch
+system/harfbuzz.patch
 system/openjpeg.patch
+system/convertutf.patch
 system/fontconfig.patch
-disable/swiftshader.patch
