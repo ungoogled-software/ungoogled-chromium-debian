@@ -3,18 +3,29 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/tools/gn/build/gen.py
 +++ b/tools/gn/build/gen.py
-@@ -312,7 +312,6 @@ def WriteGNNinja(path, platform, host, o
+@@ -311,10 +311,6 @@ def WriteGNNinja(path, platform, host, o
+     cflags_cc.extend(['-std=c++14', '-Wno-c++11-narrowing'])
  
      if platform.is_linux():
-       ldflags.extend([
+-      ldflags.extend([
 -          '-static-libstdc++',
-           '-Wl,--as-needed',
-       ])
+-          '-Wl,--as-needed',
+-      ])
        libs.extend([
+           # These are needed by libc++.
+           '-ldl',
 --- a/tools/gn/bootstrap/bootstrap.py
 +++ b/tools/gn/bootstrap/bootstrap.py
-@@ -83,14 +83,6 @@ def main(argv):
-       ['ninja', '-C', gn_build_dir, 'gn', '-w', 'dupbuild=err'])
+@@ -41,7 +41,6 @@ def main(argv):
+       '-o', '--output', help='place output in PATH', metavar='PATH')
+   parser.add_option('-s', '--no-rebuild', help='ignored')
+   parser.add_option('--no-clean', help='ignored')
+-  parser.add_option('--gn-gen-args', help='Args to pass to gn gen --args')
+   parser.add_option(
+       '--build-path',
+       help='The directory in which to build gn, '
+@@ -88,14 +87,6 @@ def main(argv):
+         ['ninja', '-C', gn_build_dir, 'gn', '-w', 'dupbuild=err'])
    shutil.copy2(os.path.join(gn_build_dir, 'gn'), gn_path)
  
 -  gn_gen_args = options.gn_gen_args or ''
