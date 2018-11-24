@@ -22,7 +22,6 @@ third_party/libjpeg/BUILD.gn
 third_party/libxslt/BUILD.gn
 third_party/freetype/BUILD.gn
 third_party/fontconfig/BUILD.gn
-third_party/harfbuzz-ng/harfbuzz.gni
 third_party/yasm/yasm_assemble.gni
 
 build/config/freetype/freetype.gni
