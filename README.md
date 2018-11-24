@@ -6,7 +6,7 @@ This repository contains Debian packaging and patches modified for ungoogled-chr
 
 ## Developer info
 
-NOTE: The Debian patches and packaging in the ungoogled-chromium repo are the authorative source for changes to these files.
+NOTE: Any changes to `debian` directory files should be made in this repo and pushed (via `sync_debian_repo.py`) to ungoogled-chromium. However, any changes to patches should be made in ungoogled-chromium and pulled (via `sync_debian_repo.py`) into this one.
 
 ### First-time setup
 
@@ -53,4 +53,6 @@ All branches with the `ungoogled_` prefix correspond to a:
 
 ### Contributing
 
-Submit a PR to this repository for every packaging type that should be updated.
+Contribution guidelines are the same as ungoogled-chromium.
+
+Submit PRs to this repository for every packaging type that should be updated.
