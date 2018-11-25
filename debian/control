@@ -1,4 +1,4 @@
-Source: chromium-browser
+Source: chromium
 Section: web
 Priority: optional
 Maintainer: Debian Chromium Team <chromium-browser@packages.debian.org>

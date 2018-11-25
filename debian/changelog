@@ -1,3 +1,13 @@
+chromium (71.0.3578.62-1) unstable; urgency=medium
+
+  * New upstream beta release.
+  * Rename the source package to chromium.
+  * Build using the system jsoncpp library.
+  * Remove non-free unrar source from the upstream tarball (closes: #914487).
+    - Requires safe browsing inspection of rar files to be disabled.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Wed, 21 Nov 2018 02:37:35 +0000
+
 chromium-browser (70.0.3538.110-1) unstable; urgency=medium
 
   * New upstream security release.

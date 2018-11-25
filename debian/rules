@@ -128,7 +128,7 @@ flotpaths=/usr/share/javascript/jquery/*min.js \
 
 out/Release/gn:
 	cp base/numerics/safe_conversions_arm_impl.h base/numerics/safe_math_arm_impl.h tools/gn/base/numerics
-	./tools/gn/bootstrap/bootstrap.py -j$(njobs)
+	./tools/gn/bootstrap/bootstrap.py --skip-generate-buildfiles -j$(njobs)
 
 override_dh_auto_configure:
 	# output compiler information
@@ -185,7 +185,7 @@ version=$(shell dpkg-parsechangelog -S Version | sed s/-.*//)
 extract=chromium-$(version)
 tarfile=$(extract)-lite.tar
 tarball=$(tarfile).xz
-debvers=../chromium-browser_$(version)
+debvers=../chromium_$(version)
 origtxz=$(debvers).orig.tar.xz
 removed=$(debvers).files-removed
 seconds=$(debvers).seconds

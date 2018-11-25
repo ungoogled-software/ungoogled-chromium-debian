@@ -29,6 +29,7 @@ fixes/connection-message.patch
 fixes/ambiguous-overloads.patch
 fixes/chromedriver-revision.patch
 
+disable/unrar.patch
 disable/signin.patch
 disable/android.patch
 disable/fuzzers.patch
@@ -59,6 +60,7 @@ system/jpeg.patch
 system/nspr.patch
 system/zlib.patch
 system/event.patch
+system/jsoncpp.patch
 system/ffmpeg34.patch
 system/harfbuzz.patch
 system/openjpeg.patch

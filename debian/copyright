@@ -8,6 +8,7 @@ Files-Excluded:
  *.elf
  *.exe
  *.pyc
+ *.pyd
  *.swf
  *.ttf
  *.orig
@@ -26,7 +27,16 @@ Files-Excluded:
  chromeos/third_party
  chrome/android
  chrome/install_static
+ chrome/installer/mac
+ chrome/installer/test
+ chrome/installer/tools
+ chrome/installer/setup
+ chrome/installer/linux
+ chrome/installer/gcapi*
+ chrome/installer/mini_installer
+ chrome/installer/launcher_support
  chrome/common/extensions/docs
+ chrome/common/safe_browsing/rar_analyzer.*
  chrome/browser/resources/chromeos
  chrome/browser/resources/default_apps
  chrome/test/data/android
@@ -107,6 +117,7 @@ Files-Excluded:
  third_party/openh264/src
  third_party/expat/files
  third_party/*rjsmin/bench
+ third_party/unrar
  third_party/perfetto
  third_party/swiftshader
  third_party/apache-win32
@@ -166,6 +177,9 @@ Files-Excluded:
  third_party/pdfium/third_party/libpng16
  third_party/pdfium/third_party/yasm/source
  third_party/pdfium/third_party/libopenjpeg20
+ third_party/jsoncpp/source
+ third_party/jsoncpp/patches
+ third_party/jsoncpp/overrides
  third_party/breakpad/breakpad/src/client/mac
  third_party/breakpad/breakpad/src/common/convert_UTF.*
  third_party/boringssl/crypto_test_data.cc
