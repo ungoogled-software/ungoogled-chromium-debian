@@ -14,7 +14,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
  AccountInfo SigninManagerBase::GetAuthenticatedAccountInfo() const {
 --- a/chrome/browser/ui/chrome_pages.cc
 +++ b/chrome/browser/ui/chrome_pages.cc
-@@ -71,12 +71,6 @@ void OpenBookmarkManagerForNode(Browser*
+@@ -72,12 +72,6 @@ void OpenBookmarkManagerForNode(Browser*
    ShowSingletonTabOverwritingNTP(browser, std::move(params));
  }
  
@@ -45,7 +45,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
  void ShowBrowserSigninOrSettings(Browser* browser,
 --- a/chrome/browser/ui/BUILD.gn
 +++ b/chrome/browser/ui/BUILD.gn
-@@ -2230,11 +2230,6 @@ jumbo_split_static_library("ui") {
+@@ -1790,11 +1790,6 @@ jumbo_split_static_library("ui") {
        "startup/default_browser_infobar_delegate.h",
        "startup/default_browser_prompt.cc",
        "startup/default_browser_prompt.h",
@@ -57,18 +57,18 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
        "sync/one_click_signin_sync_starter.cc",
        "sync/one_click_signin_sync_starter.h",
        "user_manager.cc",
-@@ -3365,8 +3360,6 @@ jumbo_split_static_library("ui") {
-           "views/policy/enterprise_startup_dialog_view.h",
-           "views/profiles/forced_reauthentication_dialog_view.cc",
-           "views/profiles/forced_reauthentication_dialog_view.h",
--          "views/sync/one_click_signin_dialog_view.cc",
--          "views/sync/one_click_signin_dialog_view.h",
-           "views/tabs/window_finder.cc",
-         ]
-       }
+@@ -2994,8 +2989,6 @@ jumbo_split_static_library("ui") {
+         "views/relaunch_notification/relaunch_required_dialog_view.cc",
+         "views/relaunch_notification/relaunch_required_dialog_view.h",
+         "views/screen_capture_notification_ui_views.cc",
+-        "views/sync/one_click_signin_dialog_view.cc",
+-        "views/sync/one_click_signin_dialog_view.h",
+         "views/tabs/window_finder.cc",
+       ]
+     }
 --- a/chrome/browser/ui/sync/one_click_signin_sync_starter.cc
 +++ b/chrome/browser/ui/sync/one_click_signin_sync_starter.cc
-@@ -397,20 +397,6 @@ void OneClickSigninSyncStarter::CancelSi
+@@ -395,20 +395,6 @@ void OneClickSigninSyncStarter::CancelSi
  }
  
  void OneClickSigninSyncStarter::ConfirmAndSignin() {

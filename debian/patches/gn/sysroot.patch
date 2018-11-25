@@ -1,6 +1,6 @@
 --- a/tools/gn/bootstrap/bootstrap.py
 +++ b/tools/gn/bootstrap/bootstrap.py
-@@ -72,8 +72,6 @@ def main(argv):
+@@ -76,8 +76,6 @@ def main(argv):
        '--no-last-commit-position',
        '--out-path=' + gn_build_dir,
    ]

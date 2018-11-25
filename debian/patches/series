@@ -6,14 +6,12 @@ gn/libcxx.patch
 gn/sysroot.patch
 gn/parallel.patch
 
-arm/skia.patch
 arm/gcc_skcms_ice.patch
 
 fixes/mojo.patch
 fixes/sizet.patch
 fixes/alignof.patch
 fixes/polymer.patch
-fixes/widevine.patch
 fixes/optimize.patch
 fixes/ps-print.patch
 fixes/as-needed.patch
@@ -24,16 +22,19 @@ fixes/constructor.patch
 fixes/gpu-timeout.patch
 fixes/empty-array.patch
 fixes/ownership-error.patch
-fixes/member-assignment.patch
+fixes/autocompletematch.patch
 fixes/widevine-revision.patch
 fixes/widevine-locations.patch
 fixes/connection-message.patch
+fixes/ambiguous-overloads.patch
+fixes/chromedriver-revision.patch
 
 disable/signin.patch
 disable/android.patch
 disable/fuzzers.patch
 disable/openh264.patch
 disable/perfetto.patch
+disable/installer.patch
 disable/swiftshader.patch
 disable/welcome-page.patch
 disable/google-api-warning.patch
@@ -48,14 +49,15 @@ warnings/sequence-point.patch
 warnings/initialization.patch
 warnings/unused-typedefs.patch
 warnings/null-destination.patch
+warnings/int-in-bool-context.patch
 warnings/explicit-constructor.patch
 
 system/vpx.patch
 system/icu.patch
+system/gtk2.patch
 system/jpeg.patch
 system/nspr.patch
 system/zlib.patch
-system/gtk2.patch
 system/event.patch
 system/ffmpeg34.patch
 system/harfbuzz.patch
