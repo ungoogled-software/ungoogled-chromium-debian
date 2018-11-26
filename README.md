@@ -24,10 +24,10 @@ git remote add upstream https://salsa.debian.org/chromium-team/chromium.git
 
 ### Updating branches
 
-There are two kinds of branches in this repository: primary branches, and secondary branches.
+There are two kinds of branches in this repository: primary branches, and secondary branches. They can be distinguished by the inclusion or exclusion of the file `packaging_parent` from the root of the branch's file tree. `packaging_parent` is a text file that contains the name of a branch's parent branch, without the `ungoogled_` prefix. Remote branches, such as those from Debian, are not tracked here.
 
-* A primary branch is a branch that is used as a base for secondary branches; Therefore, it does not contain `packaging_parent`. It also depends on the upstream branch with the latest changes; e.g. `ungoogled_debian_buster` depends on `upstream/master`.
-* A secondary branch is a branch that has a `packaging_parent` file at the root of the branch's file tree. It may also have one or more additional dependencies on an upstream branch, e.g. `upstream/stretch` for `ungoogled_debian_stretch`.
+* A primary branch is a branch that is used as a base for secondary branches; i.e. it does not contain `packaging_parent`. It also depends on the upstream branch with the latest changes; e.g. `ungoogled_debian_buster` depends on `upstream/master`.
+* A secondary branch is a branch that has a `packaging_parent` file. It may also have one or more additional dependencies on an upstream branch, e.g. `upstream/stretch` for `ungoogled_debian_stretch`.
 
 #### Updating a primary branch
 
