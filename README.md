@@ -45,6 +45,7 @@ Current branches and their dependencies:
 * `ungoogled_debian_stretch`: `ungoogled_debian_buster`, `upstream/stretch`
 * `ungoogled_debian_minimal`: `ungoogled_debian_buster`
 * `ungoogled_ubuntu_bionic`: `ungoogled_debian_buster`
+* `ungoogled_ubuntu_cosmic`: `ungoogled_debian_buster`
 
 All branches with the `ungoogled_` prefix correspond to a:
 
