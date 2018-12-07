@@ -177,9 +177,6 @@ Files-Excluded:
  third_party/pdfium/third_party/libpng16
  third_party/pdfium/third_party/yasm/source
  third_party/pdfium/third_party/libopenjpeg20
- third_party/jsoncpp/source
- third_party/jsoncpp/patches
- third_party/jsoncpp/overrides
  third_party/breakpad/breakpad/src/client/mac
  third_party/breakpad/breakpad/src/common/convert_UTF.*
  third_party/boringssl/crypto_test_data.cc

@@ -15,7 +15,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//testing/libfuzzer/tests:libfuzzer_tests",
 --- a/content/test/BUILD.gn
 +++ b/content/test/BUILD.gn
-@@ -2227,9 +2227,3 @@ test("content_perftests") {
+@@ -2229,9 +2229,3 @@ test("content_perftests") {
      deps += [ "//testing/android/native_test:native_test_native_code" ]
    }
  }

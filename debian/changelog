@@ -1,3 +1,57 @@
+chromium (71.0.3578.80-1) unstable; urgency=medium
+
+  * New upstream stable release.
+    - CVE-2018-17480: Out of bounds write in V8. Reported by Guang Gong
+    - CVE-2018-17481: Use after frees in PDFium. Reported by Anonymous
+    - CVE-2018-18335: Heap buffer overflow in Skia. Reported by Anonymous
+    - CVE-2018-18336: Use after free in PDFium. Reported by Huyna
+    - CVE-2018-18337: Use after free in Blink. Reported by cloudfuzzer
+    - CVE-2018-18338: Heap buffer overflow in Canvas. Reported by Zhe Jin
+    - CVE-2018-18339: Use after free in WebAudio. Reported by cloudfuzzer
+    - CVE-2018-18340: Use after free in MediaRecorder. Reported by Anonymous
+    - CVE-2018-18341: Heap buffer overflow in Blink. Reported by cloudfuzzer
+    - CVE-2018-18342: Out of bounds write in V8. Reported by Guang Gong
+    - CVE-2018-18343: Use after free in Skia. Reported by Tran Tien Hung
+    - CVE-2018-18344: Inappropriate implementation in Extensions. Reported by
+      Jann Horn
+    - CVE-2018-18345: Inappropriate implementation in Site Isolation. Reported
+      by Masato Kinugawa and Jun Kokatsu
+    - CVE-2018-18346: Incorrect security UI in Blink. Reported by Luan Herrera
+    - CVE-2018-18347: Inappropriate implementation in Navigation. Reported by
+      Luan Herrera
+    - CVE-2018-18348: Inappropriate implementation in Omnibox. Reported by
+      Ahmed Elsobky
+    - CVE-2018-18349: Insufficient policy enforcement in Blink. Reported by
+      David Erceg
+    - CVE-2018-18350: Insufficient policy enforcement in Blink. Reported by
+      Jun Kokatsu
+    - CVE-2018-18351: Insufficient policy enforcement in Navigation. Reported
+      by Jun Kokatsu
+    - CVE-2018-18352: Inappropriate implementation in Media. Reported by Jun
+      Kokatsu
+    - CVE-2018-18353: Inappropriate implementation in Network Authentication.
+      Reported by Wenxu Wu
+    - CVE-2018-18354: Insufficient data validation in Shell Integration.
+      Reported by Wenxu Wu
+    - CVE-2018-18355: Insufficient policy enforcement in URL Formatter.
+      Reported by evi1m0
+    - CVE-2018-18356: Use after free in Skia. Reported by Tran Tien Hung
+    - CVE-2018-18357: Insufficient policy enforcement in URL Formatter.
+      Reported by evi1m0
+    - CVE-2018-18358: Insufficient policy enforcement in Proxy. Reported by
+      Jann Horn
+    - CVE-2018-18359: Out of bounds read in V8. Reported by cyrilliu
+    - Inappropriate implementation in PDFium. Reported by Salem Faisal
+      Elmrayed
+    - Use after free in Extensions. Reported by Zhe Jin
+    - Inappropriate implementation in Navigation. Reported by Luan Herrera
+    - Inappropriate implementation in Navigation. Reported by Jesper van den
+      Ende
+    - Insufficient policy enforcement in Navigation. Reported by Ryan Pickren
+    - Insufficient policy enforcement in URL Formatter. Reported by evi1m0
+
+ -- Michael Gilbert <mgilbert@debian.org>  Wed, 05 Dec 2018 00:45:35 +0000
+
 chromium (71.0.3578.62-1) unstable; urgency=medium
 
   * New upstream beta release.
