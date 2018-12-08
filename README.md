@@ -6,8 +6,6 @@ This repository contains Debian packaging and patches modified for ungoogled-chr
 
 ## Developer info
 
-NOTE: Any changes to `debian` directory files should be made in this repo and pushed (via `sync_debian_repo.py`) to ungoogled-chromium. However, any changes to patches should be made in ungoogled-chromium and pulled (via `sync_debian_repo.py`) into this one.
-
 ### First-time setup
 
 1. Install [GitPython](https://pypi.org/project/GitPython/) (`python3-git` in Debian-based systems) version 2.1.8 or newer.
@@ -18,9 +16,24 @@ NOTE: Any changes to `debian` directory files should be made in this repo and pu
 git remote add upstream https://salsa.debian.org/chromium-team/chromium.git
 ```
 
-### Updating instructions
+### Guidelines for making changes
 
-1. Start out by updating the main branch: `git checkout ungoogled_debian_buster`
+* Any changes to `debian` directory files should be made in this repo and "pushed" (via `sync_debian_repo.py`) to ungoogled-chromium
+* Any changes to patches should be made in ungoogled-chromium and "pulled" (via `sync_debian_repo.py`) into this one.
+* Submit a Pull Request to the repository that was modified first. Then, submit another Pull Request for the second repository after the first Pull Request has been merged.
+
+### Updating branches
+
+There are two kinds of branches in this repository: primary branches, and secondary branches. They can be distinguished by the inclusion or exclusion of the file `packaging_parent` from the root of the branch's file tree. `packaging_parent` is a text file that contains the name of a branch's parent branch, without the `ungoogled_` prefix. Remote branches, such as those from Debian, are not tracked here.
+
+* A primary branch is a branch that is used as a base for secondary branches; i.e. it does not contain `packaging_parent`. It also depends on the upstream branch with the latest changes; e.g. `ungoogled_debian_buster` depends on `upstream/master`.
+* A secondary branch is a branch that has a `packaging_parent` file. It may also have one or more additional dependencies on an upstream branch, e.g. `upstream/stretch` for `ungoogled_debian_stretch`.
+
+#### Updating a primary branch
+
+These instructions will update `ungoogled_debian_buster`.
+
+1. Start out by updating the primary branch: `git checkout ungoogled_debian_buster`
 2. From ungoogled-chromium repo: `./devutils/sync_debian_repo.py push debian_buster path/to/ungoogled-chromium-debian`
 3. Commit the new changes 
 4. Pull latest changes for Debian buster (this is currently `master`): `git pull upstream master`
@@ -29,13 +42,24 @@ git remote add upstream https://salsa.debian.org/chromium-team/chromium.git
 
 #### Updating a secondary branch
 
-To update `ungoogled_debian_stretch`:
+These instructions will update `ungoogled_debian_stretch`.
 
 1. `git checkout ungoogled_debian_stretch`
 2. From ungoogled-chromium repo: `./devutils/sync_debian_repo.py push debian_stretch path/to/ungoogled-chromium-debian`
 3. Commit the changes
 4. `git merge ungoogled_debian_buster`
 5. `git pull upstream stretch`
+
+### Adding a new branch
+
+To add either a primary or secondary branch:
+
+1. Create a new branch that forks off an existing branch with code that is closest to the desired code.
+2. Give the branch a name of the format `ungoogled_DISTRO_CODENAME`. For example, Ubuntu 18.10 (cosmic) should have a branch name `ungoogled_ubuntu_cosmic`.
+3. Make the necessary changes and commit
+4. Submit a Pull Request for your new branch to the branch it is based off of. In the Pull Request, specify the new branch name that should be created. (This is necessary because GitHub doesn't support the creation of branches via PRs)
+4. Once the PR above is merged, run the following from the ungoogled-chromium repo: `./devutils/sync_debian_repo.py pull path/to/ungoogled-chromium-debian`
+5. Submit a PR for the changes made in `ungoogled-chromium`.
 
 ## Branch info
 
