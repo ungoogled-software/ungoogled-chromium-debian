@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/third_party/blink/renderer/core/streams/transform_stream.cc
 +++ b/third_party/blink/renderer/core/streams/transform_stream.cc
-@@ -37,7 +37,6 @@ class TransformStream::Algorithm : publi
+@@ -39,7 +39,6 @@ class TransformStream::Algorithm : publi
      ScriptFunction::Trace(visitor);
    }
  
@@ -11,7 +11,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    Algorithm(TransformStreamTransformer* transformer,
              ScriptState* script_state,
              ExceptionState& exception_state)
-@@ -46,6 +45,7 @@ class TransformStream::Algorithm : publi
+@@ -48,6 +47,7 @@ class TransformStream::Algorithm : publi
          interface_name_(exception_state.InterfaceName()),
          property_name_(exception_state.PropertyName()) {}
  

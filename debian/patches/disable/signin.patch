@@ -3,7 +3,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
 
 --- a/components/signin/core/browser/signin_manager_base.cc
 +++ b/components/signin/core/browser/signin_manager_base.cc
-@@ -155,7 +155,7 @@ void SigninManagerBase::Initialize(PrefS
+@@ -152,7 +152,7 @@ void SigninManagerBase::Initialize(PrefS
  bool SigninManagerBase::IsInitialized() const { return initialized_; }
  
  bool SigninManagerBase::IsSigninAllowed() const {
@@ -45,7 +45,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
  void ShowBrowserSigninOrSettings(Browser* browser,
 --- a/chrome/browser/ui/BUILD.gn
 +++ b/chrome/browser/ui/BUILD.gn
-@@ -1790,11 +1790,6 @@ jumbo_split_static_library("ui") {
+@@ -1811,11 +1811,6 @@ jumbo_split_static_library("ui") {
        "startup/default_browser_infobar_delegate.h",
        "startup/default_browser_prompt.cc",
        "startup/default_browser_prompt.h",
@@ -57,7 +57,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
        "sync/one_click_signin_sync_starter.cc",
        "sync/one_click_signin_sync_starter.h",
        "user_manager.cc",
-@@ -2994,8 +2989,6 @@ jumbo_split_static_library("ui") {
+@@ -2970,8 +2965,6 @@ jumbo_split_static_library("ui") {
          "views/relaunch_notification/relaunch_required_dialog_view.cc",
          "views/relaunch_notification/relaunch_required_dialog_view.h",
          "views/screen_capture_notification_ui_views.cc",

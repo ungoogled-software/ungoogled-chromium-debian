@@ -3,13 +3,13 @@ debianization/sandbox.patch
 debianization/master-preferences.patch
 
 gn/libcxx.patch
-gn/sysroot.patch
 gn/parallel.patch
 
 arm/gcc_skcms_ice.patch
 
 fixes/mojo.patch
 fixes/sizet.patch
+fixes/include.patch
 fixes/alignof.patch
 fixes/polymer.patch
 fixes/optimize.patch
@@ -26,7 +26,6 @@ fixes/autocompletematch.patch
 fixes/widevine-revision.patch
 fixes/widevine-locations.patch
 fixes/connection-message.patch
-fixes/ambiguous-overloads.patch
 fixes/chromedriver-revision.patch
 
 disable/unrar.patch
@@ -62,7 +61,6 @@ system/zlib.patch
 system/event.patch
 system/jsoncpp.patch
 system/ffmpeg34.patch
-system/harfbuzz.patch
 system/openjpeg.patch
 system/convertutf.patch
 system/fontconfig.patch
