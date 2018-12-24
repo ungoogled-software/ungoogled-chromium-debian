@@ -1,3 +1,21 @@
+chromium (72.0.3626.7-3) unstable; urgency=medium
+
+  * Remove unintended extra brace in arm patch.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 16 Dec 2018 22:37:19 +0000
+
+chromium (72.0.3626.7-2) experimental; urgency=medium
+
+  * Fix build failures on arm.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 14 Dec 2018 02:50:58 +0000
+
+chromium (72.0.3626.7-1) experimental; urgency=medium
+
+  * New upstream developmental release.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Tue, 11 Dec 2018 03:31:15 +0000
+
 chromium (71.0.3578.80-1) unstable; urgency=medium
 
   * New upstream stable release.
