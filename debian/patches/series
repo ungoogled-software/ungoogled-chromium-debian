@@ -6,6 +6,8 @@ gn/libcxx.patch
 gn/parallel.patch
 
 arm/gcc_skcms_ice.patch
+arm/skia-aarch64-buildfix.patch
+arm/crashpad.patch
 
 fixes/mojo.patch
 fixes/sizet.patch

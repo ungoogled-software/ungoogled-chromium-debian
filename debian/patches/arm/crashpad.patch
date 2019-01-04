@@ -1,0 +1,12 @@
+Index: chromium-72.0.3626.7/third_party/crashpad/crashpad/snapshot/linux/cpu_context_linux.cc
+===================================================================
+--- chromium-72.0.3626.7.orig/third_party/crashpad/crashpad/snapshot/linux/cpu_context_linux.cc
++++ chromium-72.0.3626.7/third_party/crashpad/crashpad/snapshot/linux/cpu_context_linux.cc
+@@ -16,6 +16,7 @@
+ 
+ #include <stddef.h>
+ #include <string.h>
++#include <limits>
+ 
+ #include "base/logging.h"
+ 

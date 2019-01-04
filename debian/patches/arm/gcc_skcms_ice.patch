@@ -2,14 +2,18 @@ description: GCC ICE with optimized version
 author: Riku Voipio
 bug-debian: http://bugs.debian.org/901290
 
---- a/third_party/skia/gn/shared_sources.gni
-+++ b/third_party/skia/gn/shared_sources.gni
-@@ -30,4 +30,8 @@ skia_opts = {
+Index: chromium-72.0.3626.7/third_party/skia/third_party/skcms/skcms.gni
+===================================================================
+--- chromium-72.0.3626.7.orig/third_party/skia/third_party/skcms/skcms.gni
++++ chromium-72.0.3626.7/third_party/skia/third_party/skcms/skcms.gni
+@@ -3,6 +3,10 @@
+ # Use of this source code is governed by a BSD-style license that can be
+ # found in the LICENSE file.
  
- # Skia Chromium defines. These flags will be defined in chromium If these
- # become 'permanent', they should be moved into Chrome's skia build file.
 +if ((current_cpu == "arm64" || current_cpu == "arm") && !is_clang) {
-+skia_for_chromium_defines = [ "SKCMS_PORTABLE=1" ]
-+} else {
- skia_for_chromium_defines = []
++    defines = [ "SKCMS_PORTABLE=1" ]
 +}
++
+ skcms_sources = [
+   "skcms.cc",
+   "skcms.h",
