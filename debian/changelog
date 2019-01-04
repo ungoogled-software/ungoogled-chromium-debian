@@ -1,3 +1,9 @@
+chromium (72.0.3626.7-5) experimental; urgency=medium
+
+  * Fix armhf and arm64 builds
+
+ -- Riku Voipio <riku.voipio@linaro.org>  Fri, 04 Jan 2019 16:17:43 +0200
+
 chromium (72.0.3626.7-4) unstable; urgency=medium
 
   * Reenable support for widevine (closes: #916058).
