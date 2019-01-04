@@ -24,6 +24,7 @@ fixes/empty-array.patch
 fixes/ownership-error.patch
 fixes/autocompletematch.patch
 fixes/widevine-revision.patch
+fixes/widevine-buildflag.patch
 fixes/widevine-locations.patch
 fixes/connection-message.patch
 fixes/chromedriver-revision.patch

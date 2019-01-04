@@ -1,3 +1,10 @@
+chromium (72.0.3626.7-4) unstable; urgency=medium
+
+  * Reenable support for widevine (closes: #916058).
+  * Update maintainer to chromium@packages.debian.org (closes: #915988).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Mon, 24 Dec 2018 19:41:02 +0000
+
 chromium (72.0.3626.7-3) unstable; urgency=medium
 
   * Remove unintended extra brace in arm patch.
