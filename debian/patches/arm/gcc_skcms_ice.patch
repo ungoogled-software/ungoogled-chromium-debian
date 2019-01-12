@@ -2,10 +2,8 @@ description: GCC ICE with optimized version
 author: Riku Voipio
 bug-debian: http://bugs.debian.org/901290
 
-Index: chromium-72.0.3626.7/third_party/skia/third_party/skcms/skcms.gni
-===================================================================
---- chromium-72.0.3626.7.orig/third_party/skia/third_party/skcms/skcms.gni
-+++ chromium-72.0.3626.7/third_party/skia/third_party/skcms/skcms.gni
+--- a/third_party/skia/third_party/skcms/skcms.gni
++++ b/third_party/skia/third_party/skcms/skcms.gni
 @@ -3,6 +3,10 @@
  # Use of this source code is governed by a BSD-style license that can be
  # found in the LICENSE file.

@@ -1,4 +1,4 @@
-description: AutocompleteMatch cannot copy construct from a nullptr
+description: gcc 6 does not support copy construction from a nullptr
 author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/components/omnibox/browser/autocomplete_match.cc

@@ -1,3 +1,12 @@
+chromium (72.0.3626.53-1) unstable; urgency=medium
+
+  * New upstream beta release.
+  * Organize the gcc 6 patches.
+  * Update standards version to 4.3.0.
+  * Drop libsrtp from the build dependencies (closes: #918542).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 12 Jan 2019 07:17:20 +0000
+
 chromium (72.0.3626.7-6) unstable; urgency=medium
 
   * Upload to unstable: fix FTBFS on arm64 and armhf

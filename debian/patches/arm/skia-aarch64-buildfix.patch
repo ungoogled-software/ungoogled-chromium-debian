@@ -1,7 +1,6 @@
-diff -up chromium-71.0.3578.98/third_party/skia/src/opts/SkRasterPipeline_opts.h.aarch64fix chromium-71.0.3578.98/third_party/skia/src/opts/SkRasterPipeline_opts.h
---- chromium-71.0.3578.98/third_party/skia/src/opts/SkRasterPipeline_opts.h.aarch64fix	2018-12-14 11:17:43.249121756 -0500
-+++ chromium-71.0.3578.98/third_party/skia/src/opts/SkRasterPipeline_opts.h	2018-12-14 11:20:07.770030234 -0500
-@@ -658,7 +658,7 @@ SI F approx_powf(F x, F y) {
+--- a/third_party/skia/src/opts/SkRasterPipeline_opts.h
++++ b/third_party/skia/src/opts/SkRasterPipeline_opts.h
+@@ -729,7 +729,7 @@ SI F approx_powf(F x, F y) {
  }
  
  SI F from_half(U16 h) {
@@ -10,7 +9,7 @@ diff -up chromium-71.0.3578.98/third_party/skia/src/opts/SkRasterPipeline_opts.h
      return vcvt_f32_f16(h);
  
  #elif defined(JUMPER_IS_HSW) || defined(JUMPER_IS_AVX512)
-@@ -678,7 +678,7 @@ SI F from_half(U16 h) {
+@@ -749,7 +749,7 @@ SI F from_half(U16 h) {
  }
  
  SI U16 to_half(F f) {

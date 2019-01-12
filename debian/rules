@@ -104,7 +104,6 @@ defines+=use_gio=true \
          use_jumbo_build=true \
          jumbo_file_merge_limit=12 \
          concurrent_links=1 \
-         optimize_for_size=true \
          proprietary_codecs=true \
          ffmpeg_branding=\"Chrome\" \
          fieldtrial_testing_like_official_build=true \

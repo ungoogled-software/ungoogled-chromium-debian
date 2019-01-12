@@ -15,7 +15,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//third_party/icu/fuzzers",
 --- a/content/test/BUILD.gn
 +++ b/content/test/BUILD.gn
-@@ -2231,9 +2231,3 @@ test("content_perftests") {
+@@ -2232,9 +2232,3 @@ test("content_perftests") {
      deps += [ "//testing/android/native_test:native_test_native_code" ]
    }
  }

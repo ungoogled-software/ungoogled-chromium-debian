@@ -5,29 +5,31 @@ debianization/master-preferences.patch
 gn/libcxx.patch
 gn/parallel.patch
 
+arm/crashpad.patch
 arm/gcc_skcms_ice.patch
 arm/skia-aarch64-buildfix.patch
-arm/crashpad.patch
+
+gcc6/sizet.patch
+gcc6/atomic.patch
+gcc6/constexpr.patch
+gcc6/constructor.patch
+gcc6/lambda-this.patch
+gcc6/use-after-move.patch
+gcc6/nullptr-copy-construct.patch
 
 fixes/mojo.patch
-fixes/sizet.patch
 fixes/include.patch
 fixes/alignof.patch
 fixes/polymer.patch
-fixes/optimize.patch
 fixes/ps-print.patch
 fixes/as-needed.patch
-fixes/constexpr.patch
 fixes/inspector.patch
 fixes/namespace.patch
-fixes/constructor.patch
 fixes/gpu-timeout.patch
 fixes/empty-array.patch
-fixes/ownership-error.patch
-fixes/autocompletematch.patch
 fixes/widevine-revision.patch
-fixes/widevine-buildflag.patch
 fixes/widevine-locations.patch
+fixes/widevine-buildflag.patch
 fixes/connection-message.patch
 fixes/chromedriver-revision.patch
 

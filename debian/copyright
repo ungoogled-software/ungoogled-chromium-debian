@@ -130,6 +130,7 @@ Files-Excluded:
  third_party/chromevox/third_party/sre
  third_party/crashpad/crashpad/handler/win
  third_party/crashpad/crashpad/snapshot/elf/elf_image_reader_fuzzer_corpus
+ third_party/blink/renderer/platform/testing/data
  third_party/blink/renderer/devtools/scripts/closure
  third_party/blink/renderer/platform/text_codec_fuzzer_seed_corpus
  third_party/google_input_tools/src/chrome/os/inputview/_locales/*.js
