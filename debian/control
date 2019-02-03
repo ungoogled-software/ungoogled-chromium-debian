@@ -33,6 +33,7 @@ Build-Depends:
  libegl1-mesa-dev,
  libgles2-mesa-dev,
  mesa-common-dev,
+ libva-dev,
  libxt-dev,
  libre2-dev,
  libgbm-dev,

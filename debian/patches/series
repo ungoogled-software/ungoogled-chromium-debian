@@ -4,6 +4,7 @@ debianization/master-preferences.patch
 
 gn/libcxx.patch
 gn/parallel.patch
+gn/bfd-linker.patch
 
 arm/crashpad.patch
 arm/gcc_skcms_ice.patch
@@ -18,9 +19,9 @@ gcc6/use-after-move.patch
 gcc6/nullptr-copy-construct.patch
 
 fixes/mojo.patch
+fixes/vaapi.patch
 fixes/include.patch
 fixes/alignof.patch
-fixes/polymer.patch
 fixes/ps-print.patch
 fixes/as-needed.patch
 fixes/inspector.patch
@@ -37,6 +38,7 @@ disable/unrar.patch
 disable/signin.patch
 disable/android.patch
 disable/fuzzers.patch
+disable/tracing.patch
 disable/openh264.patch
 disable/perfetto.patch
 disable/installer.patch

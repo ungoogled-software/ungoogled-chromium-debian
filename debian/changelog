@@ -1,3 +1,62 @@
+chromium (72.0.3626.81-1) unstable; urgency=medium
+
+  * New upstream stable release.
+    - Stack buffer overflow in Skia. Reported by Ivan Fratric
+    - Use after free in Mojo, FileAPI, and Payments. Reported by Mark Brand
+    - CVE-2018-17481: Use after free in PDFium. Reported by Anonymous
+    - CVE-2019-5754: Inappropriate implementation in QUIC Networking. Reported
+      by Klzgrad
+    - CVE-2019-5755: Inappropriate implementation in V8. Reported by Jay
+      Bosamiya
+    - CVE-2019-5756: Use after free in PDFium. Reported by Anonymous
+    - CVE-2019-5757: Type Confusion in SVG. Reported by Alexandru Pitis
+    - CVE-2019-5758: Use after free in Blink. Reported by Zhe Jin
+    - CVE-2019-5759: Use after free in HTML select elements. Reported by Almog
+      Benin
+    - CVE-2019-5760: Use after free in WebRTC. Reported by Zhe Jin
+    - CVE-2019-5762: Use after free in PDFium. Reported by Anonymous
+    - CVE-2019-5763: Insufficient validation of untrusted input in V8.
+      Reported by Guang Gong
+    - CVE-2019-5764: Use after free in WebRTC. Reported by Eyal Itkin
+    - CVE-2019-5765: Insufficient policy enforcement in the browser. Reported
+      by Sergey Toshin
+    - CVE-2019-5766: Insufficient policy enforcement in Canvas. Reported by
+      David Erceg
+    - CVE-2019-5767: Incorrect security UI in WebAPKs. Reported by Haoran Lu,
+      Yifan Zhang, Luyi Xing, and Xiaojing Liao
+    - CVE-2019-5768: Insufficient policy enforcement in DevTools. Reported by
+      Rob Wu
+    - CVE-2019-5769: Insufficient validation of untrusted input in Blink.
+      Reported by Guy Eshel
+    - CVE-2019-5770: Heap buffer overflow in WebGL. Reported by hemidallt
+    - CVE-2019-5772: Use after free in PDFium. Reported by Zhen Zhou
+    - CVE-2019-5773: Insufficient data validation in IndexedDB. Reported by
+      Yongke Wang
+    - CVE-2019-5774: Insufficient validation of untrusted input in
+      SafeBrowsing. Reported by Junghwan Kang and Juno Im
+    - CVE-2019-5775: Insufficient policy enforcement in Omnibox. Reported by
+      evi1m0
+    - CVE-2019-5776: Insufficient policy enforcement in Omnibox. Reported by
+      Lnyas Zhang
+    - CVE-2019-5777: Insufficient policy enforcement in Omnibox. Reported by
+      Khalil Zhani
+    - CVE-2019-5778: Insufficient policy enforcement in Extensions. Reported
+      by David Erceg
+    - CVE-2019-5779: Insufficient policy enforcement in ServiceWorker.
+      Reported by David Erceg
+    - CVE-2019-5780: Insufficient policy enforcement. Reported by Andreas
+      Hegenberg
+    - CVE-2019-5781: Insufficient policy enforcement in Omnibox. Reported by
+      evi1m0
+    - CVE-2019-5782: Inappropriate implementation in V8 reported by Qixun Zhao
+    - CVE-2019-5783: Insufficient validation of untrusted input in DevTools.
+      Reported by Shintaro Kobori
+  * Opt out of all Google web service options by default (closes: #916320).
+  * Enable support for hardware accelerated video decoding (closes: #856255).
+    - Thanks to Akarshan Biswas.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 02 Feb 2019 05:05:43 +0000
+
 chromium (72.0.3626.53-1) unstable; urgency=medium
 
   * New upstream beta release.

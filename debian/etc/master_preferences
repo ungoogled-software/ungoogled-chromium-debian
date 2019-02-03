@@ -14,18 +14,42 @@
      "has_seen_welcome_page" : true,
      "check_default_browser" : false
   },
+  "profile": {
+     "default_content_setting_values": {
+        "payment_handler": 2
+     }
+  },
   "bookmark_bar": {
      "show_on_all_tabs": true
   },
+  "net": {
+     "network_prediction_options": 2
+  },
+  "search": {
+     "suggest_enabled": false
+  },
+  "signin": {
+     "allowed": false,
+     "allowed_on_next_startup": false
+  },
+  "autofill": {
+     "profile_enabled": false,
+     "credit_card_enabled": false
+  },
+  "payments": {
+     "can_make_payment_enabled": false
+  },
   "safebrowsing": {
-    "enabled": false
+     "enabled": false
   },
   "dns_prefetching": {
-    "enabled": false
+     "enabled": false
   },
   "alternate_error_pages": {
-    "enabled": false
+     "enabled": false
   },
+  "credentials_enable_service": false,
+  "credentials_enable_autosignin": false,
   "default_apps": "noinstall",
   "hide_web_store_icon": true,
   "homepage_is_newtabpage": true,

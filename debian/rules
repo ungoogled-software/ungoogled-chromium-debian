@@ -67,11 +67,12 @@ endif
 
 # disabled features
 defines+=is_debug=false \
-         use_allocator=\"none\" \
+         use_goma=false \
          use_ozone=false \
          use_sysroot=false \
          use_openh264=false \
          use_kerberos=false \
+         use_allocator=\"none\" \
          use_libjpeg_turbo=true \
          use_custom_libcxx=false \
          use_gnome_keyring=false \
@@ -86,23 +87,23 @@ defines+=is_debug=false \
          enable_one_click_signin=false \
          enable_hangout_services_extension=false \
          enable_iterator_debugging=false \
-         goma_dir=\"\" \
-         gold_path=\"\" \
          linux_use_bundled_binutils=false \
 
 # enabled features
 defines+=use_gio=true \
          use_gold=true \
+         use_vaapi=true \
          use_pulseaudio=true \
          link_pulseaudio=true \
          enable_widevine=true \
+         v8_enable_backtrace=true \
          use_system_zlib=true \
          use_system_lcms2=true \
          use_system_libjpeg=true \
          use_system_freetype=true \
          use_system_harfbuzz=true \
          use_jumbo_build=true \
-         jumbo_file_merge_limit=12 \
+         jumbo_file_merge_limit=8 \
          concurrent_links=1 \
          proprietary_codecs=true \
          ffmpeg_branding=\"Chrome\" \
