@@ -57,6 +57,7 @@ Files-Excluded:
  tools/perf/page_sets/tough_scheduling_cases/*.min.js
  tools/page_cycler/acid3
  headless/test/data
+ content/browser/android
  components/test/data
  components/test/android
  components/drive/chromeos
@@ -160,6 +161,8 @@ Files-Excluded:
  third_party/catapult/third_party/polymer2
  third_party/catapult/third_party/polymer3
  third_party/catapult/third_party/polymer/components
+ third_party/catapult/third_party/d3/d3.min.js
+ third_party/catapult/third_party/redux/redux.min.js
  third_party/catapult/experimental/heatmap/power.js
  third_party/catapult/experimental/heatmap/smoothness.js
  third_party/catapult/experimental/trace_on_tap/third_party/pako/pako_deflate.min.js
@@ -168,6 +171,7 @@ Files-Excluded:
  third_party/webrtc/sdk
  third_party/webrtc/data
  third_party/webrtc/examples
+ third_party/pdfium/third_party/lcms
  third_party/pdfium/third_party/eu-strip
  third_party/pdfium/third_party/libpng16
  third_party/pdfium/third_party/yasm/source

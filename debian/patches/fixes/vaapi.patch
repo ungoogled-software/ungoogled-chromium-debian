@@ -252,3 +252,14 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
    }
  }
  
+--- a/media/gpu/vaapi/vaapi_wrapper.cc
++++ b/media/gpu/vaapi/vaapi_wrapper.cc
+@@ -1000,7 +1000,7 @@ scoped_refptr<VASurface> VaapiWrapper::C
+   }
+   va_attrib_extbuf.num_planes = num_planes;
+ 
+-  std::vector<unsigned long> fds(num_fds);
++  std::vector<uintptr_t> fds(num_fds);
+   for (size_t i = 0; i < num_fds; ++i) {
+     int dmabuf_fd = pixmap->GetDmaBufFd(i);
+     if (dmabuf_fd < 0) {

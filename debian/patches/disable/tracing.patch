@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/chrome/browser/BUILD.gn
 +++ b/chrome/browser/BUILD.gn
-@@ -1597,14 +1597,6 @@ jumbo_split_static_library("browser") {
+@@ -1599,14 +1599,6 @@ jumbo_split_static_library("browser") {
      "thumbnails/thumbnail_utils.h",
      "thumbnails/thumbnailing_context.cc",
      "thumbnails/thumbnailing_context.h",
@@ -18,7 +18,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "translate/android/translate_utils.cc",
      "translate/android/translate_utils.h",
      "translate/chrome_translate_client.cc",
-@@ -1872,7 +1864,6 @@ jumbo_split_static_library("browser") {
+@@ -1874,7 +1866,6 @@ jumbo_split_static_library("browser") {
      "//components/sync_preferences",
      "//components/sync_sessions",
      "//components/task_scheduler_util",
@@ -409,7 +409,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "chrome/browser/translate/translate_service.h"
  #include "chrome/browser/ui/blocked_content/blocked_window_params.h"
  #include "chrome/browser/ui/blocked_content/popup_blocker.h"
-@@ -4249,7 +4248,7 @@ ChromeContentBrowserClient::GetDevToolsM
+@@ -4269,7 +4268,7 @@ ChromeContentBrowserClient::GetDevToolsM
  }
  
  content::TracingDelegate* ChromeContentBrowserClient::GetTracingDelegate() {

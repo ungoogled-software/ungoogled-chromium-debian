@@ -71,27 +71,25 @@ defines+=is_debug=false \
          use_ozone=false \
          use_sysroot=false \
          use_openh264=false \
-         use_kerberos=false \
          use_allocator=\"none\" \
          use_libjpeg_turbo=true \
          use_custom_libcxx=false \
          use_gnome_keyring=false \
          use_unofficial_version_number=false \
-         treat_warnings_as_errors=false \
-         remove_webcore_debug_symbols=true \
-         optimize_webui=false \
-         enable_swiftshader=false \
          enable_nacl=false \
          enable_nacl_nonsfi=false \
+         enable_swiftshader=false \
          enable_reading_list=false \
          enable_one_click_signin=false \
-         enable_hangout_services_extension=false \
          enable_iterator_debugging=false \
+         enable_hangout_services_extension=false \
+         optimize_webui=false \
+         treat_warnings_as_errors=false \
          linux_use_bundled_binutils=false \
+         remove_webcore_debug_symbols=true \
 
 # enabled features
 defines+=use_gio=true \
-         use_gold=true \
          use_vaapi=true \
          use_pulseaudio=true \
          link_pulseaudio=true \
@@ -135,8 +133,6 @@ override_dh_auto_configure:
 	$(CXX) --version
 	# use system flot
 	for file in $(flotpaths); do ln -sf $$file third_party/flot; done
-	# use polymer from chromium's top level third_party directory
-	ln -sf ../../../../third_party/polymer/v1_0/components-chromium third_party/catapult/third_party/polymer/components
 	# put yasm script in the location expected by gn
 	ln -sf ../pdfium/third_party/yasm/run_yasm.py third_party/yasm
 	# strip out system third_party libraries

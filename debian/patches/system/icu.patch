@@ -1,4 +1,4 @@
-description: backwards compatibility for older versions of icu
+description: system icu
 author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/net/BUILD.gn

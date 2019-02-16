@@ -23,3 +23,14 @@ author: Michael Gilbert <mgilbert@debian.org>
        result = SignedExchangeLoadResult::kCTVerificationError;
      } else {
        error_message =
+--- a/third_party/blink/renderer/modules/cache_storage/inspector_cache_storage_agent.cc
++++ b/third_party/blink/renderer/modules/cache_storage/inspector_cache_storage_agent.cc
+@@ -398,7 +398,7 @@ class CachedResponseFileReaderLoaderClie
+ 
+   void DidFail(FileErrorCode error) override {
+     callback_->sendFailure(ProtocolResponse::Error(String::Format(
+-        "Unable to read the cached response, error code: %d", error)));
++        "Unable to read the cached response, error code: %d", static_cast<int>(error))));
+     dispose();
+   }
+ 

@@ -1,3 +1,14 @@
+chromium (72.0.3626.109-1) unstable; urgency=medium
+
+  * New upstream stable release.
+    - CVE-2019-5784: Inappropriate implementation in V8. Reported by Lucas
+      Pinheiro
+  * Build pdfium using system lcms.
+  * Renable support for kerberos (closes: #916684).
+  * Fix 32-bit type error in the vaapi implementation (closes: #921823).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Mon, 04 Feb 2019 04:27:06 +0000
+
 chromium (72.0.3626.81-1) unstable; urgency=medium
 
   * New upstream stable release.

@@ -157,7 +157,7 @@ origin: chromium 69 authors
 +}
 --- a/chrome/browser/ui/libgtkui/BUILD.gn
 +++ b/chrome/browser/ui/libgtkui/BUILD.gn
-@@ -8,119 +8,152 @@ import("//build/config/features.gni")
+@@ -8,119 +8,154 @@ import("//build/config/features.gni")
  import("//build/config/linux/gtk/gtk.gni")
  import("//printing/buildflags/buildflags.gni")
  
@@ -407,6 +407,8 @@ origin: chromium 69 authors
 +} else {
 +  libgtkui("libgtk2ui") {
 +    sources = [
++      "gtk2/chrome_gtk_menu_subclasses.cc",
++      "gtk2/chrome_gtk_menu_subclasses.h",
 +      "gtk2/chrome_gtk_frame.cc",
 +      "gtk2/chrome_gtk_frame.h",
 +      "gtk2/native_theme_gtk2.cc",
@@ -1069,7 +1071,7 @@ origin: chromium 69 authors
 +#endif  // CHROME_BROWSER_UI_LIBGTKUI_CHROME_GTK_FRAME_H_
 --- /dev/null
 +++ b/chrome/browser/ui/libgtkui/gtk2/native_theme_gtk2.cc
-@@ -0,0 +1,431 @@
+@@ -0,0 +1,425 @@
 +// Copyright (c) 2013 The Chromium Authors. All rights reserved.
 +// Use of this source code is governed by a BSD-style license that can be
 +// found in the LICENSE file.
@@ -1079,7 +1081,7 @@ origin: chromium 69 authors
 +#include <gtk/gtk.h>
 +
 +#include "chrome/browser/ui/libgtkui/gtk2/chrome_gtk_frame.h"
-+#include "chrome/browser/ui/libgtkui/chrome_gtk_menu_subclasses.h"
++#include "chrome/browser/ui/libgtkui/gtk2/chrome_gtk_menu_subclasses.h"
 +#include "chrome/browser/ui/libgtkui/gtk_ui.h"
 +#include "chrome/browser/ui/libgtkui/gtk_util.h"
 +#include "chrome/browser/ui/libgtkui/skia_utils_gtk.h"
@@ -1198,9 +1200,6 @@ origin: chromium 69 authors
 +}
 +
 +SkColor NativeThemeGtk2::GetSystemColor(ColorId color_id) const {
-+  const SkColor kPositiveTextColor = SkColorSetRGB(0x0b, 0x80, 0x43);
-+  const SkColor kNegativeTextColor = SkColorSetRGB(0xc5, 0x39, 0x29);
-+
 +  switch (color_id) {
 +    // Windows
 +    case kColorId_WindowBackground:
@@ -1236,6 +1235,13 @@ origin: chromium 69 authors
 +    case kColorId_TouchableMenuItemLabelColor:
 +    case kColorId_ActionableSubmenuVerticalSeparatorColor:
 +      return gfx::kPlaceholderColor;
++
++     // Fallback to the same colors as Aura.
++    case ui::NativeTheme::kColorId_HighlightedMenuItemBackgroundColor:
++    case ui::NativeTheme::kColorId_HighlightedMenuItemForegroundColor:
++    case ui::NativeTheme::kColorId_FocusedHighlightedMenuItemBackgroundColor:
++      return ui::NativeTheme::GetInstanceForNativeUi()->GetSystemColor(
++          color_id);
 +
 +    // Label
 +    case kColorId_LabelEnabledColor:
@@ -1273,20 +1279,10 @@ origin: chromium 69 authors
 +    // Button
 +    case kColorId_ButtonEnabledColor:
 +      return GetTextColor(GetButton(), NORMAL);
-+    case kColorId_BlueButtonEnabledColor:
-+      return GetTextColor(GetBlueButton(), NORMAL);
 +    case kColorId_ButtonDisabledColor:
 +      return GetTextColor(GetButton(), INSENSITIVE);
-+    case kColorId_BlueButtonDisabledColor:
-+      return GetTextColor(GetBlueButton(), INSENSITIVE);
 +    case kColorId_ButtonHoverColor:
 +      return GetTextColor(GetButton(), PRELIGHT);
-+    case kColorId_BlueButtonHoverColor:
-+      return GetTextColor(GetBlueButton(), PRELIGHT);
-+    case kColorId_BlueButtonPressedColor:
-+      return GetTextColor(GetBlueButton(), ACTIVE);
-+    case kColorId_BlueButtonShadowColor:
-+      return SK_ColorTRANSPARENT;
 +    case kColorId_ProminentButtonColor:
 +      return GetSystemColor(kColorId_LinkEnabled);
 +    case kColorId_TextOnProminentButtonColor:
@@ -1592,7 +1588,7 @@ origin: chromium 69 authors
 +// Returns a function pointer to be invoked on the main thread to init
 +// the gnome accessibility module if it's enabled (nullptr otherwise).
 +GnomeAccessibilityModuleInitFunc GetAccessibilityModuleInitFunc() {
-+  base::AssertBlockingAllowed();
++  base::AssertBlockingAllowedDeprecated();
 +
 +  // Try to load libatk-bridge.so.
 +  base::FilePath atk_bridge_path(ATK_LIB_DIR);
@@ -1649,3 +1645,85 @@ origin: chromium 69 authors
 +}
 +
 +}  // namespace ui
+--- /dev/null
++++ b/chrome/browser/ui/libgtkui/gtk2/chrome_gtk_menu_subclasses.cc
+@@ -0,0 +1,29 @@
++// Copyright 2013 The Chromium Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style license that can be
++// found in the LICENSE file.
++
++#include "chrome/browser/ui/libgtkui/gtk2/chrome_gtk_menu_subclasses.h"
++
++G_DEFINE_TYPE(GtkCustomMenu, gtk_custom_menu, GTK_TYPE_MENU)
++
++static void gtk_custom_menu_init(GtkCustomMenu* menu) {
++}
++
++static void gtk_custom_menu_class_init(GtkCustomMenuClass* klass) {
++}
++
++GtkWidget* gtk_custom_menu_new() {
++  return GTK_WIDGET(g_object_new(gtk_custom_menu_get_type(), nullptr));
++}
++
++G_DEFINE_TYPE(GtkCustomMenuItem, gtk_custom_menu_item, GTK_TYPE_MENU_ITEM)
++
++static void gtk_custom_menu_item_init(GtkCustomMenuItem* item) {
++}
++
++static void gtk_custom_menu_item_class_init(GtkCustomMenuItemClass* klass) {
++}
++
++GtkWidget* gtk_custom_menu_item_new() {
++  return GTK_WIDGET(g_object_new(gtk_custom_menu_item_get_type(), nullptr));
++}
+--- /dev/null
++++ b/chrome/browser/ui/libgtkui/gtk2/chrome_gtk_menu_subclasses.h
+@@ -0,0 +1,47 @@
++// Copyright 2013 The Chromium Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style license that can be
++// found in the LICENSE file.
++
++#ifndef CHROME_BROWSER_UI_LIBGTKUI_CHROME_GTK_MENU_SUBCLASSES_H_
++#define CHROME_BROWSER_UI_LIBGTKUI_CHROME_GTK_MENU_SUBCLASSES_H_
++
++#include <gtk/gtk.h>
++
++// This file declares two subclasses of Gtk's menu classes. We do this because
++// when we were a GTK app proper, we had classes with the same names, and gtk
++// theme authors started writing themes and styling chrome's menus by targeting
++// these classes. We have to fetch our colors from these theme classes in
++// specific because several newer GTK+2 themes are pixmap based and they
++// specifically give real colors only to these classes.
++
++G_BEGIN_DECLS
++
++typedef struct _GtkCustomMenu GtkCustomMenu;
++typedef struct _GtkCustomMenuClass GtkCustomMenuClass;
++
++struct _GtkCustomMenu {
++  GtkMenu menu;
++};
++
++struct _GtkCustomMenuClass {
++  GtkMenuClass parent_class;
++};
++
++GtkWidget* gtk_custom_menu_new();
++
++typedef struct _GtkCustomMenuItem GtkCustomMenuItem;
++typedef struct _GtkCustomMenuItemClass GtkCustomMenuItemClass;
++
++struct _GtkCustomMenuItem {
++  GtkMenuItem menu_item;
++};
++
++struct _GtkCustomMenuItemClass {
++  GtkMenuItemClass parent_class;
++};
++
++GtkWidget* gtk_custom_menu_item_new();
++
++G_END_DECLS
++
++#endif  // CHROME_BROWSER_UI_LIBGTKUI_CHROME_GTK_MENU_SUBCLASSES_H_
