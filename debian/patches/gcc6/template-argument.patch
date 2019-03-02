@@ -1,0 +1,16 @@
+description: explicit return type is needed by gcc 6 to deduce template argument type
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/third_party/blink/renderer/modules/canvas/canvas2d/base_rendering_context_2d.cc
++++ b/third_party/blink/renderer/modules/canvas/canvas2d/base_rendering_context_2d.cc
+@@ -1773,8 +1773,8 @@ void BaseRenderingContext2D::putImageDat
+     data_length *= context_color_params.BytesPerPixel();
+     if (!data_length.IsValid())
+       return;
+-    std::unique_ptr<uint8_t[]> converted_pixels(
+-        new uint8_t[data_length.ValueOrDie()]);
++    size_t length = data_length.ValueOrDie();
++    std::unique_ptr<uint8_t[]> converted_pixels(new uint8_t[length]);
+     if (data->ImageDataInCanvasColorSettings(
+             ColorParams().ColorSpace(), PixelFormat(), converted_pixels.get(),
+             kRGBAColorType)) {

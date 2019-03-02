@@ -3,7 +3,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
 
 --- a/components/signin/core/browser/signin_manager_base.cc
 +++ b/components/signin/core/browser/signin_manager_base.cc
-@@ -152,7 +152,7 @@ void SigninManagerBase::Initialize(PrefS
+@@ -158,7 +158,7 @@ void SigninManagerBase::FinalizeInitBefo
  bool SigninManagerBase::IsInitialized() const { return initialized_; }
  
  bool SigninManagerBase::IsSigninAllowed() const {
@@ -14,50 +14,37 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
  AccountInfo SigninManagerBase::GetAuthenticatedAccountInfo() const {
 --- a/chrome/browser/ui/chrome_pages.cc
 +++ b/chrome/browser/ui/chrome_pages.cc
-@@ -72,12 +72,6 @@ void OpenBookmarkManagerForNode(Browser*
-   ShowSingletonTabOverwritingNTP(browser, std::move(params));
- }
- 
--void NavigateToSingletonTab(Browser* browser, const GURL& url) {
--  NavigateParams params(GetSingletonTabNavigateParams(browser, url));
--  params.path_behavior = NavigateParams::IGNORE_AND_NAVIGATE;
--  ShowSingletonTabOverwritingNTP(browser, std::move(params));
--}
--
- // Shows either the help app or the appropriate help page for |source|. If
- // |browser| is NULL and the help page is used (vs the app), the help page is
- // shown in the last active browser. If there is no such browser, a new browser
-@@ -383,6 +377,7 @@ void ShowSearchEngineSettings(Browser* b
+@@ -379,6 +379,7 @@ void ShowSearchEngineSettings(Browser* b
  #if !defined(OS_ANDROID)
  void ShowBrowserSignin(Browser* browser,
                         signin_metrics::AccessPoint access_point) {
 +#if 0
    Profile* original_profile = browser->profile()->GetOriginalProfile();
-   SigninManagerBase* manager =
-       SigninManagerFactory::GetForProfile(original_profile);
-@@ -434,6 +429,7 @@ void ShowBrowserSignin(Browser* browser,
-                                                   access_point);
+   DCHECK(original_profile->GetPrefs()->GetBoolean(prefs::kSigninAllowed));
+ 
+@@ -407,6 +408,7 @@ void ShowBrowserSignin(Browser* browser,
+   browser->signin_view_controller()->ShowSignin(bubble_view_mode, browser,
+                                                 access_point);
  #endif
-   }
 +#endif
  }
  
  void ShowBrowserSigninOrSettings(Browser* browser,
 --- a/chrome/browser/ui/BUILD.gn
 +++ b/chrome/browser/ui/BUILD.gn
-@@ -1811,11 +1811,6 @@ jumbo_split_static_library("ui") {
+@@ -1851,11 +1851,6 @@ jumbo_split_static_library("ui") {
        "startup/default_browser_infobar_delegate.h",
        "startup/default_browser_prompt.cc",
        "startup/default_browser_prompt.h",
 -      "sync/one_click_signin_links_delegate.h",
 -      "sync/one_click_signin_links_delegate_impl.cc",
 -      "sync/one_click_signin_links_delegate_impl.h",
--      "sync/one_click_signin_sync_observer.cc",
--      "sync/one_click_signin_sync_observer.h",
-       "sync/one_click_signin_sync_starter.cc",
-       "sync/one_click_signin_sync_starter.h",
+-      "sync/one_click_signin_sync_starter.cc",
+-      "sync/one_click_signin_sync_starter.h",
        "user_manager.cc",
-@@ -2973,8 +2968,6 @@ jumbo_split_static_library("ui") {
+       "user_manager.h",
+       "views/external_protocol_dialog.cc",
+@@ -3024,8 +3019,6 @@ jumbo_split_static_library("ui") {
          "views/relaunch_notification/relaunch_required_dialog_view.cc",
          "views/relaunch_notification/relaunch_required_dialog_view.h",
          "views/screen_capture_notification_ui_views.cc",
@@ -65,27 +52,39 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
 -        "views/sync/one_click_signin_dialog_view.h",
          "views/tabs/window_finder.cc",
        ]
+       deps += [ "//ui/views/window/vector_icons" ]
+--- a/chrome/browser/ui/webui/signin/inline_login_handler_impl.cc
++++ b/chrome/browser/ui/webui/signin/inline_login_handler_impl.cc
+@@ -365,6 +365,7 @@ void InlineSigninHelper::OnClientOAuthSu
+   } else {
+     if (HandleCrossAccountError(result.refresh_token))
+       return;
++#if BUILDFLAG(ENABLE_ONE_CLICK_SIGNIN)
+     if (confirm_untrusted_signin_) {
+       // Display a confirmation dialog to the user.
+       base::RecordAction(
+@@ -379,6 +380,7 @@ void InlineSigninHelper::OnClientOAuthSu
      }
---- a/chrome/browser/ui/sync/one_click_signin_sync_starter.cc
-+++ b/chrome/browser/ui/sync/one_click_signin_sync_starter.cc
-@@ -395,20 +395,6 @@ void OneClickSigninSyncStarter::CancelSi
+     CreateSyncStarter(browser, current_url_, result.refresh_token,
+                       OneClickSigninSyncStarter::CURRENT_PROFILE);
++#endif
+     base::ThreadTaskRunnerHandle::Get()->DeleteSoon(FROM_HERE, this);
+   }
+ }
+--- a/chrome/browser/ui/webui/signin/inline_login_handler_impl.cc
++++ b/chrome/browser/ui/webui/signin/inline_login_handler_impl.cc
+@@ -413,12 +413,14 @@ void InlineSigninHelper::CreateSyncStart
+     const GURL& current_url,
+     const std::string& refresh_token,
+     OneClickSigninSyncStarter::ProfileMode profile_mode) {
++#if BUILDFLAG(ENABLE_ONE_CLICK_SIGNIN)
+   // OneClickSigninSyncStarter will delete itself once the job is done.
+   new OneClickSigninSyncStarter(
+       profile_, browser, gaia_id_, email_, password_, refresh_token,
+       signin::GetAccessPointForEmbeddedPromoURL(current_url),
+       signin::GetSigninReasonForEmbeddedPromoURL(current_url), profile_mode,
+       base::Bind(&InlineLoginHandlerImpl::SyncStarterCallback, handler_));
++#endif
  }
  
- void OneClickSigninSyncStarter::ConfirmAndSignin() {
--  SigninManager* signin = SigninManagerFactory::GetForProfile(profile_);
--  if (confirmation_required_ == CONFIRM_UNTRUSTED_SIGNIN) {
--    browser_ = EnsureBrowser(browser_, profile_);
--    base::RecordAction(
--        base::UserMetricsAction("Signin_Show_UntrustedSigninPrompt"));
--    // Display a confirmation dialog to the user.
--    browser_->window()->ShowOneClickSigninConfirmation(
--        base::UTF8ToUTF16(signin->GetUsernameForAuthInProgress()),
--        base::Bind(&OneClickSigninSyncStarter::UntrustedSigninConfirmed,
--                   weak_pointer_factory_.GetWeakPtr()));
--  } else {
--    // No confirmation required - just sign in the user.
--    signin->CompletePendingSignin();
--  }
- }
- 
- void OneClickSigninSyncStarter::UntrustedSigninConfirmed(
+ bool InlineSigninHelper::HandleCrossAccountError(

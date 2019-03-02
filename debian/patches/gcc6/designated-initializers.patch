@@ -1,0 +1,32 @@
+description: gcc 6 does not support designated initializers
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/base/task/sequence_manager/sequence_manager.h
++++ b/base/task/sequence_manager/sequence_manager.h
+@@ -61,6 +61,7 @@ class SequenceManager {
+   // MessageLoop and whether randomised sampling should be enabled.
+   struct Settings {
+     Settings() = default;
++    Settings(bool randomise):randomised_sampling_enabled(randomise) {}
+     // In the future MessagePump (which is move-only) will also be a setting,
+     // so we are making Settings move-only in preparation.
+     Settings(Settings&& move_from) noexcept = default;
+--- a/base/task/sequence_manager/test/sequence_manager_for_test.h
++++ b/base/task/sequence_manager/test/sequence_manager_for_test.h
+@@ -28,14 +28,12 @@ class SequenceManagerForTest : public in
+       const TickClock* clock,
+       // Since most test calls are in Blink, randomised sampling is enabled
+       // by default in the test SequenceManager, as opposed to production code.
+-      SequenceManager::Settings settings = SequenceManager::Settings{
+-          .randomised_sampling_enabled = true});
++      SequenceManager::Settings settings = SequenceManager::Settings(true));
+ 
+   // Creates SequenceManagerForTest using the provided ThreadController.
+   static std::unique_ptr<SequenceManagerForTest> Create(
+       std::unique_ptr<internal::ThreadController> thread_controller,
+-      SequenceManager::Settings settings = SequenceManager::Settings{
+-          .randomised_sampling_enabled = true});
++      SequenceManager::Settings settings = SequenceManager::Settings(true));
+ 
+   size_t ActiveQueuesCount() const;
+   bool HasImmediateWork() const;

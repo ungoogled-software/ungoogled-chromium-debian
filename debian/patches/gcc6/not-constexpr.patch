@@ -1,0 +1,164 @@
+description: remove constexpr from methods where it is not supported by gcc 6
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/base/test/scoped_task_environment.h
++++ b/base/test/scoped_task_environment.h
+@@ -207,11 +207,11 @@ class ScopedTaskEnvironment {
+  protected:
+   explicit ScopedTaskEnvironment(ScopedTaskEnvironment&& other);
+ 
+-  constexpr MainThreadType main_thread_type() const {
++  const MainThreadType main_thread_type() const {
+     return main_thread_type_;
+   }
+ 
+-  constexpr ExecutionMode execution_control_mode() const {
++  const ExecutionMode execution_control_mode() const {
+     return execution_control_mode_;
+   }
+ 
+--- a/gpu/command_buffer/client/transfer_buffer_cmd_copy_helpers.h
++++ b/gpu/command_buffer/client/transfer_buffer_cmd_copy_helpers.h
+@@ -13,7 +13,7 @@ namespace gpu {
+ 
+ // Sum the sizes of the types in Ts as CheckedNumeric<T>.
+ template <typename T, typename... Ts>
+-constexpr base::CheckedNumeric<T> CheckedSizeOfPackedTypes() {
++base::CheckedNumeric<T> CheckedSizeOfPackedTypes() {
+   static_assert(sizeof...(Ts) > 0, "");
+   base::CheckedNumeric<T> checked_elements_size = 0;
+   for (size_t s : {sizeof(Ts)...}) {
+@@ -87,10 +87,9 @@ auto CopyArraysToBuffer(uint32_t count,
+ // Sum the sizes of the types in Ts. This will fail to compile if the result
+ // does not fit in T.
+ template <typename T, typename... Ts>
+-constexpr T SizeOfPackedTypes() {
+-  constexpr base::CheckedNumeric<T> checked_elements_size =
++T SizeOfPackedTypes() {
++  base::CheckedNumeric<T> checked_elements_size =
+       CheckedSizeOfPackedTypes<T, Ts...>();
+-  static_assert(checked_elements_size.IsValid(), "");
+   return checked_elements_size.ValueOrDie();
+ }
+ 
+@@ -113,7 +112,7 @@ template <typename... Ts>
+ constexpr uint32_t ComputeMaxCopyCount(uint32_t buffer_size) {
+   // Start by tightly packing the elements and decrease copy_count until
+   // the total aligned copy size fits
+-  constexpr uint32_t elements_size = SizeOfPackedTypes<uint32_t, Ts...>();
++  uint32_t elements_size = SizeOfPackedTypes<uint32_t, Ts...>();
+   uint32_t copy_count = buffer_size / elements_size;
+ 
+   while (copy_count > 0) {
+--- a/media/filters/jpeg_parser.cc
++++ b/media/filters/jpeg_parser.cc
+@@ -91,13 +91,13 @@ const JpegHuffmanTable kDefaultAcTable[k
+     },
+ };
+ 
+-constexpr uint8_t kZigZag8x8[64] = {
++const uint8_t kZigZag8x8[64] = {
+     0,  1,  8,  16, 9,  2,  3,  10, 17, 24, 32, 25, 18, 11, 4,  5,
+     12, 19, 26, 33, 40, 48, 41, 34, 27, 20, 13, 6,  7,  14, 21, 28,
+     35, 42, 49, 56, 57, 50, 43, 36, 29, 22, 15, 23, 30, 37, 44, 51,
+     58, 59, 52, 45, 38, 31, 39, 46, 53, 60, 61, 54, 47, 55, 62, 63};
+ 
+-constexpr JpegQuantizationTable kDefaultQuantTable[2] = {
++const JpegQuantizationTable kDefaultQuantTable[2] = {
+     // Table K.1 Luminance quantization table values.
+     {
+         true,
+--- a/media/gpu/vaapi/vaapi_jpeg_encoder.cc
++++ b/media/gpu/vaapi/vaapi_jpeg_encoder.cc
+@@ -51,7 +51,7 @@ void FillQMatrix(VAQMatrixBufferJPEG* q_
+   // Fill the raw, unscaled quantization tables for libva. The VAAPI driver is
+   // responsible for scaling the quantization tables based on picture
+   // parameter quality.
+-  const JpegQuantizationTable& luminance = kDefaultQuantTable[0];
++  const JpegQuantizationTable luminance = kDefaultQuantTable[0];
+   static_assert(std::extent<decltype(luminance.value)>() ==
+                     std::extent<decltype(q_matrix->lum_quantiser_matrix)>(),
+                 "Luminance quantization table size mismatch.");
+@@ -62,7 +62,7 @@ void FillQMatrix(VAQMatrixBufferJPEG* q_
+     q_matrix->lum_quantiser_matrix[i] = luminance.value[kZigZag8x8[i]];
+   }
+ 
+-  const JpegQuantizationTable& chrominance = kDefaultQuantTable[1];
++  const JpegQuantizationTable chrominance = kDefaultQuantTable[1];
+   static_assert(std::extent<decltype(chrominance.value)>() ==
+                     std::extent<decltype(q_matrix->chroma_quantiser_matrix)>(),
+                 "Chrominance quantization table size mismatch.");
+--- a/content/public/test/test_browser_thread_bundle.h
++++ b/content/public/test/test_browser_thread_bundle.h
+@@ -175,7 +175,7 @@ class TestBrowserThreadBundle : public b
+     return *options == Options::REAL_IO_THREAD;
+   }
+ 
+-  constexpr bool HasIOMainLoop() const {
++  const bool HasIOMainLoop() const {
+     return main_thread_type() == MainThreadType::IO ||
+            main_thread_type() == MainThreadType::IO_MOCK_TIME;
+   }
+--- a/base/trace_event/trace_arguments.h
++++ b/base/trace_event/trace_arguments.h
+@@ -483,21 +483,21 @@ class BASE_EXPORT StringStorage {
+   void Reset(size_t alloc_size = 0);
+ 
+   // Accessors.
+-  constexpr size_t size() const { return data_ ? data_->size : 0u; }
+-  constexpr const char* data() const { return data_ ? data_->chars : nullptr; }
+-  constexpr char* data() { return data_ ? data_->chars : nullptr; }
++  size_t size() const { return data_ ? data_->size : 0u; }
++  const char* data() const { return data_ ? data_->chars : nullptr; }
++  char* data() { return data_ ? data_->chars : nullptr; }
+ 
+-  constexpr const char* begin() const { return data(); }
+-  constexpr const char* end() const { return data() + size(); }
++  const char* begin() const { return data(); }
++  const char* end() const { return data() + size(); }
+   inline char* begin() { return data(); }
+   inline char* end() { return data() + size(); }
+ 
+   // True iff storage is empty.
+-  constexpr bool empty() const { return size() == 0; }
++  bool empty() const { return size() == 0; }
+ 
+   // Returns true if |ptr| is inside the storage area, false otherwise.
+   // Used during unit-testing.
+-  constexpr bool Contains(const void* ptr) const {
++  bool Contains(const void* ptr) const {
+     const char* char_ptr = static_cast<const char*>(ptr);
+     return (char_ptr >= begin() && char_ptr < end());
+   }
+@@ -508,7 +508,7 @@ class BASE_EXPORT StringStorage {
+ 
+   // Return an estimate of the memory overhead of this instance. This doesn't
+   // count the size of |data_| itself.
+-  constexpr size_t EstimateTraceMemoryOverhead() const {
++  size_t EstimateTraceMemoryOverhead() const {
+     return data_ ? sizeof(size_t) + data_->size : 0u;
+   }
+ 
+--- a/content/public/browser/desktop_media_id.h
++++ b/content/public/browser/desktop_media_id.h
+@@ -41,16 +41,16 @@ struct CONTENT_EXPORT DesktopMediaID {
+   static aura::Window* GetAuraWindowById(const DesktopMediaID& id);
+ #endif  // defined(USE_AURA)
+ 
+-  constexpr DesktopMediaID() = default;
++  DesktopMediaID() = default;
+ 
+-  constexpr DesktopMediaID(Type type, Id id) : type(type), id(id) {}
++  DesktopMediaID(Type type, Id id) : type(type), id(id) {}
+ 
+-  constexpr DesktopMediaID(Type type,
++  DesktopMediaID(Type type,
+                            Id id,
+                            WebContentsMediaCaptureId web_contents_id)
+       : type(type), id(id), web_contents_id(web_contents_id) {}
+ 
+-  constexpr DesktopMediaID(Type type, Id id, bool audio_share)
++  DesktopMediaID(Type type, Id id, bool audio_share)
+       : type(type), id(id), audio_share(audio_share) {}
+ 
+   // Operators so that DesktopMediaID can be used with STL containers.

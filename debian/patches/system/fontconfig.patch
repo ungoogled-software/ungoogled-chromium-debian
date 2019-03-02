@@ -3,17 +3,17 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/build/config/posix/BUILD.gn
 +++ b/build/config/posix/BUILD.gn
-@@ -2,7 +2,6 @@
- # Use of this source code is governed by a BSD-style license that can be
- # found in the LICENSE file.
- 
+@@ -9,7 +9,6 @@ import("//build/config/compiler/compiler
+ import("//build/config/sanitizers/sanitizers.gni")
+ import("//build/config/sysroot.gni")
+ import("//build/toolchain/toolchain.gni")
 -import("//buildtools/deps_revisions.gni")
- import("//build/config/c++/c++.gni")
- import("//build/config/clang/clang.gni")
- import("//build/config/compiler/compiler.gni")
+ 
+ # This build configuration is used by both Fuchsia and POSIX systems.
+ assert(is_posix || is_fuchsia)
 --- a/base/test/BUILD.gn
 +++ b/base/test/BUILD.gn
-@@ -206,7 +206,7 @@ static_library("test_support") {
+@@ -207,7 +207,7 @@ static_library("test_support") {
      deps += [ "//third_party/fuchsia-sdk/sdk:zx" ]
    }
  
@@ -22,7 +22,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      public_deps += [ ":fontconfig_util_linux" ]
      data_deps = [
        "//third_party/test_fonts",
-@@ -362,7 +362,7 @@ if (is_linux) {
+@@ -381,7 +381,7 @@ if (is_linux) {
      ]
    }
  
@@ -33,7 +33,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        sources = [
 --- a/content/shell/test_runner/BUILD.gn
 +++ b/content/shell/test_runner/BUILD.gn
-@@ -178,7 +178,7 @@ group("resources") {
+@@ -175,7 +175,7 @@ group("resources") {
    if (is_mac) {
      deps += [ ":test_runner_bundle_data" ]
      data_deps += [ ":test_runner_bundle_data" ]

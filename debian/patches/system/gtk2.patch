@@ -41,15 +41,15 @@ origin: chromium 69 authors
  # gn orders flags on a target before flags from configs. The default config
 --- a/ui/accessibility/BUILD.gn
 +++ b/ui/accessibility/BUILD.gn
-@@ -3,6 +3,7 @@
- # found in the LICENSE file.
+@@ -4,6 +4,7 @@
  
- import("//build/config/linux/pkg_config.gni")
-+import("//build/config/linux/gtk/gtk.gni")
  import("//build/config/features.gni")
  import("//build/config/jumbo.gni")
++import("//build/config/linux/gtk/gtk.gni")
+ import("//build/config/linux/pkg_config.gni")
  import("//build/config/ui.gni")
-@@ -136,13 +137,19 @@ jumbo_component("accessibility") {
+ import("//mojo/public/tools/bindings/mojom.gni")
+@@ -138,13 +139,19 @@ jumbo_component("accessibility") {
      sources += [
        "platform/atk_util_auralinux.cc",
        "platform/atk_util_auralinux.h",
@@ -452,7 +452,7 @@ origin: chromium 69 authors
    g_object_unref(pixbuf);
 --- a/chrome/browser/ui/libgtkui/gtk_ui.cc
 +++ b/chrome/browser/ui/libgtkui/gtk_ui.cc
-@@ -73,6 +73,15 @@
+@@ -72,6 +72,15 @@
  #include "ui/views/linux_ui/window_button_order_observer.h"
  #include "ui/views/resources/grit/views_resources.h"
  
@@ -468,7 +468,7 @@ origin: chromium 69 authors
  #if defined(USE_GIO)
  #include "chrome/browser/ui/libgtkui/settings_provider_gsettings.h"
  #endif
-@@ -132,6 +141,49 @@ class GtkButtonImageSource : public gfx:
+@@ -131,6 +140,49 @@ class GtkButtonImageSource : public gfx:
          width, height, width * 4);
      cairo_t* cr = cairo_create(surface);
  
@@ -518,7 +518,7 @@ origin: chromium 69 authors
      ScopedStyleContext context = GetStyleContextFromCss(
          is_blue_ ? "GtkButton#button.default.suggested-action"
                   : "GtkButton#button");
-@@ -179,6 +231,7 @@ class GtkButtonImageSource : public gfx:
+@@ -178,6 +230,7 @@ class GtkButtonImageSource : public gfx:
        gtk_render_focus(context, cr, focus_rect.x(), focus_rect.y(),
                         focus_rect.width(), focus_rect.height());
      }
@@ -526,7 +526,7 @@ origin: chromium 69 authors
  
      cairo_destroy(cr);
      cairo_surface_destroy(surface);
-@@ -238,15 +291,19 @@ int indicators_count;
+@@ -237,15 +290,19 @@ int indicators_count;
  // The unknown content type.
  const char kUnknownContentType[] = "application/octet-stream";
  
@@ -546,7 +546,7 @@ origin: chromium 69 authors
  #if defined(USE_GIO)
    return std::make_unique<SettingsProviderGSettings>(gtk_ui);
  #else
-@@ -304,8 +361,10 @@ gfx::FontRenderParams GetGtkFontRenderPa
+@@ -303,8 +360,10 @@ gfx::FontRenderParams GetGtkFontRenderPa
  }
  
  views::LinuxUI::NonClientWindowFrameAction GetDefaultMiddleClickAction() {
@@ -557,7 +557,7 @@ origin: chromium 69 authors
    std::unique_ptr<base::Environment> env(base::Environment::Create());
    switch (base::nix::GetDesktopEnvironment(env.get())) {
      case base::nix::DESKTOP_ENVIRONMENT_KDE4:
-@@ -329,6 +388,7 @@ GtkUi::GtkUi() {
+@@ -328,6 +387,7 @@ GtkUi::GtkUi() {
        GetDefaultMiddleClickAction();
    window_frame_actions_[WINDOW_FRAME_ACTION_SOURCE_RIGHT_CLICK] =
        views::LinuxUI::WINDOW_FRAME_ACTION_MENU;
@@ -565,7 +565,7 @@ origin: chromium 69 authors
    // Force Gtk to use Xwayland if it would have used wayland.  libgtkui assumes
    // the use of X11 (eg. X11InputMethodContextImplGtk) and will crash under
    // other backends.
-@@ -345,9 +405,17 @@ GtkUi::GtkUi() {
+@@ -344,9 +404,17 @@ GtkUi::GtkUi() {
    // do it once it is ready.
    std::unique_ptr<base::Environment> env(base::Environment::Create());
    env->SetVar("NO_AT_BRIDGE", "1");
@@ -583,7 +583,7 @@ origin: chromium 69 authors
    gtk_widget_realize(fake_window_);
  }
  
-@@ -732,8 +800,10 @@ bool GtkUi::PreferDarkTheme() const {
+@@ -731,8 +799,10 @@ bool GtkUi::PreferDarkTheme() const {
  
  #if BUILDFLAG(ENABLE_NATIVE_WINDOW_NAV_BUTTONS)
  std::unique_ptr<views::NavButtonProvider> GtkUi::CreateNavButtonProvider() {
@@ -594,7 +594,7 @@ origin: chromium 69 authors
    return nullptr;
  }
  #endif
-@@ -819,6 +889,67 @@ void GtkUi::LoadGtkValues() {
+@@ -818,6 +888,67 @@ void GtkUi::LoadGtkValues() {
  }
  
  void GtkUi::UpdateColors() {
@@ -628,7 +628,7 @@ origin: chromium 69 authors
 +  colors_[ThemeProperties::COLOR_TAB_TEXT] = label_color;
 +  colors_[ThemeProperties::COLOR_BOOKMARK_TEXT] = label_color;
 +  colors_[ThemeProperties::COLOR_BACKGROUND_TAB_TEXT] =
-+      color_utils::BlendTowardOppositeLuma(label_color, 50);
++      color_utils::BlendTowardMaxContrast(label_color, 50);
 +
 +  inactive_selection_bg_color_ = native_theme_->GetSystemColor(
 +      ui::NativeTheme::kColorId_TextfieldReadOnlyBackground);
@@ -662,7 +662,7 @@ origin: chromium 69 authors
    SkColor location_bar_border = GetBorderColor("GtkEntry#entry");
    if (SkColorGetA(location_bar_border))
      colors_[ThemeProperties::COLOR_LOCATION_BAR_BORDER] = location_bar_border;
-@@ -862,6 +993,8 @@ void GtkUi::UpdateColors() {
+@@ -861,6 +992,8 @@ void GtkUi::UpdateColors() {
    colors_[ThemeProperties::COLOR_BACKGROUND_TAB_INCOGNITO_INACTIVE] =
        SK_ColorTRANSPARENT;
  
@@ -671,7 +671,7 @@ origin: chromium 69 authors
    colors_[ThemeProperties::COLOR_NTP_LINK] = native_theme_->GetSystemColor(
        ui::NativeTheme::kColorId_TextfieldSelectionBackgroundFocused);
  
-@@ -883,6 +1016,8 @@ void GtkUi::UpdateColors() {
+@@ -882,6 +1015,8 @@ void GtkUi::UpdateColors() {
        native_theme_->GetSystemColor(
            ui::NativeTheme::kColorId_ThrobberWaitingColor);
  
@@ -680,7 +680,7 @@ origin: chromium 69 authors
    // Generate colors that depend on whether or not a custom window frame is
    // used.  These colors belong in |color_map| below, not |colors_|.
    for (bool custom_frame : {false, true}) {
-@@ -976,6 +1111,8 @@ void GtkUi::UpdateColors() {
+@@ -975,6 +1110,8 @@ void GtkUi::UpdateColors() {
            toolbar_top_separator_inactive;
      }
    }
@@ -689,7 +689,7 @@ origin: chromium 69 authors
  }
  
  void GtkUi::UpdateCursorTheme() {
-@@ -1040,6 +1177,20 @@ void GtkUi::UpdateDefaultFont() {
+@@ -1039,6 +1176,20 @@ void GtkUi::UpdateDefaultFont() {
    g_object_unref(fake_label);
  }
  
@@ -710,7 +710,7 @@ origin: chromium 69 authors
  void GtkUi::ResetStyle() {
    colors_.clear();
    custom_frame_colors_.clear();
-@@ -1052,12 +1203,19 @@ float GtkUi::GetRawDeviceScaleFactor() {
+@@ -1051,12 +1202,19 @@ float GtkUi::GetRawDeviceScaleFactor() {
    if (display::Display::HasForceDeviceScaleFactor())
      return display::Display::GetForcedDeviceScaleFactor();
  
@@ -1071,7 +1071,7 @@ origin: chromium 69 authors
 +#endif  // CHROME_BROWSER_UI_LIBGTKUI_CHROME_GTK_FRAME_H_
 --- /dev/null
 +++ b/chrome/browser/ui/libgtkui/gtk2/native_theme_gtk2.cc
-@@ -0,0 +1,425 @@
+@@ -0,0 +1,435 @@
 +// Copyright (c) 2013 The Chromium Authors. All rights reserved.
 +// Use of this source code is governed by a BSD-style license that can be
 +// found in the LICENSE file.
@@ -1090,7 +1090,7 @@ origin: chromium 69 authors
 +#include "ui/gfx/color_utils.h"
 +#include "ui/gfx/geometry/rect.h"
 +#include "ui/gfx/geometry/size.h"
-+#include "ui/gfx/path.h"
++#include "third_party/skia/include/core/SkPath.h"
 +#include "ui/gfx/skia_util.h"
 +#include "ui/native_theme/common_theme.h"
 +#include "ui/native_theme/native_theme_aura.h"
@@ -1154,7 +1154,7 @@ origin: chromium 69 authors
 +    flags.setAntiAlias(true);
 +    flags.setColor(GetSystemColor(kColorId_MenuBackgroundColor));
 +
-+    gfx::Path path;
++    SkPath path;
 +    SkRect rect = SkRect::MakeWH(SkIntToScalar(size.width()),
 +                                 SkIntToScalar(size.height()));
 +    SkScalar radius = SkIntToScalar(menu_background.corner_radius);
@@ -1240,6 +1240,7 @@ origin: chromium 69 authors
 +    case ui::NativeTheme::kColorId_HighlightedMenuItemBackgroundColor:
 +    case ui::NativeTheme::kColorId_HighlightedMenuItemForegroundColor:
 +    case ui::NativeTheme::kColorId_FocusedHighlightedMenuItemBackgroundColor:
++    case ui::NativeTheme::kColorId_MenuItemAlertBackgroundColor:
 +      return ui::NativeTheme::GetInstanceForNativeUi()->GetSystemColor(
 +          color_id);
 +
@@ -1283,12 +1284,19 @@ origin: chromium 69 authors
 +      return GetTextColor(GetButton(), INSENSITIVE);
 +    case kColorId_ButtonHoverColor:
 +      return GetTextColor(GetButton(), PRELIGHT);
++    case kColorId_ButtonPressedShade:
++      return SK_ColorTRANSPARENT;
++
++    // ProminentButton
 +    case kColorId_ProminentButtonColor:
++    case kColorId_ProminentButtonFocusedColor:
 +      return GetSystemColor(kColorId_LinkEnabled);
 +    case kColorId_TextOnProminentButtonColor:
 +      return GetTextColor(GetLabel(), SELECTED);
-+    case kColorId_ButtonPressedShade:
-+      return SK_ColorTRANSPARENT;
++    case kColorId_ProminentButtonDisabledColor:
++      return GetTextColor(GetLabel(), INSENSITIVE);
++    case kColorId_ButtonBorderColor:
++      return GetTextColor(GetButton(), NORMAL);
 +
 +    // TabbedPane
 +    case ui::NativeTheme::kColorId_TabTitleColorActive:
@@ -1353,13 +1361,15 @@ origin: chromium 69 authors
 +    case kColorId_ResultsTableHoveredBackground:
 +      return color_utils::AlphaBlend(
 +          GetSystemColor(kColorId_TextfieldDefaultBackground),
-+          GetSystemColor(kColorId_TextfieldSelectionBackgroundFocused), 0x80);
++          GetSystemColor(kColorId_TextfieldSelectionBackgroundFocused),
++          SkAlpha(0x80));
 +    case kColorId_ResultsTableNormalText:
 +      return GetSystemColor(kColorId_TextfieldDefaultColor);
 +    case kColorId_ResultsTableDimmedText:
 +      return color_utils::AlphaBlend(
 +          GetSystemColor(kColorId_TextfieldDefaultColor),
-+          GetSystemColor(kColorId_TextfieldDefaultBackground), 0x80);
++          GetSystemColor(kColorId_TextfieldDefaultBackground),
++          SkAlpha(0x80));
 +
 +    // Throbber
 +    case kColorId_ThrobberSpinningColor:
@@ -1369,7 +1379,7 @@ origin: chromium 69 authors
 +    case kColorId_ThrobberWaitingColor:
 +      return color_utils::AlphaBlend(
 +          GetSystemColor(kColorId_TextfieldSelectionBackgroundFocused),
-+          GetBgColor(GetWindow(), NORMAL), 0x80);
++          GetBgColor(GetWindow(), NORMAL), SkAlpha(0x80));
 +
 +    // Alert icons
 +    // Just fall back to the same colors as Aura.

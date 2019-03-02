@@ -23,3 +23,24 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  bool NGBaselineRequest::operator==(const NGBaselineRequest& other) const {
    return algorithm_type_ == other.algorithm_type_ &&
+--- a/device/gamepad/public/cpp/gamepad.cc
++++ b/device/gamepad/public/cpp/gamepad.cc
+@@ -6,12 +6,12 @@
+ 
+ namespace device {
+ 
+-const float GamepadButton::kDefaultButtonPressedThreshold;
+-const double GamepadHapticActuator::kMaxEffectDurationMillis;
+-const size_t Gamepad::kIdLengthCap;
+-const size_t Gamepad::kMappingLengthCap;
+-const size_t Gamepad::kAxesLengthCap;
+-const size_t Gamepad::kButtonsLengthCap;
++constexpr float GamepadButton::kDefaultButtonPressedThreshold;
++constexpr double GamepadHapticActuator::kMaxEffectDurationMillis;
++constexpr size_t Gamepad::kIdLengthCap;
++constexpr size_t Gamepad::kMappingLengthCap;
++constexpr size_t Gamepad::kAxesLengthCap;
++constexpr size_t Gamepad::kButtonsLengthCap;
+ 
+ Gamepad::Gamepad()
+     : connected(false),

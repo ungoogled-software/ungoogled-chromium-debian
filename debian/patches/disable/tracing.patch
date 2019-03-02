@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/chrome/browser/BUILD.gn
 +++ b/chrome/browser/BUILD.gn
-@@ -1599,14 +1599,6 @@ jumbo_split_static_library("browser") {
+@@ -1605,14 +1605,6 @@ jumbo_split_static_library("browser") {
      "thumbnails/thumbnail_utils.h",
      "thumbnails/thumbnailing_context.cc",
      "thumbnails/thumbnailing_context.h",
@@ -18,7 +18,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "translate/android/translate_utils.cc",
      "translate/android/translate_utils.h",
      "translate/chrome_translate_client.cc",
-@@ -1874,7 +1866,6 @@ jumbo_split_static_library("browser") {
+@@ -1886,7 +1878,6 @@ jumbo_split_static_library("browser") {
      "//components/sync_preferences",
      "//components/sync_sessions",
      "//components/task_scheduler_util",
@@ -28,7 +28,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "//components/translate/core/common",
 --- a/content/browser/BUILD.gn
 +++ b/content/browser/BUILD.gn
-@@ -60,8 +60,6 @@ jumbo_source_set("browser") {
+@@ -61,8 +61,6 @@ jumbo_source_set("browser") {
      "//components/rappor",
      "//components/services/filesystem:lib",
      "//components/services/leveldb:lib",
@@ -37,7 +37,17 @@ author: Michael Gilbert <mgilbert@debian.org>
      "//components/ui_devtools",
      "//components/url_formatter",
      "//components/variations",
-@@ -712,8 +710,6 @@ jumbo_source_set("browser") {
+@@ -163,9 +161,6 @@ jumbo_source_set("browser") {
+     "//services/service_manager/zygote:zygote_buildflags",
+     "//services/shape_detection:lib",
+     "//services/shape_detection/public/mojom",
+-    "//services/tracing:lib",
+-    "//services/tracing:manifest",
+-    "//services/tracing/public/cpp",
+     "//services/video_capture:lib",
+     "//services/video_capture/public/cpp",
+     "//services/video_capture/public/mojom:constants",
+@@ -724,8 +719,6 @@ jumbo_source_set("browser") {
      "devtools/protocol/target_handler.h",
      "devtools/protocol/tethering_handler.cc",
      "devtools/protocol/tethering_handler.h",
@@ -46,7 +56,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "devtools/protocol_string.cc",
      "devtools/protocol_string.h",
      "devtools/render_frame_devtools_agent_host.cc",
-@@ -1732,25 +1728,6 @@ jumbo_source_set("browser") {
+@@ -1768,25 +1761,6 @@ jumbo_source_set("browser") {
      "streams/stream_write_observer.h",
      "theme_helper_mac.h",
      "theme_helper_mac.mm",
@@ -72,7 +82,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "url_loader_factory_getter.cc",
      "url_loader_factory_getter.h",
      "utility_process_host.cc",
-@@ -1960,7 +1937,6 @@ jumbo_source_set("browser") {
+@@ -2004,7 +1978,6 @@ jumbo_source_set("browser") {
    if (!is_android) {
      deps += [
        "//components/vector_icons",
@@ -82,7 +92,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/content/shell/BUILD.gn
 +++ b/content/shell/BUILD.gn
-@@ -515,7 +515,6 @@ repack("pak") {
+@@ -508,7 +508,6 @@ repack("pak") {
    sources = [
      "$root_gen_dir/content/app/resources/content_resources_100_percent.pak",
      "$root_gen_dir/content/app/strings/content_strings_en-US.pak",
@@ -90,7 +100,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "$root_gen_dir/content/content_resources.pak",
      "$root_gen_dir/content/shell/shell_resources.pak",
      "$root_gen_dir/mojo/public/js/mojo_bindings_resources.pak",
-@@ -533,7 +532,6 @@ repack("pak") {
+@@ -526,7 +525,6 @@ repack("pak") {
      "//content:resources",
      "//content/app/resources",
      "//content/app/strings",
@@ -100,7 +110,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "//third_party/blink/public:resources",
 --- a/headless/BUILD.gn
 +++ b/headless/BUILD.gn
-@@ -38,7 +38,6 @@ repack("pak") {
+@@ -39,7 +39,6 @@ repack("pak") {
      "$root_gen_dir/content/app/resources/content_resources_100_percent.pak",
      "$root_gen_dir/content/app/strings/content_strings_en-US.pak",
      "$root_gen_dir/content/browser/devtools/devtools_resources.pak",
@@ -108,7 +118,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "$root_gen_dir/content/content_resources.pak",
      "$root_gen_dir/headless/headless_lib_resources.pak",
      "$root_gen_dir/mojo/public/js/mojo_bindings_resources.pak",
-@@ -65,7 +64,6 @@ repack("pak") {
+@@ -66,7 +65,6 @@ repack("pak") {
      "//content/app/resources",
      "//content/app/strings",
      "//content/browser/devtools:resources",
@@ -147,7 +157,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 @@ -163,7 +162,6 @@ BrowserChildProcessHostImpl::BrowserChil
    data_.id = ChildProcessHostImpl::GenerateChildProcessUniqueId();
  
-   child_process_host_.reset(ChildProcessHost::Create(this));
+   child_process_host_ = ChildProcessHost::Create(this);
 -  AddFilter(new TraceMessageFilter(data_.id));
  
    g_child_process_list.Get().push_back(this);
@@ -184,7 +194,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    const TracingMode tracing_mode_;
 --- a/content/browser/browser_main_loop.cc
 +++ b/content/browser/browser_main_loop.cc
-@@ -89,8 +89,6 @@
+@@ -91,8 +91,6 @@
  #include "content/browser/speech/speech_recognition_manager_impl.h"
  #include "content/browser/startup_data_impl.h"
  #include "content/browser/startup_task_runner.h"
@@ -193,7 +203,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "content/browser/utility_process_host.h"
  #include "content/browser/webrtc/webrtc_internals.h"
  #include "content/browser/webui/content_web_ui_controller_factory.h"
-@@ -1560,10 +1558,6 @@ void BrowserMainLoop::InitializeMojo() {
+@@ -1582,10 +1580,6 @@ void BrowserMainLoop::InitializeMojo() {
    // know they're running in the same process as the service.
    content::NavigableContentsView::SetClientRunningInServiceProcess();
  
@@ -204,7 +214,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    // Registers the browser process as a memory-instrumentation client, so
    // that data for the browser process will be available in memory dumps.
    service_manager::Connector* connector =
-@@ -1573,29 +1567,6 @@ void BrowserMainLoop::InitializeMojo() {
+@@ -1595,29 +1589,6 @@ void BrowserMainLoop::InitializeMojo() {
        memory_instrumentation::mojom::ProcessType::BROWSER);
    memory_instrumentation::ClientProcessImpl::CreateInstance(config);
  
@@ -234,7 +244,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    if (parts_) {
      parts_->ServiceManagerConnectionStarted(
          ServiceManagerConnection::GetForProcess());
-@@ -1636,14 +1607,7 @@ void BrowserMainLoop::InitStartupTracing
+@@ -1658,14 +1629,7 @@ void BrowserMainLoop::InitStartupTracing
  }
  
  void BrowserMainLoop::EndStartupTracing() {
@@ -252,7 +262,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  void BrowserMainLoop::InitializeAudio() {
 --- a/content/browser/browser_main_loop.h
 +++ b/content/browser/browser_main_loop.h
-@@ -392,7 +392,6 @@ class CONTENT_EXPORT BrowserMainLoop {
+@@ -397,7 +397,6 @@ class CONTENT_EXPORT BrowserMainLoop {
    std::unique_ptr<discardable_memory::DiscardableSharedMemoryManager>
        discardable_shared_memory_manager_;
    scoped_refptr<SaveFileManager> save_file_manager_;
@@ -281,7 +291,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/content/browser/devtools/render_frame_devtools_agent_host.cc
 +++ b/content/browser/devtools/render_frame_devtools_agent_host.cc
-@@ -34,7 +34,6 @@
+@@ -35,7 +35,6 @@
  #include "content/browser/devtools/protocol/service_worker_handler.h"
  #include "content/browser/devtools/protocol/storage_handler.h"
  #include "content/browser/devtools/protocol/target_handler.h"
@@ -289,7 +299,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "content/browser/frame_host/navigation_handle_impl.h"
  #include "content/browser/frame_host/navigation_request.h"
  #include "content/browser/frame_host/render_frame_host_impl.h"
-@@ -299,10 +298,6 @@ bool RenderFrameDevToolsAgentHost::Attac
+@@ -302,10 +301,6 @@ bool RenderFrameDevToolsAgentHost::Attac
    session->AddHandler(base::WrapUnique(new protocol::PageHandler(
        emulation_handler, session->client()->MayAffectLocalFiles())));
    session->AddHandler(base::WrapUnique(new protocol::SecurityHandler()));
@@ -300,7 +310,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
    if (sessions().empty()) {
      bool use_video_capture_api = true;
-@@ -363,8 +358,6 @@ void RenderFrameDevToolsAgentHost::Ready
+@@ -366,8 +361,6 @@ void RenderFrameDevToolsAgentHost::Ready
      NavigationHandle* navigation_handle) {
    NavigationHandleImpl* handle =
        static_cast<NavigationHandleImpl*>(navigation_handle);
@@ -309,7 +319,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
    if (handle->frame_tree_node() != frame_tree_node_) {
      if (ShouldForceCreation() && handle->GetRenderFrameHost() &&
-@@ -467,8 +460,6 @@ void RenderFrameDevToolsAgentHost::Rende
+@@ -474,8 +467,6 @@ void RenderFrameDevToolsAgentHost::Rende
  
  void RenderFrameDevToolsAgentHost::FrameDeleted(RenderFrameHost* rfh) {
    RenderFrameHostImpl* host = static_cast<RenderFrameHostImpl*>(rfh);
@@ -318,7 +328,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    if (host->frame_tree_node() == frame_tree_node_) {
      DestroyOnRenderFrameGone();
      // |this| may be deleted at this point.
-@@ -714,8 +705,6 @@ void RenderFrameDevToolsAgentHost::Synch
+@@ -721,8 +712,6 @@ void RenderFrameDevToolsAgentHost::Synch
    if (!frame_trace_recorder_)
      return;
    bool did_initiate_recording = false;
@@ -329,7 +339,7 @@ author: Michael Gilbert <mgilbert@debian.org>
                                                              frame_metadata);
 --- a/content/browser/renderer_host/render_process_host_impl.cc
 +++ b/content/browser/renderer_host/render_process_host_impl.cc
-@@ -138,7 +138,6 @@
+@@ -137,7 +137,6 @@
  #include "content/browser/site_instance_impl.h"
  #include "content/browser/storage_partition_impl.h"
  #include "content/browser/streams/stream_context.h"
@@ -337,7 +347,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "content/browser/webrtc/webrtc_internals.h"
  #include "content/browser/websockets/websocket_manager.h"
  #include "content/browser/webui/web_ui_controller_factory_registry.h"
-@@ -2014,7 +2013,6 @@ void RenderProcessHostImpl::CreateMessag
+@@ -2044,7 +2043,6 @@ void RenderProcessHostImpl::CreateMessag
    p2p_socket_dispatcher_host_ =
        std::make_unique<P2PSocketDispatcherHost>(GetID());
  
@@ -375,9 +385,9 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "chrome/browser/translate/translate_service.h"
  #include "chrome/browser/ui/browser.h"
  #include "chrome/browser/ui/browser_finder.h"
-@@ -1092,12 +1090,6 @@ int ChromeBrowserMainParts::PreCreateThr
-       base::Bind(&vr::VRServiceImpl::Create));
- #endif
+@@ -1080,12 +1078,6 @@ int ChromeBrowserMainParts::PreCreateThr
+ #endif  // defined(OS_WIN)
+ #endif  // BUILDFLAG(ENABLE_VR)
  
 -  // Enable Navigation Tracing only if a trace upload url is specified.
 -  if (parsed_command_line_.HasSwitch(switches::kEnableNavigationTracing) &&
@@ -388,7 +398,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #if defined(OS_WIN) || defined(OS_MACOSX) || \
      (defined(OS_LINUX) && !defined(OS_CHROMEOS))
    metrics::DesktopSessionDurationTracker::Initialize();
-@@ -1174,10 +1166,6 @@ void ChromeBrowserMainParts::PostCreateT
+@@ -1162,10 +1154,6 @@ void ChromeBrowserMainParts::PostCreateT
  
  void ChromeBrowserMainParts::ServiceManagerConnectionStarted(
      content::ServiceManagerConnection* connection) {
@@ -401,7 +411,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      chrome_extra_parts_[i]->ServiceManagerConnectionStarted(connection);
 --- a/chrome/browser/chrome_content_browser_client.cc
 +++ b/chrome/browser/chrome_content_browser_client.cc
-@@ -125,7 +125,6 @@
+@@ -133,7 +133,6 @@
  #include "chrome/browser/subresource_filter/chrome_subresource_filter_client.h"
  #include "chrome/browser/sync_file_system/local/sync_file_system_backend.h"
  #include "chrome/browser/tab_contents/tab_util.h"
@@ -409,7 +419,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "chrome/browser/translate/translate_service.h"
  #include "chrome/browser/ui/blocked_content/blocked_window_params.h"
  #include "chrome/browser/ui/blocked_content/popup_blocker.h"
-@@ -4269,7 +4268,7 @@ ChromeContentBrowserClient::GetDevToolsM
+@@ -4330,7 +4329,7 @@ ChromeContentBrowserClient::GetDevToolsM
  }
  
  content::TracingDelegate* ChromeContentBrowserClient::GetTracingDelegate() {
@@ -420,7 +430,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  bool ChromeContentBrowserClient::IsPluginAllowedToCallRequestOSFileHandle(
 --- a/chrome/browser/prefs/browser_prefs.cc
 +++ b/chrome/browser/prefs/browser_prefs.cc
-@@ -60,7 +60,6 @@
+@@ -61,7 +61,6 @@
  #include "chrome/browser/ssl/chrome_ssl_host_state_delegate.h"
  #include "chrome/browser/ssl/ssl_config_service_manager.h"
  #include "chrome/browser/task_manager/task_manager_interface.h"
@@ -428,7 +438,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "chrome/browser/ui/blocked_content/safe_browsing_triggered_popup_blocker.h"
  #include "chrome/browser/ui/browser_ui_prefs.h"
  #include "chrome/browser/ui/navigation_correction_tab_observer.h"
-@@ -431,7 +430,6 @@ void RegisterLocalState(PrefRegistrySimp
+@@ -428,7 +427,6 @@ void RegisterLocalState(PrefRegistrySimp
    BrowserProcessImpl::RegisterPrefs(registry);
    ChromeContentBrowserClient::RegisterLocalStatePrefs(registry);
    ChromeMetricsServiceClient::RegisterPrefs(registry);
@@ -594,15 +604,15 @@ author: Michael Gilbert <mgilbert@debian.org>
  void Supervisor::StartServiceOnIOThread(
 --- a/chrome/browser/ui/tab_helpers.cc
 +++ b/chrome/browser/ui/tab_helpers.cc
-@@ -53,7 +53,6 @@
- #include "chrome/browser/sync/sessions/sync_sessions_router_tab_helper.h"
+@@ -54,7 +54,6 @@
  #include "chrome/browser/sync/sessions/sync_sessions_web_contents_router_factory.h"
  #include "chrome/browser/tab_contents/navigation_metrics_recorder.h"
+ #include "chrome/browser/complex_tasks/task_tab_helper.h"
 -#include "chrome/browser/tracing/navigation_tracing.h"
  #include "chrome/browser/translate/chrome_translate_client.h"
  #include "chrome/browser/ui/autofill/chrome_autofill_client.h"
  #include "chrome/browser/ui/bloated_renderer/bloated_renderer_tab_helper.h"
-@@ -86,7 +85,6 @@
+@@ -88,7 +87,6 @@
  #include "components/offline_pages/buildflags/buildflags.h"
  #include "components/password_manager/core/browser/password_manager.h"
  #include "components/subresource_filter/core/browser/subresource_filter_features.h"
@@ -610,7 +620,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "components/ukm/content/source_url_recorder.h"
  #include "content/public/browser/web_contents.h"
  #include "extensions/buildflags/buildflags.h"
-@@ -356,9 +354,6 @@ offline_pages::AutoFetchPageLoadWatcher:
+@@ -357,9 +355,6 @@ offline_pages::AutoFetchPageLoadWatcher:
    if (predictors::LoadingPredictorFactory::GetForProfile(profile))
      predictors::LoadingPredictorTabHelper::CreateForWebContents(web_contents);
  
@@ -638,3 +648,153 @@ author: Michael Gilbert <mgilbert@debian.org>
  
    return browser_ppapi_host;
  }
+--- a/content/public/app/content_packaged_services_manifest.cc
++++ b/content/public/app/content_packaged_services_manifest.cc
+@@ -19,7 +19,6 @@
+ #include "services/resource_coordinator/manifest.h"
+ #include "services/service_manager/public/cpp/manifest_builder.h"
+ #include "services/shape_detection/manifest.h"
+-#include "services/tracing/manifest.h"
+ #include "services/video_capture/manifest.h"
+ #include "services/viz/manifest.h"
+ 
+@@ -64,7 +63,6 @@ const service_manager::Manifest& GetCont
+         .PackageService(network::GetManifest())
+         .PackageService(resource_coordinator::GetManifest())
+         .PackageService(shape_detection::GetManifest())
+-        .PackageService(tracing::GetManifest())
+         .PackageService(video_capture::GetManifest())
+         .PackageService(viz::GetManifest())
+ #if defined(OS_LINUX)
+--- a/services/service_manager/public/cpp/service_binding.cc
++++ b/services/service_manager/public/cpp/service_binding.cc
+@@ -10,8 +10,6 @@
+ #include "base/no_destructor.h"
+ #include "base/synchronization/lock.h"
+ #include "services/service_manager/public/cpp/service.h"
+-#include "services/tracing/public/cpp/traced_process.h"
+-#include "services/tracing/public/mojom/tracing.mojom.h"
+ 
+ namespace service_manager {
+ 
+@@ -168,12 +166,6 @@ void ServiceBinding::OnBindInterface(
+     return;
+   }
+ 
+-  if (interface_name == tracing::mojom::TracedProcess::Name_) {
+-    tracing::TracedProcess::OnTracedProcessRequest(
+-        tracing::mojom::TracedProcessRequest(std::move(interface_pipe)));
+-    return;
+-  }
+-
+   service_->OnBindInterface(source_info, interface_name,
+                             std::move(interface_pipe));
+ }
+--- a/services/BUILD.gn
++++ b/services/BUILD.gn
+@@ -36,7 +36,6 @@ test("services_unittests") {
+       "//services/proxy_resolver:tests",
+       "//services/resource_coordinator:tests",
+       "//services/shape_detection:tests",
+-      "//services/tracing:tests",
+       "//services/viz",
+       "//services/viz/privileged/interfaces:unit_tests",
+       "//services/viz/public/cpp/compositing:tests",
+--- a/content/public/browser/BUILD.gn
++++ b/content/public/browser/BUILD.gn
+@@ -362,7 +362,6 @@ jumbo_source_set("browser_sources") {
+     "//services/network/public/mojom",
+     "//services/resource_coordinator/public/cpp:resource_coordinator_cpp",
+     "//services/service_manager/public/cpp",
+-    "//services/tracing/public/cpp",
+     "//services/ws/public/mojom",
+     "//third_party/webrtc/modules/desktop_capture",
+ 
+--- a/services/service_manager/public/cpp/BUILD.gn
++++ b/services/service_manager/public/cpp/BUILD.gn
+@@ -42,10 +42,6 @@ component("cpp") {
+     "//url",
+   ]
+ 
+-  deps = [
+-    "//services/tracing/public/cpp:traced_process",
+-  ]
+-
+   defines = [
+     "IS_SERVICE_MANAGER_CPP_IMPL",
+ 
+--- a/content/public/app/BUILD.gn
++++ b/content/public/app/BUILD.gn
+@@ -235,7 +235,6 @@ source_set("content_packaged_services_ma
+     "//services/network:manifest",
+     "//services/resource_coordinator:manifest",
+     "//services/shape_detection:manifest",
+-    "//services/tracing:manifest",
+     "//services/video_capture:manifest",
+     "//services/viz:manifest",
+   ]
+--- a/content/child/BUILD.gn
++++ b/content/child/BUILD.gn
+@@ -110,7 +110,6 @@ target(link_target_type, "child") {
+     "//services/service_manager/public/cpp",
+     "//services/service_manager/public/mojom",
+     "//services/service_manager/runner/common",
+-    "//services/tracing/public/cpp",
+     "//skia",
+     "//storage/common",
+     "//third_party/blink/public:blink_headers",
+--- a/content/browser/tracing/tracing_controller_impl.cc
++++ b/content/browser/tracing/tracing_controller_impl.cc
+@@ -156,14 +156,9 @@ void TracingControllerImpl::AddAgents()
+ }
+ 
+ void TracingControllerImpl::ConnectToServiceIfNeeded() {
+-  if (!coordinator_) {
+-    ServiceManagerConnection::GetForProcess()->GetConnector()->BindInterface(
+-        tracing::mojom::kServiceName, &coordinator_);
+-  }
+ }
+ 
+ void TracingControllerImpl::DisconnectFromService() {
+-  coordinator_ = nullptr;
+ }
+ 
+ // Can be called on any thread.
+@@ -335,7 +330,6 @@ bool TracingControllerImpl::StartTracing
+ 
+   start_tracing_done_ = std::move(callback);
+   ConnectToServiceIfNeeded();
+-  coordinator_->StartTracing(trace_config.ToString());
+ 
+   if (start_tracing_done_ &&
+       (base::trace_event::TraceLog::GetInstance()->IsEnabled() ||
+@@ -384,16 +378,8 @@ bool TracingControllerImpl::StopTracing(
+       new mojo::DataPipeDrainer(this, std::move(data_pipe.consumer_handle)));
+   if (agent_label.empty()) {
+     // Stop and flush all agents.
+-    coordinator_->StopAndFlush(
+-        std::move(data_pipe.producer_handle),
+-        base::BindRepeating(&TracingControllerImpl::OnMetadataAvailable,
+-                            base::Unretained(this)));
+   } else {
+     // Stop all and flush a particular agent.
+-    coordinator_->StopAndFlushAgent(
+-        std::move(data_pipe.producer_handle), agent_label,
+-        base::BindRepeating(&TracingControllerImpl::OnMetadataAvailable,
+-                            base::Unretained(this)));
+   }
+   // TODO(chiniforooshan): Is the return value used anywhere?
+   return true;
+@@ -404,12 +390,6 @@ bool TracingControllerImpl::GetTraceBuff
+   DCHECK_CURRENTLY_ON(BrowserThread::UI);
+ 
+   ConnectToServiceIfNeeded();
+-  coordinator_->RequestBufferUsage(base::BindOnce(
+-      [](GetTraceBufferUsageCallback callback, bool success, float percent_full,
+-         uint32_t approximate_count) {
+-        std::move(callback).Run(percent_full, approximate_count);
+-      },
+-      std::move(callback)));
+   // TODO(chiniforooshan): The actual success value should be sent by the
+   // callback asynchronously.
+   return true;

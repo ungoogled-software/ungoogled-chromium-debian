@@ -10,7 +10,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 -#include "base/third_party/libevent/event.h"
 +#include <event.h>
  #include "rtc_base/checks.h"
- #include "rtc_base/criticalsection.h"
+ #include "rtc_base/critical_section.h"
  #include "rtc_base/logging.h"
 --- a/base/message_loop/message_pump_libevent.cc
 +++ b/base/message_loop/message_pump_libevent.cc

@@ -9,17 +9,24 @@ arm/crashpad.patch
 arm/gcc_skcms_ice.patch
 arm/skia-aarch64-buildfix.patch
 
+gcc6/macro.patch
+gcc6/sqrtf.patch
 gcc6/sizet.patch
 gcc6/atomic.patch
+gcc6/insert.patch
 gcc6/constexpr.patch
-gcc6/constructor.patch
 gcc6/lambda-this.patch
+gcc6/not-constexpr.patch
+gcc6/move-required.patch
 gcc6/use-after-move.patch
+gcc6/template-argument.patch
+gcc6/ambiguous-overloads.patch
 gcc6/nullptr-copy-construct.patch
+gcc6/noexcept-redeclaration.patch
+gcc6/designated-initializers.patch
 
 fixes/mojo.patch
 fixes/vaapi.patch
-fixes/include.patch
 fixes/alignof.patch
 fixes/ps-print.patch
 fixes/as-needed.patch
@@ -27,6 +34,7 @@ fixes/inspector.patch
 fixes/namespace.patch
 fixes/gpu-timeout.patch
 fixes/empty-array.patch
+fixes/sequence-point.patch
 fixes/widevine-revision.patch
 fixes/widevine-locations.patch
 fixes/widevine-buildflag.patch
@@ -47,13 +55,13 @@ disable/google-api-warning.patch
 disable/third-party-cookies.patch
 disable/device-notifications.patch
 
+warnings/friend.patch
 warnings/printf.patch
 warnings/attribute.patch
 warnings/multichar.patch
 warnings/bool-compare.patch
 warnings/enum-compare.patch
 warnings/unused-result.patch
-warnings/sequence-point.patch
 warnings/initialization.patch
 warnings/unused-typedefs.patch
 warnings/null-destination.patch
@@ -69,7 +77,7 @@ system/nspr.patch
 system/zlib.patch
 system/event.patch
 system/jsoncpp.patch
-system/ffmpeg34.patch
+system/ffmpeg.patch
 system/openjpeg.patch
 system/convertutf.patch
 system/fontconfig.patch

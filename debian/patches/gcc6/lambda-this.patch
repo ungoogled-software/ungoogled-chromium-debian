@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/chrome/browser/usb/web_usb_service_impl.cc
 +++ b/chrome/browser/usb/web_usb_service_impl.cc
-@@ -161,7 +161,7 @@ void WebUsbServiceImpl::OnPermissionRevo
+@@ -141,7 +141,7 @@ void WebUsbServiceImpl::OnPermissionRevo
      if (!device_info)
        return true;
  
