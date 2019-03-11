@@ -1,5 +1,5 @@
-ungoogled-chromium ($ungoog{chromium_version}-$ungoog{release_revision}~buster) buster; urgency=medium
+ungoogled-chromium ($ungoog{chromium_version}-1~buster) buster; urgency=medium
 
-  * Built against $ungoog{current_commit_or_tag}
+  * Built against $ungoog{ungoogled_version}
 
- -- ungoogled-chromium Authors <maintainer@null>  Sun, 29 Jul 2018 00:00:00 +0000
+ -- ungoogled-chromium Authors <maintainer@null>  $ungoog{release_time}

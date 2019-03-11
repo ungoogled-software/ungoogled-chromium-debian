@@ -1,0 +1,18 @@
+description: fix gcc unused-result warning
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/components/viz/service/surfaces/surface.cc
++++ b/components/viz/service/surfaces/surface.cc
+@@ -263,9 +263,9 @@ bool Surface::QueueFrame(
+   // Returns resources for the previous pending frame.
+   UnrefFrameResourcesAndRunCallbacks(std::move(previous_pending_frame_data));
+ 
+-  // The frame should not fail to display beyond this point. Release the
+-  // callback so it is not called.
+-  (void)frame_rejected_callback.Release();
++  // The frame should not fail to display beyond this point. Null callback
++  // used to prevent later calling the frame rejected callback.
++  frame_rejected_callback.ReplaceClosure(base::NullCallback());
+ 
+   return true;
+ }

@@ -1,0 +1,29 @@
+description: gcc 6 does not support using a unique_ptr after its been moved
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/services/resource_coordinator/coordination_unit/coordination_unit_base.cc
++++ b/services/resource_coordinator/coordination_unit/coordination_unit_base.cc
+@@ -81,7 +81,8 @@ void CoordinationUnitBase::SetProperty(m
+ // static
+ CoordinationUnitBase* CoordinationUnitBase::PassOwnershipToGraph(
+     std::unique_ptr<CoordinationUnitBase> new_cu) {
+-  return new_cu->graph()->AddNewCoordinationUnit(std::move(new_cu));
++  CoordinationUnitGraph* graph = new_cu->graph();
++  return graph->AddNewCoordinationUnit(std::move(new_cu));
+ }
+ 
+ }  // namespace resource_coordinator
+
+--- a/base/task/sequence_manager/task_queue.cc
++++ b/base/task/sequence_manager/task_queue.cc
+@@ -50,7 +50,9 @@ TaskQueue::~TaskQueue() {
+   // If we've not been unregistered then this must occur on the main thread.
+   DCHECK_CALLED_ON_VALID_THREAD(associated_thread_->thread_checker);
+   impl_->SetOnNextWakeUpChangedCallback(RepeatingCallback<void(TimeTicks)>());
+-  impl_->sequence_manager()->ShutdownTaskQueueGracefully(TakeTaskQueueImpl());
++  internal::SequenceManagerImpl* sequence_manager = impl_->sequence_manager();
++  if (sequence_manager)
++    sequence_manager->ShutdownTaskQueueGracefully(TakeTaskQueueImpl());
+ }
+ 
+ TaskQueue::TaskTiming::TaskTiming(bool has_wall_time, bool has_thread_time)

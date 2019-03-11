@@ -3,16 +3,23 @@
         "enabled": false
     },
     "autofill": {
-        "enabled": false
+        "enabled": false,
+		"profile_enabled": false,
+		"credit_card_enabled": false
     },
+	"signin": {
+		"allowed": false,
+		"allowed_on_next_startup": false
+	},
     "distribution": {
         "import_bookmarks": false,
+		"import_bookmarks_from_file": "/usr/share/chromium/initial_bookmarks.html",
         "make_chrome_default": false,
         "make_chrome_default_for_user": false,
         "create_all_shortcuts": true,
         "show_welcome_page": false,
-	"verbose_logging": true,
-	"skip_first_run_ui": true,
+		"verbose_logging": true,
+		"skip_first_run_ui": true,
         "suppress_first_run_default_browser_prompt": true
     },
     "background_mode": {
@@ -32,7 +39,7 @@
         },
         "clear_lso_data_enabled": false,
         "custom_chrome_frame": false,
-	"has_seen_welcome_page": true,
+		"has_seen_welcome_page": true,
         "enable_spellchecking": true
     },
     "bookmark_bar": {
@@ -55,6 +62,7 @@
             "clear_on_exit_migrated": true
         },
         "default_content_settings": {
+			"payment_handler": 2,
             "cookies": 4,
             "geolocation": 2,
             "media-stream": 2,
@@ -80,6 +88,11 @@
     "hardware": {
         "audio_capture_enabled": false
     },
+	"payments": {
+		"can_make_payment_enabled": false
+	},
+	"credentials_enable_service": false,
+	"credentials_enable_autosignin": false,
     "default_apps": "noinstall",
     "hide_web_store_icon": true,
     "homepage_is_newtabpage": true

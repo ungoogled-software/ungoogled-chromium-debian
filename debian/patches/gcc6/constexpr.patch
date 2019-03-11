@@ -12,3 +12,14 @@ author: Michael Gilbert <mgilbert@debian.org>
    double InMillisecondsF() const { return delta_ * 1000; }
  
    bool is_max() const {
+--- a/third_party/blink/renderer/core/layout/ng/inline/ng_baseline.cc
++++ b/third_party/blink/renderer/core/layout/ng/inline/ng_baseline.cc
+@@ -11,7 +11,7 @@
+ namespace blink {
+ 
+ const unsigned NGBaselineRequest::kTypeIdCount;
+-const LayoutUnit NGBaselineList::kEmptyOffset;
++constexpr LayoutUnit NGBaselineList::kEmptyOffset;
+ 
+ bool NGBaselineRequest::operator==(const NGBaselineRequest& other) const {
+   return algorithm_type_ == other.algorithm_type_ &&

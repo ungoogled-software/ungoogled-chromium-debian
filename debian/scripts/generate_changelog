@@ -1,0 +1,89 @@
+#!/usr/bin/python3 -B
+# -*- coding: UTF-8 -*-
+
+# Copyright (c) 2018 The ungoogled-chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+"""
+Generates debian/changelog
+"""
+
+import datetime
+import locale
+import re
+import string
+from pathlib import Path
+
+_ENCODING = 'UTF-8'
+
+# Classes
+
+class _BuildFileStringTemplate(string.Template):
+    """
+    Custom string substitution class
+
+    Inspired by
+    http://stackoverflow.com/questions/12768107/string-substitutions-using-templates-in-python
+    """
+
+    pattern = r"""
+    {delim}(?:
+      (?P<escaped>{delim}) |
+      _(?P<named>{id})      |
+      {{(?P<braced>{id})}}   |
+      (?P<invalid>{delim}((?!_)|(?!{{)))
+    )
+    """.format(
+        delim=re.escape("$ungoog"), id=string.Template.idpattern)
+
+
+# Methods
+
+def _get_dpkg_changelog_datetime(override_datetime=None):
+    if override_datetime is None:
+        current_datetime = datetime.date.today()
+    else:
+        current_datetime = override_datetime
+    current_lc = locale.setlocale(locale.LC_TIME)
+    try:
+        # Setting the locale is bad practice, but datetime.strftime requires it
+        locale.setlocale(locale.LC_TIME, "C")
+        result = current_datetime.strftime("%a, %d %b %Y %H:%M:%S ")
+        timezone = current_datetime.strftime("%z")
+        if len(timezone) == 0:
+            timezone = "+0000"
+        return result + timezone
+    finally:
+        locale.setlocale(locale.LC_TIME, current_lc)
+
+def _process_templates(template_files, build_file_subs):
+    """
+    Recursively substitute '$ungoog' strings in template_files and
+        remove the suffix
+
+    template_files is an iterable of pathlib.Path
+    """
+    for old_path in template_files:
+        new_path = old_path.with_name(old_path.stem)
+        old_path.replace(new_path)
+        with new_path.open('r+', encoding=_ENCODING) as new_file:
+            content = _BuildFileStringTemplate(new_file.read()).substitute(**build_file_subs)
+            new_file.seek(0)
+            new_file.write(content)
+            new_file.truncate()
+
+
+def main():
+    """CLI Entrypoint"""
+    ungoogled_upstream = Path(__file__).resolve().parent.parent / 'ungoogled-upstream'
+
+    packaging_subs = dict(
+        chromium_version=(ungoogled_upstream / 'ungoogled-chromium' / 'chromium_version.txt').read_text(encoding=_ENCODING).strip(),
+        ungoogled_version=(ungoogled_upstream / 'version.txt').read_text(encoding=_ENCODING).strip(),
+        release_time=_get_dpkg_changelog_datetime(),
+    )
+    _process_templates([Path('changelog.ungoogin')], packaging_subs)
+
+
+if __name__ == '__main__':
+    main()

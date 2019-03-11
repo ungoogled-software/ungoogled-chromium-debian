@@ -3,36 +3,41 @@ debianization/sandbox.patch
 debianization/master-preferences.patch
 
 gn/libcxx.patch
-gn/sysroot.patch
 gn/parallel.patch
 
+arm/crashpad.patch
 arm/gcc_skcms_ice.patch
+arm/skia-aarch64-buildfix.patch
+
+gcc6/sizet.patch
+gcc6/atomic.patch
+gcc6/constexpr.patch
+gcc6/constructor.patch
+gcc6/lambda-this.patch
+gcc6/use-after-move.patch
+gcc6/nullptr-copy-construct.patch
 
 fixes/mojo.patch
-fixes/sizet.patch
+fixes/vaapi.patch
+fixes/include.patch
 fixes/alignof.patch
-fixes/polymer.patch
-fixes/optimize.patch
 fixes/ps-print.patch
 fixes/as-needed.patch
-fixes/constexpr.patch
 fixes/inspector.patch
 fixes/namespace.patch
-fixes/constructor.patch
 fixes/gpu-timeout.patch
 fixes/empty-array.patch
-fixes/ownership-error.patch
-fixes/autocompletematch.patch
 fixes/widevine-revision.patch
 fixes/widevine-locations.patch
+fixes/widevine-buildflag.patch
 fixes/connection-message.patch
-fixes/ambiguous-overloads.patch
 fixes/chromedriver-revision.patch
 
 disable/unrar.patch
 disable/signin.patch
 disable/android.patch
 disable/fuzzers.patch
+disable/tracing.patch
 disable/openh264.patch
 disable/perfetto.patch
 disable/installer.patch
@@ -45,7 +50,9 @@ disable/device-notifications.patch
 warnings/printf.patch
 warnings/attribute.patch
 warnings/multichar.patch
+warnings/bool-compare.patch
 warnings/enum-compare.patch
+warnings/unused-result.patch
 warnings/sequence-point.patch
 warnings/initialization.patch
 warnings/unused-typedefs.patch
@@ -57,12 +64,12 @@ system/vpx.patch
 system/icu.patch
 system/gtk2.patch
 system/jpeg.patch
+system/lcms.patch
 system/nspr.patch
 system/zlib.patch
 system/event.patch
 system/jsoncpp.patch
 system/ffmpeg34.patch
-system/harfbuzz.patch
 system/openjpeg.patch
 system/convertutf.patch
 system/fontconfig.patch
