@@ -83,7 +83,7 @@ defines+=use_gio=true \
          proprietary_codecs=true \
          ffmpeg_branding=\"ChromeOS\" \
          fieldtrial_testing_like_official_build=true \
-		 is_clang=true \
+         is_clang=true \
 
 # some notes about embedded libraries
 #  can't use system nss since net/third_party/nss is heavily patched
