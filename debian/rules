@@ -53,7 +53,11 @@ ungoogled_chromium_version=$(shell cat debian/ungoogled-upstream/version.txt)
 ungoogled_chromium_files=debian/ungoogled-upstream/ungoogled-chromium
 
 # add gn flags from ungoogled-chromium
-defines+=$(shell cat $(ungoogled_chromium_files)/flags.gn | tr "\n" " ")
+defines+=$(shell cat $(ungoogled_chromium_files)/flags.gn | tr "\n" " " | sed 's/"/\\"/g')
+
+# set unbundle compiler
+defines+=custom_toolchain=\"//build/toolchain/linux/unbundle:default\" \
+         host_toolchain=\"//build/toolchain/linux/unbundle:default\" \
 
 # disabled features
 defines+=use_goma=false \
@@ -65,7 +69,8 @@ defines+=use_goma=false \
          use_custom_libcxx=false \
          use_gnome_keyring=false \
          linux_use_bundled_binutils=false \
-         remove_webcore_debug_symbols=true \
+         gold_path=\"\" \
+         goma_dir=\"\" \
 
 # enabled features
 defines+=use_gio=true \
@@ -84,6 +89,9 @@ defines+=use_gio=true \
          ffmpeg_branding=\"ChromeOS\" \
          fieldtrial_testing_like_official_build=true \
          is_clang=true \
+         use_cups=true \
+         use_kerberos=false \
+         use_lld=true \
 
 # some notes about embedded libraries
 #  can't use system nss since net/third_party/nss is heavily patched

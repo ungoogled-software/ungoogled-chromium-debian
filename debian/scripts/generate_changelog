@@ -75,14 +75,15 @@ def _process_templates(template_files, build_file_subs):
 
 def main():
     """CLI Entrypoint"""
-    ungoogled_upstream = Path(__file__).resolve().parent.parent / 'ungoogled-upstream'
+    debian_dir = Path(__file__).resolve().parent.parent
+    ungoogled_upstream = debian_dir / 'ungoogled-upstream'
 
     packaging_subs = dict(
         chromium_version=(ungoogled_upstream / 'ungoogled-chromium' / 'chromium_version.txt').read_text(encoding=_ENCODING).strip(),
         ungoogled_version=(ungoogled_upstream / 'version.txt').read_text(encoding=_ENCODING).strip(),
         release_time=_get_dpkg_changelog_datetime(),
     )
-    _process_templates([Path('changelog.ungoogin')], packaging_subs)
+    _process_templates([Path(debian_dir, 'changelog.ungoogin')], packaging_subs)
 
 
 if __name__ == '__main__':
