@@ -5,11 +5,13 @@ files
 .debhelper
 debhelper-build-stamp
 
-ungoogled-chromium
-ungoogled-chromium-l10n
-ungoogled-chromium-shell
-ungoogled-chromium-driver
-ungoogled-chromium-common
-ungoogled-chromium-sandbox
+/ungoogled-chromium
+/ungoogled-chromium-l10n
+/ungoogled-chromium-shell
+/ungoogled-chromium-driver
+/ungoogled-chromium-common
+/ungoogled-chromium-sandbox
 
-scripts/mk-origtargz
+/scripts/mk-origtargz
+
+/ungoogled-upstream/ungoogled-chromium

@@ -45,6 +45,13 @@ system/ffmpeg34.patch
 system/openjpeg.patch
 system/convertutf.patch
 
+inox-patchset/chromium-skia-harmony.patch
+inox-patchset/fix-cfi-failures-with-unbundled-libxml.patch
 inox-patchset/chromium-vaapi-relax-the-version-check-for-VA-API.patch
 inox-patchset/chromium-enable-mojo-video-decoders-by-default.patch
 inox-patchset/chromium-vaapi-fix-the-VA_CHECK_VERSION.patch
+
+ungoogled-chromium/remove-fcomplete-member-pointers-cflag.patch
+ungoogled-chromium/use-system-libraries-in-official-build.patch
+ungoogled-chromium/fix-nullptr-t-namespace.patch
+ungoogled-chromium/manpage.patch
