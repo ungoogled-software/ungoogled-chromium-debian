@@ -1,3 +1,9 @@
+chromium (73.0.3683.56-2) experimental; urgency=medium
+
+  * Fix build failure on armhf.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 10 Mar 2019 04:35:32 +0000
+
 chromium (73.0.3683.56-1) experimental; urgency=medium
 
   * New upstream beta release.

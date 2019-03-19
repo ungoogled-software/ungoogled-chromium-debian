@@ -15,3 +15,11 @@ bug-debian: http://bugs.debian.org/901290
    if (!is_ios) {
      include_dirs += [ "//third_party/skia/include/codec" ]
      defines += [ "SK_HAS_JPEG_LIBRARY" ]
+@@ -238,6 +242,7 @@ config("skia_library_config") {
+ 
+ source_set("skcms") {
+   cflags = []
++  defines = [ "SKCMS_PORTABLE=1" ]
+   if (!is_win || is_clang) {
+     cflags += [
+       "-w",

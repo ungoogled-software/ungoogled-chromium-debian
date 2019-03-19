@@ -1,17 +1,28 @@
 description: fix mojo layout test build error
 author: Michael Gilbert <mgilbert@debian.org>
 
---- a/chromecast/common/mojom/typemaps.gni
-+++ b/chromecast/common/mojom/typemaps.gni
-@@ -2,4 +2,4 @@
- # Use of this source code is governed by a BSD-style license that can be
- # found in the LICENSE file.
- 
--typemaps = [ "//chromecast/common/mojom/multiroom.typemap" ]
-+typemaps = [ ]
+--- a/mojo/public/tools/bindings/chromium_bindings_configuration.gni
++++ b/mojo/public/tools/bindings/chromium_bindings_configuration.gni
+@@ -8,7 +8,6 @@ _typemap_imports = [
+   "//chrome/common/importer/typemaps.gni",
+   "//chrome/common/media_router/mojo/typemaps.gni",
+   "//chrome/typemaps.gni",
+-  "//chromecast/common/mojom/typemaps.gni",
+   "//chromeos/typemaps.gni",
+   "//chromeos/components/multidevice/mojom/typemaps.gni",
+   "//chromeos/services/secure_channel/public/mojom/typemaps.gni",
 --- a/content/shell/BUILD.gn
 +++ b/content/shell/BUILD.gn
-@@ -288,7 +288,6 @@ jumbo_static_library("content_shell_lib"
+@@ -145,8 +145,6 @@ jumbo_static_library("content_shell_lib"
+     "browser/web_test/fake_bluetooth_chooser.h",
+     "browser/web_test/leak_detector.cc",
+     "browser/web_test/leak_detector.h",
+-    "browser/web_test/mojo_web_test_helper.cc",
+-    "browser/web_test/mojo_web_test_helper.h",
+     "browser/web_test/secondary_test_window_observer.cc",
+     "browser/web_test/secondary_test_window_observer.h",
+     "browser/web_test/test_info_extractor.cc",
+@@ -288,7 +286,6 @@ jumbo_static_library("content_shell_lib"
      "//content/public/common:service_names",
      "//content/shell/test_runner:test_runner",
      "//content/test:content_test_mojo_bindings",
@@ -150,14 +161,3 @@ author: Michael Gilbert <mgilbert@debian.org>
          .Build()
    };
    return *manifest;
---- a/content/shell/BUILD.gn
-+++ b/content/shell/BUILD.gn
-@@ -145,8 +145,6 @@ jumbo_static_library("content_shell_lib"
-     "browser/web_test/fake_bluetooth_chooser.h",
-     "browser/web_test/leak_detector.cc",
-     "browser/web_test/leak_detector.h",
--    "browser/web_test/mojo_web_test_helper.cc",
--    "browser/web_test/mojo_web_test_helper.h",
-     "browser/web_test/secondary_test_window_observer.cc",
-     "browser/web_test/secondary_test_window_observer.h",
-     "browser/web_test/test_info_extractor.cc",
