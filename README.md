@@ -1,8 +1,14 @@
 # ungoogled-chromium-debian
 
-This repository contains the files to build Debian packages of [ungoogled-chromium](//github.com/Eloston/ungoogled-chromium).
+This repository contains files to build Debian packages of [ungoogled-chromium](//github.com/Eloston/ungoogled-chromium).
 
 This branch contains the code to build packages for: **Debian 10 (buster)**
+
+## Downloads
+
+**Binaries**: [Get them from the Contributor Binaries website](//ungoogled-software.github.io/ungoogled-chromium-binaries/).
+
+**Source Code**: Use the tags labeled with `buster`. The branches are for development and may not be stable.
 
 ## Building
 
