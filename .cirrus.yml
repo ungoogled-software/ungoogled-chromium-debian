@@ -25,6 +25,6 @@ validate_with_source_task:
     unpack_source_script:
         - ./ungoogled-chromium/utils/downloads.py unpack -i ungoogled-chromium/downloads.ini -c chromium_download_cache chromium_src
     validate_patches_script:
-        - ./ungoogled-chromium/devutils/validate_patches.py -l chromium_src
+        - ./ungoogled-chromium/devutils/validate_patches.py -l chromium_src -p debian/patches -s debian/patches/series
 
 # vim: set expandtab shiftwidth=4 softtabstop=4:
