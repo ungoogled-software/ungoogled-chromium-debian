@@ -3,7 +3,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
 
 --- a/chrome/browser/about_flags.cc
 +++ b/chrome/browser/about_flags.cc
-@@ -1714,7 +1714,7 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -1771,7 +1771,7 @@ const FeatureEntry kFeatureEntries[] = {
          "disable-accelerated-video-decode",
          flag_descriptions::kAcceleratedVideoDecodeName,
          flag_descriptions::kAcceleratedVideoDecodeDescription,
@@ -12,7 +12,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
          SINGLE_DISABLE_VALUE_TYPE(switches::kDisableAcceleratedVideoDecode),
      },
  #if defined(OS_WIN)
-@@ -2345,12 +2345,12 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -2402,12 +2402,12 @@ const FeatureEntry kFeatureEntries[] = {
       FEATURE_VALUE_TYPE(service_manager::features::kXRSandbox)},
  #endif  // ENABLE_ISOLATED_XR_SERVICE
  #endif  // ENABLE_VR
@@ -28,7 +28,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
      {"v8-cache-options", flag_descriptions::kV8CacheOptionsName,
       flag_descriptions::kV8CacheOptionsDescription, kOsAll,
       MULTI_VALUE_TYPE(kV8CacheOptionsChoices)},
-@@ -4294,12 +4294,14 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -4354,12 +4354,14 @@ const FeatureEntry kFeatureEntries[] = {
                                      "AutofillDropdownLayout")},
  #endif  // OS_ANDROID
  
@@ -47,7 +47,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
       flag_descriptions::kEnableHomeLauncherGesturesDescription, kOsCrOS,
 --- a/chrome/browser/flag_descriptions.cc
 +++ b/chrome/browser/flag_descriptions.cc
-@@ -3091,9 +3091,9 @@ const char kTextSuggestionsTouchBarDescr
+@@ -3095,9 +3095,9 @@ const char kTextSuggestionsTouchBarDescr
  
  #endif
  
@@ -59,7 +59,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
  
  const char kAcceleratedMjpegDecodeName[] =
      "Hardware-accelerated mjpeg decode for captured frame";
-@@ -3101,6 +3101,18 @@ const char kAcceleratedMjpegDecodeDescri
+@@ -3105,6 +3105,18 @@ const char kAcceleratedMjpegDecodeDescri
      "Enable hardware-accelerated mjpeg decode for captured frame where "
      "available.";
  
@@ -78,7 +78,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
  const char kAllowTouchpadThreeFingerClickName[] = "Touchpad three-finger-click";
  const char kAllowTouchpadThreeFingerClickDescription[] =
      "Enables touchpad three-finger-click as middle button.";
-@@ -3671,12 +3683,6 @@ const char kUseMonitorColorSpaceDescript
+@@ -3675,12 +3687,6 @@ const char kUseMonitorColorSpaceDescript
      "Enables Chrome to use the  color space information provided by the monitor"
      " instead of the default sRGB color space.";
  
@@ -93,7 +93,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
  const char kVideoPlayerChromecastSupportDescription[] =
 --- a/chrome/browser/flag_descriptions.h
 +++ b/chrome/browser/flag_descriptions.h
-@@ -1849,13 +1849,22 @@ extern const char kPermissionPromptPersi
+@@ -1852,13 +1852,22 @@ extern const char kPermissionPromptPersi
  
  #endif  // defined(OS_MACOSX)
  
@@ -118,7 +118,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
  extern const char kAllowTouchpadThreeFingerClickName[];
  extern const char kAllowTouchpadThreeFingerClickDescription[];
  
-@@ -2200,9 +2209,6 @@ extern const char kUseMashDescription[];
+@@ -2203,9 +2212,6 @@ extern const char kUseMashDescription[];
  extern const char kUseMonitorColorSpaceName[];
  extern const char kUseMonitorColorSpaceDescription[];
  
