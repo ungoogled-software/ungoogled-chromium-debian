@@ -62,6 +62,24 @@ dpkg-buildpackage -b -uc
 
 If all else fails, delete the entire build tree and start again.
 
+### Building via source package
+
+*Build via a Debian source package (i.e. `.dsc`, `.orig.tar.xz`, and `.debian.tar.xz`). This is useful for online build services like Launchpad and openSUSE Build Service.*
+
+First, install base requirements: `# apt install packaging-dev python3`
+
+Then, run the following as a regular user:
+
+```sh
+# TODO: Re-use instructions from above
+debian/rules get-orig-source
+debuild -S -sa
+```
+
+(`PACKAGE_TYPE_HERE` is the same as above)
+
+Source package files will appear under `build/`
+
 ## Developer info
 
 This section contains information for those contributing to ungoogled-chromium-debian.
