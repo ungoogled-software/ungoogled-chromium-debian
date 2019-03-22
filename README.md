@@ -105,7 +105,7 @@ git add debian/ungoogled-upstream/version.txt
 ln -s path/to/ungoogled-chromium  debian/ungoogled-upstream/ungoogled-chromium
 ./debian/rules checkout-ungoogled-chromium
 
-./debian/devutils/merge_patches.sh
+./debian/devutils/update_patches.sh merge
 source debian/devutils/set_quilt_vars.sh
 
 # Setup Chromium source
@@ -115,13 +115,14 @@ mkdir -p build/{src,download_cache}
 
 cd build/src
 # Use quilt to refresh patches. See ungoogled-chromium's docs/developing.md section "Updating patches" for more details
+quilt pop -a
 
 # Remove all patches introduced by ungoogled-chromium
-rm -r debian/patches/{core,extra}
-# Also, make sure carefully revert changes from debian/patches/series
+./debian/devutils/update_patches.sh unmerge
+# Ensure debian/patches/series is formatted correctly, e.g. blank lines
 
-# Quick sanity check of patches
-./debian/ungoogled-upstream/ungoogled-chromium/devutils/check_patch_files.py -p debian/patches
+# Sanity checking for consistency in series file
+./debian/devutils/check_patch_files.sh
 
 # Use git to add changes and commit
 ```

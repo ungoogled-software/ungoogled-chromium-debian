@@ -11,6 +11,7 @@ alias quilt='quilt --quiltrc -'
 DEBIAN_ROOT=$(dirname $(dirname $(readlink -f ${BASH_SOURCE[0]})))
 
 export QUILT_PATCHES="$DEBIAN_ROOT/patches"
+export QUILT_SERIES="series.merged"
 
 # Options below borrowed from Debian and default quilt options (from /etc/quilt.quiltrc on Debian)
 export QUILT_PUSH_ARGS="--color=auto"
