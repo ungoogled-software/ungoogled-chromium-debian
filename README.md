@@ -136,6 +136,15 @@ To add either a primary or secondary branch:
 3. Make the necessary changes and commit
 4. Submit a Pull Request for your new branch to the branch it is based off of. In the Pull Request, specify the new branch name that should be created. (This is necessary because GitHub doesn't support the creation of branches via PRs)
 
+### Tagging a new version
+
+1. Update the commit or tag version of the ungoogled-chromium repository in `debian/ungoogled-upstream/version.txt` as necessary.
+2. Increment the revision in `debian/distro_revision.txt`. However, if the upstream version was changed in Step 1, reset the revision to `1`.
+3. Use git to add a new tag in the format `{chromium_version}-{revision}.buster{distro_revision}` where
+	* `chromium_version` is the Chromium version (from the ungoogled-chromium repo)
+	* `revision` is the ungoogled-chromium revision (from the ungoogled-chromium repo)
+	* `distro_revision` is the revision from `debian/distro_revision.txt`
+
 ### Contributing
 
 Contribution guidelines are the same as ungoogled-chromium.

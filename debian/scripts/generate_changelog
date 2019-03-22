@@ -80,6 +80,8 @@ def main():
 
     packaging_subs = dict(
         chromium_version=(ungoogled_upstream / 'ungoogled-chromium' / 'chromium_version.txt').read_text(encoding=_ENCODING).strip(),
+        ungoogled_revision=(ungoogled_upstream / 'ungoogled-chromium' / 'revision.txt').read_text(encoding=_ENCODING).strip(),
+        distro_revision=(debian_dir / 'distro_revision.txt').read_text(encoding=_ENCODING).strip(),
         ungoogled_version=(ungoogled_upstream / 'version.txt').read_text(encoding=_ENCODING).strip(),
         release_time=_get_dpkg_changelog_datetime(),
     )
