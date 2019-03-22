@@ -2,6 +2,8 @@
 
 Portable Linux (i.e. a generic Linux version) packaging for [ungoogled-chromium](//github.com/Eloston/ungoogled-chromium).
 
+Portable Linux builds can run on **any Linux distribution** (that regular Chromium supports).
+
 ## Downloads
 
 [Download binaries from the Contributor Binaries website](//ungoogled-software.github.io/ungoogled-chromium-binaries/).
