@@ -34,8 +34,6 @@ warnings/int-in-bool-context.patch
 warnings/explicit-constructor.patch
 
 system/vpx.patch
-system/icu.patch
-system/icu60.patch
 system/jpeg.patch
 system/lcms.patch
 system/nspr.patch
@@ -44,7 +42,6 @@ system/event.patch
 system/jsoncpp.patch
 system/ffmpeg34.patch
 system/openjpeg.patch
-system/convertutf.patch
 
 inox-patchset/chromium-skia-harmony.patch
 inox-patchset/fix-cfi-failures-with-unbundled-libxml.patch
