@@ -43,8 +43,7 @@ For Debian-based systems:
 ### Build a tar archive
 
 ```sh
-# Run from inside the clone of the repository
-mkdir -p build/src
+git clone --recurse-submodules https://github.com/ungoogled-software/ungoogled-chromium-portablelinux.git
 # Use "export ..." for AR, NM, CC, CXX, or others to specify the compiler to use
 # It defaults to LLVM tools. See build.sh for more details
 ./build.sh
