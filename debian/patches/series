@@ -35,6 +35,7 @@ warnings/explicit-constructor.patch
 
 system/vpx.patch
 system/icu.patch
+system/icu57.patch
 system/jpeg.patch
 system/lcms.patch
 system/nspr.patch
