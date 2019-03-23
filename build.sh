@@ -1,8 +1,8 @@
 #!/bin/bash -eux
 
 # Simple build script for Portable Linux
+# NOTE: This script will re-create the entire source tree on reinvocation. Proceed with caution.
 
-# Place download_cache next the source tree, which is usually build/src
 _root_dir=$(dirname $(readlink -f $0))
 _download_cache="$_root_dir/build/download_cache"
 _src_dir="$_root_dir/build/src"
