@@ -93,6 +93,7 @@ done
 
 if [ $want_temp_profile -eq 1 ] ; then
   TEMP_PROFILE=`mktemp -d`
+  echo "Using temporary profile: $TEMP_PROFILE"
   CHROMIUM_FLAGS="$CHROMIUM_FLAGS --user-data-dir=$TEMP_PROFILE"
 fi
 

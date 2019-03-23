@@ -1,0 +1,14 @@
+description: use system lcms for pdfium
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/third_party/pdfium/core/fxcodec/codec/ccodec_iccmodule.h
++++ b/third_party/pdfium/core/fxcodec/codec/ccodec_iccmodule.h
+@@ -14,7 +14,7 @@
+ #include "core/fxcrt/fx_system.h"
+ #include "third_party/base/span.h"
+ 
+-#if defined(USE_SYSTEM_LCMS2)
++#if 1
+ #include <lcms2.h>
+ #else
+ #include "third_party/lcms/include/lcms2.h"

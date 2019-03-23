@@ -49,10 +49,50 @@ ifeq (armhf,$(DEB_HOST_ARCH))
 defines+=host_cpu=\"arm\" arm_use_neon=false
 endif
 
-config_bundle=debian/scripts/ungoogled-chromium/config_bundles/$(shell cat debian/ungoogled-config-bundle)
+ungoogled_chromium_version=$(shell cat debian/ungoogled-upstream/version.txt)
+ungoogled_chromium_files=debian/ungoogled-upstream/ungoogled-chromium
 
-# add gn flags from config bundle
-defines+=$(shell debian/scripts/get-gnargs-shell $(config_bundle))
+# add gn flags from ungoogled-chromium
+defines+=$(shell cat $(ungoogled_chromium_files)/flags.gn | tr "\n" " " | sed 's/"/\\"/g')
+
+# set unbundle compiler
+defines+=custom_toolchain=\"//build/toolchain/linux/unbundle:default\" \
+         host_toolchain=\"//build/toolchain/linux/unbundle:default\" \
+
+# disabled features
+defines+=use_goma=false \
+         use_ozone=false \
+         use_sysroot=false \
+         use_openh264=false \
+         use_allocator=\"none\" \
+         use_libjpeg_turbo=true \
+         use_custom_libcxx=false \
+         use_gnome_keyring=false \
+         linux_use_bundled_binutils=false \
+         gold_path=\"\" \
+         goma_dir=\"\" \
+
+# enabled features
+defines+=use_gio=true \
+         use_vaapi=true \
+         use_pulseaudio=true \
+         link_pulseaudio=true \
+         enable_widevine=true \
+         v8_enable_backtrace=true \
+         use_system_zlib=true \
+         use_system_lcms2=true \
+         use_system_libjpeg=true \
+         use_system_freetype=true \
+         use_system_harfbuzz=true \
+         use_jumbo_build=true \
+         jumbo_file_merge_limit=8 \
+         proprietary_codecs=true \
+         ffmpeg_branding=\"ChromeOS\" \
+         fieldtrial_testing_like_official_build=true \
+         is_clang=true \
+         use_cups=true \
+         use_kerberos=false \
+         use_lld=true \
 
 # some notes about embedded libraries
 #  can't use system nss since net/third_party/nss is heavily patched
@@ -68,8 +108,7 @@ endif
 flotpaths=/usr/share/javascript/jquery/*min.js \
           /usr/share/javascript/jquery-flot/*min.js \
 
-buildkit_cli=debian/scripts/ungoogled-chromium/run_buildkit_cli.py
-domsubcache=debian/scripts/ungoogled-chromium/domsubcache.tar.gz
+domsubcache=debian/domsubcache.tar.gz
 
 %:
 	dh $@
@@ -90,7 +129,7 @@ override_dh_auto_configure:
 	# clean polymer files manually (debian/clean doesn't work on directories)
 	rm -rf third_party/catapult/third_party/polymer/components || true
 	# apply domain substitution
-	if [ ! -e $(domsubcache) ]; then python3 -B $(buildkit_cli) domains apply -b $(config_bundle) -c $(domsubcache) ./; fi
+	if [ ! -e $(domsubcache) ]; then python3 -B $(ungoogled_chromium_files)/utils/domain_substitution.py apply -r $(ungoogled_chromium_files)/domain_regex.list -f $(ungoogled_chromium_files)/domain_substitution.list -c $(domsubcache) ./; fi
 	# use system flot
 	for file in $(flotpaths); do ln -sf $$file third_party/flot; done
 	# use polymer from chromium's top level third_party directory
@@ -106,7 +145,7 @@ override_dh_auto_build-indep: out/Release/gn
 
 override_dh_prep:
 	# building is done by this step; remove domain substitution
-	if [ -e $(domsubcache) ]; then python3 -B $(buildkit_cli) domains revert -c $(domsubcache) ./; fi
+	if [ -e $(domsubcache) ]; then python3 -B $(ungoogled_chromium_files)/utils/domain_substitution.py revert -c $(domsubcache) ./; fi
 	dh_prep
 
 override_dh_auto_install-arch:
@@ -155,7 +194,6 @@ removed=$(debvers).files-removed
 seconds=$(debvers).seconds
 
 get-orig-source:
-	if [ ! -e debian/patches ]; then python3 -B $(buildkit_cli) patches export -b $(config_bundle) debian/patches/; fi
 	wget -nv --show-progress -c $(url)/$(tarball) -O ../$(tarball)
 	cp /usr/share/perl5/Devscripts/MkOrigtargz.pm debian/scripts/mk-origtargz
 	patch -p1 < debian/scripts/mk-origtargz.patch
@@ -164,7 +202,7 @@ get-orig-source:
 	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
 	test ! -e $(extract) || rm -rf $(extract)
 	tar xf ../$(tarball)
-	python3 -B $(buildkit_cli) prune -b $(config_bundle) $(extract)
+	python3 -B $(ungoogled_chromium_files)/utils/prune_binaries.py ./ $(ungoogled_chromium_files)/pruning.list
 	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
 	while read line; do rm -rf $$line; done < $(removed)
 	cd $(extract) && ../debian/scripts/check-upstream
@@ -177,9 +215,23 @@ get-orig-source:
 	@mv -f seconds $(seconds)
 	find debian/scripts/ungoogled-chromium/ -name __pycache__ -type d -exec rm -r {} +
 
+###################### misc source setup commands ############################
+
+download-ungoogled-chromium:
+	wget https://github.com/Eloston/ungoogled-chromium/archive/$(ungoogled_chromium_version).tar.gz -O ungoogled-upstream/ungoogled-chromium-$(ungoogled_chromium_version).tar.gz
+	tar xf ungoogled-upstream/ungoogled-chromium-$(ungoogled_chromium_version).tar.gz -C debian/ungoogled-upstream
+	mv debian/ungoogled-upstream/ungoogled-chromium-$(ungoogled_chromium_version) $(ungoogled_chromium_files)
+
+checkout-ungoogled-chromium:
+	# If $(ungoogled_chromium_files) is a git repo
+	cd $(ungoogled_chromium_files) && git checkout $(ungoogled_chromium_version)
+
+setup-debian:
+	python3 -B $(ungoogled_chromium_files)/utils/patches.py merge -p debian/patches $(ungoogled_chromium_files)/patches
+	./debian/scripts/generate_changelog 
+
 setup-local-src:
 	mkdir ../download_cache || true
-	python3 -B $(buildkit_cli) downloads retrieve -b $(config_bundle) -c ../download_cache
-	python3 -B $(buildkit_cli) downloads unpack -b $(config_bundle) -c ../download_cache ./
-	python3 -B $(buildkit_cli) prune -b $(config_bundle) ./
-	python3 -B $(buildkit_cli) patches export -b $(config_bundle) debian/patches/
+	python3 -B $(ungoogled_chromium_files)/utils/downloads.py retrieve -i $(ungoogled_chromium_files)/downloads.ini -c ../download_cache
+	python3 -B $(ungoogled_chromium_files)/utils/downloads.py unpack -i $(ungoogled_chromium_files)/downloads.ini -c ../download_cache ./
+	python3 -B $(ungoogled_chromium_files)/utils/prune_binaries.py ./ $(ungoogled_chromium_files)/pruning.list

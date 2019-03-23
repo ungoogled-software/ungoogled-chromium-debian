@@ -5,6 +5,7 @@ Maintainer: ungoogled-chromium Maintainers <github@null.invalid>
 Vcs-Git: https://github.com/Eloston/ungoogled-chromium.git
 Vcs-Browser: https://github.com/Eloston/ungoogled-chromium
 Homepage: https://github.com/Eloston/ungoogled-chromium
+Standards-Version: 4.3.0
 Rules-Requires-Root: no
 Build-Depends:
  debhelper (>= 11),
@@ -54,7 +55,6 @@ Build-Depends:
  libopus-dev,
  libwebp-dev,
  libxtst-dev,
- libsrtp-dev,
  libjpeg-dev,
  libxml2-dev,
  libgtk-3-dev,
@@ -85,7 +85,6 @@ Build-Depends:
  libva-dev,
  fonts-ipafont-gothic,
  fonts-ipafont-mincho,
-Standards-Version: 4.2.1
 
 Package: ungoogled-chromium
 Architecture: i386 amd64 arm64 armhf
