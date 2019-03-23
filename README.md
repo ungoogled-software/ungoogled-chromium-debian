@@ -158,10 +158,9 @@ To add either a primary or secondary branch:
 
 1. Update the commit or tag version of the ungoogled-chromium repository in `debian/ungoogled-upstream/version.txt` as necessary.
 2. Increment the revision in `debian/distro_revision.txt`. However, if the upstream version was changed in Step 1, reset the revision to `1`.
-3. Use git to add a new tag in the format `{chromium_version}-{revision}.buster{distro_revision}` where
-	* `chromium_version` is the Chromium version (from the ungoogled-chromium repo)
-	* `revision` is the ungoogled-chromium revision (from the ungoogled-chromium repo)
-	* `distro_revision` is the revision from `debian/distro_revision.txt`
+3. Use `git tag` to add a new tag with the name generated from `debian/devutils/print_tag_version.sh`
+	* e.g. `git tag -s $(./debian/devutils/print_tag_version.sh)
+	* NOTE: This requires that `debian/ungoogled-upstream/ungoogled-chromium` contains the ungoogled-chromium repo files.
 
 ### Contributing
 
