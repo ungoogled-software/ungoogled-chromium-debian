@@ -2,6 +2,8 @@ container:
     dockerfile: .cirrus_Dockerfile
 
 validate_with_source_task:
+    submodule_checkout_script:
+        - git submodule update --init --recursive
     check_patch_files_script:
         - ./ungoogled-chromium/devutils/check_patch_files.py -p patches
     merge_patches_script:
