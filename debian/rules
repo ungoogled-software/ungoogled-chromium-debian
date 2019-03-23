@@ -71,7 +71,6 @@ defines+=use_goma=false \
          linux_use_bundled_binutils=false \
          gold_path=\"\" \
          goma_dir=\"\" \
-         icu_use_data_file=false \
 
 # enabled features
 defines+=use_gio=true \

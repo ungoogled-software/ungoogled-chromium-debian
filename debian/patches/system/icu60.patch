@@ -1,0 +1,73 @@
+description: backwards compatibility for older versions of icu
+author: Michael Gilbert <mgilbert@debian.org>
+Modified by ungoogled-chromium devs for icu 60
+
+--- a/v8/src/objects/intl-objects.cc
++++ b/v8/src/objects/intl-objects.cc
+@@ -36,14 +36,6 @@
+ #include "unicode/ustring.h"
+ #include "unicode/uvernum.h"  // U_ICU_VERSION_MAJOR_NUM
+ 
+-#define XSTR(s) STR(s)
+-#define STR(s) #s
+-static_assert(
+-    V8_MINIMUM_ICU_VERSION <= U_ICU_VERSION_MAJOR_NUM,
+-    "v8 is required to build with ICU " XSTR(V8_MINIMUM_ICU_VERSION) " and up");
+-#undef STR
+-#undef XSTR
+-
+ namespace v8 {
+ namespace internal {
+ 
+--- a/v8/src/objects/js-list-format.cc
++++ b/v8/src/objects/js-list-format.cc
+@@ -278,7 +278,6 @@ MaybeHandle<JSArray> GenerateListFormatP
+   Handle<String> substring;
+   for (const icu::FieldPosition pos : positions) {
+     CHECK(pos.getBeginIndex() >= prev_item_end_index);
+-    CHECK(pos.getField() == ULISTFMT_ELEMENT_FIELD);
+     if (pos.getBeginIndex() != prev_item_end_index) {
+       ASSIGN_RETURN_ON_EXCEPTION(
+           isolate, substring,
+@@ -316,10 +315,7 @@ std::vector<icu::FieldPosition> Generate
+   std::vector<icu::FieldPosition> positions;
+   icu::FieldPosition pos;
+   while (iter.next(pos)) {
+-    // Only take the information of the ULISTFMT_ELEMENT_FIELD field.
+-    if (pos.getField() == ULISTFMT_ELEMENT_FIELD) {
+       positions.push_back(pos);
+-    }
+   }
+   // Because the format may reoder the items, ICU FieldPositionIterator
+   // keep the order for FieldPosition based on the order of the input items.
+@@ -435,7 +431,7 @@ MaybeHandle<JSArray> JSListFormat::Forma
+   icu::UnicodeString formatted;
+   icu::FieldPositionIterator iter;
+   formatter->format(array.data(), static_cast<int32_t>(array.size()), formatted,
+-                    &iter, status);
++                    status);
+   DCHECK(U_SUCCESS(status));
+ 
+   std::vector<icu::FieldPosition> field_positions = GenerateFieldPosition(iter);
+--- a/v8/src/regexp/regexp-parser.cc
++++ b/v8/src/regexp/regexp-parser.cc
+@@ -1293,11 +1293,9 @@ bool IsSupportedBinaryProperty(UProperty
+     case UCHAR_DEPRECATED:
+     case UCHAR_DIACRITIC:
+     case UCHAR_EMOJI:
+-    case UCHAR_EMOJI_COMPONENT:
+     case UCHAR_EMOJI_MODIFIER_BASE:
+     case UCHAR_EMOJI_MODIFIER:
+     case UCHAR_EMOJI_PRESENTATION:
+-    case UCHAR_EXTENDED_PICTOGRAPHIC:
+     case UCHAR_EXTENDER:
+     case UCHAR_GRAPHEME_BASE:
+     case UCHAR_GRAPHEME_EXTEND:
+@@ -1316,7 +1314,6 @@ bool IsSupportedBinaryProperty(UProperty
+     case UCHAR_PATTERN_WHITE_SPACE:
+     case UCHAR_QUOTATION_MARK:
+     case UCHAR_RADICAL:
+-    case UCHAR_REGIONAL_INDICATOR:
+     case UCHAR_S_TERM:
+     case UCHAR_SOFT_DOTTED:
+     case UCHAR_TERMINAL_PUNCTUATION:
