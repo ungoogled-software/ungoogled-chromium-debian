@@ -2,13 +2,13 @@
 
 This repository contains files to build Debian packages of [ungoogled-chromium](//github.com/Eloston/ungoogled-chromium).
 
-This branch contains the code to build packages for: **Ubuntu 18.04 LTS (bionic)**
+This branch contains the code to build packages for: **Ubuntu 18.10 (cosmic)**
 
 ## Downloads
 
 **Binaries**: [Get them from the Contributor Binaries website](//ungoogled-software.github.io/ungoogled-chromium-binaries/).
 
-**Source Code**: Use the tags labeled with `bionic`. The branches are for development and may not be stable.
+**Source Code**: Use the tags labeled with `cosmic`. The branches are for development and may not be stable.
 
 ## Building
 
@@ -19,7 +19,7 @@ sudo apt install git python3 packaging-dev
 # Setup build tree under build/
 mkdir -p build/src
 git clone https://github.com/ungoogled-software/ungoogled-chromium-debian
-git checkout ubuntu_bionic
+git checkout ubuntu_cosmic
 cp -r ungoogled-chromium-debian/debian build/src/
 cd build/src
 
@@ -98,7 +98,7 @@ git remote add upstream https://salsa.debian.org/chromium-team/chromium.git
 First, update `debian_buster` with the latest changes. Then, merge it into this branch:
 
 ```sh
-git checkout ubuntu_bionic
+git checkout ubuntu_cosmic
 git merge debian_buster
 # Complete the git merge
 # Update patches via instructions below
