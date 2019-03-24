@@ -8,7 +8,7 @@ Portable Linux builds can run on **any Linux distribution** (that regular Chromi
 
 [Download binaries from the Contributor Binaries website](//ungoogled-software.github.io/ungoogled-chromium-binaries/).
 
-**Source Code**: Use the tags via `git checkout` (see building instructions below). The branches are for development and may not be stable.
+**Source Code**: It is recommended to use a tag via `git checkout` (see building instructions below). You may also use `master`, but it is for development and may not be stable.
 
 ## Building
 
