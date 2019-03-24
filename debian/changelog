@@ -1,3 +1,27 @@
+chromium (73.0.3683.75-1) unstable; urgency=medium
+
+  * New upstream stable release.
+    - CVE-2019-5787: Use after free in Canvas. Reported by Zhe Jin
+    - CVE-2019-5788: Use after free in FileAPI. Reported by Mark Brand
+    - CVE-2019-5789: Use after free in WebMIDI. Reported by Mark Brand
+    - CVE-2019-5790: Heap buffer overflow in V8. Reported by Dimitri Fourny
+    - CVE-2019-5791: Type confusion in V8. Reported by Choongwoo Han
+    - CVE-2019-5792: Integer overflow in PDFium. Reported by pdknsk
+    - CVE-2019-5793: Excessive permissions for private API in Extensions.
+      Reported by Jun Kokatsu
+    - CVE-2019-5794: Security UI spoofing. Reported by Juno Im of Theori
+    - CVE-2019-5795: Integer overflow in PDFium. Reported by pdknsk
+    - CVE-2019-5796: Race condition in Extensions. Reported by Mark Brand
+    - CVE-2019-5797: Race condition in DOMStorage. Reported by Mark Brand
+    - CVE-2019-5798: Out of bounds read in Skia. Reported by Tran Tien Hung
+    - CVE-2019-5799: CSP bypass with blob URL. Reported by sohalt
+    - CVE-2019-5800: CSP bypass with blob URL. Reported by Jun Kokatsu
+    - CVE-2019-5802: Security UI spoofing. Reported by Ronni Skansing
+    - CVE-2019-5803: CSP bypass with Javascript URLs'. Reported by Andrew
+      Comminos
+
+ -- Michael Gilbert <mgilbert@debian.org>  Tue, 19 Mar 2019 02:19:17 +0000
+
 chromium (73.0.3683.56-2) experimental; urgency=medium
 
   * Fix build failure on armhf.
@@ -9,6 +33,12 @@ chromium (73.0.3683.56-1) experimental; urgency=medium
   * New upstream beta release.
 
  -- Michael Gilbert <mgilbert@debian.org>  Sat, 02 Mar 2019 18:02:02 +0000
+
+chromium (72.0.3626.122-1) unstable; urgency=medium
+
+  * New upstream stable release.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 07 Mar 2019 14:05:20 +0000
 
 chromium (72.0.3626.121-1) unstable; urgency=medium
 
