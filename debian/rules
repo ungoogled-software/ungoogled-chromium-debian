@@ -218,15 +218,6 @@ get-orig-source:
 
 ###################### misc source setup commands ############################
 
-download-ungoogled-chromium:
-	wget https://github.com/Eloston/ungoogled-chromium/archive/$(ungoogled_chromium_version).tar.gz -O ungoogled-upstream/ungoogled-chromium-$(ungoogled_chromium_version).tar.gz
-	tar xf ungoogled-upstream/ungoogled-chromium-$(ungoogled_chromium_version).tar.gz -C debian/ungoogled-upstream
-	mv debian/ungoogled-upstream/ungoogled-chromium-$(ungoogled_chromium_version) $(ungoogled_chromium_files)
-
-checkout-ungoogled-chromium:
-	# If $(ungoogled_chromium_files) is a git repo
-	cd $(ungoogled_chromium_files) && git checkout $(ungoogled_chromium_version)
-
 setup-debian:
 	python3 -B $(ungoogled_chromium_files)/utils/patches.py merge -p debian/patches $(ungoogled_chromium_files)/patches
 	./debian/scripts/generate_changelog 

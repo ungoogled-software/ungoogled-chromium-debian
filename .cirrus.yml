@@ -4,14 +4,9 @@ container:
 # TODO: Syntax checking for debian/ folder contents?
 
 validate_with_source_task:
-    ungoogled_repo_cache:
-        folder: ungoogled-chromium
-        fingerprint_script: cat debian/ungoogled-upstream/version.txt
-        populate_script:
-            - wget "https://github.com/Eloston/ungoogled-chromium/archive/$(cat debian/ungoogled-upstream/version.txt).tar.gz" -O ungoogled-chromium_repo.tar.gz
-            - tar xf ungoogled-chromium_repo.tar.gz
-            - rm ungoogled-chromium_repo.tar.gz
-            - mv "ungoogled-chromium-$(cat debian/ungoogled-upstream/version.txt)" ungoogled-chromium
+    submodule_checkout_script:
+        - git submodule update --init --recursive
+        - ln -s debian/ungoogled-upstream/ungoogled-chromium ungoogled-chromium
     check_patch_files_script:
         - ./ungoogled-chromium/devutils/check_patch_files.py -p debian/patches
     merge_patches_script:

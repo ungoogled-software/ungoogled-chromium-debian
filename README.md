@@ -6,9 +6,24 @@ This branch contains the code to build packages for: **Ubuntu 18.10 (cosmic)**
 
 ## Downloads
 
-**Binaries**: [Get them from the Contributor Binaries website](//ungoogled-software.github.io/ungoogled-chromium-binaries/).
+**Binaries** (i.e. `.deb` packages): [Get them from the Contributor Binaries website](//ungoogled-software.github.io/ungoogled-chromium-binaries/).
 
-**Source Code**: Use the tags labeled with `cosmic`. The branches are for development and may not be stable.
+**Source Code**: Use the tags labeled with `cosmic` via `git checkout` (see building instructions). The branches are for development and may not be stable.
+
+## Installing
+
+The packages are essentially identical in structure to Debian's `chromium` packages. At minimum, you will need to install the `ungoogled-chromium` and `ungoogled-chromium-common` packages. For example:
+
+```sh
+# dpkg -i ungoogled-chromium_*.deb ungoogled-chromium-comon_*.deb
+```
+
+The other packages are as follows:
+
+* `*-driver`: [ChomeDriver](http://chromedriver.chromium.org/)
+* `*-l10n`: Localization package for the browser UI.
+* `*-sandbox`: [`SUID` Sandbox](https://chromium.googlesource.com/chromium/src/+/lkgr/docs/linux_suid_sandbox.md). This is only necessary if you do not have user namespaces enabled (i.e. kernel parameter `kernel.unprivileged_userns_clone`)
+* `*-shell`: Contains `content_shell`. Mainly for browser development/testing; search [the Chromium docs](https://chromium.googlesource.com/chromium/src/+/lkgr/docs/) for more details.
 
 ## Building
 
@@ -18,19 +33,11 @@ sudo apt install git python3 packaging-dev
 
 # Setup build tree under build/
 mkdir -p build/src
-git clone https://github.com/ungoogled-software/ungoogled-chromium-debian
-git checkout ubuntu_cosmic
+git clone --recurse-submodules https://github.com/ungoogled-software/ungoogled-chromium-debian.git
+# Replace TAG_OR_BRANCH_HERE with the tag or branch you want to build
+git checkout --recurse-submodules TAG_OR_BRANCH_HERE
 cp -r ungoogled-chromium-debian/debian build/src/
 cd build/src
-
-# We now need the files from the ungoogled-chromium repo
-# There are two options to get it:
-
-# Option 1 (RECOMMENDED): Download it from GitHub automatically
-./debian/rules download-ungoogled-chromium
-# Option 2 (ADVANCED USERS ONLY): Use an existing git clone of ungoogled-chromium
-ln -s path/to/ungoogled-chromium  debian/ungoogled-upstream/ungoogled-chromium
-./debian/rules checkout-ungoogled-chromium
 
 # Final setup steps for debian/ directory
 ./debian/rules setup-debian
@@ -98,7 +105,7 @@ git remote add upstream https://salsa.debian.org/chromium-team/chromium.git
 First, update `debian_buster` with the latest changes. Then, merge it into this branch:
 
 ```sh
-git checkout ubuntu_cosmic
+git checkout --recurse-submodules debian_buster
 git merge debian_buster
 # Complete the git merge
 # Update patches via instructions below
@@ -106,13 +113,24 @@ git merge debian_buster
 
 ### Pull new changes from ungoogled-chromium
 
-These are to update the base ungoogled-chromium files
+There are two options, which depend on the use case.
+
+1. Update to tag (where `TAG_HERE` is the tag name):
 
 ```sh
-# First, get the *full* commit hash from the ungoogled-chromium repo
-# We will assume this is COMMIT_HASH in the instructions
-printf '%s' COMMIT_HASH > debian/ungoogled-upstream/version.txt
-git add debian/ungoogled-upstream/version.txt
+pushd debian/ungoogled-upstream/ungoogled-chromium/
+git fetch
+git checkout TAG_HERE
+popd
+# Commit the submodule changes
+# Update patches via instructions below
+```
+
+2. Update to HEAD of `master` branch:
+
+```sh
+git submodule update --remote
+# Commit the submodule changes
 # Update patches via instructions below
 ```
 
@@ -159,7 +177,7 @@ To add either a primary or secondary branch:
 1. Update the commit or tag version of the ungoogled-chromium repository in `debian/ungoogled-upstream/version.txt` as necessary.
 2. Increment the revision in `debian/distro_revision.txt`. However, if the upstream version was changed in Step 1, reset the revision to `1`.
 3. Use `git tag` to add a new tag with the name generated from `debian/devutils/print_tag_version.sh`
-	* e.g. `git tag -s $(./debian/devutils/print_tag_version.sh)
+	* e.g. `git tag -s $(./debian/devutils/print_tag_version.sh)`
 	* NOTE: This requires that `debian/ungoogled-upstream/ungoogled-chromium` contains the ungoogled-chromium repo files.
 
 ### Contributing
