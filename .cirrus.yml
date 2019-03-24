@@ -4,6 +4,13 @@ container:
 validate_with_source_task:
     submodule_checkout_script:
         - git submodule update --init --recursive
+    check_gn_flags_script:
+        - ./ungoogled-chromium/devutils/check_gn_flags.py -f flags.portable.gn
+        - # Merge GN flags and verify again
+        - cp ungoogled-chromium/flags.gn flags.merged.gn
+        - cat flags.portable.gn >> flags.merged.gn
+        - sort -o flags.merged.gn flags.merged.gn
+        - ./ungoogled-chromium/devutils/check_gn_flags.py -f flags.merged.gn
     check_patch_files_script:
         - ./ungoogled-chromium/devutils/check_patch_files.py -p patches
     merge_patches_script:
