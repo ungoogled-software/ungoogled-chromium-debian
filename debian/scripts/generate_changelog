@@ -78,11 +78,13 @@ def main():
     debian_dir = Path(__file__).resolve().parent.parent
     ungoogled_upstream = debian_dir / 'ungoogled-upstream'
 
+    chromium_version = (ungoogled_upstream / 'ungoogled-chromium' / 'chromium_version.txt').read_text(encoding=_ENCODING).strip()
+    ungoogled_revision = (ungoogled_upstream / 'ungoogled-chromium' / 'revision.txt').read_text(encoding=_ENCODING).strip()
     packaging_subs = dict(
-        chromium_version=(ungoogled_upstream / 'ungoogled-chromium' / 'chromium_version.txt').read_text(encoding=_ENCODING).strip(),
-        ungoogled_revision=(ungoogled_upstream / 'ungoogled-chromium' / 'revision.txt').read_text(encoding=_ENCODING).strip(),
+        chromium_version=chromium_version,
+        ungoogled_revision=ungoogled_revision,
         distro_revision=(debian_dir / 'distro_revision.txt').read_text(encoding=_ENCODING).strip(),
-        ungoogled_version=(ungoogled_upstream / 'version.txt').read_text(encoding=_ENCODING).strip(),
+        ungoogled_version='{}-{}'.format(chromium_version, ungoogled_revision),
         release_time=_get_dpkg_changelog_datetime(),
     )
     _process_templates([Path(debian_dir, 'changelog.ungoogin')], packaging_subs)
