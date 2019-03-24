@@ -8,7 +8,7 @@ Portable Linux builds can run on **any Linux distribution** (that regular Chromi
 
 [Download binaries from the Contributor Binaries website](//ungoogled-software.github.io/ungoogled-chromium-binaries/).
 
-**Source Code**: Use the tags. The branches are for development and may not be stable.
+**Source Code**: Use the tags via `git checkout` (see building instructions below). The branches are for development and may not be stable.
 
 ## Building
 
@@ -44,6 +44,8 @@ For Debian-based systems:
 
 ```sh
 git clone --recurse-submodules https://github.com/ungoogled-software/ungoogled-chromium-portablelinux.git
+# Replace TAG_OR_BRANCH_HERE with a tag or branch name
+git checkout --recurse-submodules TAG_OR_BRANCH_HERE
 # Use "export ..." for AR, NM, CC, CXX, or others to specify the compiler to use
 # It defaults to LLVM tools. See build.sh for more details
 ./build.sh
