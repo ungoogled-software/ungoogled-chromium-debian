@@ -8,7 +8,7 @@ This branch contains the code to build packages for: **Debian 10 (buster)**
 
 **Binaries** (i.e. `.deb` packages): [Get them from the Contributor Binaries website](//ungoogled-software.github.io/ungoogled-chromium-binaries/).
 
-**Source Code**: Use the tags labeled with `buster`. The branches are for development and may not be stable.
+**Source Code**: Use the tags labeled with `buster` via `git checkout` (see building instructions). The branches are for development and may not be stable.
 
 ## Installing
 
@@ -33,19 +33,11 @@ sudo apt install git python3 packaging-dev
 
 # Setup build tree under build/
 mkdir -p build/src
-git clone https://github.com/ungoogled-software/ungoogled-chromium-debian
-git checkout debian_buster
+git clone --recurse-submodules https://github.com/ungoogled-software/ungoogled-chromium-debian.git
+# Replace TAG_OR_BRANCH_HERE with the tag or branch you want to build
+git checkout --recurse-submodules TAG_OR_BRANCH_HERE
 cp -r ungoogled-chromium-debian/debian build/src/
 cd build/src
-
-# We now need the files from the ungoogled-chromium repo
-# There are two options to get it:
-
-# Option 1 (RECOMMENDED): Download it from GitHub automatically
-./debian/rules download-ungoogled-chromium
-# Option 2 (ADVANCED USERS ONLY): Use an existing git clone of ungoogled-chromium
-ln -s path/to/ungoogled-chromium  debian/ungoogled-upstream/ungoogled-chromium
-./debian/rules checkout-ungoogled-chromium
 
 # Final setup steps for debian/ directory
 ./debian/rules setup-debian
@@ -113,7 +105,7 @@ git remote add upstream https://salsa.debian.org/chromium-team/chromium.git
 These instructions will pull in changes from Debian's `chromium` package into `debian_buster`:
 
 ```sh
-git checkout debian_buster
+git checkout --recurse-submodules debian_buster
 git pull upstream master
 # Complete the git merge
 # Update patches via instructions below
@@ -121,13 +113,24 @@ git pull upstream master
 
 ### Pull new changes from ungoogled-chromium
 
-These are to update the base ungoogled-chromium files
+There are two options, which depend on the use case.
+
+1. Update to tag (where `TAG_HERE` is the tag name):
 
 ```sh
-# First, get the *full* commit hash from the ungoogled-chromium repo
-# We will assume this is COMMIT_HASH in the instructions
-printf '%s' COMMIT_HASH > debian/ungoogled-upstream/version.txt
-git add debian/ungoogled-upstream/version.txt
+pushd debian/ungoogled-upstream/ungoogled-chromium/
+git fetch
+git checkout TAG_HERE
+popd
+# Commit the submodule changes
+# Update patches via instructions below
+```
+
+2. Update to HEAD of `master` branch:
+
+```sh
+git submodule update --remote
+# Commit the submodule changes
 # Update patches via instructions below
 ```
 
