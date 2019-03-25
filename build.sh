@@ -1,7 +1,7 @@
 #!/bin/bash -eux
 
 # Simple build script for Portable Linux
-# NOTE: This script will delete all build intermediates every time it is run. Proceed with caution.
+# NOTE: This script will delete all build intermediates every time it runs. Proceed with caution.
 
 _root_dir=$(dirname $(readlink -f $0))
 _download_cache="$_root_dir/build/download_cache"
