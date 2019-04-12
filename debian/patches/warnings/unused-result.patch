@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/components/viz/service/surfaces/surface.cc
 +++ b/components/viz/service/surfaces/surface.cc
-@@ -263,9 +263,9 @@ bool Surface::QueueFrame(
+@@ -265,9 +265,9 @@ bool Surface::QueueFrame(
    // Returns resources for the previous pending frame.
    UnrefFrameResourcesAndRunCallbacks(std::move(previous_pending_frame_data));
  

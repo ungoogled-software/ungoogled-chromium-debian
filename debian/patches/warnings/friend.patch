@@ -1,0 +1,23 @@
+description: unfriend classes that friend themselves
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/ui/base/clipboard/clipboard_format_type.h
++++ b/ui/base/clipboard/clipboard_format_type.h
+@@ -86,7 +86,6 @@ struct COMPONENT_EXPORT(BASE_CLIPBOARD_T
+ 
+  private:
+   friend class base::NoDestructor<ClipboardFormatType>;
+-  friend struct ClipboardFormatType;
+ 
+   // Platform-specific glue used internally by the ClipboardFormatType struct.
+   // Each platform should define,at least one of each of the following:
+--- a/chrome/browser/apps/platform_apps/audio_focus_web_contents_observer.h
++++ b/chrome/browser/apps/platform_apps/audio_focus_web_contents_observer.h
+@@ -22,7 +22,6 @@ class AudioFocusWebContentsObserver
+ 
+  private:
+   friend class content::WebContentsUserData<AudioFocusWebContentsObserver>;
+-  friend class AudioFocusWebContentsObserver;
+   friend class AudioFocusWebContentsObserverBrowserTest;
+ 
+   explicit AudioFocusWebContentsObserver(content::WebContents*);

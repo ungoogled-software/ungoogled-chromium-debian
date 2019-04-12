@@ -1,0 +1,29 @@
+description: fix undefined order in which expressions are evaluated (-Wsequence-point)
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/components/download/internal/common/download_item_impl.cc
++++ b/components/download/internal/common/download_item_impl.cc
+@@ -593,7 +593,9 @@ void DownloadItemImpl::UpdateResumptionI
+     bytes_wasted_ = 0;
+   }
+ 
+-  auto_resume_count_ = user_resume ? 0 : ++auto_resume_count_;
++  ++auto_resume_count_;
++  if (user_resume)
++    auto_resume_count_ = 0;
+ }
+ 
+ void DownloadItemImpl::Cancel(bool user_cancel) {
+--- a/third_party/blink/renderer/platform/fonts/opentype/open_type_caps_support.cc
++++ b/third_party/blink/renderer/platform/fonts/opentype/open_type_caps_support.cc
+@@ -152,8 +152,8 @@ OpenTypeCapsSupport::FontFormat OpenType
+                             hb_blob_get_length(mort_blob.get());
+     bool has_gsub = hb_ot_layout_has_substitution(hb_face);
+     font_format_ = has_morx_or_mort&& !has_gsub
+-                       ? font_format_ = FontFormat::kAat
+-                       : font_format_ = FontFormat::kOpenType;
++                       ? FontFormat::kAat
++                       : FontFormat::kOpenType;
+   }
+   return font_format_;
+ }

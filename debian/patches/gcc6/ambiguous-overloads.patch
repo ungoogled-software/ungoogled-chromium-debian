@@ -1,0 +1,45 @@
+description: gcc6 cannot automatically resolve these overloads, tell it what to do
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/net/third_party/quic/platform/impl/quic_flags_impl.cc
++++ b/net/third_party/quic/platform/impl/quic_flags_impl.cc
+@@ -153,9 +153,9 @@ std::string QuicFlagRegistry::GetHelp()
+ template <>
+ bool TypedQuicFlagHelper<bool>::SetFlag(const std::string& s) const {
+   static const base::NoDestructor<std::set<std::string>> kTrueValues(
+-      {"", "1", "t", "true", "y", "yes"});
++      std::set<std::string>({"", "1", "t", "true", "y", "yes"}));
+   static const base::NoDestructor<std::set<std::string>> kFalseValues(
+-      {"0", "f", "false", "n", "no"});
++      std::set<std::string>({"0", "f", "false", "n", "no"}));
+   if (kTrueValues->find(base::ToLowerASCII(s)) != kTrueValues->end()) {
+     *flag_ = true;
+     return true;
+--- a/extensions/common/csp_validator.cc
++++ b/extensions/common/csp_validator.cc
+@@ -681,10 +681,10 @@ bool IsSecureIsolatedWorldCSP(const std:
+     const CSPParser::Directive* directive = nullptr;
+   };
+ 
+-  DirectiveMapping script_src_mapping({DirectiveStatus({kScriptSrc})});
+-  DirectiveMapping object_src_mapping({DirectiveStatus({kObjectSrc})});
+-  DirectiveMapping worker_src_mapping({DirectiveStatus({kWorkerSrc})});
+-  DirectiveMapping default_src_mapping({DirectiveStatus({kDefaultSrc})});
++  DirectiveMapping script_src_mapping(DirectiveStatus({kScriptSrc}));
++  DirectiveMapping object_src_mapping(DirectiveStatus({kObjectSrc}));
++  DirectiveMapping worker_src_mapping(DirectiveStatus({kWorkerSrc}));
++  DirectiveMapping default_src_mapping(DirectiveStatus({kDefaultSrc}));
+ 
+   DirectiveMapping* directive_mappings[] = {
+       &script_src_mapping,
+--- a/content/renderer/media/stream/media_stream_constraints_util_audio.cc
++++ b/content/renderer/media/stream/media_stream_constraints_util_audio.cc
+@@ -307,7 +307,7 @@ class EchoCancellationContainer {
+                             bool is_device_capture,
+                             media::AudioParameters device_parameters,
+                             AudioProcessingProperties properties)
+-      : ec_mode_allowed_values_(EchoCancellationTypeSet({allowed_values})),
++      : ec_mode_allowed_values_(EchoCancellationTypeSet(allowed_values)),
+         device_parameters_(device_parameters),
+         is_device_capture_(is_device_capture) {
+     if (!has_active_source) {

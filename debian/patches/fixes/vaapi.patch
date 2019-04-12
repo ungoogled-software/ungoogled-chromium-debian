@@ -3,7 +3,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
 
 --- a/chrome/browser/about_flags.cc
 +++ b/chrome/browser/about_flags.cc
-@@ -1771,7 +1771,7 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -1606,7 +1606,7 @@ const FeatureEntry kFeatureEntries[] = {
          "disable-accelerated-video-decode",
          flag_descriptions::kAcceleratedVideoDecodeName,
          flag_descriptions::kAcceleratedVideoDecodeDescription,
@@ -12,7 +12,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
          SINGLE_DISABLE_VALUE_TYPE(switches::kDisableAcceleratedVideoDecode),
      },
  #if defined(OS_WIN)
-@@ -2402,12 +2402,12 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -2216,12 +2216,12 @@ const FeatureEntry kFeatureEntries[] = {
       FEATURE_VALUE_TYPE(service_manager::features::kXRSandbox)},
  #endif  // ENABLE_ISOLATED_XR_SERVICE
  #endif  // ENABLE_VR
@@ -28,7 +28,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
      {"v8-cache-options", flag_descriptions::kV8CacheOptionsName,
       flag_descriptions::kV8CacheOptionsDescription, kOsAll,
       MULTI_VALUE_TYPE(kV8CacheOptionsChoices)},
-@@ -4354,12 +4354,14 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -4078,12 +4078,14 @@ const FeatureEntry kFeatureEntries[] = {
                                      "AutofillDropdownLayout")},
  #endif  // OS_ANDROID
  
@@ -47,7 +47,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
       flag_descriptions::kEnableHomeLauncherGesturesDescription, kOsCrOS,
 --- a/chrome/browser/flag_descriptions.cc
 +++ b/chrome/browser/flag_descriptions.cc
-@@ -3095,9 +3095,9 @@ const char kTextSuggestionsTouchBarDescr
+@@ -3081,9 +3081,9 @@ const char kTextSuggestionsTouchBarDescr
  
  #endif
  
@@ -59,7 +59,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
  
  const char kAcceleratedMjpegDecodeName[] =
      "Hardware-accelerated mjpeg decode for captured frame";
-@@ -3105,6 +3105,18 @@ const char kAcceleratedMjpegDecodeDescri
+@@ -3091,6 +3091,18 @@ const char kAcceleratedMjpegDecodeDescri
      "Enable hardware-accelerated mjpeg decode for captured frame where "
      "available.";
  
@@ -78,7 +78,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
  const char kAllowTouchpadThreeFingerClickName[] = "Touchpad three-finger-click";
  const char kAllowTouchpadThreeFingerClickDescription[] =
      "Enables touchpad three-finger-click as middle button.";
-@@ -3675,12 +3687,6 @@ const char kUseMonitorColorSpaceDescript
+@@ -3610,12 +3622,6 @@ const char kUseMonitorColorSpaceDescript
      "Enables Chrome to use the  color space information provided by the monitor"
      " instead of the default sRGB color space.";
  
@@ -93,7 +93,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
  const char kVideoPlayerChromecastSupportDescription[] =
 --- a/chrome/browser/flag_descriptions.h
 +++ b/chrome/browser/flag_descriptions.h
-@@ -1852,13 +1852,22 @@ extern const char kPermissionPromptPersi
+@@ -1833,13 +1833,22 @@ extern const char kPermissionPromptPersi
  
  #endif  // defined(OS_MACOSX)
  
@@ -118,7 +118,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
  extern const char kAllowTouchpadThreeFingerClickName[];
  extern const char kAllowTouchpadThreeFingerClickDescription[];
  
-@@ -2203,9 +2212,6 @@ extern const char kUseMashDescription[];
+@@ -2161,9 +2170,6 @@ extern const char kUseMashDescription[];
  extern const char kUseMonitorColorSpaceName[];
  extern const char kUseMonitorColorSpaceDescription[];
  
@@ -130,7 +130,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
  
 --- a/components/viz/service/main/viz_main_impl.cc
 +++ b/components/viz/service/main/viz_main_impl.cc
-@@ -41,7 +41,7 @@ std::unique_ptr<base::Thread> CreateAndS
+@@ -35,7 +35,7 @@ std::unique_ptr<base::Thread> CreateAndS
    // It should be possible to use |main_task_runner_| for doing IO tasks.
    base::Thread::Options thread_options(base::MessageLoop::TYPE_IO, 0);
    thread_options.priority = base::ThreadPriority::NORMAL;
@@ -161,7 +161,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
  }
 --- a/content/gpu/gpu_main.cc
 +++ b/content/gpu/gpu_main.cc
-@@ -284,7 +284,7 @@ int GpuMain(const MainFunctionParams& pa
+@@ -290,7 +290,7 @@ int GpuMain(const MainFunctionParams& pa
  
    base::PlatformThread::SetName("CrGpuMain");
  
@@ -170,7 +170,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
    // Set thread priority before sandbox initialization.
    base::PlatformThread::SetCurrentThreadPriority(base::ThreadPriority::DISPLAY);
  #endif
-@@ -317,7 +317,7 @@ int GpuMain(const MainFunctionParams& pa
+@@ -323,7 +323,7 @@ int GpuMain(const MainFunctionParams& pa
    GetContentClient()->SetGpuInfo(gpu_init->gpu_info());
  
    base::ThreadPriority io_thread_priority = base::ThreadPriority::NORMAL;
@@ -201,7 +201,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
        "cr_bugs": [145531, 332596, 571899, 629434],
 --- a/media/base/media_switches.cc
 +++ b/media/base/media_switches.cc
-@@ -496,7 +496,7 @@ bool IsVideoCaptureAcceleratedJpegDecodi
+@@ -495,7 +495,7 @@ bool IsVideoCaptureAcceleratedJpegDecodi
            switches::kUseFakeJpegDecodeAccelerator)) {
      return true;
    }
@@ -220,7 +220,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
  
  jumbo_source_set("filters") {
    # Do not expand the visibility here without double-checking with OWNERS, this
-@@ -200,7 +201,7 @@ jumbo_source_set("filters") {
+@@ -202,7 +203,7 @@ jumbo_source_set("filters") {
      deps += [ "//media/base/android" ]
    }
  
@@ -231,7 +231,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
        "h264_bitstream_buffer.h",
 --- a/media/gpu/BUILD.gn
 +++ b/media/gpu/BUILD.gn
-@@ -508,6 +508,12 @@ if (use_v4l2_codec || use_vaapi || is_ma
+@@ -503,6 +503,12 @@ if (use_v4l2_codec || use_vaapi || is_ma
    }
  }
  
@@ -244,7 +244,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
  if (use_v4l2_codec || use_vaapi) {
    test("jpeg_encode_accelerator_unittest") {
      deps = [
-@@ -578,6 +584,7 @@ if (is_chromeos || is_linux) {
+@@ -573,6 +579,7 @@ if (is_chromeos || is_linux) {
      if (use_ozone) {
        deps += [ "//ui/ozone" ]
      }
@@ -254,7 +254,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
  
 --- a/media/gpu/vaapi/vaapi_wrapper.cc
 +++ b/media/gpu/vaapi/vaapi_wrapper.cc
-@@ -1000,7 +1000,7 @@ scoped_refptr<VASurface> VaapiWrapper::C
+@@ -1027,7 +1027,7 @@ scoped_refptr<VASurface> VaapiWrapper::C
    }
    va_attrib_extbuf.num_planes = num_planes;
  
