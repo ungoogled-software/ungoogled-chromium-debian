@@ -1,7 +1,7 @@
 #!/bin/bash -eux
 
 PLATFORM_ROOT=$(dirname $(readlink -f ${BASH_SOURCE[0]}))
-UNGOOGLED_REPO=$PLATFORM_ROOT/upstream/ungoogled-chromium
+UNGOOGLED_REPO=$PLATFORM_ROOT/ungoogled-chromium
 
 _command=$1
 
