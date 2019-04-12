@@ -137,10 +137,6 @@ git submodule update --remote
 ### Updating patches
 
 ```sh
-# Assuming we are using an existing git clone of the ungoogled-chromium repo
-ln -s path/to/ungoogled-chromium  debian/ungoogled-upstream/ungoogled-chromium
-./debian/rules checkout-ungoogled-chromium
-
 ./debian/devutils/update_patches.sh merge
 source debian/devutils/set_quilt_vars.sh
 
