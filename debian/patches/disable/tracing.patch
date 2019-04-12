@@ -18,7 +18,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "translate/android/translate_utils.cc",
      "translate/android/translate_utils.h",
      "translate/chrome_translate_client.cc",
-@@ -1886,7 +1878,6 @@ jumbo_split_static_library("browser") {
+@@ -1887,7 +1879,6 @@ jumbo_split_static_library("browser") {
      "//components/sync_preferences",
      "//components/sync_sessions",
      "//components/task_scheduler_util",
@@ -28,7 +28,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "//components/translate/core/common",
 --- a/content/browser/BUILD.gn
 +++ b/content/browser/BUILD.gn
-@@ -61,8 +61,6 @@ jumbo_source_set("browser") {
+@@ -60,8 +60,6 @@ jumbo_source_set("browser") {
      "//components/rappor",
      "//components/services/filesystem:lib",
      "//components/services/leveldb:lib",
@@ -37,7 +37,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "//components/ui_devtools",
      "//components/url_formatter",
      "//components/variations",
-@@ -163,9 +161,6 @@ jumbo_source_set("browser") {
+@@ -162,9 +160,6 @@ jumbo_source_set("browser") {
      "//services/service_manager/zygote:zygote_buildflags",
      "//services/shape_detection:lib",
      "//services/shape_detection/public/mojom",
@@ -347,7 +347,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "content/browser/webrtc/webrtc_internals.h"
  #include "content/browser/websockets/websocket_manager.h"
  #include "content/browser/webui/web_ui_controller_factory_registry.h"
-@@ -2044,7 +2043,6 @@ void RenderProcessHostImpl::CreateMessag
+@@ -2045,7 +2044,6 @@ void RenderProcessHostImpl::CreateMessag
    p2p_socket_dispatcher_host_ =
        std::make_unique<P2PSocketDispatcherHost>(GetID());
  
@@ -419,7 +419,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "chrome/browser/translate/translate_service.h"
  #include "chrome/browser/ui/blocked_content/blocked_window_params.h"
  #include "chrome/browser/ui/blocked_content/popup_blocker.h"
-@@ -4330,7 +4329,7 @@ ChromeContentBrowserClient::GetDevToolsM
+@@ -4299,7 +4298,7 @@ ChromeContentBrowserClient::GetDevToolsM
  }
  
  content::TracingDelegate* ChromeContentBrowserClient::GetTracingDelegate() {
@@ -438,7 +438,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "chrome/browser/ui/blocked_content/safe_browsing_triggered_popup_blocker.h"
  #include "chrome/browser/ui/browser_ui_prefs.h"
  #include "chrome/browser/ui/navigation_correction_tab_observer.h"
-@@ -428,7 +427,6 @@ void RegisterLocalState(PrefRegistrySimp
+@@ -429,7 +428,6 @@ void RegisterLocalState(PrefRegistrySimp
    BrowserProcessImpl::RegisterPrefs(registry);
    ChromeContentBrowserClient::RegisterLocalStatePrefs(registry);
    ChromeMetricsServiceClient::RegisterPrefs(registry);
@@ -620,7 +620,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "components/ukm/content/source_url_recorder.h"
  #include "content/public/browser/web_contents.h"
  #include "extensions/buildflags/buildflags.h"
-@@ -357,9 +355,6 @@ offline_pages::AutoFetchPageLoadWatcher:
+@@ -352,9 +350,6 @@ offline_pages::AutoFetchPageLoadWatcher:
    if (predictors::LoadingPredictorFactory::GetForProfile(profile))
      predictors::LoadingPredictorTabHelper::CreateForWebContents(web_contents);
  
@@ -760,7 +760,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  // Can be called on any thread.
-@@ -335,7 +330,6 @@ bool TracingControllerImpl::StartTracing
+@@ -332,7 +327,6 @@ bool TracingControllerImpl::StartTracing
  
    start_tracing_done_ = std::move(callback);
    ConnectToServiceIfNeeded();
@@ -768,7 +768,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
    if (start_tracing_done_ &&
        (base::trace_event::TraceLog::GetInstance()->IsEnabled() ||
-@@ -384,16 +378,8 @@ bool TracingControllerImpl::StopTracing(
+@@ -381,16 +375,8 @@ bool TracingControllerImpl::StopTracing(
        new mojo::DataPipeDrainer(this, std::move(data_pipe.consumer_handle)));
    if (agent_label.empty()) {
      // Stop and flush all agents.
@@ -785,7 +785,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    }
    // TODO(chiniforooshan): Is the return value used anywhere?
    return true;
-@@ -404,12 +390,6 @@ bool TracingControllerImpl::GetTraceBuff
+@@ -401,12 +387,6 @@ bool TracingControllerImpl::GetTraceBuff
    DCHECK_CURRENTLY_ON(BrowserThread::UI);
  
    ConnectToServiceIfNeeded();
