@@ -51,7 +51,7 @@ cd build/src
 
 # Add packages for LLVM 8
 # The easiest way to do this is to use the APT repo from apt.llvm.org
-# 1. Add this line to your /etc/apt/sources.list: deb http://apt.llvm.org/buster/ llvm-toolchain-buster-8 main
+# 1. Add this line to your /etc/apt/sources.list: deb http://apt.llvm.org/cosmic/ llvm-toolchain-cosmic-8 main
 # 2. Follow the instructions on https://apt.llvm.org for adding the signing key
 #
 # You do not need to install LLVM packages yourself, since the next step will do it for you.
