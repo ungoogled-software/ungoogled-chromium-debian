@@ -4,7 +4,7 @@ origin: chromium 66 authors
 
 --- a/media/filters/ffmpeg_audio_decoder.cc
 +++ b/media/filters/ffmpeg_audio_decoder.cc
-@@ -80,6 +80,8 @@ void FFmpegAudioDecoder::Initialize(
+@@ -79,6 +79,8 @@ void FFmpegAudioDecoder::Initialize(cons
      return;
    }
  
@@ -25,8 +25,8 @@ origin: chromium 66 authors
  
 --- a/media/filters/ffmpeg_glue.cc
 +++ b/media/filters/ffmpeg_glue.cc
-@@ -63,7 +63,13 @@ static int64_t AVIOSeekOperation(void* o
-   return new_offset;
+@@ -70,7 +70,13 @@ static void LogContainer(bool is_local_f
+     base::UmaHistogramSparse("Media.DetectedContainer.Local", container);
  }
  
 +void FFmpegGlue::InitializeFFmpeg() {
@@ -68,7 +68,7 @@ origin: chromium 66 authors
    return avcodec_find_decoder(VideoCodecToCodecID(codec)) != nullptr;
  }
  
-@@ -224,6 +226,8 @@ void FFmpegVideoDecoder::Initialize(
+@@ -223,6 +225,8 @@ void FFmpegVideoDecoder::Initialize(cons
      return;
    }
  
