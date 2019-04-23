@@ -2,13 +2,13 @@
 
 This repository contains files to build Debian packages of [ungoogled-chromium](//github.com/Eloston/ungoogled-chromium).
 
-This branch contains the code to build packages for: **Debian 10 (buster)**
+This branch contains the code to build packages for: **Ubuntu 19.04 (disco)**
 
 ## Downloads
 
 **Binaries** (i.e. `.deb` packages): [Get them from the Contributor Binaries website](//ungoogled-software.github.io/ungoogled-chromium-binaries/).
 
-**Source Code**: Use the tags labeled with `buster` via `git checkout` (see building instructions). The branches are for development and may not be stable.
+**Source Code**: Use the tags labeled with `disco` via `git checkout` (see building instructions). The branches are for development and may not be stable.
 
 ## Installing
 
@@ -48,13 +48,6 @@ cd build/src
 
 # Final setup steps for debian/ directory
 ./debian/rules setup-debian
-
-# Add packages for LLVM 8
-# The easiest way to do this is to use the APT repo from apt.llvm.org
-# 1. Add this line to your /etc/apt/sources.list: deb http://apt.llvm.org/buster/ llvm-toolchain-buster-8 main
-# 2. Follow the instructions on https://apt.llvm.org for adding the signing key
-#
-# You do not need to install LLVM packages yourself, since the next step will do it for you.
 
 # Install remaining requirements to build Chromium
 sudo mk-build-deps -i debian/control
@@ -116,11 +109,11 @@ git remote add upstream https://salsa.debian.org/chromium-team/chromium.git
 
 ### Pull new changes from Debian
 
-These instructions will pull in changes from Debian's `chromium` package into `debian_buster`:
+First, update `debian_buster` with the latest changes. Then, merge it into this branch:
 
 ```sh
-git checkout --recurse-submodules debian_buster
-git pull upstream master
+git checkout --recurse-submodules ubuntu_disco
+git merge debian_buster
 # Complete the git merge
 # Update patches via instructions below
 ```
