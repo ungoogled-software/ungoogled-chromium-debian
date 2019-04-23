@@ -1,3 +1,33 @@
+chromium (74.0.3729.108-1) unstable; urgency=medium
+
+  * New upstream stable release.
+    - Eliminates flood of vsync error messages (closes: #901831).
+    - Correctly shuts down when SIGTERM is recieved (closes: #924901).
+    - Fixes regression in hardware accelerated video (closes: #926032).
+    - CVE-2019-5805: Use after free in PDFium. Reported by Anonymous
+    - CVE-2019-5806: Integer overflow in Angle. Reported by Wen Xu
+    - CVE-2019-5807: Memory corruption in V8. Reported by TimGMichaud
+    - CVE-2019-5808: Use after free in Blink. Reported by cloudfuzzer
+    - CVE-2019-5809: Use after free in Blink. Reported by Mark Brand
+    - CVE-2019-5810: User information disclosure in Autofill. Reported by Mark
+      Amery
+    - CVE-2019-5811: CORS bypass in Blink. Reported by Jun Kokatsu
+    - CVE-2019-5813: Out of bounds read in V8. Reported by Aleksandar Nikolic
+    - CVE-2019-5814: CORS bypass in Blink. Reported by @AaylaSecura1138
+    - CVE-2019-5815: Heap buffer overflow in Blink. Reported by Nicolas
+      Grégoire
+    - CVE-2019-5818: Uninitialized value in media reader. Reported by Adrian
+      Tolbaru
+    - CVE-2019-5819: Incorrect escaping in developer tools. Reported by Svyat
+      Mitin
+    - CVE-2019-5820: Integer overflow in PDFium. Reported by pdknsk
+    - CVE-2019-5821: Integer overflow in PDFium. Reported by pdknsk
+    - CVE-2019-5822: CORS bypass in download manager. Reported by Jun Kokatsu
+    - CVE-2019-5823: Forced navigation from service worker. Reported by David
+      Erceg
+
+ -- Michael Gilbert <mgilbert@debian.org>  Wed, 24 Apr 2019 00:08:54 +0000
+
 chromium (73.0.3683.75-1) unstable; urgency=medium
 
   * New upstream stable release.
