@@ -1,23 +1,9 @@
 description: gcc 6 does not support using a unique_ptr after it has been moved
 author: Michael Gilbert <mgilbert@debian.org>
 
---- a/services/resource_coordinator/coordination_unit/coordination_unit_base.cc
-+++ b/services/resource_coordinator/coordination_unit/coordination_unit_base.cc
-@@ -81,7 +81,10 @@ void CoordinationUnitBase::SetProperty(m
- // static
- CoordinationUnitBase* CoordinationUnitBase::PassOwnershipToGraph(
-     std::unique_ptr<CoordinationUnitBase> new_cu) {
--  return new_cu->graph()->AddNewCoordinationUnit(std::move(new_cu));
-+  CoordinationUnitGraph* graph = new_cu->graph();
-+  if (graph)
-+    return graph->AddNewCoordinationUnit(std::move(new_cu));
-+  LOG(ERROR) << "CoordinationUnitGraph pointer is null.";
- }
- 
- }  // namespace resource_coordinator
 --- a/base/task/sequence_manager/task_queue.cc
 +++ b/base/task/sequence_manager/task_queue.cc
-@@ -68,7 +68,9 @@ TaskQueue::~TaskQueue() {
+@@ -132,7 +132,9 @@ TaskQueue::~TaskQueue() {
    // If we've not been unregistered then this must occur on the main thread.
    DCHECK_CALLED_ON_VALID_THREAD(associated_thread_->thread_checker);
    impl_->SetOnNextWakeUpChangedCallback(RepeatingCallback<void(TimeTicks)>());
@@ -30,7 +16,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  TaskQueue::TaskTiming::TaskTiming(bool has_wall_time, bool has_thread_time)
 --- a/headless/lib/browser/headless_request_context_manager.cc
 +++ b/headless/lib/browser/headless_request_context_manager.cc
-@@ -165,7 +165,8 @@ class HeadlessProxyConfigMonitor
+@@ -164,7 +164,8 @@ class HeadlessProxyConfigMonitor
        public ::network::mojom::ProxyConfigPollerClient {
   public:
    static void DeleteSoon(std::unique_ptr<HeadlessProxyConfigMonitor> instance) {
@@ -40,3 +26,15 @@ author: Michael Gilbert <mgilbert@debian.org>
    }
  
    explicit HeadlessProxyConfigMonitor(
+--- a/chrome/browser/performance_manager/performance_manager.cc
++++ b/chrome/browser/performance_manager/performance_manager.cc
+@@ -64,7 +64,8 @@ void PerformanceManager::Destroy(std::un
+   DCHECK_EQ(instance.get(), g_performance_manager);
+   g_performance_manager = nullptr;
+ 
+-  instance->task_runner_->DeleteSoon(FROM_HERE, instance.release());
++  const scoped_refptr<base::SequencedTaskRunner>& runner = instance->task_runner_;
++  runner->DeleteSoon(FROM_HERE, instance.release());
+ }
+ 
+ void PerformanceManager::DistributeMeasurementBatch(

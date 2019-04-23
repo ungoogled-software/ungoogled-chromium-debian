@@ -5,29 +5,29 @@ debianization/master-preferences.patch
 gn/libcxx.patch
 gn/parallel.patch
 
-arm/crashpad.patch
 arm/gcc_skcms_ice.patch
 arm/skia-aarch64-buildfix.patch
 
 gcc6/macro.patch
-gcc6/sqrtf.patch
 gcc6/sizet.patch
 gcc6/atomic.patch
-gcc6/insert.patch
 gcc6/constexpr.patch
+gcc6/wtf-hashmap.patch
 gcc6/lambda-this.patch
+gcc6/map-insertion.patch
 gcc6/not-constexpr.patch
 gcc6/move-required.patch
 gcc6/use-after-move.patch
-gcc6/template-argument.patch
 gcc6/ambiguous-overloads.patch
 gcc6/nullptr-copy-construct.patch
 gcc6/noexcept-redeclaration.patch
 gcc6/designated-initializers.patch
 
 fixes/mojo.patch
+fixes/quic.patch
 fixes/vaapi.patch
 fixes/alignof.patch
+fixes/nullptr.patch
 fixes/ps-print.patch
 fixes/as-needed.patch
 fixes/inspector.patch
@@ -39,7 +39,7 @@ fixes/widevine-revision.patch
 fixes/widevine-locations.patch
 fixes/widevine-buildflag.patch
 fixes/connection-message.patch
-fixes/chromedriver-revision.patch
+fixes/anonymous-aggregate.patch
 
 disable/unrar.patch
 disable/signin.patch
@@ -47,8 +47,10 @@ disable/android.patch
 disable/fuzzers.patch
 disable/tracing.patch
 disable/openh264.patch
+disable/chromeos.patch
 disable/perfetto.patch
 disable/installer.patch
+disable/font-tests.patch
 disable/swiftshader.patch
 disable/welcome-page.patch
 disable/google-api-warning.patch
@@ -64,6 +66,7 @@ warnings/enum-compare.patch
 warnings/unused-result.patch
 warnings/initialization.patch
 warnings/unused-typedefs.patch
+warnings/unused-functions.patch
 warnings/null-destination.patch
 warnings/int-in-bool-context.patch
 warnings/explicit-constructor.patch
@@ -76,8 +79,8 @@ system/lcms.patch
 system/nspr.patch
 system/zlib.patch
 system/event.patch
-system/jsoncpp.patch
 system/ffmpeg.patch
+system/jsoncpp.patch
 system/openjpeg.patch
 system/convertutf.patch
 system/fontconfig.patch

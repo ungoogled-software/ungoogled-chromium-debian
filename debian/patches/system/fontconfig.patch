@@ -1,19 +1,9 @@
 description: disable build commands for embedded fontconfig
 author: Michael Gilbert <mgilbert@debian.org>
 
---- a/build/config/posix/BUILD.gn
-+++ b/build/config/posix/BUILD.gn
-@@ -9,7 +9,6 @@ import("//build/config/compiler/compiler
- import("//build/config/sanitizers/sanitizers.gni")
- import("//build/config/sysroot.gni")
- import("//build/toolchain/toolchain.gni")
--import("//buildtools/deps_revisions.gni")
- 
- # This build configuration is used by both Fuchsia and POSIX systems.
- assert(is_posix || is_fuchsia)
 --- a/base/test/BUILD.gn
 +++ b/base/test/BUILD.gn
-@@ -207,7 +207,7 @@ static_library("test_support") {
+@@ -210,7 +210,7 @@ static_library("test_support") {
      deps += [ "//third_party/fuchsia-sdk/sdk:zx" ]
    }
  
@@ -22,7 +12,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      public_deps += [ ":fontconfig_util_linux" ]
      data_deps = [
        "//third_party/test_fonts",
-@@ -381,7 +381,7 @@ if (is_linux) {
+@@ -396,7 +396,7 @@ if (is_linux) {
      ]
    }
  
@@ -31,14 +21,3 @@ author: Michael Gilbert <mgilbert@debian.org>
      executable("generate_fontconfig_caches") {
        testonly = true
        sources = [
---- a/content/shell/test_runner/BUILD.gn
-+++ b/content/shell/test_runner/BUILD.gn
-@@ -175,7 +175,7 @@ group("resources") {
-   if (is_mac) {
-     deps += [ ":test_runner_bundle_data" ]
-     data_deps += [ ":test_runner_bundle_data" ]
--  } else {
-+  } else if (false) {
-     deps += [ "//third_party/test_fonts" ]
-     data_deps += [ "//third_party/test_fonts" ]
-   }

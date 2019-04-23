@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/base/test/scoped_task_environment.h
 +++ b/base/test/scoped_task_environment.h
-@@ -207,11 +207,11 @@ class ScopedTaskEnvironment {
+@@ -211,11 +211,11 @@ class ScopedTaskEnvironment {
   protected:
    explicit ScopedTaskEnvironment(ScopedTaskEnvironment&& other);
  
@@ -101,7 +101,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    }
 --- a/base/trace_event/trace_arguments.h
 +++ b/base/trace_event/trace_arguments.h
-@@ -483,21 +483,21 @@ class BASE_EXPORT StringStorage {
+@@ -490,21 +490,21 @@ class BASE_EXPORT StringStorage {
    void Reset(size_t alloc_size = 0);
  
    // Accessors.
@@ -130,7 +130,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      const char* char_ptr = static_cast<const char*>(ptr);
      return (char_ptr >= begin() && char_ptr < end());
    }
-@@ -508,7 +508,7 @@ class BASE_EXPORT StringStorage {
+@@ -515,7 +515,7 @@ class BASE_EXPORT StringStorage {
  
    // Return an estimate of the memory overhead of this instance. This doesn't
    // count the size of |data_| itself.
@@ -141,9 +141,9 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/content/public/browser/desktop_media_id.h
 +++ b/content/public/browser/desktop_media_id.h
-@@ -41,16 +41,16 @@ struct CONTENT_EXPORT DesktopMediaID {
-   static aura::Window* GetAuraWindowById(const DesktopMediaID& id);
- #endif  // defined(USE_AURA)
+@@ -37,16 +37,16 @@ struct CONTENT_EXPORT DesktopMediaID {
+   static gfx::NativeWindow GetNativeWindowById(const DesktopMediaID& id);
+ #endif  // USE_AURA
  
 -  constexpr DesktopMediaID() = default;
 +  DesktopMediaID() = default;
@@ -162,3 +162,23 @@ author: Michael Gilbert <mgilbert@debian.org>
        : type(type), id(id), audio_share(audio_share) {}
  
    // Operators so that DesktopMediaID can be used with STL containers.
+--- a/base/containers/any_internal.h
++++ b/base/containers/any_internal.h
+@@ -45,7 +45,7 @@ class BASE_EXPORT AnyInternal {
+     type_ops_ = other.type_ops_;
+   }
+ 
+-  constexpr bool has_value() const noexcept { return !!type_ops_; }
++  const bool has_value() const noexcept { return !!type_ops_; }
+ 
+   TypeId type() const noexcept {
+     if (!type_ops_)
+@@ -160,7 +160,7 @@ class BASE_EXPORT AnyInternal {
+ 
+ // static
+ template <typename T>
+-const AnyInternal::TypeOps AnyInternal::TypeOpsHelper<T>::type_ops;
++constexpr AnyInternal::TypeOps AnyInternal::TypeOpsHelper<T>::type_ops;
+ 
+ template <typename T>
+ struct AnyInternal::ConstructHelper<T, /* UseInlineStorage */ true> {

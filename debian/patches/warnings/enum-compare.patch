@@ -21,7 +21,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      password_label_ = autofill::CreateLabelWithColorReadabilityDisabled(
 --- a/components/viz/common/gl_helper.cc
 +++ b/components/viz/common/gl_helper.cc
-@@ -476,7 +476,7 @@ void GLHelper::CopyTextureToImpl::Cancel
+@@ -477,7 +477,7 @@ void GLHelper::CopyTextureToImpl::Cancel
  }
  
  bool GLHelper::CopyTextureToImpl::IsBGRAReadbackSupported() {
@@ -32,7 +32,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        const std::string extensions_string =
 --- a/chrome/browser/ui/views/bookmarks/bookmark_bar_view.cc
 +++ b/chrome/browser/ui/views/bookmarks/bookmark_bar_view.cc
-@@ -2059,11 +2059,13 @@ int BookmarkBarView::GetIndexForButton(v
+@@ -2064,11 +2064,13 @@ int BookmarkBarView::GetIndexForButton(v
  
  SkColor BookmarkBarView::GetBookmarkBarTextColor() {
    const ui::ThemeProvider* theme_provider = GetThemeProvider();

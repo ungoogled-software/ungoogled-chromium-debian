@@ -49,7 +49,7 @@ origin: chromium 69 authors
  import("//build/config/linux/pkg_config.gni")
  import("//build/config/ui.gni")
  import("//mojo/public/tools/bindings/mojom.gni")
-@@ -138,13 +139,19 @@ jumbo_component("accessibility") {
+@@ -158,13 +159,19 @@ jumbo_component("accessibility") {
      sources += [
        "platform/atk_util_auralinux.cc",
        "platform/atk_util_auralinux.h",
@@ -95,7 +95,7 @@ origin: chromium 69 authors
  
  # Basically no parts of Chrome should depend on GTK. To prevent accidents, the
  # parts that explicitly need GTK are whitelisted on this target.
-@@ -35,10 +27,13 @@ group("gtk") {
+@@ -36,10 +28,13 @@ group("gtk") {
      "//remoting/host:remoting_me2me_host_static",
      "//remoting/test:it2me_standalone_host_main",
      "//webrtc/examples:peerconnection_client",
@@ -157,11 +157,11 @@ origin: chromium 69 authors
 +}
 --- a/chrome/browser/ui/libgtkui/BUILD.gn
 +++ b/chrome/browser/ui/libgtkui/BUILD.gn
-@@ -8,119 +8,154 @@ import("//build/config/features.gni")
+@@ -9,119 +9,154 @@ import("//build/config/jumbo.gni")
  import("//build/config/linux/gtk/gtk.gni")
  import("//printing/buildflags/buildflags.gni")
  
--component("libgtkui") {
+-jumbo_component("libgtkui") {
 -  sources = [
 -    "app_indicator_icon.cc",
 -    "app_indicator_icon.h",
@@ -662,7 +662,7 @@ origin: chromium 69 authors
    SkColor location_bar_border = GetBorderColor("GtkEntry#entry");
    if (SkColorGetA(location_bar_border))
      colors_[ThemeProperties::COLOR_LOCATION_BAR_BORDER] = location_bar_border;
-@@ -861,6 +992,8 @@ void GtkUi::UpdateColors() {
+@@ -859,6 +990,8 @@ void GtkUi::UpdateColors() {
    colors_[ThemeProperties::COLOR_BACKGROUND_TAB_INCOGNITO_INACTIVE] =
        SK_ColorTRANSPARENT;
  
@@ -671,7 +671,7 @@ origin: chromium 69 authors
    colors_[ThemeProperties::COLOR_NTP_LINK] = native_theme_->GetSystemColor(
        ui::NativeTheme::kColorId_TextfieldSelectionBackgroundFocused);
  
-@@ -882,6 +1015,8 @@ void GtkUi::UpdateColors() {
+@@ -880,6 +1013,8 @@ void GtkUi::UpdateColors() {
        native_theme_->GetSystemColor(
            ui::NativeTheme::kColorId_ThrobberWaitingColor);
  
@@ -680,7 +680,7 @@ origin: chromium 69 authors
    // Generate colors that depend on whether or not a custom window frame is
    // used.  These colors belong in |color_map| below, not |colors_|.
    for (bool custom_frame : {false, true}) {
-@@ -975,6 +1110,8 @@ void GtkUi::UpdateColors() {
+@@ -976,6 +1111,8 @@ void GtkUi::UpdateColors() {
            toolbar_top_separator_inactive;
      }
    }
@@ -689,7 +689,7 @@ origin: chromium 69 authors
  }
  
  void GtkUi::UpdateCursorTheme() {
-@@ -1039,6 +1176,20 @@ void GtkUi::UpdateDefaultFont() {
+@@ -1040,6 +1177,20 @@ void GtkUi::UpdateDefaultFont() {
    g_object_unref(fake_label);
  }
  
@@ -710,7 +710,7 @@ origin: chromium 69 authors
  void GtkUi::ResetStyle() {
    colors_.clear();
    custom_frame_colors_.clear();
-@@ -1051,12 +1202,19 @@ float GtkUi::GetRawDeviceScaleFactor() {
+@@ -1052,12 +1203,19 @@ float GtkUi::GetRawDeviceScaleFactor() {
    if (display::Display::HasForceDeviceScaleFactor())
      return display::Display::GetForcedDeviceScaleFactor();
  
@@ -766,13 +766,14 @@ origin: chromium 69 authors
  namespace {
  
  float GetDeviceScaleFactor() {
-@@ -588,5 +593,6 @@ SkColor GetSeparatorColor(const std::str
+@@ -588,6 +593,7 @@ SkColor GetSeparatorColor(const std::str
    gtk_render_frame(context, surface.cairo(), 0, 0, w, h);
    return surface.GetAveragePixelValue(false);
  }
 +#endif
  
- }  // namespace libgtkui
+ std::string GetGtkSettingsStringProperty(GtkSettings* settings,
+                                          const gchar* prop_name) {
 --- a/chrome/browser/ui/libgtkui/gtk_util.h
 +++ b/chrome/browser/ui/libgtkui/gtk_util.h
 @@ -67,6 +67,7 @@ void ParseButtonLayout(const std::string
@@ -789,8 +790,8 @@ origin: chromium 69 authors
  SkColor GetSeparatorColor(const std::string& css_selector);
 +#endif
  
- }  // namespace libgtkui
- 
+ // Get a GtkSettings property as a C++ string.
+ std::string GetGtkSettingsStringProperty(GtkSettings* settings,
 --- a/chrome/browser/ui/libgtkui/print_dialog_gtk.cc
 +++ b/chrome/browser/ui/libgtkui/print_dialog_gtk.cc
 @@ -290,8 +290,14 @@ void PrintDialogGtk::UpdateSettings(prin

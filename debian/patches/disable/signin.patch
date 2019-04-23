@@ -3,7 +3,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
 
 --- a/components/signin/core/browser/signin_manager_base.cc
 +++ b/components/signin/core/browser/signin_manager_base.cc
-@@ -158,7 +158,7 @@ void SigninManagerBase::FinalizeInitBefo
+@@ -157,7 +157,7 @@ void SigninManagerBase::FinalizeInitBefo
  bool SigninManagerBase::IsInitialized() const { return initialized_; }
  
  bool SigninManagerBase::IsSigninAllowed() const {
@@ -15,39 +15,37 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
 --- a/chrome/browser/ui/chrome_pages.cc
 +++ b/chrome/browser/ui/chrome_pages.cc
 @@ -379,6 +379,7 @@ void ShowSearchEngineSettings(Browser* b
- #if !defined(OS_ANDROID)
+ #if !defined(OS_ANDROID) && !defined(OS_CHROMEOS)
  void ShowBrowserSignin(Browser* browser,
                         signin_metrics::AccessPoint access_point) {
-+#if 0
++#if BUILDFLAG(ENABLE_ONE_CLICK_SIGNIN)
    Profile* original_profile = browser->profile()->GetOriginalProfile();
    DCHECK(original_profile->GetPrefs()->GetBoolean(prefs::kSigninAllowed));
  
-@@ -407,6 +408,7 @@ void ShowBrowserSignin(Browser* browser,
+@@ -396,6 +397,7 @@ void ShowBrowserSignin(Browser* browser,
+           : profiles::BUBBLE_VIEW_MODE_GAIA_SIGNIN;
    browser->signin_view_controller()->ShowSignin(bubble_view_mode, browser,
                                                  access_point);
- #endif
 +#endif
  }
  
  void ShowBrowserSigninOrSettings(Browser* browser,
 --- a/chrome/browser/ui/BUILD.gn
 +++ b/chrome/browser/ui/BUILD.gn
-@@ -1851,11 +1851,6 @@ jumbo_split_static_library("ui") {
+@@ -1850,9 +1850,6 @@ jumbo_split_static_library("ui") {
        "startup/default_browser_infobar_delegate.h",
        "startup/default_browser_prompt.cc",
        "startup/default_browser_prompt.h",
 -      "sync/one_click_signin_links_delegate.h",
 -      "sync/one_click_signin_links_delegate_impl.cc",
 -      "sync/one_click_signin_links_delegate_impl.h",
--      "sync/one_click_signin_sync_starter.cc",
--      "sync/one_click_signin_sync_starter.h",
        "user_manager.cc",
        "user_manager.h",
        "views/external_protocol_dialog.cc",
-@@ -3024,8 +3019,6 @@ jumbo_split_static_library("ui") {
-         "views/relaunch_notification/relaunch_required_dialog_view.cc",
-         "views/relaunch_notification/relaunch_required_dialog_view.h",
-         "views/screen_capture_notification_ui_views.cc",
+@@ -3030,8 +3027,6 @@ jumbo_split_static_library("ui") {
+         "views/sync/dice_bubble_sync_promo_view.h",
+         "views/sync/dice_signin_button_view.cc",
+         "views/sync/dice_signin_button_view.h",
 -        "views/sync/one_click_signin_dialog_view.cc",
 -        "views/sync/one_click_signin_dialog_view.h",
          "views/tabs/window_finder.cc",
@@ -55,36 +53,19 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
        deps += [ "//ui/views/window/vector_icons" ]
 --- a/chrome/browser/ui/webui/signin/inline_login_handler_impl.cc
 +++ b/chrome/browser/ui/webui/signin/inline_login_handler_impl.cc
-@@ -365,6 +365,7 @@ void InlineSigninHelper::OnClientOAuthSu
+@@ -411,6 +411,7 @@ void InlineSigninHelper::OnClientOAuthSu
+     signin_metrics::LogSigninReason(
+         GetSigninReasonFromHandlerSigninReason(reason));
    } else {
-     if (HandleCrossAccountError(result.refresh_token))
-       return;
 +#if BUILDFLAG(ENABLE_ONE_CLICK_SIGNIN)
      if (confirm_untrusted_signin_) {
        // Display a confirmation dialog to the user.
        base::RecordAction(
-@@ -379,6 +380,7 @@ void InlineSigninHelper::OnClientOAuthSu
+@@ -422,6 +423,7 @@ void InlineSigninHelper::OnClientOAuthSu
+                          base::Unretained(this), result.refresh_token));
+       return;
      }
-     CreateSyncStarter(browser, current_url_, result.refresh_token,
-                       OneClickSigninSyncStarter::CURRENT_PROFILE);
 +#endif
-     base::ThreadTaskRunnerHandle::Get()->DeleteSoon(FROM_HERE, this);
+     CreateSyncStarter(result.refresh_token);
    }
- }
---- a/chrome/browser/ui/webui/signin/inline_login_handler_impl.cc
-+++ b/chrome/browser/ui/webui/signin/inline_login_handler_impl.cc
-@@ -413,12 +413,14 @@ void InlineSigninHelper::CreateSyncStart
-     const GURL& current_url,
-     const std::string& refresh_token,
-     OneClickSigninSyncStarter::ProfileMode profile_mode) {
-+#if BUILDFLAG(ENABLE_ONE_CLICK_SIGNIN)
-   // OneClickSigninSyncStarter will delete itself once the job is done.
-   new OneClickSigninSyncStarter(
-       profile_, browser, gaia_id_, email_, password_, refresh_token,
-       signin::GetAccessPointForEmbeddedPromoURL(current_url),
-       signin::GetSigninReasonForEmbeddedPromoURL(current_url), profile_mode,
-       base::Bind(&InlineLoginHandlerImpl::SyncStarterCallback, handler_));
-+#endif
- }
- 
- bool InlineSigninHelper::HandleCrossAccountError(
+   base::ThreadTaskRunnerHandle::Get()->DeleteSoon(FROM_HERE, this);

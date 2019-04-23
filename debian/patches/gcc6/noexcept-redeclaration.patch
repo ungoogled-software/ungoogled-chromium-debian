@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/media/learning/common/labelled_example.cc
 +++ b/media/learning/common/labelled_example.cc
-@@ -17,7 +17,7 @@ LabelledExample::LabelledExample(std::in
+@@ -21,7 +21,7 @@ LabelledExample::LabelledExample(std::in
  
  LabelledExample::LabelledExample(const LabelledExample& rhs) = default;
  
@@ -11,15 +11,4 @@ author: Michael Gilbert <mgilbert@debian.org>
 +LabelledExample::LabelledExample(LabelledExample&& rhs) = default;
  
  LabelledExample::~LabelledExample() = default;
- 
---- a/chrome/browser/media/router/providers/cast/cast_activity_manager.cc
-+++ b/chrome/browser/media/router/providers/cast/cast_activity_manager.cc
-@@ -803,7 +803,7 @@ CastActivityManager::DoLaunchSessionPara
-       callback(std::move(callback)) {}
- 
- CastActivityManager::DoLaunchSessionParams::DoLaunchSessionParams(
--    DoLaunchSessionParams&& other) noexcept = default;
-+    DoLaunchSessionParams&& other) = default;
- 
- CastActivityManager::DoLaunchSessionParams::~DoLaunchSessionParams() = default;
  

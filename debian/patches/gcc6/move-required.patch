@@ -111,3 +111,14 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  }  // namespace extensions
+--- a/device/fido/pin.cc
++++ b/device/fido/pin.cc
+@@ -129,7 +129,7 @@ base::Optional<bssl::UniquePtr<EC_POINT>
+     return base::nullopt;
+   }
+ 
+-  return ret;
++  return std::move(ret);
+ }
+ 
+ // static

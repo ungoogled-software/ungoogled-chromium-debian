@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/components/download/internal/common/download_item_impl.cc
 +++ b/components/download/internal/common/download_item_impl.cc
-@@ -593,7 +593,9 @@ void DownloadItemImpl::UpdateResumptionI
+@@ -598,7 +598,9 @@ void DownloadItemImpl::UpdateResumptionI
      bytes_wasted_ = 0;
    }
  
@@ -27,3 +27,14 @@ author: Michael Gilbert <mgilbert@debian.org>
    }
    return font_format_;
  }
+--- a/third_party/blink/renderer/modules/animationworklet/animation_worklet_proxy_client.cc
++++ b/third_party/blink/renderer/modules/animationworklet/animation_worklet_proxy_client.cc
+@@ -195,7 +195,7 @@ AnimationWorkletGlobalScope*
+ AnimationWorkletProxyClient::SelectStatelessGlobalScope() {
+   if (--next_global_scope_switch_countdown_ < 0) {
+     current_stateless_global_scope_index_ =
+-        (++current_stateless_global_scope_index_ % global_scopes_.size());
++        (current_stateless_global_scope_index_ + 1) % global_scopes_.size();
+     // Introduce an element of randomness in the switching interval to make
+     // stateful dependences easier to spot.
+     next_global_scope_switch_countdown_ =

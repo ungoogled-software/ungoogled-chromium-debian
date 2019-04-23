@@ -18,10 +18,10 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 +extern "C" {
 +
- SHIM_ALWAYS_EXPORT ALIGN_LINKAGE void* ALIGN_NEW(std::size_t size,
+ ALIGN_LINKAGE SHIM_ALWAYS_EXPORT void* ALIGN_NEW(std::size_t size,
                                                   ALIGN_VAL_T alignment) {
    return ShimCppAlignedNew(size, static_cast<size_t>(alignment));
-@@ -150,3 +152,5 @@ SHIM_ALWAYS_EXPORT ALIGN_LINKAGE void
+@@ -150,3 +152,5 @@ ALIGN_LINKAGE SHIM_ALWAYS_EXPORT void
  ALIGN_DEL_ARR_NOTHROW(void* p, ALIGN_VAL_T, const std::nothrow_t&) __THROW {
    ShimCppDelete(p);
  }
