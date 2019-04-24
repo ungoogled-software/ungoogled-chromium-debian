@@ -88,6 +88,7 @@ cd build/src
 # Use quilt to refresh patches. See ungoogled-chromium's docs/developing.md section "Updating patches" for more details
 quilt pop -a
 
+cd ../../
 # Remove all patches introduced by ungoogled-chromium
 ./devutils/update_patches.sh unmerge
 # Ensure patches/series is formatted correctly, e.g. blank lines
