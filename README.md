@@ -36,11 +36,25 @@ mkdir -p build/src
 git clone --recurse-submodules https://github.com/ungoogled-software/ungoogled-chromium-debian.git
 # Replace TAG_OR_BRANCH_HERE with the tag or branch you want to build
 git checkout --recurse-submodules TAG_OR_BRANCH_HERE
+
+# NOTE: If you are reading this on GitHub, make sure to read the version corresponding
+# to your checkout of this repo (replace TAG_OR_BRANCH_HERE with the tag or branch you want to build):
+# https://github.com/ungoogled-software/ungoogled-chromium-debian/blob/TAG_OR_BRANCH_HERE/README.md
+#
+# Or, just read the README in your local repo.
+
 cp -r ungoogled-chromium-debian/debian build/src/
 cd build/src
 
 # Final setup steps for debian/ directory
 ./debian/rules setup-debian
+
+# Add packages for LLVM 8
+# The easiest way to do this is to use the APT repo from apt.llvm.org
+# 1. Add this line to your /etc/apt/sources.list: deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main
+# 2. Follow the instructions on https://apt.llvm.org for adding the signing key
+#
+# You do not need to install LLVM packages yourself, since the next step will do it for you.
 
 # Install remaining requirements to build Chromium
 sudo mk-build-deps -i debian/control
@@ -137,10 +151,6 @@ git submodule update --remote
 ### Updating patches
 
 ```sh
-# Assuming we are using an existing git clone of the ungoogled-chromium repo
-ln -s path/to/ungoogled-chromium  debian/ungoogled-upstream/ungoogled-chromium
-./debian/rules checkout-ungoogled-chromium
-
 ./debian/devutils/update_patches.sh merge
 source debian/devutils/set_quilt_vars.sh
 

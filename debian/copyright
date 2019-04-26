@@ -46,9 +46,11 @@ Files-Excluded:
  chrome/test/data/chromeproxy
  chrome/test/data/webui/i18n_process_css_test.html
  chrome/chrome_cleaner/test/resources/signed_dll
+ services/tracing
  tools/emacs
  tools/luci-go
  tools/android
+ tools/skia_goldctl
  tools/perf/contrib
  tools/perf/page_sets
  tools/perf/measurements/test_data
@@ -170,7 +172,6 @@ Files-Excluded:
  third_party/webrtc/sdk
  third_party/webrtc/data
  third_party/webrtc/examples
- third_party/pdfium/third_party/lcms
  third_party/pdfium/third_party/eu-strip
  third_party/pdfium/third_party/libpng16
  third_party/pdfium/third_party/yasm/source

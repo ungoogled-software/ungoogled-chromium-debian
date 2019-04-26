@@ -1,0 +1,14 @@
+description: gcc 6 does not have sqrtf in namespace std
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/ui/gfx/color_utils.cc
++++ b/ui/gfx/color_utils.cc
+@@ -431,7 +431,7 @@ SkColor SetDarkestColorForTesting(SkColo
+   // GetContrastRatio(kWhiteLuminance, g_luminance_midpoint).  The formula below
+   // can be verified by plugging it into how GetContrastRatio() operates.
+   g_luminance_midpoint =
+-      std::sqrtf((dark_luminance + 0.05f) * (kWhiteLuminance + 0.05f)) - 0.05f;
++      sqrtf((dark_luminance + 0.05f) * (kWhiteLuminance + 0.05f)) - 0.05f;
+ 
+   return previous_darkest_color;
+ }

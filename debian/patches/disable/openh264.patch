@@ -3,11 +3,12 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/third_party/webrtc/webrtc.gni
 +++ b/third_party/webrtc/webrtc.gni
-@@ -153,7 +153,7 @@ declare_args() {
-   # H.264, compilation succeeds but |H264DecoderImpl| fails to initialize.
-   # CHECK THE OPENH264, FFMPEG AND H.264 LICENSES/PATENTS BEFORE BUILDING.
-   # http://www.openh264.org, https://www.ffmpeg.org/
--  rtc_use_h264 = proprietary_codecs && !is_android && !is_ios
+@@ -159,8 +159,7 @@ declare_args() {
+   #
+   # Enabling H264 when building with MSVC is currently not supported, see
+   # bugs.webrtc.org/9213#c13 for more info.
+-  rtc_use_h264 =
+-      proprietary_codecs && !is_android && !is_ios && !(is_win && !is_clang)
 +  rtc_use_h264 = false
  
    # By default, use normal platform audio support or dummy audio, but don't
