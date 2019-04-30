@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/chrome/browser/navigation_predictor/navigation_predictor.cc
 +++ b/chrome/browser/navigation_predictor/navigation_predictor.cc
-@@ -697,18 +697,6 @@ double NavigationPredictor::CalculateAnc
+@@ -677,18 +677,6 @@ double NavigationPredictor::CalculateAnc
    DCHECK_LE(0, metrics.ratio_visible_area);
    DCHECK_GE(1, metrics.ratio_visible_area);
  

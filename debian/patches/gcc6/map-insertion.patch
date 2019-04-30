@@ -1,0 +1,14 @@
+description: map doesn't support insertion from a pair in gcc 6
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/services/image_annotation/annotator.cc
++++ b/services/image_annotation/annotator.cc
+@@ -598,7 +598,7 @@ void Annotator::ProcessResults(
+     // Populate the result struct for this image and copy it into the cache if
+     // necessary.
+     if (result_lookup != results.end())
+-      cached_results_.insert({source_id, result_lookup->second.Clone()});
++      cached_results_[source_id] = result_lookup->second.Clone();
+ 
+     // This should not happen, since only this method removes entries of
+     // |request_infos_|, and this method should only execute once per source ID.

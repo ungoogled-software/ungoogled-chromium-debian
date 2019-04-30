@@ -7,13 +7,13 @@ author: Michael Gilbert <mgilbert@debian.org>
    "//chrome/common/importer/typemaps.gni",
    "//chrome/common/media_router/mojo/typemaps.gni",
    "//chrome/typemaps.gni",
--  "//chromecast/common/mojom/typemaps.gni",
+-  "//chromecast/typemaps.gni",
    "//chromeos/typemaps.gni",
    "//chromeos/components/multidevice/mojom/typemaps.gni",
    "//chromeos/services/secure_channel/public/mojom/typemaps.gni",
 --- a/content/shell/BUILD.gn
 +++ b/content/shell/BUILD.gn
-@@ -145,8 +145,6 @@ jumbo_static_library("content_shell_lib"
+@@ -144,8 +144,6 @@ jumbo_static_library("content_shell_lib"
      "browser/web_test/fake_bluetooth_chooser.h",
      "browser/web_test/leak_detector.cc",
      "browser/web_test/leak_detector.h",
@@ -22,7 +22,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "browser/web_test/secondary_test_window_observer.cc",
      "browser/web_test/secondary_test_window_observer.h",
      "browser/web_test/test_info_extractor.cc",
-@@ -288,7 +286,6 @@ jumbo_static_library("content_shell_lib"
+@@ -290,7 +288,6 @@ jumbo_static_library("content_shell_lib"
      "//content/public/common:service_names",
      "//content/shell/test_runner:test_runner",
      "//content/test:content_test_mojo_bindings",
@@ -32,7 +32,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "//device/bluetooth",
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -970,7 +970,6 @@ if (!is_ios) {
+@@ -999,7 +999,6 @@ if (!is_ios) {
        ":layout_test_data_mojo_bindings",
        ":layout_test_data_mojo_bindings_lite",
        "//content/shell:content_shell",
@@ -42,16 +42,17 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//device/vr/public/mojom:mojom_js_data_deps",
 --- a/content/browser/service_manager/service_manager_context.cc
 +++ b/content/browser/service_manager/service_manager_context.cc
-@@ -85,8 +85,6 @@
- #include "services/service_manager/sandbox/sandbox_type.h"
+@@ -84,9 +84,6 @@
  #include "services/service_manager/service_manager.h"
+ #include "services/service_manager/service_process_launcher.h"
  #include "services/shape_detection/public/mojom/constants.mojom.h"
+-#include "services/tracing/public/cpp/tracing_features.h"
 -#include "services/tracing/public/mojom/constants.mojom.h"
 -#include "services/tracing/tracing_service.h"
  #include "services/video_capture/public/mojom/constants.mojom.h"
  #include "services/video_capture/service_impl.h"
  #include "services/viz/public/interfaces/constants.mojom.h"
-@@ -391,11 +389,6 @@ std::unique_ptr<service_manager::Service
+@@ -400,11 +397,6 @@ std::unique_ptr<service_manager::Service
        std::move(request));
  }
  
@@ -63,21 +64,29 @@ author: Michael Gilbert <mgilbert@debian.org>
  std::unique_ptr<service_manager::Service> CreateMediaSessionService(
      service_manager::mojom::ServiceRequest request) {
    return std::make_unique<media_session::MediaSessionService>(
-@@ -587,11 +580,6 @@ ServiceManagerContext::ServiceManagerCon
-       base::BindRepeating(&CreateResourceCoordinatorService));
+@@ -635,19 +627,6 @@ ServiceManagerContext::ServiceManagerCon
+   GetContentClient()->browser()->RegisterOutOfProcessServices(
+       &out_of_process_services);
  
-   RegisterInProcessService(packaged_services_connection_.get(),
--                           tracing::mojom::kServiceName,
--                           service_manager_thread_task_runner_,
--                           base::BindRepeating(&CreateTracingService));
+-  if (base::FeatureList::IsEnabled(features::kTracingServiceInProcess)) {
+-    RegisterInProcessService(
+-        packaged_services_connection_.get(), tracing::mojom::kServiceName,
+-        base::CreateSequencedTaskRunnerWithTraits(
+-            {base::MayBlock(), base::TaskShutdownBehavior::SKIP_ON_SHUTDOWN,
+-             base::WithBaseSyncPrimitives(),
+-             base::TaskPriority::USER_BLOCKING}),
+-        base::BindRepeating(&CreateTracingService));
+-  } else {
+-    out_of_process_services[tracing::mojom::kServiceName] =
+-        base::BindRepeating(&base::ASCIIToUTF16, "Tracing Service");
+-  }
 -
--  RegisterInProcessService(packaged_services_connection_.get(),
-                            metrics::mojom::kMetricsServiceName,
-                            service_manager_thread_task_runner_,
-                            base::BindRepeating(&metrics::CreateMetricsService));
+   out_of_process_services[data_decoder::mojom::kServiceName] =
+       base::BindRepeating(&base::ASCIIToUTF16, "Data Decoder Service");
+ 
 --- a/content/browser/tracing/tracing_controller_impl.h
 +++ b/content/browser/tracing/tracing_controller_impl.h
-@@ -17,7 +17,6 @@
+@@ -15,7 +15,6 @@
  #include "content/common/content_export.h"
  #include "content/public/browser/tracing_controller.h"
  #include "mojo/public/cpp/system/data_pipe_drainer.h"
@@ -85,17 +94,17 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  namespace base {
  
-@@ -95,7 +94,6 @@ class TracingControllerImpl
- 
+@@ -89,7 +88,6 @@ class TracingControllerImpl : public Tra
    void CompleteFlush();
  
+   std::unique_ptr<PerfettoFileTracer> perfetto_file_tracer_;
 -  tracing::mojom::CoordinatorPtr coordinator_;
    std::vector<std::unique_ptr<tracing::BaseAgent>> agents_;
    std::unique_ptr<TracingDelegate> delegate_;
    std::unique_ptr<base::trace_event::TraceConfig> trace_config_;
 --- a/content/shell/browser/web_test/web_test_content_browser_client.cc
 +++ b/content/shell/browser/web_test/web_test_content_browser_client.cc
-@@ -27,7 +27,6 @@
+@@ -28,7 +28,6 @@
  #include "content/shell/browser/shell_browser_context.h"
  #include "content/shell/browser/web_test/blink_test_controller.h"
  #include "content/shell/browser/web_test/fake_bluetooth_chooser.h"
@@ -103,7 +112,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "content/shell/browser/web_test/web_test_bluetooth_fake_adapter_setter_impl.h"
  #include "content/shell/browser/web_test/web_test_browser_context.h"
  #include "content/shell/browser/web_test/web_test_browser_main_parts.h"
-@@ -47,11 +46,6 @@ namespace {
+@@ -48,11 +47,6 @@ namespace {
  
  WebTestContentBrowserClient* g_web_test_browser_client;
  
@@ -115,7 +124,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  class TestOverlayWindow : public OverlayWindow {
   public:
    TestOverlayWindow() = default;
-@@ -155,7 +149,6 @@ void WebTestContentBrowserClient::Expose
+@@ -156,7 +150,6 @@ void WebTestContentBrowserClient::Expose
            &WebTestContentBrowserClient::CreateFakeBluetoothChooser,
            base::Unretained(this)),
        ui_task_runner);
@@ -123,14 +132,14 @@ author: Michael Gilbert <mgilbert@debian.org>
    registry->AddInterface(
        base::BindRepeating(&WebTestContentBrowserClient::BindClipboardHost,
                            base::Unretained(this)),
-@@ -313,7 +306,6 @@ bool WebTestContentBrowserClient::CanIgn
+@@ -314,7 +307,6 @@ bool WebTestContentBrowserClient::CanIgn
  void WebTestContentBrowserClient::ExposeInterfacesToFrame(
      service_manager::BinderRegistryWithArgs<content::RenderFrameHost*>*
          registry) {
 -  registry->AddInterface(base::Bind(&BindWebTestHelper));
  }
  
- scoped_refptr<LoginDelegate> WebTestContentBrowserClient::CreateLoginDelegate(
+ std::unique_ptr<LoginDelegate> WebTestContentBrowserClient::CreateLoginDelegate(
 --- a/content/shell/browser/shell_content_browser_client.cc
 +++ b/content/shell/browser/shell_content_browser_client.cc
 @@ -47,7 +47,6 @@
@@ -141,7 +150,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "device/bluetooth/public/mojom/test/fake_bluetooth.mojom.h"
  #include "media/mojo/buildflags.h"
  #include "net/ssl/client_cert_identity.h"
-@@ -161,7 +160,7 @@ const service_manager::Manifest& GetCont
+@@ -162,7 +161,7 @@ const service_manager::Manifest& GetCont
          .ExposeCapability(
              "renderer",
              service_manager::Manifest::InterfaceList<
@@ -150,7 +159,7 @@ author: Michael Gilbert <mgilbert@debian.org>
                  mojom::WebTestBluetoothFakeAdapterSetter,
                  bluetooth::mojom::FakeBluetooth>())
          .RequireCapability(echo::mojom::kServiceName, "echo")
-@@ -169,10 +168,6 @@ const service_manager::Manifest& GetCont
+@@ -170,10 +169,6 @@ const service_manager::Manifest& GetCont
          .RequireCapability(ws::mojom::kServiceName, "test")
          .RequireCapability("test_ws", "test")
  #endif
@@ -161,3 +170,14 @@ author: Michael Gilbert <mgilbert@debian.org>
          .Build()
    };
    return *manifest;
+--- a/mojo/public/js/BUILD.gn
++++ b/mojo/public/js/BUILD.gn
+@@ -67,7 +67,7 @@ js_library("bindings_lite_sources") {
+   ]
+ }
+ 
+-if (enable_mojom_closure_compile || closure_compile) {
++if (enable_mojom_closure_compile) {
+   js_binary("bindings_lite") {
+     outputs = [
+       bindings_lite_compiled_file,

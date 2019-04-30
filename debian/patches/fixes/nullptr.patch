@@ -1,0 +1,14 @@
+description: handle nullptr error condition
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/base/files/file_descriptor_watcher_posix.cc
++++ b/base/files/file_descriptor_watcher_posix.cc
+@@ -253,6 +253,8 @@ FileDescriptorWatcher::~FileDescriptorWa
+ 
+ std::unique_ptr<FileDescriptorWatcher::Controller>
+ FileDescriptorWatcher::WatchReadable(int fd, const Closure& callback) {
++  if (tls_fd_watcher.Get().Get() == nullptr)
++    return nullptr;
+   return WrapUnique(new Controller(MessagePumpForIO::WATCH_READ, fd, callback));
+ }
+ 

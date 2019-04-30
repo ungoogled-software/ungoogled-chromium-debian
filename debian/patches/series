@@ -3,18 +3,20 @@ debianization/master-preferences.patch
 
 gn/libcxx.patch
 
-arm/crashpad.patch
 arm/gcc_skcms_ice.patch
 arm/skia-aarch64-buildfix.patch
 
-gcc6/sqrtf.patch
-gcc6/insert.patch
+gcc6/sizet.patch
+gcc6/atomic.patch
+gcc6/wtf-hashmap.patch
+gcc6/map-insertion.patch
 gcc6/move-required.patch
 gcc6/ambiguous-overloads.patch
 
 fixes/mojo.patch
 fixes/vaapi.patch
 fixes/alignof.patch
+fixes/nullptr.patch
 fixes/as-needed.patch
 fixes/namespace.patch
 fixes/gpu-timeout.patch
@@ -24,7 +26,9 @@ fixes/widevine-locations.patch
 
 disable/tracing.patch
 disable/openh264.patch
+disable/chromeos.patch
 disable/installer.patch
+disable/font-tests.patch
 disable/swiftshader.patch
 
 warnings/friend.patch
@@ -35,6 +39,7 @@ warnings/bool-compare.patch
 warnings/enum-compare.patch
 warnings/unused-result.patch
 warnings/unused-typedefs.patch
+warnings/unused-functions.patch
 warnings/null-destination.patch
 warnings/int-in-bool-context.patch
 warnings/explicit-constructor.patch
@@ -46,8 +51,8 @@ system/lcms.patch
 system/nspr.patch
 system/zlib.patch
 system/event.patch
-system/jsoncpp.patch
 system/ffmpeg.patch
+system/jsoncpp.patch
 system/openjpeg.patch
 system/convertutf.patch
 
