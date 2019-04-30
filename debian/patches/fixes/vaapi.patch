@@ -3,7 +3,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
 
 --- a/chrome/browser/about_flags.cc
 +++ b/chrome/browser/about_flags.cc
-@@ -1443,7 +1443,7 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -1510,7 +1510,7 @@ const FeatureEntry kFeatureEntries[] = {
          "disable-accelerated-video-decode",
          flag_descriptions::kAcceleratedVideoDecodeName,
          flag_descriptions::kAcceleratedVideoDecodeDescription,
@@ -12,7 +12,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
          SINGLE_DISABLE_VALUE_TYPE(switches::kDisableAcceleratedVideoDecode),
      },
  #if defined(OS_WIN)
-@@ -1999,12 +1999,12 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -2066,12 +2066,12 @@ const FeatureEntry kFeatureEntries[] = {
       FEATURE_VALUE_TYPE(service_manager::features::kXRSandbox)},
  #endif  // ENABLE_ISOLATED_XR_SERVICE
  #endif  // ENABLE_VR
@@ -28,7 +28,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
      {"v8-cache-options", flag_descriptions::kV8CacheOptionsName,
       flag_descriptions::kV8CacheOptionsDescription, kOsAll,
       MULTI_VALUE_TYPE(kV8CacheOptionsChoices)},
-@@ -3760,10 +3760,10 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -3830,10 +3830,10 @@ const FeatureEntry kFeatureEntries[] = {
                                      "AutofillDropdownLayout")},
  #endif  // OS_ANDROID
  
@@ -43,7 +43,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
  
 --- a/chrome/browser/flag_descriptions.cc
 +++ b/chrome/browser/flag_descriptions.cc
-@@ -2985,9 +2985,9 @@ const char kMacViewsTaskManagerDescripti
+@@ -2989,9 +2989,9 @@ const char kMacViewsTaskManagerDescripti
  
  #endif
  
@@ -55,7 +55,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
  
  const char kAcceleratedMjpegDecodeName[] =
      "Hardware-accelerated mjpeg decode for captured frame";
-@@ -2995,6 +2995,18 @@ const char kAcceleratedMjpegDecodeDescri
+@@ -2999,6 +2999,18 @@ const char kAcceleratedMjpegDecodeDescri
      "Enable hardware-accelerated mjpeg decode for captured frame where "
      "available.";
  
@@ -74,7 +74,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
  const char kAllowTouchpadThreeFingerClickName[] = "Touchpad three-finger-click";
  const char kAllowTouchpadThreeFingerClickDescription[] =
      "Enables touchpad three-finger-click as middle button.";
-@@ -3481,12 +3493,6 @@ const char kUserActivityPredictionMlServ
+@@ -3485,12 +3497,6 @@ const char kUserActivityPredictionMlServ
  const char kUserActivityPredictionMlServiceDescription[] =
      "Uses the new ML Service model for user activity prediction (Smart Dim).";
  
@@ -89,7 +89,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
  const char kVideoPlayerChromecastSupportDescription[] =
 --- a/chrome/browser/flag_descriptions.h
 +++ b/chrome/browser/flag_descriptions.h
-@@ -1764,13 +1764,22 @@ extern const char kPermissionPromptPersi
+@@ -1767,13 +1767,22 @@ extern const char kPermissionPromptPersi
  
  #endif  // defined(OS_MACOSX)
  
@@ -114,7 +114,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
  extern const char kAllowTouchpadThreeFingerClickName[];
  extern const char kAllowTouchpadThreeFingerClickDescription[];
  
-@@ -2072,9 +2081,6 @@ extern const char kUseMonitorColorSpaceD
+@@ -2075,9 +2084,6 @@ extern const char kUseMonitorColorSpaceD
  extern const char kUserActivityPredictionMlServiceName[];
  extern const char kUserActivityPredictionMlServiceDescription[];
  

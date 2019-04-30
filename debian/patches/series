@@ -56,7 +56,6 @@ system/jsoncpp.patch
 system/openjpeg.patch
 system/convertutf.patch
 
-inox-patchset/chromium-media-fix-build-with-libstdc++.patch
 inox-patchset/chromium-skia-harmony.patch
 inox-patchset/fix-cfi-failures-with-unbundled-libxml.patch
 
