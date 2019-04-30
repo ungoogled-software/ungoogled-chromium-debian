@@ -63,3 +63,4 @@ ungoogled-chromium/remove-fcomplete-member-pointers-cflag.patch
 ungoogled-chromium/use-system-libraries-in-official-build.patch
 ungoogled-chromium/fix-nullptr-t-namespace.patch
 ungoogled-chromium/manpage.patch
+ungoogled-chromium/remove-test-fonts.patch
