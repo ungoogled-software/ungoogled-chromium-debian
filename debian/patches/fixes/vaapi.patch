@@ -3,17 +3,15 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
 
 --- a/chrome/browser/about_flags.cc
 +++ b/chrome/browser/about_flags.cc
-@@ -1510,8 +1510,8 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -1510,7 +1510,7 @@ const FeatureEntry kFeatureEntries[] = {
          "disable-accelerated-video-decode",
          flag_descriptions::kAcceleratedVideoDecodeName,
          flag_descriptions::kAcceleratedVideoDecodeDescription,
 -        kOsMac | kOsWin | kOsCrOS | kOsAndroid,
--        SINGLE_DISABLE_VALUE_TYPE(switches::kDisableAcceleratedVideoDecode),
 +        kOsMac | kOsWin | kOsCrOS | kOsAndroid | kOsLinux,
-+        SINGLE_VALUE_TYPE(switches::kDisableAcceleratedVideoDecode),
+         SINGLE_DISABLE_VALUE_TYPE(switches::kDisableAcceleratedVideoDecode),
      },
  #if defined(OS_WIN)
-     {"enable-hdr", flag_descriptions::kEnableHDRName,
 @@ -2066,12 +2066,12 @@ const FeatureEntry kFeatureEntries[] = {
       FEATURE_VALUE_TYPE(service_manager::features::kXRSandbox)},
  #endif  // ENABLE_ISOLATED_XR_SERVICE
