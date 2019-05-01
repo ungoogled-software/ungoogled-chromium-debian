@@ -1,0 +1,33 @@
+description: gcc 6 handles Optional<WTF::HashMap<K,V>> incorrectly
+origin: derived from a similar fix for WTF::Vector in wtf/vector.h
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/third_party/blink/renderer/platform/wtf/hash_map.h
++++ b/third_party/blink/renderer/platform/wtf/hash_map.h
+@@ -22,6 +22,8 @@
+ #define THIRD_PARTY_BLINK_RENDERER_PLATFORM_WTF_HASH_MAP_H_
+ 
+ #include <initializer_list>
++
++#include "base/template_util.h"
+ #include "third_party/blink/renderer/platform/wtf/allocator/partition_allocator.h"
+ #include "third_party/blink/renderer/platform/wtf/construct_traits.h"
+ #include "third_party/blink/renderer/platform/wtf/hash_table.h"
+@@ -772,6 +774,17 @@ inline void CopyValuesToVector(const Has
+ 
+ }  // namespace WTF
+ 
++namespace base {
++
++#if defined(__GNUC__) && !defined(__clang__) && __GNUC__ <= 7
++// Workaround for g++7 and earlier family.
++// Due to https://gcc.gnu.org/bugzilla/show_bug.cgi?id=80654.
++template <typename K, typename V>
++struct is_trivially_copy_constructible<WTF::HashMap<K,V>> : std::false_type {};
++#endif
++
++}  // namespace base
++
+ using WTF::HashMap;
+ 
+ #endif  // THIRD_PARTY_BLINK_RENDERER_PLATFORM_WTF_HASH_MAP_H_

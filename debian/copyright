@@ -78,7 +78,6 @@ Files-Excluded:
  third_party/libjpeg
  third_party/libxslt
  third_party/libwebp
- third_party/eu-strip
  third_party/freetype
  third_party/android*
  third_party/chromite
@@ -88,7 +87,6 @@ Files-Excluded:
  third_party/pyelftools
  third_party/fontconfig
  third_party/depot_tools
- third_party/bidichecker
  third_party/libjpeg_turbo
  third_party/win_build_output
  third_party/flot/*.js
@@ -127,6 +125,7 @@ Files-Excluded:
  third_party/instrumented_libraries
  third_party/sqlite/sqlite-src*
  third_party/angle/third_party/deqp
+ third_party/angle/third_party/rapidjson
  third_party/sfntly/src/java/lib
  third_party/sfntly/src/cpp/ext/redist
  third_party/chromevox/third_party/sre
@@ -138,7 +137,6 @@ Files-Excluded:
  third_party/google_input_tools/src/chrome/os/inputview/_locales/*.js
  v8/third_party/binutils
  v8/third_party/colorama
- v8/third_party/eu-strip
  v8/third_party/googletest
  v8/third_party/inspector_protocol
  v8/benchmarks/regexp.js
