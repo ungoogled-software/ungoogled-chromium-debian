@@ -1,0 +1,28 @@
+# Removes additional dependencies on //third_party/test_fonts
+
+--- a/base/test/BUILD.gn
++++ b/base/test/BUILD.gn
+@@ -212,11 +212,8 @@ static_library("test_support") {
+ 
+   if (is_linux) {
+     public_deps += [ ":fontconfig_util_linux" ]
+-    data_deps = [
+-      "//third_party/test_fonts",
+-    ]
+     if (current_toolchain == host_toolchain) {
+-      data_deps += [ ":do_generate_fontconfig_caches" ]
++      data_deps = [ ":do_generate_fontconfig_caches" ]
+     }
+   }
+ 
+@@ -414,9 +411,7 @@ if (is_linux) {
+ 
+       # The copied test fonts are inputs to generate_fontconfig_caches, so must
+       # be listed in deps, not data_deps (https://crbug.com/919422).
+-      deps = [
+-        "//third_party/test_fonts",
+-      ]
++      deps = []
+       args = []
+       outputs = [
+         "$root_out_dir/fontconfig_caches/df1acc8c-39d5-4a8b-8507-b1a7396ac3ac-le64.cache-7",

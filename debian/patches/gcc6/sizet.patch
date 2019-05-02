@@ -1,0 +1,55 @@
+description: size_t is not in scope by default in gcc 6
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/media/base/subsample_entry.h
++++ b/media/base/subsample_entry.h
+@@ -36,7 +36,7 @@ struct SubsampleEntry {
+ // does not match |input_size|.
+ MEDIA_EXPORT bool VerifySubsamplesMatchSize(
+     const std::vector<SubsampleEntry>& subsamples,
+-    size_t input_size);
++    std::size_t input_size);
+ 
+ }  // namespace media
+ 
+--- a/device/vr/util/sample_queue.h
++++ b/device/vr/util/sample_queue.h
+@@ -17,22 +17,22 @@ namespace device {
+ // requested size.
+ class DEVICE_VR_EXPORT SampleQueue {
+  public:
+-  explicit SampleQueue(size_t window_size);
++  explicit SampleQueue(std::size_t window_size);
+   ~SampleQueue();
+ 
+   int64_t GetSum() const { return sum_; }
+ 
+   void AddSample(int64_t value);
+ 
+-  size_t GetCount() const { return samples_.size(); }
++  std::size_t GetCount() const { return samples_.size(); }
+ 
+   // Get sliding window size for tests.
+-  size_t GetWindowSize() const { return window_size_; }
++  std::size_t GetWindowSize() const { return window_size_; }
+ 
+  private:
+   int64_t sum_ = 0;
+-  size_t current_index_ = 0;
+-  size_t window_size_;
++  std::size_t current_index_ = 0;
++  std::size_t window_size_;
+   std::vector<int64_t> samples_;
+   DISALLOW_COPY_AND_ASSIGN(SampleQueue);
+ };
+--- a/device/vr/util/sample_queue.cc
++++ b/device/vr/util/sample_queue.cc
+@@ -8,7 +8,7 @@
+ 
+ namespace device {
+ 
+-SampleQueue::SampleQueue(size_t window_size) : window_size_(window_size) {
++SampleQueue::SampleQueue(std::size_t window_size) : window_size_(window_size) {
+   samples_.reserve(window_size);
+ }
+ 
