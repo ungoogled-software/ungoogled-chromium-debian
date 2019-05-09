@@ -8,6 +8,6 @@ author: Michael Gilbert <mgilbert@debian.org>
      "//base:base_perftests",
      "//base:base_unittests",
 -    "//chrome/installer",
+     "//chrome/updater",
      "//net:net_unittests",
      "//skia:skia_unittests",
-     "//sql:sql_unittests",

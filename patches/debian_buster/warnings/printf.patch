@@ -14,7 +14,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }  // namespace IPC
 --- a/content/browser/web_package/signed_exchange_handler.cc
 +++ b/content/browser/web_package/signed_exchange_handler.cc
-@@ -541,7 +541,7 @@ void SignedExchangeHandler::OnVerifyCert
+@@ -601,7 +601,7 @@ void SignedExchangeHandler::OnVerifyCert
        error_message = base::StringPrintf(
            "CT verification failed. result: %s, policy compliance: %d",
            net::ErrorToShortString(error_code).c_str(),
