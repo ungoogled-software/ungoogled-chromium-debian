@@ -84,6 +84,8 @@ defines+=use_gio=true \
          use_system_lcms2=true \
          use_system_libjpeg=true \
          use_system_freetype=true \
+         use_system_harfbuzz=true \
+         use_system_libopenjpeg2=true \
          use_jumbo_build=true \
          jumbo_file_merge_limit=8 \
          proprietary_codecs=true \
@@ -114,9 +116,7 @@ domsubcache=debian/domsubcache.tar.gz
 	dh $@
 
 out/Release/gn:
-	mkdir -p out/Release || true
-	cp base/numerics/safe_conversions_arm_impl.h base/numerics/safe_math_arm_impl.h tools/gn/base/numerics
-	./tools/gn/bootstrap/bootstrap.py --skip-generate-buildfiles -j$(njobs) -o out/Release/gn
+	./tools/gn/bootstrap/bootstrap.py --skip-generate-buildfiles -j$(njobs)
 
 override_dh_auto_configure:
 	# output compiler information

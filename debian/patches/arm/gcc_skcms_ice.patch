@@ -4,7 +4,7 @@ bug-debian: http://bugs.debian.org/901290
 
 --- a/skia/BUILD.gn
 +++ b/skia/BUILD.gn
-@@ -56,6 +56,10 @@ config("skia_config") {
+@@ -57,6 +57,10 @@ config("skia_config") {
      "SK_HAS_WEBP_LIBRARY",
    ]
  
@@ -13,8 +13,8 @@ bug-debian: http://bugs.debian.org/901290
 +  }
 +
    if (!is_ios) {
-     include_dirs += [ "//third_party/skia/include/codec" ]
      defines += [ "SK_HAS_JPEG_LIBRARY" ]
+   }
 @@ -238,6 +242,7 @@ config("skia_library_config") {
  
  source_set("skcms") {

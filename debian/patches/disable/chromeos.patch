@@ -1,0 +1,13 @@
+--- a/chrome/browser/resources/component_extension_resources.grd
++++ b/chrome/browser/resources/component_extension_resources.grd
+@@ -91,10 +91,6 @@
+         <include name="IDR_ARC_SUPPORT_ICON_HEADER" file="chromeos/arc_support/images/header.png" type="BINDATA" />
+         <include name="IDR_ARC_SUPPORT_RECOMMEND_APP_LIST_VIEW_JS" file="chromeos/arc_support/recommend_app_list_view.js" type="BINDATA" />
+         <include name="IDR_ARC_SUPPORT_RECOMMEND_APP_LIST_VIEW_HTML" file="chromeos/arc_support/recommend_app_list_view.html" type="chrome_html" flattenhtml="true" />
+-        <if expr="_google_chrome">
+-          <part file="chromeos/kiosk_next_home/kiosk_next_resources.grdp" />
+-          <part file="chromeos/kiosk_next_home/kiosk_next_resources_internal.grdp" />
+-        </if>
+       </if>
+       <if expr="enable_plugins">
+         <!-- Note that resources included here also must be included in

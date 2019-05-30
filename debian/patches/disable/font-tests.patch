@@ -1,0 +1,11 @@
+--- a/skia/BUILD.gn
++++ b/skia/BUILD.gn
+@@ -831,7 +831,7 @@ group("test_fonts_resources") {
+   if (is_mac) {
+     deps += [ ":test_fonts_bundle_data" ]
+     data_deps += [ ":test_fonts_bundle_data" ]
+-  } else {
++  } else if (false) {
+     deps += [ "//third_party/test_fonts" ]
+     data_deps += [ "//third_party/test_fonts" ]
+   }
