@@ -12,7 +12,9 @@ This branch contains the code to build packages for: **Debian 10 (buster)**
 
 ## Installing
 
-The packages are essentially identical in structure to Debian's `chromium` packages. At minimum, you will need to install the `ungoogled-chromium` and `ungoogled-chromium-common` packages. For example:
+**NOTE**: The packages are essentially identical in structure to Debian's `chromium` packages. **As a result, they cannot be installed simultaneously with the distro-provided Chromium package.**
+
+At minimum, you will need to install the `ungoogled-chromium` and `ungoogled-chromium-common` packages. For example:
 
 ```sh
 # dpkg -i ungoogled-chromium_*.deb ungoogled-chromium-comon_*.deb
