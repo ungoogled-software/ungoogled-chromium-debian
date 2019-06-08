@@ -4,14 +4,15 @@ author: Fedora chromium maintainers
 
 --- a/mojo/public/c/system/macros.h
 +++ b/mojo/public/c/system/macros.h
-@@ -31,9 +31,7 @@
-   (sizeof(void*) == 4 ? 32 : 0)
+@@ -27,7 +27,11 @@
+ // clang-format on
  
  // Like the C++11 |alignof| operator.
--#if __cplusplus >= 201103L
--#define MOJO_ALIGNOF(type) alignof(type)
--#elif defined(__GNUC__)
 +#if defined(__GNUC__)
- #define MOJO_ALIGNOF(type) __alignof__(type)
- #elif defined(_MSC_VER)
- // The use of |sizeof| is to work around a bug in MSVC 2010 (see
++#define MOJO_ALIGNOF(type) __alignof__(type)
++#else
+ #define MOJO_ALIGNOF(type) alignof(type)
++#endif
+ 
+ // Specify the alignment of a |struct|, etc.
+ // Use like:

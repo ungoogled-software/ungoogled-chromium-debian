@@ -1,6 +1,6 @@
 --- a/ui/gfx/native_pixmap_handle.cc
 +++ b/ui/gfx/native_pixmap_handle.cc
-@@ -12,6 +12,9 @@
+@@ -21,6 +21,9 @@
  namespace gfx {
  
  #if defined(OS_LINUX)
