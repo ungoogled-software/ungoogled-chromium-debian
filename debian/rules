@@ -76,6 +76,7 @@ defines+=is_debug=false \
          use_custom_libcxx=false \
          use_gnome_keyring=false \
          use_unofficial_version_number=false \
+         enable_vr=false \
          enable_nacl=false \
          enable_nacl_nonsfi=false \
          enable_swiftshader=false \
@@ -84,9 +85,9 @@ defines+=is_debug=false \
          enable_iterator_debugging=false \
          enable_hangout_services_extension=false \
          optimize_webui=false \
+         blink_symbol_level=0 \
          treat_warnings_as_errors=false \
          linux_use_bundled_binutils=false \
-         remove_webcore_debug_symbols=true \
 
 # enabled features
 defines+=use_gio=true \

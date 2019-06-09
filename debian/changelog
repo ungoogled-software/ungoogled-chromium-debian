@@ -1,3 +1,12 @@
+chromium (75.0.3770.10-1) experimental; urgency=medium
+
+  * New upstream development release.
+    - Fixes crash when launching chromium a second time (closes: #927913).
+  * Document how to use widevine in README.debian (closes: #929026).
+  * Apply vaapi update from the Fedora chromium 73 package (closes: #926032).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 09 Jun 2019 18:35:36 +0000
+
 chromium (74.0.3729.108-1) unstable; urgency=medium
 
   * New upstream stable release.
