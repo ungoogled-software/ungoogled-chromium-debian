@@ -18,7 +18,6 @@ debian_buster/warnings/enum-compare.patch
 debian_buster/warnings/unused-typedefs.patch
 debian_buster/warnings/null-destination.patch
 debian_buster/warnings/int-in-bool-context.patch
-debian_buster/warnings/explicit-constructor.patch
 ubuntu/no-new-ninja-flag.patch
 ubuntu/relax-ninja-version-requirement.patch
 opensuse/system-libdrm.patch
