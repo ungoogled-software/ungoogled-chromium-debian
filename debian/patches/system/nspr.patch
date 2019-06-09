@@ -25,7 +25,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/base/BUILD.gn
 +++ b/base/BUILD.gn
-@@ -81,6 +81,9 @@ config("base_flags") {
+@@ -94,6 +94,9 @@ config("base_flags") {
        "-Wglobal-constructors",
      ]
    }
@@ -35,7 +35,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  config("base_implementation") {
-@@ -830,8 +833,6 @@ jumbo_component("base") {
+@@ -873,8 +876,6 @@ jumbo_component("base") {
      "third_party/dmg_fp/g_fmt.cc",
      "third_party/icu/icu_utf.cc",
      "third_party/icu/icu_utf.h",

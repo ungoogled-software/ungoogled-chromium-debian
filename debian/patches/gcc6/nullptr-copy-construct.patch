@@ -3,20 +3,20 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/components/omnibox/browser/autocomplete_match.cc
 +++ b/components/omnibox/browser/autocomplete_match.cc
-@@ -143,7 +143,6 @@ AutocompleteMatch::AutocompleteMatch(con
-                              ? new AutocompleteMatch(*match.associated_keyword)
+@@ -142,7 +142,6 @@ AutocompleteMatch::AutocompleteMatch(con
                               : nullptr),
        keyword(match.keyword),
+       from_keyword(match.from_keyword),
 -      pedal(match.pedal),
        from_previous(match.from_previous),
        search_terms_args(
            match.search_terms_args
-@@ -153,7 +152,7 @@ AutocompleteMatch::AutocompleteMatch(con
+@@ -152,7 +151,7 @@ AutocompleteMatch::AutocompleteMatch(con
                         ? new TemplateURLRef::PostContent(*match.post_content)
                         : nullptr),
        additional_info(match.additional_info),
 -      duplicate_matches(match.duplicate_matches) {}
 +      duplicate_matches(match.duplicate_matches) { pedal = match.pedal; }
  
- AutocompleteMatch::~AutocompleteMatch() {
- }
+ AutocompleteMatch::AutocompleteMatch(AutocompleteMatch&& match) noexcept =
+     default;

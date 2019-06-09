@@ -12,26 +12,26 @@ origin: chromium 69 authors
  import("//build/config/linux/pkg_config.gni")
  import("//build/config/ui.gni")
  
-@@ -17,20 +18,18 @@ if (use_atk) {
- }
- 
+@@ -19,7 +20,6 @@ if (use_atk) {
  pkg_config("atk_base") {
--  packages = [
--    "atk",
+   packages = [
+     "atk",
 -    "atk-bridge-2.0",
--  ]
-+  packages = [ "atk" ]
+   ]
    atk_lib_dir = exec_script(pkg_config_script,
                              pkg_config_args + [
-                                   "--libdir",
-                                   "atk",
-                                 ],
+@@ -29,7 +29,6 @@ pkg_config("atk_base") {
                              "string")
--  defines = [
--    "ATK_LIB_DIR=\"$atk_lib_dir\"",
+   defines = [
+     "ATK_LIB_DIR=\"$atk_lib_dir\"",
 -    "USE_ATK_BRIDGE",
--  ]
-+  defines = [ "ATK_LIB_DIR=\"$atk_lib_dir\"" ]
+ 
+     # The AtkValue interface methods we implement and test have been deprecated
+     # in favor of new API. But that new API cannot be used until corresponding
+@@ -37,6 +36,10 @@ pkg_config("atk_base") {
+     # of ATK (i.e. < 2.12).
+     "ATK_DISABLE_DEPRECATION_WARNINGS",
+   ]
 +  if (gtk_version == 3) {
 +    packages += [ "atk-bridge-2.0" ]
 +    defines += [ "USE_ATK_BRIDGE" ]
@@ -49,7 +49,7 @@ origin: chromium 69 authors
  import("//build/config/linux/pkg_config.gni")
  import("//build/config/ui.gni")
  import("//mojo/public/tools/bindings/mojom.gni")
-@@ -158,13 +159,19 @@ jumbo_component("accessibility") {
+@@ -170,13 +171,19 @@ jumbo_component("accessibility") {
      sources += [
        "platform/atk_util_auralinux.cc",
        "platform/atk_util_auralinux.h",
@@ -157,7 +157,7 @@ origin: chromium 69 authors
 +}
 --- a/chrome/browser/ui/libgtkui/BUILD.gn
 +++ b/chrome/browser/ui/libgtkui/BUILD.gn
-@@ -9,119 +9,154 @@ import("//build/config/jumbo.gni")
+@@ -9,120 +9,155 @@ import("//build/config/jumbo.gni")
  import("//build/config/linux/gtk/gtk.gni")
  import("//printing/buildflags/buildflags.gni")
  
@@ -319,6 +319,7 @@ origin: chromium 69 authors
 +             "//ui/aura",
 +             "//ui/base",
 +             "//ui/base/ime",
++             "//ui/base/ime/linux",
 +             "//ui/display",
 +             "//ui/events",
 +             "//ui/events:dom_keyboard_layout",
@@ -370,6 +371,7 @@ origin: chromium 69 authors
 -    "//ui/aura",
 -    "//ui/base",
 -    "//ui/base/ime",
+-    "//ui/base/ime/linux",
 -    "//ui/display",
 -    "//ui/events",
 -    "//ui/events:dom_keyboard_layout",
@@ -549,23 +551,23 @@ origin: chromium 69 authors
 @@ -303,8 +360,10 @@ gfx::FontRenderParams GetGtkFontRenderPa
  }
  
- views::LinuxUI::NonClientWindowFrameAction GetDefaultMiddleClickAction() {
+ views::LinuxUI::WindowFrameAction GetDefaultMiddleClickAction() {
 +#if GTK_MAJOR_VERSION == 3
    if (GtkVersionCheck(3, 14))
-     return views::LinuxUI::WINDOW_FRAME_ACTION_NONE;
+     return views::LinuxUI::WindowFrameAction::kNone;
 +#endif
    std::unique_ptr<base::Environment> env(base::Environment::Create());
    switch (base::nix::GetDesktopEnvironment(env.get())) {
      case base::nix::DESKTOP_ENVIRONMENT_KDE4:
-@@ -328,6 +387,7 @@ GtkUi::GtkUi() {
-       GetDefaultMiddleClickAction();
-   window_frame_actions_[WINDOW_FRAME_ACTION_SOURCE_RIGHT_CLICK] =
-       views::LinuxUI::WINDOW_FRAME_ACTION_MENU;
+@@ -329,6 +388,7 @@ GtkUi::GtkUi() {
+       {ActionSource::kMiddleClick, GetDefaultMiddleClickAction()},
+       {ActionSource::kRightClick, Action::kMenu}};
+ 
 +#if GTK_MAJOR_VERSION >= 3
    // Force Gtk to use Xwayland if it would have used wayland.  libgtkui assumes
    // the use of X11 (eg. X11InputMethodContextImplGtk) and will crash under
    // other backends.
-@@ -344,9 +404,17 @@ GtkUi::GtkUi() {
+@@ -345,9 +405,17 @@ GtkUi::GtkUi() {
    // do it once it is ready.
    std::unique_ptr<base::Environment> env(base::Environment::Create());
    env->SetVar("NO_AT_BRIDGE", "1");
@@ -594,7 +596,7 @@ origin: chromium 69 authors
    return nullptr;
  }
  #endif
-@@ -818,6 +888,67 @@ void GtkUi::LoadGtkValues() {
+@@ -818,6 +888,69 @@ void GtkUi::LoadGtkValues() {
  }
  
  void GtkUi::UpdateColors() {
@@ -655,14 +657,16 @@ origin: chromium 69 authors
 +      colors_[ThemeProperties::COLOR_FRAME];
 +
 +  colors_[ThemeProperties::COLOR_TOOLBAR] = tab_color;
-+  colors_[ThemeProperties::COLOR_CONTROL_BACKGROUND] = tab_color;
++  colors_[ThemeProperties::COLOR_DOWNLOAD_SHELF] = tab_color;
++  colors_[ThemeProperties::COLOR_INFOBAR] = tab_color;
++  colors_[ThemeProperties::COLOR_STATUS_BUBBLE] = tab_color;
 +
 +#else
 +
    SkColor location_bar_border = GetBorderColor("GtkEntry#entry");
    if (SkColorGetA(location_bar_border))
      colors_[ThemeProperties::COLOR_LOCATION_BAR_BORDER] = location_bar_border;
-@@ -859,6 +990,8 @@ void GtkUi::UpdateColors() {
+@@ -857,6 +990,8 @@ void GtkUi::UpdateColors() {
    colors_[ThemeProperties::COLOR_BACKGROUND_TAB_INCOGNITO_INACTIVE] =
        SK_ColorTRANSPARENT;
  
@@ -671,7 +675,7 @@ origin: chromium 69 authors
    colors_[ThemeProperties::COLOR_NTP_LINK] = native_theme_->GetSystemColor(
        ui::NativeTheme::kColorId_TextfieldSelectionBackgroundFocused);
  
-@@ -880,6 +1013,8 @@ void GtkUi::UpdateColors() {
+@@ -878,6 +1013,8 @@ void GtkUi::UpdateColors() {
        native_theme_->GetSystemColor(
            ui::NativeTheme::kColorId_ThrobberWaitingColor);
  
@@ -680,7 +684,7 @@ origin: chromium 69 authors
    // Generate colors that depend on whether or not a custom window frame is
    // used.  These colors belong in |color_map| below, not |colors_|.
    for (bool custom_frame : {false, true}) {
-@@ -976,6 +1111,8 @@ void GtkUi::UpdateColors() {
+@@ -970,6 +1107,8 @@ void GtkUi::UpdateColors() {
            toolbar_top_separator_inactive;
      }
    }
@@ -689,7 +693,7 @@ origin: chromium 69 authors
  }
  
  void GtkUi::UpdateCursorTheme() {
-@@ -1040,6 +1177,20 @@ void GtkUi::UpdateDefaultFont() {
+@@ -1034,6 +1173,20 @@ void GtkUi::UpdateDefaultFont() {
    g_object_unref(fake_label);
  }
  
@@ -710,7 +714,7 @@ origin: chromium 69 authors
  void GtkUi::ResetStyle() {
    colors_.clear();
    custom_frame_colors_.clear();
-@@ -1052,12 +1203,19 @@ float GtkUi::GetRawDeviceScaleFactor() {
+@@ -1046,12 +1199,19 @@ float GtkUi::GetRawDeviceScaleFactor() {
    if (display::Display::HasForceDeviceScaleFactor())
      return display::Display::GetForcedDeviceScaleFactor();
  
@@ -732,7 +736,7 @@ origin: chromium 69 authors
    // to 1 decimal to prevent rendering problems (crbug.com/485183).
 --- a/chrome/browser/ui/libgtkui/gtk_ui.h
 +++ b/chrome/browser/ui/libgtkui/gtk_ui.h
-@@ -142,6 +142,10 @@ class GtkUi : public views::LinuxUI {
+@@ -138,6 +138,10 @@ class GtkUi : public views::LinuxUI {
    // Updates |default_font_*|.
    void UpdateDefaultFont();
  
@@ -1072,7 +1076,7 @@ origin: chromium 69 authors
 +#endif  // CHROME_BROWSER_UI_LIBGTKUI_CHROME_GTK_FRAME_H_
 --- /dev/null
 +++ b/chrome/browser/ui/libgtkui/gtk2/native_theme_gtk2.cc
-@@ -0,0 +1,435 @@
+@@ -0,0 +1,439 @@
 +// Copyright (c) 2013 The Chromium Authors. All rights reserved.
 +// Use of this source code is governed by a BSD-style license that can be
 +// found in the LICENSE file.
@@ -1239,11 +1243,15 @@ origin: chromium 69 authors
 +
 +     // Fallback to the same colors as Aura.
 +    case ui::NativeTheme::kColorId_HighlightedMenuItemBackgroundColor:
++      return gfx::kGoogleGrey050;
 +    case ui::NativeTheme::kColorId_HighlightedMenuItemForegroundColor:
++      return gfx::kGoogleGrey900;
 +    case ui::NativeTheme::kColorId_FocusedHighlightedMenuItemBackgroundColor:
-+    case ui::NativeTheme::kColorId_MenuItemAlertBackgroundColor:
-+      return ui::NativeTheme::GetInstanceForNativeUi()->GetSystemColor(
-+          color_id);
++      return gfx::kGoogleGrey200;
++    case ui::NativeTheme::kColorId_MenuItemAlertBackgroundColorMax:
++      return SkColorSetA(gfx::kGoogleBlue600, 0x1A);
++    case ui::NativeTheme::kColorId_MenuItemAlertBackgroundColorMin:
++      return SkColorSetA(gfx::kGoogleBlue600, 0x4D);
 +
 +    // Label
 +    case kColorId_LabelEnabledColor:
@@ -1599,7 +1607,7 @@ origin: chromium 69 authors
 +// Returns a function pointer to be invoked on the main thread to init
 +// the gnome accessibility module if it's enabled (nullptr otherwise).
 +GnomeAccessibilityModuleInitFunc GetAccessibilityModuleInitFunc() {
-+  base::AssertBlockingAllowedDeprecated();
++  base::internal::AssertBlockingAllowed();
 +
 +  // Try to load libatk-bridge.so.
 +  base::FilePath atk_bridge_path(ATK_LIB_DIR);

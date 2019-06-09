@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/base/task/sequence_manager/task_queue.cc
 +++ b/base/task/sequence_manager/task_queue.cc
-@@ -132,7 +132,9 @@ TaskQueue::~TaskQueue() {
+@@ -137,7 +137,9 @@ void TaskQueue::ShutdownTaskQueueGracefu
    // If we've not been unregistered then this must occur on the main thread.
    DCHECK_CALLED_ON_VALID_THREAD(associated_thread_->thread_checker);
    impl_->SetOnNextWakeUpChangedCallback(RepeatingCallback<void(TimeTicks)>());
@@ -28,7 +28,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    explicit HeadlessProxyConfigMonitor(
 --- a/chrome/browser/performance_manager/performance_manager.cc
 +++ b/chrome/browser/performance_manager/performance_manager.cc
-@@ -64,7 +64,8 @@ void PerformanceManager::Destroy(std::un
+@@ -70,7 +70,8 @@ void PerformanceManager::Destroy(std::un
    DCHECK_EQ(instance.get(), g_performance_manager);
    g_performance_manager = nullptr;
  
@@ -37,4 +37,4 @@ author: Michael Gilbert <mgilbert@debian.org>
 +  runner->DeleteSoon(FROM_HERE, instance.release());
  }
  
- void PerformanceManager::DistributeMeasurementBatch(
+ void PerformanceManager::CallOnGraph(const base::Location& from_here,

@@ -12,3 +12,14 @@ author: Michael Gilbert <mgilbert@debian.org>
    });
  }
  
+--- a/chrome/browser/ui/views/infobars/infobar_container_view.cc
++++ b/chrome/browser/ui/views/infobars/infobar_container_view.cc
+@@ -67,7 +67,7 @@ InfoBarContainerView::~InfoBarContainerV
+ void InfoBarContainerView::Layout() {
+   const auto set_bounds = [this](int top, auto* child) {
+     const int height = static_cast<InfoBarView*>(child)->computed_height();
+-    child->SetBounds(0, top, width(), height);
++    child->SetBounds(0, top, this->width(), height);
+     return top + height;
+   };
+   DCHECK_EQ(content_shadow_, children().back());

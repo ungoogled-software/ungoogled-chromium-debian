@@ -24,22 +24,22 @@ gcc6/noexcept-redeclaration.patch
 gcc6/designated-initializers.patch
 
 fixes/mojo.patch
-fixes/quic.patch
 fixes/vaapi.patch
-fixes/alignof.patch
-fixes/nullptr.patch
 fixes/ps-print.patch
 fixes/as-needed.patch
 fixes/inspector.patch
 fixes/namespace.patch
 fixes/gpu-timeout.patch
 fixes/empty-array.patch
+fixes/wrong-define.patch
 fixes/sequence-point.patch
+fixes/template-export.patch
+fixes/uniqueptr-compare.patch
 fixes/widevine-revision.patch
 fixes/widevine-locations.patch
 fixes/widevine-buildflag.patch
+fixes/virtual-destructor.patch
 fixes/connection-message.patch
-fixes/anonymous-aggregate.patch
 
 disable/unrar.patch
 disable/signin.patch
@@ -69,7 +69,6 @@ warnings/unused-typedefs.patch
 warnings/unused-functions.patch
 warnings/null-destination.patch
 warnings/int-in-bool-context.patch
-warnings/explicit-constructor.patch
 
 system/vpx.patch
 system/icu.patch
@@ -83,4 +82,5 @@ system/ffmpeg.patch
 system/jsoncpp.patch
 system/openjpeg.patch
 system/convertutf.patch
-system/fontconfig.patch
+
+buster/icu63.patch

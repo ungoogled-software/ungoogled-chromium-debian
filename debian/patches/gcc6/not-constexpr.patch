@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/base/test/scoped_task_environment.h
 +++ b/base/test/scoped_task_environment.h
-@@ -211,11 +211,11 @@ class ScopedTaskEnvironment {
+@@ -225,11 +225,11 @@ class ScopedTaskEnvironment {
   protected:
    explicit ScopedTaskEnvironment(ScopedTaskEnvironment&& other);
  
@@ -141,9 +141,9 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/content/public/browser/desktop_media_id.h
 +++ b/content/public/browser/desktop_media_id.h
-@@ -37,16 +37,16 @@ struct CONTENT_EXPORT DesktopMediaID {
+@@ -38,16 +38,16 @@ struct CONTENT_EXPORT DesktopMediaID {
    static gfx::NativeWindow GetNativeWindowById(const DesktopMediaID& id);
- #endif  // USE_AURA
+ #endif  // USE_AURA || OS_MACOSX
  
 -  constexpr DesktopMediaID() = default;
 +  DesktopMediaID() = default;

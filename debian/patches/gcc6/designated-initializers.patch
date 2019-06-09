@@ -3,30 +3,47 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/base/task/sequence_manager/sequence_manager.h
 +++ b/base/task/sequence_manager/sequence_manager.h
-@@ -61,6 +61,7 @@ class SequenceManager {
+@@ -61,6 +61,9 @@ class SequenceManager {
    // MessageLoop and whether randomised sampling should be enabled.
    struct Settings {
      Settings() = default;
-+    Settings(bool randomise):randomised_sampling_enabled(randomise) {}
++    Settings(MessageLoop::Type type, bool randomise=false):
++        message_loop_type(type),
++        randomised_sampling_enabled(randomise) {}
      // In the future MessagePump (which is move-only) will also be a setting,
      // so we are making Settings move-only in preparation.
      Settings(Settings&& move_from) noexcept = default;
 --- a/base/task/sequence_manager/test/sequence_manager_for_test.h
 +++ b/base/task/sequence_manager/test/sequence_manager_for_test.h
-@@ -28,14 +28,12 @@ class SequenceManagerForTest : public in
-       const TickClock* clock,
+@@ -30,7 +30,8 @@ class SequenceManagerForTest : public in
        // Since most test calls are in Blink, randomised sampling is enabled
        // by default in the test SequenceManager, as opposed to production code.
--      SequenceManager::Settings settings = SequenceManager::Settings{
+       SequenceManager::Settings settings = SequenceManager::Settings{
 -          .randomised_sampling_enabled = true});
-+      SequenceManager::Settings settings = SequenceManager::Settings(true));
++          base::MessageLoop::TYPE_DEFAULT,
++          /*randomised_sampling_enabled=*/true});
  
    // Creates SequenceManagerForTest using the provided ThreadController.
    static std::unique_ptr<SequenceManagerForTest> Create(
-       std::unique_ptr<internal::ThreadController> thread_controller,
--      SequenceManager::Settings settings = SequenceManager::Settings{
--          .randomised_sampling_enabled = true});
-+      SequenceManager::Settings settings = SequenceManager::Settings(true));
- 
-   size_t ActiveQueuesCount() const;
-   bool HasImmediateWork() const;
+--- a/base/test/scoped_task_environment.cc
++++ b/base/test/scoped_task_environment.cc
+@@ -64,7 +64,7 @@ CreateSequenceManagerForMainThreadType(
+     return nullptr;
+   } else {
+     auto settings = base::sequence_manager::SequenceManager::Settings{
+-        .message_loop_type = *type};
++        *type};
+     return sequence_manager::CreateSequenceManagerOnCurrentThreadWithPump(
+         MessageLoop::CreateMessagePumpForType(*type), std::move(settings));
+   }
+--- a/content/browser/scheduler/browser_ui_thread_scheduler.cc
++++ b/content/browser/scheduler/browser_ui_thread_scheduler.cc
+@@ -55,7 +55,7 @@ BrowserUIThreadScheduler::BrowserUIThrea
+     : owned_sequence_manager_(
+           base::sequence_manager::CreateUnboundSequenceManager(
+               base::sequence_manager::SequenceManager::Settings{
+-                  .message_loop_type = base::MessageLoop::TYPE_UI})),
++                  base::MessageLoop::TYPE_UI})),
+       sequence_manager_(owned_sequence_manager_.get()),
+       time_domain_(sequence_manager_->GetRealTimeDomain()) {
+   InitialiseTaskQueues();

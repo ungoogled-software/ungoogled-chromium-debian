@@ -29,12 +29,12 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
 --- a/third_party/blink/renderer/modules/animationworklet/animation_worklet_proxy_client.cc
 +++ b/third_party/blink/renderer/modules/animationworklet/animation_worklet_proxy_client.cc
-@@ -195,7 +195,7 @@ AnimationWorkletGlobalScope*
- AnimationWorkletProxyClient::SelectStatelessGlobalScope() {
+@@ -185,7 +185,7 @@ AnimationWorkletProxyClient::SelectGloba
    if (--next_global_scope_switch_countdown_ < 0) {
-     current_stateless_global_scope_index_ =
--        (++current_stateless_global_scope_index_ % global_scopes_.size());
-+        (current_stateless_global_scope_index_ + 1) % global_scopes_.size();
+     int last_global_scope_index = current_global_scope_index_;
+     current_global_scope_index_ =
+-        (++current_global_scope_index_ % global_scopes_.size());
++        (current_global_scope_index_ + 1) % global_scopes_.size();
+     global_scopes_[last_global_scope_index]->MigrateAnimatorsTo(
+         global_scopes_[current_global_scope_index_]);
      // Introduce an element of randomness in the switching interval to make
-     // stateful dependences easier to spot.
-     next_global_scope_switch_countdown_ =
