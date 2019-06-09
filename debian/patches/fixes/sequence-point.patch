@@ -38,3 +38,14 @@ author: Michael Gilbert <mgilbert@debian.org>
      global_scopes_[last_global_scope_index]->MigrateAnimatorsTo(
          global_scopes_[current_global_scope_index_]);
      // Introduce an element of randomness in the switching interval to make
+--- a/chrome/browser/notifications/scheduler/impression_history_tracker.cc
++++ b/chrome/browser/notifications/scheduler/impression_history_tracker.cc
+@@ -148,7 +148,7 @@ void ImpressionHistoryTrackerImpl::Apply
+ 
+   // Increase |current_max_daily_show| by 1.
+   client_state->current_max_daily_show =
+-      base::ClampToRange(++client_state->current_max_daily_show, 0,
++      base::ClampToRange(client_state->current_max_daily_show + 1, 0,
+                          config_.max_daily_shown_per_type);
+ }
+ 

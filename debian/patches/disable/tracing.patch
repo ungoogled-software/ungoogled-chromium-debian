@@ -32,7 +32,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "//components/translate/core/common",
 --- a/content/browser/BUILD.gn
 +++ b/content/browser/BUILD.gn
-@@ -62,8 +62,6 @@ jumbo_source_set("browser") {
+@@ -63,8 +63,6 @@ jumbo_source_set("browser") {
      "//components/rappor",
      "//components/services/filesystem:lib",
      "//components/services/leveldb:lib",
@@ -41,7 +41,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "//components/ui_devtools",
      "//components/url_formatter",
      "//components/variations",
-@@ -163,9 +161,6 @@ jumbo_source_set("browser") {
+@@ -164,9 +162,6 @@ jumbo_source_set("browser") {
      "//services/service_manager/zygote:zygote_buildflags",
      "//services/shape_detection:lib",
      "//services/shape_detection/public/mojom",
@@ -51,7 +51,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "//services/video_capture:lib",
      "//services/video_capture/public/cpp",
      "//services/video_capture/public/mojom:constants",
-@@ -749,8 +744,6 @@ jumbo_source_set("browser") {
+@@ -748,8 +743,6 @@ jumbo_source_set("browser") {
      "devtools/protocol/target_handler.h",
      "devtools/protocol/tethering_handler.cc",
      "devtools/protocol/tethering_handler.h",
@@ -60,7 +60,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "devtools/render_frame_devtools_agent_host.cc",
      "devtools/render_frame_devtools_agent_host.h",
      "devtools/service_worker_devtools_agent_host.cc",
-@@ -1802,29 +1795,6 @@ jumbo_source_set("browser") {
+@@ -1803,29 +1796,6 @@ jumbo_source_set("browser") {
      "streams/stream_write_observer.h",
      "theme_helper_mac.h",
      "theme_helper_mac.mm",
@@ -90,7 +90,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "url_loader_factory_getter.cc",
      "url_loader_factory_getter.h",
      "utility_process_host.cc",
-@@ -2048,7 +2018,6 @@ jumbo_source_set("browser") {
+@@ -2049,7 +2019,6 @@ jumbo_source_set("browser") {
    if (!is_android) {
      deps += [
        "//components/vector_icons",
@@ -400,7 +400,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      chrome_extra_parts_[i]->ServiceManagerConnectionStarted(connection);
 --- a/chrome/browser/chrome_content_browser_client.cc
 +++ b/chrome/browser/chrome_content_browser_client.cc
-@@ -142,7 +142,6 @@
+@@ -144,7 +144,6 @@
  #include "chrome/browser/subresource_filter/chrome_subresource_filter_client.h"
  #include "chrome/browser/sync_file_system/local/sync_file_system_backend.h"
  #include "chrome/browser/tab_contents/tab_util.h"
@@ -408,7 +408,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "chrome/browser/translate/translate_service.h"
  #include "chrome/browser/ui/blocked_content/blocked_window_params.h"
  #include "chrome/browser/ui/blocked_content/popup_blocker.h"
-@@ -4457,7 +4456,7 @@ ChromeContentBrowserClient::GetDevToolsB
+@@ -4485,7 +4484,7 @@ ChromeContentBrowserClient::GetDevToolsB
  }
  
  content::TracingDelegate* ChromeContentBrowserClient::GetTracingDelegate() {
@@ -689,7 +689,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//services/viz/public/cpp/compositing:tests",
 --- a/content/public/browser/BUILD.gn
 +++ b/content/public/browser/BUILD.gn
-@@ -380,7 +380,6 @@ jumbo_source_set("browser_sources") {
+@@ -381,7 +381,6 @@ jumbo_source_set("browser_sources") {
      "//services/network/public/mojom",
      "//services/resource_coordinator/public/cpp:resource_coordinator_cpp",
      "//services/service_manager/public/cpp",
@@ -938,12 +938,13 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "content/common/content_switches_internal.h"
  #include "content/public/common/content_switches.h"
  #include "content/public/common/main_function_params.h"
-@@ -180,9 +177,6 @@ void BrowserMainRunnerImpl::Shutdown() {
+@@ -180,10 +177,6 @@ void BrowserMainRunnerImpl::Shutdown() {
  
    main_loop_->PreShutdown();
  
 -  // Finalize the startup tracing session if it is still active.
--  TracingControllerImpl::GetInstance()->FinalizeStartupTracingIfNeeded();
+-  if (TracingControllerImpl::GetInstance())
+-    TracingControllerImpl::GetInstance()->FinalizeStartupTracingIfNeeded();
 -
    {
      // The trace event has to stay between profiler creation and destruction.
