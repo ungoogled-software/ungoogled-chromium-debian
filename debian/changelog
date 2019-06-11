@@ -1,3 +1,39 @@
+chromium (75.0.3770.80-1) unstable; urgency=medium
+
+  * New upstream stable release.
+    - CVE-2019-5824: Parameter passing error in media player. Reported by
+      leecraso and Guang Gong
+    - CVE-2019-5825: Out-of-bounds write in V8. Reported by Gengming Liu,
+      Jianyu Chen, Zhen Feng, and Jessica Liu
+    - CVE-2019-5826: Use-after-free in IndexedDB. Reported by Gengming Liu,
+      Jianyu Chen, Zhen Feng, and Jessica Liu
+    - CVE-2019-5827: Out-of-bounds access issue in SQLite. Reported by
+      mlfbrown
+    - CVE-2019-5828: Use after free in ServiceWorker. Reported by leecraso and
+      Guang Gong
+    - CVE-2019-5829: Use after free in Download Manager. Reported by Lucas
+      Pinheiro
+    - CVE-2019-5830: Incorrectly credentialed requests in CORS. Reported by
+      Andrew Krasichkov
+    - CVE-2019-5831: Incorrect map processing in V8. Reported by yngwei
+    - CVE-2019-5832: Incorrect CORS handling in XHR. Reported by Sergey Shekyan
+    - CVE-2019-5833: Inconsistent security UI placement. Reported by Khalil
+      Zhani
+    - CVE-2019-5834: URL spoof in Omnibox on iOS. Reported by Khalil Zhani
+    - CVE-2019-5835: Out of bounds read in Swiftshader. Reported by Wenxiang
+      Qian
+    - CVE-2019-5836: Heap buffer overflow in Angle. Reported by Omair
+    - CVE-2019-5837: Cross-origin resources size disclosure in Appcache.
+      Reported by Adam Iwaniuk
+    - CVE-2019-5838: Overly permissive tab access in Extensions. Reported by
+      David Erceg
+    - CVE-2019-5839: Incorrect handling of certain code points in Blink.
+      Reported by Masato Kinugawa
+    - CVE-2019-5840: Popup blocker bypass. Reported by Eliya Stein and Jerome
+      Dangu
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 09 Jun 2019 18:59:50 +0000
+
 chromium (75.0.3770.10-1) experimental; urgency=medium
 
   * New upstream development release.
