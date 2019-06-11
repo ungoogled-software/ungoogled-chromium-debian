@@ -4,7 +4,7 @@ origin: https://src.fedoraproject.org/rpms/chromium/raw/master/f/enable-vaapi.pa
 
 --- a/chrome/browser/about_flags.cc
 +++ b/chrome/browser/about_flags.cc
-@@ -1390,7 +1390,7 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -1457,7 +1457,7 @@ const FeatureEntry kFeatureEntries[] = {
          "disable-accelerated-video-decode",
          flag_descriptions::kAcceleratedVideoDecodeName,
          flag_descriptions::kAcceleratedVideoDecodeDescription,
@@ -13,7 +13,7 @@ origin: https://src.fedoraproject.org/rpms/chromium/raw/master/f/enable-vaapi.pa
          SINGLE_DISABLE_VALUE_TYPE(switches::kDisableAcceleratedVideoDecode),
      },
  #if defined(OS_WIN)
-@@ -1885,7 +1885,7 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -1952,7 +1952,7 @@ const FeatureEntry kFeatureEntries[] = {
  #if defined(OS_CHROMEOS)
      {"disable-accelerated-mjpeg-decode",
       flag_descriptions::kAcceleratedMjpegDecodeName,
@@ -24,7 +24,7 @@ origin: https://src.fedoraproject.org/rpms/chromium/raw/master/f/enable-vaapi.pa
      {"v8-cache-options", flag_descriptions::kV8CacheOptionsName,
 --- a/chrome/browser/flag_descriptions.cc
 +++ b/chrome/browser/flag_descriptions.cc
-@@ -2941,15 +2941,20 @@ const char kMacSystemMediaPermissionsInf
+@@ -2945,15 +2945,20 @@ const char kMacSystemMediaPermissionsInf
  
  #endif
  

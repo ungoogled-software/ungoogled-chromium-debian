@@ -22,7 +22,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "transition_manager/full_browser_transition_manager.cc",
      "transition_manager/full_browser_transition_manager.h",
      "translate/android/translate_utils.cc",
-@@ -1971,7 +1959,6 @@ jumbo_split_static_library("browser") {
+@@ -1972,7 +1960,6 @@ jumbo_split_static_library("browser") {
      "//components/sync_preferences",
      "//components/sync_sessions",
      "//components/thread_pool_util",
@@ -32,7 +32,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "//components/translate/core/common",
 --- a/content/browser/BUILD.gn
 +++ b/content/browser/BUILD.gn
-@@ -63,8 +63,6 @@ jumbo_source_set("browser") {
+@@ -62,8 +62,6 @@ jumbo_source_set("browser") {
      "//components/rappor",
      "//components/services/filesystem:lib",
      "//components/services/leveldb:lib",
@@ -41,7 +41,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "//components/ui_devtools",
      "//components/url_formatter",
      "//components/variations",
-@@ -164,9 +162,6 @@ jumbo_source_set("browser") {
+@@ -163,9 +161,6 @@ jumbo_source_set("browser") {
      "//services/service_manager/zygote:zygote_buildflags",
      "//services/shape_detection:lib",
      "//services/shape_detection/public/mojom",
@@ -323,7 +323,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "content/browser/webrtc/webrtc_internals.h"
  #include "content/browser/websockets/websocket_manager.h"
  #include "content/browser/webui/web_ui_controller_factory_registry.h"
-@@ -1920,7 +1919,6 @@ void RenderProcessHostImpl::CreateMessag
+@@ -1921,7 +1920,6 @@ void RenderProcessHostImpl::CreateMessag
    p2p_socket_dispatcher_host_ =
        std::make_unique<P2PSocketDispatcherHost>(GetID());
  
@@ -408,7 +408,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "chrome/browser/translate/translate_service.h"
  #include "chrome/browser/ui/blocked_content/blocked_window_params.h"
  #include "chrome/browser/ui/blocked_content/popup_blocker.h"
-@@ -4485,7 +4484,7 @@ ChromeContentBrowserClient::GetDevToolsB
+@@ -4454,7 +4453,7 @@ ChromeContentBrowserClient::GetDevToolsB
  }
  
  content::TracingDelegate* ChromeContentBrowserClient::GetTracingDelegate() {
@@ -609,7 +609,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "components/ukm/content/source_url_recorder.h"
  #include "content/public/browser/web_contents.h"
  #include "extensions/buildflags/buildflags.h"
-@@ -355,9 +353,6 @@ void TabHelpers::AttachTabHelpers(WebCon
+@@ -350,9 +348,6 @@ void TabHelpers::AttachTabHelpers(WebCon
    if (predictors::LoadingPredictorFactory::GetForProfile(profile))
      predictors::LoadingPredictorTabHelper::CreateForWebContents(web_contents);
  

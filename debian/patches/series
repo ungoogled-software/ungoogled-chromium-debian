@@ -23,11 +23,8 @@ fixes/wrong-define.patch
 fixes/sequence-point.patch
 fixes/template-export.patch
 fixes/uniqueptr-compare.patch
-fixes/widevine-revision.patch
 fixes/widevine-locations.patch
-fixes/widevine-buildflag.patch
 fixes/virtual-destructor.patch
-fixes/connection-message.patch
 
 disable/tracing.patch
 disable/openh264.patch
@@ -67,6 +64,4 @@ inox-patchset/fix-cfi-failures-with-unbundled-libxml.patch
 
 ungoogled-chromium/remove-fcomplete-member-pointers-cflag.patch
 ungoogled-chromium/use-system-libraries-in-official-build.patch
-ungoogled-chromium/fix-nullptr-t-namespace.patch
 ungoogled-chromium/manpage.patch
-ungoogled-chromium/remove-test-fonts.patch
