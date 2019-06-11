@@ -29,6 +29,13 @@ If you would like to use one of the upstream built-ins that are currently
 disabled, please edit debian/rules to enable it and rebuild the package
 from source.  See debian bug #886358 for more information.
 
+Widevine Extension
+==================
+Widevine is a non-free library that cannot be distributed directly by Debian.
+If you would like chromium to use it, you need to obtain it from google first
+and install it to one of these locations ~/.local/lib/libwidevinecdm.so or
+/usr/lib/chromium/libwidevinecdm.so.
+
 Debugging
 =========
 To produce meaningful debugging information, please install the chromium-dbgsym

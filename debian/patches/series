@@ -15,14 +15,19 @@ gcc6/ambiguous-overloads.patch
 
 fixes/mojo.patch
 fixes/vaapi.patch
-fixes/alignof.patch
-fixes/nullptr.patch
 fixes/as-needed.patch
 fixes/namespace.patch
 fixes/gpu-timeout.patch
 fixes/empty-array.patch
+fixes/wrong-define.patch
 fixes/sequence-point.patch
+fixes/template-export.patch
+fixes/uniqueptr-compare.patch
+fixes/widevine-revision.patch
 fixes/widevine-locations.patch
+fixes/widevine-buildflag.patch
+fixes/virtual-destructor.patch
+fixes/connection-message.patch
 
 disable/tracing.patch
 disable/openh264.patch
@@ -42,7 +47,6 @@ warnings/unused-typedefs.patch
 warnings/unused-functions.patch
 warnings/null-destination.patch
 warnings/int-in-bool-context.patch
-warnings/explicit-constructor.patch
 
 system/vpx.patch
 system/icu.patch
@@ -55,6 +59,8 @@ system/ffmpeg.patch
 system/jsoncpp.patch
 system/openjpeg.patch
 system/convertutf.patch
+
+buster/icu63.patch
 
 inox-patchset/chromium-skia-harmony.patch
 inox-patchset/fix-cfi-failures-with-unbundled-libxml.patch
