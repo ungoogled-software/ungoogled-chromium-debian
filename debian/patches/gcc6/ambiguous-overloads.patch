@@ -20,7 +20,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        &script_src_mapping,
 --- a/content/renderer/media/stream/media_stream_constraints_util_audio.cc
 +++ b/content/renderer/media/stream/media_stream_constraints_util_audio.cc
-@@ -306,7 +306,7 @@ class EchoCancellationContainer {
+@@ -308,7 +308,7 @@ class EchoCancellationContainer {
                              bool is_device_capture,
                              media::AudioParameters device_parameters,
                              AudioProcessingProperties properties)

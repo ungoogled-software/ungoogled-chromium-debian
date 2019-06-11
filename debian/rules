@@ -68,9 +68,9 @@ defines+=use_goma=false \
          use_libjpeg_turbo=true \
          use_custom_libcxx=false \
          use_gnome_keyring=false \
+         use_unofficial_version_number=false \
+         enable_vr=false \
          linux_use_bundled_binutils=false \
-         gold_path=\"\" \
-         goma_dir=\"\" \
 
 # enabled features
 defines+=use_gio=true \

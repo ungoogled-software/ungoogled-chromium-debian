@@ -13,7 +13,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    "//chromeos/services/secure_channel/public/mojom/typemaps.gni",
 --- a/content/shell/BUILD.gn
 +++ b/content/shell/BUILD.gn
-@@ -144,8 +144,6 @@ jumbo_static_library("content_shell_lib"
+@@ -168,8 +168,6 @@ jumbo_static_library("content_shell_lib"
      "browser/web_test/fake_bluetooth_chooser.h",
      "browser/web_test/leak_detector.cc",
      "browser/web_test/leak_detector.h",
@@ -22,7 +22,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "browser/web_test/secondary_test_window_observer.cc",
      "browser/web_test/secondary_test_window_observer.h",
      "browser/web_test/test_info_extractor.cc",
-@@ -290,7 +288,6 @@ jumbo_static_library("content_shell_lib"
+@@ -302,7 +300,6 @@ jumbo_static_library("content_shell_lib"
      "//content/public/common:service_names",
      "//content/shell/test_runner:test_runner",
      "//content/test:content_test_mojo_bindings",
@@ -52,7 +52,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "services/video_capture/public/mojom/constants.mojom.h"
  #include "services/video_capture/service_impl.h"
  #include "services/viz/public/interfaces/constants.mojom.h"
-@@ -400,11 +397,6 @@ std::unique_ptr<service_manager::Service
+@@ -391,11 +388,6 @@ std::unique_ptr<service_manager::Service
        std::move(request));
  }
  
@@ -64,7 +64,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  std::unique_ptr<service_manager::Service> CreateMediaSessionService(
      service_manager::mojom::ServiceRequest request) {
    return std::make_unique<media_session::MediaSessionService>(
-@@ -635,19 +627,6 @@ ServiceManagerContext::ServiceManagerCon
+@@ -626,19 +618,6 @@ ServiceManagerContext::ServiceManagerCon
    GetContentClient()->browser()->RegisterOutOfProcessServices(
        &out_of_process_services);
  
@@ -86,7 +86,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/content/browser/tracing/tracing_controller_impl.h
 +++ b/content/browser/tracing/tracing_controller_impl.h
-@@ -15,7 +15,6 @@
+@@ -16,7 +16,6 @@
  #include "content/common/content_export.h"
  #include "content/public/browser/tracing_controller.h"
  #include "mojo/public/cpp/system/data_pipe_drainer.h"
@@ -94,8 +94,8 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  namespace base {
  
-@@ -89,7 +88,6 @@ class TracingControllerImpl : public Tra
-   void CompleteFlush();
+@@ -106,7 +105,6 @@ class TracingControllerImpl : public Tra
+   base::FilePath GetStartupTraceFileName() const;
  
    std::unique_ptr<PerfettoFileTracer> perfetto_file_tracer_;
 -  tracing::mojom::CoordinatorPtr coordinator_;
@@ -112,7 +112,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "content/shell/browser/web_test/web_test_bluetooth_fake_adapter_setter_impl.h"
  #include "content/shell/browser/web_test/web_test_browser_context.h"
  #include "content/shell/browser/web_test/web_test_browser_main_parts.h"
-@@ -48,11 +47,6 @@ namespace {
+@@ -47,11 +46,6 @@ namespace {
  
  WebTestContentBrowserClient* g_web_test_browser_client;
  
@@ -124,7 +124,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  class TestOverlayWindow : public OverlayWindow {
   public:
    TestOverlayWindow() = default;
-@@ -156,7 +150,6 @@ void WebTestContentBrowserClient::Expose
+@@ -153,7 +147,6 @@ void WebTestContentBrowserClient::Expose
            &WebTestContentBrowserClient::CreateFakeBluetoothChooser,
            base::Unretained(this)),
        ui_task_runner);
@@ -132,7 +132,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    registry->AddInterface(
        base::BindRepeating(&WebTestContentBrowserClient::BindClipboardHost,
                            base::Unretained(this)),
-@@ -314,7 +307,6 @@ bool WebTestContentBrowserClient::CanIgn
+@@ -313,7 +306,6 @@ bool WebTestContentBrowserClient::CanIgn
  void WebTestContentBrowserClient::ExposeInterfacesToFrame(
      service_manager::BinderRegistryWithArgs<content::RenderFrameHost*>*
          registry) {
