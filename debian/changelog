@@ -1,8 +1,16 @@
-chromium (75.0.3770.80-2) UNRELEASED; urgency=medium
+chromium (75.0.3770.90-1) unstable; urgency=medium
 
-  * Fix build on armhf, closes: 930348
+  [ Riku Voipio ]
+  * Fix build on armhf (closes: #930348).
 
- -- Riku Voipio <riku.voipio@iki.fi>  Tue, 11 Jun 2019 21:04:57 +0300
+  [ Michael Gilbert ]
+  * New upstream security release.
+    - CVE-2019-5842: Use-after-free in Blink. Reported by BUGFENSE
+  * Disable hardware accelerated video (closes: #926032).
+  * Fix signedness error when built with gcc (closes: #914886).
+    - Thanks to Maciej S. Szmigiero.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 14 Jun 2019 00:10:43 +0000
 
 chromium (75.0.3770.80-1) unstable; urgency=medium
 

@@ -25,7 +25,6 @@ gcc6/noexcept-redeclaration.patch
 gcc6/designated-initializers.patch
 
 fixes/mojo.patch
-fixes/vaapi.patch
 fixes/ps-print.patch
 fixes/as-needed.patch
 fixes/inspector.patch
@@ -33,6 +32,7 @@ fixes/namespace.patch
 fixes/gpu-timeout.patch
 fixes/empty-array.patch
 fixes/wrong-define.patch
+fixes/safebrowsing.patch
 fixes/sequence-point.patch
 fixes/template-export.patch
 fixes/uniqueptr-compare.patch
