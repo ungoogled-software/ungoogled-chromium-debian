@@ -32,3 +32,14 @@ author: Michael Gilbert <mgilbert@debian.org>
      uint32_t index = gc_info_index.load(std::memory_order_acquire);
      if (!index)
        index = GCInfoTable::Get().EnsureGCInfoIndex(&kGcInfo, &gc_info_index);
+--- a/third_party/blink/renderer/platform/loader/fetch/unique_identifier.cc
++++ b/third_party/blink/renderer/platform/loader/fetch/unique_identifier.cc
+@@ -34,7 +34,7 @@
+ 
+ namespace blink {
+ 
+-static std::atomic_uint64_t g_unique_identifier(1);
++static std::atomic<uint64_t> g_unique_identifier(1);
+ 
+ uint64_t CreateUniqueIdentifier() {
+   return g_unique_identifier.fetch_add(1, std::memory_order_relaxed);

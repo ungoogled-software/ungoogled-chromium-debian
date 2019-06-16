@@ -8,11 +8,15 @@ This branch contains the code to build packages for: **Ubuntu 19.04 (disco)**
 
 **Binaries** (i.e. `.deb` packages): [Get them from the Contributor Binaries website](//ungoogled-software.github.io/ungoogled-chromium-binaries/).
 
+If your distro is not listed, you may have a look at the [community-maintained list of packages compatible on other distros](https://github.com/ungoogled-software/ungoogled-chromium-debian/wiki/Compatible-Packages). However, please note that this compatibility is not guarenteed; it may break at any time.
+
 **Source Code**: Use the tags labeled with `disco` via `git checkout` (see building instructions). The branches are for development and may not be stable.
 
 ## Installing
 
-The packages are essentially identical in structure to Debian's `chromium` packages. At minimum, you will need to install the `ungoogled-chromium` and `ungoogled-chromium-common` packages. For example:
+**NOTE**: The packages are essentially identical in structure to Debian's `chromium` packages. **As a result, they cannot be installed simultaneously with the distro-provided Chromium package.**
+
+At minimum, you will need to install the `ungoogled-chromium` and `ungoogled-chromium-common` packages. For example:
 
 ```sh
 # dpkg -i ungoogled-chromium_*.deb ungoogled-chromium-comon_*.deb

@@ -3,12 +3,23 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/services/image_annotation/annotator.cc
 +++ b/services/image_annotation/annotator.cc
-@@ -598,7 +598,7 @@ void Annotator::ProcessResults(
+@@ -682,7 +682,7 @@ void Annotator::ProcessResults(
      // Populate the result struct for this image and copy it into the cache if
      // necessary.
      if (result_lookup != results.end())
--      cached_results_.insert({source_id, result_lookup->second.Clone()});
-+      cached_results_[source_id] = result_lookup->second.Clone();
+-      cached_results_.insert({request_key, result_lookup->second.Clone()});
++      cached_results_[request_key] = result_lookup->second.Clone();
  
      // This should not happen, since only this method removes entries of
-     // |request_infos_|, and this method should only execute once per source ID.
+     // |request_infos_|, and this method should only execute once per request
+--- a/components/omnibox/browser/omnibox_pedal_implementations.cc
++++ b/components/omnibox/browser/omnibox_pedal_implementations.cc
+@@ -142,7 +142,7 @@ std::unordered_map<OmniboxPedalId, std::
+ GetPedalImplementations() {
+   std::unordered_map<OmniboxPedalId, std::unique_ptr<OmniboxPedal>> pedals;
+   const auto add = [&](OmniboxPedalId id, OmniboxPedal* pedal) {
+-    pedals.insert({id, std::unique_ptr<OmniboxPedal>(pedal)});
++    pedals[id] = std::unique_ptr<OmniboxPedal>(pedal);
+   };
+   add(OmniboxPedalId::CLEAR_BROWSING_DATA, new OmniboxPedalClearBrowsingData());
+   add(OmniboxPedalId::CHANGE_SEARCH_ENGINE,
