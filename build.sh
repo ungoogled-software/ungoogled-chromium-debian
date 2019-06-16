@@ -8,7 +8,8 @@ _download_cache="$_root_dir/build/download_cache"
 _src_dir="$_root_dir/build/src"
 _main_repo="$_root_dir/ungoogled-chromium"
 
-rm -rf "$_src_dir/out" || true
+rm -rf "$_src_dir" || true
+rm -f "$_root_dir/build/domsubcache.tar.gz" || true
 mkdir -p "$_src_dir/out/Default"
 mkdir -p "$_download_cache"
 
