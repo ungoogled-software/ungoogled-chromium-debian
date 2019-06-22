@@ -11,3 +11,28 @@ author: Michael Gilbert <mgilbert@debian.org>
  import("//third_party/protobuf/proto_library.gni")
  import("//tools/grit/grit_rule.gni")
  import("//url/features.gni")
+--- a/third_party/blink/renderer/platform/wtf/text/text_codec_utf8.cc
++++ b/third_party/blink/renderer/platform/wtf/text/text_codec_utf8.cc
+@@ -503,7 +503,7 @@ TextCodec::EncodeIntoResult TextCodecUTF
+ 
+   wtf_size_t i = 0;
+   wtf_size_t previous_code_unit_index = 0;
+-  bool is_error = false;
++  UBool is_error = false;
+   while (i < length && encode_into_result.bytes_written < capacity &&
+          !is_error) {
+     UChar32 character;
+--- a/v8/src/regexp/regexp-macro-assembler.cc
++++ b/v8/src/regexp/regexp-macro-assembler.cc
+@@ -37,9 +37,9 @@ int RegExpMacroAssembler::CaseInsensitiv
+ 
+ #ifdef V8_INTL_SUPPORT
+   int32_t length = (int32_t)(byte_length >> 1);
+-  icu::UnicodeString uni_str_1(reinterpret_cast<const char16_t*>(byte_offset1),
++  icu::UnicodeString uni_str_1(reinterpret_cast<const UChar*>(byte_offset1),
+                                length);
+-  return uni_str_1.caseCompare(reinterpret_cast<const char16_t*>(byte_offset2),
++  return uni_str_1.caseCompare(reinterpret_cast<const UChar*>(byte_offset2),
+                                length, U_FOLD_CASE_DEFAULT) == 0;
+ #else
+   uc16* substring1 = reinterpret_cast<uc16*>(byte_offset1);
