@@ -5,6 +5,7 @@ gn/libcxx.patch
 
 arm/gcc_skcms_ice.patch
 arm/skia-aarch64-buildfix.patch
+arm/pffffft-buildfix.patch
 
 gcc6/sizet.patch
 gcc6/atomic.patch
@@ -14,12 +15,12 @@ gcc6/move-required.patch
 gcc6/ambiguous-overloads.patch
 
 fixes/mojo.patch
-fixes/vaapi.patch
 fixes/as-needed.patch
 fixes/namespace.patch
 fixes/gpu-timeout.patch
 fixes/empty-array.patch
 fixes/wrong-define.patch
+fixes/safebrowsing.patch
 fixes/sequence-point.patch
 fixes/template-export.patch
 fixes/uniqueptr-compare.patch
