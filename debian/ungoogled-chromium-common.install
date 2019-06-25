@@ -1,1 +1,2 @@
 out/Release/*.bin usr/lib/chromium
+out/Release/icudtl.dat usr/lib/chromium
