@@ -31,11 +31,11 @@ export CXX=${CXX:=clang++}
 # See build/toolchain/linux/unbundle/ in the Chromium source for more details.
 #
 # Hack to allow clang to find the default cfi_blacklist.txt
-export CXXFLAGS+=-resource-dir=$(clang-8 --print-resource-dir) \
+export CXXFLAGS+=-resource-dir=$("$CC" --print-resource-dir) \
 
-export CPPFLAGS+=-resource-dir=$(clang-8 --print-resource-dir) \
+export CPPFLAGS+=-resource-dir=$("$CC" --print-resource-dir) \
 
-export CFLAGS+=-resource-dir=$(clang-8 --print-resource-dir) \
+export CFLAGS+=-resource-dir=$("$CC" --print-resource-dir) \
 
 
 cd "$_src_dir"
