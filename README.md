@@ -27,10 +27,10 @@ TODO: Document all libraries and tools needed to build. For now, see the build d
 * Python 3 (tested on 3.5) for ungoogled-chromium's utilities
 * Python 2 (tested on 2.7) for building GN and running other build-time scripts
 * [Ninja](//ninja-build.org/) for running the build command
-* One of the following LLVM toolchain versions (which include Clang and LLD):
-    * The latest stable LLVM version
-    * A build of the LLVM revision used by Google to build Chromium. This is specified in the Chromium source tree under `tools/clang/scripts/update.py` in the constant `CLANG_REVISION`. (For more info about how Google manages its prebuilt LLVM toolchain, see the file in the Chromium source tree `docs/updating_clang.md`)
-    * A nightly snapshot LLVM build, available from [the LLVM apt repo](//apt.llvm.org). However, this may result in instability.
+* One of the following LLVM toolchain versions, in descending order of preference (which must include Clang and LLD):
+    1. A build of the LLVM revision used by Google to build Chromium. This is specified in the Chromium source tree under `tools/clang/scripts/update.py` in the constant `CLANG_REVISION`. (For more info about how Google manages its prebuilt LLVM toolchain, see the file in the Chromium source tree `docs/updating_clang.md`)
+    2. The latest *stable* LLVM version (not development/trunk!)
+    3. A nightly snapshot LLVM build, available from [the LLVM apt repo](//apt.llvm.org). For best results, the branch version should match the current stable LLVM version (e.g. if the current stable is 8.0.1, use branch version 8)
 
     Note that any other LLVM version may outright fail, or [cause unexpected behavior](//github.com/Eloston/ungoogled-chromium/issues/586).
 
