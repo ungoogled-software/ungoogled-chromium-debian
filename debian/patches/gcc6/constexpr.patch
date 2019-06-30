@@ -44,3 +44,25 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  Gamepad::Gamepad()
      : connected(false),
+--- a/third_party/blink/renderer/platform/geometry/layout_unit.h
++++ b/third_party/blink/renderer/platform/geometry/layout_unit.h
+@@ -202,7 +202,7 @@ class LayoutUnit {
+     return value_ > 0 ? LayoutUnit() : *this;
+   }
+ 
+-  bool HasFraction() const { return RawValue() % kFixedPointDenominator; }
++  constexpr bool HasFraction() const { return RawValue() % kFixedPointDenominator; }
+ 
+   LayoutUnit Fraction() const {
+     // Compute fraction using the mod operator to preserve the sign of the value
+--- a/base/task/promise/abstract_promise.h
++++ b/base/task/promise/abstract_promise.h
+@@ -628,7 +628,7 @@ class BASE_EXPORT AbstractPromise
+ 
+ // static
+ template <typename T>
+-const AbstractPromise::Executor::VTable
++constexpr AbstractPromise::Executor::VTable
+     AbstractPromise::Executor::VTableHelper<T>::vtable_;
+ 
+ }  // namespace internal

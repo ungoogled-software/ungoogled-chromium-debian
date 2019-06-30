@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/ui/base/clipboard/clipboard_format_type.h
 +++ b/ui/base/clipboard/clipboard_format_type.h
-@@ -86,7 +86,6 @@ struct COMPONENT_EXPORT(BASE_CLIPBOARD_T
+@@ -90,7 +90,6 @@ struct COMPONENT_EXPORT(BASE_CLIPBOARD_T
  
   private:
    friend class base::NoDestructor<ClipboardFormatType>;

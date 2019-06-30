@@ -23,3 +23,25 @@ author: Michael Gilbert <mgilbert@debian.org>
      return top + height;
    };
    DCHECK_EQ(content_shadow_, children().back());
+--- a/ui/views/controls/textfield/textfield.cc
++++ b/ui/views/controls/textfield/textfield.cc
+@@ -897,7 +897,7 @@ bool Textfield::SkipDefaultKeyEventProce
+   std::vector<ui::TextEditCommandAuraLinux> commands;
+   if (delegate && delegate->MatchEvent(event, &commands)) {
+     const auto is_enabled = [this](const auto& command) {
+-      return IsTextEditCommandEnabled(command.command());
++      return this->IsTextEditCommandEnabled(command.command());
+     };
+     if (std::any_of(commands.cbegin(), commands.cend(), is_enabled))
+       return true;
+--- a/ui/views/widget/desktop_aura/x11_topmost_window_finder.cc
++++ b/ui/views/widget/desktop_aura/x11_topmost_window_finder.cc
+@@ -26,7 +26,7 @@ aura::Window* X11TopmostWindowFinder::Fi
+       DesktopWindowTreeHostX11::GetAllOpenWindows();
+   if (std::none_of(local_process_windows.cbegin(), local_process_windows.cend(),
+                    [this](auto* window) {
+-                     return ShouldStopIteratingAtLocalProcessWindow(window);
++                     return this->ShouldStopIteratingAtLocalProcessWindow(window);
+                    }))
+     return nullptr;
+ 

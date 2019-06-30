@@ -38,3 +38,27 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  void PerformanceManager::CallOnGraph(const base::Location& from_here,
+--- a/content/browser/cache_storage/legacy/legacy_cache_storage.cc
++++ b/content/browser/cache_storage/legacy/legacy_cache_storage.cc
+@@ -1316,8 +1316,8 @@ void LegacyCacheStorage::GetSizeThenClos
+ 
+   for (const auto& cache_metadata : cache_index_->ordered_cache_metadata()) {
+     auto cache_handle = GetLoadedCache(cache_metadata.name);
+-    LegacyCacheStorageCache::From(cache_handle)
+-        ->GetSizeThenClose(
++    LegacyCacheStorageCache* store = LegacyCacheStorageCache::From(cache_handle);
++    store->GetSizeThenClose(
+             base::BindOnce(&LegacyCacheStorage::SizeRetrievedFromCache,
+                            weak_factory_.GetWeakPtr(), std::move(cache_handle),
+                            barrier_closure, accumulator_ptr));
+@@ -1357,8 +1357,8 @@ void LegacyCacheStorage::SizeImpl(SizeCa
+       continue;
+     }
+     CacheStorageCacheHandle cache_handle = GetLoadedCache(cache_metadata.name);
+-    LegacyCacheStorageCache::From(cache_handle)
+-        ->Size(base::BindOnce(&LegacyCacheStorage::SizeRetrievedFromCache,
++    LegacyCacheStorageCache* store = LegacyCacheStorageCache::From(cache_handle);
++    store->Size(base::BindOnce(&LegacyCacheStorage::SizeRetrievedFromCache,
+                               weak_factory_.GetWeakPtr(),
+                               std::move(cache_handle), barrier_closure,
+                               accumulator_ptr));

@@ -1,0 +1,107 @@
+description: gcc 6 requires specialization to be declared in the namespace of the template
+author: Michael Gilbert <mgilbert@debian.org>
+bug: http://gcc.gnu.org/bugzilla/show_bug.cgi?id=56480
+
+--- a/ui/views/controls/image_view_base.cc
++++ b/ui/views/controls/image_view_base.cc
+@@ -147,11 +147,13 @@ void ImageViewBase::PreferredSizeChanged
+   UpdateImageOrigin();
+ }
+ 
++namespace metadata {
+ DEFINE_ENUM_CONVERTERS(
+     ImageViewBase::Alignment,
+     {ImageViewBase::Alignment::kLeading, base::ASCIIToUTF16("kLeading")},
+     {ImageViewBase::Alignment::kCenter, base::ASCIIToUTF16("kCenter")},
+     {ImageViewBase::Alignment::kTrailing, base::ASCIIToUTF16("kTrailing")})
++}
+ 
+ BEGIN_METADATA(ImageViewBase)
+ METADATA_PARENT_CLASS(View)
+--- a/ui/views/metadata/type_conversion.h
++++ b/ui/views/metadata/type_conversion.h
+@@ -62,16 +62,16 @@ static const EnumStrings<T>& GetEnumStri
+ // "{enum_value0, string16_value0}, {enum_value1, string16_value1} ...".
+ #define DEFINE_ENUM_CONVERTERS(T, ...)                             \
+   template <>                                                      \
+-  const views::metadata::EnumStrings<T>&                           \
+-  views::metadata::GetEnumStringsInstance<T>() {                   \
++  const EnumStrings<T>&                                            \
++  GetEnumStringsInstance<T>() {                                    \
+     static const base::NoDestructor<EnumStrings<T>> instance(      \
+-        std::vector<views::metadata::EnumStrings<T>::EnumString>(  \
++        std::vector<EnumStrings<T>::EnumString>(                   \
+             {__VA_ARGS__}));                                       \
+     return *instance;                                              \
+   }                                                                \
+                                                                    \
+   template <>                                                      \
+-  base::string16 views::metadata::TypeConverter<T>::ToString(      \
++  base::string16 TypeConverter<T>::ToString(                       \
+       ArgType<T> source_value) {                                   \
+     for (const auto& pair : GetEnumStringsInstance<T>().pairs) {   \
+       if (source_value == pair.enum_value)                         \
+@@ -81,7 +81,7 @@ static const EnumStrings<T>& GetEnumStri
+   }                                                                \
+                                                                    \
+   template <>                                                      \
+-  base::Optional<T> views::metadata::TypeConverter<T>::FromString( \
++  base::Optional<T> TypeConverter<T>::FromString(                  \
+       const base::string16& source_value) {                        \
+     for (const auto& pair : GetEnumStringsInstance<T>().pairs) {   \
+       if (source_value == pair.str_value) {                        \
+--- a/ui/views/controls/button/image_button.cc
++++ b/ui/views/controls/button/image_button.cc
+@@ -314,6 +314,7 @@ bool ToggleImageButton::toggled_for_test
+   return toggled_;
+ }
+ 
++namespace metadata {
+ DEFINE_ENUM_CONVERTERS(ImageButton::HorizontalAlignment,
+                        {ImageButton::HorizontalAlignment::ALIGN_LEFT,
+                         base::ASCIIToUTF16("ALIGN_LEFT")},
+@@ -328,6 +329,7 @@ DEFINE_ENUM_CONVERTERS(ImageButton::Vert
+                         base::ASCIIToUTF16("ALIGN_MIDDLE")},
+                        {ImageButton::VerticalAlignment::ALIGN_BOTTOM,
+                         base::ASCIIToUTF16("ALIGN_BOTTOM")})
++}
+ 
+ BEGIN_METADATA(ImageButton)
+ METADATA_PARENT_CLASS(Button)
+--- a/ui/views/metadata/type_conversion.cc
++++ b/ui/views/metadata/type_conversion.cc
+@@ -168,9 +168,6 @@ base::Optional<base::string16> TypeConve
+   return source_value;
+ }
+ 
+-}  // namespace metadata
+-}  // namespace views
+-
+ DEFINE_ENUM_CONVERTERS(gfx::HorizontalAlignment,
+                        {gfx::HorizontalAlignment::ALIGN_LEFT,
+                         base::ASCIIToUTF16("ALIGN_LEFT")},
+@@ -180,3 +177,6 @@ DEFINE_ENUM_CONVERTERS(gfx::HorizontalAl
+                         base::ASCIIToUTF16("ALIGN_RIGHT")},
+                        {gfx::HorizontalAlignment::ALIGN_TO_HEAD,
+                         base::ASCIIToUTF16("ALIGN_TO_HEAD")})
++
++}  // namespace metadata
++}  // namespace views
+--- a/ui/views/view.cc
++++ b/ui/views/view.cc
+@@ -2842,6 +2842,7 @@ bool View::DoDrag(const ui::LocatedEvent
+   return true;
+ }
+ 
++namespace metadata {
+ DEFINE_ENUM_CONVERTERS(View::FocusBehavior,
+                        {View::FocusBehavior::ACCESSIBLE_ONLY,
+                         base::ASCIIToUTF16("ACCESSIBLE_ONLY")},
+@@ -2849,6 +2850,7 @@ DEFINE_ENUM_CONVERTERS(View::FocusBehavi
+                         base::ASCIIToUTF16("ALWAYS")},
+                        {View::FocusBehavior::NEVER,
+                         base::ASCIIToUTF16("NEVER")})
++}
+ 
+ // This block requires the existence of METADATA_HEADER(View) in the class
+ // declaration for View.

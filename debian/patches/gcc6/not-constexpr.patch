@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/base/test/scoped_task_environment.h
 +++ b/base/test/scoped_task_environment.h
-@@ -225,11 +225,11 @@ class ScopedTaskEnvironment {
+@@ -245,11 +245,11 @@ class ScopedTaskEnvironment {
   protected:
    explicit ScopedTaskEnvironment(ScopedTaskEnvironment&& other);
  
@@ -12,9 +12,9 @@ author: Michael Gilbert <mgilbert@debian.org>
      return main_thread_type_;
    }
  
--  constexpr ExecutionMode execution_control_mode() const {
-+  const ExecutionMode execution_control_mode() const {
-     return execution_control_mode_;
+-  constexpr ThreadPoolExecutionMode thread_pool_execution_mode() const {
++  const ThreadPoolExecutionMode thread_pool_execution_mode() const {
+     return thread_pool_execution_mode_;
    }
  
 --- a/gpu/command_buffer/client/transfer_buffer_cmd_copy_helpers.h
@@ -50,8 +50,8 @@ author: Michael Gilbert <mgilbert@debian.org>
    uint32_t copy_count = buffer_size / elements_size;
  
    while (copy_count > 0) {
---- a/media/filters/jpeg_parser.cc
-+++ b/media/filters/jpeg_parser.cc
+--- a/media/parsers/jpeg_parser.cc
++++ b/media/parsers/jpeg_parser.cc
 @@ -91,13 +91,13 @@ const JpegHuffmanTable kDefaultAcTable[k
      },
  };

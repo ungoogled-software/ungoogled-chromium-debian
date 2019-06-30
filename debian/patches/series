@@ -6,8 +6,12 @@ gn/libcxx.patch
 gn/parallel.patch
 
 arm/gcc_skcms_ice.patch
-arm/skia-aarch64-buildfix.patch
 arm/pffffft-buildfix.patch
+arm/skia-aarch64-buildfix.patch
+
+gcc/wrong-namespace.patch
+gcc/virtual-destructor.patch
+gcc/explicit-specialization.patch
 
 gcc6/macro.patch
 gcc6/sizet.patch
@@ -20,26 +24,27 @@ gcc6/not-constexpr.patch
 gcc6/move-required.patch
 gcc6/use-after-move.patch
 gcc6/ambiguous-overloads.patch
+gcc6/ambiguous-initializer.patch
 gcc6/nullptr-copy-construct.patch
 gcc6/noexcept-redeclaration.patch
+gcc6/trivially-constructible.patch
 gcc6/designated-initializers.patch
+gcc6/specialization-namespace.patch
 
 fixes/mojo.patch
+fixes/public.patch
 fixes/ps-print.patch
 fixes/as-needed.patch
 fixes/inspector.patch
 fixes/namespace.patch
 fixes/gpu-timeout.patch
 fixes/empty-array.patch
-fixes/wrong-define.patch
 fixes/safebrowsing.patch
 fixes/sequence-point.patch
 fixes/template-export.patch
-fixes/uniqueptr-compare.patch
 fixes/widevine-revision.patch
 fixes/widevine-locations.patch
 fixes/widevine-buildflag.patch
-fixes/virtual-destructor.patch
 fixes/connection-message.patch
 
 disable/unrar.patch
@@ -58,13 +63,15 @@ disable/google-api-warning.patch
 disable/third-party-cookies.patch
 disable/device-notifications.patch
 
+warnings/int32.patch
 warnings/friend.patch
 warnings/printf.patch
 warnings/attribute.patch
 warnings/multichar.patch
+warnings/deprecated.patch
 warnings/bool-compare.patch
 warnings/enum-compare.patch
-warnings/unused-result.patch
+warnings/sign-compare.patch
 warnings/initialization.patch
 warnings/unused-typedefs.patch
 warnings/unused-functions.patch

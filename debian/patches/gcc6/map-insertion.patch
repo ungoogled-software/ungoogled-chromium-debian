@@ -3,11 +3,12 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/services/image_annotation/annotator.cc
 +++ b/services/image_annotation/annotator.cc
-@@ -682,7 +682,7 @@ void Annotator::ProcessResults(
+@@ -680,8 +680,7 @@ void Annotator::ProcessResults(
      // Populate the result struct for this image and copy it into the cache if
      // necessary.
      if (result_lookup != results.end())
--      cached_results_.insert({request_key, result_lookup->second.Clone()});
+-      cached_results_.insert(
+-          std::make_pair(request_key, result_lookup->second.Clone()));
 +      cached_results_[request_key] = result_lookup->second.Clone();
  
      // This should not happen, since only this method removes entries of
@@ -18,7 +19,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  GetPedalImplementations() {
    std::unordered_map<OmniboxPedalId, std::unique_ptr<OmniboxPedal>> pedals;
    const auto add = [&](OmniboxPedalId id, OmniboxPedal* pedal) {
--    pedals.insert({id, std::unique_ptr<OmniboxPedal>(pedal)});
+-    pedals.insert(std::make_pair(id, std::unique_ptr<OmniboxPedal>(pedal)));
 +    pedals[id] = std::unique_ptr<OmniboxPedal>(pedal);
    };
    add(OmniboxPedalId::CLEAR_BROWSING_DATA, new OmniboxPedalClearBrowsingData());

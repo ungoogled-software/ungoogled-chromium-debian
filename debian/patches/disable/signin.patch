@@ -3,7 +3,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
 
 --- a/components/signin/core/browser/signin_manager_base.cc
 +++ b/components/signin/core/browser/signin_manager_base.cc
-@@ -52,9 +52,9 @@ void SigninManagerBase::RegisterProfileP
+@@ -57,9 +57,9 @@ void SigninManagerBase::RegisterProfileP
    registry->RegisterStringPref(prefs::kGoogleServicesAccountId, std::string());
    registry->RegisterStringPref(prefs::kGoogleServicesUserAccountId,
                                 std::string());
@@ -17,7 +17,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
    registry->RegisterBooleanPref(prefs::kSignedInWithCredentialProvider, false);
 --- a/chrome/browser/ui/chrome_pages.cc
 +++ b/chrome/browser/ui/chrome_pages.cc
-@@ -406,6 +406,7 @@ void ShowManagementPageForProfile(Profil
+@@ -436,6 +436,7 @@ void ShowAppManagementPage(Profile* prof
  #if !defined(OS_ANDROID) && !defined(OS_CHROMEOS)
  void ShowBrowserSignin(Browser* browser,
                         signin_metrics::AccessPoint access_point) {
@@ -25,7 +25,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
    Profile* original_profile = browser->profile()->GetOriginalProfile();
    DCHECK(original_profile->GetPrefs()->GetBoolean(prefs::kSigninAllowed));
  
-@@ -423,6 +424,7 @@ void ShowBrowserSignin(Browser* browser,
+@@ -453,6 +454,7 @@ void ShowBrowserSignin(Browser* browser,
            : profiles::BUBBLE_VIEW_MODE_GAIA_SIGNIN;
    browser->signin_view_controller()->ShowSignin(bubble_view_mode, browser,
                                                  access_point);
@@ -35,7 +35,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
  void ShowBrowserSigninOrSettings(Browser* browser,
 --- a/chrome/browser/ui/BUILD.gn
 +++ b/chrome/browser/ui/BUILD.gn
-@@ -1901,9 +1901,6 @@ jumbo_split_static_library("ui") {
+@@ -1940,9 +1940,6 @@ jumbo_split_static_library("ui") {
        "startup/default_browser_infobar_delegate.h",
        "startup/default_browser_prompt.cc",
        "startup/default_browser_prompt.h",
@@ -45,7 +45,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
        "user_manager.cc",
        "user_manager.h",
        "views/external_protocol_dialog.cc",
-@@ -3109,8 +3106,6 @@ jumbo_split_static_library("ui") {
+@@ -3178,8 +3175,6 @@ jumbo_split_static_library("ui") {
          "views/sync/dice_bubble_sync_promo_view.h",
          "views/sync/dice_signin_button_view.cc",
          "views/sync/dice_signin_button_view.h",

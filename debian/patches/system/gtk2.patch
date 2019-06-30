@@ -49,7 +49,7 @@ origin: chromium 69 authors
  import("//build/config/linux/pkg_config.gni")
  import("//build/config/ui.gni")
  import("//mojo/public/tools/bindings/mojom.gni")
-@@ -170,13 +171,19 @@ jumbo_component("accessibility") {
+@@ -176,13 +177,19 @@ jumbo_component("accessibility") {
      sources += [
        "platform/atk_util_auralinux.cc",
        "platform/atk_util_auralinux.h",
@@ -113,7 +113,7 @@ origin: chromium 69 authors
  # Depend on "gtkprint" to get this.
 --- a/build/config/linux/gtk/gtk.gni
 +++ b/build/config/linux/gtk/gtk.gni
-@@ -7,4 +7,4 @@ declare_args() {
+@@ -12,4 +12,4 @@ declare_args() {
    gtk_version = 3
  }
  
@@ -454,7 +454,7 @@ origin: chromium 69 authors
    g_object_unref(pixbuf);
 --- a/chrome/browser/ui/libgtkui/gtk_ui.cc
 +++ b/chrome/browser/ui/libgtkui/gtk_ui.cc
-@@ -72,6 +72,15 @@
+@@ -70,6 +70,15 @@
  #include "ui/views/linux_ui/window_button_order_observer.h"
  #include "ui/views/resources/grit/views_resources.h"
  
@@ -470,7 +470,7 @@ origin: chromium 69 authors
  #if defined(USE_GIO)
  #include "chrome/browser/ui/libgtkui/settings_provider_gsettings.h"
  #endif
-@@ -131,6 +140,49 @@ class GtkButtonImageSource : public gfx:
+@@ -128,6 +137,46 @@ class GtkButtonImageSource : public gfx:
          width, height, width * 4);
      cairo_t* cr = cairo_create(surface);
  
@@ -486,9 +486,6 @@ origin: chromium 69 authors
 +
 +    gtk_widget_set_size_request(button, width, height);
 +    gtk_container_add(GTK_CONTAINER(window), button);
-+
-+    if (is_blue_)
-+      TurnButtonBlue(button);
 +
 +    gtk_widget_show_all(window);
 +
@@ -517,10 +514,10 @@ origin: chromium 69 authors
 +
 +    gtk_widget_destroy(window);
 +#else
-     ScopedStyleContext context = GetStyleContextFromCss(
-         is_blue_ ? "GtkButton#button.default.suggested-action"
-                  : "GtkButton#button");
-@@ -178,6 +230,7 @@ class GtkButtonImageSource : public gfx:
+     ScopedStyleContext context = GetStyleContextFromCss("GtkButton#button");
+     GtkStateFlags state_flags = StateToStateFlags(state_);
+     if (focus_) {
+@@ -173,6 +222,7 @@ class GtkButtonImageSource : public gfx:
        gtk_render_focus(context, cr, focus_rect.x(), focus_rect.y(),
                         focus_rect.width(), focus_rect.height());
      }
@@ -528,27 +525,18 @@ origin: chromium 69 authors
  
      cairo_destroy(cr);
      cairo_surface_destroy(surface);
-@@ -237,15 +290,19 @@ int indicators_count;
- // The unknown content type.
+@@ -232,8 +282,10 @@ int indicators_count;
  const char kUnknownContentType[] = "application/octet-stream";
  
-+#if GTK_MAJOR_VERSION > 2
- using GdkSetAllowedBackendsFn = void (*)(const gchar*);
- // Place this function pointer in read-only memory after being resolved to
- // prevent it being tampered with. See https://crbug.com/771365 for details.
- PROTECTED_MEMORY_SECTION base::ProtectedMemory<GdkSetAllowedBackendsFn>
-     g_gdk_set_allowed_backends;
-+#endif
- 
  std::unique_ptr<SettingsProvider> CreateSettingsProvider(GtkUi* gtk_ui) {
-+#if GTK_MAJOR_VERSION == 3
++#if GTK_MAJOR_VERSION > 2
    if (GtkVersionCheck(3, 14))
      return std::make_unique<SettingsProviderGtk>(gtk_ui);
 +#endif
  #if defined(USE_GIO)
    return std::make_unique<SettingsProviderGSettings>(gtk_ui);
  #else
-@@ -303,8 +360,10 @@ gfx::FontRenderParams GetGtkFontRenderPa
+@@ -291,8 +343,10 @@ gfx::FontRenderParams GetGtkFontRenderPa
  }
  
  views::LinuxUI::WindowFrameAction GetDefaultMiddleClickAction() {
@@ -559,7 +547,7 @@ origin: chromium 69 authors
    std::unique_ptr<base::Environment> env(base::Environment::Create());
    switch (base::nix::GetDesktopEnvironment(env.get())) {
      case base::nix::DESKTOP_ENVIRONMENT_KDE4:
-@@ -329,6 +388,7 @@ GtkUi::GtkUi() {
+@@ -317,6 +371,7 @@ GtkUi::GtkUi() {
        {ActionSource::kMiddleClick, GetDefaultMiddleClickAction()},
        {ActionSource::kRightClick, Action::kMenu}};
  
@@ -567,7 +555,7 @@ origin: chromium 69 authors
    // Force Gtk to use Xwayland if it would have used wayland.  libgtkui assumes
    // the use of X11 (eg. X11InputMethodContextImplGtk) and will crash under
    // other backends.
-@@ -345,9 +405,17 @@ GtkUi::GtkUi() {
+@@ -327,9 +382,17 @@ GtkUi::GtkUi() {
    // do it once it is ready.
    std::unique_ptr<base::Environment> env(base::Environment::Create());
    env->SetVar("NO_AT_BRIDGE", "1");
@@ -585,7 +573,29 @@ origin: chromium 69 authors
    gtk_widget_realize(fake_window_);
  }
  
-@@ -731,8 +799,10 @@ bool GtkUi::PreferDarkTheme() const {
+@@ -337,14 +400,18 @@ GtkUi::~GtkUi() {
+   gtk_widget_destroy(fake_window_);
+ }
+ 
++void OnThemeChanged(GObject* obj, GParamSpec* param, GtkUi* gtkui) {
++  gtkui->ResetStyle();
++}
++
+ void GtkUi::Initialize() {
+   GtkSettings* settings = gtk_settings_get_default();
+   g_signal_connect_after(settings, "notify::gtk-theme-name",
+-                         G_CALLBACK(OnThemeChangedThunk), this);
++                         G_CALLBACK(OnThemeChanged), this);
+   g_signal_connect_after(settings, "notify::gtk-icon-theme-name",
+-                         G_CALLBACK(OnThemeChangedThunk), this);
++                         G_CALLBACK(OnThemeChanged), this);
+   g_signal_connect_after(settings, "notify::gtk-application-prefer-dark-theme",
+-                         G_CALLBACK(OnThemeChangedThunk), this);
++                         G_CALLBACK(OnThemeChanged), this);
+ 
+   GdkScreen* screen = gdk_screen_get_default();
+   // Listen for DPI changes.
+@@ -708,8 +775,10 @@ bool GtkUi::PreferDarkTheme() const {
  
  #if BUILDFLAG(ENABLE_NATIVE_WINDOW_NAV_BUTTONS)
  std::unique_ptr<views::NavButtonProvider> GtkUi::CreateNavButtonProvider() {
@@ -596,7 +606,20 @@ origin: chromium 69 authors
    return nullptr;
  }
  #endif
-@@ -818,6 +888,69 @@ void GtkUi::LoadGtkValues() {
+@@ -780,11 +849,10 @@ bool GtkUi::MatchEvent(const ui::Event&
+   return key_bindings_handler_->MatchEvent(event, commands);
+ }
+ 
+-void GtkUi::OnThemeChanged(GtkSettings* settings, GtkParamSpec* param) {
++void GtkUi::ResetStyle() {
+   colors_.clear();
+   custom_frame_colors_.clear();
+   native_frame_colors_.clear();
+-  native_theme_->OnThemeChanged(settings, param);
+   LoadGtkValues();
+   native_theme_->NotifyObservers();
+ }
+@@ -804,6 +872,69 @@ void GtkUi::LoadGtkValues() {
  }
  
  void GtkUi::UpdateColors() {
@@ -666,7 +689,7 @@ origin: chromium 69 authors
    SkColor location_bar_border = GetBorderColor("GtkEntry#entry");
    if (SkColorGetA(location_bar_border))
      colors_[ThemeProperties::COLOR_LOCATION_BAR_BORDER] = location_bar_border;
-@@ -857,6 +990,8 @@ void GtkUi::UpdateColors() {
+@@ -843,6 +974,8 @@ void GtkUi::UpdateColors() {
    colors_[ThemeProperties::COLOR_BACKGROUND_TAB_INCOGNITO_INACTIVE] =
        SK_ColorTRANSPARENT;
  
@@ -675,7 +698,7 @@ origin: chromium 69 authors
    colors_[ThemeProperties::COLOR_NTP_LINK] = native_theme_->GetSystemColor(
        ui::NativeTheme::kColorId_TextfieldSelectionBackgroundFocused);
  
-@@ -878,6 +1013,8 @@ void GtkUi::UpdateColors() {
+@@ -864,6 +997,8 @@ void GtkUi::UpdateColors() {
        native_theme_->GetSystemColor(
            ui::NativeTheme::kColorId_ThrobberWaitingColor);
  
@@ -684,7 +707,7 @@ origin: chromium 69 authors
    // Generate colors that depend on whether or not a custom window frame is
    // used.  These colors belong in |color_map| below, not |colors_|.
    for (bool custom_frame : {false, true}) {
-@@ -970,6 +1107,8 @@ void GtkUi::UpdateColors() {
+@@ -957,6 +1092,8 @@ void GtkUi::UpdateColors() {
            toolbar_top_separator_inactive;
      }
    }
@@ -693,7 +716,7 @@ origin: chromium 69 authors
  }
  
  void GtkUi::UpdateCursorTheme() {
-@@ -1034,6 +1173,20 @@ void GtkUi::UpdateDefaultFont() {
+@@ -1021,16 +1158,37 @@ void GtkUi::UpdateDefaultFont() {
    g_object_unref(fake_label);
  }
  
@@ -711,10 +734,7 @@ origin: chromium 69 authors
 +  return false;
 +}
 +
- void GtkUi::ResetStyle() {
-   colors_.clear();
-   custom_frame_colors_.clear();
-@@ -1046,12 +1199,19 @@ float GtkUi::GetRawDeviceScaleFactor() {
+ float GtkUi::GetRawDeviceScaleFactor() {
    if (display::Display::HasForceDeviceScaleFactor())
      return display::Display::GetForcedDeviceScaleFactor();
  
@@ -736,7 +756,26 @@ origin: chromium 69 authors
    // to 1 decimal to prevent rendering problems (crbug.com/485183).
 --- a/chrome/browser/ui/libgtkui/gtk_ui.h
 +++ b/chrome/browser/ui/libgtkui/gtk_ui.h
-@@ -138,6 +138,10 @@ class GtkUi : public views::LinuxUI {
+@@ -46,6 +46,9 @@ class GtkUi : public views::LinuxUI {
+   void SetWindowFrameAction(WindowFrameActionSource source,
+                             WindowFrameAction action);
+ 
++  // Called when gtk style changes
++  void ResetStyle();
++
+   // ui::LinuxInputMethodContextFactory:
+   std::unique_ptr<ui::LinuxInputMethodContext> CreateInputMethodContext(
+       ui::LinuxInputMethodContextDelegate* delegate,
+@@ -119,8 +122,6 @@ class GtkUi : public views::LinuxUI {
+  private:
+   using TintMap = std::map<int, color_utils::HSL>;
+ 
+-  CHROMEG_CALLBACK_1(GtkUi, void, OnThemeChanged, GtkSettings*, GtkParamSpec*);
+-
+   CHROMEG_CALLBACK_1(GtkUi,
+                      void,
+                      OnDeviceScaleFactorMaybeChanged,
+@@ -140,9 +141,13 @@ class GtkUi : public views::LinuxUI {
    // Updates |default_font_*|.
    void UpdateDefaultFont();
  
@@ -746,7 +785,11 @@ origin: chromium 69 authors
 +
    float GetRawDeviceScaleFactor();
  
-   ui::NativeTheme* native_theme_;
+-  NativeThemeGtk* native_theme_;
++  ui::NativeTheme* native_theme_;
+ 
+   // A regular GtkWindow.
+   GtkWidget* fake_window_;
 --- a/chrome/browser/ui/libgtkui/gtk_util.cc
 +++ b/chrome/browser/ui/libgtkui/gtk_util.cc
 @@ -122,8 +122,12 @@ int EventFlagsFromGdkState(guint state)
@@ -1746,3 +1789,48 @@ origin: chromium 69 authors
 +G_END_DECLS
 +
 +#endif  // CHROME_BROWSER_UI_LIBGTKUI_CHROME_GTK_MENU_SUBCLASSES_H_
+--- a/chrome/browser/themes/theme_service.h
++++ b/chrome/browser/themes/theme_service.h
+@@ -25,6 +25,7 @@
+ #include "extensions/buildflags/buildflags.h"
+ #include "extensions/common/extension_id.h"
+ #include "ui/base/theme_provider.h"
++#include "ui/native_theme/native_theme.h"
+ #include "ui/native_theme/native_theme_observer.h"
+ 
+ class BrowserThemePack;
+--- a/chrome/browser/ui/libgtkui/native_theme_gtk.h
++++ b/chrome/browser/ui/libgtkui/native_theme_gtk.h
+@@ -65,8 +65,6 @@ class NativeThemeGtk : public ui::Native
+       const gfx::Rect& rect,
+       const FrameTopAreaExtraParams& frame_top_area) const override;
+ 
+-  void OnThemeChanged(GtkSettings* settings, GtkParamSpec* param);
+-
+  private:
+   friend class base::NoDestructor<NativeThemeGtk>;
+ 
+@@ -75,6 +73,12 @@ class NativeThemeGtk : public ui::Native
+ 
+   void SetThemeCssOverride(ScopedCssProvider provider);
+ 
++  CHROMEG_CALLBACK_1(NativeThemeGtk,
++                     void,
++                     OnThemeChanged,
++                     GtkSettings*,
++                     GtkParamSpec*);
++
+   mutable base::Optional<SkColor> color_cache_[kColorId_NumColors];
+ 
+   ScopedCssProvider theme_css_override_;
+--- a/chrome/browser/ui/libgtkui/native_theme_gtk.cc
++++ b/chrome/browser/ui/libgtkui/native_theme_gtk.cc
+@@ -368,6 +368,8 @@ NativeThemeGtk::NativeThemeGtk() {
+   g_type_class_unref(g_type_class_ref(gtk_tree_view_get_type()));
+   g_type_class_unref(g_type_class_ref(gtk_window_get_type()));
+ 
++  g_signal_connect_after(gtk_settings_get_default(), "notify::gtk-theme-name",
++                         G_CALLBACK(OnThemeChangedThunk), this);
+   OnThemeChanged(gtk_settings_get_default(), nullptr);
+ }
+ 
