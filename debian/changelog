@@ -1,3 +1,11 @@
+chromium (76.0.3809.62-1) unstable; urgency=medium
+
+  * New upstream beta release.
+    - Fixes error restoring multiple profiles on startup (closes: #930469).
+  * Update standards version to 4.4.0.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Wed, 10 Jul 2019 23:52:45 +0000
+
 chromium (75.0.3770.90-1) unstable; urgency=medium
 
   [ Riku Voipio ]

@@ -20,6 +20,7 @@ export LDFLAGS+=-Wl,--stats
 
 # extra flags to reduce warnings that aren't very useful
 export CXXFLAGS+=-Wno-pedantic \
+                 -Wno-unused-result \
                  -Wno-unused-function \
                  -Wno-unused-variable \
                  -Wno-unused-but-set-variable \
@@ -27,6 +28,7 @@ export CXXFLAGS+=-Wno-pedantic \
 
 # ignore warnings for minor mistakes that are too common
 export CXXFLAGS+=-Wno-return-type \
+                 -Wno-parentheses \
                  -Wno-misleading-indentation \
 
 # ignore warnings that are not supported well until gcc 8
@@ -91,7 +93,6 @@ defines+=is_debug=false \
 
 # enabled features
 defines+=use_gio=true \
-         use_vaapi=true \
          use_pulseaudio=true \
          link_pulseaudio=true \
          enable_widevine=true \
