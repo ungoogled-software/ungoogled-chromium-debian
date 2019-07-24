@@ -74,6 +74,7 @@ defines+=use_goma=false \
 
 # enabled features
 defines+=use_gio=true \
+         use_vaapi=true \
          use_pulseaudio=true \
          link_pulseaudio=true \
          enable_widevine=true \

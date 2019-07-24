@@ -15,3 +15,5 @@ debian/etc/README etc/chromium.d
 debian/etc/extensions etc/chromium.d
 debian/etc/default-flags etc/chromium.d
 debian/etc/master_preferences etc/chromium
+
+debian/usr/share/drirc.d/10-ungoogled-chromium.conf usr/share/drirc.d
