@@ -1,5 +1,4 @@
 # CHANGES MADE for ungoogled-chromium:
-# - enabled feature flag kDisableAcceleratedVideoDecode by default
 # - exposed all *-webrtc-hw-* feature flags for Linux
 description: build with hardware accelerated (vaapi) video support
 author: Akarshan Biswas <akarshan.biswas@gmail.com>
@@ -33,17 +32,15 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
       FEATURE_VALUE_TYPE(features::kWebRtcHWVP8Encoding)},
  #if defined(WEBRTC_USE_PIPEWIRE)
      {"enable-webrtc-pipewire-capturer",
-@@ -1457,8 +1457,8 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -1457,7 +1457,7 @@ const FeatureEntry kFeatureEntries[] = {
          "disable-accelerated-video-decode",
          flag_descriptions::kAcceleratedVideoDecodeName,
          flag_descriptions::kAcceleratedVideoDecodeDescription,
 -        kOsMac | kOsWin | kOsCrOS | kOsAndroid,
--        SINGLE_DISABLE_VALUE_TYPE(switches::kDisableAcceleratedVideoDecode),
 +        kOsMac | kOsWin | kOsCrOS | kOsAndroid | kOsLinux,
-+        SINGLE_VALUE_TYPE(switches::kDisableAcceleratedVideoDecode),
+         SINGLE_DISABLE_VALUE_TYPE(switches::kDisableAcceleratedVideoDecode),
      },
  #if defined(OS_WIN)
-     {"enable-hdr", flag_descriptions::kEnableHDRName,
 @@ -1949,12 +1949,12 @@ const FeatureEntry kFeatureEntries[] = {
       FEATURE_VALUE_TYPE(service_manager::features::kXRSandbox)},
  #endif  // ENABLE_ISOLATED_XR_SERVICE
