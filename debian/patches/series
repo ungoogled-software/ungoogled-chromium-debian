@@ -36,11 +36,11 @@ fixes/public.patch
 fixes/ps-print.patch
 fixes/as-needed.patch
 fixes/inspector.patch
-fixes/namespace.patch
 fixes/gpu-timeout.patch
 fixes/empty-array.patch
 fixes/safebrowsing.patch
 fixes/sequence-point.patch
+fixes/jumbo-namespace.patch
 fixes/template-export.patch
 fixes/widevine-revision.patch
 fixes/widevine-locations.patch

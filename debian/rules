@@ -45,6 +45,9 @@ export CXXFLAGS+=-Wno-address \
                  -Wno-invalid-offsetof \
                  -Wno-packed-not-aligned \
 
+# do not optimize away null pointer safety checks
+export CXXFLAGS+=-fno-delete-null-pointer-checks
+
 # disable clang options
 defines=is_clang=false clang_use_chrome_plugins=false
 

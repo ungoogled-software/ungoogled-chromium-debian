@@ -1,3 +1,11 @@
+chromium (76.0.3809.71-1) unstable; urgency=medium
+
+  * New upstream beta release.
+  * Recommend system-config-printer (closes: #929106).
+  * Add -fno-delete-null-pointer-checks back into the build flags.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Wed, 24 Jul 2019 22:51:41 +0000
+
 chromium (76.0.3809.62-1) unstable; urgency=medium
 
   * New upstream beta release.

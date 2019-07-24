@@ -1,9 +1,9 @@
-description: fix for gcc explicit namespace specialization issue
+description: fix for gcc explicit specialization namespace issue
 author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/third_party/blink/renderer/platform/fonts/shaping/shape_result_inline_headers.h
 +++ b/third_party/blink/renderer/platform/fonts/shaping/shape_result_inline_headers.h
-@@ -69,80 +69,39 @@ class ShapeResult::GlyphOffset final : p
+@@ -69,9 +69,46 @@ class ShapeResult::GlyphOffset final : p
   public:
    using FloatSize::FloatSize;
  
@@ -12,192 +12,45 @@ author: Michael Gilbert <mgilbert@debian.org>
    explicit GlyphOffset(const FloatSize& other) : FloatSize(other) {}
  };
  
--struct ShapeResult::RunInfo : public RefCounted<ShapeResult::RunInfo> {
--  USING_FAST_MALLOC(RunInfo);
--
-- public:
--  static scoped_refptr<RunInfo> Create(const SimpleFontData* font,
--                                       hb_direction_t dir,
--                                       CanvasRotationInVertical canvas_rotation,
--                                       hb_script_t script,
--                                       unsigned start_index,
--                                       unsigned num_glyphs,
--                                       unsigned num_characters) {
--    return base::AdoptRef(new RunInfo(font, dir, canvas_rotation, script,
--                                      start_index, num_glyphs, num_characters));
--  }
--
--  static scoped_refptr<RunInfo> Create(const RunInfo& other) {
--    return base::AdoptRef(new RunInfo(other));
--  }
--
--  RunInfo(const SimpleFontData* font,
--          hb_direction_t dir,
--          CanvasRotationInVertical canvas_rotation,
--          hb_script_t script,
--          unsigned start_index,
--          unsigned num_glyphs,
--          unsigned num_characters)
--      : font_data_(const_cast<SimpleFontData*>(font)),
--        direction_(dir),
--        canvas_rotation_(canvas_rotation),
--        script_(script),
--        glyph_data_(
--            std::min(num_glyphs, HarfBuzzRunGlyphData::kMaxCharacterIndex + 1)),
--        start_index_(start_index),
--        num_characters_(num_characters),
--        width_(0.0f) {}
--
--  RunInfo(const RunInfo& other)
--      : font_data_(other.font_data_),
--        direction_(other.direction_),
--        canvas_rotation_(other.canvas_rotation_),
--        script_(other.script_),
--        glyph_data_(other.glyph_data_),
--        graphemes_(other.graphemes_),
--        start_index_(other.start_index_),
--        num_characters_(other.num_characters_),
--        width_(other.width_) {}
-+namespace glyph {
- 
--  unsigned NumGlyphs() const { return glyph_data_.size(); }
--  bool Rtl() const { return HB_DIRECTION_IS_BACKWARD(direction_); }
--  bool IsHorizontal() const { return HB_DIRECTION_IS_HORIZONTAL(direction_); }
--  CanvasRotationInVertical CanvasRotation() const { return canvas_rotation_; }
--  unsigned NextSafeToBreakOffset(unsigned) const;
--  unsigned PreviousSafeToBreakOffset(unsigned) const;
--  float XPositionForVisualOffset(unsigned, AdjustMidCluster) const;
--  float XPositionForOffset(unsigned, AdjustMidCluster) const;
--  void CharacterIndexForXPosition(float,
--                                  BreakGlyphsOption,
--                                  GlyphIndexResult*) const;
--  unsigned LimitNumGlyphs(unsigned start_glyph,
--                          unsigned* num_glyphs_in_out,
--                          const bool is_ltr,
--                          const hb_glyph_info_t* glyph_infos);
--
--  unsigned GlyphToCharacterIndex(unsigned i) const {
--    return start_index_ + glyph_data_[i].character_index;
--  }
-+class GlyphDataRange;
-+class GlyphOffsetArray;
- 
--  unsigned NumGraphemes(unsigned start, unsigned end) const;
-+// A return value of |GetOffsets()| to represent optional |GlyphOffset|
-+// array.
-+template <bool has_non_zero_glyph_offsets>
-+struct iterator final {};
++namespace internal {
 +
-+// For non-zero glyph offset array
-+template <>
-+struct iterator<true> final {
-+  explicit iterator(const GlyphOffsetArray& array);
-+  explicit iterator(const GlyphDataRange& range);
-+  ShapeResult::GlyphOffset operator*() const { return *pointer; }
-+  void operator++() { ++pointer; }
-+  const ShapeResult::GlyphOffset* pointer;
-+};
++    // A return value of |GetOffsets()| to represent optional |GlyphOffset|
++    // array.
++    template <bool has_non_zero_glyph_offsets>
++    struct iterator final {};
++
++    // For non-zero glyph offset array
++    template <>
++    struct iterator<true> final {
++      // The constructor for ShapeResult
++      explicit iterator(const ShapeResult::GlyphOffset* offset, bool check)
++          : pointer(offset) {
++        DCHECK(pointer);
++      }
++
++      ShapeResult::GlyphOffset operator*() const { return *pointer; }
++      void operator++() { ++pointer; }
++
++      const ShapeResult::GlyphOffset* pointer;
++    };
++
++    // For zero glyph offset array
++    template <>
++    struct iterator<false> final {
++      explicit iterator(const ShapeResult::GlyphOffset* offset, bool check) {
++        DCHECK(!check);
++      }
++
++      ShapeResult::GlyphOffset operator*() const { return ShapeResult::GlyphOffset(); }
++      void operator++() {}
++    };
++
++}  // namespace internal
++
+ struct ShapeResult::RunInfo : public RefCounted<ShapeResult::RunInfo> {
+   USING_FAST_MALLOC(RunInfo);
  
--  // For memory reporting.
--  size_t ByteSize() const { return sizeof(this) + glyph_data_.ByteSize(); }
-+// For zero glyph offset array
-+template <>
-+struct iterator<false> final {
-+  explicit iterator(const GlyphOffsetArray& array);
-+  explicit iterator(const GlyphDataRange& range);
-+  ShapeResult::GlyphOffset operator*() const { return ShapeResult::GlyphOffset(); }
-+  void operator++() {}
-+};
- 
-   // Represents a range of HarfBuzzRunGlyphData. |begin| and |end| follow the
-   // iterator pattern; i.e., |begin| is lower or equal to |end| in the address
-@@ -155,84 +114,9 @@ struct ShapeResult::RunInfo : public Ref
- 
-     const HarfBuzzRunGlyphData* begin = nullptr;
-     const HarfBuzzRunGlyphData* end = nullptr;
--    const GlyphOffset* offsets = nullptr;
-+    const ShapeResult::GlyphOffset* offsets = nullptr;
-   };
- 
--  // Find the range of HarfBuzzRunGlyphData for the specified character index
--  // range. This function uses binary search twice, hence O(2 log n).
--  GlyphDataRange FindGlyphDataRange(unsigned start_character_index,
--                                    unsigned end_character_index) const {
--    GlyphDataRange range = GetGlyphDataRange().FindGlyphDataRange(
--        Rtl(), start_character_index, end_character_index);
--    return range;
--  }
--
--  // Creates a new RunInfo instance representing a subset of the current run.
--  scoped_refptr<RunInfo> CreateSubRun(unsigned start, unsigned end) {
--    DCHECK(end > start);
--    unsigned number_of_characters = std::min(end - start, num_characters_);
--    auto glyphs = FindGlyphDataRange(start, end);
--    unsigned number_of_glyphs =
--        static_cast<unsigned>(std::distance(glyphs.begin, glyphs.end));
--
--    auto run =
--        Create(font_data_.get(), direction_, canvas_rotation_, script_,
--               start_index_ + start, number_of_glyphs, number_of_characters);
--
--    run->glyph_data_.CopyFromRange(glyphs);
--
--    float total_advance = 0;
--    for (HarfBuzzRunGlyphData& glyph_data : run->glyph_data_) {
--      glyph_data.character_index -= start;
--      total_advance += glyph_data.advance;
--    }
--
--    run->width_ = total_advance;
--    run->num_characters_ = number_of_characters;
--
--    return run;
--  }
--
--  void ExpandRangeToIncludePartialGlyphs(int offset, int* from, int* to) const {
--    int start = !Rtl() ? offset : (offset + num_characters_);
--    int end = offset + num_characters_;
--
--    for (unsigned i = 0; i < glyph_data_.size(); ++i) {
--      int index = offset + glyph_data_[i].character_index;
--      if (start == index)
--        continue;
--
--      if (!Rtl())
--        end = index;
--
--      if (end > *from && start < *to) {
--        *from = std::min(*from, start);
--        *to = std::max(*to, end);
--      }
--
--      if (!Rtl())
--        end = num_characters_;
--      else
--        end = start;
--      start = index;
--    }
--
--    if (end > *from && start < *to) {
--      *from = std::min(*from, start);
--      *to = std::max(*to, end);
--    }
--  }
--
--  // Common signatures with RunInfoPart, to templatize algorithms.
--  const RunInfo* GetRunInfo() const { return this; }
--  const GlyphDataRange GetGlyphDataRange() const {
--    return {glyph_data_.begin(), glyph_data_.end(),
--            glyph_data_.GetMayBeOffsets()};
--  }
--  unsigned OffsetToRunStartIndex() const { return 0; }
--
--  class GlyphDataCollection;
--
-   // A array of glyph offsets. If all offsets are zero, we don't allocate
-   // storage for reducing memory usage.
-   class GlyphOffsetArray final {
-@@ -246,42 +130,6 @@ struct ShapeResult::RunInfo : public Ref
+@@ -246,51 +283,15 @@ struct ShapeResult::RunInfo : public Ref
                  AllocateStorage());
      }
  
@@ -238,326 +91,42 @@ author: Michael Gilbert <mgilbert@debian.org>
 -    };
 -
      template <bool has_non_zero_glyph_offsets>
-     iterator<has_non_zero_glyph_offsets> GetIterator() const {
-       return iterator<has_non_zero_glyph_offsets>(*this);
-@@ -296,7 +144,7 @@ struct ShapeResult::RunInfo : public Ref
+-    iterator<has_non_zero_glyph_offsets> GetIterator() const {
+-      return iterator<has_non_zero_glyph_offsets>(*this);
++    internal::iterator<has_non_zero_glyph_offsets> GetIterator() const {
++      return internal::iterator<has_non_zero_glyph_offsets>(this->GetStorage(),this->HasStorage());
+     }
+ 
+     template <bool has_non_zero_glyph_offsets>
+-    iterator<has_non_zero_glyph_offsets> GetIteratorForRange(
++    internal::iterator<has_non_zero_glyph_offsets> GetIteratorForRange(
+         const GlyphDataRange& range) const {
+-      return iterator<has_non_zero_glyph_offsets>(range);
++      return internal::iterator<has_non_zero_glyph_offsets>(range.offsets,range.offsets);
+     }
+ 
      unsigned size() const { return size_; }
- 
-     size_t ByteSize() const {
--      return storage_ ? size() * sizeof(GlyphOffset) : 0;
-+      return storage_ ? size() * sizeof(ShapeResult::GlyphOffset) : 0;
-     }
- 
-     void CopyFromRange(const GlyphDataRange& range) {
-@@ -308,7 +156,7 @@ struct ShapeResult::RunInfo : public Ref
-       std::copy(range.offsets, range.offsets + range.size(), AllocateStorage());
-     }
- 
--    GlyphOffset* GetStorage() const { return storage_.get(); }
-+    ShapeResult::GlyphOffset* GetStorage() const { return storage_.get(); }
-     bool HasStorage() const { return storage_.get(); }
- 
-     void Reverse() {
-@@ -326,7 +174,7 @@ struct ShapeResult::RunInfo : public Ref
-       size_ = new_size;
-       if (!storage_)
-         return;
--      GlyphOffset* new_offsets = new GlyphOffset[new_size];
-+      ShapeResult::GlyphOffset* new_offsets = new ShapeResult::GlyphOffset[new_size];
-       std::copy(storage_.get(), storage_.get() + new_size, new_offsets);
-       storage_.reset(new_offsets);
-     }
-@@ -348,7 +196,7 @@ struct ShapeResult::RunInfo : public Ref
-       storage_[index].SetWidth(storage_[index].Width() + delta);
-     }
- 
--    void SetAt(unsigned index, GlyphOffset offset) {
-+    void SetAt(unsigned index, ShapeResult::GlyphOffset offset) {
-       DCHECK_LT(index, size());
-       if (!storage_) {
-         if (offset.Width() == 0 && offset.Height() == 0)
-@@ -360,14 +208,14 @@ struct ShapeResult::RunInfo : public Ref
- 
-    private:
-     // Note: HarfBuzzShaperTest.ShapeVerticalUpright uses non-zero glyph offset.
--    GlyphOffset* AllocateStorage() {
-+    ShapeResult::GlyphOffset* AllocateStorage() {
-       DCHECK_GE(size(), 1u);
-       DCHECK(!storage_);
--      storage_.reset(new GlyphOffset[size()]);
-+      storage_.reset(new ShapeResult::GlyphOffset[size()]);
-       return storage_.get();
-     }
- 
--    std::unique_ptr<GlyphOffset[]> storage_;
-+    std::unique_ptr<ShapeResult::GlyphOffset[]> storage_;
-     unsigned size_;
-   };
- 
-@@ -404,11 +252,11 @@ struct ShapeResult::RunInfo : public Ref
+@@ -404,7 +405,7 @@ struct ShapeResult::RunInfo : public Ref
      }
  
      template <bool has_non_zero_glyph_offsets>
 -    GlyphOffsetArray::iterator<has_non_zero_glyph_offsets> GetOffsets() const {
-+    iterator<has_non_zero_glyph_offsets> GetOffsets() const {
++    internal::iterator<has_non_zero_glyph_offsets> GetOffsets() const {
        return offsets_.GetIterator<has_non_zero_glyph_offsets>();
      }
  
--    GlyphOffset* GetMayBeOffsets() const { return offsets_.GetStorage(); }
-+    ShapeResult::GlyphOffset* GetMayBeOffsets() const { return offsets_.GetStorage(); }
- 
-     void CopyFromRange(const GlyphDataRange& range) {
-       DCHECK_EQ(static_cast<size_t>(range.end - range.begin), size());
-@@ -426,7 +274,7 @@ struct ShapeResult::RunInfo : public Ref
-       offsets_.AddWidthAt(index, delta);
-     }
- 
--    void SetOffsetAt(unsigned index, GlyphOffset offset) {
-+    void SetOffsetAt(unsigned index, ShapeResult::GlyphOffset offset) {
-       offsets_.SetAt(index, offset);
-     }
- 
-@@ -478,13 +326,176 @@ struct ShapeResult::RunInfo : public Ref
-     GlyphOffsetArray offsets_;
-   };
- 
-+iterator<true>::iterator(const GlyphOffsetArray& array) : pointer(array.GetStorage()) {
-+  DCHECK(pointer);
-+}
-+
-+iterator<true>::iterator(const GlyphDataRange& range) : pointer(range.offsets) {
-+  DCHECK(pointer);
-+}
-+
-+iterator<false>::iterator(const GlyphOffsetArray& array) {
-+  DCHECK(!array.HasStorage());
-+}
-+
-+iterator<false>::iterator(const GlyphDataRange& range) {
-+  DCHECK(!range.offsets);
-+}
-+
-+}  // namespace glyph
-+
-+struct ShapeResult::RunInfo : public RefCounted<ShapeResult::RunInfo> {
-+  USING_FAST_MALLOC(RunInfo);
-+
-+ public:
-+  static scoped_refptr<RunInfo> Create(const SimpleFontData* font,
-+                                       hb_direction_t dir,
-+                                       CanvasRotationInVertical canvas_rotation,
-+                                       hb_script_t script,
-+                                       unsigned start_index,
-+                                       unsigned num_glyphs,
-+                                       unsigned num_characters) {
-+    return base::AdoptRef(new RunInfo(font, dir, canvas_rotation, script,
-+                                      start_index, num_glyphs, num_characters));
-+  }
-+
-+  static scoped_refptr<RunInfo> Create(const RunInfo& other) {
-+    return base::AdoptRef(new RunInfo(other));
-+  }
-+
-+  RunInfo(const SimpleFontData* font,
-+          hb_direction_t dir,
-+          CanvasRotationInVertical canvas_rotation,
-+          hb_script_t script,
-+          unsigned start_index,
-+          unsigned num_glyphs,
-+          unsigned num_characters)
-+      : font_data_(const_cast<SimpleFontData*>(font)),
-+        direction_(dir),
-+        canvas_rotation_(canvas_rotation),
-+        script_(script),
-+        glyph_data_(
-+            std::min(num_glyphs, HarfBuzzRunGlyphData::kMaxCharacterIndex + 1)),
-+        start_index_(start_index),
-+        num_characters_(num_characters),
-+        width_(0.0f) {}
-+
-+  RunInfo(const RunInfo& other)
-+      : font_data_(other.font_data_),
-+        direction_(other.direction_),
-+        canvas_rotation_(other.canvas_rotation_),
-+        script_(other.script_),
-+        glyph_data_(other.glyph_data_),
-+        graphemes_(other.graphemes_),
-+        start_index_(other.start_index_),
-+        num_characters_(other.num_characters_),
-+        width_(other.width_) {}
-+
-+  unsigned NumGlyphs() const { return glyph_data_.size(); }
-+  bool Rtl() const { return HB_DIRECTION_IS_BACKWARD(direction_); }
-+  bool IsHorizontal() const { return HB_DIRECTION_IS_HORIZONTAL(direction_); }
-+  CanvasRotationInVertical CanvasRotation() const { return canvas_rotation_; }
-+  unsigned NextSafeToBreakOffset(unsigned) const;
-+  unsigned PreviousSafeToBreakOffset(unsigned) const;
-+  float XPositionForVisualOffset(unsigned, AdjustMidCluster) const;
-+  float XPositionForOffset(unsigned, AdjustMidCluster) const;
-+  void CharacterIndexForXPosition(float,
-+                                  BreakGlyphsOption,
-+                                  GlyphIndexResult*) const;
-+  unsigned LimitNumGlyphs(unsigned start_glyph,
-+                          unsigned* num_glyphs_in_out,
-+                          const bool is_ltr,
-+                          const hb_glyph_info_t* glyph_infos);
-+
-+  unsigned GlyphToCharacterIndex(unsigned i) const {
-+    return start_index_ + glyph_data_[i].character_index;
-+  }
-+
-+  unsigned NumGraphemes(unsigned start, unsigned end) const;
-+
-+  // For memory reporting.
-+  size_t ByteSize() const { return sizeof(this) + glyph_data_.ByteSize(); }
-+
-+  // Find the range of HarfBuzzRunGlyphData for the specified character index
-+  // range. This function uses binary search twice, hence O(2 log n).
-+  glyph::GlyphDataRange FindGlyphDataRange(unsigned start_character_index,
-+                                    unsigned end_character_index) const {
-+    glyph::GlyphDataRange range = GetGlyphDataRange().FindGlyphDataRange(
-+        Rtl(), start_character_index, end_character_index);
-+    return range;
-+  }
-+
-+  // Creates a new RunInfo instance representing a subset of the current run.
-+  scoped_refptr<RunInfo> CreateSubRun(unsigned start, unsigned end) {
-+    DCHECK(end > start);
-+    unsigned number_of_characters = std::min(end - start, num_characters_);
-+    auto glyphs = FindGlyphDataRange(start, end);
-+    unsigned number_of_glyphs =
-+        static_cast<unsigned>(std::distance(glyphs.begin, glyphs.end));
-+
-+    auto run =
-+        Create(font_data_.get(), direction_, canvas_rotation_, script_,
-+               start_index_ + start, number_of_glyphs, number_of_characters);
-+
-+    run->glyph_data_.CopyFromRange(glyphs);
-+
-+    float total_advance = 0;
-+    for (HarfBuzzRunGlyphData& glyph_data : run->glyph_data_) {
-+      glyph_data.character_index -= start;
-+      total_advance += glyph_data.advance;
-+    }
-+
-+    run->width_ = total_advance;
-+    run->num_characters_ = number_of_characters;
-+
-+    return run;
-+  }
-+
-+  void ExpandRangeToIncludePartialGlyphs(int offset, int* from, int* to) const {
-+    int start = !Rtl() ? offset : (offset + num_characters_);
-+    int end = offset + num_characters_;
-+
-+    for (unsigned i = 0; i < glyph_data_.size(); ++i) {
-+      int index = offset + glyph_data_[i].character_index;
-+      if (start == index)
-+        continue;
-+
-+      if (!Rtl())
-+        end = index;
-+
-+      if (end > *from && start < *to) {
-+        *from = std::min(*from, start);
-+        *to = std::max(*to, end);
-+      }
-+
-+      if (!Rtl())
-+        end = num_characters_;
-+      else
-+        end = start;
-+      start = index;
-+    }
-+
-+    if (end > *from && start < *to) {
-+      *from = std::min(*from, start);
-+      *to = std::max(*to, end);
-+    }
-+  }
-+
-+  // Common signatures with RunInfoPart, to templatize algorithms.
-+  const RunInfo* GetRunInfo() const { return this; }
-+  const glyph::GlyphDataRange GetGlyphDataRange() const {
-+    return {glyph_data_.begin(), glyph_data_.end(),
-+            glyph_data_.GetMayBeOffsets()};
-+  }
-+  unsigned OffsetToRunStartIndex() const { return 0; }
-+
-   scoped_refptr<SimpleFontData> font_data_;
-   hb_direction_t direction_;
-   // For upright-in-vertical we need to tell the ShapeResultBloberizer to rotate
-   // the canvas back 90deg for this RunInfo.
-   CanvasRotationInVertical canvas_rotation_;
-   hb_script_t script_;
--  GlyphDataCollection glyph_data_;
-+  glyph::GlyphDataCollection glyph_data_;
- 
-   // graphemes_[i] is the number of graphemes up to (and including) the ith
-   // character in the run.
-@@ -497,8 +508,8 @@ struct ShapeResult::RunInfo : public Ref
- 
- // Find the range of HarfBuzzRunGlyphData for the specified character index
- // range. This function uses binary search twice, hence O(2 log n).
--inline ShapeResult::RunInfo::GlyphDataRange
--ShapeResult::RunInfo::GlyphDataRange::FindGlyphDataRange(
-+inline glyph::GlyphDataRange
-+glyph::GlyphDataRange::FindGlyphDataRange(
-     bool is_rtl,
-     unsigned start_character_index,
-     unsigned end_character_index) const {
 --- a/third_party/blink/renderer/platform/fonts/shaping/shape_result_view.cc
 +++ b/third_party/blink/renderer/platform/fonts/shaping/shape_result_view.cc
-@@ -18,7 +18,7 @@ struct ShapeResultView::RunInfoPart {
- 
-  public:
-   RunInfoPart(scoped_refptr<const ShapeResult::RunInfo> run,
--              ShapeResult::RunInfo::GlyphDataRange range,
-+              glyph::GlyphDataRange range,
-               unsigned start_index,
-               unsigned offset,
-               unsigned num_characters,
 @@ -44,10 +44,9 @@ struct ShapeResultView::RunInfoPart {
      return *(range_.begin + index);
    }
    template <bool has_non_zero_glyph_offsets>
 -  ShapeResult::RunInfo::GlyphOffsetArray::iterator<has_non_zero_glyph_offsets>
-+  glyph::iterator<has_non_zero_glyph_offsets>
++  internal::iterator<has_non_zero_glyph_offsets>
    GetGlyphOffsets() const {
 -    return ShapeResult::RunInfo::GlyphOffsetArray::iterator<
 -        has_non_zero_glyph_offsets>(range_);
-+    return glyph::iterator<has_non_zero_glyph_offsets>(range_);
++    return internal::iterator<has_non_zero_glyph_offsets>(range_.offsets,range_.offsets);
    }
    bool HasGlyphOffsets() const { return range_.offsets; }
    // The end character index of |this| without considering offsets in
-@@ -68,10 +67,10 @@ struct ShapeResultView::RunInfoPart {
- 
-   // Common signatures with RunInfo, to templatize algorithms.
-   const ShapeResult::RunInfo* GetRunInfo() const { return run_.get(); }
--  const ShapeResult::RunInfo::GlyphDataRange& GetGlyphDataRange() const {
-+  const glyph::GlyphDataRange& GetGlyphDataRange() const {
-     return range_;
-   }
--  ShapeResult::RunInfo::GlyphDataRange FindGlyphDataRange(
-+  glyph::GlyphDataRange FindGlyphDataRange(
-       unsigned start_character_index,
-       unsigned end_character_index) const {
-     return GetGlyphDataRange().FindGlyphDataRange(Rtl(), start_character_index,
-@@ -80,7 +79,7 @@ struct ShapeResultView::RunInfoPart {
-   unsigned OffsetToRunStartIndex() const { return offset_; }
- 
-   scoped_refptr<const ShapeResult::RunInfo> run_;
--  ShapeResult::RunInfo::GlyphDataRange range_;
-+  glyph::GlyphDataRange range_;
- 
-   // Start index for partial run, adjusted to ensure that runs are continuous.
-   unsigned start_index_;
-@@ -178,7 +177,7 @@ void ShapeResultView::CreateViewsForResu
-     unsigned part_start = run->start_index_ + other->StartIndexOffsetForRun();
-     unsigned run_end = part_start + run->num_characters_;
-     if (start_index < run_end && end_index > part_start) {
--      ShapeResult::RunInfo::GlyphDataRange range;
-+      glyph::GlyphDataRange range;
- 
-       // Adjust start/end to the character index of |RunInfo|. The start index
-       // of |RunInfo| could be different from |part_start| for ShapeResultView.

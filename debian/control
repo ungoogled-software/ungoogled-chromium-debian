@@ -171,6 +171,7 @@ Recommends:
  chromium-sandbox,
  fonts-liberation,
  notification-daemon,
+ system-config-printer,
 Breaks:
  chromium (<< ${binary:Version}),
 Replaces:
