@@ -1,3 +1,39 @@
+chromium (76.0.3809.87-1) unstable; urgency=medium
+
+  * New upstream stable release.
+    - CVE-2019-5847: V8 sealed/frozen elements cause crash. Reported by m3plex
+    - CVE-2019-5848: Font sizes may expose sensitive information. Reported by
+      Mark Amery
+    - CVE-2019-5850: Use-after-free in offline page fetcher. Reported by
+      Brendon Tiszka
+    - CVE-2019-5851: Use-after-poison in offline audio context. Reported by Zhe
+      Jin
+    - CVE-2019-5852: Object leak of utility functions. Reported by David Erceg
+    - CVE-2019-5853: Memory corruption in regexp length check. Reported by
+      yngwei and sakura
+    - CVE-2019-5854: Integer overflow in PDFium text rendering. Reported by
+      Zhen Zhou
+    - CVE-2019-5855: Integer overflow in PDFium. Reported by Zhen Zhou
+    - CVE-2019-5856: Insufficient checks on filesystem: URI permissions.
+      Reported by Yongke Wang
+    - CVE-2019-5857: Comparison of -0 and null yields crash. Reported by
+      cloudfuzzer
+    - CVE-2019-5858: Insufficient filtering of Open URL service parameters.
+      Reported by evi1m0
+    - CVE-2019-5859: res: URIs can load alternative browsers. Reported by James
+      Lee
+    - CVE-2019-5860: Use-after-free in PDFium. Reported by Anonymous
+    - CVE-2019-5861: Click location incorrectly checked. Reported by Robin Linus
+    - CVE-2019-5862: AppCache not robust to compromised renderers. Reported by
+      Jun Kokatsu
+    - CVE-2019-5864: Insufficient port filtering in CORS for extensions.
+      Reported by Devin Grindle
+    - CVE-2019-5865: Site isolation bypass from compromised renderer. Reported
+      by Ivan Fratric
+  * Use legacy call to avoid error in icu 6.3 (closes: #932049).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Mon, 29 Jul 2019 23:22:44 +0000
+
 chromium (76.0.3809.71-1) unstable; urgency=medium
 
   * New upstream beta release.
@@ -61,6 +97,7 @@ chromium (75.0.3770.80-1) unstable; urgency=medium
       Reported by Masato Kinugawa
     - CVE-2019-5840: Popup blocker bypass. Reported by Eliya Stein and Jerome
       Dangu
+    - CVE-2019-5849: Out-of-bounds read in Skia. Reported by Zhen Zhou
 
  -- Michael Gilbert <mgilbert@debian.org>  Sun, 09 Jun 2019 18:59:50 +0000
 

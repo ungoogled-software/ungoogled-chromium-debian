@@ -71,3 +71,15 @@ author: Michael Gilbert <mgilbert@debian.org>
      ProcessStartTag(token);
      return;
    }
+--- a/ui/gfx/ipc/skia/gfx_skia_param_traits_macros.h
++++ b/ui/gfx/ipc/skia/gfx_skia_param_traits_macros.h
+@@ -10,7 +10,7 @@
+ #include "ipc/ipc_message_macros.h"
+ #include "third_party/skia/include/core/SkImageInfo.h"
+ 
+-IPC_ENUM_TRAITS_VALIDATE(SkColorType, kLastEnum_SkColorType)
+-IPC_ENUM_TRAITS_VALIDATE(SkAlphaType, kLastEnum_SkAlphaType)
++IPC_ENUM_TRAITS_VALIDATE(SkColorType, value == kLastEnum_SkColorType)
++IPC_ENUM_TRAITS_VALIDATE(SkAlphaType, value == kLastEnum_SkAlphaType)
+ 
+ #endif  // UI_GFX_IPC_SKIA_GFX_SKIA_PARAM_TRAITS_MACROS_H_

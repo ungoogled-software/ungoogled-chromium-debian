@@ -13,7 +13,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    "//chromeos/services/network_config/public/mojom/typemaps.gni",
 --- a/content/shell/BUILD.gn
 +++ b/content/shell/BUILD.gn
-@@ -167,8 +167,6 @@ jumbo_static_library("content_shell_lib"
+@@ -168,8 +168,6 @@ jumbo_static_library("content_shell_lib"
      "browser/web_test/fake_bluetooth_scanning_prompt.h",
      "browser/web_test/leak_detector.cc",
      "browser/web_test/leak_detector.h",
@@ -22,7 +22,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "browser/web_test/secondary_test_window_observer.cc",
      "browser/web_test/secondary_test_window_observer.h",
      "browser/web_test/test_info_extractor.cc",
-@@ -303,7 +301,6 @@ jumbo_static_library("content_shell_lib"
+@@ -304,7 +302,6 @@ jumbo_static_library("content_shell_lib"
      "//content/public/common:service_names",
      "//content/shell/test_runner:test_runner",
      "//content/test:content_test_mojo_bindings",
@@ -42,7 +42,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//device/vr/public/mojom:mojom_js_data_deps",
 --- a/content/browser/service_manager/service_manager_context.cc
 +++ b/content/browser/service_manager/service_manager_context.cc
-@@ -81,9 +81,6 @@
+@@ -83,9 +83,6 @@
  #include "services/service_manager/service_process_host.h"
  #include "services/service_manager/service_process_launcher.h"
  #include "services/shape_detection/public/mojom/constants.mojom.h"
@@ -52,7 +52,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "services/video_capture/public/mojom/constants.mojom.h"
  #include "services/video_capture/service_impl.h"
  #include "services/viz/public/interfaces/constants.mojom.h"
-@@ -349,11 +346,6 @@ std::unique_ptr<service_manager::Service
+@@ -355,11 +352,6 @@ std::unique_ptr<service_manager::Service
        std::move(request));
  }
  

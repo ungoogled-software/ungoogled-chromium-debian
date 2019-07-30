@@ -362,7 +362,17 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "unicode/locid.h"
  #include "unicode/normalizer2.h"
  #include "unicode/numfmt.h"
-@@ -1983,11 +1982,6 @@ Handle<String> Intl::NumberFieldToType(I
+@@ -1587,8 +1586,7 @@ std::map<std::string, std::string> Looku
+       }
+     }
+     status = U_ZERO_ERROR;
+-    icu_locale->setUnicodeKeywordValue(
+-        bcp47_key == nullptr ? keyword : bcp47_key, nullptr, status);
++    icu_locale->setKeywordValue(keyword, nullptr, status);
+     CHECK(U_SUCCESS(status));
+   }
+ 
+@@ -1983,11 +1981,6 @@ Handle<String> Intl::NumberFieldToType(I
        UNREACHABLE();
        return Handle<String>();
  
@@ -374,7 +384,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      default:
        UNREACHABLE();
        return Handle<String>();
-@@ -1995,10 +1989,13 @@ Handle<String> Intl::NumberFieldToType(I
+@@ -1995,10 +1988,13 @@ Handle<String> Intl::NumberFieldToType(I
  }
  
  // A helper function to convert the FormattedValue for several Intl objects.
@@ -383,7 +393,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 +MaybeHandle<String> Intl::FormattedDateIntervalToString(
 +    Isolate* isolate, const icu::DateInterval& interval, const icu::DateIntervalFormat& format) {
 +  icu::UnicodeString result;
-+  icu::FieldPosition fpos;  // TODO avoid fpos???
++  icu::FieldPosition fpos;
 +
    UErrorCode status = U_ZERO_ERROR;
 -  icu::UnicodeString result = formatted.toString(status);
