@@ -7,6 +7,6 @@
 +#ifndef DRM_FORMAT_MOD_INVALID
 +#define DRM_FORMAT_MOD_INVALID ((1ULL<<56) - 1)
 +#endif
- static_assert(NativePixmapPlane::kNoModifier == DRM_FORMAT_MOD_INVALID,
-               "gfx::NativePixmapPlane::kNoModifier should be an alias for"
+ static_assert(NativePixmapHandle::kNoModifier == DRM_FORMAT_MOD_INVALID,
+               "gfx::NativePixmapHandle::kNoModifier should be an alias for"
                "DRM_FORMAT_MOD_INVALID");
