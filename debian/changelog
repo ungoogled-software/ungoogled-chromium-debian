@@ -1,3 +1,9 @@
+chromium (76.0.3809.87-2) unstable; urgency=medium
+
+  * Fix inverted logic in enum comparison (closes: #933598).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 03 Aug 2019 14:31:59 +0000
+
 chromium (76.0.3809.87-1) unstable; urgency=medium
 
   * New upstream stable release.
