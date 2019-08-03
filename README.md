@@ -20,6 +20,7 @@ $ sudo tar -xvf ungoogled-chromium_75.0.3770.80-1.2_linux.tar.xz -C /opt
 Before you run, you must set up your system so that the browser's sandboxing will work. There are two options:
 * Use the user namespace sandbox. This is the preferred option.
 * Use the SUID sandbox. This should be used on systems that do not have support for user namespaces.
+
 To quickly determine your current sandbox setup:
 1. Launch UC temporarily from a terminal:
 ```
