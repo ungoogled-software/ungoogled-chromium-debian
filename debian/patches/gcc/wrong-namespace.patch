@@ -1,0 +1,276 @@
+description: various methods and classes are using the wrong namespace
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/v8/src/inspector/v8-inspector-protocol-encoding.cc
++++ b/v8/src/inspector/v8-inspector-protocol-encoding.cc
+@@ -11,10 +11,10 @@
+ 
+ namespace v8_inspector {
+ namespace {
+-using IPEStatus = ::v8_inspector_protocol_encoding::Status;
+-using ::v8_inspector_protocol_encoding::span;
++using IPEStatus = inspector_protocol_encoding::Status;
++using inspector_protocol_encoding::span;
+ 
+-class Platform : public ::v8_inspector_protocol_encoding::json::Platform {
++class Platform : public inspector_protocol_encoding::json::Platform {
+  public:
+   bool StrToD(const char* str, double* result) const override {
+     *result = v8::internal::StringToDouble(str, v8::internal::NO_FLAGS);
+--- a/v8/src/inspector/v8-inspector-protocol-encoding.h
++++ b/v8/src/inspector/v8-inspector-protocol-encoding.h
+@@ -9,16 +9,16 @@
+ 
+ namespace v8_inspector {
+ 
+-::v8_inspector_protocol_encoding::Status ConvertCBORToJSON(
+-    ::v8_inspector_protocol_encoding::span<uint8_t> cbor,
++inspector_protocol_encoding::Status ConvertCBORToJSON(
++    inspector_protocol_encoding::span<uint8_t> cbor,
+     std::vector<uint8_t>* json);
+ 
+-::v8_inspector_protocol_encoding::Status ConvertJSONToCBOR(
+-    ::v8_inspector_protocol_encoding::span<uint8_t> json,
++inspector_protocol_encoding::Status ConvertJSONToCBOR(
++    inspector_protocol_encoding::span<uint8_t> json,
+     std::vector<uint8_t>* cbor);
+ 
+-::v8_inspector_protocol_encoding::Status ConvertJSONToCBOR(
+-    ::v8_inspector_protocol_encoding::span<uint16_t> json,
++inspector_protocol_encoding::Status ConvertJSONToCBOR(
++    inspector_protocol_encoding::span<uint16_t> json,
+     std::vector<uint8_t>* cbor);
+ 
+ }  // namespace v8_inspector
+--- a/v8/src/inspector/v8-inspector-session-impl.cc
++++ b/v8/src/inspector/v8-inspector-session-impl.cc
+@@ -24,9 +24,9 @@
+ 
+ namespace v8_inspector {
+ namespace {
+-using ::v8_inspector_protocol_encoding::span;
+-using ::v8_inspector_protocol_encoding::SpanFrom;
+-using IPEStatus = ::v8_inspector_protocol_encoding::Status;
++using inspector_protocol_encoding::span;
++using inspector_protocol_encoding::SpanFrom;
++using IPEStatus = inspector_protocol_encoding::Status;
+ 
+ bool IsCBORMessage(const StringView& msg) {
+   return msg.is8Bit() && msg.length() >= 2 && msg.characters8()[0] == 0xd8 &&
+--- a/net/third_party/quiche/src/quic/core/crypto/transport_parameters.cc
++++ b/net/third_party/quiche/src/quic/core/crypto/transport_parameters.cc
+@@ -62,37 +62,37 @@ const size_t kStatelessResetTokenLength
+ std::string TransportParameterIdToString(
+     TransportParameters::TransportParameterId param_id) {
+   switch (param_id) {
+-    case kOriginalConnectionId:
++    case quic::TransportParameters::TransportParameterId::kOriginalConnectionId:
+       return "original_connection_id";
+-    case kIdleTimeout:
++    case quic::TransportParameters::TransportParameterId::kIdleTimeout:
+       return "idle_timeout";
+-    case kStatelessResetToken:
++    case quic::TransportParameters::TransportParameterId::kStatelessResetToken:
+       return "stateless_reset_token";
+-    case kMaxPacketSize:
++    case quic::TransportParameters::TransportParameterId::kMaxPacketSize:
+       return "max_packet_size";
+-    case kInitialMaxData:
++    case quic::TransportParameters::TransportParameterId::kInitialMaxData:
+       return "initial_max_data";
+-    case kInitialMaxStreamDataBidiLocal:
++    case quic::TransportParameters::TransportParameterId::kInitialMaxStreamDataBidiLocal:
+       return "initial_max_stream_data_bidi_local";
+-    case kInitialMaxStreamDataBidiRemote:
++    case quic::TransportParameters::TransportParameterId::kInitialMaxStreamDataBidiRemote:
+       return "initial_max_stream_data_bidi_remote";
+-    case kInitialMaxStreamDataUni:
++    case quic::TransportParameters::TransportParameterId::kInitialMaxStreamDataUni:
+       return "initial_max_stream_data_uni";
+-    case kInitialMaxStreamsBidi:
++    case quic::TransportParameters::TransportParameterId::kInitialMaxStreamsBidi:
+       return "initial_max_streams_bidi";
+-    case kInitialMaxStreamsUni:
++    case quic::TransportParameters::TransportParameterId::kInitialMaxStreamsUni:
+       return "initial_max_streams_uni";
+-    case kAckDelayExponent:
++    case quic::TransportParameters::TransportParameterId::kAckDelayExponent:
+       return "ack_delay_exponent";
+-    case kMaxAckDelay:
++    case quic::TransportParameters::TransportParameterId::kMaxAckDelay:
+       return "max_ack_delay";
+-    case kDisableMigration:
++    case quic::TransportParameters::TransportParameterId::kDisableMigration:
+       return "disable_migration";
+-    case kPreferredAddress:
++    case quic::TransportParameters::TransportParameterId::kPreferredAddress:
+       return "preferred_address";
+-    case kGoogleQuicParam:
++    case quic::TransportParameters::TransportParameterId::kGoogleQuicParam:
+       return "google";
+-    case kGoogleQuicVersion:
++    case quic::TransportParameters::TransportParameterId::kGoogleQuicVersion:
+       return "google-version";
+   }
+   return "Unknown(" + QuicTextUtils::Uint64ToString(param_id) + ")";
+@@ -390,7 +390,7 @@ bool SerializeTransportParameters(const
+   CBB original_connection_id_param;
+   if (!in.original_connection_id.IsEmpty()) {
+     DCHECK_EQ(Perspective::IS_SERVER, in.perspective);
+-    if (!CBB_add_u16(&params, kOriginalConnectionId) ||
++    if (!CBB_add_u16(&params, quic::TransportParameters::TransportParameterId::kOriginalConnectionId) ||
+         !CBB_add_u16_length_prefixed(&params, &original_connection_id_param) ||
+         !CBB_add_bytes(
+             &original_connection_id_param,
+@@ -412,7 +412,7 @@ bool SerializeTransportParameters(const
+   if (!in.stateless_reset_token.empty()) {
+     DCHECK_EQ(kStatelessResetTokenLength, in.stateless_reset_token.size());
+     DCHECK_EQ(Perspective::IS_SERVER, in.perspective);
+-    if (!CBB_add_u16(&params, kStatelessResetToken) ||
++    if (!CBB_add_u16(&params, quic::TransportParameters::TransportParameterId::kStatelessResetToken) ||
+         !CBB_add_u16_length_prefixed(&params, &stateless_reset_token_param) ||
+         !CBB_add_bytes(&stateless_reset_token_param,
+                        in.stateless_reset_token.data(),
+@@ -438,7 +438,7 @@ bool SerializeTransportParameters(const
+ 
+   // disable_migration
+   if (in.disable_migration) {
+-    if (!CBB_add_u16(&params, kDisableMigration) ||
++    if (!CBB_add_u16(&params, quic::TransportParameters::TransportParameterId::kDisableMigration) ||
+         !CBB_add_u16(&params, 0u)) {  // 0 is the length of this parameter.
+       QUIC_BUG << "Failed to write disable_migration for " << in;
+       return false;
+@@ -458,7 +458,7 @@ bool SerializeTransportParameters(const
+       QUIC_BUG << "Bad lengths " << *in.preferred_address;
+       return false;
+     }
+-    if (!CBB_add_u16(&params, kPreferredAddress) ||
++    if (!CBB_add_u16(&params, quic::TransportParameters::TransportParameterId::kPreferredAddress) ||
+         !CBB_add_u16_length_prefixed(&params, &preferred_address_params) ||
+         !CBB_add_bytes(
+             &preferred_address_params,
+@@ -491,7 +491,7 @@ bool SerializeTransportParameters(const
+   if (in.google_quic_params) {
+     const QuicData& serialized_google_quic_params =
+         in.google_quic_params->GetSerialized();
+-    if (!CBB_add_u16(&params, kGoogleQuicParam) ||
++    if (!CBB_add_u16(&params, quic::TransportParameters::TransportParameterId::kGoogleQuicParam) ||
+         !CBB_add_u16_length_prefixed(&params, &google_quic_params) ||
+         !CBB_add_bytes(&google_quic_params,
+                        reinterpret_cast<const uint8_t*>(
+@@ -505,7 +505,7 @@ bool SerializeTransportParameters(const
+ 
+   // Google-specific version extension.
+   CBB google_version_params;
+-  if (!CBB_add_u16(&params, kGoogleQuicVersion) ||
++  if (!CBB_add_u16(&params, quic::TransportParameters::TransportParameterId::kGoogleQuicVersion) ||
+       !CBB_add_u16_length_prefixed(&params, &google_version_params) ||
+       !CBB_add_u32(&google_version_params, in.version)) {
+     QUIC_BUG << "Failed to write Google version extension for " << in;
+@@ -565,7 +565,7 @@ bool ParseTransportParameters(const uint
+     }
+     bool parse_success = true;
+     switch (param_id) {
+-      case kOriginalConnectionId:
++      case quic::TransportParameters::TransportParameterId::kOriginalConnectionId:
+         if (!out->original_connection_id.IsEmpty()) {
+           QUIC_DLOG(ERROR) << "Received a second original connection ID";
+           return false;
+@@ -581,10 +581,10 @@ bool ParseTransportParameters(const uint
+                  CBS_len(&value));
+         }
+         break;
+-      case kIdleTimeout:
++      case quic::TransportParameters::TransportParameterId::kIdleTimeout:
+         parse_success = out->idle_timeout_milliseconds.ReadFromCbs(&value);
+         break;
+-      case kStatelessResetToken:
++      case quic::TransportParameters::TransportParameterId::kStatelessResetToken:
+         if (!out->stateless_reset_token.empty()) {
+           QUIC_DLOG(ERROR) << "Received a second stateless reset token";
+           return false;
+@@ -597,36 +597,36 @@ bool ParseTransportParameters(const uint
+         out->stateless_reset_token.assign(CBS_data(&value),
+                                           CBS_data(&value) + CBS_len(&value));
+         break;
+-      case kMaxPacketSize:
++      case quic::TransportParameters::TransportParameterId::kMaxPacketSize:
+         parse_success = out->max_packet_size.ReadFromCbs(&value);
+         break;
+-      case kInitialMaxData:
++      case quic::TransportParameters::TransportParameterId::kInitialMaxData:
+         parse_success = out->initial_max_data.ReadFromCbs(&value);
+         break;
+-      case kInitialMaxStreamDataBidiLocal:
++      case quic::TransportParameters::TransportParameterId::kInitialMaxStreamDataBidiLocal:
+         parse_success =
+             out->initial_max_stream_data_bidi_local.ReadFromCbs(&value);
+         break;
+-      case kInitialMaxStreamDataBidiRemote:
++      case quic::TransportParameters::TransportParameterId::kInitialMaxStreamDataBidiRemote:
+         parse_success =
+             out->initial_max_stream_data_bidi_remote.ReadFromCbs(&value);
+         break;
+-      case kInitialMaxStreamDataUni:
++      case quic::TransportParameters::TransportParameterId::kInitialMaxStreamDataUni:
+         parse_success = out->initial_max_stream_data_uni.ReadFromCbs(&value);
+         break;
+-      case kInitialMaxStreamsBidi:
++      case quic::TransportParameters::TransportParameterId::kInitialMaxStreamsBidi:
+         parse_success = out->initial_max_streams_bidi.ReadFromCbs(&value);
+         break;
+-      case kInitialMaxStreamsUni:
++      case quic::TransportParameters::TransportParameterId::kInitialMaxStreamsUni:
+         parse_success = out->initial_max_streams_uni.ReadFromCbs(&value);
+         break;
+-      case kAckDelayExponent:
++      case quic::TransportParameters::TransportParameterId::kAckDelayExponent:
+         parse_success = out->ack_delay_exponent.ReadFromCbs(&value);
+         break;
+-      case kMaxAckDelay:
++      case quic::TransportParameters::TransportParameterId::kMaxAckDelay:
+         parse_success = out->max_ack_delay.ReadFromCbs(&value);
+         break;
+-      case kDisableMigration:
++      case quic::TransportParameters::TransportParameterId::kDisableMigration:
+         if (out->disable_migration) {
+           QUIC_DLOG(ERROR) << "Received a second disable migration";
+           return false;
+@@ -638,7 +638,7 @@ bool ParseTransportParameters(const uint
+         }
+         out->disable_migration = true;
+         break;
+-      case kPreferredAddress: {
++      case quic::TransportParameters::TransportParameterId::kPreferredAddress: {
+         uint16_t ipv4_port, ipv6_port;
+         in_addr ipv4_address;
+         in6_addr ipv6_address;
+@@ -692,7 +692,7 @@ bool ParseTransportParameters(const uint
+             QuicMakeUnique<TransportParameters::PreferredAddress>(
+                 preferred_address);
+       } break;
+-      case kGoogleQuicParam: {
++      case quic::TransportParameters::TransportParameterId::kGoogleQuicParam: {
+         if (out->google_quic_params) {
+           QUIC_DLOG(ERROR) << "Received a second Google parameter";
+           return false;
+@@ -701,7 +701,7 @@ bool ParseTransportParameters(const uint
+             reinterpret_cast<const char*>(CBS_data(&value)), CBS_len(&value));
+         out->google_quic_params = CryptoFramer::ParseMessage(serialized_params);
+       } break;
+-      case kGoogleQuicVersion: {
++      case quic::TransportParameters::TransportParameterId::kGoogleQuicVersion: {
+         if (!CBS_get_u32(&value, &out->version)) {
+           QUIC_DLOG(ERROR) << "Failed to parse Google version extension";
+           return false;
+--- a/third_party/blink/renderer/core/feature_policy/feature_policy_parser.h
++++ b/third_party/blink/renderer/core/feature_policy/feature_policy_parser.h
+@@ -96,7 +96,7 @@ class CORE_EXPORT FeaturePolicyParser {
+       ExecutionContext* execution_context = nullptr);
+ 
+  private:
+-  friend void ::ParseValueForFuzzer(mojom::PolicyValueType, const String&);
++  friend void ParseValueForFuzzer(mojom::PolicyValueType, const String&);
+   static PolicyValue GetFallbackValueForFeature(
+       mojom::FeaturePolicyFeature feature);
+   static PolicyValue ParseValueForType(mojom::PolicyValueType feature_type,

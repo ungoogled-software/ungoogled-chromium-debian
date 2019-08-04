@@ -14,7 +14,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/device/vr/util/sample_queue.h
 +++ b/device/vr/util/sample_queue.h
-@@ -17,22 +17,22 @@ namespace device {
+@@ -18,22 +18,22 @@ namespace device {
  // requested size.
  class DEVICE_VR_EXPORT SampleQueue {
   public:

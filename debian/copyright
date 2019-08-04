@@ -43,7 +43,6 @@ Files-Excluded:
  chrome/test/data/android
  chrome/test/data/chromeos
  chrome/test/data/extensions
- chrome/test/data/chromeproxy
  chrome/test/data/webui/i18n_process_css_test.html
  chrome/chrome_cleaner/test/resources/signed_dll
  services/tracing
@@ -94,14 +93,12 @@ Files-Excluded:
  third_party/zlib/deflate*
  third_party/zlib/gzguts*
  third_party/zlib/in*
- third_party/zlib/names*
  third_party/zlib/trees*
  third_party/zlib/x86*
  third_party/zlib/z*
  third_party/zlib/contrib
  third_party/zlib/patches
  third_party/skia/tools/gyp
- third_party/skia/src/compute
  third_party/skia/site/user/api
  third_party/skia/platform_tools
  third_party/skia/resources/icc_profiles
@@ -129,6 +126,7 @@ Files-Excluded:
  third_party/sfntly/src/java/lib
  third_party/sfntly/src/cpp/ext/redist
  third_party/chromevox/third_party/sre
+ third_party/openscreen/src/buildtools
  third_party/crashpad/crashpad/handler/win
  third_party/crashpad/crashpad/snapshot/elf/elf_image_reader_fuzzer_corpus
  third_party/blink/renderer/platform/testing/data
@@ -148,7 +146,6 @@ Files-Excluded:
  third_party/mocha/mocha.js
  third_party/chaijs/chai.js
  third_party/devtools-node-modules
- third_party/swiftshader/third_party/LLVM
  third_party/blanketjs/src/blanket.js
  third_party/accessibility-audit/axs_testing.js
  third_party/catapult/tracing
@@ -176,7 +173,6 @@ Files-Excluded:
  third_party/pdfium/third_party/libopenjpeg20
  third_party/breakpad/breakpad/src/client/mac
  third_party/breakpad/breakpad/src/common/convert_UTF.*
- third_party/boringssl/crypto_test_data.cc
  third_party/boringssl/src/crypto/cipher_extra/test
  third_party/dom_distiller_js/dist/js/domdistiller_wrapped.js
  third_party/libphonenumber/dist/javascript/i18n/phonenumbers/metadata.js

@@ -27,12 +27,29 @@ export LDFLAGS+=-Wl,--stats
 
 # extra flags to reduce warnings that aren't very useful
 export CXXFLAGS+=-Wno-pedantic \
+                 -Wno-unused-result \
                  -Wno-unused-function \
                  -Wno-unused-variable \
                  -Wno-deprecated-declarations \
 
 # ignore warnings for minor mistakes that are too common
 export CXXFLAGS+=-Wno-return-type \
+                 -Wno-parentheses \
+                 -Wno-misleading-indentation \
+
+# ignore warnings that are not supported well until gcc 8
+export CXXFLAGS+=-Wno-attributes \
+                 -Wno-subobject-linkage \
+
+# ignore warnings due to gcc bug (https://gcc.gnu.org/bugzilla/show_bug.cgi?id=84055)
+export CXXFLAGS+=-Wno-ignored-attributes
+
+# do not optimize away null pointer safety checks
+export CXXFLAGS+=-fno-delete-null-pointer-checks
+
+# build using system toolchain
+defines+=host_toolchain=\"//build/toolchain/linux/unbundle:default\"
+defines+=custom_toolchain=\"//build/toolchain/linux/unbundle:default\"
 
 # set the appropriate cpu architecture
 DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
@@ -55,10 +72,6 @@ ungoogled_chromium_files=debian/ungoogled-upstream/ungoogled-chromium
 # add gn flags from ungoogled-chromium
 defines+=$(shell cat $(ungoogled_chromium_files)/flags.gn | tr "\n" " " | sed 's/"/\\"/g')
 
-# set unbundle compiler
-defines+=custom_toolchain=\"//build/toolchain/linux/unbundle:default\" \
-         host_toolchain=\"//build/toolchain/linux/unbundle:default\" \
-
 # disabled features
 defines+=use_goma=false \
          use_ozone=false \
@@ -74,7 +87,6 @@ defines+=use_goma=false \
 
 # enabled features
 defines+=use_gio=true \
-         use_vaapi=true \
          use_pulseaudio=true \
          link_pulseaudio=true \
          enable_widevine=true \

@@ -1,0 +1,27 @@
+description: method needs to be public
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/net/cert_net/cert_net_fetcher_impl.cc
++++ b/net/cert_net/cert_net_fetcher_impl.cc
+@@ -139,6 +139,10 @@ class CertNetFetcherImpl::AsyncCertNetFe
+   // corresponding RequestCores that the requests have completed.
+   void Shutdown();
+ 
++  // Removes |job| from the in progress jobs and transfers ownership to the
++  // caller.
++  std::unique_ptr<Job> RemoveJob(Job* job);
++
+  private:
+   friend class Job;
+ 
+@@ -146,10 +150,6 @@ class CertNetFetcherImpl::AsyncCertNetFe
+   // no match.
+   Job* FindJob(const RequestParams& params);
+ 
+-  // Removes |job| from the in progress jobs and transfers ownership to the
+-  // caller.
+-  std::unique_ptr<Job> RemoveJob(Job* job);
+-
+   // The in-progress jobs. This set does not contain the job which is actively
+   // invoking callbacks (OnJobCompleted).
+   JobSet jobs_;

@@ -1,0 +1,14 @@
+description: ignore deprecated bison directive warnings
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/third_party/blink/renderer/build/scripts/rule_bison.py
++++ b/third_party/blink/renderer/build/scripts/rule_bison.py
+@@ -82,7 +82,7 @@ for outputHTry in outputHTries:
+ 
+ outputCpp = os.path.join(outputDir, inputRoot + '.cc')
+ 
+-returnCode = subprocess.call([bisonExe, '-d', '-p', prefix, inputFile, '-o', outputCpp])
++returnCode = subprocess.call([bisonExe, '-Wno-deprecated', '-d', '-p', prefix, inputFile, '-o', outputCpp])
+ assert returnCode == 0
+ 
+ # Find the name that bison used for the generated header file.

@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/extensions/browser/api/declarative_webrequest/webrequest_action.cc
 +++ b/extensions/browser/api/declarative_webrequest/webrequest_action.cc
-@@ -578,7 +578,7 @@ base::Optional<EventResponseDelta> WebRe
+@@ -579,7 +579,7 @@ base::Optional<EventResponseDelta> WebRe
    CHECK(request_data.stage & stages());
    EventResponseDelta result(extension_id, extension_install_time);
    result.cancel = true;
@@ -12,7 +12,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  //
-@@ -613,7 +613,7 @@ base::Optional<EventResponseDelta> WebRe
+@@ -614,7 +614,7 @@ base::Optional<EventResponseDelta> WebRe
      return base::nullopt;
    EventResponseDelta result(extension_id, extension_install_time);
    result.new_url = redirect_url_;
@@ -21,7 +21,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  //
-@@ -642,7 +642,7 @@ WebRequestRedirectToTransparentImageActi
+@@ -643,7 +643,7 @@ WebRequestRedirectToTransparentImageActi
    CHECK(request_data.stage & stages());
    EventResponseDelta result(extension_id, extension_install_time);
    result.new_url = GURL(kTransparentImageUrl);
@@ -30,7 +30,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  //
-@@ -671,7 +671,7 @@ WebRequestRedirectToEmptyDocumentAction:
+@@ -672,7 +672,7 @@ WebRequestRedirectToEmptyDocumentAction:
    CHECK(request_data.stage & stages());
    EventResponseDelta result(extension_id, extension_install_time);
    result.new_url = GURL(kEmptyDocumentUrl);
@@ -39,7 +39,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  //
-@@ -773,7 +773,7 @@ base::Optional<EventResponseDelta> WebRe
+@@ -774,7 +774,7 @@ base::Optional<EventResponseDelta> WebRe
  
    EventResponseDelta result(extension_id, extension_install_time);
    result.new_url = GURL(new_url);
@@ -48,7 +48,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  //
-@@ -813,7 +813,7 @@ WebRequestSetRequestHeaderAction::Create
+@@ -814,7 +814,7 @@ WebRequestSetRequestHeaderAction::Create
    CHECK(request_data.stage & stages());
    EventResponseDelta result(extension_id, extension_install_time);
    result.modified_request_headers.SetHeader(name_, value_);
@@ -57,7 +57,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  //
-@@ -851,7 +851,7 @@ WebRequestRemoveRequestHeaderAction::Cre
+@@ -852,7 +852,7 @@ WebRequestRemoveRequestHeaderAction::Cre
    CHECK(request_data.stage & stages());
    EventResponseDelta result(extension_id, extension_install_time);
    result.deleted_request_headers.push_back(name_);
@@ -66,7 +66,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  //
-@@ -900,7 +900,7 @@ WebRequestAddResponseHeaderAction::Creat
+@@ -901,7 +901,7 @@ WebRequestAddResponseHeaderAction::Creat
  
    EventResponseDelta result(extension_id, extension_install_time);
    result.added_response_headers.push_back(make_pair(name_, value_));
@@ -75,7 +75,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  //
-@@ -954,7 +954,7 @@ WebRequestRemoveResponseHeaderAction::Cr
+@@ -955,7 +955,7 @@ WebRequestRemoveResponseHeaderAction::Cr
        continue;
      result.deleted_response_headers.push_back(make_pair(name_, current_value));
    }
@@ -84,7 +84,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  //
-@@ -1039,7 +1039,7 @@ base::Optional<EventResponseDelta> WebRe
+@@ -1040,7 +1040,7 @@ base::Optional<EventResponseDelta> WebRe
    EventResponseDelta result(extension_id, extension_install_time);
    result.request_cookie_modifications.push_back(
        request_cookie_modification_.Clone());
@@ -93,7 +93,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  //
-@@ -1087,7 +1087,7 @@ base::Optional<EventResponseDelta> WebRe
+@@ -1088,7 +1088,7 @@ base::Optional<EventResponseDelta> WebRe
    EventResponseDelta result(extension_id, extension_install_time);
    result.response_cookie_modifications.push_back(
        response_cookie_modification_.Clone());
@@ -102,7 +102,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  //
-@@ -1127,7 +1127,7 @@ WebRequestSendMessageToExtensionAction::
+@@ -1128,7 +1128,7 @@ WebRequestSendMessageToExtensionAction::
    CHECK(request_data.stage & stages());
    EventResponseDelta result(extension_id, extension_install_time);
    result.messages_to_extension.insert(message_);
@@ -113,7 +113,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }  // namespace extensions
 --- a/device/fido/pin.cc
 +++ b/device/fido/pin.cc
-@@ -135,7 +135,7 @@ base::Optional<bssl::UniquePtr<EC_POINT>
+@@ -122,7 +122,7 @@ base::Optional<bssl::UniquePtr<EC_POINT>
      return base::nullopt;
    }
  
@@ -122,3 +122,54 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  // static
+--- a/extensions/browser/api/declarative_net_request/ruleset_manager.cc
++++ b/extensions/browser/api/declarative_net_request/ruleset_manager.cc
+@@ -427,7 +427,7 @@ base::Optional<RulesetManager::Action> R
+     if (ruleset->matcher->ShouldRedirectRequest(params, &redirect_url)) {
+       Action action(Action::Type::REDIRECT);
+       action.redirect_url = std::move(redirect_url);
+-      return action;
++      return std::move(action);
+     }
+   }
+ 
+@@ -447,7 +447,7 @@ base::Optional<RulesetManager::Action> R
+   Action action(Action::Type::REMOVE_HEADERS);
+   PopulateHeadersFromMask(mask, &action.request_headers_to_remove,
+                           &action.response_headers_to_remove);
+-  return action;
++  return std::move(action);
+ }
+ 
+ RulesetManager::Action RulesetManager::EvaluateRequestInternal(
+--- a/third_party/blink/renderer/modules/manifest/manifest_parser.cc
++++ b/third_party/blink/renderer/modules/manifest/manifest_parser.cc
+@@ -627,7 +627,7 @@ ManifestParser::ParseShareTarget(const J
+     return base::nullopt;
+   }
+ 
+-  return share_target;
++  return std::move(share_target);
+ }
+ 
+ base::Optional<mojom::blink::ManifestFileHandlerPtr>
+@@ -653,7 +653,7 @@ ManifestParser::ParseFileHandler(const J
+     return base::nullopt;
+   }
+ 
+-  return file_handler;
++  return std::move(file_handler);
+ }
+ 
+ String ManifestParser::ParseRelatedApplicationPlatform(
+--- a/device/fido/device_response_converter.cc
++++ b/device/fido/device_response_converter.cc
+@@ -536,7 +536,7 @@ base::Optional<cbor::Value> FixInvalidUT
+                                            PathPredicate predicate) {
+   if (!ContainsInvalidUTF8(in)) {
+     // Common case that everything is fine.
+-    return in;
++    return std::move(in);
+   }
+ 
+   std::vector<const cbor::Value*> path;

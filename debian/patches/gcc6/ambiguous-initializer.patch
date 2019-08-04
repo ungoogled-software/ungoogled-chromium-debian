@@ -1,0 +1,14 @@
+description: gcc6 can't automatically deduce the type in this initializer list
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/services/network/cross_origin_read_blocking.cc
++++ b/services/network/cross_origin_read_blocking.cc
+@@ -207,7 +207,7 @@ std::set<int>& GetPluginProxyingProcesse
+ // confirmation sniffing because images, scripts, etc. are frequently
+ // mislabelled by http servers as HTML/JSON/XML).
+ base::flat_set<std::string>& GetNeverSniffedMimeTypes() {
+-  static base::NoDestructor<base::flat_set<std::string>> s_types({
++  static base::NoDestructor<base::flat_set<std::string>> s_types(std::initializer_list<std::string>{
+       // The list below has been populated based on most commonly used content
+       // types according to HTTP Archive - see:
+       // https://github.com/whatwg/fetch/issues/860#issuecomment-457330454

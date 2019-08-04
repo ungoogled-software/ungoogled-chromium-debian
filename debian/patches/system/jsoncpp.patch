@@ -3,9 +3,9 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/third_party/jsoncpp/BUILD.gn
 +++ b/third_party/jsoncpp/BUILD.gn
-@@ -2,34 +2,12 @@
- # Use of this source code is governed by a BSD-style license that can be
- # found in the LICENSE file.
+@@ -4,36 +4,14 @@
+ 
+ import("//testing/libfuzzer/fuzzer_test.gni")
  
 -config("jsoncpp_config") {
 -  include_dirs = [
@@ -43,3 +43,5 @@ author: Michael Gilbert <mgilbert@debian.org>
 -
 -  include_dirs = [ "source/src/lib_json" ]
  }
+ 
+ fuzzer_test("jsoncpp_fuzzer") {
