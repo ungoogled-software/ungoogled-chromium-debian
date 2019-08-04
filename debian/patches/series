@@ -53,6 +53,7 @@ warnings/null-destination.patch
 warnings/int-in-bool-context.patch
 
 system/vpx.patch
+system/icu.patch
 system/jpeg.patch
 system/lcms.patch
 system/nspr.patch
@@ -61,6 +62,9 @@ system/event.patch
 system/ffmpeg.patch
 system/jsoncpp.patch
 system/openjpeg.patch
+system/convertutf.patch
+
+buster/icu63.patch
 
 buster/icu63.patch
 

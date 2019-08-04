@@ -64,6 +64,7 @@ Files-Excluded:
  components/drive/chromeos
  native_client*
  third_party/re2
+ third_party/icu
  third_party/ink
  third_party/opus
  third_party/flac
