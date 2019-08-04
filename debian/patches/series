@@ -30,7 +30,6 @@ fixes/jumbo-namespace.patch
 fixes/template-export.patch
 fixes/widevine-locations.patch
 
-disable/android.patch
 disable/tracing.patch
 disable/openh264.patch
 disable/chromeos.patch
@@ -63,8 +62,6 @@ system/ffmpeg.patch
 system/jsoncpp.patch
 system/openjpeg.patch
 system/convertutf.patch
-
-buster/icu63.patch
 
 buster/icu63.patch
 
