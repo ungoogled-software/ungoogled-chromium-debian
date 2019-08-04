@@ -41,7 +41,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
  }  // namespace
  
  #define RETURN_AND_NOTIFY_ON_FAILURE(result, log, error_code, ret) \
-@@ -627,6 +632,13 @@ void VaapiVideoDecodeAccelerator::Assign
+@@ -629,6 +634,13 @@ void VaapiVideoDecodeAccelerator::Assign
    const unsigned int va_format = GetVaFormatForVideoCodecProfile(profile_);
    std::vector<VASurfaceID> va_surface_ids;
  
@@ -55,7 +55,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
    // If we aren't in BufferAllocationMode::kNone, we have to allocate a
    // |vpp_vaapi_wrapper_| for VaapiPicture to DownloadFromSurface() the VA's
    // internal decoded frame.
-@@ -640,6 +652,7 @@ void VaapiVideoDecodeAccelerator::Assign
+@@ -642,6 +654,7 @@ void VaapiVideoDecodeAccelerator::Assign
        NotifyError(PLATFORM_FAILURE);
      }
    }
@@ -63,7 +63,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
  
    for (size_t i = 0; i < buffers.size(); ++i) {
      DCHECK(requested_pic_size_ == buffers[i].size());
-@@ -648,9 +661,13 @@ void VaapiVideoDecodeAccelerator::Assign
+@@ -650,9 +663,13 @@ void VaapiVideoDecodeAccelerator::Assign
      // only used as a copy destination. Therefore, the VaapiWrapper used and
      // owned by |picture| is |vpp_vaapi_wrapper_|.
      std::unique_ptr<VaapiPicture> picture = vaapi_picture_factory_->Create(
@@ -77,7 +77,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
          make_context_current_cb_, bind_image_cb_, buffers[i]);
      RETURN_AND_NOTIFY_ON_FAILURE(picture, "Failed creating a VaapiPicture",
                                   PLATFORM_FAILURE, );
-@@ -1063,6 +1080,9 @@ VaapiVideoDecodeAccelerator::GetSupporte
+@@ -1065,6 +1082,9 @@ VaapiVideoDecodeAccelerator::GetSupporte
  
  VaapiVideoDecodeAccelerator::BufferAllocationMode
  VaapiVideoDecodeAccelerator::DecideBufferAllocationMode() {
@@ -87,7 +87,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
    // TODO(crbug.com/912295): Enable a better BufferAllocationMode for IMPORT
    // |output_mode_| as well.
    if (output_mode_ == VideoDecodeAccelerator::Config::OutputMode::IMPORT)
-@@ -1095,6 +1115,7 @@ VaapiVideoDecodeAccelerator::DecideBuffe
+@@ -1097,6 +1117,7 @@ VaapiVideoDecodeAccelerator::DecideBuffe
      return BufferAllocationMode::kReduced;
  
    return BufferAllocationMode::kSuperReduced;
@@ -97,7 +97,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
  bool VaapiVideoDecodeAccelerator::IsBufferAllocationModeReducedOrSuperReduced()
 --- a/media/gpu/vaapi/vaapi_wrapper.cc
 +++ b/media/gpu/vaapi/vaapi_wrapper.cc
-@@ -266,6 +266,10 @@ void VADisplayState::PreSandboxInitializ
+@@ -250,6 +250,10 @@ void VADisplayState::PreSandboxInitializ
        base::File::FLAG_OPEN | base::File::FLAG_READ | base::File::FLAG_WRITE);
    if (drm_file.IsValid())
      VADisplayState::Get()->SetDrmFd(drm_file.GetPlatformFile());
@@ -108,7 +108,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
  }
  
  VADisplayState::VADisplayState()
-@@ -303,10 +307,11 @@ bool VADisplayState::InitializeOnce() {
+@@ -287,10 +291,11 @@ bool VADisplayState::InitializeOnce() {
      case gl::kGLImplementationDesktopGL:
  #if defined(USE_X11)
        va_display_ = vaGetDisplay(gfx::GetXDisplay());
@@ -123,7 +123,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
        break;
      // Cannot infer platform from GL, try all available displays
      case gl::kGLImplementationNone:
-@@ -339,8 +344,17 @@ bool VADisplayState::InitializeOnce() {
+@@ -323,8 +328,17 @@ bool VADisplayState::InitializeOnce() {
    int major_version, minor_version;
    VAStatus va_res = vaInitialize(va_display_, &major_version, &minor_version);
    if (va_res != VA_STATUS_SUCCESS) {
