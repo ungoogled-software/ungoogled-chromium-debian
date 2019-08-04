@@ -35,11 +35,9 @@ export CXXFLAGS+=-Wno-pedantic \
 # ignore warnings for minor mistakes that are too common
 export CXXFLAGS+=-Wno-return-type \
                  -Wno-parentheses \
-                 -Wno-misleading-indentation \
 
 # ignore warnings that are not supported well until gcc 8
 export CXXFLAGS+=-Wno-attributes \
-                 -Wno-subobject-linkage \
 
 # ignore warnings due to gcc bug (https://gcc.gnu.org/bugzilla/show_bug.cgi?id=84055)
 export CXXFLAGS+=-Wno-ignored-attributes
