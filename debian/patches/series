@@ -7,7 +7,6 @@ arm/gcc_skcms_ice.patch
 arm/pffffft-buildfix.patch
 arm/skia-aarch64-buildfix.patch
 
-gcc/wrong-namespace.patch
 gcc/virtual-destructor.patch
 
 gcc6/sizet.patch
