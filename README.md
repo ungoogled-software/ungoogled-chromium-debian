@@ -4,46 +4,6 @@ Portable Linux (i.e. a generic Linux version) packaging for [ungoogled-chromium]
 
 Portable Linux builds can run on **any Linux distribution** (that regular Chromium supports).
 
-Portable Linux binary can be installed, alternatively:
-
-```
-$ cd ~/Downloads
-$ wget https://github.com/Eloston/ungoogled-chromium-binaries/releases/download/75.0.3770.80-1.2/ungoogled-chromium_75.0.3770.80-1.2_linux.tar.xz
-```
-Check download by comparing md5, sha1 and sha256 sums with those at UC's download webpage.
-
-Unpack it:
-
-```
-$ sudo tar -xvf ungoogled-chromium_75.0.3770.80-1.2_linux.tar.xz -C /opt
-```
-Before you run, you must set up your system so that the browser's sandboxing will work. There are two options:
-* Use the user namespace sandbox. This is the preferred option.
-* Use the SUID sandbox. This should be used on systems that do not have support for user namespaces.
-
-To quickly determine your current sandbox setup:
-1. Launch UC temporarily from a terminal:
-```
-$ /opt/ungoogled-chromium_75.0.3770.80-1.1_linux/chrome
-```
-2. Navigate to:
-*chrome://sandbox/*
-3. Your screen may declare, in part:
-
-_Sandbox Status_
-
-_Layer 1 Sandbox     Namespace_
-
-_PID namespaces      Yes_
-
-In that case, the browser uses a namespace sandbox and can be run by using the untarred `chrome-wrapper` script.
-
-Alternatively, set up the SUID sandbox:
-1. Rename `chrome_sandbox` to `chrome-sandbox`
-2. Set the file mode to 4755
-3. Set the group to root
-4. Run `chrome-sandbox`
-
 ## Downloads
 
 [Download binaries from the Contributor Binaries website](//ungoogled-software.github.io/ungoogled-chromium-binaries/).
@@ -137,6 +97,20 @@ cd ../../
 ./devutils/check_patch_files.sh
 
 # Use git to add changes and commit
+```
+
+## Installing compiled binary
+
+Alternatively, the Ungoogled-Chromium Portable Linux compiled binary may be installed. It has been pre-built. Note: We cannot guarantee reproducibility.
+
+1. Download the Ungoogled-Chromium Portable Linux binary to your preferred location e.g. `~/Downloads`.
+
+2. Navigate to the download location. Check download by comparing md5, sha1 and sha256 sums with those at ungoogled-chromium's download webpage.
+
+3. Supposing that your chosen installation location is `/opt`, extract the binary, substituting in the name of your download:
+
+```
+$ sudo tar -xvf ungoogled-chromium_xxxxxxx.tar.xz -C /opt
 ```
 
 ## License
