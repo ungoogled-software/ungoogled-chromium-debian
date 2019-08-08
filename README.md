@@ -101,7 +101,7 @@ cd ../../
 
 ## Installing compiled binary
 
-Alternatively, the Ungoogled-Chromium Portable Linux compiled binary may be installed. It has been pre-built. Note: We cannot guarantee reproducibility.
+Alternatively, the Ungoogled-Chromium Portable Linux compiled binary may be installed. It has been pre-built. Note: Reproducibility cannot be guaranteed.
 
 1. Download the Ungoogled-Chromium Portable Linux binary to your preferred location e.g. `~/Downloads`.
 
