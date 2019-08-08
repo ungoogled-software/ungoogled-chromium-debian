@@ -18,8 +18,8 @@ RUNNING THE BROWSER
 
 Once the sandbox is set up, the browser can be run by using the "chrome-wrapper" script.
 
-A handy link can be also set up.  For example, and adjusting for your installation directory (/opt, etc), your UC version and sandboxing arrangement:
+A handy link can be also set up.  For example, and adjusting for your installation directory (/opt, etc), your ungoogled-chromium version and sandboxing arrangement:
 sudo ln -s /opt/ungoogled-chromium_xxxxxxx/chrome-wrapper /opt/ungoogled-chromium
 
-UC could then be simply launched as `/opt/ungoogled-chromium`
+ungoogled-chromium could then be simply launched as `/opt/ungoogled-chromium`
 
