@@ -1,3 +1,12 @@
+chromium (76.0.3809.100-1) unstable; urgency=medium
+
+  * New upstream security release.
+    - CVE-2019-5867: Out-of-bounds read in V8. Reported by Lucas Pinheiro
+    - CVE-2019-5868: Use-after-free in PDFium ExecuteFieldAction. Reported by
+      banananapenguin
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 09 Aug 2019 19:58:55 +0000
+
 chromium (76.0.3809.87-2) unstable; urgency=medium
 
   * Fix inverted logic in enum comparison (closes: #933598).
