@@ -71,5 +71,4 @@ fixes/vaapi.patch
 fedora/vaapi-fix.patch
 
 ungoogled-chromium/remove-fcomplete-member-pointers-cflag.patch
-ungoogled-chromium/use-system-libraries-in-official-build.patch
 ungoogled-chromium/manpage.patch
