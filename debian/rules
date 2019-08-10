@@ -61,7 +61,7 @@ ifeq (arm64,$(DEB_HOST_ARCH))
 defines+=host_cpu=\"arm64\"
 endif
 ifeq (armhf,$(DEB_HOST_ARCH))
-defines+=host_cpu=\"arm\" arm_use_neon=false
+defines+=host_cpu=\"arm\" arm_use_neon=false symbol_level=0
 endif
 
 ungoogled_chromium_version=$(shell cat debian/ungoogled-upstream/version.txt)
@@ -71,7 +71,8 @@ ungoogled_chromium_files=debian/ungoogled-upstream/ungoogled-chromium
 defines+=$(shell cat $(ungoogled_chromium_files)/flags.gn | tr "\n" " " | sed 's/"/\\"/g')
 
 # disabled features
-defines+=use_goma=false \
+defines+=is_debug=false \
+         use_goma=false \
          use_ozone=false \
          use_sysroot=false \
          use_openh264=false \
@@ -80,7 +81,9 @@ defines+=use_goma=false \
          use_custom_libcxx=false \
          use_gnome_keyring=false \
          use_unofficial_version_number=false \
+         enable_iterator_debugging=false \
          enable_vr=false \
+         optimize_webui=false \
          linux_use_bundled_binutils=false \
 
 # enabled features
@@ -104,6 +107,7 @@ defines+=use_gio=true \
          use_cups=true \
          use_kerberos=false \
          use_lld=true \
+         enable_ac3_eac3_audio_demuxing=true \
 
 # some notes about embedded libraries
 #  can't use system nss since net/third_party/nss is heavily patched
@@ -178,9 +182,6 @@ override_dh_auto_install-indep:
 
 override_dh_fixperms:
 	dh_fixperms --exclude chrome-sandbox
-
-override_dh_strip:
-	dh_strip --no-automatic-dbgsym # Do not build any debug packages
 
 override_dh_gencontrol:
 	dh_gencontrol -- -VBuilt-Using="$(shell dpkg-query -f '$${source:Package} (= $${source:Version}), ' -W libjs-jquery libjs-jquery-flot)"
