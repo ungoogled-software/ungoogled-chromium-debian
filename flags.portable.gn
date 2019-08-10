@@ -1,9 +1,16 @@
+blink_symbol_level=0
 custom_toolchain="//build/toolchain/linux/unbundle:default"
+enable_ac3_eac3_audio_demuxing=true
+enable_iterator_debugging=false
+fatal_linker_warnings=false
 ffmpeg_branding="Chrome"
 host_toolchain="//build/toolchain/linux/unbundle:default"
 is_clang=true
+is_debug=false
+is_official_build=true
 linux_use_bundled_binutils=false
 proprietary_codecs=true
+symbol_level=0
 use_gnome_keyring=false
 use_jumbo_build=true
 use_kerberos=false
