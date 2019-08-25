@@ -1,0 +1,16 @@
+description: fit int32_t enum values into 32 bits
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/services/network/throttling/throttling_controller.h
++++ b/services/network/throttling/throttling_controller.h
+@@ -39,8 +39,8 @@ class COMPONENT_EXPORT(NETWORK_SERVICE)
+   // TODO(https://crbug.com/960874): Debugging code to try and shed some light
+   // on why the owned maps are invalid.
+   enum class Liveness : int32_t {
+-    kAlive = 0xCA11AB13,
+-    kDead = 0xDEADBEEF,
++    kAlive = 0xCA11,
++    kDead = 0xDEAD,
+   };
+ 
+   ThrottlingController();

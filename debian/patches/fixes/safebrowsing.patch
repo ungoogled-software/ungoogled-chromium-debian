@@ -1,4 +1,4 @@
-description: fix signedness error when built with gcc that affects safe browsing
+description: fix signedness error when built with gcc, affects safe browsing
 origin: https://bugs.gentoo.org/show_bug.cgi?id=674504
 author: Maciej S. Szmigiero
 bug: http://bugs.debian.org/914886

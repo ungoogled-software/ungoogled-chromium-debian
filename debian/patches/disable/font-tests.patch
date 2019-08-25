@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/skia/BUILD.gn
 +++ b/skia/BUILD.gn
-@@ -853,7 +853,7 @@ group("test_fonts_resources") {
+@@ -800,7 +800,7 @@ group("test_fonts_resources") {
    if (is_mac) {
      deps += [ ":test_fonts_bundle_data" ]
      data_deps += [ ":test_fonts_bundle_data" ]
@@ -12,9 +12,9 @@ author: Michael Gilbert <mgilbert@debian.org>
      deps += [ "//third_party/test_fonts" ]
      data_deps += [ "//third_party/test_fonts" ]
    }
-@@ -875,7 +875,7 @@ source_set("test_fonts") {
-   if (is_fuchsia) {
-     sources += [ "ext/test_fonts_fuchsia.cc" ]
+@@ -841,7 +841,7 @@ source_set("test_fonts") {
+       "//third_party/fuchsia-sdk/sdk:sys",
+     ]
    }
 -  if (is_linux) {
 +  if (false) {
@@ -23,7 +23,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    if (is_mac) {
 --- a/base/test/BUILD.gn
 +++ b/base/test/BUILD.gn
-@@ -210,7 +210,7 @@ static_library("test_support") {
+@@ -212,7 +212,7 @@ static_library("test_support") {
      deps += [ "//third_party/fuchsia-sdk/sdk:zx" ]
    }
  
@@ -32,7 +32,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      public_deps += [ ":fontconfig_util_linux" ]
      data_deps = [
        "//third_party/test_fonts",
-@@ -396,7 +396,7 @@ if (is_linux) {
+@@ -423,7 +423,7 @@ if (is_linux) {
      ]
    }
  
@@ -43,7 +43,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        sources = [
 --- a/content/shell/app/shell_main_delegate.cc
 +++ b/content/shell/app/shell_main_delegate.cc
-@@ -295,7 +295,7 @@ bool ShellMainDelegate::BasicStartupComp
+@@ -298,7 +298,7 @@ bool ShellMainDelegate::BasicStartupComp
      BlinkTestPlatformInitialize();
  #endif
  

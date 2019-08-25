@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/v8/src/objects/js-objects.h
 +++ b/v8/src/objects/js-objects.h
-@@ -800,7 +800,23 @@ class JSObject : public JSReceiver {
+@@ -799,7 +799,23 @@ class JSObject : public JSReceiver {
    template <typename Dictionary>
    static void ApplyAttributesToDictionary(Isolate* isolate, ReadOnlyRoots roots,
                                            Handle<Dictionary> dictionary,
@@ -13,13 +13,13 @@ author: Michael Gilbert <mgilbert@debian.org>
 +    for (int i = 0; i < capacity; i++) {
 +      Object k;
 +      if (!dictionary->ToKey(roots, i, &k)) continue;
-+      if (k->FilterKey(ALL_PROPERTIES)) continue;
++      if (k.FilterKey(ALL_PROPERTIES)) continue;
 +      PropertyDetails details = dictionary->DetailsAt(i);
 +      int attrs = attributes;
 +      // READ_ONLY is an invalid attribute for JS setters/getters.
 +      if ((attributes & READ_ONLY) && details.kind() == kAccessor) {
 +        Object v = dictionary->ValueAt(i);
-+        if (v->IsAccessorPair()) attrs &= ~READ_ONLY;
++        if (v.IsAccessorPair()) attrs &= ~READ_ONLY;
 +      }
 +      details = details.CopyAddAttributes(static_cast<PropertyAttributes>(attrs));
 +      dictionary->DetailsAtPut(isolate, i, details);
@@ -30,8 +30,8 @@ author: Michael Gilbert <mgilbert@debian.org>
    friend class JSReceiver;
 --- a/v8/src/objects/js-objects.cc
 +++ b/v8/src/objects/js-objects.cc
-@@ -3771,27 +3771,6 @@ bool JSObject::IsExtensible(Handle<JSObj
-   return object->map()->is_extensible();
+@@ -3731,27 +3731,6 @@ bool JSObject::IsExtensible(Handle<JSObj
+   return object->map().is_extensible();
  }
  
 -template <typename Dictionary>
@@ -42,13 +42,13 @@ author: Michael Gilbert <mgilbert@debian.org>
 -  for (int i = 0; i < capacity; i++) {
 -    Object k;
 -    if (!dictionary->ToKey(roots, i, &k)) continue;
--    if (k->FilterKey(ALL_PROPERTIES)) continue;
+-    if (k.FilterKey(ALL_PROPERTIES)) continue;
 -    PropertyDetails details = dictionary->DetailsAt(i);
 -    int attrs = attributes;
 -    // READ_ONLY is an invalid attribute for JS setters/getters.
 -    if ((attributes & READ_ONLY) && details.kind() == kAccessor) {
 -      Object v = dictionary->ValueAt(i);
--      if (v->IsAccessorPair()) attrs &= ~READ_ONLY;
+-      if (v.IsAccessorPair()) attrs &= ~READ_ONLY;
 -    }
 -    details = details.CopyAddAttributes(static_cast<PropertyAttributes>(attrs));
 -    dictionary->DetailsAtPut(isolate, i, details);
