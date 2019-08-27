@@ -19,7 +19,7 @@ If your distro is not listed, you may have a look at the [community-maintained l
 At minimum, you will need to install the `ungoogled-chromium` and `ungoogled-chromium-common` packages. For example:
 
 ```sh
-# dpkg -i ungoogled-chromium_*.deb ungoogled-chromium-comon_*.deb
+# dpkg -i ungoogled-chromium_*.deb ungoogled-chromium-common_*.deb
 ```
 
 The other packages are as follows:
@@ -28,6 +28,7 @@ The other packages are as follows:
 * `*-l10n`: Localization package for the browser UI.
 * `*-sandbox`: [`SUID` Sandbox](https://chromium.googlesource.com/chromium/src/+/lkgr/docs/linux_suid_sandbox.md). This is only necessary if you do not have user namespaces enabled (i.e. kernel parameter `kernel.unprivileged_userns_clone`)
 * `*-shell`: Contains `content_shell`. Mainly for browser development/testing; search [the Chromium docs](https://chromium.googlesource.com/chromium/src/+/lkgr/docs/) for more details.
+* `*-dbgsym*`: Debug symbols for the associated package.
 
 ## Building
 

@@ -2,10 +2,11 @@
 # - exposed all *-webrtc-hw-* feature flags for Linux
 description: build with hardware accelerated (vaapi) video support
 author: Akarshan Biswas <akarshan.biswas@gmail.com>
+origin: https://src.fedoraproject.org/rpms/chromium/raw/master/f/enable-vaapi.patch
 
 --- a/chrome/browser/about_flags.cc
 +++ b/chrome/browser/about_flags.cc
-@@ -1121,10 +1121,10 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -1187,10 +1187,10 @@ const FeatureEntry kFeatureEntries[] = {
       flag_descriptions::kUiPartialSwapDescription, kOsAll,
       SINGLE_DISABLE_VALUE_TYPE(switches::kUIDisablePartialSwap)},
      {"disable-webrtc-hw-decoding", flag_descriptions::kWebrtcHwDecodingName,
@@ -18,7 +19,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
       SINGLE_DISABLE_VALUE_TYPE(switches::kDisableWebRtcHWEncoding)},
  #if !defined(OS_ANDROID)
      {"enable-reader-mode", flag_descriptions::kEnableReaderModeName,
-@@ -1133,11 +1133,11 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -1199,11 +1199,11 @@ const FeatureEntry kFeatureEntries[] = {
  #endif  // !defined(OS_ANDROID)
      {"enable-webrtc-hw-h264-encoding",
       flag_descriptions::kWebrtcHwH264EncodingName,
@@ -32,7 +33,7 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
       FEATURE_VALUE_TYPE(features::kWebRtcHWVP8Encoding)},
  #if defined(WEBRTC_USE_PIPEWIRE)
      {"enable-webrtc-pipewire-capturer",
-@@ -1457,7 +1457,7 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -1517,7 +1517,7 @@ const FeatureEntry kFeatureEntries[] = {
          "disable-accelerated-video-decode",
          flag_descriptions::kAcceleratedVideoDecodeName,
          flag_descriptions::kAcceleratedVideoDecodeDescription,
@@ -40,240 +41,54 @@ author: Akarshan Biswas <akarshan.biswas@gmail.com>
 +        kOsMac | kOsWin | kOsCrOS | kOsAndroid | kOsLinux,
          SINGLE_DISABLE_VALUE_TYPE(switches::kDisableAcceleratedVideoDecode),
      },
- #if defined(OS_WIN)
-@@ -1949,12 +1949,12 @@ const FeatureEntry kFeatureEntries[] = {
-      FEATURE_VALUE_TYPE(service_manager::features::kXRSandbox)},
- #endif  // ENABLE_ISOLATED_XR_SERVICE
- #endif  // ENABLE_VR
--#if defined(OS_CHROMEOS)
-+#if defined(OS_CHROMEOS) || defined(OS_LINUX)
+     {"enable-history-favicons-google-server-query",
+@@ -1953,7 +1953,7 @@ const FeatureEntry kFeatureEntries[] = {
+ #if defined(OS_CHROMEOS)
      {"disable-accelerated-mjpeg-decode",
       flag_descriptions::kAcceleratedMjpegDecodeName,
 -     flag_descriptions::kAcceleratedMjpegDecodeDescription, kOsCrOS,
 +     flag_descriptions::kAcceleratedMjpegDecodeDescription, kOsCrOS | kOsLinux,
       SINGLE_DISABLE_VALUE_TYPE(switches::kDisableAcceleratedMjpegDecode)},
--#endif  // OS_CHROMEOS
-+#endif  // OS_CHROMEOS OS_LINUX
-     {"v8-cache-options", flag_descriptions::kV8CacheOptionsName,
-      flag_descriptions::kV8CacheOptionsDescription, kOsAll,
-      MULTI_VALUE_TYPE(kV8CacheOptionsChoices)},
-@@ -3616,10 +3616,10 @@ const FeatureEntry kFeatureEntries[] = {
-      FEATURE_VALUE_TYPE(chromeos::switches::kAccountManager)},
- #endif
- 
--#if defined(OS_CHROMEOS)
-+#if defined(OS_CHROMEOS) || defined(OS_LINUX)
-     {"enable-vaapi-jpeg-image-decode-acceleration",
-      flag_descriptions::kVaapiJpegImageDecodeAccelerationName,
--     flag_descriptions::kVaapiJpegImageDecodeAccelerationDescription, kOsCrOS,
-+     flag_descriptions::kVaapiJpegImageDecodeAccelerationDescription, kOsCrOS | kOsLinux,
-      FEATURE_VALUE_TYPE(features::kVaapiJpegImageDecodeAcceleration)},
- #endif
- 
+ #endif  // OS_CHROMEOS
+     {"system-keyboard-lock", flag_descriptions::kSystemKeyboardLockName,
 --- a/chrome/browser/flag_descriptions.cc
 +++ b/chrome/browser/flag_descriptions.cc
-@@ -2945,9 +2945,9 @@ const char kMacSystemMediaPermissionsInf
+@@ -2770,15 +2770,20 @@ const char kMacSystemMediaPermissionsInf
  
  #endif
  
 -// Chrome OS -------------------------------------------------------------------
-+// Chrome OS and Linux -------------------------------------------------------------------
++// Chrome OS Linux-------------------------------------------------------------------
  
 -#if defined(OS_CHROMEOS)
 +#if defined(OS_CHROMEOS) || (defined(OS_LINUX) && !defined(OS_ANDROID))
  
  const char kAcceleratedMjpegDecodeName[] =
      "Hardware-accelerated mjpeg decode for captured frame";
-@@ -2955,6 +2955,18 @@ const char kAcceleratedMjpegDecodeDescri
+ const char kAcceleratedMjpegDecodeDescription[] =
      "Enable hardware-accelerated mjpeg decode for captured frame where "
      "available.";
- 
-+const char kVaapiJpegImageDecodeAccelerationName[] =
-+    "VA-API JPEG decode acceleration for images";
-+const char kVaapiJpegImageDecodeAccelerationDescription[] =
-+    "Enable or disable decode acceleration of JPEG images (as opposed to camera"
-+    " captures) using the VA-API.";
-+
-+#endif  // defined(OS_CHROMEOS) defined(OS_LINUX) and !defined(OS_ANDROID)
-+
-+// Only Chrome OS  ------------------------------------------------------
-+
-+#if defined(OS_CHROMEOS)
-+
- const char kAppServiceAshName[] = "App Service Ash";
- const char kAppServiceAshDescription[] =
-     "Use the App Service to provide data to the Ash UI, such as the shelf and "
-@@ -3417,12 +3429,6 @@ const char kUserActivityPredictionMlServ
- const char kUserActivityPredictionMlServiceDescription[] =
-     "Uses the new ML Service model for user activity prediction (Smart Dim).";
- 
--const char kVaapiJpegImageDecodeAccelerationName[] =
--    "VA-API JPEG decode acceleration for images";
--const char kVaapiJpegImageDecodeAccelerationDescription[] =
--    "Enable or disable decode acceleration of JPEG images (as opposed to camera"
--    " captures) using the VA-API.";
--
- const char kVirtualKeyboardName[] = "Virtual Keyboard";
- const char kVirtualKeyboardDescription[] = "Enable virtual keyboard support.";
- 
---- a/chrome/browser/flag_descriptions.h
-+++ b/chrome/browser/flag_descriptions.h
-@@ -1768,13 +1768,22 @@ extern const char kPermissionPromptPersi
- 
- #endif  // defined(OS_MACOSX)
- 
--// Chrome OS ------------------------------------------------------------------
-+// Chrome OS and Linux --------------------------------------------------------
- 
--#if defined(OS_CHROMEOS)
-+#if defined(OS_CHROMEOS)  || (defined(OS_LINUX) && !defined(OS_ANDROID))
- 
- extern const char kAcceleratedMjpegDecodeName[];
- extern const char kAcceleratedMjpegDecodeDescription[];
- 
-+extern const char kVaapiJpegImageDecodeAccelerationName[];
-+extern const char kVaapiJpegImageDecodeAccelerationDescription[];
-+
 +#endif
 +
-+// Chrome OS ------------------------------------------------------------------
++// Chrome OS --------------------------------------------------
 +
 +#if defined(OS_CHROMEOS)
-+
- extern const char kAppServiceAshName[];
- extern const char kAppServiceAshDescription[];
  
-@@ -2063,9 +2072,6 @@ extern const char kUseMonitorColorSpaceD
- extern const char kUserActivityPredictionMlServiceName[];
- extern const char kUserActivityPredictionMlServiceDescription[];
- 
--extern const char kVaapiJpegImageDecodeAccelerationName[];
--extern const char kVaapiJpegImageDecodeAccelerationDescription[];
--
- extern const char kVirtualKeyboardName[];
- extern const char kVirtualKeyboardDescription[];
- 
---- a/components/viz/service/main/viz_main_impl.cc
-+++ b/components/viz/service/main/viz_main_impl.cc
-@@ -36,7 +36,7 @@ std::unique_ptr<base::Thread> CreateAndS
-   // It should be possible to use |main_task_runner_| for doing IO tasks.
-   base::Thread::Options thread_options(base::MessageLoop::TYPE_IO, 0);
-   thread_options.priority = base::ThreadPriority::NORMAL;
--#if defined(OS_ANDROID) || defined(OS_CHROMEOS) || defined(USE_OZONE)
-+#if defined(OS_ANDROID) || defined(OS_CHROMEOS) || defined(USE_OZONE) || defined(OS_LINUX)
-   // TODO(reveman): Remove this in favor of setting it explicitly for each
-   // type of process.
-   thread_options.priority = base::ThreadPriority::DISPLAY;
---- a/content/gpu/BUILD.gn
-+++ b/content/gpu/BUILD.gn
-@@ -6,6 +6,7 @@ import("//build/config/jumbo.gni")
- import("//build/config/ui.gni")
- import("//gpu/vulkan/features.gni")
- import("//media/media_options.gni")
-+import("//media/gpu/args.gni")
- import("//ui/ozone/ozone.gni")
- 
- # See //content/BUILD.gn for how this works.
-@@ -127,4 +128,9 @@ target(link_target_type, "gpu_sources")
-       (!is_chromecast || is_cast_desktop_build)) {
-     configs += [ "//build/config/linux/dri" ]
-   }
-+
-+  # Use vaapi on desktop Linux builds when use_vaapi is set
-+  if (is_desktop_linux && use_vaapi) {
-+    public_configs = [ "//media/gpu:libva_config" ]
-+  }
- }
---- a/content/gpu/gpu_main.cc
-+++ b/content/gpu/gpu_main.cc
-@@ -288,7 +288,7 @@ int GpuMain(const MainFunctionParams& pa
- 
-   base::PlatformThread::SetName("CrGpuMain");
- 
--#if defined(OS_ANDROID) || defined(OS_CHROMEOS) || defined(USE_OZONE)
-+#if defined(OS_ANDROID) || defined(OS_CHROMEOS) || defined(USE_OZONE) || defined(OS_LINUX)
-   // Set thread priority before sandbox initialization.
-   base::PlatformThread::SetCurrentThreadPriority(base::ThreadPriority::DISPLAY);
- #endif
-@@ -321,7 +321,7 @@ int GpuMain(const MainFunctionParams& pa
-   GetContentClient()->SetGpuInfo(gpu_init->gpu_info());
- 
-   base::ThreadPriority io_thread_priority = base::ThreadPriority::NORMAL;
--#if defined(OS_ANDROID) || defined(OS_CHROMEOS) || defined(USE_OZONE)
-+#if defined(OS_ANDROID) || defined(OS_CHROMEOS) || defined(USE_OZONE) || defined(OS_LINUX)
-   io_thread_priority = base::ThreadPriority::DISPLAY;
- #endif
- 
+ const char kAppServiceAshName[] = "App Service Ash";
+ const char kAppServiceAshDescription[] =
 --- a/gpu/config/software_rendering_list.json
 +++ b/gpu/config/software_rendering_list.json
-@@ -370,17 +370,6 @@
-       ]
+@@ -370,11 +370,12 @@
      },
      {
--      "id": 48,
+       "id": 48,
 -      "description": "Accelerated video decode is unavailable on Linux",
--      "cr_bugs": [137247],
--      "os": {
--        "type": "linux"
--      },
--      "features": [
--        "accelerated_video_decode"
--      ]
--    },
--    {
-       "id": 50,
-       "description": "Disable VMware software renderer on older Mesa",
-       "cr_bugs": [145531, 332596, 571899, 629434],
---- a/media/base/media_switches.cc
-+++ b/media/base/media_switches.cc
-@@ -511,7 +511,7 @@ bool IsVideoCaptureAcceleratedJpegDecodi
-           switches::kUseFakeMjpegDecodeAccelerator)) {
-     return true;
-   }
--#if defined(OS_CHROMEOS)
-+#if defined(OS_CHROMEOS) || defined(OS_LINUX)
-   return true;
- #endif
-   return false;
---- a/media/filters/BUILD.gn
-+++ b/media/filters/BUILD.gn
-@@ -5,6 +5,7 @@
- import("//build/config/jumbo.gni")
- import("//media/media_options.gni")
- import("//third_party/libaom/options.gni")
-+import("//media/gpu/args.gni")
- 
- jumbo_source_set("filters") {
-   # Do not expand the visibility here without double-checking with OWNERS, this
-@@ -212,7 +213,7 @@ jumbo_source_set("filters") {
-     deps += [ "//media/base/android" ]
-   }
- 
--  if (current_cpu != "arm" && is_linux) {
-+  if (use_vaapi && is_linux) {
-     sources += [
-       "h264_bitstream_buffer.cc",
-       "h264_bitstream_buffer.h",
---- a/media/gpu/BUILD.gn
-+++ b/media/gpu/BUILD.gn
-@@ -510,6 +510,12 @@ if (use_v4l2_codec || use_vaapi || is_ma
-   }
- }
- 
-+import("//build/config/linux/pkg_config.gni")
-+
-+pkg_config("libva_config") {
-+  packages = [ "libva" ]
-+}
-+
- if (use_v4l2_codec || use_vaapi) {
-   test("jpeg_encode_accelerator_unittest") {
-     deps = [
-@@ -580,6 +586,7 @@ if (is_chromeos || is_linux) {
-     if (use_ozone) {
-       deps += [ "//ui/ozone" ]
-     }
-+    public_configs = [ ":libva_config" ]
-   }
- }
- 
++      "description": "Accelerated VA-API video decode is not supported on NVIDIA platforms",
+       "cr_bugs": [137247],
+       "os": {
+         "type": "linux"
+       },
++      "vendor_id": "0x10de",
+       "features": [
+         "accelerated_video_decode"
+       ]
