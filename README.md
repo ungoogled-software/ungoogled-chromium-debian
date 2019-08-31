@@ -55,9 +55,14 @@ cd build/src
 ./debian/rules setup-debian
 
 # Add packages for LLVM 8
-# The easiest way to do this is to use the APT repo from apt.llvm.org
+# One way to do this is to install from buster-backports:
+# 1. Add this line to your /etc/apt/sources.list: deb http://deb.debian.org/debian/ buster-backports main
+# 2. Run "apt update"
+#
+# Another way is to use the APT repo from apt.llvm.org
 # 1. Add this line to your /etc/apt/sources.list: deb http://apt.llvm.org/buster/ llvm-toolchain-buster-8 main
 # 2. Follow the instructions on https://apt.llvm.org for adding the signing key
+# 3. Run "apt update"
 #
 # You do not need to install LLVM packages yourself, since the next step will do it for you.
 
