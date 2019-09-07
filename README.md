@@ -200,6 +200,23 @@ To add either a primary or secondary branch:
 	* e.g. `git tag -s $(./debian/devutils/print_tag_version.sh)`
 	* NOTE: This requires that `debian/ungoogled-upstream/ungoogled-chromium` contains the ungoogled-chromium repo files.
 
+### Notes on updating older branches
+
+If you're going to backport a branch for a newer distro version onto an older distro branch, you will need to either:
+
+1. Try to use the older system library: Change `debian/control` to use an older version and get patches for Chromium to work with the older system library.
+2. Use the bundled system library instead:
+  1. If you are merging a newer distro's branch into an older distro's branch, and the older distro's branch removed the system library, git may automatically strip out most, if not all, the code to use the system library.
+  2. For libraries like ICU or VA-API, there may be commits in the history that added or removed the library (try a search on the commit history). You can try cherry-picking them, or using them as a reference.
+  3. Remove the dependency in `debian/control`
+  4. Determine the library's name under Chromium's `third_party/` directory. We will refer to this name as `$LIB_NAME` below. Note that there are multiple `third_party` directories; the most common one is at the root of the Chromium source tree. Another one you may see is `base/third_party`. The following instructions still apply regardless of which `third_party` directory you use.
+  5. Add `$LIB_NAME` to the `keepers` tuple in `debian/scripts/unbundle`. Also, check for any special removal logic, such as calls to functions `strip` and `remove_file`.
+  6. Remove any filepaths including `third_party/$LIB_NAME` in `debian/clean`.
+  7. Some libraries may produce additional build outputs (e.g. switching back to bundled ICU). In this scenario, you will need to add the build outputs into the relevant package's `.install` file. See `debian/control` for what the different packages are.
+  8. Check for any special rules in `debian/rules` dealing with your library under `third_party/$LIB_NAME`
+  9. Remove any entries involving `third_party/$LIB_NAME` from the `Files-Excluded` section of `debian/copyright`
+  10. Remove any patches from `debian/patches/` relating to your library.
+
 ### Contributing
 
 Contribution guidelines are the same as ungoogled-chromium.
