@@ -3,23 +3,22 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/chrome/browser/ui/views/passwords/password_generation_popup_view_views.cc
 +++ b/chrome/browser/ui/views/passwords/password_generation_popup_view_views.cc
-@@ -50,12 +50,12 @@ class PasswordGenerationPopupViewViews::
+@@ -50,11 +50,11 @@ class PasswordGenerationPopupViewViews::
      BuildColumnSet(layout);
      layout->StartRow(views::GridLayout::kFixedSize, 0);
  
 +    int text_style = STYLE_SECONDARY;
 +    if (state == PasswordGenerationPopupController::kOfferGeneration)
 +      text_style = views::style::STYLE_PRIMARY;
-     layout->AddView(
-         autofill::CreateLabelWithColorReadabilityDisabled(
--            suggestion, ChromeTextContext::CONTEXT_BODY_TEXT_LARGE,
--            state == PasswordGenerationPopupController::kOfferGeneration
--                ? views::style::STYLE_PRIMARY
--                : STYLE_SECONDARY)
-+            suggestion, ChromeTextContext::CONTEXT_BODY_TEXT_LARGE, text_style)
-             .release());
+     layout->AddView(autofill::CreateLabelWithColorReadabilityDisabled(
+-        suggestion, ChromeTextContext::CONTEXT_BODY_TEXT_LARGE,
+-        state == PasswordGenerationPopupController::kOfferGeneration
+-            ? views::style::STYLE_PRIMARY
+-            : STYLE_SECONDARY));
++        suggestion, ChromeTextContext::CONTEXT_BODY_TEXT_LARGE, text_style));
  
      DCHECK(!password_label_);
+     password_label_ =
 --- a/components/viz/common/gl_helper.cc
 +++ b/components/viz/common/gl_helper.cc
 @@ -469,7 +469,7 @@ void GLHelper::CopyTextureToImpl::Cancel
