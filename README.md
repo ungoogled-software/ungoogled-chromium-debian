@@ -10,6 +10,14 @@ Portable Linux builds can run on **any Linux distribution** (that regular Chromi
 
 **Source Code**: It is recommended to use a tag via `git checkout` (see building instructions below). You may also use `master`, but it is for development and may not be stable.
 
+## Installing the binaries
+
+1. Unpack the downloaded `tar` archive to any location, such as `/opt`:
+    ```sh
+    # tar -xvf ungoogled-chromium_xxxxxxx.tar.xz -C /opt
+    ```
+2. Follow the instructions in `/opt/ungoogled-chromium_xxxxxxx/README`
+
 ## Building
 
 These instructions will build packages compatible with any Linux distribution that Chromium supports. They are portable and have minimal dependencies on system libraries (just as in regular Chromium).
@@ -97,20 +105,6 @@ cd ../../
 ./devutils/check_patch_files.sh
 
 # Use git to add changes and commit
-```
-
-## Installing compiled binary
-
-Alternatively, the Ungoogled-Chromium Portable Linux compiled binary may be installed. It has been pre-built. Note: Reproducibility cannot be guaranteed.
-
-1. Download the Ungoogled-Chromium Portable Linux binary to your preferred location e.g. `~/Downloads`.
-
-2. Navigate to the download location. Check download by comparing md5, sha1 and sha256 sums with those at ungoogled-chromium's download webpage.
-
-3. Supposing that your chosen installation location is `/opt`, extract the binary, substituting in the name of your download:
-
-```
-$ sudo tar -xvf ungoogled-chromium_xxxxxxx.tar.xz -C /opt
 ```
 
 ## License
