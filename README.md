@@ -10,6 +10,14 @@ Portable Linux builds can run on **any Linux distribution** (that regular Chromi
 
 **Source Code**: It is recommended to use a tag via `git checkout` (see building instructions below). You may also use `master`, but it is for development and may not be stable.
 
+## Installing the binaries
+
+1. Unpack the downloaded `tar` archive to any location, such as `/opt`:
+    ```sh
+    # tar -xvf ungoogled-chromium_xxxxxxx.tar.xz -C /opt
+    ```
+2. Follow the instructions in `/opt/ungoogled-chromium_xxxxxxx/README`
+
 ## Building
 
 These instructions will build packages compatible with any Linux distribution that Chromium supports. They are portable and have minimal dependencies on system libraries (just as in regular Chromium).

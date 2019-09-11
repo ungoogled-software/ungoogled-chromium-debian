@@ -1,17 +1,25 @@
 Thanks for using ungoogled-chromium! You have downloaded a Portable Linux build.
 
+SANDBOXING
+
 Before you run, you must setup your system so the browser's sandboxing will work. There are two options:
 * Use the user namespace sandbox. This is the preferred option.
 * Use the SUID sandbox. This should be used on systems that do not have support for user namespaces.
 
-How to setup the SUID sandbox:
+How to set up the user namespace sandbox:
+If there is no user namespace sandbox, the kernel may be able to be configured to allow user namespaces. The method to enable it varies per system. Sometimes it's enabled by default. If it's not, sometimes sysctl can be used to set kernel.unprivileged_userns_clone to 1. There may also be a way to set it via the /sys partition. Specific instructions should be found online.
+
+How to set up the SUID sandbox:
 1. Rename "chrome_sandbox" to "chrome-sandbox"
 2. Set the file mode to 4755
 3. Set the group to root
 
-How to setup the user namespace sandbox:
-The kernel needs to be configured to allow user namespaces. The method to enable it varies per system. Sometimes it's enabled by default. If it's not, sometimes sysctl can be used to set kernel.unprivileged_userns_clone to 1. There may also be a way to set it via the /sys partition. Specific instructions should be found online.
+RUNNING THE BROWSER
 
-Running the browser:
+Once the sandbox is set up, the browser can be run by using the "chrome-wrapper" script.
 
-Once the sandbox is setup, the browser can be run by using the chrome-wrapper script.
+A handy link can be also set up.  For example, and adjusting for your installation directory (/opt, etc), your ungoogled-chromium version and sandboxing arrangement:
+sudo ln -s /opt/ungoogled-chromium_xxxxxxx/chrome-wrapper /opt/ungoogled-chromium
+
+ungoogled-chromium could then be simply launched as `/opt/ungoogled-chromium`
+
