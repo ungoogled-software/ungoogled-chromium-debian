@@ -222,3 +222,13 @@ If you're going to backport a branch for a newer distro version onto an older di
 Contribution guidelines are the same as ungoogled-chromium.
 
 Submit PRs to this repository for every packaging type that should be updated.
+
+## Differences between Debian's Chromium
+
+There are a few differences with Debian's Chromium:
+
+* Modified default CLI flags and preferences; see `debian/etc/default-flags` and `debian/etc/master_preferences`
+* Uses LLVM toolchain instead of GCC
+* Add flag for VA-API acceleration (`chrome://flags/#disable-accelerated-video-decode`)
+* Use GTK3 (Chromium's default) instead of GTK2
+* Enable more FFMpeg codecs by default
