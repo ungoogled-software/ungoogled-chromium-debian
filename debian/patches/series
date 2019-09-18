@@ -4,7 +4,10 @@ debianization/master-preferences.patch
 gn/libcxx.patch
 
 arm/gcc_skcms_ice.patch
+arm/pffffft-buildfix.patch
 arm/skia-aarch64-buildfix.patch
+
+gcc/virtual-destructor.patch
 
 gcc6/sizet.patch
 gcc6/atomic.patch
@@ -12,16 +15,18 @@ gcc6/wtf-hashmap.patch
 gcc6/map-insertion.patch
 gcc6/move-required.patch
 gcc6/ambiguous-overloads.patch
+gcc6/ambiguous-initializer.patch
+gcc6/trivially-constructible.patch
 
 fixes/mojo.patch
-fixes/vaapi.patch
-fixes/alignof.patch
-fixes/nullptr.patch
+fixes/public.patch
 fixes/as-needed.patch
-fixes/namespace.patch
 fixes/gpu-timeout.patch
 fixes/empty-array.patch
+fixes/safebrowsing.patch
 fixes/sequence-point.patch
+fixes/jumbo-namespace.patch
+fixes/template-export.patch
 fixes/widevine-locations.patch
 
 disable/tracing.patch
@@ -31,18 +36,19 @@ disable/installer.patch
 disable/font-tests.patch
 disable/swiftshader.patch
 
+warnings/int32.patch
 warnings/friend.patch
 warnings/printf.patch
 warnings/attribute.patch
 warnings/multichar.patch
+warnings/deprecated.patch
 warnings/bool-compare.patch
 warnings/enum-compare.patch
-warnings/unused-result.patch
+warnings/sign-compare.patch
 warnings/unused-typedefs.patch
 warnings/unused-functions.patch
 warnings/null-destination.patch
 warnings/int-in-bool-context.patch
-warnings/explicit-constructor.patch
 
 system/vpx.patch
 system/jpeg.patch
@@ -54,11 +60,13 @@ system/ffmpeg.patch
 system/jsoncpp.patch
 system/openjpeg.patch
 
+buster/icu63.patch
+
 inox-patchset/chromium-skia-harmony.patch
 inox-patchset/fix-cfi-failures-with-unbundled-libxml.patch
 
+fixes/vaapi.patch
+fedora/vaapi-fix.patch
+
 ungoogled-chromium/remove-fcomplete-member-pointers-cflag.patch
-ungoogled-chromium/use-system-libraries-in-official-build.patch
-ungoogled-chromium/fix-nullptr-t-namespace.patch
 ungoogled-chromium/manpage.patch
-ungoogled-chromium/remove-test-fonts.patch

@@ -1,6 +1,9 @@
+description: disable building font tests
+author: Michael Gilbert <mgilbert@debian.org>
+
 --- a/skia/BUILD.gn
 +++ b/skia/BUILD.gn
-@@ -831,7 +831,7 @@ group("test_fonts_resources") {
+@@ -800,7 +800,7 @@ group("test_fonts_resources") {
    if (is_mac) {
      deps += [ ":test_fonts_bundle_data" ]
      data_deps += [ ":test_fonts_bundle_data" ]
@@ -9,3 +12,43 @@
      deps += [ "//third_party/test_fonts" ]
      data_deps += [ "//third_party/test_fonts" ]
    }
+@@ -841,7 +841,7 @@ source_set("test_fonts") {
+       "//third_party/fuchsia-sdk/sdk:sys",
+     ]
+   }
+-  if (is_linux) {
++  if (false) {
+     sources += [ "ext/test_fonts_linux.cc" ]
+   }
+   if (is_mac) {
+--- a/base/test/BUILD.gn
++++ b/base/test/BUILD.gn
+@@ -212,7 +212,7 @@ static_library("test_support") {
+     deps += [ "//third_party/fuchsia-sdk/sdk:zx" ]
+   }
+ 
+-  if (is_linux) {
++  if (false) {
+     public_deps += [ ":fontconfig_util_linux" ]
+     data_deps = [
+       "//third_party/test_fonts",
+@@ -423,7 +423,7 @@ if (is_linux) {
+     ]
+   }
+ 
+-  if (current_toolchain == host_toolchain) {
++  if (false) {
+     executable("generate_fontconfig_caches") {
+       testonly = true
+       sources = [
+--- a/content/shell/app/shell_main_delegate.cc
++++ b/content/shell/app/shell_main_delegate.cc
+@@ -298,7 +298,7 @@ bool ShellMainDelegate::BasicStartupComp
+     BlinkTestPlatformInitialize();
+ #endif
+ 
+-#if !defined(OS_WIN)
++#if 0
+     // On Windows BlinkTestPlatformInitialize() is responsible for font
+     // initialization.
+     skia::ConfigureTestFont();

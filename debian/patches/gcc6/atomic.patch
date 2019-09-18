@@ -1,34 +1,14 @@
 description: gcc 6 does not provide a typedef for atomic<uint32_t>
 author: Michael Gilbert <mgilbert@debian.org>
 
---- a/third_party/blink/renderer/platform/heap/gc_info.cc
-+++ b/third_party/blink/renderer/platform/heap/gc_info.cc
-@@ -51,7 +51,7 @@ void GCInfoTable::CreateGlobalTable() {
+--- a/third_party/blink/renderer/platform/loader/fetch/unique_identifier.cc
++++ b/third_party/blink/renderer/platform/loader/fetch/unique_identifier.cc
+@@ -34,7 +34,7 @@
  
- uint32_t GCInfoTable::EnsureGCInfoIndex(
-     const GCInfo* gc_info,
--    std::atomic_uint32_t* gc_info_index_slot) {
-+    std::atomic<uint32_t>* gc_info_index_slot) {
-   DCHECK(gc_info);
-   DCHECK(gc_info_index_slot);
+ namespace blink {
  
---- a/third_party/blink/renderer/platform/heap/gc_info.h
-+++ b/third_party/blink/renderer/platform/heap/gc_info.h
-@@ -63,7 +63,7 @@ class PLATFORM_EXPORT GCInfoTable {
-     return info;
-   }
+-static std::atomic_uint64_t g_unique_identifier(1);
++static std::atomic<uint64_t> g_unique_identifier(1);
  
--  uint32_t EnsureGCInfoIndex(const GCInfo*, std::atomic_uint32_t*);
-+  uint32_t EnsureGCInfoIndex(const GCInfo*, std::atomic<uint32_t>*);
- 
-   uint32_t GcInfoIndex() const { return current_index_; }
- 
-@@ -107,7 +107,7 @@ struct GCInfoAtBaseType {
-         std::is_polymorphic<T>::value};
-     // This is more complicated than using threadsafe initialization, but this
-     // is instantiated many times (once for every GC type).
--    static std::atomic_uint32_t gc_info_index{0};
-+    static std::atomic<uint32_t> gc_info_index{0};
-     uint32_t index = gc_info_index.load(std::memory_order_acquire);
-     if (!index)
-       index = GCInfoTable::Get().EnsureGCInfoIndex(&kGcInfo, &gc_info_index);
+ uint64_t CreateUniqueIdentifier() {
+   return g_unique_identifier.fetch_add(1, std::memory_order_relaxed);

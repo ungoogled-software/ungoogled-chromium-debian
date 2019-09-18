@@ -1,0 +1,71 @@
+description: fix gcc sign-compare warnings
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/storage/browser/fileapi/obfuscated_file_util_memory_delegate.cc
++++ b/storage/browser/fileapi/obfuscated_file_util_memory_delegate.cc
+@@ -510,10 +510,15 @@ base::File::Error ObfuscatedFileUtilMemo
+   if (source_info.is_directory)
+     return base::File::FILE_ERROR_NOT_A_FILE;
+ 
++  // Negative file size.
++  if (source_info.size < 0)
++    return base::File::FILE_ERROR_FAILED;
++
+   // |size_t| limits the maximum size that the memory file can keep and |int|
+   // limits the maximum size that base::ReadFile function reads.
+-  if (source_info.size > std::numeric_limits<size_t>::max() ||
+-      source_info.size > std::numeric_limits<int>::max()) {
++  uint64_t size = source_info.size;
++  if (size > std::numeric_limits<size_t>::max() ||
++      size > std::numeric_limits<int>::max()) {
+     return base::File::FILE_ERROR_NO_SPACE;
+   }
+ 
+--- a/device/fido/credential_management.cc
++++ b/device/fido/credential_management.cc
+@@ -145,7 +145,7 @@ base::Optional<CredentialsMetadataRespon
+   if (it == response_map.end() || !it->second.is_unsigned()) {
+     return base::nullopt;
+   }
+-  const int64_t existing_count = it->second.GetUnsigned();
++  const uint64_t existing_count = it->second.GetUnsigned();
+   if (existing_count > std::numeric_limits<size_t>::max()) {
+     return base::nullopt;
+   }
+@@ -157,7 +157,7 @@ base::Optional<CredentialsMetadataRespon
+   if (it == response_map.end() || !it->second.is_unsigned()) {
+     return base::nullopt;
+   }
+-  const int64_t remaining_count = it->second.GetUnsigned();
++  const uint64_t remaining_count = it->second.GetUnsigned();
+   if (remaining_count > std::numeric_limits<size_t>::max()) {
+     return base::nullopt;
+   }
+@@ -188,8 +188,11 @@ base::Optional<EnumerateRPsResponse> Enu
+     return base::nullopt;
+   }
+   if (expect_rp_count) {
+-    if (it == response_map.end() || !it->second.is_unsigned() ||
+-        it->second.GetUnsigned() > std::numeric_limits<size_t>::max()) {
++    if (it == response_map.end() || !it->second.is_unsigned()) {
++      return base::nullopt;
++    }
++    const uint64_t count = it->second.GetUnsigned();
++    if (count > std::numeric_limits<size_t>::max()) {
+       return base::nullopt;
+     }
+     rp_count = static_cast<size_t>(it->second.GetUnsigned());
+@@ -292,8 +295,11 @@ EnumerateCredentialsResponse::Parse(
+   } else {
+     it = response_map.find(cbor::Value(
+         static_cast<int>(CredentialManagementResponseKey::kTotalCredentials)));
+-    if (it == response_map.end() || !it->second.is_unsigned() ||
+-        it->second.GetUnsigned() > std::numeric_limits<size_t>::max()) {
++    if (it == response_map.end() || !it->second.is_unsigned()) {
++      return base::nullopt;
++    }
++    const uint64_t count = it->second.GetUnsigned();
++    if (count > std::numeric_limits<size_t>::max()) {
+       return base::nullopt;
+     }
+     credential_count = static_cast<size_t>(it->second.GetUnsigned());

@@ -27,12 +27,27 @@ export LDFLAGS+=-Wl,--stats
 
 # extra flags to reduce warnings that aren't very useful
 export CXXFLAGS+=-Wno-pedantic \
+                 -Wno-unused-result \
                  -Wno-unused-function \
                  -Wno-unused-variable \
                  -Wno-deprecated-declarations \
 
 # ignore warnings for minor mistakes that are too common
 export CXXFLAGS+=-Wno-return-type \
+                 -Wno-parentheses \
+
+# ignore warnings that are not supported well until gcc 8
+export CXXFLAGS+=-Wno-attributes \
+
+# ignore warnings due to gcc bug (https://gcc.gnu.org/bugzilla/show_bug.cgi?id=84055)
+export CXXFLAGS+=-Wno-ignored-attributes
+
+# do not optimize away null pointer safety checks
+export CXXFLAGS+=-fno-delete-null-pointer-checks
+
+# build using system toolchain
+defines+=host_toolchain=\"//build/toolchain/linux/unbundle:default\"
+defines+=custom_toolchain=\"//build/toolchain/linux/unbundle:default\"
 
 # set the appropriate cpu architecture
 DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
@@ -46,7 +61,7 @@ ifeq (arm64,$(DEB_HOST_ARCH))
 defines+=host_cpu=\"arm64\"
 endif
 ifeq (armhf,$(DEB_HOST_ARCH))
-defines+=host_cpu=\"arm\" arm_use_neon=false
+defines+=host_cpu=\"arm\" arm_use_neon=false symbol_level=0
 endif
 
 ungoogled_chromium_version=$(shell cat debian/ungoogled-upstream/version.txt)
@@ -55,27 +70,23 @@ ungoogled_chromium_files=debian/ungoogled-upstream/ungoogled-chromium
 # add gn flags from ungoogled-chromium
 defines+=$(shell cat $(ungoogled_chromium_files)/flags.gn | tr "\n" " " | sed 's/"/\\"/g')
 
-# set unbundle compiler
-defines+=custom_toolchain=\"//build/toolchain/linux/unbundle:default\" \
-         host_toolchain=\"//build/toolchain/linux/unbundle:default\" \
-
 # disabled features
-defines+=use_goma=false \
+defines+=is_debug=false \
+         use_goma=false \
          use_ozone=false \
          use_sysroot=false \
          use_openh264=false \
-         use_allocator=\"none\" \
          use_libjpeg_turbo=true \
          use_custom_libcxx=false \
          use_gnome_keyring=false \
+         use_unofficial_version_number=false \
+         enable_iterator_debugging=false \
+         enable_vr=false \
+         optimize_webui=false \
          linux_use_bundled_binutils=false \
-         gold_path=\"\" \
-         goma_dir=\"\" \
-         icu_use_data_file=false \
 
 # enabled features
 defines+=use_gio=true \
-         use_vaapi=true \
          use_pulseaudio=true \
          link_pulseaudio=true \
          enable_widevine=true \
@@ -95,6 +106,7 @@ defines+=use_gio=true \
          use_cups=true \
          use_kerberos=false \
          use_lld=true \
+         enable_ac3_eac3_audio_demuxing=true \
 
 # some notes about embedded libraries
 #  can't use system nss since net/third_party/nss is heavily patched
@@ -169,9 +181,6 @@ override_dh_auto_install-indep:
 
 override_dh_fixperms:
 	dh_fixperms --exclude chrome-sandbox
-
-override_dh_strip:
-	dh_strip --no-automatic-dbgsym # Do not build any debug packages
 
 override_dh_gencontrol:
 	dh_gencontrol -- -VBuilt-Using="$(shell dpkg-query -f '$${source:Package} (= $${source:Version}), ' -W libjs-jquery libjs-jquery-flot)"

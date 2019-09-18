@@ -1,0 +1,11 @@
+--- a/third_party/pffft/src/pffft.c
++++ b/third_party/pffft/src/pffft.c
+@@ -151,7 +151,7 @@ typedef __m128 v4sf;
+ /*
+   ARM NEON support macros
+ */
+-#elif !defined(PFFFT_SIMD_DISABLE) && (defined(__arm__) || defined(__ARMEL__) || defined(__aarch64__) || defined(_M_ARM64))
++#elif !defined(PFFFT_SIMD_DISABLE) && ((defined(__arm__) && defined(__ARM_NEON__) )|| defined(__aarch64__) || defined(_M_ARM64))
+ #  include <arm_neon.h>
+ typedef float32x4_t v4sf;
+ #  define SIMD_SZ 4

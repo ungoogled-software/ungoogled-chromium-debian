@@ -11,6 +11,14 @@ author: Michael Gilbert <mgilbert@debian.org>
    ]
  
    public_deps = [
+@@ -81,7 +80,6 @@ source_set("courgette_common") {
+   ]
+   deps = [
+     "//base",
+-    "//third_party/lzma_sdk",
+   ]
+ }
+ 
 --- a/courgette/crc.cc
 +++ b/courgette/crc.cc
 @@ -7,6 +7,8 @@

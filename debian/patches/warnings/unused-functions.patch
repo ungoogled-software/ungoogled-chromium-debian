@@ -1,4 +1,4 @@
-description: remove functions that are unused [-Wunused-functions]
+description: remove functions that are unused [-Wunused-function]
 author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/third_party/nasm/asm/nasm.c
