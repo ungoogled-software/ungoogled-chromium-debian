@@ -82,6 +82,7 @@ defines+=is_debug=false \
          use_unofficial_version_number=false \
          enable_iterator_debugging=false \
          enable_vr=false \
+         enable_swiftshader=false \
          optimize_webui=false \
          linux_use_bundled_binutils=false \
 
