@@ -1,0 +1,7 @@
+FROM ug-chromium-builder-stage1:latest
+
+ADD ./ /repo
+
+WORKDIR /repo
+
+#RUN ./build.sh && ./package.sh
