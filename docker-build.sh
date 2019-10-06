@@ -13,4 +13,4 @@ popd
 docker build --rm -f "Dockerfile-stage2" -t ug-chromium-builder-stage2:latest ./
 
 # start the browser build
-docker run -ti -v `pwd`/build:/repo/build ug-chromium-builder-stage2:latest ./build-n-pack.sh
+docker run -ti -v `pwd`/build:/repo/build ug-chromium-builder-stage2:latest bash -c "./build.sh && ./package.sh"
