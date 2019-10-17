@@ -84,6 +84,7 @@ defines+=is_debug=false \
          enable_vr=false \
          optimize_webui=false \
          linux_use_bundled_binutils=false \
+         use_system_harfbuzz=false \
 
 # enabled features
 defines+=use_gio=true \
@@ -95,7 +96,6 @@ defines+=use_gio=true \
          use_system_lcms2=true \
          use_system_libjpeg=true \
          use_system_freetype=true \
-         use_system_harfbuzz=true \
          use_system_libopenjpeg2=true \
          use_jumbo_build=true \
          jumbo_file_merge_limit=8 \

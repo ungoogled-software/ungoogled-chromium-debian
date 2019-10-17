@@ -60,8 +60,6 @@ system/ffmpeg.patch
 system/jsoncpp.patch
 system/openjpeg.patch
 
-buster/icu63.patch
-
 inox-patchset/chromium-skia-harmony.patch
 inox-patchset/fix-cfi-failures-with-unbundled-libxml.patch
 
