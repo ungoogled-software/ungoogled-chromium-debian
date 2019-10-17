@@ -2,7 +2,7 @@
 
 This repository contains files to build Debian packages of [ungoogled-chromium](//github.com/Eloston/ungoogled-chromium).
 
-This branch contains the code to build packages for: **Ubuntu 19.04 (disco)**
+This branch contains the code to build packages for: **Ubuntu 19.10 (eoan)**
 
 ## Downloads
 
@@ -10,7 +10,7 @@ This branch contains the code to build packages for: **Ubuntu 19.04 (disco)**
 
 If your distro is not listed, you may have a look at the [community-maintained list of packages compatible on other distros](https://github.com/ungoogled-software/ungoogled-chromium-debian/wiki/Compatible-Packages). However, please note that this compatibility is not guarenteed; it may break at any time.
 
-**Source Code**: Use the tags labeled with `disco` via `git checkout` (see building instructions). The branches are for development and may not be stable.
+**Source Code**: Use the tags labeled with `eoan` via `git checkout` (see building instructions). The branches are for development and may not be stable.
 
 ## Installing
 
@@ -34,7 +34,7 @@ The other packages are as follows:
 
 ```sh
 # Install essential requirements
-sudo apt install git python3 packaging-dev
+sudo apt install git python3 packaging-dev equivs
 
 # Setup build tree under build/
 mkdir -p build/src
@@ -117,7 +117,7 @@ git remote add upstream https://salsa.debian.org/chromium-team/chromium.git
 First, update `debian_buster` with the latest changes. Then, merge it into this branch:
 
 ```sh
-git checkout --recurse-submodules ubuntu_disco
+git checkout --recurse-submodules ubuntu_eoan
 git merge debian_buster
 # Complete the git merge
 # Update patches via instructions below
