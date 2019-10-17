@@ -1,4 +1,4 @@
-ungoogled-chromium ($ungoog{chromium_version}-$ungoog{ungoogled_revision}.disco$ungoog{distro_revision}) disco; urgency=medium
+ungoogled-chromium ($ungoog{chromium_version}-$ungoog{ungoogled_revision}.eoan$ungoog{distro_revision}) eoan; urgency=medium
 
   * Built against $ungoog{ungoogled_version}
 
