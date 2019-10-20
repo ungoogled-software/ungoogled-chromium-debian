@@ -9,9 +9,9 @@ Standards-Version: 4.4.0
 Rules-Requires-Root: no
 Build-Depends:
  debhelper (>= 11),
- clang-8,
- lld-8,
- llvm-8-dev,
+ clang,
+ lld,
+ llvm-dev,
  python,
  python3,
  pkg-config,

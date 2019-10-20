@@ -10,17 +10,17 @@ export DEB_BUILD_MAINT_OPTIONS=hardening=+all
 export DEB_RULES_REQUIRES_ROOT=no
 
 # use system LLVM via unbundling
-export AR=llvm-ar-8
-export NM=llvm-nm-8
-export CC=clang-8
-export CXX=clang++-8
+export AR=llvm-ar
+export NM=llvm-nm
+export CC=clang
+export CXX=clang++
 
 # hack to allow clang to find the default cfi_blacklist.txt
-export CXXFLAGS+=-resource-dir=$(shell clang-8 --print-resource-dir) \
+export CXXFLAGS+=-resource-dir=$(shell clang --print-resource-dir) \
 
-export CPPFLAGS+=-resource-dir=$(shell clang-8 --print-resource-dir) \
+export CPPFLAGS+=-resource-dir=$(shell clang --print-resource-dir) \
 
-export CFLAGS+=-resource-dir=$(shell clang-8 --print-resource-dir) \
+export CFLAGS+=-resource-dir=$(shell clang --print-resource-dir) \
 
 # more verbose linker output
 export LDFLAGS+=-Wl,--stats
@@ -82,6 +82,7 @@ defines+=is_debug=false \
          use_unofficial_version_number=false \
          enable_iterator_debugging=false \
          enable_vr=false \
+         enable_swiftshader=false \
          optimize_webui=false \
          linux_use_bundled_binutils=false \
 
