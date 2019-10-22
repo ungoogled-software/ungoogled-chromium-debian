@@ -40,7 +40,10 @@ TODO: Document all libraries and tools needed to build. For now, see the build d
     2. The latest *stable* LLVM version (not development/trunk!)
     3. A nightly snapshot LLVM build, available from [the LLVM apt repo](//apt.llvm.org). For best results, the branch version should match the current stable LLVM version (e.g. if the current stable is 8.0.1, use branch version 8)
 
-    Note that any other LLVM version may outright fail, or [cause unexpected behavior](//github.com/Eloston/ungoogled-chromium/issues/586).
+    **However, make sure to note the following**:
+
+    * Any other LLVM version may outright fail, or [cause unexpected behavior](//github.com/Eloston/ungoogled-chromium/issues/586).
+    * on Debian-based systems, installing LLVM from the distro's repo and from `apt.llvm.org` may cause conflicts. To ensure correctness, make sure to only have one or the other installed. For example, [Clang could use the wrong linker](https://github.com/ungoogled-software/ungoogled-chromium-portablelinux/issues/21).
 
 For Debian-based systems:
 
