@@ -5,7 +5,7 @@
  
      if ($deletecount or $self->config->force_repack) {
 +        for my $filename (@to_delete) {
-+            printf "$filename\n";
++            printf "%s\n", $filename;
 +        }
 +        return $self->status(0);
 +

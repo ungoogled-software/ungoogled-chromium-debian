@@ -5,7 +5,7 @@ Maintainer: ungoogled-chromium Maintainers <github@null.invalid>
 Vcs-Git: https://github.com/Eloston/ungoogled-chromium.git
 Vcs-Browser: https://github.com/Eloston/ungoogled-chromium
 Homepage: https://github.com/Eloston/ungoogled-chromium
-Standards-Version: 4.3.0
+Standards-Version: 4.4.0
 Rules-Requires-Root: no
 Build-Depends:
  debhelper (>= 11),
@@ -46,7 +46,6 @@ Build-Depends:
  libpci-dev,
  libcap-dev,
  libdrm-dev,
- libicu-dev,
  libffi-dev,
  libkrb5-dev,
  libexif-dev,
@@ -191,6 +190,7 @@ Recommends:
  ungoogled-chromium-sandbox,
  fonts-liberation,
  notification-daemon,
+ system-config-printer,
 Breaks:
  ungoogled-chromium (<< 60.0.3112.72-1),
  chromium-common,

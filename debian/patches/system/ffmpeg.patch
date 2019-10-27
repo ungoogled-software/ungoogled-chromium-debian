@@ -4,7 +4,7 @@ origin: chromium 66 authors
 
 --- a/media/filters/ffmpeg_audio_decoder.cc
 +++ b/media/filters/ffmpeg_audio_decoder.cc
-@@ -79,6 +79,8 @@ void FFmpegAudioDecoder::Initialize(cons
+@@ -82,6 +82,8 @@ void FFmpegAudioDecoder::Initialize(cons
      return;
    }
  
@@ -12,7 +12,7 @@ origin: chromium 66 authors
 +
    if (!ConfigureDecoder(config)) {
      av_sample_format_ = 0;
-     bound_init_cb.Run(false);
+     std::move(bound_init_cb).Run(false);
 --- a/media/cdm/library_cdm/clear_key_cdm/clear_key_cdm.cc
 +++ b/media/cdm/library_cdm/clear_key_cdm/clear_key_cdm.cc
 @@ -152,6 +152,7 @@ void ConvertCdmKeysInfo(const media::Cdm
@@ -25,7 +25,7 @@ origin: chromium 66 authors
  
 --- a/media/filters/ffmpeg_glue.cc
 +++ b/media/filters/ffmpeg_glue.cc
-@@ -70,7 +70,13 @@ static void LogContainer(bool is_local_f
+@@ -64,7 +64,13 @@ static void LogContainer(bool is_local_f
      base::UmaHistogramSparse("Media.DetectedContainer.Local", container);
  }
  
@@ -75,5 +75,5 @@ origin: chromium 66 authors
 +  FFmpegGlue::InitializeFFmpeg();
 +
    if (!ConfigureDecoder(config, low_delay)) {
-     bound_init_cb.Run(false);
+     std::move(bound_init_cb).Run(false);
      return;

@@ -12,10 +12,12 @@ This branch contains the code to build packages for: **Ubuntu 18.04 LTS (bionic)
 
 ## Installing
 
-The packages are essentially identical in structure to Debian's `chromium` packages. At minimum, you will need to install the `ungoogled-chromium` and `ungoogled-chromium-common` packages. For example:
+**NOTE**: The packages are essentially identical in structure to Debian's `chromium` packages. **As a result, they cannot be installed simultaneously with the distro-provided Chromium package.**
+
+At minimum, you will need to install the `ungoogled-chromium` and `ungoogled-chromium-common` packages. For example:
 
 ```sh
-# dpkg -i ungoogled-chromium_*.deb ungoogled-chromium-comon_*.deb
+# dpkg -i ungoogled-chromium_*.deb ungoogled-chromium-common_*.deb
 ```
 
 The other packages are as follows:
@@ -24,6 +26,7 @@ The other packages are as follows:
 * `*-l10n`: Localization package for the browser UI.
 * `*-sandbox`: [`SUID` Sandbox](https://chromium.googlesource.com/chromium/src/+/lkgr/docs/linux_suid_sandbox.md). This is only necessary if you do not have user namespaces enabled (i.e. kernel parameter `kernel.unprivileged_userns_clone`)
 * `*-shell`: Contains `content_shell`. Mainly for browser development/testing; search [the Chromium docs](https://chromium.googlesource.com/chromium/src/+/lkgr/docs/) for more details.
+* `*-dbgsym*`: Debug symbols for the associated package.
 
 ## Building
 
@@ -53,6 +56,7 @@ cd build/src
 # The easiest way to do this is to use the APT repo from apt.llvm.org
 # 1. Add this line to your /etc/apt/sources.list: deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main
 # 2. Follow the instructions on https://apt.llvm.org for adding the signing key
+# 3. Run "apt update"
 #
 # You do not need to install LLVM packages yourself, since the next step will do it for you.
 
@@ -189,6 +193,23 @@ To add either a primary or secondary branch:
 3. Use `git tag` to add a new tag with the name generated from `debian/devutils/print_tag_version.sh`
 	* e.g. `git tag -s $(./debian/devutils/print_tag_version.sh)`
 	* NOTE: This requires that `debian/ungoogled-upstream/ungoogled-chromium` contains the ungoogled-chromium repo files.
+
+### Notes on updating older branches
+
+If you're going to backport a branch for a newer distro version onto an older distro branch, you will need to either:
+
+1. Try to use the older system library: Change `debian/control` to use an older version and get patches for Chromium to work with the older system library.
+2. Use the bundled system library instead:
+  1. If you are merging a newer distro's branch into an older distro's branch, and the older distro's branch removed the system library, git may automatically strip out most, if not all, the code to use the system library.
+  2. For libraries like ICU or VA-API, there may be commits in the history that added or removed the library (try a search on the commit history). You can try cherry-picking them, or using them as a reference.
+  3. Remove the dependency in `debian/control`
+  4. Determine the library's name under Chromium's `third_party/` directory. We will refer to this name as `$LIB_NAME` below. Note that there are multiple `third_party` directories; the most common one is at the root of the Chromium source tree. Another one you may see is `base/third_party`. The following instructions still apply regardless of which `third_party` directory you use.
+  5. Add `$LIB_NAME` to the `keepers` tuple in `debian/scripts/unbundle`. Also, check for any special removal logic, such as calls to functions `strip` and `remove_file`.
+  6. Remove any filepaths including `third_party/$LIB_NAME` in `debian/clean`.
+  7. Some libraries may produce additional build outputs (e.g. switching back to bundled ICU). In this scenario, you will need to add the build outputs into the relevant package's `.install` file. See `debian/control` for what the different packages are.
+  8. Check for any special rules in `debian/rules` dealing with your library under `third_party/$LIB_NAME`
+  9. Remove any entries involving `third_party/$LIB_NAME` from the `Files-Excluded` section of `debian/copyright`
+  10. Remove any patches from `debian/patches/` relating to your library.
 
 ### Contributing
 

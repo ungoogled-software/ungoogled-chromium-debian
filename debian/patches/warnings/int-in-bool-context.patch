@@ -14,7 +14,7 @@ author: Michael Gilbert <mgilbert@debian.org>
          filter_->CopyMem16x16(mb_src, stride_src, mb_dst, stride_dst);
 --- a/gpu/command_buffer/service/gles2_cmd_decoder.cc
 +++ b/gpu/command_buffer/service/gles2_cmd_decoder.cc
-@@ -15657,7 +15657,8 @@ bool GLES2DecoderImpl::GetUniformSetup(G
+@@ -16038,7 +16038,8 @@ bool GLES2DecoderImpl::GetUniformSetup(G
    }
    uint32_t checked_size = 0;
    if (!SizedResult<T>::ComputeSize(num_elements).AssignIfValid(&checked_size)) {
@@ -26,7 +26,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    if (!result) {
 --- a/components/download/internal/common/download_item_impl.cc
 +++ b/components/download/internal/common/download_item_impl.cc
-@@ -815,7 +815,7 @@ const base::FilePath& DownloadItemImpl::
+@@ -869,7 +869,7 @@ const base::FilePath& DownloadItemImpl::
  }
  
  base::FilePath DownloadItemImpl::GetTemporaryFilePath() const {
@@ -37,7 +37,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
 --- a/content/browser/renderer_host/render_widget_host_view_base.cc
 +++ b/content/browser/renderer_host/render_widget_host_view_base.cc
-@@ -328,15 +328,16 @@ void RenderWidgetHostViewBase::SetBackgr
+@@ -311,15 +311,16 @@ void RenderWidgetHostViewBase::SetBackgr
    if (default_background_color_ == color)
      return;
  
@@ -62,7 +62,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
 --- a/third_party/blink/renderer/core/html/parser/html_tree_builder.cc
 +++ b/third_party/blink/renderer/core/html/parser/html_tree_builder.cc
-@@ -937,7 +937,7 @@ void HTMLTreeBuilder::ProcessStartTagFor
+@@ -938,7 +938,7 @@ void HTMLTreeBuilder::ProcessStartTagFor
    }
    if (token->GetName() == kColTag) {
      ProcessFakeStartTag(kColgroupTag);
@@ -71,3 +71,15 @@ author: Michael Gilbert <mgilbert@debian.org>
      ProcessStartTag(token);
      return;
    }
+--- a/ui/gfx/ipc/skia/gfx_skia_param_traits_macros.h
++++ b/ui/gfx/ipc/skia/gfx_skia_param_traits_macros.h
+@@ -10,7 +10,7 @@
+ #include "ipc/ipc_message_macros.h"
+ #include "third_party/skia/include/core/SkImageInfo.h"
+ 
+-IPC_ENUM_TRAITS_VALIDATE(SkColorType, kLastEnum_SkColorType)
+-IPC_ENUM_TRAITS_VALIDATE(SkAlphaType, kLastEnum_SkAlphaType)
++IPC_ENUM_TRAITS_VALIDATE(SkColorType, value != kLastEnum_SkColorType)
++IPC_ENUM_TRAITS_VALIDATE(SkAlphaType, value != kLastEnum_SkAlphaType)
+ 
+ #endif  // UI_GFX_IPC_SKIA_GFX_SKIA_PARAM_TRAITS_MACROS_H_
