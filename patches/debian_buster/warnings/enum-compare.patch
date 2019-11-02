@@ -7,14 +7,14 @@ author: Michael Gilbert <mgilbert@debian.org>
      BuildColumnSet(layout);
      layout->StartRow(views::GridLayout::kFixedSize, 0);
  
-+    int text_style = STYLE_SECONDARY;
++    int text_style = views::style::STYLE_SECONDARY;
 +    if (state == PasswordGenerationPopupController::kOfferGeneration)
 +      text_style = views::style::STYLE_PRIMARY;
      layout->AddView(autofill::CreateLabelWithColorReadabilityDisabled(
 -        suggestion, ChromeTextContext::CONTEXT_BODY_TEXT_LARGE,
 -        state == PasswordGenerationPopupController::kOfferGeneration
 -            ? views::style::STYLE_PRIMARY
--            : STYLE_SECONDARY));
+-            : views::style::STYLE_SECONDARY));
 +        suggestion, ChromeTextContext::CONTEXT_BODY_TEXT_LARGE, text_style));
  
      DCHECK(!password_label_);
