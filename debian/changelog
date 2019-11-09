@@ -1,3 +1,12 @@
+chromium (78.0.3904.97-1) unstable; urgency=medium
+
+  * New upstream security release.
+  * Enable vaapi (closes: #940074).
+  * Fix crash during profile manager shutdown.
+  * Drop libglewmx-dev build dependency (closes: #941050).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 09 Nov 2019 03:33:52 +0000
+
 chromium (78.0.3904.87-1) unstable; urgency=medium
 
   * New upstream stable release.
