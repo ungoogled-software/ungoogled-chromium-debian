@@ -1,0 +1,25 @@
+description: gcc will not compile error messages with stray apostrophes
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/ui/aura/window.h
++++ b/ui/aura/window.h
+@@ -41,7 +41,7 @@
+ #include "ui/gfx/native_widget_types.h"
+ 
+ #if defined(OS_MACOSX)
+-#error This file must not be included on macOS; Chromium Mac doesn't use Aura.
++#error This file must not be included on macOS; Chromium Mac does not use Aura.
+ #endif
+ 
+ namespace cc {
+--- a/ui/views/widget/native_widget_aura.h
++++ b/ui/views/widget/native_widget_aura.h
+@@ -22,7 +22,7 @@
+ #include "ui/wm/public/activation_delegate.h"
+ 
+ #if defined(OS_MACOSX)
+-#error This file must not be included on macOS; Chromium Mac doesn't use Aura.
++#error This file must not be included on macOS; Chromium Mac does not use Aura.
+ #endif
+ 
+ namespace aura {

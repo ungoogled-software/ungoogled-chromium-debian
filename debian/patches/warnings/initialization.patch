@@ -1,4 +1,4 @@
-description: source_ could be uninitialized
+description: fix uninitialized variable warnings
 author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/third_party/cacheinvalidation/src/google/cacheinvalidation/include/types.h
@@ -12,3 +12,15 @@ author: Michael Gilbert <mgilbert@debian.org>
  
    /* Creates an object id for the given source and name (the name is copied). */
    ObjectId(int source, const string& name)
+--- a/base/task/promise/promise_executor.h
++++ b/base/task/promise/promise_executor.h
+@@ -47,6 +47,9 @@ class BASE_EXPORT PromiseExecutor {
+           "Executor is too big");
+       vtable_ = &VTableHelper<Derived>::vtable_;
+       new (storage_.array) Derived(std::forward<Args>(args)...);
++      for (size_t i = 0; i < MaxSize; i++) {
++        storage_.array[i] = '\0';
++      }
+     }
+ 
+     Data(Data&& other) noexcept

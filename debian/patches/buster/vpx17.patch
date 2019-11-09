@@ -1,0 +1,199 @@
+description: maintain compatibility with vpx 1.7
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/third_party/webrtc/modules/video_coding/codecs/vp9/vp9_impl.cc
++++ b/third_party/webrtc/modules/video_coding/codecs/vp9/vp9_impl.cc
+@@ -401,15 +401,6 @@ bool VP9EncoderImpl::SetSvcRates(
+   }
+   RTC_DCHECK_GT(num_active_spatial_layers_, 0);
+ 
+-  if (higher_layers_enabled && !force_key_frame_) {
+-    // Prohibit drop of all layers for the next frame, so newly enabled
+-    // layer would have a valid spatial reference.
+-    for (size_t i = 0; i < num_spatial_layers_; ++i) {
+-      svc_drop_frame_.framedrop_thresh[i] = 0;
+-    }
+-    force_all_active_layers_ = true;
+-  }
+-
+   current_bitrate_allocation_ = bitrate_allocation;
+   return true;
+ }
+@@ -727,63 +718,12 @@ int VP9EncoderImpl::InitAndSetControlSet
+                     inst->VP9().adaptiveQpMode ? 3 : 0);
+ 
+   vpx_codec_control(encoder_, VP9E_SET_FRAME_PARALLEL_DECODING, 0);
+-  vpx_codec_control(encoder_, VP9E_SET_SVC_GF_TEMPORAL_REF, 0);
+ 
+   if (is_svc_) {
+     vpx_codec_control(encoder_, VP9E_SET_SVC, 1);
+     vpx_codec_control(encoder_, VP9E_SET_SVC_PARAMETERS, &svc_params_);
+   }
+ 
+-  if (num_spatial_layers_ > 1) {
+-    switch (inter_layer_pred_) {
+-      case InterLayerPredMode::kOn:
+-        vpx_codec_control(encoder_, VP9E_SET_SVC_INTER_LAYER_PRED, 0);
+-        break;
+-      case InterLayerPredMode::kOff:
+-        vpx_codec_control(encoder_, VP9E_SET_SVC_INTER_LAYER_PRED, 1);
+-        break;
+-      case InterLayerPredMode::kOnKeyPic:
+-        vpx_codec_control(encoder_, VP9E_SET_SVC_INTER_LAYER_PRED, 2);
+-        break;
+-      default:
+-        RTC_NOTREACHED();
+-    }
+-
+-    memset(&svc_drop_frame_, 0, sizeof(svc_drop_frame_));
+-    const bool reverse_constrained_drop_mode =
+-        inter_layer_pred_ == InterLayerPredMode::kOn &&
+-        codec_.mode == VideoCodecMode::kScreensharing &&
+-        num_spatial_layers_ > 1;
+-    if (reverse_constrained_drop_mode) {
+-      // Screenshare dropping mode: drop a layer only together with all lower
+-      // layers. This ensures that drops on lower layers won't reduce frame-rate
+-      // for higher layers and reference structure is RTP-compatible.
+-      svc_drop_frame_.framedrop_mode = CONSTRAINED_FROM_ABOVE_DROP;
+-      svc_drop_frame_.max_consec_drop = 5;
+-      for (size_t i = 0; i < num_spatial_layers_; ++i) {
+-        svc_drop_frame_.framedrop_thresh[i] = config_->rc_dropframe_thresh;
+-      }
+-      // No buffering is needed because the highest layer is always present in
+-      // all frames in CONSTRAINED_FROM_ABOVE drop mode.
+-      layer_buffering_ = false;
+-    } else {
+-      // Configure encoder to drop entire superframe whenever it needs to drop
+-      // a layer. This mode is preferred over per-layer dropping which causes
+-      // quality flickering and is not compatible with RTP non-flexible mode.
+-      svc_drop_frame_.framedrop_mode =
+-          full_superframe_drop_ ? FULL_SUPERFRAME_DROP : CONSTRAINED_LAYER_DROP;
+-      // Buffering is needed only for constrained layer drop, as it's not clear
+-      // which frame is the last.
+-      layer_buffering_ = !full_superframe_drop_;
+-      svc_drop_frame_.max_consec_drop = std::numeric_limits<int>::max();
+-      for (size_t i = 0; i < num_spatial_layers_; ++i) {
+-        svc_drop_frame_.framedrop_thresh[i] = config_->rc_dropframe_thresh;
+-      }
+-    }
+-    vpx_codec_control(encoder_, VP9E_SET_SVC_FRAME_DROP_LAYER,
+-                      &svc_drop_frame_);
+-  }
+-
+   // Register callback for getting each spatial layer.
+   vpx_codec_priv_output_cx_pkt_cb_pair_t cbp = {
+       VP9EncoderImpl::EncoderOutputCodedPacketCallback,
+@@ -918,22 +858,12 @@ int VP9EncoderImpl::Encode(const VideoFr
+     }
+   }
+ 
+-  for (int sl_idx = 0; sl_idx < num_active_spatial_layers_; ++sl_idx) {
+-    layer_id.temporal_layer_id_per_spatial[sl_idx] = layer_id.temporal_layer_id;
+-  }
+-
+   if (layer_id.spatial_layer_id < first_active_layer_) {
+     layer_id.spatial_layer_id = first_active_layer_;
+   }
+ 
+   vpx_codec_control(encoder_, VP9E_SET_SVC_LAYER_ID, &layer_id);
+ 
+-  if (num_spatial_layers_ > 1) {
+-    // Update frame dropping settings as they may change on per-frame basis.
+-    vpx_codec_control(encoder_, VP9E_SET_SVC_FRAME_DROP_LAYER,
+-                      &svc_drop_frame_);
+-  }
+-
+   if (vpx_codec_enc_config_set(encoder_, config_)) {
+     return WEBRTC_VIDEO_CODEC_ERROR;
+   }
+@@ -996,21 +926,6 @@ int VP9EncoderImpl::Encode(const VideoFr
+     flags = VPX_EFLAG_FORCE_KF;
+   }
+ 
+-  if (external_ref_control_) {
+-    vpx_svc_ref_frame_config_t ref_config =
+-        SetReferences(force_key_frame_, layer_id.spatial_layer_id);
+-
+-    if (VideoCodecMode::kScreensharing == codec_.mode) {
+-      for (uint8_t sl_idx = 0; sl_idx < num_active_spatial_layers_; ++sl_idx) {
+-        ref_config.duration[sl_idx] = static_cast<int64_t>(
+-            90000 / (std::min(static_cast<float>(codec_.maxFramerate),
+-                              framerate_controller_[sl_idx].GetTargetRate())));
+-      }
+-    }
+-
+-    vpx_codec_control(encoder_, VP9E_SET_SVC_REF_FRAME_CONFIG, &ref_config);
+-  }
+-
+   first_frame_in_picture_ = true;
+ 
+   // TODO(ssilkin): Frame duration should be specified per spatial layer
+@@ -1115,9 +1030,7 @@ void VP9EncoderImpl::PopulateCodecSpecif
+   vp9_info->num_spatial_layers = num_active_spatial_layers_;
+ 
+   vp9_info->num_ref_pics = 0;
+-  FillReferenceIndices(pkt, pics_since_key_, vp9_info->inter_layer_predicted,
+-                       vp9_info);
+-  if (vp9_info->flexible_mode) {
++  if (false) {
+     vp9_info->gof_idx = kNoGofIdx;
+   } else {
+     vp9_info->gof_idx =
+@@ -1162,6 +1075,7 @@ void VP9EncoderImpl::PopulateCodecSpecif
+   first_frame_in_picture_ = false;
+ }
+ 
++/*
+ void VP9EncoderImpl::FillReferenceIndices(const vpx_codec_cx_pkt& pkt,
+                                           const size_t pic_num,
+                                           const bool inter_layer_predicted,
+@@ -1417,6 +1331,7 @@ vpx_svc_ref_frame_config_t VP9EncoderImp
+ 
+   return ref_config;
+ }
++*/
+ 
+ int VP9EncoderImpl::GetEncodedLayerFrame(const vpx_codec_cx_pkt* pkt) {
+   RTC_DCHECK_EQ(pkt->kind, VPX_CODEC_CX_FRAME_PKT);
+@@ -1459,14 +1374,10 @@ int VP9EncoderImpl::GetEncodedLayerFrame
+                         input_image_->timestamp());
+   encoded_image_.SetSpatialIndex(spatial_index);
+ 
+-  UpdateReferenceBuffers(*pkt, pics_since_key_);
+-
+   TRACE_COUNTER1("webrtc", "EncodedFrameSize", encoded_image_.size());
+   encoded_image_.SetTimestamp(input_image_->timestamp());
+-  encoded_image_._encodedHeight =
+-      pkt->data.frame.height[layer_id.spatial_layer_id];
+-  encoded_image_._encodedWidth =
+-      pkt->data.frame.width[layer_id.spatial_layer_id];
++  encoded_image_._encodedHeight = raw_->d_h;
++  encoded_image_._encodedWidth = raw_->d_w;
+   int qp = -1;
+   vpx_codec_control(encoder_, VP8E_GET_LAST_QUANTIZER, &qp);
+   encoded_image_.qp_ = qp;
+@@ -1482,14 +1393,6 @@ int VP9EncoderImpl::GetEncodedLayerFrame
+ 
+ void VP9EncoderImpl::DeliverBufferedFrame(bool end_of_picture) {
+   if (encoded_image_.size() > 0) {
+-    if (num_spatial_layers_ > 1) {
+-      // Restore frame dropping settings, as dropping may be temporary forbidden
+-      // due to dynamically enabled layers.
+-      for (size_t i = 0; i < num_spatial_layers_; ++i) {
+-        svc_drop_frame_.framedrop_thresh[i] = config_->rc_dropframe_thresh;
+-      }
+-    }
+-
+     codec_specific_.codecSpecific.VP9.end_of_picture = end_of_picture;
+ 
+     // No data partitioning in VP9, so 1 partition only.
+--- a/third_party/webrtc/modules/video_coding/codecs/vp9/vp9_impl.h
++++ b/third_party/webrtc/modules/video_coding/codecs/vp9/vp9_impl.h
+@@ -128,7 +128,6 @@ class VP9EncoderImpl : public VP9Encoder
+   const bool dynamic_rate_settings_;
+   bool layer_buffering_;
+   const bool full_superframe_drop_;
+-  vpx_svc_frame_drop_t svc_drop_frame_;
+   bool first_frame_in_picture_;
+   VideoBitrateAllocation current_bitrate_allocation_;
+   bool ss_info_needed_;

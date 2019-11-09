@@ -1,9 +1,9 @@
 description: disable browser sign-in
 origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/resources/patches/ungoogled-chromium/disable-signin.patch
 
---- a/components/signin/core/browser/signin_manager_base.cc
-+++ b/components/signin/core/browser/signin_manager_base.cc
-@@ -57,9 +57,9 @@ void SigninManagerBase::RegisterProfileP
+--- a/components/signin/internal/identity_manager/primary_account_manager.cc
++++ b/components/signin/internal/identity_manager/primary_account_manager.cc
+@@ -56,9 +56,9 @@ void PrimaryAccountManager::RegisterProf
    registry->RegisterStringPref(prefs::kGoogleServicesAccountId, std::string());
    registry->RegisterStringPref(prefs::kGoogleServicesUserAccountId,
                                 std::string());
@@ -12,12 +12,12 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
    registry->RegisterListPref(prefs::kReverseAutologinRejectedEmailList);
 -  registry->RegisterBooleanPref(prefs::kSigninAllowed, true);
 +  registry->RegisterBooleanPref(prefs::kSigninAllowed, false);
-   registry->RegisterInt64Pref(prefs::kSignedInTime,
-                               base::Time().ToInternalValue());
    registry->RegisterBooleanPref(prefs::kSignedInWithCredentialProvider, false);
+ 
+   // Deprecated prefs: will be removed in a future release.
 --- a/chrome/browser/ui/chrome_pages.cc
 +++ b/chrome/browser/ui/chrome_pages.cc
-@@ -436,6 +436,7 @@ void ShowAppManagementPage(Profile* prof
+@@ -515,6 +515,7 @@ GURL GetOSSettingsUrl(const std::string&
  #if !defined(OS_ANDROID) && !defined(OS_CHROMEOS)
  void ShowBrowserSignin(Browser* browser,
                         signin_metrics::AccessPoint access_point) {
@@ -25,7 +25,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
    Profile* original_profile = browser->profile()->GetOriginalProfile();
    DCHECK(original_profile->GetPrefs()->GetBoolean(prefs::kSigninAllowed));
  
-@@ -453,6 +454,7 @@ void ShowBrowserSignin(Browser* browser,
+@@ -532,6 +533,7 @@ void ShowBrowserSignin(Browser* browser,
            : profiles::BUBBLE_VIEW_MODE_GAIA_SIGNIN;
    browser->signin_view_controller()->ShowSignin(bubble_view_mode, browser,
                                                  access_point);
@@ -35,7 +35,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
  void ShowBrowserSigninOrSettings(Browser* browser,
 --- a/chrome/browser/ui/BUILD.gn
 +++ b/chrome/browser/ui/BUILD.gn
-@@ -1940,9 +1940,6 @@ jumbo_split_static_library("ui") {
+@@ -2024,9 +2024,6 @@ jumbo_split_static_library("ui") {
        "startup/default_browser_infobar_delegate.h",
        "startup/default_browser_prompt.cc",
        "startup/default_browser_prompt.h",
@@ -45,18 +45,18 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
        "user_manager.cc",
        "user_manager.h",
        "views/external_protocol_dialog.cc",
-@@ -3178,8 +3175,6 @@ jumbo_split_static_library("ui") {
+@@ -3331,8 +3328,6 @@ jumbo_split_static_library("ui") {
          "views/sync/dice_bubble_sync_promo_view.h",
          "views/sync/dice_signin_button_view.cc",
          "views/sync/dice_signin_button_view.h",
 -        "views/sync/one_click_signin_dialog_view.cc",
 -        "views/sync/one_click_signin_dialog_view.h",
-         "views/tabs/window_finder.cc",
        ]
        deps += [ "//ui/views/window/vector_icons" ]
+     }
 --- a/chrome/browser/ui/webui/signin/inline_login_handler_impl.cc
 +++ b/chrome/browser/ui/webui/signin/inline_login_handler_impl.cc
-@@ -405,6 +405,7 @@ void InlineSigninHelper::OnClientOAuthSu
+@@ -404,6 +404,7 @@ void InlineSigninHelper::OnClientOAuthSu
      signin_metrics::LogSigninReason(
          GetSigninReasonFromHandlerSigninReason(reason));
    } else {
@@ -64,7 +64,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
      if (confirm_untrusted_signin_) {
        // Display a confirmation dialog to the user.
        base::RecordAction(
-@@ -416,6 +417,7 @@ void InlineSigninHelper::OnClientOAuthSu
+@@ -415,6 +416,7 @@ void InlineSigninHelper::OnClientOAuthSu
                           base::Unretained(this), result.refresh_token));
        return;
      }

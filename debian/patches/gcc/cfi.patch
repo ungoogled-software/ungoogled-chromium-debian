@@ -1,0 +1,52 @@
+description: gcc does not yet support cfi attributes
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/mojo/core/watcher_dispatcher.cc
++++ b/mojo/core/watcher_dispatcher.cc
+@@ -61,7 +61,6 @@ void WatcherDispatcher::NotifyHandleClos
+ 
+ // handler_ may be address-taken in a different DSO, and hence incompatible with
+ // CFI-icall.
+-NO_SANITIZE("cfi-icall")
+ void WatcherDispatcher::InvokeWatchCallback(uintptr_t context,
+                                             MojoResult result,
+                                             const HandleSignalsState& state,
+--- a/base/threading/sequence_bound.h
++++ b/base/threading/sequence_bound.h
+@@ -129,7 +129,6 @@ class SequenceBound {
+   // constructed, except by posting such a access to |impl_task_runner_| after
+   // posting construction there as well.
+   template <typename... Args>
+-  NO_SANITIZE("cfi-unrelated-cast")
+   SequenceBound(scoped_refptr<base::SequencedTaskRunner> task_runner,
+                 Args&&... args)
+       : impl_task_runner_(std::move(task_runner)) {
+@@ -268,7 +267,7 @@ class SequenceBound {
+   // non-virtual base classes are allowed before construction by the standard.
+   // See http://eel.is/c++draft/basic.life#6 for more information.
+   template <typename From>
+-  void NO_SANITIZE("cfi-unrelated-cast") MoveRecordFrom(From&& other) {
++  void MoveRecordFrom(From&& other) {
+     // |other| might be is_null(), but that's okay.
+     impl_task_runner_ = std::move(other.impl_task_runner_);
+ 
+--- a/ui/accessibility/platform/atk_util_auralinux.cc
++++ b/ui/accessibility/platform/atk_util_auralinux.cc
+@@ -164,7 +164,6 @@ void AtkUtilAuraLinux::InitializeForTest
+ 
+ // static
+ // Disable CFI-icall since the key snooping function could be in another DSO.
+-__attribute__((no_sanitize("cfi-icall")))
+ DiscardAtkKeyEvent AtkUtilAuraLinux::HandleAtkKeyEvent(
+     AtkKeyEventStruct* key_event) {
+   DCHECK(key_event);
+--- a/base/memory/protected_memory_cfi.h
++++ b/base/memory/protected_memory_cfi.h
+@@ -38,7 +38,6 @@ class UnsanitizedCfiCall {
+   UnsanitizedCfiCall(UnsanitizedCfiCall&&) = default;
+ 
+   template <typename... Args>
+-  NO_SANITIZE("cfi-icall")
+   auto operator()(Args&&... args) {
+     return function_(std::forward<Args>(args)...);
+   }
