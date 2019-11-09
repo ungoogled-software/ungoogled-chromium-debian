@@ -1,3 +1,95 @@
+chromium (78.0.3904.87-1) unstable; urgency=medium
+
+  * New upstream stable release.
+    - CVE-2019-5869: Use-after-free in Blink. Reported by Zhe Jin
+    - CVE-2019-5870: Use-after-free in media. Reported by Guang Gong
+    - CVE-2019-5871: Heap overflow in Skia. Reported by Anonymous
+    - CVE-2019-5872: Use-after-free in Mojo. Reported by Zhe Jin
+    - CVE-2019-5874: External URIs may trigger other browsers. Reported by
+      James Lee
+    - CVE-2019-5875: URL bar spoof. Reported by Khalil
+      Zhani
+    - CVE-2019-5876: Use-after-free in media. Reported by Man Yue Mo
+    - CVE-2019-5877: Out-of-bounds access in V8. Reported by Guang Gong
+    - CVE-2019-5878: Use-after-free in V8. Reported by Guang Gong
+    - CVE-2019-5879: Extensions can read some local files. Reported by Jinseo
+      Kim
+    - CVE-2019-5880: SameSite cookie bypass. Reported by Jun Kokatsu
+    - CVE-2019-13659: URL spoof. Reported by Lnyas Zhang
+    - CVE-2019-13660: Full screen notification overlap. Reported by Wenxu Wu
+    - CVE-2019-13661: Full screen notification spoof. Reported by Wenxu Wu
+    - CVE-2019-13662: CSP bypass. Reported by David Erceg
+    - CVE-2019-13663: IDN spoof. Reported by Lnyas Zhang
+    - CVE-2019-13664: CSRF bypass. Reported by thomas "zemnmez" shadwell
+    - CVE-2019-13665: Multiple file download protection bypass. Reported by
+      Jun Kokatsu
+    - CVE-2019-13666: Side channel using storage size estimate. Reported by
+      Tom Van Goethem
+    - CVE-2019-13667: URI bar spoof when using external app URIs. Reported by
+      Khalil Zhani
+    - CVE-2019-13668: Global window leak via console. Reported by David Erceg
+    - CVE-2019-13669: HTTP authentication spoof. Reported by Khalil Zhani
+    - CVE-2019-13670: V8 memory corruption in regex. Reported by Guang Gong
+    - CVE-2019-13671: Dialog box fails to show origin. Reported by xisigr
+    - CVE-2019-13673: Cross-origin information leak using devtools. Reported
+      by David Erceg
+    - CVE-2019-13674: IDN spoofing. Reported by Khalil Zhani
+    - CVE-2019-13675: Extensions can be disabled by trailing slash. Reported
+      by Jun Kokatsu
+    - CVE-2019-13676: Google URI shown for certificate warning. Reported by
+      Wenxu Wu
+    - CVE-2019-13677: Chrome web store origin needs to be isolated. Reported
+      by Jun Kokatsu
+    - CVE-2019-13678: Download dialog spoofing. Reported by Ronni Skansing
+    - CVE-2019-13679: User gesture needed for printing. Reported by Conrad
+      Irwin
+    - CVE-2019-13680: IP address spoofing to servers. Reported by Thijs
+      Alkemade
+    - CVE-2019-13681: Bypass on download restrictions. Reported by David Erceg
+    - CVE-2019-13682: Site isolation bypass. Reported by Jun Kokatsu
+    - CVE-2019-13683: Exceptions leaked by devtools. Reported by David Erceg
+    - CVE-2019-13685: Use-after-free in UI. Reported by Khalil Zhani
+    - CVE-2019-13686: Use-after-free in offline pages. Reported by Brendon
+    - CVE-2019-13687: Use-after-free in media. Reported by Man Yue Mo
+    - CVE-2019-13688: Use-after-free in media. Reported by Man Yue Mo
+      Tiszka
+    - CVE-2019-13691: Omnibox spoof. Reported by David Erceg
+    - CVE-2019-13692: SOP bypass. Reported by Jun Kokatsu
+    - CVE-2019-13693: Use-after-free in IndexedDB. Reported by Guang Gong
+    - CVE-2019-13694: Use-after-free in WebRTC. Reported by banananapenguin
+    - CVE-2019-13695: Use-after-free in audio. Reported by Man Yue Mo
+    - CVE-2019-13696: Use-after-free in V8. Reported by Guang Gong
+    - CVE-2019-13697: Cross-origin size leak. Reported by Luan Herrera
+    - CVE-2019-13699: Use-after-free in media. Reported by Man Yue Mo
+    - CVE-2019-13700: Buffer overrun in Blink. Reported by Man Yue Mo
+    - CVE-2019-13701: URL spoof in navigation. Reported by David Erceg
+    - CVE-2019-13702: Privilege elevation in Installer. Reported by Phillip
+      Langlois and Edward Torkington
+    - CVE-2019-13703: URL bar spoofing. Reported by Khalil Zhani
+    - CVE-2019-13704: CSP bypass. Reported by Jun Kokatsu
+    - CVE-2019-13705: Extension permission bypass. Reported by Luan Herrera
+    - CVE-2019-13706: Out-of-bounds read in PDFium. Reported by pdknsk
+    - CVE-2019-13707: File storage disclosure. Reported by Andrea Palazzo
+    - CVE-2019-13708: HTTP authentication spoof. Reported by Khalil Zhani
+    - CVE-2019-13709: File download protection bypass. Reported by Zhong
+      Zhaochen
+    - CVE-2019-13710: File download protection bypass. Reported by
+      bernardo.mrod
+    - CVE-2019-13711: Cross-context information leak. Reported by David Erceg
+    - CVE-2019-13713: Cross-origin data leak. Reported by David Erceg
+    - CVE-2019-13714: CSS injection. Reported by Jun Kokatsu
+    - CVE-2019-13715: Address bar spoofing. Reported by xisigr
+    - CVE-2019-13716: Service worker state error. Reported by Barron Hagerman
+    - CVE-2019-13717: Notification obscured. Reported by xisigr
+    - CVE-2019-13718: IDN spoof. Reported by Khalil Zhani
+    - CVE-2019-13719: Notification obscured. Reported by Khalil Zhani
+    - CVE-2019-13720: Use-after-free in audio. Reported by Anton Ivanov and
+      Alexey Kulaev
+    - CVE-2019-13721: Use-after-free in PDFium. Reported by banananapenguin
+  * Drop support for building with gcc 6 and gtk 2.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 02 Nov 2019 22:30:42 +0000
+
 chromium (76.0.3809.100-1) unstable; urgency=medium
 
   * New upstream security release.
@@ -101,8 +193,6 @@ chromium (75.0.3770.80-1) unstable; urgency=medium
     - CVE-2019-5833: Inconsistent security UI placement. Reported by Khalil
       Zhani
     - CVE-2019-5834: URL spoof in Omnibox on iOS. Reported by Khalil Zhani
-    - CVE-2019-5835: Out of bounds read in Swiftshader. Reported by Wenxiang
-      Qian
     - CVE-2019-5836: Heap buffer overflow in Angle. Reported by Omair
     - CVE-2019-5837: Cross-origin resources size disclosure in Appcache.
       Reported by Adam Iwaniuk
