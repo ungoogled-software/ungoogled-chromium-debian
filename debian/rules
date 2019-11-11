@@ -93,12 +93,9 @@ defines+=is_debug=false \
          use_custom_libcxx=false \
          use_gnome_keyring=false \
          use_unofficial_version_number=false \
-         enable_iterator_debugging=false \
          enable_vr=false \
          enable_swiftshader=false \
          optimize_webui=false \
-         closure_compile=false \
-         treat_warnings_as_errors=false \
          linux_use_bundled_binutils=false \
 
 # enabled features

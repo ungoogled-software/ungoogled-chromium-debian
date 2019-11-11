@@ -48,14 +48,14 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
 +  // Nvidia doesn't support VAProfileNone, so don't try to create a temporary
 +  // copy buffer there. It's not needed anyways for hardware video decoding
 +  // to work.
-+  
++
 +  #if defined(OS_ANDROID) || defined(OS_CHROMEOS)
 +
 +
    // If we aren't in BufferAllocationMode::kNone, we have to allocate a
    // |vpp_vaapi_wrapper_| for VaapiPicture to DownloadFromSurface() the VA's
    // internal decoded frame.
-@@ -649,6 +661,7 @@ void VaapiVideoDecodeAccelerator::Assign
+@@ -648,6 +660,7 @@ void VaapiVideoDecodeAccelerator::Assign
        NotifyError(PLATFORM_FAILURE);
      }
    }
@@ -63,7 +63,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
  
    for (size_t i = 0; i < buffers.size(); ++i) {
      // If we aren't in BufferAllocationMode::kNone, this |picture| is
-@@ -660,10 +673,14 @@ void VaapiVideoDecodeAccelerator::Assign
+@@ -659,9 +672,13 @@ void VaapiVideoDecodeAccelerator::Assign
      PictureBuffer buffer = buffers[i];
      buffer.set_size(requested_pic_size_);
      std::unique_ptr<VaapiPicture> picture = vaapi_picture_factory_->Create(
