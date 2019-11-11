@@ -118,8 +118,6 @@ endif
 flotpaths=/usr/share/javascript/jquery/*min.js \
           /usr/share/javascript/jquery-flot/*min.js \
 
-domsubcache=debian/domsubcache.tar.gz
-
 %:
 	dh $@
 
@@ -137,7 +135,7 @@ override_dh_auto_configure:
 	# clean polymer files manually (debian/clean doesn't work on directories)
 	rm -rf third_party/catapult/third_party/polymer/components || true
 	# apply domain substitution
-	if [ ! -e $(domsubcache) ]; then python3 -B $(ungoogled_chromium_files)/utils/domain_substitution.py apply -r $(ungoogled_chromium_files)/domain_regex.list -f $(ungoogled_chromium_files)/domain_substitution.list -c $(domsubcache) ./; fi
+	./debian/scripts/apply_domainsubstitution
 	# use system flot
 	for file in $(flotpaths); do ln -sf $$file third_party/flot; done
 	# use polymer from chromium's top level third_party directory
@@ -153,7 +151,7 @@ override_dh_auto_build-indep: out/Release/gn
 
 override_dh_prep:
 	# building is done by this step; remove domain substitution
-	if [ -e $(domsubcache) ]; then python3 -B $(ungoogled_chromium_files)/utils/domain_substitution.py revert -c $(domsubcache) ./; fi
+	./debian/scripts/revert_domainsubstitution
 	dh_prep
 
 override_dh_auto_install-arch:

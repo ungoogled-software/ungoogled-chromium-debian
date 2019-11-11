@@ -186,6 +186,19 @@ quilt pop -a
 # Use git to add changes and commit
 ```
 
+### Fixing patches when ninja aborts
+
+```sh
+# Make sure you are in the build sandbox
+cd build/src
+./debian/scripts/revert_domainsubstitution
+# Debian already applied patches via quilt. Use quilt to modify patches
+# Once you are done, copy the patches from build/src/debian/patches
+# to this repo's debian/patches
+./debian/scripts/apply_domainsubstitution
+dpkg-buildpackage -b -uc -nc
+```
+
 ### Adding a new branch
 
 To add either a primary or secondary branch:
