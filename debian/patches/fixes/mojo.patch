@@ -33,7 +33,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "//device/bluetooth",
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -1030,8 +1030,6 @@ if (!is_ios) {
+@@ -1029,8 +1029,6 @@ if (!is_ios) {
        ":layout_test_data_mojo_bindings",
        ":layout_test_data_mojo_bindings_lite",
        "//content/shell:content_shell",

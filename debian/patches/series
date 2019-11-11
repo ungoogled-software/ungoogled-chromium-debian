@@ -10,8 +10,6 @@ fixes/link.patch
 fixes/mojo.patch
 fixes/brace.patch
 fixes/crash.patch
-fixes/vaapi.patch
-fixes/closure.patch
 fixes/as-needed.patch
 fixes/inspector.patch
 fixes/gpu-timeout.patch
@@ -60,5 +58,4 @@ inox-patchset/fix-cfi-failures-with-unbundled-libxml.patch
 
 fedora/vaapi-fix.patch
 
-ungoogled-chromium/remove-fcomplete-member-pointers-cflag.patch
 ungoogled-chromium/manpage.patch
