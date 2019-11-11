@@ -1,0 +1,14 @@
+description: https://gcc.gnu.org/bugzilla//show_bug.cgi?id=85783
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/third_party/skia/include/private/SkMalloc.h
++++ b/third_party/skia/include/private/SkMalloc.h
+@@ -118,7 +118,7 @@ static inline void sk_bzero(void* buffer
+ static inline void* sk_careful_memcpy(void* dst, const void* src, size_t len) {
+     // When we pass >0 len we had better already be passing valid pointers.
+     // So we just need to skip calling memcpy when len == 0.
+-    if (len) {
++    if (len && len <= PTRDIFF_MAX) {
+         memcpy(dst,src,len);
+     }
+     return dst;

@@ -35,12 +35,21 @@ export CXXFLAGS+=-Wno-pedantic \
 # ignore warnings for minor mistakes that are too common
 export CXXFLAGS+=-Wno-return-type \
                  -Wno-parentheses \
-
-# ignore warnings that are not supported well until gcc 8
-export CXXFLAGS+=-Wno-attributes \
+                 -Wno-dangling-else \
+                 -Wno-misleading-indentation \
 
 # ignore warnings due to gcc bug (https://gcc.gnu.org/bugzilla/show_bug.cgi?id=84055)
 export CXXFLAGS+=-Wno-ignored-attributes
+
+# ignore pragmas intended for clang
+export CXXFLAGS+=-Wno-unknown-pragmas
+
+# ingore new gcc 8 warnings that aren't yet handled upstream
+export CXXFLAGS+=-Wno-address \
+                 -Wno-array-bounds \
+                 -Wno-class-memaccess \
+                 -Wno-invalid-offsetof \
+                 -Wno-subobject-linkage \
 
 # do not optimize away null pointer safety checks
 export CXXFLAGS+=-fno-delete-null-pointer-checks
@@ -84,10 +93,13 @@ defines+=is_debug=false \
          enable_vr=false \
          enable_swiftshader=false \
          optimize_webui=false \
+         closure_compile=false \
+         treat_warnings_as_errors=false \
          linux_use_bundled_binutils=false \
 
 # enabled features
 defines+=use_gio=true \
+         use_vaapi=true \
          use_pulseaudio=true \
          link_pulseaudio=true \
          enable_widevine=true \

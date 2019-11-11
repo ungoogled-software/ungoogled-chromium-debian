@@ -1,94 +1,58 @@
-# CHANGES MADE for ungoogled-chromium:
-# - exposed all *-webrtc-hw-* feature flags for Linux
-description: build with hardware accelerated (vaapi) video support
-author: Akarshan Biswas <akarshan.biswas@gmail.com>
-origin: https://src.fedoraproject.org/rpms/chromium/raw/master/f/enable-vaapi.patch
+description: fix vaapi with vdpau
+author: Maxim Baz
+origin: chromium-vaapi patches from Arch linux
 
---- a/chrome/browser/about_flags.cc
-+++ b/chrome/browser/about_flags.cc
-@@ -1187,10 +1187,10 @@ const FeatureEntry kFeatureEntries[] = {
-      flag_descriptions::kUiPartialSwapDescription, kOsAll,
-      SINGLE_DISABLE_VALUE_TYPE(switches::kUIDisablePartialSwap)},
-     {"disable-webrtc-hw-decoding", flag_descriptions::kWebrtcHwDecodingName,
--     flag_descriptions::kWebrtcHwDecodingDescription, kOsAndroid | kOsCrOS,
-+     flag_descriptions::kWebrtcHwDecodingDescription, kOsAndroid | kOsCrOS | kOsLinux,
-      SINGLE_DISABLE_VALUE_TYPE(switches::kDisableWebRtcHWDecoding)},
-     {"disable-webrtc-hw-encoding", flag_descriptions::kWebrtcHwEncodingName,
--     flag_descriptions::kWebrtcHwEncodingDescription, kOsAndroid | kOsCrOS,
-+     flag_descriptions::kWebrtcHwEncodingDescription, kOsAndroid | kOsCrOS | kOsLinux,
-      SINGLE_DISABLE_VALUE_TYPE(switches::kDisableWebRtcHWEncoding)},
- #if !defined(OS_ANDROID)
-     {"enable-reader-mode", flag_descriptions::kEnableReaderModeName,
-@@ -1199,11 +1199,11 @@ const FeatureEntry kFeatureEntries[] = {
- #endif  // !defined(OS_ANDROID)
-     {"enable-webrtc-hw-h264-encoding",
-      flag_descriptions::kWebrtcHwH264EncodingName,
--     flag_descriptions::kWebrtcHwH264EncodingDescription, kOsAndroid | kOsCrOS,
-+     flag_descriptions::kWebrtcHwH264EncodingDescription, kOsAndroid | kOsCrOS | kOsLinux,
-      FEATURE_VALUE_TYPE(features::kWebRtcHWH264Encoding)},
-     {"enable-webrtc-hw-vp8-encoding",
-      flag_descriptions::kWebrtcHwVP8EncodingName,
--     flag_descriptions::kWebrtcHwVP8EncodingDescription, kOsAndroid | kOsCrOS,
-+     flag_descriptions::kWebrtcHwVP8EncodingDescription, kOsAndroid | kOsCrOS | kOsLinux,
-      FEATURE_VALUE_TYPE(features::kWebRtcHWVP8Encoding)},
- #if defined(WEBRTC_USE_PIPEWIRE)
-     {"enable-webrtc-pipewire-capturer",
-@@ -1517,7 +1517,7 @@ const FeatureEntry kFeatureEntries[] = {
-         "disable-accelerated-video-decode",
-         flag_descriptions::kAcceleratedVideoDecodeName,
-         flag_descriptions::kAcceleratedVideoDecodeDescription,
--        kOsMac | kOsWin | kOsCrOS | kOsAndroid,
-+        kOsMac | kOsWin | kOsCrOS | kOsAndroid | kOsLinux,
-         SINGLE_DISABLE_VALUE_TYPE(switches::kDisableAcceleratedVideoDecode),
-     },
-     {"enable-history-favicons-google-server-query",
-@@ -1953,7 +1953,7 @@ const FeatureEntry kFeatureEntries[] = {
- #if defined(OS_CHROMEOS)
-     {"disable-accelerated-mjpeg-decode",
-      flag_descriptions::kAcceleratedMjpegDecodeName,
--     flag_descriptions::kAcceleratedMjpegDecodeDescription, kOsCrOS,
-+     flag_descriptions::kAcceleratedMjpegDecodeDescription, kOsCrOS | kOsLinux,
-      SINGLE_DISABLE_VALUE_TYPE(switches::kDisableAcceleratedMjpegDecode)},
- #endif  // OS_CHROMEOS
-     {"system-keyboard-lock", flag_descriptions::kSystemKeyboardLockName,
---- a/chrome/browser/flag_descriptions.cc
-+++ b/chrome/browser/flag_descriptions.cc
-@@ -2770,15 +2770,20 @@ const char kMacSystemMediaPermissionsInf
+--- a/media/gpu/vaapi/vaapi_video_decode_accelerator.cc
++++ b/media/gpu/vaapi/vaapi_video_decode_accelerator.cc
+@@ -639,6 +639,7 @@ void VaapiVideoDecodeAccelerator::Assign
+   // |vpp_vaapi_wrapper_| for VaapiPicture to DownloadFromSurface() the VA's
+   // internal decoded frame.
+   if (buffer_allocation_mode_ != BufferAllocationMode::kNone &&
++      buffer_allocation_mode_ != BufferAllocationMode::kWrapVdpau &&
+       !vpp_vaapi_wrapper_) {
+     vpp_vaapi_wrapper_ = VaapiWrapper::Create(
+         VaapiWrapper::kVideoProcess, VAProfileNone,
+@@ -659,7 +660,8 @@ void VaapiVideoDecodeAccelerator::Assign
+     PictureBuffer buffer = buffers[i];
+     buffer.set_size(requested_pic_size_);
+     std::unique_ptr<VaapiPicture> picture = vaapi_picture_factory_->Create(
+-        (buffer_allocation_mode_ == BufferAllocationMode::kNone)
++        ((buffer_allocation_mode_ == BufferAllocationMode::kNone) ||
++         (buffer_allocation_mode_ == BufferAllocationMode::kWrapVdpau))
+             ? vaapi_wrapper_
+             : vpp_vaapi_wrapper_,
+         make_context_current_cb_, bind_image_cb_, buffer);
+@@ -1086,6 +1088,14 @@ VaapiVideoDecodeAccelerator::GetSupporte
  
- #endif
- 
--// Chrome OS -------------------------------------------------------------------
-+// Chrome OS Linux-------------------------------------------------------------------
- 
--#if defined(OS_CHROMEOS)
-+#if defined(OS_CHROMEOS) || (defined(OS_LINUX) && !defined(OS_ANDROID))
- 
- const char kAcceleratedMjpegDecodeName[] =
-     "Hardware-accelerated mjpeg decode for captured frame";
- const char kAcceleratedMjpegDecodeDescription[] =
-     "Enable hardware-accelerated mjpeg decode for captured frame where "
-     "available.";
-+#endif
+ VaapiVideoDecodeAccelerator::BufferAllocationMode
+ VaapiVideoDecodeAccelerator::DecideBufferAllocationMode() {
++  // NVIDIA blobs use VDPAU
++  if (base::StartsWith(VaapiWrapper::GetVendorStringForTesting(),
++              "Splitted-Desktop Systems VDPAU",
++              base::CompareCase::SENSITIVE)) {
++    LOG(INFO) << "VA-API driver on VDPAU backend";
++    return BufferAllocationMode::kWrapVdpau;
++  }
 +
-+// Chrome OS --------------------------------------------------
-+
-+#if defined(OS_CHROMEOS)
+   // TODO(crbug.com/912295): Enable a better BufferAllocationMode for IMPORT
+   // |output_mode_| as well.
+   if (output_mode_ == VideoDecodeAccelerator::Config::OutputMode::IMPORT)
+@@ -1098,7 +1108,7 @@ VaapiVideoDecodeAccelerator::DecideBuffe
+   // depends on the bitstream and sometimes it's not enough to cover the amount
+   // of frames needed by the client pipeline (see b/133733739).
+   // TODO(crbug.com/911754): Enable for VP9 Profile 2.
+-  if (IsGeminiLakeOrLater() &&
++  if (false && IsGeminiLakeOrLater() &&
+       (profile_ == VP9PROFILE_PROFILE0 || profile_ == VP8PROFILE_ANY)) {
+     // Add one to the reference frames for the one being currently egressed, and
+     // an extra allocation for both |client_| and |decoder_|, see
+--- a/media/gpu/vaapi/vaapi_video_decode_accelerator.h
++++ b/media/gpu/vaapi/vaapi_video_decode_accelerator.h
+@@ -204,6 +204,7 @@ class MEDIA_GPU_EXPORT VaapiVideoDecodeA
+     // Using |client_|s provided PictureBuffers and as many internally
+     // allocated.
+     kNormal,
++    kWrapVdpau,
+   };
  
- const char kAppServiceAshName[] = "App Service Ash";
- const char kAppServiceAshDescription[] =
---- a/gpu/config/software_rendering_list.json
-+++ b/gpu/config/software_rendering_list.json
-@@ -370,11 +370,12 @@
-     },
-     {
-       "id": 48,
--      "description": "Accelerated video decode is unavailable on Linux",
-+      "description": "Accelerated VA-API video decode is not supported on NVIDIA platforms",
-       "cr_bugs": [137247],
-       "os": {
-         "type": "linux"
-       },
-+      "vendor_id": "0x10de",
-       "features": [
-         "accelerated_video_decode"
-       ]
+   // Decides the concrete buffer allocation mode, depending on the hardware

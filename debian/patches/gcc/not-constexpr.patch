@@ -1,0 +1,36 @@
+description: remove constexpr from methods where gcc does not support it
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/base/trace_event/category_registry.h
++++ b/base/trace_event/category_registry.h
+@@ -68,7 +68,7 @@ class BASE_EXPORT CategoryRegistry {
+   // Returns a built-in category from its name or nullptr if not found at
+   // compile-time. The return value is an undefinitely lived pointer to the
+   // TraceCategory owned by the registry.
+-  static constexpr TraceCategory* GetBuiltinCategoryByName(
++  static TraceCategory* GetBuiltinCategoryByName(
+       const char* category_group) {
+ #if defined(OS_WIN) && defined(COMPONENT_BUILD)
+     // The address cannot be evaluated at compile-time in Windows compoment
+--- a/base/trace_event/trace_event.h
++++ b/base/trace_event/trace_event.h
+@@ -242,7 +242,7 @@
+       base::trace_event::BuiltinCategories::IsAllowedCategory(category_group), \
+       "Unknown tracing category is used. Please register your "                \
+       "category in base/trace_event/builtin_categories.h");                    \
+-  constexpr const unsigned char* INTERNAL_TRACE_EVENT_UID(                     \
++  const unsigned char* INTERNAL_TRACE_EVENT_UID(                     \
+       k_category_group_enabled) =                                              \
+       base::trace_event::TraceLog::GetBuiltinCategoryEnabled(category_group);  \
+   const unsigned char* INTERNAL_TRACE_EVENT_UID(category_group_enabled);       \
+--- a/base/trace_event/trace_log.h
++++ b/base/trace_event/trace_log.h
+@@ -219,7 +219,7 @@ class BASE_EXPORT TraceLog : public Memo
+   static const unsigned char* GetCategoryGroupEnabled(const char* name);
+   static const char* GetCategoryGroupName(
+       const unsigned char* category_group_enabled);
+-  static constexpr const unsigned char* GetBuiltinCategoryEnabled(
++  static const unsigned char* GetBuiltinCategoryEnabled(
+       const char* name) {
+     TraceCategory* builtin_category =
+         CategoryRegistry::GetBuiltinCategoryByName(name);
