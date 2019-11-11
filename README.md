@@ -180,6 +180,9 @@ quilt pop -a
 # Sanity checking for consistency in series file
 ./debian/devutils/check_patch_files.sh
 
+# Remove entries from debian/copyright that are used in patches
+./debian/devutils/fix_copyright_excludes.py
+
 # Use git to add changes and commit
 ```
 
