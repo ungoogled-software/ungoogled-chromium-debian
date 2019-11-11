@@ -6,9 +6,10 @@ gn/libcxx.patch
 arm/gcc_skcms_ice.patch
 arm/pffffft-buildfix.patch
 
+gcc/not-const.patch
+
 fixes/link.patch
 fixes/mojo.patch
-fixes/brace.patch
 fixes/crash.patch
 fixes/vaapi.patch
 fixes/as-needed.patch
@@ -56,9 +57,12 @@ system/convertutf.patch
 buster/icu63.patch
 buster/vpx17.patch
 
+archlinux/zlib.patch
+
 inox-patchset/chromium-skia-harmony.patch
 inox-patchset/fix-cfi-failures-with-unbundled-libxml.patch
 
 fedora/vaapi-fix.patch
 
+ungoogled-chromium/unknown-clang-warning-flags.patch
 ungoogled-chromium/manpage.patch
