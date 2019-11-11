@@ -6,6 +6,8 @@ gn/libcxx.patch
 arm/gcc_skcms_ice.patch
 arm/pffffft-buildfix.patch
 
+gcc/not-const.patch
+
 fixes/link.patch
 fixes/mojo.patch
 fixes/brace.patch
