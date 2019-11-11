@@ -51,6 +51,10 @@ export CXXFLAGS+=-Wno-address \
                  -Wno-invalid-offsetof \
                  -Wno-subobject-linkage \
 
+# do not warn about unknown warning options
+export CXXFLAGS+=-Wno-unknown-warning-option
+export CFLAGS+=-Wno-unknown-warning-option
+
 # do not optimize away null pointer safety checks
 export CXXFLAGS+=-fno-delete-null-pointer-checks
 
