@@ -165,6 +165,7 @@ Files-Excluded:
  third_party/catapult/experimental/trace_on_tap/third_party/pako/pako_deflate.min.js
  third_party/catapult/third_party/gsutil
  third_party/catapult/third_party/Paste/paste/evalexception/media/MochiKit.packed.js
+ third_party/catapult/telemetry/telemetry/internal/testing/perf_report_output.txt
  third_party/webrtc/sdk
  third_party/webrtc/data
  third_party/webrtc/examples
