@@ -10,7 +10,6 @@ gcc/not-const.patch
 
 fixes/link.patch
 fixes/mojo.patch
-fixes/brace.patch
 fixes/crash.patch
 fixes/as-needed.patch
 fixes/inspector.patch
