@@ -31,6 +31,7 @@ fixes/widevine-locations.patch
 disable/tracing.patch
 disable/openh264.patch
 disable/chromeos.patch
+disable/perfetto.patch
 disable/installer.patch
 disable/font-tests.patch
 disable/swiftshader.patch

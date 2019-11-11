@@ -1,0 +1,343 @@
+description: disable dependencies on third_party/perfetto
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/BUILD.gn
++++ b/BUILD.gn
+@@ -685,7 +685,7 @@ group("gn_all") {
+     }
+   }
+ 
+-  if (is_mac || is_linux || is_android || is_fuchsia) {
++  if (false) {
+     deps += [ "//third_party/perfetto:all" ]
+   }
+ 
+--- a/components/ui_devtools/BUILD.gn
++++ b/components/ui_devtools/BUILD.gn
+@@ -73,7 +73,6 @@ component("ui_devtools") {
+   sources += [
+     "agent_util.cc",
+     "agent_util.h",
+-    "connector_delegate.h",
+     "css_agent.cc",
+     "css_agent.h",
+     "devtools_base_agent.h",
+@@ -92,8 +91,6 @@ component("ui_devtools") {
+     "root_element.h",
+     "switches.cc",
+     "switches.h",
+-    "tracing_agent.cc",
+-    "tracing_agent.h",
+     "ui_element.cc",
+     "ui_element.h",
+     "ui_element_delegate.h",
+@@ -121,7 +118,6 @@ component("ui_devtools") {
+     "//services/network/public/cpp",
+     "//services/network/public/mojom",
+     "//services/service_manager/public/cpp",
+-    "//third_party/perfetto/gn:default_deps",
+   ]
+ }
+ 
+--- a/content/browser/tracing/background_tracing_active_scenario.cc
++++ b/content/browser/tracing/background_tracing_active_scenario.cc
+@@ -20,10 +20,6 @@
+ #include "mojo/public/cpp/bindings/binding.h"
+ #include "mojo/public/cpp/system/data_pipe_drainer.h"
+ #include "services/service_manager/public/cpp/connector.h"
+-#include "services/tracing/public/cpp/perfetto/perfetto_config.h"
+-#include "services/tracing/public/cpp/perfetto/trace_event_data_source.h"
+-#include "services/tracing/public/cpp/tracing_features.h"
+-#include "services/tracing/public/mojom/constants.mojom.h"
+ 
+ using base::trace_event::TraceConfig;
+ using Metrics = content::BackgroundTracingManagerImpl::Metrics;
+@@ -68,6 +64,7 @@ class BackgroundTracingActiveScenario::T
+       const base::RepeatingClosure& on_abort_callback) = 0;
+ };
+ 
++#if 0
+ class PerfettoTracingSession
+     : public BackgroundTracingActiveScenario::TracingSession,
+       public tracing::mojom::TracingSessionClient,
+@@ -186,6 +183,7 @@ class PerfettoTracingSession
+   bool has_finished_read_buffers_ = false;
+   bool has_finished_receiving_data_ = false;
+ };
++#endif
+ 
+ class LegacyTracingSession
+     : public BackgroundTracingActiveScenario::TracingSession {
+@@ -360,8 +358,6 @@ bool BackgroundTracingActiveScenario::St
+ 
+   DCHECK(!tracing_session_);
+   if (base::FeatureList::IsEnabled(features::kBackgroundTracingProtoOutput)) {
+-    tracing_session_ = std::make_unique<PerfettoTracingSession>(
+-        this, chrome_config, config_->interning_reset_interval_ms());
+   } else {
+     tracing_session_ =
+         std::make_unique<LegacyTracingSession>(this, chrome_config);
+--- a/content/browser/devtools/protocol/tracing_handler.cc
++++ b/content/browser/devtools/protocol/tracing_handler.cc
+@@ -289,6 +289,7 @@ class TracingHandler::LegacyTracingSessi
+   bool HasDataLossOccurred() override { return false; }
+ };
+ 
++#if 0
+ class TracingHandler::PerfettoTracingSession
+     : public TracingHandler::TracingSession,
+       public tracing::mojom::TracingSessionClient,
+@@ -555,6 +556,7 @@ class TracingHandler::PerfettoTracingSes
+   base::trace_event::TraceConfig last_config_for_perfetto_;
+ #endif
+ };
++#endif
+ 
+ TracingHandler::TracingHandler(FrameTreeNode* frame_tree_node_,
+                                DevToolsIOContext* io_context)
+@@ -587,8 +589,6 @@ TracingHandler::TracingHandler(FrameTree
+   }
+ 
+   DCHECK(tracing::TracingUsesPerfettoBackend());
+-  session_ = std::make_unique<PerfettoTracingSession>();
+-  session_->AdoptStartupTracingSession();
+   g_any_agent_tracing = true;
+ }
+ 
+@@ -614,8 +614,6 @@ void TracingHandler::Wire(UberDispatcher
+ }
+ 
+ Response TracingHandler::Disable() {
+-  if (session_)
+-    StopTracing(nullptr, "");
+   return Response::OK();
+ }
+ 
+@@ -653,8 +651,6 @@ void TracingHandler::OnTraceComplete() {
+   DCHECK(!trace_data_buffer_state_.in_string);
+   DCHECK(!trace_data_buffer_state_.slashed);
+ 
+-  bool data_loss = session_->HasDataLossOccurred();
+-  session_.reset();
+   frontend_->TracingComplete(data_loss);
+ }
+ 
+@@ -717,8 +713,6 @@ std::string TracingHandler::UpdateTraceD
+ }
+ 
+ void TracingHandler::OnTraceToStreamComplete(const std::string& stream_handle) {
+-  bool data_loss = session_->HasDataLossOccurred();
+-  session_.reset();
+   std::string stream_format = (proto_format_ ? Tracing::StreamFormatEnum::Proto
+                                              : Tracing::StreamFormatEnum::Json);
+   std::string stream_compression =
+@@ -821,15 +815,6 @@ void TracingHandler::StartTracingWithGpu
+ 
+   SetupProcessFilter(gpu_pid, nullptr);
+ 
+-  if (tracing::TracingUsesPerfettoBackend()) {
+-    session_ = std::make_unique<PerfettoTracingSession>();
+-  } else {
+-    session_ = std::make_unique<LegacyTracingSession>();
+-  }
+-  session_->EnableTracing(
+-      trace_config_,
+-      base::BindOnce(&TracingHandler::OnRecordingEnabled,
+-                     weak_factory_.GetWeakPtr(), std::move(callback)));
+   g_any_agent_tracing = true;
+ }
+ 
+@@ -880,7 +865,6 @@ void TracingHandler::OnProcessReady(Rend
+   trace_config_.SetProcessFilterConfig(
+       base::trace_event::TraceConfig::ProcessFilterConfig(
+           included_process_ids));
+-  session_->ChangeTraceConfig(trace_config_);
+ }
+ 
+ Response TracingHandler::End() {
+@@ -888,17 +872,6 @@ Response TracingHandler::End() {
+   // tracing is started automatically upon browser startup and can be stopped
+   // via DevTools.
+   // TODO(eseckler): Remove this when we remove the legacy tracing backend.
+-  if (!tracing::TracingUsesPerfettoBackend() && IsStartupTracingActive()) {
+-    DCHECK(!session_ && !did_initiate_recording_);
+-    session_ = std::make_unique<LegacyTracingSession>();
+-    session_->AdoptStartupTracingSession();
+-  }
+-
+-  if (!session_)
+-    return Response::Error("Tracing is not started");
+-
+-  if (session_->HasTracingFailed())
+-    return Response::Error("Tracing failed");
+ 
+   scoped_refptr<TracingController::TraceDataEndpoint> endpoint;
+   if (return_as_stream_) {
+@@ -1039,16 +1012,12 @@ void TracingHandler::SetupTimer(double u
+ }
+ 
+ void TracingHandler::UpdateBufferUsage() {
+-  session_->GetBufferUsage(base::BindOnce(&TracingHandler::OnBufferUsage,
+-                                          weak_factory_.GetWeakPtr()));
+ }
+ 
+ void TracingHandler::StopTracing(
+     const scoped_refptr<TracingController::TraceDataEndpoint>& endpoint,
+     const std::string& agent_label) {
+-  DCHECK(session_);
+   buffer_usage_poll_timer_.reset();
+-  session_->DisableTracing(proto_format_, agent_label, endpoint);
+   did_initiate_recording_ = false;
+   g_any_agent_tracing = false;
+   if (video_consumer_)
+@@ -1094,7 +1063,6 @@ void TracingHandler::ReadyToCommitNaviga
+ 
+   SetupProcessFilter(base::kNullProcessId,
+                      navigation_handle->GetRenderFrameHost());
+-  session_->ChangeTraceConfig(trace_config_);
+ }
+ 
+ void TracingHandler::FrameDeleted(RenderFrameHostImpl* frame_host) {
+--- a/content/browser/devtools/protocol/tracing_handler.h
++++ b/content/browser/devtools/protocol/tracing_handler.h
+@@ -85,7 +85,6 @@ class TracingHandler : public DevToolsDo
+ 
+   class TracingSession;
+   class LegacyTracingSession;
+-  class PerfettoTracingSession;
+ 
+   struct TraceDataBufferState {
+    public:
+@@ -143,7 +142,6 @@ class TracingHandler : public DevToolsDo
+   std::unique_ptr<DevToolsVideoConsumer> video_consumer_;
+   int number_of_screenshots_from_video_consumer_ = 0;
+   base::trace_event::TraceConfig trace_config_;
+-  std::unique_ptr<TracingSession> session_;
+   base::WeakPtrFactory<TracingHandler> weak_factory_{this};
+ 
+   FRIEND_TEST_ALL_PREFIXES(TracingHandlerTest,
+--- a/chrome/browser/ui/views/chrome_browser_main_extra_parts_views.cc
++++ b/chrome/browser/ui/views/chrome_browser_main_extra_parts_views.cc
+@@ -16,12 +16,10 @@
+ #include "chrome/browser/ui/views/devtools_process_observer.h"
+ #include "chrome/browser/ui/views/relaunch_notification/relaunch_notification_controller.h"
+ #include "components/constrained_window/constrained_window_views.h"
+-#include "components/ui_devtools/connector_delegate.h"
+ #include "components/ui_devtools/switches.h"
+ #include "components/ui_devtools/views/devtools_server_util.h"
+ #include "content/public/browser/system_connector.h"
+ #include "services/service_manager/sandbox/switches.h"
+-#include "services/tracing/public/mojom/constants.mojom.h"
+ #include "ui/base/material_design/material_design_controller.h"
+ 
+ #if defined(USE_AURA)
+@@ -48,20 +46,6 @@
+ #include "ui/base/l10n/l10n_util.h"
+ #endif  // defined(OS_LINUX) && !defined(OS_CHROMEOS)
+ 
+-// This connector is used in ui_devtools's TracingAgent to hook up with the
+-// tracing service.
+-class UiDevtoolsConnector : public ui_devtools::ConnectorDelegate {
+- public:
+-  UiDevtoolsConnector() {}
+-  ~UiDevtoolsConnector() override = default;
+-
+-  void BindTracingConsumerHost(
+-      mojo::PendingReceiver<tracing::mojom::ConsumerHost> receiver) override {
+-    content::GetSystemConnector()->Connect(tracing::mojom::kServiceName,
+-                                           std::move(receiver));
+-  }
+-};
+-
+ ChromeBrowserMainExtraPartsViews::ChromeBrowserMainExtraPartsViews() {}
+ 
+ ChromeBrowserMainExtraPartsViews::~ChromeBrowserMainExtraPartsViews() {
+@@ -101,10 +85,8 @@ void ChromeBrowserMainExtraPartsViews::P
+   if (ui_devtools::UiDevToolsServer::IsUiDevToolsEnabled(
+           ui_devtools::switches::kEnableUiDevTools)) {
+     // Starts the UI Devtools server for browser UI (and Ash UI on Chrome OS).
+-    auto connector = std::make_unique<UiDevtoolsConnector>();
+     devtools_server_ = ui_devtools::CreateUiDevToolsServerForViews(
+-        g_browser_process->system_network_context_manager()->GetContext(),
+-        std::move(connector));
++        g_browser_process->system_network_context_manager()->GetContext());
+     devtools_process_observer_ = std::make_unique<DevtoolsProcessObserver>(
+         devtools_server_->tracing_agent());
+   }
+--- a/components/ui_devtools/tracing_agent.cc
++++ b/components/ui_devtools/tracing_agent.cc
+@@ -13,7 +13,6 @@
+ #include "base/process/process.h"
+ #include "base/timer/timer.h"
+ #include "base/trace_event/traced_value.h"
+-#include "components/ui_devtools/connector_delegate.h"
+ #include "components/ui_devtools/devtools_base_agent.h"
+ #include "components/ui_devtools/devtools_protocol_encoding.h"
+ #include "mojo/public/cpp/bindings/receiver.h"
+@@ -80,6 +79,7 @@ class TracingAgent::DevToolsTraceEndpoin
+   base::WeakPtr<TracingAgent> tracing_agent_;
+ };
+ 
++#if 0
+ // Class used to communicate with the Perfetto Consumer interface.
+ class TracingAgent::PerfettoTracingSession
+     : public tracing::mojom::TracingSessionClient,
+@@ -287,6 +287,7 @@ class TracingAgent::PerfettoTracingSessi
+ 
+ TracingAgent::TracingAgent(std::unique_ptr<ConnectorDelegate> connector)
+     : connector_(std::move(connector)) {}
++#endif
+ 
+ TracingAgent::~TracingAgent() = default;
+ 
+--- a/components/ui_devtools/views/devtools_server_util.cc
++++ b/components/ui_devtools/views/devtools_server_util.cc
+@@ -11,7 +11,6 @@
+ #include "components/ui_devtools/devtools_server.h"
+ #include "components/ui_devtools/page_agent.h"
+ #include "components/ui_devtools/switches.h"
+-#include "components/ui_devtools/tracing_agent.h"
+ #include "components/ui_devtools/views/dom_agent_views.h"
+ #include "components/ui_devtools/views/overlay_agent_views.h"
+ #include "components/ui_devtools/views/page_agent_views.h"
+@@ -19,8 +18,7 @@
+ namespace ui_devtools {
+ 
+ std::unique_ptr<UiDevToolsServer> CreateUiDevToolsServerForViews(
+-    network::mojom::NetworkContext* network_context,
+-    std::unique_ptr<ConnectorDelegate> connector) {
++    network::mojom::NetworkContext* network_context) {
+   constexpr int kUiDevToolsDefaultPort = 9223;
+   int port = UiDevToolsServer::GetUiDevToolsPort(switches::kEnableUiDevTools,
+                                                  kUiDevToolsDefaultPort);
+@@ -34,9 +32,6 @@ std::unique_ptr<UiDevToolsServer> Create
+   client->AddAgent(std::move(dom_agent_views));
+   client->AddAgent(std::make_unique<CSSAgent>(dom_agent_views_ptr));
+   client->AddAgent(OverlayAgentViews::Create(dom_agent_views_ptr));
+-  auto tracing_agent = std::make_unique<TracingAgent>(std::move(connector));
+-  server->set_tracing_agent(tracing_agent.get());
+-  client->AddAgent(std::move(tracing_agent));
+   server->AttachClient(std::move(client));
+   return server;
+ }
+--- a/components/ui_devtools/views/devtools_server_util.h
++++ b/components/ui_devtools/views/devtools_server_util.h
+@@ -7,7 +7,6 @@
+ 
+ #include <memory>
+ 
+-#include "components/ui_devtools/connector_delegate.h"
+ #include "components/ui_devtools/devtools_server.h"
+ 
+ namespace ui_devtools {
+@@ -15,8 +14,7 @@ namespace ui_devtools {
+ // A factory helper to construct a UiDevToolsServer for Views.
+ // The connector is used in TracingAgent to hook up with the tracing service.
+ std::unique_ptr<UiDevToolsServer> CreateUiDevToolsServerForViews(
+-    network::mojom::NetworkContext* network_context,
+-    std::unique_ptr<ConnectorDelegate> connector);
++    network::mojom::NetworkContext* network_context);
+ 
+ }  // namespace ui_devtools
+ 
+
