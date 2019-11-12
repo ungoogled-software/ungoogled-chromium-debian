@@ -1,26 +1,6 @@
 description: fix gcc warnings about enum comparisons
 author: Michael Gilbert <mgilbert@debian.org>
 
---- a/chrome/browser/ui/views/passwords/password_generation_popup_view_views.cc
-+++ b/chrome/browser/ui/views/passwords/password_generation_popup_view_views.cc
-@@ -50,13 +50,13 @@ class PasswordGenerationPopupViewViews::
-     BuildColumnSet(layout);
-     layout->StartRow(views::GridLayout::kFixedSize, 0);
- 
-+    int text_style = STYLE_SECONDARY;
-+    if (state == PasswordGenerationPopupController::kOfferGeneration)
-+      text_style = views::style::STYLE_PRIMARY;
-     layout->AddView(
-         autofill::CreateLabelWithColorReadabilityDisabled(
-             suggestion, ChromeTextContext::CONTEXT_BODY_TEXT_LARGE,
--            state == PasswordGenerationPopupController::kOfferGeneration
--                ? views::style::STYLE_PRIMARY
--                : STYLE_SECONDARY)
--            .release());
-+            text_style).release());
- 
-     DCHECK(!password_label_);
-     password_label_ = autofill::CreateLabelWithColorReadabilityDisabled(
 --- a/components/viz/common/gl_helper.cc
 +++ b/components/viz/common/gl_helper.cc
 @@ -469,7 +469,7 @@ void GLHelper::CopyTextureToImpl::Cancel
@@ -32,3 +12,18 @@ author: Michael Gilbert <mgilbert@debian.org>
      bgra_support_ = BGRA_NOT_SUPPORTED;
      if (auto* extensions = gl_->GetString(GL_EXTENSIONS)) {
        const std::string extensions_string =
+--- a/chrome/browser/ui/views/passwords/password_items_view.cc
++++ b/chrome/browser/ui/views/passwords/password_items_view.cc
+@@ -148,9 +148,9 @@ std::unique_ptr<views::Label> CreatePass
+           ? form.password_value
+           : l10n_util::GetStringFUTF16(federation_message_id,
+                                        GetDisplayFederation(form));
+-  int text_style = form.federation_origin.opaque()
+-                       ? STYLE_SECONDARY_MONOSPACED
+-                       : views::style::STYLE_SECONDARY;
++  int text_style = views::style::STYLE_SECONDARY;
++  if (form.federation_origin.opaque())
++    text_style = STYLE_SECONDARY_MONOSPACED;
+   auto label =
+       std::make_unique<views::Label>(text, CONTEXT_BODY_TEXT_LARGE, text_style);
+   label->SetHorizontalAlignment(gfx::ALIGN_LEFT);

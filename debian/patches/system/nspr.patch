@@ -25,7 +25,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/base/BUILD.gn
 +++ b/base/BUILD.gn
-@@ -95,6 +95,9 @@ config("base_flags") {
+@@ -93,6 +93,9 @@ config("base_flags") {
        "-Wglobal-constructors",
      ]
    }
@@ -35,8 +35,8 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  config("base_implementation") {
-@@ -880,8 +883,6 @@ jumbo_component("base") {
-     "third_party/dmg_fp/g_fmt.cc",
+@@ -881,8 +884,6 @@ jumbo_component("base") {
+     "third_party/cityhash/city.h",
      "third_party/icu/icu_utf.cc",
      "third_party/icu/icu_utf.h",
 -    "third_party/nspr/prtime.cc",
@@ -46,7 +46,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "threading/platform_thread.cc",
 --- a/tools/gn/build/gen.py
 +++ b/tools/gn/build/gen.py
-@@ -325,6 +325,8 @@ def WriteGNNinja(path, platform, host, o
+@@ -327,6 +327,8 @@ def WriteGNNinja(path, platform, host, o
        ldflags.extend([
            '-Wl,--as-needed',
        ])

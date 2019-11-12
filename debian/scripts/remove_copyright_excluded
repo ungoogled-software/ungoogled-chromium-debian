@@ -1,0 +1,74 @@
+#!/usr/bin/python3 -B
+# -*- coding: UTF-8 -*-
+
+# Copyright (c) 2019 The ungoogled-chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+"""
+Generates debian/changelog
+"""
+
+import shutil
+import sys
+from pathlib import Path
+
+import debian.copyright
+
+def _get_globs(copyright_path):
+    """Returns a list of all Files-Excluded globs"""
+    # Perform optimization of separating wildcard paths with regular paths
+    # so we can strip out potentially large directory trees first before
+    # doing a recursive glob search
+    with_wildcards = list()
+    regular_paths = list()
+    with copyright_path.open() as copyright_file:
+        copyright = debian.copyright.Copyright(copyright_file)
+    for pattern in map(str.strip, copyright.header['Files-Excluded'].strip().splitlines()):
+        if '*' in pattern:
+            with_wildcards.append(pattern)
+        else:
+            regular_paths.append(pattern)
+    return with_wildcards, regular_paths
+
+def _remove_files(file_iter):
+    for filepath in file_iter:
+        if filepath.is_dir():
+            shutil.rmtree(filepath)
+        else:
+            try:
+                filepath.unlink()
+            except FileNotFoundError:
+                print('File not found:', str(filepath), file=sys.stderr)
+
+def _is_inside(outer, inner):
+    return outer.parts == inner.parts[:len(outer.parts)]
+
+def main():
+    """CLI Entrypoint"""
+    # Assume we are in the root of the source tree containing debian/
+    with_wildcards, regular_paths = _get_globs(Path('debian', 'copyright'))
+
+    # Remove regular paths first
+    _remove_files(map(Path, regular_paths))
+
+    wildcard_regex = debian.copyright.globs_to_re(with_wildcards)
+
+    # Gather all paths that match wildcards
+    matched_paths = list()
+    dir_match = None
+    for filepath in Path().glob('**'):
+        if dir_match:
+            if _is_inside(dir_match, filepath):
+                continue
+            dir_match = None
+        if wildcard_regex.fullmatch(str(filepath)):
+            matched_paths.append(filepath)
+            if filepath.is_dir():
+                dir_match = filepath
+
+    # Remove all wildcard matching paths
+    _remove_files(matched_paths)
+
+
+if __name__ == '__main__':
+    main()
