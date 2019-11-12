@@ -38,14 +38,38 @@ author: Michael Gilbert <mgilbert@debian.org>
      global_scopes_[last_global_scope_index]->MigrateAnimatorsTo(
          global_scopes_[current_global_scope_index_]);
      // Introduce an element of randomness in the switching interval to make
---- a/chrome/browser/notifications/scheduler/impression_history_tracker.cc
-+++ b/chrome/browser/notifications/scheduler/impression_history_tracker.cc
-@@ -148,7 +148,7 @@ void ImpressionHistoryTrackerImpl::Apply
+--- a/chrome/browser/notifications/scheduler/internal/impression_history_tracker.cc
++++ b/chrome/browser/notifications/scheduler/internal/impression_history_tracker.cc
+@@ -357,7 +357,7 @@ void ImpressionHistoryTrackerImpl::Apply
  
    // Increase |current_max_daily_show| by 1.
    client_state->current_max_daily_show =
 -      base::ClampToRange(++client_state->current_max_daily_show, 0,
 +      base::ClampToRange(client_state->current_max_daily_show + 1, 0,
                           config_.max_daily_shown_per_type);
+ }
+ 
+--- a/third_party/webrtc/modules/audio_coding/neteq/decision_logic.cc
++++ b/third_party/webrtc/modules/audio_coding/neteq/decision_logic.cc
+@@ -353,7 +353,7 @@ Operations DecisionLogic::FuturePacketAv
+   if (prev_mode == kModeRfc3389Cng || prev_mode == kModeCodecInternalCng) {
+     size_t cur_size_samples =
+         estimate_dtx_delay_
+-            ? cur_size_samples = packet_buffer_.GetSpanSamples(
++            ? packet_buffer_.GetSpanSamples(
+                   decoder_frame_length, sample_rate_, true)
+             : packet_buffer_.NumPacketsInBuffer() * decoder_frame_length;
+     // Target level is in number of packets in Q8.
+--- a/third_party/blink/renderer/platform/geometry/calculation_value.cc
++++ b/third_party/blink/renderer/platform/geometry/calculation_value.cc
+@@ -45,8 +45,8 @@ CalculationValue::~CalculationValue() {
+ }
+ 
+ float CalculationValue::Evaluate(float max_value) const {
+-  float value = is_expression_ ? value = data_.expression->Evaluate(max_value)
+-                               : value = Pixels() + Percent() / 100 * max_value;
++  float value = is_expression_ ? data_.expression->Evaluate(max_value)
++                               : Pixels() + Percent() / 100 * max_value;
+   return (IsNonNegative() && value < 0) ? 0 : value;
  }
  

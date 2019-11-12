@@ -168,7 +168,23 @@ quilt pop -a
 # Sanity checking for consistency in series file
 ./debian/devutils/check_patch_files.sh
 
+# Remove entries from debian/copyright that are used in patches
+./debian/devutils/fix_copyright_excludes.py
+
 # Use git to add changes and commit
+```
+
+### Fixing patches when ninja aborts
+
+```sh
+# Make sure you are in the build sandbox
+cd build/src
+./debian/scripts/revert_domainsubstitution
+# Debian already applied patches via quilt. Use quilt to modify patches
+# Once you are done, copy the patches from build/src/debian/patches
+# to this repo's debian/patches
+./debian/scripts/apply_domainsubstitution
+dpkg-buildpackage -b -uc -nc
 ```
 
 ### Adding a new branch
@@ -216,7 +232,8 @@ Submit PRs to this repository for every packaging type that should be updated.
 There are a few differences with Debian's Chromium:
 
 * Modified default CLI flags and preferences; see `debian/etc/default-flags` and `debian/etc/master_preferences`
-* Uses LLVM toolchain instead of GCC
-* Add flag for VA-API acceleration (`chrome://flags/#disable-accelerated-video-decode`)
-* Use GTK3 (Chromium's default) instead of GTK2
+* Re-enable `chrome://tracing` and DevTool's Performance tab
+* Package names are prefixed with `ungoogled-`, and will conflict Debian's Chromium packages.
+* Use LLVM instead of GCC
 * Enable more FFMpeg codecs by default
+* Use tcmalloc (Chromium default) instead of the system's memory allocator

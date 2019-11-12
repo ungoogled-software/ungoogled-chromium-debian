@@ -1,0 +1,12 @@
+#!/bin/bash -eu
+
+_debian_dir=$(dirname $(dirname $(readlink -f $0)))
+_root_dir=$(dirname $_debian_dir)
+_domsubcache="$_debian_dir/domsubcache.tar.gz"
+_ungoogled_chromium="$_debian_dir/ungoogled-upstream/ungoogled-chromium"
+
+if [ -e $_domsubcache ]; then 
+	echo 'Domain substitution cache already exists. Aborting.'
+else
+	python3 -B $_ungoogled_chromium/utils/domain_substitution.py apply -r $_ungoogled_chromium/domain_regex.list -f $_ungoogled_chromium/domain_substitution.list -c $_domsubcache $_root_dir
+fi
