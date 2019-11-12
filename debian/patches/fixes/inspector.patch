@@ -1,0 +1,118 @@
+description: use inspector_protocol from top level third_party dir
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/v8/src/inspector/BUILD.gn
++++ b/v8/src/inspector/BUILD.gn
+@@ -4,7 +4,7 @@
+ 
+ import("../../gni/v8.gni")
+ 
+-_inspector_protocol = v8_path_prefix + "/third_party/inspector_protocol"
++_inspector_protocol = "../../../third_party/inspector_protocol"
+ import("$_inspector_protocol/inspector_protocol.gni")
+ 
+ _protocol_generated = [
+@@ -97,8 +97,8 @@ v8_source_set("inspector") {
+   deps = [
+     ":inspector_string_conversions",
+     "../..:v8_version",
+-    "../../third_party/inspector_protocol:encoding",
+-    "../../third_party/inspector_protocol:bindings",
++    "../../../third_party/inspector_protocol:encoding",
++    "../../../third_party/inspector_protocol:bindings",
+   ]
+ 
+   public_deps = [
+--- a/v8/test/unittests/BUILD.gn
++++ b/v8/test/unittests/BUILD.gn
+@@ -302,8 +302,6 @@ v8_source_set("unittests_sources") {
+     "../..:v8_for_testing",
+     "../..:v8_libbase",
+     "../..:v8_libplatform",
+-    "../../third_party/inspector_protocol:bindings_test",
+-    "../../third_party/inspector_protocol:encoding_test",
+     "//build/win:default_exe_manifest",
+     "//testing/gmock",
+     "//testing/gtest",
+--- a/v8/src/inspector/inspector_protocol_config.json
++++ b/v8/src/inspector/inspector_protocol_config.json
+@@ -47,10 +47,10 @@
+     },
+ 
+     "encoding_lib": {
+-        "namespace": "v8_inspector_protocol_encoding"
++        "namespace": "inspector_protocol_encoding"
+     },
+ 
+     "bindings_lib": {
+-        "namespace": "v8_inspector_protocol_bindings"
++        "namespace": "inspector_protocol_bindings"
+     }
+ }
+--- a/v8/src/inspector/v8-inspector-protocol-encoding.cc
++++ b/v8/src/inspector/v8-inspector-protocol-encoding.cc
+@@ -11,10 +11,10 @@
+ 
+ namespace v8_inspector {
+ namespace {
+-using IPEStatus = ::v8_inspector_protocol_encoding::Status;
+-using ::v8_inspector_protocol_encoding::span;
++using IPEStatus = inspector_protocol_encoding::Status;
++using inspector_protocol_encoding::span;
+ 
+-class Platform : public ::v8_inspector_protocol_encoding::json::Platform {
++class Platform : public inspector_protocol_encoding::json::Platform {
+  public:
+   bool StrToD(const char* str, double* result) const override {
+     *result = v8::internal::StringToDouble(str, v8::internal::NO_FLAGS);
+--- a/v8/src/inspector/v8-inspector-protocol-encoding.h
++++ b/v8/src/inspector/v8-inspector-protocol-encoding.h
+@@ -9,16 +9,16 @@
+ 
+ namespace v8_inspector {
+ 
+-::v8_inspector_protocol_encoding::Status ConvertCBORToJSON(
+-    ::v8_inspector_protocol_encoding::span<uint8_t> cbor,
++inspector_protocol_encoding::Status ConvertCBORToJSON(
++    inspector_protocol_encoding::span<uint8_t> cbor,
+     std::vector<uint8_t>* json);
+ 
+-::v8_inspector_protocol_encoding::Status ConvertJSONToCBOR(
+-    ::v8_inspector_protocol_encoding::span<uint8_t> json,
++inspector_protocol_encoding::Status ConvertJSONToCBOR(
++    inspector_protocol_encoding::span<uint8_t> json,
+     std::vector<uint8_t>* cbor);
+ 
+-::v8_inspector_protocol_encoding::Status ConvertJSONToCBOR(
+-    ::v8_inspector_protocol_encoding::span<uint16_t> json,
++inspector_protocol_encoding::Status ConvertJSONToCBOR(
++    inspector_protocol_encoding::span<uint16_t> json,
+     std::vector<uint8_t>* cbor);
+ 
+ }  // namespace v8_inspector
+--- a/v8/src/inspector/v8-inspector-session-impl.cc
++++ b/v8/src/inspector/v8-inspector-session-impl.cc
+@@ -24,9 +24,9 @@
+ 
+ namespace v8_inspector {
+ namespace {
+-using ::v8_inspector_protocol_encoding::span;
+-using ::v8_inspector_protocol_encoding::SpanFrom;
+-using IPEStatus = ::v8_inspector_protocol_encoding::Status;
++using inspector_protocol_encoding::span;
++using inspector_protocol_encoding::SpanFrom;
++using IPEStatus = inspector_protocol_encoding::Status;
+ 
+ bool IsCBORMessage(const StringView& msg) {
+   return msg.is8Bit() && msg.length() >= 2 && msg.characters8()[0] == 0xd8 &&
+@@ -332,8 +332,8 @@ void V8InspectorSessionImpl::reportAllCo
+ 
+ void V8InspectorSessionImpl::dispatchProtocolMessage(
+     const StringView& message) {
+-  using ::v8_inspector_protocol_encoding::span;
+-  using ::v8_inspector_protocol_encoding::SpanFrom;
++  using inspector_protocol_encoding::span;
++  using inspector_protocol_encoding::SpanFrom;
+   span<uint8_t> cbor;
+   std::vector<uint8_t> converted_cbor;
+   if (IsCBORMessage(message)) {

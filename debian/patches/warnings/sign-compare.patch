@@ -55,7 +55,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        return base::nullopt;
      }
      rp_count = static_cast<size_t>(it->second.GetUnsigned());
-@@ -292,8 +295,11 @@ EnumerateCredentialsResponse::Parse(
+@@ -305,8 +308,11 @@ EnumerateCredentialsResponse::Parse(
    } else {
      it = response_map.find(cbor::Value(
          static_cast<int>(CredentialManagementResponseKey::kTotalCredentials)));

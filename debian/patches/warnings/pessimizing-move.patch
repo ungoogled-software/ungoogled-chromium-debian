@@ -1,0 +1,94 @@
+description: fix gcc pessimizing move warnings
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/ui/accessibility/ax_position.h
++++ b/ui/accessibility/ax_position.h
+@@ -2513,7 +2513,7 @@ class AXPosition {
+                                 AXMoveDirection::kNextInTree)) {
+           return CreateNullPosition();
+         }
+-        return std::move(child_position);
++        return child_position;
+       }
+     }
+ 
+@@ -2533,7 +2533,7 @@ class AXPosition {
+                                 AXMoveDirection::kNextInTree)) {
+           return CreateNullPosition();
+         }
+-        return std::move(next_sibling);
++        return next_sibling;
+       }
+ 
+       if (abort_predicate.Run(*current_position, *parent_position,
+@@ -2568,7 +2568,7 @@ class AXPosition {
+         return CreateNullPosition();
+       }
+ 
+-      return std::move(parent_position);
++      return parent_position;
+     }
+ 
+     AXPositionInstance leaf =
+@@ -2590,7 +2590,7 @@ class AXPosition {
+       }
+     }
+ 
+-    return std::move(leaf);
++    return leaf;
+   }
+ 
+   // Creates a position using the next text-only node as its anchor.
+--- a/mojo/public/cpp/bindings/interface_ptr.h
++++ b/mojo/public/cpp/bindings/interface_ptr.h
+@@ -234,7 +234,7 @@ InterfacePtr<Interface> MakeProxy(
+   InterfacePtr<Interface> ptr;
+   if (info.is_valid())
+     ptr.Bind(std::move(info), std::move(runner));
+-  return std::move(ptr);
++  return ptr;
+ }
+ 
+ }  // namespace mojo
+--- a/extensions/browser/api/declarative/declarative_rule.h
++++ b/extensions/browser/api/declarative/declarative_rule.h
+@@ -454,7 +454,7 @@ DeclarativeRule<ConditionT, ActionT>::Cr
+   std::unique_ptr<ConditionSet> conditions = ConditionSet::Create(
+       extension, url_matcher_condition_factory, rule.conditions, error);
+   if (!error->empty())
+-    return std::move(error_result);
++    return error_result;
+   CHECK(conditions.get());
+ 
+   bool bad_message = false;
+@@ -465,16 +465,16 @@ DeclarativeRule<ConditionT, ActionT>::Cr
+     // should be killed in case it is true.
+     *error = "An action of a rule set had an invalid "
+         "structure that should have been caught by the JSON validator.";
+-    return std::move(error_result);
++    return error_result;
+   }
+   if (!error->empty() || bad_message)
+-    return std::move(error_result);
++    return error_result;
+   CHECK(actions.get());
+ 
+   if (!check_consistency.is_null() &&
+       !check_consistency.Run(conditions.get(), actions.get(), error)) {
+     DCHECK(!error->empty());
+-    return std::move(error_result);
++    return error_result;
+   }
+ 
+   CHECK(rule.priority.get());
+--- a/ui/accessibility/ax_range.h
++++ b/ui/accessibility/ax_range.h
+@@ -199,7 +199,7 @@ class AXRange {
+       AXRange current_leaf_text_range(current_start_->AsTextPosition(),
+                                       current_end->AsTextPosition());
+       DCHECK(current_leaf_text_range.IsLeafTextRange());
+-      return std::move(current_leaf_text_range);
++      return current_leaf_text_range;
+     }
+ 
+    private:

@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/third_party/pdfium/core/fpdfapi/render/BUILD.gn
 +++ b/third_party/pdfium/core/fpdfapi/render/BUILD.gn
-@@ -51,6 +51,7 @@ jumbo_source_set("render") {
+@@ -43,6 +43,7 @@ jumbo_source_set("render") {
    ]
    configs += [ "../../../:pdfium_core_config" ]
    deps = [
@@ -11,3 +11,16 @@ author: Michael Gilbert <mgilbert@debian.org>
      "../../../constants",
      "../../fxcodec",
      "../../fxcrt",
+--- a/third_party/pdfium/core/fxcodec/jpx/cjpx_decoder.h
++++ b/third_party/pdfium/core/fxcodec/jpx/cjpx_decoder.h
+@@ -13,8 +13,8 @@
+ #include "core/fxcrt/unowned_ptr.h"
+ #include "third_party/base/span.h"
+ 
+-#if defined(USE_SYSTEM_LIBOPENJPEG2)
+-#include <openjpeg.h>
++#if 1
++#include <openjpeg-2.3/openjpeg.h>
+ #else
+ #include "third_party/libopenjpeg20/openjpeg.h"
+ #endif

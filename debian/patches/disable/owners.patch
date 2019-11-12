@@ -1,0 +1,49 @@
+description: owners.py is not in the -lite tarball, remove function that uses it
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/tools/flags/list_flags.py
++++ b/tools/flags/list_flags.py
+@@ -19,7 +19,6 @@ sys.path.append(PYJSON5_PATH)
+ sys.path.append(DEPOT_TOOLS_PATH)
+ 
+ import json5
+-import owners
+ 
+ 
+ def load_metadata():
+@@ -53,35 +52,6 @@ def keep_never_expires(flags):
+   return [f for f in flags if f['expiry_milestone'] == -1]
+ 
+ 
+-def resolve_owners(flags):
+-  """Resolves sets of owners for every flag in the provided list.
+-
+-  Given a list of flags, for each flag, resolves owners for that flag. Resolving
+-  owners means, for each entry in a flag's owners list:
+-  * Turning owners files references into the transitive set of owners listed in
+-    those files
+-  * Turning bare usernames into @chromium.org email addresses
+-  * Passing any other type of entry through unmodified
+-  """
+-
+-  owners_db = owners.Database(ROOT_PATH, open, os.path)
+-
+-  new_flags = []
+-  for f in flags:
+-    new_flag = f.copy()
+-    new_owners = []
+-    for o in f['owners']:
+-      if o.startswith('//') or '/' in o:
+-        new_owners += owners_db.owners_rooted_at_file(re.sub('//', '', o))
+-      elif '@' not in o:
+-        new_owners.append(o + '@chromium.org')
+-      else:
+-        new_owners.append(o)
+-    new_flag['resolved_owners'] = new_owners
+-    new_flags.append(new_flag)
+-  return new_flags
+-
+-
+ def print_flags(flags, verbose):
+   """Prints the supplied list of flags.
+ 
