@@ -1,4 +1,4 @@
-Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Source: http://www.chromium.org/Home
 Upstream-Name: chromium
 Files-Excluded:
@@ -25,27 +25,21 @@ Files-Excluded:
  base/third_party/nspr
  base/third_party/libevent
  chromeos/third_party
- chrome/android
  chrome/install_static
  chrome/installer/mac
  chrome/installer/test
  chrome/installer/tools
- chrome/installer/setup
  chrome/installer/linux
  chrome/installer/gcapi*
  chrome/installer/mini_installer
  chrome/installer/launcher_support
  chrome/common/extensions/docs
  chrome/common/safe_browsing/rar_analyzer.*
- chrome/browser/tracing
- chrome/browser/resources/chromeos
- chrome/browser/resources/default_apps
  chrome/test/data/android
  chrome/test/data/chromeos
  chrome/test/data/extensions
  chrome/test/data/webui/i18n_process_css_test.html
  chrome/chrome_cleaner/test/resources/signed_dll
- services/tracing
  tools/emacs
  tools/luci-go
  tools/android
@@ -80,7 +74,6 @@ Files-Excluded:
  third_party/freetype
  third_party/android*
  third_party/chromite
- third_party/tcmalloc
  third_party/lzma_sdk
  third_party/test_fonts
  third_party/pyelftools
@@ -115,7 +108,6 @@ Files-Excluded:
  third_party/expat/files
  third_party/*rjsmin/bench
  third_party/unrar
- third_party/perfetto
  third_party/checkstyle
  third_party/swiftshader
  third_party/apache-win32
@@ -149,22 +141,6 @@ Files-Excluded:
  third_party/devtools-node-modules
  third_party/blanketjs/src/blanket.js
  third_party/accessibility-audit/axs_testing.js
- third_party/catapult/tracing
- third_party/catapult/third_party/flot
- third_party/catapult/third_party/chai
- third_party/catapult/third_party/vinn
- third_party/catapult/third_party/mocha
- third_party/catapult/third_party/coverage
- third_party/catapult/third_party/polymer2
- third_party/catapult/third_party/polymer3
- third_party/catapult/third_party/polymer/components
- third_party/catapult/third_party/d3/d3.min.js
- third_party/catapult/third_party/redux/redux.min.js
- third_party/catapult/experimental/heatmap/power.js
- third_party/catapult/experimental/heatmap/smoothness.js
- third_party/catapult/experimental/trace_on_tap/third_party/pako/pako_deflate.min.js
- third_party/catapult/third_party/gsutil
- third_party/catapult/third_party/Paste/paste/evalexception/media/MochiKit.packed.js
  third_party/webrtc/sdk
  third_party/webrtc/data
  third_party/webrtc/examples
@@ -175,7 +151,6 @@ Files-Excluded:
  third_party/breakpad/breakpad/src/client/mac
  third_party/breakpad/breakpad/src/common/convert_UTF.*
  third_party/boringssl/src/crypto/cipher_extra/test
- third_party/dom_distiller_js/dist/js/domdistiller_wrapped.js
  third_party/libphonenumber/dist/javascript/i18n/phonenumbers/metadata.js
  third_party/libphonenumber/dist/javascript/i18n/phonenumbers/metadatalite.js
 

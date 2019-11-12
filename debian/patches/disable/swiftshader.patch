@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -450,7 +450,7 @@ group("gn_all") {
+@@ -468,7 +468,7 @@ group("gn_all") {
      ]
    }
  
@@ -12,3 +12,16 @@ author: Michael Gilbert <mgilbert@debian.org>
        (target_cpu == "x86" || target_cpu == "x64")) {
      deps += [ "//third_party/swiftshader" ]
    }
+--- a/gpu/vulkan/x/BUILD.gn
++++ b/gpu/vulkan/x/BUILD.gn
+@@ -37,10 +37,4 @@ component("x") {
+     "//base",
+     "//gpu/vulkan",
+   ]
+-
+-  # Vulkan Swiftshader can only be built on Linux.
+-  # TODO(samans): Support more platforms. https://crbug.com/963988
+-  data_deps = [
+-    "//third_party/swiftshader/src/Vulkan:swiftshader_libvulkan",
+-  ]
+ }
