@@ -1,7 +1,7 @@
-Index: src/content/browser/native_file_system/mock_native_file_system_permission_context.cc
-===================================================================
---- src.orig/content/browser/native_file_system/mock_native_file_system_permission_context.cc
-+++ src/content/browser/native_file_system/mock_native_file_system_permission_context.cc
+# Additional changes for disabling SafeBrowsing
+
+--- a/content/browser/native_file_system/mock_native_file_system_permission_context.cc
++++ b/content/browser/native_file_system/mock_native_file_system_permission_context.cc
 @@ -31,12 +31,4 @@ void MockNativeFileSystemPermissionConte
                                     frame_id, callback);
  }
@@ -15,10 +15,8 @@ Index: src/content/browser/native_file_system/mock_native_file_system_permission
 -}
 -
  }  // namespace content
-Index: src/content/browser/native_file_system/mock_native_file_system_permission_context.h
-===================================================================
---- src.orig/content/browser/native_file_system/mock_native_file_system_permission_context.h
-+++ src/content/browser/native_file_system/mock_native_file_system_permission_context.h
+--- a/content/browser/native_file_system/mock_native_file_system_permission_context.h
++++ b/content/browser/native_file_system/mock_native_file_system_permission_context.h
 @@ -62,17 +62,6 @@ class MockNativeFileSystemPermissionCont
             int frame_id,
             base::OnceCallback<void(SensitiveDirectoryResult)>& callback));
