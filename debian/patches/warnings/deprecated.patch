@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/third_party/blink/renderer/build/scripts/rule_bison.py
 +++ b/third_party/blink/renderer/build/scripts/rule_bison.py
-@@ -82,7 +82,7 @@ for outputHTry in outputHTries:
+@@ -80,7 +80,7 @@ for outputHTry in outputHTries:
  
  outputCpp = os.path.join(outputDir, inputRoot + '.cc')
  
