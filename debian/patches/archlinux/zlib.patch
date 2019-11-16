@@ -1,0 +1,13 @@
+description: [PATCH] Update zlib
+
+--- a/third_party/perfetto/gn/BUILD.gn
++++ b/third_party/perfetto/gn/BUILD.gn
+@@ -276,7 +276,7 @@ if (enable_perfetto_trace_processor || e
+         "//buildtools:zlib",
+       ]
+     } else {
+-      public_configs = [ "//third_party/zlib:zlib_config" ]
++      public_configs = [ "//third_party/zlib:system_zlib" ]
+       public_deps = [
+         "//third_party/zlib",
+       ]

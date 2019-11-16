@@ -35,12 +35,7 @@ export CXXFLAGS+=-Wno-pedantic \
 # ignore warnings for minor mistakes that are too common
 export CXXFLAGS+=-Wno-return-type \
                  -Wno-parentheses \
-
-# ignore warnings that are not supported well until gcc 8
-export CXXFLAGS+=-Wno-attributes \
-
-# ignore warnings due to gcc bug (https://gcc.gnu.org/bugzilla/show_bug.cgi?id=84055)
-export CXXFLAGS+=-Wno-ignored-attributes
+                 -Wno-dangling-else \
 
 # do not optimize away null pointer safety checks
 export CXXFLAGS+=-fno-delete-null-pointer-checks
@@ -80,13 +75,14 @@ defines+=is_debug=false \
          use_custom_libcxx=false \
          use_gnome_keyring=false \
          use_unofficial_version_number=false \
-         enable_iterator_debugging=false \
          enable_vr=false \
+         enable_swiftshader=false \
          optimize_webui=false \
          linux_use_bundled_binutils=false \
 
 # enabled features
 defines+=use_gio=true \
+         use_vaapi=true \
          use_pulseaudio=true \
          link_pulseaudio=true \
          enable_widevine=true \
@@ -122,8 +118,6 @@ endif
 flotpaths=/usr/share/javascript/jquery/*min.js \
           /usr/share/javascript/jquery-flot/*min.js \
 
-domsubcache=debian/domsubcache.tar.gz
-
 %:
 	dh $@
 
@@ -141,7 +135,7 @@ override_dh_auto_configure:
 	# clean polymer files manually (debian/clean doesn't work on directories)
 	rm -rf third_party/catapult/third_party/polymer/components || true
 	# apply domain substitution
-	if [ ! -e $(domsubcache) ]; then python3 -B $(ungoogled_chromium_files)/utils/domain_substitution.py apply -r $(ungoogled_chromium_files)/domain_regex.list -f $(ungoogled_chromium_files)/domain_substitution.list -c $(domsubcache) ./; fi
+	./debian/scripts/apply_domainsubstitution
 	# use system flot
 	for file in $(flotpaths); do ln -sf $$file third_party/flot; done
 	# use polymer from chromium's top level third_party directory
@@ -157,7 +151,7 @@ override_dh_auto_build-indep: out/Release/gn
 
 override_dh_prep:
 	# building is done by this step; remove domain substitution
-	if [ -e $(domsubcache) ]; then python3 -B $(ungoogled_chromium_files)/utils/domain_substitution.py revert -c $(domsubcache) ./; fi
+	./debian/scripts/revert_domainsubstitution
 	dh_prep
 
 override_dh_auto_install-arch:
@@ -235,3 +229,4 @@ setup-local-src:
 	python3 -B $(ungoogled_chromium_files)/utils/downloads.py retrieve -i $(ungoogled_chromium_files)/downloads.ini -c ../download_cache
 	python3 -B $(ungoogled_chromium_files)/utils/downloads.py unpack -i $(ungoogled_chromium_files)/downloads.ini -c ../download_cache ./
 	python3 -B $(ungoogled_chromium_files)/utils/prune_binaries.py ./ $(ungoogled_chromium_files)/pruning.list
+	./debian/scripts/remove_copyright_excluded

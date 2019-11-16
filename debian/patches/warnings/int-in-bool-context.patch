@@ -14,7 +14,7 @@ author: Michael Gilbert <mgilbert@debian.org>
          filter_->CopyMem16x16(mb_src, stride_src, mb_dst, stride_dst);
 --- a/gpu/command_buffer/service/gles2_cmd_decoder.cc
 +++ b/gpu/command_buffer/service/gles2_cmd_decoder.cc
-@@ -16038,7 +16038,8 @@ bool GLES2DecoderImpl::GetUniformSetup(G
+@@ -16031,7 +16031,8 @@ bool GLES2DecoderImpl::GetUniformSetup(G
    }
    uint32_t checked_size = 0;
    if (!SizedResult<T>::ComputeSize(num_elements).AssignIfValid(&checked_size)) {
@@ -37,7 +37,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
 --- a/content/browser/renderer_host/render_widget_host_view_base.cc
 +++ b/content/browser/renderer_host/render_widget_host_view_base.cc
-@@ -311,15 +311,16 @@ void RenderWidgetHostViewBase::SetBackgr
+@@ -308,15 +308,16 @@ void RenderWidgetHostViewBase::SetBackgr
    if (default_background_color_ == color)
      return;
  
@@ -62,7 +62,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
 --- a/third_party/blink/renderer/core/html/parser/html_tree_builder.cc
 +++ b/third_party/blink/renderer/core/html/parser/html_tree_builder.cc
-@@ -938,7 +938,7 @@ void HTMLTreeBuilder::ProcessStartTagFor
+@@ -939,7 +939,7 @@ void HTMLTreeBuilder::ProcessStartTagFor
    }
    if (token->GetName() == kColTag) {
      ProcessFakeStartTag(kColgroupTag);
@@ -83,3 +83,39 @@ author: Michael Gilbert <mgilbert@debian.org>
 +IPC_ENUM_TRAITS_VALIDATE(SkAlphaType, value != kLastEnum_SkAlphaType)
  
  #endif  // UI_GFX_IPC_SKIA_GFX_SKIA_PARAM_TRAITS_MACROS_H_
+--- a/extensions/browser/api/socket/tcp_socket.cc
++++ b/extensions/browser/api/socket/tcp_socket.cc
+@@ -212,7 +212,7 @@ void TCPSocket::SetKeepAlive(bool enable
+                              int delay,
+                              SetKeepAliveCallback callback) {
+   if (!client_socket_) {
+-    std::move(callback).Run(net::ERR_FAILED);
++    std::move(callback).Run(false);
+     return;
+   }
+   client_socket_->SetKeepAlive(enable, delay, std::move(callback));
+@@ -220,7 +220,7 @@ void TCPSocket::SetKeepAlive(bool enable
+ 
+ void TCPSocket::SetNoDelay(bool no_delay, SetNoDelayCallback callback) {
+   if (!client_socket_) {
+-    std::move(callback).Run(net::ERR_FAILED);
++    std::move(callback).Run(false);
+     return;
+   }
+   client_socket_->SetNoDelay(no_delay, std::move(callback));
+--- a/chrome/renderer/searchbox/searchbox.cc
++++ b/chrome/renderer/searchbox/searchbox.cc
+@@ -283,11 +283,11 @@ void SearchBox::Paste(const base::string
+ }
+ 
+ void SearchBox::StartCapturingKeyStrokes() {
+-  embedded_search_service_->FocusOmnibox(page_seq_no_, OMNIBOX_FOCUS_INVISIBLE);
++  embedded_search_service_->FocusOmnibox(page_seq_no_, true);
+ }
+ 
+ void SearchBox::StopCapturingKeyStrokes() {
+-  embedded_search_service_->FocusOmnibox(page_seq_no_, OMNIBOX_FOCUS_NONE);
++  embedded_search_service_->FocusOmnibox(page_seq_no_, false);
+ }
+ 
+ void SearchBox::UndoAllMostVisitedDeletions() {
