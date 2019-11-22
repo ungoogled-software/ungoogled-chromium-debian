@@ -1,3 +1,12 @@
+chromium (78.0.3904.108-1) unstable; urgency=medium
+
+  * New upstream security release.
+    - CVE-2019-13723: Use-after-free in Bluetooth. Reported by Yuxiang Li
+    - CVE-2019-13724: Out-of-bounds in Bluetooth. Reported by Yuxiang Li
+  * Disable vaapi on armhf (closes: #944627).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Wed, 20 Nov 2019 23:46:06 +0000
+
 chromium (78.0.3904.97-1) unstable; urgency=medium
 
   * New upstream security release.
