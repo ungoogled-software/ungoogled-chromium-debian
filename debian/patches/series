@@ -10,18 +10,16 @@ arm/pffffft-buildfix.patch
 
 gcc/cfi.patch
 gcc/int32.patch
-gcc/not-const.patch
-gcc/not-constexpr.patch
+gcc/namespace.patch
 gcc/empty-array.patch
-gcc/outside-range.patch
+gcc/not-constexpr.patch
 gcc/missing-include.patch
+gcc/ambiguous-initializer.patch
 gcc/noexcept-redeclaration.patch
 gcc/unterminated-apostrophe.patch
 
 fixes/link.patch
 fixes/mojo.patch
-fixes/brace.patch
-fixes/crash.patch
 fixes/vaapi.patch
 fixes/closure.patch
 fixes/ps-print.patch
@@ -31,9 +29,9 @@ fixes/gpu-timeout.patch
 fixes/safebrowsing.patch
 fixes/sequence-point.patch
 fixes/jumbo-namespace.patch
+fixes/naming-collision.patch
 fixes/widevine-revision.patch
 fixes/widevine-locations.patch
-fixes/widevine-buildflag.patch
 fixes/connection-message.patch
 
 disable/unrar.patch
@@ -43,6 +41,7 @@ disable/android.patch
 disable/fuzzers.patch
 disable/tracing.patch
 disable/openh264.patch
+disable/buildbot.patch
 disable/chromeos.patch
 disable/perfetto.patch
 disable/installer.patch
@@ -54,14 +53,13 @@ disable/third-party-cookies.patch
 disable/device-notifications.patch
 
 warnings/friend.patch
-warnings/printf.patch
 warnings/attribute.patch
 warnings/multichar.patch
 warnings/deprecated.patch
 warnings/not-unused.patch
 warnings/bool-compare.patch
-warnings/enum-compare.patch
 warnings/sign-compare.patch
+# warnings/format-enums.patch # needed
 warnings/initialization.patch
 warnings/unused-typedefs.patch
 warnings/null-destination.patch

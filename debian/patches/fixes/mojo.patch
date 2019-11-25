@@ -10,7 +10,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 -  "//chromecast/typemaps.gni",
    "//chromeos/typemaps.gni",
    "//chromeos/components/multidevice/mojom/typemaps.gni",
-   "//chromeos/services/network_config/public/mojom/typemaps.gni",
+   "//chromeos/services/device_sync/public/mojom/typemaps.gni",
 --- a/content/shell/BUILD.gn
 +++ b/content/shell/BUILD.gn
 @@ -163,8 +163,6 @@ jumbo_static_library("content_shell_lib"
@@ -22,7 +22,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "browser/web_test/secondary_test_window_observer.cc",
      "browser/web_test/secondary_test_window_observer.h",
      "browser/web_test/test_info_extractor.cc",
-@@ -299,8 +297,6 @@ jumbo_static_library("content_shell_lib"
+@@ -298,8 +296,6 @@ jumbo_static_library("content_shell_lib"
      "//content/public/common:service_names",
      "//content/shell/test_runner:test_runner",
      "//content/test:content_test_mojo_bindings",
@@ -33,7 +33,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "//device/bluetooth",
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -1030,8 +1030,6 @@ if (!is_ios) {
+@@ -1039,8 +1039,6 @@ if (!is_ios) {
        ":layout_test_data_mojo_bindings",
        ":layout_test_data_mojo_bindings_lite",
        "//content/shell:content_shell",
@@ -90,7 +90,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "device/bluetooth/public/mojom/test/fake_bluetooth.mojom.h"
  #include "media/mojo/buildflags.h"
  #include "net/ssl/client_cert_identity.h"
-@@ -152,14 +151,10 @@ const service_manager::Manifest& GetCont
+@@ -153,14 +152,10 @@ const service_manager::Manifest& GetCont
            .ExposeCapability(
                "renderer",
                service_manager::Manifest::InterfaceList<

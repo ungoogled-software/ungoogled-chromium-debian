@@ -9,3 +9,13 @@
  namespace one_euro_filter {
  namespace test {
  class OneEuroFilterTest;
+--- a/chrome/browser/apps/launch_service/launch_manager.h
++++ b/chrome/browser/apps/launch_service/launch_manager.h
+@@ -5,6 +5,7 @@
+ #ifndef CHROME_BROWSER_APPS_LAUNCH_SERVICE_LAUNCH_MANAGER_H_
+ #define CHROME_BROWSER_APPS_LAUNCH_SERVICE_LAUNCH_MANAGER_H_
+ 
++#include <vector>
+ #include <string>
+ 
+ #include "base/macros.h"

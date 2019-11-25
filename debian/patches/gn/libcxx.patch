@@ -1,13 +1,13 @@
 description: avoid chromium's embedded C++ library when bootstrapping gn
 author: Michael Gilbert <mgilbert@debian.org>
 
---- a/tools/gn/build/gen.py
-+++ b/tools/gn/build/gen.py
-@@ -325,7 +325,6 @@ def WriteGNNinja(path, platform, host, o
- 
-     if platform.is_linux():
-       ldflags.extend([
--          '-static-libstdc++',
-           '-Wl,--as-needed',
-       ])
-       # This is needed by libc++.
+--- a/tools/gn/bootstrap/bootstrap.py
++++ b/tools/gn/bootstrap/bootstrap.py
+@@ -110,6 +110,7 @@ def main(argv):
+   cmd = [
+       sys.executable,
+       os.path.join(GN_ROOT, 'build', 'gen.py'),
++      '--no-static-libstdc++',
+       '--no-last-commit-position',
+       '--out-path=' + gn_build_dir,
+   ]

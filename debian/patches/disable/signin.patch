@@ -3,21 +3,21 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
 
 --- a/components/signin/internal/identity_manager/primary_account_manager.cc
 +++ b/components/signin/internal/identity_manager/primary_account_manager.cc
-@@ -56,9 +56,9 @@ void PrimaryAccountManager::RegisterProf
-   registry->RegisterStringPref(prefs::kGoogleServicesAccountId, std::string());
-   registry->RegisterStringPref(prefs::kGoogleServicesUserAccountId,
+@@ -54,9 +54,9 @@ void PrimaryAccountManager::RegisterProf
                                 std::string());
+   registry->RegisterStringPref(prefs::kGoogleServicesAccountId, std::string());
+   registry->RegisterBooleanPref(prefs::kGoogleServicesConsentedToSync, false);
 -  registry->RegisterBooleanPref(prefs::kAutologinEnabled, true);
 +  registry->RegisterBooleanPref(prefs::kAutologinEnabled, false);
    registry->RegisterListPref(prefs::kReverseAutologinRejectedEmailList);
 -  registry->RegisterBooleanPref(prefs::kSigninAllowed, true);
 +  registry->RegisterBooleanPref(prefs::kSigninAllowed, false);
    registry->RegisterBooleanPref(prefs::kSignedInWithCredentialProvider, false);
+ }
  
-   // Deprecated prefs: will be removed in a future release.
 --- a/chrome/browser/ui/chrome_pages.cc
 +++ b/chrome/browser/ui/chrome_pages.cc
-@@ -515,6 +515,7 @@ GURL GetOSSettingsUrl(const std::string&
+@@ -519,6 +519,7 @@ GURL GetOSSettingsUrl(const std::string&
  #if !defined(OS_ANDROID) && !defined(OS_CHROMEOS)
  void ShowBrowserSignin(Browser* browser,
                         signin_metrics::AccessPoint access_point) {
@@ -25,7 +25,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
    Profile* original_profile = browser->profile()->GetOriginalProfile();
    DCHECK(original_profile->GetPrefs()->GetBoolean(prefs::kSigninAllowed));
  
-@@ -532,6 +533,7 @@ void ShowBrowserSignin(Browser* browser,
+@@ -536,6 +537,7 @@ void ShowBrowserSignin(Browser* browser,
            : profiles::BUBBLE_VIEW_MODE_GAIA_SIGNIN;
    browser->signin_view_controller()->ShowSignin(bubble_view_mode, browser,
                                                  access_point);
@@ -35,7 +35,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
  void ShowBrowserSigninOrSettings(Browser* browser,
 --- a/chrome/browser/ui/BUILD.gn
 +++ b/chrome/browser/ui/BUILD.gn
-@@ -2024,9 +2024,6 @@ jumbo_split_static_library("ui") {
+@@ -2052,9 +2052,6 @@ jumbo_static_library("ui") {
        "startup/default_browser_infobar_delegate.h",
        "startup/default_browser_prompt.cc",
        "startup/default_browser_prompt.h",
@@ -45,7 +45,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
        "user_manager.cc",
        "user_manager.h",
        "views/external_protocol_dialog.cc",
-@@ -3331,8 +3328,6 @@ jumbo_split_static_library("ui") {
+@@ -3383,8 +3380,6 @@ jumbo_static_library("ui") {
          "views/sync/dice_bubble_sync_promo_view.h",
          "views/sync/dice_signin_button_view.cc",
          "views/sync/dice_signin_button_view.h",

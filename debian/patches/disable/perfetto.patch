@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -685,7 +685,7 @@ group("gn_all") {
+@@ -692,7 +692,7 @@ group("gn_all") {
      }
    }
  
@@ -68,7 +68,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  class LegacyTracingSession
      : public BackgroundTracingActiveScenario::TracingSession {
-@@ -360,8 +358,6 @@ bool BackgroundTracingActiveScenario::St
+@@ -370,8 +368,6 @@ bool BackgroundTracingActiveScenario::St
  
    DCHECK(!tracing_session_);
    if (base::FeatureList::IsEnabled(features::kBackgroundTracingProtoOutput)) {
@@ -79,32 +79,32 @@ author: Michael Gilbert <mgilbert@debian.org>
          std::make_unique<LegacyTracingSession>(this, chrome_config);
 --- a/content/browser/devtools/protocol/tracing_handler.cc
 +++ b/content/browser/devtools/protocol/tracing_handler.cc
-@@ -289,6 +289,7 @@ class TracingHandler::LegacyTracingSessi
-   bool HasDataLossOccurred() override { return false; }
+@@ -246,6 +246,7 @@ class TracingHandler::TracingSession {
+   DISALLOW_COPY_AND_ASSIGN(TracingSession);
  };
  
 +#if 0
  class TracingHandler::PerfettoTracingSession
      : public TracingHandler::TracingSession,
        public tracing::mojom::TracingSessionClient,
-@@ -555,6 +556,7 @@ class TracingHandler::PerfettoTracingSes
+@@ -514,6 +515,7 @@ class TracingHandler::PerfettoTracingSes
    base::trace_event::TraceConfig last_config_for_perfetto_;
  #endif
  };
 +#endif
  
- TracingHandler::TracingHandler(FrameTreeNode* frame_tree_node_,
+ TracingHandler::TracingHandler(FrameTreeNode* frame_tree_node,
                                 DevToolsIOContext* io_context)
-@@ -587,8 +589,6 @@ TracingHandler::TracingHandler(FrameTree
+@@ -545,8 +547,6 @@ TracingHandler::TracingHandler(FrameTree
+     return;
    }
  
-   DCHECK(tracing::TracingUsesPerfettoBackend());
 -  session_ = std::make_unique<PerfettoTracingSession>();
 -  session_->AdoptStartupTracingSession();
    g_any_agent_tracing = true;
  }
  
-@@ -614,8 +614,6 @@ void TracingHandler::Wire(UberDispatcher
+@@ -572,8 +572,6 @@ void TracingHandler::Wire(UberDispatcher
  }
  
  Response TracingHandler::Disable() {
@@ -113,7 +113,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    return Response::OK();
  }
  
-@@ -653,8 +651,6 @@ void TracingHandler::OnTraceComplete() {
+@@ -611,8 +609,6 @@ void TracingHandler::OnTraceComplete() {
    DCHECK(!trace_data_buffer_state_.in_string);
    DCHECK(!trace_data_buffer_state_.slashed);
  
@@ -122,7 +122,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    frontend_->TracingComplete(data_loss);
  }
  
-@@ -717,8 +713,6 @@ std::string TracingHandler::UpdateTraceD
+@@ -675,8 +671,6 @@ std::string TracingHandler::UpdateTraceD
  }
  
  void TracingHandler::OnTraceToStreamComplete(const std::string& stream_handle) {
@@ -131,15 +131,11 @@ author: Michael Gilbert <mgilbert@debian.org>
    std::string stream_format = (proto_format_ ? Tracing::StreamFormatEnum::Proto
                                               : Tracing::StreamFormatEnum::Json);
    std::string stream_compression =
-@@ -821,15 +815,6 @@ void TracingHandler::StartTracingWithGpu
+@@ -773,11 +767,6 @@ void TracingHandler::StartTracingWithGpu
  
    SetupProcessFilter(gpu_pid, nullptr);
  
--  if (tracing::TracingUsesPerfettoBackend()) {
--    session_ = std::make_unique<PerfettoTracingSession>();
--  } else {
--    session_ = std::make_unique<LegacyTracingSession>();
--  }
+-  session_ = std::make_unique<PerfettoTracingSession>();
 -  session_->EnableTracing(
 -      trace_config_,
 -      base::BindOnce(&TracingHandler::OnRecordingEnabled,
@@ -147,7 +143,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    g_any_agent_tracing = true;
  }
  
-@@ -880,7 +865,6 @@ void TracingHandler::OnProcessReady(Rend
+@@ -828,7 +817,6 @@ void TracingHandler::OnProcessReady(Rend
    trace_config_.SetProcessFilterConfig(
        base::trace_event::TraceConfig::ProcessFilterConfig(
            included_process_ids));
@@ -155,25 +151,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  Response TracingHandler::End() {
-@@ -888,17 +872,6 @@ Response TracingHandler::End() {
-   // tracing is started automatically upon browser startup and can be stopped
-   // via DevTools.
-   // TODO(eseckler): Remove this when we remove the legacy tracing backend.
--  if (!tracing::TracingUsesPerfettoBackend() && IsStartupTracingActive()) {
--    DCHECK(!session_ && !did_initiate_recording_);
--    session_ = std::make_unique<LegacyTracingSession>();
--    session_->AdoptStartupTracingSession();
--  }
--
--  if (!session_)
--    return Response::Error("Tracing is not started");
--
--  if (session_->HasTracingFailed())
--    return Response::Error("Tracing failed");
- 
-   scoped_refptr<TracingController::TraceDataEndpoint> endpoint;
-   if (return_as_stream_) {
-@@ -1039,16 +1012,12 @@ void TracingHandler::SetupTimer(double u
+@@ -983,16 +971,12 @@ void TracingHandler::SetupTimer(double u
  }
  
  void TracingHandler::UpdateBufferUsage() {
@@ -190,17 +168,17 @@ author: Michael Gilbert <mgilbert@debian.org>
    did_initiate_recording_ = false;
    g_any_agent_tracing = false;
    if (video_consumer_)
-@@ -1094,7 +1063,6 @@ void TracingHandler::ReadyToCommitNaviga
+@@ -1038,7 +1022,6 @@ void TracingHandler::ReadyToCommitNaviga
  
    SetupProcessFilter(base::kNullProcessId,
-                      navigation_handle->GetRenderFrameHost());
+                      navigation_request->GetRenderFrameHost());
 -  session_->ChangeTraceConfig(trace_config_);
  }
  
  void TracingHandler::FrameDeleted(RenderFrameHostImpl* frame_host) {
 --- a/content/browser/devtools/protocol/tracing_handler.h
 +++ b/content/browser/devtools/protocol/tracing_handler.h
-@@ -85,7 +85,6 @@ class TracingHandler : public DevToolsDo
+@@ -86,7 +86,6 @@ class TracingHandler : public DevToolsDo
  
    class TracingSession;
    class LegacyTracingSession;
@@ -208,7 +186,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
    struct TraceDataBufferState {
     public:
-@@ -143,7 +142,6 @@ class TracingHandler : public DevToolsDo
+@@ -144,7 +143,6 @@ class TracingHandler : public DevToolsDo
    std::unique_ptr<DevToolsVideoConsumer> video_consumer_;
    int number_of_screenshots_from_video_consumer_ = 0;
    base::trace_event::TraceConfig trace_config_;
@@ -266,15 +244,15 @@ author: Michael Gilbert <mgilbert@debian.org>
    }
 --- a/components/ui_devtools/tracing_agent.cc
 +++ b/components/ui_devtools/tracing_agent.cc
-@@ -13,7 +13,6 @@
- #include "base/process/process.h"
+@@ -14,7 +14,6 @@
  #include "base/timer/timer.h"
+ #include "base/trace_event/trace_event.h"
  #include "base/trace_event/traced_value.h"
 -#include "components/ui_devtools/connector_delegate.h"
  #include "components/ui_devtools/devtools_base_agent.h"
  #include "components/ui_devtools/devtools_protocol_encoding.h"
  #include "mojo/public/cpp/bindings/receiver.h"
-@@ -80,6 +79,7 @@ class TracingAgent::DevToolsTraceEndpoin
+@@ -81,6 +80,7 @@ class TracingAgent::DevToolsTraceEndpoin
    base::WeakPtr<TracingAgent> tracing_agent_;
  };
  
@@ -282,7 +260,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  // Class used to communicate with the Perfetto Consumer interface.
  class TracingAgent::PerfettoTracingSession
      : public tracing::mojom::TracingSessionClient,
-@@ -287,6 +287,7 @@ class TracingAgent::PerfettoTracingSessi
+@@ -290,6 +290,7 @@ class TracingAgent::PerfettoTracingSessi
  
  TracingAgent::TracingAgent(std::unique_ptr<ConnectorDelegate> connector)
      : connector_(std::move(connector)) {}

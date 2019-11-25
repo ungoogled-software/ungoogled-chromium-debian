@@ -14,7 +14,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/components/omnibox/browser/autocomplete_match.cc
 +++ b/components/omnibox/browser/autocomplete_match.cc
-@@ -163,7 +163,7 @@ AutocompleteMatch::AutocompleteMatch(con
+@@ -165,7 +165,7 @@ AutocompleteMatch::AutocompleteMatch(con
        additional_info(match.additional_info),
        duplicate_matches(match.duplicate_matches) {}
  
@@ -25,7 +25,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  AutocompleteMatch::~AutocompleteMatch() {
 --- a/cc/trees/layer_tree_host_impl.cc
 +++ b/cc/trees/layer_tree_host_impl.cc
-@@ -250,7 +250,7 @@ LayerTreeHostImpl::FrameData::FrameData(
+@@ -231,7 +231,7 @@ LayerTreeHostImpl::FrameData::FrameData(
  LayerTreeHostImpl::FrameData::~FrameData() = default;
  LayerTreeHostImpl::UIResourceData::UIResourceData() = default;
  LayerTreeHostImpl::UIResourceData::~UIResourceData() = default;
@@ -56,71 +56,3 @@ author: Michael Gilbert <mgilbert@debian.org>
      default;
  DisjointRangeLockManager::LockRequest::~LockRequest() = default;
  DisjointRangeLockManager::Lock::Lock() = default;
---- a/third_party/blink/renderer/modules/mediastream/media_stream_constraints_util.cc
-+++ b/third_party/blink/renderer/modules/mediastream/media_stream_constraints_util.cc
-@@ -135,12 +135,12 @@ VideoCaptureSettings::VideoCaptureSettin
- VideoCaptureSettings::VideoCaptureSettings(const VideoCaptureSettings& other) =
-     default;
- VideoCaptureSettings::VideoCaptureSettings(
--    VideoCaptureSettings&& other) noexcept = default;
-+    VideoCaptureSettings&& other) = default;
- VideoCaptureSettings::~VideoCaptureSettings() = default;
- VideoCaptureSettings& VideoCaptureSettings::operator=(
-     const VideoCaptureSettings& other) = default;
- VideoCaptureSettings& VideoCaptureSettings::operator=(
--    VideoCaptureSettings&& other) noexcept = default;
-+    VideoCaptureSettings&& other) = default;
- 
- AudioCaptureSettings::AudioCaptureSettings() : AudioCaptureSettings("") {}
- 
-@@ -167,9 +167,9 @@ AudioCaptureSettings::AudioCaptureSettin
- AudioCaptureSettings& AudioCaptureSettings::operator=(
-     const AudioCaptureSettings& other) = default;
- AudioCaptureSettings::AudioCaptureSettings(
--    AudioCaptureSettings&& other) noexcept = default;
-+    AudioCaptureSettings&& other) = default;
- AudioCaptureSettings& AudioCaptureSettings::operator=(
--    AudioCaptureSettings&& other) noexcept = default;
-+    AudioCaptureSettings&& other) = default;
- 
- bool GetConstraintValueAsBoolean(
-     const WebMediaConstraints& constraints,
---- a/third_party/blink/renderer/core/messaging/blink_cloneable_message.cc
-+++ b/third_party/blink/renderer/core/messaging/blink_cloneable_message.cc
-@@ -9,9 +9,9 @@ namespace blink {
- BlinkCloneableMessage::BlinkCloneableMessage() = default;
- BlinkCloneableMessage::~BlinkCloneableMessage() = default;
- 
--BlinkCloneableMessage::BlinkCloneableMessage(BlinkCloneableMessage&&) noexcept =
-+BlinkCloneableMessage::BlinkCloneableMessage(BlinkCloneableMessage&&) =
-     default;
- BlinkCloneableMessage& BlinkCloneableMessage::operator=(
--    BlinkCloneableMessage&&) noexcept = default;
-+    BlinkCloneableMessage&&) = default;
- 
- }  // namespace blink
---- a/third_party/blink/renderer/core/messaging/blink_transferable_message.cc
-+++ b/third_party/blink/renderer/core/messaging/blink_transferable_message.cc
-@@ -16,9 +16,9 @@ BlinkTransferableMessage::BlinkTransfera
- BlinkTransferableMessage::~BlinkTransferableMessage() = default;
- 
- BlinkTransferableMessage::BlinkTransferableMessage(
--    BlinkTransferableMessage&&) noexcept = default;
-+    BlinkTransferableMessage&&) = default;
- BlinkTransferableMessage& BlinkTransferableMessage::operator=(
--    BlinkTransferableMessage&&) noexcept = default;
-+    BlinkTransferableMessage&&) = default;
- 
- scoped_refptr<blink::StaticBitmapImage> ToStaticBitmapImage(
-     const SkBitmap& sk_bitmap) {
---- a/third_party/blink/renderer/platform/weborigin/origin_access_entry.cc
-+++ b/third_party/blink/renderer/platform/weborigin/origin_access_entry.cc
-@@ -59,7 +59,7 @@ OriginAccessEntry::OriginAccessEntry(
-                network::mojom::CorsPortMatchMode::kAllowOnlySpecifiedPort,
-                priority) {}
- 
--OriginAccessEntry::OriginAccessEntry(OriginAccessEntry&& from) noexcept =
-+OriginAccessEntry::OriginAccessEntry(OriginAccessEntry&& from) =
-     default;
- 
- network::cors::OriginAccessEntry::MatchResult OriginAccessEntry::MatchesOrigin(

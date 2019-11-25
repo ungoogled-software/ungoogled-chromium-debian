@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/tools/flags/list_flags.py
 +++ b/tools/flags/list_flags.py
-@@ -19,7 +19,6 @@ sys.path.append(PYJSON5_PATH)
+@@ -21,7 +21,6 @@ sys.path.append(PYJSON5_PATH)
  sys.path.append(DEPOT_TOOLS_PATH)
  
  import json5
@@ -11,7 +11,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  
  def load_metadata():
-@@ -53,35 +52,6 @@ def keep_never_expires(flags):
+@@ -55,35 +54,6 @@ def keep_never_expires(flags):
    return [f for f in flags if f['expiry_milestone'] == -1]
  
  
@@ -47,3 +47,37 @@ author: Michael Gilbert <mgilbert@debian.org>
  def print_flags(flags, verbose):
    """Prints the supplied list of flags.
  
+--- a/tools/metrics/histograms/histograms.xml
++++ b/tools/metrics/histograms/histograms.xml
+@@ -4145,7 +4145,6 @@ uploading your change for review.
+ <histogram name="Android.WebView.Metrics.BackfillInstallDate"
+     enum="InstallDateBackfill" expires_after="M83">
+   <owner>ntfschr@chromium.org</owner>
+-  <owner>src/android_webview/OWNERS</owner>
+   <summary>
+     Records whether WebView needed to backfill the install date pref with
+     Android frameworks APIs. Recorded once during startup (metrics service
+@@ -155544,7 +155543,6 @@ regressions. -->
+     expires_after="2020-11-01">
+   <owner>rmcelrath@chromium.org</owner>
+   <owner>ntfschr@chromium.org</owner>
+-  <owner>src/android_webview/OWNERS</owner>
+   <summary>
+     The time interval between when a WebView-using app's copy of the variations
+     seed was written to its local app storage and when it was loaded for use.
+@@ -155560,7 +155558,6 @@ regressions. -->
+     expires_after="2020-11-01">
+   <owner>rmcelrath@chromium.org</owner>
+   <owner>ntfschr@chromium.org</owner>
+-  <owner>src/android_webview/OWNERS</owner>
+   <summary>
+     The result of checking if a WebView-using app's copy of the variations seed
+     is still fresh, or if a new seed should be requested.
+@@ -155803,7 +155800,6 @@ regressions. -->
+     expires_after="2020-11-01">
+   <owner>rmcelrath@chromium.org</owner>
+   <owner>ntfschr@chromium.org</owner>
+-  <owner>src/android_webview/OWNERS</owner>
+   <summary>
+     Number of consecutive times WebView started up with a stale seed. Only
+     written by WebView, when its loaded seed is fresh after previously being

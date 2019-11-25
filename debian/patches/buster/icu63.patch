@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/v8/src/objects/intl-objects.h
 +++ b/v8/src/objects/intl-objects.h
-@@ -19,8 +19,9 @@
+@@ -20,8 +20,9 @@
  #include "src/objects/objects.h"
  #include "unicode/locid.h"
  #include "unicode/uversion.h"
@@ -14,7 +14,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  namespace U_ICU_NAMESPACE {
  class BreakIterator;
-@@ -200,8 +201,8 @@ class Intl {
+@@ -201,8 +202,8 @@ class Intl {
        int32_t end);
  
    // Helper function to convert a FormattedValue to String
@@ -27,16 +27,16 @@ author: Michael Gilbert <mgilbert@debian.org>
    static Handle<String> NumberFieldToType(Isolate* isolate,
 --- a/v8/src/objects/js-list-format.cc
 +++ b/v8/src/objects/js-list-format.cc
-@@ -292,7 +292,7 @@ Maybe<std::vector<icu::UnicodeString>> T
+@@ -274,7 +274,7 @@ Maybe<std::vector<icu::UnicodeString>> T
  template <typename T>
  MaybeHandle<T> FormatListCommon(
      Isolate* isolate, Handle<JSListFormat> format, Handle<JSArray> list,
 -    MaybeHandle<T> (*formatToResult)(Isolate*, const icu::FormattedValue&)) {
 +    MaybeHandle<T> (*formatToResult)(Isolate*, const icu::UnicodeString&, const std::vector<icu::UnicodeString>&)) {
    DCHECK(!list->IsUndefined());
-   // ecma402 #sec-createpartsfromlist
-   // 2. If list contains any element value such that Type(value) is not String,
-@@ -306,49 +306,67 @@ MaybeHandle<T> FormatListCommon(
+   Maybe<std::vector<icu::UnicodeString>> maybe_array =
+       ToUnicodeStringArray(isolate, list);
+@@ -285,49 +285,67 @@ MaybeHandle<T> FormatListCommon(
    CHECK_NOT_NULL(formatter);
  
    UErrorCode status = U_ZERO_ERROR;
@@ -132,7 +132,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    JSObject::ValidateElements(*array);
    return array;
  }
-@@ -360,7 +378,7 @@ MaybeHandle<String> JSListFormat::Format
+@@ -339,7 +357,7 @@ MaybeHandle<String> JSListFormat::Format
                                               Handle<JSListFormat> format,
                                               Handle<JSArray> list) {
    return FormatListCommon<String>(isolate, format, list,
@@ -143,7 +143,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  // ecma42 #sec-formatlisttoparts
 --- a/v8/src/objects/js-relative-time-format.cc
 +++ b/v8/src/objects/js-relative-time-format.cc
-@@ -235,6 +235,65 @@ Handle<String> JSRelativeTimeFormat::Num
+@@ -236,6 +236,65 @@ Handle<String> JSRelativeTimeFormat::Num
  
  namespace {
  
@@ -209,7 +209,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  Handle<String> UnitAsString(Isolate* isolate, URelativeDateTimeUnit unit_enum) {
    Factory* factory = isolate->factory();
    switch (unit_enum) {
-@@ -297,7 +356,8 @@ MaybeHandle<T> FormatCommon(
+@@ -298,7 +357,8 @@ MaybeHandle<T> FormatCommon(
      Isolate* isolate, Handle<JSRelativeTimeFormat> format,
      Handle<Object> value_obj, Handle<Object> unit_obj, const char* func_name,
      MaybeHandle<T> (*formatToResult)(Isolate*,
@@ -219,7 +219,7 @@ author: Michael Gilbert <mgilbert@debian.org>
                                       Handle<Object>, Handle<String>)) {
    // 3. Let value be ? ToNumber(value).
    Handle<Object> value;
-@@ -327,26 +387,32 @@ MaybeHandle<T> FormatCommon(
+@@ -328,26 +388,32 @@ MaybeHandle<T> FormatCommon(
                        unit),
          T);
    }
@@ -264,7 +264,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    return Intl::ToString(isolate, result);
  }
  
-@@ -377,67 +443,32 @@ Maybe<bool> AddUnit(Isolate* isolate, Ha
+@@ -378,67 +444,32 @@ Maybe<bool> AddUnit(Isolate* isolate, Ha
  }
  
  MaybeHandle<JSArray> FormatToJSArray(
@@ -354,25 +354,43 @@ author: Michael Gilbert <mgilbert@debian.org>
  }  // namespace
 --- a/v8/src/objects/intl-objects.cc
 +++ b/v8/src/objects/intl-objects.cc
-@@ -31,7 +31,6 @@
+@@ -32,8 +32,6 @@
  #include "unicode/coll.h"
  #include "unicode/datefmt.h"
  #include "unicode/decimfmt.h"
 -#include "unicode/formattedvalue.h"
+-#include "unicode/localebuilder.h"
  #include "unicode/locid.h"
  #include "unicode/normalizer2.h"
  #include "unicode/numberformatter.h"
-@@ -1691,8 +1690,7 @@ std::map<std::string, std::string> Looku
+@@ -1612,8 +1610,6 @@ std::map<std::string, std::string> Looku
+   std::map<std::string, std::string> extensions;
+ 
+   UErrorCode status = U_ZERO_ERROR;
+-  icu::LocaleBuilder builder;
+-  builder.setLocale(*icu_locale).clearExtensions();
+   std::unique_ptr<icu::StringEnumeration> keywords(
+       icu_locale->createKeywords(status));
+   if (U_FAILURE(status)) return extensions;
+@@ -1675,14 +1671,13 @@ std::map<std::string, std::string> Looku
+       if (is_valid_value) {
+         extensions.insert(
+             std::pair<std::string, std::string>(bcp47_key, bcp47_value));
+-        builder.setUnicodeLocaleKeyword(bcp47_key, bcp47_value);
++        status = U_ZERO_ERROR;
++        icu_locale->setKeywordValue(bcp47_key, bcp47_value, status);
++        CHECK(U_SUCCESS(status));
        }
      }
-     status = U_ZERO_ERROR;
--    icu_locale->setUnicodeKeywordValue(
--        bcp47_key == nullptr ? keyword : bcp47_key, nullptr, status);
-+    icu_locale->setKeywordValue(keyword, nullptr, status);
-     CHECK(U_SUCCESS(status));
    }
  
-@@ -2098,11 +2096,6 @@ Handle<String> Intl::NumberFieldToType(I
+-  status = U_ZERO_ERROR;
+-  *icu_locale = builder.build(status);
+-
+   return extensions;
+ }
+ 
+@@ -2085,11 +2080,6 @@ Handle<String> Intl::NumberFieldToType(I
        UNREACHABLE();
        return Handle<String>();
  
@@ -384,7 +402,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      default:
        UNREACHABLE();
        return Handle<String>();
-@@ -2110,10 +2103,13 @@ Handle<String> Intl::NumberFieldToType(I
+@@ -2097,10 +2087,13 @@ Handle<String> Intl::NumberFieldToType(I
  }
  
  // A helper function to convert the FormattedValue for several Intl objects.
@@ -447,9 +465,9 @@ author: Michael Gilbert <mgilbert@debian.org>
    }
    return Just(true);
  }
-@@ -208,8 +214,7 @@ bool StartsWithUnicodeLanguageId(const s
- }
+@@ -219,8 +225,7 @@ bool JSLocale::StartsWithUnicodeLanguage
  
+ namespace {
  Maybe<bool> ApplyOptionsToTag(Isolate* isolate, Handle<String> tag,
 -                              Handle<JSReceiver> options,
 -                              icu::LocaleBuilder* builder) {
@@ -457,7 +475,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    v8::Isolate* v8_isolate = reinterpret_cast<v8::Isolate*>(isolate);
    if (tag->length() == 0) {
      THROW_NEW_ERROR_RETURN_VALUE(
-@@ -218,7 +223,6 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
+@@ -229,7 +234,6 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
    }
  
    v8::String::Utf8Value bcp47_tag(v8_isolate, v8::Utils::ToLocal(tag));
@@ -465,7 +483,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    CHECK_LT(0, bcp47_tag.length());
    CHECK_NOT_NULL(*bcp47_tag);
    // 2. If IsStructurallyValidLanguageTag(tag) is false, throw a RangeError
-@@ -227,7 +231,8 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
+@@ -238,7 +242,8 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
      return Just(false);
    }
    UErrorCode status = U_ZERO_ERROR;
@@ -475,7 +493,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    if (U_FAILURE(status)) {
      return Just(false);
    }
-@@ -242,11 +247,9 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
+@@ -253,11 +258,9 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
    MAYBE_RETURN(maybe_language, Nothing<bool>());
    // 4. If language is not undefined, then
    if (maybe_language.FromJust()) {
@@ -488,7 +506,7 @@ author: Michael Gilbert <mgilbert@debian.org>
          IsAlpha(language_str.get(), 4, 4)) {
        return Just(false);
      }
-@@ -260,11 +263,9 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
+@@ -271,11 +274,9 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
    MAYBE_RETURN(maybe_script, Nothing<bool>());
    // 6. If script is not undefined, then
    if (maybe_script.FromJust()) {
@@ -501,7 +519,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        return Just(false);
      }
    }
-@@ -279,9 +280,7 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
+@@ -290,9 +291,7 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
    if (maybe_region.FromJust()) {
      // a. If region does not match the region production, throw a RangeError
      // exception.
@@ -512,7 +530,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        return Just(false);
      }
    }
-@@ -316,9 +315,8 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
+@@ -327,9 +326,8 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
  MaybeHandle<JSLocale> JSLocale::New(Isolate* isolate, Handle<Map> map,
                                      Handle<String> locale_str,
                                      Handle<JSReceiver> options) {
@@ -523,7 +541,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    MAYBE_RETURN(maybe_apply, MaybeHandle<JSLocale>());
    if (!maybe_apply.FromJust()) {
      THROW_NEW_ERROR(isolate,
-@@ -326,12 +324,22 @@ MaybeHandle<JSLocale> JSLocale::New(Isol
+@@ -337,12 +335,22 @@ MaybeHandle<JSLocale> JSLocale::New(Isol
                      JSLocale);
    }
  
@@ -552,7 +570,7 @@ author: Michael Gilbert <mgilbert@debian.org>
                      JSLocale);
 --- a/v8/src/objects/js-date-time-format.cc
 +++ b/v8/src/objects/js-date-time-format.cc
-@@ -1777,55 +1777,12 @@ Maybe<bool> AddPartForFormatRange(Isolat
+@@ -1799,55 +1799,12 @@ Maybe<bool> AddPartForFormatRange(Isolat
  // A helper function to convert the FormattedDateInterval to a
  // MaybeHandle<JSArray> for the implementation of formatRangeToParts.
  MaybeHandle<JSArray> FormattedDateIntervalToJSArray(
@@ -611,7 +629,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
    JSObject::ValidateElements(*array);
    return array;
-@@ -1836,7 +1793,7 @@ template <typename T>
+@@ -1858,7 +1815,7 @@ template <typename T>
  MaybeHandle<T> FormatRangeCommon(
      Isolate* isolate, Handle<JSDateTimeFormat> date_time_format, double x,
      double y,
@@ -620,7 +638,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    // #sec-partitiondatetimerangepattern
    // 1. Let x be TimeClip(x).
    x = DateCache::TimeClip(x);
-@@ -1860,13 +1817,7 @@ MaybeHandle<T> FormatRangeCommon(
+@@ -1882,13 +1839,7 @@ MaybeHandle<T> FormatRangeCommon(
      THROW_NEW_ERROR(isolate, NewTypeError(MessageTemplate::kIcuError), T);
    }
  
@@ -635,7 +653,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  }  // namespace
-@@ -1875,7 +1826,7 @@ MaybeHandle<String> JSDateTimeFormat::Fo
+@@ -1897,7 +1848,7 @@ MaybeHandle<String> JSDateTimeFormat::Fo
      Isolate* isolate, Handle<JSDateTimeFormat> date_time_format, double x,
      double y) {
    return FormatRangeCommon<String>(isolate, date_time_format, x, y,
@@ -646,7 +664,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  MaybeHandle<JSArray> JSDateTimeFormat::FormatRangeToParts(
 --- a/v8/src/objects/js-number-format.cc
 +++ b/v8/src/objects/js-number-format.cc
-@@ -1261,32 +1261,44 @@ Maybe<icu::UnicodeString> IcuFormatNumbe
+@@ -1191,32 +1191,44 @@ Maybe<icu::UnicodeString> IcuFormatNumbe
      Isolate* isolate,
      const icu::number::LocalizedNumberFormatter& number_format,
      Handle<Object> numeric_obj, icu::FieldPositionIterator* fp_iter) {
@@ -705,7 +723,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    if (U_FAILURE(status)) {
      THROW_NEW_ERROR_RETURN_VALUE(isolate,
                                   NewTypeError(MessageTemplate::kIcuError),
-@@ -1472,6 +1484,22 @@ Maybe<int> ConstructParts(Isolate* isola
+@@ -1402,6 +1414,22 @@ Maybe<int> ConstructParts(Isolate* isola
  
  }  // namespace
  
@@ -745,7 +763,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        const icu::number::LocalizedNumberFormatter& number_format,
 --- a/chrome/browser/ui/views/native_file_system/native_file_system_usage_bubble_view.cc
 +++ b/chrome/browser/ui/views/native_file_system/native_file_system_usage_bubble_view.cc
-@@ -27,7 +27,7 @@
+@@ -28,7 +28,7 @@
  #include "content/public/browser/web_contents.h"
  #include "third_party/icu/source/common/unicode/unistr.h"
  #include "third_party/icu/source/common/unicode/utypes.h"
