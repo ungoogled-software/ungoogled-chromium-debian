@@ -6,7 +6,7 @@ Uploaders: Michael Gilbert <mgilbert@debian.org>, Riku Voipio <riku.voipio@linar
 Vcs-Git: https://salsa.debian.org/chromium-team/chromium.git
 Vcs-Browser: https://salsa.debian.org/chromium-team/chromium
 Homepage: http://www.chromium.org/Home
-Standards-Version: 4.4.0
+Standards-Version: 4.4.1
 Rules-Requires-Root: no
 Build-Depends:
  debhelper (>= 11),

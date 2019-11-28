@@ -1,3 +1,11 @@
+chromium (79.0.3945.56-1) experimental; urgency=medium
+
+  * New upstream beta release.
+  * Update standards version to 4.4.1.
+  * Ignore the gpu blacklist by default again.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Wed, 27 Nov 2019 23:59:29 +0000
+
 chromium (78.0.3904.108-1) unstable; urgency=medium
 
   * New upstream security release.

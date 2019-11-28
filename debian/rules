@@ -29,6 +29,7 @@ export CXXFLAGS+=-Wno-pedantic \
 # ignore warnings for minor mistakes that are too common
 export CXXFLAGS+=-Wno-return-type \
                  -Wno-parentheses \
+                 -Wno-enum-compare \
                  -Wno-dangling-else \
                  -Wno-misleading-indentation \
 
@@ -67,7 +68,7 @@ ifeq (arm64,$(DEB_HOST_ARCH))
 defines+=host_cpu=\"arm64\" use_vaapi=true
 endif
 ifeq (armhf,$(DEB_HOST_ARCH))
-defines+=host_cpu=\"arm\" use_vaapi=false arm_use_neon=false symbol_level=0 use_vaapi=true
+defines+=host_cpu=\"arm\" use_vaapi=false arm_use_neon=false symbol_level=0
 endif
 
 # disabled features
