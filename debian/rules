@@ -10,17 +10,17 @@ export DEB_BUILD_MAINT_OPTIONS=hardening=+all
 export DEB_RULES_REQUIRES_ROOT=no
 
 # use system LLVM via unbundling
-export AR=llvm-ar
-export NM=llvm-nm
-export CC=clang
-export CXX=clang++
+export AR=llvm-ar-9
+export NM=llvm-nm-9
+export CC=clang-9
+export CXX=clang++-9
 
 # hack to allow clang to find the default cfi_blacklist.txt
-export CXXFLAGS+=-resource-dir=$(shell clang --print-resource-dir) \
+export CXXFLAGS+=-resource-dir=$(shell clang-9 --print-resource-dir) \
 
-export CPPFLAGS+=-resource-dir=$(shell clang --print-resource-dir) \
+export CPPFLAGS+=-resource-dir=$(shell clang-9 --print-resource-dir) \
 
-export CFLAGS+=-resource-dir=$(shell clang --print-resource-dir) \
+export CFLAGS+=-resource-dir=$(shell clang-9 --print-resource-dir) \
 
 # more verbose linker output
 export LDFLAGS+=-Wl,--stats

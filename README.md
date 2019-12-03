@@ -54,6 +54,18 @@ cd build/src
 # Final setup steps for debian/ directory
 ./debian/rules setup-debian
 
+# Add packages for LLVM 9
+# One way to do this is to install from universe:
+# 1. Add this line to your /etc/apt/sources.list: deb http://archive.ubuntu.com/ubuntu/ eoan main universe
+# 2. Run "apt update"
+#
+# Another way is to use the APT repo from apt.llvm.org
+# 1. Add this line to your /etc/apt/sources.list: deb http://apt.llvm.org/eoan/ llvm-toolchain-eoan-9 main
+# 2. Follow the instructions on https://apt.llvm.org for adding the signing key
+# 3. Run "apt update"
+#
+# You do not need to install LLVM packages yourself, since the next step will do it for you.
+
 # Install remaining requirements to build Chromium
 sudo mk-build-deps -i debian/control
 rm ungoogled-chromium-build-deps_*.deb
