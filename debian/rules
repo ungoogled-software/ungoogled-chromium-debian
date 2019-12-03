@@ -47,16 +47,16 @@ defines+=custom_toolchain=\"//build/toolchain/linux/unbundle:default\"
 # set the appropriate cpu architecture
 DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
 ifeq (i386,$(DEB_HOST_ARCH))
-defines+=host_cpu=\"x86\"
+defines+=host_cpu=\"x86\" use_vaapi=true
 endif
 ifeq (amd64,$(DEB_HOST_ARCH))
-defines+=host_cpu=\"x64\"
+defines+=host_cpu=\"x64\" use_vaapi=true
 endif
 ifeq (arm64,$(DEB_HOST_ARCH))
-defines+=host_cpu=\"arm64\"
+defines+=host_cpu=\"arm64\" use_vaapi=true
 endif
 ifeq (armhf,$(DEB_HOST_ARCH))
-defines+=host_cpu=\"arm\" arm_use_neon=false symbol_level=0
+defines+=host_cpu=\"arm\" use_vaapi=false arm_use_neon=false symbol_level=0 use_vaapi=true
 endif
 
 ungoogled_chromium_version=$(shell cat debian/ungoogled-upstream/version.txt)
@@ -82,7 +82,6 @@ defines+=is_debug=false \
 
 # enabled features
 defines+=use_gio=true \
-         use_vaapi=true \
          use_pulseaudio=true \
          link_pulseaudio=true \
          enable_widevine=true \
