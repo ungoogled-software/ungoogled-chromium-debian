@@ -45,6 +45,7 @@ export CXXFLAGS+=-Wno-address \
                  -Wno-class-memaccess \
                  -Wno-invalid-offsetof \
                  -Wno-subobject-linkage \
+                 -Wno-address-of-packed-member \
 
 # do not optimize away null pointer safety checks
 export CXXFLAGS+=-fno-delete-null-pointer-checks

@@ -57,7 +57,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    <summary>
      Records whether WebView needed to backfill the install date pref with
      Android frameworks APIs. Recorded once during startup (metrics service
-@@ -155544,7 +155543,6 @@ regressions. -->
+@@ -155556,7 +155555,6 @@ regressions. -->
      expires_after="2020-11-01">
    <owner>rmcelrath@chromium.org</owner>
    <owner>ntfschr@chromium.org</owner>
@@ -65,7 +65,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    <summary>
      The time interval between when a WebView-using app's copy of the variations
      seed was written to its local app storage and when it was loaded for use.
-@@ -155560,7 +155558,6 @@ regressions. -->
+@@ -155572,7 +155570,6 @@ regressions. -->
      expires_after="2020-11-01">
    <owner>rmcelrath@chromium.org</owner>
    <owner>ntfschr@chromium.org</owner>
@@ -73,7 +73,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    <summary>
      The result of checking if a WebView-using app's copy of the variations seed
      is still fresh, or if a new seed should be requested.
-@@ -155803,7 +155800,6 @@ regressions. -->
+@@ -155815,7 +155812,6 @@ regressions. -->
      expires_after="2020-11-01">
    <owner>rmcelrath@chromium.org</owner>
    <owner>ntfschr@chromium.org</owner>

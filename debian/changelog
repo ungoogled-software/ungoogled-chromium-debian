@@ -1,3 +1,9 @@
+chromium (79.0.3945.79-1) unstable; urgency=medium
+
+  * New upstream stable release.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 12 Dec 2019 04:36:09 +0000
+
 chromium (79.0.3945.56-1) experimental; urgency=medium
 
   * New upstream beta release.
