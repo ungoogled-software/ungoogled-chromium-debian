@@ -56,6 +56,7 @@ Files-Excluded:
  components/test/data
  components/test/android
  components/drive/chromeos
+ testing/buildbot
  native_client*
  third_party/re2
  third_party/icu
@@ -92,7 +93,6 @@ Files-Excluded:
  third_party/zlib/z*
  third_party/zlib/contrib
  third_party/zlib/patches
- third_party/skia/tools/gyp
  third_party/skia/site/user/api
  third_party/skia/platform_tools
  third_party/skia/resources/icc_profiles
@@ -105,7 +105,7 @@ Files-Excluded:
  third_party/ffmpeg/config*
  third_party/ffmpeg/chromium
  third_party/openh264/src
- third_party/expat/files
+ third_party/expat/src
  third_party/*rjsmin/bench
  third_party/unrar
  third_party/checkstyle

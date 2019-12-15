@@ -1,44 +1,6 @@
 description: fix gcc pessimizing move warnings
 author: Michael Gilbert <mgilbert@debian.org>
 
---- a/ui/accessibility/ax_position.h
-+++ b/ui/accessibility/ax_position.h
-@@ -2513,7 +2513,7 @@ class AXPosition {
-                                 AXMoveDirection::kNextInTree)) {
-           return CreateNullPosition();
-         }
--        return std::move(child_position);
-+        return child_position;
-       }
-     }
- 
-@@ -2533,7 +2533,7 @@ class AXPosition {
-                                 AXMoveDirection::kNextInTree)) {
-           return CreateNullPosition();
-         }
--        return std::move(next_sibling);
-+        return next_sibling;
-       }
- 
-       if (abort_predicate.Run(*current_position, *parent_position,
-@@ -2568,7 +2568,7 @@ class AXPosition {
-         return CreateNullPosition();
-       }
- 
--      return std::move(parent_position);
-+      return parent_position;
-     }
- 
-     AXPositionInstance leaf =
-@@ -2590,7 +2590,7 @@ class AXPosition {
-       }
-     }
- 
--    return std::move(leaf);
-+    return leaf;
-   }
- 
-   // Creates a position using the next text-only node as its anchor.
 --- a/mojo/public/cpp/bindings/interface_ptr.h
 +++ b/mojo/public/cpp/bindings/interface_ptr.h
 @@ -234,7 +234,7 @@ InterfacePtr<Interface> MakeProxy(
@@ -83,7 +45,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    CHECK(rule.priority.get());
 --- a/ui/accessibility/ax_range.h
 +++ b/ui/accessibility/ax_range.h
-@@ -199,7 +199,7 @@ class AXRange {
+@@ -222,7 +222,7 @@ class AXRange {
        AXRange current_leaf_text_range(current_start_->AsTextPosition(),
                                        current_end->AsTextPosition());
        DCHECK(current_leaf_text_range.IsLeafTextRange());

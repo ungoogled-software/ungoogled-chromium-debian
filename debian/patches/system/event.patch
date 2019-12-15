@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/third_party/webrtc/rtc_base/task_queue_libevent.cc
 +++ b/third_party/webrtc/rtc_base/task_queue_libevent.cc
-@@ -27,7 +27,7 @@
+@@ -26,7 +26,7 @@
  #include "absl/strings/string_view.h"
  #include "api/task_queue/queued_task.h"
  #include "api/task_queue/task_queue_base.h"
@@ -25,11 +25,11 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "build/build_config.h"
 --- a/tools/gn/build/gen.py
 +++ b/tools/gn/build/gen.py
-@@ -329,6 +329,7 @@ def WriteGNNinja(path, platform, host, o
-       ])
+@@ -334,6 +334,7 @@ def WriteGNNinja(path, platform, host, o
+ 
        # Additional system libraries that are used.
        libs.append('-lnspr4')
 +      libs.append('-levent')
+ 
        # This is needed by libc++.
        libs.append('-ldl')
-     elif platform.is_darwin():

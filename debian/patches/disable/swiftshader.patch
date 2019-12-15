@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -468,7 +468,7 @@ group("gn_all") {
+@@ -475,7 +475,7 @@ group("gn_all") {
      ]
    }
  
@@ -25,3 +25,14 @@ author: Michael Gilbert <mgilbert@debian.org>
 -    "//third_party/swiftshader/src/Vulkan:swiftshader_libvulkan",
 -  ]
  }
+--- a/third_party/angle/src/libANGLE/renderer/vulkan/BUILD.gn
++++ b/third_party/angle/src/libANGLE/renderer/vulkan/BUILD.gn
+@@ -19,7 +19,7 @@ declare_args() {
+   # Currently SwiftShader's Vulkan front-end doesn't build on Android.
+   # SwiftShader is not needed on Fuchsia because Vulkan is supported on all
+   # devices that run Fuchsia.
+-  angle_swiftshader = !is_android && !is_fuchsia
++  angle_swiftshader = false
+ }
+ 
+ _vulkan_backend_sources = [
