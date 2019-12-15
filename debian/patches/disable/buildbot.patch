@@ -95,7 +95,7 @@
      include_dirs = [
 --- a/content/test/BUILD.gn
 +++ b/content/test/BUILD.gn
-@@ -1219,7 +1219,6 @@ test("content_browsertests") {
+@@ -1220,7 +1220,6 @@ test("content_browsertests") {
    data_deps = [
      ":web_ui_test_mojo_bindings_js_data_deps",
      "//content/shell:pak",
@@ -103,7 +103,7 @@
      "//third_party/mesa_headers",
    ]
  
-@@ -2141,7 +2140,6 @@ test("content_unittests") {
+@@ -2142,7 +2141,6 @@ test("content_unittests") {
    ]
  
    data_deps = [

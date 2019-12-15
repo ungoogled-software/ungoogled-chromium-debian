@@ -44,7 +44,7 @@
  }
 --- a/third_party/blink/renderer/core/dom/document.cc
 +++ b/third_party/blink/renderer/core/dom/document.cc
-@@ -8624,7 +8624,7 @@ void Document::ColorSchemeChanged() {
+@@ -8642,7 +8642,7 @@ void Document::ColorSchemeChanged() {
  bool Document::InForcedColorsMode() const {
    return RuntimeEnabledFeatures::ForcedColorsEnabled() && Platform::Current() &&
           Platform::Current()->ThemeEngine() &&
