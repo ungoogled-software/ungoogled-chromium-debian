@@ -37,7 +37,6 @@ export CXXFLAGS+=-Wno-return-type \
                  -Wno-parentheses \
                  -Wno-enum-compare \
                  -Wno-dangling-else \
-                 -Wno-misleading-indentation \
 
 # do not optimize away null pointer safety checks
 export CXXFLAGS+=-fno-delete-null-pointer-checks
