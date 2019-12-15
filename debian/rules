@@ -103,7 +103,6 @@ defines+=use_gio=true \
          use_cups=true \
          use_kerberos=false \
          use_lld=true \
-         enable_ac3_eac3_audio_demuxing=true \
 
 # some notes about embedded libraries
 #  can't use system nss since net/third_party/nss is heavily patched
