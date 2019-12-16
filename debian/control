@@ -5,7 +5,7 @@ Maintainer: ungoogled-chromium Maintainers <github@null.invalid>
 Vcs-Git: https://github.com/Eloston/ungoogled-chromium.git
 Vcs-Browser: https://github.com/Eloston/ungoogled-chromium
 Homepage: https://github.com/Eloston/ungoogled-chromium
-Standards-Version: 4.4.0
+Standards-Version: 4.4.1
 Rules-Requires-Root: no
 Build-Depends:
  debhelper (>= 11),

@@ -2,16 +2,13 @@
 
 --- a/build/config/compiler/BUILD.gn
 +++ b/build/config/compiler/BUILD.gn
-@@ -1500,23 +1500,6 @@ config("default_warnings") {
+@@ -1515,23 +1515,6 @@ config("default_warnings") {
            # Ignore warnings about MSVC optimization pragmas.
            # TODO(thakis): Only for no_chromium_code? http://crbug.com/912662
            "-Wno-ignored-pragma-optimize",
 -
 -          # TODO(https://crbug.com/989932): Evaluate and possibly enable.
 -          "-Wno-implicit-int-float-conversion",
--
--          # TODO(https://crbug.com/995200): Clean up and enable.
--          "-Wno-xor-used-as-pow",
 -
 -          # TODO(https://crbug.com/999871): Decide if we want to clean up the
 -          # codebase or just disable this.  Doesn't seem super useful, but
@@ -23,6 +20,9 @@
 -
 -          # TODO(https://crbug.com/999886): Clean up, enable.
 -          "-Wno-final-dtor-non-final-class",
+-
+-          # TODO(https://crbug.com/1002945): Evaluate and possibly enable.
+-          "-Wno-sizeof-array-div",
          ]
+ 
          cflags_c += [
-           # TODO(https://crbug.com/995993): Clean up and enable.

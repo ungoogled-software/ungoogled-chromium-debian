@@ -36,3 +36,22 @@ author: Michael Gilbert <mgilbert@debian.org>
                                 length, U_FOLD_CASE_DEFAULT) == 0;
  #else
    uc16* substring1 = reinterpret_cast<uc16*>(byte_offset1);
+--- a/base/BUILD.gn
++++ b/base/BUILD.gn
+@@ -34,7 +34,6 @@ import("//build/nocompile.gni")
+ import("//build/timestamp.gni")
+ import("//testing/libfuzzer/fuzzer_test.gni")
+ import("//testing/test.gni")
+-import("//third_party/icu/config.gni")
+ 
+ if (is_mac) {
+   # Used to generate fuzzer corpus :base_mach_port_rendezvous_convert_corpus.
+@@ -2937,7 +2936,7 @@ test("base_unittests") {
+     ]
+   }
+ 
+-  if (icu_use_data_file) {
++  if (false) {
+     if (is_android) {
+       deps += [ "//third_party/icu:icu_extra_assets" ]
+     } else {

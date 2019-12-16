@@ -35,6 +35,7 @@ export CXXFLAGS+=-Wno-pedantic \
 # ignore warnings for minor mistakes that are too common
 export CXXFLAGS+=-Wno-return-type \
                  -Wno-parentheses \
+                 -Wno-enum-compare \
                  -Wno-dangling-else \
 
 # do not optimize away null pointer safety checks
@@ -56,7 +57,7 @@ ifeq (arm64,$(DEB_HOST_ARCH))
 defines+=host_cpu=\"arm64\" use_vaapi=true
 endif
 ifeq (armhf,$(DEB_HOST_ARCH))
-defines+=host_cpu=\"arm\" use_vaapi=false arm_use_neon=false symbol_level=0 use_vaapi=true
+defines+=host_cpu=\"arm\" use_vaapi=false arm_use_neon=false symbol_level=0
 endif
 
 ungoogled_chromium_version=$(shell cat debian/ungoogled-upstream/version.txt)
@@ -101,7 +102,6 @@ defines+=use_gio=true \
          use_cups=true \
          use_kerberos=false \
          use_lld=true \
-         enable_ac3_eac3_audio_demuxing=true \
 
 # some notes about embedded libraries
 #  can't use system nss since net/third_party/nss is heavily patched
@@ -204,7 +204,7 @@ get-orig-source:
 	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
 	test ! -e $(extract) || rm -rf $(extract)
 	tar xf ../$(tarball)
-	python3 -B $(ungoogled_chromium_files)/utils/prune_binaries.py ./ $(ungoogled_chromium_files)/pruning.list
+	python3 -B $(ungoogled_chromium_files)/utils/prune_binaries.py $(extract) $(ungoogled_chromium_files)/pruning.list
 	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
 	while read line; do rm -rf $$line; done < $(removed)
 	cd $(extract) && ../debian/scripts/check-upstream
