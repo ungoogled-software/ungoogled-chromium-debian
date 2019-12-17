@@ -215,7 +215,6 @@ get-orig-source:
 	rm -rf $(extract)
 	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds | tee seconds
 	@mv -f seconds $(seconds)
-	find debian/scripts/ungoogled-chromium/ -name __pycache__ -type d -exec rm -r {} +
 
 ###################### misc source setup commands ############################
 
