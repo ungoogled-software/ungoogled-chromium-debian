@@ -35,7 +35,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  config("base_implementation") {
-@@ -881,8 +884,6 @@ jumbo_component("base") {
+@@ -889,8 +892,6 @@ jumbo_component("base") {
      "third_party/cityhash/city.h",
      "third_party/icu/icu_utf.cc",
      "third_party/icu/icu_utf.h",
@@ -46,12 +46,13 @@ author: Michael Gilbert <mgilbert@debian.org>
      "threading/platform_thread.cc",
 --- a/tools/gn/build/gen.py
 +++ b/tools/gn/build/gen.py
-@@ -327,6 +327,8 @@ def WriteGNNinja(path, platform, host, o
-       ldflags.extend([
-           '-Wl,--as-needed',
-       ])
+@@ -332,6 +332,9 @@ def WriteGNNinja(path, platform, host, o
+       if not options.no_static_libstdcpp:
+         ldflags.append('-static-libstdc++')
+ 
 +      # Additional system libraries that are used.
 +      libs.append('-lnspr4')
++
        # This is needed by libc++.
        libs.append('-ldl')
      elif platform.is_darwin():
