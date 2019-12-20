@@ -41,7 +41,7 @@ class _BuildFileStringTemplate(string.Template):
 
 def _get_dpkg_changelog_datetime(override_datetime=None):
     if override_datetime is None:
-        current_datetime = datetime.date.today()
+        current_datetime = datetime.datetime.now().astimezone()
     else:
         current_datetime = override_datetime
     current_lc = locale.setlocale(locale.LC_TIME)
