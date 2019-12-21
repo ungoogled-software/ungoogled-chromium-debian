@@ -14,7 +14,7 @@ Subject: [PATCH] Enable mojo with VDA2 on Linux
 
 --- a/chrome/browser/about_flags.cc
 +++ b/chrome/browser/about_flags.cc
-@@ -1863,14 +1863,14 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -1869,14 +1869,14 @@ const FeatureEntry kFeatureEntries[] = {
          "disable-accelerated-video-decode",
          flag_descriptions::kAcceleratedVideoDecodeName,
          flag_descriptions::kAcceleratedVideoDecodeDescription,
@@ -31,7 +31,7 @@ Subject: [PATCH] Enable mojo with VDA2 on Linux
          SINGLE_DISABLE_VALUE_TYPE(switches::kDisableAcceleratedVideoEncode),
      },
      {"enable-history-favicons-google-server-query",
-@@ -2336,10 +2336,10 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -2342,10 +2342,10 @@ const FeatureEntry kFeatureEntries[] = {
       FEATURE_VALUE_TYPE(service_manager::features::kXRSandbox)},
  #endif  // !defined(OS_ANDROID)
  #endif  // ENABLE_VR

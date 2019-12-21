@@ -206,7 +206,7 @@ get-orig-source:
 	tar xf ../$(tarball)
 	python3 -B $(ungoogled_chromium_files)/utils/prune_binaries.py $(extract) $(ungoogled_chromium_files)/pruning.list
 	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
-	while read line; do rm -rf $$line; done < $(removed)
+	xargs rm -rf < $(removed)
 	cd $(extract) && ../debian/scripts/check-upstream
 	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
 	test ! -e $(origtxz) || rm -f $(origtxz)
@@ -215,7 +215,6 @@ get-orig-source:
 	rm -rf $(extract)
 	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds | tee seconds
 	@mv -f seconds $(seconds)
-	find debian/scripts/ungoogled-chromium/ -name __pycache__ -type d -exec rm -r {} +
 
 ###################### misc source setup commands ############################
 
