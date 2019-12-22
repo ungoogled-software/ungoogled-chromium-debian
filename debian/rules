@@ -138,7 +138,9 @@ override_dh_auto_configure:
 	# use system flot
 	for file in $(flotpaths); do ln -sf $$file third_party/flot; done
 	# use polymer from chromium's top level third_party directory
-	ln -sf ../../../../third_party/polymer/v1_0/components-chromium third_party/catapult/third_party/polymer/components
+	# NOTE: This is disabled because files here are patched, so it breaks rebuilds.
+	# See https://github.com/Eloston/ungoogled-chromium/issues/899
+	#ln -sf ../../../../third_party/polymer/v1_0/components-chromium third_party/catapult/third_party/polymer/components
 
 override_dh_auto_build-arch: out/Release/gn
 	./out/Release/gn gen out/Release --args="$(defines)" --fail-on-unused-args
