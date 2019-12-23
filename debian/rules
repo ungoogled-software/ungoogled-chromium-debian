@@ -196,6 +196,7 @@ debvers=../ungoogled-chromium_$(version)
 origtxz=$(debvers).orig.tar.xz
 removed=$(debvers).files-removed
 seconds=$(debvers).seconds
+cache=../download_cache
 
 get-orig-source:
 	wget -nv --show-progress -c $(url)/$(tarball) -O ../$(tarball)
@@ -225,8 +226,8 @@ setup-debian:
 	./debian/scripts/generate_changelog 
 
 setup-local-src:
-	test -d ../download_cache || mkdir ../download_cache
-	python3 -B $(ungoogled_chromium_files)/utils/downloads.py retrieve -i $(ungoogled_chromium_files)/downloads.ini -c ../download_cache
-	python3 -B $(ungoogled_chromium_files)/utils/downloads.py unpack -i $(ungoogled_chromium_files)/downloads.ini -c ../download_cache ./
+	test -d $(cache) || mkdir $(cache)
+	python3 -B $(ungoogled_chromium_files)/utils/downloads.py retrieve -i $(ungoogled_chromium_files)/downloads.ini -c $(cache)
+	python3 -B $(ungoogled_chromium_files)/utils/downloads.py unpack -i $(ungoogled_chromium_files)/downloads.ini -c $(cache) ./
 	python3 -B $(ungoogled_chromium_files)/utils/prune_binaries.py ./ $(ungoogled_chromium_files)/pruning.list
 	./debian/scripts/remove_copyright_excluded
