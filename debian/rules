@@ -199,14 +199,15 @@ seconds=$(debvers).seconds
 cache=../download_cache
 
 get-orig-source:
-	wget -nv --show-progress -c $(url)/$(tarball) -O ../$(tarball)
+	test -d $(cache) || mkdir $(cache)
+	python3 -B $(ungoogled_chromium_files)/utils/downloads.py retrieve -i $(ungoogled_chromium_files)/downloads.ini -c $(cache)
 	cp /usr/share/perl5/Devscripts/MkOrigtargz.pm debian/scripts/mk-origtargz
 	patch -p1 < debian/scripts/mk-origtargz.patch
 	date +%s > $(seconds)
-	perl debian/scripts/mk-origtargz ../$(tarball) > $(removed)
+	perl debian/scripts/mk-origtargz $(cache)/$(tarball) > $(removed)
 	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
 	test ! -e $(extract) || rm -rf $(extract)
-	tar xf ../$(tarball)
+	python3 -B $(ungoogled_chromium_files)/utils/downloads.py unpack -i $(ungoogled_chromium_files)/downloads.ini -c $(cache) $(extract)
 	python3 -B $(ungoogled_chromium_files)/utils/prune_binaries.py $(extract) $(ungoogled_chromium_files)/pruning.list
 	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
 	xargs rm -rf < $(removed)
