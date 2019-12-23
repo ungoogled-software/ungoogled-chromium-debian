@@ -225,7 +225,7 @@ setup-debian:
 	./debian/scripts/generate_changelog 
 
 setup-local-src:
-	mkdir ../download_cache || true
+	test -d ../download_cache || mkdir ../download_cache
 	python3 -B $(ungoogled_chromium_files)/utils/downloads.py retrieve -i $(ungoogled_chromium_files)/downloads.ini -c ../download_cache
 	python3 -B $(ungoogled_chromium_files)/utils/downloads.py unpack -i $(ungoogled_chromium_files)/downloads.ini -c ../download_cache ./
 	python3 -B $(ungoogled_chromium_files)/utils/prune_binaries.py ./ $(ungoogled_chromium_files)/pruning.list
