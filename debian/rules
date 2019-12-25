@@ -132,7 +132,8 @@ override_dh_auto_configure:
 	# NOTE: Removing base/third_party/libevent/BUILD.gn and build/config/freetype/freetype.gni in scripts/unbundle
 	./debian/scripts/unbundle
 	# clean polymer files manually (debian/clean doesn't work on directories)
-	rm -rf third_party/catapult/third_party/polymer/components || true
+	# NOTE: This is disabled because of the below
+	#rm -rf third_party/catapult/third_party/polymer/components || true
 	# apply domain substitution
 	./debian/scripts/apply_domainsubstitution
 	# use system flot
