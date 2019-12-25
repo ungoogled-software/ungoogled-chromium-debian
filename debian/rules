@@ -225,7 +225,8 @@ get-orig-source:
 
 setup-debian:
 	python3 -B $(ungoogled_chromium_files)/utils/patches.py merge -p debian/patches $(ungoogled_chromium_files)/patches
-	./debian/scripts/generate_changelog 
+	./debian/scripts/generate_changelog
+	sed -i "/^Maintainer:/cMaintainer: $$(cat debian/uploader.txt)" ./debian/control
 
 setup-local-src:
 	test -d $(cache) || mkdir $(cache)
