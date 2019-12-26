@@ -234,3 +234,4 @@ setup-local-src:
 	python3 -B $(ungoogled_chromium_files)/utils/downloads.py unpack -i $(ungoogled_chromium_files)/downloads.ini -c $(cache) ./
 	python3 -B $(ungoogled_chromium_files)/utils/prune_binaries.py ./ $(ungoogled_chromium_files)/pruning.list
 	./debian/scripts/remove_copyright_excluded
+	./debian/scripts/check-upstream
