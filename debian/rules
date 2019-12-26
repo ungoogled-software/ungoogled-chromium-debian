@@ -195,27 +195,19 @@ tarfile=$(extract).tar
 tarball=$(tarfile).xz
 debvers=../ungoogled-chromium_$(version)
 origtxz=$(debvers).orig.tar.xz
-seconds=$(debvers).seconds
 cache=../download_cache
 
 get-orig-source:
 	test -d $(cache) || mkdir $(cache)
 	python3 -B $(ungoogled_chromium_files)/utils/downloads.py retrieve -i $(ungoogled_chromium_files)/downloads.ini -c $(cache)
-	date +%s > $(seconds)
-	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
 	test ! -e $(extract) || rm -rf $(extract)
 	python3 -B $(ungoogled_chromium_files)/utils/downloads.py unpack -i $(ungoogled_chromium_files)/downloads.ini -c $(cache) $(extract)
 	python3 -B $(ungoogled_chromium_files)/utils/prune_binaries.py $(extract) $(ungoogled_chromium_files)/pruning.list
-	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
 	./debian/scripts/remove_copyright_excluded $(extract)
 	cd $(extract) && ../debian/scripts/check-upstream
-	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
 	test ! -e $(origtxz) || rm -f $(origtxz)
 	tar cf - $(extract) | xz -6 -T $(njobs) - > $(origtxz)
-	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
 	rm -rf $(extract)
-	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds | tee seconds
-	@mv -f seconds $(seconds)
 
 ###################### misc source setup commands ############################
 
