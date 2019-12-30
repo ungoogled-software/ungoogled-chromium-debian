@@ -2,4 +2,4 @@ ungoogled-chromium ($ungoog{chromium_version}-$ungoog{ungoogled_revision}.buster
 
   * Built against $ungoog{ungoogled_version}
 
- -- ungoogled-chromium Authors <maintainer@null>  $ungoog{release_time}
+ -- $ungoog{uploader}  $ungoog{release_time}

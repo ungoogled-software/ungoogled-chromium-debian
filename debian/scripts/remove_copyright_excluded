@@ -47,6 +47,10 @@ def main():
     # Assume we are in the root of the source tree containing debian/
     with_wildcards, regular_paths = _get_globs(Path('debian', 'copyright'))
 
+    # If an argument is supplied then change directory to it before removing any files.
+    if len(sys.argv) > 1:
+        os.chdir(sys.argv[1])
+
     # Remove regular paths first
     _remove_files(map(Path, regular_paths))
 

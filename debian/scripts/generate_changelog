@@ -79,6 +79,7 @@ def main():
         distro_revision=(debian_dir / 'distro_revision.txt').read_text(encoding=_ENCODING).strip(),
         ungoogled_version='{}-{}'.format(chromium_version, ungoogled_revision),
         release_time=_get_dpkg_changelog_datetime(),
+        uploader=(debian_dir / 'uploader.txt').read_text(encoding=_ENCODING).strip(),
     )
     _process_templates([Path(debian_dir, 'changelog.ungoogin')], packaging_subs)
 
