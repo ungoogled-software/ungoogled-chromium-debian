@@ -9,11 +9,14 @@ export DEB_BUILD_MAINT_OPTIONS=hardening=+all
 # indicate that binary targets do not require root
 export DEB_RULES_REQUIRES_ROOT=no
 
-# use system LLVM via unbundling
-export AR=llvm-ar-8
-export NM=llvm-nm-8
-export CC=clang-8
-export CXX=clang++-8
+# specify system LLVM (required for unbundling)
+# you can set the LLVM_VERSION environment variable before building
+# to change the LLVM toolchain version
+export LLVM_VERSION?=8
+export AR=llvm-ar-$(LLVM_VERSION)
+export NM=llvm-nm-$(LLVM_VERSION)
+export CC=clang-$(LLVM_VERSION)
+export CXX=clang++-$(LLVM_VERSION)
 
 # hack to allow clang to find the default cfi_blacklist.txt
 export CXXFLAGS+=-resource-dir=$$($(CC) --print-resource-dir) \
