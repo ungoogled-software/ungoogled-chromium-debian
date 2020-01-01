@@ -48,7 +48,7 @@ git clone --recurse-submodules https://github.com/ungoogled-software/ungoogled-c
 # Replace TAG_OR_BRANCH_HERE with the tag or branch you want to build (optional)
 # Example of a tag: 79.0.3945.88-1.buster1
 # Example of a branch: debian_buster
-git checkout --recurse-submodules TAG_OR_BRANCH_HERE
+git -C ungoogled-chromium-debian checkout --recurse-submodules TAG_OR_BRANCH_HERE
 
 # Setup build tree under build/
 mkdir -p build/src
