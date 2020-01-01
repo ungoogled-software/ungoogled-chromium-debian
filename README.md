@@ -51,6 +51,10 @@ git checkout --recurse-submodules TAG_OR_BRANCH_HERE
 cp -r ungoogled-chromium-debian/debian build/src/
 cd build/src
 
+# Replace UPLOADER_HERE with your uploader string (optional)
+# Example of an uploader string: John Doe <johndoe@example.com>
+echo 'UPLOADER_HERE' > debian/uploader.txt
+
 # Final setup steps for debian/ directory
 ./debian/rules setup-debian
 
