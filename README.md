@@ -39,16 +39,16 @@ sudo apt install git python3 packaging-dev
 # Clone the repository and its submodules
 git clone --recurse-submodules https://github.com/ungoogled-software/ungoogled-chromium-debian.git
 
-# Replace TAG_OR_BRANCH_HERE with the tag or branch you want to build (optional)
-# Example of a tag: 79.0.3945.88-1.buster1
-# Example of a branch: debian_buster
-git checkout --recurse-submodules TAG_OR_BRANCH_HERE
-
 # NOTE: If you are reading this on GitHub, make sure to read the version corresponding
 # to your checkout of this repo (replace TAG_OR_BRANCH_HERE with the tag or branch you want to build):
 # https://github.com/ungoogled-software/ungoogled-chromium-debian/blob/TAG_OR_BRANCH_HERE/README.md
 #
 # Or, just read the README in your local repo.
+
+# Replace TAG_OR_BRANCH_HERE with the tag or branch you want to build (optional)
+# Example of a tag: 79.0.3945.88-1.buster1
+# Example of a branch: debian_buster
+git checkout --recurse-submodules TAG_OR_BRANCH_HERE
 
 # Setup build tree under build/
 mkdir -p build/src
