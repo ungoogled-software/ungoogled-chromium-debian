@@ -105,14 +105,48 @@ If all else fails, delete the entire build tree and start again.
 
 *Build via a Debian source package (i.e. `.dsc`, `.orig.tar.xz`, and `.debian.tar.xz`). This is useful for online build services like Launchpad and openSUSE Build Service.*
 
-First, install base requirements: `# apt install packaging-dev python3`
-
-Then, run the following as a regular user:
-
 ```sh
-# TODO: Re-use instructions from above
-debian/rules get-orig-source
-debuild -S -sa
+# Install essential requirements
+sudo apt install git python3 packaging-dev
+
+# Clone the repository and its submodules
+git clone --recurse-submodules https://github.com/ungoogled-software/ungoogled-chromium-debian.git
+
+# NOTE: If you are reading this on GitHub, make sure to read the version corresponding
+# to your checkout of this repo (replace TAG_OR_BRANCH_HERE with the tag or branch you want to build):
+# https://github.com/ungoogled-software/ungoogled-chromium-debian/blob/TAG_OR_BRANCH_HERE/README.md
+#
+# Or, just read the README in your local repo.
+
+# Replace TAG_OR_BRANCH_HERE with the tag or branch you want to build (optional)
+# Example of a tag: 79.0.3945.88-1.buster1
+# Example of a branch: debian_buster
+git -C ungoogled-chromium-debian checkout --recurse-submodules TAG_OR_BRANCH_HERE
+
+# Setup build tree under build/
+mkdir -p build/src
+cp -r ungoogled-chromium-debian/debian build/src/
+cd build/src
+
+# NOTE: If you are planning to upload to a build service then you may be required
+# to specify a suitable uploader string so that gpg will know which key to sign
+# your source package with.
+
+# Replace UPLOADER_HERE with your uploader (optional)
+# Example of an uploader string: John Doe <johndoe@example.com>
+echo 'UPLOADER_HERE' > debian/uploader.txt
+
+# Final setup steps for debian/ directory
+./debian/rules setup-debian
+
+# Download and unpack Chromium sources (this will take some time)
+./debian/rules setup-local-src
+
+# Create a source tarball suitable for use with a Debian source package (this will take some time)
+./debian/rules get-orig-source
+
+# Create the Debian source package (this will take some time)
+debuild -S -sa -d
 ```
 
 (`PACKAGE_TYPE_HERE` is the same as above)
