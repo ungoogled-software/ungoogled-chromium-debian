@@ -19,11 +19,10 @@ export CC=clang-$(LLVM_VERSION)
 export CXX=clang++-$(LLVM_VERSION)
 
 # hack to allow clang to find the default cfi_blacklist.txt
-export CXXFLAGS+=-resource-dir=$$($(CC) --print-resource-dir) \
-
-export CPPFLAGS+=-resource-dir=$$($(CC) --print-resource-dir) \
-
-export CFLAGS+=-resource-dir=$$($(CC) --print-resource-dir) \
+RESOURCE_DIR:=$(shell $(CC) --print-resource-dir)
+export CXXFLAGS+=-resource-dir=$(RESOURCE_DIR)
+export CPPFLAGS+=-resource-dir=$(RESOURCE_DIR)
+export CFLAGS+=-resource-dir=$(RESOURCE_DIR)
 
 # more verbose linker output
 export LDFLAGS+=-Wl,--stats
