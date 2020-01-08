@@ -34,7 +34,7 @@ The other packages are as follows:
 
 ```sh
 # Install essential requirements
-sudo apt install git python3 packaging-dev equivs
+sudo apt install git python3 packaging-dev
 
 # Clone the repository and its submodules
 git clone --recurse-submodules https://github.com/ungoogled-software/ungoogled-chromium-debian.git
