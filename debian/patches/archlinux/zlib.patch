@@ -2,7 +2,7 @@ description: [PATCH] Update zlib
 
 --- a/third_party/perfetto/gn/BUILD.gn
 +++ b/third_party/perfetto/gn/BUILD.gn
-@@ -276,7 +276,7 @@ if (enable_perfetto_trace_processor || e
+@@ -305,7 +305,7 @@ if (enable_perfetto_trace_processor || e
          "//buildtools:zlib",
        ]
      } else {
