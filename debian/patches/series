@@ -10,7 +10,6 @@ gcc/ambiguous-initializer.patch
 
 fixes/link.patch
 fixes/mojo.patch
-fixes/as-needed.patch
 fixes/inspector.patch
 fixes/gpu-timeout.patch
 fixes/sequence-point.patch
