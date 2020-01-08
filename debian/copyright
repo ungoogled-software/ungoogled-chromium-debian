@@ -149,7 +149,6 @@ Files-Excluded:
  third_party/pdfium/third_party/yasm/source
  third_party/pdfium/third_party/libopenjpeg20
  third_party/breakpad/breakpad/src/client/mac
- third_party/breakpad/breakpad/src/common/convert_UTF.*
  third_party/boringssl/src/crypto/cipher_extra/test
  third_party/libphonenumber/dist/javascript/i18n/phonenumbers/metadata.js
  third_party/libphonenumber/dist/javascript/i18n/phonenumbers/metadatalite.js
