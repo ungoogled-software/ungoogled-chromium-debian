@@ -1,0 +1,106 @@
+From abc7295ca1653c85472916909f0eb76e28e79a58 Mon Sep 17 00:00:00 2001
+From: Akarshan Biswas <akarshan.biswas@gmail.com>
+Date: Thu, 24 Jan 2019 12:45:29 +0530
+Subject: [PATCH] Enable mojo with VDA2 on Linux
+
+---
+ chrome/browser/about_flags.cc                |  8 ++++----
+ chrome/browser/flag_descriptions.cc          |  9 +++++++--
+ chrome/browser/flag_descriptions.h           | 10 ++++++++--
+ gpu/config/software_rendering_list.json      |  3 ++-
+ media/media_options.gni                      |  9 ++++++---
+ media/mojo/services/gpu_mojo_media_client.cc |  4 ++--
+ 6 files changed, 29 insertions(+), 14 deletions(-)
+
+--- a/chrome/browser/about_flags.cc
++++ b/chrome/browser/about_flags.cc
+@@ -1869,14 +1869,14 @@ const FeatureEntry kFeatureEntries[] = {
+         "disable-accelerated-video-decode",
+         flag_descriptions::kAcceleratedVideoDecodeName,
+         flag_descriptions::kAcceleratedVideoDecodeDescription,
+-        kOsMac | kOsWin | kOsCrOS | kOsAndroid,
++        kOsMac | kOsWin | kOsCrOS | kOsAndroid | kOsLinux,
+         SINGLE_DISABLE_VALUE_TYPE(switches::kDisableAcceleratedVideoDecode),
+     },
+     {
+         "disable-accelerated-video-encode",
+         flag_descriptions::kAcceleratedVideoEncodeName,
+         flag_descriptions::kAcceleratedVideoEncodeDescription,
+-        kOsMac | kOsWin | kOsCrOS | kOsAndroid,
++        kOsMac | kOsWin | kOsCrOS | kOsAndroid | kOsLinux,
+         SINGLE_DISABLE_VALUE_TYPE(switches::kDisableAcceleratedVideoEncode),
+     },
+     {"enable-history-favicons-google-server-query",
+@@ -2342,10 +2342,10 @@ const FeatureEntry kFeatureEntries[] = {
+      FEATURE_VALUE_TYPE(service_manager::features::kXRSandbox)},
+ #endif  // !defined(OS_ANDROID)
+ #endif  // ENABLE_VR
+-#if defined(OS_CHROMEOS)
++#if defined(OS_CHROMEOS) || defined(OS_LINUX)
+     {"disable-accelerated-mjpeg-decode",
+      flag_descriptions::kAcceleratedMjpegDecodeName,
+-     flag_descriptions::kAcceleratedMjpegDecodeDescription, kOsCrOS,
++     flag_descriptions::kAcceleratedMjpegDecodeDescription, kOsCrOS | kOsLinux,
+      SINGLE_DISABLE_VALUE_TYPE(switches::kDisableAcceleratedMjpegDecode)},
+ #endif  // OS_CHROMEOS
+     {"system-keyboard-lock", flag_descriptions::kSystemKeyboardLockName,
+--- a/chrome/browser/flag_descriptions.cc
++++ b/chrome/browser/flag_descriptions.cc
+@@ -3138,15 +3138,20 @@ const char kMetalDescription[] =
+ 
+ #endif
+ 
+-// Chrome OS -------------------------------------------------------------------
++// Chrome OS Linux-------------------------------------------------------------------
+ 
+-#if defined(OS_CHROMEOS)
++#if defined(OS_CHROMEOS) || (defined(OS_LINUX) && !defined(OS_ANDROID))
+ 
+ const char kAcceleratedMjpegDecodeName[] =
+     "Hardware-accelerated mjpeg decode for captured frame";
+ const char kAcceleratedMjpegDecodeDescription[] =
+     "Enable hardware-accelerated mjpeg decode for captured frame where "
+     "available.";
++#endif
++
++// Chrome OS --------------------------------------------------
++
++#if defined(OS_CHROMEOS)
+ 
+ const char kAggregatedMlAppRankingName[] = "Rank suggested apps with ML.";
+ const char kAggregatedMlAppRankingDescription[] =
+--- a/chrome/browser/flag_descriptions.h
++++ b/chrome/browser/flag_descriptions.h
+@@ -1855,11 +1855,15 @@ extern const char kPermissionPromptPersi
+ 
+ // Chrome OS ------------------------------------------------------------------
+ 
+-#if defined(OS_CHROMEOS)
++#if defined(OS_CHROMEOS) || (defined(OS_LINUX) && !defined(OS_ANDROID))
+ 
+ extern const char kAcceleratedMjpegDecodeName[];
+ extern const char kAcceleratedMjpegDecodeDescription[];
+ 
++#endif // defined(OS_CHROMEOS) || (defined(OS_LINUX) && !defined(OS_ANDROID))
++
++#if defined(OS_CHROMEOS)
++
+ extern const char kAggregatedMlAppRankingName[];
+ extern const char kAggregatedMlAppRankingDescription[];
+ 
+--- a/gpu/config/software_rendering_list.json
++++ b/gpu/config/software_rendering_list.json
+@@ -334,11 +334,12 @@
+     },
+     {
+       "id": 48,
+-      "description": "Accelerated video decode is unavailable on Linux",
++      "description": "Accelerated VA-API video decode is not supported on NVIDIA platforms",
+       "cr_bugs": [137247],
+       "os": {
+         "type": "linux"
+       },
++      "vendor_id": "0x10de",
+       "features": [
+         "accelerated_video_decode"
+       ]

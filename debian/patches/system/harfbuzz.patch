@@ -28,3 +28,42 @@
      ]
    }
  } else {
+--- a/components/paint_preview/common/subset_font.cc
++++ b/components/paint_preview/common/subset_font.cc
+@@ -10,8 +10,7 @@
+ #include "base/bind.h"
+ #include "base/callback.h"
+ #include "base/macros.h"
+-#include "third_party/harfbuzz-ng/src/src/hb-subset.h"
+-#include "third_party/harfbuzz-ng/src/src/hb.h"
++#include <harfbuzz/hb.h>
+ #include "third_party/skia/include/core/SkStream.h"
+ #include "third_party/skia/include/core/SkTypeface.h"
+ 
+--- a/components/paint_preview/common/serial_utils.cc
++++ b/components/paint_preview/common/serial_utils.cc
+@@ -36,12 +36,8 @@ sk_sp<SkData> SerializeTypeface(SkTypefa
+   if (usage_it == context->usage->end())
+     return typeface->serialize(SkTypeface::SerializeBehavior::kDontIncludeData);
+ 
+-  auto subset_data = SubsetFont(typeface, *usage_it->second);
+-  // This will fail if the font cannot be subsetted properly. In such cases
+-  // all typeface data should be added for portability.
+-  if (!subset_data)
++  if (true)
+     return typeface->serialize(SkTypeface::SerializeBehavior::kDoIncludeData);
+-  return subset_data;
+ }
+ 
+ // Deserializies a SkPicture within the main SkPicture. These represent
+--- a/components/paint_preview/common/BUILD.gn
++++ b/components/paint_preview/common/BUILD.gn
+@@ -15,8 +15,6 @@ if (!is_ios) {
+       "paint_preview_tracker.h",
+       "serial_utils.cc",
+       "serial_utils.h",
+-      "subset_font.cc",
+-      "subset_font.h",
+     ]
+ 
+     deps = [

@@ -8,6 +8,8 @@
 Generates debian/changelog
 """
 
+import functools
+import os
 import shutil
 import sys
 from pathlib import Path
@@ -40,13 +42,14 @@ def _remove_files(file_iter):
             except FileNotFoundError:
                 print('File not found:', str(filepath), file=sys.stderr)
 
-def _is_inside(outer, inner):
-    return outer.parts == inner.parts[:len(outer.parts)]
-
 def main():
     """CLI Entrypoint"""
     # Assume we are in the root of the source tree containing debian/
     with_wildcards, regular_paths = _get_globs(Path('debian', 'copyright'))
+
+    # If an argument is supplied then change directory to it before removing any files.
+    if len(sys.argv) > 1:
+        os.chdir(sys.argv[1])
 
     # Remove regular paths first
     _remove_files(map(Path, regular_paths))
@@ -55,16 +58,28 @@ def main():
 
     # Gather all paths that match wildcards
     matched_paths = list()
-    dir_match = None
-    for filepath in Path().glob('**'):
-        if dir_match:
-            if _is_inside(dir_match, filepath):
-                continue
-            dir_match = None
-        if wildcard_regex.fullmatch(str(filepath)):
-            matched_paths.append(filepath)
-            if filepath.is_dir():
-                dir_match = filepath
+    def _maybe_remove(*path_elems) -> bool:
+        """
+        Returns True if we should keep the path, False otherwise
+
+        For use with filter()
+        """
+        full_path = Path(*path_elems)
+        if wildcard_regex.fullmatch(str(full_path)):
+            matched_paths.append(full_path)
+            return False
+        return True
+    for curdir, dirnames, filenames in os.walk('.'):
+        # Hack to not remove anything within our debian/ directory
+        if curdir == '.':
+            try:
+                dirnames.remove('debian')
+            except ValueError:
+                pass
+        dirnames[:] = filter(functools.partial(_maybe_remove, curdir), tuple(dirnames))
+        for filepath in map(functools.partial(Path, curdir), filenames):
+            if wildcard_regex.fullmatch(str(filepath)):
+                matched_paths.append(filepath)
 
     # Remove all wildcard matching paths
     _remove_files(matched_paths)
