@@ -6,12 +6,12 @@
                                     frame_id, callback);
  }
  
--void MockNativeFileSystemPermissionContext::PerformSafeBrowsingChecks(
+-void MockNativeFileSystemPermissionContext::PerformAfterWriteChecks(
 -    std::unique_ptr<NativeFileSystemWriteItem> item,
 -    int process_id,
 -    int frame_id,
--    base::OnceCallback<void(SafeBrowsingResult)> callback) {
--  PerformSafeBrowsingChecks_(item.get(), process_id, frame_id, callback);
+-    base::OnceCallback<void(AfterWriteCheckResult)> callback) {
+-  PerformAfterWriteChecks_(item.get(), process_id, frame_id, callback);
 -}
 -
  }  // namespace content
@@ -21,16 +21,16 @@
             int frame_id,
             base::OnceCallback<void(SensitiveDirectoryResult)>& callback));
  
--  void PerformSafeBrowsingChecks(
+-  void PerformAfterWriteChecks(
 -      std::unique_ptr<NativeFileSystemWriteItem> item,
 -      int process_id,
 -      int frame_id,
--      base::OnceCallback<void(SafeBrowsingResult)> callback) override;
--  MOCK_METHOD4(PerformSafeBrowsingChecks_,
+-      base::OnceCallback<void(AfterWriteCheckResult)> callback) override;
+-  MOCK_METHOD4(PerformAfterWriteChecks_,
 -               void(NativeFileSystemWriteItem* item,
 -                    int process_id,
 -                    int frame_id,
--                    base::OnceCallback<void(SafeBrowsingResult)>& callback));
+-                    base::OnceCallback<void(AfterWriteCheckResult)>& callback));
 -
    MOCK_METHOD1(CanRequestWritePermission, bool(const url::Origin& origin));
  };

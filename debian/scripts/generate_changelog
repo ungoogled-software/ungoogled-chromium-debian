@@ -39,20 +39,13 @@ class _BuildFileStringTemplate(string.Template):
 
 # Methods
 
-def _get_dpkg_changelog_datetime(override_datetime=None):
-    if override_datetime is None:
-        current_datetime = datetime.date.today()
-    else:
-        current_datetime = override_datetime
+def _get_dpkg_changelog_datetime():
+    current_datetime = datetime.datetime.now().astimezone()
     current_lc = locale.setlocale(locale.LC_TIME)
     try:
         # Setting the locale is bad practice, but datetime.strftime requires it
         locale.setlocale(locale.LC_TIME, "C")
-        result = current_datetime.strftime("%a, %d %b %Y %H:%M:%S ")
-        timezone = current_datetime.strftime("%z")
-        if len(timezone) == 0:
-            timezone = "+0000"
-        return result + timezone
+        return current_datetime.strftime("%a, %d %b %Y %H:%M:%S %z")
     finally:
         locale.setlocale(locale.LC_TIME, current_lc)
 
@@ -86,6 +79,7 @@ def main():
         distro_revision=(debian_dir / 'distro_revision.txt').read_text(encoding=_ENCODING).strip(),
         ungoogled_version='{}-{}'.format(chromium_version, ungoogled_revision),
         release_time=_get_dpkg_changelog_datetime(),
+        uploader=(debian_dir / 'uploader.txt').read_text(encoding=_ENCODING).strip(),
     )
     _process_templates([Path(debian_dir, 'changelog.ungoogin')], packaging_subs)
 

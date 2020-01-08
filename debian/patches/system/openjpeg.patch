@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/third_party/pdfium/core/fpdfapi/render/BUILD.gn
 +++ b/third_party/pdfium/core/fpdfapi/render/BUILD.gn
-@@ -43,6 +43,7 @@ jumbo_source_set("render") {
+@@ -45,6 +45,7 @@ jumbo_source_set("render") {
    ]
    configs += [ "../../../:pdfium_core_config" ]
    deps = [

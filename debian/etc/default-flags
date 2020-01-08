@@ -3,9 +3,6 @@
 # Do not hide any extensions in the about:extensions dialog
 export CHROMIUM_FLAGS="$CHROMIUM_FLAGS --show-component-extension-options"
 
-# Disable component updates
-export CHROMIUM_FLAGS="$CHROMIUM_FLAGS --disable-component-update"
-
 # Don't use the GPU blacklist (bug #802933)
 export CHROMIUM_FLAGS="$CHROMIUM_FLAGS --ignore-gpu-blacklist"
 
