@@ -9,18 +9,20 @@ export DEB_BUILD_MAINT_OPTIONS=hardening=+all
 # indicate that binary targets do not require root
 export DEB_RULES_REQUIRES_ROOT=no
 
-# use system LLVM via unbundling
-export AR=llvm-ar-9
-export NM=llvm-nm-9
-export CC=clang-9
-export CXX=clang++-9
+# specify system LLVM (required for unbundling)
+# you can set the LLVM_VERSION environment variable before building
+# to change the LLVM toolchain version
+export LLVM_VERSION?=9
+export AR=llvm-ar-$(LLVM_VERSION)
+export NM=llvm-nm-$(LLVM_VERSION)
+export CC=clang-$(LLVM_VERSION)
+export CXX=clang++-$(LLVM_VERSION)
 
 # hack to allow clang to find the default cfi_blacklist.txt
-export CXXFLAGS+=-resource-dir=$(shell clang-9 --print-resource-dir) \
-
-export CPPFLAGS+=-resource-dir=$(shell clang-9 --print-resource-dir) \
-
-export CFLAGS+=-resource-dir=$(shell clang-9 --print-resource-dir) \
+RESOURCE_DIR:=$(shell $(CC) --print-resource-dir)
+export CXXFLAGS+=-resource-dir=$(RESOURCE_DIR)
+export CPPFLAGS+=-resource-dir=$(RESOURCE_DIR)
+export CFLAGS+=-resource-dir=$(RESOURCE_DIR)
 
 # more verbose linker output
 export LDFLAGS+=-Wl,--stats
@@ -132,13 +134,16 @@ override_dh_auto_configure:
 	# NOTE: Removing base/third_party/libevent/BUILD.gn and build/config/freetype/freetype.gni in scripts/unbundle
 	./debian/scripts/unbundle
 	# clean polymer files manually (debian/clean doesn't work on directories)
-	rm -rf third_party/catapult/third_party/polymer/components || true
+	# NOTE: This is disabled because of the below
+	#rm -rf third_party/catapult/third_party/polymer/components || true
 	# apply domain substitution
 	./debian/scripts/apply_domainsubstitution
 	# use system flot
 	for file in $(flotpaths); do ln -sf $$file third_party/flot; done
 	# use polymer from chromium's top level third_party directory
-	ln -sf ../../../../third_party/polymer/v1_0/components-chromium third_party/catapult/third_party/polymer/components
+	# NOTE: This is disabled because files here are patched, so it breaks rebuilds.
+	# See https://github.com/Eloston/ungoogled-chromium/issues/899
+	#ln -sf ../../../../third_party/polymer/v1_0/components-chromium third_party/catapult/third_party/polymer/components
 
 override_dh_auto_build-arch: out/Release/gn
 	./out/Release/gn gen out/Release --args="$(defines)" --fail-on-unused-args
@@ -192,39 +197,31 @@ tarfile=$(extract).tar
 tarball=$(tarfile).xz
 debvers=../ungoogled-chromium_$(version)
 origtxz=$(debvers).orig.tar.xz
-removed=$(debvers).files-removed
-seconds=$(debvers).seconds
+cache=../download_cache
 
 get-orig-source:
-	wget -nv --show-progress -c $(url)/$(tarball) -O ../$(tarball)
-	cp /usr/share/perl5/Devscripts/MkOrigtargz.pm debian/scripts/mk-origtargz
-	patch -p1 < debian/scripts/mk-origtargz.patch
-	date +%s > $(seconds)
-	perl debian/scripts/mk-origtargz ../$(tarball) > $(removed)
-	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
+	test -d $(cache) || mkdir $(cache)
+	python3 -B $(ungoogled_chromium_files)/utils/downloads.py retrieve -i $(ungoogled_chromium_files)/downloads.ini -c $(cache)
 	test ! -e $(extract) || rm -rf $(extract)
-	tar xf ../$(tarball)
+	python3 -B $(ungoogled_chromium_files)/utils/downloads.py unpack -i $(ungoogled_chromium_files)/downloads.ini -c $(cache) $(extract)
 	python3 -B $(ungoogled_chromium_files)/utils/prune_binaries.py $(extract) $(ungoogled_chromium_files)/pruning.list
-	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
-	xargs rm -rf < $(removed)
+	./debian/scripts/remove_copyright_excluded $(extract)
 	cd $(extract) && ../debian/scripts/check-upstream
-	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
 	test ! -e $(origtxz) || rm -f $(origtxz)
 	tar cf - $(extract) | xz -6 -T $(njobs) - > $(origtxz)
-	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
 	rm -rf $(extract)
-	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds | tee seconds
-	@mv -f seconds $(seconds)
 
 ###################### misc source setup commands ############################
 
 setup-debian:
 	python3 -B $(ungoogled_chromium_files)/utils/patches.py merge -p debian/patches $(ungoogled_chromium_files)/patches
-	./debian/scripts/generate_changelog 
+	./debian/scripts/generate_changelog
+	sed -i "/^Maintainer:/cMaintainer: $$(cat debian/uploader.txt)" ./debian/control
 
 setup-local-src:
-	mkdir ../download_cache || true
-	python3 -B $(ungoogled_chromium_files)/utils/downloads.py retrieve -i $(ungoogled_chromium_files)/downloads.ini -c ../download_cache
-	python3 -B $(ungoogled_chromium_files)/utils/downloads.py unpack -i $(ungoogled_chromium_files)/downloads.ini -c ../download_cache ./
+	test -d $(cache) || mkdir $(cache)
+	python3 -B $(ungoogled_chromium_files)/utils/downloads.py retrieve -i $(ungoogled_chromium_files)/downloads.ini -c $(cache)
+	python3 -B $(ungoogled_chromium_files)/utils/downloads.py unpack -i $(ungoogled_chromium_files)/downloads.ini -c $(cache) ./
 	python3 -B $(ungoogled_chromium_files)/utils/prune_binaries.py ./ $(ungoogled_chromium_files)/pruning.list
 	./debian/scripts/remove_copyright_excluded
+	./debian/scripts/check-upstream
