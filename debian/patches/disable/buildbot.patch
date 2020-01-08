@@ -42,7 +42,7 @@
        "//third_party/mesa_headers",
        "//third_party/widevine/cdm:widevine_test_license_server",
        "//tools/media_engagement_preload:generator",
-@@ -1405,7 +1400,6 @@ if (!is_android) {
+@@ -1406,7 +1401,6 @@ if (!is_android) {
        data_deps += [
          "//chrome",
          "//ash/keyboard/ui:resources",
@@ -50,7 +50,7 @@
          "//ui/file_manager:unit_test_data",
        ]
  
-@@ -2473,8 +2467,6 @@ if (!is_android) {
+@@ -2474,8 +2468,6 @@ if (!is_android) {
          "../browser/process_singleton_browsertest.cc",
        ]
  
@@ -59,7 +59,7 @@
        if (safe_browsing_mode == 1) {
          sources -= [
            # single-process mode hangs on Mac sometimes because of multiple UI
-@@ -3415,7 +3407,6 @@ test("unit_tests") {
+@@ -3416,7 +3408,6 @@ test("unit_tests") {
    data_deps = [
      "//chrome/test/data/media/engagement/preload:generate_preload_list",
      "//chrome/test/data/media/engagement/preload:test_data",
@@ -67,7 +67,7 @@
    ]
  
    data = [
-@@ -5603,7 +5594,6 @@ if (!is_android) {
+@@ -5604,7 +5595,6 @@ if (!is_android) {
      # Runtime dependencies
      data_deps = [
        "//ppapi:ppapi_tests",
@@ -75,7 +75,7 @@
        "//third_party/mesa_headers",
      ]
  
-@@ -6128,7 +6118,6 @@ if (!is_android && !is_fuchsia) {
+@@ -6129,7 +6119,6 @@ if (!is_android && !is_fuchsia) {
  
      data_deps = [
        "//third_party/mesa_headers",
