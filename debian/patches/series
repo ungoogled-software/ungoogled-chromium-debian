@@ -16,6 +16,7 @@ fixes/sequence-point.patch
 fixes/jumbo-namespace.patch
 fixes/widevine-locations.patch
 fixes/naming-collision.patch
+fixes/implicit-headers.patch
 
 disable/owners.patch
 disable/openh264.patch
