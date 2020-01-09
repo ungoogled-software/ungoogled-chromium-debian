@@ -1,0 +1,11 @@
+diff -ur a/chrome/browser/apps/launch_service/launch_manager.h b/chrome/browser/apps/launch_service/launch_manager.h
+--- a/chrome/browser/apps/launch_service/launch_manager.h	2020-01-07 21:53:18.000000000 +0000
++++ b/chrome/browser/apps/launch_service/launch_manager.h	2020-01-08 23:49:35.846958570 +0000
+@@ -6,6 +6,7 @@
+ #define CHROME_BROWSER_APPS_LAUNCH_SERVICE_LAUNCH_MANAGER_H_
+ 
+ #include <string>
++#include <vector>
+ 
+ #include "base/macros.h"
+ 
