@@ -61,7 +61,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "devtools/render_frame_devtools_agent_host.cc",
      "devtools/render_frame_devtools_agent_host.h",
      "devtools/service_worker_devtools_agent_host.cc",
-@@ -1796,31 +1788,6 @@ jumbo_source_set("browser") {
+@@ -1796,31 +1788,8 @@ jumbo_source_set("browser") {
      "theme_helper.h",
      "theme_helper_mac.h",
      "theme_helper_mac.mm",
@@ -81,8 +81,8 @@ author: Michael Gilbert <mgilbert@debian.org>
 -    "tracing/background_tracing_rule.h",
 -    "tracing/file_tracing_provider_impl.cc",
 -    "tracing/file_tracing_provider_impl.h",
--    "tracing/memory_instrumentation_util.cc",
--    "tracing/memory_instrumentation_util.h",
+     "tracing/memory_instrumentation_util.cc",
+     "tracing/memory_instrumentation_util.h",
 -    "tracing/perfetto_file_tracer.cc",
 -    "tracing/perfetto_file_tracer.h",
 -    "tracing/tracing_controller_impl.cc",
@@ -93,7 +93,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "url_loader_factory_getter.cc",
      "url_loader_factory_getter.h",
      "utility_process_host.cc",
-@@ -2066,7 +2033,6 @@ jumbo_source_set("browser") {
+@@ -2066,7 +2035,6 @@ jumbo_source_set("browser") {
    if (!is_android) {
      deps += [
        "//components/vector_icons",
@@ -904,15 +904,6 @@ author: Michael Gilbert <mgilbert@debian.org>
      if (should_start_service_manager_only)
        ForceInProcessNetworkService(true);
  
-@@ -957,8 +954,6 @@ int ContentMainRunnerImpl::RunServiceMan
-     download::SetIOTaskRunner(
-         service_manager_environment_->ipc_thread()->task_runner());
- 
--    InitializeBrowserMemoryInstrumentationClient();
--
- #if defined(OS_ANDROID)
-     if (start_service_manager_only) {
-       base::ThreadTaskRunnerHandle::Get()->PostTask(
 --- a/content/utility/utility_service_factory.cc
 +++ b/content/utility/utility_service_factory.cc
 @@ -28,9 +28,6 @@
@@ -1274,16 +1265,15 @@ author: Michael Gilbert <mgilbert@debian.org>
    base::Thread::Options thread_options(base::MessagePumpType::IO, 0);
 --- a/content/public/test/browser_test_base.cc
 +++ b/content/public/test/browser_test_base.cc
-@@ -39,8 +39,6 @@
- #include "content/browser/scheduler/browser_task_executor.h"
+@@ -40,7 +40,6 @@
  #include "content/browser/startup_data_impl.h"
  #include "content/browser/startup_helper.h"
--#include "content/browser/tracing/memory_instrumentation_util.h"
+ #include "content/browser/tracing/memory_instrumentation_util.h"
 -#include "content/browser/tracing/tracing_controller_impl.h"
  #include "content/public/app/content_main.h"
  #include "content/public/browser/browser_task_traits.h"
  #include "content/public/browser/browser_thread.h"
-@@ -64,7 +62,6 @@
+@@ -64,7 +63,6 @@
  #include "services/network/public/cpp/features.h"
  #include "services/network/public/mojom/network_service_test.mojom.h"
  #include "services/service_manager/embedder/switches.h"
@@ -1291,16 +1281,15 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "ui/compositor/compositor_switches.h"
  #include "ui/display/display_switches.h"
  #include "ui/gl/gl_implementation.h"
-@@ -424,8 +421,6 @@ void BrowserTestBase::SetUp() {
+@@ -424,7 +422,6 @@ void BrowserTestBase::SetUp() {
  
      StartBrowserThreadPool();
      BrowserTaskExecutor::PostFeatureListSetup();
 -    tracing::InitTracingPostThreadPoolStartAndFeatureList();
--    InitializeBrowserMemoryInstrumentationClient();
+     InitializeBrowserMemoryInstrumentationClient();
    }
  
-   // All FeatureList overrides should have been registered prior to browser test
-@@ -618,17 +613,6 @@ void BrowserTestBase::ProxyRunTestOnMain
+@@ -618,17 +615,6 @@ void BrowserTestBase::ProxyRunTestOnMain
      signal(SIGTERM, DumpStackTraceSignalHandler);
  #endif  // defined(OS_POSIX)
  
@@ -1318,7 +1307,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    {
      // This can be called from a posted task. Allow nested tasks here, because
      // otherwise the test body will have to do it in order to use RunLoop for
-@@ -672,26 +656,6 @@ void BrowserTestBase::ProxyRunTestOnMain
+@@ -672,26 +658,6 @@ void BrowserTestBase::ProxyRunTestOnMain
      TearDownOnMainThread();
    }
  

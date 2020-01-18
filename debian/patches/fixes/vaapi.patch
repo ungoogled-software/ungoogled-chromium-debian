@@ -72,7 +72,7 @@ origin: chromium-vaapi patches from Arch linux
      VAProfile va_profile,
 --- a/media/gpu/vaapi/vaapi_wrapper.h
 +++ b/media/gpu/vaapi/vaapi_wrapper.h
-@@ -118,6 +118,9 @@ class MEDIA_GPU_EXPORT VaapiWrapper
+@@ -119,6 +119,9 @@ class MEDIA_GPU_EXPORT VaapiWrapper
    // Returns the type of the underlying VA-API implementation.
    static VAImplementation GetImplementationType();
  

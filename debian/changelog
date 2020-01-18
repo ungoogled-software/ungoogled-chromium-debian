@@ -1,6 +1,85 @@
+chromium (79.0.3945.130-1) unstable; urgency=medium
+
+  * New upstream security release.
+    - CVE-2020-6377: Use after free in audio. Reported by Zhe Jin
+    - CVE-2020-6378: Use-after-free in speech recognizer. Reported by Antti
+      Levomäki and Christian Jalio
+    - CVE-2020-6379: Use-after-free in speech recognizer. Reported by Guang
+      Gong
+    - CVE-2020-6380: Extension message verification error. Reported by Sergei
+      Glazunov
+    - CVE-2019-13767: Use after free in media picker. Reported by Sergei
+      Glazunov
+  * Fix memory instrumentation singleton initialization errors caused by
+    tracing patch included in the previous upload (closes: #945920).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 18 Jan 2020 20:26:26 +0000
+
 chromium (79.0.3945.79-1) unstable; urgency=medium
 
   * New upstream stable release.
+    - CVE-2019-13725: Use after free in Bluetooth. Reported by Gengming Liu and
+      Jianyu Chen
+    - CVE-2019-13726: Heap buffer overflow in password manager. Reported by
+      Sergei Glazunov
+    - CVE-2019-13727: Insufficient policy enforcement in WebSockets. Reported
+      by @piochu
+    - CVE-2019-13728: Out of bounds write in V8. Reported by Rong Jian and
+      Guang Gong
+    - CVE-2019-13729: Use after free in WebSockets. Reported by Zhe Jin
+    - CVE-2019-13730: Type Confusion in V8. Reported by Soyeon Park and Wen Xu
+    - CVE-2019-13732: Use after free in WebAudio. Reported by Sergei Glazunov
+    - CVE-2019-13734: Out of bounds write in SQLite. Reported by Wenxiang Qian
+    - CVE-2019-13735: Out of bounds write in V8. Reported by Gengming Liu and
+      Zhen Feng
+    - CVE-2019-13764: Type Confusion in V8. Reported by Soyeon Park and Wen Xu
+    - CVE-2019-13736: Integer overflow in PDFium. Reported by Anonymous
+    - CVE-2019-13737: Insufficient policy enforcement in autocomplete. Reported
+      by Mark Amery
+    - CVE-2019-13738: Insufficient policy enforcement in navigation. Reported
+      by Johnathan Norman and Daniel Clark
+    - CVE-2019-13739: Incorrect security UI in Omnibox. Reported by xisigr
+    - CVE-2019-13740: Incorrect security UI. Reported by Khalil Zhani
+    - CVE-2019-13741: Insufficient validation of untrusted input in Blink.
+      Reported by Michał Bentkowski
+    - CVE-2019-13742: Incorrect security UI in Omnibox. Reported by Khalil
+      Zhani
+    - CVE-2019-13743: Incorrect security UI in external protocol handling.
+      Reported by Zhiyang Zeng
+    - CVE-2019-13744: Insufficient policy enforcement in cookies. Reported by
+      Prakash
+    - CVE-2019-13745: Insufficient policy enforcement in audio. Reported by
+      Luan Herrera
+    - CVE-2019-13746: Insufficient policy enforcement in Omnibox. Reported by
+      David Erceg
+    - CVE-2019-13747: Uninitialized Use in rendering. Reported by Ivan
+      Popelyshev and André Bonatti
+    - CVE-2019-13748: Insufficient policy enforcement in developer tools.
+      Reported by David Erceg
+    - CVE-2019-13749: Incorrect security UI in Omnibox. Reported by Khalil
+      Zhani
+    - CVE-2019-13750: Insufficient data validation in SQLite. Reported by
+      Wenxiang Qian
+    - CVE-2019-13751: Uninitialized Use in SQLite. Reported by Wenxiang Qian
+    - CVE-2019-13752: Out of bounds read in SQLite. Reported by Wenxiang Qian
+    - CVE-2019-13753: Out of bounds read in SQLite. Reported by Wenxiang Qian
+    - CVE-2019-13754: Insufficient policy enforcement in extensions. Reported
+      by Cody Crews
+    - CVE-2019-13755: Insufficient policy enforcement in extensions. Reported
+      by Masato Kinugawa
+    - CVE-2019-13756: Incorrect security UI in printing. Reported by Khalil
+      Zhani
+    - CVE-2019-13757: Incorrect security UI in Omnibox. Reported by Khalil
+      Zhani
+    - CVE-2019-13758: Insufficient policy enforcement in navigation. Reported
+      by Khalil Zhani
+    - CVE-2019-13759: Incorrect security UI. Reported by Wenxu Wu
+    - CVE-2019-13761: Incorrect security UI in Omnibox. Reported by Khalil
+      Zhani
+    - CVE-2019-13762: Insufficient policy enforcement in downloads. Reported by
+      csanuragjain
+    - CVE-2019-13763: Insufficient policy enforcement in payments. Reported by
+      weiwangpp93
 
  -- Michael Gilbert <mgilbert@debian.org>  Thu, 12 Dec 2019 04:36:09 +0000
 
