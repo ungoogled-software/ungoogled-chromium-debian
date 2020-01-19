@@ -27,6 +27,7 @@ Build-Depends:
  xz-utils,
  x11-apps,
  xfonts-base,
+ libx11-xcb-dev,
  libgl1-mesa-dev,
  libglu1-mesa-dev,
  libegl1-mesa-dev,
