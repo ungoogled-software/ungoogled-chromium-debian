@@ -6,7 +6,10 @@ This branch contains the code to build packages for: **Ubuntu 18.04 LTS (bionic)
 
 ## Downloads
 
-**Binaries** (i.e. `.deb` packages): [Get them from the Contributor Binaries website](//ungoogled-software.github.io/ungoogled-chromium-binaries/).
+**Binaries** (i.e. `.deb` packages): There are two ways to get binaries:
+
+- [Contributor Binaries website](//ungoogled-software.github.io/ungoogled-chromium-binaries/)
+- [PPA (maintained by @ryu0)](https://launchpad.net/~braewoods/+archive/ubuntu/ungoogled-chromium)
 
 **Source Code**: Use the tags labeled with `bionic` via `git checkout` (see building instructions). The branches are for development and may not be stable.
 
@@ -14,11 +17,22 @@ This branch contains the code to build packages for: **Ubuntu 18.04 LTS (bionic)
 
 **NOTE**: The packages are essentially identical in structure to Debian's `chromium` packages. **As a result, they cannot be installed simultaneously with the distro-provided Chromium package.**
 
-At minimum, you will need to install the `ungoogled-chromium` and `ungoogled-chromium-common` packages. For example:
+At minimum, you will need to install the `ungoogled-chromium` and `ungoogled-chromium-common` packages.
 
-```sh
-# dpkg -i ungoogled-chromium_*.deb ungoogled-chromium-common_*.deb
-```
+* If you have the `.deb` packages:
+
+	```sh
+	# dpkg -i ungoogled-chromium_*.deb ungoogled-chromium-common_*.deb
+	```
+
+* If you are using a PPA:
+
+	1. Follow the section "Adding this PPA to your system" on the PPA's homepage (linked above).
+	2. Run the following:
+
+	```sh
+	# apt install ungoogled-chromium ungoogled-chromium-common
+	```
 
 The other packages are as follows:
 
