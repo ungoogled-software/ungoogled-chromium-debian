@@ -115,10 +115,6 @@ ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
 njobs=$(patsubst parallel=%,%,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
 endif
 
-# paths to files needed by flot
-flotpaths=/usr/share/javascript/jquery/*min.js \
-          /usr/share/javascript/jquery-flot/*min.js \
-
 %:
 	dh $@
 
@@ -179,9 +175,6 @@ override_dh_auto_install-indep:
 
 override_dh_fixperms:
 	dh_fixperms --exclude chrome-sandbox
-
-override_dh_gencontrol:
-	dh_gencontrol -- -VBuilt-Using="$(shell dpkg-query -f '$${source:Package} (= $${source:Version}), ' -W libjs-jquery libjs-jquery-flot)"
 
 override_dh_auto_clean:
 	rm -rf out
