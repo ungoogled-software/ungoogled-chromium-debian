@@ -4,7 +4,7 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
 
 --- a/tools/gn/tools/gn/ninja_build_writer.cc
 +++ b/tools/gn/tools/gn/ninja_build_writer.cc
-@@ -278,7 +278,7 @@ bool NinjaBuildWriter::RunAndWriteFile(c
+@@ -277,7 +277,7 @@ bool NinjaBuildWriter::RunAndWriteFile(c
  }
  
  void NinjaBuildWriter::WriteNinjaRules() {
