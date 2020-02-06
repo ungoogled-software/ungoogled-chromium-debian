@@ -74,9 +74,9 @@ echo 'UPLOADER_HERE' > debian/uploader.txt
 # Final setup steps for debian/ directory
 ./debian/rules setup-debian
 
-# Add packages for LLVM 8
+# Add packages for LLVM 9
 # The easiest way to do this is to use the APT repo from apt.llvm.org
-# 1. Add this line to your /etc/apt/sources.list: deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main
+# 1. Add this line to your /etc/apt/sources.list: deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9 main
 # 2. Follow the instructions on https://apt.llvm.org for adding the signing key
 # 3. Run "apt update"
 #
