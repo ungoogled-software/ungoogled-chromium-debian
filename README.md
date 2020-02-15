@@ -44,12 +44,13 @@ TODO: Document all libraries and tools needed to build. For now, see the build d
 
     * Any other LLVM version may outright fail, or [cause unexpected behavior](//github.com/Eloston/ungoogled-chromium/issues/586).
     * on Debian-based systems, installing LLVM from the distro's repo and from `apt.llvm.org` may cause conflicts. To ensure correctness, make sure to only have one or the other installed. For example, [Clang could use the wrong linker](https://github.com/ungoogled-software/ungoogled-chromium-portablelinux/issues/21).
+* Node.js
 
 For Debian-based systems:
 
 1. Add the [the LLVM APT repo](//apt.llvm.org/) for the appropriate LLVM version (currently 8).
     * Note that the APT URLs for development (aka nightly snapshot) LLVM versions *do not contain* the LLVM version in them.
-2. `# apt install clang-8 lld-8 llvm-8-dev python python3 ninja-build`
+2. `# apt install clang-8 lld-8 llvm-8-dev python python3 ninja-build nodejs`
 
 ### Build a tar archive
 

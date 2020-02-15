@@ -12,6 +12,5 @@ linux_use_bundled_binutils=false
 proprietary_codecs=true
 symbol_level=0
 use_gnome_keyring=false
-use_jumbo_build=true
 use_kerberos=false
 use_sysroot=false
