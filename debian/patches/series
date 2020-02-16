@@ -34,7 +34,7 @@ warnings/bool-compare.patch
 #warnings/sign-compare.patch
 warnings/unused-typedefs.patch
 warnings/null-destination.patch
-#warnings/pessimizing-move.patch
+warnings/pessimizing-move.patch
 #warnings/int-in-bool-context.patch
 
 system/vpx.patch
