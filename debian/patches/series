@@ -14,7 +14,7 @@ fixes/link.patch
 fixes/gpu-timeout.patch
 #fixes/sequence-point.patch
 fixes/jumbo-namespace.patch
-#fixes/widevine-enable-version-string.patch
+fixes/widevine-enable-version-string.patch
 fixes/widevine-locations.patch
 
 #disable/owners.patch
