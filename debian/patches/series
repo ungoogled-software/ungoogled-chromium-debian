@@ -23,7 +23,7 @@ disable/buildbot.patch
 disable/chromeos.patch
 #disable/installer.patch
 disable/font-tests.patch
-#disable/swiftshader.patch
+disable/swiftshader.patch
 
 #warnings/friend.patch
 warnings/attribute.patch
