@@ -1,7 +1,7 @@
 debianization/sandbox.patch
 debianization/master-preferences.patch
 
-#gn/libcxx.patch
+gn/libcxx.patch
 
 arm/gcc_skcms_ice.patch
 arm/pffffft-buildfix.patch
