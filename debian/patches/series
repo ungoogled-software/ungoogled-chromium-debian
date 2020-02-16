@@ -11,7 +11,7 @@ arm/pffffft-buildfix.patch
 fixes/link.patch
 #fixes/mojo.patch
 #fixes/inspector.patch
-#fixes/gpu-timeout.patch
+fixes/gpu-timeout.patch
 #fixes/sequence-point.patch
 fixes/jumbo-namespace.patch
 #fixes/widevine-enable-version-string.patch
