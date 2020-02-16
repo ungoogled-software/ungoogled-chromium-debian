@@ -48,6 +48,7 @@ system/zlib.patch
 #system/harfbuzz.patch
 #system/openjpeg.patch
 #system/convertutf.patch
+system/xml.patch
 
 #buster/icu63.patch
 buster/vpx17.patch
