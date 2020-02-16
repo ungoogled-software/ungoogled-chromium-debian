@@ -22,7 +22,7 @@ disable/openh264.patch
 #disable/buildbot.patch
 disable/chromeos.patch
 #disable/installer.patch
-#disable/font-tests.patch
+disable/font-tests.patch
 #disable/swiftshader.patch
 
 #warnings/friend.patch
