@@ -30,7 +30,7 @@ warnings/attribute.patch
 warnings/multichar.patch
 warnings/deprecated.patch
 warnings/not-unused.patch
-#warnings/bool-compare.patch
+warnings/bool-compare.patch
 #warnings/sign-compare.patch
 warnings/unused-typedefs.patch
 warnings/null-destination.patch
