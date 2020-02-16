@@ -56,7 +56,7 @@ buster/vpx17.patch
 archlinux/zlib.patch
 
 inox-patchset/chromium-skia-harmony.patch
-#inox-patchset/fix-cfi-failures-with-unbundled-libxml.patch
+inox-patchset/fix-cfi-failures-with-unbundled-libxml.patch
 
 #fedora/vaapi.patch
 #fedora/vaapi-fix.patch
