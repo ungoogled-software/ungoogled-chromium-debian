@@ -19,7 +19,7 @@ fixes/widevine-locations.patch
 
 #disable/owners.patch
 disable/openh264.patch
-#disable/buildbot.patch
+disable/buildbot.patch
 disable/chromeos.patch
 #disable/installer.patch
 disable/font-tests.patch
