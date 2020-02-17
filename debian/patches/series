@@ -46,7 +46,7 @@ system/zlib.patch
 system/ffmpeg.patch
 #system/jsoncpp.patch
 #system/harfbuzz.patch
-#system/openjpeg.patch
+system/openjpeg.patch
 #system/convertutf.patch
 system/xml.patch
 
