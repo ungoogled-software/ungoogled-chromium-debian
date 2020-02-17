@@ -1,0 +1,28 @@
+Author: Olivier Tilloy <olivier.tilloy@canonical.com>
+Description: Do not use warning flags that require a newer Clang (bionic has 9.0.0,
+  see https://releases.llvm.org/9.0.0/tools/clang/docs/DiagnosticsReference.html)
+
+--- a/build/config/compiler/BUILD.gn
++++ b/build/config/compiler/BUILD.gn
+@@ -1520,21 +1520,6 @@ config("default_warnings") {
+           # Ignore warnings about MSVC optimization pragmas.
+           # TODO(thakis): Only for no_chromium_code? http://crbug.com/912662
+           "-Wno-ignored-pragma-optimize",
+-
+-          # TODO(https://crbug.com/989932): Evaluate and possibly enable.
+-          "-Wno-implicit-int-float-conversion",
+-
+-          # TODO(https://crbug.com/999886): Clean up, enable.
+-          "-Wno-final-dtor-non-final-class",
+-
+-          # TODO(https://crbug.com/1016947) Clean up, enable.
+-          "-Wno-bitwise-conditional-parentheses",
+-
+-          # TODO(https://crbug.com/1016945) Clean up, enable.
+-          "-Wno-builtin-assume-aligned-alignment",
+-
+-          # TODO(https://crbug.com/1028110): Evaluate and possible enable.
+-          "-Wno-deprecated-copy",
+         ]
+ 
+         if (is_fuchsia) {
