@@ -1,3 +1,12 @@
+chromium (80.0.3987.116-1) unstable; urgency=medium
+
+  * New upstream security release.
+    - CVE-2020-6383: Type confusion in V8. Reported by Sergei Glazunov
+    - CVE-2020-6384: Use after free in WebAudio. Reported by David Manouchehri
+    - CVE-2020-6386: Use after free in speech. Reported by Zhe Jin
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 22 Feb 2020 03:01:15 +0000
+
 chromium (80.0.3987.106-1) unstable; urgency=medium
 
   * New upstream stable release.
