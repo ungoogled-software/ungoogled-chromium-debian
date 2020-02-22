@@ -1,3 +1,79 @@
+chromium (80.0.3987.106-1) unstable; urgency=medium
+
+  * New upstream stable release.
+    - CVE-2019-19923: Out of bounds memory access in SQLite. Reported by
+      Richard Lorenz
+    - CVE-2019-19925: Vulnerability in SQLite. Reported by Richard Lorenz
+    - CVE-2019-19926: Inappropriate implementation in SQLite. Reported by
+      Richard Lorenz
+    - CVE-2019-19880: Vulnerability in SQLite. Reported by Richard Lorenz
+    - CVE-2020-6381: Integer overflow in JavaScript. Reported by The UK's
+      National Cyber Security Centre
+    - CVE-2020-6382: Type Confusion in JavaScript. Reported by Soyeon Park and
+      Wen Xu
+    - CVE-2020-6385: Insufficient policy enforcement in storage. Reported by
+      Sergei Glazunov
+    - CVE-2020-6387: Out of bounds write in WebRTC. Reported by Natalie
+      Silvanovich
+    - CVE-2020-6388: Out of bounds memory access in WebAudio. Reported by
+      Sergei Glazunov
+    - CVE-2020-6389: Out of bounds write in WebRTC. Reported by Natalie
+      Silvanovich
+    - CVE-2020-6390: Out of bounds memory access in streams. Reported by Sergei
+      Glazunov
+    - CVE-2020-6391: Insufficient validation of untrusted input in Blink.
+      Reported by Michał Bentkowski
+    - CVE-2020-6392: Insufficient policy enforcement in extensions. Reported by
+      Microsoft Edge Team
+    - CVE-2020-6393: Insufficient policy enforcement in Blink. Reported by Mark
+      Amery
+    - CVE-2020-6394: Insufficient policy enforcement in Blink. Reported by Phil
+      Freo
+    - CVE-2020-6395: Out of bounds read in JavaScript. Reported by Pierre
+      Langlois
+    - CVE-2020-6396: Inappropriate implementation in Skia. Reported by William
+      Luc Ritchie
+    - CVE-2020-6397: Incorrect security UI in sharing. Reported by Khalil Zhani
+    - CVE-2020-6398: Uninitialized use in PDFium. Reported by pdknsk
+    - CVE-2020-6399: Insufficient policy enforcement in AppCache. Reported by
+      Luan Herrera
+    - CVE-2020-6400: Inappropriate implementation in CORS. Reported by Takashi
+      Yoneuchi
+    - CVE-2020-6401: Insufficient validation of untrusted input in Omnibox.
+      Reported by Tzachy Horesh
+    - CVE-2020-6402: Insufficient policy enforcement in downloads. Reported by
+      Vladimir Metnew
+    - CVE-2020-6403: Incorrect security UI in Omnibox. Reported by Khalil Zhani
+    - CVE-2020-6404: Inappropriate implementation in Blink. Reported by kanchi
+    - CVE-2020-6405: Out of bounds read in SQLite. Reported by Yongheng Chen
+      and Rui Zhong
+    - CVE-2020-6406: Use after free in audio. Reported by Sergei Glazunov
+    - CVE-2020-6408: Insufficient policy enforcement in CORS. Reported by Zhong
+      Zhaochen
+    - CVE-2020-6409: Inappropriate implementation in Omnibox. Reported by
+      Divagar S and Bharathi V
+    - CVE-2020-6410: Insufficient policy enforcement in navigation. Reported by
+      evi1m0
+    - CVE-2020-6411: Insufficient validation of untrusted input in Omnibox.
+      Reported by Khalil Zhani
+    - CVE-2020-6412: Insufficient validation of untrusted input in Omnibox.
+      Reported by Zihan Zheng
+    - CVE-2020-6413: Inappropriate implementation in Blink. Reported by Michał
+      Bentkowski
+    - CVE-2020-6414: Insufficient policy enforcement in Safe Browsing. Reported
+      by Lijo A.T
+    - CVE-2020-6415: Inappropriate implementation in JavaScript. Reported by
+      Avihay Cohen
+    - CVE-2020-6416: Insufficient data validation in streams. Reported by
+      Woojin Oh
+    - CVE-2020-6417: Inappropriate implementation in installer. Reported by
+      Renato Moraes and Altieres Rohr
+  * Remove --ignore-gpu-blacklist from the default flags (closes: #947207).
+  * Update standards version to 4.5.0.
+  * Build with clang instead of gcc.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 16 Feb 2020 23:33:50 +0000
+
 chromium (79.0.3945.130-2) unstable; urgency=medium
 
   * Add libx11-xcb-dev as a build dependency.

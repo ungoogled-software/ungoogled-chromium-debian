@@ -2,7 +2,6 @@ debian/files
 debian/scripts/mk-origtargz
 
 Makefile
-third_party/flot/*.js
 
 base/third_party/libevent/BUILD.gn
 build/secondary/third_party/libjpeg_turbo/BUILD.gn

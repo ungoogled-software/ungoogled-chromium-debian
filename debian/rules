@@ -9,11 +9,11 @@ export DEB_BUILD_MAINT_OPTIONS=hardening=+all
 # indicate that binary targets do not require root
 export DEB_RULES_REQUIRES_ROOT=no
 
-# default to gcc when compiler environment variables are unset
+# default to clang when compiler environment variables are unset
 export AR=ar
 export NM=nm
-export CC?=gcc
-export CXX?=g++
+export CC=clang
+export CXX=clang++
 
 # more verbose linker output
 export LDFLAGS+=-Wl,--stats
@@ -23,7 +23,6 @@ export CXXFLAGS+=-Wno-pedantic \
                  -Wno-unused-result \
                  -Wno-unused-function \
                  -Wno-unused-variable \
-                 -Wno-unused-but-set-variable \
                  -Wno-deprecated-declarations \
 
 # ignore warnings for minor mistakes that are too common
@@ -31,27 +30,12 @@ export CXXFLAGS+=-Wno-return-type \
                  -Wno-parentheses \
                  -Wno-enum-compare \
                  -Wno-dangling-else \
-                 -Wno-misleading-indentation \
-
-# ignore warnings due to gcc bug (https://gcc.gnu.org/bugzilla/show_bug.cgi?id=84055)
-export CXXFLAGS+=-Wno-ignored-attributes
-
-# ignore pragmas intended for clang
-export CXXFLAGS+=-Wno-unknown-pragmas
-
-# ingore new gcc 8 warnings that aren't yet handled upstream
-export CXXFLAGS+=-Wno-address \
-                 -Wno-array-bounds \
-                 -Wno-class-memaccess \
-                 -Wno-invalid-offsetof \
-                 -Wno-subobject-linkage \
-                 -Wno-address-of-packed-member \
 
 # do not optimize away null pointer safety checks
 export CXXFLAGS+=-fno-delete-null-pointer-checks
 
-# disable clang options
-defines=is_clang=false clang_use_chrome_plugins=false
+# disable clang plugins
+defines=clang_use_chrome_plugins=false
 
 # build using system toolchain
 defines+=host_toolchain=\"//build/toolchain/linux/unbundle:default\"
@@ -73,7 +57,8 @@ defines+=host_cpu=\"arm\" use_vaapi=false arm_use_neon=false symbol_level=0
 endif
 
 # disabled features
-defines+=is_debug=false \
+defines+=is_cfi=false \
+         is_debug=false \
          use_goma=false \
          use_ozone=false \
          use_sysroot=false \
@@ -108,8 +93,6 @@ defines+=use_gio=true \
          use_system_freetype=true \
          use_system_harfbuzz=true \
          use_system_libopenjpeg2=true \
-         use_jumbo_build=true \
-         jumbo_file_merge_limit=8 \
          concurrent_links=1 \
          proprietary_codecs=true \
          ffmpeg_branding=\"Chrome\" \
