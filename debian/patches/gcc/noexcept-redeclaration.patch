@@ -45,8 +45,8 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  // MostVisitedURL --------------------------------------------------------------
  
---- a/content/browser/indexed_db/scopes/disjoint_range_lock_manager.cc
-+++ b/content/browser/indexed_db/scopes/disjoint_range_lock_manager.cc
+--- a/components/services/storage/indexed_db/scopes/disjoint_range_lock_manager.cc
++++ b/components/services/storage/indexed_db/scopes/disjoint_range_lock_manager.cc
 @@ -19,7 +19,7 @@ DisjointRangeLockManager::LockRequest::L
      : requested_type(type),
        locks_holder(std::move(locks_holder)),

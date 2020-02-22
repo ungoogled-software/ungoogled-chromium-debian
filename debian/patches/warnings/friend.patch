@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/ui/base/clipboard/clipboard_format_type.h
 +++ b/ui/base/clipboard/clipboard_format_type.h
-@@ -94,7 +94,6 @@ struct COMPONENT_EXPORT(BASE_CLIPBOARD_T
+@@ -96,7 +96,6 @@ struct COMPONENT_EXPORT(BASE_CLIPBOARD_T
  
   private:
    friend class base::NoDestructor<ClipboardFormatType>;
@@ -21,14 +21,3 @@ author: Michael Gilbert <mgilbert@debian.org>
    friend class AudioFocusWebContentsObserverBrowserTest;
  
    explicit AudioFocusWebContentsObserver(content::WebContents*);
---- a/base/containers/intrusive_heap.h
-+++ b/base/containers/intrusive_heap.h
-@@ -458,7 +458,7 @@ class IntrusiveHeap {
-   // General operations.
- 
-   void swap(IntrusiveHeap& other) noexcept;
--  friend void swap(IntrusiveHeap& lhs, IntrusiveHeap& rhs);
-+  void swap(IntrusiveHeap& lhs, IntrusiveHeap& rhs);
- 
-   // Comparison operators. These check for exact equality. Two heaps that are
-   // semantically equivalent (contain the same elements, but in different

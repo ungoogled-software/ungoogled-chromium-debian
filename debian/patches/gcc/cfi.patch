@@ -40,13 +40,3 @@ author: Michael Gilbert <mgilbert@debian.org>
  DiscardAtkKeyEvent AtkUtilAuraLinux::HandleAtkKeyEvent(
      AtkKeyEventStruct* key_event) {
    DCHECK(key_event);
---- a/base/memory/protected_memory_cfi.h
-+++ b/base/memory/protected_memory_cfi.h
-@@ -38,7 +38,6 @@ class UnsanitizedCfiCall {
-   UnsanitizedCfiCall(UnsanitizedCfiCall&&) = default;
- 
-   template <typename... Args>
--  NO_SANITIZE("cfi-icall")
-   auto operator()(Args&&... args) {
-     return function_(std::forward<Args>(args)...);
-   }

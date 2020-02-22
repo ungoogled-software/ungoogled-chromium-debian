@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/mojo/public/tools/bindings/chromium_bindings_configuration.gni
 +++ b/mojo/public/tools/bindings/chromium_bindings_configuration.gni
-@@ -7,7 +7,6 @@ _typemap_imports = [
+@@ -8,7 +8,6 @@ _typemap_imports = [
    "//chrome/common/importer/typemaps.gni",
    "//chrome/common/media_router/mojom/typemaps.gni",
    "//chrome/typemaps.gni",
@@ -13,38 +13,36 @@ author: Michael Gilbert <mgilbert@debian.org>
    "//chromeos/services/device_sync/public/mojom/typemaps.gni",
 --- a/content/shell/BUILD.gn
 +++ b/content/shell/BUILD.gn
-@@ -163,8 +163,6 @@ jumbo_static_library("content_shell_lib"
-     "browser/web_test/fake_bluetooth_scanning_prompt.h",
-     "browser/web_test/leak_detector.cc",
+@@ -165,8 +165,6 @@ jumbo_static_library("content_shell_lib"
      "browser/web_test/leak_detector.h",
+     "browser/web_test/mock_client_hints_controller_delegate.cc",
+     "browser/web_test/mock_client_hints_controller_delegate.h",
 -    "browser/web_test/mojo_web_test_helper.cc",
 -    "browser/web_test/mojo_web_test_helper.h",
      "browser/web_test/secondary_test_window_observer.cc",
      "browser/web_test/secondary_test_window_observer.h",
      "browser/web_test/test_info_extractor.cc",
-@@ -298,8 +296,6 @@ jumbo_static_library("content_shell_lib"
+@@ -301,7 +299,6 @@ jumbo_static_library("content_shell_lib"
      "//content/public/common:service_names",
      "//content/shell/test_runner:test_runner",
      "//content/test:content_test_mojo_bindings",
 -    "//content/test:mojo_web_test_bindings",
--    "//content/test:mojo_web_test_old_names_bindings",
      "//content/test:test_support",
      "//content/test:web_test_support",
      "//device/bluetooth",
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -1039,8 +1039,6 @@ if (!is_ios) {
+@@ -1033,7 +1033,6 @@ if (!is_ios) {
        ":layout_test_data_mojo_bindings",
        ":layout_test_data_mojo_bindings_lite",
        "//content/shell:content_shell",
 -      "//content/test:mojo_web_test_bindings_js_data_deps",
--      "//content/test:mojo_web_test_old_names_bindings_js_data_deps",
        "//content/shell:mojo_bindings_js_data_deps",
        "//device/bluetooth/public/mojom:fake_bluetooth_interfaces_js_data_deps",
        "//device/vr/public/mojom:mojom_js_data_deps",
 --- a/content/shell/browser/web_test/web_test_content_browser_client.cc
 +++ b/content/shell/browser/web_test/web_test_content_browser_client.cc
-@@ -28,7 +28,6 @@
+@@ -29,7 +29,6 @@
  #include "content/shell/browser/web_test/blink_test_controller.h"
  #include "content/shell/browser/web_test/fake_bluetooth_chooser.h"
  #include "content/shell/browser/web_test/fake_bluetooth_chooser_factory.h"
@@ -52,19 +50,19 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "content/shell/browser/web_test/web_test_bluetooth_fake_adapter_setter_impl.h"
  #include "content/shell/browser/web_test/web_test_browser_context.h"
  #include "content/shell/browser/web_test/web_test_browser_main_parts.h"
-@@ -47,11 +46,6 @@ namespace {
+@@ -51,11 +50,6 @@ namespace {
  
  WebTestContentBrowserClient* g_web_test_browser_client;
  
--void BindWebTestHelper(mojom::MojoWebTestHelperRequest request,
+-void BindWebTestHelper(mojo::PendingReceiver<mojom::MojoWebTestHelper> receiver,
 -                       RenderFrameHost* render_frame_host) {
--  MojoWebTestHelper::Create(std::move(request));
+-  MojoWebTestHelper::Create(std::move(receiver));
 -}
 -
  class TestOverlayWindow : public OverlayWindow {
   public:
    TestOverlayWindow() = default;
-@@ -154,7 +148,6 @@ void WebTestContentBrowserClient::Expose
+@@ -158,7 +152,6 @@ void WebTestContentBrowserClient::Expose
            &WebTestContentBrowserClient::CreateFakeBluetoothChooserFactory,
            base::Unretained(this)),
        ui_task_runner);
@@ -72,7 +70,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    registry->AddInterface(
        base::BindRepeating(
            &WebTestContentBrowserClient::BindClipboardHostForRequest,
-@@ -327,7 +320,6 @@ bool WebTestContentBrowserClient::CanAcc
+@@ -354,7 +347,6 @@ content::TtsPlatform* WebTestContentBrow
  void WebTestContentBrowserClient::ExposeInterfacesToFrame(
      service_manager::BinderRegistryWithArgs<content::RenderFrameHost*>*
          registry) {
@@ -90,7 +88,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "device/bluetooth/public/mojom/test/fake_bluetooth.mojom.h"
  #include "media/mojo/buildflags.h"
  #include "net/ssl/client_cert_identity.h"
-@@ -153,14 +152,10 @@ const service_manager::Manifest& GetCont
+@@ -151,14 +150,10 @@ const service_manager::Manifest& GetCont
            .ExposeCapability(
                "renderer",
                service_manager::Manifest::InterfaceList<

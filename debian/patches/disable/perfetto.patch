@@ -41,18 +41,25 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/content/browser/tracing/background_tracing_active_scenario.cc
 +++ b/content/browser/tracing/background_tracing_active_scenario.cc
-@@ -20,10 +20,6 @@
- #include "mojo/public/cpp/bindings/binding.h"
+@@ -12,17 +12,9 @@
+ #include "base/rand_util.h"
+ #include "base/timer/timer.h"
+ #include "build/build_config.h"
+-#include "content/browser/tracing/background_tracing_config_impl.h"
+-#include "content/browser/tracing/background_tracing_manager_impl.h"
+-#include "content/browser/tracing/background_tracing_rule.h"
+-#include "content/browser/tracing/tracing_controller_impl.h"
+-#include "content/public/browser/tracing_service.h"
+ #include "mojo/public/cpp/bindings/receiver.h"
+ #include "mojo/public/cpp/bindings/remote.h"
  #include "mojo/public/cpp/system/data_pipe_drainer.h"
- #include "services/service_manager/public/cpp/connector.h"
 -#include "services/tracing/public/cpp/perfetto/perfetto_config.h"
 -#include "services/tracing/public/cpp/perfetto/trace_event_data_source.h"
 -#include "services/tracing/public/cpp/tracing_features.h"
--#include "services/tracing/public/mojom/constants.mojom.h"
  
  using base::trace_event::TraceConfig;
  using Metrics = content::BackgroundTracingManagerImpl::Metrics;
-@@ -68,6 +64,7 @@ class BackgroundTracingActiveScenario::T
+@@ -67,6 +59,7 @@ class BackgroundTracingActiveScenario::T
        const base::RepeatingClosure& on_abort_callback) = 0;
  };
  
@@ -60,7 +67,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  class PerfettoTracingSession
      : public BackgroundTracingActiveScenario::TracingSession,
        public tracing::mojom::TracingSessionClient,
-@@ -186,6 +183,7 @@ class PerfettoTracingSession
+@@ -181,6 +174,7 @@ class PerfettoTracingSession
    bool has_finished_read_buffers_ = false;
    bool has_finished_receiving_data_ = false;
  };
@@ -68,7 +75,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  class LegacyTracingSession
      : public BackgroundTracingActiveScenario::TracingSession {
-@@ -370,8 +368,6 @@ bool BackgroundTracingActiveScenario::St
+@@ -366,8 +360,6 @@ bool BackgroundTracingActiveScenario::St
  
    DCHECK(!tracing_session_);
    if (base::FeatureList::IsEnabled(features::kBackgroundTracingProtoOutput)) {
@@ -79,7 +86,7 @@ author: Michael Gilbert <mgilbert@debian.org>
          std::make_unique<LegacyTracingSession>(this, chrome_config);
 --- a/content/browser/devtools/protocol/tracing_handler.cc
 +++ b/content/browser/devtools/protocol/tracing_handler.cc
-@@ -246,6 +246,7 @@ class TracingHandler::TracingSession {
+@@ -247,6 +247,7 @@ class TracingHandler::TracingSession {
    DISALLOW_COPY_AND_ASSIGN(TracingSession);
  };
  
@@ -87,7 +94,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  class TracingHandler::PerfettoTracingSession
      : public TracingHandler::TracingSession,
        public tracing::mojom::TracingSessionClient,
-@@ -514,6 +515,7 @@ class TracingHandler::PerfettoTracingSes
+@@ -509,6 +510,7 @@ class TracingHandler::PerfettoTracingSes
    base::trace_event::TraceConfig last_config_for_perfetto_;
  #endif
  };
@@ -95,7 +102,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  TracingHandler::TracingHandler(FrameTreeNode* frame_tree_node,
                                 DevToolsIOContext* io_context)
-@@ -545,8 +547,6 @@ TracingHandler::TracingHandler(FrameTree
+@@ -540,8 +542,6 @@ TracingHandler::TracingHandler(FrameTree
      return;
    }
  
@@ -104,7 +111,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    g_any_agent_tracing = true;
  }
  
-@@ -572,8 +572,6 @@ void TracingHandler::Wire(UberDispatcher
+@@ -567,8 +567,6 @@ void TracingHandler::Wire(UberDispatcher
  }
  
  Response TracingHandler::Disable() {
@@ -113,7 +120,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    return Response::OK();
  }
  
-@@ -611,8 +609,6 @@ void TracingHandler::OnTraceComplete() {
+@@ -606,8 +604,6 @@ void TracingHandler::OnTraceComplete() {
    DCHECK(!trace_data_buffer_state_.in_string);
    DCHECK(!trace_data_buffer_state_.slashed);
  
@@ -122,7 +129,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    frontend_->TracingComplete(data_loss);
  }
  
-@@ -675,8 +671,6 @@ std::string TracingHandler::UpdateTraceD
+@@ -670,8 +666,6 @@ std::string TracingHandler::UpdateTraceD
  }
  
  void TracingHandler::OnTraceToStreamComplete(const std::string& stream_handle) {
@@ -131,7 +138,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    std::string stream_format = (proto_format_ ? Tracing::StreamFormatEnum::Proto
                                               : Tracing::StreamFormatEnum::Json);
    std::string stream_compression =
-@@ -773,11 +767,6 @@ void TracingHandler::StartTracingWithGpu
+@@ -768,11 +762,6 @@ void TracingHandler::StartTracingWithGpu
  
    SetupProcessFilter(gpu_pid, nullptr);
  
@@ -143,7 +150,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    g_any_agent_tracing = true;
  }
  
-@@ -828,7 +817,6 @@ void TracingHandler::OnProcessReady(Rend
+@@ -823,7 +812,6 @@ void TracingHandler::OnProcessReady(Rend
    trace_config_.SetProcessFilterConfig(
        base::trace_event::TraceConfig::ProcessFilterConfig(
            included_process_ids));
@@ -151,7 +158,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  Response TracingHandler::End() {
-@@ -983,16 +971,12 @@ void TracingHandler::SetupTimer(double u
+@@ -979,16 +967,12 @@ void TracingHandler::SetupTimer(double u
  }
  
  void TracingHandler::UpdateBufferUsage() {
@@ -168,7 +175,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    did_initiate_recording_ = false;
    g_any_agent_tracing = false;
    if (video_consumer_)
-@@ -1038,7 +1022,6 @@ void TracingHandler::ReadyToCommitNaviga
+@@ -1034,7 +1018,6 @@ void TracingHandler::ReadyToCommitNaviga
  
    SetupProcessFilter(base::kNullProcessId,
                       navigation_request->GetRenderFrameHost());
@@ -196,20 +203,15 @@ author: Michael Gilbert <mgilbert@debian.org>
    FRIEND_TEST_ALL_PREFIXES(TracingHandlerTest,
 --- a/chrome/browser/ui/views/chrome_browser_main_extra_parts_views.cc
 +++ b/chrome/browser/ui/views/chrome_browser_main_extra_parts_views.cc
-@@ -16,12 +16,10 @@
+@@ -16,7 +16,6 @@
  #include "chrome/browser/ui/views/devtools_process_observer.h"
  #include "chrome/browser/ui/views/relaunch_notification/relaunch_notification_controller.h"
  #include "components/constrained_window/constrained_window_views.h"
 -#include "components/ui_devtools/connector_delegate.h"
  #include "components/ui_devtools/switches.h"
  #include "components/ui_devtools/views/devtools_server_util.h"
- #include "content/public/browser/system_connector.h"
- #include "services/service_manager/sandbox/switches.h"
--#include "services/tracing/public/mojom/constants.mojom.h"
- #include "ui/base/material_design/material_design_controller.h"
- 
- #if defined(USE_AURA)
-@@ -48,20 +46,6 @@
+ #include "content/public/browser/tracing_service.h"
+@@ -45,19 +44,6 @@
  #include "ui/base/l10n/l10n_util.h"
  #endif  // defined(OS_LINUX) && !defined(OS_CHROMEOS)
  
@@ -222,15 +224,14 @@ author: Michael Gilbert <mgilbert@debian.org>
 -
 -  void BindTracingConsumerHost(
 -      mojo::PendingReceiver<tracing::mojom::ConsumerHost> receiver) override {
--    content::GetSystemConnector()->Connect(tracing::mojom::kServiceName,
--                                           std::move(receiver));
+-    content::GetTracingService().BindConsumerHost(std::move(receiver));
 -  }
 -};
 -
  ChromeBrowserMainExtraPartsViews::ChromeBrowserMainExtraPartsViews() {}
  
  ChromeBrowserMainExtraPartsViews::~ChromeBrowserMainExtraPartsViews() {
-@@ -101,10 +85,8 @@ void ChromeBrowserMainExtraPartsViews::P
+@@ -97,10 +83,8 @@ void ChromeBrowserMainExtraPartsViews::P
    if (ui_devtools::UiDevToolsServer::IsUiDevToolsEnabled(
            ui_devtools::switches::kEnableUiDevTools)) {
      // Starts the UI Devtools server for browser UI (and Ash UI on Chrome OS).
@@ -250,8 +251,8 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "base/trace_event/traced_value.h"
 -#include "components/ui_devtools/connector_delegate.h"
  #include "components/ui_devtools/devtools_base_agent.h"
- #include "components/ui_devtools/devtools_protocol_encoding.h"
  #include "mojo/public/cpp/bindings/receiver.h"
+ #include "mojo/public/cpp/bindings/remote.h"
 @@ -81,6 +80,7 @@ class TracingAgent::DevToolsTraceEndpoin
    base::WeakPtr<TracingAgent> tracing_agent_;
  };

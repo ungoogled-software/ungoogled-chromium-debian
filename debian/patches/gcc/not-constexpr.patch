@@ -14,7 +14,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      // The address cannot be evaluated at compile-time in Windows compoment
 --- a/base/trace_event/trace_event.h
 +++ b/base/trace_event/trace_event.h
-@@ -242,7 +242,7 @@
+@@ -245,7 +245,7 @@
        base::trace_event::BuiltinCategories::IsAllowedCategory(category_group), \
        "Unknown tracing category is used. Please register your "                \
        "category in base/trace_event/builtin_categories.h");                    \
@@ -25,7 +25,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    const unsigned char* INTERNAL_TRACE_EVENT_UID(category_group_enabled);       \
 --- a/base/trace_event/trace_log.h
 +++ b/base/trace_event/trace_log.h
-@@ -219,7 +219,7 @@ class BASE_EXPORT TraceLog : public Memo
+@@ -223,7 +223,7 @@ class BASE_EXPORT TraceLog : public Memo
    static const unsigned char* GetCategoryGroupEnabled(const char* name);
    static const char* GetCategoryGroupName(
        const unsigned char* category_group_enabled);

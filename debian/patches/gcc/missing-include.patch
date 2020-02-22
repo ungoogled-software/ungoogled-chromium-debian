@@ -1,3 +1,6 @@
+description: add include statements needed by gcc
+author: Michael Gilbert <mgilbert@debian.org>
+
 --- a/third_party/one_euro_filter/src/one_euro_filter.h
 +++ b/third_party/one_euro_filter/src/one_euro_filter.h
 @@ -5,6 +5,8 @@
@@ -9,13 +12,3 @@
  namespace one_euro_filter {
  namespace test {
  class OneEuroFilterTest;
---- a/chrome/browser/apps/launch_service/launch_manager.h
-+++ b/chrome/browser/apps/launch_service/launch_manager.h
-@@ -5,6 +5,7 @@
- #ifndef CHROME_BROWSER_APPS_LAUNCH_SERVICE_LAUNCH_MANAGER_H_
- #define CHROME_BROWSER_APPS_LAUNCH_SERVICE_LAUNCH_MANAGER_H_
- 
-+#include <vector>
- #include <string>
- 
- #include "base/macros.h"
