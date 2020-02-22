@@ -8,26 +8,35 @@ arm/pffffft-buildfix.patch
 
 gcc/ambiguous-initializer.patch
 
-fixes/link.patch
+clang/flags.patch
+
+fixes/quic.patch
 fixes/mojo.patch
+fixes/breakpad.patch
 fixes/inspector.patch
 fixes/gpu-timeout.patch
 fixes/sequence-point.patch
 fixes/jumbo-namespace.patch
 fixes/widevine-enable-version-string.patch
 fixes/widevine-locations.patch
-fixes/naming-collision.patch
 fixes/implicit-headers.patch
+fixes/missing-includes.patch
+fixes/widevine-locations.patch
+fixes/multiple-definition.patch
+fixes/incomplete-definition.patch
 
 disable/owners.patch
 disable/openh264.patch
 disable/buildbot.patch
+disable/catapult.patch
 disable/chromeos.patch
 disable/installer.patch
 disable/font-tests.patch
 disable/swiftshader.patch
 
+warnings/pffft.patch
 warnings/friend.patch
+warnings/restrict.patch
 warnings/attribute.patch
 warnings/multichar.patch
 warnings/deprecated.patch
@@ -37,15 +46,21 @@ warnings/sign-compare.patch
 warnings/unused-typedefs.patch
 warnings/null-destination.patch
 warnings/pessimizing-move.patch
+warnings/unused-typedefs.patch
+warnings/null-destination.patch
+warnings/pessimizing-move.patch
+warnings/attribute-ignored.patch
 warnings/int-in-bool-context.patch
 
 system/vpx.patch
 system/icu.patch
 system/jpeg.patch
+system/node.patch
 system/nspr.patch
 system/zlib.patch
 system/event.patch
 system/ffmpeg.patch
+system/libxml2.patch
 system/jsoncpp.patch
 system/harfbuzz.patch
 system/openjpeg.patch
@@ -53,6 +68,7 @@ system/convertutf.patch
 
 buster/icu63.patch
 buster/vpx17.patch
+buster/opus13.patch
 
 archlinux/zlib.patch
 
