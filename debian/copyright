@@ -35,6 +35,11 @@ Files-Excluded:
  chrome/installer/launcher_support
  chrome/common/extensions/docs
  chrome/common/safe_browsing/rar_analyzer.*
+<<<<<<< HEAD
+=======
+ chrome/browser/resources/chromeos
+ chrome/browser/resources/default_apps
+>>>>>>> efe1b39c99ae33c6c030027c3390833587dab98a
  chrome/test/data/android
  chrome/test/data/chromeos
  chrome/test/data/extensions
@@ -45,6 +50,7 @@ Files-Excluded:
  tools/android
  tools/skia_goldctl
  tools/perf/contrib
+ tools/perf/testdata
  tools/perf/page_sets
  tools/perf/measurements/test_data
  tools/perf/page_sets/maps_perf_test
@@ -82,7 +88,6 @@ Files-Excluded:
  third_party/depot_tools
  third_party/libjpeg_turbo
  third_party/win_build_output
- third_party/flot/*.js
  third_party/zlib/adler*
  third_party/zlib/crc32*
  third_party/zlib/deflate*
@@ -106,31 +111,30 @@ Files-Excluded:
  third_party/ffmpeg/chromium
  third_party/openh264/src
  third_party/expat/src
- third_party/*rjsmin/bench
  third_party/unrar
+<<<<<<< HEAD
+=======
+ third_party/perfetto/ui/src/gen
+>>>>>>> efe1b39c99ae33c6c030027c3390833587dab98a
  third_party/checkstyle
  third_party/swiftshader
  third_party/apache-win32
  third_party/apache-portable-runtime
  third_party/instrumented_libraries
  third_party/sqlite/sqlite-src*
- third_party/angle/third_party/deqp
  third_party/angle/third_party/rapidjson
  third_party/sfntly/src/java/lib
  third_party/sfntly/src/cpp/ext/redist
  third_party/chromevox/third_party/sre
- third_party/openscreen/src/buildtools
  third_party/crashpad/crashpad/handler/win
  third_party/crashpad/crashpad/snapshot/elf/elf_image_reader_fuzzer_corpus
  third_party/blink/renderer/platform/testing/data
- third_party/blink/renderer/devtools/scripts/closure
  third_party/blink/renderer/platform/text_codec_fuzzer_seed_corpus
  third_party/google_input_tools/src/chrome/os/inputview/_locales/*.js
  v8/third_party/binutils
  v8/third_party/colorama
  v8/third_party/googletest
  v8/third_party/inspector_protocol
- v8/benchmarks/regexp.js
  third_party/binutils
  third_party/libxml/mac
  third_party/libxml/linux
@@ -138,9 +142,12 @@ Files-Excluded:
  third_party/node
  third_party/mocha/mocha.js
  third_party/chaijs/chai.js
- third_party/devtools-node-modules
  third_party/blanketjs/src/blanket.js
  third_party/accessibility-audit/axs_testing.js
+<<<<<<< HEAD
+=======
+ third_party/catapult
+>>>>>>> efe1b39c99ae33c6c030027c3390833587dab98a
  third_party/webrtc/sdk
  third_party/webrtc/data
  third_party/webrtc/examples
@@ -150,6 +157,11 @@ Files-Excluded:
  third_party/pdfium/third_party/libopenjpeg20
  third_party/breakpad/breakpad/src/client/mac
  third_party/boringssl/src/crypto/cipher_extra/test
+<<<<<<< HEAD
+=======
+ third_party/dom_distiller_js/dist/js/domdistiller_wrapped.js
+ third_party/devtools-frontend/src/node_modules/fsevents/fsevents.node
+>>>>>>> efe1b39c99ae33c6c030027c3390833587dab98a
  third_party/libphonenumber/dist/javascript/i18n/phonenumbers/metadata.js
  third_party/libphonenumber/dist/javascript/i18n/phonenumbers/metadatalite.js
 
@@ -6656,10 +6668,6 @@ Copyright: 2014, Adobe Systems Inc
            2010-2012, Zoltan Herczeg <zherczeg@webkit.org>
 License: LGPL-2+
 
-Files: third_party/WebKit/Source/devtools/front_end/*
-Copyright: Marijn Haverbeke and others
-License: MIT
-
 Files: third_party/WebKit/Source/core/layout/ScrollAlignment.cpp
        third_party/WebKit/Source/core/layout/ScrollAlignment.h
        third_party/WebKit/Source/core/paint/PaintLayer.cpp
@@ -6718,13 +6726,6 @@ Files: third_party/WebKit/Tools/Scripts/webkitpy/thirdparty/irc/ircbot.py
 Copyright: 1999, 2002 Joel Rosdahl
            1991-1999, Free Software Foundation, Inc
 License: LGPL-2.1+
-
-Files: third_party/WebKit/Source/build/scripts/rjsmin.py
-       third_party/WebKit/Source/devtools/front_end/es6.js
-       third_party/WebKit/Source/devtools/scripts/closure/COPYING
-       third_party/WebKit/Source/devtools/scripts/closure/README.md
-Copyright: 2009-2014, The Closure Compiler Authors
-License: Apache-2.0
 
 Files: third_party/WebKit/Tools/Scripts/webkitpy/thirdparty/coverage/htmlfiles/jquery.hotkeys.js
 Copyright: 2010, John Resig

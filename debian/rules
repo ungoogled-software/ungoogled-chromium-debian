@@ -69,7 +69,8 @@ ungoogled_chromium_files=debian/ungoogled-upstream/ungoogled-chromium
 defines+=$(shell cat $(ungoogled_chromium_files)/flags.gn | tr "\n" " " | sed 's/"/\\"/g')
 
 # disabled features
-defines+=is_debug=false \
+defines+=is_cfi=false \
+         is_debug=false \
          use_goma=false \
          use_ozone=false \
          use_sysroot=false \
@@ -95,8 +96,6 @@ defines+=use_gio=true \
          use_system_freetype=true \
          use_system_harfbuzz=true \
          use_system_libopenjpeg2=true \
-         use_jumbo_build=true \
-         jumbo_file_merge_limit=8 \
          proprietary_codecs=true \
          ffmpeg_branding=\"ChromeOS\" \
          fieldtrial_testing_like_official_build=true \
