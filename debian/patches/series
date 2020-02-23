@@ -7,9 +7,11 @@ arm/gcc_skcms_ice.patch
 arm/pffffft-buildfix.patch
 
 gcc/ambiguous-initializer.patch
+gcc/namespace5.patch
 
 clang/flags.patch
 
+fixes/link.patch
 fixes/quic.patch
 fixes/mojo.patch
 fixes/breakpad.patch
@@ -51,6 +53,7 @@ warnings/null-destination.patch
 warnings/pessimizing-move.patch
 warnings/attribute-ignored.patch
 warnings/int-in-bool-context.patch
+warnings/unused-field.patch
 
 system/vpx.patch
 system/icu.patch
