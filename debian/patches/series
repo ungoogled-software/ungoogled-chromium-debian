@@ -21,7 +21,6 @@ fixes/sequence-point.patch
 fixes/jumbo-namespace.patch
 fixes/widevine-enable-version-string.patch
 fixes/widevine-locations.patch
-fixes/implicit-headers.patch
 fixes/missing-includes.patch
 fixes/widevine-locations.patch
 fixes/multiple-definition.patch
