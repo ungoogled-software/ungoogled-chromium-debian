@@ -23,7 +23,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    DISALLOW_COPY_AND_ASSIGN(InlineSigninHelper);
 --- a/chrome/browser/ui/webui/signin/inline_login_handler_impl.cc
 +++ b/chrome/browser/ui/webui/signin/inline_login_handler_impl.cc
-@@ -299,7 +299,6 @@ InlineSigninHelper::InlineSigninHelper(
+@@ -293,7 +293,6 @@ InlineSigninHelper::InlineSigninHelper(
        gaia_id_(gaia_id),
        password_(password),
        auth_code_(auth_code),

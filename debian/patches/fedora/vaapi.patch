@@ -14,7 +14,7 @@ Subject: [PATCH] Enable mojo with VDA2 on Linux
 
 --- a/chrome/browser/about_flags.cc
 +++ b/chrome/browser/about_flags.cc
-@@ -1869,14 +1869,14 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -1932,14 +1932,14 @@ const FeatureEntry kFeatureEntries[] = {
          "disable-accelerated-video-decode",
          flag_descriptions::kAcceleratedVideoDecodeName,
          flag_descriptions::kAcceleratedVideoDecodeDescription,
@@ -31,7 +31,7 @@ Subject: [PATCH] Enable mojo with VDA2 on Linux
          SINGLE_DISABLE_VALUE_TYPE(switches::kDisableAcceleratedVideoEncode),
      },
      {"enable-history-favicons-google-server-query",
-@@ -2342,10 +2342,10 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -2392,10 +2392,10 @@ const FeatureEntry kFeatureEntries[] = {
       FEATURE_VALUE_TYPE(service_manager::features::kXRSandbox)},
  #endif  // !defined(OS_ANDROID)
  #endif  // ENABLE_VR
@@ -46,7 +46,7 @@ Subject: [PATCH] Enable mojo with VDA2 on Linux
      {"system-keyboard-lock", flag_descriptions::kSystemKeyboardLockName,
 --- a/chrome/browser/flag_descriptions.cc
 +++ b/chrome/browser/flag_descriptions.cc
-@@ -3138,15 +3138,20 @@ const char kMetalDescription[] =
+@@ -3164,15 +3164,20 @@ const char kMetalDescription[] =
  
  #endif
  
@@ -71,7 +71,7 @@ Subject: [PATCH] Enable mojo with VDA2 on Linux
  const char kAggregatedMlAppRankingDescription[] =
 --- a/chrome/browser/flag_descriptions.h
 +++ b/chrome/browser/flag_descriptions.h
-@@ -1855,11 +1855,15 @@ extern const char kPermissionPromptPersi
+@@ -1866,11 +1866,15 @@ extern const char kPermissionPromptPersi
  
  // Chrome OS ------------------------------------------------------------------
  
