@@ -59,4 +59,4 @@ author: Michael Gilbert <mgilbert@debian.org>
 -  }
  }
  
- fuzzer_test("jsoncpp_fuzzer") {
+ if (build_with_chromium) {

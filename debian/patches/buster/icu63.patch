@@ -27,7 +27,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    static Handle<String> NumberFieldToType(Isolate* isolate,
 --- a/v8/src/objects/js-list-format.cc
 +++ b/v8/src/objects/js-list-format.cc
-@@ -274,7 +274,7 @@ Maybe<std::vector<icu::UnicodeString>> T
+@@ -273,7 +273,7 @@ Maybe<std::vector<icu::UnicodeString>> T
  template <typename T>
  MaybeHandle<T> FormatListCommon(
      Isolate* isolate, Handle<JSListFormat> format, Handle<JSArray> list,
@@ -36,7 +36,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    DCHECK(!list->IsUndefined());
    Maybe<std::vector<icu::UnicodeString>> maybe_array =
        ToUnicodeStringArray(isolate, list);
-@@ -285,49 +285,67 @@ MaybeHandle<T> FormatListCommon(
+@@ -284,49 +284,67 @@ MaybeHandle<T> FormatListCommon(
    CHECK_NOT_NULL(formatter);
  
    UErrorCode status = U_ZERO_ERROR;
@@ -132,7 +132,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    JSObject::ValidateElements(*array);
    return array;
  }
-@@ -339,7 +357,7 @@ MaybeHandle<String> JSListFormat::Format
+@@ -338,7 +356,7 @@ MaybeHandle<String> JSListFormat::Format
                                               Handle<JSListFormat> format,
                                               Handle<JSArray> list) {
    return FormatListCommon<String>(isolate, format, list,
@@ -143,7 +143,16 @@ author: Michael Gilbert <mgilbert@debian.org>
  // ecma42 #sec-formatlisttoparts
 --- a/v8/src/objects/js-relative-time-format.cc
 +++ b/v8/src/objects/js-relative-time-format.cc
-@@ -236,6 +236,65 @@ Handle<String> JSRelativeTimeFormat::Num
+@@ -18,7 +18,7 @@
+ #include "src/objects/js-number-format.h"
+ #include "src/objects/js-relative-time-format-inl.h"
+ #include "src/objects/objects-inl.h"
+-#include "unicode/numfmt.h"
++#include "unicode/numberformatter.h"
+ #include "unicode/reldatefmt.h"
+ 
+ namespace v8 {
+@@ -244,6 +244,65 @@ Handle<String> JSRelativeTimeFormat::Num
  
  namespace {
  
@@ -209,7 +218,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  Handle<String> UnitAsString(Isolate* isolate, URelativeDateTimeUnit unit_enum) {
    Factory* factory = isolate->factory();
    switch (unit_enum) {
-@@ -298,7 +357,8 @@ MaybeHandle<T> FormatCommon(
+@@ -306,7 +365,8 @@ MaybeHandle<T> FormatCommon(
      Isolate* isolate, Handle<JSRelativeTimeFormat> format,
      Handle<Object> value_obj, Handle<Object> unit_obj, const char* func_name,
      MaybeHandle<T> (*formatToResult)(Isolate*,
@@ -219,7 +228,7 @@ author: Michael Gilbert <mgilbert@debian.org>
                                       Handle<Object>, Handle<String>)) {
    // 3. Let value be ? ToNumber(value).
    Handle<Object> value;
-@@ -328,26 +388,32 @@ MaybeHandle<T> FormatCommon(
+@@ -336,26 +396,32 @@ MaybeHandle<T> FormatCommon(
                        unit),
          T);
    }
@@ -264,7 +273,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    return Intl::ToString(isolate, result);
  }
  
-@@ -378,67 +444,32 @@ Maybe<bool> AddUnit(Isolate* isolate, Ha
+@@ -386,67 +452,32 @@ Maybe<bool> AddUnit(Isolate* isolate, Ha
  }
  
  MaybeHandle<JSArray> FormatToJSArray(
@@ -363,7 +372,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "unicode/locid.h"
  #include "unicode/normalizer2.h"
  #include "unicode/numberformatter.h"
-@@ -1612,8 +1610,6 @@ std::map<std::string, std::string> Looku
+@@ -1617,8 +1615,6 @@ std::map<std::string, std::string> Looku
    std::map<std::string, std::string> extensions;
  
    UErrorCode status = U_ZERO_ERROR;
@@ -372,7 +381,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    std::unique_ptr<icu::StringEnumeration> keywords(
        icu_locale->createKeywords(status));
    if (U_FAILURE(status)) return extensions;
-@@ -1675,14 +1671,13 @@ std::map<std::string, std::string> Looku
+@@ -1680,14 +1676,13 @@ std::map<std::string, std::string> Looku
        if (is_valid_value) {
          extensions.insert(
              std::pair<std::string, std::string>(bcp47_key, bcp47_value));
@@ -390,7 +399,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    return extensions;
  }
  
-@@ -2085,11 +2080,6 @@ Handle<String> Intl::NumberFieldToType(I
+@@ -2090,11 +2085,6 @@ Handle<String> Intl::NumberFieldToType(I
        UNREACHABLE();
        return Handle<String>();
  
@@ -402,7 +411,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      default:
        UNREACHABLE();
        return Handle<String>();
-@@ -2097,10 +2087,13 @@ Handle<String> Intl::NumberFieldToType(I
+@@ -2102,10 +2092,13 @@ Handle<String> Intl::NumberFieldToType(I
  }
  
  // A helper function to convert the FormattedValue for several Intl objects.
@@ -465,7 +474,41 @@ author: Michael Gilbert <mgilbert@debian.org>
    }
    return Just(true);
  }
-@@ -219,8 +225,7 @@ bool JSLocale::StartsWithUnicodeLanguage
+@@ -145,16 +151,6 @@ bool IsUnicodeLanguageSubtag(const std::
+   return IsAlpha(value, 2, 3) || IsAlpha(value, 5, 8);
+ }
+ 
+-bool IsUnicodeScriptSubtag(const std::string& value) {
+-  // unicode_script_subtag = alpha{4} ;
+-  return IsAlpha(value, 4, 4);
+-}
+-
+-bool IsUnicodeRegionSubtag(const std::string& value) {
+-  // unicode_region_subtag = (alpha{2} | digit{3});
+-  return IsAlpha(value, 2, 2) || IsDigit(value, 3, 3);
+-}
+-
+ bool IsDigitAlphanum3(const std::string& value) {
+   return value.length() == 4 && InRange(value[0], '0', '9') &&
+          IsAlphanum(value.substr(1), 3, 3);
+@@ -170,6 +166,16 @@ bool IsExtensionSingleton(const std::str
+ }
+ }  // namespace
+ 
++bool IsUnicodeScriptSubtag(const std::string& value) {
++  // unicode_script_subtag = alpha{4} ;
++  return IsAlpha(value, 4, 4);
++}
++
++bool IsUnicodeRegionSubtag(const std::string& value) {
++  // unicode_region_subtag = (alpha{2} | digit{3});
++  return IsAlpha(value, 2, 2) || IsDigit(value, 3, 3);
++}
++
+ bool JSLocale::Is38AlphaNumList(const std::string& value) {
+   std::size_t found = value.find("-");
+   if (found == std::string::npos) {
+@@ -223,8 +229,7 @@ bool JSLocale::StartsWithUnicodeLanguage
  
  namespace {
  Maybe<bool> ApplyOptionsToTag(Isolate* isolate, Handle<String> tag,
@@ -475,7 +518,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    v8::Isolate* v8_isolate = reinterpret_cast<v8::Isolate*>(isolate);
    if (tag->length() == 0) {
      THROW_NEW_ERROR_RETURN_VALUE(
-@@ -229,7 +234,6 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
+@@ -233,7 +238,6 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
    }
  
    v8::String::Utf8Value bcp47_tag(v8_isolate, v8::Utils::ToLocal(tag));
@@ -483,7 +526,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    CHECK_LT(0, bcp47_tag.length());
    CHECK_NOT_NULL(*bcp47_tag);
    // 2. If IsStructurallyValidLanguageTag(tag) is false, throw a RangeError
-@@ -238,7 +242,8 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
+@@ -242,7 +246,8 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
      return Just(false);
    }
    UErrorCode status = U_ZERO_ERROR;
@@ -493,7 +536,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    if (U_FAILURE(status)) {
      return Just(false);
    }
-@@ -253,11 +258,9 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
+@@ -257,11 +262,9 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
    MAYBE_RETURN(maybe_language, Nothing<bool>());
    // 4. If language is not undefined, then
    if (maybe_language.FromJust()) {
@@ -506,7 +549,7 @@ author: Michael Gilbert <mgilbert@debian.org>
          IsAlpha(language_str.get(), 4, 4)) {
        return Just(false);
      }
-@@ -271,11 +274,9 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
+@@ -275,11 +278,9 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
    MAYBE_RETURN(maybe_script, Nothing<bool>());
    // 6. If script is not undefined, then
    if (maybe_script.FromJust()) {
@@ -519,7 +562,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        return Just(false);
      }
    }
-@@ -290,9 +291,7 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
+@@ -294,9 +295,7 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
    if (maybe_region.FromJust()) {
      // a. If region does not match the region production, throw a RangeError
      // exception.
@@ -530,7 +573,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        return Just(false);
      }
    }
-@@ -327,9 +326,8 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
+@@ -331,9 +330,8 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
  MaybeHandle<JSLocale> JSLocale::New(Isolate* isolate, Handle<Map> map,
                                      Handle<String> locale_str,
                                      Handle<JSReceiver> options) {
@@ -541,7 +584,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    MAYBE_RETURN(maybe_apply, MaybeHandle<JSLocale>());
    if (!maybe_apply.FromJust()) {
      THROW_NEW_ERROR(isolate,
-@@ -337,12 +335,22 @@ MaybeHandle<JSLocale> JSLocale::New(Isol
+@@ -341,12 +339,22 @@ MaybeHandle<JSLocale> JSLocale::New(Isol
                      JSLocale);
    }
  
@@ -570,7 +613,7 @@ author: Michael Gilbert <mgilbert@debian.org>
                      JSLocale);
 --- a/v8/src/objects/js-date-time-format.cc
 +++ b/v8/src/objects/js-date-time-format.cc
-@@ -1799,55 +1799,12 @@ Maybe<bool> AddPartForFormatRange(Isolat
+@@ -1869,55 +1869,12 @@ Maybe<bool> AddPartForFormatRange(Isolat
  // A helper function to convert the FormattedDateInterval to a
  // MaybeHandle<JSArray> for the implementation of formatRangeToParts.
  MaybeHandle<JSArray> FormattedDateIntervalToJSArray(
@@ -629,7 +672,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
    JSObject::ValidateElements(*array);
    return array;
-@@ -1858,7 +1815,7 @@ template <typename T>
+@@ -1928,7 +1885,7 @@ template <typename T>
  MaybeHandle<T> FormatRangeCommon(
      Isolate* isolate, Handle<JSDateTimeFormat> date_time_format, double x,
      double y,
@@ -638,22 +681,25 @@ author: Michael Gilbert <mgilbert@debian.org>
    // #sec-partitiondatetimerangepattern
    // 1. Let x be TimeClip(x).
    x = DateCache::TimeClip(x);
-@@ -1882,13 +1839,7 @@ MaybeHandle<T> FormatRangeCommon(
+@@ -1960,15 +1917,11 @@ MaybeHandle<T> FormatRangeCommon(
+   std::unique_ptr<icu::Calendar> c2(calendar->clone());
+   c1->setTime(x, status);
+   c2->setTime(y, status);
+-  // We need to format by Calendar because we need the Gregorian change
+-  // adjustment already in the SimpleDateFormat to set the correct value of date
+-  // older than Oct 15, 1582.
+-  icu::FormattedDateInterval formatted =
+-      format->formatToValue(*c1, *c2, status);
++  icu::DateInterval interval(x, y);
+   if (U_FAILURE(status)) {
      THROW_NEW_ERROR(isolate, NewTypeError(MessageTemplate::kIcuError), T);
    }
- 
--  UErrorCode status = U_ZERO_ERROR;
--  icu::FormattedDateInterval formatted =
--      format->formatToValue(interval, status);
--  if (U_FAILURE(status)) {
--    THROW_NEW_ERROR(isolate, NewTypeError(MessageTemplate::kIcuError), T);
--  }
 -  return formatToResult(isolate, formatted);
 +  return formatToResult(isolate, interval, *format);
  }
  
  }  // namespace
-@@ -1897,7 +1848,7 @@ MaybeHandle<String> JSDateTimeFormat::Fo
+@@ -1977,7 +1930,7 @@ MaybeHandle<String> JSDateTimeFormat::Fo
      Isolate* isolate, Handle<JSDateTimeFormat> date_time_format, double x,
      double y) {
    return FormatRangeCommon<String>(isolate, date_time_format, x, y,
@@ -664,7 +710,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  MaybeHandle<JSArray> JSDateTimeFormat::FormatRangeToParts(
 --- a/v8/src/objects/js-number-format.cc
 +++ b/v8/src/objects/js-number-format.cc
-@@ -1191,32 +1191,44 @@ Maybe<icu::UnicodeString> IcuFormatNumbe
+@@ -1201,32 +1201,44 @@ Maybe<icu::UnicodeString> IcuFormatNumbe
      Isolate* isolate,
      const icu::number::LocalizedNumberFormatter& number_format,
      Handle<Object> numeric_obj, icu::FieldPositionIterator* fp_iter) {
@@ -723,7 +769,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    if (U_FAILURE(status)) {
      THROW_NEW_ERROR_RETURN_VALUE(isolate,
                                   NewTypeError(MessageTemplate::kIcuError),
-@@ -1402,6 +1414,22 @@ Maybe<int> ConstructParts(Isolate* isola
+@@ -1412,6 +1424,22 @@ Maybe<int> ConstructParts(Isolate* isola
  
  }  // namespace
  
@@ -748,7 +794,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      Handle<Object> numeric_obj) {
 --- a/v8/src/objects/js-number-format.h
 +++ b/v8/src/objects/js-number-format.h
-@@ -50,6 +50,12 @@ class JSNumberFormat : public JSObject {
+@@ -51,6 +51,12 @@ class JSNumberFormat : public JSObject {
        Isolate* isolate, Handle<JSNumberFormat> number_format,
        Handle<Object> numeric_obj);
  
@@ -786,3 +832,54 @@ author: Michael Gilbert <mgilbert@debian.org>
    return Intl::ToString(isolate, result);
  }
  
+--- a/v8/src/objects/js-display-names.cc
++++ b/v8/src/objects/js-display-names.cc
+@@ -11,6 +11,7 @@
+ 
+ #include "src/objects/js-display-names-inl.h"
+ #include "src/objects/js-display-names.h"
++#include "src/objects/js-locale.h"
+ 
+ #include "src/execution/isolate.h"
+ #include "src/heap/factory.h"
+@@ -20,7 +21,6 @@
+ 
+ #include "unicode/dtfmtsym.h"
+ #include "unicode/dtptngen.h"
+-#include "unicode/localebuilder.h"
+ #include "unicode/locdspnm.h"
+ #include "unicode/timezone.h"
+ #include "unicode/tznames.h"
+@@ -46,20 +46,6 @@ enum class Type {
+   kDateTimeField
+ };
+ 
+-bool IsUnicodeScriptSubtag(const std::string& value) {
+-  UErrorCode status = U_ZERO_ERROR;
+-  icu::LocaleBuilder builder;
+-  builder.setScript(value).build(status);
+-  return U_SUCCESS(status);
+-}
+-
+-bool IsUnicodeRegionSubtag(const std::string& value) {
+-  UErrorCode status = U_ZERO_ERROR;
+-  icu::LocaleBuilder builder;
+-  builder.setRegion(value).build(status);
+-  return U_SUCCESS(status);
+-}
+-
+ UDisplayContext ToUDisplayContext(JSDisplayNames::Style style) {
+   switch (style) {
+     case JSDisplayNames::Style::kLong:
+--- a/v8/src/objects/js-locale.h
++++ b/v8/src/objects/js-locale.h
+@@ -25,6 +25,9 @@ class Locale;
+ namespace v8 {
+ namespace internal {
+ 
++bool IsUnicodeScriptSubtag(const std::string& value);
++bool IsUnicodeRegionSubtag(const std::string& value);
++
+ class JSLocale : public JSObject {
+  public:
+   // Creates locale object with properties derived from input locale string
