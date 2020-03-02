@@ -13,6 +13,7 @@ Build-Depends:
  devscripts (>= 2.18.9),
  lld,
  clang,
+ python,
  python3,
  pkg-config,
  ninja-build,

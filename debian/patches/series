@@ -1,5 +1,6 @@
 debianization/manpage.patch
 debianization/sandbox.patch
+debianization/optimization.patch
 debianization/master-preferences.patch
 
 gn/libcxx.patch

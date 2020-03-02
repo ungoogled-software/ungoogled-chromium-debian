@@ -1,3 +1,12 @@
+chromium (80.0.3987.122-1) unstable; urgency=medium
+
+  * New upstream security release.
+    - CVE-2020-6407: Out of bounds memory access in streams. Reported by
+      Sergei Glazunov
+    - CVE-2020-6418: Type confusion in V8. Reported by Clement Lecigne
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 01 Mar 2020 01:25:59 +0000
+
 chromium (80.0.3987.116-1) unstable; urgency=medium
 
   * New upstream security release.
