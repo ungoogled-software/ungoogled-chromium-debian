@@ -136,6 +136,7 @@ Files-Excluded:
  third_party/chaijs/chai.js
  third_party/blanketjs/src/blanket.js
  third_party/accessibility-audit/axs_testing.js
+ third_party/catapult/third_party/gsutil
  third_party/webrtc/sdk
  third_party/webrtc/data
  third_party/webrtc/examples
