@@ -51,6 +51,9 @@ system/harfbuzz.patch
 system/openjpeg.patch
 system/convertutf.patch
 
+buster/icu63.patch
+buster/vpx17.patch
+
 archlinux/zlib.patch
 
 inox-patchset/chromium-skia-harmony.patch
@@ -59,5 +62,6 @@ inox-patchset/fix-cfi-failures-with-unbundled-libxml.patch
 fedora/vaapi.patch
 fedora/vaapi-fix.patch
 
+ungoogled-chromium/unknown-clang-warning-flags.patch
 ungoogled-chromium/manpage.patch
 ungoogled-chromium/safebrowsing.patch

@@ -1,4 +1,4 @@
-ungoogled-chromium ($ungoog{chromium_version}-$ungoog{ungoogled_revision}.sid$ungoog{distro_revision}) sid; urgency=medium
+ungoogled-chromium ($ungoog{chromium_version}-$ungoog{ungoogled_revision}.buster$ungoog{distro_revision}) buster; urgency=medium
 
   * Built against $ungoog{ungoogled_version}
 
