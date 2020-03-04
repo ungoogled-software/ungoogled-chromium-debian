@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -475,7 +475,7 @@ group("gn_all") {
+@@ -473,7 +473,7 @@ group("gn_all") {
      ]
    }
  
@@ -25,14 +25,14 @@ author: Michael Gilbert <mgilbert@debian.org>
 -    "//third_party/swiftshader/src/Vulkan:swiftshader_libvulkan",
 -  ]
  }
---- a/third_party/angle/src/libANGLE/renderer/vulkan/BUILD.gn
-+++ b/third_party/angle/src/libANGLE/renderer/vulkan/BUILD.gn
-@@ -19,7 +19,7 @@ declare_args() {
-   # Currently SwiftShader's Vulkan front-end doesn't build on Android.
-   # SwiftShader is not needed on Fuchsia because Vulkan is supported on all
-   # devices that run Fuchsia.
--  angle_swiftshader = !is_android && !is_fuchsia
-+  angle_swiftshader = false
- }
- 
- _vulkan_backend_sources = [
+--- a/third_party/angle/gni/angle.gni
++++ b/third_party/angle/gni/angle.gni
+@@ -92,7 +92,7 @@ declare_args() {
+   # ANGLE Vulkan backend on Android requires API level 26, i.e. Oreo, due to
+   # Vulkan Validation Layers compatibility issues, see http://crrev/c/1405714.
+   # Otherwise, API level 24 would have been enough.
+-  angle_enable_vulkan =
++  angle_enable_vulkan = false &&
+       angle_has_build && ((is_win && !angle_is_winuwp) ||
+                           (is_linux && angle_use_x11 && !is_chromeos) ||
+                           (is_android && ndk_api_level_at_least_26) ||

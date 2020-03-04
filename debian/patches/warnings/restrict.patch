@@ -1,0 +1,14 @@
+desciption: wrong object passed to function with restricted arguments
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/chrome/browser/resource_coordinator/tab_ranker/pairwise_inference.cc
++++ b/chrome/browser/resource_coordinator/tab_ranker/pairwise_inference.cc
+@@ -1980,7 +1980,7 @@ void Inference(const float* __restrict f
+ 
+   // dnn/hiddenlayer_0/hiddenlayer_0/Relu
+   Relu<float>(2,  // rank
+-              fixed->shape0, fixed->alloc1, fixed->alloc1);
++              fixed->shape0, fixed->alloc0, fixed->alloc1);
+ 
+   // dnn/logits/MatMul_merged_with_dnn/logits/BiasAdd
+   FullyConnected<float>(

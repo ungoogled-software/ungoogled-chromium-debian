@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/third_party/pdfium/core/fpdfapi/render/BUILD.gn
 +++ b/third_party/pdfium/core/fpdfapi/render/BUILD.gn
-@@ -45,6 +45,7 @@ jumbo_source_set("render") {
+@@ -44,6 +44,7 @@ source_set("render") {
    ]
    configs += [ "../../../:pdfium_core_config" ]
    deps = [
@@ -13,7 +13,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "../../fxcrt",
 --- a/third_party/pdfium/core/fxcodec/jpx/cjpx_decoder.h
 +++ b/third_party/pdfium/core/fxcodec/jpx/cjpx_decoder.h
-@@ -13,8 +13,8 @@
+@@ -12,8 +12,8 @@
  #include "core/fxcrt/unowned_ptr.h"
  #include "third_party/base/span.h"
  

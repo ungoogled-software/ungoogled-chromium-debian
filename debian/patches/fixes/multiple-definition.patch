@@ -1,0 +1,95 @@
+description: including these tests results in multiple definitions
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/content/shell/BUILD.gn
++++ b/content/shell/BUILD.gn
+@@ -366,8 +366,6 @@ jumbo_static_library("content_shell_lib"
+     deps += [
+       "//cc/paint",
+       "//content/ppapi_plugin",
+-      "//ppapi:blink_deprecated_test_plugin",
+-      "//ppapi:blink_test_plugin",
+       "//ppapi/shared_impl",
+     ]
+   }
+@@ -712,19 +710,9 @@ if (is_mac) {
+ 
+   if (enable_plugins) {
+     bundle_data("content_shell_framework_plugins") {
+-      sources = [
+-        "$root_out_dir/blink_deprecated_test_plugin.plugin",
+-        "$root_out_dir/blink_test_plugin.plugin",
+-      ]
+-
+       outputs = [
+         "{{bundle_contents_dir}}/{{source_file_part}}",
+       ]
+-
+-      public_deps = [
+-        "//ppapi:blink_deprecated_test_plugin",
+-        "//ppapi:blink_test_plugin",
+-      ]
+     }
+   }
+ 
+--- a/ppapi/BUILD.gn
++++ b/ppapi/BUILD.gn
+@@ -299,58 +299,6 @@ if (!is_mac) {
+   }
+ }
+ 
+-source_set("blink_deprecated_test_plugin_sources") {
+-  sources = [
+-    "tests/blink_deprecated_test_plugin.cc",
+-  ]
+-
+-  deps = [
+-    "//base",
+-    "//ppapi/cpp",
+-    "//ppapi/shared_impl",
+-  ]
+-}
+-
+-if (!is_mac) {
+-  loadable_module("blink_deprecated_test_plugin") {
+-    deps = [
+-      ":blink_deprecated_test_plugin_sources",
+-    ]
+-  }
+-} else {
+-  mac_plugin_bundle("blink_deprecated_test_plugin") {
+-    deps = [
+-      ":blink_deprecated_test_plugin_sources",
+-    ]
+-  }
+-}
+-
+-source_set("blink_test_plugin_sources") {
+-  sources = [
+-    "tests/blink_test_plugin.cc",
+-  ]
+-
+-  deps = [
+-    "//base",
+-    "//ppapi/cpp",
+-    "//ppapi/shared_impl",
+-  ]
+-}
+-
+-if (!is_mac) {
+-  loadable_module("blink_test_plugin") {
+-    deps = [
+-      ":blink_test_plugin_sources",
+-    ]
+-  }
+-} else {
+-  mac_plugin_bundle("blink_test_plugin") {
+-    deps = [
+-      ":blink_test_plugin_sources",
+-    ]
+-  }
+-}
+-
+ test("ppapi_unittests") {
+   sources = [
+     "host/resource_message_filter_unittest.cc",
