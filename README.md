@@ -182,14 +182,16 @@ git remote add upstream https://salsa.debian.org/chromium-team/chromium.git
 
 ### Pull new changes from Debian
 
-First, update `debian_buster` with the latest changes. Then, merge it into this branch:
+1. Update `debian_sid` branch using instructions from README in that branch.
+2. Merge changes from `debian_sid` into this branch:
 
-```sh
-git checkout --recurse-submodules ubuntu_eoan
-git merge debian_buster
-# Complete the git merge
-# Update patches via instructions below
-```
+	```sh
+	git checkout --recurse-submodules debian_buster
+	git pull debian_sid
+	# Complete the git merge
+	```
+
+3. Update patches via instructions below
 
 ### Pull new changes from ungoogled-chromium
 
