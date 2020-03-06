@@ -1,8 +1,8 @@
 description: fix gcc sign-compare warnings
 author: Michael Gilbert <mgilbert@debian.org>
 
---- a/storage/browser/fileapi/obfuscated_file_util_memory_delegate.cc
-+++ b/storage/browser/fileapi/obfuscated_file_util_memory_delegate.cc
+--- a/storage/browser/file_system/obfuscated_file_util_memory_delegate.cc
++++ b/storage/browser/file_system/obfuscated_file_util_memory_delegate.cc
 @@ -510,10 +510,15 @@ base::File::Error ObfuscatedFileUtilMemo
    if (source_info.is_directory)
      return base::File::FILE_ERROR_NOT_A_FILE;
@@ -80,3 +80,14 @@ author: Michael Gilbert <mgilbert@debian.org>
        static_cast<size_t>(packet_index) < packet_history_.size() &&
        packet_history_[packet_index].packet_ != nullptr) {
      RTC_LOG(LS_WARNING) << "Duplicate packet inserted: " << rtp_seq_no;
+--- a/chrome/browser/ui/input_method/input_method_engine_base.cc
++++ b/chrome/browser/ui/input_method/input_method_engine_base.cc
+@@ -140,7 +140,7 @@ void GetExtensionKeyboardEventFromKeyEve
+ }
+ 
+ bool IsUint32Value(int i) {
+-  return 0 <= i && i <= std::numeric_limits<uint32_t>::max();
++  return 0 <= i && static_cast<uint32_t>(i) <= std::numeric_limits<uint32_t>::max();
+ }
+ 
+ }  // namespace

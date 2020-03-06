@@ -13,7 +13,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "common/scoped_ptr.h"
  #include "common/string_conversion.h"
  #include "common/using_std_string.h"
-@@ -38,78 +38,24 @@ namespace google_breakpad {
+@@ -38,78 +38,21 @@ namespace google_breakpad {
  
  using std::vector;
  
@@ -25,15 +25,11 @@ author: Michael Gilbert <mgilbert@debian.org>
 -  out->clear();
 -  out->insert(out->begin(), source_length, 0);
 -  uint16_t *target_ptr = &(*out)[0];
--  uint16_t *target_end_ptr = target_ptr + out->capacity() * sizeof(uint16_t);
+-  uint16_t *target_end_ptr = target_ptr + out->capacity();
 -  ConversionResult result = ConvertUTF8toUTF16(&source_ptr, source_end_ptr,
 -                                               &target_ptr, target_end_ptr,
 -                                               strictConversion);
-+int UTF8ToUTF16Char(const char *in, int in_length, UChar out[2]) {
-+  int dest_length = 0;
-+  UErrorCode result = U_ZERO_ERROR;
-+  u_strFromUTF8(out, 2, &dest_length, in, in_length, &result);
- 
+-
 -  // Resize to be the size of the # of converted characters + NULL
 -  out->resize(result == conversionOK ? target_ptr - &(*out)[0] + 1: 0);
 -}
@@ -60,10 +56,14 @@ author: Michael Gilbert <mgilbert@debian.org>
 -
 -    if (source_end_ptr > reinterpret_cast<const UTF8 *>(in) + in_length)
 -      break;
++int UTF8ToUTF16Char(const char *in, int in_length, UChar out[2]) {
++  int dest_length = 0;
++  UErrorCode result = U_ZERO_ERROR;
++  u_strFromUTF8(out, 2, &dest_length, in, in_length, &result);
 +  if (U_FAILURE(result)) {
 +    out[0] = out[1] = 0;
    }
- 
+-
 -  return 0;
 -}
 -
@@ -75,7 +75,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 -  out->clear();
 -  out->insert(out->begin(), source_length, 0);
 -  uint16_t *target_ptr = &(*out)[0];
--  uint16_t *target_end_ptr = target_ptr + out->capacity() * sizeof(uint16_t);
+-  uint16_t *target_end_ptr = target_ptr + out->capacity();
 -  ConversionResult result = ConvertUTF32toUTF16(&source_ptr, source_end_ptr,
 -                                                &target_ptr, target_end_ptr,
 -                                                strictConversion);
@@ -94,17 +94,17 @@ author: Michael Gilbert <mgilbert@debian.org>
 -  ConversionResult result = ConvertUTF32toUTF16(&source_ptr, source_end_ptr,
 -                                                &target_ptr, target_end_ptr,
 -                                                strictConversion);
+-
+-  if (result != conversionOK) {
 +void UTF32ToUTF16Char(wchar_t in, UChar out[2]) {
 +  int32_t dest_length = 0;
 +  UErrorCode result = U_ZERO_ERROR;
 +  u_strFromWCS(out, 2, &dest_length, &in, 1, &result);
- 
--  if (result != conversionOK) {
 +  if (U_FAILURE(result)) {
      out[0] = out[1] = 0;
    }
  }
-@@ -118,38 +64,4 @@ static inline uint16_t Swap(uint16_t val
+@@ -118,38 +61,4 @@ static inline uint16_t Swap(uint16_t val
    return (value >> 8) | static_cast<uint16_t>(value << 8);
  }
  
@@ -184,11 +184,20 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/third_party/breakpad/BUILD.gn
 +++ b/third_party/breakpad/BUILD.gn
-@@ -598,8 +598,6 @@ if (is_linux || is_android) {
+@@ -581,8 +581,6 @@ if (is_linux || is_android) {
+       "breakpad/src/client/linux/handler/exception_handler.h",
+       "breakpad/src/client/linux/handler/minidump_descriptor.cc",
+       "breakpad/src/client/linux/handler/minidump_descriptor.h",
+-      "breakpad/src/client/linux/log/log.cc",
+-      "breakpad/src/client/linux/log/log.h",
+       "breakpad/src/client/linux/microdump_writer/microdump_writer.cc",
+       "breakpad/src/client/linux/microdump_writer/microdump_writer.h",
+       "breakpad/src/client/linux/minidump_writer/cpu_set.h",
+@@ -600,8 +598,6 @@ if (is_linux || is_android) {
        "breakpad/src/client/minidump_file_writer-inl.h",
        "breakpad/src/client/minidump_file_writer.cc",
        "breakpad/src/client/minidump_file_writer.h",
--      "breakpad/src/common/convert_UTF.c",
+-      "breakpad/src/common/convert_UTF.cc",
 -      "breakpad/src/common/convert_UTF.h",
        "breakpad/src/common/linux/elf_core_dump.cc",
        "breakpad/src/common/linux/elf_core_dump.h",

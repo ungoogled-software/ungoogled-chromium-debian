@@ -41,7 +41,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
  }  // namespace
  
  #define RETURN_AND_NOTIFY_ON_FAILURE(result, log, error_code, ret) \
-@@ -637,6 +642,13 @@ void VaapiVideoDecodeAccelerator::Assign
+@@ -643,6 +648,13 @@ void VaapiVideoDecodeAccelerator::Assign
    va_surface_format_ = GetVaFormatForVideoCodecProfile(profile_);
    std::vector<VASurfaceID> va_surface_ids;
  
@@ -55,7 +55,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
    // If we aren't in BufferAllocationMode::kNone, we have to allocate a
    // |vpp_vaapi_wrapper_| for VaapiPicture to DownloadFromSurface() the VA's
    // internal decoded frame.
-@@ -654,6 +666,7 @@ void VaapiVideoDecodeAccelerator::Assign
+@@ -660,6 +672,7 @@ void VaapiVideoDecodeAccelerator::Assign
                                   "Failed to create Context",
                                   PLATFORM_FAILURE, );
    }
@@ -63,7 +63,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
  
    for (size_t i = 0; i < buffers.size(); ++i) {
      // If we aren't in BufferAllocationMode::kNone, this |picture| is
-@@ -665,9 +678,13 @@ void VaapiVideoDecodeAccelerator::Assign
+@@ -671,9 +684,13 @@ void VaapiVideoDecodeAccelerator::Assign
      PictureBuffer buffer = buffers[i];
      buffer.set_size(requested_pic_size_);
      std::unique_ptr<VaapiPicture> picture = vaapi_picture_factory_->Create(
@@ -77,7 +77,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
          make_context_current_cb_, bind_image_cb_, buffer);
      RETURN_AND_NOTIFY_ON_FAILURE(picture, "Failed creating a VaapiPicture",
                                   PLATFORM_FAILURE, );
-@@ -1093,6 +1110,9 @@ VaapiVideoDecodeAccelerator::GetSupporte
+@@ -1099,6 +1116,9 @@ VaapiVideoDecodeAccelerator::GetSupporte
  
  VaapiVideoDecodeAccelerator::BufferAllocationMode
  VaapiVideoDecodeAccelerator::DecideBufferAllocationMode() {
@@ -87,7 +87,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
    // TODO(crbug.com/912295): Enable a better BufferAllocationMode for IMPORT
    // |output_mode_| as well.
    if (output_mode_ == VideoDecodeAccelerator::Config::OutputMode::IMPORT)
-@@ -1128,6 +1148,7 @@ VaapiVideoDecodeAccelerator::DecideBuffe
+@@ -1134,6 +1154,7 @@ VaapiVideoDecodeAccelerator::DecideBuffe
      return BufferAllocationMode::kReduced;
  
    return BufferAllocationMode::kSuperReduced;
