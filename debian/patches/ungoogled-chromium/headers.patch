@@ -1,6 +1,5 @@
-diff -ur a/chrome/browser/ui/webui/signin/inline_login_handler_impl.h b/chrome/browser/ui/webui/signin/inline_login_handler_impl.h
---- a/chrome/browser/ui/webui/signin/inline_login_handler_impl.h	2020-02-27 21:07:35.893307600 -0600
-+++ b/chrome/browser/ui/webui/signin/inline_login_handler_impl.h	2020-02-27 21:08:14.962700309 -0600
+--- a/chrome/browser/ui/webui/signin/inline_login_handler_impl.h
++++ b/chrome/browser/ui/webui/signin/inline_login_handler_impl.h
 @@ -17,6 +17,7 @@
  #include "chrome/browser/profiles/profile.h"
  #include "chrome/browser/ui/webui/signin/inline_login_handler.h"

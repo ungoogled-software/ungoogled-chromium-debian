@@ -28,7 +28,6 @@ fixes/incomplete-definition.patch
 disable/owners.patch
 disable/openh264.patch
 disable/buildbot.patch
-disable/catapult.patch
 disable/chromeos.patch
 disable/installer.patch
 disable/font-tests.patch
