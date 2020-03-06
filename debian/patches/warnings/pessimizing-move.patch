@@ -45,7 +45,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    CHECK(rule.priority.get());
 --- a/ui/accessibility/ax_range.h
 +++ b/ui/accessibility/ax_range.h
-@@ -222,7 +222,7 @@ class AXRange {
+@@ -240,7 +240,7 @@ class AXRange {
        AXRange current_leaf_text_range(current_start_->AsTextPosition(),
                                        current_end->AsTextPosition());
        DCHECK(current_leaf_text_range.IsLeafTextRange());

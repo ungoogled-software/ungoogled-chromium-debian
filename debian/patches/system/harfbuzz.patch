@@ -1,3 +1,6 @@
+description: use system harfbuzz
+author: Michael Gilbert <mgilbert@debian.org>
+
 --- a/third_party/skia/src/pdf/SkPDFSubsetFont.cpp
 +++ b/third_party/skia/src/pdf/SkPDFSubsetFont.cpp
 @@ -7,7 +7,7 @@
@@ -30,19 +33,19 @@
  } else {
 --- a/components/paint_preview/common/subset_font.cc
 +++ b/components/paint_preview/common/subset_font.cc
-@@ -10,8 +10,7 @@
+@@ -7,8 +7,7 @@
+ #include <memory>
+ #include <utility>
+ 
+-#include <hb-subset.h>
+-#include <hb.h>
++#include <harfbuzz/hb.h>
+ 
  #include "base/bind.h"
  #include "base/callback.h"
- #include "base/macros.h"
--#include "third_party/harfbuzz-ng/src/src/hb-subset.h"
--#include "third_party/harfbuzz-ng/src/src/hb.h"
-+#include <harfbuzz/hb.h>
- #include "third_party/skia/include/core/SkStream.h"
- #include "third_party/skia/include/core/SkTypeface.h"
- 
 --- a/components/paint_preview/common/serial_utils.cc
 +++ b/components/paint_preview/common/serial_utils.cc
-@@ -36,12 +36,8 @@ sk_sp<SkData> SerializeTypeface(SkTypefa
+@@ -50,12 +50,8 @@ sk_sp<SkData> SerializeTypeface(SkTypefa
    if (usage_it == context->usage->end())
      return typeface->serialize(SkTypeface::SerializeBehavior::kDontIncludeData);
  
@@ -55,7 +58,7 @@
 -  return subset_data;
  }
  
- // Deserializies a SkPicture within the main SkPicture. These represent
+ // Deserializies a clip rect for a subframe within the main SkPicture. These
 --- a/components/paint_preview/common/BUILD.gn
 +++ b/components/paint_preview/common/BUILD.gn
 @@ -15,8 +15,6 @@ if (!is_ios) {

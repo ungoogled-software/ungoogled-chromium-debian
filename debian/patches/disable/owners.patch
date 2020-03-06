@@ -49,7 +49,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/tools/metrics/histograms/histograms.xml
 +++ b/tools/metrics/histograms/histograms.xml
-@@ -4145,7 +4145,6 @@ uploading your change for review.
+@@ -4237,7 +4237,6 @@ uploading your change for review.
  <histogram name="Android.WebView.Metrics.BackfillInstallDate"
      enum="InstallDateBackfill" expires_after="M83">
    <owner>ntfschr@chromium.org</owner>
@@ -57,7 +57,15 @@ author: Michael Gilbert <mgilbert@debian.org>
    <summary>
      Records whether WebView needed to backfill the install date pref with
      Android frameworks APIs. Recorded once during startup (metrics service
-@@ -155556,7 +155555,6 @@ regressions. -->
+@@ -4307,7 +4306,6 @@ uploading your change for review.
+ <histogram name="Android.WebView.PrefLoadTime" units="ms"
+     expires_after="2020-12-01">
+   <owner>rmcelrath@chromium.org</owner>
+-  <owner>src/android_webview/OWNERS</owner>
+   <summary>
+     Records how long WebView blocks startup to load prefs from disk. This is
+     recorded once per browser process startup.
+@@ -161986,7 +161984,6 @@ regressions. -->
      expires_after="2020-11-01">
    <owner>rmcelrath@chromium.org</owner>
    <owner>ntfschr@chromium.org</owner>
@@ -65,7 +73,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    <summary>
      The time interval between when a WebView-using app's copy of the variations
      seed was written to its local app storage and when it was loaded for use.
-@@ -155572,7 +155570,6 @@ regressions. -->
+@@ -162002,7 +161999,6 @@ regressions. -->
      expires_after="2020-11-01">
    <owner>rmcelrath@chromium.org</owner>
    <owner>ntfschr@chromium.org</owner>
@@ -73,7 +81,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    <summary>
      The result of checking if a WebView-using app's copy of the variations seed
      is still fresh, or if a new seed should be requested.
-@@ -155815,7 +155812,6 @@ regressions. -->
+@@ -162245,7 +162241,6 @@ regressions. -->
      expires_after="2020-11-01">
    <owner>rmcelrath@chromium.org</owner>
    <owner>ntfschr@chromium.org</owner>
