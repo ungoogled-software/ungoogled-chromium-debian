@@ -1,0 +1,14 @@
+description: move constructor is needed
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/net/third_party/quiche/src/quic/core/quic_stream_send_buffer.h
++++ b/net/third_party/quiche/src/quic/core/quic_stream_send_buffer.h
+@@ -62,7 +62,7 @@ class QUIC_EXPORT_PRIVATE QuicStreamSend
+  public:
+   explicit QuicStreamSendBuffer(QuicBufferAllocator* allocator);
+   QuicStreamSendBuffer(const QuicStreamSendBuffer& other) = delete;
+-  QuicStreamSendBuffer(QuicStreamSendBuffer&& other) = delete;
++  QuicStreamSendBuffer(QuicStreamSendBuffer&& other) = default;
+   ~QuicStreamSendBuffer();
+ 
+   // Save |data_length| of data starts at |iov_offset| in |iov| to send buffer.

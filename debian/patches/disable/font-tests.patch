@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/skia/BUILD.gn
 +++ b/skia/BUILD.gn
-@@ -804,7 +804,7 @@ group("test_fonts_resources") {
+@@ -873,7 +873,7 @@ group("test_fonts_resources") {
    if (is_mac) {
      deps += [ ":test_fonts_bundle_data" ]
      data_deps += [ ":test_fonts_bundle_data" ]
@@ -12,43 +12,34 @@ author: Michael Gilbert <mgilbert@debian.org>
      deps += [ "//third_party/test_fonts" ]
      data_deps += [ "//third_party/test_fonts" ]
    }
-@@ -846,7 +846,7 @@ source_set("test_fonts") {
-       "//third_party/fuchsia-sdk/sdk:sys_cpp",
-     ]
-   }
--  if (is_linux) {
-+  if (false) {
-     sources += [ "ext/test_fonts_linux.cc" ]
-   }
-   if (is_mac) {
 --- a/base/test/BUILD.gn
 +++ b/base/test/BUILD.gn
-@@ -212,7 +212,7 @@ static_library("test_support") {
-     deps += [ "//third_party/fuchsia-sdk/sdk:zx" ]
-   }
+@@ -244,12 +244,6 @@ static_library("test_support") {
  
--  if (is_linux) {
-+  if (false) {
+   if (is_linux) {
      public_deps += [ ":fontconfig_util_linux" ]
-     data_deps = [
-       "//third_party/test_fonts",
-@@ -410,7 +410,7 @@ if (is_linux) {
-     ]
+-    data_deps = [
+-      "//third_party/test_fonts",
+-    ]
+-    if (current_toolchain == host_toolchain) {
+-      data_deps += [ ":do_generate_fontconfig_caches" ]
+-    }
    }
  
--  if (current_toolchain == host_toolchain) {
-+  if (false) {
-     executable("generate_fontconfig_caches") {
+   if (is_ios) {
+@@ -453,15 +447,9 @@ if (is_linux) {
        testonly = true
-       sources = [
---- a/content/shell/app/shell_main_delegate.cc
-+++ b/content/shell/app/shell_main_delegate.cc
-@@ -297,7 +297,7 @@ bool ShellMainDelegate::BasicStartupComp
-     BlinkTestPlatformInitialize();
- #endif
+       tool = ":generate_fontconfig_caches"
  
--#if !defined(OS_WIN)
-+#if 0
-     // On Windows BlinkTestPlatformInitialize() is responsible for font
-     // initialization.
-     skia::ConfigureTestFont();
+-      # The copied test fonts are inputs to generate_fontconfig_caches, so must
+-      # be listed in deps, not data_deps (https://crbug.com/919422).
+-      deps = [
+-        "//third_party/test_fonts",
+-      ]
+       args = []
+       outputs = [
+         "$root_out_dir/fontconfig_caches/fb5c91b2895aa445d23aebf7f9e2189c-le64.cache-7",
+-        "$root_out_dir/test_fonts/.uuid",
+       ]
+     }
+   }
