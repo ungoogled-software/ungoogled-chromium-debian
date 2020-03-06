@@ -65,6 +65,7 @@ system/convertutf.patch
 
 buster/icu63.patch
 buster/opus13.patch
+buster/vpx17.patch
 
 inox-patchset/chromium-skia-harmony.patch
 inox-patchset/fix-cfi-failures-with-unbundled-libxml.patch
