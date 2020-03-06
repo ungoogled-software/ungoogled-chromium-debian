@@ -1,0 +1,158 @@
+description: full definition of RemoteTreeNode is needed by BookmarkModelMerger
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/components/sync_bookmarks/bookmark_model_merger.cc
++++ b/components/sync_bookmarks/bookmark_model_merger.cc
+@@ -203,53 +203,7 @@ UpdatesPerParentId GroupValidUpdatesByPa
+ 
+ }  // namespace
+ 
+-class BookmarkModelMerger::RemoteTreeNode final {
+- public:
+-  // Constructs a tree given |update| as root and recursively all descendants by
+-  // traversing |*updates_per_parent_id|. |update| and |updates_per_parent_id|
+-  // must not be null. All updates |*updates_per_parent_id| must represent valid
+-  // updates. Updates corresponding from descendant nodes are moved away from
+-  // |*updates_per_parent_id|.
+-  static RemoteTreeNode BuildTree(
+-      std::unique_ptr<syncer::UpdateResponseData> update,
+-      UpdatesPerParentId* updates_per_parent_id);
+-
+-  ~RemoteTreeNode() = default;
+-
+-  // Allow moves, useful during construction.
+-  RemoteTreeNode(RemoteTreeNode&&) = default;
+-  RemoteTreeNode& operator=(RemoteTreeNode&&) = default;
+-
+-  const syncer::EntityData& entity() const { return *update_->entity; }
+-  int64_t response_version() const { return update_->response_version; }
+-
+-  // Direct children nodes, sorted by ascending unique position. These are
+-  // guaranteed to be valid updates (e.g. IsValidBookmarkSpecifics()).
+-  const std::vector<RemoteTreeNode>& children() const { return children_; }
+-
+-  // Recursively emplaces all GUIDs (this node and descendants) into
+-  // |*guid_to_remote_node_map|, which must not be null.
+-  void EmplaceSelfAndDescendantsByGUID(
+-      std::unordered_map<std::string, const RemoteTreeNode*>*
+-          guid_to_remote_node_map) const {
+-    DCHECK(guid_to_remote_node_map);
+-
+-    const std::string& guid = entity().specifics.bookmark().guid();
+-    if (!guid.empty()) {
+-      DCHECK(base::IsValidGUID(guid));
+-
+-      // Duplicate GUIDs have been sorted out before.
+-      bool success = guid_to_remote_node_map->emplace(guid, this).second;
+-      DCHECK(success);
+-    }
+-
+-    for (const RemoteTreeNode& child : children_) {
+-      child.EmplaceSelfAndDescendantsByGUID(guid_to_remote_node_map);
+-    }
+-  }
+-
+- private:
+-  static bool UniquePositionLessThan(const RemoteTreeNode& lhs,
++bool BookmarkModelMerger::RemoteTreeNode::UniquePositionLessThan(const RemoteTreeNode& lhs,
+                                      const RemoteTreeNode& rhs) {
+     const syncer::UniquePosition a_pos =
+         syncer::UniquePosition::FromProto(lhs.entity().unique_position);
+@@ -258,12 +212,6 @@ class BookmarkModelMerger::RemoteTreeNod
+     return a_pos.LessThan(b_pos);
+   }
+ 
+-  RemoteTreeNode() = default;
+-
+-  std::unique_ptr<syncer::UpdateResponseData> update_;
+-  std::vector<RemoteTreeNode> children_;
+-};
+-
+ // static
+ BookmarkModelMerger::RemoteTreeNode
+ BookmarkModelMerger::RemoteTreeNode::BuildTree(
+--- a/components/sync_bookmarks/bookmark_model_merger.h
++++ b/components/sync_bookmarks/bookmark_model_merger.h
+@@ -9,6 +9,7 @@
+ #include <unordered_map>
+ #include <vector>
+ 
++#include "base/guid.h"
+ #include "base/macros.h"
+ #include "components/sync/engine/non_blocking_sync_common.h"
+ 
+@@ -23,6 +24,12 @@ class FaviconService;
+ 
+ namespace sync_bookmarks {
+ 
++namespace {
++using UpdatesPerParentId = std::unordered_map<base::StringPiece,
++                                              syncer::UpdateResponseDataList,
++                                              base::StringPieceHash>;
++}
++
+ class SyncedBookmarkTracker;
+ 
+ // Responsible for merging local and remote bookmark models when bookmark sync
+@@ -50,7 +57,60 @@ class BookmarkModelMerger {
+ 
+  private:
+   // Internal representation of a remote tree, composed of nodes.
+-  class RemoteTreeNode;
++  class RemoteTreeNode final {
++  public:
++  // Constructs a tree given |update| as root and recursively all descendants by
++  // traversing |*updates_per_parent_id|. |update| and |updates_per_parent_id|
++  // must not be null. All updates |*updates_per_parent_id| must represent valid
++  // updates. Updates corresponding from descendant nodes are moved away from
++  // |*updates_per_parent_id|.
++  static RemoteTreeNode BuildTree(
++      std::unique_ptr<syncer::UpdateResponseData> update,
++      UpdatesPerParentId* updates_per_parent_id);
++
++  ~RemoteTreeNode() = default;
++
++  // Allow moves, useful during construction.
++  RemoteTreeNode(RemoteTreeNode&&) = default;
++  RemoteTreeNode& operator=(RemoteTreeNode&&) = default;
++
++  const syncer::EntityData& entity() const { return *update_->entity; }
++  int64_t response_version() const { return update_->response_version; }
++
++  // Direct children nodes, sorted by ascending unique position. These are
++  // guaranteed to be valid updates (e.g. IsValidBookmarkSpecifics()).
++  const std::vector<RemoteTreeNode>& children() const { return children_; }
++
++  // Recursively emplaces all GUIDs (this node and descendants) into
++  // |*guid_to_remote_node_map|, which must not be null.
++  void EmplaceSelfAndDescendantsByGUID(
++      std::unordered_map<std::string, const RemoteTreeNode*>*
++          guid_to_remote_node_map) const {
++    DCHECK(guid_to_remote_node_map);
++
++    const std::string& guid = entity().specifics.bookmark().guid();
++    if (!guid.empty()) {
++      DCHECK(base::IsValidGUID(guid));
++
++      // Duplicate GUIDs have been sorted out before.
++      bool success = guid_to_remote_node_map->emplace(guid, this).second;
++      DCHECK(success);
++    }
++
++    for (const RemoteTreeNode& child : children_) {
++      child.EmplaceSelfAndDescendantsByGUID(guid_to_remote_node_map);
++    }
++  }
++
++  private:
++  static bool UniquePositionLessThan(const RemoteTreeNode& lhs,
++                                     const RemoteTreeNode& rhs);
++
++  RemoteTreeNode() = default;
++
++  std::unique_ptr<syncer::UpdateResponseData> update_;
++  std::vector<RemoteTreeNode> children_;
++  };
+ 
+   // A forest composed of multiple trees where the root of each tree represents
+   // a permanent node, keyed by server-defined unique tag of the root.
