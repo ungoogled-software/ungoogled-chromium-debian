@@ -19,6 +19,7 @@ export CXX=clang++
 export LDFLAGS+=-Wl,--stats
 
 # initial flags from dpkg-buildflags
+export DEB_CXXFLAGS_MAINT_STRIP=-g
 export CXXFLAGS=$(shell dpkg-buildflags --get CXXFLAGS)
 
 # extra flags to reduce warnings that aren't very useful
