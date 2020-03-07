@@ -78,7 +78,7 @@
      if (is_mac) {
 --- a/third_party/breakpad/BUILD.gn
 +++ b/third_party/breakpad/BUILD.gn
-@@ -721,7 +721,6 @@ if (is_linux || is_android) {
+@@ -719,7 +719,6 @@ if (is_linux || is_android) {
  
      data_deps = [
        ":linux_dumper_unittest_helper",
