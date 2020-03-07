@@ -30,3 +30,13 @@ author: Michael Gilbert <mgilbert@debian.org>
  #ifdef COURGETTE_USE_CRC_LIB
  #  include "zlib.h"
  #else
+--- a/third_party/perfetto/gn/BUILD.gn
++++ b/third_party/perfetto/gn/BUILD.gn
+@@ -323,7 +323,6 @@ if (enable_perfetto_trace_processor || e
+         "//buildtools:zlib",
+       ]
+     } else {
+-      public_configs = [ "//third_party/zlib:zlib_config" ]
+       public_deps = [
+         "//third_party/zlib",
+       ]
