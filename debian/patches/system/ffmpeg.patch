@@ -15,7 +15,7 @@ origin: chromium 66 authors
      std::move(bound_init_cb).Run(false);
 --- a/media/cdm/library_cdm/clear_key_cdm/clear_key_cdm.cc
 +++ b/media/cdm/library_cdm/clear_key_cdm/clear_key_cdm.cc
-@@ -152,6 +152,7 @@ void ConvertCdmKeysInfo(const media::Cdm
+@@ -153,6 +153,7 @@ void ConvertCdmKeysInfo(const media::Cdm
  void INITIALIZE_CDM_MODULE() {
    DVLOG(1) << __func__;
    media::InitializeMediaLibrary();

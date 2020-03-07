@@ -4,18 +4,18 @@ bug-debian: http://bugs.debian.org/901290
 
 --- a/skia/BUILD.gn
 +++ b/skia/BUILD.gn
-@@ -45,6 +45,10 @@ config("skia_config") {
-     "SK_USER_CONFIG_HEADER=\"../../skia/config/SkUserConfig.h\"",
-   ]
+@@ -41,6 +41,10 @@ buildflag_header("buildflags") {
+ config("skia_config") {
+   include_dirs = [ "//third_party/skia" ]
  
 +  if ((current_cpu == "arm64" || current_cpu == "arm") && !is_clang) {
 +    defines += [ "SKCMS_PORTABLE=1" ]
 +  }
 +
    if (!is_ios) {
-     defines += [ "SK_HAS_JPEG_LIBRARY" ]
-   }
-@@ -175,6 +179,7 @@ config("skia_library_config") {
+     if (enable_skia_wuffs_gif) {
+       include_dirs += [ "//third_party/wuffs/src/release/c" ]
+@@ -209,6 +213,7 @@ config("skia_library_config") {
  
  source_set("skcms") {
    cflags = []
