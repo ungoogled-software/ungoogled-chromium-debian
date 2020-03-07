@@ -14,7 +14,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/components/viz/test/test_context_provider.h
 +++ b/components/viz/test/test_context_provider.h
-@@ -174,7 +174,7 @@ class TestContextProvider
+@@ -176,7 +176,7 @@ class TestContextProvider
    std::unique_ptr<skia_bindings::GrContextForGLES2Interface> gr_context_;
    std::unique_ptr<ContextCacheController> cache_controller_;
    std::unique_ptr<TestSharedImageInterface> shared_image_interface_;
