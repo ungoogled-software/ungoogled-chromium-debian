@@ -14,7 +14,6 @@ clang/flags.patch
 fixes/link.patch
 fixes/quic.patch
 fixes/mojo.patch
-fixes/breakpad.patch
 fixes/inspector.patch
 fixes/gpu-timeout.patch
 fixes/sequence-point.patch
@@ -62,6 +61,7 @@ system/harfbuzz.patch
 system/openjpeg.patch
 
 buster/opus13.patch
+buster/vpx17.patch
 
 inox-patchset/chromium-skia-harmony.patch
 inox-patchset/fix-cfi-failures-with-unbundled-libxml.patch
