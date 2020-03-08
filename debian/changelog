@@ -1,3 +1,11 @@
+chromium (80.0.3987.132-1) unstable; urgency=medium
+
+  * New upstream security release.
+    - CVE-2020-6420: Insufficient policy enforcement in media. Reported by
+      Taras Uzdenov
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 06 Mar 2020 16:40:19 +0000
+
 chromium (80.0.3987.122-2) unstable; urgency=medium
 
   * Reduce debugging symbols to avoid memory exhaustion while linking.
