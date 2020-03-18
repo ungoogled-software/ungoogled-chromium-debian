@@ -6,34 +6,26 @@ debianization/master-preferences.patch
 gn/libcxx.patch
 gn/parallel.patch
 
-arm/gcc_skcms_ice.patch
 arm/pffffft-buildfix.patch
 
 gcc/int32.patch
-gcc/empty-array.patch
-gcc/unterminated-apostrophe.patch
 
-clang/flags.patch
-
-fixes/quic.patch
+fixes/gl.patch
 fixes/mojo.patch
 fixes/vaapi.patch
 fixes/closure.patch
 fixes/breakpad.patch
 fixes/ps-print.patch
-fixes/as-needed.patch
 fixes/inspector.patch
 fixes/gpu-timeout.patch
-fixes/safebrowsing.patch
 fixes/sequence-point.patch
 fixes/missing-includes.patch
 fixes/widevine-revision.patch
 fixes/widevine-locations.patch
 fixes/connection-message.patch
-fixes/multiple-definition.patch
-fixes/incomplete-definition.patch
 
 disable/unrar.patch
+disable/glmark.patch
 disable/owners.patch
 disable/signin.patch
 disable/android.patch
@@ -56,7 +48,6 @@ warnings/restrict.patch
 warnings/attribute.patch
 warnings/multichar.patch
 warnings/deprecated.patch
-warnings/not-unused.patch
 warnings/bool-compare.patch
 warnings/sign-compare.patch
 warnings/format-enums.patch
@@ -76,12 +67,13 @@ system/nspr.patch
 system/zlib.patch
 system/event.patch
 system/ffmpeg.patch
-system/libxml2.patch
 system/jsoncpp.patch
 system/harfbuzz.patch
 system/openjpeg.patch
 system/convertutf.patch
 
+buster/re2.patch
 buster/icu63.patch
 buster/vpx17.patch
 buster/opus13.patch
+buster/clang7.patch

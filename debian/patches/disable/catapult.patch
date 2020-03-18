@@ -1,6 +1,9 @@
+description: remove dependencies on third_party catapult
+author: Michael Gilbert <mgilbert@debian.org>
+
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -221,7 +221,6 @@ group("gn_all") {
+@@ -227,7 +227,6 @@ group("gn_all") {
        "//media/capture:capture_unittests",
        "//media/cast:cast_unittests",
        "//third_party/angle/src/tests:angle_white_box_tests",
@@ -8,7 +11,7 @@
        "//third_party/smhasher:pmurhash",
      ]
    } else if (is_ios) {
-@@ -334,7 +333,6 @@ group("gn_all") {
+@@ -340,7 +339,6 @@ group("gn_all") {
        "//net/android:net_junit_tests",
        "//services:service_junit_tests",
        "//testing/android/junit:junit_unit_tests",
@@ -16,7 +19,23 @@
        "//third_party/smhasher:murmurhash3",
        "//tools/android:android_tools",
        "//tools/android:memconsumer",
-@@ -1049,7 +1047,6 @@ if (!is_ios) {
+@@ -1008,7 +1006,6 @@ if (!is_ios) {
+       data_deps = [
+         "//chrome:chrome",
+         "//chrome/test/chromedriver",
+-        "//third_party/catapult/third_party/typ",
+       ]
+     }
+     group("wpt_tests_isolate") {
+@@ -1019,7 +1016,6 @@ if (!is_ios) {
+       ]
+       deps = [
+         "//third_party/blink/tools:wpt_tests_isolate",
+-        "//third_party/catapult/third_party/typ",
+       ]
+     }
+   }
+@@ -1072,7 +1068,6 @@ if (!is_ios) {
        "//third_party/blink/public/mojom:mojom_platform_js_data_deps",
        "//third_party/blink/renderer/core/html:js_files_for_form_controls_web_tests",
        "//third_party/blink/renderer/core/script:js_files_for_web_tests",
@@ -24,7 +43,7 @@
        "//third_party/mesa_headers",
        "//tools/imagediff",
      ]
-@@ -1109,7 +1106,6 @@ if (!is_ios) {
+@@ -1129,7 +1124,6 @@ if (!is_ios) {
  
      if (is_android) {
        data += [
@@ -32,7 +51,7 @@
          "//build/android/",
        ]
      }
-@@ -1166,11 +1162,6 @@ if (!is_ios) {
+@@ -1177,11 +1171,6 @@ if (!is_ios) {
        "//third_party/blink/web_tests/StaleTestExpectations",
        "//third_party/blink/web_tests/TestExpectations",
        "//third_party/blink/web_tests/VirtualTestSuites",
@@ -46,14 +65,14 @@
        "//third_party/depot_tools/pylint_main.py",
 --- a/tools/binary_size/BUILD.gn
 +++ b/tools/binary_size/BUILD.gn
-@@ -19,7 +19,6 @@ python_library("sizes_py") {
+@@ -18,7 +18,6 @@ python_library("binary_size_trybot_py")
+ python_library("sizes_py") {
    testonly = true
    pydeps_file = "sizes.pydeps"
-   data_deps = [
--    "//third_party/catapult/tracing:convert_chart_json",
-   ]
+-  data_deps = [ "//third_party/catapult/tracing:convert_chart_json" ]
  }
  
+ if (is_linux) {
 --- a/v8/tools/BUILD.gn
 +++ b/v8/tools/BUILD.gn
 @@ -32,10 +32,6 @@ group("v8_android_test_runner_deps") {
@@ -69,7 +88,7 @@
  
 --- a/chrome/test/BUILD.gn
 +++ b/chrome/test/BUILD.gn
-@@ -6352,8 +6352,6 @@ if (!is_android && !is_fuchsia) {
+@@ -6469,8 +6469,6 @@ if (!is_android && !is_fuchsia) {
        "//chrome/test/data/password/captured_sites/",
        "//chrome/test/data/web_page_replay_go_helper_scripts/automation_helper.js",
        "//components/test/data/autofill/web_page_replay_support_files/",
@@ -78,7 +97,7 @@
      ]
  
      if (is_linux || is_win) {
-@@ -6395,7 +6393,6 @@ if (!is_android && !is_fuchsia) {
+@@ -6507,7 +6505,6 @@ if (!is_android && !is_fuchsia) {
  
        # TODO(uwyiming@chromium.org) create a gn target for Web Page Replay Go (WPR Go) and only WPR Go.
        # So that test targets requiring WPR Go does not pull down the whole telemetry tool chain.
@@ -86,23 +105,23 @@
        "//third_party/hunspell",
        "//third_party/icu",
        "//third_party/libpng",
-@@ -6431,7 +6428,6 @@ if (!is_android && !is_fuchsia) {
-     ]
+@@ -6541,7 +6538,6 @@ if (!is_android && !is_fuchsia) {
+     deps = [ "//tools/perf/chrome_telemetry_build:telemetry_chrome_test" ]
  
      data = [
 -      "//third_party/catapult/telemetry/telemetry/internal/bin/",
        "//tools/perf/run_telemetry_tests",
  
        # For isolate contract.
-@@ -6451,7 +6447,6 @@ if (!is_android && !is_fuchsia) {
+@@ -6559,7 +6555,6 @@ if (!is_android && !is_fuchsia) {
    group("telemetry_gpu_unittests") {
      testonly = true
      deps = [
 -      "//third_party/catapult:telemetry_chrome_test_support",
+       "//tools/metrics:metrics_python_tests",
      ]
      data = [
-       # TODO(kbr): refactor the telemetry dependencies more cleanly.
-@@ -6603,7 +6598,6 @@ if (is_mac || is_win || is_android) {
+@@ -6695,7 +6690,6 @@ if (is_mac || is_win || is_android) {
        "//testing/scripts",
        "//testing/test_env.py",
        "//testing/xvfb.py",
@@ -112,7 +131,7 @@
    }
 --- a/tools/grit/BUILD.gn
 +++ b/tools/grit/BUILD.gn
-@@ -37,7 +37,6 @@ group("grit_python_unittests") {
+@@ -33,7 +33,6 @@ group("grit_python_unittests") {
      "//testing/scripts/run_isolated_script_test.py",
      "//testing/xvfb.py",
      "//tools/grit/",
@@ -122,7 +141,7 @@
  
 --- a/tools/metrics/BUILD.gn
 +++ b/tools/metrics/BUILD.gn
-@@ -71,7 +71,6 @@ group("metrics_python_tests") {
+@@ -57,7 +57,6 @@ group("metrics_python_tests") {
      "//testing/scripts/common.py",
      "//testing/xvfb.py",
      "//testing/test_env.py",
@@ -132,17 +151,15 @@
      "//tools/json_comment_eater/json_comment_eater.py",
 --- a/tools/perf/chrome_telemetry_build/BUILD.gn
 +++ b/tools/perf/chrome_telemetry_build/BUILD.gn
-@@ -96,9 +96,6 @@ group("telemetry_chrome_test_without_chr
-     "//tools/perf/chrome_telemetry_build/",
+@@ -102,7 +102,6 @@ group("telemetry_chrome_test_without_chr
      "//components/crash/content/tools/generate_breakpad_symbols.py",
    ]
--  data_deps = [
+   data_deps = [
 -    "//third_party/catapult:telemetry_chrome_test_support",
--  ]
+     "//tools/metrics:metrics_python_tests",
+   ]
    if (is_chromeos) {
-     data_deps += [
-       "//third_party/breakpad:minidump_stackwalk",
-@@ -124,6 +121,5 @@ group("telemetry_chrome_test_without_chr
+@@ -128,6 +127,5 @@ group("telemetry_chrome_test_without_chr
        "//third_party/breakpad:minidump_stackwalk",
      ]
    } else {
@@ -158,17 +175,17 @@
 -    "//third_party/catapult/third_party/typ/",
    ]
  }
---- a/tools/gritsettings/resource_ids
-+++ b/tools/gritsettings/resource_ids
-@@ -405,12 +405,6 @@
+--- a/tools/gritsettings/resource_ids.spec
++++ b/tools/gritsettings/resource_ids.spec
+@@ -414,12 +414,6 @@
    "content/shell/shell_resources.grd": {
-     "includes": [15070],
+     "includes": [2940],
    },
 -
 -  # This file is generated during the build.
 -  "<(SHARED_INTERMEDIATE_DIR)/content/browser/tracing/tracing_resources.grd": {
 -    "META": {"sizes": {"includes": [20],}},
--    "includes": [15080],
+-    "includes": [2960],
 -  },
    # END content/ section.
  
@@ -186,14 +203,14 @@
 @@ -108,7 +107,6 @@ template("chrome_extra_paks") {
        "//components/autofill/core/browser:autofill_address_rewriter_resources",
        "//components/resources",
-       "//content:resources",
+       "//content:content_resources",
 -      "//content/browser/tracing:resources",
        "//mojo/public/js:resources",
        "//net:net_resources",
        "//third_party/blink/public:resources",
 --- a/content/browser/BUILD.gn
 +++ b/content/browser/BUILD.gn
-@@ -2047,7 +2047,6 @@ jumbo_source_set("browser") {
+@@ -2055,7 +2055,6 @@ jumbo_source_set("browser") {
    if (!is_android) {
      deps += [
        "//components/vector_icons",
@@ -203,16 +220,16 @@
  
 --- a/content/shell/BUILD.gn
 +++ b/content/shell/BUILD.gn
-@@ -533,7 +533,6 @@ repack("pak") {
+@@ -519,7 +519,6 @@ repack("pak") {
    sources = [
      "$root_gen_dir/content/app/resources/content_resources_100_percent.pak",
      "$root_gen_dir/content/browser/resources/media/media_internals_resources.pak",
 -    "$root_gen_dir/content/browser/tracing/tracing_resources.pak",
      "$root_gen_dir/content/browser/webrtc/resources/webrtc_internals_resources.pak",
      "$root_gen_dir/content/content_resources.pak",
-     "$root_gen_dir/content/shell/shell_resources.pak",
-@@ -553,7 +552,6 @@ repack("pak") {
-     "//content:resources",
+     "$root_gen_dir/content/dev_ui_content_resources.pak",
+@@ -541,7 +540,6 @@ repack("pak") {
+     "//content:dev_ui_content_resources",
      "//content/app/resources",
      "//content/browser/resources/media:media_internals_resources",
 -    "//content/browser/tracing:resources",
@@ -221,17 +238,17 @@
      "//net:net_resources",
 --- a/fuchsia/engine/BUILD.gn
 +++ b/fuchsia/engine/BUILD.gn
-@@ -31,7 +31,6 @@ repack("web_engine_pak") {
+@@ -32,7 +32,6 @@ repack("web_engine_pak") {
      "$root_gen_dir/components/components_resources.pak",
      "$root_gen_dir/components/strings/components_strings_en-US.pak",
      "$root_gen_dir/content/app/resources/content_resources_100_percent.pak",
 -    "$root_gen_dir/content/browser/tracing/tracing_resources.pak",
      "$root_gen_dir/content/content_resources.pak",
+     "$root_gen_dir/content/dev_ui_content_resources.pak",
      "$root_gen_dir/mojo/public/js/mojo_bindings_resources.pak",
-     "$root_gen_dir/net/net_resources.pak",
-@@ -48,7 +47,6 @@ repack("web_engine_pak") {
-     "//components/strings",
-     "//content:resources",
+@@ -52,7 +51,6 @@ repack("web_engine_pak") {
+     "//content:content_resources",
+     "//content:dev_ui_content_resources",
      "//content/app/resources",
 -    "//content/browser/tracing:resources",
      "//gpu/command_buffer/service",
@@ -239,16 +256,16 @@
      "//net:net_resources",
 --- a/headless/BUILD.gn
 +++ b/headless/BUILD.gn
-@@ -34,7 +34,6 @@ repack("pak") {
+@@ -32,7 +32,6 @@ repack("pak") {
      "$root_gen_dir/components/strings/components_strings_en-US.pak",
      "$root_gen_dir/content/app/resources/content_resources_100_percent.pak",
      "$root_gen_dir/content/browser/devtools/devtools_resources.pak",
 -    "$root_gen_dir/content/browser/tracing/tracing_resources.pak",
      "$root_gen_dir/content/content_resources.pak",
+     "$root_gen_dir/content/dev_ui_content_resources.pak",
      "$root_gen_dir/headless/headless_lib_resources.pak",
-     "$root_gen_dir/mojo/public/js/mojo_bindings_resources.pak",
 @@ -61,7 +60,6 @@ repack("pak") {
-     "//content:resources",
+     "//content:dev_ui_content_resources",
      "//content/app/resources",
      "//content/browser/devtools:resources",
 -    "//content/browser/tracing:resources",
@@ -257,17 +274,17 @@
      "//third_party/blink/public:resources",
 --- a/weblayer/shell/BUILD.gn
 +++ b/weblayer/shell/BUILD.gn
-@@ -166,7 +166,6 @@ repack("support_pak") {
+@@ -152,7 +152,6 @@ repack("support_pak") {
      "$root_gen_dir/components/components_resources_100_percent.pak",
      "$root_gen_dir/components/strings/components_strings_en-US.pak",
      "$root_gen_dir/content/app/resources/content_resources_100_percent.pak",
 -    "$root_gen_dir/content/browser/tracing/tracing_resources.pak",
      "$root_gen_dir/content/content_resources.pak",
+     "$root_gen_dir/content/dev_ui_content_resources.pak",
      "$root_gen_dir/mojo/public/js/mojo_bindings_resources.pak",
-     "$root_gen_dir/net/net_resources.pak",
-@@ -185,7 +184,6 @@ repack("support_pak") {
-     "//components/strings",
-     "//content:resources",
+@@ -173,7 +172,6 @@ repack("support_pak") {
+     "//content:content_resources",
+     "//content:dev_ui_content_resources",
      "//content/app/resources",
 -    "//content/browser/tracing:resources",
      "//mojo/public/js:resources",
@@ -275,7 +292,7 @@
      "//third_party/blink/public:resources",
 --- a/content/browser/tracing/tracing_ui.cc
 +++ b/content/browser/tracing/tracing_ui.cc
-@@ -26,7 +26,6 @@
+@@ -27,7 +27,6 @@
  #include "base/strings/stringprintf.h"
  #include "base/trace_event/trace_event.h"
  #include "base/values.h"
@@ -283,7 +300,7 @@
  #include "content/browser/tracing/tracing_controller_impl.h"
  #include "content/public/browser/browser_context.h"
  #include "content/public/browser/browser_thread.h"
-@@ -171,8 +170,6 @@ TracingUI::TracingUI(WebUI* web_ui)
+@@ -176,8 +175,6 @@ TracingUI::TracingUI(WebUI* web_ui)
  
    WebUIDataSource* source = WebUIDataSource::Create(kChromeUITracingHost);
    source->UseStringsJs();
@@ -292,3 +309,13 @@
    source->SetRequestFilter(base::BindRepeating(OnShouldHandleRequest),
                             base::BindRepeating(OnTracingRequest));
    WebUIDataSource::Add(browser_context, source);
+--- a/testing/BUILD.gn
++++ b/testing/BUILD.gn
+@@ -27,7 +27,6 @@ group("run_perf_test") {
+ 
+   data_deps = [
+     ":test_scripts_shared",
+-    "//third_party/catapult/tracing:convert_chart_json",
+   ]
+ 
+   if (is_android) {

@@ -1,66 +1,42 @@
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -1045,7 +1045,6 @@ if (!is_ios) {
-       "//services/device/public/mojom:generic_sensor_js_data_deps",
+@@ -1068,7 +1068,6 @@ if (!is_ios) {
        "//services/device/public/mojom:usb_js_data_deps",
+       "//services/shape_detection/public/mojom:mojom_js_data_deps",
        "//skia/public/mojom:mojom_js_data_deps",
 -      "//testing/buildbot/filters:blink_web_tests_filter",
        "//third_party/blink/public:blink_devtools_frontend_resources_files",
        "//third_party/blink/public/mojom:mojom_platform_js_data_deps",
        "//third_party/blink/renderer/core/html:js_files_for_form_controls_web_tests",
---- a/services/BUILD.gn
-+++ b/services/BUILD.gn
-@@ -30,10 +30,6 @@ test("services_unittests") {
-     "//services/test:run_all_unittests",
-   ]
- 
--  data_deps = [
--    "//testing/buildbot/filters:services_unittests_filters",
--  ]
--
-   if (!is_ios) {
-     deps += [
-       "//services/audio:tests",
 --- a/chrome/test/BUILD.gn
 +++ b/chrome/test/BUILD.gn
-@@ -527,10 +527,6 @@ if (is_android) {
+@@ -519,8 +519,6 @@ if (is_android) {
        "//testing/android/native_test:native_test_support",
      ]
  
--    data_deps = [
--      "//testing/buildbot/filters:android_browsertests_filters",
--    ]
+-    data_deps = [ "//testing/buildbot/filters:android_browsertests_filters" ]
 -
      sources = [
-       "../browser/engagement/important_sites_util_browsertest.cc",
-       "../browser/payments/empty_parameters_browsertest.cc",
-@@ -771,8 +767,6 @@ if (!is_android) {
+       "../browser/android/customtabs/custom_tabs_browsertest.cc",
+       "../browser/android/webapk/webapk_icon_hasher_browsertest.cc",
+@@ -773,8 +771,6 @@ if (!is_android) {
        "//ppapi:copy_test_files2",
-       "//ppapi:ppapi_tests",
        "//ppapi:power_saver_test_plugin",
+       "//ppapi:ppapi_tests",
 -      "//testing/buildbot/filters:browser_tests_filters",
 -      "//testing/buildbot/filters:linux_trusty_rel_browser_tests_filters",
        "//third_party/mesa_headers",
        "//third_party/widevine/cdm:widevine_test_license_server",
        "//tools/media_engagement_preload:generator",
-@@ -1443,7 +1437,6 @@ if (!is_android) {
+@@ -1462,7 +1458,6 @@ if (!is_android) {
        data_deps += [
-         "//chrome",
          "//ash/keyboard/ui:resources",
+         "//chrome",
 -        "//testing/buildbot/filters:chromeos_filters",
          "//ui/file_manager:unit_test_data",
        ]
  
-@@ -2561,8 +2554,6 @@ if (!is_android) {
-         "../browser/process_singleton_browsertest.cc",
-       ]
- 
--      data += [ "//testing/buildbot/filters/mac_window_server_killers.browser_tests.filter" ]
--
-       if (safe_browsing_mode == 1) {
-         sources -= [
-           # single-process mode hangs on Mac sometimes because of multiple UI
-@@ -3498,7 +3489,6 @@ test("unit_tests") {
+@@ -3587,7 +3582,6 @@ test("unit_tests") {
    data_deps = [
      "//chrome/test/data/media/engagement/preload:generate_preload_list",
      "//chrome/test/data/media/engagement/preload:test_data",
@@ -68,17 +44,33 @@
    ]
  
    data = [
-@@ -6165,7 +6155,6 @@ if (!is_android && !is_fuchsia) {
- 
+@@ -5070,7 +5064,6 @@ test("unit_tests") {
+       "//chrome/browser/chromeos:unit_tests",
+       "//chromeos/ime:gencode",
+     ]
+-    data_deps += [ "//testing/buildbot/filters:chromeos_filters" ]
+     sources -=
+         [ "../browser/policy/cloud/user_policy_signin_service_unittest.cc" ]
+   }
+@@ -5765,7 +5758,6 @@ if (!is_android) {
+     # Runtime dependencies
      data_deps = [
+       "//ppapi:ppapi_tests",
+-      "//testing/buildbot/filters:interactive_ui_tests_filters",
        "//third_party/mesa_headers",
--      "//testing/buildbot/filters:e2e_sync_integration_tests_filters",
+       "//ui/resources:ui_test_pak_data",
+     ]
+@@ -6281,7 +6273,6 @@ if (!is_android && !is_fuchsia) {
      ]
  
-     if (is_mac) {
+     data_deps = [
+-      "//testing/buildbot/filters:e2e_sync_integration_tests_filters",
+       "//third_party/mesa_headers",
+     ]
+ 
 --- a/third_party/breakpad/BUILD.gn
 +++ b/third_party/breakpad/BUILD.gn
-@@ -721,7 +721,6 @@ if (is_linux || is_android) {
+@@ -715,7 +715,6 @@ if (is_linux || is_android) {
  
      data_deps = [
        ":linux_dumper_unittest_helper",
@@ -88,7 +80,7 @@
      include_dirs = [
 --- a/content/test/BUILD.gn
 +++ b/content/test/BUILD.gn
-@@ -1186,7 +1186,6 @@ test("content_browsertests") {
+@@ -1190,7 +1190,6 @@ test("content_browsertests") {
    data_deps = [
      ":web_ui_test_mojo_bindings_js_data_deps",
      "//content/shell:pak",
@@ -96,7 +88,7 @@
      "//third_party/mesa_headers",
    ]
  
-@@ -2054,7 +2053,6 @@ test("content_unittests") {
+@@ -2063,7 +2062,6 @@ test("content_unittests") {
    ]
  
    data_deps = [
@@ -104,3 +96,64 @@
      "//third_party/mesa_headers",
    ]
  
+--- a/media/BUILD.gn
++++ b/media/BUILD.gn
+@@ -161,8 +161,6 @@ test("media_unittests") {
+ 
+   data = [ "test/data/" ]
+ 
+-  data_deps = [ "//testing/buildbot/filters:media_unittests_filters" ]
+-
+   if (media_use_ffmpeg) {
+     deps += [ "//media/ffmpeg:unit_tests" ]
+   }
+--- a/net/BUILD.gn
++++ b/net/BUILD.gn
+@@ -4555,7 +4555,6 @@ test("net_unittests") {
+   data = []
+   data_deps = [
+     "third_party/nist-pkits/",
+-    "//testing/buildbot/filters:net_unittests_filters",
+   ]
+ 
+   if (is_linux || is_mac || is_win || is_fuchsia) {
+--- a/cc/BUILD.gn
++++ b/cc/BUILD.gn
+@@ -787,7 +787,6 @@ cc_test("cc_unittests") {
+     "//ui/gl:test_support",
+   ]
+   data_deps = [
+-    "//testing/buildbot/filters:cc_unittests_filters",
+     "//third_party/mesa_headers",
+   ]
+ 
+--- a/components/viz/BUILD.gn
++++ b/components/viz/BUILD.gn
+@@ -23,7 +23,6 @@ viz_test("viz_unittests") {
+   data = [ "test/data/" ]
+ 
+   data_deps = [
+-    "//testing/buildbot/filters:viz_unittests_filters",
+     "//third_party/mesa_headers",
+   ]
+ 
+--- a/gpu/BUILD.gn
++++ b/gpu/BUILD.gn
+@@ -420,7 +420,6 @@ test("gl_tests") {
+     ]
+   }
+ 
+-  data_deps = [ "//testing/buildbot/filters:gl_tests_filters" ]
+ }
+ 
+ test("gpu_unittests") {
+--- a/sandbox/linux/BUILD.gn
++++ b/sandbox/linux/BUILD.gn
+@@ -194,7 +194,6 @@ action("bpf_dsl_golden") {
+ 
+ test("sandbox_linux_unittests") {
+   deps = [ ":sandbox_linux_unittests_sources" ]
+-  data_deps = [ "//testing/buildbot/filters:sandbox_linux_unittests_filters" ]
+   if (is_android) {
+     use_raw_android_executable = true
+   }

@@ -17,7 +17,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
  
 --- a/chrome/browser/ui/chrome_pages.cc
 +++ b/chrome/browser/ui/chrome_pages.cc
-@@ -509,6 +509,7 @@ GURL GetOSSettingsUrl(const std::string&
+@@ -492,6 +492,7 @@ GURL GetOSSettingsUrl(const std::string&
  #if !defined(OS_ANDROID) && !defined(OS_CHROMEOS)
  void ShowBrowserSignin(Browser* browser,
                         signin_metrics::AccessPoint access_point) {
@@ -25,7 +25,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
    Profile* original_profile = browser->profile()->GetOriginalProfile();
    DCHECK(original_profile->GetPrefs()->GetBoolean(prefs::kSigninAllowed));
  
-@@ -526,6 +527,7 @@ void ShowBrowserSignin(Browser* browser,
+@@ -509,6 +510,7 @@ void ShowBrowserSignin(Browser* browser,
            : profiles::BUBBLE_VIEW_MODE_GAIA_SIGNIN;
    browser->signin_view_controller()->ShowSignin(bubble_view_mode, browser,
                                                  access_point);
@@ -35,7 +35,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
  void ShowBrowserSigninOrSettings(Browser* browser,
 --- a/chrome/browser/ui/BUILD.gn
 +++ b/chrome/browser/ui/BUILD.gn
-@@ -2109,9 +2109,6 @@ jumbo_static_library("ui") {
+@@ -2156,9 +2156,6 @@ jumbo_static_library("ui") {
        "startup/default_browser_infobar_delegate.h",
        "startup/default_browser_prompt.cc",
        "startup/default_browser_prompt.h",
@@ -45,7 +45,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
        "user_manager.cc",
        "user_manager.h",
        "views/external_protocol_dialog.cc",
-@@ -3447,8 +3444,6 @@ jumbo_static_library("ui") {
+@@ -3524,8 +3521,6 @@ jumbo_static_library("ui") {
          "views/sync/dice_bubble_sync_promo_view.h",
          "views/sync/dice_signin_button_view.cc",
          "views/sync/dice_signin_button_view.h",

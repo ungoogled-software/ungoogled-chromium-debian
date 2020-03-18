@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -473,7 +473,7 @@ group("gn_all") {
+@@ -480,7 +480,7 @@ group("gn_all") {
      ]
    }
  
@@ -12,22 +12,9 @@ author: Michael Gilbert <mgilbert@debian.org>
        (target_cpu == "x86" || target_cpu == "x64")) {
      deps += [ "//third_party/swiftshader" ]
    }
---- a/gpu/vulkan/x/BUILD.gn
-+++ b/gpu/vulkan/x/BUILD.gn
-@@ -37,10 +37,4 @@ component("x") {
-     "//base",
-     "//gpu/vulkan",
-   ]
--
--  # Vulkan Swiftshader can only be built on Linux.
--  # TODO(samans): Support more platforms. https://crbug.com/963988
--  data_deps = [
--    "//third_party/swiftshader/src/Vulkan:swiftshader_libvulkan",
--  ]
- }
 --- a/third_party/angle/gni/angle.gni
 +++ b/third_party/angle/gni/angle.gni
-@@ -92,7 +92,7 @@ declare_args() {
+@@ -100,7 +100,7 @@ declare_args() {
    # ANGLE Vulkan backend on Android requires API level 26, i.e. Oreo, due to
    # Vulkan Validation Layers compatibility issues, see http://crrev/c/1405714.
    # Otherwise, API level 24 would have been enough.
@@ -36,3 +23,20 @@ author: Michael Gilbert <mgilbert@debian.org>
        angle_has_build && ((is_win && !angle_is_winuwp) ||
                            (is_linux && angle_use_x11 && !is_chromeos) ||
                            (is_android && ndk_api_level_at_least_26) ||
+@@ -325,7 +325,6 @@ template("angle_test") {
+     deps += [
+       "$angle_root:angle_common",
+       "$angle_root:includes",
+-      "$angle_root/third_party/rapidjson:rapidjson",
+       "$angle_root/util:angle_test_utils",
+       "//testing/gmock",
+       "//testing/gtest",
+--- a/gpu/vulkan/features.gni
++++ b/gpu/vulkan/features.gni
+@@ -13,5 +13,5 @@ declare_args() {
+   # Enable swiftshader vulkan. Disabling it can save build time, however
+   # --use-vulkan=swiftshader and some tests which use swiftshader vulkan will
+   # not work.
+-  enable_swiftshader_vulkan = true
++  enable_swiftshader_vulkan = false
+ }
