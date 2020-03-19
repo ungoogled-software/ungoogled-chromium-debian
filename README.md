@@ -9,7 +9,7 @@ This branch contains the code to build packages for: **Ubuntu 18.04 LTS (bionic)
 **Binaries** (i.e. `.deb` packages): There are two ways to get binaries:
 
 - [Contributor Binaries website](//ungoogled-software.github.io/ungoogled-chromium-binaries/)
-- [PPA (maintained by @ryu0)](https://launchpad.net/~braewoods/+archive/ubuntu/ungoogled-chromium)
+- [PPA (maintained by @braewoods)](https://launchpad.net/~braewoods/+archive/ubuntu/ungoogled-chromium)
 
 **Source Code**: Use the tags labeled with `bionic` via `git checkout` (see building instructions). The branches are for development and may not be stable.
 
