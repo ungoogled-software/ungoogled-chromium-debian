@@ -1,3 +1,21 @@
+chromium (80.0.3987.149-1) unstable; urgency=medium
+
+  * New upstream security release.
+    - CVE-2019-20503: Out of bounds read in usersctplib. Reported by Natalie
+      Silvanovich
+    - CVE-2020-6422: Use after free in WebGL. Reported by David Manouchehri
+    - CVE-2020-6424: Use after free in media. Reported by Sergei Glazunov
+    - CVE-2020-6425: Insufficient policy enforcement in extensions. Reported by
+      Sergei Glazunov
+    - CVE-2020-6426: Inappropriate implementation in V8. Reported by Avihay
+      Cohen
+    - CVE-2020-6427: Use after free in audio. Reported by Man Yue Mo
+    - CVE-2020-6428: Use after free in audio. Reported by Man Yue Mo
+    - CVE-2020-6429: Use after free in audio. Reported by Man Yue Mo
+    - CVE-2020-6449: Use after free in audio. Reported by Man Yue Mo
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 20 Mar 2020 00:18:06 +0000
+
 chromium (80.0.3987.132-1) unstable; urgency=medium
 
   * New upstream security release.
