@@ -103,6 +103,7 @@ Files-Excluded:
  third_party/ffmpeg/compat
  third_party/ffmpeg/config*
  third_party/ffmpeg/chromium
+ third_party/harfbuzz-ng/src
  third_party/openh264/src
  third_party/expat/src
  third_party/unrar
