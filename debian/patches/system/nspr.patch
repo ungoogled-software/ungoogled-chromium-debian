@@ -46,7 +46,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "threading/platform_thread.cc",
 --- a/tools/gn/build/gen.py
 +++ b/tools/gn/build/gen.py
-@@ -332,6 +332,9 @@ def WriteGNNinja(path, platform, host, o
+@@ -330,6 +330,9 @@ def WriteGNNinja(path, platform, host, o
        if not options.no_static_libstdcpp:
          ldflags.append('-static-libstdc++')
  

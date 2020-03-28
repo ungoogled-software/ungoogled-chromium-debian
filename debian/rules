@@ -27,18 +27,13 @@ export CFLAGS+=-resource-dir=$(RESOURCE_DIR)
 # more verbose linker output
 export LDFLAGS+=-Wl,--stats
 
-# extra flags to reduce warnings that aren't very useful
-export CXXFLAGS+=-Wno-pedantic \
-                 -Wno-unused-result \
-                 -Wno-unused-function \
-                 -Wno-unused-variable \
-                 -Wno-deprecated-declarations \
+# initial flags from dpkg-buildflags
+export DEB_CXXFLAGS_MAINT_STRIP=-g
+export CXXFLAGS=$(shell dpkg-buildflags --get CXXFLAGS)
 
-# ignore warnings for minor mistakes that are too common
-export CXXFLAGS+=-Wno-return-type \
-                 -Wno-parentheses \
-                 -Wno-enum-compare \
-                 -Wno-dangling-else \
+# extra flags to reduce warnings that aren't very useful
+export CXXFLAGS+=-Wno-unused-function \
+                 -Wno-unused-variable \
 
 # do not optimize away null pointer safety checks
 export CXXFLAGS+=-fno-delete-null-pointer-checks
