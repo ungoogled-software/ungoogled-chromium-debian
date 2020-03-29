@@ -10,8 +10,6 @@ arm/pffffft-buildfix.patch
 gcc/ambiguous-initializer.patch
 gcc/namespace5.patch
 
-clang/flags.patch
-
 fixes/link.patch
 fixes/quic.patch
 fixes/mojo.patch
