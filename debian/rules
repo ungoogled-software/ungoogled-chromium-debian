@@ -12,7 +12,7 @@ export DEB_RULES_REQUIRES_ROOT=no
 # specify system LLVM (required for unbundling)
 # you can set the LLVM_VERSION environment variable before building
 # to change the LLVM toolchain version
-export LLVM_VERSION?=9
+export LLVM_VERSION?=10
 export AR=llvm-ar-$(LLVM_VERSION)
 export NM=llvm-nm-$(LLVM_VERSION)
 export CC=clang-$(LLVM_VERSION)
@@ -32,8 +32,13 @@ export DEB_CXXFLAGS_MAINT_STRIP=-g
 export CXXFLAGS=$(shell dpkg-buildflags --get CXXFLAGS)
 
 # extra flags to reduce warnings that aren't very useful
+# FIXME: remove -Wno-enum-enum-conversion, -Wno-enum-float-conversion, -Wno-range-loop-construct if possible.
+# FIXME: They are here to stem the tide of new warnings from Clang 10.
 export CXXFLAGS+=-Wno-unused-function \
                  -Wno-unused-variable \
+                 -Wno-enum-enum-conversion \
+                 -Wno-enum-float-conversion \
+                 -Wno-range-loop-construct
 
 # do not optimize away null pointer safety checks
 export CXXFLAGS+=-fno-delete-null-pointer-checks
@@ -113,7 +118,7 @@ endif
 	dh $@
 
 out/Release/gn:
-	./tools/gn/bootstrap/bootstrap.py --skip-generate-buildfiles -j$(njobs)
+	python2 tools/gn/bootstrap/bootstrap.py --skip-generate-buildfiles -j$(njobs)
 
 override_dh_auto_configure:
 	# output compiler information
@@ -136,11 +141,11 @@ override_dh_auto_configure:
 	#ln -sf ../../../../third_party/polymer/v1_0/components-chromium third_party/catapult/third_party/polymer/components
 
 override_dh_auto_build-arch: out/Release/gn
-	./out/Release/gn gen out/Release --args="$(defines)" --fail-on-unused-args
+	./out/Release/gn gen out/Release --args="$(defines)" --script-executable=/usr/bin/python2 --fail-on-unused-args
 	ninja -j$(njobs) -C out/Release chrome chrome_sandbox content_shell chromedriver
 
 override_dh_auto_build-indep: out/Release/gn
-	./out/Release/gn gen out/Release --args="$(defines)" --fail-on-unused-args
+	./out/Release/gn gen out/Release --args="$(defines)" --script-executable=/usr/bin/python2 --fail-on-unused-args
 	ninja -j$(njobs) -C out/Release packed_resources
 
 override_dh_prep:
