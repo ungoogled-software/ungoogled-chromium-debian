@@ -2,7 +2,7 @@
 
 This repository contains files to build Debian packages of [ungoogled-chromium](//github.com/Eloston/ungoogled-chromium).
 
-This branch contains the code to build packages for: **Debian unstable (sid)**. Since Debian unstable is a moving target (i.e. it never stabilizes), this branch is not guaranteed to be stable.
+This branch contains the code to build packages for: **Ubuntu 20.04 (focal)**
 
 ## Downloads
 
@@ -13,7 +13,7 @@ This branch contains the code to build packages for: **Debian unstable (sid)**. 
 
 If your distro is not listed, you may have a look at the [community-maintained list of packages compatible on other distros](https://github.com/ungoogled-software/ungoogled-chromium-debian/wiki/Compatible-Packages). However, please note that this compatibility is not guarenteed; it may break at any time.
 
-**Source Code**: Use the tags labeled with `sid` via `git checkout` (see building instructions). The branches are for development and may not be stable.
+**Source Code**: Use the tags labeled with `focal` via `git checkout` (see building instructions). The branches are for development and may not be stable.
 
 ## Installing
 
@@ -170,14 +170,14 @@ git remote add upstream https://salsa.debian.org/chromium-team/chromium.git
 
 ### Pull new changes from Debian
 
-These instructions will pull in changes from Debian's `chromium` package into `debian_sid`:
-
+1. Update `debian_sid` branch using instructions from README in that branch.
+2. Merge changes from `debian_sid` into this branch:
 ```sh
-git checkout --recurse-submodules debian_sid
-git pull upstream master
+git checkout --recurse-submodules ubuntu_focal
+git pull debian_sid
 # Complete the git merge
-# Update patches via instructions below
 ```
+3. Update patches via instructions below
 
 ### Pull new changes from ungoogled-chromium
 
