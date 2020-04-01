@@ -34,6 +34,7 @@ export CXXFLAGS=$(shell dpkg-buildflags --get CXXFLAGS)
 # extra flags to reduce warnings that aren't very useful
 export CXXFLAGS+=-Wno-unused-function \
                  -Wno-unused-variable \
+                 -Wno-unused-private-field \
 
 # do not optimize away null pointer safety checks
 export CXXFLAGS+=-fno-delete-null-pointer-checks
