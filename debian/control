@@ -9,10 +9,10 @@ Standards-Version: 4.5.0
 Rules-Requires-Root: no
 Build-Depends:
  debhelper (>= 11),
- clang-9,
- lld-9,
- llvm-9-dev,
- python,
+ clang-10,
+ lld-10,
+ llvm-10-dev,
+ python2,
  python3,
  python3-debian,
  pkg-config,
