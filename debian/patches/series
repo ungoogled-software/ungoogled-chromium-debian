@@ -34,7 +34,6 @@ disable/installer.patch
 disable/font-tests.patch
 disable/swiftshader.patch
 
-warnings/pffft.patch
 warnings/friend.patch
 warnings/restrict.patch
 warnings/attribute.patch
@@ -77,3 +76,4 @@ fedora/vaapi-fix.patch
 ungoogled-chromium/manpage.patch
 ungoogled-chromium/safebrowsing.patch
 ungoogled-chromium/headers.patch
+ungoogled-chromium/explicit-python.patch
