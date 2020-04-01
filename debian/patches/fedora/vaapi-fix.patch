@@ -97,7 +97,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
  bool VaapiVideoDecodeAccelerator::IsBufferAllocationModeReducedOrSuperReduced()
 --- a/media/gpu/vaapi/vaapi_wrapper.cc
 +++ b/media/gpu/vaapi/vaapi_wrapper.cc
-@@ -340,6 +340,10 @@ void VADisplayState::PreSandboxInitializ
+@@ -404,6 +404,10 @@ void VADisplayState::PreSandboxInitializ
        base::File::FLAG_OPEN | base::File::FLAG_READ | base::File::FLAG_WRITE);
    if (drm_file.IsValid())
      VADisplayState::Get()->SetDrmFd(drm_file.GetPlatformFile());
@@ -108,7 +108,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
  }
  
  VADisplayState::VADisplayState()
-@@ -378,10 +382,11 @@ bool VADisplayState::InitializeOnce() {
+@@ -442,10 +446,11 @@ bool VADisplayState::InitializeOnce() {
      case gl::kGLImplementationDesktopGL:
  #if defined(USE_X11)
        va_display_ = vaGetDisplay(gfx::GetXDisplay());
@@ -123,7 +123,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
        break;
      // Cannot infer platform from GL, try all available displays
      case gl::kGLImplementationNone:
-@@ -414,8 +419,17 @@ bool VADisplayState::InitializeOnce() {
+@@ -478,8 +483,17 @@ bool VADisplayState::InitializeOnce() {
    int major_version, minor_version;
    VAStatus va_res = vaInitialize(va_display_, &major_version, &minor_version);
    if (va_res != VA_STATUS_SUCCESS) {
