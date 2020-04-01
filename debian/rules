@@ -36,6 +36,7 @@ export CXXFLAGS=$(shell dpkg-buildflags --get CXXFLAGS)
 # FIXME: They are here to stem the tide of new warnings from Clang 10.
 export CXXFLAGS+=-Wno-unused-function \
                  -Wno-unused-variable \
+                 -Wno-unused-private-field \
                  -Wno-enum-enum-conversion \
                  -Wno-enum-float-conversion \
                  -Wno-range-loop-construct
