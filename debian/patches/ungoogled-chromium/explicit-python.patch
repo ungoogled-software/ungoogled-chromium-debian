@@ -1,0 +1,37 @@
+This is a patch to resolve issues where parts of the build system try to
+reference the python executable through the symlink that is no longer
+provided by Ubuntu. This patches these instances so that builds should
+continue to work in spite of this change. This only patches the bare
+minimum for the default builds so it may require additional work if
+something different is done such as building a debug build.
+
+diff -ur a/third_party/catapult/common/py_vulcanize/py_vulcanize/generate.py b/third_party/catapult/common/py_vulcanize/py_vulcanize/generate.py
+--- a/third_party/catapult/common/py_vulcanize/py_vulcanize/generate.py	2020-03-17 22:05:46.000000000 +0000
++++ b/third_party/catapult/common/py_vulcanize/py_vulcanize/generate.py	2020-03-31 22:24:38.624100860 +0000
+@@ -74,7 +74,7 @@
+ 
+   with tempfile.NamedTemporaryFile() as _:
+     args = [
+-        'python',
++        'python3',
+         rjsmin_path
+     ]
+     p = subprocess.Popen(args,
+@@ -194,7 +194,7 @@
+       os.path.join(py_vulcanize_path, 'third_party', 'rcssmin', 'rcssmin.py'))
+ 
+   with tempfile.NamedTemporaryFile() as _:
+-    rcssmin_args = ['python', rcssmin_path]
++    rcssmin_args = ['python3', rcssmin_path]
+     p = subprocess.Popen(rcssmin_args,
+                          stdin=subprocess.PIPE,
+                          stdout=subprocess.PIPE,
+diff -ur a/third_party/dom_distiller_js/protoc_plugins/json_values_converter.py b/third_party/dom_distiller_js/protoc_plugins/json_values_converter.py
+--- a/third_party/dom_distiller_js/protoc_plugins/json_values_converter.py	2020-03-17 21:56:07.000000000 +0000
++++ b/third_party/dom_distiller_js/protoc_plugins/json_values_converter.py	2020-03-31 22:33:00.148985123 +0000
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python2
+ # Copyright 2016 The Chromium Authors. All rights reserved.
+ # Use of this source code is governed by a BSD-style license that can be
+ # found in the LICENSE file.
