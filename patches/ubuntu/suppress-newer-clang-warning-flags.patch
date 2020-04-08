@@ -4,7 +4,7 @@ Description: Do not use warning flags that require a newer Clang (bionic has 9.0
 
 --- a/build/config/compiler/BUILD.gn
 +++ b/build/config/compiler/BUILD.gn
-@@ -1520,21 +1520,6 @@ config("default_warnings") {
+@@ -1514,27 +1514,6 @@ config("default_warnings") {
            # Ignore warnings about MSVC optimization pragmas.
            # TODO(thakis): Only for no_chromium_code? http://crbug.com/912662
            "-Wno-ignored-pragma-optimize",
@@ -23,6 +23,12 @@ Description: Do not use warning flags that require a newer Clang (bionic has 9.0
 -
 -          # TODO(https://crbug.com/1028110): Evaluate and possible enable.
 -          "-Wno-deprecated-copy",
+-
+-          # TODO(https://crbug.com/1031169): Clean up and enable.
+-          "-Wno-misleading-indentation",
+-
+-          # TODO(https://crbug.com/1039697): Evaluate and possibly enable.
+-          "-Wno-range-loop-analysis",
          ]
  
-         if (is_fuchsia) {
+         cflags_c += [
