@@ -1,3 +1,49 @@
+chromium (81.0.4044.92-1) unstable; urgency=medium
+
+  * New upstream stable release.
+    - CVE-2020-6423: Use after free in audio. Reported by Anonymous
+    - CVE-2020-6430: Type Confusion in V8. Reported by Avihay Cohen
+    - CVE-2020-6431: Insufficient policy enforcement in full screen. Reported
+      by Luan Herrera
+    - CVE-2020-6432: Insufficient policy enforcement in navigations. Reported
+      by David Erceg
+    - CVE-2020-6433: Insufficient policy enforcement in extensions. Reported by
+      David Erceg
+    - CVE-2020-6434: Use after free in devtools. Reported by HyungSeok Han
+    - CVE-2020-6435: Insufficient policy enforcement in extensions. Reported by
+      Sergei Glazunov
+    - CVE-2020-6436: Use after free in window management. Reported by Igor
+      Bukanov
+    - CVE-2020-6437: Inappropriate implementation in WebView. Reported by Jann
+      Horn
+    - CVE-2020-6438: Insufficient policy enforcement in extensions. Reported by
+      Ng Yik Phang
+    - CVE-2020-6439: Insufficient policy enforcement in navigations. Reported
+      by remkoboonstra
+    - CVE-2020-6440: Inappropriate implementation in extensions. Reported by
+      David Erceg
+    - CVE-2020-6441: Insufficient policy enforcement in omnibox. Reported by
+      David Erceg
+    - CVE-2020-6442: Inappropriate implementation in cache. Reported by B@rMey
+    - CVE-2020-6443: Insufficient data validation in developer tools. Reported
+      by @lovasoa
+    - CVE-2020-6444: Uninitialized use in WebRTC. Reported by mlfbrown
+    - CVE-2020-6445: Insufficient policy enforcement in trusted types. Reported
+      by Jun Kokatsu
+    - CVE-2020-6446: Insufficient policy enforcement in trusted types. Reported
+      by Jun Kokatsu
+    - CVE-2020-6447: Inappropriate implementation in developer tools. Reported
+      by David Erceg
+    - CVE-2020-6448: Use after free in V8. Reported by Guang Gong
+    - CVE-2020-6454: Use after free in extensions. Reported by leecraso and
+      Guang Gong
+    - CVE-2020-6455: Out of bounds read in WebSQL. Reported by Nan Wang and
+      Guang Gong
+    - CVE-2020-6456: Insufficient validation of untrusted input in clipboard.
+      Reported by Michał Bentkowski
+
+ -- Michael Gilbert <mgilbert@debian.org>  Tue, 07 Apr 2020 23:05:20 +0000
+
 chromium (80.0.3987.162-1) unstable; urgency=medium
 
   * New upstream security release.

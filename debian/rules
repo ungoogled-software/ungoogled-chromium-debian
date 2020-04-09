@@ -9,7 +9,7 @@ export DEB_BUILD_MAINT_OPTIONS=hardening=+all
 # indicate that binary targets do not require root
 export DEB_RULES_REQUIRES_ROOT=no
 
-# default to clang when compiler environment variables are unset
+# compile with clang (gcc is currently not supported)
 export AR=ar
 export NM=nm
 export CC=clang
@@ -23,7 +23,8 @@ export DEB_CXXFLAGS_MAINT_STRIP=-g
 export CXXFLAGS=$(shell dpkg-buildflags --get CXXFLAGS)
 
 # extra flags to reduce warnings that aren't very useful
-export CXXFLAGS+=-Wno-unused-function \
+export CXXFLAGS+=-Wno-conversion \
+                 -Wno-unused-function \
                  -Wno-unused-variable \
 
 # do not optimize away null pointer safety checks
@@ -52,8 +53,7 @@ defines+=host_cpu=\"arm\" use_vaapi=false arm_use_neon=false symbol_level=0
 endif
 
 # disabled features
-defines+=is_cfi=false \
-         is_debug=false \
+defines+=is_debug=false \
          use_goma=false \
          use_ozone=false \
          use_sysroot=false \
@@ -93,10 +93,6 @@ defines+=use_gio=true \
          ffmpeg_branding=\"Chrome\" \
          fieldtrial_testing_like_official_build=true \
 
-# some notes about embedded libraries
-#  can't use system nss since net/third_party/nss is heavily patched
-#  can't use system ots (open text *summarizer*) since that's not google's ots (open text *sanitizer*)
-
 # handle parallel build options
 njobs=1
 ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
@@ -112,10 +108,7 @@ out/Release/gn:
 override_dh_auto_configure:
 	# output compiler information
 	$(CXX) --version
-	# put yasm script in the location expected by gn
-	ln -sf ../pdfium/third_party/yasm/run_yasm.py third_party/yasm
-	# strip out system third_party libraries
-	rm -f base/third_party/libevent/BUILD.gn build/config/freetype/freetype.gni
+	# prefer unbundled (system) libraries
 	./debian/scripts/unbundle
 
 override_dh_auto_build-arch: out/Release/gn
