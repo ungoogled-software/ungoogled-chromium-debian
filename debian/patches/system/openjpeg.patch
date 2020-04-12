@@ -13,7 +13,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "../../fxcrt",
 --- a/third_party/pdfium/core/fxcodec/jpx/cjpx_decoder.h
 +++ b/third_party/pdfium/core/fxcodec/jpx/cjpx_decoder.h
-@@ -12,8 +12,8 @@
+@@ -13,8 +13,8 @@
  #include "core/fxcrt/unowned_ptr.h"
  #include "third_party/base/span.h"
  

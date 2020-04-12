@@ -49,7 +49,31 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/tools/metrics/histograms/histograms.xml
 +++ b/tools/metrics/histograms/histograms.xml
-@@ -4237,7 +4237,6 @@ uploading your change for review.
+@@ -4175,7 +4175,6 @@ uploading your change for review.
+ <histogram name="Android.WebView.AndroidX.ApiCall" enum="AndroidXWebkitApiCall"
+     expires_after="2021-01-29">
+   <owner>laisminchillo@chromium.org</owner>
+-  <owner>src/android_webview/OWNERS</owner>
+   <summary>
+     Records calls to WebView APIs from AndroidX. Some AndroidX-originating calls
+     will plumb through the framework, for example, if methods that are available
+@@ -4267,7 +4266,6 @@ uploading your change for review.
+     enum="BooleanEnabled" expires_after="2021-01-20">
+   <owner>ntfschr@chromium.org</owner>
+   <owner>hazems@chromium.org</owner>
+-  <owner>src/android_webview/OWNERS</owner>
+   <summary>
+     Records whether or not WebView is starting up in &quot;developer mode.&quot;
+     This is a mode where the user has enabled debugging features through the
+@@ -4279,7 +4277,6 @@ uploading your change for review.
+     expires_after="2021-01-20">
+   <owner>ntfschr@chromium.org</owner>
+   <owner>hazems@chromium.org</owner>
+-  <owner>src/android_webview/OWNERS</owner>
+   <summary>
+     Records the number of flags we will toggle for this run of WebView. This is
+     recorded only once during WebView startup, and only if we've already
+@@ -4363,7 +4360,6 @@ uploading your change for review.
  <histogram name="Android.WebView.Metrics.BackfillInstallDate"
      enum="InstallDateBackfill" expires_after="M83">
    <owner>ntfschr@chromium.org</owner>
@@ -57,7 +81,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    <summary>
      Records whether WebView needed to backfill the install date pref with
      Android frameworks APIs. Recorded once during startup (metrics service
-@@ -4307,7 +4306,6 @@ uploading your change for review.
+@@ -4433,7 +4429,6 @@ uploading your change for review.
  <histogram name="Android.WebView.PrefLoadTime" units="ms"
      expires_after="2020-12-01">
    <owner>rmcelrath@chromium.org</owner>
@@ -65,7 +89,15 @@ author: Michael Gilbert <mgilbert@debian.org>
    <summary>
      Records how long WebView blocks startup to load prefs from disk. This is
      recorded once per browser process startup.
-@@ -161986,7 +161984,6 @@ regressions. -->
+@@ -4550,7 +4545,6 @@ uploading your change for review.
+ <histogram name="Android.WebView.Startup.DataDirLockAttempts" units="attempts"
+     expires_after="2020-06-30">
+   <owner>torne@chromium.org</owner>
+-  <owner>src/android_webview/OWNERS</owner>
+   <summary>
+     How many attempts it took to acquire the WebView data directory lock. A
+     value of 0 indicates that we reached the max retry count and failed to
+@@ -166658,7 +166652,6 @@ regressions. -->
      expires_after="2020-11-01">
    <owner>rmcelrath@chromium.org</owner>
    <owner>ntfschr@chromium.org</owner>
@@ -73,7 +105,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    <summary>
      The time interval between when a WebView-using app's copy of the variations
      seed was written to its local app storage and when it was loaded for use.
-@@ -162002,7 +161999,6 @@ regressions. -->
+@@ -166674,7 +166667,6 @@ regressions. -->
      expires_after="2020-11-01">
    <owner>rmcelrath@chromium.org</owner>
    <owner>ntfschr@chromium.org</owner>
@@ -81,7 +113,15 @@ author: Michael Gilbert <mgilbert@debian.org>
    <summary>
      The result of checking if a WebView-using app's copy of the variations seed
      is still fresh, or if a new seed should be requested.
-@@ -162245,7 +162241,6 @@ regressions. -->
+@@ -166712,7 +166704,6 @@ regressions. -->
+     has a higher maximum bucket.
+   </obsolete>
+   <owner>rmcelrath@chromium.org</owner>
+-  <owner>src/android_webview/OWNERS</owner>
+   <summary>
+     The duration of the network request to downloads a new WebView variations
+     seed from the variations server to the central on-device service.
+@@ -166931,7 +166922,6 @@ regressions. -->
      expires_after="2020-11-01">
    <owner>rmcelrath@chromium.org</owner>
    <owner>ntfschr@chromium.org</owner>
@@ -89,3 +129,35 @@ author: Michael Gilbert <mgilbert@debian.org>
    <summary>
      Number of consecutive times WebView started up with a stale seed. Only
      written by WebView, when its loaded seed is fresh after previously being
+@@ -167467,7 +167457,6 @@ regressions. -->
+ <histogram name="Variations.WebViewDownloadJobFetchResult"
+     enum="VariationsSeedFetchResult" expires_after="2021-01-31">
+   <owner>rmcelrath@chromium.org</owner>
+-  <owner>src/android_webview/OWNERS</owner>
+   <summary>
+     The result of a WebView seed download. Records both the HTTP code and
+     various error values in one enumeration.
+@@ -167477,7 +167466,6 @@ regressions. -->
+ <histogram name="Variations.WebViewDownloadJobFetchTime2" units="ms"
+     expires_after="2021-01-31">
+   <owner>rmcelrath@chromium.org</owner>
+-  <owner>src/android_webview/OWNERS</owner>
+   <summary>
+     The duration of the network request to downloads a new WebView variations
+     seed from the variations server to the central on-device service.
+@@ -167487,7 +167475,6 @@ regressions. -->
+ <histogram name="Variations.WebViewDownloadJobInterval" units="minutes"
+     expires_after="2021-01-31">
+   <owner>rmcelrath@chromium.org</owner>
+-  <owner>src/android_webview/OWNERS</owner>
+   <summary>
+     The time between the start of two consecutive WebView seed downloads by
+     WebView's service. This metric will not be written if seeds are never
+@@ -167498,7 +167485,6 @@ regressions. -->
+ <histogram name="Variations.WebViewDownloadJobQueueTime" units="minutes"
+     expires_after="2021-01-31">
+   <owner>rmcelrath@chromium.org</owner>
+-  <owner>src/android_webview/OWNERS</owner>
+   <summary>
+     The delay between when a WebView seed download was scheduled by the service
+     with the JobScheduler and when it was executed.
