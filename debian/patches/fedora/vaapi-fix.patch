@@ -38,10 +38,10 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
  
 +#endif
 +
- }  // namespace
- 
- #define RETURN_AND_NOTIFY_ON_FAILURE(result, log, error_code, ret) \
-@@ -657,6 +662,13 @@ void VaapiVideoDecodeAccelerator::Assign
+ // Returns the size of a rectangle whose upper left corner is at the origin (0,
+ // 0) and whose bottom right corner is the same as that of |rect|. This is
+ // useful to get the size of a buffer that contains the visible rectangle plus
+@@ -708,6 +713,13 @@ void VaapiVideoDecodeAccelerator::Assign
    va_surface_format_ = GetVaFormatForVideoCodecProfile(profile_);
    std::vector<VASurfaceID> va_surface_ids;
  
@@ -55,7 +55,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
    // If we aren't in BufferAllocationMode::kNone, we have to allocate a
    // |vpp_vaapi_wrapper_| for VaapiPicture to DownloadFromSurface() the VA's
    // internal decoded frame.
-@@ -674,6 +686,7 @@ void VaapiVideoDecodeAccelerator::Assign
+@@ -725,6 +737,7 @@ void VaapiVideoDecodeAccelerator::Assign
                                   "Failed to create Context",
                                   PLATFORM_FAILURE, );
    }
@@ -63,21 +63,21 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
  
    for (size_t i = 0; i < buffers.size(); ++i) {
      // If we aren't in BufferAllocationMode::kNone, this |picture| is
-@@ -685,9 +698,13 @@ void VaapiVideoDecodeAccelerator::Assign
-     PictureBuffer buffer = buffers[i];
-     buffer.set_size(requested_pic_size_);
+@@ -743,9 +743,13 @@
+             : gfx::Size();
+ 
      std::unique_ptr<VaapiPicture> picture = vaapi_picture_factory_->Create(
-+    	#if defined(OS_LINUX) && !defined(OS_ANDROID) && !defined(OS_CHROMEOS)
-+    	     vaapi_wrapper_,
++       #if defined(OS_LINUX) && !defined(OS_ANDROID) && !defined(OS_CHROMEOS)
++            vaapi_wrapper_,
 +        #else
          (buffer_allocation_mode_ == BufferAllocationMode::kNone)
              ? vaapi_wrapper_
              : vpp_vaapi_wrapper_,
 +        #endif
-         make_context_current_cb_, bind_image_cb_, buffer);
+         make_context_current_cb_, bind_image_cb_, buffer, size_to_bind);
      RETURN_AND_NOTIFY_ON_FAILURE(picture, "Failed creating a VaapiPicture",
                                   PLATFORM_FAILURE, );
-@@ -1131,6 +1148,9 @@ VaapiVideoDecodeAccelerator::GetSupporte
+@@ -1199,6 +1216,9 @@ VaapiVideoDecodeAccelerator::GetSupporte
  
  VaapiVideoDecodeAccelerator::BufferAllocationMode
  VaapiVideoDecodeAccelerator::DecideBufferAllocationMode() {
@@ -87,7 +87,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
    // TODO(crbug.com/912295): Enable a better BufferAllocationMode for IMPORT
    // |output_mode_| as well.
    if (output_mode_ == VideoDecodeAccelerator::Config::OutputMode::IMPORT)
-@@ -1166,6 +1186,7 @@ VaapiVideoDecodeAccelerator::DecideBuffe
+@@ -1234,6 +1254,7 @@ VaapiVideoDecodeAccelerator::DecideBuffe
      return BufferAllocationMode::kReduced;
  
    return BufferAllocationMode::kSuperReduced;
@@ -97,7 +97,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
  bool VaapiVideoDecodeAccelerator::IsBufferAllocationModeReducedOrSuperReduced()
 --- a/media/gpu/vaapi/vaapi_wrapper.cc
 +++ b/media/gpu/vaapi/vaapi_wrapper.cc
-@@ -404,6 +404,10 @@ void VADisplayState::PreSandboxInitializ
+@@ -405,6 +405,10 @@ void VADisplayState::PreSandboxInitializ
        base::File::FLAG_OPEN | base::File::FLAG_READ | base::File::FLAG_WRITE);
    if (drm_file.IsValid())
      VADisplayState::Get()->SetDrmFd(drm_file.GetPlatformFile());
@@ -108,7 +108,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
  }
  
  VADisplayState::VADisplayState()
-@@ -442,10 +446,11 @@ bool VADisplayState::InitializeOnce() {
+@@ -443,10 +447,11 @@ bool VADisplayState::InitializeOnce() {
      case gl::kGLImplementationDesktopGL:
  #if defined(USE_X11)
        va_display_ = vaGetDisplay(gfx::GetXDisplay());
@@ -123,7 +123,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
        break;
      // Cannot infer platform from GL, try all available displays
      case gl::kGLImplementationNone:
-@@ -478,8 +483,17 @@ bool VADisplayState::InitializeOnce() {
+@@ -479,8 +484,17 @@ bool VADisplayState::InitializeOnce() {
    int major_version, minor_version;
    VAStatus va_res = vaInitialize(va_display_, &major_version, &minor_version);
    if (va_res != VA_STATUS_SUCCESS) {
