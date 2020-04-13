@@ -81,7 +81,6 @@ Files-Excluded:
  third_party/pyelftools
  third_party/fontconfig
  third_party/depot_tools
- third_party/libjpeg.gni
  third_party/libjpeg_turbo
  third_party/win_build_output
  third_party/zlib/adler*
