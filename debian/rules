@@ -123,8 +123,6 @@ override_dh_auto_configure:
 	$(CXX) --version
 	# put yasm script in the location expected by gn
 	ln -sf ../pdfium/third_party/yasm/run_yasm.py third_party/yasm
-	# strip out system third_party libraries
-	# NOTE: Removing base/third_party/libevent/BUILD.gn and build/config/freetype/freetype.gni in scripts/unbundle
 	# prefer unbundled (system) libraries
 	./debian/scripts/unbundle
 	# clean polymer files manually (debian/clean doesn't work on directories)
