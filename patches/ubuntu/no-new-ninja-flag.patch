@@ -3,16 +3,16 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
 
 --- a/tools/gn/bootstrap/bootstrap.py
 +++ b/tools/gn/bootstrap/bootstrap.py
-@@ -122,10 +122,10 @@ def main(argv):
+@@ -123,10 +123,10 @@ def main(argv):
        os.path.join(BOOTSTRAP_DIR, 'last_commit_position.h'), gn_build_dir)
    if options.jobs:
      subprocess.check_call(
--        ['ninja', '-C', gn_build_dir, 'gn', '-w', 'dupbuild=err', '-j'+str(options.jobs)])
-+        ['ninja', '-C', gn_build_dir, 'gn', '-j'+str(options.jobs)])
+-        [ninja_binary, '-C', gn_build_dir, '-w', 'dupbuild=err', '-j'+str(options.jobs), 'gn'])
++        [ninja_binary, '-C', gn_build_dir, '-j'+str(options.jobs), 'gn'])
    else:
      subprocess.check_call(
--        ['ninja', '-C', gn_build_dir, 'gn', '-w', 'dupbuild=err'])
-+        ['ninja', '-C', gn_build_dir, 'gn'])
+-        [ninja_binary, '-C', gn_build_dir, '-w', 'dupbuild=err', 'gn'])
++        [ninja_binary, '-C', gn_build_dir, 'gn'])
    shutil.copy2(os.path.join(gn_build_dir, 'gn'), gn_path)
  
    if not options.skip_generate_buildfiles:

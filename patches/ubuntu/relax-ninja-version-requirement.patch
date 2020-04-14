@@ -2,8 +2,8 @@ Description: Relax ninja version requirement to match version in xenial
 Origin: https://chromium.googlesource.com/chromium/src/tools/gn/+/ebe34f81141db077aa69427fd2a7e1c8495a2cf2
 Author: Olivier Tilloy <olivier.tilloy@canonical.com>
 
---- a/tools/gn/tools/gn/ninja_build_writer.cc
-+++ b/tools/gn/tools/gn/ninja_build_writer.cc
+--- a/tools/gn/src/gn/ninja_build_writer.cc
++++ b/tools/gn/src/gn/ninja_build_writer.cc
 @@ -277,7 +277,7 @@ bool NinjaBuildWriter::RunAndWriteFile(c
  }
  

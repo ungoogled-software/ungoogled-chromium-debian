@@ -3,22 +3,24 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/chrome/browser/ui/views/passwords/password_generation_popup_view_views.cc
 +++ b/chrome/browser/ui/views/passwords/password_generation_popup_view_views.cc
-@@ -51,11 +51,11 @@ class PasswordGenerationPopupViewViews::
-     BuildColumnSet(layout);
-     layout->StartRow(views::GridLayout::kFixedSize, 0);
+@@ -79,12 +79,13 @@ void PasswordGenerationPopupViewViews::G
+   BuildColumnSet(layout);
+   layout->StartRow(views::GridLayout::kFixedSize, 0);
  
-+    int text_style = views::style::STYLE_SECONDARY;
-+    if (state == PasswordGenerationPopupController::kOfferGeneration)
-+      text_style = views::style::STYLE_PRIMARY;
-     layout->AddView(autofill::CreateLabelWithColorReadabilityDisabled(
--        suggestion, ChromeTextContext::CONTEXT_BODY_TEXT_LARGE,
--        state == PasswordGenerationPopupController::kOfferGeneration
--            ? views::style::STYLE_PRIMARY
--            : views::style::STYLE_SECONDARY));
-+        suggestion, ChromeTextContext::CONTEXT_BODY_TEXT_LARGE, text_style));
++  int text_style = views::style::STYLE_SECONDARY;
++  if (controller_->state() == 
++      PasswordGenerationPopupController::kOfferGeneration)
++    text_style = views::style::STYLE_PRIMARY;
+   suggestion_label_ = layout->AddView(std::make_unique<views::Label>(
+       controller_->SuggestedText(), ChromeTextContext::CONTEXT_BODY_TEXT_LARGE,
+-      controller_->state() ==
+-              PasswordGenerationPopupController::kOfferGeneration
+-          ? views::style::STYLE_PRIMARY
+-          : views::style::STYLE_SECONDARY));
++      text_style));
  
-     DCHECK(!password_label_);
-     password_label_ =
+   DCHECK(!password_label_);
+   password_label_ = layout->AddView(std::make_unique<views::Label>(
 --- a/components/viz/common/gl_helper.cc
 +++ b/components/viz/common/gl_helper.cc
 @@ -473,7 +473,7 @@ void GLHelper::CopyTextureToImpl::Cancel
