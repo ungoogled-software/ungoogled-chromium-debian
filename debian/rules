@@ -76,6 +76,7 @@ defines+=is_debug=false \
          use_ozone=false \
          use_sysroot=false \
          use_openh264=false \
+         use_allocator=\"tcmalloc\" \
          use_libjpeg_turbo=true \
          use_custom_libcxx=false \
          use_gnome_keyring=false \
@@ -84,7 +85,13 @@ defines+=is_debug=false \
          enable_nacl=false \
          enable_nacl_nonsfi=false \
          enable_swiftshader=false \
+         enable_reading_list=false \
+         enable_one_click_signin=false \
+         enable_iterator_debugging=false \
+         enable_hangout_services_extension=false \
          optimize_webui=false \
+         closure_compile=false \
+         treat_warnings_as_errors=false \
          linux_use_bundled_binutils=false \
 
 # enabled features
