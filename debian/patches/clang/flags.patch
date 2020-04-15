@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/build/config/compiler/BUILD.gn
 +++ b/build/config/compiler/BUILD.gn
-@@ -1515,21 +1515,9 @@
+@@ -1515,24 +1515,6 @@
            # TODO(thakis): Only for no_chromium_code? http://crbug.com/912662
            "-Wno-ignored-pragma-optimize",
  
@@ -16,12 +16,15 @@ author: Michael Gilbert <mgilbert@debian.org>
 -          # TODO(https://crbug.com/1016947) Clean up, enable.
 -          "-Wno-bitwise-conditional-parentheses",
 -
-           # TODO(https://crbug.com/1016945) Clean up, enable.
-           "-Wno-builtin-assume-aligned-alignment",
- 
+-          # TODO(https://crbug.com/1016945) Clean up, enable.
+-          "-Wno-builtin-assume-aligned-alignment",
+-
 -          # TODO(https://crbug.com/1028110): Evaluate and possible enable.
 -          "-Wno-deprecated-copy",
 -
-           # TODO(https://crbug.com/1031169): Clean up and enable.
-           "-Wno-misleading-indentation",
- 
+-          # TODO(https://crbug.com/1031169): Clean up and enable.
+-          "-Wno-misleading-indentation",
+-
+           # TODO(https://crbug.com/1039697): Evaluate and possibly enable.
+           "-Wno-range-loop-analysis",
+         ]
