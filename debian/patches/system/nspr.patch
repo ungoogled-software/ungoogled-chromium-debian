@@ -35,7 +35,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  config("base_implementation") {
-@@ -697,8 +700,6 @@ jumbo_component("base") {
+@@ -698,8 +701,6 @@ jumbo_component("base") {
      "third_party/cityhash/city.h",
      "third_party/icu/icu_utf.cc",
      "third_party/icu/icu_utf.h",
