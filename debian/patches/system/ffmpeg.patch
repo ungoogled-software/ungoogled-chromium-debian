@@ -4,7 +4,7 @@ origin: chromium 66 authors
 
 --- a/media/filters/ffmpeg_audio_decoder.cc
 +++ b/media/filters/ffmpeg_audio_decoder.cc
-@@ -82,6 +82,8 @@ void FFmpegAudioDecoder::Initialize(cons
+@@ -84,6 +84,8 @@ void FFmpegAudioDecoder::Initialize(cons
      return;
    }
  
@@ -15,7 +15,7 @@ origin: chromium 66 authors
      std::move(bound_init_cb).Run(false);
 --- a/media/cdm/library_cdm/clear_key_cdm/clear_key_cdm.cc
 +++ b/media/cdm/library_cdm/clear_key_cdm/clear_key_cdm.cc
-@@ -153,6 +153,7 @@ void ConvertCdmKeysInfo(const media::Cdm
+@@ -152,6 +152,7 @@ void ConvertCdmKeysInfo(const media::Cdm
  void INITIALIZE_CDM_MODULE() {
    DVLOG(1) << __func__;
    media::InitializeMediaLibrary();

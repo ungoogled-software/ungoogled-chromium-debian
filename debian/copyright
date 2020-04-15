@@ -70,10 +70,10 @@ Files-Excluded:
  third_party/libvpx
  third_party/libdrm
  third_party/snappy
- third_party/libjpeg
  third_party/libxslt
  third_party/libwebp
  third_party/freetype
+ build/config/freetype/freetype.gni
  third_party/android*
  third_party/chromite
  third_party/lzma_sdk
@@ -81,6 +81,7 @@ Files-Excluded:
  third_party/pyelftools
  third_party/fontconfig
  third_party/depot_tools
+ third_party/libjpeg.gni
  third_party/libjpeg_turbo
  third_party/win_build_output
  third_party/zlib/adler*
@@ -89,13 +90,14 @@ Files-Excluded:
  third_party/zlib/gzguts*
  third_party/zlib/in*
  third_party/zlib/trees*
- third_party/zlib/x86*
  third_party/zlib/z*
  third_party/zlib/contrib
  third_party/zlib/patches
+ third_party/yasm/yasm_assemble.gni
  third_party/skia/site/user/api
  third_party/skia/platform_tools
  third_party/skia/resources/icc_profiles
+ third_party/ffmpeg/BUILD.gn
  third_party/ffmpeg/doc
  third_party/ffmpeg/lib*
  third_party/ffmpeg/tests
@@ -105,7 +107,9 @@ Files-Excluded:
  third_party/ffmpeg/config*
  third_party/ffmpeg/chromium
  third_party/harfbuzz-ng/src
+ third_party/harfbuzz-ng/harfbuzz.gni
  third_party/openh264/src
+ third_party/openh264/BUILD.gn
  third_party/expat/src
  third_party/unrar
  third_party/perfetto/ui/src/gen
@@ -115,9 +119,9 @@ Files-Excluded:
  third_party/apache-portable-runtime
  third_party/instrumented_libraries
  third_party/sqlite/sqlite-src*
+ third_party/angle/third_party/glmark2
  third_party/angle/third_party/rapidjson
- third_party/sfntly/src/java/lib
- third_party/sfntly/src/cpp/ext/redist
+ third_party/angle/third_party/VK-GL-CTS
  third_party/chromevox/third_party/sre
  third_party/crashpad/crashpad/handler/win
  third_party/crashpad/crashpad/snapshot/elf/elf_image_reader_fuzzer_corpus
@@ -132,6 +136,7 @@ Files-Excluded:
  third_party/libxml/mac
  third_party/libxml/linux
  third_party/libxml/win32
+ third_party/libxml/BUILD.gn
  third_party/node
  third_party/mocha/mocha.js
  third_party/chaijs/chai.js
@@ -145,11 +150,14 @@ Files-Excluded:
  third_party/pdfium/third_party/yasm/source
  third_party/pdfium/third_party/libopenjpeg20
  third_party/breakpad/breakpad/src/client/mac
+ third_party/breakpad/breakpad/src/common/convert_UTF.*
  third_party/boringssl/src/crypto/cipher_extra/test
  third_party/dom_distiller_js/dist/js/domdistiller_wrapped.js
+ third_party/devtools-frontend/src/scripts/closure/compiler.jar
  third_party/devtools-frontend/src/node_modules/fsevents/fsevents.node
  third_party/libphonenumber/dist/javascript/i18n/phonenumbers/metadata.js
  third_party/libphonenumber/dist/javascript/i18n/phonenumbers/metadatalite.js
+
 
 Files: *
 Copyright: The Chromium Authors. All rights reserved.
