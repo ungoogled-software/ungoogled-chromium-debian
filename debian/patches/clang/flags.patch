@@ -28,3 +28,14 @@ author: Michael Gilbert <mgilbert@debian.org>
            # TODO(https://crbug.com/1039697): Evaluate and possibly enable.
            "-Wno-range-loop-analysis",
          ]
+--- a/third_party/blink/renderer/BUILD.gn	2020-04-02 23:11:35.000000000 -0500
++++ b/third_party/blink/renderer/BUILD.gn	2020-04-15 14:38:57.650905797 -0500
+@@ -51,8 +51,6 @@
+ 
+     if (!is_chromeos || default_toolchain != "//build/toolchain/cros:target") {
+       cflags += [
+-        "-Wno-enum-enum-conversion",
+-        "-Wno-enum-float-conversion",
+       ]
+     }
+   }
