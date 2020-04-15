@@ -3,11 +3,10 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/build/config/compiler/BUILD.gn
 +++ b/build/config/compiler/BUILD.gn
-@@ -1520,21 +1520,6 @@ config("default_warnings") {
-           # Ignore warnings about MSVC optimization pragmas.
+@@ -1515,21 +1515,9 @@
            # TODO(thakis): Only for no_chromium_code? http://crbug.com/912662
            "-Wno-ignored-pragma-optimize",
--
+ 
 -          # TODO(https://crbug.com/989932): Evaluate and possibly enable.
 -          "-Wno-implicit-int-float-conversion",
 -
@@ -17,11 +16,12 @@ author: Michael Gilbert <mgilbert@debian.org>
 -          # TODO(https://crbug.com/1016947) Clean up, enable.
 -          "-Wno-bitwise-conditional-parentheses",
 -
--          # TODO(https://crbug.com/1016945) Clean up, enable.
--          "-Wno-builtin-assume-aligned-alignment",
--
+           # TODO(https://crbug.com/1016945) Clean up, enable.
+           "-Wno-builtin-assume-aligned-alignment",
+ 
 -          # TODO(https://crbug.com/1028110): Evaluate and possible enable.
 -          "-Wno-deprecated-copy",
-         ]
+-
+           # TODO(https://crbug.com/1031169): Clean up and enable.
+           "-Wno-misleading-indentation",
  
-         if (is_fuchsia) {
