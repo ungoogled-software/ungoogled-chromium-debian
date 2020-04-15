@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/components/download/internal/common/download_item_impl.cc
 +++ b/components/download/internal/common/download_item_impl.cc
-@@ -625,7 +625,9 @@ void DownloadItemImpl::UpdateResumptionI
+@@ -646,7 +646,9 @@ void DownloadItemImpl::UpdateResumptionI
      bytes_wasted_ = 0;
    }
  
@@ -51,7 +51,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/third_party/webrtc/modules/audio_coding/neteq/decision_logic.cc
 +++ b/third_party/webrtc/modules/audio_coding/neteq/decision_logic.cc
-@@ -353,7 +353,7 @@ NetEq::Operation DecisionLogic::FuturePa
+@@ -352,7 +352,7 @@ NetEq::Operation DecisionLogic::FuturePa
        prev_mode == NetEq::Mode::kCodecInternalCng) {
      size_t cur_size_samples =
          estimate_dtx_delay_

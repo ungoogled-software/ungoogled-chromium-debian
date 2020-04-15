@@ -3,8 +3,8 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/skia/BUILD.gn
 +++ b/skia/BUILD.gn
-@@ -873,7 +873,7 @@ group("test_fonts_resources") {
-   if (is_mac) {
+@@ -850,7 +850,7 @@ group("test_fonts_resources") {
+   if (is_mac || is_ios) {
      deps += [ ":test_fonts_bundle_data" ]
      data_deps += [ ":test_fonts_bundle_data" ]
 -  } else {
@@ -14,28 +14,24 @@ author: Michael Gilbert <mgilbert@debian.org>
    }
 --- a/base/test/BUILD.gn
 +++ b/base/test/BUILD.gn
-@@ -244,12 +244,6 @@ static_library("test_support") {
+@@ -244,10 +244,6 @@ static_library("test_support") {
  
    if (is_linux) {
      public_deps += [ ":fontconfig_util_linux" ]
--    data_deps = [
--      "//third_party/test_fonts",
--    ]
+-    data_deps = [ "//third_party/test_fonts" ]
 -    if (current_toolchain == host_toolchain) {
 -      data_deps += [ ":do_generate_fontconfig_caches" ]
 -    }
    }
  
    if (is_ios) {
-@@ -453,15 +447,9 @@ if (is_linux) {
+@@ -425,13 +421,9 @@ if (is_linux) {
        testonly = true
        tool = ":generate_fontconfig_caches"
  
 -      # The copied test fonts are inputs to generate_fontconfig_caches, so must
 -      # be listed in deps, not data_deps (https://crbug.com/919422).
--      deps = [
--        "//third_party/test_fonts",
--      ]
+-      deps = [ "//third_party/test_fonts" ]
        args = []
        outputs = [
          "$root_out_dir/fontconfig_caches/fb5c91b2895aa445d23aebf7f9e2189c-le64.cache-7",
