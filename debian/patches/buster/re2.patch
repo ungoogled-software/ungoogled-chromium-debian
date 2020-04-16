@@ -1,0 +1,24 @@
+--- a/extensions/browser/api/declarative_net_request/regex_rules_matcher.cc
++++ b/extensions/browser/api/declarative_net_request/regex_rules_matcher.cc
+@@ -289,7 +289,7 @@
+     if (!DoesRuleMetadataMatchRequest(*rule->url_rule(), params))
+       continue;
+ 
+-    const RE2& regex = filtered_re2_.GetRE2(re2_id);
++    const RE2& regex = *filtered_re2_.GetRE2(re2_id);
+     potential_matches.emplace_back(rule, &regex);
+   }
+ 
+--- a/extensions/browser/api/declarative_net_request/regex_rules_matcher.h
++++ b/extensions/browser/api/declarative_net_request/regex_rules_matcher.h
+@@ -8,7 +8,10 @@
+ #include "base/macros.h"
+ #include "components/url_matcher/substring_set_matcher.h"
+ #include "extensions/browser/api/declarative_net_request/ruleset_matcher_base.h"
++
++#define private public
+ #include "third_party/re2/src/re2/filtered_re2.h"
++#undef private
+ 
+ namespace extensions {
+ namespace declarative_net_request {
