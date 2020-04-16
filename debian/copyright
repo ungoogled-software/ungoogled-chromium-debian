@@ -59,7 +59,6 @@ Files-Excluded:
  components/drive/chromeos
  testing/buildbot
  native_client*
- third_party/re2
  third_party/ink
  third_party/opus
  third_party/flac
