@@ -11,6 +11,7 @@ clang/flags.patch
 fixes/link.patch
 fixes/gl.patch
 fixes/mojo.patch
+fixes/breakpad.patch
 fixes/inspector.patch
 fixes/gpu-timeout.patch
 fixes/sequence-point.patch
