@@ -6,8 +6,6 @@ gn/libcxx.patch
 
 arm/pffffft-buildfix.patch
 
-clang/flags.patch
-
 fixes/link.patch
 fixes/gl.patch
 fixes/mojo.patch
