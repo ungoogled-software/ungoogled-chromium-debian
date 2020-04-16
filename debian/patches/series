@@ -52,6 +52,7 @@ system/ffmpeg.patch
 system/jsoncpp.patch
 system/harfbuzz.patch
 system/openjpeg.patch
+system/convertutf.patch
 
 buster/opus13.patch
 buster/vpx17.patch
