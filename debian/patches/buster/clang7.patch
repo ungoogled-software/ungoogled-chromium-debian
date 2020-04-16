@@ -37,16 +37,6 @@ author: Michael Gilbert <mgilbert@debian.org>
            # TODO(https://crbug.com/1039697): Evaluate and possibly enable.
            "-Wno-range-loop-analysis",
          ]
---- a/third_party/pffft/BUILD.gn
-+++ b/third_party/pffft/BUILD.gn
-@@ -22,7 +22,6 @@ config("common_config") {
- 
- static_library("pffft") {
-   configs += [ ":common_config" ]
--  cflags = [ "-Wno-unused-but-set-variable" ]
-   sources = [
-     "src/pffft.c",
-     "src/pffft.h",
 --- a/third_party/blink/renderer/BUILD.gn
 +++ b/third_party/blink/renderer/BUILD.gn
 @@ -49,7 +49,7 @@ config("inside_blink") {
