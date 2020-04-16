@@ -8,7 +8,7 @@ sys.path.append("build/linux/unbundle")
 
 import replace_gn_files
 
-keepers = ('harfbuzz-ng', 'icu', 're2')
+keepers = ('harfbuzz-ng', 'icu')
 
 for lib,rule in replace_gn_files.REPLACEMENTS.items():
     if lib not in keepers:
