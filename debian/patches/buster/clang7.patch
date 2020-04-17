@@ -39,8 +39,12 @@ author: Michael Gilbert <mgilbert@debian.org>
          ]
 --- a/third_party/blink/renderer/BUILD.gn
 +++ b/third_party/blink/renderer/BUILD.gn
-@@ -49,7 +49,7 @@ config("inside_blink") {
-       "-Wno-implicit-int-conversion",
+@@ -45,11 +45,9 @@
+       "-Wconversion",
+       "-Wno-float-conversion",
+       "-Wno-sign-conversion",
+-      "-Wno-implicit-float-conversion",
+-      "-Wno-implicit-int-conversion",
      ]
  
 -    if (!is_chromeos || default_toolchain != "//build/toolchain/cros:target") {
@@ -98,3 +102,16 @@ author: Michael Gilbert <mgilbert@debian.org>
  #    pragma clang diagnostic ignored "-Wunreachable-code"
  #endif
  
+--- a/third_party/blink/renderer/platform/heap/finalizer_traits.h
++++ b/third_party/blink/renderer/platform/heap/finalizer_traits.h
+@@ -49,10 +49,7 @@
+ // an object's base class has a virtual destructor. In case there is no virtual
+ // destructor present, the object is always finalized through its leaf type. In
+ // other words: there is no finalization through a base pointer.
+-#pragma GCC diagnostic push
+-#pragma GCC diagnostic ignored "-Wdelete-non-abstract-non-virtual-dtor"
+       static_cast<T*>(obj)->~T();
+-#pragma GCC diagnostic pop
+     }
+   };
+   using FinalizeImpl =
