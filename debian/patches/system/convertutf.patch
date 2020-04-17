@@ -4,16 +4,25 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/third_party/breakpad/breakpad/src/common/string_conversion.cc
 +++ b/third_party/breakpad/breakpad/src/common/string_conversion.cc
-@@ -29,7 +29,7 @@
+@@ -29,7 +29,16 @@
  
  #include <string.h>
  
 -#include "common/convert_UTF.h"
-+#include <unicode/ustring.h>
++#include "third_party/icu/source/common/unicode/uconfig.h"
++#include "third_party/icu/source/common/unicode/uvernum.h"
++#include "third_party/icu/source/common/unicode/platform.h"
++#include "third_party/icu/source/common/unicode/ptypes.h"
++#include "third_party/icu/source/common/unicode/urename.h"
++#include "third_party/icu/source/common/unicode/umachine.h"
++#include "third_party/icu/source/common/unicode/uversion.h"
++#include "third_party/icu/source/common/unicode/putil.h"
++#include "third_party/icu/source/common/unicode/uiter.h"
++#include "third_party/icu/source/common/unicode/ustring.h"
  #include "common/scoped_ptr.h"
  #include "common/string_conversion.h"
  #include "common/using_std_string.h"
-@@ -38,78 +38,21 @@ namespace google_breakpad {
+@@ -38,78 +47,21 @@
  
  using std::vector;
  
@@ -104,7 +113,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      out[0] = out[1] = 0;
    }
  }
-@@ -118,38 +61,4 @@ static inline uint16_t Swap(uint16_t val
+@@ -118,38 +70,4 @@
    return (value >> 8) | static_cast<uint16_t>(value << 8);
  }
  
@@ -145,15 +154,20 @@ author: Michael Gilbert <mgilbert@debian.org>
  }  // namespace google_breakpad
 --- a/third_party/breakpad/breakpad/src/common/string_conversion.h
 +++ b/third_party/breakpad/breakpad/src/common/string_conversion.h
-@@ -35,6 +35,7 @@
+@@ -35,6 +35,12 @@
  #include <string>
  #include <vector>
  
-+#include <unicode/umachine.h>
++#include "third_party/icu/source/common/unicode/uconfig.h"
++#include "third_party/icu/source/common/unicode/uvernum.h"
++#include "third_party/icu/source/common/unicode/platform.h"
++#include "third_party/icu/source/common/unicode/ptypes.h"
++#include "third_party/icu/source/common/unicode/urename.h"
++#include "third_party/icu/source/common/unicode/umachine.h"
  #include "common/using_std_string.h"
  #include "google_breakpad/common/breakpad_types.h"
  
-@@ -42,26 +43,15 @@ namespace google_breakpad {
+@@ -42,26 +48,15 @@
    
  using std::vector;
  
