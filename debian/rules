@@ -34,7 +34,8 @@ export CXXFLAGS=$(shell dpkg-buildflags --get CXXFLAGS)
 # extra flags to reduce warnings that aren't very useful
 # FIXME: remove -Wno-enum-enum-conversion, -Wno-enum-float-conversion, -Wno-range-loop-construct if possible.
 # FIXME: They are here to stem the tide of new warnings from Clang 10.
-export CXXFLAGS+=-Wno-unused-function \
+export CXXFLAGS+=-Wno-conversion \
+                 -Wno-unused-function \
                  -Wno-unused-variable \
                  -Wno-unused-private-field \
                  -Wno-enum-enum-conversion \
@@ -75,13 +76,22 @@ defines+=is_debug=false \
          use_ozone=false \
          use_sysroot=false \
          use_openh264=false \
+         use_allocator=\"tcmalloc\" \
          use_libjpeg_turbo=true \
          use_custom_libcxx=false \
          use_gnome_keyring=false \
          use_unofficial_version_number=false \
          enable_vr=false \
+         enable_nacl=false \
+         enable_nacl_nonsfi=false \
          enable_swiftshader=false \
+         enable_reading_list=false \
+         enable_one_click_signin=false \
+         enable_iterator_debugging=false \
+         enable_hangout_services_extension=false \
          optimize_webui=false \
+         closure_compile=false \
+         treat_warnings_as_errors=false \
          linux_use_bundled_binutils=false \
 
 # enabled features
@@ -105,10 +115,6 @@ defines+=use_gio=true \
          use_kerberos=false \
          use_lld=true \
 
-# some notes about embedded libraries
-#  can't use system nss since net/third_party/nss is heavily patched
-#  can't use system ots (open text *summarizer*) since that's not google's ots (open text *sanitizer*)
-
 # handle parallel build options
 njobs=1
 ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
@@ -126,8 +132,7 @@ override_dh_auto_configure:
 	$(CXX) --version
 	# put yasm script in the location expected by gn
 	ln -sf ../pdfium/third_party/yasm/run_yasm.py third_party/yasm
-	# strip out system third_party libraries
-	# NOTE: Removing base/third_party/libevent/BUILD.gn and build/config/freetype/freetype.gni in scripts/unbundle
+	# prefer unbundled (system) libraries
 	./debian/scripts/unbundle
 	# clean polymer files manually (debian/clean doesn't work on directories)
 	# NOTE: This is disabled because of the below

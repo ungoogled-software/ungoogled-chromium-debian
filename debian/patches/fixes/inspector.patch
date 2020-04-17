@@ -23,7 +23,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    public_deps = [
 --- a/v8/test/unittests/BUILD.gn
 +++ b/v8/test/unittests/BUILD.gn
-@@ -296,7 +296,7 @@ v8_source_set("unittests_sources") {
+@@ -312,7 +312,7 @@ v8_source_set("unittests_sources") {
      "../..:v8_for_testing",
      "../..:v8_libbase",
      "../..:v8_libplatform",
@@ -44,24 +44,35 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
 --- a/v8/src/inspector/v8-inspector-session-impl.cc
 +++ b/v8/src/inspector/v8-inspector-session-impl.cc
-@@ -25,11 +25,11 @@
+@@ -25,12 +25,12 @@
  
  namespace v8_inspector {
  namespace {
 -using v8_crdtp::span;
 -using v8_crdtp::SpanFrom;
 -using v8_crdtp::Status;
+-using v8_crdtp::cbor::CheckCBORMessage;
 -using v8_crdtp::json::ConvertCBORToJSON;
 -using v8_crdtp::json::ConvertJSONToCBOR;
 +using crdtp::span;
 +using crdtp::SpanFrom;
 +using crdtp::Status;
++using crdtp::cbor::CheckCBORMessage;
 +using crdtp::json::ConvertCBORToJSON;
 +using crdtp::json::ConvertJSONToCBOR;
  
  bool IsCBORMessage(const StringView& msg) {
    return msg.is8Bit() && msg.length() >= 2 && msg.characters8()[0] == 0xd8 &&
-@@ -335,8 +335,8 @@ void V8InspectorSessionImpl::reportAllCo
+@@ -195,7 +195,7 @@ void V8InspectorSessionImpl::sendProtoco
+ }
+ 
+ void V8InspectorSessionImpl::fallThrough(int callId, const String16& method,
+-                                         v8_crdtp::span<uint8_t> message) {
++                                         crdtp::span<uint8_t> message) {
+   // There's no other layer to handle the command.
+   UNREACHABLE();
+ }
+@@ -338,8 +338,8 @@ void V8InspectorSessionImpl::reportAllCo
  
  void V8InspectorSessionImpl::dispatchProtocolMessage(
      const StringView& message) {
@@ -72,3 +83,78 @@ author: Michael Gilbert <mgilbert@debian.org>
    span<uint8_t> cbor;
    std::vector<uint8_t> converted_cbor;
    if (IsCBORMessage(message)) {
+@@ -367,7 +367,7 @@ void V8InspectorSessionImpl::dispatchPro
+     // Pass empty string instead of the actual message to save on a conversion.
+     // We're allowed to do so because fall-through is not implemented.
+     m_dispatcher.dispatch(callId, method, std::move(parsed_message),
+-                          v8_crdtp::span<uint8_t>());
++                          crdtp::span<uint8_t>());
+   }
+ }
+ 
+--- a/v8/src/inspector/string-16.cc
++++ b/v8/src/inspector/string-16.cc
+@@ -231,7 +231,7 @@ std::string String16::utf8() const {
+ 
+ }  // namespace v8_inspector
+ 
+-namespace v8_crdtp {
++namespace crdtp {
+ void SerializerTraits<v8_inspector::String16>::Serialize(
+     const v8_inspector::String16& str, std::vector<uint8_t>* out) {
+   cbor::EncodeFromUTF16(
+--- a/v8/src/inspector/string-16.h
++++ b/v8/src/inspector/string-16.h
+@@ -166,7 +166,7 @@ struct hash<v8_inspector::String16> {
+ #endif  // !defined(__APPLE__) || defined(_LIBCPP_VERSION)
+ 
+ // See third_party/inspector_protocol/crdtp/serializer_traits.h.
+-namespace v8_crdtp {
++namespace crdtp {
+ template <>
+ struct SerializerTraits<v8_inspector::String16> {
+   static void Serialize(const v8_inspector::String16& str,
+--- a/v8/src/inspector/v8-inspector-session-impl.h
++++ b/v8/src/inspector/v8-inspector-session-impl.h
+@@ -105,7 +105,7 @@ class V8InspectorSessionImpl : public V8
+   void sendProtocolNotification(
+       std::unique_ptr<protocol::Serializable> message) override;
+   void fallThrough(int callId, const String16& method,
+-                   v8_crdtp::span<uint8_t> message) override;
++                   crdtp::span<uint8_t> message) override;
+   void flushProtocolNotifications() override;
+ 
+   std::unique_ptr<StringBuffer> serializeForFrontend(
+--- a/v8/src/inspector/injected-script.cc
++++ b/v8/src/inspector/injected-script.cc
+@@ -732,7 +732,7 @@ Response InjectedScript::resolveCallArgu
+       std::vector<uint8_t> cbor =
+           std::move(*callArgument->getValue(nullptr)).TakeSerialized();
+       std::vector<uint8_t> json;
+-      v8_crdtp::json::ConvertCBORToJSON(v8_crdtp::SpanFrom(cbor), &json);
++      crdtp::json::ConvertCBORToJSON(crdtp::SpanFrom(cbor), &json);
+       value =
+           "(" +
+           String16(reinterpret_cast<const char*>(json.data()), json.size()) +
+--- a/v8/src/inspector/custom-preview.cc
++++ b/v8/src/inspector/custom-preview.cc
+@@ -122,7 +122,7 @@ bool substituteObjectTags(int sessionId,
+     }
+     std::vector<uint8_t> cbor = std::move(*wrapper).TakeSerialized();
+     std::vector<uint8_t> json;
+-    v8_crdtp::json::ConvertCBORToJSON(v8_crdtp::SpanFrom(cbor), &json);
++    crdtp::json::ConvertCBORToJSON(crdtp::SpanFrom(cbor), &json);
+     v8::Local<v8::Value> jsonWrapper;
+     v8_inspector::StringView serialized(json.data(), json.size());
+     if (!v8::JSON::Parse(context, toV8String(isolate, serialized))
+--- a/v8/src/inspector/v8-stack-trace-impl.cc
++++ b/v8/src/inspector/v8-stack-trace-impl.cc
+@@ -152,7 +152,7 @@ std::unique_ptr<StringBuffer> V8StackTra
+   dict->setBoolean(kShouldPause, should_pause);
+   std::vector<uint8_t> json;
+   std::vector<uint8_t> cbor = std::move(*dict).TakeSerialized();
+-  v8_crdtp::json::ConvertCBORToJSON(v8_crdtp::SpanFrom(cbor), &json);
++  crdtp::json::ConvertCBORToJSON(crdtp::SpanFrom(cbor), &json);
+   return StringBufferFrom(std::move(json));
+ }
+ 

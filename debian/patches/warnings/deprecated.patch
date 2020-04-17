@@ -3,12 +3,12 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/third_party/blink/renderer/build/scripts/rule_bison.py
 +++ b/third_party/blink/renderer/build/scripts/rule_bison.py
-@@ -80,7 +80,7 @@ for outputHTry in outputHTries:
+@@ -82,7 +82,7 @@ def main():
+     original_output_h = os.path.join(output_dir,
+                                      output_basename + BISON_HEADER_EXT)
  
- outputCpp = os.path.join(outputDir, inputRoot + '.cc')
- 
--returnCode = subprocess.call([bisonExe, '-d', '-p', prefix, inputFile, '-o', outputCpp])
-+returnCode = subprocess.call([bisonExe, '-Wno-deprecated', '-d', '-p', prefix, inputFile, '-o', outputCpp])
- assert returnCode == 0
- 
- # Find the name that bison used for the generated header file.
+-    return_code = subprocess.call([bison_exe, '-d', input_file,
++    return_code = subprocess.call([bison_exe, '-d', input_file, '-Wno-deprecated',
+                                    '-o', output_cc])
+     assert return_code == 0
+     # If the file doesn't exist, this raise an OSError.
