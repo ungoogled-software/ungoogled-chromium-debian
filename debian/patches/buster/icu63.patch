@@ -9,7 +9,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "unicode/uversion.h"
 +#include "unicode/dtitvfmt.h"
  
--#define V8_MINIMUM_ICU_VERSION 64
+-#define V8_MINIMUM_ICU_VERSION 65
 +#define V8_MINIMUM_ICU_VERSION 63
  
  namespace U_ICU_NAMESPACE {
@@ -363,16 +363,133 @@ author: Michael Gilbert <mgilbert@debian.org>
  }  // namespace
 --- a/v8/src/objects/intl-objects.cc
 +++ b/v8/src/objects/intl-objects.cc
-@@ -32,8 +32,6 @@
+@@ -32,9 +32,6 @@
  #include "unicode/coll.h"
  #include "unicode/datefmt.h"
  #include "unicode/decimfmt.h"
 -#include "unicode/formattedvalue.h"
 -#include "unicode/localebuilder.h"
+-#include "unicode/localematcher.h"
  #include "unicode/locid.h"
  #include "unicode/normalizer2.h"
  #include "unicode/numberformatter.h"
-@@ -1617,8 +1615,6 @@ std::map<std::string, std::string> Looku
+@@ -1441,114 +1438,12 @@ std::vector<std::string> LookupSupported
+   return subset;
+ }
+ 
+-icu::LocaleMatcher BuildLocaleMatcher(
+-    Isolate* isolate, const std::set<std::string>& available_locales,
+-    UErrorCode* status) {
+-  icu::Locale default_locale =
+-      icu::Locale::forLanguageTag(DefaultLocale(isolate), *status);
+-  CHECK(U_SUCCESS(*status));
+-  icu::LocaleMatcher::Builder builder;
+-  builder.setDefaultLocale(&default_locale);
+-  for (auto it = available_locales.begin(); it != available_locales.end();
+-       ++it) {
+-    builder.addSupportedLocale(
+-        icu::Locale::forLanguageTag(it->c_str(), *status));
+-  }
+-
+-  return builder.build(*status);
+-}
+-
+-class Iterator : public icu::Locale::Iterator {
+- public:
+-  Iterator(std::vector<std::string>::const_iterator begin,
+-           std::vector<std::string>::const_iterator end)
+-      : iter_(begin), end_(end) {}
+-  virtual ~Iterator() {}
+-
+-  UBool hasNext() const override { return iter_ != end_; }
+-
+-  const icu::Locale& next() override {
+-    UErrorCode status = U_ZERO_ERROR;
+-    locale_ = icu::Locale::forLanguageTag(iter_->c_str(), status);
+-    CHECK(U_SUCCESS(status));
+-    ++iter_;
+-    return locale_;
+-  }
+-
+- private:
+-  std::vector<std::string>::const_iterator iter_;
+-  std::vector<std::string>::const_iterator end_;
+-  icu::Locale locale_;
+-};
+-
+-// ecma402/#sec-bestfitmatcher
+-// The BestFitMatcher abstract operation compares requestedLocales, which must
+-// be a List as returned by CanonicalizeLocaleList, against the locales in
+-// availableLocales and determines the best available language to meet the
+-// request. The algorithm is implementation dependent, but should produce
+-// results that a typical user of the requested locales would perceive
+-// as at least as good as those produced by the LookupMatcher abstract
+-// operation. Options specified through Unicode locale extension sequences must
+-// be ignored by the algorithm. Information about such subsequences is returned
+-// separately. The abstract operation returns a record with a [[locale]] field,
+-// whose value is the language tag of the selected locale, which must be an
+-// element of availableLocales. If the language tag of the request locale that
+-// led to the selected locale contained a Unicode locale extension sequence,
+-// then the returned record also contains an [[extension]] field whose value is
+-// the first Unicode locale extension sequence within the request locale
+-// language tag.
+-std::string BestFitMatcher(Isolate* isolate,
+-                           const std::set<std::string>& available_locales,
+-                           const std::vector<std::string>& requested_locales) {
+-  UErrorCode status = U_ZERO_ERROR;
+-  icu::LocaleMatcher matcher =
+-      BuildLocaleMatcher(isolate, available_locales, &status);
+-  CHECK(U_SUCCESS(status));
+-
+-  Iterator iter(requested_locales.cbegin(), requested_locales.cend());
+-  std::string bestfit =
+-      matcher.getBestMatch(iter, status)->toLanguageTag<std::string>(status);
+-  if (U_FAILURE(status)) {
+-    return DefaultLocale(isolate);
+-  }
+-  // We need to return the extensions with it.
+-  for (auto it = requested_locales.begin(); it != requested_locales.end();
+-       ++it) {
+-    if (it->find(bestfit) == 0) {
+-      return *it;
+-    }
+-  }
+-  return bestfit;
+-}
+-
+ // ECMA 402 9.2.8 BestFitSupportedLocales(availableLocales, requestedLocales)
+ // https://tc39.github.io/ecma402/#sec-bestfitsupportedlocales
+ std::vector<std::string> BestFitSupportedLocales(
+     Isolate* isolate, const std::set<std::string>& available_locales,
+     const std::vector<std::string>& requested_locales) {
+-  UErrorCode status = U_ZERO_ERROR;
+-  icu::LocaleMatcher matcher =
+-      BuildLocaleMatcher(isolate, available_locales, &status);
+-  CHECK(U_SUCCESS(status));
+-
+-  std::string default_locale = DefaultLocale(isolate);
+-  std::vector<std::string> result;
+-  for (auto it = requested_locales.cbegin(); it != requested_locales.cend();
+-       it++) {
+-    if (*it == default_locale) {
+-      result.push_back(*it);
+-    } else {
+-      status = U_ZERO_ERROR;
+-      icu::Locale desired = icu::Locale::forLanguageTag(it->c_str(), status);
+-      std::string bestfit = matcher.getBestMatch(desired, status)
+-                                ->toLanguageTag<std::string>(status);
+-      // We need to return the extensions with it.
+-      if (U_SUCCESS(status) && it->find(bestfit) == 0) {
+-        result.push_back(*it);
+-      }
+-    }
+-  }
+-  return result;
++  return LookupSupportedLocales(available_locales, requested_locales);
+ }
+ 
+ // ecma262 #sec-createarrayfromlist
+@@ -1723,8 +1618,6 @@ std::map<std::string, std::string> Looku
    std::map<std::string, std::string> extensions;
  
    UErrorCode status = U_ZERO_ERROR;
@@ -381,7 +498,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    std::unique_ptr<icu::StringEnumeration> keywords(
        icu_locale->createKeywords(status));
    if (U_FAILURE(status)) return extensions;
-@@ -1680,14 +1676,13 @@ std::map<std::string, std::string> Looku
+@@ -1786,14 +1679,13 @@ std::map<std::string, std::string> Looku
        if (is_valid_value) {
          extensions.insert(
              std::pair<std::string, std::string>(bcp47_key, bcp47_value));
@@ -399,7 +516,17 @@ author: Michael Gilbert <mgilbert@debian.org>
    return extensions;
  }
  
-@@ -2090,11 +2085,6 @@ Handle<String> Intl::NumberFieldToType(I
+@@ -1862,8 +1754,7 @@ Intl::ResolvedLocale Intl::ResolveLocale
+     const std::vector<std::string>& requested_locales, MatcherOption matcher,
+     const std::set<std::string>& relevant_extension_keys) {
+   std::string locale;
+-  if (matcher == Intl::MatcherOption::kBestFit && implement_bestfit) {
+-    locale = BestFitMatcher(isolate, available_locales, requested_locales);
++  if (false) {
+   } else {
+     locale = LookupMatcher(isolate, available_locales, requested_locales);
+   }
+@@ -2195,11 +2086,6 @@ Handle<String> Intl::NumberFieldToType(I
        UNREACHABLE();
        return Handle<String>();
  
@@ -411,7 +538,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      default:
        UNREACHABLE();
        return Handle<String>();
-@@ -2102,10 +2092,13 @@ Handle<String> Intl::NumberFieldToType(I
+@@ -2207,10 +2093,13 @@ Handle<String> Intl::NumberFieldToType(I
  }
  
  // A helper function to convert the FormattedValue for several Intl objects.
