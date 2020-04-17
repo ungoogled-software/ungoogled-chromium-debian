@@ -17,7 +17,7 @@
  }  // namespace content
 --- a/content/browser/native_file_system/mock_native_file_system_permission_context.h
 +++ b/content/browser/native_file_system/mock_native_file_system_permission_context.h
-@@ -62,17 +62,6 @@ class MockNativeFileSystemPermissionCont
+@@ -63,17 +63,6 @@ class MockNativeFileSystemPermissionCont
             int frame_id,
             base::OnceCallback<void(SensitiveDirectoryResult)>& callback));
  

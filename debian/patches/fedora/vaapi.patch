@@ -14,7 +14,7 @@ Subject: [PATCH] Enable mojo with VDA2 on Linux
 
 --- a/chrome/browser/about_flags.cc
 +++ b/chrome/browser/about_flags.cc
-@@ -1937,14 +1937,14 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -1987,14 +1987,14 @@ const FeatureEntry kFeatureEntries[] = {
          "disable-accelerated-video-decode",
          flag_descriptions::kAcceleratedVideoDecodeName,
          flag_descriptions::kAcceleratedVideoDecodeDescription,
@@ -31,7 +31,7 @@ Subject: [PATCH] Enable mojo with VDA2 on Linux
          SINGLE_DISABLE_VALUE_TYPE(switches::kDisableAcceleratedVideoEncode),
      },
      {"enable-history-favicons-google-server-query",
-@@ -2397,10 +2397,10 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -2419,10 +2419,10 @@ const FeatureEntry kFeatureEntries[] = {
       FEATURE_VALUE_TYPE(service_manager::features::kXRSandbox)},
  #endif  // !defined(OS_ANDROID)
  #endif  // ENABLE_VR
@@ -46,7 +46,7 @@ Subject: [PATCH] Enable mojo with VDA2 on Linux
      {"system-keyboard-lock", flag_descriptions::kSystemKeyboardLockName,
 --- a/chrome/browser/flag_descriptions.cc
 +++ b/chrome/browser/flag_descriptions.cc
-@@ -3164,15 +3164,20 @@ const char kMetalDescription[] =
+@@ -3003,15 +3003,20 @@ const char kMetalDescription[] =
  
  #endif
  
@@ -71,7 +71,7 @@ Subject: [PATCH] Enable mojo with VDA2 on Linux
  const char kAggregatedMlAppRankingDescription[] =
 --- a/chrome/browser/flag_descriptions.h
 +++ b/chrome/browser/flag_descriptions.h
-@@ -1866,11 +1866,15 @@ extern const char kPermissionPromptPersi
+@@ -1735,11 +1735,15 @@ extern const char kPermissionPromptPersi
  
  // Chrome OS ------------------------------------------------------------------
  
@@ -90,17 +90,17 @@ Subject: [PATCH] Enable mojo with VDA2 on Linux
  
 --- a/gpu/config/software_rendering_list.json
 +++ b/gpu/config/software_rendering_list.json
-@@ -334,11 +334,12 @@
+@@ -337,11 +337,12 @@
      },
      {
        "id": 48,
 -      "description": "Accelerated video decode is unavailable on Linux",
 +      "description": "Accelerated VA-API video decode is not supported on NVIDIA platforms",
-       "cr_bugs": [137247],
+       "cr_bugs": [137247, 1032907],
        "os": {
          "type": "linux"
        },
 +      "vendor_id": "0x10de",
-       "features": [
-         "accelerated_video_decode"
-       ]
+       "exceptions": [
+         {
+           "machine_model_name": ["Chromecast"]

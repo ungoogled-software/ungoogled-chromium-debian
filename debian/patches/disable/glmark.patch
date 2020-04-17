@@ -1,0 +1,18 @@
+--- a/third_party/angle/src/tests/BUILD.gn
++++ b/third_party/angle/src/tests/BUILD.gn
+@@ -257,13 +257,13 @@ if (is_win || is_linux || is_android ||
+       "${angle_root}:library_name_config",
+     ]
+ 
+-    if (is_win || is_linux) {
++    if (false) {
+       data_deps += [ "${angle_root}/third_party/glmark2:glmark2_angle" ]
+     }
+     if (is_win && target_cpu != "arm64") {
+       data_deps += [ "${angle_root}/third_party/glmark2:glmark2_wgl" ]
+     }
+-    if (is_linux) {
++    if (false) {
+       data_deps += [ "${angle_root}/third_party/glmark2:glmark2_glx" ]
+     }
+ 

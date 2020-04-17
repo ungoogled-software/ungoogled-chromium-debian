@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/third_party/webrtc/modules/audio_coding/codecs/opus/opus_interface.cc
 +++ b/third_party/webrtc/modules/audio_coding/codecs/opus/opus_interface.cc
-@@ -370,18 +370,6 @@ int16_t WebRtcOpus_SetForceChannels(Opus
+@@ -372,18 +372,6 @@ int16_t WebRtcOpus_SetForceChannels(Opus
    }
  }
  

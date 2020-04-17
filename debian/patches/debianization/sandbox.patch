@@ -10,7 +10,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 -    LOG(FATAL)
 -        << "No usable sandbox! Update your kernel or see "
 -           "https://chromium.googlesource.com/chromium/src/+/master/"
--           "docs/linux_suid_sandbox_development.md for more information on "
+-           "docs/linux/suid_sandbox_development.md for more information on "
 -           "developing with the SUID sandbox. "
 +    LOG(ERROR)
 +        << "No usable sandbox! If this is a Debian system, please install the "
