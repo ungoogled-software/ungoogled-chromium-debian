@@ -312,6 +312,5 @@ There are a few differences with Debian's Chromium:
 * Modified default CLI flags and preferences; see `debian/etc/default-flags` and `debian/etc/master_preferences`
 * Re-enable `chrome://tracing` and DevTool's Performance tab
 * Package names are prefixed with `ungoogled-`, and will conflict Debian's Chromium packages.
-* Use LLVM instead of GCC
 * Enable more FFMpeg codecs by default
 * Use tcmalloc (Chromium default) instead of the system's memory allocator

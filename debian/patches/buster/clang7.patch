@@ -1,0 +1,117 @@
+description: disable flags that are introduced after clang 7
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/build/config/compiler/BUILD.gn
++++ b/build/config/compiler/BUILD.gn
+@@ -137,7 +137,7 @@ declare_args() {
+   # TODO(vitalybuka):
+   # 'is_android' breaks content_shell_test_apk on android-kitkat-arm-rel.
+   # 'use_xcode_clang' may call old clang.
+-  init_stack_vars = !is_android && !use_xcode_clang && !is_official_build
++  init_stack_vars = false # for clang 7 on buster
+ }
+ 
+ declare_args() {
+@@ -1515,24 +1515,6 @@ config("default_warnings") {
+           # TODO(thakis): Only for no_chromium_code? http://crbug.com/912662
+           "-Wno-ignored-pragma-optimize",
+ 
+-          # TODO(https://crbug.com/989932): Evaluate and possibly enable.
+-          "-Wno-implicit-int-float-conversion",
+-
+-          # TODO(https://crbug.com/999886): Clean up, enable.
+-          "-Wno-final-dtor-non-final-class",
+-
+-          # TODO(https://crbug.com/1016947) Clean up, enable.
+-          "-Wno-bitwise-conditional-parentheses",
+-
+-          # TODO(https://crbug.com/1016945) Clean up, enable.
+-          "-Wno-builtin-assume-aligned-alignment",
+-
+-          # TODO(https://crbug.com/1028110): Evaluate and possible enable.
+-          "-Wno-deprecated-copy",
+-
+-          # TODO(https://crbug.com/1031169): Clean up and enable.
+-          "-Wno-misleading-indentation",
+-
+           # TODO(https://crbug.com/1039697): Evaluate and possibly enable.
+           "-Wno-range-loop-analysis",
+         ]
+--- a/third_party/blink/renderer/BUILD.gn
++++ b/third_party/blink/renderer/BUILD.gn
+@@ -45,11 +45,9 @@
+       "-Wconversion",
+       "-Wno-float-conversion",
+       "-Wno-sign-conversion",
+-      "-Wno-implicit-float-conversion",
+-      "-Wno-implicit-int-conversion",
+     ]
+ 
+-    if (!is_chromeos || default_toolchain != "//build/toolchain/cros:target") {
++    if (false) {
+       cflags += [
+         "-Wno-enum-enum-conversion",
+         "-Wno-enum-float-conversion",
+--- a/third_party/angle/BUILD.gn
++++ b/third_party/angle/BUILD.gn
+@@ -143,7 +143,6 @@ config("extra_warnings") {
+   if (is_clang) {
+     cflags += [
+       "-Wconditional-uninitialized",
+-      "-Wextra-semi-stmt",
+       "-Wfloat-conversion",
+       "-Winconsistent-missing-destructor-override",
+       "-Wmissing-field-initializers",
+--- a/third_party/angle/src/compiler/preprocessor/preprocessor.l
++++ b/third_party/angle/src/compiler/preprocessor/preprocessor.l
+@@ -50,7 +50,6 @@ IF YOU MODIFY THIS FILE YOU ALSO NEED TO
+ #pragma clang diagnostic ignored "-Wunknown-warning-option"
+ #endif
+ // Flex isn't semi-colon clean.
+-#pragma clang diagnostic ignored "-Wextra-semi-stmt"
+ #pragma clang diagnostic ignored "-Wunreachable-code"
+ #endif
+ 
+--- a/third_party/angle/src/compiler/translator/glslang.l
++++ b/third_party/angle/src/compiler/translator/glslang.l
+@@ -46,7 +46,6 @@ WHICH GENERATES THE GLSL ES LEXER (glsla
+ #pragma clang diagnostic ignored "-Wunknown-warning-option"
+ #endif
+ // Flex isn't semi-colon clean.
+-#pragma clang diagnostic ignored "-Wextra-semi-stmt"
+ #pragma clang diagnostic ignored "-Wunreachable-code"
+ #endif
+ }
+--- a/third_party/angle/src/compiler/preprocessor/preprocessor_lex_autogen.cpp
++++ b/third_party/angle/src/compiler/preprocessor/preprocessor_lex_autogen.cpp
+@@ -708,7 +708,6 @@ IF YOU MODIFY THIS FILE YOU ALSO NEED TO
+ #        pragma clang diagnostic ignored "-Wunknown-warning-option"
+ #    endif
+ // Flex isn't semi-colon clean.
+-#    pragma clang diagnostic ignored "-Wextra-semi-stmt"
+ #    pragma clang diagnostic ignored "-Wunreachable-code"
+ #endif
+ 
+--- a/third_party/angle/src/compiler/translator/glslang_lex_autogen.cpp
++++ b/third_party/angle/src/compiler/translator/glslang_lex_autogen.cpp
+@@ -31,7 +31,6 @@
+ #        pragma clang diagnostic ignored "-Wunknown-warning-option"
+ #    endif
+ // Flex isn't semi-colon clean.
+-#    pragma clang diagnostic ignored "-Wextra-semi-stmt"
+ #    pragma clang diagnostic ignored "-Wunreachable-code"
+ #endif
+ 
+--- a/third_party/blink/renderer/platform/heap/finalizer_traits.h
++++ b/third_party/blink/renderer/platform/heap/finalizer_traits.h
+@@ -49,10 +49,7 @@
+ // an object's base class has a virtual destructor. In case there is no virtual
+ // destructor present, the object is always finalized through its leaf type. In
+ // other words: there is no finalization through a base pointer.
+-#pragma GCC diagnostic push
+-#pragma GCC diagnostic ignored "-Wdelete-non-abstract-non-virtual-dtor"
+       static_cast<T*>(obj)->~T();
+-#pragma GCC diagnostic pop
+     }
+   };
+   using FinalizeImpl =

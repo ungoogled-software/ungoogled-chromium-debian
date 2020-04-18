@@ -9,9 +9,9 @@ Standards-Version: 4.4.1
 Rules-Requires-Root: no
 Build-Depends:
  debhelper (>= 11),
- clang-8,
- lld-8,
- llvm-8-dev,
+ clang-7,
+ lld-7,
+ llvm-7-dev,
  python,
  python3,
  python3-debian,
@@ -39,6 +39,7 @@ Build-Depends:
  libgles2-mesa-dev,
  mesa-common-dev,
  libxt-dev,
+ libre2-dev,
  libgbm-dev,
  libpng-dev,
  libxss-dev,
@@ -74,6 +75,7 @@ Build-Depends:
  libminizip-dev,
  libhunspell-dev,
  libharfbuzz-dev (>= 2.1.1),
+ libxcb-dri3-dev,
  libusb-1.0-0-dev,
  libopenjp2-7-dev,
  libmodpbase64-dev,
