@@ -4,17 +4,14 @@ debianization/master-preferences.patch
 
 gn/libcxx.patch
 
-arm/gcc_skcms_ice.patch
 arm/pffffft-buildfix.patch
-
-gcc/ambiguous-initializer.patch
-gcc/namespace5.patch
 
 clang/flags.patch
 
 fixes/link.patch
-fixes/quic.patch
+fixes/gl.patch
 fixes/mojo.patch
+fixes/breakpad.patch
 fixes/inspector.patch
 fixes/gpu-timeout.patch
 fixes/sequence-point.patch
@@ -22,9 +19,8 @@ fixes/jumbo-namespace.patch
 fixes/widevine-enable-version-string.patch
 fixes/widevine-locations.patch
 fixes/missing-includes.patch
-fixes/multiple-definition.patch
-fixes/incomplete-definition.patch
 
+disable/glmark.patch
 disable/owners.patch
 disable/openh264.patch
 disable/buildbot.patch
@@ -38,7 +34,6 @@ warnings/restrict.patch
 warnings/attribute.patch
 warnings/multichar.patch
 warnings/deprecated.patch
-warnings/not-unused.patch
 warnings/bool-compare.patch
 warnings/sign-compare.patch
 warnings/unused-typedefs.patch
@@ -55,10 +50,10 @@ system/nspr.patch
 system/zlib.patch
 system/event.patch
 system/ffmpeg.patch
-system/libxml2.patch
 system/jsoncpp.patch
 system/harfbuzz.patch
 system/openjpeg.patch
+system/convertutf.patch
 
 buster/opus13.patch
 buster/vpx17.patch

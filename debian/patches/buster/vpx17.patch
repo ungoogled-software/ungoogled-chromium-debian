@@ -83,11 +83,14 @@ author: Michael Gilbert <mgilbert@debian.org>
    // Register callback for getting each spatial layer.
    vpx_codec_priv_output_cx_pkt_cb_pair_t cbp = {
        VP9EncoderImpl::EncoderOutputCodedPacketCallback,
-@@ -917,22 +857,12 @@ int VP9EncoderImpl::Encode(const VideoFr
+@@ -917,25 +857,12 @@ int VP9EncoderImpl::Encode(const VideoFr
      }
    }
  
--  for (int sl_idx = 0; sl_idx < num_active_spatial_layers_; ++sl_idx) {
+-  // Need to set temporal layer id on ALL layers, even disabled ones.
+-  // Otherwise libvpx might produce frames on a disabled layer:
+-  // http://crbug.com/1051476
+-  for (int sl_idx = 0; sl_idx < num_spatial_layers_; ++sl_idx) {
 -    layer_id.temporal_layer_id_per_spatial[sl_idx] = layer_id.temporal_layer_id;
 -  }
 -
@@ -106,7 +109,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    if (vpx_codec_enc_config_set(encoder_, config_)) {
      return WEBRTC_VIDEO_CODEC_ERROR;
    }
-@@ -995,21 +925,6 @@ int VP9EncoderImpl::Encode(const VideoFr
+@@ -998,21 +925,6 @@ int VP9EncoderImpl::Encode(const VideoFr
      flags = VPX_EFLAG_FORCE_KF;
    }
  
@@ -128,8 +131,8 @@ author: Michael Gilbert <mgilbert@debian.org>
    first_frame_in_picture_ = true;
  
    // TODO(ssilkin): Frame duration should be specified per spatial layer
-@@ -1114,9 +1029,7 @@ void VP9EncoderImpl::PopulateCodecSpecif
-   vp9_info->num_spatial_layers = num_active_spatial_layers_;
+@@ -1119,9 +1031,7 @@ void VP9EncoderImpl::PopulateCodecSpecif
+   vp9_info->first_active_layer = first_active_layer_;
  
    vp9_info->num_ref_pics = 0;
 -  FillReferenceIndices(pkt, pics_since_key_, vp9_info->inter_layer_predicted,
@@ -139,7 +142,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      vp9_info->gof_idx = kNoGofIdx;
    } else {
      vp9_info->gof_idx =
-@@ -1161,6 +1074,7 @@ void VP9EncoderImpl::PopulateCodecSpecif
+@@ -1166,6 +1076,7 @@ void VP9EncoderImpl::PopulateCodecSpecif
    first_frame_in_picture_ = false;
  }
  
@@ -147,7 +150,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  void VP9EncoderImpl::FillReferenceIndices(const vpx_codec_cx_pkt& pkt,
                                            const size_t pic_num,
                                            const bool inter_layer_predicted,
-@@ -1413,6 +1327,7 @@ vpx_svc_ref_frame_config_t VP9EncoderImp
+@@ -1418,6 +1329,7 @@ vpx_svc_ref_frame_config_t VP9EncoderImp
  
    return ref_config;
  }
@@ -155,7 +158,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  int VP9EncoderImpl::GetEncodedLayerFrame(const vpx_codec_cx_pkt* pkt) {
    RTC_DCHECK_EQ(pkt->kind, VPX_CODEC_CX_FRAME_PKT);
-@@ -1455,14 +1370,10 @@ int VP9EncoderImpl::GetEncodedLayerFrame
+@@ -1460,14 +1372,10 @@ int VP9EncoderImpl::GetEncodedLayerFrame
                          input_image_->timestamp());
    encoded_image_.SetSpatialIndex(spatial_index);
  
@@ -172,7 +175,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    int qp = -1;
    vpx_codec_control(encoder_, VP8E_GET_LAST_QUANTIZER, &qp);
    encoded_image_.qp_ = qp;
-@@ -1478,14 +1389,6 @@ int VP9EncoderImpl::GetEncodedLayerFrame
+@@ -1483,14 +1391,6 @@ int VP9EncoderImpl::GetEncodedLayerFrame
  
  void VP9EncoderImpl::DeliverBufferedFrame(bool end_of_picture) {
    if (encoded_image_.size() > 0) {

@@ -35,7 +35,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  config("base_implementation") {
-@@ -696,8 +699,6 @@ jumbo_component("base") {
+@@ -698,8 +701,6 @@ jumbo_component("base") {
      "third_party/cityhash/city.h",
      "third_party/icu/icu_utf.cc",
      "third_party/icu/icu_utf.h",
@@ -43,10 +43,10 @@ author: Michael Gilbert <mgilbert@debian.org>
 -    "third_party/nspr/prtime.h",
      "third_party/superfasthash/superfasthash.c",
      "thread_annotations.h",
-     "threading/platform_thread.cc",
+     "threading/hang_watcher.cc",
 --- a/tools/gn/build/gen.py
 +++ b/tools/gn/build/gen.py
-@@ -330,6 +330,9 @@ def WriteGNNinja(path, platform, host, o
+@@ -337,6 +337,9 @@ def WriteGNNinja(path, platform, host, o
        if not options.no_static_libstdcpp:
          ldflags.append('-static-libstdc++')
  
