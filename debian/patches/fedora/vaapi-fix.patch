@@ -22,7 +22,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
    return nullptr;
 --- a/media/gpu/vaapi/vaapi_video_decode_accelerator.cc
 +++ b/media/gpu/vaapi/vaapi_video_decode_accelerator.cc
-@@ -63,6 +63,9 @@
+@@ -64,6 +64,9 @@
                              VAVDA_DECODER_FAILURES_MAX + 1);
  }
  
@@ -32,16 +32,16 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
  // Returns true if the CPU is an Intel Gemini Lake or later (including Kaby
  // Lake) Cpu platform id's are referenced from the following file in kernel
  // source arch/x86/include/asm/intel-family.h
-@@ -76,6 +79,8 @@
+@@ -77,6 +80,8 @@
    return is_geminilake_or_later;
  }
  
 +#endif
 +
- // Returns the size of a rectangle whose upper left corner is at the origin (0,
- // 0) and whose bottom right corner is the same as that of |rect|. This is
- // useful to get the size of a buffer that contains the visible rectangle plus
-@@ -708,6 +713,13 @@
+ }  // namespace
+ 
+ #define RETURN_AND_NOTIFY_ON_FAILURE(result, log, error_code, ret) \
+@@ -675,6 +680,13 @@
    va_surface_format_ = GetVaFormatForVideoCodecProfile(profile_);
    std::vector<VASurfaceID> va_surface_ids;
  
@@ -55,7 +55,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
    // If we aren't in BufferAllocationMode::kNone, we have to allocate a
    // |vpp_vaapi_wrapper_| for VaapiPicture to DownloadFromSurface() the VA's
    // internal decoded frame.
-@@ -725,6 +737,7 @@
+@@ -692,6 +704,7 @@
                                   "Failed to create Context",
                                   PLATFORM_FAILURE, );
    }
@@ -63,7 +63,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
  
    for (size_t i = 0; i < buffers.size(); ++i) {
      // If we aren't in BufferAllocationMode::kNone, this |picture| is
-@@ -743,9 +756,13 @@
+@@ -710,9 +723,13 @@
              : gfx::Size();
  
      std::unique_ptr<VaapiPicture> picture = vaapi_picture_factory_->Create(
@@ -77,7 +77,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
          make_context_current_cb_, bind_image_cb_, buffer, size_to_bind);
      RETURN_AND_NOTIFY_ON_FAILURE(picture, "Failed creating a VaapiPicture",
                                   PLATFORM_FAILURE, );
-@@ -1199,6 +1216,9 @@
+@@ -1166,6 +1183,9 @@
  
  VaapiVideoDecodeAccelerator::BufferAllocationMode
  VaapiVideoDecodeAccelerator::DecideBufferAllocationMode() {
@@ -87,7 +87,7 @@ Subject: [PATCH] Disable VAProfileNone on Linux and fix vaapi drm
    // TODO(crbug.com/912295): Enable a better BufferAllocationMode for IMPORT
    // |output_mode_| as well.
    if (output_mode_ == VideoDecodeAccelerator::Config::OutputMode::IMPORT)
-@@ -1234,6 +1254,7 @@
+@@ -1201,6 +1221,7 @@
      return BufferAllocationMode::kReduced;
  
    return BufferAllocationMode::kSuperReduced;
