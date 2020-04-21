@@ -14,7 +14,6 @@ read CHROMIUM_VERSION < $UNGOOGLED_CHROMIUM/chromium_version.txt
 read CHROMIUM_REVISION < $UNGOOGLED_CHROMIUM/revision.txt
 read DISTRO_RELEASE < $DEBIAN/distro_release.txt
 read DISTRO_REVISION < $DEBIAN/distro_revision.txt
-read OBS_REPOSITORY < $DEBIAN/obs_repository.txt
 read OBS_DEPENDS < $DEBIAN/obs_depends.txt
 
 cd "$1"
@@ -85,8 +84,8 @@ cp -r $DEBIAN tmp
 tar -c -T/dev/null | xz -9 > ungoogled-chromium_${CHROMIUM_VERSION}.orig.tar.xz
 (cd tmp; debian/scripts/setup debian; rm debian/patches/series)
 dpkg-source -b tmp
-sed -e '/^Checksums-/,$d' -e '/^Version:/cVersion: 1.0' -e "s/^Build-Depends:.*/&${OBS_DEPENDS}/" ungoogled-chromium_*.dsc > ungoogled-chromium-${OBS_REPOSITORY}.dsc
-cat >> ungoogled-chromium-${OBS_REPOSITORY}.dsc << EOF
+sed -e '/^Checksums-/,$d' -e '/^Version:/cVersion: 1.0' -e "s/^Build-Depends:.*/&${OBS_DEPENDS}/" ungoogled-chromium_*.dsc > ungoogled-chromium.dsc
+cat >> ungoogled-chromium.dsc << EOF
 Checksums-Sha1:
  $(sha1sum ungoogled-chromium_1.0.orig.tar.xz | cut -f 1 -d ' ') $(stat -c %s ungoogled-chromium_1.0.orig.tar.xz) ungoogled-chromium_1.0.orig.tar.xz
  $(sha1sum ungoogled-chromium_1.0.debian.tar.xz | cut -f 1 -d ' ') $(stat -c %s ungoogled-chromium_1.0.debian.tar.xz) ungoogled-chromium_1.0.debian.tar.xz
