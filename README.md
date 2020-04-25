@@ -9,9 +9,9 @@ This branch contains the code to build packages for: **Debian unstable (sid)**. 
 **Binaries** (i.e. `.deb` packages): There are two ways to get binaries:
 
 - [Contributor Binaries website](//ungoogled-software.github.io/ungoogled-chromium-binaries/)
-- [PPA (maintained by @braewoods)](https://launchpad.net/~braewoods/+archive/ubuntu/ungoogled-chromium)
+- [PPA](https://launchpad.net/~braewoods/+archive/ubuntu/ungoogled-chromium) (maintained by [@braewoods](https://github.com/braewoods))
 
-If your distro is not listed, you may have a look at the [community-maintained list of packages compatible on other distros](https://github.com/ungoogled-software/ungoogled-chromium-debian/wiki/Compatible-Packages). However, please note that this compatibility is not guarenteed; it may break at any time.
+If your distro is not listed, you may have a look at the [community-maintained list of packages compatible on other distros](https://github.com/ungoogled-software/ungoogled-chromium-debian/wiki/Compatible-Packages). However, please note that this compatibility is not guaranteed; it may break at any time.
 
 **Source Code**: Use the tags labeled with `sid` via `git checkout` (see building instructions). The branches are for development and may not be stable.
 
