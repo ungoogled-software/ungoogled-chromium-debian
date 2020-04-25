@@ -1,0 +1,42 @@
+#!/bin/bash -eu
+
+DEBIAN=$(pwd)/debian
+UNGOOGLED_CHROMIUM=$DEBIAN/ungoogled-upstream/ungoogled-chromium
+SCRIPTS=$DEBIAN/scripts
+UTILS=$UNGOOGLED_CHROMIUM/utils
+
+setup_source()
+{
+    local CACHE=../download_cache
+    local ROOT=$1
+    test -d $CACHE || mkdir $CACHE
+    test -d $ROOT || mkdir $ROOT
+    python3 -B $UTILS/downloads.py retrieve -i $UNGOOGLED_CHROMIUM/downloads.ini -c $CACHE
+    python3 -B $UTILS/downloads.py unpack -i $UNGOOGLED_CHROMIUM/downloads.ini -c $CACHE $ROOT
+    python3 -B $UTILS/prune_binaries.py $ROOT $UNGOOGLED_CHROMIUM/pruning.list
+    $SCRIPTS/remove_copyright_excluded $ROOT
+    (cd $ROOT && $SCRIPTS/check-upstream)
+}
+
+case "$1" in
+
+debian)
+    python3 -B $UTILS/patches.py merge -p $DEBIAN/patches $UNGOOGLED_CHROMIUM/patches
+    $SCRIPTS/generate_changelog
+    sed -i "/^Maintainer:/cMaintainer: $(cat debian/uploader.txt)" $DEBIAN/control
+    ;;
+
+local-src)
+    setup_source .
+    ;;
+
+orig-source)
+    VERSION=$(cat $UNGOOGLED_CHROMIUM/chromium_version.txt)
+    EXTRACT=chromium-$VERSION
+    test ! -e $EXTRACT || rm -rf $EXTRACT
+    setup_source $EXTRACT
+    tar -c $EXTRACT | xz -9 > ../ungoogled-chromium_$VERSION.orig.tar.xz
+    rm -rf $EXTRACT
+    ;;
+
+esac
