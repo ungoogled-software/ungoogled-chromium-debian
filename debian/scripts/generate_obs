@@ -1,0 +1,99 @@
+#!/bin/sh
+set -e
+
+if test -z "$1"
+then
+    echo "Usage: $0 <obs package root>"
+    exit 1
+fi
+
+DEBIAN=$(pwd)/debian
+UNGOOGLED_CHROMIUM=$DEBIAN/ungoogled-upstream/ungoogled-chromium
+
+read CHROMIUM_VERSION < $UNGOOGLED_CHROMIUM/chromium_version.txt
+read CHROMIUM_REVISION < $UNGOOGLED_CHROMIUM/revision.txt
+read DISTRO_RELEASE < $DEBIAN/distro_release.txt
+read DISTRO_REVISION < $DEBIAN/distro_revision.txt
+read OBS_DEPENDS < $DEBIAN/obs_depends.txt
+
+cd "$1"
+
+cat > _service << EOF
+<services>
+    <service name="obs_scm">
+        <param name="scm">git</param>
+        <param name="url">https://github.com/ungoogled-software/ungoogled-chromium-debian.git</param>
+        <param name="submodules">enable</param>
+        <param name="subdir">debian</param>
+        <param name="filename">ungoogled-chromium-debian</param>
+        <param name="versionformat">@PARENT_TAG@</param>
+        <param name="versionrewrite-pattern">(.*)([0-9])([.][a-z]*[0-9])</param>
+        <param name="versionrewrite-replacement">\1-\2\3</param>
+        <param name="revision">${CHROMIUM_VERSION}-${CHROMIUM_REVISION}.${DISTRO_RELEASE}${DISTRO_REVISION}</param>
+    </service>
+    <service name="download_url">
+        <param name="protocol">https</param>
+        <param name="host">commondatastorage.googleapis.com</param>
+        <param name="path">chromium-browser-official/chromium-${CHROMIUM_VERSION}.tar.xz</param>
+    </service>
+    <service name="download_url">
+        <param name="protocol">https</param>
+        <param name="host">commondatastorage.googleapis.com</param>
+        <param name="path">chromium-browser-official/chromium-${CHROMIUM_VERSION}.tar.xz.hashes</param>
+    </service>
+    <service name="recompress">
+        <param name="compression">xz</param>
+        <param name="file">*.obscpio</param>
+    </service>
+</services>
+EOF
+
+cat > _constraints << 'EOF'
+<constraints>
+    <hardware>
+        <disk>
+            <size unit="G">32</size>
+        </disk>
+        <memory>
+            <size unit="G">16</size>
+        </memory>
+    </hardware>
+</constraints>
+EOF
+
+cat > build.script << 'EOF'
+xz -d < ../SOURCES/ungoogled-chromium-debian-*.obscpio.xz | cpio -i -d
+mv ungoogled-chromium-debian-* debian
+
+mkdir ../download_cache
+ln -s ../SOURCES/chromium-*.tar.xz ../download_cache
+ln -s ../SOURCES/chromium-*.tar.xz.hashes ../download_cache
+
+debian/scripts/setup debian
+debian/scripts/setup local-src
+
+dpkg-buildpackage -b -uc
+EOF
+
+tar -c -T/dev/null | xz -9 > ungoogled-chromium_1.0.debian.tar.xz
+
+tar -c -T/dev/null | xz -9 > ungoogled-chromium_1.0.orig.tar.xz
+
+mkdir tmp
+cp -r $DEBIAN tmp
+tar -c -T/dev/null | xz -9 > ungoogled-chromium_${CHROMIUM_VERSION}.orig.tar.xz
+(cd tmp; debian/scripts/setup debian; rm debian/patches/series)
+dpkg-source -b tmp
+sed -e '/^Checksums-/,$d' -e '/^Version:/cVersion: 1.0' -e "s/^Build-Depends:.*/&${OBS_DEPENDS}/" ungoogled-chromium_*.dsc > ungoogled-chromium.dsc
+cat >> ungoogled-chromium.dsc << EOF
+Checksums-Sha1:
+ $(sha1sum ungoogled-chromium_1.0.orig.tar.xz | cut -f 1 -d ' ') $(stat -c %s ungoogled-chromium_1.0.orig.tar.xz) ungoogled-chromium_1.0.orig.tar.xz
+ $(sha1sum ungoogled-chromium_1.0.debian.tar.xz | cut -f 1 -d ' ') $(stat -c %s ungoogled-chromium_1.0.debian.tar.xz) ungoogled-chromium_1.0.debian.tar.xz
+Checksums-Sha256:
+ $(sha256sum ungoogled-chromium_1.0.orig.tar.xz | cut -f 1 -d ' ') $(stat -c %s ungoogled-chromium_1.0.orig.tar.xz) ungoogled-chromium_1.0.orig.tar.xz
+ $(sha256sum ungoogled-chromium_1.0.debian.tar.xz | cut -f 1 -d ' ') $(stat -c %s ungoogled-chromium_1.0.debian.tar.xz) ungoogled-chromium_1.0.debian.tar.xz
+Files:
+ $(md5sum ungoogled-chromium_1.0.orig.tar.xz | cut -f 1 -d ' ') $(stat -c %s ungoogled-chromium_1.0.orig.tar.xz) ungoogled-chromium_1.0.orig.tar.xz
+ $(md5sum ungoogled-chromium_1.0.debian.tar.xz | cut -f 1 -d ' ') $(stat -c %s ungoogled-chromium_1.0.debian.tar.xz) ungoogled-chromium_1.0.debian.tar.xz
+EOF
+rm -rf tmp *${CHROMIUM_VERSION}*

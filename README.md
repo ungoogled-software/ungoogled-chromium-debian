@@ -74,14 +74,14 @@ cd build/src
 echo 'UPLOADER_HERE' > debian/uploader.txt
 
 # Final setup steps for debian/ directory
-./debian/rules setup-debian
+./debian/scripts/setup debian
 
 # Install remaining requirements to build Chromium
 sudo mk-build-deps -i debian/control
 rm ungoogled-chromium-build-deps_*.deb
 
 # Download and unpack Chromium sources (this will take some time)
-./debian/rules setup-local-src
+./debian/scripts/setup local-src
 
 # Start building
 dpkg-buildpackage -b -uc
@@ -139,13 +139,13 @@ cd build/src
 echo 'UPLOADER_HERE' > debian/uploader.txt
 
 # Final setup steps for debian/ directory
-./debian/rules setup-debian
+./debian/scripts/setup debian
 
 # Download and unpack Chromium sources (this will take some time)
-./debian/rules setup-local-src
+./debian/scripts/setup local-src
 
 # Create a source tarball suitable for use with a Debian source package (this will take some time)
-./debian/rules get-orig-source
+./debian/scripts/setup orig-source
 
 # Create the Debian source package (this will take some time)
 debuild -S -sa -d
