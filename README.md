@@ -9,7 +9,9 @@ This branch contains the code to build packages for: **Ubuntu 18.04 LTS (bionic)
 **Binaries** (i.e. `.deb` packages): There are two ways to get binaries:
 
 - [Contributor Binaries website](//ungoogled-software.github.io/ungoogled-chromium-binaries/)
-- [PPA (maintained by @braewoods)](https://launchpad.net/~braewoods/+archive/ubuntu/ungoogled-chromium)
+- [PPA](https://launchpad.net/~braewoods/+archive/ubuntu/ungoogled-chromium) (maintained by [@braewoods](https://github.com/braewoods))
+
+If your distro is not listed, you may have a look at the [community-maintained list of packages compatible on other distros](https://github.com/ungoogled-software/ungoogled-chromium-debian/wiki/Compatible-Packages). However, please note that this compatibility is not guaranteed; it may break at any time.
 
 **Source Code**: Use the tags labeled with `bionic` via `git checkout` (see building instructions). The branches are for development and may not be stable.
 
@@ -72,14 +74,14 @@ cd build/src
 echo 'UPLOADER_HERE' > debian/uploader.txt
 
 # Final setup steps for debian/ directory
-./debian/rules setup-debian
+./debian/scripts/setup debian
 
 # Install remaining requirements to build Chromium
 sudo mk-build-deps -i debian/control
 rm ungoogled-chromium-build-deps_*.deb
 
 # Download and unpack Chromium sources (this will take some time)
-./debian/rules setup-local-src
+./debian/scripts/setup local-src
 
 # Start building
 dpkg-buildpackage -b -uc
@@ -137,13 +139,13 @@ cd build/src
 echo 'UPLOADER_HERE' > debian/uploader.txt
 
 # Final setup steps for debian/ directory
-./debian/rules setup-debian
+./debian/scripts/setup debian
 
 # Download and unpack Chromium sources (this will take some time)
-./debian/rules setup-local-src
+./debian/scripts/setup local-src
 
 # Create a source tarball suitable for use with a Debian source package (this will take some time)
-./debian/rules get-orig-source
+./debian/scripts/setup orig-source
 
 # Create the Debian source package (this will take some time)
 debuild -S -sa -d

@@ -1,0 +1,22 @@
+name: OBS Upload
+
+on:
+  push:
+  release:
+    types:
+      - published
+
+jobs:
+  obs-upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Convert from shallow repository to full repository
+        run: git fetch --unshallow
+      - name: Initialize ungoogled-chromium submodule
+        run: git submodule update --init --recursive
+      - name: Run OBS Upload Script
+        env:
+          OBS_API_USERNAME: ${{ secrets.OBS_API_USERNAME }}
+          OBS_API_PASSWORD: ${{ secrets.OBS_API_PASSWORD }}
+        run: .github/workflows/obs-upload.sh
