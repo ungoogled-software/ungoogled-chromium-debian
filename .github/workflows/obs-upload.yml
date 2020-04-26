@@ -1,0 +1,13 @@
+name: OBS Upload
+
+on:
+  - push
+
+jobs:
+  obs-upload:
+    runs-on: debian-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Test Script
+        run: which curl
+ 
