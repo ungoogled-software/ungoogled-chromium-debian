@@ -32,6 +32,7 @@ done
 dsc_sha1()
 {
     local FILE="${1}"
+    local FILENAME="${FILE##*/}"
 
     if test ! -f "$FILE"
     then
@@ -39,12 +40,13 @@ dsc_sha1()
         exit 1
     fi
 
-    echo " $(sha1sum "${FILE}" | cut -f 1 -d ' ') $(stat -c '%s' "${FILE}") ${FILE}"
+    echo " $(sha1sum "${FILE}" | cut -f 1 -d ' ') $(stat -c '%s' "${FILE}") ${FILENAME}"
 }
 
 dsc_sha256()
 {
     local FILE="${1}"
+    local FILENAME="${FILE##*/}"
 
     if test ! -f "$FILE"
     then
@@ -52,12 +54,13 @@ dsc_sha256()
         exit 1
     fi
 
-    echo " $(sha256sum "${FILE}" | cut -f 1 -d ' ') $(stat -c '%s' "${FILE}") ${FILE}"
+    echo " $(sha256sum "${FILE}" | cut -f 1 -d ' ') $(stat -c '%s' "${FILE}") ${FILENAME}"
 }
 
 dsc_md5()
 {
     local FILE="${1}"
+    local FILENAME="${FILE##*/}"
 
     if test ! -f "$FILE"
     then
@@ -65,7 +68,7 @@ dsc_md5()
         exit 1
     fi
 
-    echo " $(md5sum "${FILE}" | cut -f 1 -d ' ') $(stat -c '%s' "${FILE}") ${FILE}"
+    echo " $(md5sum "${FILE}" | cut -f 1 -d ' ') $(stat -c '%s' "${FILE}") ${FILENAME}"
 }
 
 git_get_tag()
@@ -159,14 +162,14 @@ EOF
     sed -e '/^Checksums-/,$d' -e '/^Version:/cVersion: 1.0' -e "s/^Build-Depends:.*/&${OBS_DEPENDS}/" "${ROOT}"/ungoogled-chromium_*.dsc > "${ROOT}/ungoogled-chromium.dsc"
     cat >> "${ROOT}/ungoogled-chromium.dsc" << EOF
 Checksums-Sha1:
-$(dsc_sha1 ungoogled-chromium_1.0.orig.tar.xz)
-$(dsc_sha1 ungoogled-chromium_1.0.debian.tar.xz)
+$(dsc_sha1 "${ROOT}/ungoogled-chromium_1.0.orig.tar.xz")
+$(dsc_sha1 "${ROOT}/ungoogled-chromium_1.0.debian.tar.xz")
 Checksums-Sha256:
-$(dsc_sha256 ungoogled-chromium_1.0.orig.tar.xz)
-$(dsc_sha256 ungoogled-chromium_1.0.debian.tar.xz)
+$(dsc_sha256 "${ROOT}/ungoogled-chromium_1.0.orig.tar.xz")
+$(dsc_sha256 "${ROOT}/ungoogled-chromium_1.0.debian.tar.xz")
 Files:
-$(dsc_md5 ungoogled-chromium_1.0.orig.tar.xz)
-$(dsc_md5 ungoogled-chromium_1.0.debian.tar.xz)
+$(dsc_md5 "${ROOT}/ungoogled-chromium_1.0.orig.tar.xz")
+$(dsc_md5 "${ROOT}/ungoogled-chromium_1.0.debian.tar.xz")
 EOF
     rm -rf "${ROOT}/tmp" "${ROOT}"/*"${CHROMIUM_VERSION}"*
 }
