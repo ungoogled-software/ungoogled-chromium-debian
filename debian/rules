@@ -59,11 +59,8 @@ ifeq (armhf,$(DEB_HOST_ARCH))
 defines+=host_cpu=\"arm\" use_vaapi=false arm_use_neon=false symbol_level=0
 endif
 
-ungoogled_chromium_version=$(shell cat debian/ungoogled-upstream/version.txt)
-ungoogled_chromium_files=debian/ungoogled-upstream/ungoogled-chromium
-
 # add gn flags from ungoogled-chromium
-defines+=$(shell cat $(ungoogled_chromium_files)/flags.gn | tr "\n" " " | sed 's/"/\\"/g')
+defines+=$(shell cat debian/ungoogled-upstream/ungoogled-chromium/flags.gn | tr "\n" " " | sed 's/"/\\"/g')
 
 # disabled features
 defines+=is_debug=false \
@@ -180,41 +177,3 @@ override_dh_auto_clean:
 	rm -rf out
 	find . -name \*.pyc -execdir rm -f {} \;
 	dh_auto_clean
-
-###################### upstream source downloading ############################
-
-url=https://gsdview.appspot.com/chromium-browser-official
-version=$(shell dpkg-parsechangelog -S Version | sed s/-.*//)
-extract=chromium-$(version)
-tarfile=$(extract).tar
-tarball=$(tarfile).xz
-debvers=../ungoogled-chromium_$(version)
-origtxz=$(debvers).orig.tar.xz
-cache=../download_cache
-
-get-orig-source:
-	test -d $(cache) || mkdir $(cache)
-	python3 -B $(ungoogled_chromium_files)/utils/downloads.py retrieve -i $(ungoogled_chromium_files)/downloads.ini -c $(cache)
-	test ! -e $(extract) || rm -rf $(extract)
-	python3 -B $(ungoogled_chromium_files)/utils/downloads.py unpack -i $(ungoogled_chromium_files)/downloads.ini -c $(cache) $(extract)
-	python3 -B $(ungoogled_chromium_files)/utils/prune_binaries.py $(extract) $(ungoogled_chromium_files)/pruning.list
-	./debian/scripts/remove_copyright_excluded $(extract)
-	cd $(extract) && ../debian/scripts/check-upstream
-	test ! -e $(origtxz) || rm -f $(origtxz)
-	tar cf - $(extract) | xz -6 -T $(njobs) - > $(origtxz)
-	rm -rf $(extract)
-
-###################### misc source setup commands ############################
-
-setup-debian:
-	python3 -B $(ungoogled_chromium_files)/utils/patches.py merge -p debian/patches $(ungoogled_chromium_files)/patches
-	./debian/scripts/generate_changelog
-	sed -i "/^Maintainer:/cMaintainer: $$(cat debian/uploader.txt)" ./debian/control
-
-setup-local-src:
-	test -d $(cache) || mkdir $(cache)
-	python3 -B $(ungoogled_chromium_files)/utils/downloads.py retrieve -i $(ungoogled_chromium_files)/downloads.ini -c $(cache)
-	python3 -B $(ungoogled_chromium_files)/utils/downloads.py unpack -i $(ungoogled_chromium_files)/downloads.ini -c $(cache) ./
-	python3 -B $(ungoogled_chromium_files)/utils/prune_binaries.py ./ $(ungoogled_chromium_files)/pruning.list
-	./debian/scripts/remove_copyright_excluded
-	./debian/scripts/check-upstream

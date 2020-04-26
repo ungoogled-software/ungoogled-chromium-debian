@@ -9,7 +9,6 @@ arm/pffffft-buildfix.patch
 clang/flags.patch
 
 fixes/link.patch
-fixes/gl.patch
 fixes/mojo.patch
 fixes/breakpad.patch
 fixes/inspector.patch
@@ -65,6 +64,7 @@ inox-patchset/fix-cfi-failures-with-unbundled-libxml.patch
 
 fedora/vaapi.patch
 fedora/vaapi-fix.patch
+fedora/chromium-81-vaapi-r738595.patch
 
 ungoogled-chromium/manpage.patch
 ungoogled-chromium/safebrowsing.patch
