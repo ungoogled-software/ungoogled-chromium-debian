@@ -2,9 +2,9 @@ name: OBS Upload
 
 on:
   - push
-  - release
-    types:
-      - published
+  - release:
+      types:
+        - published
 
 jobs:
   obs-upload:
