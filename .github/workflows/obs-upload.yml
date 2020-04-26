@@ -10,6 +10,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Initialize ungoogled-chromium submodule
         run: git submodule update --init --recursive
+      - name: Retrieve repository tags
+        run: git pull --tags --rebase
       - name: Run OBS Upload Script
         env:
           OBS_API_USERNAME: ${{ secrets.OBS_API_USERNAME }}
