@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Initialize ungoogled-chromium submodule
+        run: git submodule update --init --recursive
       - name: Run OBS Upload Script
         env:
           OBS_API_USERNAME: ${{ secrets.OBS_API_USERNAME }}
