@@ -1,10 +1,10 @@
 name: OBS Upload
 
 on:
-  - push
-  - release:
-      types:
-        - published
+  push:
+  release:
+    types:
+      - published
 
 jobs:
   obs-upload:
