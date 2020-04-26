@@ -5,9 +5,8 @@ on:
 
 jobs:
   obs-upload:
-    runs-on: debian-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Test Script
         run: which curl
- 
