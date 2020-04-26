@@ -9,4 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run OBS Upload Script
+        env:
+          OBS_API_USERNAME: ${{ secrets.OBS_API_USERNAME }}
+          OBS_API_PASSWORD: ${{ secrets.OBS_API_PASSWORD }}
         run: .github/workflows/obs-upload.sh
