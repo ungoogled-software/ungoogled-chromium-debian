@@ -126,7 +126,7 @@ EOF
 <constraints>
     <hardware>
         <disk>
-            <size unit="G">20</size>
+            <size unit="G">32</size>
         </disk>
         <memory>
             <size unit="M">8192</size>
@@ -196,19 +196,19 @@ upload_obs()
 
     esac
 
-    curl -K - "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}" -F 'cmd=deleteuploadrev' << EOF
+    curl -s -K - "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}" -F 'cmd=deleteuploadrev' << EOF
 user="${USERNAME}:${PASSWORD}"
 EOF
 
     for FILE in "${ROOT}"/*
     do
         FILENAME="${FILE##*/}"
-        curl -K - "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}/${FILENAME}?rev=upload" -T "${FILE}" << EOF
+        curl -s -K - "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}/${FILENAME}?rev=upload" -T "${FILE}" << EOF
 user="${USERNAME}:${PASSWORD}"
 EOF
     done
 
-    curl -K - "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}" -F 'cmd=commit' << EOF
+    curl -s -K - "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}" -F 'cmd=commit' << EOF
 user="${USERNAME}:${PASSWORD}"
 EOF
 }
