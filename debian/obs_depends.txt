@@ -1,1 +1,1 @@
-
+, libncurses-dev, libavcodec58
