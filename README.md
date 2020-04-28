@@ -54,14 +54,28 @@ For Debian-based systems:
 
 ### Build a tar archive
 
+First clone the repository and choose the right tag or branch
+
 ```sh
 git clone --recurse-submodules https://github.com/ungoogled-software/ungoogled-chromium-portablelinux.git
+cd ungoogled-chromium-portablelinux
 # Replace TAG_OR_BRANCH_HERE with a tag or branch name
 git checkout --recurse-submodules TAG_OR_BRANCH_HERE
+```
+
+Then run a normal build
+
+```sh
 # Use "export ..." for AR, NM, CC, CXX, or others to specify the compiler to use
 # It defaults to LLVM tools. See build.sh for more details
 ./build.sh
 ./package.sh
+```
+
+Or a docker build
+
+```sh
+./docker-build
 ```
 
 A compressed tar archive will appear under `build`
@@ -73,6 +87,12 @@ A compressed tar archive will appear under `build`
 
 ### Building an AppImage
 
+Software requirements:
+
+* desktop-file-utils
+* libglib2.0-dev
+* binutils
+
 First, follow the instructions in [Build a tar archive](#build-a-tar-archive).
 
 Then, run the following:
@@ -81,7 +101,7 @@ Then, run the following:
 ./package.appimage.sh
 ```
 
-An `.AppImage` file will appear under `build`
+An `.AppImage` file will appear under `AppImages/out`
 
 ## Developer info
 
