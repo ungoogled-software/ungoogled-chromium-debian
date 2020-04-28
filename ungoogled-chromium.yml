@@ -15,7 +15,7 @@ ingredients:
     - deb http://us.archive.ubuntu.com/ubuntu/ trusty main universe
 
 script:
-  - mkdir -p ./opt/google/chrome/ ; tar xf ../../../ungoogled-chromium_*_linux.tar.xz --strip-components=1 -C ./opt/google/chrome/
+  - mkdir -p ./opt/google/chrome/ ; tar xf ../../../build/ungoogled-chromium_*_linux.tar.xz --strip-components=1 -C ./opt/google/chrome/
   - mkdir -p usr/share/icons/hicolor/48x48/apps/
   - cp ./opt/google/chrome/product_logo_48.png usr/share/icons/hicolor/48x48/apps/chromium.png
   - cp usr/share/icons/hicolor/48x48/apps/chromium.png .
