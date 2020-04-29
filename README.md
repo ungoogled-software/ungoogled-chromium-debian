@@ -9,7 +9,8 @@ This branch contains the code to build packages for: **Ubuntu 20.04 (focal)**
 **Binaries** (i.e. `.deb` packages): There are two ways to get binaries:
 
 - [Contributor Binaries website](//ungoogled-software.github.io/ungoogled-chromium-binaries/)
-- [PPA](https://launchpad.net/~braewoods/+archive/ubuntu/ungoogled-chromium) (maintained by [@braewoods](https://github.com/braewoods))
+- [OBS Production Project](//build.opensuse.org/project/show/home:ungoogled_chromium)
+- [OBS Development Project](//build.opensuse.org/project/show/home:ungoogled_chromium:testing)
 
 If your distro is not listed, you may have a look at the [community-maintained list of packages compatible on other distros](https://github.com/ungoogled-software/ungoogled-chromium-debian/wiki/Compatible-Packages). However, please note that this compatibility is not guaranteed; it may break at any time.
 
@@ -27,14 +28,10 @@ At minimum, you will need to install the `ungoogled-chromium` and `ungoogled-chr
 	# dpkg -i ungoogled-chromium_*.deb ungoogled-chromium-common_*.deb
 	```
 
-* If you are using a PPA:
+* If you are using OBS:
 
-	1. Follow the section "Adding this PPA to your system" on the PPA's homepage (linked above).
-	2. Run the following:
-
-	```sh
-	# apt install ungoogled-chromium ungoogled-chromium-common
-	```
+  - [OBS Production Repository Instructions](//software.opensuse.org/download/package?package=ungoogled-chromium&project=home:ungoogled_chromium)
+  - [OBS Development Repository Instructions](//software.opensuse.org/download/package?package=ungoogled-chromium&project=home:ungoogled_chromium:testing)
 
 The other packages are as follows:
 
