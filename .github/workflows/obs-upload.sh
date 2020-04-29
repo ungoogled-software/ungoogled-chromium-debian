@@ -139,6 +139,8 @@ EOF
 EOF
 
     cat > "${ROOT}/build.script" << 'EOF'
+export LANG=C.UTF-8
+
 xz -d < ../SOURCES/ungoogled-chromium-debian-*.obscpio.xz | cpio -i -d
 mv ungoogled-chromium-debian-* debian
 
