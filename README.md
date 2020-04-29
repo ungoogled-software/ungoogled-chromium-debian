@@ -6,7 +6,7 @@ This branch contains the code to build packages for: **Ubuntu 18.04 LTS (bionic)
 
 ## Downloads
 
-**Binaries** (i.e. `.deb` packages): There are two ways to get binaries:
+**Binaries** (i.e. `.deb` packages): There are three ways to get binaries:
 
 - [Contributor Binaries website](//ungoogled-software.github.io/ungoogled-chromium-binaries/)
 - [OBS Production Project](//build.opensuse.org/project/show/home:ungoogled_chromium)
