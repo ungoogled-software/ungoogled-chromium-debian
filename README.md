@@ -28,6 +28,11 @@ At minimum, you will need to install the `ungoogled-chromium` and `ungoogled-chr
 	# dpkg -i ungoogled-chromium_*.deb ungoogled-chromium-common_*.deb
 	```
 
+* If you are using OBS:
+
+  - [OBS Production Repository Instructions](//software.opensuse.org/download/package?package=ungoogled-chromium&project=home:ungoogled_chromium)
+  - [OBS Development Repository Instructions](//software.opensuse.org/download/package?package=ungoogled-chromium&project=home:ungoogled_chromium:testing)
+
 The other packages are as follows:
 
 * `*-driver`: [ChomeDriver](http://chromedriver.chromium.org/)
