@@ -72,7 +72,7 @@ Then run a normal build
 ./package.sh
 ```
 
-Or a docker build
+Or run a build inside a docker container
 
 ```sh
 ./docker-build
