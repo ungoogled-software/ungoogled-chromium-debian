@@ -134,7 +134,7 @@ EOF
             <size unit="G">32</size>
         </disk>
         <memory>
-            <size unit="M">8192</size>
+            <size unit="G">8</size>
         </memory>
     </hardware>
 </constraints>
