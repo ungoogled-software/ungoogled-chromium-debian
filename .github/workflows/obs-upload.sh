@@ -22,7 +22,7 @@ fi
 
 for i in OBS_API_USERNAME OBS_API_PASSWORD
 do
-    if test -z "$(eval echo $"${i}")"
+    if test -z "$(eval echo \$${i})"
     then
         echo "$i is not in the environment. Aborting."
         exit 1
