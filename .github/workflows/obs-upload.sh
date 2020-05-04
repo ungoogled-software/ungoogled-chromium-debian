@@ -29,6 +29,8 @@ do
     fi
 done
 
+PROJECT="${OBS_API_PROJECT:-home:${OBS_API_USERNAME}}"
+
 dsc_sha1()
 {
     local FILE="${1}"
@@ -192,11 +194,11 @@ upload_obs()
     case "${TYPE}" in
     
         production)
-            REPOSITORY="home:${USERNAME}"
+            REPOSITORY="${PROJECT}"
             ;;
 
         development)
-            REPOSITORY="home:${USERNAME}:testing"
+            REPOSITORY="${PROJECT}:testing"
             ;;
 
     esac
