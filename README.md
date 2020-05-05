@@ -75,7 +75,7 @@ Then run a normal build
 Or run a build inside a docker container
 
 ```sh
-./docker-build
+./docker-build.sh
 ```
 
 A compressed tar archive will appear under `build`
