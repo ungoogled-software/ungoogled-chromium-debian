@@ -22,12 +22,14 @@ fi
 
 for i in OBS_API_USERNAME OBS_API_PASSWORD
 do
-    if test -z "$(eval echo $"${i}")"
+    if test -z "$(eval echo \$${i})"
     then
         echo "$i is not in the environment. Aborting."
         exit 1
     fi
 done
+
+PROJECT="${OBS_API_PROJECT:-home:${OBS_API_USERNAME}}"
 
 dsc_sha1()
 {
@@ -132,7 +134,7 @@ EOF
             <size unit="G">32</size>
         </disk>
         <memory>
-            <size unit="M">8192</size>
+            <size unit="G">8</size>
         </memory>
     </hardware>
 </constraints>
@@ -192,11 +194,11 @@ upload_obs()
     case "${TYPE}" in
     
         production)
-            REPOSITORY="home:${USERNAME}"
+            REPOSITORY="${PROJECT}"
             ;;
 
         development)
-            REPOSITORY="home:${USERNAME}:testing"
+            REPOSITORY="${PROJECT}:testing"
             ;;
 
     esac
