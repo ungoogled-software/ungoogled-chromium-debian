@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/chrome/browser/ui/views/passwords/password_generation_popup_view_views.cc
 +++ b/chrome/browser/ui/views/passwords/password_generation_popup_view_views.cc
-@@ -79,12 +79,13 @@ void PasswordGenerationPopupViewViews::G
+@@ -83,12 +83,13 @@ void PasswordGenerationPopupViewViews::G
    BuildColumnSet(layout);
    layout->StartRow(views::GridLayout::kFixedSize, 0);
  
@@ -21,14 +21,3 @@ author: Michael Gilbert <mgilbert@debian.org>
  
    DCHECK(!password_label_);
    password_label_ = layout->AddView(std::make_unique<views::Label>(
---- a/components/viz/common/gl_helper.cc
-+++ b/components/viz/common/gl_helper.cc
-@@ -473,7 +473,7 @@ void GLHelper::CopyTextureToImpl::Cancel
- }
- 
- bool GLHelper::CopyTextureToImpl::IsBGRAReadbackSupported() {
--  if (bgra_support_ == BGRA_PREFERENCE_UNKNOWN) {
-+  if (bgra_support_ == BGRA_SUPPORT_UNKNOWN) {
-     bgra_support_ = BGRA_NOT_SUPPORTED;
-     if (auto* extensions = gl_->GetString(GL_EXTENSIONS)) {
-       const std::string extensions_string =
