@@ -3,7 +3,7 @@
 
 --- a/build/config/compiler/BUILD.gn
 +++ b/build/config/compiler/BUILD.gn
-@@ -702,14 +702,6 @@ config("compiler") {
+@@ -690,14 +690,6 @@ config("compiler") {
      ldflags += [ "-Wl,--no-rosegment" ]
    }
  
