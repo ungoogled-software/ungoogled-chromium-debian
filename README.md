@@ -48,9 +48,9 @@ TODO: Document all libraries and tools needed to build. For now, see the build d
 
 For Debian-based systems:
 
-1. Add the [the LLVM APT repo](//apt.llvm.org/) for the appropriate LLVM version (currently 8).
+1. Add the [the LLVM APT repo](//apt.llvm.org/) for the appropriate LLVM version (e.g. the latest stable).
     * Note that the APT URLs for development (aka nightly snapshot) LLVM versions *do not contain* the LLVM version in them.
-2. `# apt install clang-8 lld-8 llvm-8-dev python python3 ninja-build nodejs`
+2. Install LLVM (version 10 shown) and other build dependencies: `# apt install clang-10 lld-10 llvm-10-dev python python3 ninja-build nodejs`
 
 ### Build a tar archive
 
