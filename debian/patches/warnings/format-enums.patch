@@ -25,15 +25,15 @@ author: Michael Gilbert <mgilbert@debian.org>
        error_message =
 --- a/third_party/blink/renderer/modules/cache_storage/inspector_cache_storage_agent.cc
 +++ b/third_party/blink/renderer/modules/cache_storage/inspector_cache_storage_agent.cc
-@@ -455,7 +455,7 @@ class CachedResponseFileReaderLoaderClie
- 
+@@ -461,7 +461,7 @@ class CachedResponseFileReaderLoaderClie
    void DidFail(FileErrorCode error) override {
-     callback_->sendFailure(ProtocolResponse::Error(String::Format(
--        "Unable to read the cached response, error code: %d", error)));
-+        "Unable to read the cached response, error code: %d", static_cast<int>(error))));
+     callback_->sendFailure(ProtocolResponse::ServerError(
+         String::Format("Unable to read the cached response, error code: %d",
+-                       error)
++                       static_cast<int>(error))
+             .Utf8()));
      dispose();
    }
- 
 --- a/services/proxy_resolver/proxy_resolver_v8_tracing.cc
 +++ b/services/proxy_resolver/proxy_resolver_v8_tracing.cc
 @@ -857,7 +857,7 @@ void Job::SaveDnsToLocalCache(const std:
@@ -59,7 +59,7 @@ author: Michael Gilbert <mgilbert@debian.org>
                  event.data.scroll_update.velocity_y);
 --- a/chrome/test/chromedriver/chrome_launcher.cc
 +++ b/chrome/test/chromedriver/chrome_launcher.cc
-@@ -856,7 +856,7 @@ Status ProcessExtension(const std::strin
+@@ -866,7 +866,7 @@ Status ProcessExtension(const std::strin
                      "updated?");
      } else if (result != crx_file::VerifierResult::OK_FULL) {
        return Status(kUnknownError,

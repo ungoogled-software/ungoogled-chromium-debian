@@ -1,8 +1,8 @@
 description: add postscript (ps) printing capability
 author: Salvatore Bonaccorso
 
---- a/chrome/browser/ui/gtk/print_dialog_gtk.cc
-+++ b/chrome/browser/ui/gtk/print_dialog_gtk.cc
+--- a/ui/gtk/print_dialog_gtk.cc
++++ b/ui/gtk/print_dialog_gtk.cc
 @@ -338,7 +338,7 @@ void PrintDialogGtk::ShowDialog(
    GtkPrintCapabilities cap = static_cast<GtkPrintCapabilities>(
        GTK_PRINT_CAPABILITY_GENERATE_PDF | GTK_PRINT_CAPABILITY_PAGE_SET |

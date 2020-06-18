@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/build/config/compiler/BUILD.gn
 +++ b/build/config/compiler/BUILD.gn
-@@ -2013,7 +2013,7 @@ config("optimize") {
+@@ -1987,7 +1987,7 @@ config("optimize") {
        cflags = [ "-Os" ] + common_optimize_on_cflags
      }
    } else {
@@ -12,16 +12,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    }
    ldflags = common_optimize_on_ldflags
  }
-@@ -2036,7 +2036,7 @@ config("optimize_no_wpo") {
-   } else if (optimize_for_fuzzing) {
-     cflags = [ "-O1" ] + common_optimize_on_cflags
-   } else {
--    cflags = [ "-O2" ] + common_optimize_on_cflags
-+    cflags = common_optimize_on_cflags
-   }
-   ldflags = common_optimize_on_ldflags
- }
-@@ -2103,7 +2103,7 @@ config("optimize_max") {
+@@ -2047,7 +2047,7 @@ config("optimize_max") {
      } else if (optimize_for_fuzzing) {
        cflags = [ "-O1" ] + common_optimize_on_cflags
      } else {
@@ -30,7 +21,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      }
    }
  }
-@@ -2140,7 +2140,7 @@ config("optimize_speed") {
+@@ -2079,7 +2079,7 @@ config("optimize_speed") {
      } else if (optimize_for_fuzzing) {
        cflags = [ "-O1" ] + common_optimize_on_cflags
      } else {
@@ -41,7 +32,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
 --- a/tools/gn/build/gen.py
 +++ b/tools/gn/build/gen.py
-@@ -287,10 +287,8 @@ def WriteGNNinja(path, platform, host, o
+@@ -289,10 +289,8 @@ def WriteGNNinja(path, platform, host, o
        cflags.extend(['-O0', '-g'])
      else:
        cflags.append('-DNDEBUG')

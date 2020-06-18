@@ -1,6 +1,6 @@
 --- a/extensions/browser/api/declarative_net_request/regex_rules_matcher.cc
 +++ b/extensions/browser/api/declarative_net_request/regex_rules_matcher.cc
-@@ -289,7 +289,12 @@ const std::vector<RegexRuleInfo>& RegexR
+@@ -303,7 +303,12 @@ const std::vector<RegexRuleInfo>& RegexR
      if (!DoesRuleMetadataMatchRequest(*rule->url_rule(), params))
        continue;
  
@@ -15,7 +15,7 @@
  
 --- a/extensions/browser/api/declarative_net_request/regex_rules_matcher.h
 +++ b/extensions/browser/api/declarative_net_request/regex_rules_matcher.h
-@@ -8,7 +8,10 @@
+@@ -10,7 +10,10 @@
  #include "base/macros.h"
  #include "components/url_matcher/substring_set_matcher.h"
  #include "extensions/browser/api/declarative_net_request/ruleset_matcher_base.h"

@@ -14,7 +14,22 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  namespace U_ICU_NAMESPACE {
  class BreakIterator;
-@@ -201,8 +202,8 @@ class Intl {
+@@ -37,6 +38,14 @@ template <typename T>
+ class Handle;
+ class JSCollator;
+ 
++Maybe<icu::Locale> CreateICULocale(const std::string& bcp47_locale);
++
++Maybe<std::string> CanonicalizeLanguageTag(Isolate* isolate,
++                                           Handle<Object> locale_in);
++
++Maybe<std::string> CanonicalizeLanguageTag(Isolate* isolate,
++                                           const std::string& locale);
++
+ class Intl {
+  public:
+   enum class BoundFunctionContextSlot {
+@@ -189,8 +198,8 @@ class Intl {
        int32_t end);
  
    // Helper function to convert a FormattedValue to String
@@ -27,7 +42,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    static Handle<String> NumberFieldToType(Isolate* isolate,
 --- a/v8/src/objects/js-list-format.cc
 +++ b/v8/src/objects/js-list-format.cc
-@@ -273,7 +273,7 @@ Maybe<std::vector<icu::UnicodeString>> T
+@@ -246,7 +246,7 @@ Maybe<std::vector<icu::UnicodeString>> T
  template <typename T>
  MaybeHandle<T> FormatListCommon(
      Isolate* isolate, Handle<JSListFormat> format, Handle<JSArray> list,
@@ -36,7 +51,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    DCHECK(!list->IsUndefined());
    Maybe<std::vector<icu::UnicodeString>> maybe_array =
        ToUnicodeStringArray(isolate, list);
-@@ -284,49 +284,67 @@ MaybeHandle<T> FormatListCommon(
+@@ -257,49 +257,67 @@ MaybeHandle<T> FormatListCommon(
    CHECK_NOT_NULL(formatter);
  
    UErrorCode status = U_ZERO_ERROR;
@@ -132,7 +147,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    JSObject::ValidateElements(*array);
    return array;
  }
-@@ -338,7 +356,7 @@ MaybeHandle<String> JSListFormat::Format
+@@ -311,7 +329,7 @@ MaybeHandle<String> JSListFormat::Format
                                               Handle<JSListFormat> format,
                                               Handle<JSArray> list) {
    return FormatListCommon<String>(isolate, format, list,
@@ -152,7 +167,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "unicode/reldatefmt.h"
  
  namespace v8 {
-@@ -244,6 +244,65 @@ Handle<String> JSRelativeTimeFormat::Num
+@@ -278,6 +278,65 @@ Handle<String> JSRelativeTimeFormat::Num
  
  namespace {
  
@@ -218,7 +233,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  Handle<String> UnitAsString(Isolate* isolate, URelativeDateTimeUnit unit_enum) {
    Factory* factory = isolate->factory();
    switch (unit_enum) {
-@@ -306,7 +365,8 @@ MaybeHandle<T> FormatCommon(
+@@ -340,7 +399,8 @@ MaybeHandle<T> FormatCommon(
      Isolate* isolate, Handle<JSRelativeTimeFormat> format,
      Handle<Object> value_obj, Handle<Object> unit_obj, const char* func_name,
      MaybeHandle<T> (*formatToResult)(Isolate*,
@@ -228,7 +243,7 @@ author: Michael Gilbert <mgilbert@debian.org>
                                       Handle<Object>, Handle<String>)) {
    // 3. Let value be ? ToNumber(value).
    Handle<Object> value;
-@@ -336,26 +396,32 @@ MaybeHandle<T> FormatCommon(
+@@ -370,26 +430,37 @@ MaybeHandle<T> FormatCommon(
                        unit),
          T);
    }
@@ -254,7 +269,12 @@ author: Michael Gilbert <mgilbert@debian.org>
 -                        UnitAsString(isolate, unit_enum));
 +
 +  std::string locale_str(format->locale().ToCString().get());
-+  icu::Locale icu_locale = Intl::CreateICULocale(locale_str);
++  Maybe<icu::Locale> maybe_icu_locale = CreateICULocale(locale_str);
++  if (maybe_icu_locale.IsNothing()) {
++    THROW_NEW_ERROR(isolate, NewTypeError(MessageTemplate::kIcuError), T);
++  }
++
++  icu::Locale icu_locale = maybe_icu_locale.FromJust();
 +  return formatToResult(isolate, formatted,
 +                        icu::number::NumberFormatter::withLocale(icu_locale),
 +                        value, UnitAsString(isolate, unit_enum));
@@ -273,7 +293,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    return Intl::ToString(isolate, result);
  }
  
-@@ -386,67 +452,32 @@ Maybe<bool> AddUnit(Isolate* isolate, Ha
+@@ -420,67 +491,32 @@ Maybe<bool> AddUnit(Isolate* isolate, Ha
  }
  
  MaybeHandle<JSArray> FormatToJSArray(
@@ -373,7 +393,43 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "unicode/locid.h"
  #include "unicode/normalizer2.h"
  #include "unicode/numberformatter.h"
-@@ -1441,114 +1438,12 @@ std::vector<std::string> LookupSupported
+@@ -431,8 +428,6 @@ std::string Intl::GetNumberingSystem(con
+   return "latn";
+ }
+ 
+-namespace {
+-
+ Maybe<icu::Locale> CreateICULocale(const std::string& bcp47_locale) {
+   DisallowHeapAllocation no_gc;
+ 
+@@ -448,8 +443,6 @@ Maybe<icu::Locale> CreateICULocale(const
+   return Just(icu_locale);
+ }
+ 
+-}  // anonymous namespace
+-
+ // static
+ 
+ MaybeHandle<String> Intl::ToString(Isolate* isolate,
+@@ -769,6 +762,8 @@ bool IsStructurallyValidLanguageTag(cons
+   return JSLocale::StartsWithUnicodeLanguageId(tag);
+ }
+ 
++}  // anonymous namespace
++
+ // Canonicalize the locale.
+ // https://tc39.github.io/ecma402/#sec-canonicalizelanguagetag,
+ // including type check and structural validity check.
+@@ -872,8 +867,6 @@ Maybe<std::string> CanonicalizeLanguageT
+   return CanonicalizeLanguageTag(isolate, locale);
+ }
+ 
+-}  // anonymous namespace
+-
+ Maybe<std::vector<std::string>> Intl::CanonicalizeLocaleList(
+     Isolate* isolate, Handle<Object> locales, bool only_return_one_result) {
+   // 1. If locales is undefined, then
+@@ -1451,114 +1444,12 @@ std::vector<std::string> LookupSupported
    return subset;
  }
  
@@ -489,7 +545,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  // ecma262 #sec-createarrayfromlist
-@@ -1723,8 +1618,6 @@ std::map<std::string, std::string> Looku
+@@ -1733,8 +1624,6 @@ std::map<std::string, std::string> Looku
    std::map<std::string, std::string> extensions;
  
    UErrorCode status = U_ZERO_ERROR;
@@ -498,7 +554,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    std::unique_ptr<icu::StringEnumeration> keywords(
        icu_locale->createKeywords(status));
    if (U_FAILURE(status)) return extensions;
-@@ -1786,14 +1679,13 @@ std::map<std::string, std::string> Looku
+@@ -1796,14 +1685,13 @@ std::map<std::string, std::string> Looku
        if (is_valid_value) {
          extensions.insert(
              std::pair<std::string, std::string>(bcp47_key, bcp47_value));
@@ -516,7 +572,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    return extensions;
  }
  
-@@ -1862,8 +1754,7 @@ Intl::ResolvedLocale Intl::ResolveLocale
+@@ -1872,8 +1760,7 @@ Maybe<Intl::ResolvedLocale> Intl::Resolv
      const std::vector<std::string>& requested_locales, MatcherOption matcher,
      const std::set<std::string>& relevant_extension_keys) {
    std::string locale;
@@ -526,7 +582,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    } else {
      locale = LookupMatcher(isolate, available_locales, requested_locales);
    }
-@@ -2195,11 +2086,6 @@ Handle<String> Intl::NumberFieldToType(I
+@@ -2180,11 +2067,6 @@ Handle<String> Intl::NumberFieldToType(I
        UNREACHABLE();
        return Handle<String>();
  
@@ -538,7 +594,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      default:
        UNREACHABLE();
        return Handle<String>();
-@@ -2207,10 +2093,13 @@ Handle<String> Intl::NumberFieldToType(I
+@@ -2192,10 +2074,13 @@ Handle<String> Intl::NumberFieldToType(I
  }
  
  // A helper function to convert the FormattedValue for several Intl objects.
@@ -716,7 +772,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    }
  
 +  Maybe<std::string> maybe_locale =
-+      Intl::CanonicalizeLanguageTag(isolate, locale_str);
++      CanonicalizeLanguageTag(isolate, locale_str);
 +  MAYBE_RETURN(maybe_locale, MaybeHandle<JSLocale>());
 +  UErrorCode status = U_ZERO_ERROR;
 +  icu::Locale icu_locale =
@@ -740,7 +796,7 @@ author: Michael Gilbert <mgilbert@debian.org>
                      JSLocale);
 --- a/v8/src/objects/js-date-time-format.cc
 +++ b/v8/src/objects/js-date-time-format.cc
-@@ -1869,55 +1869,12 @@ Maybe<bool> AddPartForFormatRange(Isolat
+@@ -1892,55 +1892,12 @@ Maybe<bool> AddPartForFormatRange(Isolat
  // A helper function to convert the FormattedDateInterval to a
  // MaybeHandle<JSArray> for the implementation of formatRangeToParts.
  MaybeHandle<JSArray> FormattedDateIntervalToJSArray(
@@ -799,16 +855,16 @@ author: Michael Gilbert <mgilbert@debian.org>
  
    JSObject::ValidateElements(*array);
    return array;
-@@ -1928,7 +1885,7 @@ template <typename T>
+@@ -1951,7 +1908,7 @@ template <typename T>
  MaybeHandle<T> FormatRangeCommon(
      Isolate* isolate, Handle<JSDateTimeFormat> date_time_format, double x,
      double y,
 -    MaybeHandle<T> (*formatToResult)(Isolate*, const icu::FormattedValue&)) {
 +    MaybeHandle<T> (*formatToResult)(Isolate*, const icu::DateInterval&, const icu::DateIntervalFormat&)) {
-   // #sec-partitiondatetimerangepattern
-   // 1. Let x be TimeClip(x).
-   x = DateCache::TimeClip(x);
-@@ -1960,15 +1917,11 @@ MaybeHandle<T> FormatRangeCommon(
+   // Track newer feature formateRange and formatRangeToParts
+   isolate->CountUsage(v8::Isolate::UseCounterFeature::kDateTimeFormatRange);
+ 
+@@ -1986,15 +1943,11 @@ MaybeHandle<T> FormatRangeCommon(
    std::unique_ptr<icu::Calendar> c2(calendar->clone());
    c1->setTime(x, status);
    c2->setTime(y, status);
@@ -826,7 +882,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  }  // namespace
-@@ -1977,7 +1930,7 @@ MaybeHandle<String> JSDateTimeFormat::Fo
+@@ -2003,7 +1956,7 @@ MaybeHandle<String> JSDateTimeFormat::Fo
      Isolate* isolate, Handle<JSDateTimeFormat> date_time_format, double x,
      double y) {
    return FormatRangeCommon<String>(isolate, date_time_format, x, y,
@@ -837,12 +893,11 @@ author: Michael Gilbert <mgilbert@debian.org>
  MaybeHandle<JSArray> JSDateTimeFormat::FormatRangeToParts(
 --- a/v8/src/objects/js-number-format.cc
 +++ b/v8/src/objects/js-number-format.cc
-@@ -1201,32 +1201,44 @@ Maybe<icu::UnicodeString> IcuFormatNumbe
-     Isolate* isolate,
+@@ -1244,33 +1244,45 @@ Maybe<icu::UnicodeString> IcuFormatNumbe
      const icu::number::LocalizedNumberFormatter& number_format,
      Handle<Object> numeric_obj, icu::FieldPositionIterator* fp_iter) {
-+  icu::UnicodeString result;
    // If it is BigInt, handle it differently.
++  icu::UnicodeString result;
    UErrorCode status = U_ZERO_ERROR;
 -  icu::number::FormattedNumber formatted;
    if (numeric_obj->IsBigInt()) {
@@ -866,7 +921,9 @@ author: Michael Gilbert <mgilbert@debian.org>
 +    }
 +    result = formatted.toString(status);
    } else {
-     double number = numeric_obj->Number();
+     double number = numeric_obj->IsNaN()
+                         ? std::numeric_limits<double>::quiet_NaN()
+                         : numeric_obj->Number();
 -    formatted = number_format.formatDouble(number, status);
 -  }
 -  if (U_FAILURE(status)) {
@@ -896,7 +953,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    if (U_FAILURE(status)) {
      THROW_NEW_ERROR_RETURN_VALUE(isolate,
                                   NewTypeError(MessageTemplate::kIcuError),
-@@ -1412,6 +1424,22 @@ Maybe<int> ConstructParts(Isolate* isola
+@@ -1456,6 +1468,22 @@ Maybe<int> ConstructParts(Isolate* isola
  
  }  // namespace
  
@@ -947,7 +1004,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "ui/views/controls/button/image_button.h"
 --- a/v8/src/objects/js-plural-rules.cc
 +++ b/v8/src/objects/js-plural-rules.cc
-@@ -191,10 +191,7 @@ MaybeHandle<String> JSPluralRules::Resol
+@@ -195,10 +195,7 @@ MaybeHandle<String> JSPluralRules::Resol
        fmt->formatDouble(number, status);
    CHECK(U_SUCCESS(status));
  
@@ -977,7 +1034,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "unicode/locdspnm.h"
  #include "unicode/timezone.h"
  #include "unicode/tznames.h"
-@@ -46,20 +46,6 @@ enum class Type {
+@@ -47,20 +47,6 @@ enum class Type {
    kDateTimeField
  };
  
@@ -1010,3 +1067,32 @@ author: Michael Gilbert <mgilbert@debian.org>
  class JSLocale : public JSObject {
   public:
    // Creates locale object with properties derived from input locale string
+--- a/base/i18n/icu_util.cc
++++ b/base/i18n/icu_util.cc
+@@ -370,6 +370,8 @@ enum class ICUCreateInstance {
+   kMaxValue = kChineseJapaneseBreakEngine
+ };
+ 
++#if 0
++
+ // Callback functions to report the opening of ICU Data File, and creation of
+ // key objects to UMA. This help us to understand what built-in ICU data files
+ // are rarely used in the user's machines and the distribution of ICU usage.
+@@ -481,6 +483,8 @@ static void U_CALLCONV TraceICUData(cons
+   }
+ }
+ 
++#endif
++
+ // Common initialization to run regardless of how ICU is initialized.
+ // There are multiple exposed InitializeIcu* functions. This should be called
+ // as at the end of (the last functions in the sequence of) these functions.
+@@ -490,8 +494,6 @@ bool DoCommonInitialization() {
+   // when requested.
+   InitializeIcuTimeZone();
+ 
+-  const void* context = nullptr;
+-  utrace_setFunctions(context, TraceICUEntry, nullptr, TraceICUData);
+   utrace_setLevel(UTRACE_VERBOSE);
+   return true;
+ }

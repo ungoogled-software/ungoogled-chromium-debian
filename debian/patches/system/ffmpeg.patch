@@ -4,7 +4,7 @@ origin: chromium 66 authors
 
 --- a/media/filters/ffmpeg_audio_decoder.cc
 +++ b/media/filters/ffmpeg_audio_decoder.cc
-@@ -84,6 +84,8 @@ void FFmpegAudioDecoder::Initialize(cons
+@@ -93,6 +93,8 @@ void FFmpegAudioDecoder::Initialize(cons
      return;
    }
  
@@ -12,7 +12,7 @@ origin: chromium 66 authors
 +
    if (!ConfigureDecoder(config)) {
      av_sample_format_ = 0;
-     std::move(bound_init_cb).Run(false);
+     std::move(bound_init_cb).Run(StatusCode::kDecoderFailedInitialization);
 --- a/media/cdm/library_cdm/clear_key_cdm/clear_key_cdm.cc
 +++ b/media/cdm/library_cdm/clear_key_cdm/clear_key_cdm.cc
 @@ -152,6 +152,7 @@ void ConvertCdmKeysInfo(const media::Cdm
@@ -68,12 +68,12 @@ origin: chromium 66 authors
    return avcodec_find_decoder(VideoCodecToCodecID(codec)) != nullptr;
  }
  
-@@ -223,6 +225,8 @@ void FFmpegVideoDecoder::Initialize(cons
+@@ -218,6 +220,8 @@ void FFmpegVideoDecoder::Initialize(cons
      return;
    }
  
 +  FFmpegGlue::InitializeFFmpeg();
 +
    if (!ConfigureDecoder(config, low_delay)) {
-     std::move(bound_init_cb).Run(false);
+     std::move(bound_init_cb).Run(StatusCode::kDecoderFailedInitialization);
      return;

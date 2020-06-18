@@ -10,20 +10,25 @@ arm/pffffft-buildfix.patch
 
 gcc/int32.patch
 
-fixes/gl.patch
 fixes/mojo.patch
 fixes/vaapi.patch
+fixes/gnu-as.patch
 fixes/closure.patch
 fixes/breakpad.patch
 fixes/ps-print.patch
+fixes/ordering.patch
 fixes/inspector.patch
 fixes/gpu-timeout.patch
 fixes/sequence-point.patch
+fixes/incomplete-type.patch
 fixes/missing-includes.patch
+fixes/lambda-expression.patch
 fixes/widevine-revision.patch
 fixes/widevine-locations.patch
 fixes/connection-message.patch
+fixes/nullptr-dereference.patch
 
+disable/tests.patch
 disable/unrar.patch
 disable/glmark.patch
 disable/owners.patch
@@ -33,7 +38,6 @@ disable/fuzzers.patch
 disable/openh264.patch
 disable/buildbot.patch
 disable/catapult.patch
-disable/chromeos.patch
 disable/installer.patch
 disable/font-tests.patch
 disable/swiftshader.patch
@@ -71,9 +75,9 @@ system/jsoncpp.patch
 system/harfbuzz.patch
 system/openjpeg.patch
 system/convertutf.patch
+system/clang-format.patch
 
 buster/re2.patch
 buster/icu63.patch
 buster/vpx17.patch
-buster/opus13.patch
 buster/clang7.patch

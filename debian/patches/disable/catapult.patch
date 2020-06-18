@@ -3,15 +3,15 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -227,7 +227,6 @@ group("gn_all") {
+@@ -230,7 +230,6 @@ group("gn_all") {
        "//media/capture:capture_unittests",
        "//media/cast:cast_unittests",
        "//third_party/angle/src/tests:angle_white_box_tests",
 -      "//third_party/catapult/telemetry:bitmaptools($host_toolchain)",
-       "//third_party/smhasher:pmurhash",
      ]
    } else if (is_ios) {
-@@ -340,7 +339,6 @@ group("gn_all") {
+     deps += [
+@@ -343,7 +342,6 @@ group("gn_all") {
        "//net/android:net_junit_tests",
        "//services:service_junit_tests",
        "//testing/android/junit:junit_unit_tests",
@@ -19,31 +19,23 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//third_party/smhasher:murmurhash3",
        "//tools/android:android_tools",
        "//tools/android:memconsumer",
-@@ -1008,7 +1006,6 @@ if (!is_ios) {
+@@ -1007,7 +1005,6 @@ if (!is_ios) {
        data_deps = [
          "//chrome:chrome",
          "//chrome/test/chromedriver",
 -        "//third_party/catapult/third_party/typ",
        ]
-     }
-     group("wpt_tests_isolate") {
-@@ -1019,7 +1016,6 @@ if (!is_ios) {
-       ]
-       deps = [
-         "//third_party/blink/tools:wpt_tests_isolate",
--        "//third_party/catapult/third_party/typ",
-       ]
-     }
-   }
-@@ -1072,7 +1068,6 @@ if (!is_ios) {
+       if (is_win) {
+         data_deps += [ "//build/win:copy_cdb_to_output" ]
+@@ -1052,7 +1049,6 @@ if (!is_ios) {
+       "//third_party/blink/public:blink_devtools_frontend_resources_files",
        "//third_party/blink/public/mojom:mojom_platform_js_data_deps",
        "//third_party/blink/renderer/core/html:js_files_for_form_controls_web_tests",
-       "//third_party/blink/renderer/core/script:js_files_for_web_tests",
 -      "//third_party/catapult/third_party/typ",
        "//third_party/mesa_headers",
        "//tools/imagediff",
      ]
-@@ -1129,7 +1124,6 @@ if (!is_ios) {
+@@ -1113,7 +1109,6 @@ if (!is_ios) {
  
      if (is_android) {
        data += [
@@ -51,7 +43,7 @@ author: Michael Gilbert <mgilbert@debian.org>
          "//build/android/",
        ]
      }
-@@ -1177,11 +1171,6 @@ if (!is_ios) {
+@@ -1220,11 +1215,6 @@ if (!is_ios) {
        "//third_party/blink/web_tests/StaleTestExpectations",
        "//third_party/blink/web_tests/TestExpectations",
        "//third_party/blink/web_tests/VirtualTestSuites",
@@ -75,10 +67,10 @@ author: Michael Gilbert <mgilbert@debian.org>
  if (is_linux) {
 --- a/v8/tools/BUILD.gn
 +++ b/v8/tools/BUILD.gn
-@@ -32,10 +32,6 @@ group("v8_android_test_runner_deps") {
-     data_deps = [
-       "//build/android:test_runner_py",
-     ]
+@@ -30,10 +30,6 @@ group("v8_android_test_runner_deps") {
+ 
+   if (is_android && !build_with_chromium) {
+     data_deps = [ "//build/android:test_runner_py" ]
 -    data = [
 -      # This is used by android.py, but not included by test_runner_py above.
 -      "//third_party/catapult/devil/devil/android/perf/",
@@ -88,7 +80,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/chrome/test/BUILD.gn
 +++ b/chrome/test/BUILD.gn
-@@ -6469,8 +6469,6 @@ if (!is_android && !is_fuchsia) {
+@@ -6577,8 +6577,6 @@ if (!is_fuchsia && !is_android) {
        "//chrome/test/data/password/captured_sites/",
        "//chrome/test/data/web_page_replay_go_helper_scripts/automation_helper.js",
        "//components/test/data/autofill/web_page_replay_support_files/",
@@ -97,7 +89,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      ]
  
      if (is_linux || is_win) {
-@@ -6507,7 +6505,6 @@ if (!is_android && !is_fuchsia) {
+@@ -6615,7 +6613,6 @@ if (!is_fuchsia && !is_android) {
  
        # TODO(uwyiming@chromium.org) create a gn target for Web Page Replay Go (WPR Go) and only WPR Go.
        # So that test targets requiring WPR Go does not pull down the whole telemetry tool chain.
@@ -105,7 +97,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//third_party/hunspell",
        "//third_party/icu",
        "//third_party/libpng",
-@@ -6541,7 +6538,6 @@ if (!is_android && !is_fuchsia) {
+@@ -6645,7 +6642,6 @@ if (!is_fuchsia && !is_android) {
      deps = [ "//tools/perf/chrome_telemetry_build:telemetry_chrome_test" ]
  
      data = [
@@ -113,7 +105,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//tools/perf/run_telemetry_tests",
  
        # For isolate contract.
-@@ -6559,7 +6555,6 @@ if (!is_android && !is_fuchsia) {
+@@ -6663,7 +6659,6 @@ if (!is_fuchsia && !is_android) {
    group("telemetry_gpu_unittests") {
      testonly = true
      deps = [
@@ -121,7 +113,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//tools/metrics:metrics_python_tests",
      ]
      data = [
-@@ -6695,7 +6690,6 @@ if (is_mac || is_win || is_android) {
+@@ -6795,7 +6790,6 @@ if (is_mac || is_win || is_android) {
        "//testing/scripts",
        "//testing/test_env.py",
        "//testing/xvfb.py",
@@ -151,18 +143,18 @@ author: Michael Gilbert <mgilbert@debian.org>
      "//tools/json_comment_eater/json_comment_eater.py",
 --- a/tools/perf/chrome_telemetry_build/BUILD.gn
 +++ b/tools/perf/chrome_telemetry_build/BUILD.gn
-@@ -102,7 +102,6 @@ group("telemetry_chrome_test_without_chr
+@@ -103,7 +103,6 @@ group("telemetry_chrome_test_without_chr
      "//components/crash/content/tools/generate_breakpad_symbols.py",
    ]
    data_deps = [
 -    "//third_party/catapult:telemetry_chrome_test_support",
      "//tools/metrics:metrics_python_tests",
    ]
-   if (is_chromeos) {
-@@ -128,6 +127,5 @@ group("telemetry_chrome_test_without_chr
-       "//third_party/breakpad:minidump_stackwalk",
+ 
+@@ -134,6 +133,5 @@ group("telemetry_chrome_test_without_chr
+       "//build/android:stack_tools",
      ]
-   } else {
+   } else if (!is_fuchsia) {
 -    data_deps += [ "//third_party/catapult/telemetry:bitmaptools" ]
    }
  }
@@ -177,7 +169,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
 --- a/tools/gritsettings/resource_ids.spec
 +++ b/tools/gritsettings/resource_ids.spec
-@@ -414,12 +414,6 @@
+@@ -429,12 +429,6 @@
    "content/shell/shell_resources.grd": {
      "includes": [2940],
    },
@@ -210,7 +202,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//third_party/blink/public:resources",
 --- a/content/browser/BUILD.gn
 +++ b/content/browser/BUILD.gn
-@@ -2055,7 +2055,6 @@ jumbo_source_set("browser") {
+@@ -2086,7 +2086,6 @@ jumbo_source_set("browser") {
    if (!is_android) {
      deps += [
        "//components/vector_icons",
@@ -220,7 +212,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/content/shell/BUILD.gn
 +++ b/content/shell/BUILD.gn
-@@ -519,7 +519,6 @@ repack("pak") {
+@@ -527,7 +527,6 @@ repack("pak") {
    sources = [
      "$root_gen_dir/content/app/resources/content_resources_100_percent.pak",
      "$root_gen_dir/content/browser/resources/media/media_internals_resources.pak",
@@ -228,7 +220,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "$root_gen_dir/content/browser/webrtc/resources/webrtc_internals_resources.pak",
      "$root_gen_dir/content/content_resources.pak",
      "$root_gen_dir/content/dev_ui_content_resources.pak",
-@@ -541,7 +540,6 @@ repack("pak") {
+@@ -549,7 +548,6 @@ repack("pak") {
      "//content:dev_ui_content_resources",
      "//content/app/resources",
      "//content/browser/resources/media:media_internals_resources",
@@ -319,3 +311,32 @@ author: Michael Gilbert <mgilbert@debian.org>
    ]
  
    if (is_android) {
+--- a/mojo/public/tools/BUILD.gn
++++ b/mojo/public/tools/BUILD.gn
+@@ -14,5 +14,4 @@ group("mojo_python_unittests") {
+     "//testing/xvfb.py",
+   ]
+   deps = [ "//mojo/public/tools/mojom/mojom:tests" ]
+-  data_deps = [ "//third_party/catapult/third_party/typ/" ]
+ }
+--- a/third_party/webrtc/test/BUILD.gn
++++ b/third_party/webrtc/test/BUILD.gn
+@@ -241,10 +241,6 @@ rtc_library("perf_test") {
+   ]
+   if (rtc_enable_protobuf) {
+     sources += [ "testsupport/perf_test_histogram_writer.cc" ]
+-    deps += [
+-      "//third_party/catapult/tracing/tracing:histogram",
+-      "//third_party/catapult/tracing/tracing:reserved_infos",
+-    ]
+   } else {
+     sources += [ "testsupport/perf_test_histogram_writer_no_protobuf.cc" ]
+   }
+@@ -518,7 +514,6 @@ if (rtc_include_tests) {
+ 
+     if (rtc_enable_protobuf) {
+       sources += [ "testsupport/perf_test_histogram_writer_unittest.cc" ]
+-      deps += [ "//third_party/catapult/tracing/tracing:histogram" ]
+     }
+ 
+     data = test_support_unittests_resources

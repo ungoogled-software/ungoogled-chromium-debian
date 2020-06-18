@@ -4,7 +4,7 @@ origin: chromium-vaapi patches from Arch linux
 
 --- a/media/gpu/vaapi/vaapi_video_decode_accelerator.cc
 +++ b/media/gpu/vaapi/vaapi_video_decode_accelerator.cc
-@@ -712,6 +712,7 @@ void VaapiVideoDecodeAccelerator::Assign
+@@ -663,6 +663,7 @@ void VaapiVideoDecodeAccelerator::Assign
    // |vpp_vaapi_wrapper_| for VaapiPicture to DownloadFromSurface() the VA's
    // internal decoded frame.
    if (buffer_allocation_mode_ != BufferAllocationMode::kNone &&
@@ -12,7 +12,7 @@ origin: chromium-vaapi patches from Arch linux
        !vpp_vaapi_wrapper_) {
      vpp_vaapi_wrapper_ = VaapiWrapper::Create(
          VaapiWrapper::kVideoProcess, VAProfileNone,
-@@ -743,7 +744,8 @@ void VaapiVideoDecodeAccelerator::Assign
+@@ -694,7 +695,8 @@ void VaapiVideoDecodeAccelerator::Assign
              : gfx::Size();
  
      std::unique_ptr<VaapiPicture> picture = vaapi_picture_factory_->Create(
@@ -22,7 +22,7 @@ origin: chromium-vaapi patches from Arch linux
              ? vaapi_wrapper_
              : vpp_vaapi_wrapper_,
          make_context_current_cb_, bind_image_cb_, buffer, size_to_bind);
-@@ -1199,6 +1201,14 @@ VaapiVideoDecodeAccelerator::GetSupporte
+@@ -1150,6 +1152,14 @@ VaapiVideoDecodeAccelerator::GetSupporte
  
  VaapiVideoDecodeAccelerator::BufferAllocationMode
  VaapiVideoDecodeAccelerator::DecideBufferAllocationMode() {
@@ -37,7 +37,7 @@ origin: chromium-vaapi patches from Arch linux
    // TODO(crbug.com/912295): Enable a better BufferAllocationMode for IMPORT
    // |output_mode_| as well.
    if (output_mode_ == VideoDecodeAccelerator::Config::OutputMode::IMPORT)
-@@ -1211,7 +1221,7 @@ VaapiVideoDecodeAccelerator::DecideBuffe
+@@ -1162,7 +1172,7 @@ VaapiVideoDecodeAccelerator::DecideBuffe
    // depends on the bitstream and sometimes it's not enough to cover the amount
    // of frames needed by the client pipeline (see b/133733739).
    // TODO(crbug.com/911754): Enable for VP9 Profile 2.
@@ -48,7 +48,7 @@ origin: chromium-vaapi patches from Arch linux
      // an extra allocation for both |client_| and |decoder_|, see
 --- a/media/gpu/vaapi/vaapi_video_decode_accelerator.h
 +++ b/media/gpu/vaapi/vaapi_video_decode_accelerator.h
-@@ -208,6 +208,7 @@ class MEDIA_GPU_EXPORT VaapiVideoDecodeA
+@@ -210,6 +210,7 @@ class MEDIA_GPU_EXPORT VaapiVideoDecodeA
      // Using |client_|s provided PictureBuffers and as many internally
      // allocated.
      kNormal,
@@ -58,7 +58,7 @@ origin: chromium-vaapi patches from Arch linux
    // Decides the concrete buffer allocation mode, depending on the hardware
 --- a/media/gpu/vaapi/vaapi_wrapper.cc
 +++ b/media/gpu/vaapi/vaapi_wrapper.cc
-@@ -1137,6 +1137,11 @@ VAImplementation VaapiWrapper::GetImplem
+@@ -1170,6 +1170,11 @@ VAImplementation VaapiWrapper::GetImplem
  }
  
  // static
