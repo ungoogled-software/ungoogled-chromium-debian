@@ -133,6 +133,8 @@ Files-Excluded:
  third_party/crashpad/crashpad/snapshot/elf/elf_image_reader_fuzzer_corpus
  third_party/blink/renderer/platform/testing/data
  third_party/blink/renderer/platform/text_codec_fuzzer_seed_corpus
+ third_party/blink/web_tests/wpt_internal/webgpu/third_party/glslang_js/lib/glslang.js
+ third_party/blink/web_tests/wpt_internal/webgpu/third_party/glslang_js/lib/glslang.wasm
  third_party/google_input_tools/src/chrome/os/inputview/_locales/*.js
  v8/third_party/binutils
  v8/third_party/colorama
@@ -160,6 +162,7 @@ Files-Excluded:
  third_party/breakpad/breakpad/src/common/convert_UTF.*
  third_party/boringssl/src/crypto/cipher_extra/test
  third_party/dom_distiller_js/dist/js/domdistiller_wrapped.js
+ third_party/devtools-frontend/src/test
  third_party/devtools-frontend/src/scripts/closure/compiler.jar
  third_party/devtools-frontend/src/node_modules/fsevents/fsevents.node
  third_party/libphonenumber/dist/javascript/i18n/phonenumbers/metadata.js

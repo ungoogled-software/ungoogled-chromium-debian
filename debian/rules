@@ -26,6 +26,7 @@ export CXXFLAGS=$(shell dpkg-buildflags --get CXXFLAGS)
 export CXXFLAGS+=-Wno-conversion \
                  -Wno-unused-function \
                  -Wno-unused-variable \
+                 -Wno-unused-private-field \
 
 # do not optimize away null pointer safety checks
 export CXXFLAGS+=-fno-delete-null-pointer-checks

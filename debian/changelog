@@ -1,3 +1,70 @@
+chromium (83.0.4103.83-1) unstable; urgency=medium
+
+  * New upstream stable release.
+    - CVE-2020-6457: Use after free in speech recognizer. Reported by Leecraso
+      and Guang Gong
+    - CVE-2020-6458: Out of bounds read and write in PDFium. Reported by
+      Aleksandar Nikolic
+    - CVE-2020-6459: Use after free in payments. Reported by Zhe Jin
+    - CVE-2020-6460: Insufficient data validation in URL formatting. Reported
+      by Anonymous
+    - CVE-2020-6461: Use after free in storage. Reported by Zhe Jin
+    - CVE-2020-6462: Use after free in task scheduling. Reported by Zhe Jin
+    - CVE-2020-6463: Use after free in ANGLE. Reported by Pawel Wylecial
+    - CVE-2020-6464: Type Confusion in Blink. Reported by Looben Yang
+    - CVE-2020-6465: Use after free in reader mode. Reported by Woojin Oh
+    - CVE-2020-6466: Use after free in media. Reported by Zhe Jin
+    - CVE-2020-6467: Use after free in WebRTC. Reported by ZhanJia Song
+    - CVE-2020-6468: Type Confusion in V8. Reported by Chris Salls and Jake
+      Corina
+    - CVE-2020-6469: Insufficient policy enforcement in developer tools.
+      Reported by David Erceg
+    - CVE-2020-6470: Insufficient validation of untrusted input in clipboard.
+      Reported by Michał Bentkowski
+    - CVE-2020-6471: Insufficient policy enforcement in developer tools.
+      Reported by David Erceg
+    - CVE-2020-6472: Insufficient policy enforcement in developer tools.
+      Reported by David Erceg
+    - CVE-2020-6473: Insufficient policy enforcement in Blink. Reported by
+      Soroush Karami and Panagiotis Ilia
+    - CVE-2020-6474: Use after free in Blink. Reported by Zhe Jin
+    - CVE-2020-6475: Incorrect security UI in full screen. Reported by Khalil
+      Zhani
+    - CVE-2020-6476: Insufficient policy enforcement in tab strip. Reported by
+      Alexandre Le Borgne
+    - CVE-2020-6478: Inappropriate implementation in full screen. Reported by
+      Khalil Zhani
+    - CVE-2020-6479: Inappropriate implementation in sharing. Reported by Zhong
+      Zhaochen
+    - CVE-2020-6480: Insufficient policy enforcement in enterprise. Reported by
+      Marvin Witt
+    - CVE-2020-6481: Insufficient policy enforcement in URL formatting.
+      Reported by Rayyan Bijoora
+    - CVE-2020-6482: Insufficient policy enforcement in developer tools.
+      Reported by Abdulrahman Alqabandi
+    - CVE-2020-6483: Insufficient policy enforcement in payments. Reported by
+      Jun Kokatsu
+    - CVE-2020-6484: Insufficient data validation in ChromeDriver. Reported by
+      Artem Zinenko
+    - CVE-2020-6485: Insufficient data validation in media router. Reported by
+      Sergei Glazunov
+    - CVE-2020-6486: Insufficient policy enforcement in navigations. Reported
+      by David Erceg
+    - CVE-2020-6487: Insufficient policy enforcement in downloads. Reported by
+      Jun Kokatsu
+    - CVE-2020-6488: Insufficient policy enforcement in downloads. Reported by
+      David Erceg
+    - CVE-2020-6489: Inappropriate implementation in developer tools. Reported
+      by @lovasoa
+    - CVE-2020-6490: Insufficient data validation in loader. Reported by
+      Twitter
+    - CVE-2020-6491: Incorrect security UI in site information. Reported by
+      Sultan Haikal
+    - CVE-2020-6831: Stack buffer overflow in SCTP. Reported by Natalie
+      Silvanovich
+
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 18 Jun 2020 02:05:11 +0000
+
 chromium (81.0.4044.92-1) unstable; urgency=medium
 
   * New upstream stable release.
