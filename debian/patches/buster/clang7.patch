@@ -10,10 +10,10 @@ author: Michael Gilbert <mgilbert@debian.org>
 -  init_stack_vars =
 -      !is_android && !use_xcode_clang && (!is_official_build || is_linux)
 +  init_stack_vars = false # for clang 7 on buster
- }
  
- declare_args() {
-@@ -1496,21 +1495,6 @@ config("default_warnings") {
+   # This argument is to control whether enabling text section splitting in the
+   # final binary. When enabled, the separated text sections with prefix
+@@ -1511,21 +1510,6 @@ config("default_warnings") {
            # TODO(thakis): Only for no_chromium_code? http://crbug.com/912662
            "-Wno-ignored-pragma-optimize",
  
@@ -35,7 +35,7 @@ author: Michael Gilbert <mgilbert@debian.org>
            # TODO(https://crbug.com/1059231): Clean up, enable.
            "-Wno-pointer-to-int-cast",
          ]
-@@ -1660,7 +1644,7 @@ config("no_chromium_code") {
+@@ -1675,7 +1659,7 @@ config("no_chromium_code") {
        # suppressing them individually, we just blanket suppress them here.
        "-Wno-unused-variable",
      ]

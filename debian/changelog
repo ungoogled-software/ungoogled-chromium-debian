@@ -1,3 +1,26 @@
+chromium (83.0.4103.106-1) unstable; urgency=medium
+
+  * New upstream security release.
+    - CVE-2020-6493: Use after free in WebAuthentication. Reported by Anonymous
+    - CVE-2020-6494: Incorrect security UI in payments. Reported by Juho
+      Nurminen
+    - CVE-2020-6495: Insufficient policy enforcement in developer tools.
+      Reported by David Erceg
+    - CVE-2020-6496: Use after free in payments. Reported by Khalil Zhani
+    - CVE-2020-6497: Insufficient policy enforcement in Omnibox. Reported by
+      Rayyan Bijoora
+    - CVE-2020-6498: Incorrect security UI in progress display. Reported by
+      Rayyan Bijoora
+    - CVE-2020-6505: Use after free in speech. Reported by Khalil Zhani
+    - CVE-2020-6506: Insufficient policy enforcement in WebView. Reported by
+      Alesandro Ortiz
+    - CVE-2020-6507: Out of bounds write in V8. Reported by Sergei Glazunov
+  * Conflict with ffmpeg 4.3 (closes: #963080).
+  * Support building with icu 67 (closes: #960236).
+  * Support building with re2 20200501 (closes: #960361).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Fri, 19 Jun 2020 00:40:28 +0000
+
 chromium (83.0.4103.83-1) unstable; urgency=medium
 
   * New upstream stable release.

@@ -63,8 +63,10 @@ warnings/stringop-overflow.patch
 warnings/attribute-ignored.patch
 warnings/int-in-bool-context.patch
 
+system/re2.patch
 system/vpx.patch
 system/icu.patch
+system/icu67.patch
 system/jpeg.patch
 system/node.patch
 system/nspr.patch

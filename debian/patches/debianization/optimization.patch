@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/build/config/compiler/BUILD.gn
 +++ b/build/config/compiler/BUILD.gn
-@@ -1987,7 +1987,7 @@ config("optimize") {
+@@ -2002,7 +2002,7 @@ config("optimize") {
        cflags = [ "-Os" ] + common_optimize_on_cflags
      }
    } else {
@@ -12,7 +12,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    }
    ldflags = common_optimize_on_ldflags
  }
-@@ -2047,7 +2047,7 @@ config("optimize_max") {
+@@ -2062,7 +2062,7 @@ config("optimize_max") {
      } else if (optimize_for_fuzzing) {
        cflags = [ "-O1" ] + common_optimize_on_cflags
      } else {
@@ -21,7 +21,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      }
    }
  }
-@@ -2079,7 +2079,7 @@ config("optimize_speed") {
+@@ -2094,7 +2094,7 @@ config("optimize_speed") {
      } else if (optimize_for_fuzzing) {
        cflags = [ "-O1" ] + common_optimize_on_cflags
      } else {
