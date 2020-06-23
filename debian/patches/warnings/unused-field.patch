@@ -11,7 +11,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "chrome/browser/profiles/profile.h"
  #include "chrome/browser/ui/webui/signin/inline_login_handler.h"
  #include "chrome/browser/ui/webui/signin/signin_email_confirmation_dialog.h"
-@@ -183,7 +184,9 @@ class InlineSigninHelper : public GaiaAu
+@@ -184,7 +185,9 @@ class InlineSigninHelper : public GaiaAu
    std::string gaia_id_;
    std::string password_;
    std::string auth_code_;

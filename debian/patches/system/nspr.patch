@@ -25,7 +25,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/base/BUILD.gn
 +++ b/base/BUILD.gn
-@@ -99,6 +99,9 @@ config("base_flags") {
+@@ -107,6 +107,9 @@ config("base_flags") {
        "-Wglobal-constructors",
      ]
    }
@@ -35,8 +35,8 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  config("base_implementation") {
-@@ -697,8 +700,6 @@ jumbo_component("base") {
-     "third_party/cityhash/city.h",
+@@ -712,8 +715,6 @@ jumbo_component("base") {
+     "third_party/cityhash_v103/src/city_v103.h",
      "third_party/icu/icu_utf.cc",
      "third_party/icu/icu_utf.h",
 -    "third_party/nspr/prtime.cc",
@@ -46,7 +46,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "threading/hang_watcher.cc",
 --- a/tools/gn/build/gen.py
 +++ b/tools/gn/build/gen.py
-@@ -337,6 +337,9 @@ def WriteGNNinja(path, platform, host, o
+@@ -339,6 +339,9 @@ def WriteGNNinja(path, platform, host, o
        if not options.no_static_libstdcpp:
          ldflags.append('-static-libstdc++')
  
@@ -54,5 +54,5 @@ author: Michael Gilbert <mgilbert@debian.org>
 +      libs.append('-lnspr4')
 +
        # This is needed by libc++.
-       libs.append('-ldl')
-     elif platform.is_darwin():
+       if not platform.is_mingw():
+         libs.append('-ldl')
