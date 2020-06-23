@@ -25,16 +25,15 @@ author: Michael Gilbert <mgilbert@debian.org>
  } else {
 --- a/components/paint_preview/common/subset_font.cc
 +++ b/components/paint_preview/common/subset_font.cc
-@@ -7,8 +7,7 @@
- #include <memory>
- #include <utility>
+@@ -5,8 +5,6 @@
+ #include "components/paint_preview/common/subset_font.h"
  
--#include <hb-subset.h>
+ // clang-format off
 -#include <hb.h>
-+#include <harfbuzz/hb.h>
+-#include <hb-subset.h>
+ // clang-format on
  
- #include "base/bind.h"
- #include "base/callback.h"
+ #include <memory>
 --- a/components/paint_preview/common/serial_utils.cc
 +++ b/components/paint_preview/common/serial_utils.cc
 @@ -50,12 +50,8 @@ sk_sp<SkData> SerializeTypeface(SkTypefa
@@ -64,7 +63,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      deps = [
 --- a/third_party/skia/BUILD.gn
 +++ b/third_party/skia/BUILD.gn
-@@ -680,7 +680,6 @@ optional("pdf") {
+@@ -697,7 +697,6 @@ optional("pdf") {
    sources_when_disabled = [ "src/pdf/SkDocument_PDF_None.cpp" ]
    if (skia_use_icu && skia_use_harfbuzz && skia_pdf_subset_harfbuzz) {
      deps += [ "//third_party/harfbuzz" ]
@@ -72,3 +71,22 @@ author: Michael Gilbert <mgilbert@debian.org>
    } else if (skia_use_icu && skia_use_sfntly) {
      deps += [ "//third_party/sfntly" ]
      defines = [ "SK_PDF_USE_SFNTLY" ]
+--- a/third_party/harfbuzz-ng/utils/hb_scoped.h
++++ b/third_party/harfbuzz-ng/utils/hb_scoped.h
+@@ -6,8 +6,6 @@
+ #define THIRD_PARTY_HARFBUZZ_NG_UTILS_HB_SCOPED_H_
+ 
+ // clang-format off
+-#include <hb.h>
+-#include <hb-subset.h>
+ // clang-format on
+ 
+ #include <memory>
+@@ -53,7 +51,6 @@ using HbScoped = std::unique_ptr<T, HbSp
+   F(hb_face_t, hb_face_destroy)            \
+   F(hb_font_t, hb_font_destroy)            \
+   F(hb_set_t, hb_set_destroy)              \
+-  F(hb_subset_input_t, hb_subset_input_destroy)
+ 
+ HB_TYPE_DESTRUCTOR_PAIRS_REPEAT(SPECIALIZED_DELETER_FOR_HARFBUZZ_TYPE)
+ 

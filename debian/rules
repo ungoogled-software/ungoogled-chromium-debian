@@ -41,6 +41,7 @@ export CXXFLAGS+=-Wno-conversion \
                  -Wno-enum-enum-conversion \
                  -Wno-enum-float-conversion \
                  -Wno-range-loop-construct
+                 -Wno-deprecated-declarations \
 
 # do not optimize away null pointer safety checks
 export CXXFLAGS+=-fno-delete-null-pointer-checks

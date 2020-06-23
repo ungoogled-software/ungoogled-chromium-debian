@@ -10,5 +10,29 @@ author: Michael Gilbert <mgilbert@debian.org>
 -    "//chrome/installer",
 -    "//chrome/updater",
      "//components:components_unittests",
+     "//components/gc:gc_unittests",
      "//components/gwp_asan:gwp_asan_unittests",
-     "//net:net_unittests",
+--- a/chrome/browser/BUILD.gn
++++ b/chrome/browser/BUILD.gn
+@@ -5578,7 +5578,6 @@ source_set("active_use_util") {
+   deps = [
+     "//base",
+     "//chrome/common:constants",
+-    "//chrome/install_static:buildflags",
+   ]
+ }
+ 
+--- a/chrome/browser/active_use_util.cc
++++ b/chrome/browser/active_use_util.cc
+@@ -7,10 +7,9 @@
+ #include "base/command_line.h"
+ #include "build/build_config.h"
+ #include "chrome/common/chrome_switches.h"
+-#include "chrome/install_static/buildflags.h"
+ 
+ bool ShouldRecordActiveUse(const base::CommandLine& command_line) {
+-#if defined(OS_WIN) && !BUILDFLAG(USE_GOOGLE_UPDATE_INTEGRATION)
++#if defined(OS_WIN)
+   return false;
+ #else
+   return command_line.GetSwitchValueNative(switches::kTryChromeAgain).empty();
