@@ -32,16 +32,12 @@ export DEB_CXXFLAGS_MAINT_STRIP=-g
 export CXXFLAGS=$(shell dpkg-buildflags --get CXXFLAGS)
 
 # extra flags to reduce warnings that aren't very useful
-# FIXME: remove -Wno-enum-enum-conversion, -Wno-enum-float-conversion, -Wno-range-loop-construct if possible.
-# FIXME: They are here to stem the tide of new warnings from Clang 10.
 export CXXFLAGS+=-Wno-conversion \
                  -Wno-unused-function \
                  -Wno-unused-variable \
                  -Wno-unused-private-field \
-                 -Wno-enum-enum-conversion \
-                 -Wno-enum-float-conversion \
-                 -Wno-range-loop-construct
                  -Wno-deprecated-declarations \
+                 -Wno-unreachable-code
 
 # do not optimize away null pointer safety checks
 export CXXFLAGS+=-fno-delete-null-pointer-checks

@@ -1,0 +1,12 @@
+--- a/build/config/compiler/BUILD.gn	2020-06-23 09:55:36.804790852 -0500
++++ b/build/config/compiler/BUILD.gn	2020-06-23 09:55:15.528750703 -0500
+@@ -1523,6 +1523,9 @@
+           # TODO(https://crbug.com/1028110): Evaluate and possible enable.
+           "-Wno-deprecated-copy",
+ 
++          # TODO(https://crbug.com/1050281): Clean up, enable.
++          "-Wno-non-c-typedef-for-linkage",
++
+           # TODO(https://crbug.com/1059231): Clean up, enable.
+           "-Wno-pointer-to-int-cast",
+         ]
