@@ -109,7 +109,7 @@
    }
 --- a/net/BUILD.gn
 +++ b/net/BUILD.gn
-@@ -4574,7 +4574,6 @@ test("net_unittests") {
+@@ -4576,7 +4576,6 @@ test("net_unittests") {
    data = []
    data_deps = [
      "third_party/nist-pkits/",
