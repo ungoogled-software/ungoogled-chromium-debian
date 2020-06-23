@@ -8,7 +8,7 @@ something different is done such as building a debug build.
 diff -ur a/third_party/catapult/common/py_vulcanize/py_vulcanize/generate.py b/third_party/catapult/common/py_vulcanize/py_vulcanize/generate.py
 --- a/third_party/catapult/common/py_vulcanize/py_vulcanize/generate.py	2020-03-17 22:05:46.000000000 +0000
 +++ b/third_party/catapult/common/py_vulcanize/py_vulcanize/generate.py	2020-03-31 22:24:38.624100860 +0000
-@@ -74,7 +74,7 @@
+@@ -83,7 +83,7 @@
  
    with tempfile.NamedTemporaryFile() as _:
      args = [
@@ -17,7 +17,7 @@ diff -ur a/third_party/catapult/common/py_vulcanize/py_vulcanize/generate.py b/t
          rjsmin_path
      ]
      p = subprocess.Popen(args,
-@@ -194,7 +194,7 @@
+@@ -203,7 +203,7 @@
        os.path.join(py_vulcanize_path, 'third_party', 'rcssmin', 'rcssmin.py'))
  
    with tempfile.NamedTemporaryFile() as _:

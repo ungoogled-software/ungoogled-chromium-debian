@@ -1,0 +1,12 @@
+--- a/third_party/blink/renderer/bindings/scripts/bind_gen/style_format.py
++++ b/third_party/blink/renderer/bindings/scripts/bind_gen/style_format.py
+@@ -35,8 +35,7 @@ def init(root_src_dir):
+                                            platform)
+ 
+     # //buildtools/<platform>/clang-format
+-    _clang_format_command_path = os.path.join(
+-        buildtools_platform_dir, "clang-format{}".format(exe_suffix))
++    _clang_format_command_path = "clang-format-10"
+ 
+     # //buildtools/<platform>/gn
+     _gn_command_path = os.path.join(buildtools_platform_dir,
