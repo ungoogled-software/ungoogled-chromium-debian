@@ -10,6 +10,7 @@ Rules-Requires-Root: no
 Build-Depends:
  debhelper (>= 11),
  clang-10,
+ clang-format-10,
  lld-10,
  llvm-10-dev,
  python,
