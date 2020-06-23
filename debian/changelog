@@ -1,3 +1,10 @@
+chromium (83.0.4103.116-1) unstable; urgency=medium
+
+  * New upstream security release.
+    - CVE-2020-6509: Use after free in extensions. Reported by Anonymous
+
+ -- Michael Gilbert <mgilbert@debian.org>  Mon, 22 Jun 2020 19:45:51 +0000
+
 chromium (83.0.4103.106-1) unstable; urgency=medium
 
   * New upstream security release.
