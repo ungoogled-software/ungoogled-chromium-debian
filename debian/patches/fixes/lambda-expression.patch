@@ -1,0 +1,43 @@
+description: clang 7 has trouble deducing auto type in lambda expression
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/third_party/blink/renderer/bindings/core/v8/serialization/serialized_script_value.h
++++ b/third_party/blink/renderer/bindings/core/v8/serialization/serialized_script_value.h
+@@ -268,12 +268,16 @@ class CORE_EXPORT SerializedScriptValue
+   MessagePortChannelArray& GetStreamChannels() { return stream_channels_; }
+ 
+   bool IsLockedToAgentCluster() const {
++    bool is_locked = false;
++    for (const auto& entry : attachments_) {
++      if (entry.value->IsLockedToAgentCluster()) {
++        is_locked = true;
++      }
++    }
++
+     return !wasm_modules_.IsEmpty() ||
+            !shared_array_buffers_contents_.IsEmpty() ||
+-           std::any_of(attachments_.begin(), attachments_.end(),
+-                       [](const auto& entry) {
+-                         return entry.value->IsLockedToAgentCluster();
+-                       });
++           is_locked;
+   }
+ 
+   // Returns true after serializing script values that remote origins cannot
+--- a/third_party/blink/renderer/core/layout/ng/ng_physical_container_fragment.cc
++++ b/third_party/blink/renderer/core/layout/ng/ng_physical_container_fragment.cc
+@@ -115,11 +115,9 @@ void NGPhysicalContainerFragment::AddOut
+       // Don't add |Children()|. If |this| has |NGFragmentItems|, children are
+       // either line box, which we already handled in items, or OOF, which we
+       // should ignore.
+-      DCHECK(std::all_of(PostLayoutChildren().begin(),
+-                         PostLayoutChildren().end(), [](const NGLink& child) {
+-                           return child->IsLineBox() ||
+-                                  child->IsOutOfFlowPositioned();
+-                         }));
++      for (const NGLink& child : PostLayoutChildren()) {
++        DCHECK(child->IsLineBox() || child->IsOutOfFlowPositioned());
++      }
+       return;
+     }
+   }

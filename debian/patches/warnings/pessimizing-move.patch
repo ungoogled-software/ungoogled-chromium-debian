@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/mojo/public/cpp/bindings/interface_ptr.h
 +++ b/mojo/public/cpp/bindings/interface_ptr.h
-@@ -234,7 +234,7 @@ InterfacePtr<Interface> MakeProxy(
+@@ -237,7 +237,7 @@ InterfacePtr<Interface> MakeProxy(
    InterfacePtr<Interface> ptr;
    if (info.is_valid())
      ptr.Bind(std::move(info), std::move(runner));
