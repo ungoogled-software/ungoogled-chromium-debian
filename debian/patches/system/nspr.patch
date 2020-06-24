@@ -25,17 +25,18 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/base/BUILD.gn
 +++ b/base/BUILD.gn
-@@ -107,6 +107,9 @@ config("base_flags") {
+@@ -108,6 +108,9 @@
        "-Wglobal-constructors",
      ]
    }
 +  ldflags = [
-+    "-lnspr4",
++    "-lnspr4"
 +  ]
  }
  
  config("base_implementation") {
-@@ -712,8 +715,6 @@ jumbo_component("base") {
+@@ -713,8 +716,6 @@
+     "third_party/cityhash_v103/src/city_v103.h",
      "third_party/icu/icu_utf.cc",
      "third_party/icu/icu_utf.h",
 -    "third_party/nspr/prtime.cc",
