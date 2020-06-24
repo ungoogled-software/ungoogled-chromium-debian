@@ -47,7 +47,6 @@ warnings/unused-field.patch
 system/re2.patch
 system/vpx.patch
 system/icu.patch
-system/icu67.patch
 system/jpeg.patch
 system/node.patch
 system/nspr.patch
@@ -67,6 +66,7 @@ fedora/vaapi.patch
 fedora/vaapi-fix.patch
 
 ungoogled-chromium/clang.patch
+ungoogled-chromium/icu66.patch
 ungoogled-chromium/manpage.patch
 ungoogled-chromium/safebrowsing.patch
 ungoogled-chromium/headers.patch
