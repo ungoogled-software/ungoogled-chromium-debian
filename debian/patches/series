@@ -47,7 +47,6 @@ warnings/unused-field.patch
 system/re2.patch
 system/vpx.patch
 system/icu.patch
-system/icu67.patch
 system/jpeg.patch
 system/node.patch
 system/nspr.patch
@@ -63,7 +62,6 @@ system/clang-format.patch
 buster/re2.patch
 buster/icu63.patch
 buster/vpx17.patch
-buster/opus13.patch
 buster/clang7.patch
 
 inox-patchset/chromium-skia-harmony.patch
