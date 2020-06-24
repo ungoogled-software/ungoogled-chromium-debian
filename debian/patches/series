@@ -46,7 +46,6 @@ warnings/unused-field.patch
 
 system/re2.patch
 system/vpx.patch
-system/icu67.patch
 system/jpeg.patch
 system/node.patch
 system/nspr.patch
