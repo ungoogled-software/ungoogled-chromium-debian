@@ -1,15 +1,3 @@
---- a/build/config/compiler/BUILD.gn
-+++ b/build/config/compiler/BUILD.gn
-@@ -1523,9 +1523,6 @@
-           # TODO(https://crbug.com/1028110): Evaluate and possible enable.
-           "-Wno-deprecated-copy",
- 
--          # TODO(https://crbug.com/1050281): Clean up, enable.
--          "-Wno-non-c-typedef-for-linkage",
--
-           # TODO(https://crbug.com/1059231): Clean up, enable.
-           "-Wno-pointer-to-int-cast",
-         ]
 --- a/content/public/browser/content_browser_client.cc
 +++ b/content/public/browser/content_browser_client.cc
 @@ -4,13 +4,6 @@
