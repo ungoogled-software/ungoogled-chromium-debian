@@ -75,7 +75,7 @@ echo 'UPLOADER_HERE' > debian/uploader.txt
 
 # Install remaining requirements to build Chromium
 sudo mk-build-deps -i debian/control
-rm ungoogled-chromium-build-deps_*.deb
+rm ungoogled-chromium-build-deps_*
 
 # Download and unpack Chromium sources (this will take some time)
 ./debian/scripts/setup local-src

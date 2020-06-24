@@ -25,11 +25,11 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "build/build_config.h"
 --- a/tools/gn/build/gen.py
 +++ b/tools/gn/build/gen.py
-@@ -339,6 +339,7 @@ def WriteGNNinja(path, platform, host, o
+@@ -341,6 +341,7 @@ def WriteGNNinja(path, platform, host, o
  
        # Additional system libraries that are used.
        libs.append('-lnspr4')
 +      libs.append('-levent')
  
        # This is needed by libc++.
-       libs.append('-ldl')
+       if not platform.is_mingw():

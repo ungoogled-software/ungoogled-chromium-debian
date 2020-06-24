@@ -85,9 +85,6 @@
     "translate": {
         "enabled": false
     },
-    "hardware": {
-        "audio_capture_enabled": false
-    },
 	"payments": {
 		"can_make_payment_enabled": false
 	},
