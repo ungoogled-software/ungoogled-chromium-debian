@@ -24,7 +24,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      UChar32 character;
 --- a/v8/src/regexp/regexp-macro-assembler.cc
 +++ b/v8/src/regexp/regexp-macro-assembler.cc
-@@ -37,9 +37,9 @@ int RegExpMacroAssembler::CaseInsensitiv
+@@ -38,9 +38,9 @@ int RegExpMacroAssembler::CaseInsensitiv
  
  #ifdef V8_INTL_SUPPORT
    int32_t length = (int32_t)(byte_length >> 1);
@@ -38,7 +38,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    uc16* substring1 = reinterpret_cast<uc16*>(byte_offset1);
 --- a/base/BUILD.gn
 +++ b/base/BUILD.gn
-@@ -34,7 +34,6 @@ import("//build/nocompile.gni")
+@@ -35,7 +35,6 @@ import("//build/nocompile.gni")
  import("//build/timestamp.gni")
  import("//testing/libfuzzer/fuzzer_test.gni")
  import("//testing/test.gni")
@@ -46,7 +46,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  if (is_mac) {
    # Used to generate fuzzer corpus :base_mach_port_rendezvous_convert_corpus.
-@@ -2943,7 +2942,7 @@ test("base_unittests") {
+@@ -2961,7 +2960,7 @@ test("base_unittests") {
      ]
    }
  

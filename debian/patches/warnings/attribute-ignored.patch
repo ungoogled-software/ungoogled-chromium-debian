@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/third_party/abseil-cpp/absl/base/attributes.h
 +++ b/third_party/abseil-cpp/absl/base/attributes.h
-@@ -441,7 +441,7 @@
+@@ -443,7 +443,7 @@
  // https://gcc.gnu.org/bugzilla/show_bug.cgi?id=66425
  //
  // Note: past advice was to place the macro after the argument list.

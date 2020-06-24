@@ -1,7 +1,7 @@
 --- a/third_party/angle/src/tests/BUILD.gn
 +++ b/third_party/angle/src/tests/BUILD.gn
-@@ -257,13 +257,13 @@ if (is_win || is_linux || is_android ||
-       "${angle_root}:library_name_config",
+@@ -330,13 +330,13 @@ if (is_win || is_linux || is_android ||
+       "${angle_root}:libGLESv2",
      ]
  
 -    if (is_win || is_linux) {

@@ -1,0 +1,14 @@
+description: use a meaningful string to avoid possible nullptr dereference
+author: Michael Gilbert
+
+--- a/base/location.cc
++++ b/base/location.cc
+@@ -92,7 +92,7 @@ NOINLINE Location Location::Current(cons
+ #else
+ // static
+ NOINLINE Location Location::Current() {
+-  return Location(nullptr, RETURN_ADDRESS());
++  return Location("[unknown file]", RETURN_ADDRESS());
+ }
+ #endif
+ 
