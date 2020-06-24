@@ -893,7 +893,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  MaybeHandle<JSArray> JSDateTimeFormat::FormatRangeToParts(
 --- a/v8/src/objects/js-number-format.cc
 +++ b/v8/src/objects/js-number-format.cc
-@@ -1458,6 +1458,22 @@ Maybe<int> ConstructParts(Isolate* isola
+@@ -1456,6 +1456,22 @@ Maybe<int> ConstructParts(Isolate* isola
  
  }  // namespace
  

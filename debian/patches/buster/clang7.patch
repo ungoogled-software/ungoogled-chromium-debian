@@ -44,16 +44,6 @@ author: Michael Gilbert <mgilbert@debian.org>
        cflags += [
          # TODO(https://crbug.com/1031169): Clean up and enable.
          "-Wno-misleading-indentation",
---- a/third_party/pffft/BUILD.gn
-+++ b/third_party/pffft/BUILD.gn
-@@ -24,7 +24,6 @@ config("common_config") {
- 
- static_library("pffft") {
-   configs += [ ":common_config" ]
--  cflags = [ "-Wno-unused-but-set-variable" ]
-   sources = [
-     "src/pffft.c",
-     "src/pffft.h",
 --- a/third_party/blink/renderer/BUILD.gn
 +++ b/third_party/blink/renderer/BUILD.gn
 @@ -45,11 +45,9 @@ config("inside_blink") {
