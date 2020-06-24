@@ -71,7 +71,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      credential_count = static_cast<size_t>(it->second.GetUnsigned());
 --- a/third_party/webrtc/modules/rtp_rtcp/source/rtp_packet_history.cc
 +++ b/third_party/webrtc/modules/rtp_rtcp/source/rtp_packet_history.cc
-@@ -133,7 +133,7 @@ void RtpPacketHistory::PutRtpPacket(std:
+@@ -134,7 +134,7 @@ void RtpPacketHistory::PutRtpPacket(std:
    // Store packet.
    const uint16_t rtp_seq_no = packet->SequenceNumber();
    int packet_index = GetPacketIndex(rtp_seq_no);

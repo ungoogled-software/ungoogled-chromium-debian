@@ -12,7 +12,7 @@ export DEB_RULES_REQUIRES_ROOT=no
 # specify system LLVM (required for unbundling)
 # you can set the LLVM_VERSION environment variable before building
 # to change the LLVM toolchain version
-export LLVM_VERSION?=9
+export LLVM_VERSION?=10
 export AR=llvm-ar-$(LLVM_VERSION)
 export NM=llvm-nm-$(LLVM_VERSION)
 export CC=clang-$(LLVM_VERSION)
@@ -36,6 +36,8 @@ export CXXFLAGS+=-Wno-conversion \
                  -Wno-unused-function \
                  -Wno-unused-variable \
                  -Wno-unused-private-field \
+                 -Wno-deprecated-declarations \
+                 -Wno-unreachable-code
 
 # do not optimize away null pointer safety checks
 export CXXFLAGS+=-fno-delete-null-pointer-checks
