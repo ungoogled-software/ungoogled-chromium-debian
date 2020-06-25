@@ -893,7 +893,67 @@ author: Michael Gilbert <mgilbert@debian.org>
  MaybeHandle<JSArray> JSDateTimeFormat::FormatRangeToParts(
 --- a/v8/src/objects/js-number-format.cc
 +++ b/v8/src/objects/js-number-format.cc
-@@ -1456,6 +1456,22 @@ Maybe<int> ConstructParts(Isolate* isola
+@@ -1244,33 +1244,45 @@ Maybe<icu::UnicodeString> IcuFormatNumbe
+     const icu::number::LocalizedNumberFormatter& number_format,
+     Handle<Object> numeric_obj, icu::FieldPositionIterator* fp_iter) {
+   // If it is BigInt, handle it differently.
++  icu::UnicodeString result;
+   UErrorCode status = U_ZERO_ERROR;
+-  icu::number::FormattedNumber formatted;
+   if (numeric_obj->IsBigInt()) {
+     Handle<BigInt> big_int = Handle<BigInt>::cast(numeric_obj);
+     Handle<String> big_int_string;
+     ASSIGN_RETURN_ON_EXCEPTION_VALUE(isolate, big_int_string,
+                                      BigInt::ToString(isolate, big_int),
+                                      Nothing<icu::UnicodeString>());
+-    formatted = number_format.formatDecimal(
++    icu::number::FormattedNumber formatted = number_format.formatDecimal(
+         {big_int_string->ToCString().get(), big_int_string->length()}, status);
++    if (U_FAILURE(status)) {
++      // This happen because of icu data trimming trim out "unit".
++      // See https://bugs.chromium.org/p/v8/issues/detail?id=8641
++      THROW_NEW_ERROR_RETURN_VALUE(isolate,
++                                   NewTypeError(MessageTemplate::kIcuError),
++                                   Nothing<icu::UnicodeString>());
++    }
++    if (fp_iter) {
++      formatted.getAllFieldPositions(*fp_iter, status);
++    }
++    result = formatted.toString(status);
+   } else {
+     double number = numeric_obj->IsNaN()
+                         ? std::numeric_limits<double>::quiet_NaN()
+                         : numeric_obj->Number();
+-    formatted = number_format.formatDouble(number, status);
+-  }
+-  if (U_FAILURE(status)) {
+-    // This happen because of icu data trimming trim out "unit".
+-    // See https://bugs.chromium.org/p/v8/issues/detail?id=8641
+-    THROW_NEW_ERROR_RETURN_VALUE(isolate,
+-                                 NewTypeError(MessageTemplate::kIcuError),
+-                                 Nothing<icu::UnicodeString>());
+-  }
+-  if (fp_iter) {
+-    formatted.getAllFieldPositions(*fp_iter, status);
++    icu::number::FormattedNumber formatted =
++        number_format.formatDouble(number, status);
++    if (U_FAILURE(status)) {
++      // This happen because of icu data trimming trim out "unit".
++      // See https://bugs.chromium.org/p/v8/issues/detail?id=8641
++      THROW_NEW_ERROR_RETURN_VALUE(isolate,
++                                   NewTypeError(MessageTemplate::kIcuError),
++                                   Nothing<icu::UnicodeString>());
++    }
++    if (fp_iter) {
++      formatted.getAllFieldPositions(*fp_iter, status);
++    }
++    result = formatted.toString(status);
+   }
+-  icu::UnicodeString result = formatted.toString(status);
+   if (U_FAILURE(status)) {
+     THROW_NEW_ERROR_RETURN_VALUE(isolate,
+                                  NewTypeError(MessageTemplate::kIcuError),
+@@ -1456,6 +1468,22 @@ Maybe<int> ConstructParts(Isolate* isola
  
  }  // namespace
  
@@ -905,11 +965,11 @@ author: Michael Gilbert <mgilbert@debian.org>
 +                                         Handle<Object> numeric_obj,
 +                                         Handle<String> unit) {
 +  DCHECK(numeric_obj->IsNumeric());
-+  icu::number::FormattedNumber formatted;
-+  Maybe<bool> maybe_format =
-+      IcuFormatNumber(isolate, number_format, numeric_obj, &formatted);
++  icu::FieldPositionIterator fp_iter;
++  Maybe<icu::UnicodeString> maybe_format =
++      IcuFormatNumber(isolate, number_format, numeric_obj, &fp_iter);
 +  MAYBE_RETURN(maybe_format, Nothing<int>());
-+  return ConstructParts(isolate, &formatted, result,
++  return ConstructParts(isolate, maybe_format.FromJust(), &fp_iter, result,
 +                        start_index, numeric_obj, !unit.is_null());
 +}
 +
@@ -925,7 +985,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 +  // From chromium 74
 +  V8_WARN_UNUSED_RESULT static Maybe<int> FormatToParts(
 +      Isolate* isolate, Handle<JSArray> result, int start_index,
-+      const icu::number::LocalizedNumberFormatter& number_format,
++      const icu::number::LocalizedNumberFormatter& nf,
 +      Handle<Object> numeric_obj, Handle<String> unit);
 +
    V8_WARN_UNUSED_RESULT static MaybeHandle<String> FormatNumeric(
