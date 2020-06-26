@@ -6,22 +6,26 @@ gn/libcxx.patch
 
 arm/pffffft-buildfix.patch
 
-fixes/link.patch
 fixes/mojo.patch
+fixes/gnu-as.patch
 fixes/breakpad.patch
+fixes/ordering.patch
 fixes/inspector.patch
 fixes/gpu-timeout.patch
 fixes/sequence-point.patch
 fixes/jumbo-namespace.patch
+fixes/incomplete-type.patch
+fixes/missing-includes.patch
+fixes/lambda-expression.patch
 fixes/widevine-enable-version-string.patch
 fixes/widevine-locations.patch
-fixes/missing-includes.patch
+fixes/nullptr-dereference.patch
 
+disable/tests.patch
 disable/glmark.patch
 disable/owners.patch
 disable/openh264.patch
 disable/buildbot.patch
-disable/chromeos.patch
 disable/installer.patch
 disable/font-tests.patch
 disable/swiftshader.patch
@@ -40,6 +44,7 @@ warnings/attribute-ignored.patch
 warnings/int-in-bool-context.patch
 warnings/unused-field.patch
 
+system/re2.patch
 system/vpx.patch
 system/icu.patch
 system/jpeg.patch
@@ -52,11 +57,11 @@ system/jsoncpp.patch
 system/harfbuzz.patch
 system/openjpeg.patch
 system/convertutf.patch
+system/clang-format.patch
 
 buster/re2.patch
 buster/icu63.patch
 buster/vpx17.patch
-buster/opus13.patch
 buster/clang7.patch
 
 inox-patchset/chromium-skia-harmony.patch
@@ -64,8 +69,8 @@ inox-patchset/fix-cfi-failures-with-unbundled-libxml.patch
 
 fedora/vaapi.patch
 fedora/vaapi-fix.patch
-fedora/chromium-81-vaapi-r738595.patch
 
+ungoogled-chromium/clang.patch
 ungoogled-chromium/manpage.patch
 ungoogled-chromium/safebrowsing.patch
 ungoogled-chromium/headers.patch

@@ -3,16 +3,17 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/build/config/compiler/BUILD.gn
 +++ b/build/config/compiler/BUILD.gn
-@@ -137,7 +137,7 @@ declare_args() {
+@@ -137,8 +137,7 @@ declare_args() {
    # TODO(vitalybuka):
    # 'is_android' breaks content_shell_test_apk on android-kitkat-arm-rel.
    # 'use_xcode_clang' may call old clang.
--  init_stack_vars = !is_android && !use_xcode_clang && !is_official_build
+-  init_stack_vars =
+-      !is_android && !use_xcode_clang && (!is_official_build || is_linux)
 +  init_stack_vars = false # for clang 7 on buster
- }
  
- declare_args() {
-@@ -1515,24 +1515,6 @@ config("default_warnings") {
+   # This argument is to control whether enabling text section splitting in the
+   # final binary. When enabled, the separated text sections with prefix
+@@ -1511,21 +1510,6 @@ config("default_warnings") {
            # TODO(thakis): Only for no_chromium_code? http://crbug.com/912662
            "-Wno-ignored-pragma-optimize",
  
@@ -22,24 +23,30 @@ author: Michael Gilbert <mgilbert@debian.org>
 -          # TODO(https://crbug.com/999886): Clean up, enable.
 -          "-Wno-final-dtor-non-final-class",
 -
--          # TODO(https://crbug.com/1016947) Clean up, enable.
--          "-Wno-bitwise-conditional-parentheses",
--
 -          # TODO(https://crbug.com/1016945) Clean up, enable.
 -          "-Wno-builtin-assume-aligned-alignment",
 -
 -          # TODO(https://crbug.com/1028110): Evaluate and possible enable.
 -          "-Wno-deprecated-copy",
 -
--          # TODO(https://crbug.com/1031169): Clean up and enable.
--          "-Wno-misleading-indentation",
+-          # TODO(https://crbug.com/1050281): Clean up, enable.
+-          "-Wno-non-c-typedef-for-linkage",
 -
-           # TODO(https://crbug.com/1039697): Evaluate and possibly enable.
-           "-Wno-range-loop-analysis",
+           # TODO(https://crbug.com/1059231): Clean up, enable.
+           "-Wno-pointer-to-int-cast",
          ]
+@@ -1675,7 +1659,7 @@ config("no_chromium_code") {
+       # suppressing them individually, we just blanket suppress them here.
+       "-Wno-unused-variable",
+     ]
+-    if (!is_nacl && (current_toolchain == host_toolchain || !use_xcode_clang)) {
++    if (false) {
+       cflags += [
+         # TODO(https://crbug.com/1031169): Clean up and enable.
+         "-Wno-misleading-indentation",
 --- a/third_party/blink/renderer/BUILD.gn
 +++ b/third_party/blink/renderer/BUILD.gn
-@@ -45,11 +45,9 @@
+@@ -45,11 +45,9 @@ config("inside_blink") {
        "-Wconversion",
        "-Wno-float-conversion",
        "-Wno-sign-conversion",
@@ -49,12 +56,12 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 -    if (!is_chromeos || default_toolchain != "//build/toolchain/cros:target") {
 +    if (false) {
-       cflags += [
-         "-Wno-enum-enum-conversion",
-         "-Wno-enum-float-conversion",
+       cflags += [ "-Wno-enum-float-conversion" ]
+     }
+   }
 --- a/third_party/angle/BUILD.gn
 +++ b/third_party/angle/BUILD.gn
-@@ -143,7 +143,6 @@ config("extra_warnings") {
+@@ -137,7 +137,6 @@ config("extra_warnings") {
    if (is_clang) {
      cflags += [
        "-Wconditional-uninitialized",
@@ -104,10 +111,14 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/third_party/blink/renderer/platform/heap/finalizer_traits.h
 +++ b/third_party/blink/renderer/platform/heap/finalizer_traits.h
-@@ -49,10 +49,7 @@
- // an object's base class has a virtual destructor. In case there is no virtual
- // destructor present, the object is always finalized through its leaf type. In
- // other words: there is no finalization through a base pointer.
+@@ -45,14 +45,7 @@
+   };
+   struct Destructor {
+     static void Call(void* obj) {
+-// The garbage collector differs from regular C++ here as it remembers whether
+-// an object's base class has a virtual destructor. In case there is no virtual
+-// destructor present, the object is always finalized through its leaf type. In
+-// other words: there is no finalization through a base pointer.
 -#pragma GCC diagnostic push
 -#pragma GCC diagnostic ignored "-Wdelete-non-abstract-non-virtual-dtor"
        static_cast<T*>(obj)->~T();

@@ -22,3 +22,80 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include <string>
  
  #include "base/macros.h"
+--- a/third_party/webrtc/call/rtx_receive_stream.h
++++ b/third_party/webrtc/call/rtx_receive_stream.h
+@@ -11,6 +11,8 @@
+ #ifndef CALL_RTX_RECEIVE_STREAM_H_
+ #define CALL_RTX_RECEIVE_STREAM_H_
+ 
++#include <stdint.h>
++
+ #include <map>
+ 
+ #include "call/rtp_packet_sink_interface.h"
+--- a/third_party/webrtc/modules/audio_processing/aec3/clockdrift_detector.h
++++ b/third_party/webrtc/modules/audio_processing/aec3/clockdrift_detector.h
+@@ -11,6 +11,8 @@
+ #ifndef MODULES_AUDIO_PROCESSING_AEC3_CLOCKDRIFT_DETECTOR_H_
+ #define MODULES_AUDIO_PROCESSING_AEC3_CLOCKDRIFT_DETECTOR_H_
+ 
++#include <stddef.h>
++
+ #include <array>
+ 
+ namespace webrtc {
+--- a/ui/gfx/linux/drm_util_linux.h
++++ b/ui/gfx/linux/drm_util_linux.h
+@@ -5,6 +5,8 @@
+ #ifndef UI_GFX_LINUX_DRM_UTIL_LINUX_H_
+ #define UI_GFX_LINUX_DRM_UTIL_LINUX_H_
+ 
++#include <stdint.h>
++
+ #include "ui/gfx/buffer_types.h"
+ 
+ namespace ui {
+--- a/chrome/browser/search/background/ntp_backgrounds.h
++++ b/chrome/browser/search/background/ntp_backgrounds.h
+@@ -5,6 +5,8 @@
+ #ifndef CHROME_BROWSER_SEARCH_BACKGROUND_NTP_BACKGROUNDS_H_
+ #define CHROME_BROWSER_SEARCH_BACKGROUND_NTP_BACKGROUNDS_H_
+ 
++#include <stddef.h>
++
+ #include <array>
+ 
+ class GURL;
+--- a/extensions/browser/install/crx_install_error.cc
++++ b/extensions/browser/install/crx_install_error.cc
+@@ -7,6 +7,8 @@
+ #include "base/logging.h"
+ #include "extensions/browser/install/sandboxed_unpacker_failure_reason.h"
+ 
++#include <algorithm>
++
+ namespace extensions {
+ 
+ CrxInstallError::CrxInstallError(CrxInstallErrorType type,
+--- a/chrome/browser/performance_manager/graph/policies/background_tab_loading_policy_helpers.cc
++++ b/chrome/browser/performance_manager/graph/policies/background_tab_loading_policy_helpers.cc
+@@ -5,6 +5,8 @@
+ #include "chrome/browser/performance_manager/graph/policies/background_tab_loading_policy_helpers.h"
+ #include "base/logging.h"
+ 
++#include <limits>
++
+ namespace performance_manager {
+ 
+ namespace policies {
+--- a/third_party/blink/renderer/core/html/trust_token_attribute_parsing.h
++++ b/third_party/blink/renderer/core/html/trust_token_attribute_parsing.h
+@@ -9,6 +9,8 @@
+ #include "services/network/public/mojom/trust_tokens.mojom-blink-forward.h"
+ #include "third_party/blink/renderer/core/core_export.h"
+ 
++#include <memory>
++
+ namespace blink {
+ 
+ class JSONValue;

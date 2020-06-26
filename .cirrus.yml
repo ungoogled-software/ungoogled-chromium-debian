@@ -15,7 +15,7 @@ validate_with_source_task:
         folder: chromium_download_cache
         fingerprint_script: cat ungoogled-chromium/chromium_version.txt
         populate_script:
-            - mkdir chromium_download_cache
+            - mkdir chromium_download_cache || true
             - ./ungoogled-chromium/utils/downloads.py retrieve -i ungoogled-chromium/downloads.ini -c chromium_download_cache
     unpack_source_script:
         - ./ungoogled-chromium/utils/downloads.py unpack -i ungoogled-chromium/downloads.ini -c chromium_download_cache chromium_src
