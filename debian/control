@@ -110,8 +110,6 @@ Breaks:
  chromium-tt-rss-notifier (<= 0.5.2-2),
 Conflicts:
  libnettle4,
- libavcodec58 (= 7:4.3-1),
- libavcodec58 (= 7:4.3-2),
  libsecret-1-0 (<< 0.18),
  libgl1-mesa-swx11,
 Description: web browser
