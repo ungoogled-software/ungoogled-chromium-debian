@@ -53,6 +53,7 @@ system/nspr.patch
 system/zlib.patch
 system/event.patch
 system/ffmpeg.patch
+system/ffmpeg43.patch
 system/jsoncpp.patch
 system/harfbuzz.patch
 system/openjpeg.patch
