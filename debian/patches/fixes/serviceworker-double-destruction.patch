@@ -62,8 +62,8 @@ Cr-Commit-Position: refs/heads/master@{#766770}
 
 Index: chromium-83.0.4103.116/content/browser/service_worker/service_worker_container_host.cc
 ===================================================================
---- chromium-83.0.4103.116.orig/content/browser/service_worker/service_worker_container_host.cc
-+++ chromium-83.0.4103.116/content/browser/service_worker/service_worker_container_host.cc
+--- a/content/browser/service_worker/service_worker_container_host.cc
++++ b/content/browser/service_worker/service_worker_container_host.cc
 @@ -713,6 +713,16 @@ void ServiceWorkerContainerHost::RemoveS
      int64_t version_id) {
    DCHECK_CURRENTLY_ON(ServiceWorkerContext::GetCoreThreadId());
@@ -83,8 +83,8 @@ Index: chromium-83.0.4103.116/content/browser/service_worker/service_worker_cont
  
 Index: chromium-83.0.4103.116/content/browser/service_worker/service_worker_object_host_unittest.cc
 ===================================================================
---- chromium-83.0.4103.116.orig/content/browser/service_worker/service_worker_object_host_unittest.cc
-+++ chromium-83.0.4103.116/content/browser/service_worker/service_worker_object_host_unittest.cc
+--- a/content/browser/service_worker/service_worker_object_host_unittest.cc
++++ b/content/browser/service_worker/service_worker_object_host_unittest.cc
 @@ -200,6 +200,19 @@ class ServiceWorkerObjectHostTest : publ
      return registration_info;
    }
