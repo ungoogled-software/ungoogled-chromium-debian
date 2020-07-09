@@ -20,6 +20,7 @@ fixes/lambda-expression.patch
 fixes/widevine-enable-version-string.patch
 fixes/widevine-locations.patch
 fixes/nullptr-dereference.patch
+fixes/serviceworker-double-destruction.patch
 
 disable/tests.patch
 disable/glmark.patch
