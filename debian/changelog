@@ -1,3 +1,10 @@
+chromium (83.0.4103.116-3) unstable; urgency=high
+
+  * Fix crashes when a connection error occurs (closes: #963548).
+    - Thank you so much to Riku Voipio.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 11 Jul 2020 14:56:34 +0000
+
 chromium (83.0.4103.116-2) unstable; urgency=medium
 
   * Fix crashes due to ffmpeg 4.3 (closes: #963035).
