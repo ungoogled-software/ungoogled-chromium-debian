@@ -69,6 +69,7 @@ fedora/vaapi.patch
 fedora/vaapi-fix.patch
 
 ungoogled-chromium/clang.patch
+ungoogled-chromium/re2.patch
 ungoogled-chromium/manpage.patch
 ungoogled-chromium/safebrowsing.patch
 ungoogled-chromium/headers.patch

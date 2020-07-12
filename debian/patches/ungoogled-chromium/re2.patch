@@ -1,0 +1,35 @@
+--- a/components/omnibox/browser/document_provider.cc
++++ b/components/omnibox/browser/document_provider.cc
+@@ -335,7 +335,7 @@
+   for (const auto& doc_id_group : docs_url_pattern_.NamedCapturingGroups()) {
+     re2::StringPiece identified_doc_id = matched_doc_ids[doc_id_group.second];
+     if (!identified_doc_id.empty()) {
+-      return std::string(identified_doc_id);
++      return identified_doc_id.ToString();
+     }
+   }
+   return std::string();
+--- a/extensions/browser/api/declarative_net_request/regex_rules_matcher.cc
++++ b/extensions/browser/api/declarative_net_request/regex_rules_matcher.cc
+@@ -303,7 +303,7 @@
+     if (!DoesRuleMetadataMatchRequest(*rule->url_rule(), params))
+       continue;
+ 
+-    const RE2& regex = filtered_re2_.GetRE2(re2_id);
++    const RE2& regex = *filtered_re2_.GetRE2(re2_id);
+     potential_matches.emplace_back(rule, &regex);
+   }
+ 
+--- a/extensions/browser/api/declarative_net_request/regex_rules_matcher.h
++++ b/extensions/browser/api/declarative_net_request/regex_rules_matcher.h
+@@ -10,7 +10,10 @@
+ #include "base/macros.h"
+ #include "components/url_matcher/substring_set_matcher.h"
+ #include "extensions/browser/api/declarative_net_request/ruleset_matcher_base.h"
++
++#define private public
+ #include "third_party/re2/src/re2/filtered_re2.h"
++#undef private
+ 
+ namespace extensions {
+ namespace declarative_net_request {
