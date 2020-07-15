@@ -10,4 +10,4 @@ author: Michael Gilbert <mgilbert@debian.org>
 -    "//chrome/installer",
      "//chrome/updater",
      "//components:components_unittests",
-     "//components/gc:gc_unittests",
+     "//components/gwp_asan:gwp_asan_unittests",

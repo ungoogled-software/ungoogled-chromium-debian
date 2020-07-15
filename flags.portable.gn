@@ -8,7 +8,6 @@ host_toolchain="//build/toolchain/linux/unbundle:default"
 is_clang=true
 is_debug=false
 is_official_build=true
-linux_use_bundled_binutils=false
 proprietary_codecs=true
 symbol_level=0
 use_gnome_keyring=false

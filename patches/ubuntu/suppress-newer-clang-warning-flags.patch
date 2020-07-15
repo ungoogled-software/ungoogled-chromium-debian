@@ -4,10 +4,11 @@ Description: Do not use warning flags that require a newer Clang (bionic has 9.0
 
 --- a/build/config/compiler/BUILD.gn
 +++ b/build/config/compiler/BUILD.gn
-@@ -1511,21 +1511,6 @@ config("default_warnings") {
+@@ -1483,21 +1483,6 @@ config("default_warnings") {
+           # Ignore warnings about MSVC optimization pragmas.
            # TODO(thakis): Only for no_chromium_code? http://crbug.com/912662
            "-Wno-ignored-pragma-optimize",
- 
+-
 -          # TODO(https://crbug.com/989932): Evaluate and possibly enable.
 -          "-Wno-implicit-int-float-conversion",
 -
@@ -22,11 +23,10 @@ Description: Do not use warning flags that require a newer Clang (bionic has 9.0
 -
 -          # TODO(https://crbug.com/1050281): Clean up, enable.
 -          "-Wno-non-c-typedef-for-linkage",
--
-           # TODO(https://crbug.com/1059231): Clean up, enable.
-           "-Wno-pointer-to-int-cast",
          ]
-@@ -1676,10 +1661,10 @@ config("no_chromium_code") {
+ 
+         cflags_c += [
+@@ -1639,10 +1624,10 @@ config("no_chromium_code") {
        "-Wno-unused-variable",
      ]
      if (!is_nacl && (current_toolchain == host_toolchain || !use_xcode_clang)) {

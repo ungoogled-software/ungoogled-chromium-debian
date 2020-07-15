@@ -4,7 +4,7 @@ bug-debian: http://bugs.debian.org/901290
 
 --- a/third_party/skia/third_party/skcms/skcms.gni
 +++ b/third_party/skia/third_party/skcms/skcms.gni
-@@ -3,6 +3,10 @@
+@@ -3,4 +3,8 @@
  # Use of this source code is governed by a BSD-style license that can be
  # found in the LICENSE file.
  
@@ -12,6 +12,4 @@ bug-debian: http://bugs.debian.org/901290
 +    defines = [ "SKCMS_PORTABLE=1" ]
 +}
 +
- skcms_sources = [
-   "skcms.cc",
- ]
+ skcms_sources = [ "skcms.cc" ]
