@@ -10,11 +10,11 @@ author: Michael Gilbert <mgilbert@debian.org>
 -    "//chrome/installer",
 -    "//chrome/updater",
      "//components:components_unittests",
-     "//components/gc:gc_unittests",
      "//components/gwp_asan:gwp_asan_unittests",
+     "//net:net_unittests",
 --- a/chrome/browser/BUILD.gn
 +++ b/chrome/browser/BUILD.gn
-@@ -5578,7 +5578,6 @@ source_set("active_use_util") {
+@@ -5586,7 +5586,6 @@ source_set("active_use_util") {
    deps = [
      "//base",
      "//chrome/common:constants",

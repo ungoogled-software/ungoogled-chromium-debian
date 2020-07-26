@@ -1,6 +1,9 @@
+description: maintain compatibility with re2 on buster
+author: Michael Gilbert <mgilbert@debian.org>
+
 --- a/extensions/browser/api/declarative_net_request/regex_rules_matcher.cc
 +++ b/extensions/browser/api/declarative_net_request/regex_rules_matcher.cc
-@@ -303,7 +303,12 @@ const std::vector<RegexRuleInfo>& RegexR
+@@ -275,7 +275,12 @@ const std::vector<RegexRuleInfo>& RegexR
      if (!DoesRuleMetadataMatchRequest(*rule->url_rule(), params))
        continue;
  

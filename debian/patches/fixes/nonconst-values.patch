@@ -1,0 +1,75 @@
+description: clang 7 needs vector value types to be non-const
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/extensions/common/features/feature_flags.cc
++++ b/extensions/common/features/feature_flags.cc
+@@ -19,7 +19,7 @@ namespace {
+ constexpr base::Feature kFeatureFlags[] = {
+     {"DeclarativeNetRequest", base::FEATURE_ENABLED_BY_DEFAULT}};
+ 
+-const std::vector<const base::Feature>* g_feature_flags_test_override = nullptr;
++const std::vector<base::Feature>* g_feature_flags_test_override = nullptr;
+ 
+ template <typename T>
+ const base::Feature* GetFeature(T begin,
+@@ -52,8 +52,8 @@ bool IsFeatureFlagEnabled(const std::str
+ }
+ 
+ ScopedFeatureFlagsOverride CreateScopedFeatureFlagsOverrideForTesting(
+-    const std::vector<const base::Feature>* features) {
+-  return base::AutoReset<const std::vector<const base::Feature>*>(
++    const std::vector<base::Feature>* features) {
++  return base::AutoReset<const std::vector<base::Feature>*>(
+       &g_feature_flags_test_override, features);
+ }
+ 
+--- a/extensions/common/features/feature_flags.h
++++ b/extensions/common/features/feature_flags.h
+@@ -25,9 +25,9 @@ bool IsFeatureFlagEnabled(const std::str
+ // in scope. Clients must ensure that |features| remains alive (non-dangling)
+ // while the returned value is in scope.
+ using ScopedFeatureFlagsOverride =
+-    base::AutoReset<const std::vector<const base::Feature>*>;
++    base::AutoReset<const std::vector<base::Feature>*>;
+ ScopedFeatureFlagsOverride CreateScopedFeatureFlagsOverrideForTesting(
+-    const std::vector<const base::Feature>* features);
++    const std::vector<base::Feature>* features);
+ 
+ }  // namespace extensions
+ 
+--- a/content/test/mock_raw_clipboard_host.cc
++++ b/content/test/mock_raw_clipboard_host.cc
+@@ -60,7 +60,7 @@ void MockRawClipboardHost::Write(const b
+   if (needs_reset_)
+     Reset();
+   // Simulate the underlying platform copying this data.
+-  std::vector<const uint8_t> data_copy(data.data(), data.data() + data.size());
++  std::vector<uint8_t> data_copy(data.data(), data.data() + data.size());
+ 
+   // Provide one commonly-used format on some platforms, where the platforms
+   // automatically convert between certain format names, for use in testing.
+@@ -92,4 +92,4 @@ void MockRawClipboardHost::CommitWrite()
+   needs_reset_ = true;
+ }
+ 
+-}  // namespace content
+\ No newline at end of file
++}  // namespace content
+--- a/content/test/mock_raw_clipboard_host.h
++++ b/content/test/mock_raw_clipboard_host.h
+@@ -41,7 +41,7 @@ class MockRawClipboardHost : public blin
+   // The associated sanitized clipboard, for emulating platform-specific
+   // clipboard type conversions. Owned by WebTestContentBrowserClient.
+   MockClipboardHost* const mock_clipboard_host_;
+-  std::map<base::string16, std::vector<const uint8_t>> raw_data_map_;
++  std::map<base::string16, std::vector<uint8_t>> raw_data_map_;
+   // Tracks whether a commit has happened since the last write. After a
+   // sequence of writes are committed, future writes should clear the clipboard
+   // before continuing to write.
+@@ -50,4 +50,4 @@ class MockRawClipboardHost : public blin
+ 
+ }  // namespace content
+ 
+-#endif  // CONTENT_TEST_MOCK_RAW_CLIPBOARD_HOST_H_
+\ No newline at end of file
++#endif  // CONTENT_TEST_MOCK_RAW_CLIPBOARD_HOST_H_

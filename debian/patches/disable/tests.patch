@@ -1,6 +1,6 @@
 --- a/third_party/devtools-frontend/src/BUILD.gn
 +++ b/third_party/devtools-frontend/src/BUILD.gn
-@@ -958,7 +958,6 @@ devtools_frontend_resources_data_test_de
+@@ -966,7 +966,6 @@ devtools_frontend_resources_data_test_de
  # builds. Since we don't run these tests on Android any case, we disable
  # the generation of the tests on Android.
  if (!is_android) {
