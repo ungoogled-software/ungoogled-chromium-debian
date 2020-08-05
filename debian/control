@@ -43,7 +43,6 @@ Build-Depends:
  libxt-dev,
  libre2-dev,
  libgbm-dev,
- libpng-dev,
  libxss-dev,
  libelf-dev,
  libvpx-dev (>= 1.7.0),

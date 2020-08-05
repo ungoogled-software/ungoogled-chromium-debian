@@ -66,7 +66,6 @@ Files-Excluded:
  third_party/flac
  third_party/llvm
  third_party/webgl
- third_party/libpng
  third_party/libvpx
  third_party/libdrm
  third_party/snappy
