@@ -1,3 +1,64 @@
+chromium (84.0.4147.105-1) experimental; urgency=medium
+
+  * New upstream security release.
+    - CVE-2020-6537: Type Confusion in V8. Reported by Rong Jian and Guang Gong
+    - CVE-2020-6532: Use after free in SCTP. Reported by Anonymous
+    - CVE-2020-6538: Inappropriate implementation in WebView. Reported by
+      Yongke Wang and Aryb1n
+    - CVE-2020-6539: Use after free in CSS. Reported by Oriol Brufau
+    - CVE-2020-6540: Heap buffer overflow in Skia. Reported by Zhen Zhou
+    - CVE-2020-6541: Use after free in WebUSB. Reported by Sergei Glazunov
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 01 Aug 2020 03:00:31 +0000
+
+chromium (84.0.4147.89-1) experimental; urgency=medium
+
+  * New upstream stable release.
+    - CVE-2020-6510: Heap buffer overflow in background fetch. Reported by
+      Leecraso and Guang Gong
+    - CVE-2020-6511: Side-channel information leakage in content security
+      policy. Reported by Mikhail Oblozhikhin
+    - CVE-2020-6512: Type Confusion in V8. Reported by nocma, leogan, cheneyxu
+    - CVE-2020-6513: Heap buffer overflow in PDFium. Reported by Aleksandar
+      Nikolic
+    - CVE-2020-6514: Inappropriate implementation in WebRTC. Reported by
+      Natalie Silvanovich
+    - CVE-2020-6515: Use after free in tab strip. Reported by DDV_UA
+    - CVE-2020-6516: Policy bypass in CORS. Reported by Yongke Wang and Aryb1n
+    - CVE-2020-6517: Heap buffer overflow in history. Reported by ZeKai Wu
+    - CVE-2020-6518: Use after free in developer tools. Reported by David Erceg
+    - CVE-2020-6519: Policy bypass in CSP. Reported by Gal Weizman
+    - CVE-2020-6520: Heap buffer overflow in Skia. Reported by Zhen Zhou
+    - CVE-2020-6521: Side-channel information leakage in autofill. Reported by
+      Xu Lin, Panagiotis Ilia, Jason Polakis
+    - CVE-2020-6522: Inappropriate implementation in external protocol
+      handlers. Reported by Eric Lawrence
+    - CVE-2020-6523: Out of bounds write in Skia. Reported by Liu Wei and Wu
+      Zekai
+    - CVE-2020-6524: Heap buffer overflow in WebAudio. Reported by Sung Ta
+    - CVE-2020-6525: Heap buffer overflow in Skia. Reported by Zhen Zhou
+    - CVE-2020-6526: Inappropriate implementation in iframe sandbox. Reported
+      by Jonathan Kingston
+    - CVE-2020-6527: Insufficient policy enforcement in CSP. Reported by Zhong
+      Zhaochen
+    - CVE-2020-6528: Incorrect security UI in basic auth. Reported by Rayyan
+      Bijoora
+    - CVE-2020-6529: Inappropriate implementation in WebRTC. Reported by
+      kaustubhvats7
+    - CVE-2020-6530: Out of bounds memory access in developer tools. Reported
+      by myvyang
+    - CVE-2020-6531: Side-channel information leakage in scroll to text.
+      Reported by Jun Kokatsu
+    - CVE-2020-6533: Type Confusion in V8. Reported by Avihay Cohen
+    - CVE-2020-6534: Heap buffer overflow in WebRTC. Reported by Anonymous
+    - CVE-2020-6535: Insufficient data validation in WebUI. Reported by Jun
+      Kokatsu
+    - CVE-2020-6536: Incorrect security UI in PWAs. Reported by Zhiyang Zeng
+  * Update information in debian/copyright.
+  * Include more upstream metadata information.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 26 Jul 2020 15:21:41 +0000
+
 chromium (83.0.4103.116-3) unstable; urgency=high
 
   * Fix crashes when a connection error occurs (closes: #963548).

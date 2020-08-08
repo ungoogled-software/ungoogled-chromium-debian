@@ -1,1 +1,1 @@
-report-with: chromium-common chromium-driver chromium-sandbox
+report-with: chromium-common chromium-dbgsym chromium-driver chromium-sandbox

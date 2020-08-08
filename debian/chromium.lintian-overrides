@@ -1,3 +1,5 @@
 # currently unavoidable embedded libraries
 embedded-library usr/lib/chromium/chromium: srtp
 embedded-library usr/lib/chromium/chromium: sqlite
+# too many upstream spelling mistakes
+spelling-error-in-binary

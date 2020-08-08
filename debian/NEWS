@@ -1,30 +1,33 @@
 chromium-browser (70.0.3538.54-2) unstable; urgency=medium
 
-  * The master_preferences files has been moved from /usr/share/chromium to
-    /etc/chromium to support system level configuration of default options.
+  The master_preferences files has been moved from /usr/share/chromium to
+  /etc/chromium to support system level configuration of default options.
 
  -- Michael Gilbert <mgilbert@debian.org>  Sun, 14 Oct 2018 23:34:04 +0000
 
 chromium-browser (69.0.3497.100-1) unstable; urgency=medium
 
-  * All local extensions that are installed to /usr/share/chromium/extensions
-    will now be loaded and enabled automatically.
-  * Some extension packages used to do this manually with a file in
-    /etc/chromium.d. This conflicts with the new approach, so those packages
-    need to be updated to account for this.
-  * External extensions were enabled by default in an upload prior to the
-    release of stretch and will remain this way for the buster release.  A
-    future upload following the release of buster will disable this.
+  All local extensions that are installed to /usr/share/chromium/extensions
+  will now be loaded and enabled automatically.
+
+  Some extension packages used to do this manually with a file in
+  /etc/chromium.d. This conflicts with the new approach, so those packages
+  need to be updated to account for this.
+
+  External extensions were enabled by default in an upload prior to the
+  release of stretch and will remain this way for the buster release.  A
+  future upload following the release of buster will disable this.
 
  -- Michael Gilbert <mgilbert@debian.org>  Sat, 13 Oct 2018 03:22:43 +0000
 
 chromium-browser (55.0.2883.75-4) unstable; urgency=medium
 
-  * External extensions are now disabled by default.  Chromium will only load
-    extensions that are explicitly specified with the --load-extension command
-    line option passed into CHROMIUM_FLAGS.  See the chromium-lwn4chrome
-    package for an example of how to do this.
-  * You can also use the --enable-remote-extensions command line argument to
-    chromium, which will bypass this restriction.
+  External extensions are now disabled by default.  Chromium will only load
+  extensions that are explicitly specified with the --load-extension command
+  line option passed into CHROMIUM_FLAGS.  See the chromium-lwn4chrome
+  package for an example of how to do this.
+
+  You can also use the --enable-remote-extensions command line argument to
+  chromium, which will bypass this restriction.
 
  -- Michael Gilbert <mgilbert@debian.org>  Mon, 02 Jan 2017 02:42:29 +0000
