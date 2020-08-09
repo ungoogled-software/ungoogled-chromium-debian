@@ -15,7 +15,7 @@ origin: chromium 66 authors
      std::move(bound_init_cb).Run(StatusCode::kDecoderFailedInitialization);
 --- a/media/cdm/library_cdm/clear_key_cdm/clear_key_cdm.cc
 +++ b/media/cdm/library_cdm/clear_key_cdm/clear_key_cdm.cc
-@@ -152,6 +152,7 @@ void ConvertCdmKeysInfo(const media::Cdm
+@@ -149,6 +149,7 @@ void ConvertCdmKeysInfo(const media::Cdm
  void INITIALIZE_CDM_MODULE() {
    DVLOG(1) << __func__;
    media::InitializeMediaLibrary();
@@ -25,7 +25,7 @@ origin: chromium 66 authors
  
 --- a/media/filters/ffmpeg_glue.cc
 +++ b/media/filters/ffmpeg_glue.cc
-@@ -64,7 +64,13 @@ static void LogContainer(bool is_local_f
+@@ -65,7 +65,13 @@ static void LogContainer(bool is_local_f
      base::UmaHistogramSparse("Media.DetectedContainer.Local", container);
  }
  

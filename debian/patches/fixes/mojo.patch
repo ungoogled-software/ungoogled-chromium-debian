@@ -13,7 +13,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    "//chromeos/services/cros_healthd/public/mojom/typemaps.gni",
 --- a/content/shell/BUILD.gn
 +++ b/content/shell/BUILD.gn
-@@ -165,8 +165,6 @@ static_library("content_shell_lib") {
+@@ -301,8 +301,6 @@ static_library("content_shell_lib") {
      "browser/web_test/leak_detector.h",
      "browser/web_test/mock_client_hints_controller_delegate.cc",
      "browser/web_test/mock_client_hints_controller_delegate.h",
@@ -22,27 +22,27 @@ author: Michael Gilbert <mgilbert@debian.org>
      "browser/web_test/secondary_test_window_observer.cc",
      "browser/web_test/secondary_test_window_observer.h",
      "browser/web_test/test_info_extractor.cc",
-@@ -305,7 +303,6 @@ static_library("content_shell_lib") {
-     "//content/shell/test_runner:test_runner",
+@@ -436,7 +434,6 @@ static_library("content_shell_lib") {
+     "//content/public/common:service_names",
      "//content/test:blink_test_browser_support",
      "//content/test:content_test_mojo_bindings",
 -    "//content/test:mojo_web_test_bindings",
      "//content/test:test_support",
-     "//content/test:web_test_support",
+     "//content/test:web_test_support_browser",
      "//device/bluetooth",
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -1037,7 +1037,6 @@ if (!is_ios) {
+@@ -1040,7 +1040,6 @@ if (!is_ios) {
        ":layout_test_data_mojo_bindings_lite",
        "//content/shell:content_shell",
-       "//content/shell:mojo_bindings_js_data_deps",
+       "//content/shell:web_test_common_mojom_js_data_deps",
 -      "//content/test:mojo_web_test_bindings_js_data_deps",
        "//device/bluetooth/public/mojom:fake_bluetooth_interfaces_js_data_deps",
        "//device/vr/public/mojom:mojom_js_data_deps",
        "//media/capture/mojom:image_capture_js_data_deps",
 --- a/content/shell/browser/web_test/web_test_content_browser_client.cc
 +++ b/content/shell/browser/web_test/web_test_content_browser_client.cc
-@@ -32,7 +32,6 @@
+@@ -34,7 +34,6 @@
  #include "content/shell/browser/web_test/fake_bluetooth_chooser.h"
  #include "content/shell/browser/web_test/fake_bluetooth_chooser_factory.h"
  #include "content/shell/browser/web_test/fake_bluetooth_delegate.h"
@@ -50,15 +50,15 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "content/shell/browser/web_test/web_test_bluetooth_fake_adapter_setter_impl.h"
  #include "content/shell/browser/web_test/web_test_browser_context.h"
  #include "content/shell/browser/web_test/web_test_browser_main_parts.h"
-@@ -43,7 +42,6 @@
- #include "content/shell/common/blink_test.mojom.h"
+@@ -45,7 +44,6 @@
+ #include "content/shell/browser/web_test/web_test_tts_platform.h"
  #include "content/shell/common/web_test/web_test_bluetooth_fake_adapter_setter.mojom.h"
  #include "content/shell/common/web_test/web_test_switches.h"
 -#include "content/test/data/mojo_web_test_helper_test.mojom.h"
  #include "content/test/mock_badge_service.h"
  #include "content/test/mock_clipboard_host.h"
  #include "content/test/mock_platform_notification_service.h"
-@@ -71,19 +69,13 @@ namespace {
+@@ -74,19 +72,13 @@ namespace {
  
  WebTestContentBrowserClient* g_web_test_browser_client;
  
@@ -79,7 +79,7 @@ author: Michael Gilbert <mgilbert@debian.org>
                    mojom::FakeBluetoothChooserFactory,
                    mojom::WebTestBluetoothFakeAdapterSetter,
                    bluetooth::mojom::FakeBluetooth>())
-@@ -197,7 +189,6 @@ void WebTestContentBrowserClient::Expose
+@@ -232,7 +224,6 @@ void WebTestContentBrowserClient::Expose
            &WebTestContentBrowserClient::CreateFakeBluetoothChooserFactory,
            base::Unretained(this)),
        ui_task_runner);
@@ -87,11 +87,11 @@ author: Michael Gilbert <mgilbert@debian.org>
    registry->AddInterface(
        base::BindRepeating(
            &WebTestContentBrowserClient::BindClientHintsControllerDelegate,
-@@ -376,7 +367,6 @@ bool WebTestContentBrowserClient::CanCre
+@@ -411,7 +402,6 @@ bool WebTestContentBrowserClient::CanCre
  void WebTestContentBrowserClient::RegisterBrowserInterfaceBindersForFrame(
      RenderFrameHost* render_frame_host,
-     service_manager::BinderMapWithContext<content::RenderFrameHost*>* map) {
+     mojo::BinderMapWithContext<content::RenderFrameHost*>* map) {
 -  map->Add<mojom::MojoWebTestHelper>(base::BindRepeating(&BindWebTestHelper));
    map->Add<blink::mojom::ClipboardHost>(base::BindRepeating(
        &WebTestContentBrowserClient::BindClipboardHost, base::Unretained(this)));
-   map->Add<blink::mojom::BadgeService>(base::BindRepeating(
+   map->Add<blink::mojom::RawClipboardHost>(

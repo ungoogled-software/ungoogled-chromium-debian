@@ -18,7 +18,7 @@ Signed-off-by: Bastian Germann <bastiangermann@fishpost.de>
  #include "media/base/media.h"
  
  #include "base/allocator/buildflags.h"
-@@ -41,7 +43,7 @@
+@@ -41,7 +43,7 @@ class MediaInitializer {
  
  #if BUILDFLAG(USE_ALLOCATOR_SHIM)
      // Remove allocation limit from ffmpeg, so calls go down to shim layer.

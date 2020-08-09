@@ -1,3 +1,9 @@
 name: chromium
-bug-database: http://crbug.com
-cpe: cpe:/a:google:chrome
+cpe: cpe:/a:google:chrome cpe:/a:google:blink cpe:/a:chromium:chromium cpe:/a:apple:webkit
+faq: https://www.chromium.org/administrators/frequently-asked-questions
+bug-database: https://crbug.com
+changelog: https://chromereleases.googleblog.com
+donation: https://www.chromium.org/getting-involved
+documentation: https://www.chromium.org/Home
+repository: https://chromium.googlesource.com/chromium/src.git
+repository-browse: https://chromium.googlesource.com/chromium/src

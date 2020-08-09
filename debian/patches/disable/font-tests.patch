@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/skia/BUILD.gn
 +++ b/skia/BUILD.gn
-@@ -846,7 +846,7 @@ group("test_fonts_resources") {
+@@ -838,7 +838,7 @@ group("test_fonts_resources") {
    if (is_mac || is_ios) {
      deps += [ ":test_fonts_bundle_data" ]
      data_deps += [ ":test_fonts_bundle_data" ]
