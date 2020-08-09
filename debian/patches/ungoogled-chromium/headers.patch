@@ -1,6 +1,6 @@
 --- a/chrome/browser/ui/webui/signin/inline_login_handler_impl.h
 +++ b/chrome/browser/ui/webui/signin/inline_login_handler_impl.h
-@@ -17,6 +17,7 @@
+@@ -16,6 +16,7 @@
  #include "chrome/browser/profiles/profile.h"
  #include "chrome/browser/ui/webui/signin/inline_login_handler.h"
  #include "chrome/browser/ui/webui/signin/signin_email_confirmation_dialog.h"

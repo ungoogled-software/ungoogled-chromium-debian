@@ -112,7 +112,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    }
 --- a/net/BUILD.gn
 +++ b/net/BUILD.gn
-@@ -4565,7 +4565,6 @@ test("net_unittests") {
+@@ -4567,7 +4567,6 @@ test("net_unittests") {
    data = []
    data_deps = [
      "third_party/nist-pkits/",

@@ -4,7 +4,7 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
 
 --- a/chrome/common/chrome_content_client.cc
 +++ b/chrome/common/chrome_content_client.cc
-@@ -387,7 +387,7 @@ std::unique_ptr<content::CdmInfo> Create
+@@ -388,7 +388,7 @@ std::unique_ptr<content::CdmInfo> Create
  #endif  // (BUILDFLAG(BUNDLE_WIDEVINE_CDM) ||
          // BUILDFLAG(ENABLE_WIDEVINE_CDM_COMPONENT)) && defined(OS_LINUX)
  
@@ -13,7 +13,7 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
  // On Linux/ChromeOS we have to preload the CDM since it uses the zygote
  // sandbox. On Windows and Mac, the bundled CDM is handled by the component
  // updater.
-@@ -455,7 +455,7 @@ content::CdmInfo* GetBundledWidevine() {
+@@ -456,7 +456,7 @@ content::CdmInfo* GetBundledWidevine() {
        }());
    return s_cdm_info->get();
  }
@@ -22,7 +22,7 @@ Author: Olivier Tilloy <olivier.tilloy@canonical.com>
  
  #if BUILDFLAG(ENABLE_WIDEVINE_CDM_COMPONENT) && defined(OS_LINUX)
  // This code checks to see if a component updated Widevine CDM can be found. If
-@@ -613,7 +613,7 @@ void ChromeContentClient::AddContentDecr
+@@ -614,7 +614,7 @@ void ChromeContentClient::AddContentDecr
      // case both versions will be the same and point to the same directory, so
      // it doesn't matter which one is loaded.
      content::CdmInfo* bundled_widevine = nullptr;
