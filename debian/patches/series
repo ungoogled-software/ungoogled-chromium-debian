@@ -66,7 +66,6 @@ inox-patchset/fix-cfi-failures-with-unbundled-libxml.patch
 fedora/vaapi.patch
 fedora/vaapi-fix.patch
 
-ungoogled-chromium/clang.patch
 ungoogled-chromium/manpage.patch
 ungoogled-chromium/safebrowsing.patch
 ungoogled-chromium/explicit-python.patch

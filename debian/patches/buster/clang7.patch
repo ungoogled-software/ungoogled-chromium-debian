@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/build/config/compiler/BUILD.gn
 +++ b/build/config/compiler/BUILD.gn
-@@ -137,8 +137,7 @@ declare_args() {
+@@ -132,8 +132,7 @@ declare_args() {
    # TODO(vitalybuka):
    # 'is_android' breaks content_shell_test_apk on android-kitkat-arm-rel.
    # 'use_xcode_clang' may call old clang.
@@ -13,10 +13,11 @@ author: Michael Gilbert <mgilbert@debian.org>
  
    # This argument is to control whether enabling text section splitting in the
    # final binary. When enabled, the separated text sections with prefix
-@@ -1511,21 +1510,6 @@ config("default_warnings") {
+@@ -1483,21 +1482,6 @@ config("default_warnings") {
+           # Ignore warnings about MSVC optimization pragmas.
            # TODO(thakis): Only for no_chromium_code? http://crbug.com/912662
            "-Wno-ignored-pragma-optimize",
- 
+-
 -          # TODO(https://crbug.com/989932): Evaluate and possibly enable.
 -          "-Wno-implicit-int-float-conversion",
 -
@@ -31,11 +32,10 @@ author: Michael Gilbert <mgilbert@debian.org>
 -
 -          # TODO(https://crbug.com/1050281): Clean up, enable.
 -          "-Wno-non-c-typedef-for-linkage",
--
-           # TODO(https://crbug.com/1059231): Clean up, enable.
-           "-Wno-pointer-to-int-cast",
          ]
-@@ -1675,7 +1659,7 @@ config("no_chromium_code") {
+ 
+         cflags_c += [
+@@ -1638,7 +1622,7 @@ config("no_chromium_code") {
        # suppressing them individually, we just blanket suppress them here.
        "-Wno-unused-variable",
      ]
@@ -109,20 +109,3 @@ author: Michael Gilbert <mgilbert@debian.org>
  #    pragma clang diagnostic ignored "-Wunreachable-code"
  #endif
  
---- a/third_party/blink/renderer/platform/heap/finalizer_traits.h
-+++ b/third_party/blink/renderer/platform/heap/finalizer_traits.h
-@@ -45,14 +45,7 @@
-   };
-   struct Destructor {
-     static void Call(void* obj) {
--// The garbage collector differs from regular C++ here as it remembers whether
--// an object's base class has a virtual destructor. In case there is no virtual
--// destructor present, the object is always finalized through its leaf type. In
--// other words: there is no finalization through a base pointer.
--#pragma GCC diagnostic push
--#pragma GCC diagnostic ignored "-Wdelete-non-abstract-non-virtual-dtor"
-       static_cast<T*>(obj)->~T();
--#pragma GCC diagnostic pop
-     }
-   };
-   using FinalizeImpl =

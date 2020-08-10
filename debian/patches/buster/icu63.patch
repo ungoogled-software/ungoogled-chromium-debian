@@ -40,6 +40,40 @@ author: Michael Gilbert <mgilbert@debian.org>
  
    // Helper function to convert number field id to type string.
    static Handle<String> NumberFieldToType(Isolate* isolate,
+@@ -280,22 +289,24 @@ class Intl {
+   class AvailableLocales {
+    public:
+     AvailableLocales() {
+-      UErrorCode status = U_ZERO_ERROR;
+-      UEnumeration* uenum =
+-          uloc_openAvailableByType(ULOC_AVAILABLE_WITH_LEGACY_ALIASES, &status);
+-      DCHECK(U_SUCCESS(status));
++      int32_t num_locales = 0;
++      const icu::Locale* icu_available_locales =
++          icu::Locale::getAvailableLocales(num_locales);
+ 
+       std::vector<std::string> all_locales;
+-      const char* loc;
+-      while ((loc = uenum_next(uenum, NULL, &status)) != nullptr) {
+-        DCHECK(U_SUCCESS(status));
+-        std::string locstr(loc);
++      for (int32_t num = 0; num < num_locales; num++) {
++        const icu::Locale* locale = icu_available_locales++;
++        std::string locstr(locale->getName());
+         std::replace(locstr.begin(), locstr.end(), '_', '-');
+         // Handle special case
+         if (locstr == "en-US-POSIX") locstr = "en-US-u-va-posix";
+         all_locales.push_back(locstr);
+       }
+-      uenum_close(uenum);
++
++      // Include legacy and alias locales.
++      for (std::string locstr : {"ars","az-AZ","bs-BA","en-NH","en-RH","ff-CM","ff-GN","ff-MR","ff-SN","in","in-ID","iw","iw-IL","ks-Arab-IN","mni-IN","mo","no","no-NO","no-NO-NY","pa-IN","pa-PK","sat-IN","sd-PK","sh","sh-BA","sh-CS","sh-YU","shi-MA","sr-BA","sr-CS","sr-Cyrl-CS","sr-Cyrl-YU","sr-Latn-CS","sr-Latn-YU","sr-ME","sr-RS","sr-XK","sr-YU","su-ID","tl","tl-PH","uz-AF","uz-UZ","vai-LR","yue-CN","yue-HK","zh-CN","zh-HK","zh-MO","zh-TW","zh-SG"}) {
++        all_locales.push_back(locstr);
++      }
+ 
+       set_ = Intl::BuildLocaleSet(all_locales, C::path(), C::key());
+     }
 --- a/v8/src/objects/js-list-format.cc
 +++ b/v8/src/objects/js-list-format.cc
 @@ -246,7 +246,7 @@ Maybe<std::vector<icu::UnicodeString>> T
@@ -411,7 +445,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  // static
  
  MaybeHandle<String> Intl::ToString(Isolate* isolate,
-@@ -769,6 +762,8 @@ bool IsStructurallyValidLanguageTag(cons
+@@ -767,6 +760,8 @@ bool IsStructurallyValidLanguageTag(cons
    return JSLocale::StartsWithUnicodeLanguageId(tag);
  }
  
@@ -420,7 +454,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  // Canonicalize the locale.
  // https://tc39.github.io/ecma402/#sec-canonicalizelanguagetag,
  // including type check and structural validity check.
-@@ -872,8 +867,6 @@ Maybe<std::string> CanonicalizeLanguageT
+@@ -870,8 +865,6 @@ Maybe<std::string> CanonicalizeLanguageT
    return CanonicalizeLanguageTag(isolate, locale);
  }
  
@@ -429,7 +463,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  Maybe<std::vector<std::string>> Intl::CanonicalizeLocaleList(
      Isolate* isolate, Handle<Object> locales, bool only_return_one_result) {
    // 1. If locales is undefined, then
-@@ -1451,114 +1444,12 @@ std::vector<std::string> LookupSupported
+@@ -1449,114 +1442,12 @@ std::vector<std::string> LookupSupported
    return subset;
  }
  
@@ -545,7 +579,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  // ecma262 #sec-createarrayfromlist
-@@ -1733,8 +1624,6 @@ std::map<std::string, std::string> Looku
+@@ -1731,8 +1622,6 @@ std::map<std::string, std::string> Looku
    std::map<std::string, std::string> extensions;
  
    UErrorCode status = U_ZERO_ERROR;
@@ -554,7 +588,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    std::unique_ptr<icu::StringEnumeration> keywords(
        icu_locale->createKeywords(status));
    if (U_FAILURE(status)) return extensions;
-@@ -1796,14 +1685,13 @@ std::map<std::string, std::string> Looku
+@@ -1794,14 +1683,13 @@ std::map<std::string, std::string> Looku
        if (is_valid_value) {
          extensions.insert(
              std::pair<std::string, std::string>(bcp47_key, bcp47_value));
@@ -572,7 +606,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    return extensions;
  }
  
-@@ -1872,8 +1760,7 @@ Maybe<Intl::ResolvedLocale> Intl::Resolv
+@@ -1870,8 +1758,7 @@ Maybe<Intl::ResolvedLocale> Intl::Resolv
      const std::vector<std::string>& requested_locales, MatcherOption matcher,
      const std::set<std::string>& relevant_extension_keys) {
    std::string locale;
@@ -582,7 +616,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    } else {
      locale = LookupMatcher(isolate, available_locales, requested_locales);
    }
-@@ -2180,11 +2067,6 @@ Handle<String> Intl::NumberFieldToType(I
+@@ -2177,11 +2064,6 @@ Handle<String> Intl::NumberFieldToType(I
        UNREACHABLE();
        return Handle<String>();
  
@@ -594,7 +628,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      default:
        UNREACHABLE();
        return Handle<String>();
-@@ -2192,10 +2074,13 @@ Handle<String> Intl::NumberFieldToType(I
+@@ -2189,10 +2071,13 @@ Handle<String> Intl::NumberFieldToType(I
  }
  
  // A helper function to convert the FormattedValue for several Intl objects.
@@ -796,7 +830,7 @@ author: Michael Gilbert <mgilbert@debian.org>
                      JSLocale);
 --- a/v8/src/objects/js-date-time-format.cc
 +++ b/v8/src/objects/js-date-time-format.cc
-@@ -1892,55 +1892,12 @@ Maybe<bool> AddPartForFormatRange(Isolat
+@@ -1976,55 +1976,12 @@ Maybe<bool> AddPartForFormatRange(Isolat
  // A helper function to convert the FormattedDateInterval to a
  // MaybeHandle<JSArray> for the implementation of formatRangeToParts.
  MaybeHandle<JSArray> FormattedDateIntervalToJSArray(
@@ -855,7 +889,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
    JSObject::ValidateElements(*array);
    return array;
-@@ -1951,7 +1908,7 @@ template <typename T>
+@@ -2035,7 +1992,7 @@ template <typename T>
  MaybeHandle<T> FormatRangeCommon(
      Isolate* isolate, Handle<JSDateTimeFormat> date_time_format, double x,
      double y,
@@ -864,7 +898,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    // Track newer feature formateRange and formatRangeToParts
    isolate->CountUsage(v8::Isolate::UseCounterFeature::kDateTimeFormatRange);
  
-@@ -1986,15 +1943,11 @@ MaybeHandle<T> FormatRangeCommon(
+@@ -2070,15 +2027,11 @@ MaybeHandle<T> FormatRangeCommon(
    std::unique_ptr<icu::Calendar> c2(calendar->clone());
    c1->setTime(x, status);
    c2->setTime(y, status);
@@ -882,7 +916,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  }  // namespace
-@@ -2003,7 +1956,7 @@ MaybeHandle<String> JSDateTimeFormat::Fo
+@@ -2087,7 +2040,7 @@ MaybeHandle<String> JSDateTimeFormat::Fo
      Isolate* isolate, Handle<JSDateTimeFormat> date_time_format, double x,
      double y) {
    return FormatRangeCommon<String>(isolate, date_time_format, x, y,
@@ -893,67 +927,52 @@ author: Michael Gilbert <mgilbert@debian.org>
  MaybeHandle<JSArray> JSDateTimeFormat::FormatRangeToParts(
 --- a/v8/src/objects/js-number-format.cc
 +++ b/v8/src/objects/js-number-format.cc
-@@ -1244,33 +1244,45 @@ Maybe<icu::UnicodeString> IcuFormatNumbe
-     const icu::number::LocalizedNumberFormatter& number_format,
-     Handle<Object> numeric_obj, icu::FieldPositionIterator* fp_iter) {
-   // If it is BigInt, handle it differently.
-+  icu::UnicodeString result;
-   UErrorCode status = U_ZERO_ERROR;
--  icu::number::FormattedNumber formatted;
-   if (numeric_obj->IsBigInt()) {
-     Handle<BigInt> big_int = Handle<BigInt>::cast(numeric_obj);
-     Handle<String> big_int_string;
-     ASSIGN_RETURN_ON_EXCEPTION_VALUE(isolate, big_int_string,
-                                      BigInt::ToString(isolate, big_int),
-                                      Nothing<icu::UnicodeString>());
--    formatted = number_format.formatDecimal(
-+    icu::number::FormattedNumber formatted = number_format.formatDecimal(
-         {big_int_string->ToCString().get(), big_int_string->length()}, status);
-+    if (U_FAILURE(status)) {
-+      // This happen because of icu data trimming trim out "unit".
-+      // See https://bugs.chromium.org/p/v8/issues/detail?id=8641
-+      THROW_NEW_ERROR_RETURN_VALUE(isolate,
-+                                   NewTypeError(MessageTemplate::kIcuError),
-+                                   Nothing<icu::UnicodeString>());
-+    }
-+    if (fp_iter) {
-+      formatted.getAllFieldPositions(*fp_iter, status);
-+    }
-+    result = formatted.toString(status);
-   } else {
-     double number = numeric_obj->IsNaN()
-                         ? std::numeric_limits<double>::quiet_NaN()
-                         : numeric_obj->Number();
--    formatted = number_format.formatDouble(number, status);
--  }
--  if (U_FAILURE(status)) {
--    // This happen because of icu data trimming trim out "unit".
--    // See https://bugs.chromium.org/p/v8/issues/detail?id=8641
--    THROW_NEW_ERROR_RETURN_VALUE(isolate,
--                                 NewTypeError(MessageTemplate::kIcuError),
--                                 Nothing<icu::UnicodeString>());
--  }
--  if (fp_iter) {
--    formatted.getAllFieldPositions(*fp_iter, status);
-+    icu::number::FormattedNumber formatted =
-+        number_format.formatDouble(number, status);
-+    if (U_FAILURE(status)) {
-+      // This happen because of icu data trimming trim out "unit".
-+      // See https://bugs.chromium.org/p/v8/issues/detail?id=8641
-+      THROW_NEW_ERROR_RETURN_VALUE(isolate,
-+                                   NewTypeError(MessageTemplate::kIcuError),
-+                                   Nothing<icu::UnicodeString>());
-+    }
-+    if (fp_iter) {
-+      formatted.getAllFieldPositions(*fp_iter, status);
-+    }
-+    result = formatted.toString(status);
+@@ -1105,7 +1105,7 @@ MaybeHandle<JSNumberFormat> JSNumberForm
+ 
+   if (style == Style::PERCENT) {
+     icu_number_formatter =
+-        icu_number_formatter.unit(icu::MeasureUnit::getPercent())
++        icu_number_formatter.unit(icu::NoUnit::percent())
+             .scale(icu::number::Scale::powerOfTen(2));
    }
--  icu::UnicodeString result = formatted.toString(status);
+ 
+@@ -1276,11 +1276,12 @@ MaybeHandle<String> JSNumberFormat::Form
+     Handle<Object> numeric_obj) {
+   DCHECK(numeric_obj->IsNumeric());
+ 
+-  icu::number::FormattedNumber formatted;
++  UErrorCode status = U_ZERO_ERROR;
++  icu::number::LocalizedNumberFormatter formatter;
++  icu::number::FormattedNumber formatted = formatter.formatInt(0, status);
+   Maybe<bool> maybe_format =
+       IcuFormatNumber(isolate, number_format, numeric_obj, &formatted);
+   MAYBE_RETURN(maybe_format, Handle<String>());
+-  UErrorCode status = U_ZERO_ERROR;
+   icu::UnicodeString result = formatted.toString(status);
    if (U_FAILURE(status)) {
-     THROW_NEW_ERROR_RETURN_VALUE(isolate,
-                                  NewTypeError(MessageTemplate::kIcuError),
-@@ -1456,6 +1468,22 @@ Maybe<int> ConstructParts(Isolate* isola
+     THROW_NEW_ERROR(isolate, NewTypeError(MessageTemplate::kIcuError), String);
+@@ -1421,12 +1422,20 @@ Maybe<int> ConstructParts(Isolate* isola
+   regions.push_back(NumberFormatSpan(-1, 0, formatted_text.length()));
+ 
+   {
++#if U_ICU_VERSION_MAJOR_NUM >= 64
+     icu::ConstrainedFieldPosition cfp;
+     cfp.constrainCategory(UFIELD_CATEGORY_NUMBER);
+     while (formatted->nextPosition(cfp, status)) {
+       regions.push_back(
+           NumberFormatSpan(cfp.getField(), cfp.getStart(), cfp.getLimit()));
+     }
++#else
++    icu::FieldPosition fp;
++    while (formatted->nextFieldPosition(fp, status)) {
++      regions.push_back(NumberFormatSpan(fp.getField(), fp.getBeginIndex(),
++                                         fp.getEndIndex()));
++    }
++#endif
+   }
+ 
+   std::vector<NumberFormatSpan> parts = FlattenRegionsToParts(&regions);
+@@ -1458,6 +1467,25 @@ Maybe<int> ConstructParts(Isolate* isola
  
  }  // namespace
  
@@ -965,27 +984,45 @@ author: Michael Gilbert <mgilbert@debian.org>
 +                                         Handle<Object> numeric_obj,
 +                                         Handle<String> unit) {
 +  DCHECK(numeric_obj->IsNumeric());
-+  icu::FieldPositionIterator fp_iter;
-+  Maybe<icu::UnicodeString> maybe_format =
-+      IcuFormatNumber(isolate, number_format, numeric_obj, &fp_iter);
++
++  UErrorCode status = U_ZERO_ERROR;
++  icu::number::LocalizedNumberFormatter formatter;
++  icu::number::FormattedNumber formatted = formatter.formatInt(0, status);
++  Maybe<bool> maybe_format =
++      IcuFormatNumber(isolate, number_format, numeric_obj, &formatted);
 +  MAYBE_RETURN(maybe_format, Nothing<int>());
-+  return ConstructParts(isolate, maybe_format.FromJust(), &fp_iter, result,
++  return ConstructParts(isolate, &formatted, result,
 +                        start_index, numeric_obj, !unit.is_null());
 +}
 +
  MaybeHandle<JSArray> JSNumberFormat::FormatToParts(
      Isolate* isolate, Handle<JSNumberFormat> number_format,
      Handle<Object> numeric_obj) {
+@@ -1467,11 +1495,12 @@ MaybeHandle<JSArray> JSNumberFormat::For
+       number_format->icu_number_formatter().raw();
+   CHECK_NOT_NULL(fmt);
+ 
+-  icu::number::FormattedNumber formatted;
++  UErrorCode status = U_ZERO_ERROR;
++  icu::number::LocalizedNumberFormatter formatter;
++  icu::number::FormattedNumber formatted = formatter.formatInt(0, status);
+   Maybe<bool> maybe_format =
+       IcuFormatNumber(isolate, *fmt, numeric_obj, &formatted);
+   MAYBE_RETURN(maybe_format, Handle<JSArray>());
+-  UErrorCode status = U_ZERO_ERROR;
+ 
+   bool style_is_unit =
+       Style::UNIT == StyleFromSkeleton(fmt->toSkeleton(status));
 --- a/v8/src/objects/js-number-format.h
 +++ b/v8/src/objects/js-number-format.h
-@@ -51,6 +51,12 @@ class JSNumberFormat : public JSObject {
+@@ -52,6 +52,12 @@ class JSNumberFormat
        Isolate* isolate, Handle<JSNumberFormat> number_format,
        Handle<Object> numeric_obj);
  
 +  // From chromium 74
 +  V8_WARN_UNUSED_RESULT static Maybe<int> FormatToParts(
 +      Isolate* isolate, Handle<JSArray> result, int start_index,
-+      const icu::number::LocalizedNumberFormatter& nf,
++      const icu::number::LocalizedNumberFormatter& number_format,
 +      Handle<Object> numeric_obj, Handle<String> unit);
 +
    V8_WARN_UNUSED_RESULT static MaybeHandle<String> FormatNumeric(
@@ -1064,7 +1101,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 +bool IsUnicodeScriptSubtag(const std::string& value);
 +bool IsUnicodeRegionSubtag(const std::string& value);
 +
- class JSLocale : public JSObject {
+ class JSLocale : public TorqueGeneratedJSLocale<JSLocale, JSObject> {
   public:
    // Creates locale object with properties derived from input locale string
 --- a/base/i18n/icu_util.cc
