@@ -16,6 +16,7 @@ Build-Depends:
  python2,
  python3,
  python3-debian,
+ python-xcbgen,
  pkg-config,
  ninja-build,
  python-jinja2,
