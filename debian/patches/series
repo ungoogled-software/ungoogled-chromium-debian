@@ -57,9 +57,6 @@ buster/icu63.patch
 buster/vpx17.patch
 buster/clang7.patch
 
-fixes/python3.patch
-study3.patch
-
 inox-patchset/chromium-skia-harmony.patch
 inox-patchset/fix-cfi-failures-with-unbundled-libxml.patch
 
