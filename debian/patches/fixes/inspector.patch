@@ -12,9 +12,9 @@ author: Michael Gilbert <mgilbert@debian.org>
  import("$_inspector_protocol/inspector_protocol.gni")
  
  _protocol_generated = [
-@@ -95,7 +95,7 @@ v8_source_set("inspector") {
-   deps = [
+@@ -84,7 +84,7 @@ v8_source_set("inspector") {
      ":inspector_string_conversions",
+     "../..:v8_tracing",
      "../..:v8_version",
 -    "../../third_party/inspector_protocol:crdtp",
 +    "../../../third_party/inspector_protocol:crdtp",
@@ -23,7 +23,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    public_deps = [
 --- a/v8/test/unittests/BUILD.gn
 +++ b/v8/test/unittests/BUILD.gn
-@@ -360,7 +360,7 @@ v8_source_set("unittests_sources") {
+@@ -380,7 +380,7 @@ v8_source_set("unittests_sources") {
      "../..:v8_for_testing",
      "../..:v8_libbase",
      "../..:v8_libplatform",
@@ -234,7 +234,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        protocol::Value::parseBinary(cbor.data(), cbor.size());
 --- a/v8/src/inspector/string-util.cc
 +++ b/v8/src/inspector/string-util.cc
-@@ -159,7 +159,7 @@ String16 stackTraceIdToString(uintptr_t
+@@ -245,7 +245,7 @@ String16 stackTraceIdToString(uintptr_t
  
  }  // namespace v8_inspector
  
@@ -245,7 +245,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    cbor::EncodeBinary(span<uint8_t>(binary.data(), binary.size()), out);
 --- a/v8/src/inspector/string-util.h
 +++ b/v8/src/inspector/string-util.h
-@@ -90,7 +90,7 @@ String16 stackTraceIdToString(uintptr_t
+@@ -85,7 +85,7 @@ String16 stackTraceIdToString(uintptr_t
  }  //  namespace v8_inspector
  
  // See third_party/inspector_protocol/crdtp/serializer_traits.h.
@@ -256,7 +256,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    static void Serialize(const v8_inspector::protocol::Binary& binary,
 --- a/v8/src/inspector/v8-debugger-agent-impl.cc
 +++ b/v8/src/inspector/v8-debugger-agent-impl.cc
-@@ -1443,8 +1443,8 @@ void V8DebuggerAgentImpl::didParseSource
+@@ -1524,8 +1524,8 @@ void V8DebuggerAgentImpl::didParseSource
      // execution context id.
      const String16& aux = inspected->auxData();
      std::vector<uint8_t> cbor;

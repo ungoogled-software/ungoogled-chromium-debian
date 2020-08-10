@@ -184,7 +184,15 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/third_party/breakpad/BUILD.gn
 +++ b/third_party/breakpad/BUILD.gn
-@@ -575,8 +575,6 @@ if (is_linux || is_android) {
+@@ -380,7 +380,6 @@ if (is_mac) {
+       "breakpad/src/client/mac/handler/dynamic_images.cc",
+       "breakpad/src/client/mac/handler/minidump_generator.cc",
+       "breakpad/src/client/minidump_file_writer.cc",
+-      "breakpad/src/common/convert_UTF.cc",
+       "breakpad/src/common/mac/MachIPC.mm",
+       "breakpad/src/common/mac/arch_utilities.cc",
+       "breakpad/src/common/mac/bootstrap_compat.cc",
+@@ -579,8 +578,6 @@ if (is_linux || is_android) {
        "breakpad/src/client/linux/handler/exception_handler.h",
        "breakpad/src/client/linux/handler/minidump_descriptor.cc",
        "breakpad/src/client/linux/handler/minidump_descriptor.h",
@@ -193,15 +201,24 @@ author: Michael Gilbert <mgilbert@debian.org>
        "breakpad/src/client/linux/microdump_writer/microdump_writer.cc",
        "breakpad/src/client/linux/microdump_writer/microdump_writer.h",
        "breakpad/src/client/linux/minidump_writer/cpu_set.h",
-@@ -594,8 +592,6 @@ if (is_linux || is_android) {
+@@ -598,8 +595,6 @@ if (is_linux || is_android) {
        "breakpad/src/client/minidump_file_writer-inl.h",
        "breakpad/src/client/minidump_file_writer.cc",
        "breakpad/src/client/minidump_file_writer.h",
 -      "breakpad/src/common/convert_UTF.cc",
 -      "breakpad/src/common/convert_UTF.h",
+       "breakpad/src/common/linux/breakpad_getcontext.S",
        "breakpad/src/common/linux/elf_core_dump.cc",
        "breakpad/src/common/linux/elf_core_dump.h",
-       "breakpad/src/common/linux/elfutils.cc",
+@@ -1029,8 +1024,6 @@ if (is_ios) {
+       "breakpad/src/client/minidump_file_writer-inl.h",
+       "breakpad/src/client/minidump_file_writer.cc",
+       "breakpad/src/client/minidump_file_writer.h",
+-      "breakpad/src/common/convert_UTF.cc",
+-      "breakpad/src/common/convert_UTF.h",
+       "breakpad/src/common/long_string_dictionary.cc",
+       "breakpad/src/common/mac/HTTPMultipartUpload.m",
+       "breakpad/src/common/mac/file_id.cc",
 --- a/third_party/breakpad/breakpad/src/client/minidump_file_writer.cc
 +++ b/third_party/breakpad/breakpad/src/client/minidump_file_writer.cc
 @@ -149,11 +149,11 @@ bool MinidumpFileWriter::CopyStringToMDS

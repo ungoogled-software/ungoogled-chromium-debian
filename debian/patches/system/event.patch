@@ -25,7 +25,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "build/build_config.h"
 --- a/tools/gn/build/gen.py
 +++ b/tools/gn/build/gen.py
-@@ -341,6 +341,7 @@ def WriteGNNinja(path, platform, host, o
+@@ -359,6 +359,7 @@ def WriteGNNinja(path, platform, host, o
  
        # Additional system libraries that are used.
        libs.append('-lnspr4')
