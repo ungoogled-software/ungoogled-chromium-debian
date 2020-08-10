@@ -1,0 +1,16 @@
+description: suggest proxy misconfiguration when network is unreachable
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/base/supports_user_data.cc
++++ b/base/supports_user_data.cc
+@@ -42,6 +42,10 @@ void SupportsUserData::SetUserData(const
+ 
+ void SupportsUserData::RemoveUserData(const void* key) {
+   DCHECK(sequence_checker_.CalledOnValidSequence());
++
++  std::unique_ptr<Data> to_be_deleted =
++  std::move(user_data_[key]);
++  DCHECK(to_be_deleted);
+   user_data_.erase(key);
+ }
+ 

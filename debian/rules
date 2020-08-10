@@ -37,7 +37,8 @@ export CXXFLAGS+=-Wno-conversion \
                  -Wno-unused-variable \
                  -Wno-unused-private-field \
                  -Wno-deprecated-declarations \
-                 -Wno-unreachable-code
+                 -Wno-unreachable-code \
+                 -Wno-unknown-pragmas
 
 # do not optimize away null pointer safety checks
 export CXXFLAGS+=-fno-delete-null-pointer-checks
@@ -86,7 +87,6 @@ defines+=is_debug=false \
          optimize_webui=false \
          closure_compile=false \
          treat_warnings_as_errors=false \
-         linux_use_bundled_binutils=false \
 
 # enabled features
 defines+=use_gio=true \
@@ -124,8 +124,6 @@ out/Release/gn:
 override_dh_auto_configure:
 	# output compiler information
 	$(CXX) --version
-	# put yasm script in the location expected by gn
-	ln -sf ../pdfium/third_party/yasm/run_yasm.py third_party/yasm
 	# prefer unbundled (system) libraries
 	./debian/scripts/unbundle
 	# clean polymer files manually (debian/clean doesn't work on directories)

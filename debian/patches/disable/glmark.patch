@@ -1,6 +1,9 @@
+description: disable dependencies on glmark directory
+author: Michael Gilbert <mgilbert@debian.org>
+
 --- a/third_party/angle/src/tests/BUILD.gn
 +++ b/third_party/angle/src/tests/BUILD.gn
-@@ -330,13 +330,13 @@ if (is_win || is_linux || is_android ||
+@@ -368,13 +368,13 @@ if (is_win || is_linux || is_android ||
        "${angle_root}:libGLESv2",
      ]
  

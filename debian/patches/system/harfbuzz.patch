@@ -36,7 +36,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include <memory>
 --- a/components/paint_preview/common/serial_utils.cc
 +++ b/components/paint_preview/common/serial_utils.cc
-@@ -50,12 +50,8 @@ sk_sp<SkData> SerializeTypeface(SkTypefa
+@@ -53,12 +53,8 @@ sk_sp<SkData> SerializeTypeface(SkTypefa
    if (usage_it == context->usage->end())
      return typeface->serialize(SkTypeface::SerializeBehavior::kDontIncludeData);
  
@@ -63,7 +63,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      deps = [
 --- a/third_party/skia/BUILD.gn
 +++ b/third_party/skia/BUILD.gn
-@@ -697,7 +697,6 @@ optional("pdf") {
+@@ -710,7 +710,6 @@ optional("pdf") {
    sources_when_disabled = [ "src/pdf/SkDocument_PDF_None.cpp" ]
    if (skia_use_icu && skia_use_harfbuzz && skia_pdf_subset_harfbuzz) {
      deps += [ "//third_party/harfbuzz" ]
