@@ -1,4 +1,4 @@
-description: clang 7 has trouble deducing auto type in lambda expression
+description: clang 7 has trouble deducing auto type in lambda expressions
 author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/third_party/blink/renderer/bindings/core/v8/serialization/serialized_script_value.h
@@ -26,7 +26,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    // Returns true after serializing script values that remote origins cannot
 --- a/third_party/blink/renderer/core/layout/ng/ng_physical_container_fragment.cc
 +++ b/third_party/blink/renderer/core/layout/ng/ng_physical_container_fragment.cc
-@@ -115,11 +115,9 @@ void NGPhysicalContainerFragment::AddOut
+@@ -122,11 +122,9 @@ void NGPhysicalContainerFragment::AddOut
        // Don't add |Children()|. If |this| has |NGFragmentItems|, children are
        // either line box, which we already handled in items, or OOF, which we
        // should ignore.
@@ -41,3 +41,40 @@ author: Michael Gilbert <mgilbert@debian.org>
        return;
      }
    }
+--- a/third_party/blink/renderer/modules/accessibility/ax_object.cc
++++ b/third_party/blink/renderer/modules/accessibility/ax_object.cc
+@@ -1815,11 +1815,12 @@ bool AXObject::IsSubWidget() const {
+ 
+       // Otherwise it's only a subwidget if it's in a grid or treegrid,
+       // not in a table.
+-      return std::any_of(
+-          AncestorsBegin(), AncestorsEnd(), [](const AXObject& ancestor) {
+-            return ancestor.RoleValue() == ax::mojom::Role::kGrid ||
+-                   ancestor.RoleValue() == ax::mojom::Role::kTreeGrid;
+-          });
++      for (auto ancestor = AncestorsBegin(); ancestor != AncestorsEnd(); ++ancestor) {
++        if (ancestor->RoleValue() == ax::mojom::Role::kGrid ||
++            ancestor->RoleValue() == ax::mojom::Role::kTreeGrid)
++          return true;
++      }
++      return false;
+ 
+     case ax::mojom::Role::kListBoxOption:
+     case ax::mojom::Role::kMenuListOption:
+@@ -4043,11 +4044,11 @@ bool AXObject::SupportsARIAReadOnly() co
+ 
+   if (ui::IsCellOrTableHeader(RoleValue())) {
+     // For cells and row/column headers, readonly is supported within a grid.
+-    return std::any_of(
+-        AncestorsBegin(), AncestorsEnd(), [](const AXObject& ancestor) {
+-          return ancestor.RoleValue() == ax::mojom::Role::kGrid ||
+-                 ancestor.RoleValue() == ax::mojom::Role::kTreeGrid;
+-        });
++    for (auto ancestor = AncestorsBegin(); ancestor != AncestorsEnd(); ++ancestor) {
++        if (ancestor->RoleValue() == ax::mojom::Role::kGrid ||
++            ancestor->RoleValue() == ax::mojom::Role::kTreeGrid)
++          return true;
++    }
+   }
+ 
+   return false;

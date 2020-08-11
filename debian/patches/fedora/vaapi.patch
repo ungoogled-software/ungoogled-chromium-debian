@@ -14,7 +14,7 @@ Subject: [PATCH] Enable mojo with VDA2 on Linux
 
 --- a/chrome/browser/about_flags.cc	2020-06-23 06:54:06.949389331 -0500
 +++ b/chrome/browser/about_flags.cc	2020-06-23 08:57:50.865089671 -0500
-@@ -2230,14 +2230,14 @@
+@@ -2457,14 +2457,14 @@
          "disable-accelerated-video-decode",
          flag_descriptions::kAcceleratedVideoDecodeName,
          flag_descriptions::kAcceleratedVideoDecodeDescription,
@@ -31,7 +31,7 @@ Subject: [PATCH] Enable mojo with VDA2 on Linux
          SINGLE_DISABLE_VALUE_TYPE(switches::kDisableAcceleratedVideoEncode),
      },
  #if defined(OS_CHROMEOS)
-@@ -2662,10 +2662,10 @@
+@@ -2888,10 +2888,10 @@
       flag_descriptions::kWebXrForceRuntimeDescription, kOsDesktop,
       MULTI_VALUE_TYPE(kWebXrForceRuntimeChoices)},
  #endif  // ENABLE_VR
@@ -46,7 +46,7 @@ Subject: [PATCH] Enable mojo with VDA2 on Linux
      {"system-keyboard-lock", flag_descriptions::kSystemKeyboardLockName,
 --- a/chrome/browser/flag_descriptions.cc
 +++ b/chrome/browser/flag_descriptions.cc
-@@ -2984,15 +2984,20 @@ const char kMetalDescription[] =
+@@ -3140,15 +3140,20 @@ const char kMetalDescription[] =
  
  #endif
  
@@ -71,7 +71,7 @@ Subject: [PATCH] Enable mojo with VDA2 on Linux
  const char kAggregatedMlAppRankingDescription[] =
 --- a/chrome/browser/flag_descriptions.h
 +++ b/chrome/browser/flag_descriptions.h
-@@ -1716,11 +1716,15 @@ extern const char kPermissionPromptPersi
+@@ -1825,11 +1825,15 @@ extern const char kPermissionPromptPersi
  
  // Chrome OS ------------------------------------------------------------------
  
