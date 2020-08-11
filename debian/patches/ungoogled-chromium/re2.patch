@@ -11,7 +11,7 @@
    return std::string();
 --- a/extensions/browser/api/declarative_net_request/regex_rules_matcher.cc
 +++ b/extensions/browser/api/declarative_net_request/regex_rules_matcher.cc
-@@ -303,7 +303,7 @@
+@@ -275,7 +275,7 @@
      if (!DoesRuleMetadataMatchRequest(*rule->url_rule(), params))
        continue;
  
