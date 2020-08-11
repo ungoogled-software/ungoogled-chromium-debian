@@ -1,28 +1,12 @@
 --- a/build/config/compiler/BUILD.gn
 +++ b/build/config/compiler/BUILD.gn
-@@ -1523,9 +1523,6 @@
+@@ -1495,9 +1495,6 @@
+ 
            # TODO(https://crbug.com/1028110): Evaluate and possible enable.
            "-Wno-deprecated-copy",
- 
+-
 -          # TODO(https://crbug.com/1050281): Clean up, enable.
 -          "-Wno-non-c-typedef-for-linkage",
--
-           # TODO(https://crbug.com/1059231): Clean up, enable.
-           "-Wno-pointer-to-int-cast",
          ]
---- a/content/public/browser/content_browser_client.cc
-+++ b/content/public/browser/content_browser_client.cc
-@@ -4,13 +4,6 @@
  
- #include "content/public/browser/content_browser_client.h"
- 
--// content_browser_client.h is a widely included header and its size impacts
--// build time significantly. If you run into this limit, try using forward
--// declarations instead of including more headers. If that is infeasible, adjust
--// the limit. For more info, see
--// https://chromium.googlesource.com/chromium/src/+/HEAD/docs/wmax_tokens.md
--#pragma clang max_tokens_here 820000
--
- #include <utility>
- 
- #include "base/feature_list.h"
+         cflags_c += [

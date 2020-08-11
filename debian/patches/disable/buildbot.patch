@@ -1,6 +1,9 @@
+description: remove dependencies on buildbot directory
+author: Michael Gilbert <mgilbert@debian.org>
+
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -1049,7 +1049,6 @@ if (!is_ios) {
+@@ -1051,7 +1051,6 @@ if (!is_ios) {
        "//services/device/public/mojom:usb_js_data_deps",
        "//services/shape_detection/public/mojom:mojom_js_data_deps",
        "//skia/public/mojom:mojom_js_data_deps",
@@ -10,7 +13,7 @@
        "//third_party/blink/renderer/core/html:js_files_for_form_controls_web_tests",
 --- a/chrome/test/BUILD.gn
 +++ b/chrome/test/BUILD.gn
-@@ -501,8 +501,6 @@ if (is_android) {
+@@ -509,8 +509,6 @@ if (is_android) {
        "//testing/android/native_test:native_test_support",
      ]
  
@@ -19,7 +22,7 @@
      sources = [
        "../browser/android/customtabs/custom_tabs_browsertest.cc",
        "../browser/android/webapk/webapk_icon_hasher_browsertest.cc",
-@@ -743,8 +741,6 @@ if (!is_android) {
+@@ -756,8 +754,6 @@ if (!is_android) {
        "//ppapi:copy_test_files2",
        "//ppapi:power_saver_test_plugin",
        "//ppapi:ppapi_tests",
@@ -28,7 +31,7 @@
        "//third_party/mesa_headers",
        "//third_party/widevine/cdm:widevine_test_license_server",
        "//tools/media_engagement_preload:generator",
-@@ -1452,7 +1448,6 @@ if (!is_android) {
+@@ -1471,7 +1467,6 @@ if (!is_android) {
        data_deps += [
          "//ash/keyboard/ui:resources",
          "//chrome",
@@ -36,7 +39,7 @@
          "//ui/file_manager:unit_test_data",
        ]
  
-@@ -3594,7 +3589,6 @@ test("unit_tests") {
+@@ -3640,7 +3635,6 @@ test("unit_tests") {
    data_deps = [
      "//chrome/test/data/media/engagement/preload:generate_preload_list",
      "//chrome/test/data/media/engagement/preload:test_data",
@@ -44,7 +47,7 @@
    ]
  
    data = [
-@@ -5134,7 +5128,6 @@ test("unit_tests") {
+@@ -5218,7 +5212,6 @@ test("unit_tests") {
        "//chrome/browser/chromeos:unit_tests",
        "//chromeos/ime:gencode",
      ]
@@ -52,7 +55,7 @@
      sources -=
          [ "../browser/policy/cloud/user_policy_signin_service_unittest.cc" ]
    }
-@@ -5835,7 +5828,6 @@ if (!is_android) {
+@@ -5924,7 +5917,6 @@ if (!is_android) {
      # Runtime dependencies
      data_deps = [
        "//ppapi:ppapi_tests",
@@ -60,7 +63,7 @@
        "//third_party/mesa_headers",
        "//ui/resources:ui_test_pak_data",
      ]
-@@ -6395,7 +6387,6 @@ if (!is_fuchsia && !is_android) {
+@@ -6490,7 +6482,6 @@ if (!is_fuchsia && !is_android) {
      ]
  
      data_deps = [
@@ -70,7 +73,7 @@
  
 --- a/third_party/breakpad/BUILD.gn
 +++ b/third_party/breakpad/BUILD.gn
-@@ -715,7 +715,6 @@ if (is_linux || is_android) {
+@@ -717,7 +717,6 @@ if (is_linux || is_android) {
  
      data_deps = [
        ":linux_dumper_unittest_helper",
@@ -80,7 +83,7 @@
      include_dirs = [
 --- a/content/test/BUILD.gn
 +++ b/content/test/BUILD.gn
-@@ -1246,7 +1246,6 @@ test("content_browsertests") {
+@@ -1238,7 +1238,6 @@ test("content_browsertests") {
    data_deps = [
      ":web_ui_test_mojo_bindings_js_data_deps",
      "//content/shell:pak",
@@ -109,7 +112,7 @@
    }
 --- a/net/BUILD.gn
 +++ b/net/BUILD.gn
-@@ -4576,7 +4576,6 @@ test("net_unittests") {
+@@ -4567,7 +4567,6 @@ test("net_unittests") {
    data = []
    data_deps = [
      "third_party/nist-pkits/",
@@ -119,7 +122,7 @@
    if (is_linux || is_mac || is_win || is_fuchsia) {
 --- a/cc/BUILD.gn
 +++ b/cc/BUILD.gn
-@@ -789,7 +789,6 @@ cc_test("cc_unittests") {
+@@ -800,7 +800,6 @@ cc_test("cc_unittests") {
      "//ui/gl:test_support",
    ]
    data_deps = [
@@ -139,7 +142,7 @@
  
 --- a/gpu/BUILD.gn
 +++ b/gpu/BUILD.gn
-@@ -420,7 +420,6 @@ test("gl_tests") {
+@@ -421,7 +421,6 @@ test("gl_tests") {
      ]
    }
  

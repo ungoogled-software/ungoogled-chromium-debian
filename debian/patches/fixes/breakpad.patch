@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/third_party/breakpad/BUILD.gn
 +++ b/third_party/breakpad/BUILD.gn
-@@ -569,6 +569,8 @@ if (is_linux || is_android) {
+@@ -573,6 +573,8 @@ if (is_linux || is_android) {
        "breakpad/src/client/linux/dump_writer_common/thread_info.h",
        "breakpad/src/client/linux/dump_writer_common/ucontext_reader.cc",
        "breakpad/src/client/linux/dump_writer_common/ucontext_reader.h",
