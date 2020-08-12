@@ -87,7 +87,6 @@ defines+=is_debug=false \
          optimize_webui=false \
          closure_compile=false \
          treat_warnings_as_errors=false \
-         linux_use_bundled_binutils=false \
          use_system_harfbuzz=false \
 
 # enabled features
