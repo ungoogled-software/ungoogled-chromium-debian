@@ -217,9 +217,11 @@ Depends:
  ${misc:Depends},
  ${shlibs:Depends},
 Breaks:
- chromium (<< ${binary:Version}),
+ ungoogled-chromium (<< ${binary:Version}),
+ chromium-sandbox,
 Replaces:
- chromium (<< ${binary:Version}),
+ ungoogled-chromium (<< ${binary:Version}),
+ chromium-sandbox,
 Description: web browser - setuid security sandbox for ungoogled-chromium
  Web browser that aims to build a safer, faster, and more stable internet
  browsing experience.
