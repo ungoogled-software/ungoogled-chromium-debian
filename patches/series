@@ -18,7 +18,6 @@ debian_buster/warnings/enum-compare.patch
 debian_buster/warnings/null-destination.patch
 debian_buster/warnings/int-in-bool-context.patch
 ubuntu/no-new-ninja-flag.patch
-ubuntu/relax-ninja-version-requirement.patch
 ubuntu/suppress-newer-clang-warning-flags.patch
 opensuse/system-libdrm.patch
 ungoogled-chromium/linux/manpage.patch
