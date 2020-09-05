@@ -4,7 +4,7 @@ author: Fedora chromium maintainers
 
 --- a/mojo/public/c/system/macros.h
 +++ b/mojo/public/c/system/macros.h
-@@ -27,7 +27,11 @@
+@@ -28,7 +28,11 @@
  // clang-format on
  
  // Like the C++11 |alignof| operator.
@@ -14,5 +14,5 @@ author: Fedora chromium maintainers
  #define MOJO_ALIGNOF(type) alignof(type)
 +#endif
  
- // Specify the alignment of a |struct|, etc.
- // Use like:
+ // Provides a convenient test for the presence of a field in a user-provided
+ // structure from a potentially older version of the ABI. Presence is determined
