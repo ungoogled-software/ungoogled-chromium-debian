@@ -13,3 +13,5 @@ symbol_level=0
 use_gnome_keyring=false
 use_kerberos=false
 use_sysroot=false
+use_system_libdrm=false
+use_system_minigbm=false
