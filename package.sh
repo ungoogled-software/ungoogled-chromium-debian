@@ -10,4 +10,13 @@ _tarprefix=ungoogled-chromium_$_chromium_version-$_ungoogled_revision.${_package
 # Assume source tree is outside this script's directory
 _archive_output="$_root_dir/build/$_tarprefix.tar.xz"
 
-"$_root_dir/ungoogled-chromium/utils/filescfg.py" -c "$_root_dir/build/src/chrome/tools/build/linux/FILES.cfg" --build-outputs "$_root_dir/build/src/out/Default" archive -o "$_archive_output" -i "$_root_dir/tar_includes/README"
+"$_root_dir/ungoogled-chromium/utils/filescfg.py" \
+	-c "$_root_dir/build/src/chrome/tools/build/linux/FILES.cfg" \
+	--build-outputs "$_root_dir/build/src/out/Default" \
+	archive \
+	-o "$_archive_output" \
+	-i "$_root_dir/tar_includes/README" \
+	-i "$_root_dir/build/src/out/Default/libminigbm.so" # use_system_minigbm=false
+
+# NOTE: Forcing use_system_minigbm=false in flags.portable.gn, which is the case on ChromeOS
+# Therefore, we are including files according to build/src/chrome/tools/build/chromeos/FILES.cfg
