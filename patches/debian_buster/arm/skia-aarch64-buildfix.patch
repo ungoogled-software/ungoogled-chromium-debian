@@ -1,6 +1,6 @@
 --- a/third_party/skia/src/opts/SkRasterPipeline_opts.h
 +++ b/third_party/skia/src/opts/SkRasterPipeline_opts.h
-@@ -983,7 +983,7 @@ SI F approx_powf(F x, F y) {
+@@ -978,7 +978,7 @@ SI F approx_powf(F x, F y) {
  }
  
  SI F from_half(U16 h) {
@@ -9,7 +9,7 @@
      && !defined(SK_BUILD_FOR_GOOGLE3)  // Temporary workaround for some Google3 builds.
      return vcvt_f32_f16(h);
  
-@@ -1004,7 +1004,7 @@ SI F from_half(U16 h) {
+@@ -999,7 +999,7 @@ SI F from_half(U16 h) {
  }
  
  SI U16 to_half(F f) {

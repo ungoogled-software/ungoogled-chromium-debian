@@ -9,12 +9,12 @@ Source: https://bazaar.launchpad.net/~chromium-team/chromium-browser/disco-dev/v
 
 --- a/chrome/common/chrome_paths.cc
 +++ b/chrome/common/chrome_paths.cc
-@@ -374,8 +374,17 @@ bool PathProvider(int key, base::FilePat
-       cur = cur.Append(FILE_PATH_LITERAL("pnacl"));
+@@ -377,8 +377,17 @@ bool PathProvider(int key, base::FilePat
        break;
  
--#if defined(OS_LINUX) && BUILDFLAG(BUNDLE_WIDEVINE_CDM)
-+#if defined(OS_LINUX) && BUILDFLAG(ENABLE_WIDEVINE_CDM_COMPONENT)
+ #if (defined(OS_LINUX) || defined(OS_CHROMEOS)) && \
+-    BUILDFLAG(BUNDLE_WIDEVINE_CDM)
++    BUILDFLAG(ENABLE_WIDEVINE_CDM_COMPONENT)
      case chrome::DIR_BUNDLED_WIDEVINE_CDM:
 +      base::PathService::Get(base::DIR_HOME, &cur);
 +      cur = cur.Append(FILE_PATH_LITERAL(".local/lib"))
@@ -28,12 +28,12 @@ Source: https://bazaar.launchpad.net/~chromium-team/chromium-browser/disco-dev/v
        if (!GetComponentDirectory(&cur))
          return false;
  #if !defined(OS_CHROMEOS)
-@@ -384,7 +393,7 @@ bool PathProvider(int key, base::FilePat
-       cur = cur.AppendASCII(kWidevineCdmBaseDirectory);
+@@ -388,7 +397,7 @@ bool PathProvider(int key, base::FilePat
  #endif  // !defined(OS_CHROMEOS)
        break;
--#endif  // defined(OS_LINUX) && BUILDFLAG(BUNDLE_WIDEVINE_CDM)
-+#endif  // defined(OS_LINUX) && BUILDFLAG(ENABLE_WIDEVINE_CDM_COMPONENT)
+ #endif  // (defined(OS_LINUX) || defined(OS_CHROMEOS)) &&
+-        // BUILDFLAG(BUNDLE_WIDEVINE_CDM)
++        // BUILDFLAG(ENABLE_WIDEVINE_CDM_COMPONENT)
  
  #if defined(OS_LINUX) && !defined(OS_CHROMEOS) && \
      BUILDFLAG(ENABLE_WIDEVINE_CDM_COMPONENT)

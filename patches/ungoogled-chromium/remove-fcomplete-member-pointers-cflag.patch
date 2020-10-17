@@ -3,8 +3,8 @@
 
 --- a/build/config/compiler/BUILD.gn
 +++ b/build/config/compiler/BUILD.gn
-@@ -695,14 +695,6 @@ config("compiler") {
-     ldflags += [ "-Wl,--no-rosegment" ]
+@@ -705,14 +705,6 @@ config("compiler") {
+     }
    }
  
 -  # This flag enforces that member pointer base types are complete. It helps
