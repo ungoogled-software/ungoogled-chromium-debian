@@ -2,6 +2,7 @@ blink_symbol_level=0
 custom_toolchain="//build/toolchain/linux/unbundle:default"
 enable_iterator_debugging=false
 enable_swiftshader=false
+enable_widevine=true
 fatal_linker_warnings=false
 ffmpeg_branding="Chrome"
 host_toolchain="//build/toolchain/linux/unbundle:default"
