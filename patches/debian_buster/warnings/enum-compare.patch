@@ -8,11 +8,11 @@ author: Michael Gilbert <mgilbert@debian.org>
    layout->StartRow(views::GridLayout::kFixedSize, 0);
  
 +  int text_style = views::style::STYLE_SECONDARY;
-+  if (controller_->state() == 
++  if (controller_->state() ==
 +      PasswordGenerationPopupController::kOfferGeneration)
 +    text_style = views::style::STYLE_PRIMARY;
    suggestion_label_ = layout->AddView(std::make_unique<views::Label>(
-       controller_->SuggestedText(), ChromeTextContext::CONTEXT_BODY_TEXT_LARGE,
+       controller_->SuggestedText(), views::style::CONTEXT_DIALOG_BODY_TEXT,
 -      controller_->state() ==
 -              PasswordGenerationPopupController::kOfferGeneration
 -          ? views::style::STYLE_PRIMARY
