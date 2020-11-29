@@ -1,0 +1,13 @@
+# A set of command line flags that we want to set by default.
+
+# Do not hide any extensions in the about:extensions dialog
+export CHROMIUM_FLAGS="$CHROMIUM_FLAGS --show-component-extension-options"
+
+# Enable GPU rasterization.
+export CHROMIUM_FLAGS="$CHROMIUM_FLAGS --enable-gpu-rasterization"
+
+# Don't display any warnings about not being the default browser
+export CHROMIUM_FLAGS="$CHROMIUM_FLAGS --no-default-browser-check"
+
+# Disable the builtin media router (bug #833477)
+export CHROMIUM_FLAGS="$CHROMIUM_FLAGS --media-router=0"

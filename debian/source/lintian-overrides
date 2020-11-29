@@ -1,0 +1,2 @@
+# upstream provides no good way to watch for upstream changes
+debian-watch-file-is-missing

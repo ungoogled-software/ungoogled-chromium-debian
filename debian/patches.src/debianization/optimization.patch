@@ -1,0 +1,45 @@
+description: respect optimization level specified by dpkg-buildflags
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/build/config/compiler/BUILD.gn
++++ b/build/config/compiler/BUILD.gn
+@@ -1992,7 +1992,7 @@ config("optimize") {
+     # - Investigate -Oz here, maybe just for ARM?
+     cflags = [ "-Os" ] + common_optimize_on_cflags
+   } else {
+-    cflags = [ "-O2" ] + common_optimize_on_cflags
++    cflags = common_optimize_on_cflags
+   }
+   ldflags = common_optimize_on_ldflags
+ }
+@@ -2058,7 +2058,7 @@ config("optimize_max") {
+     } else if (optimize_for_fuzzing) {
+       cflags = [ "-O1" ] + common_optimize_on_cflags
+     } else {
+-      cflags = [ "-O2" ] + common_optimize_on_cflags
++      cflags = common_optimize_on_cflags
+     }
+   }
+ }
+@@ -2090,7 +2090,7 @@ config("optimize_speed") {
+     } else if (optimize_for_fuzzing) {
+       cflags = [ "-O1" ] + common_optimize_on_cflags
+     } else {
+-      cflags = [ "-O3" ] + common_optimize_on_cflags
++      cflags = common_optimize_on_cflags
+     }
+   }
+ }
+--- a/tools/gn/build/gen.py
++++ b/tools/gn/build/gen.py
+@@ -326,10 +326,8 @@ def WriteGNNinja(path, platform, host, o
+       cflags.extend(['-O0', '-g'])
+     else:
+       cflags.append('-DNDEBUG')
+-      cflags.append('-O3')
+       if options.no_strip:
+         cflags.append('-g')
+-      ldflags.append('-O3')
+       # Use -fdata-sections and -ffunction-sections to place each function
+       # or data item into its own section so --gc-sections can eliminate any
+       # unused functions and data items.

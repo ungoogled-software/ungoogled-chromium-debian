@@ -1,0 +1,14 @@
+description: ignore deprecated bison directive warnings
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/third_party/blink/renderer/build/scripts/rule_bison.py
++++ b/third_party/blink/renderer/build/scripts/rule_bison.py
+@@ -83,7 +83,7 @@ def main():
+                                      output_basename + BISON_HEADER_EXT)
+ 
+     return_code = subprocess.call(
+-        [bison_exe, '-d', input_file, '-o', output_cc])
++        [bison_exe, '-Wno-deprecated', '-d', input_file, '-o', output_cc])
+     assert return_code == 0
+     # If the file doesn't exist, this raise an OSError.
+     os.stat(original_output_h)

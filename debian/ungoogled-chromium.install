@@ -1,0 +1,21 @@
+build/src/out/Release/chromium usr/lib/chromium
+
+build/src/out/Release/chrome_*.pak usr/lib/chromium
+build/src/out/Release/resources.pak usr/lib/chromium
+build/src/out/Release/xdg-mime usr/lib/chromium
+build/src/out/Release/xdg-settings usr/lib/chromium
+
+build/src/out/Release/resources/en-US.pak usr/lib/chromium/locales
+
+debian/presubj usr/share/bug/chromium
+
+debian/chromium.xml usr/share/gnome-control-center/default-apps
+
+debian/chromium.desktop usr/share/applications
+
+debian/etc/README etc/chromium.d
+debian/etc/extensions etc/chromium.d
+debian/etc/default-flags etc/chromium.d
+debian/etc/master_preferences etc/chromium
+
+debian/usr/share/drirc.d/10-ungoogled-chromium.conf usr/share/drirc.d

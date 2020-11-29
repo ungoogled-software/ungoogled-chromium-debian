@@ -1,0 +1,5 @@
+ungoogled-chromium ($ungoog{chromium_version}-$ungoog{ungoogled_revision}.$ungoog{distro_release}$ungoog{distro_revision}) $ungoog{distro_release}; urgency=medium
+
+  * Built against $ungoog{ungoogled_version}
+
+ -- $ungoog{uploader}  $ungoog{release_time}

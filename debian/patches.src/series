@@ -1,0 +1,9 @@
+archlinux/wayland-egl.patch
+
+debianization/sandbox.patch
+debianization/optimization.patch
+debianization/master-preferences.patch
+
+warnings/deprecated.patch
+
+ungoogled-chromium/explicit-python.patch

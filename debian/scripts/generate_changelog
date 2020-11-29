@@ -1,0 +1,86 @@
+#!/usr/bin/python3 -B
+# -*- coding: UTF-8 -*-
+
+# Copyright (c) 2018 The ungoogled-chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+"""
+Generates debian/changelog
+"""
+
+import datetime
+import locale
+import re
+import string
+from pathlib import Path
+
+_ENCODING = 'UTF-8'
+
+# Classes
+
+class _BuildFileStringTemplate(string.Template):
+    """
+    Custom string substitution class
+
+    Inspired by
+    http://stackoverflow.com/questions/12768107/string-substitutions-using-templates-in-python
+    """
+
+    pattern = r"""
+    {delim}(?:
+      (?P<escaped>{delim}) |
+      _(?P<named>{id})      |
+      {{(?P<braced>{id})}}   |
+      (?P<invalid>{delim}((?!_)|(?!{{)))
+    )
+    """.format(
+        delim=re.escape("$ungoog"), id=string.Template.idpattern)
+
+
+# Methods
+
+def _get_dpkg_changelog_datetime():
+    current_datetime = datetime.datetime.now().astimezone()
+    current_lc = locale.setlocale(locale.LC_TIME)
+    try:
+        # Setting the locale is bad practice, but datetime.strftime requires it
+        locale.setlocale(locale.LC_TIME, "C")
+        return current_datetime.strftime("%a, %d %b %Y %H:%M:%S %z")
+    finally:
+        locale.setlocale(locale.LC_TIME, current_lc)
+
+def _process_templates(template_files, build_file_subs):
+    """
+    Recursively substitute '$ungoog' strings in template_files and
+        generate new files without the suffix
+
+    template_files is an iterable of pathlib.Path
+    """
+    for old_path in template_files:
+        new_path = old_path.with_name(old_path.stem)
+        with new_path.open('w', encoding=_ENCODING) as new_file:
+            content = _BuildFileStringTemplate(old_path.read_text(encoding=_ENCODING)).substitute(**build_file_subs)
+            new_file.write(content)
+
+
+def main():
+    """CLI Entrypoint"""
+    debian_dir = Path(__file__).resolve().parent.parent
+    root_dir = debian_dir.parent
+
+    chromium_version = (root_dir / 'ungoogled-chromium' / 'chromium_version.txt').read_text(encoding=_ENCODING).strip()
+    ungoogled_revision = (root_dir / 'ungoogled-chromium' / 'revision.txt').read_text(encoding=_ENCODING).strip()
+    packaging_subs = dict(
+        chromium_version=chromium_version,
+        ungoogled_revision=ungoogled_revision,
+        distro_revision=(root_dir / 'revision.txt').read_text(encoding=_ENCODING).strip(),
+        distro_release=(debian_dir / 'distro_release.txt').read_text(encoding=_ENCODING).strip(),
+        ungoogled_version='{}-{}'.format(chromium_version, ungoogled_revision),
+        release_time=_get_dpkg_changelog_datetime(),
+        uploader=(debian_dir / 'uploader.txt').read_text(encoding=_ENCODING).strip(),
+    )
+    _process_templates([Path(debian_dir, 'changelog.ungoogin')], packaging_subs)
+
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,5 @@
+build/src/out/Release/*.bin usr/lib/chromium
+build/src/out/Release/icudtl.dat usr/lib/chromium
+build/src/out/Release/libEGL.so usr/lib/chromium
+build/src/out/Release/libGLESv2.so usr/lib/chromium
+build/src/out/Release/libminigbm.so usr/lib/chromium

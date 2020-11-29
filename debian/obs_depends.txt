@@ -1,0 +1,1 @@
+, lsb-release, libncurses-dev, libavcodec58, libfontconfig-dev

@@ -1,0 +1,44 @@
+#!/bin/bash -eu
+
+DEBIAN=$(pwd)/debian
+ROOT_DIR=$(pwd)
+UNGOOGLED_CHROMIUM="$ROOT_DIR/ungoogled-chromium"
+SCRIPTS="$DEBIAN/scripts"
+UTILS="$UNGOOGLED_CHROMIUM/utils"
+
+setup_source()
+{
+    local CACHE="$ROOT_DIR/build/download_cache"
+    local ROOT="$1"
+    test -d "$CACHE" || mkdir "$CACHE"
+    test -d "$ROOT" || mkdir "$ROOT"
+    python3 -B "$UTILS/downloads.py" retrieve -i "$UNGOOGLED_CHROMIUM/downloads.ini" -c "$CACHE"
+    python3 -B "$UTILS/downloads.py" unpack -i "$UNGOOGLED_CHROMIUM/downloads.ini" -c "$CACHE" "$ROOT"
+    python3 -B "$UTILS/prune_binaries.py" "$ROOT" "$UNGOOGLED_CHROMIUM/pruning.list"
+    python3 -B "$UTILS/patches.py" apply "$ROOT" "$UNGOOGLED_CHROMIUM/patches" "$ROOT_DIR/patches"
+    cd $ROOT && env QUILT_PATCHES=$DEBIAN/patches.src quilt push -a
+    #(cd $ROOT && $SCRIPTS/check-upstream)
+}
+
+case "$1" in
+
+debian)
+    "$SCRIPTS/generate_changelog"
+    #sed -i "/^Maintainer:/cMaintainer: $(cat debian/uploader.txt)" "$DEBIAN/control"
+    ;;
+
+local-src)
+    mkdir -p "$ROOT_DIR/build/src"
+    setup_source "$ROOT_DIR/build/src"
+    ;;
+
+orig-source)
+    VERSION=$(cat $UNGOOGLED_CHROMIUM/chromium_version.txt)
+    EXTRACT=chromium-$VERSION
+    test ! -e $EXTRACT || rm -rf $EXTRACT
+    setup_source $EXTRACT
+    tar -c $EXTRACT | xz -9 > ../ungoogled-chromium_$VERSION.orig.tar.xz
+    rm -rf $EXTRACT
+    ;;
+
+esac
