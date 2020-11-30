@@ -1,3 +1,40 @@
+# ungoogled-chromium-debian
+
+This is a Debian packaging of [ungoogled-chromium-portablelinux](//github.com/ungoogled-software/ungoogled-chromium-portablelinux). It also enables system-dependent GN flags that require no code changes like VA-API, and a few minor "Debianization" patches.
+
+## Downloads
+
+[Download binaries from the Contributor Binaries website](//ungoogled-software.github.io/ungoogled-chromium-binaries/).
+
+## Building
+
+TODO: Copy any other necessary info from other branches
+
+Tested on Debian 10 (buster). It will not work on newer Debian versions right now because `python-xcbgen` is not available on them (only `python3-xcbgen`).
+
+1. Add the [the LLVM APT repo](//apt.llvm.org/) for **LLVM 11**.
+    * Note that the APT URLs for development (aka nightly snapshot) LLVM versions *do not contain* the LLVM version in them.
+2. Run the following commands:
+
+```sh
+git pull --recurse-submodules https://github.com/ungoogled-software/ungoogled-chromium-debian.git
+git switch unportable
+./debian/scripts/setup debian
+./debian/scripts/setup local-src
+mk-build-deps  # To install dependencies
+dpkg-buildpackage -b -uc
+```
+
+## Developing
+
+TODO: Modify instructions from other branches
+
+## License
+
+See [LICENSE](LICENSE)
+
+---
+
 # ungoogled-chromium-portablelinux
 
 Portable Linux (i.e. a generic Linux version) packaging for [ungoogled-chromium](//github.com/Eloston/ungoogled-chromium).
