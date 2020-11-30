@@ -52,7 +52,6 @@ defines+=$(shell cat flags.portable.gn | tr "\n" " " | sed 's/"/\\"/g')
 
 # From ungoogled-chromium-archlinux
 defines+=link_pulseaudio=true \
-		 use_vaapi=true \
 
 # handle parallel build options
 njobs=1
