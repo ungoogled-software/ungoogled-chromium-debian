@@ -20,5 +20,4 @@ ubuntu/no-new-ninja-flag.patch
 ubuntu/suppress-newer-clang-warning-flags.patch
 opensuse/system-libdrm.patch
 ungoogled-chromium/linux/manpage.patch
-ungoogled-chromium/remove-fcomplete-member-pointers-cflag.patch
 ungoogled-chromium/fix-node-path.patch
