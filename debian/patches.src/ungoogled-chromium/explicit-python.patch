@@ -5,10 +5,9 @@ continue to work in spite of this change. This only patches the bare
 minimum for the default builds so it may require additional work if
 something different is done such as building a debug build.
 
-diff -ur a/third_party/catapult/common/py_vulcanize/py_vulcanize/generate.py b/third_party/catapult/common/py_vulcanize/py_vulcanize/generate.py
---- a/third_party/catapult/common/py_vulcanize/py_vulcanize/generate.py	2020-03-17 22:05:46.000000000 +0000
-+++ b/third_party/catapult/common/py_vulcanize/py_vulcanize/generate.py	2020-03-31 22:24:38.624100860 +0000
-@@ -83,7 +83,7 @@
+--- a/third_party/catapult/common/py_vulcanize/py_vulcanize/generate.py
++++ b/third_party/catapult/common/py_vulcanize/py_vulcanize/generate.py
+@@ -83,7 +83,7 @@ def _MinifyJS(input_js):
  
    with tempfile.NamedTemporaryFile() as _:
      args = [
@@ -17,7 +16,7 @@ diff -ur a/third_party/catapult/common/py_vulcanize/py_vulcanize/generate.py b/t
          rjsmin_path
      ]
      p = subprocess.Popen(args,
-@@ -203,7 +203,7 @@
+@@ -203,7 +203,7 @@ def _MinifyCSS(css_text):
        os.path.join(py_vulcanize_path, 'third_party', 'rcssmin', 'rcssmin.py'))
  
    with tempfile.NamedTemporaryFile() as _:
@@ -26,9 +25,8 @@ diff -ur a/third_party/catapult/common/py_vulcanize/py_vulcanize/generate.py b/t
      p = subprocess.Popen(rcssmin_args,
                           stdin=subprocess.PIPE,
                           stdout=subprocess.PIPE,
-diff -ur a/third_party/dom_distiller_js/protoc_plugins/json_values_converter.py b/third_party/dom_distiller_js/protoc_plugins/json_values_converter.py
---- a/third_party/dom_distiller_js/protoc_plugins/json_values_converter.py	2020-03-17 21:56:07.000000000 +0000
-+++ b/third_party/dom_distiller_js/protoc_plugins/json_values_converter.py	2020-03-31 22:33:00.148985123 +0000
+--- a/third_party/dom_distiller_js/protoc_plugins/json_values_converter.py
++++ b/third_party/dom_distiller_js/protoc_plugins/json_values_converter.py
 @@ -1,4 +1,4 @@
 -#!/usr/bin/env python
 +#!/usr/bin/env python2
