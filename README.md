@@ -77,6 +77,15 @@ dpkg-buildpackage -b -uc
 
 TODO: Modify instructions from other branches
 
+1. (First-time only) Add Portable Linux remote: `git remote add portablelinux https://github.com/ungoogled-software/ungoogled-chromium-portablelinux.git`
+2. Merge new changes from upstream: `git pull --recurse-submodules --no-ff portablelinux master`
+3. Refresh existing patches:
+	a. `./debian/scripts/setup local-src`
+	b. `source debian/devutils/set_quilt_vars.sh`
+	c. `cd build/src`
+	d. TODO: Clarify quilt commands to run here
+4. TODO
+
 ## License
 
 See [LICENSE](LICENSE)
