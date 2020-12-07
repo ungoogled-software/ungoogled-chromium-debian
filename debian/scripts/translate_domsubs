@@ -1,0 +1,33 @@
+#!/bin/sh -e
+
+case $1 in
+  revert)
+    a='9oo91eapis\.qjz9zk'
+    b='googleapis\.com'
+    ;;
+
+  apply)
+    a='googleapis\.com'
+    b='9oo91eapis\.qjz9zk'
+    ;;
+
+  *)
+    exit 1
+    ;;
+esac
+
+CDIR=$(dirname $0)
+
+for f in \
+  chrome/browser/translate/translate_manager_browsertest.cc \
+  components/translate/core/browser/translate_script.cc \
+  components/translate/core/common/translate_util.cc
+do
+  if [ ! -e $CDIR/../../$f ]; then
+    printf '%s\n' "WARN: Cannot find $f"
+    continue
+  fi
+  sed -i "s@\(translate\.\)$a@\1$b@g" $CDIR/../../$f
+done
+
+exit $?

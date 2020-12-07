@@ -1,8 +1,9 @@
 #!/bin/bash -eu
 
 DEBIAN=$(pwd)/debian
-UNGOOGLED_CHROMIUM=$DEBIAN/ungoogled-upstream/ungoogled-chromium
+PATCHES=$DEBIAN/patches
 SCRIPTS=$DEBIAN/scripts
+UNGOOGLED_CHROMIUM=$DEBIAN/ungoogled-upstream/ungoogled-chromium
 UTILS=$UNGOOGLED_CHROMIUM/utils
 
 setup_source()
@@ -16,6 +17,28 @@ setup_source()
     python3 -B $UTILS/prune_binaries.py $ROOT $UNGOOGLED_CHROMIUM/pruning.list
     $SCRIPTS/remove_copyright_excluded $ROOT
     (cd $ROOT && $SCRIPTS/check-upstream)
+}
+
+translate_rules()
+{
+sed -e '/^--- a\/.*\/spellcheck_hunspell_dictionary\.cc$/,/^--- a\//{//!d}' \
+    -e '/^--- a\/.*\/translate_url_fetcher\.cc$/,/^--- a\//{//!d}' \
+    -e '/^--- a\/.*\/translate_util\.cc$/,/^--- a\//{//!d}' \
+    -e '/spellcheck_hunspell_dictionary/{g;d}' \
+    -e '/translate/{g;d}' \
+    -i $PATCHES/core/iridium-browser/all-add-trk-prefixes-to-possibly-evil-connections.patch
+
+if [ -z "$(grep 'google translate domain substitutions' $DEBIAN/rules)" ]; then
+    sed -e '/debian\/scripts\/apply_domainsubstitution/a\
+	# revert google translate domain substitutions\
+	\./debian/scripts/translate_domsubs revert'\
+\
+        -e '/^override_dh_prep:/a\
+	# re-apply google translate domain substitutions\
+	\./debian/scripts/translate_domsubs apply'\
+\
+        -i $DEBIAN/rules
+fi
 }
 
 case "$1" in
@@ -37,6 +60,10 @@ orig-source)
     setup_source $EXTRACT
     tar -c $EXTRACT | xz -9 > ../ungoogled-chromium_$VERSION.orig.tar.xz
     rm -rf $EXTRACT
+    ;;
+
+translate-enable)
+    translate_rules
     ;;
 
 esac
