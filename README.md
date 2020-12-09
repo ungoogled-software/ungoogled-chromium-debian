@@ -51,11 +51,6 @@ git submodule update --init
 # If you omit this step, you will build the latest changes in unportable.
 git -C ungoogled-chromium-debian checkout --recurse-submodules TAG_HERE
 
-# Setup build tree under build/
-mkdir -p build/src
-cp -r ungoogled-chromium-debian/debian build/src/
-cd build/src
-
 # Replace UPLOADER_HERE with your uploader string (optional)
 # Example of an uploader string: John Doe <johndoe@example.com>
 echo 'UPLOADER_HERE' > debian/uploader.txt
