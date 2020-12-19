@@ -17,29 +17,3 @@ author: Michael Gilbert <mgilbert@debian.org>
    out_ << " ";
    path_output_.WriteFile(out_, target_->action_values().script());
    for (const auto& arg : args.list()) {
---- a/ui/gfx/x/gen_xproto.py
-+++ b/ui/gfx/x/gen_xproto.py
-@@ -166,6 +166,7 @@
- 
- from __future__ import print_function
- 
-+import functools
- import argparse
- import collections
- import os
-@@ -919,11 +920,13 @@ class GenXproto:
-                 return 3
-             return 2
- 
--        def cmp((_1, item1), (_2, item2)):
-+        def compare(tuple1, tuple2):
-+            (_1, item1) = tuple1
-+            (_2, item2) = tuple2
-             return type_order_priority(item1) - type_order_priority(item2)
- 
-         # sort() is guaranteed to be stable.
--        self.module.all.sort(cmp=cmp)
-+        self.module.all.sort(key=functools.cmp_to_key(compare))
- 
-     def gen_header(self):
-         self.file = self.args.headerfile

@@ -3,18 +3,18 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/third_party/angle/src/tests/BUILD.gn
 +++ b/third_party/angle/src/tests/BUILD.gn
-@@ -368,13 +368,13 @@ if (is_win || is_linux || is_android ||
-       "${angle_root}:libGLESv2",
-     ]
+@@ -342,13 +342,13 @@ if (build_angle_perftests) {
+       data_deps += [ "//testing:run_perf_test" ]
+     }
  
--    if (is_win || is_linux) {
+-    if (is_win || is_linux || is_chromeos) {
 +    if (false) {
        data_deps += [ "${angle_root}/third_party/glmark2:glmark2_angle" ]
      }
      if (is_win && target_cpu != "arm64") {
        data_deps += [ "${angle_root}/third_party/glmark2:glmark2_wgl" ]
      }
--    if (is_linux) {
+-    if (is_linux || is_chromeos) {
 +    if (false) {
        data_deps += [ "${angle_root}/third_party/glmark2:glmark2_glx" ]
      }

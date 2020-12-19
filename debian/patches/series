@@ -7,25 +7,21 @@ gn/libcxx.patch
 gn/parallel.patch
 
 fixes/mojo.patch
-fixes/vaapi.patch
 fixes/gnu-as.patch
 fixes/closure.patch
-fixes/breakpad.patch
 fixes/ps-print.patch
-fixes/ordering.patch
 fixes/inspector.patch
 fixes/gpu-timeout.patch
 fixes/not-constexpr.patch
 fixes/sequence-point.patch
-fixes/nonconst-values.patch
 fixes/missing-includes.patch
-fixes/pointer-required.patch
-fixes/lambda-expression.patch
 fixes/widevine-revision.patch
 fixes/widevine-locations.patch
 fixes/connection-message.patch
 fixes/nullptr-dereference.patch
 fixes/multiple-destruction.patch
+fixes/openscreen.patch
+fixes/ozone.patch
 
 disable/tests.patch
 disable/unrar.patch
@@ -43,19 +39,16 @@ disable/swiftshader.patch
 disable/welcome-page.patch
 disable/google-api-warning.patch
 disable/third-party-cookies.patch
-disable/device-notifications.patch
 
 warnings/restrict.patch
 warnings/multichar.patch
 warnings/deprecated.patch
 warnings/sign-compare.patch
-warnings/initialization.patch
 warnings/gcc-diagnostic.patch
 warnings/null-destination.patch
 warnings/stringop-overflow.patch
 warnings/int-in-bool-context.patch
 
-system/vpx.patch
 system/icu.patch
 system/jpeg.patch
 system/node.patch
@@ -71,14 +64,9 @@ system/clang-format.patch
 
 buster/re2.patch
 buster/icu63.patch
-buster/vpx17.patch
 buster/clang7.patch
 
-use-explicit-python2-sed.patch
 use-explicit-python2-gn.patch
 allow-time64-syscalls.patch
 
-bullseye/ffmpeg43.patch
-
 fixes/python3.patch
-study3.patch

@@ -75,7 +75,7 @@ defines+=is_debug=false \
          enable_iterator_debugging=false \
          enable_hangout_services_extension=false \
          optimize_webui=false \
-         closure_compile=false \
+         enable_js_type_check=false \
          treat_warnings_as_errors=false \
 
 # enabled features
@@ -144,8 +144,8 @@ override_dh_auto_clean:
 	rm -rf out
 	find . -name \*.pyc -execdir rm -f {} \;
 	dh_auto_clean
-	#it seems something in the upstream buildsystem sometimes resets the shebang in this to /usr/bin/python
-	sed -i 's_/usr/bin/python\b_/usr/bin/python2_' third_party/closure_compiler/compiler.py
+	for file in `grep -rl '/usr/bin/python' *`; do sed -i 's_/usr/bin/python\b_/usr/bin/python2_' $$file ; done
+	for file in `grep -rl 'env python' *`; do sed -i 's_env python\b_env python2_' $$file ; done
 
 ###################### upstream source downloading ############################
 

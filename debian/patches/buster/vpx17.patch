@@ -177,7 +177,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    int qp = -1;
    vpx_codec_control(encoder_, VP8E_GET_LAST_QUANTIZER, &qp);
    encoded_image_.qp_ = qp;
-@@ -1514,14 +1420,6 @@ int VP9EncoderImpl::GetEncodedLayerFrame
+@@ -1532,14 +1532,6 @@ int VP9EncoderImpl::GetEncodedLayerFrame(const vpx_codec_cx_pkt* pkt) {
  
  void VP9EncoderImpl::DeliverBufferedFrame(bool end_of_picture) {
    if (encoded_image_.size() > 0) {
@@ -191,10 +191,10 @@ author: Michael Gilbert <mgilbert@debian.org>
 -
      codec_specific_.codecSpecific.VP9.end_of_picture = end_of_picture;
  
-     // No data partitioning in VP9, so 1 partition only.
+     encoded_complete_callback_->OnEncodedImage(encoded_image_,
 --- a/third_party/webrtc/modules/video_coding/codecs/vp9/vp9_impl.h
 +++ b/third_party/webrtc/modules/video_coding/codecs/vp9/vp9_impl.h
-@@ -128,7 +128,6 @@ class VP9EncoderImpl : public VP9Encoder
+@@ -131,7 +131,6 @@ class VP9EncoderImpl : public VP9Encoder {
    const bool dynamic_rate_settings_;
    bool layer_buffering_;
    const bool full_superframe_drop_;

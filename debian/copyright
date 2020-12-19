@@ -73,7 +73,6 @@ Files-Excluded:
  third_party/llvm
  third_party/webgl
  third_party/libpng
- third_party/libvpx
  third_party/libdrm
  third_party/snappy
  third_party/libxslt
@@ -103,6 +102,7 @@ Files-Excluded:
  third_party/skia/site/user/api
  third_party/skia/platform_tools
  third_party/skia/resources/icc_profiles
+ third_party/skia/tools/perf-canvaskit-puppeteer/path_translate_assets/car.svg
  third_party/ffmpeg/BUILD.gn
  third_party/ffmpeg/doc
  third_party/ffmpeg/lib*
@@ -118,9 +118,11 @@ Files-Excluded:
  third_party/openh264/BUILD.gn
  third_party/expat/src
  third_party/unrar
+ third_party/perfetto/infra/perfetto.dev/dist
  third_party/perfetto/ui/src/gen
  third_party/checkstyle
  third_party/swiftshader
+ third_party/apache-mac
  third_party/apache-win32
  third_party/apache-portable-runtime
  third_party/instrumented_libraries
@@ -273,11 +275,7 @@ Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of 
 License: BSD-3-clause
 
 Files: chrome/browser/chromeos/login/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.
-License: BSD-3-clause
-
-Files: chrome/browser/chromeos/login/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+Copyright: Copyright (c) 2009-2020 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
 Files: chrome/browser/diagnostics/*
@@ -404,14 +402,6 @@ Files: chrome/browser/printing/print_dialog_gtk.ccgchrome/browser/printing/print
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
-Files: chrome/browser/privacy_blacklist/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/privacy_blacklist/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
 Files: chrome/browser/renderer_host/async_resource_handler.h chrome/browser/renderer_host/buffered_resource_handler.h chrome/browser/renderer_host/cross_site_resource_handler.h chrome/browser/renderer_host/download_resource_handler.cc chrome/browser/renderer_host/download_resource_handler.h chrome/browser/renderer_host/download_throttling_resource_handler.h chrome/browser/renderer_host/render_widget_helper.cc chrome/browser/renderer_host/render_widget_helper.h chrome/browser/renderer_host/render_widget_host_view_mac.h chrome/browser/renderer_host/resource_dispatcher_host_unittest.cc chrome/browser/renderer_host/resource_handler.h chrome/browser/renderer_host/safe_browsing_resource_handler.h chrome/browser/renderer_host/save_file_resource_handler.cc chrome/browser/renderer_host/save_file_resource_handler.h chrome/browser/renderer_host/site_instance.cc chrome/browser/renderer_host/sync_resource_handler.cc chrome/browser/renderer_host/sync_resource_handler.h chrome/browser/renderer_host/web_cache_manager_unittest.cc
 Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
@@ -429,14 +419,6 @@ Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of 
 License: BSD-3-clause
 
 Files: chrome/browser/renderer_host/accelerated_surface_container_mac.ccgchrome/browser/renderer_host/accelerated_surface_container_mac.h chrome/browser/renderer_host/accelerated_surface_container_manager_mac.cc chrome/browser/renderer_host/accelerated_surface_container_manager_mac.h chrome/browser/renderer_host/async_resource_handler.cc chrome/browser/renderer_host/audio_renderer_host.cc chrome/browser/renderer_host/audio_renderer_host.h chrome/browser/renderer_host/audio_renderer_host_unittest.cc chrome/browser/renderer_host/backing_store.cc chrome/browser/renderer_host/backing_store.h chrome/browser/renderer_host/backing_store_mac.h chrome/browser/renderer_host/backing_store_manager.cc chrome/browser/renderer_host/backing_store_manager.h chrome/browser/renderer_host/backing_store_proxy.cc chrome/browser/renderer_host/backing_store_proxy.h chrome/browser/renderer_host/backing_store_win.cc chrome/browser/renderer_host/backing_store_win.h chrome/browser/renderer_host/backing_store_x.cc chrome/browser/renderer_host/backing_store_x.h chrome/browser/renderer_host/browser_render_process_host.cc chrome/browser/renderer_host/browser_render_process_host.h chrome/browser/renderer_host/buffered_resource_handler.cc chrome/browser/renderer_host/database_dispatcher_host.cc chrome/browser/renderer_host/database_dispatcher_host.h chrome/browser/renderer_host/database_permission_request.cc chrome/browser/renderer_host/database_permission_request.h chrome/browser/renderer_host/gpu_view_host.cc chrome/browser/renderer_host/gpu_view_host.h chrome/browser/renderer_host/gtk_im_context_wrapper.cc chrome/browser/renderer_host/gtk_im_context_wrapper.h chrome/browser/renderer_host/render_view_host.cc chrome/browser/renderer_host/render_view_host.h chrome/browser/renderer_host/render_view_host_delegate.cc chrome/browser/renderer_host/render_view_host_delegate.h chrome/browser/renderer_host/render_view_host_notification_task.h chrome/browser/renderer_host/render_widget_host.cc chrome/browser/renderer_host/render_widget_host_view.h chrome/browser/renderer_host/render_widget_host_view_gtk.cc chrome/browser/renderer_host/render_widget_host_view_gtk.h chrome/browser/renderer_host/render_widget_host_view_win.cc chrome/browser/renderer_host/render_widget_host_view_win.h chrome/browser/renderer_host/resource_dispatcher_host.cc chrome/browser/renderer_host/resource_dispatcher_host_uitest.cc chrome/browser/renderer_host/resource_message_filter.cc chrome/browser/renderer_host/resource_message_filter.h chrome/browser/renderer_host/safe_browsing_resource_handler.cc chrome/browser/renderer_host/video_layer.cc chrome/browser/renderer_host/video_layer.h chrome/browser/renderer_host/video_layer_proxy.cc chrome/browser/renderer_host/video_layer_proxy.h chrome/browser/renderer_host/video_layer_x.cc chrome/browser/renderer_host/video_layer_x.h
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/renderer_host/test/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/renderer_host/test/*
 Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
@@ -477,11 +459,7 @@ Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of 
 License: BSD-3-clause
 
 Files: chrome/browser/sessions/*
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/sessions/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+Copyright: Copyright (c) 2006-2020 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
 Files: chrome/browser/ssl/ssl_blocking_page.ccgchrome/browser/ssl/ssl_blocking_page.h chrome/browser/ssl/ssl_error_info.cc chrome/browser/ssl/ssl_manager.h chrome/browser/ssl/ssl_policy.cc chrome/browser/ssl/ssl_policy.h
@@ -552,52 +530,12 @@ Files: chrome/browser/sync/glue/autofill_change_processor.ccgchrome/browser/sync
 Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
-Files: chrome/browser/sync/notifier/base/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/sync/notifier/base/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/sync/notifier/base/linux/async_network_alive_linux.cc
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/sync/notifier/base/mac/network_status_detector_task_mac.ccgchrome/browser/sync/notifier/base/mac/network_status_detector_task_mac.h chrome/browser/sync/notifier/base/mac/network_status_detector_task_mac_unittest.cc
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/sync/notifier/base/posix/time_posix.cc
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/sync/notifier/base/win/async_network_alive_win32.ccgchrome/browser/sync/notifier/base/win/time_win32.cc
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/sync/notifier/communicator/auto_reconnect.ccgchrome/browser/sync/notifier/communicator/auto_reconnect.h chrome/browser/sync/notifier/communicator/connection_options.cc chrome/browser/sync/notifier/communicator/connection_options.h chrome/browser/sync/notifier/communicator/connection_settings.cc chrome/browser/sync/notifier/communicator/connection_settings.h chrome/browser/sync/notifier/communicator/const_communicator.h chrome/browser/sync/notifier/communicator/login.cc chrome/browser/sync/notifier/communicator/login.h chrome/browser/sync/notifier/communicator/login_failure.cc chrome/browser/sync/notifier/communicator/login_failure.h chrome/browser/sync/notifier/communicator/login_settings.cc chrome/browser/sync/notifier/communicator/login_settings.h chrome/browser/sync/notifier/communicator/mailbox.cc chrome/browser/sync/notifier/communicator/mailbox.h chrome/browser/sync/notifier/communicator/mailbox_unittest.cc chrome/browser/sync/notifier/communicator/product_info.cc chrome/browser/sync/notifier/communicator/product_info.h chrome/browser/sync/notifier/communicator/single_login_attempt.cc chrome/browser/sync/notifier/communicator/single_login_attempt.h chrome/browser/sync/notifier/communicator/ssl_socket_adapter.cc chrome/browser/sync/notifier/communicator/ssl_socket_adapter.h chrome/browser/sync/notifier/communicator/xmpp_connection_generator.cc chrome/browser/sync/notifier/communicator/xmpp_connection_generator.h chrome/browser/sync/notifier/communicator/xmpp_log.cc chrome/browser/sync/notifier/communicator/xmpp_log.h chrome/browser/sync/notifier/communicator/xmpp_socket_adapter.cc chrome/browser/sync/notifier/communicator/xmpp_socket_adapter.h
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/sync/notifier/listener/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/sync/notifier/listener/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
 Files: chrome/browser/sync/protocol/service_constants.h
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
 Files: chrome/browser/sync/sessions/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/sync/sessions/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+Copyright: Copyright (c) 2009-2017 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
 Files: chrome/browser/sync/syncable/*
@@ -628,136 +566,16 @@ Files: chrome/browser/tab_contents/infobar_delegate.hgchrome/browser/tab_content
 Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
-Files: chrome/browser/tabs/*
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/tabs/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
 Files: chrome/browser/translate/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/translate/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/views/about_chrome_view.hgchrome/browser/views/bookmark_bar_view_test.cc chrome/browser/views/bookmark_context_menu_test.cc chrome/browser/views/bookmark_editor_view_unittest.cc chrome/browser/views/bookmark_folder_tree_view.cc chrome/browser/views/bookmark_folder_tree_view.h chrome/browser/views/clear_browsing_data.cc chrome/browser/views/clear_browsing_data.h chrome/browser/views/constrained_window_win.h chrome/browser/views/dom_view.cc chrome/browser/views/dom_view.h chrome/browser/views/download_item_view.cc chrome/browser/views/download_item_view.h chrome/browser/views/download_shelf_view.cc chrome/browser/views/download_shelf_view.h chrome/browser/views/event_utils.cc chrome/browser/views/event_utils.h chrome/browser/views/find_bar_host_interactive_uitest.cc chrome/browser/views/html_dialog_view.cc chrome/browser/views/html_dialog_view.h chrome/browser/views/importer_lock_view.cc chrome/browser/views/importer_lock_view.h chrome/browser/views/jsmessage_box_dialog.cc chrome/browser/views/jsmessage_box_dialog.h chrome/browser/views/login_view.cc chrome/browser/views/login_view.h chrome/browser/views/modal_dialog_delegate.cc chrome/browser/views/modal_dialog_delegate.h chrome/browser/views/repost_form_warning_view.h chrome/browser/views/restart_message_box.cc chrome/browser/views/restart_message_box.h chrome/browser/views/sad_tab_view.cc chrome/browser/views/sad_tab_view.h chrome/browser/views/select_profile_dialog.cc chrome/browser/views/select_profile_dialog.h chrome/browser/views/shell_dialogs_win.cc chrome/browser/views/status_bubble_views.h chrome/browser/views/tab_icon_view.cc chrome/browser/views/tab_icon_view.h chrome/browser/views/theme_helpers.cc chrome/browser/views/theme_helpers.h chrome/browser/views/toolbar_star_toggle.cc chrome/browser/views/user_data_dir_dialog.cc chrome/browser/views/user_data_dir_dialog.h
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/views/dropdown_bar_host_gtk.ccgchrome/browser/views/dropdown_bar_host_win.cc chrome/browser/views/find_bar_host_gtk.cc chrome/browser/views/find_bar_host_win.cc
-Copyright: Copyright (c) 2006-2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/views/unhandled_keyboard_event_handler.h
-Copyright: Copyright (c) 2006-2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/views/PRESUBMIT.pygchrome/browser/views/about_chrome_view.cc chrome/browser/views/about_ipc_dialog.cc chrome/browser/views/about_ipc_dialog.h chrome/browser/views/about_network_dialog.cc chrome/browser/views/about_network_dialog.h chrome/browser/views/accelerator_table_gtk.h chrome/browser/views/bookmark_bar_instructions_view.cc chrome/browser/views/bookmark_bar_instructions_view.h chrome/browser/views/bookmark_bubble_view.cc chrome/browser/views/bookmark_bubble_view.h chrome/browser/views/bookmark_context_menu.cc chrome/browser/views/bookmark_menu_button.cc chrome/browser/views/bookmark_menu_button.h chrome/browser/views/browser_bubble.cc chrome/browser/views/browser_bubble.h chrome/browser/views/browser_bubble_gtk.cc chrome/browser/views/browser_bubble_win.cc chrome/browser/views/browser_views_accessibility_browsertest.cc chrome/browser/views/bubble_border.cc chrome/browser/views/bubble_border.h chrome/browser/views/bug_report_view.h chrome/browser/views/chrome_views_delegate.cc chrome/browser/views/chrome_views_delegate.h chrome/browser/views/confirm_message_box_dialog.cc chrome/browser/views/confirm_message_box_dialog.h chrome/browser/views/create_application_shortcut_view.cc chrome/browser/views/create_application_shortcut_view.h chrome/browser/views/detachable_toolbar_view.cc chrome/browser/views/download_started_animation_win.cc chrome/browser/views/edit_search_engine_dialog.cc chrome/browser/views/edit_search_engine_dialog.h chrome/browser/views/external_protocol_dialog.cc chrome/browser/views/external_protocol_dialog.h chrome/browser/views/find_bar_host_uitest.cc chrome/browser/views/fullscreen_exit_bubble.cc chrome/browser/views/fullscreen_exit_bubble.h chrome/browser/views/info_bubble.h chrome/browser/views/new_profile_dialog.cc chrome/browser/views/new_profile_dialog.h chrome/browser/views/theme_install_bubble_view.h chrome/browser/views/uninstall_view.cc chrome/browser/views/uninstall_view.h
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/views/accelerator_table_gtk.ccgchrome/browser/views/accessible_toolbar_view.cc chrome/browser/views/accessible_toolbar_view.h chrome/browser/views/app_launcher.cc chrome/browser/views/app_launcher.h chrome/browser/views/appcache_info_view.cc chrome/browser/views/appcache_info_view.h chrome/browser/views/autofill_profiles_view_win.cc chrome/browser/views/autofill_profiles_view_win.h chrome/browser/views/bookmark_bar_view.cc chrome/browser/views/bookmark_bar_view.h chrome/browser/views/bookmark_context_menu.h chrome/browser/views/bookmark_context_menu_controller_views.cc chrome/browser/views/bookmark_context_menu_controller_views.h chrome/browser/views/bookmark_editor_view.cc chrome/browser/views/bookmark_editor_view.h chrome/browser/views/bookmark_manager_view.cc chrome/browser/views/bookmark_manager_view.h chrome/browser/views/bookmark_menu_controller_views.cc chrome/browser/views/bookmark_menu_controller_views.h chrome/browser/views/bookmark_table_view.cc chrome/browser/views/bookmark_table_view.h chrome/browser/views/browser_actions_container.cc chrome/browser/views/browser_actions_container.h chrome/browser/views/browser_actions_container_browsertest.cc chrome/browser/views/browser_dialogs.h chrome/browser/views/bug_report_view.cc chrome/browser/views/constrained_window_win.cc chrome/browser/views/content_blocked_bubble_contents.cc chrome/browser/views/content_blocked_bubble_contents.h chrome/browser/views/cookie_info_view.cc chrome/browser/views/cookie_info_view.h chrome/browser/views/cookie_prompt_view.cc chrome/browser/views/cookie_prompt_view.h chrome/browser/views/database_info_view.cc chrome/browser/views/database_info_view.h chrome/browser/views/database_open_info_view.cc chrome/browser/views/database_open_info_view.h chrome/browser/views/detachable_toolbar_view.h chrome/browser/views/dialog_stubs_gtk.cc chrome/browser/views/dropdown_bar_host.cc chrome/browser/views/dropdown_bar_host.h chrome/browser/views/dropdown_bar_view.h chrome/browser/views/find_bar_host.cc chrome/browser/views/find_bar_host.h chrome/browser/views/find_bar_view.cc chrome/browser/views/find_bar_view.h chrome/browser/views/first_run_bubble.cc chrome/browser/views/first_run_bubble.h chrome/browser/views/first_run_customize_view.cc chrome/browser/views/first_run_customize_view.h chrome/browser/views/first_run_search_engine_view.cc chrome/browser/views/first_run_search_engine_view.h chrome/browser/views/first_run_view.cc chrome/browser/views/first_run_view.h chrome/browser/views/first_run_view_base.cc chrome/browser/views/first_run_view_base.h chrome/browser/views/generic_info_view.cc chrome/browser/views/generic_info_view.h chrome/browser/views/generic_info_view_unittest.cc chrome/browser/views/go_button.cc chrome/browser/views/go_button.h chrome/browser/views/hung_renderer_view.cc chrome/browser/views/importer_view.cc chrome/browser/views/importer_view.h chrome/browser/views/importing_progress_view.cc chrome/browser/views/importing_progress_view.h chrome/browser/views/info_bubble.cc chrome/browser/views/keyword_editor_view.cc chrome/browser/views/keyword_editor_view.h chrome/browser/views/list_background.h chrome/browser/views/local_storage_info_view.cc chrome/browser/views/local_storage_info_view.h chrome/browser/views/local_storage_set_item_info_view.cc chrome/browser/views/local_storage_set_item_info_view.h chrome/browser/views/location_bar_view.cc chrome/browser/views/location_bar_view.h chrome/browser/views/page_info_window_view.cc chrome/browser/views/repost_form_warning_view.cc chrome/browser/views/select_file_dialog.cc chrome/browser/views/status_bubble_views.cc chrome/browser/views/task_manager_view.cc chrome/browser/views/theme_background.cc chrome/browser/views/theme_background.h chrome/browser/views/theme_install_bubble_view.cc chrome/browser/views/toolbar_star_toggle.h chrome/browser/views/toolbar_view.cc chrome/browser/views/toolbar_view.h chrome/browser/views/unhandled_keyboard_event_handler.cc chrome/browser/views/url_picker.cc chrome/browser/views/url_picker.h
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/views/autocomplete/autocomplete_popup_contents_view.ccgchrome/browser/views/autocomplete/autocomplete_popup_contents_view.h chrome/browser/views/autocomplete/autocomplete_popup_gtk.cc chrome/browser/views/autocomplete/autocomplete_popup_gtk.h chrome/browser/views/autocomplete/autocomplete_popup_win.cc chrome/browser/views/autocomplete/autocomplete_popup_win.h
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/views/extensions/extension_view.h
-Copyright: Copyright (c) 2006-2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/views/extensions/extension_popup.ccgchrome/browser/views/extensions/extension_popup.h
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/views/frame/browser_frame.hgchrome/browser/views/frame/browser_frame_win.h
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/views/frame/browser_extender.hgchrome/browser/views/frame/browser_frame_gtk.h chrome/browser/views/frame/browser_non_client_frame_view.h chrome/browser/views/frame/browser_root_view.cc chrome/browser/views/frame/browser_root_view.h
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/views/frame/app_panel_browser_frame_view.ccgchrome/browser/views/frame/app_panel_browser_frame_view.h chrome/browser/views/frame/browser_bubble_host.cc chrome/browser/views/frame/browser_bubble_host.h chrome/browser/views/frame/browser_frame_gtk.cc chrome/browser/views/frame/browser_frame_win.cc chrome/browser/views/frame/browser_view.cc chrome/browser/views/frame/browser_view.h chrome/browser/views/frame/browser_view_layout.cc chrome/browser/views/frame/browser_view_layout.h chrome/browser/views/frame/glass_browser_frame_view.cc chrome/browser/views/frame/glass_browser_frame_view.h chrome/browser/views/frame/opaque_browser_frame_view.cc chrome/browser/views/frame/opaque_browser_frame_view.h
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/views/infobars/extension_infobar.ccgchrome/browser/views/infobars/extension_infobar.h chrome/browser/views/infobars/infobar_container.cc chrome/browser/views/infobars/infobar_container.h chrome/browser/views/infobars/infobars.cc chrome/browser/views/infobars/infobars.h chrome/browser/views/infobars/translate_infobars.cc chrome/browser/views/infobars/translate_infobars.h
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/views/notifications/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/views/notifications/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/views/options/advanced_contents_view.hgchrome/browser/views/options/advanced_page_view.cc chrome/browser/views/options/advanced_page_view.h chrome/browser/views/options/fonts_languages_window_view.cc chrome/browser/views/options/fonts_page_view.h chrome/browser/views/options/languages_page_view.h chrome/browser/views/options/options_group_view.h chrome/browser/views/options/options_page_view.cc chrome/browser/views/options/options_page_view.h
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/views/options/exceptions_page_view.ccgchrome/browser/views/options/exceptions_page_view.h chrome/browser/views/options/fonts_languages_window_view.h chrome/browser/views/options/fonts_page_view.cc chrome/browser/views/options/general_page_view.h chrome/browser/views/options/languages_page_view.cc chrome/browser/views/options/options_group_view.cc chrome/browser/views/options/passwords_exceptions_window_view.cc chrome/browser/views/options/passwords_exceptions_window_view.h chrome/browser/views/options/passwords_page_view.cc chrome/browser/views/options/passwords_page_view.h
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/views/options/advanced_contents_view.ccgchrome/browser/views/options/content_filter_page_view.cc chrome/browser/views/options/content_filter_page_view.h chrome/browser/views/options/content_page_view.cc chrome/browser/views/options/content_page_view.h chrome/browser/views/options/content_settings_window_view.cc chrome/browser/views/options/content_settings_window_view.h chrome/browser/views/options/cookie_filter_page_view.cc chrome/browser/views/options/cookie_filter_page_view.h chrome/browser/views/options/cookies_view.cc chrome/browser/views/options/cookies_view.h chrome/browser/views/options/customize_sync_window_view.cc chrome/browser/views/options/customize_sync_window_view.h chrome/browser/views/options/exception_editor_view.cc chrome/browser/views/options/exception_editor_view.h chrome/browser/views/options/exceptions_view.cc chrome/browser/views/options/exceptions_view.h chrome/browser/views/options/general_page_view.cc chrome/browser/views/options/geolocation_exceptions_view.cc chrome/browser/views/options/geolocation_exceptions_view.h chrome/browser/views/options/options_window_view.cc chrome/browser/views/options/plugin_filter_page_view.cc chrome/browser/views/options/plugin_filter_page_view.h
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/views/status_icons/status_icon_win.ccgchrome/browser/views/status_icons/status_icon_win.h chrome/browser/views/status_icons/status_tray_win.cc chrome/browser/views/status_icons/status_tray_win.h chrome/browser/views/status_icons/status_tray_win_unittest.cc
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/views/tab_contents/tab_contents_view_win.h
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/views/tab_contents/native_tab_contents_container.hgchrome/browser/views/tab_contents/native_tab_contents_container_gtk.cc chrome/browser/views/tab_contents/native_tab_contents_container_gtk.h chrome/browser/views/tab_contents/native_tab_contents_container_win.cc chrome/browser/views/tab_contents/native_tab_contents_container_win.h chrome/browser/views/tab_contents/render_view_context_menu_external_win.cc chrome/browser/views/tab_contents/render_view_context_menu_external_win.h chrome/browser/views/tab_contents/render_view_context_menu_gtk.cc chrome/browser/views/tab_contents/render_view_context_menu_gtk.h chrome/browser/views/tab_contents/render_view_context_menu_win.cc chrome/browser/views/tab_contents/render_view_context_menu_win.h chrome/browser/views/tab_contents/tab_contents_drag_win.cc chrome/browser/views/tab_contents/tab_contents_drag_win.h
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/views/tab_contents/tab_contents_container.ccgchrome/browser/views/tab_contents/tab_contents_container.h chrome/browser/views/tab_contents/tab_contents_view_gtk.cc chrome/browser/views/tab_contents/tab_contents_view_gtk.h chrome/browser/views/tab_contents/tab_contents_view_win.cc
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/views/tabs/dragged_tab_controller.hgchrome/browser/views/tabs/dragged_tab_view.cc chrome/browser/views/tabs/dragged_tab_view.h chrome/browser/views/tabs/native_view_photobooth.h chrome/browser/views/tabs/native_view_photobooth_win.cc chrome/browser/views/tabs/native_view_photobooth_win.h chrome/browser/views/tabs/tab_dragging_test.cc chrome/browser/views/tabs/tab_renderer.h
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/views/tabs/native_view_photobooth_gtk.ccgchrome/browser/views/tabs/native_view_photobooth_gtk.h
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/views/tabs/base_tab_strip.hgchrome/browser/views/tabs/browser_tab_strip_controller.cc chrome/browser/views/tabs/browser_tab_strip_controller.h chrome/browser/views/tabs/dragged_tab_controller.cc chrome/browser/views/tabs/side_tab.cc chrome/browser/views/tabs/side_tab.h chrome/browser/views/tabs/side_tab_strip.cc chrome/browser/views/tabs/side_tab_strip.h chrome/browser/views/tabs/side_tab_strip_model.h chrome/browser/views/tabs/tab.cc chrome/browser/views/tabs/tab.h chrome/browser/views/tabs/tab_renderer.cc chrome/browser/views/tabs/tab_strip.cc chrome/browser/views/tabs/tab_strip.h
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+Copyright: Copyright (c) 2009-2020 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
 Files: chrome/browser/web_applications/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/web_applications/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+Copyright: Copyright (c) 2009-2020 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
 Files: chrome/browser/web_resource/web_resource_service.ccgchrome/browser/web_resource/web_resource_service.h
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/webdata/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/browser/webdata/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
 Files: chrome/browser/worker_host/message_port_dispatcher.ccgchrome/browser/worker_host/message_port_dispatcher.h chrome/browser/worker_host/worker_document_set.cc chrome/browser/worker_host/worker_document_set.h chrome/browser/worker_host/worker_process_host.cc chrome/browser/worker_host/worker_process_host.h chrome/browser/worker_host/worker_service.cc chrome/browser/worker_host/worker_service.h
@@ -792,22 +610,6 @@ Files: chrome/common/app_mode_constants_mac.hgchrome/common/chrome_paths_linux.c
 Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
-Files: chrome/common/appcache/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/common/appcache/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/common/desktop_notifications/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/common/desktop_notifications/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
 Files: chrome/common/extensions/extension_error_reporter.ccgchrome/common/extensions/extension_error_reporter.h chrome/common/extensions/extension_error_utils.h chrome/common/extensions/url_pattern.cc chrome/common/extensions/url_pattern.h chrome/common/extensions/url_pattern_unittest.cc
 Copyright: Copyright (c) 2006-2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
@@ -833,11 +635,7 @@ Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Us
 License: BSD-3-clause
 
 Files: chrome/common/net/*
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/common/net/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+Copyright: Copyright (c) 2006-2020 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
 Files: chrome/common/web_resource/web_resource_unpacker.ccgchrome/common/web_resource/web_resource_unpacker.h
@@ -846,14 +644,6 @@ License: BSD-3-clause
 
 Files: chrome/gpu/gpu_backing_store_glx.ccgchrome/gpu/gpu_backing_store_glx.h chrome/gpu/gpu_backing_store_glx_context.cc chrome/gpu/gpu_backing_store_glx_context.h chrome/gpu/gpu_backing_store_win.cc chrome/gpu/gpu_backing_store_win.h chrome/gpu/gpu_channel.cc chrome/gpu/gpu_channel.h chrome/gpu/gpu_command_buffer_stub.cc chrome/gpu/gpu_command_buffer_stub.h chrome/gpu/gpu_config.h chrome/gpu/gpu_main.cc chrome/gpu/gpu_process.cc chrome/gpu/gpu_process.h chrome/gpu/gpu_thread.cc chrome/gpu/gpu_thread.h chrome/gpu/gpu_video_layer_glx.cc chrome/gpu/gpu_video_layer_glx.h chrome/gpu/gpu_view_win.cc chrome/gpu/gpu_view_win.h chrome/gpu/gpu_view_x.cc chrome/gpu/gpu_view_x.h chrome/gpu/x_util.cc chrome/gpu/x_util.h
 Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/installer/gcapi/*
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/installer/gcapi/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
 Files: chrome/installer/mini_installer/mini_installer.ccgchrome/installer/mini_installer/mini_installer.h chrome/installer/mini_installer/pe_resource.cc chrome/installer/mini_installer/pe_resource.h
@@ -956,20 +746,8 @@ Files: chrome/renderer/about_handler.ccgchrome/renderer/audio_message_filter.cc 
 Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
-Files: chrome/renderer/automation/*
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/renderer/automation/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
 Files: chrome/renderer/extensions/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/renderer/extensions/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+Copyright: Copyright (c) 2009-2020 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
 Files: chrome/renderer/ggl/ggl.ccgchrome/renderer/ggl/ggl.h
@@ -977,11 +755,7 @@ Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of 
 License: BSD-3-clause
 
 Files: chrome/renderer/media/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: chrome/renderer/media/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+Copyright: Copyright (c) 2009-2020 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
 Files: chrome/renderer/net/render_dns_master.ccgchrome/renderer/net/render_dns_master.h chrome/renderer/net/render_dns_master_unittest.cc chrome/renderer/net/render_dns_queue.cc chrome/renderer/net/render_dns_queue.h chrome/renderer/net/render_dns_queue_unittest.cc
@@ -1072,14 +846,6 @@ Files: gfx/canvas_win.ccggfx/empty.cc gfx/gfx_paths.cc gfx/gfx_paths.h gfx/icon_
 Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
-Files: gfx/codec/*
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: gfx/codec/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
 Files: url/*
 Copyright: Copyright 2013 The Chromium Authors. All rights reserved.
 License: BSD-3-clause
@@ -1093,35 +859,11 @@ Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of 
 License: BSD-3-clause
 
 Files: gpu/command_buffer/common/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: gpu/command_buffer/common/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+Copyright: Copyright (c) 2009-2019 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
 Files: gpu/command_buffer/service/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: gpu/command_buffer/service/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: gpu/demos/framework/*
-Copyright: Copyright (c) 2006-2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: gpu/demos/framework/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: gpu/demos/gles2_book/*
-Copyright: Copyright (c) 2006-2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: gpu/demos/gles2_book/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+Copyright: Copyright (c) 2009-2020 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
 Files: gpu/gpu_plugin/gpu_plugin.ccggpu/gpu_plugin/gpu_plugin.h
@@ -1153,43 +895,7 @@ Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of 
 License: BSD-3-clause
 
 Files: media/audio/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: media/audio/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: media/audio/linux/audio_manager_linux.cc
-Copyright: Copyright (c) 2006-2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: media/audio/linux/audio_manager_linux.h
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: media/audio/linux/alsa_output.ccgmedia/audio/linux/alsa_output.h media/audio/linux/alsa_output_unittest.cc media/audio/linux/alsa_wrapper.cc media/audio/linux/alsa_wrapper.h
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: media/audio/mac/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: media/audio/mac/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: media/audio/openbsd/audio_manager_openbsd.ccgmedia/audio/openbsd/audio_manager_openbsd.h
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: media/audio/win/*
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: media/audio/win/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+Copyright: Copyright (c) 2009-2020 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
 Files: media/base/media_format.ccgmedia/base/media_format.h media/base/run_all_unittests.cc
@@ -1264,14 +970,6 @@ Files: media/tools/media_bench/media_bench.cc
 Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
-Files: media/tools/omx_test/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved.  Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: media/tools/omx_test/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
 Files: media/tools/player_wtl/list.hgmedia/tools/player_wtl/mainfrm.h media/tools/player_wtl/props.h media/tools/player_wtl/seek.h media/tools/player_wtl/wtl_renderer.h
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved.  Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
@@ -1294,810 +992,6 @@ License: BSD-3-clause
 
 Files: media/tools/wav_ola_test/wav_ola_test.cc
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: native_client/PRESUBMIT.py
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/build/cook_tarball.py
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/common/nacl_util.pygnative_client/common/standalone.cc native_client/common/standalone.h native_client/common/worker.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/common/console/console.ccgnative_client/common/console/console.h native_client/common/console/console_c.cc native_client/common/console/console_c.h native_client/common/console/console_color.h native_client/common/console/console_xterm.cc native_client/common/console/console_xterm.h native_client/common/console/font2c.py native_client/common/console/term.h native_client/common/console/termcap.c
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/site_scons/http_download.py native_client/site_scons/site_init.py native_client/site_scons/sync_tgz.py native_client/site_scons/usage_log.py
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/site_scons/site_tools/wix.py
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008 Google Inc:
-License: BSD-3-clause
-
-Files: native_client/site_scons/site_tools/atlmfc_vc80.pygnative_client/site_scons/site_tools/code_coverage.py native_client/site_scons/site_tools/code_signing.py native_client/site_scons/site_tools/collada_dom.py native_client/site_scons/site_tools/command_output.py native_client/site_scons/site_tools/component_bits.py native_client/site_scons/site_tools/component_builders.py native_client/site_scons/site_tools/component_setup.py native_client/site_scons/site_tools/component_targets.py native_client/site_scons/site_tools/component_targets_msvs.py native_client/site_scons/site_tools/component_targets_xml.py native_client/site_scons/site_tools/defer.py native_client/site_scons/site_tools/directx_9_0_c.py native_client/site_scons/site_tools/directx_9_18_944_0_partial.py native_client/site_scons/site_tools/distcc.py native_client/site_scons/site_tools/environment_tools.py native_client/site_scons/site_tools/gather_inputs.py native_client/site_scons/site_tools/naclsdk.py native_client/site_scons/site_tools/publish.py native_client/site_scons/site_tools/replace_strings.py native_client/site_scons/site_tools/replicate.py native_client/site_scons/site_tools/sdl.py native_client/site_scons/site_tools/seven_zip.py native_client/site_scons/site_tools/target_debug.py native_client/site_scons/site_tools/target_optimized.py native_client/site_scons/site_tools/target_platform_linux.py native_client/site_scons/site_tools/target_platform_mac.py native_client/site_scons/site_tools/target_platform_windows.py native_client/site_scons/site_tools/visual_studio_solution.py native_client/site_scons/site_tools/windows_hard_link.py
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/include/checked_cast.hgnative_client/include/checked_cast_debug.h
-Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/include/atomic_ops.hgnative_client/include/elf.h native_client/include/elf32.h native_client/include/elf64.h native_client/include/elf_constants.h native_client/include/nacl_base.h native_client/include/nacl_elf.h native_client/include/nacl_platform.h native_client/include/portability.h native_client/include/portability_io.h native_client/include/portability_string.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/include/nacl_macros.hgnative_client/include/portability_process.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/include/nacl_string.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2010gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/include/linux/arm/atomic_ops.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/include/linux/x86/atomic_ops.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/include/nacl/nacl_inttypes.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/include/osx/atomic_ops_osx.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/include/win/atomic_ops_win32.hgnative_client/include/win/port_win.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/shared/gio/gio.cgnative_client/shared/gio/gio.h native_client/shared/gio/gio_mem.c native_client/shared/gio/gio_mem_snapshot.c native_client/shared/gio/gio_mem_test.cc native_client/shared/gio/gprintf.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/shared/imc/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/shared/imc/*
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/shared/imc/linux/nacl_imc.cc
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/shared/imc/nacl/nacl_imc.cc
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/shared/imc/osx/nacl_imc.cc
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/shared/imc/win/nacl_imc.ccgnative_client/shared/imc/win/nacl_shm.cc
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/shared/npruntime/nacl_npapi.hgnative_client/shared/npruntime/naclnp_util.cc native_client/shared/npruntime/npbridge.cc native_client/shared/npruntime/npbridge.h native_client/shared/npruntime/npcapability.h native_client/shared/npruntime/npmodule.h native_client/shared/npruntime/npn_gate.cc native_client/shared/npruntime/npnavigator.cc native_client/shared/npruntime/npnavigator.h native_client/shared/npruntime/npobject_proxy.cc native_client/shared/npruntime/npobject_proxy.h native_client/shared/npruntime/npobject_stub.cc native_client/shared/npruntime/npobject_stub.h native_client/shared/npruntime/structure_translations.cc
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/shared/npruntime/device2d.ccgnative_client/shared/npruntime/device2d.h native_client/shared/npruntime/device3d.cc native_client/shared/npruntime/device3d.h native_client/shared/npruntime/npextensions.cc native_client/shared/npruntime/npextensions.h native_client/shared/npruntime/npn_gate.h
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/shared/npruntime/pointer_translations.cc
-Copyright: Copyright: 2010 Google Inc. All Rights Reserved:
-License: BSD-3-clause
-
-Files: native_client/shared/npruntime/audio.ccgnative_client/shared/npruntime/audio.h native_client/shared/npruntime/main.cc native_client/shared/npruntime/npclosure.cc native_client/shared/npruntime/npclosure.h native_client/shared/npruntime/npmodule_rpc_impl.cc native_client/shared/npruntime/npnavigator_rpc_impl.cc native_client/shared/npruntime/npstub_rpc_impl.cc native_client/shared/npruntime/npupcall_server.cc native_client/shared/npruntime/npupcall_server.h native_client/shared/npruntime/pointer_translations.h native_client/shared/npruntime/structure_translations.h native_client/shared/npruntime/wire_format.h
-Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/shared/platform/nacl_check.cgnative_client/shared/platform/nacl_check.h native_client/shared/platform/nacl_global_secure_random.c native_client/shared/platform/nacl_global_secure_random.h native_client/shared/platform/nacl_host_desc.h native_client/shared/platform/nacl_host_desc_common.c native_client/shared/platform/nacl_host_dir.h native_client/shared/platform/nacl_interruptible_condvar.c native_client/shared/platform/nacl_interruptible_condvar.h native_client/shared/platform/nacl_interruptible_mutex.c native_client/shared/platform/nacl_interruptible_mutex.h native_client/shared/platform/nacl_log.c native_client/shared/platform/nacl_log.h native_client/shared/platform/nacl_secure_random.h native_client/shared/platform/nacl_secure_random_base.h native_client/shared/platform/nacl_secure_random_common.c native_client/shared/platform/nacl_semaphore.h native_client/shared/platform/nacl_sync.cc native_client/shared/platform/nacl_sync.h native_client/shared/platform/nacl_sync_checked.c native_client/shared/platform/nacl_sync_checked.h native_client/shared/platform/nacl_threads.h native_client/shared/platform/nacl_time.h native_client/shared/platform/nacl_timestamp.h native_client/shared/platform/time.cc native_client/shared/platform/time.h
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/shared/platform/nacl_log_intern.h
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/shared/platform/nacl_find_addrsp.hgnative_client/shared/platform/platform_tests.cc
-Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/shared/platform/linux/condition_variable.ccgnative_client/shared/platform/linux/condition_variable.h native_client/shared/platform/linux/lock.cc native_client/shared/platform/linux/lock.h native_client/shared/platform/linux/nacl_host_desc.c native_client/shared/platform/linux/nacl_host_desc_types.h native_client/shared/platform/linux/nacl_host_dir.c native_client/shared/platform/linux/nacl_host_dir_types.h native_client/shared/platform/linux/nacl_secure_random.c native_client/shared/platform/linux/nacl_secure_random_types.h native_client/shared/platform/linux/nacl_semaphore.c native_client/shared/platform/linux/nacl_semaphore.h native_client/shared/platform/linux/nacl_threads.c native_client/shared/platform/linux/nacl_threads_types.h native_client/shared/platform/linux/nacl_time.c native_client/shared/platform/linux/nacl_timestamp.c native_client/shared/platform/linux/time_linux.cc
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/shared/platform/linux/nacl_time_types.h
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/shared/platform/linux/nacl_find_addrsp.c
-Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/shared/platform/osx/nacl_host_dir.cgnative_client/shared/platform/osx/nacl_host_dir_types.h native_client/shared/platform/osx/nacl_semaphore.c native_client/shared/platform/osx/nacl_semaphore.h native_client/shared/platform/osx/strnlen_osx.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/shared/platform/win/condition_variable.ccgnative_client/shared/platform/win/condition_variable.h native_client/shared/platform/win/condition_variable_events.h native_client/shared/platform/win/lock.cc native_client/shared/platform/win/lock.h native_client/shared/platform/win/lock_impl.h native_client/shared/platform/win/lock_impl_win.cc native_client/shared/platform/win/nacl_host_desc.c native_client/shared/platform/win/nacl_host_desc_types.h native_client/shared/platform/win/nacl_host_dir.c native_client/shared/platform/win/nacl_host_dir_types.h native_client/shared/platform/win/nacl_secure_random.c native_client/shared/platform/win/nacl_secure_random_types.h native_client/shared/platform/win/nacl_semaphore.c native_client/shared/platform/win/nacl_semaphore.h native_client/shared/platform/win/nacl_threads.c native_client/shared/platform/win/nacl_threads_types.h native_client/shared/platform/win/nacl_time.c native_client/shared/platform/win/nacl_timestamp.c native_client/shared/platform/win/port_win.c native_client/shared/platform/win/time_win.cc native_client/shared/platform/win/xlate_system_error.c native_client/shared/platform/win/xlate_system_error.h
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/shared/platform/win/nacl_time_types.hgnative_client/shared/platform/win/port_win_test.c
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/shared/platform/win/nacl_find_addrsp.c
-Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/shared/srpc/accept_loop.cgnative_client/shared/srpc/imc_buffer.c native_client/shared/srpc/invoke.c native_client/shared/srpc/main.c native_client/shared/srpc/nacl_srpc.c native_client/shared/srpc/nacl_srpc.h native_client/shared/srpc/nacl_srpc_internal.h native_client/shared/srpc/rpc_serialize.c native_client/shared/srpc/rpc_server_loop.c native_client/shared/srpc/rpc_service.c native_client/shared/srpc/rpc_universal.c native_client/shared/srpc/utility.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/shared/utils/debugging.hgnative_client/shared/utils/flags.c native_client/shared/utils/flags.h native_client/shared/utils/formatting.c native_client/shared/utils/formatting.h native_client/shared/utils/types.h
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/src/third_party/valgrind/memcheck.hgnative_client/third_party/valgrind/valgrind.h
-Copyright: Copyright: 2000-2009 Julian Seward. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/base/nacl_base_array_size_test.cgnative_client/trusted/base/nacl_base_assert_is_array_test.c native_client/trusted/base/nacl_base_test.c native_client/trusted/base/nacl_min_max_test.c
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/desc/nacl_desc_base.cgnative_client/trusted/desc/nacl_desc_base.h native_client/trusted/desc/nacl_desc_cond.c native_client/trusted/desc/nacl_desc_cond.h native_client/trusted/desc/nacl_desc_conn_cap.c native_client/trusted/desc/nacl_desc_conn_cap.h native_client/trusted/desc/nacl_desc_dir.c native_client/trusted/desc/nacl_desc_dir.h native_client/trusted/desc/nacl_desc_effector.h native_client/trusted/desc/nacl_desc_effector_cleanup.c native_client/trusted/desc/nacl_desc_effector_cleanup.h native_client/trusted/desc/nacl_desc_effector_ldr.c native_client/trusted/desc/nacl_desc_effector_ldr.h native_client/trusted/desc/nacl_desc_imc.c native_client/trusted/desc/nacl_desc_imc.h native_client/trusted/desc/nacl_desc_imc_bound_desc.c native_client/trusted/desc/nacl_desc_imc_bound_desc.h native_client/trusted/desc/nacl_desc_imc_shm.c native_client/trusted/desc/nacl_desc_imc_shm.h native_client/trusted/desc/nacl_desc_io.c native_client/trusted/desc/nacl_desc_io.h native_client/trusted/desc/nacl_desc_mutex.c native_client/trusted/desc/nacl_desc_mutex.h native_client/trusted/desc/nacl_desc_semaphore.c native_client/trusted/desc/nacl_desc_semaphore.h native_client/trusted/desc/nrd_all_modules.c native_client/trusted/desc/nrd_all_modules.h native_client/trusted/desc/nrd_xfer.c native_client/trusted/desc/nrd_xfer.h native_client/trusted/desc/nrd_xfer_effector.c native_client/trusted/desc/nrd_xfer_effector.h native_client/trusted/desc/nrd_xfer_test.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/desc/nacl_desc_invalid.cgnative_client/trusted/desc/nacl_desc_invalid.h native_client/trusted/desc/nacl_desc_sync_socket.c native_client/trusted/desc/nacl_desc_sync_socket.h native_client/trusted/desc/nacl_desc_wrapper.cc native_client/trusted/desc/nacl_desc_wrapper.h
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/desc/nacl_desc_effector_trusted_mem.cgnative_client/trusted/desc/nacl_desc_effector_trusted_mem.h
-Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/src/trusted/desc/nrd_xfer.*
-Copyright: Copyright 2013 The Chromium Authors. All rights reserved.
-License: BSD-3-clause
-
-Files: native_client/trusted/desc/linux/nacl_desc.cgnative_client/trusted/desc/linux/nacl_desc_sysv_shm.c native_client/trusted/desc/linux/nacl_desc_sysv_shm.h
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/desc/win/nacl_desc.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/handle_pass/browser_handle.ccgnative_client/trusted/handle_pass/browser_handle.h native_client/trusted/handle_pass/handle_lookup.cc native_client/trusted/handle_pass/handle_lookup.h native_client/trusted/handle_pass/ldr_handle.cc native_client/trusted/handle_pass/ldr_handle.h
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/nacl_breakpad/nacl_breakpad.hgnative_client/trusted/nacl_breakpad/nacl_breakpad_test.cc
-Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/nacl_breakpad/linux/nacl_breakpad.cc
-Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/nacl_breakpad/osx/nacl_breakpad.cc
-Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/nacl_breakpad/win/nacl_breakpad.cc
-Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/nonnacl_util/*
-Copyright: Copyright: 2006-2009 The Chromium Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/nonnacl_util/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/nonnacl_util/linux/get_plugin_dirname.ccgnative_client/trusted/nonnacl_util/linux/sel_ldr_launcher_linux.cc
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/nonnacl_util/win/sel_ldr_launcher_win.cc
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/platform_qualify/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/platform_qualify/*
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/platform_qualify/linux/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/platform_qualify/linux/*
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/platform_qualify/osx/nacl_os_qualify.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/platform_qualify/win/nacl_os_qualify.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/plugin/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/plugin/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/trusted/plugin/srpc/*
-Copyright: Copyright: 2008-2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/sandbox/linux/nacl_registers.ccgnative_client/trusted/sandbox/linux/nacl_registers.h native_client/trusted/sandbox/linux/nacl_sandbox.cc native_client/trusted/sandbox/linux/nacl_sandbox.h native_client/trusted/sandbox/linux/nacl_sandbox_main.cc native_client/trusted/sandbox/linux/nacl_syscall_checker.cc native_client/trusted/sandbox/linux/nacl_syscall_checker.h native_client/trusted/sandbox/linux/nacl_syscall_def.cc native_client/trusted/sandbox/linux/nacl_syscall_def.h native_client/trusted/sandbox/linux/nacl_syscall_filter.cc native_client/trusted/sandbox/linux/nacl_syscall_filter.h
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/sel_universal/sel_universal.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/sel_universal/multimedia_handler.ccgnative_client/trusted/sel_universal/rpc_benchmarker.c
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/sel_universal/multimedia.hgnative_client/trusted/sel_universal/multimedia_sdl.cc native_client/trusted/sel_universal/multimedia_test.cc native_client/trusted/sel_universal/sel_universal_new.cc native_client/trusted/sel_universal/workqueue.h
-Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/dyn_array.cgnative_client/trusted/service_runtime/dyn_array.h native_client/trusted/service_runtime/dyn_array_test.c native_client/trusted/service_runtime/expiration.c native_client/trusted/service_runtime/expiration.h native_client/trusted/service_runtime/expiration_test.c native_client/trusted/service_runtime/internal_errno.h native_client/trusted/service_runtime/main.c native_client/trusted/service_runtime/main2.c native_client/trusted/service_runtime/mmap_test.c native_client/trusted/service_runtime/modify_ldt.c native_client/trusted/service_runtime/modify_ldt2.c native_client/trusted/service_runtime/nacl_all_modules.h native_client/trusted/service_runtime/nacl_app.h native_client/trusted/service_runtime/nacl_app_thread.c native_client/trusted/service_runtime/nacl_app_thread.h native_client/trusted/service_runtime/nacl_assert.h native_client/trusted/service_runtime/nacl_audio_video.h native_client/trusted/service_runtime/nacl_bottom_half.c native_client/trusted/service_runtime/nacl_bottom_half.h native_client/trusted/service_runtime/nacl_closure.c native_client/trusted/service_runtime/nacl_closure.h native_client/trusted/service_runtime/nacl_config.h native_client/trusted/service_runtime/nacl_error_code.h native_client/trusted/service_runtime/nacl_globals.c native_client/trusted/service_runtime/nacl_globals.h native_client/trusted/service_runtime/nacl_ldt_unittest.c native_client/trusted/service_runtime/nacl_memory_object.c native_client/trusted/service_runtime/nacl_memory_object.h native_client/trusted/service_runtime/nacl_switch_to_app.h native_client/trusted/service_runtime/nacl_sync_cond_test.c native_client/trusted/service_runtime/nacl_sync_queue.c native_client/trusted/service_runtime/nacl_sync_queue.h native_client/trusted/service_runtime/nacl_sync_unittest.cc native_client/trusted/service_runtime/nacl_syscall_asm_symbols.h native_client/trusted/service_runtime/nacl_syscall_common.c native_client/trusted/service_runtime/nacl_syscall_common.h native_client/trusted/service_runtime/nacl_syscall_handlers.h native_client/trusted/service_runtime/nacl_syscall_hook.c native_client/trusted/service_runtime/sel_addrspace.c native_client/trusted/service_runtime/sel_addrspace.h native_client/trusted/service_runtime/sel_ldr-inl.h native_client/trusted/service_runtime/sel_ldr.c native_client/trusted/service_runtime/sel_ldr.h native_client/trusted/service_runtime/sel_ldr_standard.c native_client/trusted/service_runtime/sel_ldr_test.cc native_client/trusted/service_runtime/sel_ldr_thread_death_test.c native_client/trusted/service_runtime/sel_main.c native_client/trusted/service_runtime/sel_mem.c native_client/trusted/service_runtime/sel_mem.h native_client/trusted/service_runtime/sel_mem_test.cc native_client/trusted/service_runtime/sel_memory.h native_client/trusted/service_runtime/sel_memory_unittest.cc native_client/trusted/service_runtime/sel_util.c native_client/trusted/service_runtime/sel_util.h native_client/trusted/service_runtime/springboard.h native_client/trusted/service_runtime/unittest_main.cc native_client/trusted/service_runtime/web_worker_stub.c native_client/trusted/service_runtime/web_worker_stub.h
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/nacl_syscall_handlers_gen2.py
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved. Use:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/export_header.py
-Copyright: Copyright: 2008g2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/elf_util.cgnative_client/trusted/service_runtime/elf_util.h native_client/trusted/service_runtime/env_cleanser.c native_client/trusted/service_runtime/env_cleanser.h native_client/trusted/service_runtime/env_cleanser_test.c native_client/trusted/service_runtime/env_cleanser_test.h native_client/trusted/service_runtime/nacl_all_modules.c native_client/trusted/service_runtime/nacl_check_test.c native_client/trusted/service_runtime/nacl_text.c native_client/trusted/service_runtime/nacl_text.h native_client/trusted/service_runtime/nacl_thread_nice.h native_client/trusted/service_runtime/nacl_tls.h native_client/trusted/service_runtime/sel_ldr-inl.c native_client/trusted/service_runtime/sel_rt.h native_client/trusted/service_runtime/sel_util-inl.c native_client/trusted/service_runtime/sel_util-inl.h
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/gio_shm.cgnative_client/trusted/service_runtime/gio_shm.h native_client/trusted/service_runtime/gio_shm_test.c native_client/trusted/service_runtime/gio_shm_unbounded.c native_client/trusted/service_runtime/gio_shm_unbounded.h native_client/trusted/service_runtime/gio_shm_unbounded_test.c native_client/trusted/service_runtime/nacl_config_dangerous.h native_client/trusted/service_runtime/nacl_tls_unittest.c native_client/trusted/service_runtime/sel_validate_image.c
-Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/arch/sel_ldr_arch.h
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/arch/arm/nacl_app.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/arch/arm/nacl_tls.cgnative_client/trusted/service_runtime/arch/arm/sel_addrspace_arm.c native_client/trusted/service_runtime/arch/arm/sel_ldr_arm.c native_client/trusted/service_runtime/arch/arm/sel_ldr_arm.h native_client/trusted/service_runtime/arch/arm/sel_rt.c native_client/trusted/service_runtime/arch/arm/sel_rt.h native_client/trusted/service_runtime/arch/arm/tramp_arm.h
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/arch/arm/nacl_switch_to_app_arm.c
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/arch/x86/nacl_ldt_x86.cgnative_client/trusted/service_runtime/arch/x86/nacl_ldt_x86.h
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/arch/x86/sel_ldr_x86.hgnative_client/trusted/service_runtime/arch/x86/sel_rt.h
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/arch/x86_32/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/arch/x86_32/*
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/arch/x86_64/nacl_app_64.c
-Copyright: Copyright: 2006 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/arch/x86_64/nacl_switch_to_app_64.cgnative_client/trusted/service_runtime/arch/x86_64/tramp_64.h
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/arch/x86_64/nacl_tls_64.cgnative_client/trusted/service_runtime/arch/x86_64/sel_addrspace_x86_64.c native_client/trusted/service_runtime/arch/x86_64/sel_ldr_x86_64.c native_client/trusted/service_runtime/arch/x86_64/sel_rt_64.c native_client/trusted/service_runtime/arch/x86_64/sel_rt_64.h
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/benchmark/getpid.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/fs/fs.hgnative_client/trusted/service_runtime/fs/obj_proxy.c native_client/trusted/service_runtime/fs/obj_proxy.h native_client/trusted/service_runtime/fs/obj_proxy_test.c native_client/trusted/service_runtime/fs/xdr.c native_client/trusted/service_runtime/fs/xdr.h
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/generic_container/container.cgnative_client/trusted/service_runtime/generic_container/container.h
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/include/bits/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/include/bits/*
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/include/machine/_types.h
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/include/sys/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/include/sys/*
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/linux/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/linux/*
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/linux/arm/sel_segments.c
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/linux/x86/nacl_ldt.cgnative_client/trusted/service_runtime/linux/x86/sel_segments.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/osx/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/osx/*
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/win/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/service_runtime/win/*
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/validator_arm/v2/address_set.ccgnative_client/trusted/validator_arm/v2/address_set.h native_client/trusted/validator_arm/v2/address_set_test.cc native_client/trusted/validator_arm/v2/decode.h native_client/trusted/validator_arm/v2/dgen_core.py native_client/trusted/validator_arm/v2/dgen_input.py native_client/trusted/validator_arm/v2/dgen_opt.py native_client/trusted/validator_arm/v2/generate_decoder.py native_client/trusted/validator_arm/v2/inst_classes.cc native_client/trusted/validator_arm/v2/inst_classes.h native_client/trusted/validator_arm/v2/model-inl.h native_client/trusted/validator_arm/v2/model.h native_client/trusted/validator_arm/v2/ncval.cc native_client/trusted/validator_arm/v2/ncvalidate.cc native_client/trusted/validator_arm/v2/ncvalidate.h native_client/trusted/validator_arm/v2/optimize-table.py native_client/trusted/validator_arm/v2/validation-report.py native_client/trusted/validator_arm/v2/validator.cc native_client/trusted/validator_arm/v2/validator.h
-Copyright: Copyright: 2009gGoogle Inc / 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/validator_arm/v2/testdata/compile_tests.sh
-Copyright: Copyright: 2009 Google Inc / 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/validator_x86/nacl_cpuid.cgnative_client/trusted/validator_x86/nacl_cpuid.h native_client/trusted/validator_x86/nacl_cpuid_test.c native_client/trusted/validator_x86/nc_opcode_histogram.c native_client/trusted/validator_x86/ncdecode.c native_client/trusted/validator_x86/ncdecode.h native_client/trusted/validator_x86/ncdecode_tests.c native_client/trusted/validator_x86/ncdecode_tests.h native_client/trusted/validator_x86/ncdis.c native_client/trusted/validator_x86/ncdis_util.c native_client/trusted/validator_x86/ncfileutil.c native_client/trusted/validator_x86/ncfileutil.h native_client/trusted/validator_x86/ncval.c native_client/trusted/validator_x86/ncval_tests.c native_client/trusted/validator_x86/ncvalidate.h native_client/trusted/validator_x86/ncvalidate_internaltypes.h
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/validator_x86/nc_cpu_checks.cgnative_client/trusted/validator_x86/nc_illegal.c native_client/trusted/validator_x86/nc_illegal.h native_client/trusted/validator_x86/nc_inst_iter.c native_client/trusted/validator_x86/nc_inst_iter.h native_client/trusted/validator_x86/nc_inst_state.c native_client/trusted/validator_x86/nc_inst_state.h native_client/trusted/validator_x86/nc_inst_state_internal.h native_client/trusted/validator_x86/nc_inst_trans.c native_client/trusted/validator_x86/nc_inst_trans.h native_client/trusted/validator_x86/nc_jumps.c native_client/trusted/validator_x86/nc_jumps.h native_client/trusted/validator_x86/nc_opcode_histogram.h native_client/trusted/validator_x86/nc_protect_base.c native_client/trusted/validator_x86/nc_protect_base.h native_client/trusted/validator_x86/nc_read_segment.c native_client/trusted/validator_x86/nc_read_segment.h native_client/trusted/validator_x86/nc_segment.c native_client/trusted/validator_x86/nc_segment.h native_client/trusted/validator_x86/nc_store_protect.c native_client/trusted/validator_x86/nc_store_protect.h native_client/trusted/validator_x86/ncdecode_OF.c native_client/trusted/validator_x86/ncdecode_forms.c native_client/trusted/validator_x86/ncdecode_forms.h native_client/trusted/validator_x86/ncdecode_onebyte.c native_client/trusted/validator_x86/ncdecode_sse.c native_client/trusted/validator_x86/ncdecode_table.c native_client/trusted/validator_x86/ncdecode_tablegen.c native_client/trusted/validator_x86/ncdecode_tablegen.h native_client/trusted/validator_x86/ncdis_util.h native_client/trusted/validator_x86/ncop_exps.c native_client/trusted/validator_x86/ncop_exps.h native_client/trusted/validator_x86/ncopcode_desc.c native_client/trusted/validator_x86/ncopcode_desc.h native_client/trusted/validator_x86/ncval_driver.c native_client/trusted/validator_x86/ncval_driver.h native_client/trusted/validator_x86/ncval_iter.c native_client/trusted/validator_x86/ncval_iter_test.c native_client/trusted/validator_x86/ncvalidate_iter.c native_client/trusted/validator_x86/ncvalidate_iter.h native_client/trusted/validator_x86/ncvalidate_iter_internal.h native_client/trusted/validator_x86/ncvalidate_utils.c native_client/trusted/validator_x86/ncvalidate_utils.h native_client/trusted/validator_x86/ncvalidator_registry.c native_client/trusted/validator_x86/ncvalidator_registry.h native_client/trusted/validator_x86/types_memory_model.h
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/validator_x86/ncdecodeX87.c
-Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/trusted/validator_x86/discmp.py
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/trusted/validator_x86/enum_gen.py
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/untrusted/av/nacl_av.cgnative_client/untrusted/av/nacl_av.h native_client/untrusted/av/nacl_av_priv.h
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/untrusted/nacl/_exit.cgnative_client/untrusted/nacl/clock.c native_client/untrusted/nacl/close.c native_client/untrusted/nacl/fstat.c native_client/untrusted/nacl/getdents.c native_client/untrusted/nacl/getpid.c native_client/untrusted/nacl/gettimeofday.c native_client/untrusted/nacl/imc_accept.c native_client/untrusted/nacl/imc_connect.c native_client/untrusted/nacl/imc_makeboundsock.c native_client/untrusted/nacl/imc_mem_obj_create.c native_client/untrusted/nacl/imc_recvmsg.c native_client/untrusted/nacl/imc_sendmsg.c native_client/untrusted/nacl/imc_socketpair.c native_client/untrusted/nacl/lock.c native_client/untrusted/nacl/lseek.c native_client/untrusted/nacl/mmap.c native_client/untrusted/nacl/munmap.c native_client/untrusted/nacl/null.c native_client/untrusted/nacl/open.c native_client/untrusted/nacl/read.c native_client/untrusted/nacl/sbrk.c native_client/untrusted/nacl/sched_yield.c native_client/untrusted/nacl/srpc_get_fd.c native_client/untrusted/nacl/stacktrace.c native_client/untrusted/nacl/stat.c native_client/untrusted/nacl/sysconf.c native_client/untrusted/nacl/tls.c native_client/untrusted/nacl/tls.h native_client/untrusted/nacl/write.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/untrusted/nacl/av_wait.cgnative_client/untrusted/nacl/nanosleep.c native_client/untrusted/nacl/sleep.c native_client/untrusted/nacl/srpc_init.c native_client/untrusted/nacl/srpc_wait.c native_client/untrusted/nacl/syscall_bindings_trampoline.h
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/untrusted/nacl/dyncode_copy.c
-Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/untrusted/nosys/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/untrusted/nosys/*
-Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/untrusted/pthread/nc_condvar.cgnative_client/untrusted/pthread/nc_condvar.h native_client/untrusted/pthread/nc_hash.c native_client/untrusted/pthread/nc_hash.h native_client/untrusted/pthread/nc_mutex.c native_client/untrusted/pthread/nc_semaphore.c native_client/untrusted/pthread/nc_thread.c native_client/untrusted/pthread/pthread.h native_client/untrusted/pthread/pthread_types.h native_client/untrusted/pthread/semaphore.h
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/untrusted/reachable_function_symbols/reachable_function_symbols.c
-Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/untrusted/stubs/tls.c
-Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/app_lib/app_lib_test.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/autoloader/autoloader_default.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/barebones/*
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/barebones/*
-Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/breakpad/*
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/cdom_perf/ccdomtable.ccgnative_client/tests/cdom_perf/cdomshm.c native_client/tests/cdom_perf/cdomshm.h native_client/tests/cdom_perf/cdomtable.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/contest_issues/issue52.cgnative_client/tests/contest_issues/issue55.c native_client/tests/contest_issues/issue63.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/createthreads/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/createthreads/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/tests/drawing/drawing.cc
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/dynamic_code_loading/dynamic_load_test.cgnative_client/tests/dynamic_code_loading/templates.h
-Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/earth/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/earth/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/tests/egyptian_cotton/egyptian_cotton.c
-Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/eviltests/linux_overlapjmp.cgnative_client/tests/eviltests/macos_overlapjmp.c native_client/tests/eviltests/trustme.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/fib/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/fib/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/tests/file/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/file/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/tests/hello_world/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/hello_world/*
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/imc_shm_mmap/imc_shm_mmap_test.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/life/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/life/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/tests/loop/loop.cc
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/lua/lua_module.cc
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/mandel/mandel.cgnative_client/tests/mandel/mandel_tiled.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/mandel_nav/mandel_nav.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/mmap/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/mmap/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/tests/nacl_log/nacl_log.c
-Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/nanosleep/nanosleep_test.c
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/native_worker/mandel_worker.cgnative_client/tests/native_worker/native_worker.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/noop/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/noop/*
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/npapi_bridge/base_object.ccgnative_client/tests/npapi_bridge/base_object.h native_client/tests/npapi_bridge/npp_gate.cc native_client/tests/npapi_bridge/plugin.cc native_client/tests/npapi_bridge/plugin.h
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/npapi_geturl/main.ccgnative_client/tests/npapi_geturl/plugin.cc native_client/tests/npapi_geturl/plugin.h
-Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/npapi_hw/npapi_hw.cgnative_client/tests/npapi_hw/npp_gate.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/npapi_pi/base_object.ccgnative_client/tests/npapi_pi/base_object.h native_client/tests/npapi_pi/npp_gate.cc native_client/tests/npapi_pi/plugin.cc native_client/tests/npapi_pi/plugin.h
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/npapi_runtime/main.ccgnative_client/tests/npapi_runtime/plugin.cc native_client/tests/npapi_runtime/plugin.h
-Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/nrd_xfer/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved
-License: BSD-3-clause
-
-Files: native_client/tests/nthread_nice/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/nthread_nice/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/tests/null/null.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/nullptr/*
-Copyright: Copyright (c) 2011 The Native Client Authors. All rights reserved.
-License: BSD-3-clause
-
-Files: native_client/tests/photo/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/photo/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/tests/pthread_bless/run.py
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/tests/python_version/python_version.py
-Copyright: Copyright (c) 2011 The Native Client Authors. All rights reserved.
-License: BSD-3-clause
-
-Files: native_client/tests/quake/nacl_file.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/ruby/main.c
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/ruby/appendix/config.hgnative_client/tests/ruby/appendix/signal_missing.c
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/srpc/cat.cgnative_client/tests/srpc/srpc_bad_service.c native_client/tests/srpc/srpc_nrd_client.c native_client/tests/srpc/srpc_nrd_server.c native_client/tests/srpc/srpc_shm.c native_client/tests/srpc/srpc_test.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/srpc/srpc_bidir.c
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/srpc/test_fixed.sh
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/tests/srpc_hw/srpc_hw.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/srpc_without_pthread/basic_srpc.c
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/sysbasic/sysbasic.cgnative_client/tests/sysbasic/tls_test.c
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/syscall_return_sandboxing/*
-Copyright: Copyright (c) 2013 The Native Client Authors. All rights reserved.
-License: BSD-3-clause
-
-Files: native_client/tests/syscalls/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/threads/thread_test.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/threads/simple_thread_test.c
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/threads/run.py
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/tests/time/gettimeofday_test.c
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/tone/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/tone/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/tests/toolchain/dummy.c
-Copyright: Copyright: 2009gGoogle Inc / 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/tools/sigpipe_tool_test.c
-Copyright: Copyright (c) 2011 The Native Client Authors. All rights reserved.
-License: BSD-3-clause
-
-Files: native_client/tests/tparty/tparty.sh
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/tests/vim/vim_tool.sh
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/tests/voronoi/*
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tests/voronoi/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/tests/xaos/xaos_tool.sh
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/tools/selenium_tester.py
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tools/google-chrome-wrapper.py
-Copyright: Copyright: 2010 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tools/build_memcheck.sh
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008g2009 Google Inc:
-License: BSD-3-clause
-
-Files: native_client/tools/command_tester.pygnative_client/tools/download.sh native_client/tools/firefoxinstall.py native_client/tools/httpd.py native_client/tools/redirector.c native_client/tools/set_abi_version.py native_client/tools/syscall_stats.py native_client/tools/sysinfo.py native_client/tools/test_lib.py native_client/tools/test_timing.py native_client/tools/update_death_test_files.py
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/tools/code_hygiene.pygnative_client/tools/create_redirector.sh native_client/tools/file_cmp_test.py native_client/tools/linux.x86_64.prep.sh native_client/tools/win_as.py
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/tools/srpcgen.py
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2010gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/tools/tests/hello_world_gdb.c
-Copyright: Copyright: 2008 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tools/tests/test_toolchain.py
-Copyright: Copyright: 2009 The Native Client Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: native_client/tools/tests/libs_present_test.ccgnative_client/tools/tests/npp_gate.c
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/tools/tests/libs_present_stub.ccgnative_client/tools/tests/libs_present_stub.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc:
-License: BSD-3-clause
-
-Files: native_client/tools/xray/hashtable.cgnative_client/tools/xray/stringpool.c native_client/tools/xray/symtable.c native_client/tools/xray/xray.c native_client/tools/xray/xray.h native_client/tools/xray/xray_priv.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
 License: BSD-3-clause
 
 Files: net/base/run_all_unittests.cc
@@ -2264,20 +1158,8 @@ Files: net/socket/client_socket_handle.ccgnet/socket/client_socket_handle.h net/
 Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
-Files: net/socket_stream/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: net/socket_stream/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
 Files: net/spdy/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: net/spdy/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+Copyright: Copyright (c) 2009-2019 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
 Files: net/third_party/nss/*
@@ -2293,19 +1175,7 @@ Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of 
 License: BSD-3-clause
 
 Files: net/tools/dump_cache/*
-Copyright: Copyright (c) 2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: net/tools/dump_cache/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: net/tools/fetch/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: net/tools/fetch/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+Copyright: Copyright (c) 2008-2012 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
 Files: net/tools/flip_server/string_piece_utils.h
@@ -2349,11 +1219,7 @@ Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of 
 License: BSD-3-clause
 
 Files: net/websockets/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: net/websockets/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+Copyright: Copyright (c) 2009-2018 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
 Files: printing/emf_win.ccgprinting/emf_win.h printing/emf_win_unittest.cc printing/page_number.cc printing/page_number.h printing/page_number_unittest.cc printing/page_range.cc printing/page_range.h printing/page_range_unittest.cc printing/page_setup.cc printing/page_setup.h printing/page_setup_unittest.cc printing/print_settings.cc printing/print_settings.h printing/printed_page.cc printing/printed_page.h printing/printed_pages_source.h printing/printing_context.h printing/printing_context_win_unittest.cc printing/printing_test.h printing/run_all_unittests.cc printing/units.cc printing/units.h printing/units_unittest.cc
@@ -2372,78 +1238,6 @@ Files: printing/pdf_ps_metafile_cairo.cc printing/pdf_ps_metafile_cairo.h printi
 Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
-Files: sdch/open-vcdiff/blockhash.hgsdch/open-vcdiff/vcdiffengine.h
-Copyright: Copyright: 2006 Google Inc:
-License: Apache-2.0
-
-Files: sdch/open-vcdiff/blockhash.ccgsdch/open-vcdiff/vcdiffengine.cc
-Copyright: Copyright: 2006g2008 Google Inc:
-License: Apache-2.0
-
-Files: sdch/open-vcdiff/addrcache.ccgsdch/open-vcdiff/addrcache.h sdch/open-vcdiff/addrcache_test.cc sdch/open-vcdiff/rolling_hash_test.cc
-Copyright: Copyright: 2007 Google Inc:
-License: Apache-2.0
-
-Files: sdch/open-vcdiff/rolling_hash.h
-Copyright: Copyright: 2007g2008 Google Inc:
-License: Apache-2.0
-
-Files: sdch/open-vcdiff/blockhash_test.ccgsdch/open-vcdiff/checksum.h sdch/open-vcdiff/codetable.cc sdch/open-vcdiff/codetable.h sdch/open-vcdiff/codetable_test.cc sdch/open-vcdiff/compile_assert.h sdch/open-vcdiff/decodetable.cc sdch/open-vcdiff/decodetable.h sdch/open-vcdiff/decodetable_test.cc sdch/open-vcdiff/encodetable.cc sdch/open-vcdiff/encodetable.h sdch/open-vcdiff/encodetable_test.cc sdch/open-vcdiff/headerparser.cc sdch/open-vcdiff/headerparser.h sdch/open-vcdiff/headerparser_test.cc sdch/open-vcdiff/instruction_map.cc sdch/open-vcdiff/instruction_map.h sdch/open-vcdiff/instruction_map_test.cc sdch/open-vcdiff/logging.cc sdch/open-vcdiff/logging.h sdch/open-vcdiff/output_string_crope.h sdch/open-vcdiff/output_string_test.cc sdch/open-vcdiff/testing.h sdch/open-vcdiff/varint_bigendian.cc sdch/open-vcdiff/varint_bigendian.h sdch/open-vcdiff/varint_bigendian_test.cc sdch/open-vcdiff/vcdecoder1_test.cc sdch/open-vcdiff/vcdecoder2_test.cc sdch/open-vcdiff/vcdecoder3_test.cc sdch/open-vcdiff/vcdecoder4_test.cc sdch/open-vcdiff/vcdecoder5_test.cc sdch/open-vcdiff/vcdecoder_test.cc sdch/open-vcdiff/vcdecoder_test.h sdch/open-vcdiff/vcdiff_defs.h sdch/open-vcdiff/vcdiff_main.cc sdch/open-vcdiff/vcdiff_test.sh sdch/open-vcdiff/vcdiffengine_test.cc sdch/open-vcdiff/vcencoder_test.cc
-Copyright: Copyright: 2008 Google Inc:
-License: Apache-2.0
-
-Files: sdch/open-vcdiff/src/codetablewriter_interface.h
-Copyright: 2008 Google Inc. All Rights Reserved.
-License: Apache-2.0
-
-Files: sdch/open-vcdiff/src/zlib/*
-Copyright: Copyright 1995-2005 Jean-loup Gailly and Mark Adler
-License: zlib
-
-Files: sdch/open-vcdiff/gflags/gflags.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2006gGoogle Inc:
-License: BSD-3-clause
-
-Files: sdch/open-vcdiff/google/*
-Copyright: Copyright: 2007 Google Inc:
-License: Apache-2.0
-
-Files: sdch/open-vcdiff/google/*
-Copyright: Copyright: 2008 Google Inc:
-License: Apache-2.0
-
-Files: sdch/open-vcdiff/gtest/gtest-spi.h
-Copyright: Copyright: 2007gGoogle Inc / HOLDERS AND CONTRIBUTORS:
-License: BSD-3-clause
-
-Files: sdch/open-vcdiff/gtest/gtest-death-test.ccgsdch/open-vcdiff/gtest/gtest-death-test.h sdch/open-vcdiff/gtest/gtest-message.h sdch/open-vcdiff/gtest/gtest.cc sdch/open-vcdiff/gtest/gtest.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2005gGoogle Inc:
-License: BSD-3-clause
-
-Files: sdch/open-vcdiff/gtest/gtest_main.ccgsdch/open-vcdiff/gtest/gtest_prod.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2006gGoogle Inc:
-License: BSD-3-clause
-
-Files: sdch/open-vcdiff/gtest/gtest-filepath.ccgsdch/open-vcdiff/gtest/gtest-port.cc
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: sdch/open-vcdiff/gtest/internal/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2005gGoogle Inc:
-License: BSD-3-clause
-
-Files: sdch/open-vcdiff/gtest/internal/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: sdch/open-vcdiff/gtest/gtest-internal-inl.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2005gGoogle Inc:
-License: BSD-3-clause
-
-Files: sdch/open-vcdiff/vsprojects/config.hgsdch/open-vcdiff/vsprojects/stdint.h
-Copyright: Copyright: 2008 Google Inc:
-License: Apache-2.0
-
 Files: site_scons/site_tools/chromium_builders.py
 Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
@@ -2457,95 +1251,15 @@ Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of 
 License: BSD-3-clause
 
 Files: skia/ext/*
-Copyright: Copyright: 2008gGoogle Inc:
-License: Apache-2.0
-
-Files: skia/ext/*
-Copyright: Copyright: 2009gGoogle Inc:
-License: Apache-2.0
-
-Files: skia/ext/bitmap_platform_device_mac.ccgskia/ext/bitmap_platform_device_mac.h skia/ext/bitmap_platform_device_win.cc skia/ext/bitmap_platform_device_win.h skia/ext/platform_canvas.cc skia/ext/platform_canvas.h skia/ext/platform_canvas_linux.cc skia/ext/platform_canvas_mac.cc skia/ext/platform_canvas_unittest.cc skia/ext/platform_canvas_win.cc skia/ext/platform_device.h skia/ext/platform_device_linux.cc skia/ext/platform_device_linux.h skia/ext/platform_device_mac.cc skia/ext/platform_device_mac.h skia/ext/platform_device_win.cc skia/ext/platform_device_win.h skia/ext/skia_utils_mac.h skia/ext/skia_utils_win.cc skia/ext/skia_utils_win.h skia/ext/vector_canvas_unittest.cc
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: skia/ext/vector_canvas.ccgskia/ext/vector_canvas.h skia/ext/vector_canvas_win.cc
-Copyright: Copyright (c) 2006-2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: skia/ext/SkMemory_new_handler.cppgskia/ext/SkTypeface_fake.cpp skia/ext/bitmap_platform_device.h skia/ext/bitmap_platform_device_linux.cc skia/ext/bitmap_platform_device_linux.h skia/ext/canvas_paint.h skia/ext/canvas_paint_linux.h skia/ext/canvas_paint_mac.h skia/ext/canvas_paint_win.h skia/ext/convolver.cc skia/ext/convolver.h skia/ext/convolver_unittest.cc skia/ext/google_logging.cc skia/ext/image_operations.cc skia/ext/image_operations.h skia/ext/image_operations_unittest.cc skia/ext/platform_canvas_win.h skia/ext/vector_canvas_linux.cc skia/ext/vector_platform_device.h skia/ext/vector_platform_device_linux.cc skia/ext/vector_platform_device_linux.h skia/ext/vector_platform_device_win.cc skia/ext/vector_platform_device_win.h
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+Copyright: Copyright (c) 2006-2019 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
 Files: testing/*
 Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
-Files: testing/gmock/run_tests.py
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc. All rights reserved:
-License: BSD-3-clause
-
-Files: testing/gmock/include/gmock/gmock-actions.hgtesting/gmock/include/gmock/gmock-cardinalities.h testing/gmock/include/gmock/gmock-matchers.h testing/gmock/include/gmock/gmock-more-actions.h testing/gmock/include/gmock/gmock-printers.h testing/gmock/include/gmock/gmock-spec-builders.h testing/gmock/include/gmock/gmock.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2007gGoogle Inc:
-License: BSD-3-clause
-
-Files: testing/gmock/include/gmock/internal/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2007gGoogle Inc:
-License: BSD-3-clause
-
-Files: testing/gmock/include/gmock/internal/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: testing/gmock/scripts/upload.py
-Copyright: Copyright: 2007 Google Inc:
-License: Apache-2.0
-
-Files: testing/gmock/scripts/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: testing/gmock/scripts/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc:
-License: BSD-3-clause
-
-Files: testing/gmock/scripts/generator/gmock_gen.py
-Copyright: Copyright: 2008 Google Inc. All Rights Reserved:
-License: Apache-2.0
-
-Files: testing/gmock/scripts/generator/cpp/ast.pygtesting/gmock/scripts/generator/cpp/keywords.py testing/gmock/scripts/generator/cpp/tokenize.py testing/gmock/scripts/generator/cpp/utils.py
-Copyright: Copyright: 2007 Google Inc / 2007 Neal Norwitz:
-License: Apache-2.0
-
-Files: testing/gmock/scripts/generator/cpp/gmock_class.py
-Copyright: Copyright: 2008 Google Inc. All Rights Reserved:
-License: Apache-2.0
-
-Files: testing/gmock/scripts/generator/cpp/gmock_class_test.py
-Copyright: Copyright: 2009 Google Inc. All Rights Reserved / 2009 Neal Norwitz All Rights Reserved:
-License: Apache-2.0
-
 Files: testing/gmock/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2007gGoogle Inc:
-License: BSD-3-clause
-
-Files: testing/gmock/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: testing/gmock/test/gmock_test_utils.py
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2006gGoogle Inc:
-License: BSD-3-clause
-
-Files: testing/gmock/test/gmock-actions_test.ccgtesting/gmock/test/gmock-cardinalities_test.cc testing/gmock/test/gmock-generated-function-mockers_test.cc testing/gmock/test/gmock-generated-internal-utils_test.cc testing/gmock/test/gmock-internal-utils_test.cc testing/gmock/test/gmock-matchers_test.cc testing/gmock/test/gmock-more-actions_test.cc testing/gmock/test/gmock-printers_test.cc testing/gmock/test/gmock-spec-builders_test.cc
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2007gGoogle Inc:
-License: BSD-3-clause
-
-Files: testing/gmock/test/gmock-nice-strict_test.ccgtesting/gmock/test/gmock-port_test.cc testing/gmock/test/gmock_link2_test.cc testing/gmock/test/gmock_link_test.cc testing/gmock/test/gmock_output_test.py testing/gmock/test/gmock_output_test_.cc testing/gmock/test/gmock_test.cc
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: testing/gmock/test/gmock_all_test.ccgtesting/gmock/test/gmock_leak_test.py testing/gmock/test/gmock_leak_test_.cc testing/gmock/test/gmock_link_test.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc:
+Copyright: Copyright (c) 2017 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
 Files: testing/gtest/run_tests.py
@@ -2770,116 +1484,8 @@ Files: third_party/hunspell/tests/test.sh
 Copyright: UNKNOWN:
 License: MPL-1.1 or GPL-2.0 or LGPL-2.1
 
-Files: third_party/libevent/log.c
-Copyright: Copyright: 1993 / 2000 Dug Song <dugsong@monkey.org> / 2005 Nick Mathewson <nickm@freehaven.net>:
-License: BSD-3-clause
-
-Files: third_party/libevent/strlcpy.c
-Copyright: Copyright: 1998 Todd C. Miller <Todd.Miller@courtesan.com>:
-License: BSD-3-clause
-
-Files: third_party/libevent/evsignal.hgthird_party/libevent/kqueue.c third_party/libevent/select.c third_party/libevent/signal.c
-Copyright: Copyright: 2000-2002 Niels Provos <provos@citi.umich.edu>:
-License: BSD-3-clause
-
-Files: third_party/libevent/epoll.cgthird_party/libevent/poll.c
-Copyright: Copyright: 2000-2003 Niels Provos <provos@citi.umich.edu>:
-License: BSD-3-clause
-
-Files: third_party/libevent/devpoll.cgthird_party/libevent/event-internal.h third_party/libevent/event.c third_party/libevent/evhttp.h third_party/libevent/evrpc.c third_party/libevent/log.h
-Copyright: Copyright: 2000-2004 Niels Provos <provos@citi.umich.edu>:
-License: BSD-3-clause
-
-Files: third_party/libevent/event.h
-Copyright: Copyright: 2000-2007 Niels Provos <provos@citi.umich.edu>:
-License: BSD-3-clause
-
-Files: third_party/libevent/http-internal.h
-Copyright: Copyright: 2001 Niels Provos <provos@citi.umich.edu>:
-License: BSD-3-clause
-
-Files: third_party/libevent/buffer.c
-Copyright: Copyright: 2002g2003 Niels Provos <provos@citi.umich.edu>:
-License: BSD-3-clause
-
-Files: third_party/libevent/evbuffer.c
-Copyright: Copyright: 2002-2004 Niels Provos <provos@citi.umich.edu>:
-License: BSD-3-clause
-
-Files: third_party/libevent/http.c
-Copyright: Copyright: 2002-2006 Niels Provos <provos@citi.umich.edu>:
-License: BSD-3-clause
-
-Files: third_party/libevent/epoll_sub.c
-Copyright: Copyright: 2003 Niels Provos <provos@citi.umich.edu>:
-License: BSD-3-clause
-
-Files: third_party/libevent/event_tagging.c
-Copyright: Copyright: 2003g2004 Niels Provos <provos@citi.umich.edu>:
-License: BSD-3-clause
-
-Files: third_party/libevent/event_rpcgen.py
-Copyright: Copyright: 2005 Niels Provos <provos@citi.umich.edu>:
-License: BSD-3-clause
-
-Files: third_party/libevent/min_heap.h
-Copyright: Copyright: 2006 Maxim Yegorushkin <maxim.yegorushkin@gmail.com>:
-License: BSD-3-clause
-
-Files: third_party/libevent/evrpc-internal.h
-Copyright: Copyright: 2006 Niels Provos <provos@citi.umich.edu>:
-License: BSD-3-clause
-
-Files: third_party/libevent/evdns.h
-Copyright: Copyright: 2006 Niels Provos <provos@citi.umich.edu> / below. Please:
-License: BSD-3-clause
-
-Files: third_party/libevent/evutil.cgthird_party/libevent/evutil.h
-Copyright: Copyright: 2007 Niels Provos <provos@citi.umich.edu>:
-License: BSD-3-clause
-
-Files: third_party/libevent/evport.c
-Copyright: Copyright: 2007 Sun Microsystems. All rights reserved:
-License: BSD-3-clause
-
-Files: third_party/libevent/event-config.h
-Copyright: Copyright: 2009 The Chromium Authors. All rights reserved:
-License: BSD-3-clause
-
-Files: third_party/libevent/autogen.shgthird_party/libevent/evdns.c third_party/libevent/strlcpy-internal.h
-Copyright: UNKNOWN:
-License: BSD-3-clause
-
-Files: third_party/libevent/compat/sys/*
-Copyright: Copyright: 1982g1986 1993:
-License: BSD-3-clause
-
-Files: third_party/libevent/compat/sys/*
-Copyright: Copyright: 1991g1993:
-License: BSD-3-clause
-
-Files: third_party/libevent/sample/event-test.cgthird_party/libevent/sample/signal-test.c third_party/libevent/sample/time-test.c
-Copyright: UNKNOWN:
-License: BSD-3-clause
-
-Files: third_party/libevent/test/regress.h
-Copyright: Copyright: 2000-2004 Niels Provos <provos@citi.umich.edu>:
-License: BSD-3-clause
-
-Files: third_party/libevent/test/bench.c
-Copyright: Copyright: 2003 Niels Provos <provos@citi.umich.edu>:
-License: BSD-3-clause
-
-Files: third_party/libevent/test/regress.c
-Copyright: Copyright: 2003g2004 Niels Provos <provos@citi.umich.edu>:
-License: BSD-3-clause
-
-Files: third_party/libevent/test/regress_dns.cgthird_party/libevent/test/regress_http.c third_party/libevent/test/regress_rpc.c
-Copyright: Copyright: 2003-2006 Niels Provos <provos@citi.umich.edu>:
-License: BSD-3-clause
-
-Files: third_party/libevent/test/regress.gen.hgthird_party/libevent/test/test-eof.c third_party/libevent/test/test-init.c third_party/libevent/test/test-time.c third_party/libevent/test/test-weof.c third_party/libevent/test/test.sh
-Copyright: UNKNOWN:
+Files: third_party/libvpx/*
+Copyright: Copyright (c) 2010, The WebM Project authors. All rights reserved. 
 License: BSD-3-clause
 
 Files: third_party/lzma_sdk/7zCrc.cgthird_party/lzma_sdk/7zCrc.h third_party/lzma_sdk/Alloc.c third_party/lzma_sdk/Alloc.h third_party/lzma_sdk/Types.h
@@ -2896,10 +1502,6 @@ License: Public-domain
 
 Files: third_party/lzma_sdk/Compress/Lzma/*
 Copyright: Copyright: 1999-2006 Igor Pavlov (2006-05-01):
-License: Public-domain
-
-Files: third_party/lzma_sdk/Compress/Lzma/*
-Copyright: UNKNOWN:
 License: Public-domain
 
 Files: third_party/modp_b64/*
@@ -2950,238 +1552,6 @@ Files: third_party/ots/*
 Copyright: 2009 The Chromium Authors.
 License: BSD-3-clause
 
-Files: third_party/protobuf2/autogen.shgthird_party/protobuf2/generate_descriptor_proto.sh third_party/protobuf2/post_process_dist.sh
-Copyright: UNKNOWN:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/benchmarks/ProtoBench.java
-Copyright: Copyright: 2009 Google Inc. All rights reserved / HOLDERS AND CONTRIBUTORS:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/editors/protobuf-mode.el
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/examples/AddPerson.javagthird_party/protobuf2/examples/ListPeople.java third_party/protobuf2/examples/add_person.cc third_party/protobuf2/examples/add_person.py third_party/protobuf2/examples/list_people.cc third_party/protobuf2/examples/list_people.py
-Copyright: UNKNOWN:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/run_tests.py
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc. All rights reserved:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/codegear/gtest_all.ccgthird_party/protobuf2/gtest/codegear/gtest_link.cc
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/include/gtest/gtest-spi.h
-Copyright: Copyright: 2007gGoogle Inc / HOLDERS AND CONTRIBUTORS:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/include/gtest/gtest-death-test.hgthird_party/protobuf2/gtest/include/gtest/gtest-message.h third_party/protobuf2/gtest/include/gtest/gtest.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2005gGoogle Inc:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/include/gtest/gtest_prod.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2006gGoogle Inc:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/include/gtest/gtest-typed-test.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008 Google Inc:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/include/gtest/gtest-test-part.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/include/gtest/*
-Copyright: 2006-2008 Google Inc.
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/include/gtest/internal/gtest-linked_ptr.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2003 Google Inc:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/include/gtest/internal/gtest-death-test-internal.hgthird_party/protobuf2/gtest/include/gtest/internal/gtest-internal.h third_party/protobuf2/gtest/include/gtest/internal/gtest-port.h third_party/protobuf2/gtest/include/gtest/internal/gtest-string.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2005gGoogle Inc:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/include/gtest/internal/gtest-param-util.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008 Google Inc:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/include/gtest/internal/gtest-filepath.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/samples/sample10_unittest.ccgthird_party/protobuf2/gtest/samples/sample9_unittest.cc
-Copyright: Copyright: 2009 Google Inc. All Rights Reserved / HOLDERS AND CONTRIBUTORS:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/samples/sample1.ccgthird_party/protobuf2/gtest/samples/sample1.h third_party/protobuf2/gtest/samples/sample1_unittest.cc third_party/protobuf2/gtest/samples/sample2.cc third_party/protobuf2/gtest/samples/sample2.h third_party/protobuf2/gtest/samples/sample2_unittest.cc third_party/protobuf2/gtest/samples/sample3-inl.h third_party/protobuf2/gtest/samples/sample3_unittest.cc third_party/protobuf2/gtest/samples/sample4.cc third_party/protobuf2/gtest/samples/sample4.h third_party/protobuf2/gtest/samples/sample4_unittest.cc third_party/protobuf2/gtest/samples/sample5_unittest.cc
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2005gGoogle Inc:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/samples/prime_tables.hgthird_party/protobuf2/gtest/samples/sample6_unittest.cc third_party/protobuf2/gtest/samples/sample7_unittest.cc third_party/protobuf2/gtest/samples/sample8_unittest.cc
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008 Google Inc:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/scripts/upload.py
-Copyright: Copyright: 2007 Google Inc:
-License: Apache-2.0
-
-Files: third_party/protobuf2/gtest/scripts/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2006gGoogle Inc:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/scripts/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/gtest-death-test.ccgthird_party/protobuf2/gtest/gtest-internal-inl.h third_party/protobuf2/gtest/gtest.cc
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2005gGoogle Inc:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/gtest_main.cc
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2006gGoogle Inc:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/gtest-typed-test.cc
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008 Google Inc:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/gtest-all.ccgthird_party/protobuf2/gtest/gtest-filepath.cc third_party/protobuf2/gtest/gtest-port.cc third_party/protobuf2/gtest/gtest-test-part.cc
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/test/gtest-linked_ptr_test.cc
-Copyright: Copyright: 2003gGoogle Inc / HOLDERS AND CONTRIBUTORS:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/test/gtest-tuple_test.ccgthird_party/protobuf2/gtest/test/gtest_environment_test.cc third_party/protobuf2/gtest/test/gtest_nc.cc third_party/protobuf2/gtest/test/gtest_nc_test.py third_party/protobuf2/gtest/test/gtest_stress_test.cc
-Copyright: Copyright: 2007gGoogle Inc / HOLDERS AND CONTRIBUTORS:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/test/gtest_shuffle_test.pygthird_party/protobuf2/gtest/test/run_tests_test.py
-Copyright: Copyright: 2009 Google Inc. All Rights Reserved / HOLDERS AND CONTRIBUTORS:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/test/gtest-listener_test.ccgthird_party/protobuf2/gtest/test/gtest-unittest-api_test.cc
-Copyright: Copyright: 2009 Google Inc. All rights reserved / HOLDERS AND CONTRIBUTORS:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/test/gtest_filter_unittest.py
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2005 Google Inc. All Rights Reserved:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/test/gtest-death-test_test.ccgthird_party/protobuf2/gtest/test/gtest-message_test.cc third_party/protobuf2/gtest/test/gtest_filter_unittest_.cc third_party/protobuf2/gtest/test/gtest_output_test_.cc third_party/protobuf2/gtest/test/gtest_unittest.cc
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2005gGoogle Inc:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/test/gtest_break_on_failure_unittest.pygthird_party/protobuf2/gtest/test/gtest_break_on_failure_unittest_.cc third_party/protobuf2/gtest/test/gtest_list_tests_unittest.py third_party/protobuf2/gtest/test/gtest_list_tests_unittest_.cc third_party/protobuf2/gtest/test/gtest_main_unittest.cc third_party/protobuf2/gtest/test/gtest_no_test_unittest.cc third_party/protobuf2/gtest/test/gtest_prod_test.cc third_party/protobuf2/gtest/test/gtest_test_utils.py third_party/protobuf2/gtest/test/gtest_xml_output_unittest.py third_party/protobuf2/gtest/test/gtest_xml_output_unittest_.cc third_party/protobuf2/gtest/test/gtest_xml_test_utils.py third_party/protobuf2/gtest/test/production.cc third_party/protobuf2/gtest/test/production.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2006gGoogle Inc:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/test/gtest-test-part_test.ccgthird_party/protobuf2/gtest/test/gtest-typed-test2_test.cc third_party/protobuf2/gtest/test/gtest-typed-test_test.cc third_party/protobuf2/gtest/test/gtest-typed-test_test.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008 Google Inc:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/test/gtest-filepath_test.ccgthird_party/protobuf2/gtest/test/gtest-options_test.cc third_party/protobuf2/gtest/test/gtest-param-test2_test.cc third_party/protobuf2/gtest/test/gtest-param-test_test.cc third_party/protobuf2/gtest/test/gtest-param-test_test.h third_party/protobuf2/gtest/test/gtest-port_test.cc third_party/protobuf2/gtest/test/gtest_color_test.py third_party/protobuf2/gtest/test/gtest_color_test_.cc third_party/protobuf2/gtest/test/gtest_env_var_test.py third_party/protobuf2/gtest/test/gtest_env_var_test_.cc third_party/protobuf2/gtest/test/gtest_output_test.py third_party/protobuf2/gtest/test/gtest_repeat_test.cc third_party/protobuf2/gtest/test/gtest_sole_header_test.cc third_party/protobuf2/gtest/test/gtest_uninitialized_test.py third_party/protobuf2/gtest/test/gtest_uninitialized_test_.cc third_party/protobuf2/gtest/test/gtest_xml_outfile1_test_.cc third_party/protobuf2/gtest/test/gtest_xml_outfile2_test_.cc third_party/protobuf2/gtest/test/gtest_xml_outfiles_test.py
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/test/gtest_all_test.ccgthird_party/protobuf2/gtest/test/gtest_help_test.py third_party/protobuf2/gtest/test/gtest_help_test_.cc third_party/protobuf2/gtest/test/gtest_shuffle_test_.cc third_party/protobuf2/gtest/test/gtest_throw_on_failure_ex_test.cc third_party/protobuf2/gtest/test/gtest_throw_on_failure_test.py third_party/protobuf2/gtest/test/gtest_throw_on_failure_test_.cc
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2009gGoogle Inc:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/xcode/Samples/FrameworkSample/widget.ccgthird_party/protobuf2/gtest/xcode/Samples/FrameworkSample/widget.h third_party/protobuf2/gtest/xcode/Samples/FrameworkSample/widget_test.cc
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008gGoogle Inc:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/gtest/xcode/Scripts/runtests.sh
-Copyright: UNKNOWN:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/java/main/java/com/google/protobuf/AbstractMessage.javagthird_party/protobuf2/java/main/java/com/google/protobuf/AbstractMessageLite.java third_party/protobuf2/java/main/java/com/google/protobuf/BlockingRpcChannel.java third_party/protobuf2/java/main/java/com/google/protobuf/BlockingService.java third_party/protobuf2/java/main/java/com/google/protobuf/ByteString.java third_party/protobuf2/java/main/java/com/google/protobuf/CodedInputStream.java third_party/protobuf2/java/main/java/com/google/protobuf/CodedOutputStream.java third_party/protobuf2/java/main/java/com/google/protobuf/Descriptors.java third_party/protobuf2/java/main/java/com/google/protobuf/DynamicMessage.java third_party/protobuf2/java/main/java/com/google/protobuf/ExtensionRegistry.java third_party/protobuf2/java/main/java/com/google/protobuf/ExtensionRegistryLite.java third_party/protobuf2/java/main/java/com/google/protobuf/FieldSet.java third_party/protobuf2/java/main/java/com/google/protobuf/GeneratedMessage.java third_party/protobuf2/java/main/java/com/google/protobuf/GeneratedMessageLite.java third_party/protobuf2/java/main/java/com/google/protobuf/Internal.java third_party/protobuf2/java/main/java/com/google/protobuf/InvalidProtocolBufferException.java third_party/protobuf2/java/main/java/com/google/protobuf/Message.java third_party/protobuf2/java/main/java/com/google/protobuf/MessageLite.java third_party/protobuf2/java/main/java/com/google/protobuf/RpcCallback.java third_party/protobuf2/java/main/java/com/google/protobuf/RpcChannel.java third_party/protobuf2/java/main/java/com/google/protobuf/RpcController.java third_party/protobuf2/java/main/java/com/google/protobuf/RpcUtil.java third_party/protobuf2/java/main/java/com/google/protobuf/Service.java third_party/protobuf2/java/main/java/com/google/protobuf/ServiceException.java third_party/protobuf2/java/main/java/com/google/protobuf/TextFormat.java third_party/protobuf2/java/main/java/com/google/protobuf/UninitializedMessageException.java third_party/protobuf2/java/main/java/com/google/protobuf/UnknownFieldSet.java third_party/protobuf2/java/main/java/com/google/protobuf/WireFormat.java
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008 Google Inc. All rights reserved:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/java/test/java/com/google/protobuf/AbstractMessageTest.javagthird_party/protobuf2/java/test/java/com/google/protobuf/CodedInputStreamTest.java third_party/protobuf2/java/test/java/com/google/protobuf/CodedOutputStreamTest.java third_party/protobuf2/java/test/java/com/google/protobuf/DescriptorsTest.java third_party/protobuf2/java/test/java/com/google/protobuf/DynamicMessageTest.java third_party/protobuf2/java/test/java/com/google/protobuf/GeneratedMessageTest.java third_party/protobuf2/java/test/java/com/google/protobuf/LiteTest.java third_party/protobuf2/java/test/java/com/google/protobuf/MessageTest.java third_party/protobuf2/java/test/java/com/google/protobuf/ServiceTest.java third_party/protobuf2/java/test/java/com/google/protobuf/TestUtil.java third_party/protobuf2/java/test/java/com/google/protobuf/TextFormatTest.java third_party/protobuf2/java/test/java/com/google/protobuf/UnknownFieldSetTest.java third_party/protobuf2/java/test/java/com/google/protobuf/WireFormatTest.java
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008 Google Inc. All rights reserved:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/python/mox.pygthird_party/protobuf2/python/stubout.py
-Copyright: Copyright: 2008 Google Inc:
-License: Apache-2.0
-
-Files: third_party/protobuf2/python/ez_setup.pygthird_party/protobuf2/python/setup.py
-Copyright: UNKNOWN:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/python/google/__init__.py
-Copyright: UNKNOWN:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/python/google/protobuf/descriptor.pygthird_party/protobuf2/python/google/protobuf/reflection.py third_party/protobuf2/python/google/protobuf/service.py third_party/protobuf2/python/google/protobuf/service_reflection.py third_party/protobuf2/python/google/protobuf/text_format.py
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008 Google Inc. All rights reserved:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/python/google/protobuf/internal/containers.pygthird_party/protobuf2/python/google/protobuf/internal/decoder.py third_party/protobuf2/python/google/protobuf/internal/descriptor_test.py third_party/protobuf2/python/google/protobuf/internal/encoder.py third_party/protobuf2/python/google/protobuf/internal/generator_test.py third_party/protobuf2/python/google/protobuf/internal/message_listener.py third_party/protobuf2/python/google/protobuf/internal/message_test.py third_party/protobuf2/python/google/protobuf/internal/reflection_test.py third_party/protobuf2/python/google/protobuf/internal/service_reflection_test.py third_party/protobuf2/python/google/protobuf/internal/test_util.py third_party/protobuf2/python/google/protobuf/internal/text_format_test.py third_party/protobuf2/python/google/protobuf/internal/type_checkers.py third_party/protobuf2/python/google/protobuf/internal/wire_format.py third_party/protobuf2/python/google/protobuf/internal/wire_format_test.py
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008 Google Inc. All rights reserved:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/google/protobuf/descriptor.ccgthird_party/protobuf2/google/protobuf/descriptor_database.cc third_party/protobuf2/google/protobuf/descriptor_database.h third_party/protobuf2/google/protobuf/descriptor_database_unittest.cc third_party/protobuf2/google/protobuf/descriptor_unittest.cc third_party/protobuf2/google/protobuf/dynamic_message.cc third_party/protobuf2/google/protobuf/dynamic_message.h third_party/protobuf2/google/protobuf/dynamic_message_unittest.cc third_party/protobuf2/google/protobuf/extension_set.cc third_party/protobuf2/google/protobuf/extension_set.h third_party/protobuf2/google/protobuf/extension_set_heavy.cc third_party/protobuf2/google/protobuf/extension_set_unittest.cc third_party/protobuf2/google/protobuf/generated_message_reflection.cc third_party/protobuf2/google/protobuf/generated_message_reflection.h third_party/protobuf2/google/protobuf/generated_message_reflection_unittest.cc third_party/protobuf2/google/protobuf/generated_message_util.cc third_party/protobuf2/google/protobuf/generated_message_util.h third_party/protobuf2/google/protobuf/lite_unittest.cc third_party/protobuf2/google/protobuf/message.cc third_party/protobuf2/google/protobuf/message.h third_party/protobuf2/google/protobuf/message_lite.cc third_party/protobuf2/google/protobuf/message_lite.h third_party/protobuf2/google/protobuf/message_unittest.cc third_party/protobuf2/google/protobuf/package_info.h third_party/protobuf2/google/protobuf/reflection_ops.cc third_party/protobuf2/google/protobuf/reflection_ops.h third_party/protobuf2/google/protobuf/reflection_ops_unittest.cc third_party/protobuf2/google/protobuf/repeated_field.cc third_party/protobuf2/google/protobuf/repeated_field.h third_party/protobuf2/google/protobuf/repeated_field_unittest.cc third_party/protobuf2/google/protobuf/service.cc third_party/protobuf2/google/protobuf/service.h third_party/protobuf2/google/protobuf/test_util.cc third_party/protobuf2/google/protobuf/test_util.h third_party/protobuf2/google/protobuf/test_util_lite.cc third_party/protobuf2/google/protobuf/test_util_lite.h third_party/protobuf2/google/protobuf/text_format.cc third_party/protobuf2/google/protobuf/text_format.h third_party/protobuf2/google/protobuf/text_format_unittest.cc third_party/protobuf2/google/protobuf/unknown_field_set.cc third_party/protobuf2/google/protobuf/unknown_field_set.h third_party/protobuf2/google/protobuf/unknown_field_set_unittest.cc third_party/protobuf2/google/protobuf/wire_format.cc third_party/protobuf2/google/protobuf/wire_format.h third_party/protobuf2/google/protobuf/wire_format_lite.cc third_party/protobuf2/google/protobuf/wire_format_lite.h third_party/protobuf2/google/protobuf/wire_format_lite_inl.h third_party/protobuf2/google/protobuf/wire_format_unittest.cc
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008 Google Inc. All rights reserved:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/google/protobuf/compiler/*
-Copyright: Copyright: 2009 Google Inc. All rights reserved / HOLDERS AND CONTRIBUTORS:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/google/protobuf/compiler/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008 Google Inc. All rights reserved:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/google/protobuf/compiler/cpp/cpp_enum.ccgthird_party/protobuf2/google/protobuf/compiler/cpp/cpp_enum.h third_party/protobuf2/google/protobuf/compiler/cpp/cpp_enum_field.cc third_party/protobuf2/google/protobuf/compiler/cpp/cpp_enum_field.h third_party/protobuf2/google/protobuf/compiler/cpp/cpp_extension.cc third_party/protobuf2/google/protobuf/compiler/cpp/cpp_extension.h third_party/protobuf2/google/protobuf/compiler/cpp/cpp_field.cc third_party/protobuf2/google/protobuf/compiler/cpp/cpp_field.h third_party/protobuf2/google/protobuf/compiler/cpp/cpp_file.cc third_party/protobuf2/google/protobuf/compiler/cpp/cpp_file.h third_party/protobuf2/google/protobuf/compiler/cpp/cpp_generator.cc third_party/protobuf2/google/protobuf/compiler/cpp/cpp_generator.h third_party/protobuf2/google/protobuf/compiler/cpp/cpp_helpers.cc third_party/protobuf2/google/protobuf/compiler/cpp/cpp_helpers.h third_party/protobuf2/google/protobuf/compiler/cpp/cpp_message.cc third_party/protobuf2/google/protobuf/compiler/cpp/cpp_message.h third_party/protobuf2/google/protobuf/compiler/cpp/cpp_message_field.cc third_party/protobuf2/google/protobuf/compiler/cpp/cpp_message_field.h third_party/protobuf2/google/protobuf/compiler/cpp/cpp_plugin_unittest.cc third_party/protobuf2/google/protobuf/compiler/cpp/cpp_primitive_field.cc third_party/protobuf2/google/protobuf/compiler/cpp/cpp_primitive_field.h third_party/protobuf2/google/protobuf/compiler/cpp/cpp_service.cc third_party/protobuf2/google/protobuf/compiler/cpp/cpp_service.h third_party/protobuf2/google/protobuf/compiler/cpp/cpp_string_field.cc third_party/protobuf2/google/protobuf/compiler/cpp/cpp_string_field.h third_party/protobuf2/google/protobuf/compiler/cpp/cpp_unittest.cc
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008 Google Inc. All rights reserved:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/google/protobuf/compiler/java/java_enum.ccgthird_party/protobuf2/google/protobuf/compiler/java/java_enum.h third_party/protobuf2/google/protobuf/compiler/java/java_enum_field.cc third_party/protobuf2/google/protobuf/compiler/java/java_enum_field.h third_party/protobuf2/google/protobuf/compiler/java/java_extension.cc third_party/protobuf2/google/protobuf/compiler/java/java_extension.h third_party/protobuf2/google/protobuf/compiler/java/java_field.cc third_party/protobuf2/google/protobuf/compiler/java/java_field.h third_party/protobuf2/google/protobuf/compiler/java/java_file.cc third_party/protobuf2/google/protobuf/compiler/java/java_file.h third_party/protobuf2/google/protobuf/compiler/java/java_generator.cc third_party/protobuf2/google/protobuf/compiler/java/java_generator.h third_party/protobuf2/google/protobuf/compiler/java/java_helpers.cc third_party/protobuf2/google/protobuf/compiler/java/java_helpers.h third_party/protobuf2/google/protobuf/compiler/java/java_message.cc third_party/protobuf2/google/protobuf/compiler/java/java_message.h third_party/protobuf2/google/protobuf/compiler/java/java_message_field.cc third_party/protobuf2/google/protobuf/compiler/java/java_message_field.h third_party/protobuf2/google/protobuf/compiler/java/java_plugin_unittest.cc third_party/protobuf2/google/protobuf/compiler/java/java_primitive_field.cc third_party/protobuf2/google/protobuf/compiler/java/java_primitive_field.h third_party/protobuf2/google/protobuf/compiler/java/java_service.cc third_party/protobuf2/google/protobuf/compiler/java/java_service.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008 Google Inc. All rights reserved:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/google/protobuf/compiler/python/python_generator.ccgthird_party/protobuf2/google/protobuf/compiler/python/python_generator.h third_party/protobuf2/google/protobuf/compiler/python/python_plugin_unittest.cc
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008 Google Inc. All rights reserved:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/google/protobuf/io/*
-Copyright: Copyright: 2009 Google Inc. All rights reserved / HOLDERS AND CONTRIBUTORS:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/google/protobuf/io/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008 Google Inc. All rights reserved:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/google/protobuf/stubs/*
-Copyright: Copyright: 2008 Google Inc. All Rights Reserved:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/google/protobuf/stubs/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008 Google Inc. All rights reserved:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/google/protobuf/testing/*
-Copyright: Copyright: 2009 Google Inc. All rights reserved / HOLDERS AND CONTRIBUTORS:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/google/protobuf/testing/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008 Google Inc. All rights reserved:
-License: BSD-3-clause
-
-Files: third_party/protobuf2/vsprojects/config.hgthird_party/protobuf2/vsprojects/convert2008to2005.sh
-Copyright: UNKNOWN:
-License: BSD-3-clause
-
 Files: third_party/simplejson/*
 Copyright: 2006 Bob Ippolito
 License: MIT
@@ -3190,12 +1560,8 @@ Files: third_party/skia/include/animator/SkAnimator.hgthird_party/skia/include/a
 Copyright: Copyright: 2006 The Android Open Source Project:
 License: Apache-2.0
 
-Files: third_party/skia/include/config/*
+Files: third_party/skia/include/config/SkUserConfig.h
 Copyright: Copyright: 2006 The Android Open Source Project:
-License: Apache-2.0
-
-Files: third_party/skia/include/config/*
-Copyright: UNKNOWN:
 License: Apache-2.0
 
 Files: third_party/skia/include/core/SkRegion.h
@@ -3302,24 +1668,8 @@ Files: third_party/skia/include/utils/mac/SkCGUtils.h
 Copyright: UNKNOWN:
 License: Apache-2.0
 
-Files: third_party/skia/include/views/*
-Copyright: Copyright: 2005 __MyCompanyName__. All rights reserved / 2006 The Android Open Source Project:
-License: Apache-2.0
-
-Files: third_party/skia/include/views/*
-Copyright: Copyright: 2006 The Android Open Source Project:
-License: Apache-2.0
-
 Files: third_party/skia/include/xml/SkBML_WXMLParser.hgthird_party/skia/include/xml/SkBML_XMLParser.h third_party/skia/include/xml/SkDOM.h third_party/skia/include/xml/SkJS.h third_party/skia/include/xml/SkXMLParser.h third_party/skia/include/xml/SkXMLWriter.h
 Copyright: Copyright: 2006 The Android Open Source Project:
-License: Apache-2.0
-
-Files: third_party/skia/animator/*
-Copyright: Copyright: 2006gThe Android Open Source Project:
-License: Apache-2.0
-
-Files: third_party/skia/animator/*
-Copyright: UNKNOWN:
 License: Apache-2.0
 
 Files: third_party/skia/core/SkRect.cppgthird_party/skia/core/SkXfermode.cpp
@@ -3494,32 +1844,8 @@ Files: third_party/skia/utils/win/SkOSWindow_Win.cpp
 Copyright: UNKNOWN:
 License: Apache-2.0
 
-Files: third_party/skia/views/*
-Copyright: Copyright: 2006gThe Android Open Source Project:
-License: Apache-2.0
-
-Files: third_party/skia/views/*
-Copyright: UNKNOWN:
-License: Apache-2.0
-
-Files: third_party/skia/xml/*
-Copyright: Copyright: 2006gThe Android Open Source Project:
-License: Apache-2.0
-
-Files: third_party/skia/xml/*
-Copyright: UNKNOWN:
-License: Apache-2.0
-
-Files: third_party/sqlite/ltmain.sh
-Copyright: Copyright: 1996g1997 1998 1999 2000 2001 2003 2004 2005 2006 2007 2008 Free Software Foundation Inc:
-License: GPL-2+
-
 Files: third_party/sqlite/*
-Copyright: Copyright: 2007 Google Inc. All Rights Reserved:
-License: Public-domain
-
-Files: third_party/sqlite/*
-Copyright: UNKNOWN:
+Copyright: The author disclaims copyright to this source code.:
 License: Public-domain
 
 Files: third_party/sqlite/ext/async/*
@@ -3651,11 +1977,7 @@ Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Us
 License: BSD-3-clause
 
 Files: tools/code_coverage/*
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: tools/code_coverage/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+Copyright: Copyright (c) 2006-2018 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
 Files: tools/coverity/coverity.py
@@ -3722,14 +2044,6 @@ Files: tools/gtk_clipboard_dump/gtk_clipboard_dump.cc
 Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
-Files: tools/heapcheck/*
-Copyright: Copyright (c) 2006-2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: tools/heapcheck/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
 Files: tools/imagediff/image_diff.cc
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
@@ -3742,18 +2056,6 @@ Files: tools/measure_page_load_time/ie_bho/MeasurePageLoadTimeBHO.h
 Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
-Files: tools/memory_watcher/ia32_modrm_map.ccgtools/memory_watcher/ia32_opcode_map.cc tools/memory_watcher/mini_disassembler.cc tools/memory_watcher/mini_disassembler.h tools/memory_watcher/mini_disassembler_types.h tools/memory_watcher/preamble_patcher.cc tools/memory_watcher/preamble_patcher.h tools/memory_watcher/preamble_patcher_with_stub.cc
-Copyright: Copyright: 2007gGoogle Inc / HOLDERS AND CONTRIBUTORS:
-License: BSD-3-clause
-
-Files: tools/memory_watcher/*
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: tools/memory_watcher/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
 Files: tools/perf_expectations/PRESUBMIT.py
 Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
@@ -3763,11 +2065,7 @@ Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of 
 License: BSD-3-clause
 
 Files: tools/python/google/*
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: tools/python/google/*
-Copyright: Copyright (c) 2006-2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
+Copyright: Copyright (c) 2006-2016 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
 Files: tools/swig/swig.py
@@ -3803,19 +2101,11 @@ Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of 
 License: BSD-3-clause
 
 Files: v8/include/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2007-2009 the V8 project authors. All rights reserved:
-License: BSD-3-clause
-
-Files: v8/include/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008 the V8 project authors. All rights reserved:
+Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2007-2020 the V8 project authors. All rights reserved:
 License: BSD-3-clause
 
 Files: v8/samples/*
-Copyright: Copyright: 2009 the V8 project authors. All rights reserved / HOLDERS AND CONTRIBUTORS:
-License: BSD-3-clause
-
-Files: v8/samples/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008 the V8 project authors. All rights reserved:
+Copyright: Copyright 2009-2020 the V8 project authors. All rights reserved.
 License: BSD-3-clause
 
 Files: v8/assembler.ccgv8/assembler.h
@@ -3862,70 +2152,6 @@ Files: v8/cached-powers.*
 Copyright: 2010 the V8 project authors. All rights reserved
 License: BSD-3-clause
 
-Files: v8/arm/*
-Copyright: All rights reserved / 1994-2006 Sun Microsystems Inc
-License: BSD-3-clause
-
-Files: v8/ia32/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS "AS / 2006-2008 the V8 project authors. All rights reserved / OWNER OR / 1994-2006 Sun Microsystems Inc:
-License: BSD-3-clause
-
-Files: v8/ia32/*
-Copyright: Copyright: OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECTgINDIRECT / HOLDERS AND CONTRIBUTORS / 2006-2008 the V8 project authors. All rights reserved / 1994-2006 Sun Microsystems Inc:
-License: BSD-3-clause
-
-Files: v8/ia32/disasm-ia32.cc
-Copyright: Copyright: 2007-2008 the V8 project authors. All rights reserved / HOLDERS AND CONTRIBUTORS:
-License: BSD-3-clause
-
-Files: v8/ia32/codegen-ia32-inl.hgv8/ia32/full-codegen-ia32.cc v8/ia32/register-allocator-ia32-inl.h v8/ia32/register-allocator-ia32.h v8/ia32/virtual-frame-ia32.cc v8/ia32/virtual-frame-ia32.h
-Copyright: Copyright: 2009 the V8 project authors. All rights reserved / HOLDERS AND CONTRIBUTORS:
-License: BSD-3-clause
-
-Files: v8/ia32/cpu-ia32.ccgv8/ia32/frames-ia32.cc v8/ia32/frames-ia32.h v8/ia32/ic-ia32.cc
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2006-2008 the V8 project authors. All rights reserved:
-License: BSD-3-clause
-
-Files: v8/ia32/builtins-ia32.ccgv8/ia32/macro-assembler-ia32.cc v8/ia32/macro-assembler-ia32.h v8/ia32/stub-cache-ia32.cc
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2006-2009 the V8 project authors. All rights reserved:
-License: BSD-3-clause
-
-Files: v8/ia32/jump-target-ia32.ccgv8/ia32/register-allocator-ia32.cc v8/ia32/simulator-ia32.cc v8/ia32/simulator-ia32.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008 the V8 project authors. All rights reserved:
-License: BSD-3-clause
-
-Files: v8/ia32/regexp-macro-assembler-ia32.ccgv8/ia32/regexp-macro-assembler-ia32.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008-2009 the V8 project authors. All rights reserved:
-License: BSD-3-clause
-
-Files: v8/ia32/codegen-ia32.ccgv8/ia32/codegen-ia32.h v8/ia32/debug-ia32.cc v8/ia32/fast-codegen-ia32.cc v8/ia32/fast-codegen-ia32.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2010 the V8 project authors. All rights reserved:
-License: BSD-3-clause
-
-Files: v8/mips/assembler-mips-inl.hgv8/mips/assembler-mips.cc v8/mips/assembler-mips.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS "AS / 2010 the V8 project authors. All rights reserved / OWNER OR / 1994-2006 Sun Microsystems Inc:
-License: BSD-3-clause
-
-Files: v8/mips/builtins-mips.ccgv8/mips/codegen-mips-inl.h v8/mips/codegen-mips.cc v8/mips/codegen-mips.h v8/mips/constants-mips.cc v8/mips/constants-mips.h v8/mips/cpu-mips.cc v8/mips/debug-mips.cc v8/mips/disasm-mips.cc v8/mips/fast-codegen-mips.cc v8/mips/frames-mips.cc v8/mips/frames-mips.h v8/mips/full-codegen-mips.cc v8/mips/ic-mips.cc v8/mips/jump-target-mips.cc v8/mips/macro-assembler-mips.cc v8/mips/macro-assembler-mips.h v8/mips/register-allocator-mips-inl.h v8/mips/register-allocator-mips.cc v8/mips/register-allocator-mips.h v8/mips/simulator-mips.cc v8/mips/simulator-mips.h v8/mips/stub-cache-mips.cc v8/mips/virtual-frame-mips.cc v8/mips/virtual-frame-mips.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2010 the V8 project authors. All rights reserved:
-License: BSD-3-clause
-
-Files: v8/third_party/valgrind/valgrind.h
-Copyright: Copyright: 2000-2007 Julian Seward. All rights reserved:
-License: BSD-3-clause
-
-Files: v8/x64/assembler-x64.h
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS "AS / 2006-2009 the V8 project authors. All rights reserved / OWNER OR / 1994-2006 Sun Microsystems Inc:
-License: BSD-3-clause
-
-Files: v8/x64/*
-Copyright: Copyright: 2009 the V8 project authors. All rights reserved / HOLDERS AND CONTRIBUTORS:
-License: BSD-3-clause
-
-Files: v8/x64/*
-Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2010 the V8 project authors. All rights reserved:
-License: BSD-3-clause
-
 Files: v8/test/es5conform/testcfg.py
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008 the V8 project authors. All rights reserved:
 License: BSD-3-clause
@@ -3956,190 +2182,6 @@ License: BSD-3-clause
 
 Files: v8/tools/linux-tick-processor.pygv8/tools/presubmit.py v8/tools/splaytree.py v8/tools/stats-viewer.py v8/tools/test.py v8/tools/tickprocessor.py v8/tools/utils.py v8/tools/windows-tick-processor.py
 Copyright: Copyright: HOLDERS AND CONTRIBUTORS / 2008 the V8 project authors. All rights reserved:
-License: BSD-3-clause
-
-Files: views/accelerator.ccgviews/border.cc views/border.h views/event.cc views/event.h views/grid_layout_unittest.cc views/layout_manager.cc views/layout_manager.h views/repeat_controller.cc views/repeat_controller.h views/standard_layout.h views/view_constants.cc views/view_constants.h
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/PRESUBMIT.pygviews/accelerator.h views/background.cc views/background.h views/event_gtk.cc views/event_win.cc views/fill_layout.cc views/fill_layout.h views/grid_layout.cc views/painter.cc views/painter.h views/screen.h views/screen_gtk.cc views/screen_win.cc views/views_delegate.h
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/drag_utils.ccgviews/drag_utils.h views/drag_utils_gtk.cc views/drag_utils_win.cc views/grid_layout.h views/view.cc views/view.h views/view_gtk.cc views/view_text_utils.cc views/view_text_utils.h views/view_unittest.cc views/view_win.cc
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/accessibility/*
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/accessibility/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/animation/bounds_animator.ccgviews/animation/bounds_animator.h
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/message_box_view.hgviews/controls/native_control.h views/controls/throbber.cc views/controls/throbber.h
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/native_control_gtk.ccgviews/controls/native_control_gtk.h views/controls/native_control_win.h
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/image_view.ccgviews/controls/image_view.h views/controls/label.cc views/controls/label.h views/controls/label_unittest.cc views/controls/link.cc views/controls/link.h views/controls/message_box_view.cc views/controls/native_control.cc views/controls/native_control_win.cc views/controls/progress_bar.cc views/controls/progress_bar.h views/controls/progress_bar_unittest.cc views/controls/resize_gripper.cc views/controls/resize_gripper.h views/controls/scroll_view.cc views/controls/scroll_view.h views/controls/separator.cc views/controls/separator.h views/controls/single_split_view.cc views/controls/single_split_view.h
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/button/menu_button.hgviews/controls/button/text_button.cc views/controls/button/text_button.h
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/button/native_button_gtk.hgviews/controls/button/native_button_win.h views/controls/button/native_button_wrapper.h views/controls/button/radio_button.cc views/controls/button/radio_button.h
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/button/button.ccgviews/controls/button/button.h views/controls/button/button_dropdown.cc views/controls/button/button_dropdown.h views/controls/button/checkbox.cc views/controls/button/checkbox.h views/controls/button/custom_button.cc views/controls/button/custom_button.h views/controls/button/image_button.cc views/controls/button/image_button.h views/controls/button/menu_button.cc views/controls/button/native_button.cc views/controls/button/native_button.h views/controls/button/native_button_gtk.cc views/controls/button/native_button_win.cc
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/combobox/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/combobox/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/menu/controller.hgviews/controls/menu/menu.cc views/controls/menu/menu_separator_gtk.cc views/controls/menu/menu_win.h views/controls/menu/submenu_view.h
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/menu/view_menu_delegate.h
-Copyright: Copyright (c) 2006-2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/menu/menu_gtk.cc
-Copyright: Copyright (c) 2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/menu/menu_config.ccgviews/controls/menu/menu_config.h views/controls/menu/menu_config_gtk.cc views/controls/menu/menu_config_win.cc views/controls/menu/menu_gtk.h views/controls/menu/menu_host_gtk.cc views/controls/menu/menu_host_gtk.h views/controls/menu/menu_host_root_view.cc views/controls/menu/menu_host_root_view.h views/controls/menu/menu_host_win.cc views/controls/menu/menu_host_win.h views/controls/menu/menu_item_view_gtk.cc views/controls/menu/menu_item_view_win.cc views/controls/menu/menu_separator.h views/controls/menu/menu_separator_win.cc
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/menu/menu.hgviews/controls/menu/menu_2.cc views/controls/menu/menu_2.h views/controls/menu/menu_controller.cc views/controls/menu/menu_controller.h views/controls/menu/menu_delegate.h views/controls/menu/menu_item_view.cc views/controls/menu/menu_item_view.h views/controls/menu/menu_scroll_view_container.cc views/controls/menu/menu_scroll_view_container.h views/controls/menu/menu_win.cc views/controls/menu/menu_wrapper.h views/controls/menu/native_menu_gtk.cc views/controls/menu/native_menu_gtk.h views/controls/menu/native_menu_win.cc views/controls/menu/native_menu_win.h views/controls/menu/submenu_view.cc
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/native/*
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/native/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/scrollbar/native_scroll_bar.cc
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/scrollbar/native_scroll_bar.h
-Copyright: Copyright (c) 2006-2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/scrollbar/native_scroll_bar_gtk.ccgviews/controls/scrollbar/native_scroll_bar_gtk.h views/controls/scrollbar/native_scroll_bar_win.cc views/controls/scrollbar/native_scroll_bar_win.h views/controls/scrollbar/native_scroll_bar_wrapper.h
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/scrollbar/bitmap_scroll_bar.ccgviews/controls/scrollbar/bitmap_scroll_bar.h views/controls/scrollbar/scroll_bar.cc views/controls/scrollbar/scroll_bar.h
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/slider/native_slider_gtk.ccgviews/controls/slider/native_slider_gtk.h views/controls/slider/native_slider_wrapper.h views/controls/slider/slider.cc views/controls/slider/slider.h
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/tabbed_pane/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/tabbed_pane/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/table/group_table_view.ccgviews/controls/table/group_table_view.h views/controls/table/table_view2.cc views/controls/table/table_view2.h views/controls/table/table_view_observer.h views/controls/table/table_view_unittest.cc
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/table/native_table_win.hgviews/controls/table/native_table_wrapper.h
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/table/native_table_gtk.ccgviews/controls/table/native_table_gtk.h views/controls/table/native_table_win.cc views/controls/table/table_view.cc views/controls/table/table_view.h
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/textfield/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/textfield/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/controls/tree/tree_view.ccgviews/controls/tree/tree_view.h
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/examples/*
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/examples/*
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/focus/accelerator_handler.hgviews/focus/external_focus_tracker.cc views/focus/external_focus_tracker.h views/focus/focus_manager.cc views/focus/focus_manager.h views/focus/view_storage.cc views/focus/view_storage.h
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/focus/focus_manager_gtk.ccgviews/focus/focus_manager_win.cc
-Copyright: Copyright (c) 2006-2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/focus/accelerator_handler_gtk.ccgviews/focus/accelerator_handler_win.cc views/focus/focus_manager_unittest.cc views/focus/focus_util_win.cc views/focus/focus_util_win.h
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/widget/aero_tooltip_manager.hgviews/widget/drop_helper.cc views/widget/drop_helper.h views/widget/root_view_gtk.cc views/widget/tooltip_manager.h views/widget/widget.h
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/widget/widget_delegate.h
-Copyright: Copyright (c) 2006-2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/widget/default_theme_provider.ccgviews/widget/default_theme_provider.h views/widget/drop_target_gtk.cc views/widget/drop_target_gtk.h views/widget/drop_target_win.cc views/widget/drop_target_win.h views/widget/gtk_views_fixed.cc views/widget/gtk_views_fixed.h views/widget/tooltip_manager.cc views/widget/tooltip_manager_gtk.h views/widget/widget_gtk.h views/widget/widget_win.cc views/widget/widget_win.h
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/widget/aero_tooltip_manager.ccgviews/widget/root_view.cc views/widget/root_view.h views/widget/tooltip_manager_gtk.cc views/widget/tooltip_manager_win.cc views/widget/tooltip_manager_win.h views/widget/widget_gtk.cc
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/window/client_view.ccgviews/window/client_view.h views/window/dialog_client_view.h views/window/dialog_delegate.cc views/window/dialog_delegate.h views/window/window_delegate.cc views/window/window_delegate.h views/window/window_resources.h
-Copyright: Copyright (c) 2006-2008 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/window/hit_test.hgviews/window/window.h views/window/window_gtk.cc views/window/window_gtk.h
-Copyright: Copyright (c) 2009 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
-License: BSD-3-clause
-
-Files: views/window/custom_frame_view.ccgviews/window/custom_frame_view.h views/window/dialog_client_view.cc views/window/native_frame_view.cc views/window/native_frame_view.h views/window/non_client_view.cc views/window/non_client_view.h views/window/window.cc views/window/window_win.cc views/window/window_win.h
-Copyright: Copyright (c) 2010 The Chromium Authors. All rights reserved. Use of this source code is governed by a BSD-style license that can be found in the LICENSE file.:
 License: BSD-3-clause
 
 License: GPL-2+

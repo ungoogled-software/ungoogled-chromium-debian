@@ -25,18 +25,17 @@ author: Michael Gilbert <mgilbert@debian.org>
  } else {
 --- a/components/paint_preview/common/subset_font.cc
 +++ b/components/paint_preview/common/subset_font.cc
-@@ -5,8 +5,6 @@
- #include "components/paint_preview/common/subset_font.h"
+@@ -6,7 +6,6 @@
  
  // clang-format off
--#include <hb.h>
+ #include <hb.h>
 -#include <hb-subset.h>
  // clang-format on
  
  #include <memory>
 --- a/components/paint_preview/common/serial_utils.cc
 +++ b/components/paint_preview/common/serial_utils.cc
-@@ -53,12 +53,8 @@ sk_sp<SkData> SerializeTypeface(SkTypefa
+@@ -65,12 +65,8 @@ sk_sp<SkData> SerializeTypeface(SkTypeface* typeface, void* ctx) {
    if (usage_it == context->usage->end())
      return typeface->serialize(SkTypeface::SerializeBehavior::kDontIncludeData);
  
@@ -49,18 +48,18 @@ author: Michael Gilbert <mgilbert@debian.org>
 -  return subset_data;
  }
  
- // Deserializies a clip rect for a subframe within the main SkPicture. These
+ // Deserializes a clip rect for a subframe within the main SkPicture. These
 --- a/components/paint_preview/common/BUILD.gn
 +++ b/components/paint_preview/common/BUILD.gn
-@@ -17,8 +17,6 @@ if (!is_ios) {
-       "paint_preview_tracker.h",
-       "serial_utils.cc",
+@@ -23,8 +23,6 @@ if (!is_ios) {
        "serial_utils.h",
+       "serialized_recording.cc",
+       "serialized_recording.h",
 -      "subset_font.cc",
 -      "subset_font.h",
+       "version.cc",
+       "version.h",
      ]
- 
-     deps = [
 --- a/third_party/skia/BUILD.gn
 +++ b/third_party/skia/BUILD.gn
 @@ -710,7 +710,6 @@ optional("pdf") {
@@ -73,16 +72,15 @@ author: Michael Gilbert <mgilbert@debian.org>
      defines = [ "SK_PDF_USE_SFNTLY" ]
 --- a/third_party/harfbuzz-ng/utils/hb_scoped.h
 +++ b/third_party/harfbuzz-ng/utils/hb_scoped.h
-@@ -6,8 +6,6 @@
- #define THIRD_PARTY_HARFBUZZ_NG_UTILS_HB_SCOPED_H_
+@@ -7,7 +7,6 @@
  
  // clang-format off
--#include <hb.h>
+ #include <hb.h>
 -#include <hb-subset.h>
  // clang-format on
  
  #include <memory>
-@@ -53,7 +51,6 @@ using HbScoped = std::unique_ptr<T, HbSp
+@@ -53,7 +52,6 @@ using HbScoped = std::unique_ptr<T, HbSpecializedDeleter<T>>;
    F(hb_face_t, hb_face_destroy)            \
    F(hb_font_t, hb_font_destroy)            \
    F(hb_set_t, hb_set_destroy)              \

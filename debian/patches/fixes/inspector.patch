@@ -23,10 +23,10 @@ author: Michael Gilbert <mgilbert@debian.org>
    public_deps = [
 --- a/v8/test/unittests/BUILD.gn
 +++ b/v8/test/unittests/BUILD.gn
-@@ -380,7 +380,7 @@ v8_source_set("unittests_sources") {
-     "../..:v8_for_testing",
+@@ -442,7 +442,7 @@ v8_source_set("unittests_sources") {
      "../..:v8_libbase",
      "../..:v8_libplatform",
+     "../..:wasm_test_common",
 -    "../../third_party/inspector_protocol:crdtp_test",
 +    "../../../third_party/inspector_protocol:crdtp_test",
      "//build/win:default_exe_manifest",
@@ -234,26 +234,26 @@ author: Michael Gilbert <mgilbert@debian.org>
        protocol::Value::parseBinary(cbor.data(), cbor.size());
 --- a/v8/src/inspector/string-util.cc
 +++ b/v8/src/inspector/string-util.cc
-@@ -245,7 +245,7 @@ String16 stackTraceIdToString(uintptr_t
+@@ -245,7 +245,7 @@ String16 stackTraceIdToString(uintptr_t id) {
  
  }  // namespace v8_inspector
  
 -namespace v8_crdtp {
 +namespace crdtp {
- void SerializerTraits<v8_inspector::protocol::Binary>::Serialize(
-     const v8_inspector::protocol::Binary& binary, std::vector<uint8_t>* out) {
-   cbor::EncodeBinary(span<uint8_t>(binary.data(), binary.size()), out);
+ 
+ using v8_inspector::String16;
+ using v8_inspector::protocol::Binary;
 --- a/v8/src/inspector/string-util.h
 +++ b/v8/src/inspector/string-util.h
-@@ -85,7 +85,7 @@ String16 stackTraceIdToString(uintptr_t
- }  //  namespace v8_inspector
+@@ -86,7 +86,7 @@ String16 stackTraceIdToString(uintptr_t id);
+ }  // namespace v8_inspector
  
  // See third_party/inspector_protocol/crdtp/serializer_traits.h.
 -namespace v8_crdtp {
 +namespace crdtp {
+ 
  template <>
- struct SerializerTraits<v8_inspector::protocol::Binary> {
-   static void Serialize(const v8_inspector::protocol::Binary& binary,
+ struct ProtocolTypeTraits<v8_inspector::String16> {
 --- a/v8/src/inspector/v8-debugger-agent-impl.cc
 +++ b/v8/src/inspector/v8-debugger-agent-impl.cc
 @@ -1524,8 +1524,8 @@ void V8DebuggerAgentImpl::didParseSource

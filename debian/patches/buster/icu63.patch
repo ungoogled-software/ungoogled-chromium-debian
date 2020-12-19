@@ -9,7 +9,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "unicode/uversion.h"
 +#include "unicode/dtitvfmt.h"
  
--#define V8_MINIMUM_ICU_VERSION 65
+-#define V8_MINIMUM_ICU_VERSION 67
 +#define V8_MINIMUM_ICU_VERSION 63
  
  namespace U_ICU_NAMESPACE {
@@ -40,7 +40,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
    // Helper function to convert number field id to type string.
    static Handle<String> NumberFieldToType(Isolate* isolate,
-@@ -280,22 +289,24 @@ class Intl {
+@@ -284,22 +293,24 @@ class Intl {
    class AvailableLocales {
     public:
      AvailableLocales() {
@@ -54,7 +54,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
        std::vector<std::string> all_locales;
 -      const char* loc;
--      while ((loc = uenum_next(uenum, NULL, &status)) != nullptr) {
+-      while ((loc = uenum_next(uenum, nullptr, &status)) != nullptr) {
 -        DCHECK(U_SUCCESS(status));
 -        std::string locstr(loc);
 +      for (int32_t num = 0; num < num_locales; num++) {
@@ -76,7 +76,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      }
 --- a/v8/src/objects/js-list-format.cc
 +++ b/v8/src/objects/js-list-format.cc
-@@ -246,7 +246,7 @@ Maybe<std::vector<icu::UnicodeString>> T
+@@ -246,7 +246,7 @@ Maybe<std::vector<icu::UnicodeString>> ToUnicodeStringArray(
  template <typename T>
  MaybeHandle<T> FormatListCommon(
      Isolate* isolate, Handle<JSListFormat> format, Handle<JSArray> list,
@@ -86,7 +86,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    Maybe<std::vector<icu::UnicodeString>> maybe_array =
        ToUnicodeStringArray(isolate, list);
 @@ -257,49 +257,67 @@ MaybeHandle<T> FormatListCommon(
-   CHECK_NOT_NULL(formatter);
+   DCHECK_NOT_NULL(formatter);
  
    UErrorCode status = U_ZERO_ERROR;
 -  icu::FormattedList formatted = formatter->formatStringsToValue(
@@ -181,7 +181,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    JSObject::ValidateElements(*array);
    return array;
  }
-@@ -311,7 +329,7 @@ MaybeHandle<String> JSListFormat::Format
+@@ -311,7 +329,7 @@ MaybeHandle<String> JSListFormat::FormatList(Isolate* isolate,
                                               Handle<JSListFormat> format,
                                               Handle<JSArray> list) {
    return FormatListCommon<String>(isolate, format, list,
@@ -192,15 +192,15 @@ author: Michael Gilbert <mgilbert@debian.org>
  // ecma42 #sec-formatlisttoparts
 --- a/v8/src/objects/js-relative-time-format.cc
 +++ b/v8/src/objects/js-relative-time-format.cc
-@@ -18,7 +18,7 @@
- #include "src/objects/js-number-format.h"
+@@ -19,7 +19,7 @@
  #include "src/objects/js-relative-time-format-inl.h"
  #include "src/objects/objects-inl.h"
+ #include "unicode/decimfmt.h"
 -#include "unicode/numfmt.h"
 +#include "unicode/numberformatter.h"
  #include "unicode/reldatefmt.h"
+ #include "unicode/unum.h"
  
- namespace v8 {
 @@ -278,6 +278,65 @@ Handle<String> JSRelativeTimeFormat::Num
  
  namespace {
@@ -463,7 +463,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  Maybe<std::vector<std::string>> Intl::CanonicalizeLocaleList(
      Isolate* isolate, Handle<Object> locales, bool only_return_one_result) {
    // 1. If locales is undefined, then
-@@ -1449,114 +1442,12 @@ std::vector<std::string> LookupSupported
+@@ -1447,114 +1447,12 @@ std::vector<std::string> LookupSupportedLocales(
    return subset;
  }
  
@@ -472,7 +472,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 -    UErrorCode* status) {
 -  icu::Locale default_locale =
 -      icu::Locale::forLanguageTag(DefaultLocale(isolate), *status);
--  CHECK(U_SUCCESS(*status));
+-  DCHECK(U_SUCCESS(*status));
 -  icu::LocaleMatcher::Builder builder;
 -  builder.setDefaultLocale(&default_locale);
 -  for (auto it = available_locales.begin(); it != available_locales.end();
@@ -489,14 +489,14 @@ author: Michael Gilbert <mgilbert@debian.org>
 -  Iterator(std::vector<std::string>::const_iterator begin,
 -           std::vector<std::string>::const_iterator end)
 -      : iter_(begin), end_(end) {}
--  virtual ~Iterator() {}
+-  ~Iterator() override = default;
 -
 -  UBool hasNext() const override { return iter_ != end_; }
 -
 -  const icu::Locale& next() override {
 -    UErrorCode status = U_ZERO_ERROR;
 -    locale_ = icu::Locale::forLanguageTag(iter_->c_str(), status);
--    CHECK(U_SUCCESS(status));
+-    DCHECK(U_SUCCESS(status));
 -    ++iter_;
 -    return locale_;
 -  }
@@ -529,7 +529,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 -  UErrorCode status = U_ZERO_ERROR;
 -  icu::LocaleMatcher matcher =
 -      BuildLocaleMatcher(isolate, available_locales, &status);
--  CHECK(U_SUCCESS(status));
+-  DCHECK(U_SUCCESS(status));
 -
 -  Iterator iter(requested_locales.cbegin(), requested_locales.cend());
 -  std::string bestfit =
@@ -555,7 +555,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 -  UErrorCode status = U_ZERO_ERROR;
 -  icu::LocaleMatcher matcher =
 -      BuildLocaleMatcher(isolate, available_locales, &status);
--  CHECK(U_SUCCESS(status));
+-  DCHECK(U_SUCCESS(status));
 -
 -  std::string default_locale = DefaultLocale(isolate);
 -  std::vector<std::string> result;
@@ -661,7 +661,7 @@ author: Michael Gilbert <mgilbert@debian.org>
                                      Handle<JSReceiver> options,
 -                                    icu::LocaleBuilder* builder) {
 +                                    icu::Locale* icu_locale) {
-   CHECK(isolate);
+   DCHECK(isolate);
  
    const std::vector<const char*> hour_cycle_values = {"h11", "h12", "h23",
 @@ -60,6 +59,7 @@ Maybe<bool> InsertOptionsIntoLocale(Isol
@@ -735,13 +735,13 @@ author: Michael Gilbert <mgilbert@debian.org>
    v8::Isolate* v8_isolate = reinterpret_cast<v8::Isolate*>(isolate);
    if (tag->length() == 0) {
      THROW_NEW_ERROR_RETURN_VALUE(
-@@ -233,7 +238,6 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
+@@ -233,7 +232,6 @@ Maybe<bool> ApplyOptionsToTag(Isolate* isolate, Handle<String> tag,
    }
  
    v8::String::Utf8Value bcp47_tag(v8_isolate, v8::Utils::ToLocal(tag));
 -  builder->setLanguageTag({*bcp47_tag, bcp47_tag.length()});
-   CHECK_LT(0, bcp47_tag.length());
-   CHECK_NOT_NULL(*bcp47_tag);
+   DCHECK_LT(0, bcp47_tag.length());
+   DCHECK_NOT_NULL(*bcp47_tag);
    // 2. If IsStructurallyValidLanguageTag(tag) is false, throw a RangeError
 @@ -242,7 +246,8 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
      return Just(false);
@@ -830,15 +830,48 @@ author: Michael Gilbert <mgilbert@debian.org>
                      JSLocale);
 --- a/v8/src/objects/js-date-time-format.cc
 +++ b/v8/src/objects/js-date-time-format.cc
-@@ -1976,55 +1976,12 @@ Maybe<bool> AddPartForFormatRange(Isolat
+@@ -59,21 +59,6 @@ JSDateTimeFormat::HourCycle ToHourCycle(const std::string& hc) {
+   return JSDateTimeFormat::HourCycle::kUndefined;
+ }
+ 
+-JSDateTimeFormat::HourCycle ToHourCycle(UDateFormatHourCycle hc) {
+-  switch (hc) {
+-    case UDAT_HOUR_CYCLE_11:
+-      return JSDateTimeFormat::HourCycle::kH11;
+-    case UDAT_HOUR_CYCLE_12:
+-      return JSDateTimeFormat::HourCycle::kH12;
+-    case UDAT_HOUR_CYCLE_23:
+-      return JSDateTimeFormat::HourCycle::kH23;
+-    case UDAT_HOUR_CYCLE_24:
+-      return JSDateTimeFormat::HourCycle::kH24;
+-    default:
+-      return JSDateTimeFormat::HourCycle::kUndefined;
+-  }
+-}
+-
+ Maybe<JSDateTimeFormat::HourCycle> GetHourCycle(Isolate* isolate,
+                                                 Handle<JSReceiver> options,
+                                                 const char* method) {
+@@ -1576,8 +1561,9 @@ MaybeHandle<JSDateTimeFormat> JSDateTimeFormat::New(
+       generator_cache.Pointer()->CreateGenerator(icu_locale));
+ 
+   // 15.Let hcDefault be dataLocaleData.[[hourCycle]].
+-  HourCycle hc_default = ToHourCycle(generator->getDefaultHourCycle(status));
++  icu::UnicodeString hour_pattern = generator->getBestPattern("jjmm", status);
+   DCHECK(U_SUCCESS(status));
++  HourCycle hc_default = HourCycleFromPattern(hour_pattern);
+ 
+   // 16.Let hc be r.[[hc]].
+   HourCycle hc = HourCycle::kUndefined;
+@@ -2082,55 +2068,12 @@ Maybe<bool> AddPartForFormatRange(Isolate* isolate, Handle<JSArray> array,
  // A helper function to convert the FormattedDateInterval to a
  // MaybeHandle<JSArray> for the implementation of formatRangeToParts.
  MaybeHandle<JSArray> FormattedDateIntervalToJSArray(
 -    Isolate* isolate, const icu::FormattedValue& formatted) {
 -  UErrorCode status = U_ZERO_ERROR;
 -  icu::UnicodeString result = formatted.toString(status);
--
 +    Isolate* isolate, const icu::DateInterval& interval, const icu::DateIntervalFormat& format) {
+ 
    Factory* factory = isolate->factory();
    Handle<JSArray> array = factory->NewJSArray(0);
 -  icu::ConstrainedFieldPosition cfpos;
@@ -852,10 +885,10 @@ author: Michael Gilbert <mgilbert@debian.org>
 -    int32_t limit = cfpos.getLimit();
 -
 -    if (category == UFIELD_CATEGORY_DATE_INTERVAL_SPAN) {
--      CHECK_LE(field, 2);
+-      DCHECK_LE(field, 2);
 -      tracker.Add(field, start, limit);
 -    } else {
--      CHECK(category == UFIELD_CATEGORY_DATE);
+-      DCHECK(category == UFIELD_CATEGORY_DATE);
 -      if (start > previous_end_pos) {
 -        // Add "literal" from the previous end position to the start if
 -        // necessary.
@@ -880,7 +913,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 -        isolate, array, result, index, -1, previous_end_pos, end, tracker);
 -    MAYBE_RETURN(maybe_added, Handle<JSArray>());
 -  }
- 
+-
 -  if (U_FAILURE(status)) {
 -    THROW_NEW_ERROR(isolate, NewTypeError(MessageTemplate::kIcuError), JSArray);
 -  }
@@ -889,7 +922,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
    JSObject::ValidateElements(*array);
    return array;
-@@ -2035,7 +1992,7 @@ template <typename T>
+@@ -2141,7 +2098,7 @@ template <typename T>
  MaybeHandle<T> FormatRangeCommon(
      Isolate* isolate, Handle<JSDateTimeFormat> date_time_format, double x,
      double y,
@@ -898,7 +931,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    // Track newer feature formateRange and formatRangeToParts
    isolate->CountUsage(v8::Isolate::UseCounterFeature::kDateTimeFormatRange);
  
-@@ -2070,15 +2027,11 @@ MaybeHandle<T> FormatRangeCommon(
+@@ -2176,15 +2133,11 @@ MaybeHandle<T> FormatRangeCommon(
    std::unique_ptr<icu::Calendar> c2(calendar->clone());
    c1->setTime(x, status);
    c2->setTime(y, status);
@@ -916,7 +949,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  }  // namespace
-@@ -2087,7 +2040,7 @@ MaybeHandle<String> JSDateTimeFormat::Fo
+@@ -2193,7 +2146,7 @@ MaybeHandle<String> JSDateTimeFormat::Fo
      Isolate* isolate, Handle<JSDateTimeFormat> date_time_format, double x,
      double y) {
    return FormatRangeCommon<String>(isolate, date_time_format, x, y,
@@ -1041,18 +1074,17 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "ui/views/controls/button/image_button.h"
 --- a/v8/src/objects/js-plural-rules.cc
 +++ b/v8/src/objects/js-plural-rules.cc
-@@ -195,10 +195,7 @@ MaybeHandle<String> JSPluralRules::Resol
+@@ -195,9 +195,7 @@ MaybeHandle<String> JSPluralRules::ResolvePlural(
        fmt->formatDouble(number, status);
-   CHECK(U_SUCCESS(status));
+   DCHECK(U_SUCCESS(status));
  
 -  icu::UnicodeString result =
 -      icu_plural_rules->select(formatted_number, status);
--  CHECK(U_SUCCESS(status));
--
+-  DCHECK(U_SUCCESS(status));
 +  icu::UnicodeString result = icu_plural_rules->select(number);
+ 
    return Intl::ToString(isolate, result);
  }
- 
 --- a/v8/src/objects/js-display-names.cc
 +++ b/v8/src/objects/js-display-names.cc
 @@ -11,6 +11,7 @@

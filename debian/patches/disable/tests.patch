@@ -1,10 +1,90 @@
---- a/third_party/devtools-frontend/src/BUILD.gn
-+++ b/third_party/devtools-frontend/src/BUILD.gn
-@@ -966,7 +966,6 @@ devtools_frontend_resources_data_test_de
- # builds. Since we don't run these tests on Android any case, we disable
- # the generation of the tests on Android.
- if (!is_android) {
--  devtools_frontend_resources_data_test_deps += [ "test" ]
+--- a/chrome/test/BUILD.gn
++++ b/chrome/test/BUILD.gn
+@@ -61,10 +61,6 @@ if (is_android) {
+ # into the build.
+ group("test") {
+   testonly = true
+-
+-  if (enable_extensions) {
+-    deps = [ "//chrome/common/extensions/docs/server2:extension_docserver_python_unittests" ]
+-  }
  }
  
- group("devtools_frontend_resources") {
+ group("policy_testserver_pyproto") {
+--- a/media/BUILD.gn
++++ b/media/BUILD.gn
+@@ -151,7 +151,6 @@ test("media_unittests") {
+     "//media/device_monitors:unit_tests",
+     "//media/filters:unit_tests",
+     "//media/formats:unit_tests",
+-    "//media/gpu:unit_tests",
+     "//media/learning:unit_tests",
+     "//media/mojo:unit_tests",
+     "//media/muxers:unit_tests",
+--- a/media/gpu/BUILD.gn
++++ b/media/gpu/BUILD.gn
+@@ -480,54 +480,6 @@ static_library("test_support") {
+   ]
+ }
+ 
+-source_set("unit_tests") {
+-  testonly = true
+-  deps = [
+-    "//base",
+-    "//base/test:test_support",
+-    "//media:test_support",
+-    "//media/gpu",
+-    "//media/gpu:test_support",
+-    "//media/gpu/ipc/service:unit_tests",
+-    "//testing/gmock",
+-    "//testing/gtest",
+-    "//ui/gl:test_support",
+-  ]
+-  sources = [ "h264_decoder_unittest.cc" ]
+-
+-  if (use_v4l2_codec || use_vaapi) {
+-    deps += [ "//media/gpu/chromeos:unit_tests" ]
+-  }
+-  if (use_vaapi) {
+-    deps += [ "//media/gpu/vaapi:unit_test" ]
+-  }
+-  if (use_v4l2_codec) {
+-    deps += [ "//media/gpu/v4l2:unit_test" ]
+-  }
+-
+-  # TODO(crbug.com/1006266): consider using |use_chromeos_video_acceleration|.
+-  if (use_v4l2_codec || use_vaapi) {
+-    sources += [ "vp8_decoder_unittest.cc" ]
+-  }
+-  if (is_win && enable_library_cdms) {
+-    sources += [
+-      "windows/d3d11_copying_texture_wrapper_unittest.cc",
+-      "windows/d3d11_decoder_configurator_unittest.cc",
+-      "windows/d3d11_texture_selector_unittest.cc",
+-      "windows/d3d11_texture_wrapper_unittest.cc",
+-      "windows/d3d11_video_decoder_unittest.cc",
+-      "windows/d3d11_video_device_format_support_unittest.cc",
+-      "windows/d3d11_video_processor_proxy_unittest.cc",
+-      "windows/supported_profile_helpers_unittest.cc",
+-    ]
+-    libs = [ "dxguid.lib" ]
+-  }
+-
+-  if (is_mac) {
+-    deps += [ "//media/gpu/mac:unit_tests" ]
+-  }
+-}
+-
+ # TODO(crbug.com/1006266): consider using |use_chromeos_video_acceleration|.
+ if (use_v4l2_codec || use_vaapi) {
+   test("video_decode_accelerator_tests") {
+--- a/third_party/devtools-frontend/src/BUILD.gn
++++ b/third_party/devtools-frontend/src/BUILD.gn
+@@ -224,7 +224,6 @@ devtools_frontend_resources_deps = [
+   ":build_release_devtools",
+   ":devtools_extension_api",
+   "front_end",
+-  "test",
+ ]
+ 
+ group("devtools_all_files") {

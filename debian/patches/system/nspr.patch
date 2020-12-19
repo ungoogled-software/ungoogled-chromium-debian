@@ -15,8 +15,8 @@ author: Michael Gilbert <mgilbert@debian.org>
 --- a/base/time/time.cc
 +++ b/base/time/time.cc
 @@ -14,7 +14,7 @@
- #include "base/macros.h"
- #include "base/no_destructor.h"
+ #include "base/optional.h"
+ #include "base/strings/string_util.h"
  #include "base/strings/stringprintf.h"
 -#include "base/third_party/nspr/prtime.h"
 +#include <nspr/prtime.h>
@@ -44,15 +44,3 @@ author: Michael Gilbert <mgilbert@debian.org>
      "third_party/superfasthash/superfasthash.c",
      "thread_annotations.h",
      "threading/hang_watcher.cc",
---- a/tools/gn/build/gen.py
-+++ b/tools/gn/build/gen.py
-@@ -357,6 +357,9 @@ def WriteGNNinja(path, platform, host, o
-       if not options.no_static_libstdcpp:
-         ldflags.append('-static-libstdc++')
- 
-+      # Additional system libraries that are used.
-+      libs.append('-lnspr4')
-+
-       # This is needed by libc++.
-       if not platform.is_mingw():
-         libs.append('-ldl')

@@ -3,12 +3,12 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -753,8 +753,7 @@ group("gn_all") {
+@@ -761,8 +761,7 @@ group("gn_all") {
      }
    }
  
--  if ((is_linux && !is_chromecast) || (is_win && use_libfuzzer) ||
--      (use_libfuzzer && is_mac)) {
+-  if (((is_linux || is_chromeos) && !is_chromecast) ||
+-      (is_win && use_libfuzzer) || (use_libfuzzer && is_mac)) {
 +  if (false) {
      deps += [
        "//chrome/services/ipp_parser/public/cpp:fuzzers",

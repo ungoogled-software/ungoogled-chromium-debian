@@ -3,17 +3,25 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/build/config/compiler/BUILD.gn
 +++ b/build/config/compiler/BUILD.gn
-@@ -132,8 +132,7 @@ declare_args() {
-   # TODO(vitalybuka):
-   # 'is_android' breaks content_shell_test_apk on android-kitkat-arm-rel.
-   # 'use_xcode_clang' may call old clang.
--  init_stack_vars =
--      !is_android && !use_xcode_clang && (!is_official_build || is_linux)
-+  init_stack_vars = false # for clang 7 on buster
+@@ -128,7 +128,7 @@ declare_args() {
+   #
+   # TODO(crbug.com/977230): Enabling this when 'use_xcode_clang' is true may
+   # call an old clang that doesn't support auto-init.
+-  init_stack_vars = !is_android && !use_xcode_clang
++  init_stack_vars = false
  
    # This argument is to control whether enabling text section splitting in the
    # final binary. When enabled, the separated text sections with prefix
-@@ -1483,21 +1482,6 @@ config("default_warnings") {
+@@ -703,7 +703,7 @@ config("compiler") {
+   # present. On Android this increases binary size due to more thinks for long
+   # jumps. Turn it off by default and enable selectively for targets where it's
+   # beneficial.
+-  if (use_lld && !enable_call_graph_profile_sort) {
++  if (false) {
+     if (is_win) {
+       ldflags += [ "/call-graph-profile-sort:no" ]
+     } else {
+@@ -1524,21 +1524,6 @@ config("default_warnings") {
            # Ignore warnings about MSVC optimization pragmas.
            # TODO(thakis): Only for no_chromium_code? http://crbug.com/912662
            "-Wno-ignored-pragma-optimize",
@@ -35,7 +43,7 @@ author: Michael Gilbert <mgilbert@debian.org>
          ]
  
          cflags_c += [
-@@ -1638,7 +1622,7 @@ config("no_chromium_code") {
+@@ -1686,7 +1671,7 @@ config("no_chromium_code") {
        # suppressing them individually, we just blanket suppress them here.
        "-Wno-unused-variable",
      ]
@@ -61,10 +69,10 @@ author: Michael Gilbert <mgilbert@debian.org>
    }
 --- a/third_party/angle/BUILD.gn
 +++ b/third_party/angle/BUILD.gn
-@@ -137,7 +137,6 @@ config("extra_warnings") {
-   if (is_clang) {
-     cflags += [
+@@ -145,7 +145,6 @@ config("extra_warnings") {
+       "-Wbad-function-cast",
        "-Wconditional-uninitialized",
+       "-Wdeprecated-copy",
 -      "-Wextra-semi-stmt",
        "-Wfloat-conversion",
        "-Winconsistent-missing-destructor-override",

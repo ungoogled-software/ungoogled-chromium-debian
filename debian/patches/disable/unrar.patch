@@ -52,6 +52,16 @@ bug: http://bugs.debian.org/914487
        "//components/safe_browsing/core:features",
      ]
  
+--- a/chrome/services/file_util/BUILD.gn
++++ b/chrome/services/file_util/BUILD.gn
+@@ -15,7 +15,6 @@ source_set("file_util") {
+     "//base",
+     "//chrome/common/safe_browsing",
+     "//chrome/common/safe_browsing:archive_analyzer_results",
+-    "//chrome/common/safe_browsing:rar_analyzer",
+     "//components/safe_browsing:buildflags",
+     "//mojo/public/cpp/bindings",
+   ]
 --- a/chrome/services/file_util/safe_archive_analyzer.cc
 +++ b/chrome/services/file_util/safe_archive_analyzer.cc
 @@ -7,7 +7,6 @@
@@ -60,9 +70,9 @@ bug: http://bugs.debian.org/914487
  #include "chrome/common/safe_browsing/archive_analyzer_results.h"
 -#include "chrome/common/safe_browsing/rar_analyzer.h"
  #include "chrome/common/safe_browsing/zip_analyzer.h"
- #include "mojo/public/cpp/bindings/strong_binding.h"
  
-@@ -48,8 +47,7 @@ void SafeArchiveAnalyzer::AnalyzeRarFile
+ #if defined(OS_MAC)
+@@ -47,8 +46,7 @@ void SafeArchiveAnalyzer::AnalyzeRarFile(base::File rar_file,
                                           AnalyzeRarFileCallback callback) {
    DCHECK(rar_file.IsValid());
  
@@ -74,12 +84,12 @@ bug: http://bugs.debian.org/914487
  }
 --- a/chrome/browser/safe_browsing/download_protection/file_analyzer.cc
 +++ b/chrome/browser/safe_browsing/download_protection/file_analyzer.cc
-@@ -87,7 +87,7 @@ void FileAnalyzer::Start(const base::Fil
+@@ -90,7 +90,7 @@ void FileAnalyzer::Start(const base::FilePath& target_path,
    if (inspection_type == DownloadFileType::ZIP) {
      StartExtractZipFeatures();
    } else if (inspection_type == DownloadFileType::RAR) {
 -    StartExtractRarFeatures();
 +    LOG(WARNING) << "Safebrowser inspection of rar files is disabled in this build";
- #if defined(OS_MACOSX)
+ #if defined(OS_MAC)
    } else if (inspection_type == DownloadFileType::DMG) {
      StartExtractDmgFeatures();
