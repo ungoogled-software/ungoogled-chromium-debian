@@ -14,7 +14,7 @@ Build-Depends:
  lld,
  clang,
  clang-format,
- python,
+ python2,
  python3,
  python3-xcbgen,
  pkg-config,

@@ -59,6 +59,22 @@ chromium (84.0.4147.89-1) experimental; urgency=medium
 
  -- Michael Gilbert <mgilbert@debian.org>  Sun, 26 Jul 2020 15:21:41 +0000
 
+chromium (83.0.4103.116-3.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Add 64-bit time syscalls to syscall whitelist and clock selection
+    parameter filtering code
+  * Switch to explicitly versioned python2
+    + Update build-depends
+    + Replace references to /usr/bin/python and to env python
+      with /usr/bin/python2 and env python2
+    + make exec_script in gn use python2
+    + add code in debian/rules clean to set the shebang in
+      third_party/closure_compiler/compiler.py it seems someting in the upstream
+      build system sometimes resets it.
+
+ -- Peter Michael Green <plugwash@debian.org>  Tue, 15 Sep 2020 13:10:35 +0000
+
 chromium (83.0.4103.116-3) unstable; urgency=high
 
   * Fix crashes when a connection error occurs (closes: #963548).

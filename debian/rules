@@ -144,6 +144,8 @@ override_dh_auto_clean:
 	rm -rf out
 	find . -name \*.pyc -execdir rm -f {} \;
 	dh_auto_clean
+	#it seems something in the upstream buildsystem sometimes resets the shebang in this to /usr/bin/python
+	sed -i 's_/usr/bin/python\b_/usr/bin/python2_' third_party/closure_compiler/compiler.py
 
 ###################### upstream source downloading ############################
 

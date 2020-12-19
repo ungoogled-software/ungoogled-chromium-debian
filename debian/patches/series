@@ -74,6 +74,10 @@ buster/icu63.patch
 buster/vpx17.patch
 buster/clang7.patch
 
+use-explicit-python2-sed.patch
+use-explicit-python2-gn.patch
+allow-time64-syscalls.patch
+
 bullseye/ffmpeg43.patch
 
 fixes/python3.patch

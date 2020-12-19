@@ -44,7 +44,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 --- /dev/null
 +++ b/third_party/closure_compiler/compiler.py
 @@ -0,0 +1,314 @@
-+#!/usr/bin/python
++#!/usr/bin/python2
 +# Copyright 2015 The Chromium Authors. All rights reserved.
 +# Use of this source code is governed by a BSD-style license that can be
 +# found in the LICENSE file.
