@@ -144,8 +144,10 @@ override_dh_auto_clean:
 	rm -rf out
 	find . -name \*.pyc -execdir rm -f {} \;
 	dh_auto_clean
-	for file in `grep -rl '/usr/bin/python' *`; do sed -i 's_/usr/bin/python\b_/usr/bin/python2_' $$file ; done
-	for file in `grep -rl 'env python' *`; do sed -i 's_env python\b_env python2_' $$file ; done
+	# Package is still using unversioned python and we need to change that
+	# debian dir must be excluded else the sed will modify this file and changes won't be applied on next clean
+	for file in `grep -rl --exclude-dir debian '/usr/bin/python' *`; do sed -i 's_/usr/bin/python\b_/usr/bin/python2_' $$file ; done
+	for file in `grep -rl --exclude-dir debian 'env python' *`; do sed -i 's_env python\b_env python2_' $$file ; done
 
 ###################### upstream source downloading ############################
 
