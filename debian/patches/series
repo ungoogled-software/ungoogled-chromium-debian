@@ -22,6 +22,7 @@ fixes/nullptr-dereference.patch
 fixes/multiple-destruction.patch
 fixes/openscreen.patch
 fixes/ozone.patch
+fixes/double-delete-csw.patch
 
 disable/tests.patch
 disable/unrar.patch
