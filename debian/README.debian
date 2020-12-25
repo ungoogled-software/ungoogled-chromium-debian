@@ -33,8 +33,8 @@ Widevine Extension
 ==================
 Widevine is a non-free library that cannot be distributed directly by Debian.
 If you would like chromium to use it, you need to obtain it from google first
-and install it to one of these locations ~/.local/lib/libwidevinecdm.so or
-/usr/lib/chromium/libwidevinecdm.so.
+and install it to one of these locations ~/.config/chromium/WidevineCdm/ or
+/usr/lib/chromium/WidevineCdm/.
 
 Debugging
 =========
