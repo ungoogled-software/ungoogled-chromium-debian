@@ -40,6 +40,7 @@ disable/swiftshader.patch
 disable/welcome-page.patch
 disable/google-api-warning.patch
 disable/third-party-cookies.patch
+disable/driver-chrome-path.patch
 
 warnings/restrict.patch
 warnings/multichar.patch
