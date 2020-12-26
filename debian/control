@@ -169,6 +169,7 @@ Package: chromium-common
 Architecture: i386 amd64 arm64 armhf
 Depends:
  ${misc:Depends},
+ ${shlibs:Depends},
  x11-utils,
  xdg-utils,
 Recommends:
