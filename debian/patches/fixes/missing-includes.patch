@@ -72,3 +72,31 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  class GURL;
  
+--- a/components/autofill/core/browser/pattern_provider/pattern_provider.h
++++ b/components/autofill/core/browser/pattern_provider/pattern_provider.h
+@@ -6,6 +6,7 @@
+ #define COMPONENTS_AUTOFILL_CORE_BROWSER_PATTERN_PROVIDER_PATTERN_PROVIDER_H_
+ 
+ #include <string>
++#include <vector>
+ 
+ #include "base/macros.h"
+ #include "base/no_destructor.h"
+@@ -55,4 +56,4 @@
+   friend class base::NoDestructor<PatternProvider>;
+ };
+ }  // namespace autofill
+-#endif  // COMPONENTS_AUTOFILL_CORE_BROWSER_PATTERN_PROVIDER_PATTERN_PROVIDER_H_
+\ No newline at end of file
++#endif  // COMPONENTS_AUTOFILL_CORE_BROWSER_PATTERN_PROVIDER_PATTERN_PROVIDER_H_
+--- a/components/autofill/core/browser/data_model/borrowed_transliterator.h
++++ b/components/autofill/core/browser/data_model/borrowed_transliterator.h
+@@ -5,6 +5,8 @@
+ #ifndef COMPONENTS_AUTOFILL_CORE_BROWSER_DATA_MODEL_BORROWED_TRANSLITERATOR_H_
+ #define COMPONENTS_AUTOFILL_CORE_BROWSER_DATA_MODEL_BORROWED_TRANSLITERATOR_H_
+ 
++#include <memory>
++
+ #include "base/i18n/unicodestring.h"
+ #include "base/no_destructor.h"
+ #include "base/synchronization/lock.h"

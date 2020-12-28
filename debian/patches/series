@@ -69,6 +69,7 @@ system/clang-format.patch
 buster/re2.patch
 buster/icu63.patch
 buster/clang7.patch
+buster/fix-libdrm.patch
 
 use-explicit-python2-gn.patch
 allow-time64-syscalls.patch
