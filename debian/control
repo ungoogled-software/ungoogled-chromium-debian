@@ -16,7 +16,6 @@ Build-Depends:
  clang-format,
  python2,
  python3,
- python3-xcbgen,
  pkg-config,
  ninja-build,
  python-jinja2,
