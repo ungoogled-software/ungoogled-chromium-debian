@@ -2,6 +2,7 @@ debianization/manpage.patch
 debianization/sandbox.patch
 debianization/optimization.patch
 debianization/master-preferences.patch
+debianization/use-explicit-python2.patch
 
 gn/libcxx.patch
 gn/parallel.patch
