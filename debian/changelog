@@ -1,3 +1,19 @@
+chromium (87.0.4280.88-0.4) unstable; urgency=medium
+
+  * Non-maintainer upload.
+
+  [ Michel Le Bihan ]
+  * Install ANGLE EGL and GLESv2 libs (closes: 977870).
+  * Disable Widevine CDM component updater (closes: 960454).
+  * Disable usage of google-chrome in driver (closes: 930543).
+
+  [ Jan Luca Naumann ]
+  * Remove python3-xcbgen from Build-Deps
+  * Changes to allow building on buster
+  * Add patch for explicit python2 usage in scripts
+
+ -- Michel Le Bihan <michel@lebihan.pl>  Tue, 29 Dec 2020 10:58:42 +0100
+
 chromium (87.0.4280.88-0.3) unstable; urgency=medium
 
   * Non-maintainer upload.
