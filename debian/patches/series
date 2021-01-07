@@ -65,6 +65,7 @@ system/harfbuzz.patch
 system/openjpeg.patch
 system/convertutf.patch
 system/clang-format.patch
+system/use-desktop-gl-as-default.patch
 
 buster/re2.patch
 buster/icu63.patch
