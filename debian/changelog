@@ -1,3 +1,37 @@
+chromium (87.0.4280.141-0.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * New upstream security release (closes: 979520).
+    - CVE-2021-21106: Use after free in autofill. Reported by Weipeng Jiang
+      @Krace from Codesafe Team of Legendsec at Qi'anxin Group
+    - CVE-2021-21107: Use after free in drag and drop. Reported by Leecraso and
+      Guang Gong of 360 Alpha Lab
+    - CVE-2021-21108: Use after free in media. Reported by Leecraso and Guang
+      Gong of 360 Alpha Lab
+    - CVE-2021-21109: Use after free in payments. Reported by Rong Jian and
+      Guang Gong of 360 Alpha Lab
+    - CVE-2021-21110: Use after free in safe browsing. Reported by Anonymous
+    - CVE-2021-21111: Insufficient policy enforcement in WebUI. Reported by
+      Alesandro Ortiz
+    - CVE-2021-21112: Use after free in Blink. Reported by YoungJoo Lee
+      @ashuu_lee of Raon Whitehat
+    - CVE-2021-21113: Heap buffer overflow in Skia. Reported by tsubmunu
+    - CVE-2020-16043: Insufficient data validation in networking. Reported by
+      Samy Kamkar, Ben Seri at Armis, Gregory Vishnepolsky at Armis
+    - CVE-2021-21114: Use after free in audio. Reported by Man Yue Mo of GitHub
+      Security Lab
+    - CVE-2020-15995: Out of bounds write in V8. Reported by Bohan Liu
+      @P4nda20371774 of Tencent Security Xuanwu Lab
+    - CVE-2021-21115: Use after free in safe browsing. Reported by Leecraso and
+      Guang Gong of 360 Alpha Lab
+    - CVE-2021-21116: Heap buffer overflow in audio. Reported by Alison
+      Huffman, Microsoft Browser Vulnerability Research
+
+  [ Jan Luca Naumann ]
+  * Use desktop gl implementation as default. (closes: 979135)
+
+ -- Michel Le Bihan <michel@lebihan.pl>  Sat, 09 Jan 2021 11:24:58 +0100
+
 chromium (87.0.4280.88-0.4) unstable; urgency=medium
 
   * Non-maintainer upload.
