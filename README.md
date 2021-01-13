@@ -37,6 +37,7 @@ sudo apt install git python3 packaging-dev equivs
 
 # Clone the repository and switch to unportable variant
 git clone https://github.com/ungoogled-software/ungoogled-chromium-debian.git
+cd ungoogled-chromium-debian/
 git switch unportable
 git submodule update --init
 
@@ -49,7 +50,7 @@ git submodule update --init
 # (Optional) Replace TAG_HERE with the tag you want to build
 # Example of a tag: 79.0.3945.88-1.sid1
 # If you omit this step, you will build the latest changes in unportable.
-git -C ungoogled-chromium-debian checkout --recurse-submodules TAG_HERE
+git checkout --recurse-submodules TAG_HERE
 
 # Replace UPLOADER_HERE with your uploader string (optional)
 # Example of an uploader string: John Doe <johndoe@example.com>
