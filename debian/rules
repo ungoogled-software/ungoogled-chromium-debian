@@ -171,7 +171,9 @@ get-orig-source:
 	cd $(extract) && ../debian/scripts/check-upstream
 	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
 	test ! -e $(origtxz) || rm -f $(origtxz)
-	tar cf - $(extract) | xz -6 -T $(njobs) - > $(origtxz)
+	tar --sort=name --owner=0 --group=0 --numeric-owner \
+		--mtime="@$$(stat --format "%Y" ../$(tarball))" --clamp-mtime \
+		-cf - $(extract) | xz -6 -T $(njobs) - > $(origtxz)
 	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
 	rm -rf $(extract)
 	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds | tee seconds
