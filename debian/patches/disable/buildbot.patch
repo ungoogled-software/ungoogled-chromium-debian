@@ -13,9 +13,9 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//third_party/blink/public/mojom:mojom_platform_js_data_deps",
 --- a/chrome/test/BUILD.gn
 +++ b/chrome/test/BUILD.gn
-@@ -857,8 +857,6 @@ if (!is_android) {
+@@ -883,8 +883,6 @@ if (!is_android) {
+       "//ppapi:copy_test_files",
        "//ppapi:copy_test_files2",
-       "//ppapi:power_saver_test_plugin",
        "//ppapi:ppapi_tests",
 -      "//testing/buildbot/filters:browser_tests_filters",
 -      "//testing/buildbot/filters:linux_trusty_rel_browser_tests_filters",
@@ -74,9 +74,9 @@ author: Michael Gilbert <mgilbert@debian.org>
      include_dirs = [
 --- a/content/test/BUILD.gn
 +++ b/content/test/BUILD.gn
-@@ -1238,7 +1238,6 @@ test("content_browsertests") {
+@@ -1351,7 +1351,6 @@ test("content_browsertests") {
+ 
    data_deps = [
-     ":web_ui_test_mojo_bindings_js_data_deps",
      "//content/shell:pak",
 -    "//testing/buildbot/filters:content_browsertests_filters",
      "//third_party/mesa_headers",

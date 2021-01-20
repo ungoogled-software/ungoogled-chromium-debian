@@ -149,17 +149,6 @@ author: Michael Gilbert <mgilbert@debian.org>
    std::unique_ptr<StringBuffer> serializeForFrontend(
 --- a/v8/src/inspector/injected-script.cc
 +++ b/v8/src/inspector/injected-script.cc
-@@ -520,8 +520,8 @@ Response InjectedScript::getInternalAndP
- 
- void InjectedScript::releaseObject(const String16& objectId) {
-   std::vector<uint8_t> cbor;
--  v8_crdtp::json::ConvertJSONToCBOR(
--      v8_crdtp::span<uint16_t>(objectId.characters16(), objectId.length()),
-+  crdtp::json::ConvertJSONToCBOR(
-+      crdtp::span<uint16_t>(objectId.characters16(), objectId.length()),
-       &cbor);
-   std::unique_ptr<protocol::Value> parsedObjectId =
-       protocol::Value::parseBinary(cbor.data(), cbor.size());
 @@ -733,8 +733,8 @@ Response InjectedScript::resolveCallArgu
      String16 value;
      if (callArgument->hasValue()) {
@@ -184,9 +173,9 @@ author: Michael Gilbert <mgilbert@debian.org>
      v8_inspector::StringView serialized(json.data(), json.size());
 --- a/v8/src/inspector/v8-stack-trace-impl.cc
 +++ b/v8/src/inspector/v8-stack-trace-impl.cc
-@@ -10,9 +10,9 @@
- #include "src/inspector/v8-debugger.h"
+@@ -11,9 +11,9 @@
  #include "src/inspector/v8-inspector-impl.h"
+ #include "src/tracing/trace-event.h"
  
 -using v8_crdtp::SpanFrom;
 -using v8_crdtp::json::ConvertCBORToJSON;
@@ -219,19 +208,6 @@ author: Michael Gilbert <mgilbert@debian.org>
                                      &json);
    return StringBufferFrom(std::move(json));
  }
---- a/v8/src/inspector/remote-object-id.cc
-+++ b/v8/src/inspector/remote-object-id.cc
-@@ -15,8 +15,8 @@ RemoteObjectIdBase::RemoteObjectIdBase()
- std::unique_ptr<protocol::DictionaryValue>
- RemoteObjectIdBase::parseInjectedScriptId(const String16& objectId) {
-   std::vector<uint8_t> cbor;
--  v8_crdtp::json::ConvertJSONToCBOR(
--      v8_crdtp::span<uint16_t>(objectId.characters16(), objectId.length()),
-+  crdtp::json::ConvertJSONToCBOR(
-+      crdtp::span<uint16_t>(objectId.characters16(), objectId.length()),
-       &cbor);
-   std::unique_ptr<protocol::Value> parsedValue =
-       protocol::Value::parseBinary(cbor.data(), cbor.size());
 --- a/v8/src/inspector/string-util.cc
 +++ b/v8/src/inspector/string-util.cc
 @@ -245,7 +245,7 @@ String16 stackTraceIdToString(uintptr_t id) {

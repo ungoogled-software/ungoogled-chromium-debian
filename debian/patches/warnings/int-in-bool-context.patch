@@ -60,19 +60,6 @@ author: Michael Gilbert <mgilbert@debian.org>
      ProcessStartTag(token);
      return;
    }
---- a/ui/gfx/ipc/skia/gfx_skia_param_traits_macros.h
-+++ b/ui/gfx/ipc/skia/gfx_skia_param_traits_macros.h
-@@ -13,8 +13,8 @@
- #undef IPC_MESSAGE_EXPORT
- #define IPC_MESSAGE_EXPORT GFX_SKIA_IPC_EXPORT
- 
--IPC_ENUM_TRAITS_VALIDATE(SkColorType, kLastEnum_SkColorType)
--IPC_ENUM_TRAITS_VALIDATE(SkAlphaType, kLastEnum_SkAlphaType)
-+IPC_ENUM_TRAITS_VALIDATE(SkColorType, value != kLastEnum_SkColorType)
-+IPC_ENUM_TRAITS_VALIDATE(SkAlphaType, value != kLastEnum_SkAlphaType)
- 
- #undef IPC_MESSAGE_EXPORT
- #define IPC_MESSAGE_EXPORT
 --- a/extensions/browser/api/socket/tcp_socket.cc
 +++ b/extensions/browser/api/socket/tcp_socket.cc
 @@ -214,7 +214,7 @@ void TCPSocket::SetKeepAlive(bool enable

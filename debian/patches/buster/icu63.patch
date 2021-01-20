@@ -1133,9 +1133,9 @@ author: Michael Gilbert <mgilbert@debian.org>
 +bool IsUnicodeScriptSubtag(const std::string& value);
 +bool IsUnicodeRegionSubtag(const std::string& value);
 +
+ #include "torque-generated/src/objects/js-locale-tq.inc"
+ 
  class JSLocale : public TorqueGeneratedJSLocale<JSLocale, JSObject> {
-  public:
-   // Creates locale object with properties derived from input locale string
 --- a/base/i18n/icu_util.cc
 +++ b/base/i18n/icu_util.cc
 @@ -370,6 +370,8 @@ enum class ICUCreateInstance {

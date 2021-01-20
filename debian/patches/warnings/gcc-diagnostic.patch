@@ -1,8 +1,8 @@
 description: avoid clang warnings about gcc specific compiler flag
 author: Michael Gilbert <mgilbert@debian.org>
 
---- a/third_party/blink/renderer/platform/heap/finalizer_traits.h
-+++ b/third_party/blink/renderer/platform/heap/finalizer_traits.h
+--- a/third_party/blink/renderer/platform/heap/impl/finalizer_traits.h
++++ b/third_party/blink/renderer/platform/heap/impl/finalizer_traits.h
 @@ -43,10 +43,7 @@
  // an object's base class has a virtual destructor. In case there is no virtual
  // destructor present, the object is always finalized through its leaf type. In

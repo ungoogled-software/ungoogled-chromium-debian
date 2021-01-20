@@ -23,7 +23,7 @@
      "//media/muxers:unit_tests",
 --- a/media/gpu/BUILD.gn
 +++ b/media/gpu/BUILD.gn
-@@ -480,54 +480,6 @@ static_library("test_support") {
+@@ -493,57 +493,6 @@ static_library("test_support") {
    ]
  }
  
@@ -41,8 +41,10 @@
 -    "//ui/gl:test_support",
 -  ]
 -  sources = [ "h264_decoder_unittest.cc" ]
--
--  if (use_v4l2_codec || use_vaapi) {
+-  if (proprietary_codecs && enable_platform_hevc) {
+-    sources += [ "h265_decoder_unittest.cc" ]
+-  }
+-  if (is_ash && (use_v4l2_codec || use_vaapi)) {
 -    deps += [ "//media/gpu/chromeos:unit_tests" ]
 -  }
 -  if (use_vaapi) {
@@ -60,6 +62,7 @@
 -    sources += [
 -      "windows/d3d11_copying_texture_wrapper_unittest.cc",
 -      "windows/d3d11_decoder_configurator_unittest.cc",
+-      "windows/d3d11_picture_buffer_unittest.cc",
 -      "windows/d3d11_texture_selector_unittest.cc",
 -      "windows/d3d11_texture_wrapper_unittest.cc",
 -      "windows/d3d11_video_decoder_unittest.cc",

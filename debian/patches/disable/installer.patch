@@ -3,15 +3,15 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -70,8 +70,6 @@ group("gn_all") {
+@@ -72,8 +72,6 @@ group("gn_all") {
      "//base:base_perftests",
      "//base:base_unittests",
      "//base/util:base_util_unittests",
 -    "//chrome/installer",
 -    "//chrome/updater",
+     "//codelabs",
      "//components:components_unittests",
      "//components/gwp_asan:gwp_asan_unittests",
-     "//net:net_unittests",
 --- a/chrome/browser/BUILD.gn
 +++ b/chrome/browser/BUILD.gn
 @@ -5586,7 +5586,6 @@ source_set("active_use_util") {

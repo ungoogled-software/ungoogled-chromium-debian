@@ -49,17 +49,6 @@ author: Michael Gilbert <mgilbert@debian.org>
                           config_.max_daily_shown_per_type);
  }
  
---- a/third_party/webrtc/modules/audio_coding/neteq/decision_logic.cc
-+++ b/third_party/webrtc/modules/audio_coding/neteq/decision_logic.cc
-@@ -352,7 +352,7 @@ NetEq::Operation DecisionLogic::FuturePa
-       prev_mode == NetEq::Mode::kCodecInternalCng) {
-     size_t cur_size_samples =
-         estimate_dtx_delay_
--            ? cur_size_samples = span_samples_in_packet_buffer
-+            ? span_samples_in_packet_buffer
-             : num_packets_in_packet_buffer * decoder_frame_length;
-     // Target level is in number of packets in Q8.
-     const size_t target_level_samples =
 --- a/third_party/blink/renderer/platform/geometry/calculation_value.cc
 +++ b/third_party/blink/renderer/platform/geometry/calculation_value.cc
 @@ -45,8 +45,8 @@ CalculationValue::~CalculationValue() {

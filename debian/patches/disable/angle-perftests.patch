@@ -1,0 +1,95 @@
+description: Disable ANGLE perftests
+author: Michel Le Bihan <michel@lebihan.pl>
+
+--- a/chrome/test/BUILD.gn
++++ b/chrome/test/BUILD.gn
+@@ -3279,7 +3279,6 @@ group("performance_test_suite") {
+     "//gpu:gpu_perftests",
+     "//media:media_perftests",
+     "//testing:run_perf_test",
+-    "//third_party/angle/src/tests:angle_perftests",
+   ]
+ 
+   if (build_dawn_tests) {
+--- a/third_party/angle/src/tests/BUILD.gn
++++ b/third_party/angle/src/tests/BUILD.gn
+@@ -12,8 +12,7 @@ declare_args() {
+   build_angle_deqp_tests = false
+   build_angle_gles1_conform_tests = false
+   build_angle_trace_perf_tests = false
+-  build_angle_perftests =
+-      is_win || is_linux || is_chromeos || is_android || is_mac || is_fuchsia
++  build_angle_perftests = false
+ }
+ 
+ angle_test("test_utils_unittest_helper") {
+@@ -229,43 +229,7 @@ config("angle_maybe_has_histograms") {
+   }
+ }
+ 
+-template("angle_perftests_common") {
+-  assert(defined(invoker.test_utils))
+-
+-  angle_source_set(target_name) {
+-    testonly = true
+-    sources = [
+-      "../third_party/trace_event/trace_event.h",
+-      "perf_tests/ANGLEPerfTest.cpp",
+-      "perf_tests/ANGLEPerfTest.h",
+-      "perf_tests/ANGLEPerfTestArgs.cpp",
+-      "perf_tests/ANGLEPerfTestArgs.h",
+-      "perf_tests/DrawCallPerfParams.cpp",
+-      "perf_tests/DrawCallPerfParams.h",
+-      "perf_tests/third_party/perf/perf_result_reporter.cc",
+-      "perf_tests/third_party/perf/perf_result_reporter.h",
+-      "perf_tests/third_party/perf/perf_test.cc",
+-      "perf_tests/third_party/perf/perf_test.h",
+-      "test_utils/runner/HistogramWriter.h",
+-      "test_utils/runner/TestSuite.h",
+-    ]
+-    public_deps = [
+-      "$angle_root/third_party/rapidjson:rapidjson",
+-      "${invoker.test_utils}",
+-    ]
+-    public_configs += [ "${angle_root}:libANGLE_config" ]
+-  }
+-}
+-
+-angle_perftests_common("angle_perftests_shared") {
+-  test_utils = ":angle_common_test_utils_shared"
+-}
+-
+-angle_perftests_common("angle_perftests_static") {
+-  test_utils = ":angle_common_test_utils_static"
+-}
+-
+-if (is_win || is_linux || is_chromeos || is_android || is_mac) {
++if (false) {
+   import("angle_perftests.gni")
+ 
+   # This test suite is for perf tests that use ANGLE's internals in some direct way.
+@@ -1393,12 +1393,11 @@ group("angle_tests") {
+   testonly = true
+   deps = [
+     ":angle_end2end_tests",
+-    ":angle_perftests",
+     ":angle_system_info_test",
+     ":angle_unittests",
+     "capture_replay_tests",
+   ]
+-  if (!is_fuchsia) {
++  if (false) {
+     deps += [
+       ":angle_white_box_perftests",
+       ":angle_white_box_tests",
+--- a/third_party/angle/gni/angle.gni
++++ b/third_party/angle/gni/angle.gni
+@@ -147,7 +147,7 @@ declare_args() {
+ }
+ 
+ declare_args() {
+-  angle_has_histograms = angle_has_build
++  angle_has_histograms = false
+ }
+ 
+ if (!defined(angle_zlib_compression_utils_dir)) {

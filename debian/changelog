@@ -1,3 +1,65 @@
+chromium (88.0.4324.96-0.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * New upstream stable release (closes: 980564).
+    - CVE-2021-21117: Insufficient policy enforcement in Cryptohome. Reported
+      by Rory McNamara
+    - CVE-2021-21118: Insufficient data validation in V8. Reported by Tyler
+      Nighswander @tylerni7 of Theori
+    - CVE-2021-21119: Use after free in Media. Reported by Anonymous
+    - CVE-2021-21120: Use after free in WebSQL. Reported by Nan Wang
+      @eternalsakura13 and Guang Gong of 360 Alpha Lab
+    - CVE-2021-21121: Use after free in Omnibox. Reported by Leecraso and Guang
+      Gong of 360 Alpha Lab
+    - CVE-2021-21122: Use after free in Blink. Reported by Renata Hodovan
+    - CVE-2021-21123: Insufficient data validation in File System API. Reported
+      by Maciej Pulikowski
+    - CVE-2021-21124: Potential user after free in Speech Recognizer. Reported
+      by Chaoyang Ding(@V4kst1z) from Codesafe Team of Legendsec at Qi'anxin
+      Group
+    - CVE-2021-21125: Insufficient policy enforcement in File System API.
+      Reported by Ron Masas
+    - CVE-2020-16044: Use after free in WebRTC. Reported by Ned Williamson of
+      Project Zero
+    - CVE-2021-21126: Insufficient policy enforcement in extensions. Reported
+      by David Erceg
+    - CVE-2021-21127: Insufficient policy enforcement in extensions. Reported
+      by Jasminder Pal Singh, Web Services Point WSP, Kotkapura
+    - CVE-2021-21128: Heap buffer overflow in Blink. Reported by Liang Dong
+    - CVE-2021-21129: Insufficient policy enforcement in File System API.
+      Reported by Maciej Pulikowski
+    - CVE-2021-21130: Insufficient policy enforcement in File System API.
+      Reported by Maciej Pulikowski
+    - CVE-2021-21131: Insufficient policy enforcement in File System API.
+      Reported by Maciej Pulikowski
+    - CVE-2021-21132: Inappropriate implementation in DevTools. Reported by
+      David Erceg
+    - CVE-2021-21133: Insufficient policy enforcement in Downloads. Reported by
+      wester0x01
+    - CVE-2021-21134: Incorrect security UI in Page Info. Reported by
+      wester0x01
+    - CVE-2021-21135: Inappropriate implementation in Performance API. Reported
+      by ndevtk
+    - CVE-2021-21136: Insufficient policy enforcement in WebView. Reported by
+      Shiv Sahni, Movnavinothan V and Imdad Mohammed
+    - CVE-2021-21137: Inappropriate implementation in DevTools. Reported by
+      bobblybear
+    - CVE-2021-21138: Use after free in DevTools. Reported by Weipeng Jiang
+      @Krace from Codesafe Team of Legendsec at Qi'anxin Group
+    - CVE-2021-21139: Inappropriate implementation in iframe sandbox. Reported
+      by Jun Kokatsu, Microsoft Browser Vulnerability Research
+    - CVE-2021-21140: Uninitialized Use in USB. Reported by David Manouchehri
+    - CVE-2021-21141: Insufficient policy enforcement in File System API.
+      Reported by Maciej Pulikowski
+
+  [ Jan Luca Naumann ]
+  * Add watch file.
+
+  [ Mattia Rizzolo ]
+  * Change get-orig-source to produce reproducible tarballs.
+
+ -- Michel Le Bihan <michel@lebihan.pl>  Wed, 20 Jan 2021 23:23:08 +0100
+
 chromium (87.0.4280.141-0.1) unstable; urgency=medium
 
   * Non-maintainer upload.

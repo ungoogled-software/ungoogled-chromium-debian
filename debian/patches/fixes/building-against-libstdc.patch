@@ -1,0 +1,32 @@
+From 09304ba4c3167b9977b412f8a3fc2e99c67fabd2 Mon Sep 17 00:00:00 2001
+From: Hans-Filip Elo <helo@vewd.com>
+Date: Thu, 17 Dec 2020 22:34:21 +0000
+Subject: [PATCH] Build fix for libstdc++
+
+When building against libstdc++, the macro DCHECK_NE does not seem to
+handle implicit conversion between std::unique_ptr and nullptr. This
+patch fixes one such build error in compositor_frame_reporter.cc.
+
+Bug: 957519
+Change-Id: If1801dba777a90089a4c0585cec7e62de8006fff
+Reviewed-on: https://chromium-review.googlesource.com/c/chromium/src/+/2595279
+Reviewed-by: danakj <danakj@chromium.org>
+Commit-Queue: Hans-Filip Elo <helo@vewd.com>
+Cr-Commit-Position: refs/heads/master@{#838269}
+---
+ cc/metrics/compositor_frame_reporter.cc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cc/metrics/compositor_frame_reporter.cc b/cc/metrics/compositor_frame_reporter.cc
+index 9392f0a443361..bab060123064a 100644
+--- a/cc/metrics/compositor_frame_reporter.cc
++++ b/cc/metrics/compositor_frame_reporter.cc
+@@ -767,7 +767,7 @@ void CompositorFrameReporter::ReportCompositorLatencyHistogram(
+ 
+ void CompositorFrameReporter::ReportEventLatencyHistograms() const {
+   for (const auto& event_metrics : events_metrics_) {
+-    DCHECK_NE(event_metrics, nullptr);
++    DCHECK(event_metrics);
+     const std::string histogram_base_name =
+         GetEventLatencyHistogramBaseName(*event_metrics);
+     const int event_type_index = static_cast<int>(event_metrics->type());

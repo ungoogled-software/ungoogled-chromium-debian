@@ -12,7 +12,6 @@ fixes/gnu-as.patch
 fixes/closure.patch
 fixes/ps-print.patch
 fixes/inspector.patch
-fixes/gpu-timeout.patch
 fixes/not-constexpr.patch
 fixes/sequence-point.patch
 fixes/missing-includes.patch
@@ -22,8 +21,9 @@ fixes/connection-message.patch
 fixes/nullptr-dereference.patch
 fixes/multiple-destruction.patch
 fixes/openscreen.patch
-fixes/ozone.patch
-fixes/double-delete-csw.patch
+fixes/building-against-libstdc.patch
+fixes/ideographic-space-character-constant.patch
+fixes/no-ozone.patch
 
 disable/tests.patch
 disable/unrar.patch
@@ -43,6 +43,9 @@ disable/google-api-warning.patch
 disable/third-party-cookies.patch
 disable/driver-chrome-path.patch
 disable/widevine-cdm-cu.patch
+disable/angle-perftests.patch
+disable/web-ui-tests.patch
+disable/ozone-unittests.patch
 
 warnings/restrict.patch
 warnings/multichar.patch

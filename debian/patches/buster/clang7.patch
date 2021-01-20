@@ -12,32 +12,6 @@ author: Michael Gilbert <mgilbert@debian.org>
  
    # This argument is to control whether enabling text section splitting in the
    # final binary. When enabled, the separated text sections with prefix
-@@ -489,25 +489,6 @@
-       "-mllvm",
-       "-instcombine-lower-dbg-declare=0",
-     ]
--
--    # Pinned clang has enable-dse-memoryssa enabled by default but it's broken,
--    # so we have to force it off.
--    # Trunk clang has it disabled by default but it might work, so we force it
--    # on so the ToT bots can check if it works now.
--    if (!llvm_force_head_revision) {
--      cflags += [
--        # TODO(https://crbug.com/1127713): Investigate, remove.
--        "-mllvm",
--        "-enable-dse-memoryssa=false",
--      ]
--    }
--    if (llvm_force_head_revision) {
--      cflags += [
--        # TODO(https://crbug.com/1127713): Investigate, remove.
--        "-mllvm",
--        "-enable-dse-memoryssa=true",
--      ]
--    }
-   }
- 
-   # C11/C++11 compiler flags setup.
 @@ -703,7 +684,7 @@
    # present. On Android this increases binary size due to more thinks for long
    # jumps. Turn it off by default and enable selectively for targets where it's
@@ -80,7 +54,7 @@ author: Michael Gilbert <mgilbert@debian.org>
          "-Wno-misleading-indentation",
 --- a/third_party/blink/renderer/BUILD.gn
 +++ b/third_party/blink/renderer/BUILD.gn
-@@ -45,11 +45,9 @@ config("inside_blink") {
+@@ -46,11 +46,9 @@ config("inside_blink") {
        "-Wconversion",
        "-Wno-float-conversion",
        "-Wno-sign-conversion",
@@ -88,7 +62,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 -      "-Wno-implicit-int-conversion",
      ]
  
--    if (!is_chromeos || default_toolchain != "//build/toolchain/cros:target") {
+-    if (!is_ash || default_toolchain != "//build/toolchain/cros:target") {
 +    if (false) {
        cflags += [ "-Wno-enum-float-conversion" ]
      }
@@ -142,18 +116,4 @@ author: Michael Gilbert <mgilbert@debian.org>
 -#    pragma clang diagnostic ignored "-Wextra-semi-stmt"
  #    pragma clang diagnostic ignored "-Wunreachable-code"
  #endif
- 
---- a/third_party/blink/public/common/privacy_budget/identifiable_token.h
-+++ b/third_party/blink/public/common/privacy_budget/identifiable_token.h
-@@ -118,8 +118,9 @@ class IdentifiableToken {
- 
-   // Enums. Punt to the underlying type.
-   template <typename T,
--            typename U = typename std::underlying_type<T>::type,
--            typename std::enable_if_t<std::is_enum<T>::value>* = nullptr>
-+            // Set dummy type before U to avoid GCC compile errors
-+            typename std::enable_if_t<std::is_enum<T>::value>* = nullptr,
-+            typename U = typename std::underlying_type<T>::type>
-   constexpr IdentifiableToken(T in)  // NOLINT(google-explicit-constructor)
-       : IdentifiableToken(static_cast<U>(in)) {}
  

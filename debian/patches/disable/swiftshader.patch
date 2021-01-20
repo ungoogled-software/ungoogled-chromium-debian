@@ -14,23 +14,23 @@ author: Michael Gilbert <mgilbert@debian.org>
    }
 --- a/third_party/angle/gni/angle.gni
 +++ b/third_party/angle/gni/angle.gni
-@@ -106,7 +106,7 @@ declare_args() {
+@@ -108,7 +108,7 @@ declare_args() {
    # ANGLE Vulkan backend on Android requires API level 26, i.e. Oreo, due to
    # Vulkan Validation Layers compatibility issues, see http://crrev/c/1405714.
    # Otherwise, API level 24 would have been enough.
 -  angle_enable_vulkan =
 +  angle_enable_vulkan = false &&
-       angle_has_build && ((is_win && !angle_is_winuwp) ||
-                           (is_linux && angle_use_x11 && !is_chromeos) ||
-                           (is_android && ndk_api_level_at_least_26) ||
-@@ -322,7 +322,6 @@ template("angle_test") {
-     public_deps += invoker.deps + [
-                      "$angle_root:angle_common",
-                      "$angle_root:includes",
--                     "$angle_root/third_party/rapidjson:rapidjson",
-                      "$angle_root/util:angle_test_utils",
-                      "//testing/gmock",
-                      "//testing/gtest",
+       angle_has_build &&
+       ((is_win && !angle_is_winuwp) ||
+        (is_linux && (angle_use_x11 || angle_use_vulkan_display) &&
+@@ -308,7 +308,6 @@ template("angle_test") {
+                     "$angle_root:angle_common",
+                     "$angle_root:includes",
+                     "$angle_root/util:angle_test_utils",
+-                    "$angle_root/third_party/rapidjson:rapidjson",
+                     "//testing/gmock",
+                     "//testing/gtest",
+                     "//third_party/googletest:gmock",
 --- a/gpu/vulkan/features.gni
 +++ b/gpu/vulkan/features.gni
 @@ -13,5 +13,5 @@ declare_args() {

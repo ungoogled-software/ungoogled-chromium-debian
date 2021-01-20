@@ -1,0 +1,31 @@
+From bfb5e2c034591b0c8729822b0e8bd07c3e9206b6 Mon Sep 17 00:00:00 2001
+From: Stephan Hartmann <stha09@googlemail.com>
+Date: Wed, 9 Dec 2020 17:13:16 +0000
+Subject: [PATCH] fix ideographicSpaceCharacter constant for system icu
+
+https://chromium-review.googlesource.com/c/chromium/src/+/1687411
+renamed ideographicSpaceCharacter to kIdeographicSpaceCharacter.
+
+Bug: None
+Change-Id: I5f74dfa489cdca4927a8132bed209549702ca947
+Reviewed-on: https://chromium-review.googlesource.com/c/chromium/src/+/2574740
+Reviewed-by: Nico Weber <thakis@chromium.org>
+Commit-Queue: Nico Weber <thakis@chromium.org>
+Cr-Commit-Position: refs/heads/master@{#835231}
+---
+ third_party/blink/renderer/platform/wtf/text/text_codec_icu.cc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/third_party/blink/renderer/platform/wtf/text/text_codec_icu.cc b/third_party/blink/renderer/platform/wtf/text/text_codec_icu.cc
+index fb8ab0530c51e..5d4ea13e753a1 100644
+--- a/third_party/blink/renderer/platform/wtf/text/text_codec_icu.cc
++++ b/third_party/blink/renderer/platform/wtf/text/text_codec_icu.cc
+@@ -432,7 +432,7 @@ String TextCodecICU::Decode(const char* bytes,
+   // ICU decodes it as U+E5E5.
+   if (!strcmp(encoding_.GetName(), "GBK")) {
+     if (EqualIgnoringASCIICase(encoding_.GetName(), "gb18030"))
+-      resultString.Replace(0xE5E5, ideographicSpaceCharacter);
++      resultString.Replace(0xE5E5, kIdeographicSpaceCharacter);
+     // Make GBK compliant to the encoding spec and align with GB18030
+     resultString.Replace(0x01F9, 0xE7C8);
+     // FIXME: Once https://www.w3.org/Bugs/Public/show_bug.cgi?id=28740#c3
