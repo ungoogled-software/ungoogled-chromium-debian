@@ -13,7 +13,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//media/capture/mojom:image_capture_js_data_deps",
 --- a/content/web_test/BUILD.gn
 +++ b/content/web_test/BUILD.gn
-@@ -94,8 +94,6 @@ static_library("web_test_browser") {
+@@ -88,8 +88,6 @@ static_library("web_test_browser") {
      "browser/leak_detector.h",
      "browser/mojo_echo.cc",
      "browser/mojo_echo.h",
@@ -22,7 +22,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "browser/test_info_extractor.cc",
      "browser/test_info_extractor.h",
      "browser/web_test_background_fetch_delegate.cc",
-@@ -161,7 +159,6 @@ static_library("web_test_browser") {
+@@ -163,7 +161,6 @@ static_library("web_test_browser") {
      "//content/public/browser",  # For component builds.
      "//content/shell:content_shell_lib",
      "//content/test:blink_test_browser_support",
@@ -32,7 +32,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "//device/bluetooth:mocks",
 --- a/content/web_test/browser/web_test_content_browser_client.cc
 +++ b/content/web_test/browser/web_test_content_browser_client.cc
-@@ -30,7 +30,6 @@
+@@ -31,7 +31,6 @@
  #include "content/public/common/service_names.mojom.h"
  #include "content/shell/browser/shell_browser_context.h"
  #include "content/shell/browser/shell_content_browser_client.h"
@@ -40,7 +40,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "content/test/mock_badge_service.h"
  #include "content/test/mock_clipboard_host.h"
  #include "content/test/mock_platform_notification_service.h"
-@@ -39,7 +38,6 @@
+@@ -40,7 +39,6 @@
  #include "content/web_test/browser/fake_bluetooth_chooser_factory.h"
  #include "content/web_test/browser/fake_bluetooth_delegate.h"
  #include "content/web_test/browser/mojo_echo.h"
@@ -48,7 +48,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "content/web_test/browser/web_test_bluetooth_fake_adapter_setter_impl.h"
  #include "content/web_test/browser/web_test_browser_context.h"
  #include "content/web_test/browser/web_test_browser_main_parts.h"
-@@ -75,12 +73,6 @@ namespace {
+@@ -76,12 +74,6 @@ namespace {
  
  WebTestContentBrowserClient* g_web_test_browser_client;
  
@@ -61,7 +61,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  // An OverlayWindow that returns the last given video natural size as the
  // window's bounds.
  class BoundsMatchVideoSizeOverlayWindow : public OverlayWindow {
-@@ -220,7 +212,6 @@ void WebTestContentBrowserClient::ExposeInterfacesToRenderer(
+@@ -221,7 +213,6 @@ void WebTestContentBrowserClient::Expose
            &WebTestContentBrowserClient::CreateFakeBluetoothChooserFactory,
            base::Unretained(this)),
        ui_task_runner);
@@ -69,7 +69,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
    registry->AddInterface(
        base::BindRepeating(
-@@ -389,7 +380,6 @@ void WebTestContentBrowserClient::RegisterBrowserInterfaceBindersForFrame(
+@@ -390,7 +381,6 @@ void WebTestContentBrowserClient::Regist
      mojo::BinderMapWithContext<content::RenderFrameHost*>* map) {
    ShellContentBrowserClient::RegisterBrowserInterfaceBindersForFrame(
        render_frame_host, map);

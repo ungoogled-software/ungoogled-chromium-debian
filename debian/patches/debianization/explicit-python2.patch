@@ -287,7 +287,7 @@
  # Copyright 2018 The Chromium Authors. All rights reserved.
  # Use of this source code is governed by a BSD-style license that can be
  # found in the LICENSE file.
-@@ -18,7 +18,7 @@ import apk_operations  # pylint: disable=unused-import
+@@ -18,7 +18,7 @@ import apk_operations  # pylint: disable
  from util import build_utils
  
  SCRIPT_TEMPLATE = string.Template("""\
@@ -2678,7 +2678,7 @@
  # found in the LICENSE file.
 --- a/docs/win_cross.md
 +++ b/docs/win_cross.md
-@@ -69,7 +69,7 @@ setting `DEPOT_TOOLS_WIN_TOOLCHAIN_BASE_URL` and running `gclient sync`:
+@@ -69,7 +69,7 @@ setting `DEPOT_TOOLS_WIN_TOOLCHAIN_BASE_
      gclient sync
      ...
      Running hooks:  17% (11/64) win_toolchain
@@ -5066,7 +5066,7 @@
  from __future__ import division
 --- a/third_party/mako/test/templates/internationalization.html
 +++ b/third_party/mako/test/templates/internationalization.html
-@@ -282,7 +282,7 @@ but Python 2.4 and above support writing Unicode literals in any encoding as
+@@ -282,7 +282,7 @@ but Python 2.4 and above support writing
  long as you declare the encoding being used by including a special comment as
  either the first or second line of the source file:</p>
  <textarea name="code" class="python">
@@ -5075,7 +5075,7 @@
  # -*- coding: latin-1 -*-
  
  u = u'abcdÈ'
-@@ -293,7 +293,7 @@ default encoding for string literals; in Python 2.4, characters greater than
+@@ -293,7 +293,7 @@ default encoding for string literals; in
  127 still work but result in a warning. For example, the following program has
  no encoding declaration:</p>
  <textarea name="code" class="python">
@@ -6205,7 +6205,7 @@
  # found in the LICENSE file.
 --- a/tools/gn/src/gn/json_project_writer_unittest.cc
 +++ b/tools/gn/src/gn/json_project_writer_unittest.cc
-@@ -37,7 +37,7 @@ TEST_F(JSONWriter, ActionWithResponseFile) {
+@@ -37,7 +37,7 @@ TEST_F(JSONWriter, ActionWithResponseFil
        SubstitutionList::MakeForTest("//out/Debug/output1.out");
  
    setup.build_settings()->set_python_path(
@@ -6214,7 +6214,7 @@
    std::vector<const Target*> targets;
    targets.push_back(&target);
  #if defined(OS_WIN)
-@@ -172,7 +172,7 @@ TEST_F(JSONWriter, ForEachWithResponseFile) {
+@@ -172,7 +172,7 @@ TEST_F(JSONWriter, ForEachWithResponseFi
        SubstitutionList::MakeForTest("//out/Debug/{{source_name_part}}.out");
  
    setup.build_settings()->set_python_path(
@@ -6225,7 +6225,7 @@
  #if defined(OS_WIN)
 --- a/tools/gn/src/gn/ninja_action_target_writer_unittest.cc
 +++ b/tools/gn/src/gn/ninja_action_target_writer_unittest.cc
-@@ -54,14 +54,14 @@ TEST(NinjaActionTargetWriter, ActionNoSources) {
+@@ -54,14 +54,14 @@ TEST(NinjaActionTargetWriter, ActionNoSo
    ASSERT_TRUE(target.OnResolved(&err));
  
    setup.build_settings()->set_python_path(
@@ -6242,7 +6242,7 @@
    description = ACTION //foo:bar()
    restat = 1
  
-@@ -96,7 +96,7 @@ TEST(NinjaActionTargetWriter, ActionNoSourcesConsole) {
+@@ -96,7 +96,7 @@ TEST(NinjaActionTargetWriter, ActionNoSo
    ASSERT_TRUE(target.OnResolved(&err));
  
    setup.build_settings()->set_python_path(
@@ -6251,7 +6251,7 @@
  
    std::ostringstream out;
    NinjaActionTargetWriter writer(&target, out);
-@@ -105,7 +105,7 @@ TEST(NinjaActionTargetWriter, ActionNoSourcesConsole) {
+@@ -105,7 +105,7 @@ TEST(NinjaActionTargetWriter, ActionNoSo
    // The console pool's name must be mapped exactly to the string "console"
    // which is a special pre-defined pool name in ninja.
    const char* expected = R"(rule __foo_bar___rule
@@ -6260,7 +6260,7 @@
    description = ACTION //foo:bar()
    restat = 1
  
-@@ -138,7 +138,7 @@ TEST(NinjaActionTargetWriter, ActionWithSources) {
+@@ -138,7 +138,7 @@ TEST(NinjaActionTargetWriter, ActionWith
    ASSERT_TRUE(target.OnResolved(&err));
  
    setup.build_settings()->set_python_path(
@@ -6269,7 +6269,7 @@
  
    std::ostringstream out;
    NinjaActionTargetWriter writer(&target, out);
-@@ -146,7 +146,7 @@ TEST(NinjaActionTargetWriter, ActionWithSources) {
+@@ -146,7 +146,7 @@ TEST(NinjaActionTargetWriter, ActionWith
  
    const char expected_linux[] =
        "rule __foo_bar___rule\n"
@@ -6296,7 +6296,7 @@
  // Escaping is different between Windows and Posix.
  #if defined(OS_WIN)
        "\"--out=foo$ bar${source_name_part}.o\"\n"
-@@ -263,7 +263,7 @@ TEST(NinjaActionTargetWriter, ForEachWithDepfile) {
+@@ -263,7 +263,7 @@ TEST(NinjaActionTargetWriter, ForEachWit
    target.config_values().inputs().push_back(SourceFile("//foo/included.txt"));
  
    setup.build_settings()->set_python_path(
@@ -6305,7 +6305,7 @@
    setup.build_settings()->set_ninja_required_version(Version{1, 9, 0});
  
    std::ostringstream out;
-@@ -272,7 +272,7 @@ TEST(NinjaActionTargetWriter, ForEachWithDepfile) {
+@@ -272,7 +272,7 @@ TEST(NinjaActionTargetWriter, ForEachWit
  
    const char expected_linux[] =
        "rule __foo_bar___rule\n"
@@ -6314,7 +6314,7 @@
  #if defined(OS_WIN)
        "\"--out=foo$ bar${source_name_part}.o\"\n"
  #else
-@@ -321,7 +321,7 @@ TEST(NinjaActionTargetWriter, ForEachWithResponseFile) {
+@@ -321,7 +321,7 @@ TEST(NinjaActionTargetWriter, ForEachWit
        SubstitutionList::MakeForTest("//out/Debug/{{source_name_part}}.out");
  
    setup.build_settings()->set_python_path(
@@ -6323,7 +6323,7 @@
  
    std::ostringstream out;
    NinjaActionTargetWriter writer(&target, out);
-@@ -334,7 +334,7 @@ TEST(NinjaActionTargetWriter, ForEachWithResponseFile) {
+@@ -334,7 +334,7 @@ TEST(NinjaActionTargetWriter, ForEachWit
        // These come from rsp_file_contents above.
        "  rspfile_content = -j ${source_name_part}\n"
        // These come from the args.
@@ -6332,7 +6332,7 @@
        "${source_file_part} ${rspfile}\n"
        "  description = ACTION //foo:bar()\n"
        "  restat = 1\n"
-@@ -379,7 +379,7 @@ TEST(NinjaActionTargetWriter, ForEachWithPool) {
+@@ -379,7 +379,7 @@ TEST(NinjaActionTargetWriter, ForEachWit
        SubstitutionList::MakeForTest("//out/Debug/{{source_name_part}}.out");
  
    setup.build_settings()->set_python_path(
@@ -6341,7 +6341,7 @@
  
    std::ostringstream out;
    NinjaActionTargetWriter writer(&target, out);
-@@ -388,7 +388,7 @@ TEST(NinjaActionTargetWriter, ForEachWithPool) {
+@@ -388,7 +388,7 @@ TEST(NinjaActionTargetWriter, ForEachWit
    const char expected_linux[] =
        "rule __foo_bar___rule\n"
        // These come from the args.
@@ -6350,7 +6350,7 @@
        "${source_file_part}\n"
        "  description = ACTION //foo:bar()\n"
        "  restat = 1\n"
-@@ -408,7 +408,7 @@ TEST(NinjaActionTargetWriter, NoTransitiveHardDeps) {
+@@ -408,7 +408,7 @@ TEST(NinjaActionTargetWriter, NoTransiti
    TestWithScope setup;
  
    setup.build_settings()->set_python_path(
@@ -6359,7 +6359,7 @@
  
    Target dep(setup.settings(), Label(SourceDir("//foo/"), "dep"));
    dep.set_output_type(Target::ACTION);
-@@ -435,7 +435,7 @@ TEST(NinjaActionTargetWriter, NoTransitiveHardDeps) {
+@@ -435,7 +435,7 @@ TEST(NinjaActionTargetWriter, NoTransiti
      const char expected_linux[] =
          "rule __foo_foo___rule\n"
          // These come from the args.
@@ -6368,7 +6368,7 @@
          "  description = ACTION //foo:foo()\n"
          "  restat = 1\n"
          "\n"
-@@ -464,7 +464,7 @@ TEST(NinjaActionTargetWriter, NoTransitiveHardDeps) {
+@@ -464,7 +464,7 @@ TEST(NinjaActionTargetWriter, NoTransiti
      const char expected_linux[] =
          "rule __bar_bar___rule\n"
          // These come from the args.

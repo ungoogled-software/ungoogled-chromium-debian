@@ -3,7 +3,7 @@ author: Michel Le Bihan <michel@lebihan.pl>
 
 --- a/chrome/test/BUILD.gn
 +++ b/chrome/test/BUILD.gn
-@@ -3279,7 +3279,6 @@ group("performance_test_suite") {
+@@ -3272,7 +3272,6 @@ group("performance_test_suite") {
      "//gpu:gpu_perftests",
      "//media:media_perftests",
      "//testing:run_perf_test",
@@ -23,7 +23,7 @@ author: Michel Le Bihan <michel@lebihan.pl>
  }
  
  angle_test("test_utils_unittest_helper") {
-@@ -229,43 +229,7 @@ config("angle_maybe_has_histograms") {
+@@ -229,43 +228,7 @@ config("angle_maybe_has_histograms") {
    }
  }
  
@@ -68,7 +68,7 @@ author: Michel Le Bihan <michel@lebihan.pl>
    import("angle_perftests.gni")
  
    # This test suite is for perf tests that use ANGLE's internals in some direct way.
-@@ -1393,12 +1393,11 @@ group("angle_tests") {
+@@ -1393,12 +1356,11 @@ group("angle_tests") {
    testonly = true
    deps = [
      ":angle_end2end_tests",

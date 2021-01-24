@@ -5,7 +5,7 @@ Forwarded: not-needed
 Last-Update: 2021-01-07
 --- a/ui/gl/init/gl_factory.cc
 +++ b/ui/gl/init/gl_factory.cc
-@@ -66,6 +66,16 @@
+@@ -66,6 +66,16 @@ GLImplementation GetRequestedGLImplement
      }
    }
  

@@ -2,10 +2,11 @@ debianization/manpage.patch
 debianization/sandbox.patch
 debianization/optimization.patch
 debianization/master-preferences.patch
-debianization/use-explicit-python2.patch
+debianization/explicit-python2.patch
 
 gn/libcxx.patch
 gn/parallel.patch
+gn/explicit-python2.patch
 
 fixes/mojo.patch
 fixes/gnu-as.patch
@@ -13,6 +14,7 @@ fixes/closure.patch
 fixes/ps-print.patch
 fixes/inspector.patch
 fixes/not-constexpr.patch
+fixes/time64-sandbox.patch
 fixes/sequence-point.patch
 fixes/missing-includes.patch
 fixes/widevine-revision.patch
@@ -57,6 +59,7 @@ warnings/stringop-overflow.patch
 warnings/int-in-bool-context.patch
 
 system/icu.patch
+system/vpx.patch
 system/jpeg.patch
 system/node.patch
 system/nspr.patch
@@ -71,11 +74,7 @@ system/clang-format.patch
 system/use-desktop-gl-as-default.patch
 
 buster/re2.patch
+buster/drm97.patch
 buster/icu63.patch
+buster/vpx17.patch
 buster/clang7.patch
-buster/fix-libdrm.patch
-
-use-explicit-python2-gn.patch
-allow-time64-syscalls.patch
-
-fixes/python3.patch

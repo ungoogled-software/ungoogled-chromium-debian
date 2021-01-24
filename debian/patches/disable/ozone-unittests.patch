@@ -1,6 +1,6 @@
 --- a/ui/ozone/BUILD.gn
 +++ b/ui/ozone/BUILD.gn
-@@ -340,19 +340,6 @@ action("generate_test_support_constructor_list") {
+@@ -340,19 +340,6 @@ action("generate_test_support_constructo
    deps = [ ":generate_ozone_platform_list" ]
  }
  

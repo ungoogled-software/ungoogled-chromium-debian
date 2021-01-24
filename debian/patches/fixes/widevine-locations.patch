@@ -4,7 +4,7 @@ author: Olivier Tilloy <olivier.tilloy@canonical.com>
 
 --- a/chrome/common/chrome_paths.cc
 +++ b/chrome/common/chrome_paths.cc
-@@ -379,6 +379,11 @@ bool PathProvider(int key, base::FilePath* result) {
+@@ -338,6 +338,11 @@ bool PathProvider(int key, base::FilePat
  #if (defined(OS_LINUX) || defined(OS_CHROMEOS)) && \
      BUILDFLAG(BUNDLE_WIDEVINE_CDM)
      case chrome::DIR_BUNDLED_WIDEVINE_CDM:

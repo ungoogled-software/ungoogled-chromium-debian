@@ -14,8 +14,8 @@ Forwarded: <no|not-needed|url proving that it has been forwarded>
 Reviewed-By: <name and email of someone who approved the patch>
 Last-Update: 2020-08-13
 
---- chromium-83.0.4103.116.orig/tools/gn/src/gn/function_exec_script.cc
-+++ chromium-83.0.4103.116/tools/gn/src/gn/function_exec_script.cc
+--- a/tools/gn/src/gn/function_exec_script.cc
++++ b/tools/gn/src/gn/function_exec_script.cc
 @@ -79,7 +79,7 @@ const char kExecScript_Help[] =
    rebase_path() function to make file names relative to this path (see "gn help
    rebase_path").
@@ -25,9 +25,9 @@ Last-Update: 2020-08-13
    "python.bat" on Windows). This can be configured by the script_executable
    variable, see "gn help dotfile".
  
---- chromium-83.0.4103.116.orig/tools/gn/src/gn/setup.cc
-+++ chromium-83.0.4103.116/tools/gn/src/gn/setup.cc
-@@ -717,7 +717,7 @@ bool Setup::FillPythonPath(const base::C
+--- a/tools/gn/src/gn/setup.cc
++++ b/tools/gn/src/gn/setup.cc
+@@ -762,7 +762,7 @@ bool Setup::FillPythonPath(const base::C
      }
      build_settings_.set_python_path(python_path.NormalizePathSeparatorsTo('/'));
  #else

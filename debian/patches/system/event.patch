@@ -25,7 +25,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "build/build_config.h"
 --- a/tools/gn/build/gen.py
 +++ b/tools/gn/build/gen.py
-@@ -380,6 +380,8 @@ def WriteGNNinja(path, platform, host, options):
+@@ -378,6 +378,8 @@ def WriteGNNinja(path, platform, host, o
        if not options.no_static_libstdcpp:
          ldflags.append('-static-libstdc++')
  

@@ -3,7 +3,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
 
 --- a/components/signin/internal/identity_manager/primary_account_manager.cc
 +++ b/components/signin/internal/identity_manager/primary_account_manager.cc
-@@ -54,9 +54,9 @@ void PrimaryAccountManager::RegisterProf
+@@ -55,9 +55,9 @@ void PrimaryAccountManager::RegisterProf
                                 std::string());
    registry->RegisterStringPref(prefs::kGoogleServicesAccountId, std::string());
    registry->RegisterBooleanPref(prefs::kGoogleServicesConsentedToSync, false);
@@ -17,7 +17,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
  
 --- a/chrome/browser/ui/chrome_pages.cc
 +++ b/chrome/browser/ui/chrome_pages.cc
-@@ -518,6 +518,7 @@ GURL GetOSSettingsUrl(const std::string&
+@@ -474,6 +474,7 @@ GURL GetOSSettingsUrl(const std::string&
  #if !defined(OS_ANDROID) && !defined(OS_CHROMEOS)
  void ShowBrowserSignin(Browser* browser,
                         signin_metrics::AccessPoint access_point) {
@@ -25,7 +25,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
    Profile* original_profile = browser->profile()->GetOriginalProfile();
    DCHECK(original_profile->GetPrefs()->GetBoolean(prefs::kSigninAllowed));
  
-@@ -534,6 +535,7 @@ void ShowBrowserSignin(Browser* browser,
+@@ -490,6 +491,7 @@ void ShowBrowserSignin(Browser* browser,
            ? profiles::BUBBLE_VIEW_MODE_GAIA_REAUTH
            : profiles::BUBBLE_VIEW_MODE_GAIA_SIGNIN;
    browser->signin_view_controller()->ShowSignin(bubble_view_mode, access_point);
@@ -35,7 +35,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
  void ShowBrowserSigninOrSettings(Browser* browser,
 --- a/chrome/browser/ui/BUILD.gn
 +++ b/chrome/browser/ui/BUILD.gn
-@@ -2787,9 +2787,6 @@ static_library("ui") {
+@@ -2819,9 +2819,6 @@ static_library("ui") {
        "startup/default_browser_infobar_delegate.h",
        "startup/default_browser_prompt.cc",
        "startup/default_browser_prompt.h",
@@ -45,7 +45,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
        "user_manager.cc",
        "user_manager.h",
        "views/profiles/badged_profile_photo.cc",
-@@ -4196,8 +4193,6 @@ static_library("ui") {
+@@ -4255,8 +4252,6 @@ static_library("ui") {
          "views/sync/dice_bubble_sync_promo_view.h",
          "views/sync/dice_signin_button_view.cc",
          "views/sync/dice_signin_button_view.h",
@@ -56,7 +56,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
      }
 --- a/chrome/browser/ui/webui/signin/inline_login_handler_impl.cc
 +++ b/chrome/browser/ui/webui/signin/inline_login_handler_impl.cc
-@@ -405,6 +405,7 @@ void InlineSigninHelper::OnClientOAuthSu
+@@ -400,6 +400,7 @@ void InlineSigninHelper::OnClientOAuthSu
      signin_metrics::LogSigninReason(
          GetSigninReasonFromHandlerSigninReason(reason));
    } else {
@@ -64,7 +64,7 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
      if (confirm_untrusted_signin_) {
        // Display a confirmation dialog to the user.
        base::RecordAction(
-@@ -416,6 +417,7 @@ void InlineSigninHelper::OnClientOAuthSu
+@@ -411,6 +412,7 @@ void InlineSigninHelper::OnClientOAuthSu
                           base::Unretained(this), result.refresh_token));
        return;
      }

@@ -73,6 +73,7 @@ Files-Excluded:
  third_party/llvm
  third_party/webgl
  third_party/libpng
+ third_party/libvpx
  third_party/libdrm
  third_party/snappy
  third_party/libxslt
@@ -90,6 +91,7 @@ Files-Excluded:
  third_party/libjpeg.gni
  third_party/libjpeg_turbo
  third_party/win_build_output
+ third_party/zlib/BUILD.gn
  third_party/zlib/adler*
  third_party/zlib/crc32*
  third_party/zlib/deflate*

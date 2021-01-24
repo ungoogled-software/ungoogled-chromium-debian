@@ -52,6 +52,7 @@ Build-Depends:
  libdrm-dev,
  libicu-dev,
  libffi-dev,
+ libvpx-dev (>= 1.7.0),
  libkrb5-dev,
  libexif-dev,
  libflac-dev,

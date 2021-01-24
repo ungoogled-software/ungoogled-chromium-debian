@@ -15,7 +15,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    rtc_use_absl_mutex = false
 --- a/media/media_options.gni
 +++ b/media/media_options.gni
-@@ -58,12 +58,9 @@ declare_args() {
+@@ -59,12 +59,9 @@ declare_args() {
      media_use_libvpx = false
    }
  

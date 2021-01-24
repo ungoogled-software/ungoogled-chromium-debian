@@ -24,7 +24,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      UChar32 character;
 --- a/v8/src/regexp/regexp-macro-assembler.cc
 +++ b/v8/src/regexp/regexp-macro-assembler.cc
-@@ -68,9 +68,9 @@ int RegExpMacroAssembler::CaseInsensitiveCompareUnicode(Address byte_offset1,
+@@ -68,9 +68,9 @@ int RegExpMacroAssembler::CaseInsensitiv
  
  #ifdef V8_INTL_SUPPORT
    int32_t length = static_cast<int32_t>(byte_length >> 1);
@@ -46,7 +46,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  if (is_mac) {
    # Used to generate fuzzer corpus :base_mach_port_rendezvous_convert_corpus.
-@@ -3190,7 +3189,7 @@ test("base_unittests") {
+@@ -3232,7 +3231,7 @@ test("base_unittests") {
      ]
    }
  

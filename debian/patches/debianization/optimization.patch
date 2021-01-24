@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/build/config/compiler/BUILD.gn
 +++ b/build/config/compiler/BUILD.gn
-@@ -2027,7 +2027,7 @@ config("optimize") {
+@@ -2035,7 +2035,7 @@ config("optimize") {
      # - Investigate -Oz here, maybe just for ARM?
      cflags = [ "-Os" ] + common_optimize_on_cflags
    } else {
@@ -12,7 +12,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    }
    ldflags = common_optimize_on_ldflags
  }
-@@ -2093,7 +2093,7 @@ config("optimize_max") {
+@@ -2101,7 +2101,7 @@ config("optimize_max") {
      } else if (optimize_for_fuzzing) {
        cflags = [ "-O1" ] + common_optimize_on_cflags
      } else {
@@ -21,7 +21,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      }
    }
  }
-@@ -2125,7 +2125,7 @@ config("optimize_speed") {
+@@ -2133,7 +2133,7 @@ config("optimize_speed") {
      } else if (optimize_for_fuzzing) {
        cflags = [ "-O1" ] + common_optimize_on_cflags
      } else {
@@ -32,7 +32,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
 --- a/tools/gn/build/gen.py
 +++ b/tools/gn/build/gen.py
-@@ -307,10 +307,8 @@ def WriteGNNinja(path, platform, host, o
+@@ -326,10 +326,8 @@ def WriteGNNinja(path, platform, host, o
        cflags.extend(['-O0', '-g'])
      else:
        cflags.append('-DNDEBUG')

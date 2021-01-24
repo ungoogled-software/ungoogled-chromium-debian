@@ -1,6 +1,6 @@
 --- a/content/shell/BUILD.gn
 +++ b/content/shell/BUILD.gn
-@@ -404,7 +404,6 @@ repack("pak") {
+@@ -403,7 +403,6 @@ repack("pak") {
      "$root_gen_dir/content/content_resources.pak",
      "$root_gen_dir/content/dev_ui_content_resources.pak",
      "$root_gen_dir/content/shell/shell_resources.pak",
@@ -8,7 +8,7 @@
      "$root_gen_dir/mojo/public/js/mojo_bindings_resources.pak",
      "$root_gen_dir/net/net_resources.pak",
      "$root_gen_dir/third_party/blink/public/resources/blink_resources.pak",
-@@ -426,7 +425,6 @@ repack("pak") {
+@@ -424,7 +423,6 @@ repack("pak") {
      "//content/app/resources",
      "//content/browser/resources/media:media_internals_resources",
      "//content/browser/webrtc/resources",
@@ -65,7 +65,7 @@
      "//base/test:test_support",
      "//build:chromecast_buildflags",
      "//build:chromeos_buildflags",
-@@ -1666,18 +1640,6 @@ test("content_browsertests") {
+@@ -1665,18 +1639,6 @@ test("content_browsertests") {
    }
  }
  

@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/third_party/blink/renderer/platform/heap/impl/finalizer_traits.h
 +++ b/third_party/blink/renderer/platform/heap/impl/finalizer_traits.h
-@@ -43,10 +43,7 @@
+@@ -43,10 +43,7 @@ struct FinalizerTraitImpl<T, true> {
  // an object's base class has a virtual destructor. In case there is no virtual
  // destructor present, the object is always finalized through its leaf type. In
  // other words: there is no finalization through a base pointer.

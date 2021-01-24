@@ -1,6 +1,9 @@
+description: support libdrm in buster
+author: Jan Luca Naumann
+
 --- a/ui/gfx/linux/drm_util_linux.cc
 +++ b/ui/gfx/linux/drm_util_linux.cc
-@@ -40,8 +40,6 @@
+@@ -40,8 +40,6 @@ int GetFourCCFormatFromBufferFormat(gfx:
        return DRM_FORMAT_YVU420;
      case gfx::BufferFormat::YUV_420_BIPLANAR:
        return DRM_FORMAT_NV12;
@@ -9,7 +12,7 @@
    }
    return DRM_FORMAT_INVALID;
  }
-@@ -70,8 +68,6 @@
+@@ -70,8 +68,6 @@ gfx::BufferFormat GetBufferFormatFromFou
        return gfx::BufferFormat::YUV_420_BIPLANAR;
      case DRM_FORMAT_YVU420:
        return gfx::BufferFormat::YVU_420;
@@ -18,7 +21,7 @@
      default:
        NOTREACHED();
        return gfx::BufferFormat::BGRA_8888;
-@@ -91,7 +87,6 @@
+@@ -91,7 +87,6 @@ bool IsValidBufferFormat(uint32_t curren
      case DRM_FORMAT_RGB565:
      case DRM_FORMAT_NV12:
      case DRM_FORMAT_YVU420:

@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/components/download/internal/common/download_item_impl.cc
 +++ b/components/download/internal/common/download_item_impl.cc
-@@ -643,7 +643,9 @@ void DownloadItemImpl::UpdateResumptionInfo(bool user_resume) {
+@@ -643,7 +643,9 @@ void DownloadItemImpl::UpdateResumptionI
      bytes_wasted_ = 0;
    }
  
@@ -40,7 +40,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      // Introduce an element of randomness in the switching interval to make
 --- a/chrome/browser/notifications/scheduler/internal/impression_history_tracker.cc
 +++ b/chrome/browser/notifications/scheduler/internal/impression_history_tracker.cc
-@@ -410,7 +410,7 @@ void ImpressionHistoryTrackerImpl::ApplyPositiveImpression(
+@@ -412,7 +412,7 @@ void ImpressionHistoryTrackerImpl::Apply
  
    // Increase |current_max_daily_show| by 1.
    client_state->current_max_daily_show =

@@ -1,7 +1,17 @@
+chromium (88.0.4324.96-1) unstable; urgency=medium
+
+  * Organize patches.
+  * Use system vpx again.
+  * Support icu 6.3 and clang 7 in buster again.
+  * Apply the non-maintainer uploads (closes: #972134).
+    - Thanks to Michel Le Bihan, Jan Luca Naumann, and Peter Michael Green.
+
+ -- Michael Gilbert <mgilbert@debian.org>  Wed, 27 Jan 2021 01:40:59 +0000
+
 chromium (88.0.4324.96-0.1) unstable; urgency=medium
 
   * Non-maintainer upload.
-  * New upstream stable release (closes: 980564).
+  * New upstream stable release (closes: #980564).
     - CVE-2021-21117: Insufficient policy enforcement in Cryptohome. Reported
       by Rory McNamara
     - CVE-2021-21118: Insufficient data validation in V8. Reported by Tyler
@@ -63,7 +73,7 @@ chromium (88.0.4324.96-0.1) unstable; urgency=medium
 chromium (87.0.4280.141-0.1) unstable; urgency=medium
 
   * Non-maintainer upload.
-  * New upstream security release (closes: 979520).
+  * New upstream security release (closes: #979520).
     - CVE-2021-21106: Use after free in autofill. Reported by Weipeng Jiang
       @Krace from Codesafe Team of Legendsec at Qi'anxin Group
     - CVE-2021-21107: Use after free in drag and drop. Reported by Leecraso and
@@ -90,7 +100,7 @@ chromium (87.0.4280.141-0.1) unstable; urgency=medium
       Huffman, Microsoft Browser Vulnerability Research
 
   [ Jan Luca Naumann ]
-  * Use desktop gl implementation as default. (closes: 979135)
+  * Use desktop gl implementation as default. (closes: #979135)
 
  -- Michel Le Bihan <michel@lebihan.pl>  Sat, 09 Jan 2021 11:24:58 +0100
 
@@ -99,9 +109,9 @@ chromium (87.0.4280.88-0.4) unstable; urgency=medium
   * Non-maintainer upload.
 
   [ Michel Le Bihan ]
-  * Install ANGLE EGL and GLESv2 libs (closes: 977870).
-  * Disable Widevine CDM component updater (closes: 960454).
-  * Disable usage of google-chrome in driver (closes: 930543).
+  * Install ANGLE EGL and GLESv2 libs (closes: #977870).
+  * Disable Widevine CDM component updater (closes: #960454).
+  * Disable usage of google-chrome in driver (closes: #930543).
 
   [ Jan Luca Naumann ]
   * Remove python3-xcbgen from Build-Deps
@@ -113,7 +123,7 @@ chromium (87.0.4280.88-0.4) unstable; urgency=medium
 chromium (87.0.4280.88-0.3) unstable; urgency=medium
 
   * Non-maintainer upload.
-  * Fix double-delete in content service worker (closes: 977901).
+  * Fix double-delete in content service worker (closes: #977901).
 
  -- Michel Le Bihan <michel@lebihan.pl>  Wed, 23 Dec 2020 11:55:48 +0100
 
@@ -127,7 +137,7 @@ chromium (87.0.4280.88-0.2) unstable; urgency=medium
 chromium (87.0.4280.88-0.1) unstable; urgency=medium
 
   * Non-maintainer upload.
-  * New upstream stable release (closes: 973848).
+  * New upstream stable release (closes: #973848).
     - CVE-2020-16037: Use after free in clipboard. Reported by Ryoya Tsukasaki
     - CVE-2020-16038: Use after free in media. Reported by Khalil Zhani
     - CVE-2020-16039: Use after free in extensions. Reported by Anonymous

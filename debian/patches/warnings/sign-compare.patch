@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/storage/browser/file_system/obfuscated_file_util_memory_delegate.cc
 +++ b/storage/browser/file_system/obfuscated_file_util_memory_delegate.cc
-@@ -510,10 +510,15 @@ base::File::Error ObfuscatedFileUtilMemo
+@@ -541,10 +541,15 @@ base::File::Error ObfuscatedFileUtilMemo
    if (source_info.is_directory)
      return base::File::FILE_ERROR_NOT_A_FILE;
  
@@ -23,7 +23,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/device/fido/credential_management.cc
 +++ b/device/fido/credential_management.cc
-@@ -145,7 +145,7 @@ base::Optional<CredentialsMetadataRespon
+@@ -130,7 +130,7 @@ base::Optional<CredentialsMetadataRespon
    if (it == response_map.end() || !it->second.is_unsigned()) {
      return base::nullopt;
    }
@@ -32,7 +32,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    if (existing_count > std::numeric_limits<size_t>::max()) {
      return base::nullopt;
    }
-@@ -157,7 +157,7 @@ base::Optional<CredentialsMetadataRespon
+@@ -142,7 +142,7 @@ base::Optional<CredentialsMetadataRespon
    if (it == response_map.end() || !it->second.is_unsigned()) {
      return base::nullopt;
    }
@@ -41,7 +41,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    if (remaining_count > std::numeric_limits<size_t>::max()) {
      return base::nullopt;
    }
-@@ -188,8 +188,11 @@ base::Optional<EnumerateRPsResponse> Enu
+@@ -173,8 +173,11 @@ base::Optional<EnumerateRPsResponse> Enu
      return base::nullopt;
    }
    if (expect_rp_count) {
@@ -55,7 +55,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        return base::nullopt;
      }
      rp_count = static_cast<size_t>(it->second.GetUnsigned());
-@@ -305,8 +308,11 @@ EnumerateCredentialsResponse::Parse(
+@@ -290,8 +293,11 @@ EnumerateCredentialsResponse::Parse(
    } else {
      it = response_map.find(cbor::Value(
          static_cast<int>(CredentialManagementResponseKey::kTotalCredentials)));
@@ -82,7 +82,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      RTC_LOG(LS_WARNING) << "Duplicate packet inserted: " << rtp_seq_no;
 --- a/chrome/browser/chromeos/input_method/input_method_engine_base.cc
 +++ b/chrome/browser/chromeos/input_method/input_method_engine_base.cc
-@@ -140,7 +140,7 @@ void GetExtensionKeyboardEventFromKeyEve
+@@ -123,7 +123,7 @@ void GetExtensionKeyboardEventFromKeyEve
  }
  
  bool IsUint32Value(int i) {

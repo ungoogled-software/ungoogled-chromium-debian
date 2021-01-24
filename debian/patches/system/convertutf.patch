@@ -185,7 +185,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/third_party/breakpad/BUILD.gn
 +++ b/third_party/breakpad/BUILD.gn
-@@ -393,7 +393,6 @@ if (is_mac) {
+@@ -380,7 +380,6 @@ if (is_mac) {
        "breakpad/src/client/mac/handler/dynamic_images.cc",
        "breakpad/src/client/mac/handler/minidump_generator.cc",
        "breakpad/src/client/minidump_file_writer.cc",
@@ -193,7 +193,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        "breakpad/src/common/mac/MachIPC.mm",
        "breakpad/src/common/mac/arch_utilities.cc",
        "breakpad/src/common/mac/bootstrap_compat.cc",
-@@ -609,8 +608,6 @@ if (is_linux || is_chromeos || is_android) {
+@@ -594,8 +593,6 @@ if (is_linux || is_chromeos || is_androi
        "breakpad/src/client/minidump_file_writer-inl.h",
        "breakpad/src/client/minidump_file_writer.cc",
        "breakpad/src/client/minidump_file_writer.h",
@@ -202,7 +202,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        "breakpad/src/common/linux/breakpad_getcontext.S",
        "breakpad/src/common/linux/elf_core_dump.cc",
        "breakpad/src/common/linux/elf_core_dump.h",
-@@ -1041,8 +1038,6 @@ if (is_ios) {
+@@ -1018,8 +1015,6 @@ if (is_ios) {
        "breakpad/src/client/minidump_file_writer-inl.h",
        "breakpad/src/client/minidump_file_writer.cc",
        "breakpad/src/client/minidump_file_writer.h",
@@ -213,7 +213,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        "breakpad/src/common/mac/HTTPRequest.m",
 --- a/third_party/breakpad/breakpad/src/client/minidump_file_writer.cc
 +++ b/third_party/breakpad/breakpad/src/client/minidump_file_writer.cc
-@@ -149,11 +149,11 @@ bool MinidumpFileWriter::CopyStringToMDString(const wchar_t* str,
+@@ -149,11 +149,11 @@ bool MinidumpFileWriter::CopyStringToMDS
                                                unsigned int length,
                                                TypedMDRVA<MDString>* mdstring) {
    bool result = true;
@@ -227,7 +227,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      int out_idx = 0;
  
      // Copy the string character by character
-@@ -170,7 +170,7 @@ bool MinidumpFileWriter::CopyStringToMDString(const wchar_t* str,
+@@ -170,7 +170,7 @@ bool MinidumpFileWriter::CopyStringToMDS
        // zero, but the second one may be zero, depending on the conversion from
        // UTF-32.
        int out_count = out[1] ? 2 : 1;
@@ -236,7 +236,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        result = mdstring->CopyIndexAfterObject(out_idx, out, out_size);
        out_idx += out_count;
      }
-@@ -182,7 +182,7 @@ bool MinidumpFileWriter::CopyStringToMDString(const char* str,
+@@ -182,7 +182,7 @@ bool MinidumpFileWriter::CopyStringToMDS
                                                unsigned int length,
                                                TypedMDRVA<MDString>* mdstring) {
    bool result = true;
@@ -245,7 +245,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    int out_idx = 0;
  
    // Copy the string character by character
-@@ -197,7 +197,7 @@ bool MinidumpFileWriter::CopyStringToMDString(const char* str,
+@@ -197,7 +197,7 @@ bool MinidumpFileWriter::CopyStringToMDS
  
      // Append the one or two UTF-16 characters
      int out_count = out[1] ? 2 : 1;

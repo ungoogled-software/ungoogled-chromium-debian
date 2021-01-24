@@ -16,11 +16,9 @@ Cr-Commit-Position: refs/heads/master@{#835231}
  third_party/blink/renderer/platform/wtf/text/text_codec_icu.cc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/third_party/blink/renderer/platform/wtf/text/text_codec_icu.cc b/third_party/blink/renderer/platform/wtf/text/text_codec_icu.cc
-index fb8ab0530c51e..5d4ea13e753a1 100644
 --- a/third_party/blink/renderer/platform/wtf/text/text_codec_icu.cc
 +++ b/third_party/blink/renderer/platform/wtf/text/text_codec_icu.cc
-@@ -432,7 +432,7 @@ String TextCodecICU::Decode(const char* bytes,
+@@ -432,7 +432,7 @@ String TextCodecICU::Decode(const char*
    // ICU decodes it as U+E5E5.
    if (!strcmp(encoding_.GetName(), "GBK")) {
      if (EqualIgnoringASCIICase(encoding_.GetName(), "gb18030"))

@@ -17,11 +17,9 @@ Cr-Commit-Position: refs/heads/master@{#838269}
  cc/metrics/compositor_frame_reporter.cc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/cc/metrics/compositor_frame_reporter.cc b/cc/metrics/compositor_frame_reporter.cc
-index 9392f0a443361..bab060123064a 100644
 --- a/cc/metrics/compositor_frame_reporter.cc
 +++ b/cc/metrics/compositor_frame_reporter.cc
-@@ -767,7 +767,7 @@ void CompositorFrameReporter::ReportCompositorLatencyHistogram(
+@@ -671,7 +671,7 @@ void CompositorFrameReporter::ReportComp
  
  void CompositorFrameReporter::ReportEventLatencyHistograms() const {
    for (const auto& event_metrics : events_metrics_) {

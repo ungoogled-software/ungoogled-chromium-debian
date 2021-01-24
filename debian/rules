@@ -6,6 +6,9 @@ export DH_VERBOSE=1
 # enable all build hardening flags
 export DEB_BUILD_MAINT_OPTIONS=hardening=+all
 
+# disable unsupported flag in clang 7
+export DEB_BUILD_MAINT_OPTIONS+=reproducible=-fixfilepath
+
 # indicate that binary targets do not require root
 export DEB_RULES_REQUIRES_ROOT=no
 
