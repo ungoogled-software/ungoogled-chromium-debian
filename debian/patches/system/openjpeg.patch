@@ -1,6 +1,17 @@
 description: build using system openjpeg
 author: Michael Gilbert <mgilbert@debian.org>
 
+--- a/third_party/pdfium/BUILD.gn
++++ b/third_party/pdfium/BUILD.gn.new
+@@ -17,7 +17,7 @@ group("freetype_common") {
+ config("pdfium_common_config") {
+   cflags = []
+   ldflags = []
+-  include_dirs = [ "." ]
++  include_dirs = [ ".", "/usr/include/openjpeg-2.3", "/usr/include/openjpeg-2.4" ]
+   defines = [
+     "PNG_PREFIX",
+     "PNG_USE_READ_MACROS",
 --- a/third_party/pdfium/core/fpdfapi/render/BUILD.gn
 +++ b/third_party/pdfium/core/fpdfapi/render/BUILD.gn
 @@ -46,6 +46,7 @@ source_set("render") {
@@ -13,14 +24,12 @@ author: Michael Gilbert <mgilbert@debian.org>
      "../../fxcrt",
 --- a/third_party/pdfium/core/fxcodec/jpx/cjpx_decoder.h
 +++ b/third_party/pdfium/core/fxcodec/jpx/cjpx_decoder.h
-@@ -12,8 +12,8 @@
+@@ -12,7 +12,7 @@
  #include "core/fxcrt/unowned_ptr.h"
  #include "third_party/base/span.h"
  
 -#if defined(USE_SYSTEM_LIBOPENJPEG2)
--#include <openjpeg.h>
 +#if 1
-+#include <openjpeg-2.3/openjpeg.h>
+ #include <openjpeg.h>
  #else
  #include "third_party/libopenjpeg20/openjpeg.h"
- #endif
