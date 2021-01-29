@@ -1,3 +1,10 @@
+chromium (88.0.4324.96-2) unstable; urgency=medium
+
+  * Add Michel Le Bihan to uploaders.
+  * Add openjpeg include dirs to pdfium BUILD.gn (closes: #981270).
+
+ -- Michel Le Bihan <michel@lebihan.pl>  Fri, 29 Jan 2021 12:37:49 +0100
+
 chromium (88.0.4324.96-1) unstable; urgency=medium
 
   * Organize patches.
