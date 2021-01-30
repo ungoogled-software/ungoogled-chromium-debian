@@ -32,7 +32,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #else
 --- a/third_party/perfetto/gn/BUILD.gn
 +++ b/third_party/perfetto/gn/BUILD.gn
-@@ -359,7 +359,6 @@ if (enable_perfetto_zlib) {
+@@ -360,7 +360,6 @@ if (enable_perfetto_zlib) {
        public_configs = [ "//buildtools:zlib_config" ]
        public_deps = [ "//buildtools:zlib" ]
      } else {
@@ -40,3 +40,13 @@ author: Michael Gilbert <mgilbert@debian.org>
        public_deps = [ "//third_party/zlib" ]
      }
    }
+--- a/third_party/angle/src/libANGLE/MemoryProgramCache.cpp
++++ b/third_party/angle/src/libANGLE/MemoryProgramCache.cpp
+@@ -21,7 +21,6 @@
+ #include "libANGLE/renderer/ProgramImpl.h"
+ #include "platform/PlatformMethods.h"
+ 
+-#define USE_SYSTEM_ZLIB
+ #include "compression_utils_portable.h"
+ 
+ namespace gl

@@ -45,14 +45,15 @@ Build-Depends:
  libxt-dev,
  libre2-dev,
  libgbm-dev,
+ libpng-dev,
  libxss-dev,
  libelf-dev,
- libvpx-dev (>= 1.7.0),
  libpci-dev,
  libcap-dev,
  libdrm-dev,
  libicu-dev,
  libffi-dev,
+ libvpx-dev (>= 1.7.0),
  libkrb5-dev,
  libexif-dev,
  libflac-dev,
@@ -189,6 +190,7 @@ Package: ungoogled-chromium-common
 Architecture: i386 amd64 arm64 armhf
 Depends:
  ${misc:Depends},
+ ${shlibs:Depends},
  x11-utils,
  xdg-utils,
 Recommends:
