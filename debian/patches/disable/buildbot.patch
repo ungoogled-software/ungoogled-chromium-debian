@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -1063,7 +1063,6 @@ if (!is_ios) {
+@@ -1055,7 +1055,6 @@ if (!is_ios) {
        "//services/device/public/mojom:usb_js_data_deps",
        "//services/shape_detection/public/mojom:mojom_js_data_deps",
        "//skia/public/mojom:mojom_js_data_deps",
@@ -102,7 +102,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      deps += [ "//media/ffmpeg:unit_tests" ]
 --- a/net/BUILD.gn
 +++ b/net/BUILD.gn
-@@ -4579,7 +4579,6 @@ test("net_unittests") {
+@@ -4581,7 +4581,6 @@ test("net_unittests") {
    data = []
    data_deps = [
      "third_party/nist-pkits/",

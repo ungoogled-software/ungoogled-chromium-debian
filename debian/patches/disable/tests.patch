@@ -87,7 +87,7 @@
    ":build_release_devtools",
    ":devtools_extension_api",
    "front_end",
--  "test",
+-#  "test",
  ]
  
  group("devtools_all_files") {
