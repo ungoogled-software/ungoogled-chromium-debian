@@ -240,14 +240,14 @@ author: Michael Gilbert <mgilbert@debian.org>
 --- a/fuchsia/engine/BUILD.gn
 +++ b/fuchsia/engine/BUILD.gn
 @@ -32,7 +32,6 @@ repack("web_engine_pak") {
+   sources = [
      "$root_gen_dir/components/components_resources.pak",
-     "$root_gen_dir/components/strings/components_strings_en-US.pak",
      "$root_gen_dir/content/app/resources/content_resources_100_percent.pak",
 -    "$root_gen_dir/content/browser/tracing/tracing_resources.pak",
      "$root_gen_dir/content/content_resources.pak",
      "$root_gen_dir/content/dev_ui_content_resources.pak",
      "$root_gen_dir/mojo/public/js/mojo_bindings_resources.pak",
-@@ -51,7 +50,6 @@ repack("web_engine_pak") {
+@@ -47,7 +46,6 @@ repack("web_engine_pak") {
      "//content:content_resources",
      "//content:dev_ui_content_resources",
      "//content/app/resources",
