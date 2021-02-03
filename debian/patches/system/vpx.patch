@@ -31,3 +31,37 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  namespace webrtc {
  
+--- a/media/gpu/vaapi/BUILD.gn
++++ b/media/gpu/vaapi/BUILD.gn
+@@ -81,7 +81,6 @@
+ 
+   configs += [
+     "//build/config/linux/libva",
+-    "//third_party/libvpx:libvpx_config",
+   ]
+ 
+   deps = [
+@@ -96,7 +95,6 @@
+     "//media/gpu/chromeos:common",
+     "//media/parsers",
+     "//mojo/public/cpp/bindings",
+-    "//third_party/libvpx:libvp9rc",
+     "//third_party/libyuv",
+     "//ui/gfx",
+     "//ui/gfx/geometry",
+@@ -218,7 +216,6 @@
+     "vp9_encoder_unittest.cc",
+     "vp9_temporal_layers_unittest.cc",
+   ]
+-  configs += [ "//third_party/libvpx:libvpx_config" ]
+   deps = [
+     ":common",
+     ":vaapi",
+@@ -230,7 +227,6 @@
+     "//mojo/core/embedder",
+     "//testing/gmock",
+     "//testing/gtest",
+-    "//third_party/libvpx:libvp9rc",
+     "//ui/gfx:test_support",
+     "//ui/gfx/geometry",
+   ]
