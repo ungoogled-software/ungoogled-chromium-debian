@@ -16,7 +16,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    #       seems currently broken for this platform at the moment, and the
    #       corresponding code build and works on Linux unmodified.
    #       See instructions in the corresponding BUILD.gn.
--  if (is_android || is_chromeos) {
+-  if (is_linux || is_chromeos) {
 +  if (is_android) {
      deps +=
          [ "//third_party/android_crazy_linker:android_crazy_linker_zip_fuzzer" ]

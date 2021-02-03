@@ -4219,7 +4219,7 @@
 --- a/testing/trigger_scripts/perf_device_trigger_unittest.py
 +++ b/testing/trigger_scripts/perf_device_trigger_unittest.py
 @@ -1,4 +1,4 @@
--#!/usr/bin/python
+-#!/usr/bin/env vpython
 +#!/usr/bin/python2
  # Copyright 2018 The Chromium Authors. All rights reserved.
  # Use of this source code is governed by a BSD-style license that can be

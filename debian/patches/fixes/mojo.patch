@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -1043,7 +1043,6 @@ if (!is_ios) {
+@@ -1044,7 +1044,6 @@ if (!is_ios) {
        ":layout_test_data_mojo_bindings_lite",
        "//content/shell:content_shell",
        "//content/test:mojo_bindings_web_test_mojom_js_data_deps",
