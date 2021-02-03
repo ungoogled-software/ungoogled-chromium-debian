@@ -1,37 +1,36 @@
 # Additional changes for disabling SafeBrowsing
 
---- a/content/browser/native_file_system/mock_native_file_system_permission_context.cc
-+++ b/content/browser/native_file_system/mock_native_file_system_permission_context.cc
-@@ -31,12 +31,4 @@
+diff -ur a/content/browser/file_system_access/mock_native_file_system_permission_context.cc b/content/browser/file_system_access/mock_native_file_system_permission_context.cc
+--- a/content/browser/file_system_access/mock_native_file_system_permission_context.cc
++++ b/content/browser/file_system_access/mock_native_file_system_permission_context.cc
+@@ -22,11 +22,4 @@
                                     frame_id, callback);
  }
  
 -void MockNativeFileSystemPermissionContext::PerformAfterWriteChecks(
 -    std::unique_ptr<NativeFileSystemWriteItem> item,
--    int process_id,
--    int frame_id,
+-    GlobalFrameRoutingId frame_id,
 -    base::OnceCallback<void(AfterWriteCheckResult)> callback) {
--  PerformAfterWriteChecks_(item.get(), process_id, frame_id, callback);
+-  PerformAfterWriteChecks_(item.get(), frame_id, callback);
 -}
 -
  }  // namespace content
---- a/content/browser/native_file_system/mock_native_file_system_permission_context.h	2020-06-23 06:52:53.150229634 -0500
-+++ b/content/browser/native_file_system/mock_native_file_system_permission_context.h	2020-06-23 09:16:11.365772880 -0500
-@@ -63,17 +63,6 @@
-            int frame_id,
+diff -ur a/content/browser/file_system_access/mock_native_file_system_permission_context.h b/content/browser/file_system_access/mock_native_file_system_permission_context.h
+--- a/content/browser/file_system_access/mock_native_file_system_permission_context.h
++++ b/content/browser/file_system_access/mock_native_file_system_permission_context.h
+@@ -47,15 +47,6 @@
+            GlobalFrameRoutingId frame_id,
             base::OnceCallback<void(SensitiveDirectoryResult)>& callback));
  
 -  void PerformAfterWriteChecks(
 -      std::unique_ptr<NativeFileSystemWriteItem> item,
--      int process_id,
--      int frame_id,
+-      GlobalFrameRoutingId frame_id,
 -      base::OnceCallback<void(AfterWriteCheckResult)> callback) override;
--  MOCK_METHOD4(PerformAfterWriteChecks_,
+-  MOCK_METHOD3(PerformAfterWriteChecks_,
 -               void(NativeFileSystemWriteItem* item,
--                    int process_id,
--                    int frame_id,
+-                    GlobalFrameRoutingId frame_id,
 -                    base::OnceCallback<void(AfterWriteCheckResult)>& callback));
 -
+   MOCK_METHOD1(CanObtainReadPermission, bool(const url::Origin& origin));
    MOCK_METHOD1(CanObtainWritePermission, bool(const url::Origin& origin));
- };
  

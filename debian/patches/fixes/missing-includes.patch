@@ -10,11 +10,11 @@ author: Michael Gilbert <mgilbert@debian.org>
 +#include <string.h>
  
  #include <algorithm>
- #include <vector>
+ #include <cstring>
 --- a/third_party/crashpad/crashpad/util/net/http_multipart_builder.cc
 +++ b/third_party/crashpad/crashpad/util/net/http_multipart_builder.cc
-@@ -16,6 +16,7 @@
- 
+@@ -17,6 +17,7 @@
+ #include <string.h>
  #include <sys/types.h>
  
 +#include <cstring>
@@ -23,7 +23,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/third_party/crashpad/crashpad/snapshot/minidump/minidump_context_converter.cc
 +++ b/third_party/crashpad/crashpad/snapshot/minidump/minidump_context_converter.cc
-@@ -17,6 +17,8 @@
+@@ -20,6 +20,8 @@
  #include "base/stl_util.h"
  #include "minidump/minidump_context.h"
  
@@ -34,59 +34,28 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/third_party/crashpad/crashpad/util/process/process_memory.cc
 +++ b/third_party/crashpad/crashpad/util/process/process_memory.cc
-@@ -14,6 +14,7 @@
- 
- #include "util/process/process_memory.h"
- 
-+#include <cstring>
- #include <algorithm>
- 
- #include "base/logging.h"
---- a/third_party/crashpad/crashpad/util/stream/log_output_stream.cc
-+++ b/third_party/crashpad/crashpad/util/stream/log_output_stream.cc
-@@ -14,6 +14,7 @@
- 
- #include "util/stream/log_output_stream.h"
- 
-+#include <cstring>
- #include <algorithm>
- 
- #include "base/logging.h"
---- a/third_party/crashpad/crashpad/util/net/http_transport_socket.cc
-+++ b/third_party/crashpad/crashpad/util/net/http_transport_socket.cc
-@@ -14,6 +14,7 @@
- 
- #include "util/net/http_transport.h"
- 
-+#include <string.h>
- #include <fcntl.h>
- #include <netdb.h>
- #include <poll.h>
---- a/third_party/crashpad/crashpad/util/linux/ptrace_client.cc
-+++ b/third_party/crashpad/crashpad/util/linux/ptrace_client.cc
 @@ -16,6 +16,7 @@
  
- #include <errno.h>
- #include <stdio.h>
-+#include <string.h>
+ #include <string.h>
  
- #include <string>
++#include <cstring>
+ #include <algorithm>
  
---- a/content/shell/browser/shell_platform_delegate.h
-+++ b/content/shell/browser/shell_platform_delegate.h
-@@ -11,6 +11,8 @@
- #include "ui/gfx/geometry/size.h"
- #include "ui/gfx/native_widget_types.h"
+ #include "base/check_op.h"
+--- a/third_party/crashpad/crashpad/util/stream/log_output_stream.cc
++++ b/third_party/crashpad/crashpad/util/stream/log_output_stream.cc
+@@ -16,6 +16,7 @@
  
-+#include <memory>
-+
- #if defined(OS_MACOSX)
- #include "content/public/browser/native_web_keyboard_event.h"
- #endif
+ #include <string.h>
+ 
++#include <cstring>
+ #include <algorithm>
+ 
+ #include "base/check.h"
 --- a/third_party/webrtc/modules/audio_processing/aec3/clockdrift_detector.h
 +++ b/third_party/webrtc/modules/audio_processing/aec3/clockdrift_detector.h
-@@ -12,6 +12,7 @@
- #define MODULES_AUDIO_PROCESSING_AEC3_CLOCKDRIFT_DETECTOR_H_
+@@ -14,6 +14,7 @@
+ #include <stddef.h>
  
  #include <array>
 +#include <cstddef>
@@ -95,11 +64,44 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/chrome/browser/search/background/ntp_backgrounds.h
 +++ b/chrome/browser/search/background/ntp_backgrounds.h
-@@ -6,6 +6,7 @@
- #define CHROME_BROWSER_SEARCH_BACKGROUND_NTP_BACKGROUNDS_H_
+@@ -8,6 +8,7 @@
+ #include <stddef.h>
  
  #include <array>
 +#include <cstddef>
  
  class GURL;
  
+--- a/components/autofill/core/browser/pattern_provider/pattern_provider.h
++++ b/components/autofill/core/browser/pattern_provider/pattern_provider.h
+@@ -6,6 +6,7 @@
+ #define COMPONENTS_AUTOFILL_CORE_BROWSER_PATTERN_PROVIDER_PATTERN_PROVIDER_H_
+ 
+ #include <string>
++#include <vector>
+ 
+ #include "base/gtest_prod_util.h"
+ #include "base/macros.h"
+--- a/components/autofill/core/browser/data_model/borrowed_transliterator.h
++++ b/components/autofill/core/browser/data_model/borrowed_transliterator.h
+@@ -5,6 +5,8 @@
+ #ifndef COMPONENTS_AUTOFILL_CORE_BROWSER_DATA_MODEL_BORROWED_TRANSLITERATOR_H_
+ #define COMPONENTS_AUTOFILL_CORE_BROWSER_DATA_MODEL_BORROWED_TRANSLITERATOR_H_
+ 
++#include <memory>
++
+ #include "base/i18n/unicodestring.h"
+ #include "base/no_destructor.h"
+ #include "base/synchronization/lock.h"
+--- a/ui/accessibility/platform/inspect/tree_formatter.h
++++ b/ui/accessibility/platform/inspect/tree_formatter.h
+@@ -5,6 +5,9 @@
+ #ifndef UI_ACCESSIBILITY_PLATFORM_INSPECT_TREE_FORMATTER_H_
+ #define UI_ACCESSIBILITY_PLATFORM_INSPECT_TREE_FORMATTER_H_
+ 
++#include <memory>
++#include <vector>
++
+ #include "ui/accessibility/platform/inspect/inspect.h"
+ 
+ #include "ui/gfx/native_widget_types.h"

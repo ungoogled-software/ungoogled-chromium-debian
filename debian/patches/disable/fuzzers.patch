@@ -1,0 +1,25 @@
+description: fuzzers aren't built, so don't depend on them
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/BUILD.gn
++++ b/BUILD.gn
+@@ -757,8 +757,7 @@ group("gn_all") {
+     }
+   }
+ 
+-  if (((is_linux || is_chromeos) && !is_chromecast) ||
+-      (is_win && use_libfuzzer) || (use_libfuzzer && is_mac)) {
++  if (false) {
+     deps += [
+       "//chrome/services/ipp_parser/public/cpp:fuzzers",
+       "//testing/libfuzzer/fuzzers",
+--- a/v8/tools/BUILD.gn
++++ b/v8/tools/BUILD.gn
+@@ -12,7 +12,6 @@ group("gn_all") {
+     ":v8_check_static_initializers",
+     "debug_helper:v8_debug_helper",
+     "gcmole:v8_run_gcmole",
+-    "jsfunfuzz:v8_jsfunfuzz",
+   ]
+ 
+   if (is_win) {

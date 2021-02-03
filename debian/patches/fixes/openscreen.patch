@@ -1,0 +1,10 @@
+--- a/third_party/openscreen/src/util/crypto/random_bytes.h
++++ b/third_party/openscreen/src/util/crypto/random_bytes.h
+@@ -6,6 +6,7 @@
+ #define UTIL_CRYPTO_RANDOM_BYTES_H_
+ 
+ #include <array>
++#include <cstdint>
+ 
+ namespace openscreen {
+ 
