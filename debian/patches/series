@@ -25,6 +25,7 @@ fixes/no-ozone.patch
 disable/tests.patch
 disable/glmark.patch
 disable/owners.patch
+disable/android.patch
 disable/openh264.patch
 disable/buildbot.patch
 disable/installer.patch
