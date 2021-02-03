@@ -5040,14 +5040,6 @@
  # Copyright 2013 The Chromium Authors. All rights reserved.
  # Use of this source code is governed by a BSD-style license that can be
  # found in the LICENSE file.
---- a/third_party/libvpx/run_perl.py
-+++ b/third_party/libvpx/run_perl.py
-@@ -1,4 +1,4 @@
--#!/usr/bin/python
-+#!/usr/bin/python2
- #
- # Copyright 2014 The Chromium Authors. All rights reserved.
- # Use of this source code is governed by a BSD-style license that can be
 --- a/third_party/libxml/chromium/roll.py
 +++ b/third_party/libxml/chromium/roll.py
 @@ -1,4 +1,4 @@
