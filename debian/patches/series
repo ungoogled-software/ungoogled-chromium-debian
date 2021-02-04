@@ -63,7 +63,6 @@ system/use-desktop-gl-as-default.patch
 
 buster/re2.patch
 buster/icu63.patch
-buster/vpx17.patch
 buster/clang7.patch
 
 inox-patchset/chromium-skia-harmony.patch
