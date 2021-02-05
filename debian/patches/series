@@ -62,6 +62,7 @@ system/clang-format.patch
 system/use-desktop-gl-as-default.patch
 
 buster/re2.patch
+buster/drm97.patch
 buster/icu63.patch
 buster/clang7.patch
 
