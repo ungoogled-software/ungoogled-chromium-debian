@@ -2,7 +2,7 @@
 
 This repository contains files to build Debian packages of [ungoogled-chromium](//github.com/Eloston/ungoogled-chromium).
 
-This branch contains the code to build packages for: **Debian 10 (buster)**
+This branch contains the code to build packages for: **Debian unstable (sid)**. Since Debian unstable is a moving target (i.e. it never stabilizes), this branch is not guaranteed to be stable.
 
 ## Downloads
 
@@ -13,7 +13,7 @@ This branch contains the code to build packages for: **Debian 10 (buster)**
 
 If your distro is not listed, you may have a look at the [community-maintained list of packages compatible on other distros](https://github.com/ungoogled-software/ungoogled-chromium-debian/wiki/Compatible-Packages). However, please note that this compatibility is not guaranteed; it may break at any time.
 
-**Source Code**: Use the tags labeled with `buster` via `git checkout` (see building instructions). The branches are for development and may not be stable.
+**Source Code**: Use the tags labeled with `sid` via `git checkout` (see building instructions). The branches are for development and may not be stable.
 
 ## Installing
 
@@ -81,8 +81,8 @@ git clone --recurse-submodules https://github.com/ungoogled-software/ungoogled-c
 # Or, just read the README in your local repo.
 
 # Replace TAG_OR_BRANCH_HERE with the tag or branch you want to build (optional)
-# Example of a tag: 79.0.3945.88-1.buster1
-# Example of a branch: debian_buster
+# Example of a tag: 79.0.3945.88-1.sid1
+# Example of a branch: debian_sid
 git -C ungoogled-chromium-debian checkout --recurse-submodules TAG_OR_BRANCH_HERE
 
 # Setup build tree under build/
@@ -142,8 +142,8 @@ git clone --recurse-submodules https://github.com/ungoogled-software/ungoogled-c
 # Or, just read the README in your local repo.
 
 # Replace TAG_OR_BRANCH_HERE with the tag or branch you want to build (optional)
-# Example of a tag: 79.0.3945.88-1.buster1
-# Example of a branch: debian_buster
+# Example of a tag: 79.0.3945.88-1.sid1
+# Example of a branch: debian_sid
 git -C ungoogled-chromium-debian checkout --recurse-submodules TAG_OR_BRANCH_HERE
 
 # Setup build tree under build/
@@ -191,24 +191,14 @@ git remote add upstream https://salsa.debian.org/chromium-team/chromium.git
 
 ### Pull new changes from Debian
 
-1. Update `debian_sid` branch using instructions from README in that branch.
-2. Merge changes from `debian_sid` into this branch:
+These instructions will pull in changes from Debian's `chromium` package into `debian_sid`:
 
-	```sh
-	git checkout --recurse-submodules debian_buster
-	git pull debian_sid
-	# Complete the git merge
-	```
-
-3. Merge new changes from `buster` branch of Debian's `chromium` package (skip if nothing changed):
-
-	```sh
-	git checkout --recurse-submodules debian_buster
-	git pull upstream buster
-	# Complete the git merge
-	```
-
-4. Update patches via instructions below
+```sh
+git checkout --recurse-submodules debian_sid
+git pull upstream master
+# Complete the git merge
+# Update patches via instructions below
+```
 
 ### Pull new changes from ungoogled-chromium
 

@@ -6,7 +6,7 @@
      # //buildtools/<platform>/clang-format
 -    _clang_format_command_path = os.path.join(
 -        buildtools_platform_dir, "clang-format{}".format(exe_suffix))
-+    _clang_format_command_path = "clang-format-7"
++    _clang_format_command_path = "clang-format-11"
  
      # //buildtools/<platform>/gn
      _gn_command_path = os.path.join(buildtools_platform_dir,

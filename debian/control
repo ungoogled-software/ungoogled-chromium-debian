@@ -5,18 +5,18 @@ Maintainer: ungoogled-chromium Maintainers <github@null.invalid>
 Vcs-Git: https://github.com/Eloston/ungoogled-chromium.git
 Vcs-Browser: https://github.com/Eloston/ungoogled-chromium
 Homepage: https://github.com/Eloston/ungoogled-chromium
-Standards-Version: 4.4.1
+Standards-Version: 4.5.0
 Rules-Requires-Root: no
 Build-Depends:
  debhelper (>= 11),
- clang-7,
- clang-format-7,
- lld-7,
- llvm-7-dev,
+ clang-11,
+ clang-format-11,
+ lld-11,
+ llvm-11-dev,
  python2,
  python3,
  python3-debian,
- python-xcbgen,
+ python3-xcbgen,
  pkg-config,
  ninja-build,
  python-jinja2,
