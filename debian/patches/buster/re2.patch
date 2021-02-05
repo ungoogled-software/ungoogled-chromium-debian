@@ -1,0 +1,31 @@
+description: maintain compatibility with re2 on buster
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/extensions/browser/api/declarative_net_request/regex_rules_matcher.cc
++++ b/extensions/browser/api/declarative_net_request/regex_rules_matcher.cc
+@@ -283,7 +283,12 @@ const std::vector<RegexRuleInfo>& RegexR
+     if (!DoesRuleMetadataMatchRequest(*rule->url_rule(), params))
+       continue;
+ 
++// Check this is getting built on buster (older re2), not a great way to do this
++#if __clang_major__ == 7
++    const RE2& regex = *filtered_re2_.GetRE2(re2_id);
++#else
+     const RE2& regex = filtered_re2_.GetRE2(re2_id);
++#endif
+     potential_matches.emplace_back(rule, &regex);
+   }
+ 
+--- a/extensions/browser/api/declarative_net_request/regex_rules_matcher.h
++++ b/extensions/browser/api/declarative_net_request/regex_rules_matcher.h
+@@ -10,7 +10,10 @@
+ #include "base/macros.h"
+ #include "components/url_matcher/substring_set_matcher.h"
+ #include "extensions/browser/api/declarative_net_request/ruleset_matcher_base.h"
++
++#define private public
+ #include "third_party/re2/src/re2/filtered_re2.h"
++#undef private
+ 
+ namespace extensions {
+ namespace declarative_net_request {
