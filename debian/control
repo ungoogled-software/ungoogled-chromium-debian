@@ -45,14 +45,15 @@ Build-Depends:
  libxt-dev,
  libre2-dev,
  libgbm-dev,
+ libpng-dev,
  libxss-dev,
  libelf-dev,
- libvpx-dev (>= 1.7.0),
  libpci-dev,
  libcap-dev,
  libdrm-dev,
  libicu-dev,
  libffi-dev,
+ libvpx-dev (>= 1.7.0),
  libkrb5-dev,
  libexif-dev,
  libflac-dev,
@@ -133,9 +134,9 @@ Depends:
  ${misc:Depends},
  ungoogled-chromium (>= ${source:Version}),
  ungoogled-chromium (<< ${source:Version}.1~),
-Replaces:
- chromium-l10n,
 Breaks:
+ chromium-l10n,
+Conflicts:
  chromium-l10n,
 Description: web browser - language packs
  Web browser that aims to build a safer, faster, and more stable internet
@@ -152,9 +153,9 @@ Depends:
  ${misc:Depends},
  ${shlibs:Depends},
  ungoogled-chromium-common (= ${binary:Version}),
-Replaces:
- chromium-shell,
 Breaks:
+ chromium-shell,
+Conflicts:
  chromium-shell,
 Description: web browser - minimal shell
  Web browser that aims to build a safer, faster, and more stable internet
@@ -169,11 +170,13 @@ Depends:
  ${misc:Depends},
  ${shlibs:Depends},
  ungoogled-chromium (= ${binary:Version}),
-Replaces:
- chromedriver,
- chromium-driver,
 Breaks:
  chromium-driver,
+ chromium,
+Replaces:
+ chromedriver,
+Conflicts:
+ chromium-driver, 
 Description: web browser - WebDriver support
  Web browser that aims to build a safer, faster, and more stable internet
  browsing experience.
@@ -187,6 +190,7 @@ Package: ungoogled-chromium-common
 Architecture: i386 amd64 arm64 armhf
 Depends:
  ${misc:Depends},
+ ${shlibs:Depends},
  x11-utils,
  xdg-utils,
 Recommends:
@@ -201,9 +205,11 @@ Recommends:
 Breaks:
  ungoogled-chromium (<< 60.0.3112.72-1),
  chromium-common,
+ chromium,
 Replaces:
  ungoogled-chromium (<< 60.0.3112.72-1),
- chromium-common,
+Conflicts:
+ chromium-common, 
 Description: web browser - common resources used by ungoogled-chromium packages
  Web browser that aims to build a safer, faster, and more stable internet
  browsing experience.
@@ -217,9 +223,13 @@ Depends:
  ${misc:Depends},
  ${shlibs:Depends},
 Breaks:
- chromium (<< ${binary:Version}),
+ ungoogled-chromium (<< ${binary:Version}),
+ chromium-sandbox,
+ chromium,
 Replaces:
- chromium (<< ${binary:Version}),
+ ungoogled-chromium (<< ${binary:Version}),
+Conflicts:
+ chromium-sandbox,
 Description: web browser - setuid security sandbox for ungoogled-chromium
  Web browser that aims to build a safer, faster, and more stable internet
  browsing experience.

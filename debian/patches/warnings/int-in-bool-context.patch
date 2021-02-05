@@ -14,7 +14,7 @@ author: Michael Gilbert <mgilbert@debian.org>
          filter_->CopyMem16x16(mb_src, stride_src, mb_dst, stride_dst);
 --- a/gpu/command_buffer/service/gles2_cmd_decoder.cc
 +++ b/gpu/command_buffer/service/gles2_cmd_decoder.cc
-@@ -16388,7 +16388,8 @@ bool GLES2DecoderImpl::GetUniformSetup(G
+@@ -16511,7 +16511,8 @@ bool GLES2DecoderImpl::GetUniformSetup(G
    }
    uint32_t checked_size = 0;
    if (!SizedResult<T>::ComputeSize(num_elements).AssignIfValid(&checked_size)) {
@@ -26,7 +26,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    if (!result) {
 --- a/content/browser/renderer_host/render_widget_host_view_base.cc
 +++ b/content/browser/renderer_host/render_widget_host_view_base.cc
-@@ -311,15 +311,16 @@ void RenderWidgetHostViewBase::SetBackgr
+@@ -294,15 +294,16 @@ void RenderWidgetHostViewBase::SetBackgr
    if (default_background_color_ == color)
      return;
  
@@ -51,7 +51,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
 --- a/third_party/blink/renderer/core/html/parser/html_tree_builder.cc
 +++ b/third_party/blink/renderer/core/html/parser/html_tree_builder.cc
-@@ -1041,7 +1041,7 @@ void HTMLTreeBuilder::ProcessStartTagFor
+@@ -1054,7 +1054,7 @@ void HTMLTreeBuilder::ProcessStartTagFor
    }
    if (token->GetName() == html_names::kColTag) {
      ProcessFakeStartTag(html_names::kColgroupTag);
@@ -60,21 +60,9 @@ author: Michael Gilbert <mgilbert@debian.org>
      ProcessStartTag(token);
      return;
    }
---- a/ui/gfx/ipc/skia/gfx_skia_param_traits_macros.h
-+++ b/ui/gfx/ipc/skia/gfx_skia_param_traits_macros.h
-@@ -10,7 +10,7 @@
- #include "ipc/ipc_message_macros.h"
- #include "third_party/skia/include/core/SkImageInfo.h"
- 
--IPC_ENUM_TRAITS_VALIDATE(SkColorType, kLastEnum_SkColorType)
--IPC_ENUM_TRAITS_VALIDATE(SkAlphaType, kLastEnum_SkAlphaType)
-+IPC_ENUM_TRAITS_VALIDATE(SkColorType, value != kLastEnum_SkColorType)
-+IPC_ENUM_TRAITS_VALIDATE(SkAlphaType, value != kLastEnum_SkAlphaType)
- 
- #endif  // UI_GFX_IPC_SKIA_GFX_SKIA_PARAM_TRAITS_MACROS_H_
 --- a/extensions/browser/api/socket/tcp_socket.cc
 +++ b/extensions/browser/api/socket/tcp_socket.cc
-@@ -214,7 +214,7 @@ void TCPSocket::SetKeepAlive(bool enable
+@@ -213,7 +213,7 @@ void TCPSocket::SetKeepAlive(bool enable
                               int delay,
                               SetKeepAliveCallback callback) {
    if (!client_socket_) {
@@ -83,7 +71,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      return;
    }
    client_socket_->SetKeepAlive(enable, delay, std::move(callback));
-@@ -222,7 +222,7 @@ void TCPSocket::SetKeepAlive(bool enable
+@@ -221,7 +221,7 @@ void TCPSocket::SetKeepAlive(bool enable
  
  void TCPSocket::SetNoDelay(bool no_delay, SetNoDelayCallback callback) {
    if (!client_socket_) {

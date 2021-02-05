@@ -4,7 +4,7 @@ origin: chromium 66 authors
 
 --- a/media/filters/ffmpeg_audio_decoder.cc
 +++ b/media/filters/ffmpeg_audio_decoder.cc
-@@ -93,6 +93,8 @@ void FFmpegAudioDecoder::Initialize(cons
+@@ -95,6 +95,8 @@ void FFmpegAudioDecoder::Initialize(cons
      return;
    }
  
