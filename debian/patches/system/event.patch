@@ -10,26 +10,27 @@ author: Michael Gilbert <mgilbert@debian.org>
 -#include "base/third_party/libevent/event.h"
 +#include <event.h>
  #include "rtc_base/checks.h"
- #include "rtc_base/critical_section.h"
  #include "rtc_base/logging.h"
+ #include "rtc_base/numerics/safe_conversions.h"
 --- a/base/message_loop/message_pump_libevent.cc
 +++ b/base/message_loop/message_pump_libevent.cc
-@@ -14,7 +14,7 @@
- #include "base/files/file_util.h"
+@@ -15,7 +15,7 @@
  #include "base/logging.h"
+ #include "base/notreached.h"
  #include "base/posix/eintr_wrapper.h"
 -#include "base/third_party/libevent/event.h"
 +#include <event.h>
  #include "base/time/time.h"
- #include "base/trace_event/trace_event.h"
+ #include "base/trace_event/base_tracing.h"
  #include "build/build_config.h"
 --- a/tools/gn/build/gen.py
 +++ b/tools/gn/build/gen.py
-@@ -359,6 +359,7 @@ def WriteGNNinja(path, platform, host, o
+@@ -378,6 +378,8 @@ def WriteGNNinja(path, platform, host, o
+       if not options.no_static_libstdcpp:
+         ldflags.append('-static-libstdc++')
  
-       # Additional system libraries that are used.
-       libs.append('-lnspr4')
 +      libs.append('-levent')
- 
-       # This is needed by libc++.
-       if not platform.is_mingw():
++
+       if platform.is_mingw() or platform.is_msys():
+         cflags.remove('-std=c++17')
+         cflags.extend([

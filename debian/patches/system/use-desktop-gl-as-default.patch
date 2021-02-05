@@ -1,0 +1,24 @@
+Description: Use desktop gl implementation as default
+Author: Jan Luca Naumann <j.naumann@fu-berlin.de>
+Bug-Debian: https://bugs.debian.org/979135
+Forwarded: not-needed
+Last-Update: 2021-01-07
+--- a/ui/gl/init/gl_factory.cc
++++ b/ui/gl/init/gl_factory.cc
+@@ -66,6 +66,16 @@ GLImplementation GetRequestedGLImplement
+     }
+   }
+ 
++  // Use desktop implementation as default if allowed
++  {
++    auto iter = std::find(allowed_impls.begin(), allowed_impls.end(),
++                          kGLImplementationDesktopGL);
++    if (iter != allowed_impls.end()) {
++      allowed_impls.erase(iter);
++      allowed_impls.insert(allowed_impls.begin(), kGLImplementationDesktopGL);
++    }
++  }
++
+   if (allowed_impls.empty()) {
+     LOG(ERROR) << "List of allowed GL implementations is empty.";
+     return kGLImplementationNone;

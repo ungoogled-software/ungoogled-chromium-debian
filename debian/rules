@@ -6,13 +6,16 @@ export DH_VERBOSE=1
 # enable all build hardening flags
 export DEB_BUILD_MAINT_OPTIONS=hardening=+all
 
+# disable unsupported flag in clang 7
+export DEB_BUILD_MAINT_OPTIONS+=reproducible=-fixfilepath
+
 # indicate that binary targets do not require root
 export DEB_RULES_REQUIRES_ROOT=no
 
 # specify system LLVM (required for unbundling)
 # you can set the LLVM_VERSION environment variable before building
 # to change the LLVM toolchain version
-export LLVM_VERSION?=10
+export LLVM_VERSION?=11
 export AR=llvm-ar-$(LLVM_VERSION)
 export NM=llvm-nm-$(LLVM_VERSION)
 export CC=clang-$(LLVM_VERSION)
@@ -85,7 +88,7 @@ defines+=is_debug=false \
          enable_iterator_debugging=false \
          enable_hangout_services_extension=false \
          optimize_webui=false \
-         closure_compile=false \
+         enable_js_type_check=false \
          treat_warnings_as_errors=false \
 
 # enabled features
@@ -120,6 +123,8 @@ endif
 
 out/Release/gn:
 	python2 tools/gn/bootstrap/bootstrap.py --skip-generate-buildfiles -j$(njobs)
+	# Workaround for system node patch issue
+	mkdir -p third_party/node; cp debian/node.py third_party/node/node.py
 
 override_dh_auto_configure:
 	# output compiler information

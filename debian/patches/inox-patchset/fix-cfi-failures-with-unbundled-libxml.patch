@@ -1,3 +1,4 @@
+diff -ur a/third_party/blink/renderer/core/xml/parser/xml_document_parser.cc b/third_party/blink/renderer/core/xml/parser/xml_document_parser.cc
 --- a/third_party/blink/renderer/core/xml/parser/xml_document_parser.cc
 +++ b/third_party/blink/renderer/core/xml/parser/xml_document_parser.cc
 @@ -140,11 +140,11 @@
@@ -49,9 +50,10 @@
  
    void Call(XMLDocumentParser* parser) override {
      parser->HandleError(type_, reinterpret_cast<char*>(message_),
+diff -ur a/third_party/blink/renderer/core/xml/xsl_style_sheet_libxslt.cc b/third_party/blink/renderer/core/xml/xsl_style_sheet_libxslt.cc
 --- a/third_party/blink/renderer/core/xml/xsl_style_sheet_libxslt.cc
 +++ b/third_party/blink/renderer/core/xml/xsl_style_sheet_libxslt.cc
-@@ -195,7 +195,7 @@ void XSLStyleSheet::LoadChildSheets() {
+@@ -196,7 +196,7 @@
          xmlChar* uri_ref =
              xsltGetNsProp(curr, (const xmlChar*)"href", XSLT_NAMESPACE);
          LoadChildSheet(String::FromUTF8((const char*)uri_ref));
@@ -60,7 +62,7 @@
        } else {
          break;
        }
-@@ -209,7 +209,7 @@ void XSLStyleSheet::LoadChildSheets() {
+@@ -210,7 +210,7 @@
          xmlChar* uri_ref =
              xsltGetNsProp(curr, (const xmlChar*)"href", XSLT_NAMESPACE);
          LoadChildSheet(String::FromUTF8((const char*)uri_ref));
@@ -69,7 +71,7 @@
        }
        curr = curr->next;
      }
-@@ -298,8 +298,8 @@ xmlDocPtr XSLStyleSheet::LocateStyleshee
+@@ -300,8 +300,8 @@
        xmlChar* child_uri =
            xmlBuildURI((const xmlChar*)import_href.c_str(), base);
        bool equal_ur_is = xmlStrEqual(uri, child_uri);
@@ -80,9 +82,10 @@
        if (equal_ur_is) {
          child->MarkAsProcessed();
          return child->GetDocument();
+diff -ur a/third_party/blink/renderer/core/xml/xslt_extensions.cc b/third_party/blink/renderer/core/xml/xslt_extensions.cc
 --- a/third_party/blink/renderer/core/xml/xslt_extensions.cc
 +++ b/third_party/blink/renderer/core/xml/xslt_extensions.cc
-@@ -69,7 +69,7 @@ static void ExsltNodeSetFunction(xmlXPat
+@@ -69,7 +69,7 @@
    CHECK(ret);
  
    if (strval)
@@ -91,20 +94,22 @@
  
    valuePush(ctxt, ret);
  }
+diff -ur a/third_party/blink/renderer/core/xml/xslt_processor_libxslt.cc b/third_party/blink/renderer/core/xml/xslt_processor_libxslt.cc
 --- a/third_party/blink/renderer/core/xml/xslt_processor_libxslt.cc
 +++ b/third_party/blink/renderer/core/xml/xslt_processor_libxslt.cc
-@@ -104,7 +104,7 @@ static xmlDocPtr DocLoaderFunc(const xml
+@@ -104,7 +104,7 @@
        xmlChar* base = xmlNodeGetBase(context->document->doc, context->node);
        KURL url(KURL(reinterpret_cast<const char*>(base)),
                 reinterpret_cast<const char*>(uri));
 -      xmlFree(base);
 +      free(base);
  
-       ResourceLoaderOptions fetch_options;
+       ResourceLoaderOptions fetch_options(nullptr /* world */);
        fetch_options.initiator_info.name = fetch_initiator_type_names::kXml;
+diff -ur a/third_party/blink/renderer/core/xml/xslt_unicode_sort.cc b/third_party/blink/renderer/core/xml/xslt_unicode_sort.cc
 --- a/third_party/blink/renderer/core/xml/xslt_unicode_sort.cc
 +++ b/third_party/blink/renderer/core/xml/xslt_unicode_sort.cc
-@@ -327,18 +327,18 @@ void XsltUnicodeSortFunction(xsltTransfo
+@@ -327,18 +327,18 @@
      comp = static_cast<xsltStylePreComp*>(sorts[j]->psvi);
      if (tempstype[j] == 1) {
        // The data-type needs to be recomputed each time.
@@ -126,9 +131,10 @@
      }
    }
  
+diff -ur a/third_party/libxml/chromium/xml_reader.cc b/third_party/libxml/chromium/xml_reader.cc
 --- a/third_party/libxml/chromium/xml_reader.cc
 +++ b/third_party/libxml/chromium/xml_reader.cc
-@@ -17,7 +17,7 @@ namespace {
+@@ -17,7 +17,7 @@
  // Same as XmlStringToStdString but also frees |xmlstring|.
  std::string XmlStringToStdStringWithDelete(xmlChar* xmlstring) {
    std::string result = XmlStringToStdString(xmlstring);
