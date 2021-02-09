@@ -1,3 +1,10 @@
+chromium (88.0.4324.150-1) unstable; urgency=medium
+
+  * New upstream security release (closes: #982205).
+    - CVE-2021-21148: Heap buffer overflow in V8. Reported by Mattias Buelens
+
+ -- Michel Le Bihan <michel@lebihan.pl>  Tue, 09 Feb 2021 13:02:34 +0100
+
 chromium (88.0.4324.146-1) unstable; urgency=medium
 
   * New upstream stable release.
