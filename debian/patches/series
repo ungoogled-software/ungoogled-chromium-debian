@@ -60,8 +60,6 @@ system/convertutf.patch
 system/clang-format.patch
 system/use-desktop-gl-as-default.patch
 
-buster/vpx17.patch
-
 inox-patchset/chromium-skia-harmony.patch
 inox-patchset/fix-cfi-failures-with-unbundled-libxml.patch
 
@@ -69,7 +67,9 @@ fedora/enable-hardware-accelerated-mjpeg.patch
 fedora/fix-vaapi-on-intel.patch
 
 ungoogled-chromium/re2.patch
+ungoogled-chromium/drm97.patch
 ungoogled-chromium/manpage.patch
 ungoogled-chromium/safebrowsing.patch
 ungoogled-chromium/explicit-python.patch
 ungoogled-chromium/vpx19.patch
+ungoogled-chromium/vpx17.patch

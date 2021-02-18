@@ -1,22 +1,18 @@
---- a/components/omnibox/browser/document_provider.cc
-+++ b/components/omnibox/browser/document_provider.cc
-@@ -335,7 +335,7 @@
-   for (const auto& doc_id_group : docs_url_pattern_.NamedCapturingGroups()) {
-     re2::StringPiece identified_doc_id = matched_doc_ids[doc_id_group.second];
-     if (!identified_doc_id.empty()) {
--      return std::string(identified_doc_id);
-+      return identified_doc_id.ToString();
-     }
-   }
-   return std::string();
+description: maintain compatibility with re2 on buster
+author: Michael Gilbert <mgilbert@debian.org>
+
 --- a/extensions/browser/api/declarative_net_request/regex_rules_matcher.cc
 +++ b/extensions/browser/api/declarative_net_request/regex_rules_matcher.cc
-@@ -275,7 +275,7 @@
+@@ -283,7 +283,12 @@ const std::vector<RegexRuleInfo>& RegexR
      if (!DoesRuleMetadataMatchRequest(*rule->url_rule(), params))
        continue;
  
--    const RE2& regex = filtered_re2_.GetRE2(re2_id);
++// Check this is getting built on buster (older re2), not a great way to do this
++#if __clang_major__ == 7
 +    const RE2& regex = *filtered_re2_.GetRE2(re2_id);
++#else
+     const RE2& regex = filtered_re2_.GetRE2(re2_id);
++#endif
      potential_matches.emplace_back(rule, &regex);
    }
  

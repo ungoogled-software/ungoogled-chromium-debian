@@ -2,6 +2,77 @@ description: use icu for UTF8 conversions (eliminates ConvertUTF embedded code c
 bug-debian: http://bugs.debian.org/900596
 author: Michael Gilbert <mgilbert@debian.org>
 
+--- a/third_party/breakpad/BUILD.gn
++++ b/third_party/breakpad/BUILD.gn
+@@ -380,7 +380,6 @@
+       "breakpad/src/client/mac/handler/dynamic_images.cc",
+       "breakpad/src/client/mac/handler/minidump_generator.cc",
+       "breakpad/src/client/minidump_file_writer.cc",
+-      "breakpad/src/common/convert_UTF.cc",
+       "breakpad/src/common/mac/MachIPC.mm",
+       "breakpad/src/common/mac/arch_utilities.cc",
+       "breakpad/src/common/mac/bootstrap_compat.cc",
+@@ -594,8 +593,6 @@
+       "breakpad/src/client/minidump_file_writer-inl.h",
+       "breakpad/src/client/minidump_file_writer.cc",
+       "breakpad/src/client/minidump_file_writer.h",
+-      "breakpad/src/common/convert_UTF.cc",
+-      "breakpad/src/common/convert_UTF.h",
+       "breakpad/src/common/linux/breakpad_getcontext.S",
+       "breakpad/src/common/linux/elf_core_dump.cc",
+       "breakpad/src/common/linux/elf_core_dump.h",
+@@ -1018,8 +1015,6 @@
+       "breakpad/src/client/minidump_file_writer-inl.h",
+       "breakpad/src/client/minidump_file_writer.cc",
+       "breakpad/src/client/minidump_file_writer.h",
+-      "breakpad/src/common/convert_UTF.cc",
+-      "breakpad/src/common/convert_UTF.h",
+       "breakpad/src/common/long_string_dictionary.cc",
+       "breakpad/src/common/mac/HTTPMultipartUpload.m",
+       "breakpad/src/common/mac/HTTPRequest.m",
+--- a/third_party/breakpad/breakpad/src/client/minidump_file_writer.cc
++++ b/third_party/breakpad/breakpad/src/client/minidump_file_writer.cc
+@@ -149,11 +149,11 @@
+                                               unsigned int length,
+                                               TypedMDRVA<MDString>* mdstring) {
+   bool result = true;
+-  if (sizeof(wchar_t) == sizeof(uint16_t)) {
++  if (sizeof(wchar_t) == sizeof(UChar)) {
+     // Shortcut if wchar_t is the same size as MDString's buffer
+     result = mdstring->Copy(str, mdstring->get()->length);
+   } else {
+-    uint16_t out[2];
++    UChar out[2];
+     int out_idx = 0;
+ 
+     // Copy the string character by character
+@@ -170,7 +170,7 @@
+       // zero, but the second one may be zero, depending on the conversion from
+       // UTF-32.
+       int out_count = out[1] ? 2 : 1;
+-      size_t out_size = sizeof(uint16_t) * out_count;
++      size_t out_size = sizeof(UChar) * out_count;
+       result = mdstring->CopyIndexAfterObject(out_idx, out, out_size);
+       out_idx += out_count;
+     }
+@@ -182,7 +182,7 @@
+                                               unsigned int length,
+                                               TypedMDRVA<MDString>* mdstring) {
+   bool result = true;
+-  uint16_t out[2];
++  UChar out[2];
+   int out_idx = 0;
+ 
+   // Copy the string character by character
+@@ -197,7 +197,7 @@
+ 
+     // Append the one or two UTF-16 characters
+     int out_count = out[1] ? 2 : 1;
+-    size_t out_size = sizeof(uint16_t) * out_count;
++    size_t out_size = sizeof(UChar) * out_count;
+     result = mdstring->CopyIndexAfterObject(out_idx, out, out_size);
+     out_idx += out_count;
+   }
 --- a/third_party/breakpad/breakpad/src/common/string_conversion.cc
 +++ b/third_party/breakpad/breakpad/src/common/string_conversion.cc
 @@ -29,7 +29,16 @@
@@ -22,7 +93,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "common/scoped_ptr.h"
  #include "common/string_conversion.h"
  #include "common/using_std_string.h"
-@@ -38,118 +38,23 @@ namespace google_breakpad {
+@@ -38,118 +47,23 @@
  
  using std::vector;
  
@@ -197,74 +268,3 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  }  // namespace google_breakpad
  
---- a/third_party/breakpad/BUILD.gn
-+++ b/third_party/breakpad/BUILD.gn
-@@ -380,7 +380,6 @@ if (is_mac) {
-       "breakpad/src/client/mac/handler/dynamic_images.cc",
-       "breakpad/src/client/mac/handler/minidump_generator.cc",
-       "breakpad/src/client/minidump_file_writer.cc",
--      "breakpad/src/common/convert_UTF.cc",
-       "breakpad/src/common/mac/MachIPC.mm",
-       "breakpad/src/common/mac/arch_utilities.cc",
-       "breakpad/src/common/mac/bootstrap_compat.cc",
-@@ -594,8 +593,6 @@ if (is_linux || is_chromeos || is_androi
-       "breakpad/src/client/minidump_file_writer-inl.h",
-       "breakpad/src/client/minidump_file_writer.cc",
-       "breakpad/src/client/minidump_file_writer.h",
--      "breakpad/src/common/convert_UTF.cc",
--      "breakpad/src/common/convert_UTF.h",
-       "breakpad/src/common/linux/breakpad_getcontext.S",
-       "breakpad/src/common/linux/elf_core_dump.cc",
-       "breakpad/src/common/linux/elf_core_dump.h",
-@@ -1018,8 +1015,6 @@ if (is_ios) {
-       "breakpad/src/client/minidump_file_writer-inl.h",
-       "breakpad/src/client/minidump_file_writer.cc",
-       "breakpad/src/client/minidump_file_writer.h",
--      "breakpad/src/common/convert_UTF.cc",
--      "breakpad/src/common/convert_UTF.h",
-       "breakpad/src/common/long_string_dictionary.cc",
-       "breakpad/src/common/mac/HTTPMultipartUpload.m",
-       "breakpad/src/common/mac/HTTPRequest.m",
---- a/third_party/breakpad/breakpad/src/client/minidump_file_writer.cc
-+++ b/third_party/breakpad/breakpad/src/client/minidump_file_writer.cc
-@@ -149,11 +149,11 @@ bool MinidumpFileWriter::CopyStringToMDS
-                                               unsigned int length,
-                                               TypedMDRVA<MDString>* mdstring) {
-   bool result = true;
--  if (sizeof(wchar_t) == sizeof(uint16_t)) {
-+  if (sizeof(wchar_t) == sizeof(UChar)) {
-     // Shortcut if wchar_t is the same size as MDString's buffer
-     result = mdstring->Copy(str, mdstring->get()->length);
-   } else {
--    uint16_t out[2];
-+    UChar out[2];
-     int out_idx = 0;
- 
-     // Copy the string character by character
-@@ -170,7 +170,7 @@ bool MinidumpFileWriter::CopyStringToMDS
-       // zero, but the second one may be zero, depending on the conversion from
-       // UTF-32.
-       int out_count = out[1] ? 2 : 1;
--      size_t out_size = sizeof(uint16_t) * out_count;
-+      size_t out_size = sizeof(UChar) * out_count;
-       result = mdstring->CopyIndexAfterObject(out_idx, out, out_size);
-       out_idx += out_count;
-     }
-@@ -182,7 +182,7 @@ bool MinidumpFileWriter::CopyStringToMDS
-                                               unsigned int length,
-                                               TypedMDRVA<MDString>* mdstring) {
-   bool result = true;
--  uint16_t out[2];
-+  UChar out[2];
-   int out_idx = 0;
- 
-   // Copy the string character by character
-@@ -197,7 +197,7 @@ bool MinidumpFileWriter::CopyStringToMDS
- 
-     // Append the one or two UTF-16 characters
-     int out_count = out[1] ? 2 : 1;
--    size_t out_size = sizeof(uint16_t) * out_count;
-+    size_t out_size = sizeof(UChar) * out_count;
-     result = mdstring->CopyIndexAfterObject(out_idx, out, out_size);
-     out_idx += out_count;
-   }
