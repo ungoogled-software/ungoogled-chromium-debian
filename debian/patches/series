@@ -73,3 +73,4 @@ ungoogled-chromium/safebrowsing.patch
 ungoogled-chromium/explicit-python.patch
 ungoogled-chromium/vpx19.patch
 ungoogled-chromium/vpx17.patch
+ungoogled-chromium/fixes.patch

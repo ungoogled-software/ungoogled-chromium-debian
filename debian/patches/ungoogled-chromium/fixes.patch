@@ -1,0 +1,11 @@
+--- a/tools/gn/src/gn/version.h
++++ b/tools/gn/src/gn/version.h
+@@ -7,6 +7,8 @@
+ 
+ #include <optional>
+ #include <string>
++#undef major
++#undef minor
+ 
+ // Represents a semantic version.
+ class Version {
