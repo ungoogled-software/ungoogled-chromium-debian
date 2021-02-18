@@ -1,6 +1,6 @@
 --- b/debian/scripts/mk-origtargz
 +++ a/debian/scripts/mk-origtargz
-@@ -213,6 +213,11 @@
+@@ -239,6 +239,11 @@
      }
  
      if ($deletecount or $self->config->force_repack) {
@@ -12,7 +12,7 @@
          $destfilebase = sprintf "%s_%s%s.%s.tar", $self->config->package,
            $self->config->version, $self->config->repack_suffix,
            $self->config->orig;
-@@ -579,4 +584,4 @@
+@@ -611,4 +616,4 @@
      return sprintf "%s.%s", $destfiletar, $comp;
  }
  
