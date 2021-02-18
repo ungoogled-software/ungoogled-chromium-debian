@@ -15,8 +15,8 @@ author: Michael Gilbert <mgilbert@debian.org>
 --- a/base/time/time.cc
 +++ b/base/time/time.cc
 @@ -14,7 +14,7 @@
- #include "base/macros.h"
- #include "base/no_destructor.h"
+ #include "base/optional.h"
+ #include "base/strings/string_util.h"
  #include "base/strings/stringprintf.h"
 -#include "base/third_party/nspr/prtime.h"
 +#include <nspr/prtime.h>
@@ -25,34 +25,25 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/base/BUILD.gn
 +++ b/base/BUILD.gn
-@@ -109,6 +109,9 @@ config("base_flags") {
-       "-Wglobal-constructors",
-     ]
+@@ -113,6 +113,12 @@ if (is_android) {
    }
+ }
+ 
++if (is_linux) {
 +  ldflags = [
 +    "-lnspr4"
 +  ]
- }
- 
- config("base_implementation") {
-@@ -720,8 +723,6 @@ jumbo_component("base") {
++}
++
+ # Base and everything it depends on should be a static library rather than
+ # a source set. Base is more of a "library" in the classic sense in that many
+ # small parts of it are used in many different contexts. This combined with a
+@@ -712,8 +718,6 @@ component("base") {
+     "third_party/cityhash_v103/src/city_v103.cc",
      "third_party/cityhash_v103/src/city_v103.h",
-     "third_party/icu/icu_utf.cc",
      "third_party/icu/icu_utf.h",
 -    "third_party/nspr/prtime.cc",
 -    "third_party/nspr/prtime.h",
      "third_party/superfasthash/superfasthash.c",
      "thread_annotations.h",
      "threading/hang_watcher.cc",
---- a/tools/gn/build/gen.py
-+++ b/tools/gn/build/gen.py
-@@ -357,6 +357,9 @@ def WriteGNNinja(path, platform, host, o
-       if not options.no_static_libstdcpp:
-         ldflags.append('-static-libstdc++')
- 
-+      # Additional system libraries that are used.
-+      libs.append('-lnspr4')
-+
-       # This is needed by libc++.
-       if not platform.is_mingw():
-         libs.append('-ldl')

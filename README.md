@@ -8,7 +8,6 @@ This branch contains the code to build packages for: **Ubuntu 18.04 LTS (bionic)
 
 **Binaries** (i.e. `.deb` packages): There are three ways to get binaries:
 
-- [Contributor Binaries website](//ungoogled-software.github.io/ungoogled-chromium-binaries/)
 - [OBS Production Project](//build.opensuse.org/project/show/home:ungoogled_chromium)
 - [OBS Development Project](//build.opensuse.org/project/show/home:ungoogled_chromium:testing)
 
@@ -29,9 +28,34 @@ At minimum, you will need to install the `ungoogled-chromium` and `ungoogled-chr
 	```
 
 * If you are using OBS:
-
-  - [OBS Production Repository Instructions](//software.opensuse.org/download/package?package=ungoogled-chromium&project=home:ungoogled_chromium)
-  - [OBS Development Repository Instructions](//software.opensuse.org/download/package?package=ungoogled-chromium&project=home:ungoogled_chromium:testing)
+  - OBS (Debian Buster)
+    ```sh
+    # echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Debian_Buster/ /' | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list > /dev/null
+    # curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Debian_Buster/Release.key' | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg > /dev/null
+    # sudo apt update
+    # sudo apt install -y ungoogled-chromium
+    ```
+  - OBS (Debian Sid)
+    ```sh
+    # echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Debian_Sid/ /' | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list > /dev/null
+    # curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Debian_Sid/Release.key' | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg > /dev/null
+    # sudo apt update
+    # sudo apt install -y ungoogled-chromium
+    ```
+  - OBS (Ubuntu Bionic)
+    ```sh
+    # echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Bionic/ /' | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list > /dev/null
+    # curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Bionic/Release.key' | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg > /dev/null
+    # sudo apt update
+    # sudo apt install -y ungoogled-chromium
+    ```
+  - OBS (Ubuntu Focal)
+    ```sh
+    # echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Focal/ /' | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list > /dev/null
+    # curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Focal/Release.key' | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg > /dev/null
+    # sudo apt update
+    # sudo apt install -y ungoogled-chromium
+    ```
 
 The other packages are as follows:
 
