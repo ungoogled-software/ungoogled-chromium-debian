@@ -30,7 +30,6 @@ Build-Depends:
  wdiff,
  gperf,
  bison,
- nodejs,
  valgrind,
  xz-utils,
  x11-apps,

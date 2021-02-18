@@ -135,7 +135,6 @@ Files-Excluded:
  third_party/libxml/linux
  third_party/libxml/win32
  third_party/libxml/BUILD.gn
- third_party/node
  third_party/mocha/mocha.js
  third_party/chaijs/chai.js
  third_party/blanketjs/src/blanket.js

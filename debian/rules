@@ -123,8 +123,6 @@ endif
 
 out/Release/gn:
 	python2 tools/gn/bootstrap/bootstrap.py --skip-generate-buildfiles -j$(njobs)
-	# Workaround for system node patch issue
-	mkdir -p third_party/node; cp debian/node.py third_party/node/node.py
 
 override_dh_auto_configure:
 	# output compiler information
