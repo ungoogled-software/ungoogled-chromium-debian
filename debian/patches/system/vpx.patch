@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/media/base/supported_types.cc
 +++ b/media/base/supported_types.cc
-@@ -17,8 +17,8 @@
+@@ -19,8 +19,8 @@
  #if BUILDFLAG(ENABLE_LIBVPX)
  // TODO(dalecurtis): This technically should not be allowed in media/base. See
  // TODO below about moving outside of base.
@@ -16,10 +16,10 @@ author: Michael Gilbert <mgilbert@debian.org>
  #if defined(OS_ANDROID)
 --- a/third_party/webrtc/modules/video_coding/codecs/vp9/vp9_impl.cc
 +++ b/third_party/webrtc/modules/video_coding/codecs/vp9/vp9_impl.cc
-@@ -32,10 +32,10 @@
+@@ -41,10 +41,10 @@
  #include "rtc_base/time_utils.h"
  #include "rtc_base/trace_event.h"
- #include "system_wrappers/include/field_trial.h"
+ #include "third_party/libyuv/include/libyuv/convert.h"
 -#include "vpx/vp8cx.h"
 -#include "vpx/vp8dx.h"
 -#include "vpx/vpx_decoder.h"
@@ -31,3 +31,37 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  namespace webrtc {
  
+--- a/media/gpu/vaapi/BUILD.gn
++++ b/media/gpu/vaapi/BUILD.gn
+@@ -81,7 +81,6 @@
+ 
+   configs += [
+     "//build/config/linux/libva",
+-    "//third_party/libvpx:libvpx_config",
+   ]
+ 
+   deps = [
+@@ -96,7 +95,6 @@
+     "//media/gpu/chromeos:common",
+     "//media/parsers",
+     "//mojo/public/cpp/bindings",
+-    "//third_party/libvpx:libvp9rc",
+     "//third_party/libyuv",
+     "//ui/gfx",
+     "//ui/gfx/geometry",
+@@ -218,7 +216,6 @@
+     "vp9_encoder_unittest.cc",
+     "vp9_temporal_layers_unittest.cc",
+   ]
+-  configs += [ "//third_party/libvpx:libvpx_config" ]
+   deps = [
+     ":common",
+     ":vaapi",
+@@ -230,7 +227,6 @@
+     "//mojo/core/embedder",
+     "//testing/gmock",
+     "//testing/gtest",
+-    "//third_party/libvpx:libvp9rc",
+     "//ui/gfx:test_support",
+     "//ui/gfx/geometry",
+   ]

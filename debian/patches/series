@@ -1,45 +1,53 @@
 debianization/sandbox.patch
 debianization/optimization.patch
 debianization/master-preferences.patch
+debianization/explicit-python2.patch
 
 gn/libcxx.patch
+gn/explicit-python2.patch
 
 fixes/mojo.patch
 fixes/gnu-as.patch
-fixes/breakpad.patch
-fixes/ordering.patch
 fixes/inspector.patch
-fixes/gpu-timeout.patch
 fixes/not-constexpr.patch
+fixes/time64-sandbox.patch
 fixes/sequence-point.patch
-fixes/nonconst-values.patch
 fixes/missing-includes.patch
-fixes/pointer-required.patch
-fixes/lambda-expression.patch
 fixes/widevine-enable-version-string.patch
 fixes/widevine-locations.patch
 fixes/nullptr-dereference.patch
 fixes/multiple-destruction.patch
+fixes/openscreen.patch
+fixes/building-against-libstdc.patch
+fixes/ideographic-space-character-constant.patch
+fixes/no-ozone.patch
 
 disable/tests.patch
 disable/glmark.patch
 disable/owners.patch
+disable/android.patch
+disable/fuzzers.patch
 disable/openh264.patch
 disable/buildbot.patch
 disable/installer.patch
 disable/font-tests.patch
 disable/swiftshader.patch
+disable/driver-chrome-path.patch
+disable/widevine-cdm-cu.patch
+disable/angle-perftests.patch
+disable/web-ui-tests.patch
+disable/ozone-unittests.patch
 
 warnings/restrict.patch
 warnings/multichar.patch
 warnings/deprecated.patch
 warnings/sign-compare.patch
-warnings/null-destination.patch
 warnings/gcc-diagnostic.patch
+warnings/null-destination.patch
 warnings/int-in-bool-context.patch
 
-system/vpx.patch
 system/icu.patch
+system/vpx.patch
 system/jpeg.patch
 system/node.patch
 system/nspr.patch
@@ -51,21 +59,16 @@ system/harfbuzz.patch
 system/openjpeg.patch
 system/convertutf.patch
 system/clang-format.patch
-
-bullseye/ffmpeg43.patch
-
-fixes/python3.patch
-study3.patch
+system/use-desktop-gl-as-default.patch
 
 inox-patchset/chromium-skia-harmony.patch
 inox-patchset/fix-cfi-failures-with-unbundled-libxml.patch
 
-fedora/vaapi.patch
-fedora/vaapi-fix.patch
+fedora/enable-hardware-accelerated-mjpeg.patch
+fedora/fix-vaapi-on-intel.patch
 
-ungoogled-chromium/clang.patch
 ungoogled-chromium/icu66.patch
 ungoogled-chromium/manpage.patch
 ungoogled-chromium/safebrowsing.patch
 ungoogled-chromium/explicit-python.patch
-ungoogled-chromium/manifest-crash.patch
+ungoogled-chromium/vpx19.patch

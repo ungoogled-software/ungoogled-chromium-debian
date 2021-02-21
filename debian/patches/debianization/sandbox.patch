@@ -1,9 +1,9 @@
 description: debian specific instructions when no working sandbox is available
 author: Michael Gilbert <mgilbert@debian.org>
 
---- a/services/service_manager/zygote/host/zygote_host_impl_linux.cc
-+++ b/services/service_manager/zygote/host/zygote_host_impl_linux.cc
-@@ -113,14 +113,13 @@ void ZygoteHostImpl::Init(const base::Co
+--- a/content/browser/zygote_host/zygote_host_impl_linux.cc
++++ b/content/browser/zygote_host/zygote_host_impl_linux.cc
+@@ -114,14 +114,13 @@ void ZygoteHostImpl::Init(const base::Co
      // root.
      use_suid_sandbox_for_adj_oom_score_ = use_suid_sandbox_;
    } else {
@@ -17,7 +17,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 +           "chromium-sandbox package to solve this problem. "
             "If you want to live dangerously and need an immediate workaround, "
             "you can try using --"
-         << service_manager::switches::kNoSandbox << ".";
+         << sandbox::policy::switches::kNoSandbox << ".";
 +    exit(EXIT_FAILURE);
    }
  }

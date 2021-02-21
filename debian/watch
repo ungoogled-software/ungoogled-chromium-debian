@@ -1,0 +1,4 @@
+version=4
+opts=compression=xz,searchmode=plain,downloadurlmangle=s/"version":\s"@ANY_VERSION@"/https:\/\/gsdview.appspot.com\/chromium-browser-official\/chromium-$1-lite.tar.xz/,filenamemangle=s/"version":\s"@ANY_VERSION@"/chromium-$1-lite.tar.xz/ \
+https://chromiumdash.appspot.com/fetch_releases?channel=Stable&platform=Linux \
+"version":\s"@ANY_VERSION@"
