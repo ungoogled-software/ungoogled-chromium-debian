@@ -30,7 +30,7 @@ author: Michael Gilbert <mgilbert@debian.org>
          "//ui/file_manager:unit_test_data",
        ]
  
-@@ -4047,7 +4044,6 @@ test("unit_tests") {
+@@ -4048,7 +4045,6 @@ test("unit_tests") {
      "//chrome/browser/media/kaleidoscope/test/proto:test",
      "//chrome/test/data/media/engagement/preload:generate_preload_list",
      "//chrome/test/data/media/engagement/preload:test_data",
@@ -38,7 +38,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    ]
  
    data = [
-@@ -5767,7 +5763,6 @@ test("unit_tests") {
+@@ -5768,7 +5764,6 @@ test("unit_tests") {
        "//chrome/browser/chromeos:unit_tests",
        "//chromeos/ime:gencode",
      ]
@@ -46,7 +46,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      sources -=
          [ "../browser/policy/cloud/user_policy_signin_service_unittest.cc" ]
    }
-@@ -6543,7 +6538,6 @@ if (!is_android) {
+@@ -6544,7 +6539,6 @@ if (!is_android) {
      data_deps = [
        "//chrome:browser_tests_pak",
        "//ppapi:ppapi_tests",
@@ -54,7 +54,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//third_party/mesa_headers",
        "//ui/resources:ui_test_pak_data",
      ]
-@@ -7103,7 +7097,6 @@ if (!is_fuchsia && !is_android) {
+@@ -7104,7 +7098,6 @@ if (!is_fuchsia && !is_android) {
      ]
  
      data_deps = [
@@ -74,7 +74,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      include_dirs = [
 --- a/content/test/BUILD.gn
 +++ b/content/test/BUILD.gn
-@@ -1351,7 +1351,6 @@ test("content_browsertests") {
+@@ -1352,7 +1352,6 @@ test("content_browsertests") {
  
    data_deps = [
      "//content/shell:pak",
@@ -82,7 +82,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "//third_party/mesa_headers",
    ]
  
-@@ -2296,7 +2295,6 @@ test("content_unittests") {
+@@ -2297,7 +2296,6 @@ test("content_unittests") {
    ]
  
    data_deps = [

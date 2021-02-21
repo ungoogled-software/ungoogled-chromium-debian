@@ -50,7 +50,7 @@ diff -ur a/content/test/BUILD.gn b/content/test/BUILD.gn
  mojom("mojo_web_test_bindings") {
    testonly = true
    sources = [
-@@ -1228,7 +1205,6 @@
+@@ -1229,7 +1206,6 @@
  
    public_deps = [
      ":test_interfaces",
@@ -58,7 +58,7 @@ diff -ur a/content/test/BUILD.gn b/content/test/BUILD.gn
      "//content:content_resources",
      "//content:dev_ui_content_resources",
    ]
-@@ -1237,8 +1213,6 @@
+@@ -1238,8 +1214,6 @@
      ":browsertest_support",
      ":content_test_mojo_bindings",
      ":test_support",
@@ -67,7 +67,7 @@ diff -ur a/content/test/BUILD.gn b/content/test/BUILD.gn
      "//base/test:test_support",
      "//build:chromecast_buildflags",
      "//build:chromeos_buildflags",
-@@ -1665,18 +1639,6 @@
+@@ -1666,18 +1640,6 @@
    }
  }
  
