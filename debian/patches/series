@@ -67,7 +67,6 @@ inox-patchset/fix-cfi-failures-with-unbundled-libxml.patch
 fedora/enable-hardware-accelerated-mjpeg.patch
 fedora/fix-vaapi-on-intel.patch
 
-ungoogled-chromium/icu66.patch
 ungoogled-chromium/manpage.patch
 ungoogled-chromium/safebrowsing.patch
 ungoogled-chromium/explicit-python.patch
