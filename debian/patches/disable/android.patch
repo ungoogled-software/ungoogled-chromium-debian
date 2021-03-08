@@ -32,9 +32,9 @@ author: Michael Gilbert <mgilbert@debian.org>
  # Chrome can be built with any combination of v1/v2 enabled.
  # When both are enabled, we use the InterestFeedV2 feature to select which
  # one is used at runtime.
-@@ -22,8 +20,3 @@ declare_args() {
-   # Whether to include Feed V2 as a DFM in ChromeModern builds.
-   dfmify_feed_v2_modern = false
+@@ -27,8 +25,3 @@ declare_args() {
+   # doubledown. Provided for use with pinpoint.
+   override_use_doubledown_feed = "use_default"
  }
 -
 -if (is_android && android_channel != "default") {

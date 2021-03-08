@@ -1,3 +1,74 @@
+chromium (89.0.4389.82-1) unstable; urgency=medium
+
+  * New upstream stable release (closes: #984532).
+    - CVE-2021-21159: Heap buffer overflow in TabStrip. Reported by Khalil
+      Zhani
+    - CVE-2021-21160: Heap buffer overflow in WebAudio. Reported by Marcin
+      'Icewall' Noga of Cisco Talos
+    - CVE-2021-21161: Heap buffer overflow in TabStrip. Reported by Khalil
+      Zhani
+    - CVE-2021-21162: Use after free in WebRTC. Reported by Anonymous
+    - CVE-2021-21163: Insufficient data validation in Reader Mode. Reported by
+      Alison Huffman, Microsoft Browser Vulnerability Research
+    - CVE-2021-21164: Insufficient data validation in Chrome for iOS. Reported
+      by Muneaki Nishimura nishimunea
+    - CVE-2021-21165: Object lifecycle issue in audio. Reported by Alison
+      Huffman, Microsoft Browser Vulnerability Research
+    - CVE-2021-21166: Object lifecycle issue in audio. Reported by Alison
+      Huffman, Microsoft Browser Vulnerability Research
+    - CVE-2021-21167: Use after free in bookmarks. Reported by Leecraso and
+      Guang Gong of 360 Alpha Lab
+    - CVE-2021-21168: Insufficient policy enforcement in appcache. Reported by
+      Luan Herrera @lbherrera_
+    - CVE-2021-21169: Out of bounds memory access in V8. Reported by Bohan Liu
+      @P4nda20371774 and Moon Liang of Tencent Security Xuanwu Lab
+    - CVE-2021-21170: Incorrect security UI in Loader. Reported by David Erceg
+    - CVE-2021-21171: Incorrect security UI in TabStrip and Navigation.
+      Reported by Irvan Kurniawan sourc7
+    - CVE-2021-21172: Insufficient policy enforcement in File System API.
+      Reported by Maciej Pulikowski
+    - CVE-2021-21173: Side-channel information leakage in Network Internals.
+      Reported by Tom Van Goethem from imec-DistriNet, KU Leuven
+    - CVE-2021-21174: Inappropriate implementation in Referrer. Reported by
+      Ashish Gautam Kamble
+    - CVE-2021-21175: Inappropriate implementation in Site isolation. Reported
+      by Jun Kokatsu, Microsoft Browser Vulnerability Research
+    - CVE-2021-21176: Inappropriate implementation in full screen mode.
+      Reported by Luan Herrera @lbherrera_
+    - CVE-2021-21177: Insufficient policy enforcement in Autofill. Reported by
+      Abdulrahman Alqabandi, Microsoft Browser Vulnerability Research
+    - CVE-2021-21178: Inappropriate implementation in Compositing. Reported by
+      Japong
+    - CVE-2021-21179: Use after free in Network Internals. Reported by
+      Anonymous
+    - CVE-2021-21180: Use after free in tab search. Reported by Abdulrahman
+      Alqabandi, Microsoft Browser Vulnerability Research
+    - CVE-2020-27844: Heap buffer overflow in OpenJPEG. Reported by Sean
+      Campbell at Tableau
+    - CVE-2021-21181: Side-channel information leakage in autofill. Reported by
+      Xu Lin (University of Illinois at Chicago), Panagiotis Ilia University of
+      Illinois at Chicago, Jason Polakis University of Illinois at Chicago
+    - CVE-2021-21182: Insufficient policy enforcement in navigations. Reported
+      by Luan Herrera @lbherrera_
+    - CVE-2021-21183: Inappropriate implementation in performance APIs.
+      Reported by Takashi Yoneuchi @y0n3uchy
+    - CVE-2021-21184: Inappropriate implementation in performance APIs.
+      Reported by James Hartig
+    - CVE-2021-21185: Insufficient policy enforcement in extensions. Reported
+      by David Erceg
+    - CVE-2021-21186: Insufficient policy enforcement in QR scanning. Reported
+      by dhirajkumarnifty
+    - CVE-2021-21187: Insufficient data validation in URL formatting. Reported
+      by Kirtikumar Anandrao Ramchandani
+    - CVE-2021-21188: Use after free in Blink. Reported by Woojin Oh
+      @pwn_expoit of STEALIEN
+    - CVE-2021-21189: Insufficient policy enforcement in payments. Reported by
+      Khalil Zhani
+    - CVE-2021-21190: Uninitialized Use in PDFium. Reported by Zhou Aiting
+      @zhouat1 of Qihoo 360 Vulcan Team
+
+ -- Michel Le Bihan <michel@lebihan.pl>  Mon, 08 Mar 2021 09:48:03 +0100
+
 chromium (88.0.4324.182-1) unstable; urgency=medium
 
   * New upstream security release.

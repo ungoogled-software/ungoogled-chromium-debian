@@ -18,12 +18,12 @@ author: Michel Le Bihan <michel@lebihan.pl>
    build_angle_gles1_conform_tests = false
    build_angle_trace_perf_tests = false
 -  build_angle_perftests =
--      is_win || is_linux || is_chromeos || is_android || is_mac || is_fuchsia
+-      is_win || is_linux || is_chromeos || is_android || is_apple || is_fuchsia
 +  build_angle_perftests = false
  }
  
  angle_test("test_utils_unittest_helper") {
-@@ -229,43 +228,7 @@ config("angle_maybe_has_histograms") {
+@@ -258,43 +257,7 @@ config("angle_maybe_has_histograms") {
    }
  }
  
@@ -63,12 +63,12 @@ author: Michel Le Bihan <michel@lebihan.pl>
 -  test_utils = ":angle_common_test_utils_static"
 -}
 -
--if (is_win || is_linux || is_chromeos || is_android || is_mac) {
+-if (is_win || is_linux || is_chromeos || is_android || is_apple) {
 +if (false) {
    import("angle_perftests.gni")
  
    # This test suite is for perf tests that use ANGLE's internals in some direct way.
-@@ -1393,12 +1356,11 @@ group("angle_tests") {
+@@ -1443,12 +1406,11 @@ group("angle_tests") {
    testonly = true
    deps = [
      ":angle_end2end_tests",
@@ -84,10 +84,10 @@ author: Michel Le Bihan <michel@lebihan.pl>
        ":angle_white_box_tests",
 --- a/third_party/angle/gni/angle.gni
 +++ b/third_party/angle/gni/angle.gni
-@@ -147,7 +147,7 @@ declare_args() {
- }
+@@ -173,7 +173,7 @@ declare_args() {
+   # TODO(jdarpinian): Support enabling CGL and EAGL at the same time using the soft linking code. Also support disabling both for Metal-only builds.
+   angle_enable_cgl = angle_enable_gl && !angle_enable_eagl && is_apple
  
- declare_args() {
 -  angle_has_histograms = angle_has_build
 +  angle_has_histograms = false
  }

@@ -11,7 +11,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 -  base::FilePath initial_prefs;
 -  if (!base::PathService::Get(base::DIR_EXE, &initial_prefs))
 -    return base::FilePath();
--  return initial_prefs.AppendASCII(installer::kDefaultMasterPrefs);
+-  return initial_prefs.AppendASCII(installer::kLegacyInitialPrefs);
 +  return base::FilePath("/etc/chromium/master_preferences");
  }
  

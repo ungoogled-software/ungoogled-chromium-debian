@@ -1,0 +1,120 @@
+diff --git a/third_party/devtools-frontend/src/front_end/component_docs/computed_style_property/BUILD.gn b/third_party/devtools-frontend/src/front_end/component_docs/computed_style_property/BUILD.gn
+index 0588200..f29e86e 100644
+--- a/third_party/devtools-frontend/src/front_end/component_docs/computed_style_property/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/component_docs/computed_style_property/BUILD.gn
+@@ -14,7 +14,6 @@ ts_library("ts") {
+   ]
+ 
+   deps = [
+-    "../../../test/unittests/front_end/helpers",
+     "../../elements:bundle",
+   ]
+ }
+diff --git a/third_party/devtools-frontend/src/front_end/component_docs/data_grid/BUILD.gn b/third_party/devtools-frontend/src/front_end/component_docs/data_grid/BUILD.gn
+index 1b6b307..349f30d 100644
+--- a/third_party/devtools-frontend/src/front_end/component_docs/data_grid/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/component_docs/data_grid/BUILD.gn
+@@ -17,7 +17,6 @@ ts_library("ts") {
+   ]
+ 
+   deps = [
+-    "../../../test/unittests/front_end/helpers",
+     "../../component_helpers:bundle",
+     "../../ui/components:bundle",
+   ]
+diff --git a/third_party/devtools-frontend/src/front_end/component_docs/data_grid_controller/BUILD.gn b/third_party/devtools-frontend/src/front_end/component_docs/data_grid_controller/BUILD.gn
+index bf4a0a4..4fb8179 100644
+--- a/third_party/devtools-frontend/src/front_end/component_docs/data_grid_controller/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/component_docs/data_grid_controller/BUILD.gn
+@@ -14,7 +14,6 @@ ts_library("ts") {
+   ]
+ 
+   deps = [
+-    "../../../test/unittests/front_end/helpers",
+     "../../component_helpers:bundle",
+     "../../text_utils:bundle",
+     "../../ui/components:bundle",
+diff --git a/third_party/devtools-frontend/src/front_end/component_docs/issue_survey_link/BUILD.gn b/third_party/devtools-frontend/src/front_end/component_docs/issue_survey_link/BUILD.gn
+index f7abfbb..3df4c8c 100644
+--- a/third_party/devtools-frontend/src/front_end/component_docs/issue_survey_link/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/component_docs/issue_survey_link/BUILD.gn
+@@ -10,7 +10,6 @@ ts_library("ts") {
+   sources = [ "basic.ts" ]
+ 
+   deps = [
+-    "../../../test/unittests/front_end/helpers",
+     "../../component_helpers:bundle",
+     "../../issues:bundle",
+   ]
+diff --git a/third_party/devtools-frontend/src/front_end/component_docs/webvitals/BUILD.gn b/third_party/devtools-frontend/src/front_end/component_docs/webvitals/BUILD.gn
+index 117d3c5..5333f99 100644
+--- a/third_party/devtools-frontend/src/front_end/component_docs/webvitals/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/component_docs/webvitals/BUILD.gn
+@@ -10,7 +10,6 @@ ts_library("ts") {
+   sources = [ "webvitals.ts" ]
+ 
+   deps = [
+-    "../../../test/unittests/front_end/helpers",
+     "../../component_helpers:bundle",
+     "../../timeline:bundle",
+     "../../ui:bundle",
+diff --git a/third_party/devtools-frontend/src/front_end/elements/BUILD.gn b/third_party/devtools-frontend/src/front_end/elements/BUILD.gn
+index 0385f33..835e99e 100644
+--- a/third_party/devtools-frontend/src/front_end/elements/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/elements/BUILD.gn
+@@ -73,7 +73,6 @@ devtools_module("elements") {
+   ]
+ 
+   visibility = [
+-    "../../test/unittests/front_end/elements",
+     "../component_docs/*",
+   ]
+ }
+diff --git a/third_party/devtools-frontend/src/front_end/issues/BUILD.gn b/third_party/devtools-frontend/src/front_end/issues/BUILD.gn
+index 8274cf1..f650703 100644
+--- a/third_party/devtools-frontend/src/front_end/issues/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/issues/BUILD.gn
+@@ -37,7 +37,6 @@ devtools_module("issues") {
+     "../ui/components:bundle",
+   ]
+ 
+-  visibility = [ "../../test/unittests/front_end/issues" ]
+ }
+ 
+ devtools_entrypoint("bundle") {
+diff --git a/third_party/devtools-frontend/src/front_end/perf_ui/BUILD.gn b/third_party/devtools-frontend/src/front_end/perf_ui/BUILD.gn
+index e691882..b5ff37c 100644
+--- a/third_party/devtools-frontend/src/front_end/perf_ui/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/perf_ui/BUILD.gn
+@@ -36,7 +36,6 @@ devtools_module("perf_ui") {
+   ]
+ 
+   visibility = [
+-    "../../test/unittests/front_end/perf_ui",
+     "../component_docs/perf_piechart",
+   ]
+ }
+diff --git a/third_party/devtools-frontend/src/front_end/text_utils/BUILD.gn b/third_party/devtools-frontend/src/front_end/text_utils/BUILD.gn
+index d6ef85c..cba843f 100644
+--- a/third_party/devtools-frontend/src/front_end/text_utils/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/text_utils/BUILD.gn
+@@ -21,7 +21,6 @@ devtools_module("text_utils") {
+     "../root:bundle",
+   ]
+ 
+-  visibility = [ "../../test/unittests/front_end/text_utils:text_utils" ]
+ }
+ 
+ devtools_entrypoint("bundle") {
+diff --git a/third_party/devtools-frontend/src/front_end/ui/components/BUILD.gn b/third_party/devtools-frontend/src/front_end/ui/components/BUILD.gn
+index b411d8b..1e4e243 100644
+--- a/third_party/devtools-frontend/src/front_end/ui/components/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/ui/components/BUILD.gn
+@@ -27,7 +27,6 @@ devtools_module("components") {
+     "../../ui:bundle",
+   ]
+ 
+-  visibility = [ "../../../test/unittests/front_end/ui/components" ]
+ }
+ 
+ devtools_entrypoint("bundle") {

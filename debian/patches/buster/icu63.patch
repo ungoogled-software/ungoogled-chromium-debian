@@ -9,7 +9,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "unicode/uversion.h"
 +#include "unicode/dtitvfmt.h"
  
--#define V8_MINIMUM_ICU_VERSION 67
+-#define V8_MINIMUM_ICU_VERSION 68
 +#define V8_MINIMUM_ICU_VERSION 63
  
  namespace U_ICU_NAMESPACE {
@@ -499,16 +499,16 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "unicode/locid.h"
  #include "unicode/normalizer2.h"
  #include "unicode/numberformatter.h"
-@@ -430,8 +427,6 @@ std::string Intl::GetNumberingSystem(con
+@@ -430,8 +427,6 @@ std::string Intl::GetNumberingSystem(const icu::Locale& icu_locale) {
    return "latn";
  }
  
 -namespace {
 -
  Maybe<icu::Locale> CreateICULocale(const std::string& bcp47_locale) {
-   DisallowHeapAllocation no_gc;
+   DisallowGarbageCollection no_gc;
  
-@@ -447,8 +442,6 @@ Maybe<icu::Locale> CreateICULocale(const
+@@ -447,8 +442,6 @@ Maybe<icu::Locale> CreateICULocale(const std::string& bcp47_locale) {
    return Just(icu_locale);
  }
  
@@ -526,6 +526,30 @@ author: Michael Gilbert <mgilbert@debian.org>
  // Canonicalize the locale.
  // https://tc39.github.io/ecma402/#sec-canonicalizelanguagetag,
  // including type check and structural validity check.
+@@ -789,8 +789,21 @@ Maybe<std::string> CanonicalizeLanguageTag(Isolate* isolate,
+         Nothing<std::string>());
+   }
+ 
+-  // Use LocaleBuilder to validate locale.
+-  icu_locale = icu::LocaleBuilder().setLocale(icu_locale).build(error);
++  // reject attribute of wrong length.
++  if (std::strstr(icu_locale.getName(), "attribute=") != nullptr) {
++    std::string attribute =
++        icu_locale.getKeywordValue<std::string>("attribute", error);
++    if (U_SUCCESS(error) &&
++        (attribute.length() < 3 || attribute.length() > 8)) {
++      THROW_NEW_ERROR_RETURN_VALUE(
++          isolate,
++          NewRangeError(
++              MessageTemplate::kInvalidLanguageTag,
++              isolate->factory()->NewStringFromAsciiChecked(locale.c_str())),
++          Nothing<std::string>());
++    }
++  }
++
+   icu_locale.canonicalize(error);
+   if (U_FAILURE(error) || icu_locale.isBogus()) {
+     THROW_NEW_ERROR_RETURN_VALUE(
 @@ -869,8 +864,6 @@ Maybe<std::string> CanonicalizeLanguageT
    return CanonicalizeLanguageTag(isolate, locale);
  }
@@ -763,7 +787,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    }
    return Just(true);
  }
-@@ -145,16 +151,6 @@ bool IsUnicodeLanguageSubtag(const std::
+@@ -142,16 +141,6 @@ bool IsUnicodeLanguageSubtag(const std::string& value) {
    return IsAlpha(value, 2, 3) || IsAlpha(value, 5, 8);
  }
  
@@ -778,7 +802,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 -}
 -
  bool IsDigitAlphanum3(const std::string& value) {
-   return value.length() == 4 && InRange(value[0], '0', '9') &&
+   return value.length() == 4 && base::IsInRange(value[0], '0', '9') &&
           IsAlphanum(value.substr(1), 3, 3);
 @@ -170,6 +166,16 @@ bool IsExtensionSingleton(const std::str
  }
@@ -815,17 +839,22 @@ author: Michael Gilbert <mgilbert@debian.org>
    DCHECK_LT(0, bcp47_tag.length());
    DCHECK_NOT_NULL(*bcp47_tag);
    // 2. If IsStructurallyValidLanguageTag(tag) is false, throw a RangeError
-@@ -242,7 +246,8 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
+@@ -239,12 +239,11 @@ Maybe<bool> ApplyOptionsToTag(Isolate* isolate, Handle<String> tag,
      return Just(false);
    }
    UErrorCode status = U_ZERO_ERROR;
--  builder->build(status);
+-  icu::Locale canonicalized = builder->build(status);
+-  canonicalized.canonicalize(status);
 +  icu::Locale icu_locale =
 +      icu::Locale::forLanguageTag({*bcp47_tag, bcp47_tag.length()}, status);
    if (U_FAILURE(status)) {
      return Just(false);
    }
-@@ -257,11 +262,9 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
+-  builder->setLocale(canonicalized);
+ 
+   // 3. Let language be ? GetOption(options, "language", "string", undefined,
+   // undefined).
+@@ -256,11 +255,9 @@ Maybe<bool> ApplyOptionsToTag(Isolate* isolate, Handle<String> tag,
    MAYBE_RETURN(maybe_language, Nothing<bool>());
    // 4. If language is not undefined, then
    if (maybe_language.FromJust()) {
@@ -873,14 +902,20 @@ author: Michael Gilbert <mgilbert@debian.org>
    MAYBE_RETURN(maybe_apply, MaybeHandle<JSLocale>());
    if (!maybe_apply.FromJust()) {
      THROW_NEW_ERROR(isolate,
-@@ -341,12 +339,22 @@ MaybeHandle<JSLocale> JSLocale::New(Isol
+@@ -340,15 +337,22 @@ MaybeHandle<JSLocale> JSLocale::New(Isolate* isolate, Handle<Map> map,
                      JSLocale);
    }
  
+-  Maybe<bool> maybe_insert =
+-      InsertOptionsIntoLocale(isolate, options, &builder);
+-  MAYBE_RETURN(maybe_insert, MaybeHandle<JSLocale>());
 +  Maybe<std::string> maybe_locale =
 +      CanonicalizeLanguageTag(isolate, locale_str);
 +  MAYBE_RETURN(maybe_locale, MaybeHandle<JSLocale>());
-+  UErrorCode status = U_ZERO_ERROR;
+   UErrorCode status = U_ZERO_ERROR;
+-  icu::Locale icu_locale = builder.build(status);
+-
+-  icu_locale.canonicalize(status);
 +  icu::Locale icu_locale =
 +      icu::Locale::forLanguageTag(maybe_locale.FromJust().c_str(), status);
 +  if (U_FAILURE(status)) {
@@ -888,14 +923,11 @@ author: Michael Gilbert <mgilbert@debian.org>
 +                    NewRangeError(MessageTemplate::kLocaleBadParameters),
 +                    JSLocale);
 +  }
-+
-   Maybe<bool> maybe_insert =
--      InsertOptionsIntoLocale(isolate, options, &builder);
-+      InsertOptionsIntoLocale(isolate, options, &icu_locale);
-   MAYBE_RETURN(maybe_insert, MaybeHandle<JSLocale>());
--  UErrorCode status = U_ZERO_ERROR;
--  icu::Locale icu_locale = builder.build(status);
+ 
 -  if (!maybe_insert.FromJust() || U_FAILURE(status)) {
++  Maybe<bool> maybe_insert =
++      InsertOptionsIntoLocale(isolate, options, &icu_locale);
++  MAYBE_RETURN(maybe_insert, MaybeHandle<JSLocale>());
 +  if (!maybe_insert.FromJust()) {
      THROW_NEW_ERROR(isolate,
                      NewRangeError(MessageTemplate::kLocaleBadParameters),
@@ -1133,17 +1165,6 @@ author: Michael Gilbert <mgilbert@debian.org>
    V8_WARN_UNUSED_RESULT static MaybeHandle<String> FormatNumeric(
        Isolate* isolate,
        const icu::number::LocalizedNumberFormatter& number_format,
---- a/chrome/browser/ui/views/native_file_system/native_file_system_usage_bubble_view.cc
-+++ b/chrome/browser/ui/views/native_file_system/native_file_system_usage_bubble_view.cc
-@@ -28,7 +28,7 @@
- #include "content/public/browser/web_contents.h"
- #include "third_party/icu/source/common/unicode/unistr.h"
- #include "third_party/icu/source/common/unicode/utypes.h"
--#include "third_party/icu/source/i18n/unicode/listformatter.h"
-+#include <unicode/listformatter.h>
- #include "ui/base/l10n/l10n_util.h"
- #include "ui/gfx/paint_vector_icon.h"
- #include "ui/views/controls/button/image_button.h"
 --- a/v8/src/objects/js-plural-rules.cc
 +++ b/v8/src/objects/js-plural-rules.cc
 @@ -195,9 +195,7 @@ MaybeHandle<String> JSPluralRules::Resol

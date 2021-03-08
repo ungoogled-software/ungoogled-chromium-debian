@@ -55,7 +55,7 @@ bug: http://bugs.debian.org/914487
 --- a/chrome/services/file_util/BUILD.gn
 +++ b/chrome/services/file_util/BUILD.gn
 @@ -15,7 +15,6 @@ source_set("file_util") {
-     "//base",
+     "//build:chromeos_buildflags",
      "//chrome/common/safe_browsing",
      "//chrome/common/safe_browsing:archive_analyzer_results",
 -    "//chrome/common/safe_browsing:rar_analyzer",

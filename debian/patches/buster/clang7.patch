@@ -20,7 +20,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 +  if (false) {
      if (is_win) {
        ldflags += [ "/call-graph-profile-sort:no" ]
-     } else {
+     } else if (!is_apple) {
 @@ -1514,29 +1514,9 @@ config("default_warnings") {
          # Flags NaCl (Clang 3.7) and Xcode 9.2 (Clang clang-900.0.39.2) do not
          # recognize.
@@ -52,8 +52,8 @@ author: Michael Gilbert <mgilbert@debian.org>
  
          cflags_c += [
 @@ -1549,12 +1529,6 @@ config("default_warnings") {
-           cflags_objc = [ "-Wno-gnu-folding-constant" ]
-         }
+           "-Wno-implicit-fallthrough",
+         ]
  
 -        if (enable_wmax_tokens) {
 -          cflags += [ "-Wmax-tokens" ]
@@ -75,39 +75,47 @@ author: Michael Gilbert <mgilbert@debian.org>
          "-Wno-misleading-indentation",
 --- a/third_party/blink/renderer/BUILD.gn
 +++ b/third_party/blink/renderer/BUILD.gn
-@@ -46,11 +46,9 @@ config("inside_blink") {
+@@ -46,15 +46,7 @@ config("inside_blink") {
        "-Wconversion",
        "-Wno-float-conversion",
        "-Wno-sign-conversion",
 -      "-Wno-implicit-float-conversion",
 -      "-Wno-implicit-int-conversion",
+-      "-Wno-shorten-64-to-32",
      ]
- 
--    if (!is_ash || default_toolchain != "//build/toolchain/cros:target") {
-+    if (false) {
-       cflags += [ "-Wno-enum-float-conversion" ]
-     }
+-
+-    if (!is_chromeos_ash ||
+-        default_toolchain != "//build/toolchain/cros:target") {
+-      cflags += [ "-Wno-enum-float-conversion" ]
+-    }
    }
+ }
+ 
 --- a/third_party/angle/BUILD.gn
 +++ b/third_party/angle/BUILD.gn
-@@ -165,8 +165,6 @@ config("extra_warnings") {
+@@ -172,7 +172,6 @@ config("extra_warnings") {
      cflags += [
        "-Wbad-function-cast",
        "-Wconditional-uninitialized",
--      "-Wdeprecated-copy",
 -      "-Wextra-semi-stmt",
        "-Wfloat-conversion",
        "-Winconsistent-missing-destructor-override",
        "-Wmissing-field-initializers",
-@@ -175,8 +173,6 @@ config("extra_warnings") {
-       "-Wredundant-parens",
-       "-Wreturn-std-move-in-c++11",
-       "-Wshadow-field",
--      "-Wsuggest-destructor-override",
--      "-Wsuggest-override",
-       "-Wtautological-type-limit-compare",
-       "-Wundefined-reinterpret-cast",
-       "-Wunneeded-internal-declaration",
+@@ -194,14 +193,6 @@ config("extra_warnings") {
+       "-Wunreachable-code",
+       "-Wshorten-64-to-32",
+     ]
+-    if (!use_xcode_clang) {
+-      # Mac catalyst uses a clang version that doesn't have these.
+-      cflags += [
+-        "-Wdeprecated-copy",
+-        "-Wsuggest-destructor-override",
+-        "-Wsuggest-override",
+-      ]
+-    }
+   }
+ 
+   if (angle_is_winuwp) {
 --- a/third_party/angle/src/compiler/preprocessor/preprocessor.l
 +++ b/third_party/angle/src/compiler/preprocessor/preprocessor.l
 @@ -50,7 +50,6 @@ IF YOU MODIFY THIS FILE YOU ALSO NEED TO

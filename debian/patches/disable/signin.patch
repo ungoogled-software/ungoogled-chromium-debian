@@ -17,17 +17,17 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
  
 --- a/chrome/browser/ui/chrome_pages.cc
 +++ b/chrome/browser/ui/chrome_pages.cc
-@@ -474,6 +474,7 @@ GURL GetOSSettingsUrl(const std::string&
- #if !defined(OS_ANDROID) && !defined(OS_CHROMEOS)
+@@ -493,6 +493,7 @@ GURL GetOSSettingsUrl(const std::string& sub_page) {
  void ShowBrowserSignin(Browser* browser,
-                        signin_metrics::AccessPoint access_point) {
+                        signin_metrics::AccessPoint access_point,
+                        signin::ConsentLevel consent_level) {
 +#if BUILDFLAG(ENABLE_ONE_CLICK_SIGNIN)
    Profile* original_profile = browser->profile()->GetOriginalProfile();
    DCHECK(original_profile->GetPrefs()->GetBoolean(prefs::kSigninAllowed));
  
-@@ -490,6 +491,7 @@ void ShowBrowserSignin(Browser* browser,
-           ? profiles::BUBBLE_VIEW_MODE_GAIA_REAUTH
-           : profiles::BUBBLE_VIEW_MODE_GAIA_SIGNIN;
+@@ -519,6 +520,7 @@ void ShowBrowserSignin(Browser* browser,
+   }
+ 
    browser->signin_view_controller()->ShowSignin(bubble_view_mode, access_point);
 +#endif
  }

@@ -48,6 +48,23 @@
  mojom("mojo_web_test_bindings") {
    testonly = true
    sources = [
+@@ -848,16 +848,6 @@ mojom("test_interfaces") {
+   }
+ }
+ 
+-mojom("mojo_bindings_web_test_mojom") {
+-  testonly = true
+-  sources = [
+-    "data/mojo_bindings_web_test.test-mojom",
+-    "data/mojo_bindings_web_test_types.test-mojom",
+-  ]
+-  scramble_message_ids = false
+-  js_generate_struct_deserializers = true
+-}
+-
+ if (is_android) {
+   static_library("android_test_message_pump_support") {
+     testonly = true
 @@ -1228,7 +1205,6 @@ test("content_browsertests") {
  
    public_deps = [

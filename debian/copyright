@@ -57,6 +57,8 @@ Files-Excluded:
  tools/perf/page_sets/webrtc_cases/adapter.js
  tools/perf/page_sets/tough_scheduling_cases/*.min.js
  tools/page_cycler/acid3
+ tools/resultdb/result_adapter
+ tools/resultdb/.versions/result_adapter.cipd_version
  headless/test/data
  content/browser/android
  components/test/data
@@ -167,6 +169,7 @@ Files-Excluded:
  third_party/devtools-frontend/src/back_end/CXXDWARFSymbols/unittests
  third_party/libphonenumber/dist/javascript/i18n/phonenumbers/metadata.js
  third_party/libphonenumber/dist/javascript/i18n/phonenumbers/metadatalite.js
+ third_party/tflite/src/tensorflow/examples/multibox_detector/data/surfers.jpg
 
 
 Files: *

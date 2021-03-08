@@ -82,8 +82,8 @@ author: Michael Gilbert <mgilbert@debian.org>
      RTC_LOG(LS_WARNING) << "Duplicate packet inserted: " << rtp_seq_no;
 --- a/chrome/browser/chromeos/input_method/input_method_engine_base.cc
 +++ b/chrome/browser/chromeos/input_method/input_method_engine_base.cc
-@@ -123,7 +123,7 @@ void GetExtensionKeyboardEventFromKeyEve
- }
+@@ -39,7 +39,7 @@ const char kErrorWrongContext[] = "Context is not active.";
+ const char kErrorInvalidValue[] = "Argument '%s' with value '%d' is not valid.";
  
  bool IsUint32Value(int i) {
 -  return 0 <= i && i <= std::numeric_limits<uint32_t>::max();

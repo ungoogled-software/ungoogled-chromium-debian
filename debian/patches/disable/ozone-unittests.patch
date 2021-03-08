@@ -30,11 +30,11 @@
  
 --- a/ui/views/BUILD.gn
 +++ b/ui/views/BUILD.gn
-@@ -1332,11 +1332,6 @@ test("views_unittests") {
+@@ -1352,11 +1352,6 @@ test("views_unittests") {
      }
    }
  
--  if (is_linux && use_ozone) {
+-  if ((is_linux || is_chromeos_lacros) && use_ozone) {
 -    data_deps +=
 -        [ "//testing/buildbot/filters:linux_ozone_views_unittests_filters" ]
 -  }
