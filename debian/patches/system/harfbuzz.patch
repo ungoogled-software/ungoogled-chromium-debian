@@ -51,15 +51,15 @@ author: Michael Gilbert <mgilbert@debian.org>
  sk_sp<SkData> SerializeImage(SkImage* image, void* ctx) {
 --- a/components/paint_preview/common/BUILD.gn
 +++ b/components/paint_preview/common/BUILD.gn
-@@ -23,8 +23,6 @@ if (!is_ios) {
-       "serial_utils.h",
-       "serialized_recording.cc",
-       "serialized_recording.h",
--      "subset_font.cc",
--      "subset_font.h",
-       "version.cc",
-       "version.h",
-     ]
+@@ -26,8 +26,6 @@ source_set("common") {
+     "serial_utils.h",
+     "serialized_recording.cc",
+     "serialized_recording.h",
+-    "subset_font.cc",
+-    "subset_font.h",
+     "version.cc",
+     "version.h",
+   ]
 --- a/third_party/skia/BUILD.gn
 +++ b/third_party/skia/BUILD.gn
 @@ -989,7 +989,6 @@ optional("pdf") {

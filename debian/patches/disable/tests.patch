@@ -1,16 +1,3 @@
---- a/chrome/test/BUILD.gn
-+++ b/chrome/test/BUILD.gn
-@@ -55,10 +55,6 @@ if (is_android) {
- # into the build.
- group("test") {
-   testonly = true
--
--  if (enable_extensions) {
--    deps = [ "//chrome/common/extensions/docs/server2:extension_docserver_python_unittests" ]
--  }
- }
- 
- group("policy_testserver_pyproto") {
 --- a/media/BUILD.gn
 +++ b/media/BUILD.gn
 @@ -159,7 +159,6 @@ test("media_unittests") {
@@ -23,7 +10,7 @@
      "//media/muxers:unit_tests",
 --- a/media/gpu/BUILD.gn
 +++ b/media/gpu/BUILD.gn
-@@ -493,57 +493,6 @@ static_library("test_support") {
+@@ -507,66 +507,6 @@ static_library("test_support") {
    ]
  }
  
@@ -44,7 +31,7 @@
 -  if (proprietary_codecs && enable_platform_hevc) {
 -    sources += [ "h265_decoder_unittest.cc" ]
 -  }
--  if (is_ash && (use_v4l2_codec || use_vaapi)) {
+-  if (is_chromeos_ash && (use_v4l2_codec || use_vaapi)) {
 -    deps += [ "//media/gpu/chromeos:unit_tests" ]
 -  }
 -  if (use_vaapi) {
@@ -58,6 +45,15 @@
 -  if (use_v4l2_codec || use_vaapi) {
 -    sources += [ "vp8_decoder_unittest.cc" ]
 -  }
+-
+-  if ((is_chromeos_ash && use_vaapi) || is_win) {
+-    sources += [ "av1_decoder_unittest.cc" ]
+-    deps += [
+-      "//build:chromeos_buildflags",
+-      "//third_party/ffmpeg",
+-    ]
+-  }
+-
 -  if (is_win && enable_library_cdms) {
 -    sources += [
 -      "windows/d3d11_copying_texture_wrapper_unittest.cc",
@@ -84,8 +80,8 @@
 --- a/third_party/devtools-frontend/src/BUILD.gn
 +++ b/third_party/devtools-frontend/src/BUILD.gn
 @@ -226,7 +226,6 @@ devtools_frontend_resources_deps = [
+ devtools_frontend_resources_deps = [
    ":build_release_devtools",
-   ":devtools_extension_api",
    "front_end",
 -#  "test",
  ]

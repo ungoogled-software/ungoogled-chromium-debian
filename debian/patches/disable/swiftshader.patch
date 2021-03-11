@@ -23,14 +23,14 @@ author: Michael Gilbert <mgilbert@debian.org>
        angle_has_build &&
        ((is_win && !angle_is_winuwp) ||
         (is_linux && (angle_use_x11 || angle_use_vulkan_display) &&
-@@ -308,7 +308,6 @@ template("angle_test") {
-                     "$angle_root:angle_common",
-                     "$angle_root:includes",
-                     "$angle_root/util:angle_test_utils",
--                    "$angle_root/third_party/rapidjson:rapidjson",
-                     "//testing/gmock",
-                     "//testing/gtest",
-                     "//third_party/googletest:gmock",
+@@ -360,7 +360,6 @@ if (angle_standalone || build_with_chromium) {
+                       "$angle_root:angle_common",
+                       "$angle_root:includes",
+                       "$angle_root/util:angle_test_utils",
+-                      "$angle_root/third_party/rapidjson:rapidjson",
+                       "//testing/gmock",
+                       "//testing/gtest",
+                       "//third_party/googletest:gmock",
 --- a/gpu/vulkan/features.gni
 +++ b/gpu/vulkan/features.gni
 @@ -13,5 +13,5 @@ declare_args() {

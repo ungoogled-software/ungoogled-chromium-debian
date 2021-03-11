@@ -31,7 +31,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        ]
  
 @@ -4048,7 +4045,6 @@ test("unit_tests") {
-     "//chrome/browser/media/kaleidoscope/test/proto:test",
+   data_deps = [
      "//chrome/test/data/media/engagement/preload:generate_preload_list",
      "//chrome/test/data/media/engagement/preload:test_data",
 -    "//testing/buildbot/filters:unit_tests_filters",
