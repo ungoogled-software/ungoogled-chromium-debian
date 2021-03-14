@@ -1,6 +1,6 @@
 --- a/chrome/browser/ui/views/chrome_browser_main_extra_parts_views_linux.cc
 +++ b/chrome/browser/ui/views/chrome_browser_main_extra_parts_views_linux.cc
-@@ -86,9 +86,11 @@ void ChromeBrowserMainExtraPartsViewsLin
+@@ -107,9 +107,11 @@ void ChromeBrowserMainExtraPartsViewsLin
    views::LinuxUI::SetInstance(linux_ui);
    linux_ui->Initialize();
  

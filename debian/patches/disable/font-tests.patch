@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/skia/BUILD.gn
 +++ b/skia/BUILD.gn
-@@ -873,7 +873,7 @@ group("test_fonts_resources") {
+@@ -874,7 +874,7 @@ group("test_fonts_resources") {
    if (is_apple) {
      deps += [ ":test_fonts_bundle_data" ]
      data_deps += [ ":test_fonts_bundle_data" ]
@@ -14,7 +14,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    }
 --- a/base/test/BUILD.gn
 +++ b/base/test/BUILD.gn
-@@ -183,10 +183,6 @@ static_library("test_support") {
+@@ -195,10 +195,6 @@ static_library("test_support") {
    if (is_linux || is_chromeos) {
      sources += [ "test_file_util_linux.cc" ]
      public_deps += [ ":fontconfig_util_linux" ]
@@ -25,7 +25,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    }
  
    if (is_mac) {
-@@ -433,9 +429,6 @@ if (is_linux || is_chromeos) {
+@@ -445,9 +441,6 @@ if (is_linux || is_chromeos) {
        testonly = true
        tool = ":generate_fontconfig_caches"
  

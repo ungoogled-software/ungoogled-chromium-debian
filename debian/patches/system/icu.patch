@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/net/BUILD.gn
 +++ b/net/BUILD.gn
-@@ -10,7 +10,6 @@ import("//build/config/features.gni")
+@@ -11,7 +11,6 @@ import("//build/config/features.gni")
  import("//net/features.gni")
  import("//testing/libfuzzer/fuzzer_test.gni")
  import("//testing/test.gni")

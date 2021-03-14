@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/media/base/supported_types.cc
 +++ b/media/base/supported_types.cc
-@@ -19,8 +19,8 @@
+@@ -20,8 +20,8 @@
  #if BUILDFLAG(ENABLE_LIBVPX)
  // TODO(dalecurtis): This technically should not be allowed in media/base. See
  // TODO below about moving outside of base.
@@ -742,7 +742,7 @@ author: Michael Gilbert <mgilbert@debian.org>
                               nullptr);
 --- a/third_party/webrtc/modules/video_coding/codecs/vp9/libvpx_vp9_encoder.h
 +++ b/third_party/webrtc/modules/video_coding/codecs/vp9/libvpx_vp9_encoder.h
-@@ -133,7 +133,6 @@ class VP9EncoderImpl : public VP9Encoder
+@@ -132,7 +132,6 @@ class VP9EncoderImpl : public VP9Encoder
    const bool trusted_rate_controller_;
    bool layer_buffering_;
    const bool full_superframe_drop_;
@@ -762,7 +762,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      default: {
        rtc::scoped_refptr<I420BufferInterface> i420_image =
            input_image->ToI420();
-@@ -1240,8 +1237,6 @@ void LibvpxVp8Encoder::MaybeUpdatePixelF
+@@ -1256,8 +1253,6 @@ void LibvpxVp8Encoder::MaybeUpdatePixelF
          << "Not all raw images had the right format!";
      return;
    }
@@ -771,7 +771,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    for (size_t i = 0; i < raw_images_.size(); ++i) {
      vpx_image_t& img = raw_images_[i];
      auto d_w = img.d_w;
-@@ -1288,7 +1283,6 @@ void LibvpxVp8Encoder::PrepareI420Image(
+@@ -1304,7 +1299,6 @@ void LibvpxVp8Encoder::PrepareI420Image(
  
  void LibvpxVp8Encoder::PrepareNV12Image(const NV12BufferInterface* frame) {
    RTC_DCHECK(!raw_images_.empty());
@@ -969,7 +969,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    SEQUENCE_CHECKER(sequence_checker_);
 --- a/third_party/blink/renderer/modules/mediarecorder/vpx_encoder.cc
 +++ b/third_party/blink/renderer/modules/mediarecorder/vpx_encoder.cc
-@@ -72,14 +72,6 @@ void VpxEncoder::EncodeOnEncodingTaskRun
+@@ -73,14 +73,6 @@ void VpxEncoder::EncodeOnEncodingTaskRun
    TRACE_EVENT0("media", "VpxEncoder::EncodeOnEncodingTaskRunner");
    DCHECK_CALLED_ON_VALID_SEQUENCE(encoding_sequence_checker_);
  
@@ -984,7 +984,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    const gfx::Size frame_size = frame->visible_rect().size();
    base::TimeDelta duration = EstimateFrameDuration(*frame);
    const media::WebmMuxer::VideoParameters video_params(frame);
-@@ -95,18 +87,6 @@ void VpxEncoder::EncodeOnEncodingTaskRun
+@@ -96,18 +88,6 @@ void VpxEncoder::EncodeOnEncodingTaskRun
    std::string data;
    std::string alpha_data;
    switch (frame->format()) {
@@ -1003,7 +1003,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      case media::PIXEL_FORMAT_I420: {
        last_frame_had_alpha_ = false;
        DoEncode(encoder_.get(), frame_size, frame->data(VideoFrame::kYPlane),
-@@ -195,7 +175,7 @@ void VpxEncoder::DoEncode(vpx_codec_ctx_
+@@ -196,7 +176,7 @@ void VpxEncoder::DoEncode(vpx_codec_ctx_
                            bool* const keyframe,
                            vpx_img_fmt_t img_fmt) {
    DCHECK_CALLED_ON_VALID_SEQUENCE(encoding_sequence_checker_);

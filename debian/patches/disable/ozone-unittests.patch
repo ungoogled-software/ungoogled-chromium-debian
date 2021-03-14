@@ -1,6 +1,6 @@
 --- a/ui/ozone/BUILD.gn
 +++ b/ui/ozone/BUILD.gn
-@@ -340,19 +340,6 @@ action("generate_test_support_constructo
+@@ -341,19 +341,6 @@ action("generate_test_support_constructo
    deps = [ ":generate_ozone_platform_list" ]
  }
  
@@ -20,7 +20,7 @@
  # X11 backend has its own test suite only built when we are using the x11
  # backend.
  if (ozone_platform_x11) {
-@@ -381,7 +368,6 @@ group("unittests") {
+@@ -382,7 +369,6 @@ group("unittests") {
    visibility += [ "*" ]
  
    deps = [

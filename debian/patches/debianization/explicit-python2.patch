@@ -5263,7 +5263,7 @@ index 64b7522..510cb83 100755
 --- a/testing/xvfb.py
 +++ b/testing/xvfb.py
 @@ -1,4 +1,4 @@
--#!/usr/bin/env python
+-#!/usr/bin/env vpython
 +#!/usr/bin/env python2
  # Copyright (c) 2012 The Chromium Authors. All rights reserved.
  # Use of this source code is governed by a BSD-style license that can be

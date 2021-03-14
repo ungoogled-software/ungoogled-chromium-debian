@@ -9,7 +9,7 @@ Source: https://bazaar.launchpad.net/~chromium-team/chromium-browser/disco-dev/v
 
 --- a/chrome/common/chrome_paths.cc
 +++ b/chrome/common/chrome_paths.cc
-@@ -339,6 +339,11 @@ bool PathProvider(int key, base::FilePath* result) {
+@@ -339,6 +339,15 @@ bool PathProvider(int key, base::FilePath* result) {
  #if (defined(OS_LINUX) || defined(OS_CHROMEOS)) && \
      BUILDFLAG(BUNDLE_WIDEVINE_CDM)
      case chrome::DIR_BUNDLED_WIDEVINE_CDM:

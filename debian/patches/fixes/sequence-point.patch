@@ -27,7 +27,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      // Introduce an element of randomness in the switching interval to make
 --- a/chrome/browser/notifications/scheduler/internal/impression_history_tracker.cc
 +++ b/chrome/browser/notifications/scheduler/internal/impression_history_tracker.cc
-@@ -412,7 +412,7 @@ void ImpressionHistoryTrackerImpl::Apply
+@@ -415,7 +415,7 @@ void ImpressionHistoryTrackerImpl::Apply
  
    // Increase |current_max_daily_show| by 1.
    client_state->current_max_daily_show =

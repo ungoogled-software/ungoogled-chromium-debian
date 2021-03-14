@@ -79,7 +79,7 @@
    test("video_decode_accelerator_tests") {
 --- a/third_party/devtools-frontend/src/BUILD.gn
 +++ b/third_party/devtools-frontend/src/BUILD.gn
-@@ -226,7 +226,6 @@ devtools_frontend_resources_deps = [
+@@ -212,7 +212,6 @@ devtools_frontend_resources_deps = [
  devtools_frontend_resources_deps = [
    ":build_release_devtools",
    "front_end",

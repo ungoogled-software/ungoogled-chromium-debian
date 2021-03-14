@@ -62,7 +62,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    ]
 --- a/third_party/skia/BUILD.gn
 +++ b/third_party/skia/BUILD.gn
-@@ -989,7 +989,6 @@ optional("pdf") {
+@@ -1039,7 +1039,6 @@ optional("pdf") {
    sources_when_disabled = [ "src/pdf/SkDocument_PDF_None.cpp" ]
    if (skia_use_icu && skia_use_harfbuzz && skia_pdf_subset_harfbuzz) {
      deps += [ "//third_party/harfbuzz" ]

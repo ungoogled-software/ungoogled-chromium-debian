@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -482,7 +482,7 @@ group("gn_all") {
+@@ -479,7 +479,7 @@ group("gn_all") {
      ]
    }
  
@@ -14,7 +14,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    }
 --- a/third_party/angle/gni/angle.gni
 +++ b/third_party/angle/gni/angle.gni
-@@ -108,7 +108,7 @@ declare_args() {
+@@ -114,7 +114,7 @@ declare_args() {
    # ANGLE Vulkan backend on Android requires API level 26, i.e. Oreo, due to
    # Vulkan Validation Layers compatibility issues, see http://crrev/c/1405714.
    # Otherwise, API level 24 would have been enough.
