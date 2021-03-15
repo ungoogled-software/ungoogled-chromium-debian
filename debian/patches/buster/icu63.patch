@@ -1,6 +1,574 @@
 description: maintain compatibility with icu 6.3
 author: Michael Gilbert <mgilbert@debian.org>
 
+--- b/chrome/browser/web_applications/BUILD.gn
++++ a/chrome/browser/web_applications/BUILD.gn
+@@ -338,7 +338,6 @@
+     ":web_applications_unit_tests",
+     "//chrome/browser/web_applications/components:unit_tests",
+     "//chrome/browser/web_applications/extensions:unit_tests",
+-    "//chrome/browser/web_applications/preinstalled_web_apps:unit_tests",
+   ]
+ }
+ 
+--- b/chrome/browser/web_applications/preinstalled_web_apps/BUILD.gn
++++ a/chrome/browser/web_applications/preinstalled_web_apps/BUILD.gn
+@@ -17,7 +17,6 @@ source_set("preinstalled_web_apps") {
+     "//base",
+     "//build:branding_buildflags",
+     "//build:chromeos_buildflags",
+-    "//chrome/browser:browser_process",
+     "//chrome/browser/web_applications/components",
+     "//chrome/common:non_code_constants",
+     "//skia",
+@@ -40,16 +39,3 @@
+     deps += [ "//chrome/browser/resources:preinstalled_web_apps_resources" ]
+   }
+ }
+-
+-source_set("unit_tests") {
+-  testonly = true
+-
+-  sources = [ "preinstalled_web_app_utils_unittest.cc" ]
+-
+-  deps = [
+-    "//chrome/browser:browser_process",
+-    "//chrome/browser/web_applications/preinstalled_web_apps",
+-    "//skia",
+-    "//testing/gtest",
+-  ]
+-}
+--- b/chrome/browser/web_applications/preinstalled_web_apps/google_docs.cc
++++ a/chrome/browser/web_applications/preinstalled_web_apps/google_docs.cc
+@@ -13,90 +13,6 @@
+ 
+ namespace web_app {
+ 
+-namespace {
+-
+-// clang-format off
+-constexpr Translation kNameTranslations[] = {
+-    {"af", u8"Dokumente"},
+-    {"am", u8"ሰነዶች"},
+-    {"ar", u8"مستندات"},
+-    {"hy", u8"Փաստաթղթեր"},
+-    {"az", u8"Sənəd"},
+-    {"eu", u8"Dokumentuak"},
+-    {"be", u8"Дакументы"},
+-    {"bn", u8"Docs"},
+-    {"bg", u8"Документи"},
+-    {"my", u8"Docs"},
+-    {"ca", u8"Documents"},
+-    {"zh-HK", u8"Google 文件"},
+-    {"zh-CN", u8"Google 文档"},
+-    {"zh-TW", u8"文件"},
+-    {"hr", u8"Dokumenti"},
+-    {"cs", u8"Dokumenty"},
+-    {"da", u8"Docs"},
+-    {"nl", u8"Documenten"},
+-    {"en-AU", u8"Docs"},
+-    {"en-GB", u8"Docs"},
+-    {"et", u8"Dokumendid"},
+-    {"fil", u8"Docs"},
+-    {"fi", u8"Docs"},
+-    {"fr", u8"Docs"},
+-    {"fr-CA", u8"Documents"},
+-    {"gl", u8"Documentos"},
+-    {"ka", u8"Docs"},
+-    {"de", u8"Dokumente"},
+-    {"el", u8"Έγγραφα"},
+-    {"gu", u8"Docs"},
+-    {"iw", u8"Docs"},
+-    {"hi", u8"Docs"},
+-    {"hu", u8"Dokumentumok"},
+-    {"is", u8"Skjöl"},
+-    {"id", u8"Dokumen"},
+-    {"it", u8"Documenti"},
+-    {"ja", u8"ドキュメント"},
+-    {"kn", u8"Docs"},
+-    {"kk", u8"Құжаттар"},
+-    {"km", u8"ឯកសារ"},
+-    {"ko", u8"문서"},
+-    {"lo", u8"ເອກະສານ"},
+-    {"lv", u8"Dokumenti"},
+-    {"lt", u8"Dokumentai"},
+-    {"ms", u8"Dokumen"},
+-    {"ml", u8"Docs"},
+-    {"mr", u8"Docs"},
+-    {"mn", u8"Docs"},
+-    {"ne", u8"कागजात"},
+-    {"no", u8"Dokumenter"},
+-    {"or", u8"Docs"},
+-    {"fa", u8"سندنگار"},
+-    {"pl", u8"Dokumenty"},
+-    {"pt-BR", u8"Textos"},
+-    {"pt-PT", u8"Docs"},
+-    {"pa", u8"Docs"},
+-    {"ro", u8"Documente"},
+-    {"ru", u8"Документы"},
+-    {"sr", u8"Документи"},
+-    {"si", u8"Docs"},
+-    {"sk", u8"Dokumenty"},
+-    {"sl", u8"Dokumenti"},
+-    {"es", u8"Documentos"},
+-    {"es-419", u8"Documentos"},
+-    {"sw", u8"Hati za Google"},
+-    {"sv", u8"Dokument"},
+-    {"ta", u8"Docs"},
+-    {"te", u8"Docs"},
+-    {"th", u8"เอกสาร"},
+-    {"tr", u8"Dokümanlar"},
+-    {"uk", u8"Документи"},
+-    {"ur", u8"Docs"},
+-    {"vi", u8"Tài liệu"},
+-    {"cy", u8"Docs"},
+-    {"zu", u8"Amadokhumenti"},
+-};
+-// clang-format on
+-
+-}  // namespace
+-
+ ExternalInstallOptions GetConfigForGoogleDocs() {
+   ExternalInstallOptions options(
+       /*install_url=*/GURL(
+@@ -111,8 +27,7 @@
+   options.only_use_app_info_factory = true;
+   options.app_info_factory = base::BindRepeating([]() {
+     auto info = std::make_unique<WebApplicationInfo>();
++    info->title = base::UTF8ToUTF16("Docs");
+-    info->title =
+-        base::UTF8ToUTF16(GetTranslatedName("Docs", kNameTranslations));
+     info->start_url =
+         GURL("https://docs.google.com/document/?usp=installed_webapp");
+     info->scope = GURL("https://docs.google.com/document/");
+--- b/chrome/browser/web_applications/preinstalled_web_apps/google_drive.cc
++++ a/chrome/browser/web_applications/preinstalled_web_apps/google_drive.cc
+@@ -13,93 +13,6 @@
+ 
+ namespace web_app {
+ 
+-namespace {
+-
+-// clang-format off
+-constexpr Translation kNameTranslations[] = {
+-    {"af", u8"Google Drive"},
+-    {"sq", u8"Disku i Google"},
+-    {"am", u8"Google Drive"},
+-    {"ar", u8"Google Drive"},
+-    {"hy", u8"Google Drive"},
+-    {"az", u8"Google Disk"},
+-    {"eu", u8"Google Drive"},
+-    {"be", u8"Google Дыск"},
+-    {"bn", u8"Google Drive"},
+-    {"bs", u8"Google Disk"},
+-    {"bg", u8"Google Диск"},
+-    {"my", u8"Google Drive"},
+-    {"ca", u8"Google Drive"},
+-    {"zh-HK", u8"Google 雲端硬碟"},
+-    {"zh-CN", u8"Google 云端硬盘"},
+-    {"zh-TW", u8"Google 雲端硬碟"},
+-    {"hr", u8"Google disk"},
+-    {"cs", u8"Disk Google"},
+-    {"da", u8"Google Drev"},
+-    {"nl", u8"Google Drive"},
+-    {"en-GB", u8"Google Drive"},
+-    {"et", u8"Google Drive"},
+-    {"fil", u8"Google Drive"},
+-    {"fi", u8"Google Drive"},
+-    {"fr-CA", u8"Google Disque"},
+-    {"fr", u8"Google Drive"},
+-    {"gl", u8"Google Drive"},
+-    {"ka", u8"Google Drive"},
+-    {"de", u8"Google Drive"},
+-    {"el", u8"Google Drive"},
+-    {"gu", u8"Google Drive"},
+-    {"iw", u8"Google Drive"},
+-    {"hi", u8"Google Drive"},
+-    {"hu", u8"Google Drive"},
+-    {"is", u8"Google Drive"},
+-    {"id", u8"Google Drive"},
+-    {"it", u8"Google Drive"},
+-    {"ja", u8"Google ドライブ"},
+-    {"kn", u8"Google Drive"},
+-    {"kk", u8"Google Drive"},
+-    {"km", u8"Google ថាស"},
+-    {"ko", u8"Google 드라이브"},
+-    {"ky", u8"Google Drive"},
+-    {"lo", u8"Google Drive"},
+-    {"lv", u8"Google disks"},
+-    {"lt", u8"„Google“ diskas"},
+-    {"ms", u8"Google Drive"},
+-    {"ml", u8"Google Drive"},
+-    {"mr", u8"Google Drive"},
+-    {"mn", u8"Google Драйв"},
+-    {"ne", u8"Google Drive"},
+-    {"no", u8"Google Disk"},
+-    {"fa", u8"Google Drive"},
+-    {"pl", u8"Dysk Google"},
+-    {"pt-BR", u8"Google Drive"},
+-    {"pt-PT", u8"Google Drive"},
+-    {"pa", u8"Google Drive"},
+-    {"ro", u8"Google Drive"},
+-    {"ru", u8"Google Диск"},
+-    {"sr", u8"Google диск"},
+-    {"si", u8"Google Drive"},
+-    {"sk", u8"Disk Google"},
+-    {"sl", u8"Google Drive"},
+-    {"es-419", u8"Google Drive"},
+-    {"es", u8"Google Drive"},
+-    {"sw", u8"Hifadhi ya Google"},
+-    {"sv", u8"Google Drive"},
+-    {"ta", u8"Google Drive"},
+-    {"te", u8"Google Drive"},
+-    {"th", u8"Google ไดรฟ์"},
+-    {"tr", u8"Google Drive"},
+-    {"uk", u8"Google Диск"},
+-    {"ur", u8"Google Drive"},
+-    {"uz", u8"Google Drive"},
+-    {"vi", u8"Google Drive"},
+-    {"cy", u8"Google Drive"},
+-    {"zu", u8"Google Drayivu"},
+-    {"zu", u8"Drayivu"},
+-};
+-// clang-format on
+-
+-}  // namespace
+-
+ ExternalInstallOptions GetConfigForGoogleDrive() {
+   ExternalInstallOptions options(
+       /*install_url=*/GURL(
+@@ -116,8 +29,7 @@ ExternalInstallOptions GetConfigForGoogleDrive() {
+   options.only_use_app_info_factory = true;
+   options.app_info_factory = base::BindRepeating([]() {
+     auto info = std::make_unique<WebApplicationInfo>();
+-    info->title =
+-        base::UTF8ToUTF16(GetTranslatedName("Google Drive", kNameTranslations));
++    info->title = base::UTF8ToUTF16("Google Drive");
+     info->start_url = GURL("https://drive.google.com/?lfhs=2");
+     info->scope = GURL("https://drive.google.com/");
+     info->display_mode = DisplayMode::kStandalone;
+--- b/chrome/browser/web_applications/preinstalled_web_apps/google_sheets.cc
++++ a/chrome/browser/web_applications/preinstalled_web_apps/google_sheets.cc
+@@ -13,88 +13,6 @@
+ 
+ namespace web_app {
+ 
+-namespace {
+-
+-// clang-format off
+-constexpr Translation kNameTranslations[] = {
+-    {"af", u8"Blaaie"},
+-    {"am", u8"ሉሆች"},
+-    {"ar", u8"جداول البيانات"},
+-    {"hy", u8"Աղյուսակներ"},
+-    {"az", u8"Cədvəl"},
+-    {"eu", u8"Kalkulu-orriak"},
+-    {"be", u8"Табліцы"},
+-    {"bn", u8"Sheets"},
+-    {"bg", u8"Таблици"},
+-    {"my", u8"စာမျက်နှာများ"},
+-    {"ca", u8"Fulls de càlcul"},
+-    {"zh-HK", u8"試算表"},
+-    {"zh-CN", u8"表格"},
+-    {"zh-TW", u8"試算表"},
+-    {"hr", u8"Listovi"},
+-    {"cs", u8"Tabulky"},
+-    {"da", u8"Regneark"},
+-    {"nl", u8"Spreadsheets"},
+-    {"en-GB", u8"Sheets"},
+-    {"et", u8"Lehed"},
+-    {"fil", u8"Mga Sheet"},
+-    {"fi", u8"Sheets"},
+-    {"fr", u8"Feuilles de calcul"},
+-    {"fr-CA", u8"Feuilles de calcul"},
+-    {"gl", u8"Follas de cálculo"},
+-    {"ka", u8"Sheets"},
+-    {"de", u8"Tabellen"},
+-    {"el", u8"Υπολογιστικά φύλλα"},
+-    {"gu", u8"Sheets"},
+-    {"iw", u8"Sheets"},
+-    {"hi", u8"Sheets"},
+-    {"hu", u8"Táblázatok"},
+-    {"is", u8"Töflureiknar"},
+-    {"id", u8"Spreadsheet"},
+-    {"it", u8"Fogli"},
+-    {"ja", u8"スプレッドシート"},
+-    {"kn", u8"Sheets"},
+-    {"kk", u8"Sheets"},
+-    {"km", u8"បញ្ជី"},
+-    {"ko", u8"스프레드시트"},
+-    {"lo", u8"​ຊີດ"},
+-    {"lv", u8"Izklājlapas"},
+-    {"lt", u8"Skaičiuoklės"},
+-    {"ms", u8"Helaian"},
+-    {"ml", u8"Sheets"},
+-    {"mr", u8"Sheets"},
+-    {"mn", u8"Хүснэгт"},
+-    {"ne", u8"पाना"},
+-    {"no", u8"Regneark"},
+-    {"fa", u8"کاربرگ‌نگار"},
+-    {"pl", u8"Arkusze"},
+-    {"pt-BR", u8"Planilhas"},
+-    {"pt-PT", u8"Sheets"},
+-    {"pa", u8"Sheets"},
+-    {"ro", u8"Foi de calcul"},
+-    {"ru", u8"Таблица"},
+-    {"sr", u8"Табеле"},
+-    {"si", u8"Sheets"},
+-    {"sk", u8"Tabuľky"},
+-    {"sl", u8"Preglednice"},
+-    {"es", u8"Hojas de cálculo"},
+-    {"es-419", u8"Hojas de cálculo"},
+-    {"sw", u8"Majedwali"},
+-    {"sv", u8"Kalkylark"},
+-    {"ta", u8"Sheets"},
+-    {"te", u8"షీట్‌లు"},
+-    {"th", u8"ชีต"},
+-    {"tr", u8"E-Tablolar"},
+-    {"uk", u8"Таблиці"},
+-    {"ur", u8"شیٹس"},
+-    {"vi", u8"Trang tính"},
+-    {"cy", u8"Dalenni"},
+-    {"zu", u8"AmaSpredishithi"},
+-};
+-// clang-format on
+-
+-}  // namespace
+-
+ ExternalInstallOptions GetConfigForGoogleSheets() {
+   ExternalInstallOptions options(
+       /*install_url=*/GURL("https://docs.google.com/spreadsheets/"
+@@ -109,9 +27,7 @@
+   options.only_use_app_info_factory = true;
+   options.app_info_factory = base::BindRepeating([]() {
+     auto info = std::make_unique<WebApplicationInfo>();
++    info->title = base::UTF8ToUTF16("Sheets");
+-    info->title =
+-        base::UTF8ToUTF16(GetTranslatedName("Sheets", kNameTranslations));
+-
+     info->start_url =
+         GURL("https://docs.google.com/spreadsheets/?usp=installed_webapp");
+     info->scope = GURL("https://docs.google.com/spreadsheets/");
+--- b/chrome/browser/web_applications/preinstalled_web_apps/google_slides.cc
++++ a/chrome/browser/web_applications/preinstalled_web_apps/google_slides.cc
+@@ -13,88 +13,6 @@
+ 
+ namespace web_app {
+ 
+-namespace {
+-
+-// clang-format off
+-constexpr Translation kNameTranslations[] = {
+-    {"af", u8"Skyfies"},
+-    {"am", u8"ስላይዶች"},
+-    {"ar", u8"العروض التقديمية"},
+-    {"hy", u8"Սլայդներ"},
+-    {"az", u8"Slaydlar"},
+-    {"eu", u8"Aurkezpenak"},
+-    {"be", u8"Прэзентацыі"},
+-    {"bn", u8"Slides"},
+-    {"bg", u8"Презентации"},
+-    {"my", u8"ဆလိုက်များ"},
+-    {"ca", u8"Presentacions"},
+-    {"zh-HK", u8"簡報"},
+-    {"zh-CN", u8"幻灯片"},
+-    {"zh-TW", u8"簡報"},
+-    {"hr", u8"Prezentacije"},
+-    {"cs", u8"Prezentace"},
+-    {"da", u8"Præsentationer"},
+-    {"nl", u8"Presentaties"},
+-    {"en-GB", u8"Slides"},
+-    {"et", u8"Esitlused"},
+-    {"fil", u8"Mga Slide"},
+-    {"fi", u8"Slides"},
+-    {"fr", u8"Présentations"},
+-    {"fr-CA", u8"Présentations"},
+-    {"gl", u8"Presentacións"},
+-    {"ka", u8"Slides"},
+-    {"de", u8"Präsentationen"},
+-    {"el", u8"Παρουσιάσεις"},
+-    {"gu", u8"Slides"},
+-    {"iw", u8"Slides"},
+-    {"hi", u8"Slides"},
+-    {"hu", u8"Diák"},
+-    {"is", u8"Skyggnur"},
+-    {"id", u8"Slide"},
+-    {"it", u8"Presentazioni"},
+-    {"ja", u8"スライド"},
+-    {"kn", u8"Slides"},
+-    {"kk", u8"Slides"},
+-    {"km", u8"បទបង្ហាញ"},
+-    {"ko", u8"프레젠테이션"},
+-    {"lo", u8"ສະໄລ້"},
+-    {"lv", u8"Prezentācijas"},
+-    {"lt", u8"Skaidrės"},
+-    {"ms", u8"Slaid"},
+-    {"ml", u8"Slides"},
+-    {"mr", u8"Slides"},
+-    {"mn", u8"Слайд"},
+-    {"ne", u8"स्लाइड"},
+-    {"no", u8"Presentasjoner"},
+-    {"fa", u8"اسلایدنگار"},
+-    {"pl", u8"Prezentacje"},
+-    {"pt-BR", u8"Apresentações"},
+-    {"pt-PT", u8"Slides"},
+-    {"pa", u8"Slides"},
+-    {"ro", u8"Prezentări"},
+-    {"ru", u8"Презентация"},
+-    {"sr", u8"Презентације"},
+-    {"si", u8"Slides"},
+-    {"sk", u8"Prezentácie"},
+-    {"sl", u8"Predstavitve"},
+-    {"es", u8"Presentaciones"},
+-    {"es-419", u8"Presentaciones"},
+-    {"sw", u8"Slaidi"},
+-    {"sv", u8"Presentationer"},
+-    {"ta", u8"Slides"},
+-    {"te", u8"Slides"},
+-    {"th", u8"สไลด์"},
+-    {"tr", u8"Slaytlar"},
+-    {"uk", u8"Презентації"},
+-    {"ur", u8"سلائیڈز"},
+-    {"vi", u8"Trang trình bày"},
+-    {"cy", u8"Sleidiau"},
+-    {"zu", u8"Amaslayidi"},
+-};
+-// clang-format on
+-
+-}  // namespace
+-
+ ExternalInstallOptions GetConfigForGoogleSlides() {
+   ExternalInstallOptions options(
+       /*install_url=*/GURL("https://docs.google.com/presentation/"
+@@ -109,8 +27,7 @@
+   options.only_use_app_info_factory = true;
+   options.app_info_factory = base::BindRepeating([]() {
+     auto info = std::make_unique<WebApplicationInfo>();
++    info->title = base::UTF8ToUTF16("Slides");
+-    info->title =
+-        base::UTF8ToUTF16(GetTranslatedName("Slides", kNameTranslations));
+     info->start_url =
+         GURL("https://docs.google.com/presentation/?usp=installed_webapp");
+     info->scope = GURL("https://docs.google.com/presentation/");
+--- b/chrome/browser/web_applications/preinstalled_web_apps/preinstalled_web_app_utils.cc
++++ a/chrome/browser/web_applications/preinstalled_web_apps/preinstalled_web_app_utils.cc
+@@ -4,24 +4,10 @@
+ 
+ #include "chrome/browser/web_applications/preinstalled_web_apps/preinstalled_web_app_utils.h"
+ 
+-#include "chrome/browser/browser_process.h"
+-#include "third_party/icu/source/common/unicode/localematcher.h"
+ #include "ui/base/resource/resource_bundle.h"
+ 
+ namespace web_app {
+ 
+-namespace {
+-
+-icu::Locale GetLocaleFromTranslation(const Translation& translation) {
+-  UErrorCode error = U_ZERO_ERROR;
+-  icu::Locale locale =
+-      icu::Locale::forLanguageTag(translation.bcp47_locale, error);
+-  DCHECK(U_SUCCESS(error));
+-  return locale;
+-}
+-
+-}  // namespace
+-
+ std::map<SquareSizePx, SkBitmap> LoadBundledIcons(
+     const std::initializer_list<int>& icon_resource_ids) {
+   std::map<SquareSizePx, SkBitmap> results;
+@@ -34,28 +20,4 @@
+   return results;
+ }
+ 
+-const char* GetTranslatedName(const char* utf8_default_name,
+-                              base::span<const Translation> translations) {
+-  UErrorCode error = U_ZERO_ERROR;
+-  icu::LocaleMatcher matcher = icu::LocaleMatcher::Builder()
+-                                   .setSupportedLocalesViaConverter(
+-                                       translations.begin(), translations.end(),
+-                                       GetLocaleFromTranslation)
+-                                   .build(error);
+-  DCHECK(U_SUCCESS(error));
+-
+-  icu::Locale application_locale = icu::Locale::forLanguageTag(
+-      g_browser_process->GetApplicationLocale(), error);
+-  DCHECK(U_SUCCESS(error));
+-
+-  int32_t best_index =
+-      matcher.getBestMatchResult(application_locale, error).getSupportedIndex();
+-  DCHECK(U_SUCCESS(error));
+-
+-  if (best_index == -1)
+-    return utf8_default_name;
+-
+-  return translations[best_index].utf8_translation;
+-}
+-
+ }  // namespace web_app
+--- b/chrome/browser/web_applications/preinstalled_web_apps/preinstalled_web_app_utils.h
++++ a/chrome/browser/web_applications/preinstalled_web_apps/preinstalled_web_app_utils.h
+@@ -12,14 +12,6 @@
+ std::map<SquareSizePx, SkBitmap> LoadBundledIcons(
+     const std::initializer_list<int>& icon_resource_ids);
+ 
+-struct Translation {
+-  const char* bcp47_locale;
+-  const char* utf8_translation;
+-};
+-
+-const char* GetTranslatedName(const char* utf8_default_name,
+-                              base::span<const Translation> translations);
+-
+ }  // namespace web_app
+ 
+ #endif  // CHROME_BROWSER_WEB_APPLICATIONS_PREINSTALLED_WEB_APPS_PREINSTALLED_WEB_APP_UTILS_H_
+--- b/chrome/browser/web_applications/preinstalled_web_apps/preinstalled_web_app_utils_unittest.cc
++++ /dev/null
+@@ -1,43 +0,0 @@
+-// Copyright (c) 2018 The Chromium Authors. All rights reserved.
+-// Use of this source code is governed by a BSD-style license that can be
+-// found in the LICENSE file.
+-
+-#include "chrome/browser/web_applications/preinstalled_web_apps/preinstalled_web_app_utils.h"
+-
+-#include "chrome/browser/browser_process.h"
+-#include "testing/gtest/include/gtest/gtest.h"
+-
+-namespace web_app {
+-
+-class PreinstalledWebAppUtilsTest : public testing::Test {
+- public:
+-  PreinstalledWebAppUtilsTest() = default;
+-  PreinstalledWebAppUtilsTest(const PreinstalledWebAppUtilsTest&) = delete;
+-  PreinstalledWebAppUtilsTest& operator=(const PreinstalledWebAppUtilsTest&) =
+-      delete;
+-  ~PreinstalledWebAppUtilsTest() override = default;
+-};
+-
+-TEST_F(PreinstalledWebAppUtilsTest, GetTranslatedName) {
+-  std::string test_locale;
+-  constexpr Translation kTranslations[] = {
+-      {"en", "en"},
+-      {"en-GB", "en-GB"},
+-      {"fr", "fr"},
+-  };
+-
+-  auto test = [&](const char* application_locale) -> std::string {
+-    test_locale = application_locale;
+-    g_browser_process->SetApplicationLocale(test_locale);
+-    return GetTranslatedName("default", kTranslations);
+-  };
+-
+-  EXPECT_EQ(test("en"), "en");
+-  EXPECT_EQ(test("en-US"), "en");
+-  EXPECT_EQ(test("en-GB"), "en-GB");
+-  EXPECT_EQ(test("fr"), "fr");
+-  EXPECT_EQ(test("fr-CA"), "fr");
+-  EXPECT_EQ(test("ko"), "default");
+-}
+-
+-}  // namespace web_app
 --- a/v8/src/objects/intl-objects.h
 +++ b/v8/src/objects/intl-objects.h
 @@ -20,8 +20,9 @@
@@ -526,12 +1094,13 @@ author: Michael Gilbert <mgilbert@debian.org>
  // Canonicalize the locale.
  // https://tc39.github.io/ecma402/#sec-canonicalizelanguagetag,
  // including type check and structural validity check.
-@@ -789,8 +789,21 @@ Maybe<std::string> CanonicalizeLanguageTag(Isolate* isolate,
+@@ -789,9 +789,21 @@ Maybe<std::string> CanonicalizeLanguageTag(Isolate* isolate,
          Nothing<std::string>());
    }
  
 -  // Use LocaleBuilder to validate locale.
 -  icu_locale = icu::LocaleBuilder().setLocale(icu_locale).build(error);
+-  icu_locale.canonicalize(error);
 +  // reject attribute of wrong length.
 +  if (std::strstr(icu_locale.getName(), "attribute=") != nullptr) {
 +    std::string attribute =
@@ -547,9 +1116,9 @@ author: Michael Gilbert <mgilbert@debian.org>
 +    }
 +  }
 +
-   icu_locale.canonicalize(error);
    if (U_FAILURE(error) || icu_locale.isBogus()) {
      THROW_NEW_ERROR_RETURN_VALUE(
+         isolate,
 @@ -869,8 +864,6 @@ Maybe<std::string> CanonicalizeLanguageT
    return CanonicalizeLanguageTag(isolate, locale);
  }

@@ -1,3 +1,16 @@
+chromium (89.0.4389.90-1) unstable; urgency=medium
+
+  * New upstream security release (closes: #985271).
+    - CVE-2021-21191: Use after free in WebRTC. Reported by raven @raid_akame
+    - CVE-2021-21192: Heap buffer overflow in tab groups. Reported by
+      Abdulrahman Alqabandi, Microsoft Browser Vulnerability Research
+    - CVE-2021-21193: Use after free in Blink. Reported by Anonymous
+      (closes: #985142)
+  * Fix build with libvpx 1.7.0 and libicu63 (closes: #984926).
+  * Change debian/rules to not leave debian/scripts/mk-origtargz
+
+ -- Michel Le Bihan <michel@lebihan.pl>  Mon, 15 Mar 2021 12:57:00 +0100
+
 chromium (89.0.4389.82-1) unstable; urgency=medium
 
   * New upstream stable release (closes: #984532).

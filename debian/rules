@@ -166,6 +166,7 @@ get-orig-source:
 	date +%s > $(seconds)
 	perl debian/scripts/mk-origtargz ../$(tarball) > $(removed)
 	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
+	rm debian/scripts/mk-origtargz
 	test ! -e $(extract) || rm -rf $(extract)
 	tar xf ../$(tarball)
 	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
