@@ -71,3 +71,4 @@ fedora/fix-vaapi-on-intel.patch
 ungoogled-chromium/manpage.patch
 ungoogled-chromium/safebrowsing.patch
 ungoogled-chromium/explicit-python.patch
+ungoogled-chromium/icu67.patch
