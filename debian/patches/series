@@ -65,6 +65,7 @@ system/opus.patch
 buster/re2.patch
 buster/drm97.patch
 buster/icu63.patch
+buster/vpx17.patch
 buster/clang7.patch
 
 inox-patchset/chromium-skia-harmony.patch
