@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -329,7 +329,7 @@ group("gn_all") {
+@@ -326,7 +326,7 @@ group("gn_all") {
    # Allow building md5sum tool for other OSes (android is added below).
    # For Windows, see: crbug.com/1090428.
    # TODO(cavalcantii): move it out of 'android' folder.
@@ -12,7 +12,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      deps += [ "//tools/android/md5sum" ]
    }
  
-@@ -410,7 +410,7 @@ group("gn_all") {
+@@ -407,7 +407,7 @@ group("gn_all") {
    #       seems currently broken for this platform at the moment, and the
    #       corresponding code build and works on Linux unmodified.
    #       See instructions in the corresponding BUILD.gn.
@@ -32,9 +32,9 @@ author: Michael Gilbert <mgilbert@debian.org>
  # Chrome can be built with any combination of v1/v2 enabled.
  # When both are enabled, we use the InterestFeedV2 feature to select which
  # one is used at runtime.
-@@ -22,8 +20,3 @@ declare_args() {
-   # Whether to include Feed V2 as a DFM in ChromeModern builds.
-   dfmify_feed_v2_modern = false
+@@ -27,8 +25,3 @@ declare_args() {
+   # doubledown. Provided for use with pinpoint.
+   override_use_doubledown_feed = "use_default"
  }
 -
 -if (is_android && android_channel != "default") {

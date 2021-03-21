@@ -41,7 +41,8 @@ export CXXFLAGS+=-Wno-conversion \
                  -Wno-unused-private-field \
                  -Wno-deprecated-declarations \
                  -Wno-unreachable-code \
-                 -Wno-unknown-pragmas
+                 -Wno-unknown-pragmas \
+                 -Wno-thread-safety-attributes
 
 # do not optimize away null pointer safety checks
 export CXXFLAGS+=-fno-delete-null-pointer-checks
@@ -73,7 +74,6 @@ defines+=is_debug=false \
          use_goma=false \
          use_ozone=false \
          use_sysroot=false \
-         use_openh264=false \
          use_allocator=\"tcmalloc\" \
          use_libjpeg_turbo=true \
          use_custom_libcxx=false \

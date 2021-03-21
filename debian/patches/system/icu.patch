@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/net/BUILD.gn
 +++ b/net/BUILD.gn
-@@ -10,7 +10,6 @@ import("//build/config/features.gni")
+@@ -11,7 +11,6 @@ import("//build/config/features.gni")
  import("//net/features.gni")
  import("//testing/libfuzzer/fuzzer_test.gni")
  import("//testing/test.gni")
@@ -38,7 +38,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    uc16* substring1 = reinterpret_cast<uc16*>(byte_offset1);
 --- a/base/BUILD.gn
 +++ b/base/BUILD.gn
-@@ -35,7 +35,6 @@ import("//build/timestamp.gni")
+@@ -36,7 +36,6 @@ import("//build/timestamp.gni")
  import("//build_overrides/build.gni")
  import("//testing/libfuzzer/fuzzer_test.gni")
  import("//testing/test.gni")
@@ -46,12 +46,12 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  if (is_mac) {
    # Used to generate fuzzer corpus :base_mach_port_rendezvous_convert_corpus.
-@@ -3232,7 +3231,7 @@ test("base_unittests") {
-     ]
-   }
+@@ -3257,7 +3256,7 @@ if (build_base_unittests) {
+       ]
+     }
  
--  if (icu_use_data_file) {
-+  if (false) {
-     if (is_android) {
-       deps += [ "//third_party/icu:icu_extra_assets" ]
-     } else {
+-    if (icu_use_data_file) {
++    if (false) {
+       if (is_android) {
+         deps += [ "//third_party/icu:icu_extra_assets" ]
+       } else {
