@@ -14,19 +14,6 @@ author: Michael Gilbert <mgilbert@debian.org>
    download_schedule_ = base::nullopt;
    RecordDownloadLaterEvent(DownloadLaterEvent::kScheduleRemoved);
  }
---- a/third_party/blink/renderer/platform/fonts/opentype/open_type_caps_support.cc
-+++ b/third_party/blink/renderer/platform/fonts/opentype/open_type_caps_support.cc
-@@ -153,8 +153,8 @@ OpenTypeCapsSupport::FontFormat OpenType
-                             hb_blob_get_length(mort_blob.get());
-     bool has_gsub = hb_ot_layout_has_substitution(hb_face);
-     font_format_ = has_morx_or_mort&& !has_gsub
--                       ? font_format_ = FontFormat::kAat
--                       : font_format_ = FontFormat::kOpenType;
-+                       ? FontFormat::kAat
-+                       : FontFormat::kOpenType;
-   }
-   return font_format_;
- }
 --- a/third_party/blink/renderer/modules/animationworklet/animation_worklet_proxy_client.cc
 +++ b/third_party/blink/renderer/modules/animationworklet/animation_worklet_proxy_client.cc
 @@ -186,7 +186,7 @@ AnimationWorkletProxyClient::SelectGloba
@@ -40,25 +27,12 @@ author: Michael Gilbert <mgilbert@debian.org>
      // Introduce an element of randomness in the switching interval to make
 --- a/chrome/browser/notifications/scheduler/internal/impression_history_tracker.cc
 +++ b/chrome/browser/notifications/scheduler/internal/impression_history_tracker.cc
-@@ -412,7 +412,7 @@ void ImpressionHistoryTrackerImpl::Apply
+@@ -415,7 +415,7 @@ void ImpressionHistoryTrackerImpl::Apply
  
    // Increase |current_max_daily_show| by 1.
    client_state->current_max_daily_show =
 -      base::ClampToRange(++client_state->current_max_daily_show, 0,
 +      base::ClampToRange(client_state->current_max_daily_show + 1, 0,
                           config_.max_daily_shown_per_type);
- }
- 
---- a/third_party/blink/renderer/platform/geometry/calculation_value.cc
-+++ b/third_party/blink/renderer/platform/geometry/calculation_value.cc
-@@ -45,8 +45,8 @@ CalculationValue::~CalculationValue() {
- }
- 
- float CalculationValue::Evaluate(float max_value) const {
--  float value = is_expression_ ? value = data_.expression->Evaluate(max_value)
--                               : value = Pixels() + Percent() / 100 * max_value;
-+  float value = is_expression_ ? data_.expression->Evaluate(max_value)
-+                               : Pixels() + Percent() / 100 * max_value;
-   return (IsNonNegative() && value < 0) ? 0 : value;
  }
  
