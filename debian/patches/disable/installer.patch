@@ -14,7 +14,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "//components/gwp_asan:gwp_asan_unittests",
 --- a/chrome/browser/BUILD.gn
 +++ b/chrome/browser/BUILD.gn
-@@ -6425,7 +6425,6 @@ source_set("active_use_util") {
+@@ -6428,7 +6428,6 @@ source_set("active_use_util") {
    deps = [
      "//base",
      "//chrome/common:constants",

@@ -32,7 +32,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//third_party/mesa_headers",
        "//third_party/widevine/cdm:widevine_test_license_server",
        "//tools/media_engagement_preload:generator",
-@@ -1725,7 +1723,6 @@
+@@ -1728,7 +1726,6 @@
        data_deps += [
          "//ash/keyboard/ui:resources",
          "//chrome",
@@ -40,7 +40,7 @@ author: Michael Gilbert <mgilbert@debian.org>
          "//ui/file_manager:unit_test_data",
        ]
  
-@@ -4112,7 +4109,6 @@
+@@ -4116,7 +4113,6 @@
    data_deps = [
      "//chrome/test/data/media/engagement/preload:generate_preload_list",
      "//chrome/test/data/media/engagement/preload:test_data",
@@ -48,7 +48,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    ]
  
    data = [
-@@ -5878,7 +5874,6 @@
+@@ -5882,7 +5878,6 @@
        "//chrome/browser/chromeos:unit_tests",
        "//chromeos/ime:gencode",
      ]
@@ -56,7 +56,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      sources -=
          [ "../browser/policy/cloud/user_policy_signin_service_unittest.cc" ]
    }
-@@ -6639,7 +6634,6 @@
+@@ -6643,7 +6638,6 @@
      data_deps = [
        "//chrome:browser_tests_pak",
        "//ppapi:ppapi_tests",
@@ -64,7 +64,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//third_party/mesa_headers",
        "//ui/resources:ui_test_pak_data",
      ]
-@@ -7230,7 +7224,6 @@
+@@ -7234,7 +7228,6 @@
      ]
  
      data_deps = [
