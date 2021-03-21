@@ -1,6 +1,6 @@
 --- a/media/gpu/vaapi/vaapi_video_decode_accelerator.cc
 +++ b/media/gpu/vaapi/vaapi_video_decode_accelerator.cc
-@@ -58,6 +58,7 @@
+@@ -59,6 +59,7 @@
    return VA_RT_FORMAT_YUV420;
  }
  
@@ -8,7 +8,7 @@
  // Returns true if the CPU is an Intel Gemini Lake or later (including Kaby
  // Lake) Cpu platform id's are referenced from the following file in kernel
  // source arch/x86/include/asm/intel-family.h
-@@ -70,6 +71,7 @@
+@@ -71,6 +72,7 @@
        cpuid.model() >= kGeminiLakeModelId;
    return is_geminilake_or_later;
  }
@@ -16,7 +16,7 @@
  
  }  // namespace
  
-@@ -1224,6 +1226,8 @@
+@@ -1231,6 +1233,8 @@
    if (output_mode_ == VideoDecodeAccelerator::Config::OutputMode::IMPORT)
      return BufferAllocationMode::kNormal;
  
@@ -25,7 +25,7 @@
    // On Gemini Lake, Kaby Lake and later we can pass to libva the client's
    // PictureBuffers to decode onto, which skips the use of the Vpp unit and its
    // associated format reconciliation copy, avoiding all internal buffer
-@@ -1239,6 +1243,7 @@
+@@ -1246,6 +1250,7 @@
        num_extra_pics_ = 3;
      return BufferAllocationMode::kNone;
    }

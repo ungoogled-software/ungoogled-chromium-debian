@@ -37,6 +37,7 @@ Build-Depends:
  xcb-proto,
  xfonts-base,
  libx11-xcb-dev,
+ libxshmfence-dev,
  libgl1-mesa-dev,
  libglu1-mesa-dev,
  libegl1-mesa-dev,

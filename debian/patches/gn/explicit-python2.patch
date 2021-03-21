@@ -27,7 +27,7 @@ Last-Update: 2020-08-13
  
 --- a/tools/gn/src/gn/setup.cc
 +++ b/tools/gn/src/gn/setup.cc
-@@ -762,7 +762,7 @@ bool Setup::FillPythonPath(const base::C
+@@ -772,7 +772,7 @@ bool Setup::FillPythonPath(const base::C
      }
      build_settings_.set_python_path(python_path.NormalizePathSeparatorsTo('/'));
  #else

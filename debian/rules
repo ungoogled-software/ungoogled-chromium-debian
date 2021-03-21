@@ -73,7 +73,6 @@ defines+=is_debug=false \
          use_goma=false \
          use_ozone=false \
          use_sysroot=false \
-         use_openh264=false \
          use_allocator=\"tcmalloc\" \
          use_libjpeg_turbo=true \
          use_custom_libcxx=false \
