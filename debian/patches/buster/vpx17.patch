@@ -782,3 +782,48 @@
    bool first_frame_in_picture_;
    VideoBitrateAllocation current_bitrate_allocation_;
    bool ss_info_needed_;
+--- a/third_party/blink/renderer/modules/mediarecorder/vpx_encoder.cc
++++ b/third_party/blink/renderer/modules/mediarecorder/vpx_encoder.cc
+@@ -73,14 +73,6 @@ void VpxEncoder::EncodeOnEncodingTaskRun
+   TRACE_EVENT0("media", "VpxEncoder::EncodeOnEncodingTaskRunner");
+   DCHECK_CALLED_ON_VALID_SEQUENCE(encoding_sequence_checker_);
+ 
+-  if (frame->format() == media::PIXEL_FORMAT_NV12 &&
+-      frame->storage_type() == media::VideoFrame::STORAGE_GPU_MEMORY_BUFFER)
+-    frame = media::ConvertToMemoryMappedFrame(frame);
+-  if (!frame) {
+-    LOG(WARNING) << "Invalid video frame to encode";
+-    return;
+-  }
+-
+   const gfx::Size frame_size = frame->visible_rect().size();
+   base::TimeDelta duration = EstimateFrameDuration(*frame);
+   const media::WebmMuxer::VideoParameters video_params(frame);
+@@ -96,18 +88,6 @@ void VpxEncoder::EncodeOnEncodingTaskRun
+   std::string data;
+   std::string alpha_data;
+   switch (frame->format()) {
+-    case media::PIXEL_FORMAT_NV12: {
+-      last_frame_had_alpha_ = false;
+-      DoEncode(encoder_.get(), frame_size, frame->data(VideoFrame::kYPlane),
+-               frame->visible_data(VideoFrame::kYPlane),
+-               frame->stride(VideoFrame::kYPlane),
+-               frame->visible_data(VideoFrame::kUVPlane),
+-               frame->stride(VideoFrame::kUVPlane),
+-               frame->visible_data(VideoFrame::kUVPlane) + 1,
+-               frame->stride(VideoFrame::kUVPlane), duration, force_keyframe,
+-               data, &keyframe, VPX_IMG_FMT_NV12);
+-      break;
+-    }
+     case media::PIXEL_FORMAT_I420: {
+       last_frame_had_alpha_ = false;
+       DoEncode(encoder_.get(), frame_size, frame->data(VideoFrame::kYPlane),
+@@ -196,7 +176,7 @@ void VpxEncoder::DoEncode(vpx_codec_ctx_
+                           bool* const keyframe,
+                           vpx_img_fmt_t img_fmt) {
+   DCHECK_CALLED_ON_VALID_SEQUENCE(encoding_sequence_checker_);
+-  DCHECK(img_fmt == VPX_IMG_FMT_I420 || img_fmt == VPX_IMG_FMT_NV12);
++  DCHECK(img_fmt == VPX_IMG_FMT_I420);
+ 
+   vpx_image_t vpx_image;
+   vpx_image_t* const result =
