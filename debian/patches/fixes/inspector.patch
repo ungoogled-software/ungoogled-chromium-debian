@@ -23,9 +23,9 @@ author: Michael Gilbert <mgilbert@debian.org>
    public_deps = [
 --- a/v8/test/unittests/BUILD.gn
 +++ b/v8/test/unittests/BUILD.gn
-@@ -450,7 +450,7 @@ v8_source_set("unittests_sources") {
-     "../..:v8_libbase",
+@@ -461,7 +461,7 @@ v8_source_set("unittests_sources") {
      "../..:v8_libplatform",
+     "../..:v8_wrappers",
      "../..:wasm_test_common",
 -    "../../third_party/inspector_protocol:crdtp_test",
 +    "../../../third_party/inspector_protocol:crdtp_test",
@@ -63,7 +63,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  bool IsCBORMessage(StringView msg) {
    return msg.is8Bit() && msg.length() >= 2 && msg.characters8()[0] == 0xd8 &&
-@@ -196,8 +196,8 @@ void V8InspectorSessionImpl::SendProtoco
+@@ -197,8 +197,8 @@ void V8InspectorSessionImpl::SendProtoco
  }
  
  void V8InspectorSessionImpl::FallThrough(int callId,
@@ -74,7 +74,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    // There's no other layer to handle the command.
    UNREACHABLE();
  }
-@@ -344,8 +344,8 @@ void V8InspectorSessionImpl::reportAllCo
+@@ -345,8 +345,8 @@ void V8InspectorSessionImpl::reportAllCo
  }
  
  void V8InspectorSessionImpl::dispatchProtocolMessage(StringView message) {
@@ -85,7 +85,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    span<uint8_t> cbor;
    std::vector<uint8_t> converted_cbor;
    if (IsCBORMessage(message)) {
-@@ -358,21 +358,21 @@ void V8InspectorSessionImpl::dispatchPro
+@@ -359,21 +359,21 @@ void V8InspectorSessionImpl::dispatchPro
      auto status = ConvertToCBOR(message, &converted_cbor);
      if (!status.ok()) {
        m_channel->sendNotification(
@@ -136,7 +136,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    static void Serialize(const v8_inspector::String16& str,
 --- a/v8/src/inspector/v8-inspector-session-impl.h
 +++ b/v8/src/inspector/v8-inspector-session-impl.h
-@@ -105,8 +105,8 @@ class V8InspectorSessionImpl : public V8
+@@ -107,8 +107,8 @@ class V8InspectorSessionImpl : public V8
        int callId, std::unique_ptr<protocol::Serializable> message) override;
    void SendProtocolNotification(
        std::unique_ptr<protocol::Serializable> message) override;
@@ -149,7 +149,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    std::unique_ptr<StringBuffer> serializeForFrontend(
 --- a/v8/src/inspector/injected-script.cc
 +++ b/v8/src/inspector/injected-script.cc
-@@ -724,8 +724,8 @@ Response InjectedScript::resolveCallArgu
+@@ -722,8 +722,8 @@ Response InjectedScript::resolveCallArgu
      String16 value;
      if (callArgument->hasValue()) {
        std::vector<uint8_t> json;
@@ -232,7 +232,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  struct ProtocolTypeTraits<v8_inspector::String16> {
 --- a/v8/src/inspector/v8-debugger-agent-impl.cc
 +++ b/v8/src/inspector/v8-debugger-agent-impl.cc
-@@ -1607,8 +1607,8 @@ void V8DebuggerAgentImpl::didParseSource
+@@ -1558,8 +1558,8 @@ void V8DebuggerAgentImpl::didParseSource
      // execution context id.
      const String16& aux = inspected->auxData();
      std::vector<uint8_t> cbor;
@@ -245,7 +245,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    }
 --- a/v8/src/inspector/v8-runtime-agent-impl.cc
 +++ b/v8/src/inspector/v8-runtime-agent-impl.cc
-@@ -870,8 +870,8 @@ void V8RuntimeAgentImpl::reportExecution
+@@ -886,8 +886,8 @@ void V8RuntimeAgentImpl::reportExecution
    const String16& aux = context->auxData();
    if (!aux.isEmpty()) {
      std::vector<uint8_t> cbor;

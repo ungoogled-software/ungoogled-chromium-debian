@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/build/config/compiler/BUILD.gn
 +++ b/build/config/compiler/BUILD.gn
-@@ -1121,7 +1121,7 @@ config("compiler_deterministic") {
+@@ -1143,7 +1143,7 @@ config("compiler_deterministic") {
        "-Xclang",
        ".",
      ]
