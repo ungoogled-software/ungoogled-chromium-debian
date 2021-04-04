@@ -77,6 +77,7 @@ defines+=is_debug=false \
          enable_iterator_debugging=false \
          enable_hangout_services_extension=false \
          optimize_webui=false \
+         angle_has_histograms=false \
          enable_js_type_check=false \
          treat_warnings_as_errors=false \
 
@@ -155,29 +156,31 @@ extract=chromium-$(version)
 tarfile=$(extract)-lite.tar
 tarball=$(tarfile).xz
 debvers=../chromium_$(version)
+seconds=$(debvers).seconds
 origtxz=$(debvers).orig.tar.xz
 removed=$(debvers).files-removed
-seconds=$(debvers).seconds
+options=--sort=name --owner=0 --group=0 --numeric-owner --mtime="@$$(stat --format "%Y" ../$(tarball))" --clamp-mtime
 
 get-orig-source:
 	wget -nv --show-progress -c $(url)/$(tarball) -O ../$(tarball)
 	cp /usr/share/perl5/Devscripts/MkOrigtargz.pm debian/scripts/mk-origtargz
 	patch -p1 < debian/scripts/mk-origtargz.patch
-	date +%s > $(seconds)
+	@date +%s > $(seconds)
 	perl debian/scripts/mk-origtargz ../$(tarball) > $(removed)
-	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
-	rm debian/scripts/mk-origtargz
+	@echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
+	@echo
 	test ! -e $(extract) || rm -rf $(extract)
 	tar xf ../$(tarball)
-	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
+	@echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
+	@echo
 	while read line; do rm -rf $$line; done < $(removed)
 	cd $(extract) && ../debian/scripts/check-upstream
-	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
+	@echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
+	@echo
 	test ! -e $(origtxz) || rm -f $(origtxz)
-	tar --sort=name --owner=0 --group=0 --numeric-owner \
-		--mtime="@$$(stat --format "%Y" ../$(tarball))" --clamp-mtime \
-		-cf - $(extract) | xz -6 -T $(njobs) - > $(origtxz)
-	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
+	tar $(options) -cf - $(extract) | xz -6 -T $(njobs) - > $(origtxz)
+	@echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds
+	@echo
 	rm -rf $(extract)
-	echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds | tee seconds
+	@echo $$(($$(date +%s) - $$(cat $(seconds)))) seconds | tee seconds
 	@mv -f seconds $(seconds)

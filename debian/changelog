@@ -1,3 +1,18 @@
+chromium (89.0.4389.114-1) unstable; urgency=medium
+
+  * New upstream security release (closes: #986335).
+    - CVE-2021-21194: Use after free in screen capture. Reported by Leecraso
+      and Guang Gong
+    - CVE-2021-21195: Use after free in V8. Reported by Liu and Liang
+    - CVE-2021-21196: Heap buffer overflow in TabStrip. Reported by Khalil
+      Zhani
+    - CVE-2021-21197: Heap buffer overflow in TabStrip. Reported by Abdulrahman
+      Alqabandi
+    - CVE-2021-21198: Out of bounds read in IPC. Reported by Mark Brand
+    - CVE-2021-21199: Use Use after free in Aura. Reported by Weipeng Jiang
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sun, 04 Apr 2021 00:34:12 +0000
+
 chromium (89.0.4389.90-1) unstable; urgency=medium
 
   * New upstream security release (closes: #985271).
