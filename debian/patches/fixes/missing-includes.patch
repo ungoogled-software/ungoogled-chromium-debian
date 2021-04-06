@@ -93,15 +93,13 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "base/i18n/unicodestring.h"
  #include "base/no_destructor.h"
  #include "base/synchronization/lock.h"
---- a/ui/accessibility/platform/inspect/tree_formatter.h
-+++ b/ui/accessibility/platform/inspect/tree_formatter.h
-@@ -5,6 +5,9 @@
- #ifndef UI_ACCESSIBILITY_PLATFORM_INSPECT_TREE_FORMATTER_H_
- #define UI_ACCESSIBILITY_PLATFORM_INSPECT_TREE_FORMATTER_H_
+--- a/ui/accessibility/ax_tree_serializer.h
++++ b/ui/accessibility/ax_tree_serializer.h
+@@ -8,6 +8,7 @@
+ #include <stddef.h>
+ #include <stdint.h>
  
-+#include <memory>
-+#include <vector>
-+
- #include "ui/accessibility/platform/inspect/inspect.h"
- 
- #include "ui/gfx/native_widget_types.h"
++#include <ctime>
+ #include <ostream>
+ #include <unordered_map>
+ #include <unordered_set>

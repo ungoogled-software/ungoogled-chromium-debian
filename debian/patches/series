@@ -6,7 +6,6 @@ debianization/explicit-python2.patch
 gn/libcxx.patch
 gn/explicit-python2.patch
 
-fixes/mojo.patch
 fixes/gnu-as.patch
 fixes/inspector.patch
 fixes/not-constexpr.patch
@@ -17,11 +16,11 @@ fixes/widevine-enable-version-string.patch
 fixes/widevine-locations.patch
 fixes/nullptr-dereference.patch
 fixes/multiple-destruction.patch
-fixes/openscreen.patch
-fixes/building-against-libstdc.patch
-fixes/ideographic-space-character-constant.patch
 fixes/no-ozone.patch
+fixes/quiche.patch
+fixes/chromeos_devicetype.patch
 
+disable/mojo.patch
 disable/tests.patch
 disable/glmark.patch
 disable/owners.patch
@@ -37,6 +36,7 @@ disable/widevine-cdm-cu.patch
 disable/angle-perftests.patch
 disable/web-ui-tests.patch
 disable/ozone-unittests.patch
+disable/devtools-unittests.patch
 
 warnings/restrict.patch
 warnings/multichar.patch
@@ -60,6 +60,7 @@ system/openjpeg.patch
 system/convertutf.patch
 system/clang-format.patch
 system/use-desktop-gl-as-default.patch
+system/opus.patch
 
 inox-patchset/chromium-skia-harmony.patch
 inox-patchset/fix-cfi-failures-with-unbundled-libxml.patch
@@ -70,5 +71,4 @@ fedora/fix-vaapi-on-intel.patch
 ungoogled-chromium/manpage.patch
 ungoogled-chromium/safebrowsing.patch
 ungoogled-chromium/explicit-python.patch
-ungoogled-chromium/vpx19.patch
 ungoogled-chromium/vpx18.patch

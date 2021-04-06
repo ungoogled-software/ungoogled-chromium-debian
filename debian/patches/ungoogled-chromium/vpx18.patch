@@ -1,20 +1,54 @@
---- a/third_party/blink/renderer/modules/mediarecorder/vpx_encoder.cc
+--- a/media/video/vpx_video_encoder.cc	2021-03-12 23:57:27.000000000 +0000
++++ b/media/video/vpx_video_encoder.cc
+@@ -319,28 +319,14 @@
+       NOTREACHED();
+       break;
+     default:
+-      vpx_img_fmt_t fmt = frame->format() == PIXEL_FORMAT_NV12
+-                              ? VPX_IMG_FMT_NV12
+-                              : VPX_IMG_FMT_I420;
++      vpx_img_fmt_t fmt = VPX_IMG_FMT_I420;
+       Status status = ReallocateVpxImageIfNeeded(
+           &vpx_image_, fmt, codec_config_.g_w, codec_config_.g_h);
+       if (!status.is_ok()) {
+         std::move(done_cb).Run(status);
+         return;
+       }
+-      if (fmt == VPX_IMG_FMT_NV12) {
+-        vpx_image_.planes[VPX_PLANE_Y] =
+-            const_cast<uint8_t*>(frame->visible_data(VideoFrame::kYPlane));
+-        vpx_image_.planes[VPX_PLANE_U] =
+-            const_cast<uint8_t*>(frame->visible_data(VideoFrame::kUVPlane));
+-        // In NV12 Y and U samples are combined in one plane (bytes go YUYUYU),
+-        // but libvpx treats them as two planes with the same stride but shifted
+-        // by one byte.
+-        vpx_image_.planes[VPX_PLANE_V] = vpx_image_.planes[VPX_PLANE_U] + 1;
+-        vpx_image_.stride[VPX_PLANE_Y] = frame->stride(VideoFrame::kYPlane);
+-        vpx_image_.stride[VPX_PLANE_U] = frame->stride(VideoFrame::kUVPlane);
+-        vpx_image_.stride[VPX_PLANE_V] = frame->stride(VideoFrame::kUVPlane);
+-      } else {
++      {
+         vpx_image_.planes[VPX_PLANE_Y] =
+             const_cast<uint8_t*>(frame->visible_data(VideoFrame::kYPlane));
+         vpx_image_.planes[VPX_PLANE_U] =
+--- a/third_party/blink/renderer/modules/mediarecorder/vpx_encoder.cc	2021-03-12 23:57:30.000000000 +0000
 +++ b/third_party/blink/renderer/modules/mediarecorder/vpx_encoder.cc
-@@ -72,13 +72,6 @@
+@@ -73,14 +73,6 @@
    TRACE_EVENT0("media", "VpxEncoder::EncodeOnEncodingTaskRunner");
    DCHECK_CALLED_ON_VALID_SEQUENCE(encoding_sequence_checker_);
  
 -  if (frame->format() == media::PIXEL_FORMAT_NV12 &&
 -      frame->storage_type() == media::VideoFrame::STORAGE_GPU_MEMORY_BUFFER)
--    frame = WrapMappedGpuMemoryBufferVideoFrame(frame);
+-    frame = media::ConvertToMemoryMappedFrame(frame);
 -  if (!frame) {
 -    LOG(WARNING) << "Invalid video frame to encode";
 -    return;
 -  }
- 
+-
    const gfx::Size frame_size = frame->visible_rect().size();
    base::TimeDelta duration = EstimateFrameDuration(*frame);
-@@ -95,18 +88,6 @@
+   const media::WebmMuxer::VideoParameters video_params(frame);
+@@ -96,18 +88,6 @@
    std::string data;
    std::string alpha_data;
    switch (frame->format()) {
@@ -33,7 +67,7 @@
      case media::PIXEL_FORMAT_I420: {
        last_frame_had_alpha_ = false;
        DoEncode(encoder_.get(), frame_size, frame->data(VideoFrame::kYPlane),
-@@ -195,7 +176,7 @@
+@@ -196,7 +176,7 @@
                            bool* const keyframe,
                            vpx_img_fmt_t img_fmt) {
    DCHECK_CALLED_ON_VALID_SEQUENCE(encoding_sequence_checker_);
@@ -42,7 +76,18 @@
  
    vpx_image_t vpx_image;
    vpx_image_t* const result =
---- a/third_party/webrtc/modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc
+--- a/third_party/webrtc/modules/video_coding/codecs/interface/libvpx_interface.cc
++++ b/third_party/webrtc/modules/video_coding/codecs/interface/libvpx_interface.cc
+@@ -168,8 +168,6 @@
+         return vpx_codec_control(ctx, VP9E_SET_COLOR_SPACE, param);
+       case VP9E_SET_COLOR_RANGE:
+         return vpx_codec_control(ctx, VP9E_SET_COLOR_RANGE, param);
+-      case VP9E_SET_DELTA_Q_UV:
+-        return vpx_codec_control(ctx, VP9E_SET_DELTA_Q_UV, param);
+ 
+       default:
+         if (param >= 0) {
+--- a/third_party/webrtc/modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc	2021-03-13 00:03:43.000000000 +0000
 +++ b/third_party/webrtc/modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc
 @@ -954,9 +954,6 @@
      case VideoFrameBuffer::Type::kI420:
@@ -54,7 +99,7 @@
      default: {
        rtc::scoped_refptr<I420BufferInterface> i420_image =
            input_image->ToI420();
-@@ -1240,8 +1237,6 @@
+@@ -1256,8 +1253,6 @@
          << "Not all raw images had the right format!";
      return;
    }
@@ -63,7 +108,7 @@
    for (size_t i = 0; i < raw_images_.size(); ++i) {
      vpx_image_t& img = raw_images_[i];
      auto d_w = img.d_w;
-@@ -1288,7 +1283,6 @@
+@@ -1304,7 +1299,6 @@
  
  void LibvpxVp8Encoder::PrepareNV12Image(const NV12BufferInterface* frame) {
    RTC_DCHECK(!raw_images_.empty());
@@ -71,9 +116,9 @@
    // Image in vpx_image_t format.
    // Input image is const. VP8's raw image is not defined as const.
    raw_images_[0].planes[VPX_PLANE_Y] = const_cast<uint8_t*>(frame->DataY());
---- a/third_party/webrtc/modules/video_coding/codecs/vp9/vp9_impl.cc
-+++ b/third_party/webrtc/modules/video_coding/codecs/vp9/vp9_impl.cc
-@@ -1110,19 +1110,7 @@
+--- a/third_party/webrtc/modules/video_coding/codecs/vp9/libvpx_vp9_encoder.cc
++++ b/third_party/webrtc/modules/video_coding/codecs/vp9/libvpx_vp9_encoder.cc
+@@ -1044,19 +1044,7 @@
    rtc::scoped_refptr<const I010BufferInterface> i010_copy;
    switch (profile_) {
      case VP9Profile::kProfile0: {
@@ -90,16 +135,16 @@
 -        raw_->stride[VPX_PLANE_U] = nv12_buffer->StrideUV();
 -        raw_->stride[VPX_PLANE_V] = nv12_buffer->StrideUV();
 -      } else {
-+      if (true) {
++      {
          rtc::scoped_refptr<I420BufferInterface> i420_buffer =
              input_image.video_frame_buffer()->ToI420();
          video_frame_buffer = i420_buffer;
-@@ -1929,8 +1917,6 @@
-   if (!raw_) {
-     raw_ = vpx_img_wrap(nullptr, fmt, codec_.width, codec_.height, 1, nullptr);
+@@ -1869,8 +1857,6 @@
+     raw_ = libvpx_->img_wrap(nullptr, fmt, codec_.width, codec_.height, 1,
+                              nullptr);
    } else if (raw_->fmt != fmt) {
 -    RTC_LOG(INFO) << "Switching VP9 encoder pixel format to "
 -                  << (fmt == VPX_IMG_FMT_NV12 ? "NV12" : "I420");
-     vpx_img_free(raw_);
-     raw_ = vpx_img_wrap(nullptr, fmt, codec_.width, codec_.height, 1, nullptr);
-   }
+     libvpx_->img_free(raw_);
+     raw_ = libvpx_->img_wrap(nullptr, fmt, codec_.width, codec_.height, 1,
+                              nullptr);
