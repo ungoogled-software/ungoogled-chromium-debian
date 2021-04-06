@@ -6,7 +6,6 @@ base/third_party/libevent/BUILD.gn
 build/secondary/third_party/libjpeg_turbo/BUILD.gn
 
 third_party/re2/BUILD.gn
-third_party/icu/BUILD.gn
 third_party/flac/BUILD.gn
 third_party/zlib/BUILD.gn
 third_party/opus/BUILD.gn

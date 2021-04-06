@@ -9,7 +9,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include <string.h>
  
 -#include "common/convert_UTF.h"
-+#include <unicode/ustring.h>
++#include "../../../../icu/source/common/unicode/ustring.h"
  #include "common/scoped_ptr.h"
  #include "common/string_conversion.h"
  #include "common/using_std_string.h"
@@ -150,7 +150,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include <string>
  #include <vector>
  
-+#include <unicode/umachine.h>
++#include "../../../../icu/source/common/unicode/umachine.h"
  #include "common/using_std_string.h"
  #include "google_breakpad/common/breakpad_types.h"
  

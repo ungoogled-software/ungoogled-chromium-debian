@@ -52,7 +52,6 @@ Build-Depends:
  libpci-dev,
  libcap-dev,
  libdrm-dev,
- libicu-dev,
  libffi-dev,
  libvpx-dev (>= 1.7.0),
  libkrb5-dev,
