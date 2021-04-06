@@ -89,6 +89,7 @@ defines+=is_debug=false \
          enable_iterator_debugging=false \
          enable_hangout_services_extension=false \
          optimize_webui=false \
+         angle_has_histograms=false \
          enable_js_type_check=false \
          treat_warnings_as_errors=false \
 
