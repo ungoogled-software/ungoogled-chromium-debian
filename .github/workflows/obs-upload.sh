@@ -131,12 +131,22 @@ EOF
 <constraints>
     <hardware>
         <disk>
-            <size unit="G">32</size>
+            <size unit="G">16</size>
         </disk>
         <memory>
             <size unit="G">8</size>
         </memory>
     </hardware>
+    <overwrite>
+        <conditions>
+            <arch>x86_64</arch>
+        </conditions>
+        <hardware>
+            <memory>
+                <size unit="G">24</size>
+            </memory>
+        </hardware>
+    </overwrite>
 </constraints>
 EOF
 
