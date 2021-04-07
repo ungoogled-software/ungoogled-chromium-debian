@@ -56,7 +56,6 @@ system/ffmpeg.patch
 system/jsoncpp.patch
 system/harfbuzz.patch
 system/openjpeg.patch
-system/convertutf.patch
 system/clang-format.patch
 system/use-desktop-gl-as-default.patch
 system/opus.patch
