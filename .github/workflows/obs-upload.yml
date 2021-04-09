@@ -15,8 +15,11 @@ jobs:
         run: git fetch --unshallow
       - name: Initialize ungoogled-chromium submodule
         run: git submodule update --init --recursive
+      - name: Install extra packages
+        run: sudo apt install -y xmlstarlet
       - name: Run OBS Upload Script
         env:
           OBS_API_USERNAME: ${{ secrets.OBS_API_USERNAME }}
           OBS_API_PASSWORD: ${{ secrets.OBS_API_PASSWORD }}
+          OBS_API_PROJECT: ${{ secrets.OBS_API_PROJECT }}
         run: .github/workflows/obs-upload.sh

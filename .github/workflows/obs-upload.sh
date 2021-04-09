@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-for i in git curl
+for i in git curl xmlstarlet
 do
     if test -z "$(which "$i" || true)"
     then
@@ -216,6 +216,19 @@ upload_obs()
     curl -s -K - "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}" -F 'cmd=deleteuploadrev' << EOF
 user="${USERNAME}:${PASSWORD}"
 EOF
+
+    curl -s -K - "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}" > directory.xml << EOF
+user="${USERNAME}:${PASSWORD}"
+EOF
+
+    xmlstarlet sel -t -v '//entry/@name' < directory.xml | while read FILENAME
+    do
+        curl -s -K - "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}/${FILENAME}?rev=upload" -X DELETE << EOF
+user="${USERNAME}:${PASSWORD}"
+EOF
+    done
+
+    rm -f directory.xml
 
     for FILE in "${ROOT}"/*
     do
