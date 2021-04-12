@@ -6,7 +6,7 @@ This branch contains the code to build packages for: **Debian unstable (sid)**. 
 
 ## Downloads
 
-**Binaries** (i.e. `.deb` packages): There are three ways to get binaries:
+**Binaries** (i.e. `.deb` packages):
 
 - [OBS Production Project](//build.opensuse.org/project/show/home:ungoogled_chromium)
 - [OBS Development Project](//build.opensuse.org/project/show/home:ungoogled_chromium:testing)
