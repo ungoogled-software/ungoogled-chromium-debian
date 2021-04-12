@@ -11,8 +11,6 @@ This branch contains the code to build packages for: **Debian unstable (sid)**. 
 - [OBS Production Project](//build.opensuse.org/project/show/home:ungoogled_chromium)
 - [OBS Development Project](//build.opensuse.org/project/show/home:ungoogled_chromium:testing)
 
-If your distro is not listed, you may have a look at the [community-maintained list of packages compatible on other distros](https://github.com/ungoogled-software/ungoogled-chromium-debian/wiki/Compatible-Packages). However, please note that this compatibility is not guaranteed; it may break at any time.
-
 **Source Code**: Use the tags labeled with `sid` via `git checkout` (see building instructions). The branches are for development and may not be stable.
 
 ## Installing
