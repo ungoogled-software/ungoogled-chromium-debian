@@ -213,17 +213,17 @@ upload_obs()
 
     esac
 
-    curl -s -K - "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}" -F 'cmd=deleteuploadrev' << EOF
+    curl -sS -K - "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}" -F 'cmd=deleteuploadrev' << EOF
 user="${USERNAME}:${PASSWORD}"
 EOF
 
-    curl -s -K - "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}" > directory.xml << EOF
+    curl -sS -K - "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}" > directory.xml << EOF
 user="${USERNAME}:${PASSWORD}"
 EOF
 
     xmlstarlet sel -t -v '//entry/@name' < directory.xml | while read FILENAME
     do
-        curl -s -K - "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}/${FILENAME}?rev=upload" -X DELETE << EOF
+        curl -sS -K - "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}/${FILENAME}?rev=upload" -X DELETE << EOF
 user="${USERNAME}:${PASSWORD}"
 EOF
     done
@@ -233,12 +233,12 @@ EOF
     for FILE in "${ROOT}"/*
     do
         FILENAME="${FILE##*/}"
-        curl -s -K - "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}/${FILENAME}?rev=upload" -T "${FILE}" << EOF
+        curl -sS -K - "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}/${FILENAME}?rev=upload" -T "${FILE}" << EOF
 user="${USERNAME}:${PASSWORD}"
 EOF
     done
 
-    curl -s -K - "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}" -F 'cmd=commit' << EOF
+    curl -sS -K - "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}" -F 'cmd=commit' << EOF
 user="${USERNAME}:${PASSWORD}"
 EOF
 }
