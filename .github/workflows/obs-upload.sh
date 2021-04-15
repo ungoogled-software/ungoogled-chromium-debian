@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-for i in git curl
+for i in git curl xmlstarlet
 do
     if test -z "$(which "$i" || true)"
     then
@@ -71,6 +71,19 @@ dsc_md5()
     fi
 
     echo " $(md5sum "${FILE}" | cut -f 1 -d ' ') $(stat -c '%s' "${FILE}") ${FILENAME}"
+}
+
+curl()
+{
+    for i in `seq 1 5`
+    do
+        command curl -sS -K - "${@}" << EOF
+user="${OBS_API_USERNAME}:${OBS_API_PASSWORD}"
+EOF
+        test "${?}" -eq 0 && return 0
+        sleep 30s
+    done
+    return 1
 }
 
 git_get_tag()
@@ -190,12 +203,10 @@ EOF
 
 upload_obs()
 {
-    local USERNAME="${1}"
-    local PASSWORD="${2}"
-    local ROOT="${3}"
-    local TAG="${4#*:}"
-    local TYPE="${4%:*}"
-    local DISTRO_RELEASE="${5}"
+    local ROOT="${1}"
+    local TAG="${2#*:}"
+    local TYPE="${2%:*}"
+    local DISTRO_RELEASE="${3}"
     local REPOSITORY
     local PACKAGE="ungoogled-chromium-${DISTRO_RELEASE}"
     local FILE
@@ -213,21 +224,24 @@ upload_obs()
 
     esac
 
-    curl -s -K - "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}" -F 'cmd=deleteuploadrev' << EOF
-user="${USERNAME}:${PASSWORD}"
-EOF
+    curl "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}" -F 'cmd=deleteuploadrev'
+
+    curl "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}" > "${ROOT}/directory.xml"
+
+    xmlstarlet sel -t -v '//entry/@name' < "${ROOT}/directory.xml" | while read FILENAME
+    do
+        curl "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}/${FILENAME}?rev=upload" -X DELETE
+    done
+
+    rm -f "${ROOT}/directory.xml"
 
     for FILE in "${ROOT}"/*
     do
         FILENAME="${FILE##*/}"
-        curl -s -K - "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}/${FILENAME}?rev=upload" -T "${FILE}" << EOF
-user="${USERNAME}:${PASSWORD}"
-EOF
+        curl "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}/${FILENAME}?rev=upload" -T "${FILE}"
     done
 
-    curl -s -K - "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}" -F 'cmd=commit' << EOF
-user="${USERNAME}:${PASSWORD}"
-EOF
+    curl "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}" -F 'cmd=commit'
 }
 
 TMP="$(mktemp -d)"
@@ -236,7 +250,6 @@ OBS_DEPENDS="$(cat "${DEBIAN}/obs_depends.txt")"
 GIT_TAG="$(git_get_tag)"
 DISTRO_RELEASE="$(cat "${DEBIAN}/distro_release.txt")"
 
+trap 'rm -rf "${TMP}"' EXIT INT
 generate_obs "${TMP}" "${CHROMIUM_VERSION}" "${OBS_DEPENDS}" "${GIT_TAG}"
-upload_obs "${OBS_API_USERNAME}" "${OBS_API_PASSWORD}" "${TMP}" "${GIT_TAG}" "${DISTRO_RELEASE}"
-
-rm -rf "${TMP}"
+upload_obs "${TMP}" "${GIT_TAG}" "${DISTRO_RELEASE}"
