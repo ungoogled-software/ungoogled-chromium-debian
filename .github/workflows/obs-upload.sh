@@ -250,7 +250,6 @@ OBS_DEPENDS="$(cat "${DEBIAN}/obs_depends.txt")"
 GIT_TAG="$(git_get_tag)"
 DISTRO_RELEASE="$(cat "${DEBIAN}/distro_release.txt")"
 
+trap 'rm -rf "${TMP}"' EXIT INT
 generate_obs "${TMP}" "${CHROMIUM_VERSION}" "${OBS_DEPENDS}" "${GIT_TAG}"
 upload_obs "${TMP}" "${GIT_TAG}" "${DISTRO_RELEASE}"
-
-rm -rf "${TMP}"
