@@ -226,14 +226,14 @@ upload_obs()
 
     curl "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}" -F 'cmd=deleteuploadrev'
 
-    curl "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}" > directory.xml
+    curl "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}" > "${ROOT}/directory.xml"
 
-    xmlstarlet sel -t -v '//entry/@name' < directory.xml | while read FILENAME
+    xmlstarlet sel -t -v '//entry/@name' < "${ROOT}/directory.xml" | while read FILENAME
     do
         curl "https://api.opensuse.org/source/${REPOSITORY}/${PACKAGE}/${FILENAME}?rev=upload" -X DELETE
     done
 
-    rm -f directory.xml
+    rm -f "${ROOT}/directory.xml"
 
     for FILE in "${ROOT}"/*
     do
