@@ -77,11 +77,11 @@ curl()
 {
     for i in `seq 1 5`
     do
+        {
         command curl -sS -K - "${@}" << EOF
 user="${OBS_API_USERNAME}:${OBS_API_PASSWORD}"
 EOF
-        test "${?}" -eq 0 && return 0
-        sleep 30s
+        } && return 0 || sleep 30s
     done
     return 1
 }
