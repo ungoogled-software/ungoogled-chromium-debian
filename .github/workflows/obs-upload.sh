@@ -124,14 +124,10 @@ generate_obs()
         <param name="revision">${TAG}</param>
     </service>
     <service name="download_url">
-        <param name="protocol">https</param>
-        <param name="host">commondatastorage.googleapis.com</param>
-        <param name="path">chromium-browser-official/chromium-${CHROMIUM_VERSION}.tar.xz</param>
+        <param name="url">https://commondatastorage.googleapis.com/chromium-browser-official/chromium-${CHROMIUM_VERSION}.tar.xz</param>
     </service>
     <service name="download_url">
-        <param name="protocol">https</param>
-        <param name="host">commondatastorage.googleapis.com</param>
-        <param name="path">chromium-browser-official/chromium-${CHROMIUM_VERSION}.tar.xz.hashes</param>
+        <param name="url">https://commondatastorage.googleapis.com/chromium-browser-official/chromium-${CHROMIUM_VERSION}.tar.xz.hashes</param>
     </service>
     <service name="recompress">
         <param name="compression">xz</param>
