@@ -23,8 +23,8 @@ author: Michael Gilbert <mgilbert@debian.org>
    public_deps = [
 --- a/v8/test/unittests/BUILD.gn
 +++ b/v8/test/unittests/BUILD.gn
-@@ -450,7 +450,7 @@ v8_source_set("unittests_sources") {
-     "../..:v8_libplatform",
+@@ -486,7 +486,7 @@ v8_source_set("unittests_sources") {
+     "../..:v8_shared_internal_headers",
      "../..:v8_wrappers",
      "../..:wasm_test_common",
 -    "../../third_party/inspector_protocol:crdtp_test",

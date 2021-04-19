@@ -1,3 +1,44 @@
+chromium (90.0.4430.72-1) unstable; urgency=medium
+
+  * New upstream security release (closes: #987053).
+    - CVE-2021-21201: Use after free in permissions. Reported by Gengming Liu
+      and Jianyu Chen when working at Tencent KeenLab
+    - CVE-2021-21202: Use after free in extensions. Reported by David Erceg
+    - CVE-2021-21203: Use after free in Blink. Reported by asnine
+    - CVE-2021-21204: Use after free in Blink. Reported by Chelse Tsai-Simek,
+      Jeanette Ulloa, and Emily Voigtlander of Seesaw
+    - CVE-2021-21205: Insufficient policy enforcement in navigation. Reported
+      by Alison Huffman, Microsoft Browser Vulnerability Research
+    - CVE-2021-21221: Insufficient validation of untrusted input in Mojo.
+      Reported by Guang Gong of Alpha Lab, Qihoo 360
+    - CVE-2021-21207: Use after free in IndexedDB. Reported by koocola
+      @alo_cook and Nan Wang @eternalsakura13 of 360 Alpha Lab
+    - CVE-2021-21208: Insufficient data validation in QR scanner. Reported by
+      Ahmed Elsobky @0xsobky
+    - CVE-2021-21209: Inappropriate implementation in storage. Reported by Tom
+      Van Goethem @tomvangoethem
+    - CVE-2021-21210: Inappropriate implementation in Network. Reported by
+      @bananabr
+    - CVE-2021-21211: Inappropriate implementation in Navigation. Reported by
+      Akash Labade m0ns7er
+    - CVE-2021-21212: Incorrect security UI in Network Config UI. Reported by
+      Hugo Hue and Sze Yiu Chau of the Chinese University of Hong Kong
+    - CVE-2021-21213: Use after free in WebMIDI. Reported by raven
+      @raid_akame
+    - CVE-2021-21214: Use after free in Network API. Reported by Anonymous
+    - CVE-2021-21215: Inappropriate implementation in Autofill. Reported by
+      Abdulrahman Alqabandi, Microsoft Browser Vulnerability Research
+    - CVE-2021-21216: Inappropriate implementation in Autofill. Reported by
+      Abdulrahman Alqabandi, Microsoft Browser Vulnerability Research
+    - CVE-2021-21217: Uninitialized Use in PDFium. Reported by Zhou Aiting
+      @zhouat1 of Qihoo 360 Vulcan Team
+    - CVE-2021-21218: Uninitialized Use in PDFium. Reported by Zhou Aiting
+      @zhouat1 of Qihoo 360 Vulcan Team
+    - CVE-2021-21219: Uninitialized Use in PDFium. Reported by Zhou Aiting
+      @zhouat1 of Qihoo 360 Vulcan Team
+
+ -- Michel Le Bihan <michel@lebihan.pl>  Mon, 19 Apr 2021 19:13:47 +0200
+
 chromium (89.0.4389.114-1) unstable; urgency=medium
 
   * New upstream security release (closes: #986335).

@@ -10,7 +10,7 @@
      "//media/muxers:unit_tests",
 --- a/media/gpu/BUILD.gn
 +++ b/media/gpu/BUILD.gn
-@@ -507,66 +507,6 @@ static_library("test_support") {
+@@ -470,66 +470,6 @@ static_library("test_support") {
    ]
  }
  
@@ -46,7 +46,7 @@
 -    sources += [ "vp8_decoder_unittest.cc" ]
 -  }
 -
--  if ((is_chromeos_ash && use_vaapi) || is_win) {
+-  if (use_libgav1_parser) {
 -    sources += [ "av1_decoder_unittest.cc" ]
 -    deps += [
 -      "//build:chromeos_buildflags",

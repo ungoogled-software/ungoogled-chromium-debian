@@ -22,8 +22,8 @@ fixes/connection-message.patch
 fixes/nullptr-dereference.patch
 fixes/multiple-destruction.patch
 fixes/no-ozone.patch
-fixes/quiche.patch
 fixes/chromeos_devicetype.patch
+fixes/nomerge.patch
 
 disable/mojo.patch
 disable/tests.patch
@@ -48,6 +48,8 @@ disable/angle-perftests.patch
 disable/web-ui-tests.patch
 disable/ozone-unittests.patch
 disable/devtools-unittests.patch
+disable/ios.patch
+disable/tflite-test.patch
 
 warnings/restrict.patch
 warnings/multichar.patch
@@ -61,6 +63,7 @@ warnings/int-in-bool-context.patch
 system/icu.patch
 system/vpx.patch
 system/jpeg.patch
+system/png.patch
 system/node.patch
 system/nspr.patch
 system/zlib.patch

@@ -65,6 +65,7 @@ Files-Excluded:
  components/test/android
  components/drive/chromeos
  testing/buildbot
+ testing/rts
  native_client*
  android_webview
  third_party/re2

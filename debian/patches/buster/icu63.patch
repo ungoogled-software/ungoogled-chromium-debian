@@ -1501,6 +1501,77 @@ author: Michael Gilbert <mgilbert@debian.org>
      THROW_NEW_ERROR(isolate,
                      NewRangeError(MessageTemplate::kLocaleBadParameters),
                      JSLocale);
+@@ -392,62 +392,22 @@ MaybeHandle<JSLocale> Construct(Isolate* isolate,
+ 
+ MaybeHandle<JSLocale> JSLocale::Maximize(Isolate* isolate,
+                                          Handle<JSLocale> locale) {
+-  // ICU has limitation on the length of the locale while addLikelySubtags
+-  // is called. Work around the issue by only perform addLikelySubtags
+-  // on the base locale and merge the extension if needed.
+-  icu::Locale source(*(locale->icu_locale().raw()));
+-  icu::Locale result = icu::Locale::createFromName(source.getBaseName());
++  icu::Locale icu_locale(*(locale->icu_locale().raw()));
+   UErrorCode status = U_ZERO_ERROR;
+-  result.addLikelySubtags(status);
+-  if (strlen(source.getBaseName()) != strlen(result.getBaseName())) {
+-    // Base name is changed
+-    if (strlen(source.getBaseName()) != strlen(source.getName())) {
+-      // the source has extensions, get the extensions from the source.
+-      result = icu::LocaleBuilder()
+-                   .setLocale(source)
+-                   .setLanguage(result.getLanguage())
+-                   .setRegion(result.getCountry())
+-                   .setScript(result.getScript())
+-                   .setVariant(result.getVariant())
+-                   .build(status);
+-    }
+-  } else {
+-    // Base name is not changed
+-    result = source;
+-  }
++  icu_locale.addLikelySubtags(status);
+   DCHECK(U_SUCCESS(status));
+-  DCHECK(!result.isBogus());
+-  return Construct(isolate, result);
++  DCHECK(!icu_locale.isBogus());
++  return Construct(isolate, icu_locale);
+ }
+ 
+ MaybeHandle<JSLocale> JSLocale::Minimize(Isolate* isolate,
+                                          Handle<JSLocale> locale) {
+-  // ICU has limitation on the length of the locale while minimizeSubtags
+-  // is called. Work around the issue by only perform addLikelySubtags
+-  // on the base locale and merge the extension if needed.
+-  icu::Locale source(*(locale->icu_locale().raw()));
+-  icu::Locale result = icu::Locale::createFromName(source.getBaseName());
++  icu::Locale icu_locale(*(locale->icu_locale().raw()));
+   UErrorCode status = U_ZERO_ERROR;
+-  result.minimizeSubtags(status);
+-  if (strlen(source.getBaseName()) != strlen(result.getBaseName())) {
+-    // Base name is changed
+-    if (strlen(source.getBaseName()) != strlen(source.getName())) {
+-      // the source has extensions, get the extensions from the source.
+-      result = icu::LocaleBuilder()
+-                   .setLocale(source)
+-                   .setLanguage(result.getLanguage())
+-                   .setRegion(result.getCountry())
+-                   .setScript(result.getScript())
+-                   .setVariant(result.getVariant())
+-                   .build(status);
+-    }
+-  } else {
+-    // Base name is not changed
+-    result = source;
+-  }
++  icu_locale.minimizeSubtags(status);
+   DCHECK(U_SUCCESS(status));
+-  DCHECK(!result.isBogus());
+-  return Construct(isolate, result);
++  DCHECK(!icu_locale.isBogus());
++  return Construct(isolate, icu_locale);
+ }
+ 
+ Handle<Object> JSLocale::Language(Isolate* isolate, Handle<JSLocale> locale) {
 --- a/v8/src/objects/js-date-time-format.cc
 +++ b/v8/src/objects/js-date-time-format.cc
 @@ -59,21 +59,6 @@ JSDateTimeFormat::HourCycle ToHourCycle(

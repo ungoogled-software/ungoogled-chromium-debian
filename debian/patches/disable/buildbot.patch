@@ -120,6 +120,17 @@ author: Michael Gilbert <mgilbert@debian.org>
      "//third_party/mesa_headers",
    ]
  
+--- a/components/BUILD.gn
++++ b/components/BUILD.gn
+@@ -185,7 +185,7 @@ test("components_unittests") {
+     "//components/webdata_services:unit_tests",
+   ]
+ 
+-  data_deps = [ "//testing/buildbot/filters:components_unittests_filters" ]
++  data_deps = []
+ 
+   if (toolkit_views) {
+     deps += [
 --- a/components/viz/BUILD.gn
 +++ b/components/viz/BUILD.gn
 @@ -26,7 +26,6 @@ viz_test("viz_unittests") {
@@ -150,3 +161,14 @@ author: Michael Gilbert <mgilbert@debian.org>
    if (is_android) {
      use_raw_android_executable = true
    }
+--- a/ui/base/BUILD.gn
++++ b/ui/base/BUILD.gn
+@@ -924,7 +924,7 @@ test("ui_base_unittests") {
+   }
+ 
+   data = []
+-  data_deps = [ "//testing/buildbot/filters:ui_base_unittests_filters" ]
++  data_deps = []
+   deps = [
+     ":ui_base_test_resources_grit",
+     ":ui_base_unittests_bundle_data",

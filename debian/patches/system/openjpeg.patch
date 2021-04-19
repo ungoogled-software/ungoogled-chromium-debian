@@ -2,7 +2,7 @@ description: build using system openjpeg
 author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/third_party/pdfium/BUILD.gn
-+++ b/third_party/pdfium/BUILD.gn.new
++++ b/third_party/pdfium/BUILD.gn
 @@ -17,7 +17,7 @@ group("freetype_common") {
  config("pdfium_common_config") {
    cflags = []

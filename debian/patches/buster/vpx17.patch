@@ -461,8 +461,8 @@
      vp9_info->gof_idx =
          static_cast<uint8_t>(pics_since_key_ % gof_.num_frames_in_gof);
      vp9_info->temporal_up_switch = gof_.temporal_up_switch[vp9_info->gof_idx];
-@@ -1308,261 +1135,6 @@ void LibvpxVp9Encoder::PopulateCodecSpecific(CodecSpecificInfo* codec_specific,
-   }
+@@ -1314,261 +1314,6 @@ bool LibvpxVp9Encoder::PopulateCodecSpecific(CodecSpecificInfo* codec_specific,
+   return true;
  }
  
 -void LibvpxVp9Encoder::FillReferenceIndices(const vpx_codec_cx_pkt& pkt,
@@ -720,11 +720,11 @@
 -  return ref_config;
 -}
 -
- int LibvpxVp9Encoder::GetEncodedLayerFrame(const vpx_codec_cx_pkt* pkt) {
+ void LibvpxVp9Encoder::GetEncodedLayerFrame(const vpx_codec_cx_pkt* pkt) {
    RTC_DCHECK_EQ(pkt->kind, VPX_CODEC_CX_FRAME_PKT);
  
-@@ -1603,14 +1175,10 @@ int LibvpxVp9Encoder::GetEncodedLayerFrame(const vpx_codec_cx_pkt* pkt) {
-                         input_image_->timestamp());
+@@ -1613,14 +1358,10 @@ void LibvpxVp9Encoder::GetEncodedLayerFrame(const vpx_codec_cx_pkt* pkt) {
+   }
    encoded_image_.SetSpatialIndex(spatial_index);
  
 -  UpdateReferenceBuffers(*pkt, pics_since_key_);

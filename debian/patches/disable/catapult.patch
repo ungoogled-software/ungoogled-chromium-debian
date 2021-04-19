@@ -3,10 +3,10 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -240,7 +240,6 @@ group("gn_all") {
+@@ -245,7 +245,6 @@ group("gn_all") {
+       "//google_apis/gcm:mcs_probe",
        "//media/capture:capture_unittests",
        "//media/cast:cast_unittests",
-       "//third_party/angle/src/tests:angle_white_box_tests",
 -      "//third_party/catapult/telemetry:bitmaptools($host_toolchain)",
      ]
    } else if (is_ios) {
@@ -16,9 +16,9 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//services:services_junit_tests",
        "//testing/android/junit:junit_unit_tests",
 -      "//third_party/catapult/devil",
+       "//third_party/r8:custom_d8_java",
        "//third_party/smhasher:murmurhash3",
        "//tools/android:android_tools",
-       "//tools/android:memconsumer",
 @@ -950,7 +948,6 @@ if (is_chromeos) {
        "//third_party/dawn/src/tests:dawn_unittests",
  
@@ -65,14 +65,14 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//third_party/depot_tools/pylint_main.py",
 --- a/tools/binary_size/BUILD.gn
 +++ b/tools/binary_size/BUILD.gn
-@@ -18,7 +18,6 @@ python_library("binary_size_trybot_py")
+@@ -18,7 +18,6 @@ python_library("binary_size_trybot_py") {
  python_library("sizes_py") {
    testonly = true
    pydeps_file = "sizes.pydeps"
 -  data_deps = [ "//third_party/catapult/tracing:convert_chart_json" ]
  }
  
- if (is_linux || is_chromeos) {
+ if (is_linux) {
 --- a/v8/tools/BUILD.gn
 +++ b/v8/tools/BUILD.gn
 @@ -30,10 +30,6 @@ group("v8_android_test_runner_deps") {
@@ -113,14 +113,6 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//tools/perf/run_telemetry_tests",
  
        # For isolate contract.
-@@ -7380,7 +7376,6 @@ if (!is_fuchsia && !is_android) {
-   group("telemetry_gpu_unittests") {
-     testonly = true
-     deps = [
--      "//third_party/catapult:telemetry_chrome_test_support",
-       "//tools/metrics:metrics_python_tests",
-     ]
-     data = [
 @@ -7504,7 +7499,6 @@ if (is_mac || is_win || is_android) {
        "//testing/scripts",
        "//testing/test_env.py",
@@ -239,17 +231,17 @@ author: Michael Gilbert <mgilbert@debian.org>
      "//third_party/blink/public:resources",
 --- a/chrome/chrome_paks.gni
 +++ b/chrome/chrome_paks.gni
-@@ -143,7 +143,6 @@ template("chrome_extra_paks") {
-         "$root_gen_dir/chrome/settings_resources.pak",
+@@ -146,7 +146,6 @@ template("chrome_extra_paks") {
          "$root_gen_dir/chrome/tab_search_resources.pak",
+         "$root_gen_dir/chrome/webid_resources_100_percent.pak",
          "$root_gen_dir/content/browser/devtools/devtools_resources.pak",
 -        "$root_gen_dir/content/browser/tracing/tracing_resources.pak",
          "$root_gen_dir/headless/headless_lib_resources.pak",
        ]
        deps += [
-@@ -160,7 +159,6 @@ template("chrome_extra_paks") {
-         "//chrome/browser/resources/settings:settings_resources",
-         "//chrome/browser/resources/tab_search:tab_search_resources",
+@@ -166,7 +165,6 @@ template("chrome_extra_paks") {
+         "//chrome/browser/resources/settings:resources",
+         "//chrome/browser/resources/tab_search:resources",
          "//content/browser/devtools:devtools_resources",
 -        "//content/browser/tracing:resources",
          "//headless:resources",
@@ -350,8 +342,8 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
 --- a/third_party/webrtc/test/BUILD.gn
 +++ b/third_party/webrtc/test/BUILD.gn
-@@ -254,10 +254,6 @@ rtc_library("perf_test") {
-   absl_deps = [ "//third_party/abseil-cpp/absl/types:optional" ]
+@@ -262,10 +262,6 @@ rtc_library("perf_test") {
+   ]
    if (rtc_enable_protobuf) {
      sources += [ "testsupport/perf_test_histogram_writer.cc" ]
 -    deps += [
