@@ -1,3 +1,19 @@
+chromium (90.0.4430.85-1) unstable; urgency=medium
+
+  * New upstream security release (closes: #987358).
+    - CVE-2021-21222: Heap buffer overflow in V8. Reported by Guang Gong of
+      Alpha Lab, Qihoo 360
+    - CVE-2021-21223: Integer overflow in Mojo. Reported by Guang Gong of Alpha
+      Lab, Qihoo 360
+    - CVE-2021-21224: Type Confusion in V8. Reported by Jose Martinez tr0y4
+      from VerSprite Inc.
+    - CVE-2021-21225: Out of bounds memory access in V8. Reported by Brendon
+      Tiszka @btiszka supporting the EFF
+    - CVE-2021-21226: Use after free in navigation. Reported by Brendon Tiszka
+      @btiszka supporting the EFF
+
+ -- Michel Le Bihan <michel@lebihan.pl>  Thu, 22 Apr 2021 13:01:41 +0200
+
 chromium (90.0.4430.72-1) unstable; urgency=medium
 
   * New upstream security release (closes: #987053).
