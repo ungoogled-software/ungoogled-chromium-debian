@@ -3,17 +3,20 @@ author: Michel Le Bihan <michel@lebihan.pl>
 
 --- a/chrome/test/BUILD.gn
 +++ b/chrome/test/BUILD.gn
-@@ -3355,7 +3355,6 @@ group("performance_test_suite") {
-     "//gpu:gpu_perftests",
-     "//media:media_perftests",
-     "//testing:run_perf_test",
--    "//third_party/angle/src/tests:angle_perftests",
-   ]
+@@ -3388,10 +3388,6 @@
+       data_deps += [ "//third_party/dawn/src/tests:dawn_perf_tests" ]
+     }
  
-   if (build_dawn_tests) {
+-    if (!is_chromeos_lacros) {
+-      data_deps += [ "//third_party/angle/src/tests:angle_perftests" ]
+-    }
+-
+     if (!is_android && !is_fuchsia) {
+       data_deps += [
+         "//chrome/test:load_library_perf_tests",
 --- a/third_party/angle/src/tests/BUILD.gn
 +++ b/third_party/angle/src/tests/BUILD.gn
-@@ -12,8 +12,7 @@ declare_args() {
+@@ -12,8 +12,7 @@
    build_angle_deqp_tests = false
    build_angle_gles1_conform_tests = false
    build_angle_trace_perf_tests = false
@@ -23,7 +26,7 @@ author: Michel Le Bihan <michel@lebihan.pl>
  }
  
  angle_test("test_utils_unittest_helper") {
-@@ -258,43 +257,7 @@ config("angle_maybe_has_histograms") {
+@@ -262,47 +261,7 @@
    }
  }
  
@@ -32,6 +35,10 @@ author: Michel Le Bihan <michel@lebihan.pl>
 -
 -  angle_source_set(target_name) {
 -    testonly = true
+-    if (is_ios) {
+-      # shared libraries are hidden inside ios_framework_bundle, but we include headers from them
+-      check_includes = false
+-    }
 -    sources = [
 -      "../third_party/trace_event/trace_event.h",
 -      "perf_tests/ANGLEPerfTest.cpp",
@@ -68,7 +75,7 @@ author: Michel Le Bihan <michel@lebihan.pl>
    import("angle_perftests.gni")
  
    # This test suite is for perf tests that use ANGLE's internals in some direct way.
-@@ -1443,12 +1406,11 @@ group("angle_tests") {
+@@ -1459,12 +1418,11 @@
    testonly = true
    deps = [
      ":angle_end2end_tests",
@@ -84,7 +91,7 @@ author: Michel Le Bihan <michel@lebihan.pl>
        ":angle_white_box_tests",
 --- a/third_party/angle/gni/angle.gni
 +++ b/third_party/angle/gni/angle.gni
-@@ -173,7 +173,7 @@ declare_args() {
+@@ -172,7 +172,7 @@
    # TODO(jdarpinian): Support enabling CGL and EAGL at the same time using the soft linking code. Also support disabling both for Metal-only builds.
    angle_enable_cgl = angle_enable_gl && !angle_enable_eagl && is_apple
  

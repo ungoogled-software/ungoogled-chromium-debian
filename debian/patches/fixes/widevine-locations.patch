@@ -9,7 +9,7 @@ Source: https://bazaar.launchpad.net/~chromium-team/chromium-browser/disco-dev/v
 
 --- a/chrome/common/chrome_paths.cc
 +++ b/chrome/common/chrome_paths.cc
-@@ -339,6 +339,15 @@ bool PathProvider(int key, base::FilePath* result) {
+@@ -317,6 +317,15 @@ bool PathProvider(int key, base::FilePath* result) {
  #if (defined(OS_LINUX) || defined(OS_CHROMEOS)) && \
      BUILDFLAG(BUNDLE_WIDEVINE_CDM)
      case chrome::DIR_BUNDLED_WIDEVINE_CDM:
@@ -27,7 +27,7 @@ Source: https://bazaar.launchpad.net/~chromium-team/chromium-browser/disco-dev/v
  #if !BUILDFLAG(IS_CHROMEOS_ASH)
 --- a/third_party/widevine/cdm/BUILD.gn
 +++ b/third_party/widevine/cdm/BUILD.gn
-@@ -15,7 +15,7 @@ buildflag_header("buildflags") {
+@@ -16,7 +16,7 @@ buildflag_header("buildflags") {
  
    flags = [
      "ENABLE_WIDEVINE=$enable_widevine",

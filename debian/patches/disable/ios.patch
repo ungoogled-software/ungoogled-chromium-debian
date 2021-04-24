@@ -1,0 +1,10 @@
+--- a/components/crash/core/common/BUILD.gn
++++ b/components/crash/core/common/BUILD.gn
+@@ -4,7 +4,6 @@
+ 
+ import("//build/buildflag_header.gni")
+ import("//components/gwp_asan/buildflags/buildflags.gni")
+-import("//ios/features.gni")
+ 
+ declare_args() {
+   # If set to true, this will stub out and disable the entire crash key system.

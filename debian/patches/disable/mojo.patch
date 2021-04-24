@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -1034,8 +1034,6 @@
+@@ -1039,8 +1039,6 @@
        ":layout_test_data_mojo_bindings",
        ":layout_test_data_mojo_bindings_lite",
        "//content/shell:content_shell",
@@ -12,7 +12,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//device/bluetooth/public/mojom:fake_bluetooth_interfaces_js_data_deps",
        "//device/vr/public/mojom:vr_service_js_data_deps",
        "//media/capture/mojom:image_capture_js_data_deps",
-@@ -1069,8 +1067,6 @@
+@@ -1074,8 +1072,6 @@
          "//third_party/breakpad:symupload",
          "//tools/android/forwarder2",
        ]
@@ -23,7 +23,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      if (!is_win && !is_android) {
 --- a/content/browser/BUILD.gn
 +++ b/content/browser/BUILD.gn
-@@ -2865,7 +2865,6 @@ group("for_content_tests") {
+@@ -2898,7 +2898,6 @@ group("for_content_tests") {
    visibility = [
      "//content/public/test/android/*",
      "//content/test/*",
@@ -33,7 +33,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      public_deps = [ ":browser" ]
 --- a/content/renderer/BUILD.gn
 +++ b/content/renderer/BUILD.gn
-@@ -571,7 +571,6 @@ target(link_target_type, "renderer") {
+@@ -564,7 +564,6 @@ target(link_target_type, "renderer") {
  group("for_content_tests") {
    visibility = [
      "//content/test/*",
@@ -157,7 +157,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
 --- a/third_party/blink/tools/BUILD.gn
 +++ b/third_party/blink/tools/BUILD.gn
-@@ -63,8 +63,6 @@ group("wpt_tests_base_mojo_bindings") {
+@@ -66,8 +66,6 @@ group("wpt_tests_base_mojo_bindings") {
    data_deps = [
      "//:layout_test_data_mojo_bindings",
      "//:layout_test_data_mojo_bindings_lite",

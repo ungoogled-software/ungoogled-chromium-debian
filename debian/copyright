@@ -61,6 +61,7 @@ Files-Excluded:
  components/test/android
  components/drive/chromeos
  testing/buildbot
+ testing/rts
  native_client*
  third_party/re2
  third_party/icu

@@ -185,15 +185,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/third_party/breakpad/BUILD.gn
 +++ b/third_party/breakpad/BUILD.gn
-@@ -380,7 +380,6 @@ if (is_mac) {
-       "breakpad/src/client/mac/handler/dynamic_images.cc",
-       "breakpad/src/client/mac/handler/minidump_generator.cc",
-       "breakpad/src/client/minidump_file_writer.cc",
--      "breakpad/src/common/convert_UTF.cc",
-       "breakpad/src/common/mac/MachIPC.mm",
-       "breakpad/src/common/mac/arch_utilities.cc",
-       "breakpad/src/common/mac/bootstrap_compat.cc",
-@@ -594,8 +593,6 @@ if (is_linux || is_chromeos || is_androi
+@@ -604,8 +604,6 @@ if (is_linux || is_chromeos || is_android) {
        "breakpad/src/client/minidump_file_writer-inl.h",
        "breakpad/src/client/minidump_file_writer.cc",
        "breakpad/src/client/minidump_file_writer.h",
@@ -202,15 +194,6 @@ author: Michael Gilbert <mgilbert@debian.org>
        "breakpad/src/common/linux/breakpad_getcontext.S",
        "breakpad/src/common/linux/elf_core_dump.cc",
        "breakpad/src/common/linux/elf_core_dump.h",
-@@ -1018,8 +1015,6 @@ if (is_ios) {
-       "breakpad/src/client/minidump_file_writer-inl.h",
-       "breakpad/src/client/minidump_file_writer.cc",
-       "breakpad/src/client/minidump_file_writer.h",
--      "breakpad/src/common/convert_UTF.cc",
--      "breakpad/src/common/convert_UTF.h",
-       "breakpad/src/common/long_string_dictionary.cc",
-       "breakpad/src/common/mac/HTTPMultipartUpload.m",
-       "breakpad/src/common/mac/HTTPRequest.m",
 --- a/third_party/breakpad/breakpad/src/client/minidump_file_writer.cc
 +++ b/third_party/breakpad/breakpad/src/client/minidump_file_writer.cc
 @@ -149,11 +149,11 @@ bool MinidumpFileWriter::CopyStringToMDS

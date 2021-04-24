@@ -93,13 +93,33 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "base/i18n/unicodestring.h"
  #include "base/no_destructor.h"
  #include "base/synchronization/lock.h"
---- a/ui/accessibility/ax_tree_serializer.h
-+++ b/ui/accessibility/ax_tree_serializer.h
-@@ -8,6 +8,7 @@
- #include <stddef.h>
- #include <stdint.h>
+--- a/components/translate/core/language_detection/ngram_hash_ops_utils.cc
++++ b/components/translate/core/language_detection/ngram_hash_ops_utils.cc
+@@ -4,6 +4,7 @@
  
-+#include <ctime>
- #include <ostream>
- #include <unordered_map>
- #include <unordered_set>
+ #include "components/translate/core/language_detection/ngram_hash_ops_utils.h"
+ 
++#include <cstring>
+ #include <vector>
+ 
+ #include "third_party/utf/src/include/utf.h"
+--- a/components/translate/core/language_detection/quantization_utils.h
++++ b/components/translate/core/language_detection/quantization_utils.h
+@@ -7,6 +7,7 @@
+ 
+ #include <algorithm>
+ #include <cmath>
++#include <cstdint>
+ 
+ namespace translate {
+ 
+--- a/third_party/pdfium/core/fxcodec/png/png_decoder.cpp
++++ b/third_party/pdfium/core/fxcodec/png/png_decoder.cpp
+@@ -10,6 +10,7 @@
+ 
+ #include "core/fxcodec/cfx_codec_memory.h"
+ #include "core/fxcodec/fx_codec.h"
++#include "core/fxcodec/fx_codec_def.h"
+ #include "core/fxcrt/unowned_ptr.h"
+ #include "core/fxge/dib/fx_dib.h"
+ #include "third_party/base/compiler_specific.h"
