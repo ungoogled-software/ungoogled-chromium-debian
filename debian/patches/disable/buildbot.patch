@@ -130,6 +130,47 @@ author: Michael Gilbert <mgilbert@debian.org>
    ]
  
    if (is_linux || is_chromeos || is_mac || is_win || is_fuchsia) {
+--- a/cc/BUILD.gn
++++ b/cc/BUILD.gn
+@@ -831,7 +831,6 @@ cc_test("cc_unittests") {
+     "//ui/gl:test_support",
+   ]
+   data_deps = [
+-    "//testing/buildbot/filters:cc_unittests_filters",
+     "//third_party/mesa_headers",
+   ]
+ 
+--- a/components/BUILD.gn
++++ b/components/BUILD.gn
+@@ -185,7 +185,7 @@ test("components_unittests") {
+     "//components/webdata_services:unit_tests",
+   ]
+ 
+-  data_deps = [ "//testing/buildbot/filters:components_unittests_filters" ]
++  data_deps = []
+ 
+   if (toolkit_views) {
+     deps += [
+--- a/components/viz/BUILD.gn
++++ b/components/viz/BUILD.gn
+@@ -26,7 +26,6 @@ viz_test("viz_unittests") {
+   data = [ "test/data/" ]
+ 
+   data_deps = [
+-    "//testing/buildbot/filters:viz_unittests_filters",
+     "//third_party/mesa_headers",
+   ]
+ 
+--- a/gpu/BUILD.gn
++++ b/gpu/BUILD.gn
+@@ -445,7 +445,6 @@ test("gl_tests") {
+     ]
+   }
+ 
+-  data_deps = [ "//testing/buildbot/filters:gl_tests_filters" ]
+ }
+ 
+ test("gpu_unittests") {
 --- a/sandbox/linux/BUILD.gn
 +++ b/sandbox/linux/BUILD.gn
 @@ -199,7 +199,6 @@
@@ -140,13 +181,14 @@ author: Michael Gilbert <mgilbert@debian.org>
    if (is_android) {
      use_raw_android_executable = true
    }
---- a/third_party/breakpad/BUILD.gn
-+++ b/third_party/breakpad/BUILD.gn
-@@ -711,7 +711,6 @@
+--- a/ui/base/BUILD.gn
++++ b/ui/base/BUILD.gn
+@@ -924,7 +924,7 @@ test("ui_base_unittests") {
+   }
  
-     data_deps = [
-       ":linux_dumper_unittest_helper",
--      "//testing/buildbot/filters:breakpad_unittests_filters",
-     ]
- 
-     include_dirs = [
+   data = []
+-  data_deps = [ "//testing/buildbot/filters:ui_base_unittests_filters" ]
++  data_deps = []
+   deps = [
+     ":ui_base_test_resources_grit",
+     ":ui_base_unittests_bundle_data",

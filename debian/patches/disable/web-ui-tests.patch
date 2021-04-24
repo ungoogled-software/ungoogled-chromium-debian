@@ -9,9 +9,9 @@ diff -ur a/content/shell/BUILD.gn b/content/shell/BUILD.gn
      "$root_gen_dir/mojo/public/js/mojo_bindings_resources.pak",
      "$root_gen_dir/net/net_resources.pak",
      "$root_gen_dir/third_party/blink/public/resources/blink_resources.pak",
-@@ -425,7 +424,6 @@
+@@ -426,7 +426,6 @@ repack("pak") {
      "//content/app/resources",
-     "//content/browser/resources/media:media_internals_resources",
+     "//content/browser/resources/media:resources",
      "//content/browser/webrtc/resources",
 -    "//content/test:web_ui_mojo_test_resources",
      "//mojo/public/js:resources",
@@ -20,7 +20,7 @@ diff -ur a/content/shell/BUILD.gn b/content/shell/BUILD.gn
 diff -ur a/content/test/BUILD.gn b/content/test/BUILD.gn
 --- a/content/test/BUILD.gn
 +++ b/content/test/BUILD.gn
-@@ -804,29 +804,6 @@
+@@ -812,28 +812,6 @@ mojom("content_test_mojo_bindings") {
    ]
  }
  
@@ -42,7 +42,6 @@ diff -ur a/content/test/BUILD.gn b/content/test/BUILD.gn
 -# NOTE: Building this target serves as a compile test for type-checking of
 -# WebUI JS that consumes generated Mojom JS bindings.
 -js_type_check("web_ui_mojo_test_js_type_check") {
--  uses_js_modules = true
 -  deps = [ ":web_ui_mojo_test_js" ]
 -  closure_flags = default_closure_args + mojom_js_args
 -}

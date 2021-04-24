@@ -1,0 +1,21 @@
+--- a/chrome/services/machine_learning/BUILD.gn
++++ b/chrome/services/machine_learning/BUILD.gn
+@@ -30,7 +30,6 @@ source_set("machine_learning") {
+     ]
+ 
+     deps += [
+-      ":tflite_simple_test",
+       "//components/optimization_guide/core:machine_learning",
+     ]
+ 
+@@ -80,10 +79,3 @@ source_set("unit_tests") {
+     "//testing/gtest",
+   ]
+ }
+-
+-if (build_with_tflite_lib) {
+-  copy("tflite_simple_test") {
+-    sources = [ "//components/test/data/optimization_guide/simple_test.tflite" ]
+-    outputs = [ "$root_out_dir/test_data/simple_test.tflite" ]
+-  }
+-}

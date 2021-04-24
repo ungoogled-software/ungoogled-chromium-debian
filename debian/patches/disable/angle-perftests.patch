@@ -3,14 +3,17 @@ author: Michel Le Bihan <michel@lebihan.pl>
 
 --- a/chrome/test/BUILD.gn
 +++ b/chrome/test/BUILD.gn
-@@ -3355,7 +3355,6 @@ group("performance_test_suite") {
-     "//gpu:gpu_perftests",
-     "//media:media_perftests",
-     "//testing:run_perf_test",
--    "//third_party/angle/src/tests:angle_perftests",
-   ]
+@@ -3391,10 +3391,6 @@ template("performance_test_suite_template") {
+       data_deps += [ "//third_party/dawn/src/tests:dawn_perf_tests" ]
+     }
  
-   if (build_dawn_tests) {
+-    if (!is_chromeos_lacros) {
+-      data_deps += [ "//third_party/angle/src/tests:angle_perftests" ]
+-    }
+-
+     if (!is_android && !is_fuchsia) {
+       data_deps += [
+         "//chrome/test:load_library_perf_tests",
 --- a/third_party/angle/src/tests/BUILD.gn
 +++ b/third_party/angle/src/tests/BUILD.gn
 @@ -12,8 +12,7 @@ declare_args() {
@@ -23,7 +26,7 @@ author: Michel Le Bihan <michel@lebihan.pl>
  }
  
  angle_test("test_utils_unittest_helper") {
-@@ -258,43 +257,7 @@ config("angle_maybe_has_histograms") {
+@@ -262,47 +262,7 @@ config("angle_maybe_has_histograms") {
    }
  }
  
@@ -32,6 +35,10 @@ author: Michel Le Bihan <michel@lebihan.pl>
 -
 -  angle_source_set(target_name) {
 -    testonly = true
+-    if (is_ios) {
+-      # shared libraries are hidden inside ios_framework_bundle, but we include headers from them
+-      check_includes = false
+-    }
 -    sources = [
 -      "../third_party/trace_event/trace_event.h",
 -      "perf_tests/ANGLEPerfTest.cpp",
