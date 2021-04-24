@@ -1,6 +1,6 @@
 --- a/chrome/browser/about_flags.cc
 +++ b/chrome/browser/about_flags.cc
-@@ -3533,12 +3533,12 @@
+@@ -3632,12 +3632,12 @@
       flag_descriptions::kWebXrForceRuntimeDescription, kOsDesktop,
       MULTI_VALUE_TYPE(kWebXrForceRuntimeChoices)},
  #endif  // ENABLE_VR
@@ -18,7 +18,7 @@
       FEATURE_VALUE_TYPE(features::kSystemKeyboardLock)},
 --- a/chrome/browser/flag_descriptions.cc
 +++ b/chrome/browser/flag_descriptions.cc
-@@ -3708,12 +3708,22 @@
+@@ -3822,12 +3822,22 @@
      "Settings. "
      "See go/betterAM";
  
@@ -43,7 +43,7 @@
  const char kAllowDisableMouseAccelerationDescription[] =
 --- a/chrome/browser/flag_descriptions.h
 +++ b/chrome/browser/flag_descriptions.h
-@@ -2141,9 +2141,17 @@
+@@ -2211,9 +2211,17 @@
  extern const char kAccountManagementFlowsV2Name[];
  extern const char kAccountManagementFlowsV2Description[];
  

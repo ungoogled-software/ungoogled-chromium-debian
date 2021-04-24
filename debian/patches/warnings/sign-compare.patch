@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/storage/browser/file_system/obfuscated_file_util_memory_delegate.cc
 +++ b/storage/browser/file_system/obfuscated_file_util_memory_delegate.cc
-@@ -541,10 +541,15 @@ base::File::Error ObfuscatedFileUtilMemo
+@@ -582,10 +582,15 @@ base::File::Error ObfuscatedFileUtilMemo
    if (source_info.is_directory)
      return base::File::FILE_ERROR_NOT_A_FILE;
  

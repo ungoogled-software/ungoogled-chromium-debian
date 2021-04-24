@@ -4,7 +4,7 @@ origin: chromium 66 authors
 
 --- a/media/filters/ffmpeg_audio_decoder.cc
 +++ b/media/filters/ffmpeg_audio_decoder.cc
-@@ -95,6 +95,8 @@ void FFmpegAudioDecoder::Initialize(cons
+@@ -99,6 +99,8 @@ void FFmpegAudioDecoder::Initialize(cons
      return;
    }
  
@@ -68,7 +68,7 @@ origin: chromium 66 authors
    return avcodec_find_decoder(VideoCodecToCodecID(codec)) != nullptr;
  }
  
-@@ -218,6 +220,8 @@ void FFmpegVideoDecoder::Initialize(cons
+@@ -253,6 +255,8 @@ void FFmpegVideoDecoder::Initialize(cons
      return;
    }
  

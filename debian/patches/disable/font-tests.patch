@@ -25,7 +25,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    }
  
    if (is_mac) {
-@@ -445,9 +441,6 @@ if (is_linux || is_chromeos) {
+@@ -438,9 +434,6 @@ if (is_linux || is_chromeos) {
        testonly = true
        tool = ":generate_fontconfig_caches"
  

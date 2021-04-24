@@ -32,7 +32,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #else
 --- a/third_party/perfetto/gn/BUILD.gn
 +++ b/third_party/perfetto/gn/BUILD.gn
-@@ -367,7 +367,6 @@ if (enable_perfetto_zlib) {
+@@ -370,7 +370,6 @@ if (enable_perfetto_zlib) {
        public_configs = [ "//buildtools:zlib_config" ]
        public_deps = [ "//buildtools:zlib" ]
      } else {

@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -1045,7 +1045,6 @@
+@@ -1050,7 +1050,6 @@
        "//services/device/public/mojom:usb_js_data_deps",
        "//services/shape_detection/public/mojom:mojom_js_data_deps",
        "//skia/public/mojom:mojom_js_data_deps",
@@ -13,7 +13,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//third_party/blink/public/mojom:mojom_platform_js_data_deps",
 --- a/cc/BUILD.gn
 +++ b/cc/BUILD.gn
-@@ -847,7 +847,6 @@
+@@ -855,7 +855,6 @@
      "//ui/gl:test_support",
    ]
    data_deps = [
@@ -23,7 +23,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/chrome/test/BUILD.gn
 +++ b/chrome/test/BUILD.gn
-@@ -893,8 +893,6 @@
+@@ -914,8 +914,6 @@
        "//ppapi:copy_test_files",
        "//ppapi:copy_test_files2",
        "//ppapi:ppapi_tests",
@@ -32,7 +32,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//third_party/mesa_headers",
        "//third_party/widevine/cdm:widevine_test_license_server",
        "//tools/media_engagement_preload:generator",
-@@ -1728,7 +1726,6 @@
+@@ -1740,7 +1738,6 @@
        data_deps += [
          "//ash/keyboard/ui:resources",
          "//chrome",
@@ -40,7 +40,7 @@ author: Michael Gilbert <mgilbert@debian.org>
          "//ui/file_manager:unit_test_data",
        ]
  
-@@ -4116,7 +4113,6 @@
+@@ -4145,7 +4142,6 @@
    data_deps = [
      "//chrome/test/data/media/engagement/preload:generate_preload_list",
      "//chrome/test/data/media/engagement/preload:test_data",
@@ -48,7 +48,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    ]
  
    data = [
-@@ -5882,7 +5878,6 @@
+@@ -5924,7 +5920,6 @@
        "//chrome/browser/chromeos:unit_tests",
        "//chromeos/ime:gencode",
      ]
@@ -56,7 +56,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      sources -=
          [ "../browser/policy/cloud/user_policy_signin_service_unittest.cc" ]
    }
-@@ -6643,7 +6638,6 @@
+@@ -6698,7 +6693,6 @@
      data_deps = [
        "//chrome:browser_tests_pak",
        "//ppapi:ppapi_tests",
@@ -64,7 +64,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//third_party/mesa_headers",
        "//ui/resources:ui_test_pak_data",
      ]
-@@ -7234,7 +7228,6 @@
+@@ -7301,7 +7295,6 @@
      ]
  
      data_deps = [
@@ -84,7 +84,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/content/test/BUILD.gn
 +++ b/content/test/BUILD.gn
-@@ -1364,7 +1364,6 @@
+@@ -1381,7 +1381,6 @@
  
    data_deps = [
      "//content/shell:pak",
@@ -92,7 +92,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "//third_party/mesa_headers",
    ]
  
-@@ -2313,7 +2312,6 @@
+@@ -2334,7 +2333,6 @@
    ]
  
    data_deps = [
@@ -112,7 +112,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  test("gpu_unittests") {
 --- a/media/BUILD.gn
 +++ b/media/BUILD.gn
-@@ -175,7 +175,6 @@
+@@ -176,7 +176,6 @@
      "formats/mp4/h264_annex_b_fuzz_corpus/",
    ]
  
@@ -122,7 +122,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      deps += [ "//media/ffmpeg:unit_tests" ]
 --- a/net/BUILD.gn
 +++ b/net/BUILD.gn
-@@ -4577,7 +4577,6 @@
+@@ -4568,7 +4568,6 @@
    data = []
    data_deps = [
      "third_party/nist-pkits/",
@@ -130,16 +130,6 @@ author: Michael Gilbert <mgilbert@debian.org>
    ]
  
    if (is_linux || is_chromeos || is_mac || is_win || is_fuchsia) {
---- a/cc/BUILD.gn
-+++ b/cc/BUILD.gn
-@@ -831,7 +831,6 @@ cc_test("cc_unittests") {
-     "//ui/gl:test_support",
-   ]
-   data_deps = [
--    "//testing/buildbot/filters:cc_unittests_filters",
-     "//third_party/mesa_headers",
-   ]
- 
 --- a/components/BUILD.gn
 +++ b/components/BUILD.gn
 @@ -185,7 +185,7 @@ test("components_unittests") {
@@ -151,29 +141,9 @@ author: Michael Gilbert <mgilbert@debian.org>
  
    if (toolkit_views) {
      deps += [
---- a/components/viz/BUILD.gn
-+++ b/components/viz/BUILD.gn
-@@ -26,7 +26,6 @@ viz_test("viz_unittests") {
-   data = [ "test/data/" ]
- 
-   data_deps = [
--    "//testing/buildbot/filters:viz_unittests_filters",
-     "//third_party/mesa_headers",
-   ]
- 
---- a/gpu/BUILD.gn
-+++ b/gpu/BUILD.gn
-@@ -445,7 +445,6 @@ test("gl_tests") {
-     ]
-   }
- 
--  data_deps = [ "//testing/buildbot/filters:gl_tests_filters" ]
- }
- 
- test("gpu_unittests") {
 --- a/sandbox/linux/BUILD.gn
 +++ b/sandbox/linux/BUILD.gn
-@@ -199,7 +199,6 @@
+@@ -203,7 +203,6 @@
      ":sandbox_linux_unittests_sources",
      "//sandbox/policy:tests",
    ]

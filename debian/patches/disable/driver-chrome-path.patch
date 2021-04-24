@@ -3,7 +3,7 @@ author: Michel Le Bihan <michel@lebihan.pl>
 
 --- a/chrome/test/chromedriver/chrome/chrome_finder.cc
 +++ b/chrome/test/chromedriver/chrome/chrome_finder.cc
-@@ -63,9 +63,6 @@ void GetApplicationDirs(std::vector<base
+@@ -63,9 +63,6 @@
    locations->push_back(base::FilePath("/usr/bin"));
    locations->push_back(base::FilePath("/sbin"));
    locations->push_back(base::FilePath("/bin"));
@@ -13,7 +13,7 @@ author: Michel Le Bihan <michel@lebihan.pl>
  }
  #elif defined(OS_ANDROID)
  void GetApplicationDirs(std::vector<base::FilePath>* locations) {
-@@ -139,8 +139,6 @@ bool FindChrome(base::FilePath* browser_exe) {
+@@ -139,8 +136,6 @@
  #if defined(OS_WIN) || defined(OS_MAC)
      base::FilePath(chrome::kBrowserProcessExecutablePath),
  #elif defined(OS_LINUX) || defined(OS_CHROMEOS)

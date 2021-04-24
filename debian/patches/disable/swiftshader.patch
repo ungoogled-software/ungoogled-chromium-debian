@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -479,7 +479,7 @@ group("gn_all") {
+@@ -483,7 +483,7 @@ group("gn_all") {
      ]
    }
  
@@ -23,7 +23,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        angle_has_build &&
        ((is_win && !angle_is_winuwp) ||
         (is_linux && (angle_use_x11 || angle_use_vulkan_display) &&
-@@ -360,7 +360,6 @@ if (angle_standalone || build_with_chromium) {
+@@ -368,7 +368,6 @@ if (angle_standalone || build_with_chromium) {
                        "$angle_root:angle_common",
                        "$angle_root:includes",
                        "$angle_root/util:angle_test_utils",
