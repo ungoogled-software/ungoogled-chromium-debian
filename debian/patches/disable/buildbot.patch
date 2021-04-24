@@ -162,3 +162,13 @@ author: Michael Gilbert <mgilbert@debian.org>
    deps = [
      ":ui_base_test_resources_grit",
      ":ui_base_unittests_bundle_data",
+--- a/third_party/breakpad/BUILD.gn
++++ b/third_party/breakpad/BUILD.gn
+@@ -724,7 +724,6 @@
+ 
+     data_deps = [
+       ":linux_dumper_unittest_helper",
+-      "//testing/buildbot/filters:breakpad_unittests_filters",
+     ]
+ 
+     include_dirs = [
