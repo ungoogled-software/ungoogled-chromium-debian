@@ -1,0 +1,20 @@
+description: call system nodejs
+author: Michael Gilbert <mgilbert@debian.org>
+
+--- a/third_party/devtools-frontend/src/scripts/devtools_paths.py
++++ b/third_party/devtools-frontend/src/scripts/devtools_paths.py
+@@ -37,13 +37,7 @@ def third_party_path():
+ 
+ # This points to the node binary downloaded as part of the checkout.
+ def node_path():
+-    try:
+-        old_sys_path = sys.path[:]
+-        sys.path.append(path.join(third_party_path(), 'node'))
+-        import node
+-    finally:
+-        sys.path = old_sys_path
+-    return node.GetBinaryPath()
++    return '/usr/bin/nodejs'
+ 
+ 
+ def devtools_root_path():
