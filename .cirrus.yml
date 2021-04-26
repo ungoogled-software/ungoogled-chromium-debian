@@ -11,15 +11,15 @@ validate_with_source_task:
         - ./ungoogled-chromium/devutils/check_patch_files.py -p debian/patches
     merge_patches_script:
         - ./ungoogled-chromium/utils/patches.py merge -p debian/patches ungoogled-chromium/patches
-    chromium_download_cache:
-        folder: chromium_download_cache
+    download_cache:
+        folder: download_cache
         fingerprint_script: cat ungoogled-chromium/chromium_version.txt
         populate_script:
-            - mkdir chromium_download_cache || true
-            - ./ungoogled-chromium/utils/downloads.py retrieve -i ungoogled-chromium/downloads.ini -c chromium_download_cache
+            - mkdir download_cache || true
+            - ./ungoogled-chromium/utils/downloads.py retrieve -i ungoogled-chromium/downloads.ini -c download_cache
     unpack_source_script:
-        - ./ungoogled-chromium/utils/downloads.py unpack -i ungoogled-chromium/downloads.ini -c chromium_download_cache chromium_src
+        - ./ungoogled-chromium/utils/downloads.py unpack -i ungoogled-chromium/downloads.ini -c download_cache src
     validate_patches_script:
-        - ./ungoogled-chromium/devutils/validate_patches.py -l chromium_src -p debian/patches -s debian/patches/series
+        - ./ungoogled-chromium/devutils/validate_patches.py -l src -p debian/patches -s debian/patches/series
 
 # vim: set expandtab shiftwidth=4 softtabstop=4:
