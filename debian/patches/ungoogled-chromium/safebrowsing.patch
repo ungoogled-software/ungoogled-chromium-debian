@@ -33,3 +33,47 @@
    MOCK_METHOD(bool,
                CanObtainReadPermission,
                (const url::Origin& origin),
+--- a/content/browser/file_system_access/fake_file_system_access_permission_context.cc
++++ b/content/browser/file_system_access/fake_file_system_access_permission_context.cc
+@@ -45,13 +45,6 @@
+   std::move(callback).Run(SensitiveDirectoryResult::kAllowed);
+ }
+ 
+-void FakeFileSystemAccessPermissionContext::PerformAfterWriteChecks(
+-    std::unique_ptr<FileSystemAccessWriteItem> item,
+-    GlobalFrameRoutingId frame_id,
+-    base::OnceCallback<void(AfterWriteCheckResult)> callback) {
+-  std::move(callback).Run(AfterWriteCheckResult::kAllow);
+-}
+-
+ bool FakeFileSystemAccessPermissionContext::CanObtainReadPermission(
+     const url::Origin& origin) {
+   return true;
+@@ -95,4 +88,4 @@
+              : base::FilePath();
+ }
+ 
+-}  // namespace content
+\ No newline at end of file
++}  // namespace content
+--- a/content/browser/file_system_access/fake_file_system_access_permission_context.h
++++ b/content/browser/file_system_access/fake_file_system_access_permission_context.h
+@@ -40,11 +40,6 @@
+       GlobalFrameRoutingId frame_id,
+       base::OnceCallback<void(SensitiveDirectoryResult)> callback) override;
+ 
+-  void PerformAfterWriteChecks(
+-      std::unique_ptr<FileSystemAccessWriteItem> item,
+-      GlobalFrameRoutingId frame_id,
+-      base::OnceCallback<void(AfterWriteCheckResult)> callback) override;
+-
+   bool CanObtainReadPermission(const url::Origin& origin) override;
+   bool CanObtainWritePermission(const url::Origin& origin) override;
+ 
+@@ -71,4 +66,4 @@
+ 
+ }  // namespace content
+ 
+-#endif  // CONTENT_BROWSER_FILE_SYSTEM_ACCESS_FAKE_FILE_SYSTEM_ACCESS_PERMISSION_CONTEXT_H_
+\ No newline at end of file
++#endif  // CONTENT_BROWSER_FILE_SYSTEM_ACCESS_FAKE_FILE_SYSTEM_ACCESS_PERMISSION_CONTEXT_H_
