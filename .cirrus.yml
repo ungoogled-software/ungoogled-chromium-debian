@@ -6,20 +6,19 @@ container:
 validate_with_source_task:
     submodule_checkout_script:
         - git submodule update --init --recursive
-        - ln -s debian/ungoogled-upstream/ungoogled-chromium ungoogled-chromium
     check_patch_files_script:
-        - ./ungoogled-chromium/devutils/check_patch_files.py -p debian/patches
+        - debian/ungoogled-upstream/ungoogled-chromium/devutils/check_patch_files.py -p debian/patches
     merge_patches_script:
-        - ./ungoogled-chromium/utils/patches.py merge -p debian/patches ungoogled-chromium/patches
+        - debian/ungoogled-upstream/ungoogled-chromium/utils/patches.py merge -p debian/patches debian/ungoogled-upstream/ungoogled-chromium/patches
     download_cache:
         folder: download_cache
-        fingerprint_script: cat ungoogled-chromium/chromium_version.txt
+        fingerprint_script: cat debian/ungoogled-upstream/ungoogled-chromium/chromium_version.txt
         populate_script:
             - mkdir download_cache || true
-            - ./ungoogled-chromium/utils/downloads.py retrieve -i ungoogled-chromium/downloads.ini -c download_cache
+            - debian/ungoogled-upstream/ungoogled-chromium/utils/downloads.py retrieve -i debian/ungoogled-upstream/ungoogled-chromium/downloads.ini -c download_cache
     unpack_source_script:
-        - ./ungoogled-chromium/utils/downloads.py unpack -i ungoogled-chromium/downloads.ini -c download_cache src
+        - debian/ungoogled-upstream/ungoogled-chromium/utils/downloads.py unpack -i debian/ungoogled-upstream/ungoogled-chromium/downloads.ini -c download_cache src
     validate_patches_script:
-        - ./ungoogled-chromium/devutils/validate_patches.py -l src -p debian/patches -s debian/patches/series
+        - debian/ungoogled-upstream/ungoogled-chromium/devutils/validate_patches.py -l src -p debian/patches -s debian/patches/series
 
 # vim: set expandtab shiftwidth=4 softtabstop=4:
