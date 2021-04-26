@@ -17,12 +17,12 @@ export QUILT_SERIES="series.merged"
 export QUILT_PUSH_ARGS="--color=auto"
 export QUILT_DIFF_OPTS="--show-c-function"
 export QUILT_PATCH_OPTS="--unified --reject-format=unified"
-export QUILT_DIFF_ARGS="-p ab --no-timestamps --no-index --color=auto"
-export QUILT_REFRESH_ARGS="-p ab --no-timestamps --no-index"
+export QUILT_DIFF_ARGS="-p ab --no-timestamps --no-index --color=auto --sort"
+export QUILT_REFRESH_ARGS="-p ab --no-timestamps --no-index --sort --strip-trailing-whitespace"
 export QUILT_COLORS="diff_hdr=1;32:diff_add=1;34:diff_rem=1;31:diff_hunk=1;33:diff_ctx=35:diff_cctx=33"
 export QUILT_SERIES_ARGS="--color=auto"
 export QUILT_PATCHES_ARGS="--color=auto"
 
 # When non-default less options are used, add the -R option so that less outputs
 # ANSI color escape codes "raw".
-[ -n "$LESS" -a -z "${QUILT_PAGER+x}" ] && export QUILT_PAGER="less -FRX"
+[ -n "$LESS" -a -z "${QUILT_PAGER+x}" ] && export QUILT_PAGER="less -FRX" || true

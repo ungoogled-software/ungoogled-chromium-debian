@@ -1,0 +1,65 @@
+name: Update master With Upstream
+
+on:
+    workflow_dispatch:
+        inputs:
+            committish:
+                description: 'ungoogled-chromium git repo commit-ish object to update to'
+                required: true
+
+jobs:
+    update-master-upstream:
+        runs-on: ubuntu-latest
+        env:
+            download-cache: build/download_cache
+            src: build/src
+            main-repo: ungoogled-chromium
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  submodules: true
+                  fetch-depth: 0
+            - name: Update submodule
+              run: git -C ${{ env.main-repo }} switch -d "${{ github.event.inputs.committish }}"
+            - id: upstream_version
+              run: |
+                  echo "::set-output name=chromium_version::$(cat ${{ env.main-repo }}/chromium_version.txt)"
+                  echo "::set-output name=revision::$(cat ${{ env.main-repo }}/revision.txt)"
+            - run: mkdir -p ${{ env.download-cache }} ${{ env.src }}
+            - uses: actions/cache@v2
+              id: download_cache
+              with:
+                  path: ${{ env.download-cache }}
+                  key: download_cache-${{ steps.upstream_version.outputs.chromium_version }}
+            - name: Checkout Chromium source
+              run: |
+                  ./${{ env.main-repo }}/utils/downloads.py retrieve -i ${{ env.main-repo }}/downloads.ini -c ${{ env.download-cache }}
+                  ./${{ env.main-repo }}/utils/downloads.py unpack -i ${{ env.main-repo }}/downloads.ini -c ${{ env.download-cache }} ${{ env.src }}
+                  ./${{ env.main-repo }}/utils/prune_binaries.py ${{ env.src }} ${{ env.main-repo }}/pruning.list
+            - run: ./devutils/update_patches.sh merge
+            - run: sudo apt-get install -y quilt
+            - name: Run quilt
+              shell: bash
+              run: |
+                  set -ex
+                  source devutils/set_quilt_vars.sh
+                  cd ${{ env.src }}
+                  echo "${BASH_ALIASES[quilt]}"
+                  set | grep QUILT
+                  # For some reason, the "quilt" alias set in set_quilt_vars.sh is ignored. We force usage via BASH_ALIASES
+                  ${BASH_ALIASES[quilt]} push -a --refresh
+            - name: Cleanup repo for Pull Request
+              run: |
+                ./devutils/update_patches.sh unmerge
+                # Delete backup files from quilt
+                find patches/ -name '*.patch~' -delete
+            - name: Reset revision
+              run: echo '1' >revision.txt
+            - name: Create Pull Request
+              uses: peter-evans/create-pull-request@v3
+              with:
+                  title: Update to ungoogled-chromium ${{ steps.upstream_version.outputs.chromium_version }}-${{ steps.upstream_version.outputs.revision }}
+                  body: Triggered by Actions Workflow on git commit-ish object `${{ github.event.inputs.committish }}`
+                  commit-message: Update to ungoogled-chromium ${{ steps.upstream_version.outputs.chromium_version }}-${{ steps.upstream_version.outputs.revision }}
+                  branch: workflows/update-master-upstream
+                  reviewers: Eloston
