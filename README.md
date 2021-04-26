@@ -18,7 +18,7 @@ At minimum, you will need to install the `ungoogled-chromium` and `ungoogled-chr
 
 The other packages are as follows:
 
-* `*-driver`: [ChomeDriver](http://chromedriver.chromium.org/)
+* `*-driver`: [ChromeDriver](http://chromedriver.chromium.org/)
 * `*-l10n`: Localization package for the browser UI.
 * `*-sandbox`: [`SUID` Sandbox](https://chromium.googlesource.com/chromium/src/+/lkgr/docs/linux_suid_sandbox.md). This is only necessary if you do not have user namespaces enabled (i.e. kernel parameter `kernel.unprivileged_userns_clone`)
 * `*-dbgsym*`: Debug symbols for the associated package.
