@@ -8,7 +8,7 @@ UTILS=$UNGOOGLED_CHROMIUM/utils
 setup_source()
 {
     local CACHE=../download_cache
-    local ROOT=$1
+    local ROOT=$(realpath "$1")
     test -d $CACHE || mkdir $CACHE
     test -d $ROOT || mkdir $ROOT
     python3 -B $UTILS/downloads.py retrieve -i $UNGOOGLED_CHROMIUM/downloads.ini -c $CACHE

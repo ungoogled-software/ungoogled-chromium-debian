@@ -46,7 +46,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  if (is_mac) {
    # Used to generate fuzzer corpus :base_mach_port_rendezvous_convert_corpus.
-@@ -3257,7 +3256,7 @@ if (build_base_unittests) {
+@@ -3358,7 +3357,7 @@ if (build_base_unittests) {
        ]
      }
  

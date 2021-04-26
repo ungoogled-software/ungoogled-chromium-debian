@@ -1,6 +1,6 @@
 --- a/media/BUILD.gn
 +++ b/media/BUILD.gn
-@@ -159,7 +159,6 @@ test("media_unittests") {
+@@ -160,7 +160,6 @@ test("media_unittests") {
      "//media/device_monitors:unit_tests",
      "//media/filters:unit_tests",
      "//media/formats:unit_tests",
@@ -10,7 +10,7 @@
      "//media/muxers:unit_tests",
 --- a/media/gpu/BUILD.gn
 +++ b/media/gpu/BUILD.gn
-@@ -507,66 +507,6 @@ static_library("test_support") {
+@@ -470,66 +470,6 @@ static_library("test_support") {
    ]
  }
  
@@ -46,7 +46,7 @@
 -    sources += [ "vp8_decoder_unittest.cc" ]
 -  }
 -
--  if ((is_chromeos_ash && use_vaapi) || is_win) {
+-  if (use_libgav1_parser) {
 -    sources += [ "av1_decoder_unittest.cc" ]
 -    deps += [
 -      "//build:chromeos_buildflags",
@@ -79,7 +79,7 @@
    test("video_decode_accelerator_tests") {
 --- a/third_party/devtools-frontend/src/BUILD.gn
 +++ b/third_party/devtools-frontend/src/BUILD.gn
-@@ -212,7 +212,6 @@ devtools_frontend_resources_deps = [
+@@ -230,7 +230,6 @@ devtools_frontend_resources_deps = [
  devtools_frontend_resources_deps = [
    ":build_release_devtools",
    "front_end",

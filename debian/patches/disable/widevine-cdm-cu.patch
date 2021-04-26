@@ -5,7 +5,7 @@ author: Michel Le Bihan <michel@lebihan.pl>
 +++ b/chrome/browser/component_updater/registration.cc
 @@ -96,10 +96,6 @@ void RegisterComponentsForUpdate(bool is_off_the_record_profile,
    // TODO(crbug.com/1069814): Remove after 2021-10-01.
-   CleanUpPepperFlashComponent();
+   CleanUpPepperFlashComponent(profile_path);
  
 -#if BUILDFLAG(ENABLE_WIDEVINE_CDM_COMPONENT)
 -  RegisterWidevineCdmComponent(cus);

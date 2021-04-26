@@ -10,7 +10,7 @@ Author: Peter Michael Green <plugwash@raspbian.org>
 
 --- a/sandbox/linux/seccomp-bpf-helpers/baseline_policy.cc
 +++ b/sandbox/linux/seccomp-bpf-helpers/baseline_policy.cc
-@@ -157,7 +157,11 @@ ResultExpr EvaluateSyscallImpl(int fs_de
+@@ -159,7 +159,11 @@ ResultExpr EvaluateSyscallImpl(int fs_de
      return Allow();
  #endif
  

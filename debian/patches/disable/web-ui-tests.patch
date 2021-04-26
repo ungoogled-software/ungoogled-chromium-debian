@@ -1,7 +1,7 @@
 diff -ur a/content/shell/BUILD.gn b/content/shell/BUILD.gn
 --- a/content/shell/BUILD.gn
 +++ b/content/shell/BUILD.gn
-@@ -404,7 +404,6 @@
+@@ -405,7 +405,6 @@
      "$root_gen_dir/content/content_resources.pak",
      "$root_gen_dir/content/dev_ui_content_resources.pak",
      "$root_gen_dir/content/shell/shell_resources.pak",
@@ -9,9 +9,9 @@ diff -ur a/content/shell/BUILD.gn b/content/shell/BUILD.gn
      "$root_gen_dir/mojo/public/js/mojo_bindings_resources.pak",
      "$root_gen_dir/net/net_resources.pak",
      "$root_gen_dir/third_party/blink/public/resources/blink_resources.pak",
-@@ -425,7 +424,6 @@
+@@ -426,7 +425,6 @@
      "//content/app/resources",
-     "//content/browser/resources/media:media_internals_resources",
+     "//content/browser/resources/media:resources",
      "//content/browser/webrtc/resources",
 -    "//content/test:web_ui_mojo_test_resources",
      "//mojo/public/js:resources",
@@ -20,7 +20,7 @@ diff -ur a/content/shell/BUILD.gn b/content/shell/BUILD.gn
 diff -ur a/content/test/BUILD.gn b/content/test/BUILD.gn
 --- a/content/test/BUILD.gn
 +++ b/content/test/BUILD.gn
-@@ -804,29 +804,6 @@
+@@ -812,28 +812,6 @@
    ]
  }
  
@@ -42,7 +42,6 @@ diff -ur a/content/test/BUILD.gn b/content/test/BUILD.gn
 -# NOTE: Building this target serves as a compile test for type-checking of
 -# WebUI JS that consumes generated Mojom JS bindings.
 -js_type_check("web_ui_mojo_test_js_type_check") {
--  uses_js_modules = true
 -  deps = [ ":web_ui_mojo_test_js" ]
 -  closure_flags = default_closure_args + mojom_js_args
 -}
@@ -50,7 +49,7 @@ diff -ur a/content/test/BUILD.gn b/content/test/BUILD.gn
  mojom("mojo_web_test_bindings") {
    testonly = true
    sources = [
-@@ -848,16 +825,6 @@
+@@ -855,16 +833,6 @@
    }
  }
  
@@ -67,7 +66,7 @@ diff -ur a/content/test/BUILD.gn b/content/test/BUILD.gn
  if (is_android) {
    static_library("android_test_message_pump_support") {
      testonly = true
-@@ -1240,7 +1207,6 @@
+@@ -1256,7 +1224,6 @@
  
    public_deps = [
      ":test_interfaces",
@@ -75,7 +74,7 @@ diff -ur a/content/test/BUILD.gn b/content/test/BUILD.gn
      "//content:content_resources",
      "//content:dev_ui_content_resources",
    ]
-@@ -1249,8 +1215,6 @@
+@@ -1265,8 +1232,6 @@
      ":browsertest_support",
      ":content_test_mojo_bindings",
      ":test_support",
@@ -84,7 +83,7 @@ diff -ur a/content/test/BUILD.gn b/content/test/BUILD.gn
      "//base/test:test_support",
      "//build:chromecast_buildflags",
      "//build:chromeos_buildflags",
-@@ -1679,18 +1643,6 @@
+@@ -1700,18 +1665,6 @@
    }
  }
  

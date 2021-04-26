@@ -16,7 +16,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #if defined(OS_ANDROID)
 --- a/media/gpu/vaapi/BUILD.gn
 +++ b/media/gpu/vaapi/BUILD.gn
-@@ -68,8 +68,6 @@ source_set("vaapi") {
+@@ -71,8 +71,6 @@ source_set("vaapi") {
      "vp8_vaapi_video_decoder_delegate.h",
      "vp9_encoder.cc",
      "vp9_encoder.h",
@@ -25,7 +25,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "vp9_temporal_layers.cc",
      "vp9_temporal_layers.h",
      "vp9_vaapi_video_decoder_delegate.cc",
-@@ -84,7 +82,6 @@ source_set("vaapi") {
+@@ -87,7 +85,6 @@ source_set("vaapi") {
  
    configs += [
      "//build/config/linux/libva",
@@ -33,7 +33,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    ]
  
    deps = [
-@@ -99,7 +96,6 @@ source_set("vaapi") {
+@@ -102,7 +99,6 @@ source_set("vaapi") {
      "//media/gpu/chromeos:common",
      "//media/parsers",
      "//mojo/public/cpp/bindings",
@@ -463,7 +463,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 +#endif  // VPX_VPX_VPX_EXT_RATECTRL_H_
 --- a/media/filters/vpx_video_decoder.cc
 +++ b/media/filters/vpx_video_decoder.cc
-@@ -242,13 +242,6 @@ bool VpxVideoDecoder::ConfigureDecoder(c
+@@ -265,13 +265,6 @@ bool VpxVideoDecoder::ConfigureDecoder(c
        return false;
      }
  
