@@ -1,4 +1,3 @@
 debian/system/node.patch
 debian/system/node2.patch
 ungoogled-chromium/linux/manpage.patch
-ungoogled-chromium/build.patch
