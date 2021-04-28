@@ -1,0 +1,11 @@
+--- a/third_party/libaom/options.gni
++++ b/third_party/libaom/options.gni
+@@ -4,7 +4,7 @@ import("//build/config/gclient_args.gni")
+ 
+ declare_args() {
+   # Enable encoding and decoding AV1 video files.
+-  enable_libaom =
++  enable_libaom = current_cpu != "arm" &&
+       !is_chromeos_lacros && !is_chromeos_ash && !is_android && !is_chromecast
+ 
+   # To be deprecated soon.

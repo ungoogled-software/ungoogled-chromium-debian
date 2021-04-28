@@ -50,6 +50,7 @@ disable/ozone-unittests.patch
 disable/devtools-unittests.patch
 disable/ios.patch
 disable/tflite-test.patch
+disable/libaom-arm.patch
 
 warnings/restrict.patch
 warnings/multichar.patch

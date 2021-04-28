@@ -1,3 +1,17 @@
+chromium (90.0.4430.93-1) unstable; urgency=medium
+
+  * New upstream security release (closes: #987715).
+    - CVE-2021-21227: Insufficient data validation in V8. Reported by Gengming Liu of Singular Security Lab
+    - CVE-2021-21232: Use after free in Dev Tools. Reported by Abdulrahman Alqabandi, Microsoft Browser Vulnerability Research
+    - CVE-2021-21233: Heap buffer overflow in ANGLE. Reported by Omair
+    - CVE-2021-21228: Insufficient policy enforcement in extensions. Reported by Rob Wu
+    - CVE-2021-21229: Incorrect security UI in downloads. Reported by Mohit Raj (shadow2639)
+    - CVE-2021-21230: Type Confusion in V8. Reported by Manfred Paul
+    - CVE-2021-21231: Insufficient data validation in V8. Reported by Sergei Glazunov of Google Project Zero
+  * Disable libaom on arm to potentially fix FTBFS on armhf
+
+ -- Michel Le Bihan <michel@lebihan.pl>  Wed, 28 Apr 2021 12:15:32 +0200
+
 chromium (90.0.4430.85-1) unstable; urgency=medium
 
   * New upstream security release (closes: #987358).
