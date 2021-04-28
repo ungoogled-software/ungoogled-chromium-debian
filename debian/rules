@@ -166,8 +166,7 @@ override_dh_auto_install-arch:
 	    < chrome/app/resources/manpage.1.in > out/Release/chromium.1
 	dh_auto_install
 	# update launcher script with build information
-	sed 's|@BUILD_DIST@|$(shell printf "%s %s/%s" $(shell lsb_release -si) $(shell lsb_release -sc) $(shell lsb_release -sr))|' \
-	    < debian/scripts/chromium > debian/ungoogled-chromium/usr/bin/chromium
+	debian/devutils/update_launcher.sh < debian/scripts/chromium > debian/ungoogled-chromium/usr/bin/chromium
 	# move icons into /usr/share
 	./debian/scripts/icons
 

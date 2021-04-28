@@ -24,6 +24,8 @@ usage () {
   echo " See 'man chromium' for more details"
 }
 
+@PRINT_DIST@
+
 nosse2="\
 The hardware on this system lacks support for the sse2 instruction set.
 The upstream chromium project no longer supports this configuration.
@@ -54,7 +56,7 @@ fi
 export CHROME_DESKTOP="chromium.desktop"
 
 # Set CHROME_VERSION_EXTRA text, which is displayed in the About dialog
-DIST=`printf "%s %s/%s" $(lsb_release -si) $(lsb_release -sc) $(lsb_release -sr)`
+DIST=`print_dist`
 BUILD_DIST="@BUILD_DIST@"
 export CHROME_VERSION_EXTRA="built on $BUILD_DIST, running on $DIST"
 
