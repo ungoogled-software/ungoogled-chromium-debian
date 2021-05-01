@@ -1,0 +1,11 @@
+--- a/base/compiler_specific.h
++++ b/base/compiler_specific.h
+@@ -334,7 +334,7 @@ inline constexpr bool AnalyzerAssumeTrue(bool arg) {
+ 
+ // Use nomerge attribute to disable optimization of merging multiple same calls.
+ #if defined(__clang__) && __has_attribute(nomerge) && !defined(OS_CHROMEOS)
+-#define NOMERGE [[clang::nomerge]]
++#define NOMERGE
+ #else
+ #define NOMERGE
+ #endif
