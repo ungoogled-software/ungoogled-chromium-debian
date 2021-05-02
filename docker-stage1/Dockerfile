@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM debian:bullseye
 
 RUN apt-get update --fix-missing && apt-get -y upgrade
 
