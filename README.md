@@ -47,6 +47,13 @@ At minimum, you will need to install the `ungoogled-chromium` and `ungoogled-chr
     # sudo apt update
     # sudo apt install -y ungoogled-chromium
     ```
+  - OBS (Ubuntu Hirsute)
+    ```sh
+    # echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Hirsute/ /' | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list > /dev/null
+    # curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Hirsute/Release.key' | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg > /dev/null
+    # sudo apt update
+    # sudo apt install -y ungoogled-chromium
+    ```
 
 The other packages are as follows:
 
