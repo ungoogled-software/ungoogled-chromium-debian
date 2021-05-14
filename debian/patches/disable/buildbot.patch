@@ -48,7 +48,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    ]
  
    data = [
-@@ -5924,7 +5920,6 @@
+@@ -5925,7 +5921,6 @@
        "//chrome/browser/chromeos:unit_tests",
        "//chromeos/ime:gencode",
      ]
@@ -56,7 +56,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      sources -=
          [ "../browser/policy/cloud/user_policy_signin_service_unittest.cc" ]
    }
-@@ -6698,7 +6693,6 @@
+@@ -6699,7 +6694,6 @@
      data_deps = [
        "//chrome:browser_tests_pak",
        "//ppapi:ppapi_tests",
@@ -64,7 +64,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//third_party/mesa_headers",
        "//ui/resources:ui_test_pak_data",
      ]
-@@ -7301,7 +7295,6 @@
+@@ -7302,7 +7296,6 @@
      ]
  
      data_deps = [
