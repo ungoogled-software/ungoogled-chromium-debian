@@ -1,9 +1,9 @@
 description: maintain compatibility with icu 6.3
 author: Michael Gilbert <mgilbert@debian.org>
 
---- b/chrome/browser/web_applications/BUILD.gn
-+++ a/chrome/browser/web_applications/BUILD.gn
-@@ -338,7 +338,6 @@
+--- a/chrome/browser/web_applications/BUILD.gn
++++ b/chrome/browser/web_applications/BUILD.gn
+@@ -347,7 +347,6 @@ group("unit_tests") {
      ":web_applications_unit_tests",
      "//chrome/browser/web_applications/components:unit_tests",
      "//chrome/browser/web_applications/extensions:unit_tests",
@@ -11,8 +11,8 @@ author: Michael Gilbert <mgilbert@debian.org>
    ]
  }
  
---- b/chrome/browser/web_applications/preinstalled_web_apps/BUILD.gn
-+++ a/chrome/browser/web_applications/preinstalled_web_apps/BUILD.gn
+--- a/chrome/browser/web_applications/preinstalled_web_apps/BUILD.gn
++++ b/chrome/browser/web_applications/preinstalled_web_apps/BUILD.gn
 @@ -17,7 +17,6 @@ source_set("preinstalled_web_apps") {
      "//base",
      "//build:branding_buildflags",
@@ -21,7 +21,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      "//chrome/browser/web_applications/components",
      "//chrome/common:non_code_constants",
      "//skia",
-@@ -40,16 +39,3 @@
+@@ -50,16 +49,3 @@ source_set("preinstalled_web_apps") {
      deps += [ "//chrome/browser/resources:preinstalled_web_apps_resources" ]
    }
  }
@@ -38,8 +38,8 @@ author: Michael Gilbert <mgilbert@debian.org>
 -    "//testing/gtest",
 -  ]
 -}
---- b/chrome/browser/web_applications/preinstalled_web_apps/google_docs.cc
-+++ a/chrome/browser/web_applications/preinstalled_web_apps/google_docs.cc
+--- a/chrome/browser/web_applications/preinstalled_web_apps/google_docs.cc
++++ b/chrome/browser/web_applications/preinstalled_web_apps/google_docs.cc
 @@ -13,90 +13,6 @@
  
  namespace web_app {
@@ -131,18 +131,18 @@ author: Michael Gilbert <mgilbert@debian.org>
  ExternalInstallOptions GetConfigForGoogleDocs() {
    ExternalInstallOptions options(
        /*install_url=*/GURL(
-@@ -111,8 +27,7 @@
+@@ -111,8 +27,7 @@ ExternalInstallOptions GetConfigForGoogl
    options.only_use_app_info_factory = true;
    options.app_info_factory = base::BindRepeating([]() {
      auto info = std::make_unique<WebApplicationInfo>();
-+    info->title = base::UTF8ToUTF16("Docs");
 -    info->title =
 -        base::UTF8ToUTF16(GetTranslatedName("Docs", kNameTranslations));
++    info->title = base::UTF8ToUTF16("Docs");
      info->start_url =
          GURL("https://docs.google.com/document/?usp=installed_webapp");
      info->scope = GURL("https://docs.google.com/document/");
---- b/chrome/browser/web_applications/preinstalled_web_apps/google_drive.cc
-+++ a/chrome/browser/web_applications/preinstalled_web_apps/google_drive.cc
+--- a/chrome/browser/web_applications/preinstalled_web_apps/google_drive.cc
++++ b/chrome/browser/web_applications/preinstalled_web_apps/google_drive.cc
 @@ -13,93 +13,6 @@
  
  namespace web_app {
@@ -237,7 +237,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  ExternalInstallOptions GetConfigForGoogleDrive() {
    ExternalInstallOptions options(
        /*install_url=*/GURL(
-@@ -116,8 +29,7 @@ ExternalInstallOptions GetConfigForGoogleDrive() {
+@@ -116,8 +29,7 @@ ExternalInstallOptions GetConfigForGoogl
    options.only_use_app_info_factory = true;
    options.app_info_factory = base::BindRepeating([]() {
      auto info = std::make_unique<WebApplicationInfo>();
@@ -247,8 +247,8 @@ author: Michael Gilbert <mgilbert@debian.org>
      info->start_url = GURL("https://drive.google.com/?lfhs=2");
      info->scope = GURL("https://drive.google.com/");
      info->display_mode = DisplayMode::kStandalone;
---- b/chrome/browser/web_applications/preinstalled_web_apps/google_sheets.cc
-+++ a/chrome/browser/web_applications/preinstalled_web_apps/google_sheets.cc
+--- a/chrome/browser/web_applications/preinstalled_web_apps/google_sheets.cc
++++ b/chrome/browser/web_applications/preinstalled_web_apps/google_sheets.cc
 @@ -13,88 +13,6 @@
  
  namespace web_app {
@@ -338,19 +338,19 @@ author: Michael Gilbert <mgilbert@debian.org>
  ExternalInstallOptions GetConfigForGoogleSheets() {
    ExternalInstallOptions options(
        /*install_url=*/GURL("https://docs.google.com/spreadsheets/"
-@@ -109,9 +27,7 @@
+@@ -109,9 +27,7 @@ ExternalInstallOptions GetConfigForGoogl
    options.only_use_app_info_factory = true;
    options.app_info_factory = base::BindRepeating([]() {
      auto info = std::make_unique<WebApplicationInfo>();
-+    info->title = base::UTF8ToUTF16("Sheets");
 -    info->title =
 -        base::UTF8ToUTF16(GetTranslatedName("Sheets", kNameTranslations));
 -
++    info->title = base::UTF8ToUTF16("Sheets");
      info->start_url =
          GURL("https://docs.google.com/spreadsheets/?usp=installed_webapp");
      info->scope = GURL("https://docs.google.com/spreadsheets/");
---- b/chrome/browser/web_applications/preinstalled_web_apps/google_slides.cc
-+++ a/chrome/browser/web_applications/preinstalled_web_apps/google_slides.cc
+--- a/chrome/browser/web_applications/preinstalled_web_apps/google_slides.cc
++++ b/chrome/browser/web_applications/preinstalled_web_apps/google_slides.cc
 @@ -13,88 +13,6 @@
  
  namespace web_app {
@@ -440,18 +440,18 @@ author: Michael Gilbert <mgilbert@debian.org>
  ExternalInstallOptions GetConfigForGoogleSlides() {
    ExternalInstallOptions options(
        /*install_url=*/GURL("https://docs.google.com/presentation/"
-@@ -109,8 +27,7 @@
+@@ -109,8 +27,7 @@ ExternalInstallOptions GetConfigForGoogl
    options.only_use_app_info_factory = true;
    options.app_info_factory = base::BindRepeating([]() {
      auto info = std::make_unique<WebApplicationInfo>();
-+    info->title = base::UTF8ToUTF16("Slides");
 -    info->title =
 -        base::UTF8ToUTF16(GetTranslatedName("Slides", kNameTranslations));
++    info->title = base::UTF8ToUTF16("Slides");
      info->start_url =
          GURL("https://docs.google.com/presentation/?usp=installed_webapp");
      info->scope = GURL("https://docs.google.com/presentation/");
---- b/chrome/browser/web_applications/preinstalled_web_apps/preinstalled_web_app_utils.cc
-+++ a/chrome/browser/web_applications/preinstalled_web_apps/preinstalled_web_app_utils.cc
+--- a/chrome/browser/web_applications/preinstalled_web_apps/preinstalled_web_app_utils.cc
++++ b/chrome/browser/web_applications/preinstalled_web_apps/preinstalled_web_app_utils.cc
 @@ -4,24 +4,10 @@
  
  #include "chrome/browser/web_applications/preinstalled_web_apps/preinstalled_web_app_utils.h"
@@ -477,7 +477,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  std::map<SquareSizePx, SkBitmap> LoadBundledIcons(
      const std::initializer_list<int>& icon_resource_ids) {
    std::map<SquareSizePx, SkBitmap> results;
-@@ -34,28 +20,4 @@
+@@ -34,28 +20,4 @@ std::map<SquareSizePx, SkBitmap> LoadBun
    return results;
  }
  
@@ -506,9 +506,9 @@ author: Michael Gilbert <mgilbert@debian.org>
 -}
 -
  }  // namespace web_app
---- b/chrome/browser/web_applications/preinstalled_web_apps/preinstalled_web_app_utils.h
-+++ a/chrome/browser/web_applications/preinstalled_web_apps/preinstalled_web_app_utils.h
-@@ -12,14 +12,6 @@
+--- a/chrome/browser/web_applications/preinstalled_web_apps/preinstalled_web_app_utils.h
++++ b/chrome/browser/web_applications/preinstalled_web_apps/preinstalled_web_app_utils.h
+@@ -12,14 +12,6 @@ namespace web_app {
  std::map<SquareSizePx, SkBitmap> LoadBundledIcons(
      const std::initializer_list<int>& icon_resource_ids);
  
@@ -523,7 +523,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }  // namespace web_app
  
  #endif  // CHROME_BROWSER_WEB_APPLICATIONS_PREINSTALLED_WEB_APPS_PREINSTALLED_WEB_APP_UTILS_H_
---- b/chrome/browser/web_applications/preinstalled_web_apps/preinstalled_web_app_utils_unittest.cc
+--- a/chrome/browser/web_applications/preinstalled_web_apps/preinstalled_web_app_utils_unittest.cc
 +++ /dev/null
 @@ -1,43 +0,0 @@
 -// Copyright (c) 2018 The Chromium Authors. All rights reserved.
@@ -1067,7 +1067,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "unicode/locid.h"
  #include "unicode/normalizer2.h"
  #include "unicode/numberformatter.h"
-@@ -430,8 +427,6 @@ std::string Intl::GetNumberingSystem(const icu::Locale& icu_locale) {
+@@ -430,8 +427,6 @@ std::string Intl::GetNumberingSystem(con
    return "latn";
  }
  
@@ -1076,7 +1076,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  Maybe<icu::Locale> CreateICULocale(const std::string& bcp47_locale) {
    DisallowGarbageCollection no_gc;
  
-@@ -447,8 +442,6 @@ Maybe<icu::Locale> CreateICULocale(const std::string& bcp47_locale) {
+@@ -447,8 +442,6 @@ Maybe<icu::Locale> CreateICULocale(const
    return Just(icu_locale);
  }
  
@@ -1085,7 +1085,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  // static
  
  MaybeHandle<String> Intl::ToString(Isolate* isolate,
-@@ -766,6 +759,8 @@ bool IsStructurallyValidLanguageTag(cons
+@@ -735,6 +728,8 @@ bool IsStructurallyValidLanguageTag(cons
    return JSLocale::StartsWithUnicodeLanguageId(tag);
  }
  
@@ -1094,7 +1094,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  // Canonicalize the locale.
  // https://tc39.github.io/ecma402/#sec-canonicalizelanguagetag,
  // including type check and structural validity check.
-@@ -789,9 +789,21 @@ Maybe<std::string> CanonicalizeLanguageTag(Isolate* isolate,
+@@ -789,9 +784,21 @@ Maybe<std::string> CanonicalizeLanguageT
          Nothing<std::string>());
    }
  
@@ -1119,7 +1119,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    if (U_FAILURE(error) || icu_locale.isBogus()) {
      THROW_NEW_ERROR_RETURN_VALUE(
          isolate,
-@@ -869,8 +864,6 @@ Maybe<std::string> CanonicalizeLanguageT
+@@ -844,8 +851,6 @@ Maybe<std::string> CanonicalizeLanguageT
    return CanonicalizeLanguageTag(isolate, locale);
  }
  
@@ -1128,7 +1128,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  Maybe<std::vector<std::string>> Intl::CanonicalizeLocaleList(
      Isolate* isolate, Handle<Object> locales, bool only_return_one_result) {
    // 1. If locales is undefined, then
-@@ -1492,114 +1485,12 @@ std::vector<std::string> LookupSupported
+@@ -1467,114 +1472,12 @@ std::vector<std::string> LookupSupported
    return subset;
  }
  
@@ -1244,7 +1244,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  // ecma262 #sec-createarrayfromlist
-@@ -1775,8 +1666,6 @@ std::map<std::string, std::string> Looku
+@@ -1750,8 +1653,6 @@ std::map<std::string, std::string> Looku
    std::map<std::string, std::string> extensions;
  
    UErrorCode status = U_ZERO_ERROR;
@@ -1253,7 +1253,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    std::unique_ptr<icu::StringEnumeration> keywords(
        icu_locale->createKeywords(status));
    if (U_FAILURE(status)) return extensions;
-@@ -1838,14 +1727,13 @@ std::map<std::string, std::string> Looku
+@@ -1813,14 +1714,13 @@ std::map<std::string, std::string> Looku
        if (is_valid_value) {
          extensions.insert(
              std::pair<std::string, std::string>(bcp47_key, bcp47_value));
@@ -1271,7 +1271,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    return extensions;
  }
  
-@@ -1914,8 +1802,7 @@ Maybe<Intl::ResolvedLocale> Intl::Resolv
+@@ -1889,8 +1789,7 @@ Maybe<Intl::ResolvedLocale> Intl::Resolv
      const std::vector<std::string>& requested_locales, MatcherOption matcher,
      const std::set<std::string>& relevant_extension_keys) {
    std::string locale;
@@ -1281,7 +1281,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    } else {
      locale = LookupMatcher(isolate, available_locales, requested_locales);
    }
-@@ -2221,11 +2108,6 @@ Handle<String> Intl::NumberFieldToType(I
+@@ -2196,11 +2095,6 @@ Handle<String> Intl::NumberFieldToType(I
        UNREACHABLE();
        return Handle<String>();
  
@@ -1293,7 +1293,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      default:
        UNREACHABLE();
        return Handle<String>();
-@@ -2233,10 +2115,13 @@ Handle<String> Intl::NumberFieldToType(I
+@@ -2208,10 +2102,13 @@ Handle<String> Intl::NumberFieldToType(I
  }
  
  // A helper function to convert the FormattedValue for several Intl objects.
@@ -1356,7 +1356,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    }
    return Just(true);
  }
-@@ -142,16 +141,6 @@ bool IsUnicodeLanguageSubtag(const std::string& value) {
+@@ -142,16 +148,6 @@ bool IsUnicodeLanguageSubtag(const std::
    return IsAlpha(value, 2, 3) || IsAlpha(value, 5, 8);
  }
  
@@ -1373,7 +1373,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  bool IsDigitAlphanum3(const std::string& value) {
    return value.length() == 4 && base::IsInRange(value[0], '0', '9') &&
           IsAlphanum(value.substr(1), 3, 3);
-@@ -170,6 +166,16 @@ bool IsExtensionSingleton(const std::str
+@@ -167,6 +163,16 @@ bool IsExtensionSingleton(const std::str
  }
  }  // namespace
  
@@ -1390,7 +1390,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  bool JSLocale::Is38AlphaNumList(const std::string& value) {
    std::size_t found = value.find("-");
    if (found == std::string::npos) {
-@@ -223,8 +229,7 @@ bool JSLocale::StartsWithUnicodeLanguage
+@@ -220,8 +226,7 @@ bool JSLocale::StartsWithUnicodeLanguage
  
  namespace {
  Maybe<bool> ApplyOptionsToTag(Isolate* isolate, Handle<String> tag,
@@ -1400,7 +1400,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    v8::Isolate* v8_isolate = reinterpret_cast<v8::Isolate*>(isolate);
    if (tag->length() == 0) {
      THROW_NEW_ERROR_RETURN_VALUE(
-@@ -233,7 +238,6 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
+@@ -230,7 +235,6 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
    }
  
    v8::String::Utf8Value bcp47_tag(v8_isolate, v8::Utils::ToLocal(tag));
@@ -1408,7 +1408,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    DCHECK_LT(0, bcp47_tag.length());
    DCHECK_NOT_NULL(*bcp47_tag);
    // 2. If IsStructurallyValidLanguageTag(tag) is false, throw a RangeError
-@@ -239,12 +239,11 @@ Maybe<bool> ApplyOptionsToTag(Isolate* isolate, Handle<String> tag,
+@@ -239,12 +243,11 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
      return Just(false);
    }
    UErrorCode status = U_ZERO_ERROR;
@@ -1423,7 +1423,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
    // 3. Let language be ? GetOption(options, "language", "string", undefined,
    // undefined).
-@@ -256,11 +255,9 @@ Maybe<bool> ApplyOptionsToTag(Isolate* isolate, Handle<String> tag,
+@@ -256,11 +259,9 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
    MAYBE_RETURN(maybe_language, Nothing<bool>());
    // 4. If language is not undefined, then
    if (maybe_language.FromJust()) {
@@ -1436,7 +1436,7 @@ author: Michael Gilbert <mgilbert@debian.org>
          IsAlpha(language_str.get(), 4, 4)) {
        return Just(false);
      }
-@@ -275,11 +278,9 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
+@@ -274,11 +275,9 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
    MAYBE_RETURN(maybe_script, Nothing<bool>());
    // 6. If script is not undefined, then
    if (maybe_script.FromJust()) {
@@ -1449,7 +1449,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        return Just(false);
      }
    }
-@@ -294,9 +295,7 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
+@@ -293,9 +292,7 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
    if (maybe_region.FromJust()) {
      // a. If region does not match the region production, throw a RangeError
      // exception.
@@ -1460,7 +1460,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        return Just(false);
      }
    }
-@@ -331,9 +330,8 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
+@@ -330,9 +327,8 @@ Maybe<bool> ApplyOptionsToTag(Isolate* i
  MaybeHandle<JSLocale> JSLocale::New(Isolate* isolate, Handle<Map> map,
                                      Handle<String> locale_str,
                                      Handle<JSReceiver> options) {
@@ -1471,7 +1471,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    MAYBE_RETURN(maybe_apply, MaybeHandle<JSLocale>());
    if (!maybe_apply.FromJust()) {
      THROW_NEW_ERROR(isolate,
-@@ -340,15 +337,22 @@ MaybeHandle<JSLocale> JSLocale::New(Isolate* isolate, Handle<Map> map,
+@@ -340,15 +336,22 @@ MaybeHandle<JSLocale> JSLocale::New(Isol
                      JSLocale);
    }
  
@@ -1501,7 +1501,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      THROW_NEW_ERROR(isolate,
                      NewRangeError(MessageTemplate::kLocaleBadParameters),
                      JSLocale);
-@@ -392,62 +392,22 @@ MaybeHandle<JSLocale> Construct(Isolate* isolate,
+@@ -392,62 +395,22 @@ MaybeHandle<JSLocale> Construct(Isolate*
  
  MaybeHandle<JSLocale> JSLocale::Maximize(Isolate* isolate,
                                           Handle<JSLocale> locale) {
@@ -1596,7 +1596,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  Maybe<JSDateTimeFormat::HourCycle> GetHourCycle(Isolate* isolate,
                                                  Handle<JSReceiver> options,
                                                  const char* method) {
-@@ -1576,8 +1561,9 @@ MaybeHandle<JSDateTimeFormat> JSDateTime
+@@ -1588,8 +1573,9 @@ MaybeHandle<JSDateTimeFormat> JSDateTime
        generator_cache.Pointer()->CreateGenerator(icu_locale));
  
    // 15.Let hcDefault be dataLocaleData.[[hourCycle]].
@@ -1607,7 +1607,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
    // 16.Let hc be r.[[hc]].
    HourCycle hc = HourCycle::kUndefined;
-@@ -2082,55 +2068,12 @@ Maybe<bool> AddPartForFormatRange(Isolat
+@@ -2095,55 +2081,12 @@ Maybe<bool> AddPartForFormatRange(Isolat
  // A helper function to convert the FormattedDateInterval to a
  // MaybeHandle<JSArray> for the implementation of formatRangeToParts.
  MaybeHandle<JSArray> FormattedDateIntervalToJSArray(
@@ -1666,7 +1666,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
    JSObject::ValidateElements(*array);
    return array;
-@@ -2141,7 +2084,7 @@ template <typename T>
+@@ -2154,7 +2097,7 @@ template <typename T>
  MaybeHandle<T> FormatRangeCommon(
      Isolate* isolate, Handle<JSDateTimeFormat> date_time_format, double x,
      double y,
@@ -1675,7 +1675,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    // Track newer feature formateRange and formatRangeToParts
    isolate->CountUsage(v8::Isolate::UseCounterFeature::kDateTimeFormatRange);
  
-@@ -2176,15 +2119,11 @@ MaybeHandle<T> FormatRangeCommon(
+@@ -2189,15 +2132,11 @@ MaybeHandle<T> FormatRangeCommon(
    std::unique_ptr<icu::Calendar> c2(calendar->clone());
    c1->setTime(x, status);
    c2->setTime(y, status);
@@ -1693,7 +1693,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
  
  }  // namespace
-@@ -2193,7 +2132,7 @@ MaybeHandle<String> JSDateTimeFormat::Fo
+@@ -2206,7 +2145,7 @@ MaybeHandle<String> JSDateTimeFormat::Fo
      Isolate* isolate, Handle<JSDateTimeFormat> date_time_format, double x,
      double y) {
    return FormatRangeCommon<String>(isolate, date_time_format, x, y,
@@ -1857,6 +1857,17 @@ author: Michael Gilbert <mgilbert@debian.org>
  UDisplayContext ToUDisplayContext(JSDisplayNames::Style style) {
    switch (style) {
      case JSDisplayNames::Style::kLong:
+@@ -130,9 +116,7 @@ class LanguageNames : public LocaleDispl
+     // 1.b If IsStructurallyValidLanguageTag(code) is false, throw a RangeError
+     // exception.
+     icu::Locale l =
+-        icu::Locale(icu::Locale::forLanguageTag(code, status).getBaseName());
+-    // 1.c Set code to CanonicalizeUnicodeLocaleId(code).
+-    l.canonicalize(status);
++        icu::Locale::createCanonical(icu::Locale::forLanguageTag(code, status).getBaseName());
+     std::string checked = l.toLanguageTag<std::string>(status);
+ 
+     if (U_FAILURE(status)) {
 --- a/v8/src/objects/js-locale.h
 +++ b/v8/src/objects/js-locale.h
 @@ -25,6 +25,9 @@ class Locale;

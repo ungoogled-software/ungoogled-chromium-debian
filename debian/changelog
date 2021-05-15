@@ -1,3 +1,29 @@
+chromium (90.0.4430.212-1) unstable; urgency=medium
+
+  * New upstream security release.
+    - CVE-2021-30506: Incorrect security UI in Web App Installs. Reported by
+      @retsew0x01
+    - CVE-2021-30507: Inappropriate implementation in Offline. Reported by
+      Alison Huffman
+    - CVE-2021-30508: Heap buffer overflow in Media Feeds. Reported by Leecraso
+      and Guang Gong
+    - CVE-2021-30509: Out of bounds write in Tab Strip. Reported by David Erceg
+    - CVE-2021-30510: Race in Aura. Reported by Weipeng Jiang
+    - CVE-2021-30511: Out of bounds read in Tab Groups. Reported by David Erceg
+    - CVE-2021-30512: Use after free in Notifications. Reported by ZhanJia Song
+    - CVE-2021-30513: Type Confusion in V8. Reported by Man Yue Mo
+    - CVE-2021-30514: Use after free in Autofill. Reported by koocola and Wang
+    - CVE-2021-30515: Use after free in File API. Reported by Rong Jian and
+      Guang Gong
+    - CVE-2021-30516: Heap buffer overflow in History. Reported by ZhanJia Song
+    - CVE-2021-30517: Type Confusion in V8. Reported by laural
+    - CVE-2021-30518: Heap buffer overflow in Reader Mode. Reported by Jun
+      Kokatsu
+    - CVE-2021-30519: Use after free in Payments. Reported by asnine
+    - CVE-2021-30520: Use after free in Tab Strip. Reported by Khalil Zhani
+
+ -- Michael Gilbert <mgilbert@debian.org>  Thu, 13 May 2021 02:50:43 +0000
+
 chromium (90.0.4430.93-1) unstable; urgency=medium
 
   * New upstream security release (closes: #987715).
