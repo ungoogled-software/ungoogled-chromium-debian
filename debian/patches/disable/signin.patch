@@ -1,9 +1,29 @@
 description: disable browser sign-in
 origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/resources/patches/ungoogled-chromium/disable-signin.patch
 
+--- a/chrome/browser/ui/webui/signin/inline_login_handler_impl.cc
++++ b/chrome/browser/ui/webui/signin/inline_login_handler_impl.cc
+@@ -408,17 +408,6 @@ void InlineSigninHelper::OnClientOAuthSuccessAndBrowserOpened(
+ 
+     signin_metrics::LogSigninReason(signin_metrics::Reason::kReauthentication);
+   } else {
+-    if (confirm_untrusted_signin_) {
+-      // Display a confirmation dialog to the user.
+-      base::RecordAction(
+-          base::UserMetricsAction("Signin_Show_UntrustedSigninPrompt"));
+-      Browser* browser = chrome::FindLastActiveWithProfile(profile_);
+-      browser->window()->ShowOneClickSigninConfirmation(
+-          base::UTF8ToUTF16(email_),
+-          base::BindOnce(&InlineSigninHelper::UntrustedSigninConfirmed,
+-                         base::Unretained(this), result.refresh_token));
+-      return;
+-    }
+     CreateSyncStarter(result.refresh_token);
+   }
+ 
 --- a/components/signin/internal/identity_manager/primary_account_manager.cc
 +++ b/components/signin/internal/identity_manager/primary_account_manager.cc
-@@ -55,9 +55,9 @@ void PrimaryAccountManager::RegisterProf
+@@ -53,9 +53,9 @@ void PrimaryAccountManager::RegisterProfilePrefs(PrefRegistrySimple* registry) {
                                 std::string());
    registry->RegisterStringPref(prefs::kGoogleServicesAccountId, std::string());
    registry->RegisterBooleanPref(prefs::kGoogleServicesConsentedToSync, false);
@@ -12,63 +32,6 @@ origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/reso
    registry->RegisterListPref(prefs::kReverseAutologinRejectedEmailList);
 -  registry->RegisterBooleanPref(prefs::kSigninAllowed, true);
 +  registry->RegisterBooleanPref(prefs::kSigninAllowed, false);
+   registry->RegisterBooleanPref(prefs::kSigninAllowedByPolicy, true);
    registry->RegisterBooleanPref(prefs::kSignedInWithCredentialProvider, false);
  }
- 
---- a/chrome/browser/ui/chrome_pages.cc
-+++ b/chrome/browser/ui/chrome_pages.cc
-@@ -493,6 +493,7 @@ GURL GetOSSettingsUrl(const std::string& sub_page) {
- void ShowBrowserSignin(Browser* browser,
-                        signin_metrics::AccessPoint access_point,
-                        signin::ConsentLevel consent_level) {
-+#if BUILDFLAG(ENABLE_ONE_CLICK_SIGNIN)
-   Profile* original_profile = browser->profile()->GetOriginalProfile();
-   DCHECK(original_profile->GetPrefs()->GetBoolean(prefs::kSigninAllowed));
- 
-@@ -519,6 +520,7 @@ void ShowBrowserSignin(Browser* browser,
-   }
- 
-   browser->signin_view_controller()->ShowSignin(bubble_view_mode, access_point);
-+#endif
- }
- 
- void ShowBrowserSigninOrSettings(Browser* browser,
---- a/chrome/browser/ui/BUILD.gn
-+++ b/chrome/browser/ui/BUILD.gn
-@@ -2916,9 +2916,6 @@ static_library("ui") {
-       "startup/default_browser_infobar_delegate.h",
-       "startup/default_browser_prompt.cc",
-       "startup/default_browser_prompt.h",
--      "sync/one_click_signin_links_delegate.h",
--      "sync/one_click_signin_links_delegate_impl.cc",
--      "sync/one_click_signin_links_delegate_impl.h",
-       "views/profiles/badged_profile_photo.cc",
-       "views/profiles/badged_profile_photo.h",
-       "views/profiles/profile_picker_force_signin_dialog_delegate.cc",
-@@ -4255,8 +4252,6 @@ static_library("ui") {
-         "views/sync/dice_bubble_sync_promo_view.h",
-         "views/sync/dice_signin_button_view.cc",
-         "views/sync/dice_signin_button_view.h",
--        "views/sync/one_click_signin_dialog_view.cc",
--        "views/sync/one_click_signin_dialog_view.h",
-       ]
-       deps += [ "//ui/views/window/vector_icons" ]
-     }
---- a/chrome/browser/ui/webui/signin/inline_login_handler_impl.cc
-+++ b/chrome/browser/ui/webui/signin/inline_login_handler_impl.cc
-@@ -400,6 +400,7 @@ void InlineSigninHelper::OnClientOAuthSu
-     signin_metrics::LogSigninReason(
-         GetSigninReasonFromHandlerSigninReason(reason));
-   } else {
-+#if BUILDFLAG(ENABLE_ONE_CLICK_SIGNIN)
-     if (confirm_untrusted_signin_) {
-       // Display a confirmation dialog to the user.
-       base::RecordAction(
-@@ -411,6 +412,7 @@ void InlineSigninHelper::OnClientOAuthSu
-                          base::Unretained(this), result.refresh_token));
-       return;
-     }
-+#endif
-     CreateSyncStarter(result.refresh_token);
-   }
-   base::ThreadTaskRunnerHandle::Get()->DeleteSoon(FROM_HERE, this);

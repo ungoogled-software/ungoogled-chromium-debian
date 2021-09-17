@@ -3,9 +3,9 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/third_party/angle/src/tests/BUILD.gn
 +++ b/third_party/angle/src/tests/BUILD.gn
-@@ -339,13 +339,13 @@ if (build_angle_perftests) {
-       data_deps += [ "//testing:run_perf_test" ]
-     }
+@@ -436,13 +436,13 @@ if (build_angle_perftests) {
+ 
+     data_deps += [ "//testing:run_perf_test" ]
  
 -    if (is_win || is_linux || is_chromeos) {
 +    if (false) {

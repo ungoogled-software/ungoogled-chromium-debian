@@ -3,16 +3,16 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -765,8 +765,7 @@ group("gn_all") {
-     }
+@@ -788,8 +788,7 @@ group("gn_all") {
+     deps += [ "//ui/gtk:gtk_unittests" ]
    }
  
 -  if (((is_linux || is_chromeos) && !is_chromecast) ||
 -      (is_win && use_libfuzzer) || (use_libfuzzer && is_mac)) {
 +  if (false) {
      deps += [
-       "//chrome/services/ipp_parser/public/cpp:fuzzers",
        "//testing/libfuzzer/fuzzers",
+       "//third_party/freetype-testing:fuzzers",
 --- a/v8/tools/BUILD.gn
 +++ b/v8/tools/BUILD.gn
 @@ -12,7 +12,6 @@ group("gn_all") {

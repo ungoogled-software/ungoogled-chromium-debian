@@ -1,3 +1,5 @@
 out/Release/*.bin usr/lib/chromium
 out/Release/libEGL.so usr/lib/chromium
 out/Release/libGLESv2.so usr/lib/chromium
+
+out/Release/crashpad_handler usr/lib/chromium

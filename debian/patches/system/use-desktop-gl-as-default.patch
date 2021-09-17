@@ -21,4 +21,4 @@ Last-Update: 2021-01-07
 +
    if (allowed_impls.empty()) {
      LOG(ERROR) << "List of allowed GL implementations is empty.";
-     return kGLImplementationNone;
+     return GLImplementationParts(kGLImplementationNone);

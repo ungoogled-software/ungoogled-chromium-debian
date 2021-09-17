@@ -1,3 +1,128 @@
+chromium (93.0.4577.82-1) unstable; urgency=medium
+
+  * New upstream stable release.
+    - CVE-2021-30625: Use after free in Selection API. Reported by Marcin
+      Towalski of Cisco Talos
+    - CVE-2021-30626: Out of bounds memory access in ANGLE. Reported by
+      Jeonghoon Shin of Theori
+    - CVE-2021-30627: Type Confusion in Blink layout. Reported by Aki Helin of
+      OUSPG
+    - CVE-2021-30628: Stack buffer overflow in ANGLE. Reported by Jaehun Jeong
+      @n3sk of Theori
+    - CVE-2021-30629: Use after free in Permissions. Reported by Weipeng Jiang
+      @Krace from Codesafe Team of Legendsec at Qi'anxin Group
+    - CVE-2021-30630: Inappropriate implementation in Blink . Reported by
+      SorryMybad @S0rryMybad of Kunlun Lab
+    - CVE-2021-30631: Type Confusion in Blink layout. Reported by Atte Kettunen
+      of OUSPG
+    - CVE-2021-30632: Out of bounds write in V8. Reported by Anonymous
+    - CVE-2021-30633: Use after free in Indexed DB API. Reported by Anonymous
+    - CVE-2021-30606: Use after free in Blink. Reported by Nan Wang
+      @eternalsakura13 and koocola @alo_cook of 360 Alpha Lab
+    - CVE-2021-30607: Use after free in Permissions. Reported by Weipeng Jiang
+      @Krace from Codesafe Team of Legendsec at Qi'anxin Group
+    - CVE-2021-30608: Use after free in Web Share. Reported by Huyna at Viettel
+      Cyber Security
+    - CVE-2021-30609: Use after free in Sign-In. Reported by raven @raid_akame
+    - CVE-2021-30610: Use after free in Extensions API. Reported by Igor
+      Bukanov from Vivaldi
+    - CVE-2021-30611: Use after free in WebRTC. Reported by Nan Wang
+      @eternalsakura13 and koocola @alo_cook of 360 Alpha Lab
+    - CVE-2021-30612: Use after free in WebRTC. Reported by Nan Wang
+      @eternalsakura13 and koocola @alo_cook of 360 Alpha Lab
+    - CVE-2021-30613: Use after free in Base internals. Reported by Yangkang
+      @dnpushme of 360 ATA
+    - CVE-2021-30614: Heap buffer overflow in TabStrip. Reported by Huinian
+      Yang @vmth6 of Amber Security Lab, OPPO Mobile Telecommunications Corp.
+      Ltd. 
+    - CVE-2021-30615: Cross-origin data leak in Navigation. Reported by NDevTK
+    - CVE-2021-30616: Use after free in Media. Reported by Anonymous
+    - CVE-2021-30617: Policy bypass in Blink. Reported by NDevTK
+    - CVE-2021-30618: Inappropriate implementation in DevTools. Reported by
+      @DanAmodio and @mattaustin from Contrast Security
+    - CVE-2021-30619: UI Spoofing in Autofill. Reported by Alesandro Ortiz
+    - CVE-2021-30620: Insufficient policy enforcement in Blink. Reported by Jun
+      Kokatsu, Microsoft Browser Vulnerability Research
+    - CVE-2021-30621: UI Spoofing in Autofill. Reported by Abdulrahman
+      Alqabandi, Microsoft Browser Vulnerability Research
+    - CVE-2021-30622: Use after free in WebApp Installs. Reported by Jun
+      Kokatsu, Microsoft Browser Vulnerability Research
+    - CVE-2021-30623: Use after free in Bookmarks. Reported by Leecraso and
+      Guang Gong of 360 Alpha Lab
+    - CVE-2021-30624: Use after free in Autofill. Reported by Wei Yuan of
+      MoyunSec VLab
+    - CVE-2021-30598: Type Confusion in V8. Reported by Manfred Paul
+    - CVE-2021-30599: Type Confusion in V8. Reported by Manfred Paul
+    - CVE-2021-30600: Use after free in Printing. Reported by Leecraso and
+      Guang Gong of 360 Alpha Lab
+    - CVE-2021-30601: Use after free in Extensions API. Reported by koocola
+      @alo_cook and Nan Wang @eternalsakura13 of 360 Alpha Lab
+    - CVE-2021-30602: Use after free in WebRTC. Reported by Marcin Towalski of
+      Cisco Talos 
+    - CVE-2021-30603: Race in WebAudio. Reported by Sergei Glazunov of Google
+      Project Zero
+    - CVE-2021-30604: Use after free in ANGLE. Reported by Seong-Hwan Park
+      SeHwa of SecunologyLab
+    - CVE-2021-30554: Use after free in WebGL. Reported by anonymous
+    - CVE-2021-30555: Use after free in Sharing. Reported by David Erceg
+    - CVE-2021-30556: Use after free in WebAudio. Reported by Yangkang
+      @dnpushme of 360 ATA
+    - CVE-2021-30557: Use after free in TabGroups. Reported by David Erceg
+    - CVE-2021-30544: Use after free in BFCache. Reported by Rong Jian and
+      Guang Gong of 360 Alpha Lab
+    - CVE-2021-30545: Use after free in Extensions. Reported by kkwon with
+      everpall and kkomdal
+    - CVE-2021-30546: Use after free in Autofill. Reported by Abdulrahman
+      Alqabandi, Microsoft Browser Vulnerability Research
+    - CVE-2021-30547: Out of bounds write in ANGLE. Reported by Seong-Hwan Park
+      SeHwa of SecunologyLab
+    - CVE-2021-30548: Use after free in Loader. Reported by Yangkang @dnpushme
+      & Wanglu of Qihoo360 Qex Team
+    - CVE-2021-30549: Use after free in Spell check. Reported by David Erceg
+    - CVE-2021-30550: Use after free in Accessibility. Reported by David Erceg
+    - CVE-2021-30551: Type Confusion in V8. Reported by Clement Lecigne of
+      Google's Threat Analysis Group and Sergei Glazunov of Google Project Zero
+    - CVE-2021-30552: Use after free in Extensions. Reported by David Erceg
+    - CVE-2021-30553: Use after free in Network service. Reported by Anonymous
+    - CVE-2021-30521: Heap buffer overflow in Autofill. Reported by ZhanJia
+      Song
+    - CVE-2021-30522: Use after free in WebAudio. Reported by Piotr Bania of
+      Cisco Talos
+    - CVE-2021-30523: Use after free in WebRTC. Reported by Tolyan Korniltsev
+    - CVE-2021-30524: Use after free in TabStrip. Reported by David Erceg
+    - CVE-2021-30525: Use after free in TabGroups. Reported by David Erceg
+    - CVE-2021-30526: Out of bounds write in TabStrip. Reported by David Erceg
+    - CVE-2021-30527: Use after free in WebUI. Reported by David Erceg
+    - CVE-2021-30528: Use after free in WebAuthentication. Reported by Man Yue
+      Mo of GitHub Security Lab
+    - CVE-2021-30529: Use after free in Bookmarks. Reported by koocola
+      @alo_cook and Nan Wang @eternalsakura13 of 360 Alpha Lab
+    - CVE-2021-30530: Out of bounds memory access in WebAudio. Reported by
+      kkwon
+    - CVE-2021-30531: Insufficient policy enforcement in Content Security
+      Policy. Reported by Philip Papurt
+    - CVE-2021-30532: Insufficient policy enforcement in Content Security
+      Policy. Reported by Philip Papurt
+    - CVE-2021-30533: Insufficient policy enforcement in PopupBlocker. Reported
+      by Eliya Stein
+    - CVE-2021-30534: Insufficient policy enforcement in iFrameSandbox.
+      Reported by Alesandro Ortiz
+    - CVE-2021-30535: Double free in ICU. Reported by nocma, leogan, cheneyxu
+      of WeChat Open Platform Security Team
+    - CVE-2021-21212: Insufficient data validation in networking. Reported by
+      Hugo Hue and Sze Yiu Chau of the Chinese University of Hong Kong
+    - CVE-2021-30536: Out of bounds read in V8. Reported by Chris Salls @salls
+    - CVE-2021-30537: Insufficient policy enforcement in cookies. Reported by
+      Jun Kokatsu @shhnjk
+    - CVE-2021-30538: Insufficient policy enforcement in content security
+      policy. Reported by Tianze Ding @D1iv3 of Tencent Security Xuanwu Lab
+    - CVE-2021-30539: Insufficient policy enforcement in content security
+      policy. Reported by unnamed researcher
+    - CVE-2021-30540: Incorrect security UI in payments. Reported by
+      @retsew0x01
+
+ -- Michel Le Bihan <michel@lebihan.pl>  Thu, 16 Sep 2021 17:48:15 +0200
+
 chromium (90.0.4430.212-1) unstable; urgency=medium
 
   * New upstream security release.
@@ -27,13 +152,18 @@ chromium (90.0.4430.212-1) unstable; urgency=medium
 chromium (90.0.4430.93-1) unstable; urgency=medium
 
   * New upstream security release (closes: #987715).
-    - CVE-2021-21227: Insufficient data validation in V8. Reported by Gengming Liu of Singular Security Lab
-    - CVE-2021-21232: Use after free in Dev Tools. Reported by Abdulrahman Alqabandi, Microsoft Browser Vulnerability Research
+    - CVE-2021-21227: Insufficient data validation in V8. Reported by Gengming
+      Liu of Singular Security Lab
+    - CVE-2021-21232: Use after free in Dev Tools. Reported by Abdulrahman
+      Alqabandi, Microsoft Browser Vulnerability Research
     - CVE-2021-21233: Heap buffer overflow in ANGLE. Reported by Omair
-    - CVE-2021-21228: Insufficient policy enforcement in extensions. Reported by Rob Wu
-    - CVE-2021-21229: Incorrect security UI in downloads. Reported by Mohit Raj (shadow2639)
+    - CVE-2021-21228: Insufficient policy enforcement in extensions. Reported
+      by Rob Wu
+    - CVE-2021-21229: Incorrect security UI in downloads. Reported by Mohit Raj
+      shadow2639
     - CVE-2021-21230: Type Confusion in V8. Reported by Manfred Paul
-    - CVE-2021-21231: Insufficient data validation in V8. Reported by Sergei Glazunov of Google Project Zero
+    - CVE-2021-21231: Insufficient data validation in V8. Reported by Sergei
+      Glazunov of Google Project Zero
   * Disable libaom on arm to potentially fix FTBFS on armhf
 
  -- Michel Le Bihan <michel@lebihan.pl>  Wed, 28 Apr 2021 12:15:32 +0200

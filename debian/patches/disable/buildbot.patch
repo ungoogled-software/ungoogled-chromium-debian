@@ -11,6 +11,16 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//third_party/blink/public:blink_devtools_frontend_resources_files",
        "//third_party/blink/public:blink_devtools_inspector_resources",
        "//third_party/blink/public/mojom:mojom_platform_js_data_deps",
+--- a/base/BUILD.gn
++++ b/base/BUILD.gn
+@@ -3190,7 +3190,6 @@ test("base_unittests") {
+     "//base/test:immediate_crash_test_helper",
+     "//base/test:test_child_process",
+     "//base/test:test_shared_library",
+-    "//testing/buildbot/filters:base_unittests_filters",
+   ]
+ 
+   if (is_apple) {
 --- a/chrome/test/BUILD.gn
 +++ b/chrome/test/BUILD.gn
 @@ -879,8 +879,6 @@ if (!is_android) {
@@ -22,10 +32,10 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//third_party/mesa_headers",
        "//third_party/widevine/cdm:widevine_test_license_server",
        "//tools/media_engagement_preload:generator",
-@@ -1674,7 +1672,6 @@ if (!is_android) {
-       data_deps += [
-         "//ash/keyboard/ui:resources",
-         "//chrome",
+@@ -2206,7 +2206,6 @@ if (!is_android) {
+         "//chrome/test/data/webui/cr_components/chromeos/network_health:modulize_runtime_data",
+         "//chrome/test/data/webui/nearby_share/shared:modulize_runtime_data",
+         "//chrome/test/data/webui/settings/chromeos:modulize_runtime_data",
 -        "//testing/buildbot/filters:chromeos_filters",
          "//ui/file_manager:unit_test_data",
        ]
@@ -46,19 +56,19 @@ author: Michael Gilbert <mgilbert@debian.org>
      sources -=
          [ "../browser/policy/cloud/user_policy_signin_service_unittest.cc" ]
    }
-@@ -6544,7 +6539,6 @@ if (!is_android) {
-     data_deps = [
+@@ -8015,7 +8014,6 @@ if (!is_android) {
        "//chrome:browser_tests_pak",
+       "//chrome/test/data:web_ui_test_mojom_js_module",
        "//ppapi:ppapi_tests",
 -      "//testing/buildbot/filters:interactive_ui_tests_filters",
        "//third_party/mesa_headers",
        "//ui/resources:ui_test_pak_data",
      ]
-@@ -7104,7 +7098,6 @@ if (!is_fuchsia && !is_android) {
-     ]
+@@ -8104,7 +8098,6 @@ if (!is_fuchsia && !is_android) {
  
      data_deps = [
--      "//testing/buildbot/filters:e2e_sync_integration_tests_filters",
+       "//testing:test_scripts_shared",
+-      "//testing/buildbot/filters:sync_integration_tests_filters",
        "//third_party/mesa_headers",
      ]
  
@@ -161,14 +171,24 @@ author: Michael Gilbert <mgilbert@debian.org>
    if (is_android) {
      use_raw_android_executable = true
    }
---- a/ui/base/BUILD.gn
-+++ b/ui/base/BUILD.gn
-@@ -924,7 +924,7 @@ test("ui_base_unittests") {
-   }
+--- a/third_party/blink/renderer/controller/BUILD.gn
++++ b/third_party/blink/renderer/controller/BUILD.gn
+@@ -128,7 +128,6 @@ test("blink_unittests") {
+   data_deps = [
+     ":blink_unittests_data",
+     "//content/shell:pak",
+-    "//testing/buildbot/filters:blink_unittests_filters",
+   ]
  
-   data = []
--  data_deps = [ "//testing/buildbot/filters:ui_base_unittests_filters" ]
-+  data_deps = []
-   deps = [
-     ":ui_base_test_resources_grit",
-     ":ui_base_unittests_bundle_data",
+   if (is_android) {
+--- a/third_party/crashpad/crashpad/BUILD.gn
++++ b/third_party/crashpad/crashpad/BUILD.gn
+@@ -31,8 +31,6 @@ if (crashpad_is_in_chromium || crashpad_is_in_fuchsia) {
+       "util:util_test",
+     ]
+ 
+-    data_deps = [ "//testing/buildbot/filters:crashpad_tests_filters" ]
+-
+     if (!crashpad_is_ios && !crashpad_is_fuchsia) {
+       deps += [ "handler:handler_test" ]
+     }

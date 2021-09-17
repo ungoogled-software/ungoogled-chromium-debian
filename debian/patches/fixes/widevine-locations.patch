@@ -4,9 +4,9 @@ author: Olivier Tilloy <olivier.tilloy@canonical.com>
 
 --- a/chrome/common/chrome_paths.cc
 +++ b/chrome/common/chrome_paths.cc
-@@ -339,6 +339,11 @@ bool PathProvider(int key, base::FilePath* result) {
- #if (defined(OS_LINUX) || defined(OS_CHROMEOS)) && \
-     BUILDFLAG(BUNDLE_WIDEVINE_CDM)
+@@ -313,6 +313,11 @@ bool PathProvider(int key, base::FilePath* result) {
+ 
+ #if BUILDFLAG(ENABLE_WIDEVINE)
      case chrome::DIR_BUNDLED_WIDEVINE_CDM:
 +      base::PathService::Get(base::DIR_HOME, &cur);
 +      cur = cur.Append(FILE_PATH_LITERAL(".local/lib/libwidevinecdm.so"));
@@ -18,12 +18,12 @@ author: Olivier Tilloy <olivier.tilloy@canonical.com>
  #if !BUILDFLAG(IS_CHROMEOS_ASH)
 --- a/third_party/widevine/cdm/BUILD.gn
 +++ b/third_party/widevine/cdm/BUILD.gn
-@@ -15,7 +15,7 @@ buildflag_header("buildflags") {
+@@ -17,7 +17,7 @@ buildflag_header("buildflags") {
  
    flags = [
      "ENABLE_WIDEVINE=$enable_widevine",
 -    "BUNDLE_WIDEVINE_CDM=$bundle_widevine_cdm",
 +    "BUNDLE_WIDEVINE_CDM=true",
      "ENABLE_WIDEVINE_CDM_COMPONENT=$enable_widevine_cdm_component",
+     "ENABLE_MEDIA_FOUNDATION_WIDEVINE_CDM=$enable_media_foundation_widevine_cdm",
    ]
- }

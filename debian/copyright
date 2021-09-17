@@ -76,7 +76,6 @@ Files-Excluded:
  third_party/llvm
  third_party/webgl
  third_party/libpng
- third_party/libvpx
  third_party/libdrm
  third_party/snappy
  third_party/libxslt
@@ -86,7 +85,7 @@ Files-Excluded:
  third_party/android*
  third_party/chromite
  third_party/tcmalloc
- third_party/lzma_sdk
+ third_party/lzma_sdk/7zr.exe
  third_party/test_fonts
  third_party/pyelftools
  third_party/fontconfig
@@ -1494,15 +1493,15 @@ Files: third_party/libvpx/*
 Copyright: Copyright (c) 2010, The WebM Project authors. All rights reserved. 
 License: BSD-3-clause
 
-Files: third_party/lzma_sdk/7zCrc.cgthird_party/lzma_sdk/7zCrc.h third_party/lzma_sdk/Alloc.c third_party/lzma_sdk/Alloc.h third_party/lzma_sdk/Types.h
+Files: third_party/lzma_sdk/7zCrc.c third_party/lzma_sdk/7zCrc.h third_party/lzma_sdk/Alloc.c third_party/lzma_sdk/Alloc.h third_party/lzma_sdk/Types.h
 Copyright: UNKNOWN:
 License: Public-domain
 
-Files: third_party/lzma_sdk/Archive/7z/7zAlloc.cgthird_party/lzma_sdk/Archive/7z/7zAlloc.h third_party/lzma_sdk/Archive/7z/7zBuffer.c third_party/lzma_sdk/Archive/7z/7zBuffer.h third_party/lzma_sdk/Archive/7z/7zDecode.c third_party/lzma_sdk/Archive/7z/7zDecode.h third_party/lzma_sdk/Archive/7z/7zExtract.c third_party/lzma_sdk/Archive/7z/7zExtract.h third_party/lzma_sdk/Archive/7z/7zHeader.c third_party/lzma_sdk/Archive/7z/7zHeader.h third_party/lzma_sdk/Archive/7z/7zIn.c third_party/lzma_sdk/Archive/7z/7zIn.h third_party/lzma_sdk/Archive/7z/7zItem.c third_party/lzma_sdk/Archive/7z/7zItem.h third_party/lzma_sdk/Archive/7z/7zMethodID.c third_party/lzma_sdk/Archive/7z/7zMethodID.h
+Files: third_party/lzma_sdk/Archive/7z/7zAlloc.c third_party/lzma_sdk/Archive/7z/7zAlloc.h third_party/lzma_sdk/Archive/7z/7zBuffer.c third_party/lzma_sdk/Archive/7z/7zBuffer.h third_party/lzma_sdk/Archive/7z/7zDecode.c third_party/lzma_sdk/Archive/7z/7zDecode.h third_party/lzma_sdk/Archive/7z/7zExtract.c third_party/lzma_sdk/Archive/7z/7zExtract.h third_party/lzma_sdk/Archive/7z/7zHeader.c third_party/lzma_sdk/Archive/7z/7zHeader.h third_party/lzma_sdk/Archive/7z/7zIn.c third_party/lzma_sdk/Archive/7z/7zIn.h third_party/lzma_sdk/Archive/7z/7zItem.c third_party/lzma_sdk/Archive/7z/7zItem.h third_party/lzma_sdk/Archive/7z/7zMethodID.c third_party/lzma_sdk/Archive/7z/7zMethodID.h
 Copyright: UNKNOWN:
 License: Public-domain
 
-Files: third_party/lzma_sdk/Compress/Branch/BranchTypes.hgthird_party/lzma_sdk/Compress/Branch/BranchX86.c third_party/lzma_sdk/Compress/Branch/BranchX86.h third_party/lzma_sdk/Compress/Branch/BranchX86_2.c third_party/lzma_sdk/Compress/Branch/BranchX86_2.h
+Files: third_party/lzma_sdk/Compress/Branch/BranchTypes.h third_party/lzma_sdk/Compress/Branch/BranchX86.c third_party/lzma_sdk/Compress/Branch/BranchX86.h third_party/lzma_sdk/Compress/Branch/BranchX86_2.c third_party/lzma_sdk/Compress/Branch/BranchX86_2.h
 Copyright: UNKNOWN:
 License: Public-domain
 

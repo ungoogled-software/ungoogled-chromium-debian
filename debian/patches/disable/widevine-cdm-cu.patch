@@ -3,9 +3,9 @@ author: Michel Le Bihan <michel@lebihan.pl>
 
 --- a/chrome/browser/component_updater/registration.cc
 +++ b/chrome/browser/component_updater/registration.cc
-@@ -96,10 +96,6 @@ void RegisterComponentsForUpdate(bool is_off_the_record_profile,
-   // TODO(crbug.com/1069814): Remove after 2021-10-01.
-   CleanUpPepperFlashComponent(profile_path);
+@@ -118,10 +118,6 @@ void RegisterComponentsForUpdate(bool is_off_the_record_profile,
+   RegisterMediaFoundationWidevineCdmComponent(cus);
+ #endif
  
 -#if BUILDFLAG(ENABLE_WIDEVINE_CDM_COMPONENT)
 -  RegisterWidevineCdmComponent(cus);

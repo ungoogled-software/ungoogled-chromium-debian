@@ -16,7 +16,6 @@ third_party/ffmpeg/BUILD.gn
 third_party/libxml/BUILD.gn
 third_party/libdrm/BUILD.gn
 third_party/libpng/BUILD.gn
-third_party/libvpx/BUILD.gn
 third_party/libwebp/BUILD.gn
 third_party/libjpeg/BUILD.gn
 third_party/libxslt/BUILD.gn

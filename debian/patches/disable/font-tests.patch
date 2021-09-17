@@ -14,11 +14,11 @@ author: Michael Gilbert <mgilbert@debian.org>
    }
 --- a/base/test/BUILD.gn
 +++ b/base/test/BUILD.gn
-@@ -183,10 +183,6 @@ static_library("test_support") {
+@@ -197,10 +197,6 @@ static_library("test_support") {
    if (is_linux || is_chromeos) {
      sources += [ "test_file_util_linux.cc" ]
      public_deps += [ ":fontconfig_util_linux" ]
--    data_deps = [ "//third_party/test_fonts" ]
+-    data_deps += [ "//third_party/test_fonts" ]
 -    if (current_toolchain == host_toolchain) {
 -      data_deps += [ ":do_generate_fontconfig_caches" ]
 -    }

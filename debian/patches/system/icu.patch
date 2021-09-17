@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/net/BUILD.gn
 +++ b/net/BUILD.gn
-@@ -10,7 +10,6 @@ import("//build/config/features.gni")
+@@ -11,7 +11,6 @@ import("//build/config/features.gni")
  import("//net/features.gni")
  import("//testing/libfuzzer/fuzzer_test.gni")
  import("//testing/test.gni")
@@ -11,31 +11,6 @@ author: Michael Gilbert <mgilbert@debian.org>
  import("//third_party/protobuf/proto_library.gni")
  import("//tools/grit/grit_rule.gni")
  import("//url/features.gni")
---- a/third_party/blink/renderer/platform/wtf/text/text_codec_utf8.cc
-+++ b/third_party/blink/renderer/platform/wtf/text/text_codec_utf8.cc
-@@ -502,7 +502,7 @@ TextCodec::EncodeIntoResult TextCodecUTF
- 
-   wtf_size_t i = 0;
-   wtf_size_t previous_code_unit_index = 0;
--  bool is_error = false;
-+  UBool is_error = false;
-   while (i < length && encode_into_result.bytes_written < capacity &&
-          !is_error) {
-     UChar32 character;
---- a/v8/src/regexp/regexp-macro-assembler.cc
-+++ b/v8/src/regexp/regexp-macro-assembler.cc
-@@ -68,9 +68,9 @@ int RegExpMacroAssembler::CaseInsensitiv
- 
- #ifdef V8_INTL_SUPPORT
-   int32_t length = static_cast<int32_t>(byte_length >> 1);
--  icu::UnicodeString uni_str_1(reinterpret_cast<const char16_t*>(byte_offset1),
-+  icu::UnicodeString uni_str_1(reinterpret_cast<const UChar*>(byte_offset1),
-                                length);
--  return uni_str_1.caseCompare(reinterpret_cast<const char16_t*>(byte_offset2),
-+  return uni_str_1.caseCompare(reinterpret_cast<const UChar*>(byte_offset2),
-                                length, U_FOLD_CASE_DEFAULT) == 0;
- #else
-   uc16* substring1 = reinterpret_cast<uc16*>(byte_offset1);
 --- a/base/BUILD.gn
 +++ b/base/BUILD.gn
 @@ -36,7 +36,6 @@ import("//build/timestamp.gni")
@@ -46,12 +21,12 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  if (is_mac) {
    # Used to generate fuzzer corpus :base_mach_port_rendezvous_convert_corpus.
-@@ -3257,7 +3256,7 @@ if (build_base_unittests) {
-       ]
-     }
+@@ -3397,7 +3396,7 @@ test("base_unittests") {
+     ]
+   }
  
--    if (icu_use_data_file) {
-+    if (false) {
-       if (is_android) {
-         deps += [ "//third_party/icu:icu_extra_assets" ]
-       } else {
+-  if (icu_use_data_file) {
++  if (false) {
+     if (is_android) {
+       deps += [ "//third_party/icu:icu_extra_assets" ]
+     } else {

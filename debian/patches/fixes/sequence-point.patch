@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/components/download/internal/common/download_item_impl.cc
 +++ b/components/download/internal/common/download_item_impl.cc
-@@ -643,7 +643,9 @@ void DownloadItemImpl::UpdateResumptionI
+@@ -646,7 +646,9 @@ void DownloadItemImpl::UpdateResumptionInfo(bool user_resume) {
      bytes_wasted_ = 0;
    }
  
@@ -11,7 +11,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 +  ++auto_resume_count_;
 +  if (user_resume)
 +    auto_resume_count_ = 0;
-   download_schedule_ = base::nullopt;
+   download_schedule_ = absl::nullopt;
    RecordDownloadLaterEvent(DownloadLaterEvent::kScheduleRemoved);
  }
 --- a/third_party/blink/renderer/modules/animationworklet/animation_worklet_proxy_client.cc

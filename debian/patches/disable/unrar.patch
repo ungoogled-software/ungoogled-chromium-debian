@@ -5,7 +5,7 @@ bug: http://bugs.debian.org/914487
 --- a/chrome/common/safe_browsing/BUILD.gn
 +++ b/chrome/common/safe_browsing/BUILD.gn
 @@ -43,39 +43,6 @@ if (safe_browsing_mode == 1) {
-     public_deps = [ "//components/safe_browsing/core:csd_proto" ]
+     public_deps = [ "//components/safe_browsing/core/common/proto:csd_proto" ]
    }
  
 -  source_set("rar_analyzer") {
@@ -19,8 +19,8 @@ bug: http://bugs.debian.org/914487
 -      ":download_type_util",
 -      "//base",
 -      "//base:i18n",
--      "//components/safe_browsing/core:features",
--      "//components/safe_browsing/core:file_type_policies",
+-      "//components/safe_browsing/content/common:file_type_policies",
+-      "//components/safe_browsing/core/common",
 -      "//third_party/unrar:unrar",
 -    ]
 -
@@ -38,30 +38,30 @@ bug: http://bugs.debian.org/914487
 -      "UNRAR_NO_EXCEPTIONS",
 -    ]
 -
--    public_deps = [ "//components/safe_browsing/core:csd_proto" ]
+-    public_deps = [ "//components/safe_browsing/core/common/proto:csd_proto" ]
 -  }
 -
    if (is_mac) {
      source_set("disk_image_type_sniffer_mac") {
        sources = [
-@@ -145,7 +112,6 @@ source_set("safe_browsing") {
+@@ -149,7 +116,6 @@ source_set("safe_browsing") {
        ":archive_analyzer_results",
        ":binary_feature_extractor",
        ":download_type_util",
 -      ":rar_analyzer",
-       "//components/safe_browsing/core:features",
+       "//components/safe_browsing/core/common",
      ]
  
 --- a/chrome/services/file_util/BUILD.gn
 +++ b/chrome/services/file_util/BUILD.gn
-@@ -15,7 +15,6 @@ source_set("file_util") {
-     "//build:chromeos_buildflags",
-     "//chrome/common/safe_browsing",
-     "//chrome/common/safe_browsing:archive_analyzer_results",
--    "//chrome/common/safe_browsing:rar_analyzer",
-     "//components/safe_browsing:buildflags",
-     "//mojo/public/cpp/bindings",
-   ]
+@@ -50,7 +50,6 @@ source_set("file_util") {
+     deps += [
+       "//chrome/common/safe_browsing",
+       "//chrome/common/safe_browsing:archive_analyzer_results",
+-      "//chrome/common/safe_browsing:rar_analyzer",
+     ]
+   }
+ 
 --- a/chrome/services/file_util/safe_archive_analyzer.cc
 +++ b/chrome/services/file_util/safe_archive_analyzer.cc
 @@ -7,7 +7,6 @@

@@ -1,6 +1,17 @@
 description: call system nodejs
 author: Michael Gilbert <mgilbert@debian.org>
 
+--- a/tools/typescript/tsconfig_base.json
++++ b/tools/typescript/tsconfig_base.json
+@@ -3,7 +3,7 @@
+     "module": "ESNext",
+     "target": "ESNext",
+ 
+-    "noEmitOnError": true,
++    "noEmitOnError": false,
+     "pretty": true,
+ 
+     "incremental": true,
 --- a/third_party/devtools-frontend/src/scripts/devtools_paths.py
 +++ b/third_party/devtools-frontend/src/scripts/devtools_paths.py
 @@ -37,13 +37,7 @@ def third_party_path():
@@ -18,6 +29,60 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  
  def devtools_root_path():
+--- a/third_party/lottie/minify_lottie.py
++++ b/third_party/lottie/minify_lottie.py
+@@ -12,16 +12,14 @@ _SRC_PATH = os.path.normpath(os.path.join(_HERE_PATH, '..', '..'))
+ 
+ sys.path.append(os.path.join(_SRC_PATH, 'third_party', 'node'))
+ import node
+-import node_modules
+ 
+ def main(argv):
+   parser = argparse.ArgumentParser()
+   parser.add_argument('--out_folder', required=True)
+   args = parser.parse_args(argv)
+ 
+-  node.RunNode([node_modules.PathToTerser(),
++  node.RunNode(['/usr/bin/uglifyjs.terser',
+           os.path.join(_HERE_PATH, 'lottie_worker.js'),
+-          '--ascii_only=true',
+           '-b', 'beautify=false',
+           '--compress',
+           '--mangle', 'reserved=[\'$\',\'onmessage\',\'postMessage\']',
+--- /dev/null
++++ b/third_party/node/node.gni
+@@ -0,0 +1,16 @@
++# Copyright 2021 The Chromium Authors. All rights reserved.
++# Use of this source code is governed by a BSD-style license that can be
++# found in the LICENSE file.
++
++template("node") {
++  action(target_name) {
++    forward_variables_from(invoker, "*", TESTONLY_AND_VISIBILITY)
++    forward_variables_from(invoker, TESTONLY_AND_VISIBILITY)
++
++    # Declare dependencies to all involved tools.
++    inputs += [
++      "//third_party/node/node.py",
++      "//third_party/node/node_modules.py",
++    ]
++  }
++}
+--- /dev/null
++++ b/third_party/node/node_modules.py
+@@ -0,0 +1,12 @@
++#!/usr/bin/python3
++# Copyright 2016 The Chromium Authors. All rights reserved.
++# Use of this source code is governed by a BSD-style license that can be
++# found in the LICENSE file.
++
++from os import path as os_path
++
++
++# Typescript is not approved for general use in Chromium. Email chromium-dev
++# if you want to use it.
++def PathToTypescript():
++  return '/usr/bin/tsc'
 --- /dev/null
 +++ b/third_party/node/node.py
 @@ -0,0 +1,36 @@
@@ -53,7 +118,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 +  if stderr:
 +    raise RuntimeError('%s failed: %s' % (cmd, stderr))
 +
-+  return stdout
++  return stdout.decode()
 +
 +if __name__ == '__main__':
 +  RunNode(sys.argv[1:])
