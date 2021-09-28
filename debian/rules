@@ -118,8 +118,10 @@ endif
 
 out/Release/gn:
 	python2 tools/gn/bootstrap/bootstrap.py --skip-generate-buildfiles -j$(njobs)
-	# Workaround for system node patch issue
-	mkdir -p third_party/node; cp debian/node.py third_party/node/node.py
+	# Workaround for patches that creat or delete files
+	mkdir -p ui/chromeos; cp debian/extras/devicetype_utils.h debian/extras/ui_chromeos_export.h ui/chromeos/
+	mkdir -p third_party/node; cp debian/extras/node.gni debian/extras/node_modules.py debian/extras/node.py third_party/node/
+	mkdir -p base/strings base/i18n; cp debian/extras/string16.h base/strings/; cp debian/extras/uchar.h base/i18n/
 
 override_dh_auto_configure:
 	# output compiler information

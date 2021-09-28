@@ -1,0 +1,16 @@
+# Copyright 2021 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+template("node") {
+  action(target_name) {
+    forward_variables_from(invoker, "*", TESTONLY_AND_VISIBILITY)
+    forward_variables_from(invoker, TESTONLY_AND_VISIBILITY)
+
+    # Declare dependencies to all involved tools.
+    inputs += [
+      "//third_party/node/node.py",
+      "//third_party/node/node_modules.py",
+    ]
+  }
+}

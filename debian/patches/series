@@ -14,7 +14,6 @@ fixes/widevine-enable-version-string.patch
 fixes/widevine-locations.patch
 fixes/nullptr-dereference.patch
 fixes/multiple-destruction.patch
-fixes/chromeos_devicetype.patch
 fixes/nomerge.patch
 
 disable/mojo.patch
