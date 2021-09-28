@@ -23,7 +23,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    public_deps = [
 --- a/v8/test/unittests/BUILD.gn
 +++ b/v8/test/unittests/BUILD.gn
-@@ -491,7 +491,7 @@ v8_source_set("unittests_sources") {
+@@ -500,7 +500,7 @@ v8_source_set("unittests_sources") {
      "../..:v8_libbase",
      "../..:v8_libplatform",
      "../..:v8_shared_internal_headers",
@@ -63,7 +63,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  bool IsCBORMessage(StringView msg) {
    return msg.is8Bit() && msg.length() >= 2 && msg.characters8()[0] == 0xd8 &&
-@@ -197,8 +197,8 @@ void V8InspectorSessionImpl::SendProtoco
+@@ -211,8 +211,8 @@ void V8InspectorSessionImpl::SendProtoco
  }
  
  void V8InspectorSessionImpl::FallThrough(int callId,
@@ -74,7 +74,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    // There's no other layer to handle the command.
    UNREACHABLE();
  }
-@@ -345,8 +345,8 @@ void V8InspectorSessionImpl::reportAllCo
+@@ -359,8 +359,8 @@ void V8InspectorSessionImpl::reportAllCo
  }
  
  void V8InspectorSessionImpl::dispatchProtocolMessage(StringView message) {
@@ -85,7 +85,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    span<uint8_t> cbor;
    std::vector<uint8_t> converted_cbor;
    if (IsCBORMessage(message)) {
-@@ -359,21 +359,21 @@ void V8InspectorSessionImpl::dispatchPro
+@@ -373,21 +373,21 @@ void V8InspectorSessionImpl::dispatchPro
      auto status = ConvertToCBOR(message, &converted_cbor);
      if (!status.ok()) {
        m_channel->sendNotification(
@@ -136,7 +136,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    static void Serialize(const v8_inspector::String16& str,
 --- a/v8/src/inspector/v8-inspector-session-impl.h
 +++ b/v8/src/inspector/v8-inspector-session-impl.h
-@@ -107,8 +107,8 @@ class V8InspectorSessionImpl : public V8
+@@ -110,8 +110,8 @@ class V8InspectorSessionImpl : public V8
        int callId, std::unique_ptr<protocol::Serializable> message) override;
    void SendProtocolNotification(
        std::unique_ptr<protocol::Serializable> message) override;
@@ -149,7 +149,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    std::unique_ptr<StringBuffer> serializeForFrontend(
 --- a/v8/src/inspector/injected-script.cc
 +++ b/v8/src/inspector/injected-script.cc
-@@ -722,8 +722,8 @@ Response InjectedScript::resolveCallArgu
+@@ -723,8 +723,8 @@ Response InjectedScript::resolveCallArgu
      String16 value;
      if (callArgument->hasValue()) {
        std::vector<uint8_t> json;
@@ -173,7 +173,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      v8_inspector::StringView serialized(json.data(), json.size());
 --- a/v8/src/inspector/v8-stack-trace-impl.cc
 +++ b/v8/src/inspector/v8-stack-trace-impl.cc
-@@ -11,9 +11,9 @@
+@@ -17,9 +17,9 @@
  #include "src/inspector/v8-inspector-impl.h"
  #include "src/tracing/trace-event.h"
  
@@ -186,7 +186,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  namespace v8_inspector {
  
-@@ -139,10 +139,10 @@ V8StackTraceId::V8StackTraceId(StringVie
+@@ -145,10 +145,10 @@ V8StackTraceId::V8StackTraceId(StringVie
    std::vector<uint8_t> cbor;
    if (json.is8Bit()) {
      ConvertJSONToCBOR(
@@ -199,7 +199,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    }
    auto dict = protocol::DictionaryValue::cast(
        protocol::Value::parseBinary(cbor.data(), cbor.size()));
-@@ -169,7 +169,7 @@ std::unique_ptr<StringBuffer> V8StackTra
+@@ -175,7 +175,7 @@ std::unique_ptr<StringBuffer> V8StackTra
    dict->setString(kDebuggerId, V8DebuggerId(debugger_id).toString());
    dict->setBoolean(kShouldPause, should_pause);
    std::vector<uint8_t> json;
@@ -232,7 +232,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  struct ProtocolTypeTraits<v8_inspector::String16> {
 --- a/v8/src/inspector/v8-debugger-agent-impl.cc
 +++ b/v8/src/inspector/v8-debugger-agent-impl.cc
-@@ -1558,8 +1558,8 @@ void V8DebuggerAgentImpl::didParseSource
+@@ -1576,8 +1576,8 @@ void V8DebuggerAgentImpl::didParseSource
      // execution context id.
      const String16& aux = inspected->auxData();
      std::vector<uint8_t> cbor;
@@ -245,7 +245,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    }
 --- a/v8/src/inspector/v8-runtime-agent-impl.cc
 +++ b/v8/src/inspector/v8-runtime-agent-impl.cc
-@@ -886,8 +886,8 @@ void V8RuntimeAgentImpl::reportExecution
+@@ -897,8 +897,8 @@ void V8RuntimeAgentImpl::reportExecution
    const String16& aux = context->auxData();
    if (!aux.isEmpty()) {
      std::vector<uint8_t> cbor;

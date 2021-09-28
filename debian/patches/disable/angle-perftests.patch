@@ -3,7 +3,7 @@ author: Michel Le Bihan <michel@lebihan.pl>
 
 --- a/chrome/test/BUILD.gn
 +++ b/chrome/test/BUILD.gn
-@@ -3391,10 +3391,6 @@ template("performance_test_suite_template") {
+@@ -4115,10 +4115,6 @@
        data_deps += [ "//third_party/dawn/src/tests:dawn_perf_tests" ]
      }
  
@@ -16,7 +16,7 @@ author: Michel Le Bihan <michel@lebihan.pl>
          "//chrome/test:load_library_perf_tests",
 --- a/third_party/angle/BUILD.gn
 +++ b/third_party/angle/BUILD.gn
-@@ -47,7 +47,7 @@ declare_args() {
+@@ -47,7 +47,7 @@
    angle_force_context_check_every_call = false
  
    # Indicate if the rapidJSON library is available to build with in third_party/.
@@ -38,7 +38,7 @@ author: Michel Le Bihan <michel@lebihan.pl>
  angle_abseil_cpp_dir = "//third_party/abseil-cpp"
 --- a/third_party/angle/src/tests/BUILD.gn
 +++ b/third_party/angle/src/tests/BUILD.gn
-@@ -12,8 +12,7 @@ declare_args() {
+@@ -12,8 +12,7 @@
    build_angle_deqp_tests = false
    build_angle_gles1_conform_tests = false
    build_angle_trace_perf_tests = false
@@ -48,7 +48,7 @@ author: Michel Le Bihan <michel@lebihan.pl>
  }
  
  if (is_android) {
-@@ -177,7 +177,6 @@ angle_test("angle_unittests") {
+@@ -177,7 +176,6 @@
  
    deps = [
      ":angle_test_expectations",
@@ -56,7 +56,7 @@ author: Michel Le Bihan <michel@lebihan.pl>
      "$angle_root:libANGLE",
      "$angle_root:libEGL_static",
      "$angle_root:libGLESv2_static",
-@@ -315,48 +314,7 @@ config("angle_maybe_has_histograms") {
+@@ -315,48 +313,7 @@
    }
  }
  
@@ -106,7 +106,7 @@ author: Michel Le Bihan <michel@lebihan.pl>
    import("angle_perftests.gni")
  
    # This test suite is for perf tests that use ANGLE's internals in some direct way.
-@@ -1534,12 +1492,11 @@ group("angle_tests") {
+@@ -1534,12 +1491,11 @@
    testonly = true
    deps = [
      ":angle_end2end_tests",
@@ -122,7 +122,7 @@ author: Michel Le Bihan <michel@lebihan.pl>
        ":angle_white_box_tests",
 --- a/third_party/angle/gni/angle.gni
 +++ b/third_party/angle/gni/angle.gni
-@@ -173,7 +173,7 @@ declare_args() {
+@@ -206,7 +206,7 @@
    # TODO(jdarpinian): Support enabling CGL and EAGL at the same time using the soft linking code. Also support disabling both for Metal-only builds.
    angle_enable_cgl = angle_enable_gl && !angle_enable_eagl && is_apple
  

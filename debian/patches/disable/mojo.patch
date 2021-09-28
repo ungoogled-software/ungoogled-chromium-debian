@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -1039,8 +1039,6 @@
+@@ -1087,8 +1087,6 @@
        ":layout_test_data_mojo_bindings",
        ":layout_test_data_mojo_bindings_lite",
        "//content/shell:content_shell",
@@ -12,7 +12,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//device/bluetooth/public/mojom:fake_bluetooth_interfaces_js_data_deps",
        "//device/vr/public/mojom:vr_service_js_data_deps",
        "//media/capture/mojom:image_capture_js_data_deps",
-@@ -1074,8 +1072,6 @@
+@@ -1122,8 +1120,6 @@
          "//third_party/breakpad:symupload",
          "//tools/android/forwarder2",
        ]
@@ -23,7 +23,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      if (!is_win && !is_android) {
 --- a/content/browser/BUILD.gn
 +++ b/content/browser/BUILD.gn
-@@ -2898,7 +2898,6 @@ group("for_content_tests") {
+@@ -3036,7 +3036,6 @@
    visibility = [
      "//content/public/test/android/*",
      "//content/test/*",
@@ -33,7 +33,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      public_deps = [ ":browser" ]
 --- a/content/renderer/BUILD.gn
 +++ b/content/renderer/BUILD.gn
-@@ -564,7 +564,6 @@ target(link_target_type, "renderer") {
+@@ -556,7 +556,6 @@
  group("for_content_tests") {
    visibility = [
      "//content/test/*",
@@ -43,7 +43,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    if (!is_component_build) {
 --- a/content/shell/BUILD.gn
 +++ b/content/shell/BUILD.gn
-@@ -43,7 +43,7 @@ config("content_shell_lib_warnings") {
+@@ -46,7 +46,7 @@
  }
  
  # Web test support not built on android, but is everywhere else.
@@ -54,7 +54,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    testonly = true
 --- a/content/shell/app/shell_main_delegate.h
 +++ b/content/shell/app/shell_main_delegate.h
-@@ -19,10 +19,6 @@ class ShellContentGpuClient;
+@@ -19,10 +19,6 @@
  class ShellContentRendererClient;
  class ShellContentUtilityClient;
  
@@ -65,7 +65,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  class ShellMainDelegate : public ContentMainDelegate {
   public:
    explicit ShellMainDelegate(bool is_content_browsertests = false);
-@@ -52,13 +48,6 @@ class ShellMainDelegate : public ContentMainDelegate {
+@@ -54,13 +50,6 @@
    // content_browsertests should not set the kRunWebTests command line flag, so
    // |is_content_browsertests_| and |web_test_runner_| are mututally exclusive.
    bool is_content_browsertests_;
@@ -81,7 +81,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    std::unique_ptr<ShellContentGpuClient> gpu_client_;
 --- a/content/shell/app/shell_main_delegate.cc
 +++ b/content/shell/app/shell_main_delegate.cc
-@@ -40,12 +40,6 @@
+@@ -41,12 +41,6 @@
      content::RegisterIPCLogger(msg_id, logger)
  #endif
  
@@ -94,7 +94,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #if defined(OS_ANDROID)
  #include "base/android/apk_assets.h"
  #include "base/posix/global_descriptors.h"
-@@ -171,17 +171,6 @@ bool ShellMainDelegate::BasicStartupComplete(int* exit_code) {
+@@ -171,17 +165,6 @@
  
    InitLogging(command_line);
  
@@ -112,7 +112,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    RegisterShellPathProvider();
  
    return false;
-@@ -230,16 +213,6 @@ int ShellMainDelegate::RunProcess(
+@@ -237,16 +220,6 @@
        kTraceEventBrowserProcessSortIndex);
  
  #if !defined(OS_ANDROID)
@@ -129,7 +129,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    // On non-Android, we can return -1 and have the caller run BrowserMain()
    // normally.
    return -1;
-@@ -331,12 +304,6 @@ ContentClient* ShellMainDelegate::CreateContentClient() {
+@@ -346,12 +319,6 @@
  }
  
  ContentBrowserClient* ShellMainDelegate::CreateContentBrowserClient() {
@@ -142,7 +142,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    browser_client_ = std::make_unique<ShellContentBrowserClient>();
    return browser_client_.get();
  }
-@@ -347,12 +314,6 @@ ContentGpuClient* ShellMainDelegate::CreateContentGpuClient() {
+@@ -362,12 +329,6 @@
  }
  
  ContentRendererClient* ShellMainDelegate::CreateContentRendererClient() {
@@ -157,7 +157,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  }
 --- a/third_party/blink/tools/BUILD.gn
 +++ b/third_party/blink/tools/BUILD.gn
-@@ -66,8 +66,6 @@ group("wpt_tests_base_mojo_bindings") {
+@@ -71,8 +71,6 @@
    data_deps = [
      "//:layout_test_data_mojo_bindings",
      "//:layout_test_data_mojo_bindings_lite",

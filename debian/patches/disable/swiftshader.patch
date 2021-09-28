@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -488,7 +488,7 @@ group("gn_all") {
+@@ -512,7 +512,7 @@ group("gn_all") {
      ]
    }
  

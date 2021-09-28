@@ -1,35 +1,6 @@
---- a/v8/src/objects/intl-objects.h
-+++ b/v8/src/objects/intl-objects.h
-@@ -21,7 +21,7 @@
- #include "unicode/locid.h"
- #include "unicode/uversion.h"
- 
--#define V8_MINIMUM_ICU_VERSION 69
-+#define V8_MINIMUM_ICU_VERSION 67
- 
- namespace U_ICU_NAMESPACE {
- class BreakIterator;
---- a/v8/src/objects/intl-objects.cc
-+++ b/v8/src/objects/intl-objects.cc
-@@ -2050,12 +2050,10 @@ bool ICUTimezoneCache::GetOffsets(double time_ms, bool is_utc,
-   if (is_utc) {
-     GetTimeZone()->getOffset(time_ms, false, *raw_offset, *dst_offset, status);
-   } else {
--    // Note that casting TimeZone to BasicTimeZone is safe because we know that
--    // icu::TimeZone used here is a BasicTimeZone.
-     static_cast<const icu::BasicTimeZone*>(GetTimeZone())
--        ->getOffsetFromLocal(time_ms, UCAL_TZ_LOCAL_FORMER,
--                             UCAL_TZ_LOCAL_FORMER, *raw_offset, *dst_offset,
--                             status);
-+        ->getOffsetFromLocal(time_ms, icu::BasicTimeZone::kFormer,
-+                             icu::BasicTimeZone::kFormer, *raw_offset,
-+                             *dst_offset, status);
-   }
- 
-   return U_SUCCESS(status);
---- b/base/BUILD.gn
-+++ a/base/BUILD.gn
-@@ -2541,6 +2541,7 @@
+--- a/base/BUILD.gn
++++ b/base/BUILD.gn
+@@ -2575,6 +2575,7 @@
      "i18n/time_formatting.h",
      "i18n/timezone.cc",
      "i18n/timezone.h",
@@ -37,8 +8,8 @@
      "i18n/unicodestring.h",
      "i18n/utf8_validator_tables.cc",
      "i18n/utf8_validator_tables.h",
---- b/base/i18n/break_iterator.cc
-+++ a/base/i18n/break_iterator.cc
+--- a/base/i18n/break_iterator.cc
++++ b/base/i18n/break_iterator.cc
 @@ -7,6 +7,7 @@
  #include <stdint.h>
  
@@ -47,41 +18,41 @@
  #include "base/lazy_instance.h"
  #include "base/notreached.h"
  #include "base/synchronization/lock.h"
-@@ -164,9 +165,9 @@
+@@ -165,9 +166,9 @@
        iter_ = line_break_cache.Pointer()->Lease(status);
        break;
      case RULE_BASED:
-+      iter_ = ubrk_openRules(ToUCharPtr(rules_.c_str()),
-+                             static_cast<int32_t>(rules_.length()), nullptr, 0,
-+                             &parse_error, &status);
 -      iter_ =
 -          ubrk_openRules(rules_.c_str(), static_cast<int32_t>(rules_.length()),
 -                         nullptr, 0, &parse_error, &status);
++      iter_ = ubrk_openRules(ToUCharPtr(rules_.c_str()),
++                             static_cast<int32_t>(rules_.length()), nullptr, 0,
++                             &parse_error, &status);
        if (U_FAILURE(status)) {
          NOTREACHED() << "ubrk_openRules failed to parse rule string at line "
                       << parse_error.line << ", offset " << parse_error.offset;
-@@ -182,7 +183,8 @@
+@@ -183,7 +184,8 @@
    }
  
    if (string_.data() != nullptr) {
+-    ubrk_setText(static_cast<UBreakIterator*>(iter_), string_.data(),
 +    ubrk_setText(static_cast<UBreakIterator*>(iter_),
 +                 ToUCharPtr(string_.data()),
--    ubrk_setText(static_cast<UBreakIterator*>(iter_), string_.data(),
                   static_cast<int32_t>(string_.size()), &status);
      if (U_FAILURE(status)) {
        return false;
-@@ -232,7 +234,8 @@
+@@ -233,7 +235,8 @@
  
  bool BreakIterator::SetText(const char16_t* text, const size_t length) {
    UErrorCode status = U_ZERO_ERROR;
+-  ubrk_setText(static_cast<UBreakIterator*>(iter_), text, length, &status);
 +  ubrk_setText(static_cast<UBreakIterator*>(iter_), ToUCharPtr(text), length,
 +               &status);
--  ubrk_setText(static_cast<UBreakIterator*>(iter_), text, length, &status);
    pos_ = 0;  // implicit when ubrk_setText is done
    prev_ = npos;
    if (U_FAILURE(status)) {
---- b/base/i18n/case_conversion.cc
-+++ a/base/i18n/case_conversion.cc
+--- a/base/i18n/case_conversion.cc
++++ b/base/i18n/case_conversion.cc
 @@ -8,6 +8,7 @@
  
  #include <string>
@@ -90,23 +61,23 @@
  #include "base/numerics/safe_conversions.h"
  #include "base/strings/string_util.h"
  #include "third_party/icu/source/common/unicode/uchar.h"
-@@ -63,9 +64,10 @@
+@@ -65,9 +66,10 @@
      // ICU won't terminate the string if there's not enough room for the null
      // terminator, but will otherwise. So we don't need to save room for that.
      // Don't use WriteInto, which assumes null terminators.
+-    int32_t new_length = case_mapper(
+-        &dest[0], saturated_cast<int32_t>(dest.size()), string.data(),
+-        saturated_cast<int32_t>(string.size()), &error);
 +    int32_t new_length =
 +        case_mapper(ToUCharPtr(&dest[0]), saturated_cast<int32_t>(dest.size()),
 +                    ToUCharPtr(string.data()),
 +                    saturated_cast<int32_t>(string.size()), &error);
--    int32_t new_length = case_mapper(
--        &dest[0], saturated_cast<int32_t>(dest.size()), string.data(),
--        saturated_cast<int32_t>(string.size()), &error);
      dest.resize(new_length);
    } while (error == U_BUFFER_OVERFLOW_ERROR);
    return dest;
---- b/base/i18n/file_util_icu_unittest.cc
-+++ a/base/i18n/file_util_icu_unittest.cc
-@@ -54,55 +54,55 @@ TEST_F(FileUtilICUTest, ReplaceIllegalCharactersInPathLinuxTest) {
+--- a/base/i18n/file_util_icu_unittest.cc
++++ b/base/i18n/file_util_icu_unittest.cc
+@@ -53,55 +53,55 @@
  // unicode characters. For Mac they should be converted to UTF-8, for Windows to
  // wide.
  static const struct FileUtilICUTestCases {
@@ -196,8 +167,8 @@
  #endif
    }
  }
---- b/base/i18n/icu_string_conversions.cc
-+++ a/base/i18n/icu_string_conversions.cc
+--- a/base/i18n/icu_string_conversions.cc
++++ b/base/i18n/icu_string_conversions.cc
 @@ -11,6 +11,7 @@
  #include <vector>
  
@@ -210,10 +181,10 @@
  
    // ucnv_fromUChars returns size not including terminating null
    int actual_size =
-+      ucnv_fromUChars(converter, &(*encoded)[0], encoded_max_length,
-+                      i18n::ToUCharPtr(src.data()), src.length(), &status);
 -      ucnv_fromUChars(converter, &(*encoded)[0], encoded_max_length, src.data(),
 -                      src.length(), &status);
++      ucnv_fromUChars(converter, &(*encoded)[0], encoded_max_length,
++                      i18n::ToUCharPtr(src.data()), src.length(), &status);
    encoded->resize(actual_size);
    ucnv_close(converter);
    if (U_SUCCESS(status))
@@ -221,18 +192,18 @@
  
    SetUpErrorHandlerForToUChars(on_error, converter, &status);
    std::unique_ptr<char16_t[]> buffer(new char16_t[uchar_max_length]);
+-  int actual_size = ucnv_toUChars(
+-      converter, buffer.get(), static_cast<int>(uchar_max_length),
+-      encoded.data(), static_cast<int>(encoded.length()), &status);
 +  int actual_size =
 +      ucnv_toUChars(converter, i18n::ToUCharPtr(buffer.get()),
 +                    static_cast<int>(uchar_max_length), encoded.data(),
 +                    static_cast<int>(encoded.length()), &status);
--  int actual_size = ucnv_toUChars(
--      converter, buffer.get(), static_cast<int>(uchar_max_length),
--      encoded.data(), static_cast<int>(encoded.length()), &status);
    ucnv_close(converter);
    if (!U_SUCCESS(status)) {
      utf16->clear();  // Make sure the output is empty on error.
---- b/base/i18n/string_search.cc
-+++ a/base/i18n/string_search.cc
+--- a/base/i18n/string_search.cc
++++ b/base/i18n/string_search.cc
 @@ -5,6 +5,7 @@
  #include <stdint.h>
  
@@ -241,7 +212,7 @@
  
  #include "base/check.h"
  #include "base/check_op.h"
-@@ -20,7 +21,7 @@ FixedPatternStringSearch::FixedPatternStringSearch(
+@@ -22,7 +23,7 @@
    const std::u16string& dummy = find_this_;
  
    UErrorCode status = U_ZERO_ERROR;
@@ -250,115 +221,17 @@
                           dummy.size(), uloc_getDefault(),
                           nullptr,  // breakiter
                           &status);
-@@ -48,7 +50,7 @@
+@@ -51,7 +52,7 @@
                                        size_t* match_length,
                                        bool forward_search) {
    UErrorCode status = U_ZERO_ERROR;
-+  usearch_setText(search_, ToUCharPtr(in_this.data()), in_this.size(), &status);
 -  usearch_setText(search_, in_this.data(), in_this.size(), &status);
++  usearch_setText(search_, ToUCharPtr(in_this.data()), in_this.size(), &status);
  
    // Default to basic substring search if usearch fails. According to
    // http://icu-project.org/apiref/icu4c/usearch_8h.html, usearch_open will fail
---- /dev/null
-+++ b/base/strings/string16.h
-@@ -0,0 +1,49 @@
-+// Copyright 2013 The Chromium Authors. All rights reserved.
-+// Use of this source code is governed by a BSD-style license that can be
-+// found in the LICENSE file.
-+
-+#ifndef BASE_STRINGS_STRING16_H_
-+#define BASE_STRINGS_STRING16_H_
-+
-+// WHAT:
-+// Type aliases for string and character types supporting UTF-16 data. Prior to
-+// C++11 there was no standard library solution for this, which is why wstring
-+// was used where possible (i.e. where wchar_t holds UTF-16 encoded data).
-+//
-+// In C++11 we gained std::u16string, which is a cross-platform solution for
-+// UTF-16 strings. This is now the string16 type where ever wchar_t does not
-+// hold UTF16 data (i.e. commonly non-Windows platforms). Eventually this should
-+// be used everywhere, at which point this type alias and this file should be
-+// removed. https://crbug.com/911896 tracks the migration effort.
-+
-+#include <string>
-+
-+#include "build/build_config.h"
-+
-+#if defined(WCHAR_T_IS_UTF16)
-+
-+// Define a macro for wrapping construction of char16 arrays and string16s from
-+// a literal string. This indirection allows for an easier migration of
-+// base::char16 to char16_t on platforms where WCHAR_T_IS_UTF16, as only a one
-+// character change to the macro will be necessary.
-+// TODO(https://crbug.com/911896): Remove this macro once base::char16 is
-+// char16_t on all platforms.
-+#define STRING16_LITERAL(x) L##x
-+
-+namespace base {
-+using char16 = wchar_t;
-+using string16 = std::wstring;
-+}  // namespace base
-+
-+#else
-+
-+#define STRING16_LITERAL(x) u##x
-+
-+namespace base {
-+using char16 = char16_t;
-+using string16 = std::u16string;
-+}  // namespace base
-+
-+#endif  // WCHAR_T_IS_UTF16
-+
-+#endif  // BASE_STRINGS_STRING16_H_
---- /dev/null
-+++ a/base/i18n/uchar.h
-@@ -0,0 +1,43 @@
-+// Copyright 2021 The Chromium Authors. All rights reserved.
-+// Use of this source code is governed by a BSD-style license that can be
-+// found in the LICENSE file.
-+
-+#ifndef BASE_I18N_UCHAR_H_
-+#define BASE_I18N_UCHAR_H_
-+
-+#include "base/strings/string16.h"
-+#include "third_party/icu/source/common/unicode/utypes.h"
-+
-+// This file contains functions to convert between C-strings of character types
-+// `UChar` and `base::char16`. This allows to change the underlying types
-+// independently, simplifying the migration of both types to char16_t.
-+// Naming and functionality of these functions is inspired by ICU's toUCharPtr.
-+//
-+// TODO(crbug.com/911896): Remove these functions once `base::char16` and
-+// `UChar` are char16_t on all platforms.
-+namespace base {
-+namespace i18n {
-+
-+static_assert(sizeof(UChar) == sizeof(char16_t),
-+              "Error: UChar and char16_t are not of the same size.");
-+
-+inline const UChar* ToUCharPtr(const char16_t* str) {
-+  return reinterpret_cast<const UChar*>(str);
-+}
-+
-+inline UChar* ToUCharPtr(char16_t* str) {
-+  return reinterpret_cast<UChar*>(str);
-+}
-+
-+inline const char16_t* ToChar16Ptr(const UChar* str) {
-+  return reinterpret_cast<const char16_t*>(str);
-+}
-+
-+inline char16_t* ToChar16Ptr(UChar* str) {
-+  return reinterpret_cast<char16_t*>(str);
-+}
-+
-+}  // namespace i18n
-+}  // namespace base
-+
-+#endif  // BASE_I18N_UCHAR_H_
---- b/base/i18n/unicodestring.h
-+++ a/base/i18n/unicodestring.h
+--- a/base/i18n/unicodestring.h
++++ b/base/i18n/unicodestring.h
 @@ -7,6 +7,7 @@
  
  #include <string>
@@ -367,7 +240,7 @@
  #include "third_party/icu/source/common/unicode/unistr.h"
  #include "third_party/icu/source/common/unicode/uvernum.h"
  
-@@ -20,7 +21,7 @@ namespace i18n {
+@@ -20,7 +21,7 @@
  inline std::u16string UnicodeStringToString16(
      const icu::UnicodeString& unistr) {
  #if U_ICU_VERSION_MAJOR_NUM >= 59
@@ -376,27 +249,27 @@
                          static_cast<size_t>(unistr.length()));
  #else
    return std::u16string(unistr.getBuffer(),
---- b/base/logging.cc
-+++ a/base/logging.cc
-@@ -1140,9 +1140,14 @@
+--- a/base/logging.cc
++++ b/base/logging.cc
+@@ -1162,9 +1162,14 @@
  }
  
  std::ostream& std::operator<<(std::ostream& out, const char16_t* str16) {
+-  return out << (str16 ? base::StringPiece16(str16) : base::StringPiece16());
 +  // TODO(crbug.com/911896): Drop cast once char16_t is char16_t everywhere.
 +  return out << (str16 ? base::StringPiece16(
 +                             reinterpret_cast<const char16_t*>(str16))
 +                       : base::StringPiece16());
--  return out << (str16 ? base::StringPiece16(str16) : base::StringPiece16());
  }
  
  std::ostream& std::operator<<(std::ostream& out, const std::u16string& str16) {
+-  return out << base::StringPiece16(str16);
 +  // TODO(crbug.com/911896): Drop cast once char16_t is char16_t everywhere.
 +  return out << base::StringPiece16(
 +             reinterpret_cast<const char16_t*>(str16.data()), str16.size());
--  return out << base::StringPiece16(str16);
  }
---- b/chrome/browser/ui/commander/fuzzy_finder.cc
-+++ a/chrome/browser/ui/commander/fuzzy_finder.cc
+--- a/chrome/browser/ui/commander/fuzzy_finder.cc
++++ b/chrome/browser/ui/commander/fuzzy_finder.cc
 @@ -6,6 +6,7 @@
  
  #include "base/i18n/case_conversion.h"
@@ -405,7 +278,7 @@
  #include "base/ranges/algorithm.h"
  #include "base/strings/string_util.h"
  #include "third_party/icu/source/common/unicode/uchar.h"
-@@ -75,7 +75,7 @@ double ScoreForMatches(const std::vector<MatchRecord>& matches,
+@@ -75,7 +76,7 @@
  }
  
  size_t LengthInCodePoints(const std::u16string& str) {
@@ -414,8 +287,8 @@
  }
  
  // Returns a positive score if every code point in |needle| is present in
---- b/components/url_formatter/spoof_checks/idn_spoof_checker.cc
-+++ a/components/url_formatter/spoof_checks/idn_spoof_checker.cc
+--- a/components/url_formatter/spoof_checks/idn_spoof_checker.cc
++++ b/components/url_formatter/spoof_checks/idn_spoof_checker.cc
 @@ -5,6 +5,7 @@
  #include "components/url_formatter/spoof_checks/idn_spoof_checker.h"
  
@@ -424,26 +297,26 @@
  #include "base/containers/contains.h"
  #include "base/logging.h"
  #include "base/no_destructor.h"
-@@ -357,7 +358,7 @@
+@@ -358,7 +359,7 @@
      base::StringPiece16 top_level_domain_unicode) {
    UErrorCode status = U_ZERO_ERROR;
    int32_t result =
-+      uspoof_check(checker_, base::i18n::ToUCharPtr(label.data()),
 -      uspoof_check(checker_, label.data(),
++      uspoof_check(checker_, base::i18n::ToUCharPtr(label.data()),
                     base::checked_cast<int32_t>(label.size()), nullptr, &status);
    // If uspoof_check fails (due to library failure), or if any of the checks
    // fail, treat the IDN as unsafe.
---- b/components/url_formatter/url_formatter.cc
-+++ a/components/url_formatter/url_formatter.cc
+--- a/components/url_formatter/url_formatter.cc
++++ b/components/url_formatter/url_formatter.cc
 @@ -8,6 +8,7 @@
  #include <utility>
  #include <vector>
  
 +#include "base/i18n/uchar.h"
+ #include "base/command_line.h"
  #include "base/lazy_instance.h"
  #include "base/numerics/safe_conversions.h"
- #include "base/strings/strcat.h"
-@@ -432,8 +432,8 @@ ComponentResult IDNToUnicodeOneComponent(
+@@ -438,8 +439,8 @@
      // code units, |status| will be U_BUFFER_OVERFLOW_ERROR and we'll try
      // the conversion again, but with a sufficiently large buffer.
      output_length = uidna_labelToUnicode(
@@ -454,8 +327,8 @@
    } while ((status == U_BUFFER_OVERFLOW_ERROR && info.errors == 0));
  
    if (U_SUCCESS(status) && info.errors == 0) {
---- b/content/child/browser_font_resource_trusted.cc
-+++ a/content/child/browser_font_resource_trusted.cc
+--- a/content/child/browser_font_resource_trusted.cc
++++ b/content/child/browser_font_resource_trusted.cc
 @@ -6,6 +6,7 @@
  
  #include <stddef.h>
@@ -468,15 +341,15 @@
      } else {
        bidi_ = ubidi_open();
        UErrorCode uerror = U_ZERO_ERROR;
-+      ubidi_setPara(bidi_, base::i18n::ToUCharPtr(text_.data()), text_.size(),
-+                    run.rtl, nullptr, &uerror);
 -      ubidi_setPara(bidi_, text_.data(), text_.size(), run.rtl, nullptr,
 -                    &uerror);
++      ubidi_setPara(bidi_, base::i18n::ToUCharPtr(text_.data()), text_.size(),
++                    run.rtl, nullptr, &uerror);
        if (U_SUCCESS(uerror))
          num_runs_ = ubidi_countRuns(bidi_, &uerror);
      }
---- b/third_party/blink/renderer/core/DEPS
-+++ a/third_party/blink/renderer/core/DEPS
+--- a/third_party/blink/renderer/core/DEPS
++++ b/third_party/blink/renderer/core/DEPS
 @@ -4,6 +4,7 @@
      "+base/bits.h",
      "+base/cancelable_callback.h",
@@ -485,8 +358,8 @@
      "+base/mac/foundation_util.h",
      "+base/mac/mac_util.h",
      "+base/mac/scoped_cftyperef.h",
---- b/third_party/blink/renderer/core/clipboard/clipboard_utilities.cc
-+++ a/third_party/blink/renderer/core/clipboard/clipboard_utilities.cc
+--- a/third_party/blink/renderer/core/clipboard/clipboard_utilities.cc
++++ b/third_party/blink/renderer/core/clipboard/clipboard_utilities.cc
 @@ -30,6 +30,7 @@
  
  #include "third_party/blink/renderer/core/clipboard/clipboard_utilities.h"
@@ -495,20 +368,20 @@
  #include "mojo/public/cpp/base/big_buffer.h"
  #include "net/base/escape.h"
  #include "third_party/blink/renderer/platform/image-encoders/image_encoder.h"
-@@ -75,8 +76,9 @@
+@@ -76,8 +77,9 @@
          {reinterpret_cast<const char*>(str.Characters8()), str.length()});
      return String(result.data(), result.size());
    }
+-  auto result = net::EscapeForHTML({str.Characters16(), str.length()});
+-  return String(result.data(), result.size());
 +  auto result = net::EscapeForHTML(
 +      {base::i18n::ToChar16Ptr(str.Characters16()), str.length()});
 +  return String(base::i18n::ToUCharPtr(result.data()), result.size());
--  auto result = net::EscapeForHTML({str.Characters16(), str.length()});
--  return String(result.data(), result.size());
  }
  
  String URLToImageMarkup(const KURL& url, const String& title) {
---- b/third_party/blink/renderer/core/editing/editor_key_bindings.cc
-+++ a/third_party/blink/renderer/core/editing/editor_key_bindings.cc
+--- a/third_party/blink/renderer/core/editing/editor_key_bindings.cc
++++ b/third_party/blink/renderer/core/editing/editor_key_bindings.cc
 @@ -26,6 +26,7 @@
  
  #include "third_party/blink/renderer/core/editing/editor.h"
@@ -517,23 +390,23 @@
  #include "third_party/blink/public/common/input/web_input_event.h"
  #include "third_party/blink/renderer/core/editing/commands/editor_command.h"
  #include "third_party/blink/renderer/core/editing/editing_behavior.h"
-@@ -89,11 +90,12 @@
+@@ -93,11 +94,12 @@
      return false;
  
    // Return true to prevent default action. e.g. Space key scroll.
+-  if (DispatchBeforeInputInsertText(evt->target()->ToNode(), key_event->text) !=
 +  if (DispatchBeforeInputInsertText(evt->target()->ToNode(),
 +                                    base::i18n::ToUCharPtr(key_event->text)) !=
--  if (DispatchBeforeInputInsertText(evt->target()->ToNode(), key_event->text) !=
        DispatchEventResult::kNotCanceled)
      return true;
  
-+  return InsertText(base::i18n::ToUCharPtr(key_event->text), evt);
 -  return InsertText(key_event->text, evt);
++  return InsertText(base::i18n::ToUCharPtr(key_event->text), evt);
  }
  
  void Editor::HandleKeyboardEvent(KeyboardEvent* evt) {
---- b/third_party/blink/renderer/core/input/keyboard_event_manager.cc
-+++ a/third_party/blink/renderer/core/input/keyboard_event_manager.cc
+--- a/third_party/blink/renderer/core/input/keyboard_event_manager.cc
++++ b/third_party/blink/renderer/core/input/keyboard_event_manager.cc
 @@ -6,6 +6,7 @@
  
  #include <memory>
@@ -542,17 +415,17 @@
  #include "build/build_config.h"
  #include "third_party/blink/public/common/input/web_input_event.h"
  #include "third_party/blink/public/mojom/input/focus_type.mojom-blink.h"
-@@ -163,7 +164,7 @@
+@@ -164,7 +165,7 @@
    if ((evt.GetModifiers() & (WebKeyboardEvent::kKeyModifiers &
                               ~WebInputEvent::kShiftKey)) != kAccessKeyModifiers)
      return false;
-+  String key = String(base::i18n::ToUCharPtr(evt.unmodified_text));
 -  String key = String(evt.unmodified_text);
++  String key = String(base::i18n::ToUCharPtr(evt.unmodified_text));
    Element* elem =
        frame_->GetDocument()->GetElementByAccessKey(key.DeprecatedLower());
    if (!elem)
---- b/third_party/blink/renderer/modules/gamepad/DEPS
-+++ a/third_party/blink/renderer/modules/gamepad/DEPS
+--- a/third_party/blink/renderer/modules/gamepad/DEPS
++++ b/third_party/blink/renderer/modules/gamepad/DEPS
 @@ -14,6 +14,7 @@
      "+third_party/blink/renderer/modules/event_modules.h",
      "+third_party/blink/renderer/modules/gamepad",
@@ -561,8 +434,8 @@
      "+base/macros.h",
  
      # For shared metrics.
---- b/third_party/blink/renderer/modules/gamepad/gamepad.cc
-+++ a/third_party/blink/renderer/modules/gamepad/gamepad.cc
+--- a/third_party/blink/renderer/modules/gamepad/gamepad.cc
++++ b/third_party/blink/renderer/modules/gamepad/gamepad.cc
 @@ -25,6 +25,7 @@
  
  #include "third_party/blink/renderer/modules/gamepad/gamepad.h"
@@ -571,7 +444,7 @@
  #include "base/trace_event/trace_event.h"
  #include "third_party/blink/renderer/core/timing/performance.h"
  #include "third_party/blink/renderer/modules/gamepad/gamepad_comparisons.h"
-@@ -60,7 +60,7 @@ void Gamepad::UpdateFromDeviceState(const device::Gamepad& device_gamepad,
+@@ -60,7 +61,7 @@
    GamepadComparisons::HasGamepadConnectionChanged(
        connected(),                            // Old connected.
        device_gamepad.connected,               // New connected.
@@ -580,17 +453,17 @@
        &newly_connected, nullptr);
  
    SetConnected(device_gamepad.connected);
-@@ -74,7 +76,7 @@
+@@ -75,7 +76,7 @@
    // These fields are not expected to change and will only be written when the
    // gamepad is newly connected.
    if (newly_connected) {
-+    SetId(base::i18n::ToUCharPtr(device_gamepad.id));
 -    SetId(device_gamepad.id);
++    SetId(base::i18n::ToUCharPtr(device_gamepad.id));
      SetMapping(device_gamepad.mapping);
    }
  }
---- b/third_party/blink/renderer/modules/url_pattern/DEPS
-+++ a/third_party/blink/renderer/modules/url_pattern/DEPS
+--- a/third_party/blink/renderer/modules/url_pattern/DEPS
++++ b/third_party/blink/renderer/modules/url_pattern/DEPS
 @@ -3,6 +3,7 @@
  # found in the LICENSE file.
  
@@ -610,7 +483,7 @@
  #include "third_party/blink/renderer/modules/url_pattern/url_pattern_canon.h"
  
  #include "third_party/blink/renderer/modules/url_pattern/url_pattern_component.h"
-@@ -223,7 +225,7 @@ String CanonicalizeProtocol(const String& input,
+@@ -223,7 +225,7 @@
      result = url::CanonicalizeScheme(
          utf8.data(), url::Component(0, utf8.size()), &canon_output, &component);
    } else {
@@ -619,7 +492,7 @@
                                       url::Component(0, stripped.length()),
                                       &canon_output, &component);
    }
-@@ -269,9 +271,11 @@ void CanonicalizeUsernameAndPassword(const String& username,
+@@ -269,9 +271,11 @@
      username16.Ensure16Bit();
      password16.Ensure16Bit();
      result = url::CanonicalizeUserInfo(
@@ -634,7 +507,7 @@
    }
  
    if (!result) {
-@@ -424,7 +428,7 @@ String CanonicalizeSearch(const String& input,
+@@ -424,7 +428,7 @@
      url::CanonicalizeQuery(utf8.data(), url::Component(0, utf8.size()),
                             /*converter=*/nullptr, &canon_output, &component);
    } else {
@@ -643,7 +516,7 @@
                             url::Component(0, stripped.length()),
                             /*converter=*/nullptr, &canon_output, &component);
    }
-@@ -452,7 +456,7 @@ String CanonicalizeHash(const String& input,
+@@ -452,7 +456,7 @@
      url::CanonicalizeRef(utf8.data(), url::Component(0, utf8.size()),
                           &canon_output, &component);
    } else {
@@ -652,9 +525,9 @@
                           url::Component(0, stripped.length()), &canon_output,
                           &component);
    }
---- b/third_party/blink/renderer/platform/DEPS
-+++ a/third_party/blink/renderer/platform/DEPS
-@@ -13,6 +13,7 @@
+--- a/third_party/blink/renderer/platform/DEPS
++++ b/third_party/blink/renderer/platform/DEPS
+@@ -15,6 +15,7 @@
      "+base/files",
      "+base/containers/flat_map.h",
      "+base/guid.h",
@@ -662,8 +535,8 @@
      "+base/json",
      "+base/location.h",
      "+base/logging.h",
---- b/third_party/blink/renderer/platform/exported/file_path_conversion.cc
-+++ a/third_party/blink/renderer/platform/exported/file_path_conversion.cc
+--- a/third_party/blink/renderer/platform/exported/file_path_conversion.cc
++++ b/third_party/blink/renderer/platform/exported/file_path_conversion.cc
 @@ -5,6 +5,7 @@
  #include "third_party/blink/public/platform/file_path_conversion.h"
  
@@ -676,15 +549,15 @@
      return base::FilePath();
  
    if (!str.Is8Bit()) {
-+    return base::FilePath::FromUTF16Unsafe(base::StringPiece16(
-+        base::i18n::ToChar16Ptr(str.Characters16()), str.length()));
 -    return base::FilePath::FromUTF16Unsafe(
 -        base::StringPiece16(str.Characters16(), str.length()));
++    return base::FilePath::FromUTF16Unsafe(base::StringPiece16(
++        base::i18n::ToChar16Ptr(str.Characters16()), str.length()));
    }
  
  #if defined(OS_POSIX)
---- b/third_party/blink/renderer/platform/exported/url_conversion.cc
-+++ a/third_party/blink/renderer/platform/exported/url_conversion.cc
+--- a/third_party/blink/renderer/platform/exported/url_conversion.cc
++++ b/third_party/blink/renderer/platform/exported/url_conversion.cc
 @@ -4,6 +4,7 @@
  
  #include "third_party/blink/public/platform/url_conversion.h"
@@ -697,14 +570,14 @@
    }
  
    // GURL can consume UTF-16 directly.
+-  return GURL(base::StringPiece16(str.Characters16(), str.length()));
 +  return GURL(base::StringPiece16(base::i18n::ToChar16Ptr(str.Characters16()),
 +                                  str.length()));
--  return GURL(base::StringPiece16(str.Characters16(), str.length()));
  }
  
  }  // namespace blink
---- b/third_party/blink/renderer/platform/exported/web_string.cc
-+++ a/third_party/blink/renderer/platform/exported/web_string.cc
+--- a/third_party/blink/renderer/platform/exported/web_string.cc
++++ b/third_party/blink/renderer/platform/exported/web_string.cc
 @@ -30,6 +30,7 @@
  
  #include "third_party/blink/public/platform/web_string.h"
@@ -717,9 +590,9 @@
  WebString& WebString::operator=(WebString&&) = default;
  
  WebString::WebString(const WebUChar* data, size_t len)
+-    : impl_(StringImpl::Create8BitIfPossible(data, len)) {}
 +    : impl_(StringImpl::Create8BitIfPossible(base::i18n::ToUCharPtr(data),
 +                                             len)) {}
--    : impl_(StringImpl::Create8BitIfPossible(data, len)) {}
  
  void WebString::Reset() {
    impl_ = nullptr;
@@ -727,14 +600,14 @@
  }
  
  const WebUChar* WebString::Data16() const {
+-  return impl_ && !Is8Bit() ? impl_->Characters16() : nullptr;
 +  return impl_ && !Is8Bit() ? base::i18n::ToChar16Ptr(impl_->Characters16())
 +                            : nullptr;
--  return impl_ && !Is8Bit() ? impl_->Characters16() : nullptr;
  }
  
  std::string WebString::Utf8(UTF8ConversionMode mode) const {
---- b/third_party/blink/renderer/platform/link_hash.cc
-+++ a/third_party/blink/renderer/platform/link_hash.cc
+--- a/third_party/blink/renderer/platform/link_hash.cc
++++ b/third_party/blink/renderer/platform/link_hash.cc
 @@ -30,6 +30,7 @@
  
  #include "third_party/blink/renderer/platform/link_hash.h"
@@ -747,14 +620,14 @@
                                  relative_utf8.size(), nullptr, buffer, &parsed);
    }
    return url::ResolveRelative(base_utf8.data(), base_utf8.size(),
+-                              base.GetParsed(), relative.Characters16(),
 +                              base.GetParsed(),
 +                              base::i18n::ToChar16Ptr(relative.Characters16()),
--                              base.GetParsed(), relative.Characters16(),
                                relative.length(), nullptr, buffer, &parsed);
  }
  
---- b/third_party/blink/renderer/platform/weborigin/kurl.cc
-+++ a/third_party/blink/renderer/platform/weborigin/kurl.cc
+--- a/third_party/blink/renderer/platform/weborigin/kurl.cc
++++ b/third_party/blink/renderer/platform/weborigin/kurl.cc
 @@ -29,6 +29,7 @@
  
  #include <algorithm>
@@ -767,11 +640,11 @@
    void ConvertFromUTF16(const char16_t* input,
                          int input_length,
                          url::CanonOutput* output) override {
+-    std::string encoded = encoding_->Encode(
+-        String(input, input_length), WTF::kURLEncodedEntitiesForUnencodables);
 +    std::string encoded =
 +        encoding_->Encode(String(base::i18n::ToUCharPtr(input), input_length),
 +                          WTF::kURLEncodedEntitiesForUnencodables);
--    std::string encoded = encoding_->Encode(
--        String(input, input_length), WTF::kURLEncodedEntitiesForUnencodables);
      output->Append(encoded.c_str(), static_cast<int>(encoded.length()));
    }
  
@@ -779,9 +652,9 @@
    if (string_.Is8Bit()) {
      url::ExtractFileName(AsURLChar8Subtle(string_), path, &file);
    } else {
+-    url::ExtractFileName(string_.Characters16(), path, &file);
 +    url::ExtractFileName(base::i18n::ToChar16Ptr(string_.Characters16()), path,
 +                         &file);
--    url::ExtractFileName(string_.Characters16(), path, &file);
    }
  
    // Bug: https://bugs.webkit.org/show_bug.cgi?id=21015 this function returns
@@ -789,49 +662,49 @@
    if (!is_valid_ || parsed_.port.len <= 0)
      return 0;
    DCHECK(!string_.IsNull());
+-  int port = string_.Is8Bit()
+-                 ? url::ParsePort(AsURLChar8Subtle(string_), parsed_.port)
+-                 : url::ParsePort(string_.Characters16(), parsed_.port);
 +  int port =
 +      string_.Is8Bit()
 +          ? url::ParsePort(AsURLChar8Subtle(string_), parsed_.port)
 +          : url::ParsePort(base::i18n::ToChar16Ptr(string_.Characters16()),
 +                           parsed_.port);
--  int port = string_.Is8Bit()
--                 ? url::ParsePort(AsURLChar8Subtle(string_), parsed_.port)
--                 : url::ParsePort(string_.Characters16(), parsed_.port);
    DCHECK_NE(port, url::PORT_UNSPECIFIED);  // Checked port.len <= 0 already.
    DCHECK_NE(port, url::PORT_INVALID);      // Checked is_valid_ already.
  
-@@ -724,7 +729,8 @@
+@@ -789,7 +794,8 @@
      return false;
    return string_.Is8Bit()
               ? url::IsStandard(AsURLChar8Subtle(string_), parsed_.scheme)
+-             : url::IsStandard(string_.Characters16(), parsed_.scheme);
 +             : url::IsStandard(base::i18n::ToChar16Ptr(string_.Characters16()),
 +                               parsed_.scheme);
--             : url::IsStandard(string_.Characters16(), parsed_.scheme);
  }
  
  bool EqualIgnoringFragmentIdentifier(const KURL& a, const KURL& b) {
-@@ -777,7 +783,8 @@
+@@ -842,7 +848,8 @@
    if (string_.Is8Bit()) {
      url::ExtractFileName(AsURLChar8Subtle(string_), parsed_.path, &filename);
    } else {
+-    url::ExtractFileName(string_.Characters16(), parsed_.path, &filename);
 +    url::ExtractFileName(base::i18n::ToChar16Ptr(string_.Characters16()),
 +                         parsed_.path, &filename);
--    url::ExtractFileName(string_.Characters16(), parsed_.path, &filename);
    }
    return filename.begin;
  }
-@@ -792,8 +799,8 @@
+@@ -857,8 +864,8 @@
      return url::FindAndCompareScheme(AsURLChar8Subtle(url), url.length(),
                                       protocol, nullptr);
    }
-+  return url::FindAndCompareScheme(base::i18n::ToChar16Ptr(url.Characters16()),
-+                                   url.length(), protocol, nullptr);
 -  return url::FindAndCompareScheme(url.Characters16(), url.length(), protocol,
 -                                   nullptr);
++  return url::FindAndCompareScheme(base::i18n::ToChar16Ptr(url.Characters16()),
++                                   url.length(), protocol, nullptr);
  }
  
  void KURL::Init(const KURL& base,
-@@ -825,7 +825,7 @@ void KURL::Init(const KURL& base,
+@@ -890,7 +897,7 @@
                                       charset_converter, &output, &parsed_);
    } else {
      is_valid_ = url::ResolveRelative(base_utf8.data(), base_utf8.size(),
@@ -840,8 +713,8 @@
                                       clampTo<int>(relative.length()),
                                       charset_converter, &output, &parsed_);
    }
---- b/third_party/blink/renderer/platform/weborigin/security_origin.cc
-+++ a/third_party/blink/renderer/platform/weborigin/security_origin.cc
+--- a/third_party/blink/renderer/platform/weborigin/security_origin.cc
++++ b/third_party/blink/renderer/platform/weborigin/security_origin.cc
 @@ -34,6 +34,7 @@
  #include <string>
  #include <utility>
@@ -850,22 +723,22 @@
  #include "base/containers/contains.h"
  #include "net/base/url_util.h"
  #include "services/network/public/cpp/is_potentially_trustworthy.h"
-@@ -737,9 +738,9 @@
+@@ -697,9 +698,9 @@
      *success = url::CanonicalizeHost(
          utf8.data(), url::Component(0, utf8.size()), &canon_output, &out_host);
    } else {
-+    *success = url::CanonicalizeHost(
-+        base::i18n::ToChar16Ptr(host.Characters16()),
-+        url::Component(0, host.length()), &canon_output, &out_host);
 -    *success = url::CanonicalizeHost(host.Characters16(),
 -                                     url::Component(0, host.length()),
 -                                     &canon_output, &out_host);
++    *success = url::CanonicalizeHost(
++        base::i18n::ToChar16Ptr(host.Characters16()),
++        url::Component(0, host.length()), &canon_output, &out_host);
    }
    return String::FromUTF8(canon_output.data(), canon_output.length());
  }
 --- a/third_party/blink/renderer/platform/wtf/date_math.cc
 +++ b/third_party/blink/renderer/platform/wtf/date_math.cc
-@@ -672,8 +672,9 @@ absl::optional<base::Time> ParseDateFromNullTerminatedCharacters(
+@@ -672,8 +672,9 @@
      // Handle the conversion of localtime to UTC the same way as the
      // latest ECMA 262 spec for Javascript (v8 does that, too).
      static_cast<const icu::BasicTimeZone*>(timezone.get())
@@ -877,9 +750,9 @@
      DCHECK(U_SUCCESS(status));
      offset = static_cast<int>((raw_offset + dst_offset) / kMsPerMinute);
    }
---- b/third_party/blink/renderer/platform/wtf/text/atomic_string.h
-+++ a/third_party/blink/renderer/platform/wtf/text/atomic_string.h
-@@ -76,6 +76,10 @@ class WTF_EXPORT AtomicString {
+--- a/third_party/blink/renderer/platform/wtf/text/atomic_string.h
++++ b/third_party/blink/renderer/platform/wtf/text/atomic_string.h
+@@ -76,6 +76,10 @@
    AtomicString(const LChar* chars, unsigned length);
    AtomicString(const UChar* chars, unsigned length);
    AtomicString(const UChar* chars);
@@ -890,9 +763,9 @@
  
    // Constructing an AtomicString from a String / StringImpl can be expensive if
    // the StringImpl is not already atomic.
---- b/third_party/blink/renderer/platform/wtf/text/string_view.h
-+++ a/third_party/blink/renderer/platform/wtf/text/string_view.h
-@@ -128,6 +128,12 @@
+--- a/third_party/blink/renderer/platform/wtf/text/string_view.h
++++ b/third_party/blink/renderer/platform/wtf/text/string_view.h
+@@ -130,6 +130,12 @@
    StringView(const UChar* chars, unsigned length)
        : impl_(StringImpl::empty16_bit_), bytes_(chars), length_(length) {}
    StringView(const UChar* chars);
@@ -905,8 +778,8 @@
  
  #if DCHECK_IS_ON()
    ~StringView();
---- b/third_party/blink/renderer/platform/wtf/text/wtf_string.h
-+++ a/third_party/blink/renderer/platform/wtf/text/wtf_string.h
+--- a/third_party/blink/renderer/platform/wtf/text/wtf_string.h
++++ b/third_party/blink/renderer/platform/wtf/text/wtf_string.h
 @@ -83,6 +83,12 @@
  
    // Construct a string with UTF-16 data, from a null-terminated source.
@@ -920,9 +793,9 @@
  
    // Construct a string with latin1 data.
    String(const LChar* characters, unsigned length);
---- b/ui/base/ime/utf_offset_unittest.cc
-+++ a/ui/base/ime/utf_offset_unittest.cc
-@@ -128,9 +128,12 @@
+--- a/ui/base/ime/utf_offset_unittest.cc
++++ b/ui/base/ime/utf_offset_unittest.cc
+@@ -129,9 +129,12 @@
    };
  
    for (const auto& test_case : kTestCases) {
@@ -930,16 +803,16 @@
 +    // to char16_t.
 +    base::string16 text(reinterpret_cast<const char16_t*>(test_case.str));
      EXPECT_EQ(test_case.expect,
-+              Utf8OffsetFromUtf16Offset(text, test_case.offset))
-+        << " at " << text << "[" << test_case.offset << "]";
 -              Utf8OffsetFromUtf16Offset(test_case.str, test_case.offset))
 -        << " at " << test_case.str << "[" << test_case.offset << "]";
++              Utf8OffsetFromUtf16Offset(text, test_case.offset))
++        << " at " << text << "[" << test_case.offset << "]";
    }
  }
  
---- b/ui/base/l10n/l10n_util.cc
-+++ a/ui/base/l10n/l10n_util.cc
-@@ -19,6 +19,7 @@
+--- a/ui/base/l10n/l10n_util.cc
++++ b/ui/base/l10n/l10n_util.cc
+@@ -20,6 +20,7 @@
  #include "base/i18n/number_formatting.h"
  #include "base/i18n/rtl.h"
  #include "base/i18n/string_compare.h"
@@ -947,7 +820,7 @@
  #include "base/lazy_instance.h"
  #include "base/logging.h"
  #include "base/no_destructor.h"
-@@ -633,11 +634,11 @@ std::u16string GetDisplayNameForLocale(const std::string& locale,
+@@ -643,11 +644,11 @@
      if (locale_code[0] == '-' || locale_code[0] == '_') {
        actual_size = uloc_getDisplayCountry(
            locale_code.c_str(), display_locale.c_str(),
@@ -961,8 +834,8 @@
      }
      if (disallow_default && U_USING_DEFAULT_WARNING == error)
        return std::u16string();
---- b/ui/base/l10n/time_format.cc
-+++ a/ui/base/l10n/time_format.cc
+--- a/ui/base/l10n/time_format.cc
++++ b/ui/base/l10n/time_format.cc
 @@ -8,6 +8,7 @@
  
  #include "base/check_op.h"
@@ -971,7 +844,7 @@
  #include "base/lazy_instance.h"
  #include "base/notreached.h"
  #include "base/numerics/safe_conversions.h"
-@@ -144,7 +144,7 @@ std::u16string TimeFormat::DetailedWithMonthAndYear(
+@@ -144,7 +145,7 @@
    DCHECK_GT(capacity, 1);
    std::u16string result;
    UErrorCode error = U_ZERO_ERROR;
@@ -980,8 +853,8 @@
    DCHECK(U_SUCCESS(error));
    return result;
  }
---- b/ui/gfx/bidi_line_iterator.cc
-+++ a/ui/gfx/bidi_line_iterator.cc
+--- a/ui/gfx/bidi_line_iterator.cc
++++ b/ui/gfx/bidi_line_iterator.cc
 @@ -5,6 +5,7 @@
  #include "ui/gfx/bidi_line_iterator.h"
  
@@ -994,14 +867,14 @@
    if (U_FAILURE(error))
      return false;
  
+-  ubidi_setPara(bidi_, text.data(), static_cast<int>(text.length()),
 +  ubidi_setPara(bidi_, base::i18n::ToUCharPtr(text.data()),
 +                static_cast<int>(text.length()),
--  ubidi_setPara(bidi_, text.data(), static_cast<int>(text.length()),
                  GetParagraphLevelForDirection(direction), nullptr, &error);
    return (U_SUCCESS(error));
  }
---- b/ui/gfx/font_fallback_unittest.cc
-+++ a/ui/gfx/font_fallback_unittest.cc
+--- a/ui/gfx/font_fallback_unittest.cc
++++ b/ui/gfx/font_fallback_unittest.cc
 @@ -6,6 +6,7 @@
  
  #include <tuple>
@@ -1014,15 +887,15 @@
      // Make a sample text to test the script.
      char16_t text[8];
      UErrorCode errorCode = U_ZERO_ERROR;
-+    int text_length = uscript_getSampleString(
-+        script, base::i18n::ToUCharPtr(text), base::size(text), &errorCode);
 -    int text_length =
 -        uscript_getSampleString(script, text, base::size(text), &errorCode);
++    int text_length = uscript_getSampleString(
++        script, base::i18n::ToUCharPtr(text), base::size(text), &errorCode);
      if (text_length <= 0 || errorCode != U_ZERO_ERROR)
        continue;
  
---- b/url/url_canon_icu.cc
-+++ a/url/url_canon_icu.cc
+--- a/url/url_canon_icu.cc
++++ b/url/url_canon_icu.cc
 @@ -9,6 +9,7 @@
  #include <string.h>
  
@@ -1035,16 +908,16 @@
    do {
      UErrorCode err = U_ZERO_ERROR;
      char* dest = &output->data()[begin_offset];
+-    int required_capacity = ucnv_fromUChars(converter_, dest, dest_capacity,
+-                                            input, input_len, &err);
 +    int required_capacity =
 +        ucnv_fromUChars(converter_, dest, dest_capacity,
 +                        base::i18n::ToUCharPtr(input), input_len, &err);
--    int required_capacity = ucnv_fromUChars(converter_, dest, dest_capacity,
--                                            input, input_len, &err);
      if (err != U_BUFFER_OVERFLOW_ERROR) {
        output->set_length(begin_offset + required_capacity);
        return;
---- b/url/url_idna_icu.cc
-+++ a/url/url_idna_icu.cc
+--- a/url/url_idna_icu.cc
++++ b/url/url_idna_icu.cc
 @@ -11,6 +11,7 @@
  #include <ostream>
  
@@ -1053,7 +926,7 @@
  #include "third_party/icu/source/common/unicode/uidna.h"
  #include "third_party/icu/source/common/unicode/utypes.h"
  #include "url/url_canon_icu.h"
-@@ -80,8 +81,10 @@ bool IDNToASCII(const char16_t* src, int src_len, CanonOutputW* output) {
+@@ -80,8 +81,10 @@
    while (true) {
      UErrorCode err = U_ZERO_ERROR;
      UIDNAInfo info = UIDNA_INFO_INITIALIZER;
@@ -1066,3 +939,32 @@
  
      // Ignore various errors for web compatibility. The options are specified
      // by the WHATWG URL Standard. See
+--- a/v8/src/objects/intl-objects.cc
++++ b/v8/src/objects/intl-objects.cc
+@@ -2050,12 +2050,10 @@
+   if (is_utc) {
+     GetTimeZone()->getOffset(time_ms, false, *raw_offset, *dst_offset, status);
+   } else {
+-    // Note that casting TimeZone to BasicTimeZone is safe because we know that
+-    // icu::TimeZone used here is a BasicTimeZone.
+     static_cast<const icu::BasicTimeZone*>(GetTimeZone())
+-        ->getOffsetFromLocal(time_ms, UCAL_TZ_LOCAL_FORMER,
+-                             UCAL_TZ_LOCAL_FORMER, *raw_offset, *dst_offset,
+-                             status);
++        ->getOffsetFromLocal(time_ms, icu::BasicTimeZone::kFormer,
++                             icu::BasicTimeZone::kFormer, *raw_offset,
++                             *dst_offset, status);
+   }
+ 
+   return U_SUCCESS(status);
+--- a/v8/src/objects/intl-objects.h
++++ b/v8/src/objects/intl-objects.h
+@@ -21,7 +21,7 @@
+ #include "unicode/locid.h"
+ #include "unicode/uversion.h"
+ 
+-#define V8_MINIMUM_ICU_VERSION 69
++#define V8_MINIMUM_ICU_VERSION 67
+ 
+ namespace U_ICU_NAMESPACE {
+ class BreakIterator;

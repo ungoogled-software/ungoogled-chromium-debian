@@ -1,7 +1,7 @@
 diff -ur a/content/shell/BUILD.gn b/content/shell/BUILD.gn
 --- a/content/shell/BUILD.gn
 +++ b/content/shell/BUILD.gn
-@@ -405,7 +405,6 @@
+@@ -420,7 +420,6 @@
      "$root_gen_dir/content/content_resources.pak",
      "$root_gen_dir/content/dev_ui_content_resources.pak",
      "$root_gen_dir/content/shell/shell_resources.pak",
@@ -9,7 +9,7 @@ diff -ur a/content/shell/BUILD.gn b/content/shell/BUILD.gn
      "$root_gen_dir/mojo/public/js/mojo_bindings_resources.pak",
      "$root_gen_dir/net/net_resources.pak",
      "$root_gen_dir/third_party/blink/public/resources/blink_resources.pak",
-@@ -426,7 +425,6 @@
+@@ -441,7 +440,6 @@
      "//content/app/resources",
      "//content/browser/resources/media:resources",
      "//content/browser/webrtc/resources",
@@ -20,7 +20,7 @@ diff -ur a/content/shell/BUILD.gn b/content/shell/BUILD.gn
 diff -ur a/content/test/BUILD.gn b/content/test/BUILD.gn
 --- a/content/test/BUILD.gn
 +++ b/content/test/BUILD.gn
-@@ -812,28 +812,6 @@
+@@ -885,28 +885,6 @@
    ]
  }
  
@@ -49,7 +49,7 @@ diff -ur a/content/test/BUILD.gn b/content/test/BUILD.gn
  mojom("mojo_web_test_bindings") {
    testonly = true
    sources = [
-@@ -855,16 +833,6 @@
+@@ -928,16 +906,6 @@
    }
  }
  
@@ -66,7 +66,7 @@ diff -ur a/content/test/BUILD.gn b/content/test/BUILD.gn
  if (is_android) {
    static_library("android_test_message_pump_support") {
      testonly = true
-@@ -1256,7 +1224,6 @@
+@@ -1353,7 +1321,6 @@
  
    public_deps = [
      ":test_interfaces",
@@ -74,7 +74,7 @@ diff -ur a/content/test/BUILD.gn b/content/test/BUILD.gn
      "//content:content_resources",
      "//content:dev_ui_content_resources",
    ]
-@@ -1265,8 +1232,6 @@
+@@ -1362,8 +1329,6 @@
      ":browsertest_support",
      ":content_test_mojo_bindings",
      ":test_support",
@@ -83,7 +83,7 @@ diff -ur a/content/test/BUILD.gn b/content/test/BUILD.gn
      "//base/test:test_support",
      "//build:chromecast_buildflags",
      "//build:chromeos_buildflags",
-@@ -1700,18 +1665,6 @@
+@@ -1818,18 +1783,6 @@
    }
  }
  

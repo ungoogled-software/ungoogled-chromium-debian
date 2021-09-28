@@ -14,7 +14,7 @@ author: Michael Gilbert <mgilbert@debian.org>
          libyuv::CopyPlane(mb_src, stride_src, mb_dst, stride_dst, 16, 16);
 --- a/gpu/command_buffer/service/gles2_cmd_decoder.cc
 +++ b/gpu/command_buffer/service/gles2_cmd_decoder.cc
-@@ -16406,7 +16406,8 @@ bool GLES2DecoderImpl::GetUniformSetup(G
+@@ -16439,7 +16439,8 @@ bool GLES2DecoderImpl::GetUniformSetup(G
    }
    uint32_t checked_size = 0;
    if (!SizedResult<T>::ComputeSize(num_elements).AssignIfValid(&checked_size)) {
@@ -26,7 +26,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    if (!result) {
 --- a/content/browser/renderer_host/render_widget_host_view_base.cc
 +++ b/content/browser/renderer_host/render_widget_host_view_base.cc
-@@ -295,15 +295,16 @@ void RenderWidgetHostViewBase::SetBackgr
+@@ -325,15 +325,16 @@ void RenderWidgetHostViewBase::SetBackgr
    if (default_background_color_ == color)
      return;
  
@@ -62,7 +62,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    }
 --- a/extensions/browser/api/socket/tcp_socket.cc
 +++ b/extensions/browser/api/socket/tcp_socket.cc
-@@ -213,7 +213,7 @@ void TCPSocket::SetKeepAlive(bool enable
+@@ -210,7 +210,7 @@ void TCPSocket::SetKeepAlive(bool enable
                               int delay,
                               SetKeepAliveCallback callback) {
    if (!client_socket_) {
@@ -71,7 +71,7 @@ author: Michael Gilbert <mgilbert@debian.org>
      return;
    }
    client_socket_->SetKeepAlive(enable, delay, std::move(callback));
-@@ -221,7 +221,7 @@ void TCPSocket::SetKeepAlive(bool enable
+@@ -218,7 +218,7 @@ void TCPSocket::SetKeepAlive(bool enable
  
  void TCPSocket::SetNoDelay(bool no_delay, SetNoDelayCallback callback) {
    if (!client_socket_) {
@@ -82,7 +82,7 @@ author: Michael Gilbert <mgilbert@debian.org>
    client_socket_->SetNoDelay(no_delay, std::move(callback));
 --- a/chrome/renderer/searchbox/searchbox.cc
 +++ b/chrome/renderer/searchbox/searchbox.cc
-@@ -290,11 +290,11 @@ void SearchBox::Paste(const base::string
+@@ -268,11 +268,11 @@ void SearchBox::Paste(const base::string
  }
  
  void SearchBox::StartCapturingKeyStrokes() {

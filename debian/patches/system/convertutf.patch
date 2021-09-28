@@ -185,7 +185,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 --- a/third_party/breakpad/BUILD.gn
 +++ b/third_party/breakpad/BUILD.gn
-@@ -604,8 +604,6 @@ if (is_linux || is_chromeos || is_android) {
+@@ -621,8 +621,6 @@ if (is_linux || is_chromeos || is_android) {
        "breakpad/src/client/minidump_file_writer-inl.h",
        "breakpad/src/client/minidump_file_writer.cc",
        "breakpad/src/client/minidump_file_writer.h",

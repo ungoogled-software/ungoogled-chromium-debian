@@ -1,6 +1,6 @@
 --- a/media/BUILD.gn
 +++ b/media/BUILD.gn
-@@ -160,7 +160,6 @@ test("media_unittests") {
+@@ -163,7 +163,6 @@ test("media_unittests") {
      "//media/device_monitors:unit_tests",
      "//media/filters:unit_tests",
      "//media/formats:unit_tests",
@@ -10,7 +10,7 @@
      "//media/muxers:unit_tests",
 --- a/media/gpu/BUILD.gn
 +++ b/media/gpu/BUILD.gn
-@@ -470,66 +470,6 @@ static_library("test_support") {
+@@ -474,66 +474,6 @@ static_library("test_support") {
    ]
  }
  
@@ -77,13 +77,3 @@
  # TODO(crbug.com/1006266): consider using |use_chromeos_video_acceleration|.
  if (use_v4l2_codec || use_vaapi) {
    test("video_decode_accelerator_tests") {
---- a/third_party/devtools-frontend/src/BUILD.gn
-+++ b/third_party/devtools-frontend/src/BUILD.gn
-@@ -230,7 +230,6 @@ devtools_frontend_resources_deps = [
- devtools_frontend_resources_deps = [
-   ":build_release_devtools",
-   "front_end",
--#  "test",
- ]
- 
- group("devtools_all_files") {
