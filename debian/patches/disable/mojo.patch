@@ -94,7 +94,7 @@ author: Michael Gilbert <mgilbert@debian.org>
  #if defined(OS_ANDROID)
  #include "base/android/apk_assets.h"
  #include "base/posix/global_descriptors.h"
-@@ -170,17 +164,6 @@ bool ShellMainDelegate::BasicStartupComplete(int* exit_code) {
+@@ -171,17 +171,6 @@ bool ShellMainDelegate::BasicStartupComplete(int* exit_code) {
  
    InitLogging(command_line);
  
@@ -109,9 +109,9 @@ author: Michael Gilbert <mgilbert@debian.org>
 -  }
 -#endif
 -
-   return false;
- }
+   RegisterShellPathProvider();
  
+   return false;
 @@ -230,16 +213,6 @@ int ShellMainDelegate::RunProcess(
        kTraceEventBrowserProcessSortIndex);
  

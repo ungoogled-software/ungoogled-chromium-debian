@@ -1,110 +1,220 @@
---- a/third_party/devtools-frontend/src/front_end/component_docs/computed_style_property/BUILD.gn
-+++ b/third_party/devtools-frontend/src/front_end/component_docs/computed_style_property/BUILD.gn
+--- a/third_party/devtools-frontend/src/front_end/ui/components/docs/color_swatch/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/ui/components/docs/color_swatch/BUILD.gn
+@@ -13,7 +13,6 @@ ts_library("ts") {
+   ]
+ 
+   deps = [
+-    "../../../../../test/unittests/front_end/helpers",
+     "../../../../ui/legacy/components/inline_editor:bundle",
+   ]
+ }
+--- a/third_party/devtools-frontend/src/front_end/ui/components/docs/computed_style_property/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/ui/components/docs/computed_style_property/BUILD.gn
 @@ -14,7 +14,6 @@ ts_library("ts") {
    ]
  
    deps = [
--    "../../../test/unittests/front_end/helpers",
-     "../../elements:bundle",
+-    "../../../../../test/unittests/front_end/helpers",
+     "../../../../panels/elements/components:bundle",
    ]
  }
---- a/third_party/devtools-frontend/src/front_end/component_docs/data_grid/BUILD.gn
-+++ b/third_party/devtools-frontend/src/front_end/component_docs/data_grid/BUILD.gn
+--- a/third_party/devtools-frontend/src/front_end/ui/components/docs/data_grid/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/ui/components/docs/data_grid/BUILD.gn
 @@ -18,7 +18,6 @@ ts_library("ts") {
    ]
  
    deps = [
--    "../../../test/unittests/front_end/helpers",
-     "../../component_helpers:bundle",
-     "../../ui/components:bundle",
+-    "../../../../../test/unittests/front_end/helpers",
+     "../../../../ui/components/data_grid:bundle",
+     "../../../../ui/components/helpers:bundle",
    ]
---- a/third_party/devtools-frontend/src/front_end/component_docs/data_grid_controller/BUILD.gn
-+++ b/third_party/devtools-frontend/src/front_end/component_docs/data_grid_controller/BUILD.gn
+--- a/third_party/devtools-frontend/src/front_end/ui/components/docs/data_grid_controller/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/ui/components/docs/data_grid_controller/BUILD.gn
 @@ -14,7 +14,6 @@ ts_library("ts") {
    ]
  
    deps = [
--    "../../../test/unittests/front_end/helpers",
-     "../../component_helpers:bundle",
-     "../../text_utils:bundle",
-     "../../ui/components:bundle",
---- a/third_party/devtools-frontend/src/front_end/component_docs/flexbox_editor/BUILD.gn
-+++ b/third_party/devtools-frontend/src/front_end/component_docs/flexbox_editor/BUILD.gn
+-    "../../../../../test/unittests/front_end/helpers",
+     "../../../../models/text_utils:bundle",
+     "../../../../ui/components/data_grid:bundle",
+     "../../../../ui/components/helpers:bundle",
+--- a/third_party/devtools-frontend/src/front_end/ui/components/docs/expandable_list/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/ui/components/docs/expandable_list/BUILD.gn
 @@ -10,7 +10,6 @@ ts_library("ts") {
    sources = [ "basic.ts" ]
  
    deps = [
--    "../../../test/unittests/front_end/helpers",
-     "../../component_helpers:bundle",
-     "../../elements:bundle",
+-    "../../../../../test/unittests/front_end/helpers",
+     "../../expandable_list:bundle",
    ]
---- a/third_party/devtools-frontend/src/front_end/component_docs/icon_button/BUILD.gn
-+++ b/third_party/devtools-frontend/src/front_end/component_docs/icon_button/BUILD.gn
+ }
+--- a/third_party/devtools-frontend/src/front_end/ui/components/docs/icon_button/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/ui/components/docs/icon_button/BUILD.gn
 @@ -10,7 +10,6 @@ ts_library("ts") {
    sources = [ "basic.ts" ]
  
    deps = [
--    "../../../test/unittests/front_end/helpers",
-     "../../component_helpers:bundle",
-     "../../ui/components:bundle",
+-    "../../../../../test/unittests/front_end/helpers",
+     "../../../../ui/components/helpers:bundle",
+     "../../../../ui/components/icon_button:bundle",
    ]
---- a/third_party/devtools-frontend/src/front_end/component_docs/markdown_image/BUILD.gn
-+++ b/third_party/devtools-frontend/src/front_end/component_docs/markdown_image/BUILD.gn
-@@ -6,7 +6,6 @@ ts_library("ts") {
-   sources = [ "basic.ts" ]
- 
-   deps = [
--    "../../../test/unittests/front_end/helpers",
-     "../../component_helpers:bundle",
-     "../../issues:bundle",
-   ]
---- a/third_party/devtools-frontend/src/front_end/component_docs/markdown_link/BUILD.gn
-+++ b/third_party/devtools-frontend/src/front_end/component_docs/markdown_link/BUILD.gn
-@@ -6,7 +6,6 @@ ts_library("ts") {
-   sources = [ "basic.ts" ]
- 
-   deps = [
--    "../../../test/unittests/front_end/helpers",
-     "../../component_helpers:bundle",
-     "../../issues:bundle",
-   ]
---- a/third_party/devtools-frontend/src/front_end/component_docs/markdown_view/BUILD.gn
-+++ b/third_party/devtools-frontend/src/front_end/component_docs/markdown_view/BUILD.gn
-@@ -6,7 +6,6 @@ ts_library("ts") {
-   sources = [ "basic.ts" ]
- 
-   deps = [
--    "../../../test/unittests/front_end/helpers",
-     "../../component_helpers:bundle",
-     "../../issues:bundle",
-     "../../third_party/marked:bundle",
---- a/third_party/devtools-frontend/src/front_end/component_docs/survey_link/BUILD.gn
-+++ b/third_party/devtools-frontend/src/front_end/component_docs/survey_link/BUILD.gn
+--- a/third_party/devtools-frontend/src/front_end/ui/components/docs/issue_counter/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/ui/components/docs/issue_counter/BUILD.gn
 @@ -10,7 +10,6 @@ ts_library("ts") {
    sources = [ "basic.ts" ]
  
    deps = [
--    "../../../test/unittests/front_end/helpers",
-     "../../common:bundle",
-     "../../component_helpers:bundle",
-     "../../ui/components:bundle",
---- a/third_party/devtools-frontend/src/front_end/component_docs/tree_outline/BUILD.gn
-+++ b/third_party/devtools-frontend/src/front_end/component_docs/tree_outline/BUILD.gn
+-    "../../../../../test/unittests/front_end/helpers",
+     "../../../../models/issues_manager:bundle",
+     "../../../../ui/components/helpers:bundle",
+     "../../../../ui/components/issue_counter:bundle",
+--- a/third_party/devtools-frontend/src/front_end/ui/components/docs/issue_link_icon/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/ui/components/docs/issue_link_icon/BUILD.gn
+@@ -10,7 +10,6 @@ ts_library("ts") {
+   sources = [ "basic.ts" ]
+ 
+   deps = [
+-    "../../../../../test/unittests/front_end/helpers",
+     "../../../../ui/components/helpers:bundle",
+     "../../../../ui/components/issue_counter:bundle",
+   ]
+--- a/third_party/devtools-frontend/src/front_end/ui/components/docs/layout_pane/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/ui/components/docs/layout_pane/BUILD.gn
+@@ -10,7 +10,6 @@ ts_library("ts") {
+   sources = [ "basic.ts" ]
+ 
+   deps = [
+-    "../../../../../test/unittests/front_end/helpers",
+     "../../../../panels/elements/components:bundle",
+   ]
+ }
+--- a/third_party/devtools-frontend/src/front_end/ui/components/docs/legacy_color_invert/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/ui/components/docs/legacy_color_invert/BUILD.gn
+@@ -10,7 +10,6 @@ ts_library("ts") {
+   sources = [ "basic.ts" ]
+ 
+   deps = [
+-    "../../../../../test/unittests/front_end/helpers",
+     "../../../../core/common:bundle",
+     "../../../../core/platform:bundle",
+     "../../helpers:bundle",
+--- a/third_party/devtools-frontend/src/front_end/ui/components/docs/linear_memory_inspector/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/ui/components/docs/linear_memory_inspector/BUILD.gn
+@@ -10,7 +10,6 @@ ts_library("ts") {
+   sources = [ "basic.ts" ]
+ 
+   deps = [
+-    "../../../../../test/unittests/front_end/helpers",
+     "../../../../ui/components/helpers:bundle",
+     "../../../../ui/components/linear_memory_inspector:bundle",
+   ]
+--- a/third_party/devtools-frontend/src/front_end/ui/components/docs/markdown_image/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/ui/components/docs/markdown_image/BUILD.gn
+@@ -10,7 +10,6 @@ ts_library("ts") {
+   sources = [ "basic.ts" ]
+ 
+   deps = [
+-    "../../../../../test/unittests/front_end/helpers",
+     "../../../../ui/components/helpers:bundle",
+     "../../../../ui/components/markdown_view:bundle",
+   ]
+--- a/third_party/devtools-frontend/src/front_end/ui/components/docs/markdown_link/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/ui/components/docs/markdown_link/BUILD.gn
+@@ -10,7 +10,6 @@ ts_library("ts") {
+   sources = [ "basic.ts" ]
+ 
+   deps = [
+-    "../../../../../test/unittests/front_end/helpers",
+     "../../../../ui/components/helpers:bundle",
+     "../../../../ui/components/markdown_view:bundle",
+   ]
+--- a/third_party/devtools-frontend/src/front_end/ui/components/docs/markdown_view/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/ui/components/docs/markdown_view/BUILD.gn
+@@ -10,7 +10,6 @@ ts_library("ts") {
+   sources = [ "basic.ts" ]
+ 
+   deps = [
+-    "../../../../../test/unittests/front_end/helpers",
+     "../../../../third_party/marked:bundle",
+     "../../../../ui/components/helpers:bundle",
+     "../../../../ui/components/markdown_view:bundle",
+--- a/third_party/devtools-frontend/src/front_end/ui/components/docs/perf_piechart/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/ui/components/docs/perf_piechart/BUILD.gn
+@@ -12,7 +12,6 @@ ts_library("ts") {
+     "basic-without-legend.ts",
+   ]
+   deps = [
+-    "../../../../../test/unittests/front_end/helpers",
+     "../../../../ui/legacy/components/perf_ui:bundle",
+   ]
+ }
+--- a/third_party/devtools-frontend/src/front_end/ui/components/docs/request_link_icon/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/ui/components/docs/request_link_icon/BUILD.gn
+@@ -10,7 +10,6 @@ ts_library("ts") {
+   sources = [ "basic.ts" ]
+ 
+   deps = [
+-    "../../../../../test/unittests/front_end/helpers",
+     "../../../../ui/components/helpers:bundle",
+     "../../../../ui/components/request_link_icon:bundle",
+   ]
+--- a/third_party/devtools-frontend/src/front_end/ui/components/docs/style_property_editor/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/ui/components/docs/style_property_editor/BUILD.gn
+@@ -13,7 +13,6 @@ ts_library("ts") {
+   ]
+ 
+   deps = [
+-    "../../../../../test/unittests/front_end/helpers",
+     "../../../../panels/elements/components:bundle",
+     "../../../../ui/components/helpers:bundle",
+   ]
+--- a/third_party/devtools-frontend/src/front_end/ui/components/docs/survey_link/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/ui/components/docs/survey_link/BUILD.gn
+@@ -10,7 +10,6 @@ ts_library("ts") {
+   sources = [ "basic.ts" ]
+ 
+   deps = [
+-    "../../../../../test/unittests/front_end/helpers",
+     "../../../../core/common:bundle",
+     "../../../../ui/components/helpers:bundle",
+     "../../../../ui/components/survey_link:bundle",
+--- a/third_party/devtools-frontend/src/front_end/ui/components/docs/tree_outline/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/ui/components/docs/tree_outline/BUILD.gn
 @@ -15,7 +15,6 @@ ts_library("ts") {
    ]
  
    deps = [
--    "../../../test/unittests/front_end/helpers",
-     "../../component_helpers:bundle",
-     "../../third_party/lit-html:bundle",
-     "../../ui/components:bundle",
---- a/third_party/devtools-frontend/src/front_end/component_docs/webvitals/BUILD.gn
-+++ b/third_party/devtools-frontend/src/front_end/component_docs/webvitals/BUILD.gn
+-    "../../../../../test/unittests/front_end/helpers",
+     "../../../../ui/components/helpers:bundle",
+     "../../../../ui/components/tree_outline:bundle",
+     "../../../../ui/lit-html:bundle",
+--- a/third_party/devtools-frontend/src/front_end/ui/components/docs/trust_tokens_view/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/ui/components/docs/trust_tokens_view/BUILD.gn
+@@ -10,7 +10,6 @@ ts_library("ts") {
+   sources = [ "basic.ts" ]
+ 
+   deps = [
+-    "../../../../../test/unittests/front_end/helpers",
+     "../../../../generated:protocol",
+     "../../../../panels/application/components:bundle",
+     "../../../../ui/components/helpers:bundle",
+--- a/third_party/devtools-frontend/src/front_end/ui/components/docs/user_agent_client_hints/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/ui/components/docs/user_agent_client_hints/BUILD.gn
+@@ -10,7 +10,6 @@ ts_library("ts") {
+   sources = [ "basic.ts" ]
+ 
+   deps = [
+-    "../../../../../test/unittests/front_end/helpers",
+     "../../../../panels/emulation/components:bundle",
+     "../../../../ui/components/helpers:bundle",
+   ]
+--- a/third_party/devtools-frontend/src/front_end/ui/components/docs/webvitals/BUILD.gn
++++ b/third_party/devtools-frontend/src/front_end/ui/components/docs/webvitals/BUILD.gn
 @@ -10,7 +10,6 @@ ts_library("ts") {
    sources = [ "webvitals.ts" ]
  
    deps = [
--    "../../../test/unittests/front_end/helpers",
-     "../../component_helpers:bundle",
-     "../../timeline:bundle",
-     "../../ui:bundle",
+-    "../../../../../test/unittests/front_end/helpers",
+     "../../../../panels/timeline/components:bundle",
+     "../../../../ui/components/helpers:bundle",
+   ]

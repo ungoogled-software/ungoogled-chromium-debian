@@ -16,7 +16,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 +++ b/third_party/pdfium/core/fpdfapi/render/BUILD.gn
 @@ -46,6 +46,7 @@ source_set("render") {
    ]
-   configs += [ "../../../:pdfium_core_config" ]
+   configs += [ "../../../:pdfium_strict_config" ]
    deps = [
 +    "../../../third_party:libopenjpeg2",
      "../../../constants",

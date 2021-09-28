@@ -11,6 +11,76 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  #include <algorithm>
  #include <cstring>
+--- a/chrome/browser/devtools/devtools_embedder_message_dispatcher.h
++++ b/chrome/browser/devtools/devtools_embedder_message_dispatcher.h
+@@ -8,6 +8,7 @@
+ #include <map>
+ #include <memory>
+ #include <string>
++#include <vector>
+ 
+ #include "base/callback.h"
+ #include "ui/gfx/geometry/insets.h"
+--- a/extensions/browser/extension_dialog_auto_confirm.cc
++++ b/extensions/browser/extension_dialog_auto_confirm.cc
+@@ -4,6 +4,7 @@
+ 
+ #include "extensions/browser/extension_dialog_auto_confirm.h"
+ 
++#include <cstring>
+ #include <utility>
+ 
+ #include "base/check.h"
+--- a/net/base/test_data_stream.cc
++++ b/net/base/test_data_stream.cc
+@@ -5,6 +5,7 @@
+ #include "net/base/test_data_stream.h"
+ 
+ #include <algorithm>
++#include <string.h>
+ 
+ namespace net {
+ 
+--- a/ui/base/class_property.h
++++ b/ui/base/class_property.h
+@@ -8,6 +8,7 @@
+ #include <stdint.h>
+ 
+ #include <map>
++#include <memory>
+ #include <set>
+ #include <type_traits>
+ 
+--- a/ui/base/clipboard/test/clipboard_test_util.h
++++ b/ui/base/clipboard/test/clipboard_test_util.h
+@@ -6,6 +6,7 @@
+ #define UI_BASE_CLIPBOARD_TEST_CLIPBOARD_TEST_UTIL_H_
+ 
+ #include <vector>
++#include <stdint.h>
+ 
+ class SkBitmap;
+ 
+--- a/device/bluetooth/bluetooth_low_energy_scan_filter.h
++++ b/device/bluetooth/bluetooth_low_energy_scan_filter.h
+@@ -8,6 +8,7 @@
+ #include <stddef.h>
+ #include <stdint.h>
+ #include <vector>
++#include <memory>
+ 
+ #include "base/time/time.h"
+ #include "device/bluetooth/bluetooth_export.h"
+--- a/components/password_manager/core/browser/hash_password_manager.h
++++ b/components/password_manager/core/browser/hash_password_manager.h
+@@ -6,6 +6,7 @@
+ #define COMPONENTS_PASSWORD_MANAGER_CORE_BROWSER_HASH_PASSWORD_MANAGER_H_
+ 
+ #include <string>
++#include <vector>
+ 
+ #include "base/callback.h"
+ #include "base/callback_list.h"
 --- a/third_party/crashpad/crashpad/util/net/http_multipart_builder.cc
 +++ b/third_party/crashpad/crashpad/util/net/http_multipart_builder.cc
 @@ -17,6 +17,7 @@
@@ -20,17 +90,6 @@ author: Michael Gilbert <mgilbert@debian.org>
 +#include <cstring>
  #include <utility>
  #include <vector>
- 
---- a/third_party/crashpad/crashpad/snapshot/minidump/minidump_context_converter.cc
-+++ b/third_party/crashpad/crashpad/snapshot/minidump/minidump_context_converter.cc
-@@ -20,6 +20,8 @@
- #include "base/stl_util.h"
- #include "minidump/minidump_context.h"
- 
-+#include <cstring>
-+
- namespace crashpad {
- namespace internal {
  
 --- a/third_party/crashpad/crashpad/util/process/process_memory.cc
 +++ b/third_party/crashpad/crashpad/util/process/process_memory.cc
@@ -72,47 +131,16 @@ author: Michael Gilbert <mgilbert@debian.org>
  
  class GURL;
  
---- a/components/autofill/core/browser/pattern_provider/pattern_provider.h
-+++ b/components/autofill/core/browser/pattern_provider/pattern_provider.h
+--- a/third_party/pdfium/core/fxcodec/jpx/cjpx_decoder.cpp
++++ b/third_party/pdfium/core/fxcodec/jpx/cjpx_decoder.cpp
 @@ -6,6 +6,7 @@
- #define COMPONENTS_AUTOFILL_CORE_BROWSER_PATTERN_PROVIDER_PATTERN_PROVIDER_H_
  
- #include <string>
-+#include <vector>
+ #include "core/fxcodec/jpx/cjpx_decoder.h"
  
- #include "base/gtest_prod_util.h"
- #include "base/macros.h"
---- a/components/autofill/core/browser/data_model/borrowed_transliterator.h
-+++ b/components/autofill/core/browser/data_model/borrowed_transliterator.h
-@@ -5,6 +5,8 @@
- #ifndef COMPONENTS_AUTOFILL_CORE_BROWSER_DATA_MODEL_BORROWED_TRANSLITERATOR_H_
- #define COMPONENTS_AUTOFILL_CORE_BROWSER_DATA_MODEL_BORROWED_TRANSLITERATOR_H_
- 
-+#include <memory>
-+
- #include "base/i18n/unicodestring.h"
- #include "base/no_destructor.h"
- #include "base/synchronization/lock.h"
---- a/components/translate/core/language_detection/ngram_hash_ops_utils.cc
-+++ b/components/translate/core/language_detection/ngram_hash_ops_utils.cc
-@@ -4,6 +4,7 @@
- 
- #include "components/translate/core/language_detection/ngram_hash_ops_utils.h"
- 
-+#include <cstring>
- #include <vector>
- 
- #include "third_party/utf/src/include/utf.h"
---- a/components/translate/core/language_detection/quantization_utils.h
-+++ b/components/translate/core/language_detection/quantization_utils.h
-@@ -7,6 +7,7 @@
- 
++#include <string.h>
  #include <algorithm>
- #include <cmath>
-+#include <cstdint>
- 
- namespace translate {
- 
+ #include <limits>
+ #include <utility>
 --- a/third_party/pdfium/core/fxcodec/png/png_decoder.cpp
 +++ b/third_party/pdfium/core/fxcodec/png/png_decoder.cpp
 @@ -10,6 +10,7 @@

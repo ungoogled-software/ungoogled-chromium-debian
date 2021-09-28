@@ -8,15 +8,12 @@ gn/explicit-python2.patch
 
 fixes/gnu-as.patch
 fixes/inspector.patch
-fixes/not-constexpr.patch
-fixes/time64-sandbox.patch
 fixes/sequence-point.patch
 fixes/missing-includes.patch
 fixes/widevine-enable-version-string.patch
 fixes/widevine-locations.patch
 fixes/nullptr-dereference.patch
 fixes/multiple-destruction.patch
-fixes/no-ozone.patch
 fixes/chromeos_devicetype.patch
 fixes/nomerge.patch
 
@@ -38,21 +35,18 @@ disable/web-ui-tests.patch
 disable/ozone-unittests.patch
 disable/devtools-unittests.patch
 disable/ios.patch
-disable/tflite-test.patch
 disable/libaom-arm.patch
 
 warnings/restrict.patch
 warnings/multichar.patch
 warnings/deprecated.patch
-warnings/sign-compare.patch
 warnings/gcc-diagnostic.patch
 warnings/null-destination.patch
 warnings/int-in-bool-context.patch
+warnings/unused-but.patch
 
 system/icu.patch
-system/vpx.patch
 system/jpeg.patch
-system/png.patch
 system/node.patch
 system/nspr.patch
 system/zlib.patch
@@ -65,6 +59,7 @@ system/convertutf.patch
 system/clang-format.patch
 system/use-desktop-gl-as-default.patch
 system/opus.patch
+system/eu-strip.patch
 
 inox-patchset/chromium-skia-harmony.patch
 inox-patchset/fix-cfi-failures-with-unbundled-libxml.patch
@@ -76,3 +71,6 @@ ungoogled-chromium/manpage.patch
 ungoogled-chromium/safebrowsing.patch
 ungoogled-chromium/explicit-python.patch
 ungoogled-chromium/icu67.patch
+
+bullseye/icu-types.patch
+bullseye/ffmpeg.patch

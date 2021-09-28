@@ -83,9 +83,9 @@ author: Michael Gilbert <mgilbert@debian.org>
  namespace mirroring {
 --- a/third_party/openscreen/src/cast/streaming/answer_messages.h
 +++ b/third_party/openscreen/src/cast/streaming/answer_messages.h
-@@ -16,7 +16,7 @@
- 
+@@ -17,7 +17,7 @@
  #include "absl/types/optional.h"
+ #include "cast/streaming/resolution.h"
  #include "cast/streaming/ssrc.h"
 -#include "json/value.h"
 +#include <json/value.h>

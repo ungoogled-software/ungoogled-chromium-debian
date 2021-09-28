@@ -29,6 +29,6 @@ author: Michael Gilbert <mgilbert@debian.org>
  
 -import("//chrome/android/channel.gni")
 -
- # Chrome can be built with any combination of v1/v2 enabled.
- # When both are enabled, we use the InterestFeedV2 feature to select which
- # one is used at runtime.
+ declare_args() {
+   # Whether Feed is enabled in the build.
+   enable_feed_v2 = is_android

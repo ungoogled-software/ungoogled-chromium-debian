@@ -94,6 +94,7 @@ defines+=use_gio=true \
          use_system_zlib=true \
          use_system_lcms2=true \
          use_system_libjpeg=true \
+         use_system_libpng=true \
          use_system_freetype=true \
          use_system_harfbuzz=true \
          use_system_libopenjpeg2=true \

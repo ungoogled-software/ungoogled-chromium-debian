@@ -1,0 +1,11 @@
+--- a/build/linux/strip_binary.gni
++++ b/build/linux/strip_binary.gni
+@@ -20,7 +20,7 @@ template("strip_binary") {
+                            "testonly",
+                          ])
+   action("${target_name}") {
+-    eu_strip_binary = "//buildtools/third_party/eu-strip/bin/eu-strip"
++    eu_strip_binary = "/usr/bin/eu-strip"
+     script = "//build/linux/strip_binary.py"
+     inputs = [
+       invoker.binary_input,
