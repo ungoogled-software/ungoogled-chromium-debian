@@ -13,7 +13,7 @@ Build-Depends:
  clang-format-12,
  lld-12,
  llvm-12-dev,
- python2,
+ python-is-python3,
  python3,
  python3-debian,
  python3-xcbgen,
