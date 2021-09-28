@@ -78,7 +78,7 @@ Files-Excluded:
  build/config/freetype/freetype.gni
  third_party/android*
  third_party/chromite
- third_party/lzma_sdk
+ third_party/lzma_sdk/7zr.exe
  third_party/test_fonts
  third_party/pyelftools
  third_party/fontconfig
