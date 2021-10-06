@@ -111,8 +111,6 @@ Files-Excluded:
  third_party/ffmpeg/chromium
  third_party/harfbuzz-ng/src
  third_party/harfbuzz-ng/harfbuzz.gni
- third_party/openh264/src
- third_party/openh264/BUILD.gn
  third_party/expat/src
  third_party/unrar
  third_party/perfetto/infra/perfetto.dev/dist

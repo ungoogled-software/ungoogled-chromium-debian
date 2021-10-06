@@ -20,7 +20,6 @@ disable/glmark.patch
 disable/owners.patch
 disable/android.patch
 disable/fuzzers.patch
-disable/openh264.patch
 disable/buildbot.patch
 disable/installer.patch
 disable/font-tests.patch
