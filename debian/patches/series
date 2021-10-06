@@ -61,7 +61,8 @@ inox-patchset/chromium-skia-harmony.patch
 inox-patchset/fix-cfi-failures-with-unbundled-libxml.patch
 
 fedora/enable-hardware-accelerated-mjpeg.patch
-fedora/fix-vaapi-on-intel.patch
+
+archlinux/unexpire-accelerated-video-decode-flag.patch
 
 ungoogled-chromium/manpage.patch
 ungoogled-chromium/safebrowsing.patch
