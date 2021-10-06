@@ -20,7 +20,6 @@ disable/glmark.patch
 disable/owners.patch
 disable/android.patch
 disable/fuzzers.patch
-disable/openh264.patch
 disable/buildbot.patch
 disable/installer.patch
 disable/font-tests.patch
@@ -62,7 +61,8 @@ inox-patchset/chromium-skia-harmony.patch
 inox-patchset/fix-cfi-failures-with-unbundled-libxml.patch
 
 fedora/enable-hardware-accelerated-mjpeg.patch
-fedora/fix-vaapi-on-intel.patch
+
+archlinux/unexpire-accelerated-video-decode-flag.patch
 
 ungoogled-chromium/manpage.patch
 ungoogled-chromium/safebrowsing.patch
