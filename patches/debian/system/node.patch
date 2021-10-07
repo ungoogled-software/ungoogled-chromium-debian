@@ -1,6 +1,17 @@
 description: call system nodejs
 author: Michael Gilbert <mgilbert@debian.org>
 
+--- a/tools/typescript/tsconfig_base.json
++++ b/tools/typescript/tsconfig_base.json
+@@ -3,7 +3,7 @@
+     "module": "ESNext",
+     "target": "ESNext",
+ 
+-    "noEmitOnError": true,
++    "noEmitOnError": false,
+     "pretty": true,
+ 
+     "incremental": true,
 --- a/third_party/devtools-frontend/src/scripts/devtools_paths.py
 +++ b/third_party/devtools-frontend/src/scripts/devtools_paths.py
 @@ -37,13 +37,7 @@ def third_party_path():
@@ -14,7 +25,27 @@ author: Michael Gilbert <mgilbert@debian.org>
 -    finally:
 -        sys.path = old_sys_path
 -    return node.GetBinaryPath()
-+    return '/usr/bin/node'
++    return '/usr/bin/nodejs'
  
  
  def devtools_root_path():
+--- a/third_party/lottie/minify_lottie.py
++++ b/third_party/lottie/minify_lottie.py
+@@ -12,16 +12,14 @@ _SRC_PATH = os.path.normpath(os.path.join(_HERE_PATH, '..', '..'))
+ 
+ sys.path.append(os.path.join(_SRC_PATH, 'third_party', 'node'))
+ import node
+-import node_modules
+ 
+ def main(argv):
+   parser = argparse.ArgumentParser()
+   parser.add_argument('--out_folder', required=True)
+   args = parser.parse_args(argv)
+ 
+-  node.RunNode([node_modules.PathToTerser(),
++  node.RunNode(['/usr/bin/uglifyjs.terser',
+           os.path.join(_HERE_PATH, 'lottie_worker.js'),
+-          '--ascii_only=true',
+           '-b', 'beautify=false',
+           '--compress',
+           '--mangle', 'reserved=[\'$\',\'onmessage\',\'postMessage\']',

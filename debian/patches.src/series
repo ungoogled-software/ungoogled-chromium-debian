@@ -1,9 +1,10 @@
+archlinux/linux-sandbox-syscall-broker-use-struct-kernel_stat.patch
+archlinux/linux-sandbox-fix-fstatat-crash.patch
 archlinux/wayland-egl.patch
 
-debianization/sandbox.patch
-debianization/optimization.patch
-debianization/master-preferences.patch
+debian/clang-format.patch
+debian/debianization/sandbox.patch
+debian/debianization/optimization.patch
+debian/debianization/master-preferences.patch
 
 warnings/deprecated.patch
-
-ungoogled-chromium/explicit-python.patch
