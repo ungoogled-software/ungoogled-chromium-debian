@@ -8,7 +8,7 @@ sys.path.append("build/linux/unbundle")
 
 import replace_gn_files
 
-keepers = ('libvpx','libpng')
+keepers = ('libvpx','libpng', 'openh264')
 
 for lib,rule in replace_gn_files.REPLACEMENTS.items():
     if lib not in keepers:
