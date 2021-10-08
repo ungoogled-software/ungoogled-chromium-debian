@@ -15,7 +15,7 @@
 -    'Linux': ('linux', 'node-linux-x64', 'bin', 'node'),
 -    'Windows': ('win', 'node.exe'),
 -  }[platform.system()])
-+  return '/usr/bin/node'
++  return '/usr/bin/nodejs'
  
  
  def RunNode(cmd_parts, stdout=None):
