@@ -15,8 +15,7 @@ _archive_output="$_root_dir/build/$_tarprefix.tar.xz"
 	--build-outputs "$_root_dir/build/src/out/Default" \
 	archive \
 	-o "$_archive_output" \
-	-i "$_root_dir/tar_includes/README" \
-	-i "$_root_dir/build/src/out/Default/libminigbm.so" # use_system_minigbm=false
+	-i "$_root_dir/tar_includes/README"
 
 # NOTE: Forcing use_system_minigbm=false in flags.portable.gn, which is the case on ChromeOS
 # Therefore, we are including files according to build/src/chrome/tools/build/chromeos/FILES.cfg
