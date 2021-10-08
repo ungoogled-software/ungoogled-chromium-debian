@@ -14,5 +14,4 @@ use_kerberos=false
 use_sysroot=false
 rtc_use_pipewire=true
 link_pulseaudio=true
-use_custom_libcxx=false
 use_vaapi=true
