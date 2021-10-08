@@ -1,5 +1,5 @@
-archlinux/linux-sandbox-syscall-broker-use-struct-kernel_stat.patch
-archlinux/linux-sandbox-fix-fstatat-crash.patch
+archlinux/unexpire-accelerated-video-decode-flag.patch
+archlinux/pipewire-do-not-typecheck-the-portal-session_handle.patch
 archlinux/wayland-egl.patch
 
 debian/clang-format.patch
