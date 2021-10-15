@@ -1,0 +1,11 @@
+--- a/third_party/perfetto/gn/BUILD.gn
++++ b/third_party/perfetto/gn/BUILD.gn
+@@ -376,7 +376,7 @@
+ if (enable_perfetto_zlib) {
+   group("zlib") {
+     if (perfetto_use_system_zlib) {
+-      public_configs = [ "//gn:system_zlib_config" ]
++      public_configs = [ ":system_zlib_config" ]
+     } else if (perfetto_root_path == "//") {
+       public_configs = [ "//buildtools:zlib_config" ]
+       public_deps = [ "//buildtools:zlib" ]

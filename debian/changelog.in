@@ -1,0 +1,5 @@
+ungoogled-chromium (@@VERSION@@) @@RELEASE@@; urgency=low
+
+  * New upstream release
+
+ -- @@AUTHOR@@  @@DATETIME@@

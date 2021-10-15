@@ -1,0 +1,146 @@
+#!/usr/bin/make -f
+
+RT_DIR   := $(CURDIR)
+DB_DIR   := $(RT_DIR)/debian
+SH_DIR   := $(DB_DIR)/shims
+CL_DIR   := $(DB_DIR)/submodules/chromium-launcher
+UC_DIR   := $(DB_DIR)/submodules/ungoogled-chromium
+UL_DIR   := $(UC_DIR)/utils
+UP_DIR   := $(UC_DIR)/patches
+DL_CACHE := $(DB_DIR)/download_cache
+DS_CACHE := $(DB_DIR)/domsubcache.tar.gz
+OUT_DIR  := out/Release
+GN       := $(OUT_DIR)/gn
+
+# Changelog and control template variables
+VERSION  := $(file < $(UC_DIR)/chromium_version.txt)-1
+RELEASE  := focal
+AUTHOR   := ungoogled-chromium Maintainers <github@null.invalid>
+DATETIME := $(shell date -R)
+
+# Assign the clang toolchain to use
+LLVM_VERSION ?= 11
+export AR    := llvm-ar-$(LLVM_VERSION)
+export NM    := llvm-nm-$(LLVM_VERSION)
+export CC    := clang-$(LLVM_VERSION)
+export CXX   := clang++-$(LLVM_VERSION)
+
+# Setup compiler and linkers flags
+export DEB_CXXFLAGS_MAINT_STRIP := -g -flto=auto -ffat-lto-objects
+export CXXFLAGS                 := $(shell dpkg-buildflags --get CXXFLAGS) \
+                                   -Wno-unknown-warning-option
+export CFLAGS                   := $(CXXFLAGS)
+
+# Use parallel jobs if requested
+JOBS := 1
+ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
+JOBS := $(patsubst parallel=%,%,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
+endif
+
+# Version of node to install
+NODE_VERSION := v14.15.4
+
+# Find the distribution codename for this release
+CODENAME := $(patsubst %:,,$(shell lsb_release -c))
+
+# Start with the upstream Ungoogled Chromium flags
+GN_FLAGS := $(shell tr "\n" " " < $(UC_DIR)/flags.gn | sed 's/"/\\"/g')
+
+# Add our downstream Debian flags
+GN_FLAGS += \
+        custom_toolchain=\"//build/toolchain/linux/unbundle:default\" \
+        host_toolchain=\"//build/toolchain/linux/unbundle:default\" \
+        use_custom_libcxx=false \
+        is_official_build=true \
+        is_debug=false \
+        symbol_level=1 \
+        blink_enable_generated_code_formatting=false \
+        is_cfi=false \
+        use_sysroot=false \
+        use_gnome_keyring=false \
+        ffmpeg_branding=\"Chrome\" \
+        proprietary_codecs=true \
+        link_pulseaudio=true \
+        use_vaapi=true
+
+# Currently omitted from base (focal): icu, harfbuzz-ng, ffmpeg, openh264, libvpx
+SYS_LIBS :=         \
+        flac        \
+        fontconfig  \
+        freetype    \
+        jsoncpp     \
+        libdrm      \
+        libevent    \
+        libjpeg     \
+        libpng      \
+        libwebp     \
+        libxml      \
+        libxslt     \
+        opus        \
+        re2         \
+        snappy      \
+        zlib
+
+# Add extra flags for system libs
+GN_FLAGS +=                           \
+        perfetto_use_system_zlib=true \
+        use_system_lcms2=true         \
+        use_system_libopenjpeg2=true  \
+        use_system_libpng=true        \
+        use_system_zlib=true
+
+%:
+	dh $@
+
+changelog:
+	sed -e "s;@@VERSION@@;$(VERSION);g" -e "s;@@RELEASE@@;$(RELEASE);g" -e "s;@@AUTHOR@@;$(AUTHOR);g" -e "s;@@DATETIME@@;$(DATETIME);g" < $(DB_DIR)/changelog.in > $(DB_DIR)/changelog
+
+control:
+	sed -e "s;@@AUTHOR@@;$(AUTHOR);g" < $(DB_DIR)/control.in > $(DB_DIR)/control
+
+download:
+	mkdir -p $(DL_CACHE)
+	$(UL_DIR)/downloads.py retrieve -i $(UC_DIR)/downloads.ini -c $(DL_CACHE)
+	test -f $(DL_CACHE)/node-$(NODE_VERSION)-linux-x64.tar.xz || curl "https://nodejs.org/dist/$(NODE_VERSION)/node-$(NODE_VERSION)-linux-x64.tar.xz" -o $(DL_CACHE)/node-$(NODE_VERSION)-linux-x64.tar.xz
+	test -f $(DL_CACHE)/node-$(NODE_VERSION)-linux-arm64.tar.xz || curl "https://nodejs.org/dist/$(NODE_VERSION)/node-$(NODE_VERSION)-linux-arm64.tar.xz" -o $(DL_CACHE)/node-$(NODE_VERSION)-linux-arm64.tar.xz
+	test -f $(DL_CACHE)/node-$(NODE_VERSION).sha256sum || curl "https://nodejs.org/dist/$(NODE_VERSION)/SHASUMS256.txt" -o $(DL_CACHE)/node-$(NODE_VERSION).sha256sum
+	cd $(DL_CACHE); sha256sum --ignore-missing -c node-$(NODE_VERSION).sha256sum
+
+setup: changelog control download
+	test ! -d $(RT_DIR)/.git || git clean -xfd -e debian/changelog -e debian/control -e debian/download_cache/
+	$(UL_DIR)/downloads.py unpack -i $(UC_DIR)/downloads.ini -c $(DL_CACHE) $(RT_DIR)
+	$(UL_DIR)/prune_binaries.py $(RT_DIR) $(UC_DIR)/pruning.list
+	for lib in $(subst libevent,,$(subst libjpeg,libjpeg_turbo,$(SYS_LIBS))); do find "third_party/$$lib" -type f ! -path "third_party/$$lib/chromium/*" ! -path "third_party/$$lib/google/*" ! -name "*.gn" ! -name "*.gni" ! -name "*.isolate" -delete; done
+	cd third_party/node/linux; tar -xf $(DL_CACHE)/node-$(NODE_VERSION)-linux-x64.tar.xz; mv node-$(NODE_VERSION)-linux-x64 node-linux-x64
+	cd third_party/node/linux; tar -xf $(DL_CACHE)/node-$(NODE_VERSION)-linux-arm64.tar.xz; mv node-$(NODE_VERSION)-linux-arm64 node-linux-arm64
+
+$(GN):
+	# Switch to distribution GN once generate-ninja has widespread availability
+	tools/gn/bootstrap/bootstrap.py -j $(JOBS) --skip-generate-buildfiles
+
+override_dh_auto_configure:
+	$(UL_DIR)/patches.py apply $(RT_DIR) $(UP_DIR)
+	$(UL_DIR)/domain_substitution.py apply -r $(UC_DIR)/domain_regex.list -f $(UC_DIR)/domain_substitution.list -c $(DS_CACHE) $(RT_DIR)
+	cp $(SH_DIR)/jsoncpp.gn build/linux/unbundle
+	build/linux/unbundle/replace_gn_files.py --system-libraries $(SYS_LIBS)
+
+override_dh_auto_build: $(GN)
+	$(GN) gen $(OUT_DIR) --args="$(GN_FLAGS)" --fail-on-unused-args
+	ninja -j $(JOBS) -C $(OUT_DIR) chrome chrome_sandbox chromedriver
+	make -C $(CL_DIR) CFLAGS="$(CFLAGS) -g -pie -fPIE" CHROMIUM_BINARY=/usr/lib/chromium/chrome chromium
+
+override_dh_prep:
+	for file in `find -name "*.gn.orig" -o -name "*.gni.orig"`; do mv $$file $${file%.orig}; done
+	rm -f build/linux/unbundle/jsoncpp.gn
+	$(UL_DIR)/domain_substitution.py revert -c $(DS_CACHE) $(RT_DIR)
+	for patch in `tac $(UP_DIR)/series`; do printf "Info: Reverting %s...\n" $$patch; patch -RNp1 -i $(UP_DIR)/$$patch; done
+	dh_prep
+
+override_dh_fixperms:
+	dh_fixperms --exclude chrome_sandbox
+
+override_dh_auto_clean:
+	rm -rf out
+	make -C $(CL_DIR) clean
+	find -name "*.pyc" -delete
+	dh_auto_clean

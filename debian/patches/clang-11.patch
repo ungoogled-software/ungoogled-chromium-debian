@@ -1,0 +1,60 @@
+--- a/base/compiler_specific.h
++++ b/base/compiler_specific.h
+@@ -364,12 +364,7 @@
+ 
+ #endif  // defined(__clang_analyzer__)
+ 
+-// Use nomerge attribute to disable optimization of merging multiple same calls.
+-#if defined(__clang__) && __has_attribute(nomerge)
+-#define NOMERGE [[clang::nomerge]]
+-#else
+ #define NOMERGE
+-#endif
+ 
+ // Marks a type as being eligible for the "trivial" ABI despite having a
+ // non-trivial destructor or copy/move constructor. Such types can be relocated
+--- a/build/config/compiler/BUILD.gn
++++ b/build/config/compiler/BUILD.gn
+@@ -1234,7 +1234,7 @@
+     } else {
+       # -ffile-compilation-dir is an alias for both -fdebug-compilation-dir=
+       # and -fcoverage-compilation-dir=.
+-      cflags += [ "-ffile-compilation-dir=." ]
++      cflags += [ "-fdebug-compilation-dir=." ]
+     }
+     if (!is_win) {
+       # We don't use clang -cc1as on Windows (yet? https://crbug.com/762167)
+@@ -2398,13 +2398,6 @@
+         "-Xclang",
+         "-debug-info-kind=limited",
+       ]
+-    } else {
+-      # Use constructor homing for debug info. This option reduces debug info
+-      # by emitting class type info only when constructors are emitted.
+-      cflags += [
+-        "-Xclang",
+-        "-fuse-ctor-homing",
+-      ]
+     }
+   }
+ }
+--- a/third_party/blink/renderer/platform/heap/v8_wrapper/custom_spaces.h
++++ b/third_party/blink/renderer/platform/heap/v8_wrapper/custom_spaces.h
+@@ -6,6 +6,7 @@
+ #define THIRD_PARTY_BLINK_RENDERER_PLATFORM_HEAP_V8_WRAPPER_CUSTOM_SPACES_H_
+ 
+ #include <vector>
++#include <memory>
+ 
+ #include "third_party/blink/renderer/platform/platform_export.h"
+ #include "v8/include/cppgc/custom-space.h"
+--- a/third_party/ruy/src/ruy/block_map.cc
++++ b/third_party/ruy/src/ruy/block_map.cc
+@@ -16,6 +16,7 @@
+ #include "ruy/block_map.h"
+ 
+ #include <algorithm>
++#include <limits>
+ #include <cstdint>
+ 
+ #ifdef RUY_MAKEBLOCKMAP_DEBUG

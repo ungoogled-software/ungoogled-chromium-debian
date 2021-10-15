@@ -1,0 +1,25 @@
+#!/usr/bin/dh-exec
+out/Release/chrome_sandbox                                                     usr/lib/chromium
+out/Release/chrome                                                             usr/lib/chromium
+out/Release/chromedriver                                                       usr/lib/chromium
+out/Release/libEGL.so                                                          usr/lib/chromium
+out/Release/libGLESv2.so                                                       usr/lib/chromium
+out/Release/chrome_*_percent.pak                                               usr/lib/chromium
+out/Release/chrome_crashpad_handler                                            usr/lib/chromium
+out/Release/v8_context_snapshot.bin                                            usr/lib/chromium
+out/Release/icudtl.dat                                                         usr/lib/chromium
+out/Release/resources.pak                                                      usr/lib/chromium
+out/Release/locales/*.pak                                                      usr/lib/chromium/locales
+out/Release/swiftshader/lib*.so                                                usr/lib/chromium/swiftshader
+debian/submodules/chromium-launcher/chromium                                   usr/bin
+debian/chromium-flags.conf                                                     etc
+chrome/installer/linux/common/desktop.template                              => usr/share/applications/chromium.desktop
+chrome/app/resources/manpage.1.in                                           => usr/share/man/man1/chromium.1
+chrome/installer/linux/common/chromium-browser/chromium-browser.appdata.xml => usr/share/metainfo/chromium.appdata.xml
+chrome/app/theme/default_100_percent/chromium/product_logo_16.png           => usr/share/icons/hicolor/16x16/apps/chromium.png
+chrome/app/theme/chromium/product_logo_24.png                               => usr/share/icons/hicolor/24x24/apps/chromium.png
+chrome/app/theme/default_100_percent/chromium/product_logo_32.png           => usr/share/icons/hicolor/32x32/apps/chromium.png
+chrome/app/theme/chromium/product_logo_48.png                               => usr/share/icons/hicolor/48x48/apps/chromium.png
+chrome/app/theme/chromium/product_logo_64.png                               => usr/share/icons/hicolor/64x64/apps/chromium.png
+chrome/app/theme/chromium/product_logo_128.png                              => usr/share/icons/hicolor/128x128/apps/chromium.png
+chrome/app/theme/chromium/product_logo_256.png                              => usr/share/icons/hicolor/256x256/apps/chromium.png

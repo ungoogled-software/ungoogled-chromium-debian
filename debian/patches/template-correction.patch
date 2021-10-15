@@ -1,0 +1,137 @@
+--- a/chrome/app/resources/manpage.1.in
++++ b/chrome/app/resources/manpage.1.in
+@@ -1,12 +1,12 @@
+ .\" This file is processed to generate manpages in the
+ .\" build diretory.
+-.TH @@PACKAGE@@ 1 "" "" "USER COMMANDS"
++.TH chromium 1 "" "" "USER COMMANDS"
+ 
+ .SH NAME
+-@@PACKAGE@@ \- the web browser from Google
++chromium \- the web browser from Google
+ 
+ .SH SYNOPSIS
+-.B @@PACKAGE@@
++.B chromium
+ [\fIOPTION\fR] [\fIPATH\fR|\fIURL\fR]
+ 
+ .SH DESCRIPTION
+@@ -17,16 +17,16 @@
+ This manpage only describes invocation, environment, and arguments.
+ 
+ .SH OPTIONS
+-@@MENUNAME@@ has hundreds of undocumented command-line flags that are added
++Chromium has hundreds of undocumented command-line flags that are added
+ and removed at the whim of the developers.  Here, we document relatively
+ stable flags.
+ .TP
+ \fB\-\-user\-data\-dir\fR=\fIDIR\fR
+ Specifies the directory that user data (your "profile") is kept in.
+ Defaults to
+-.I $HOME/.config/@@PACKAGE@@ .
+-Separate instances of @@MENUNAME@@ must use separate user data directories;
+-repeated invocations of @@PACKAGE@@ will reuse an existing process for
++.I $HOME/.config/chromium .
++Separate instances of Chromium must use separate user data directories;
++repeated invocations of chromium will reuse an existing process for
+ a given user data directory.
+ 
+ .TP
+@@ -108,7 +108,7 @@
+ Show version information.
+ 
+ .PP
+-As a GTK+ app, @@MENUNAME@@ also obeys GTK+ command-line flags, such
++As a GTK+ app, Chromium also obeys GTK+ command-line flags, such
+ as
+ .BR \-\-display .
+ See the GTK documentation for more:
+@@ -117,7 +117,7 @@
+ <http://library.gnome.org/devel/gtk/stable/gtk-x11.html>
+ 
+ .SH ENVIRONMENT
+-@@MENUNAME@@ obeys the following environment variables:
++Chromium obeys the following environment variables:
+ 
+ .TP
+ .B all_proxy
+@@ -150,11 +150,11 @@
+ 
+ .SH FILES
+ .TP
+-.I $HOME/.config/@@PACKAGE@@
++.I $HOME/.config/chromium
+ Default directory for configuration data.
+ 
+ .TP
+-.I $HOME/.cache/@@PACKAGE@@
++.I $HOME/.cache/chromium
+ Default directory for cache data.  (Why?  See
+ <http://standards.freedesktop.org/basedir-spec/latest/> .)
+ 
+--- a/chrome/installer/linux/common/chromium-browser/chromium-browser.appdata.xml
++++ b/chrome/installer/linux/common/chromium-browser/chromium-browser.appdata.xml
+@@ -1,8 +1,6 @@
+-<!-- Copyright 2017 The Chromium Authors -->
+ <?xml version="1.0" encoding="UTF-8"?>
+ <component type="desktop">
+-  <id>chromium-browser.desktop</id>
+-  <update_contact>chromium-dev@chromium.org</update_contact>
++  <id>chromium.desktop</id>
+   <metadata_license>CC0-1.0</metadata_license>
+   <project_license>BSD-3-Clause and LGPL-2.1+ and Apache-2.0 and IJG and MIT and GPL-2.0+ and ISC and OpenSSL and (MPL-1.1 or GPL-2.0 or LGPL-2.0)</project_license>
+   <name>Chromium Web Browser</name>
+@@ -12,15 +10,6 @@
+     Chromium is an open-source browser project that aims to build a safer, faster,
+     and more stable way to experience the web.
+     </p>
+-    <p>
+-    We invite you to join our effort to build a powerful platform for developing a
+-    new generation of web applications.
+-    </p>
+-    <p>
+-    Chromium supports Vorbis, Theora, WebM and HTML5 audio and video standards, but
+-    does not include the non-free AAC, H.264, MP3 or Adobe Flash code that is found
+-    in Chrome.
+-    </p>
+   </description>
+   <url type="homepage">https://www.chromium.org/Home</url>
+   <screenshots>
+--- a/chrome/installer/linux/common/desktop.template
++++ b/chrome/installer/linux/common/desktop.template
+@@ -1,6 +1,6 @@
+ [Desktop Entry]
+ Version=1.0
+-Name=@@MENUNAME@@
++Name=Chromium
+ # Only KDE 4 seems to use GenericName, so we reuse the KDE strings.
+ # From Ubuntu's language-pack-kde-XX-base packages, version 9.04-20090413.
+ GenericName=Web Browser
+@@ -105,10 +105,10 @@
+ Comment[zh_CN]=访问互联网
+ Comment[zh_HK]=連線到網際網路
+ Comment[zh_TW]=連線到網際網路
+-Exec=/usr/bin/@@USR_BIN_SYMLINK_NAME@@ %U
++Exec=/usr/bin/chromium %U
+ StartupNotify=true
+ Terminal=false
+-Icon=@@PACKAGE@@
++Icon=chromium
+ Type=Application
+ Categories=Network;WebBrowser;
+ MimeType=application/pdf;application/rdf+xml;application/rss+xml;application/xhtml+xml;application/xhtml_xml;application/xml;image/gif;image/jpeg;image/png;image/webp;text/html;text/xml;x-scheme-handler/http;x-scheme-handler/https;
+@@ -166,7 +166,7 @@
+ Name[vi]=Cửa sổ Mới
+ Name[zh_CN]=新建窗口
+ Name[zh_TW]=開新視窗
+-Exec=/usr/bin/@@USR_BIN_SYMLINK_NAME@@
++Exec=/usr/bin/chromium
+ 
+ [Desktop Action new-private-window]
+ Name=New Incognito Window
+@@ -218,4 +218,4 @@
+ Name[vi]=Cửa sổ ẩn danh mới
+ Name[zh_CN]=新建隐身窗口
+ Name[zh_TW]=新增無痕式視窗
+-Exec=/usr/bin/@@USR_BIN_SYMLINK_NAME@@ --incognito
++Exec=/usr/bin/chromium --incognito

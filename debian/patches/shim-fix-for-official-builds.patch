@@ -1,0 +1,12 @@
+--- a/tools/generate_shim_headers/generate_shim_headers.py
++++ b/tools/generate_shim_headers/generate_shim_headers.py
+@@ -18,9 +18,6 @@
+ 
+ 
+ SHIM_TEMPLATE = """
+-#if defined(OFFICIAL_BUILD)
+-#error shim headers must not be used in official builds!
+-#endif
+ """
+ 
+ 

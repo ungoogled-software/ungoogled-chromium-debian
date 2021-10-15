@@ -1,0 +1,6 @@
+[submodule "debian/submodules/ungoogled-chromium"]
+	path = debian/submodules/ungoogled-chromium
+	url = https://github.com/Eloston/ungoogled-chromium.git
+[submodule "debian/submodules/chromium-launcher"]
+	path = debian/submodules/chromium-launcher
+	url = https://github.com/foutrelis/chromium-launcher.git
