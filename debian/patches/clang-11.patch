@@ -58,3 +58,27 @@
  #include <cstdint>
  
  #ifdef RUY_MAKEBLOCKMAP_DEBUG
+--- a/third_party/breakpad/breakpad/src/client/linux/handler/exception_handler.cc
++++ b/third_party/breakpad/breakpad/src/client/linux/handler/exception_handler.cc
+@@ -138,7 +138,7 @@
+   // SIGSTKSZ may be too small to prevent the signal handlers from overrunning
+   // the alternative stack. Ensure that the size of the alternative stack is
+   // large enough.
+-  static const unsigned kSigStackSize = std::max(16384, SIGSTKSZ);
++  static const unsigned kSigStackSize = std::max(16384L, (long) SIGSTKSZ);
+ 
+   // Only set an alternative stack if there isn't already one, or if the current
+   // one is too small.
+--- a/sandbox/linux/services/credentials.cc
++++ b/sandbox/linux/services/credentials.cc
+@@ -98,7 +98,9 @@
+   // attempt this optimization.
+   clone_flags |= CLONE_VM | CLONE_VFORK | CLONE_SETTLS;
+ 
+-  char tls_buf[PTHREAD_STACK_MIN] = {0};
++  long tls_size = PTHREAD_STACK_MIN;
++  char tls_buf[tls_size];
++  __builtin_memset(tls_buf, 0, tls_size);
+   tls = tls_buf;
+ #endif
+ 
