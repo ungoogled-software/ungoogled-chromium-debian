@@ -111,8 +111,8 @@ setup: changelog control download
 	$(UL_DIR)/downloads.py unpack -i $(UC_DIR)/downloads.ini -c $(DL_CACHE) $(RT_DIR)
 	$(UL_DIR)/prune_binaries.py $(RT_DIR) $(UC_DIR)/pruning.list
 	for lib in $(subst libevent,,$(subst libjpeg,libjpeg_turbo,$(SYS_LIBS))); do find "third_party/$$lib" -type f ! -path "third_party/$$lib/chromium/*" ! -path "third_party/$$lib/google/*" ! -name "*.gn" ! -name "*.gni" ! -name "*.isolate" -delete; done
-	cd third_party/node/linux; tar -xf $(DL_CACHE)/node-$(NODE_VERSION)-linux-x64.tar.xz; mv node-$(NODE_VERSION)-linux-x64 node-linux-x64
-	cd third_party/node/linux; tar -xf $(DL_CACHE)/node-$(NODE_VERSION)-linux-arm64.tar.xz; mv node-$(NODE_VERSION)-linux-arm64 node-linux-arm64
+	tar -C third_party/node/linux -xf $(DL_CACHE)/node-$(NODE_VERSION)-linux-x64.tar.xz --transform=s/^node-$(NODE_VERSION)-linux-x64/node-linux-x64/
+	tar -C third_party/node/linux -xf $(DL_CACHE)/node-$(NODE_VERSION)-linux-arm64.tar.xz --transform=s/^node-$(NODE_VERSION)-linux-arm64/node-linux-arm64/
 
 $(GN):
 	# Switch to distribution GN once generate-ninja has widespread availability
