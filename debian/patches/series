@@ -2,7 +2,6 @@ clang-11.patch
 use-package-optimizations.patch
 shim-fix-for-official-builds.patch
 perfetto-system-zlib.patch
-pdfium-headers.patch
 pdfium-system-tiff.patch
 system-jsoncpp.patch
 template-correction.patch
