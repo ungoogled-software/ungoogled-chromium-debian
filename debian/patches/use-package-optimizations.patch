@@ -1,35 +1,35 @@
 --- a/build/config/compiler/BUILD.gn
 +++ b/build/config/compiler/BUILD.gn
-@@ -2123,7 +2123,7 @@ config("optimize") {
+@@ -2130,7 +2130,7 @@
      # - Investigate -Oz here, maybe just for ARM?
      cflags = [ "-Os" ] + common_optimize_on_cflags
    } else {
 -    cflags = [ "-O2" ] + common_optimize_on_cflags
 +    cflags = common_optimize_on_cflags
    }
-   ldflags = common_optimize_on_ldflags
- }
-@@ -2189,7 +2189,7 @@ config("optimize_max") {
+   if (optimize_for_size) {
+     rustflags = [ "-Copt-level=s" ]
+@@ -2201,7 +2201,7 @@
      } else if (optimize_for_fuzzing) {
        cflags = [ "-O1" ] + common_optimize_on_cflags
      } else {
 -      cflags = [ "-O2" ] + common_optimize_on_cflags
 +      cflags = common_optimize_on_cflags
      }
+     rustflags = [ "-Copt-level=3" ]
    }
- }
-@@ -2221,7 +2221,7 @@ config("optimize_speed") {
+@@ -2234,7 +2234,7 @@
      } else if (optimize_for_fuzzing) {
        cflags = [ "-O1" ] + common_optimize_on_cflags
      } else {
 -      cflags = [ "-O3" ] + common_optimize_on_cflags
 +      cflags = common_optimize_on_cflags
      }
+     rustflags = [ "-Copt-level=3" ]
    }
- }
 --- a/tools/gn/build/gen.py
 +++ b/tools/gn/build/gen.py
-@@ -326,10 +326,8 @@ def WriteGNNinja(path, platform, host, o
+@@ -344,10 +344,8 @@
        cflags.extend(['-O0', '-g'])
      else:
        cflags.append('-DNDEBUG')

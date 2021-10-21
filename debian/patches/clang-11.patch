@@ -15,7 +15,16 @@
  // non-trivial destructor or copy/move constructor. Such types can be relocated
 --- a/build/config/compiler/BUILD.gn
 +++ b/build/config/compiler/BUILD.gn
-@@ -1234,7 +1234,7 @@
+@@ -348,7 +348,7 @@
+     }
+ 
+     if (use_lld) {
+-      ldflags += [ "-fuse-ld=lld" ]
++      ldflags += [ "-fuse-ld=lld-11" ]
+       if (lld_path != "") {
+         ldflags += [ "-B$lld_path" ]
+       }
+@@ -1264,7 +1264,7 @@
      } else {
        # -ffile-compilation-dir is an alias for both -fdebug-compilation-dir=
        # and -fcoverage-compilation-dir=.
@@ -24,7 +33,7 @@
      }
      if (!is_win) {
        # We don't use clang -cc1as on Windows (yet? https://crbug.com/762167)
-@@ -2398,13 +2398,6 @@
+@@ -2459,13 +2459,6 @@
          "-Xclang",
          "-debug-info-kind=limited",
        ]
@@ -37,27 +46,30 @@
 -      ]
      }
    }
- }
+   rustflags = [ "-g" ]
+--- a/sandbox/linux/services/credentials.cc
++++ b/sandbox/linux/services/credentials.cc
+@@ -100,7 +100,9 @@
+   // TODO(crbug.com/1247458) Broken in MSan builds after LLVM f1bb30a4956f.
+   clone_flags |= CLONE_VM | CLONE_VFORK | CLONE_SETTLS;
+ 
+-  char tls_buf[PTHREAD_STACK_MIN] = {0};
++  long tls_size = PTHREAD_STACK_MIN;
++  char tls_buf[tls_size];
++  __builtin_memset(tls_buf, 0, tls_size);
+   tls = tls_buf;
+ #endif
+ 
 --- a/third_party/blink/renderer/platform/heap/v8_wrapper/custom_spaces.h
 +++ b/third_party/blink/renderer/platform/heap/v8_wrapper/custom_spaces.h
-@@ -6,6 +6,7 @@
- #define THIRD_PARTY_BLINK_RENDERER_PLATFORM_HEAP_V8_WRAPPER_CUSTOM_SPACES_H_
+@@ -7,6 +7,7 @@
  
+ #include <memory>
  #include <vector>
 +#include <memory>
  
  #include "third_party/blink/renderer/platform/platform_export.h"
  #include "v8/include/cppgc/custom-space.h"
---- a/third_party/ruy/src/ruy/block_map.cc
-+++ b/third_party/ruy/src/ruy/block_map.cc
-@@ -16,6 +16,7 @@
- #include "ruy/block_map.h"
- 
- #include <algorithm>
-+#include <limits>
- #include <cstdint>
- 
- #ifdef RUY_MAKEBLOCKMAP_DEBUG
 --- a/third_party/breakpad/breakpad/src/client/linux/handler/exception_handler.cc
 +++ b/third_party/breakpad/breakpad/src/client/linux/handler/exception_handler.cc
 @@ -138,7 +138,7 @@
@@ -69,16 +81,13 @@
  
    // Only set an alternative stack if there isn't already one, or if the current
    // one is too small.
---- a/sandbox/linux/services/credentials.cc
-+++ b/sandbox/linux/services/credentials.cc
-@@ -98,7 +98,9 @@
-   // attempt this optimization.
-   clone_flags |= CLONE_VM | CLONE_VFORK | CLONE_SETTLS;
+--- a/third_party/ruy/src/ruy/block_map.cc
++++ b/third_party/ruy/src/ruy/block_map.cc
+@@ -16,6 +16,7 @@
+ #include "ruy/block_map.h"
  
--  char tls_buf[PTHREAD_STACK_MIN] = {0};
-+  long tls_size = PTHREAD_STACK_MIN;
-+  char tls_buf[tls_size];
-+  __builtin_memset(tls_buf, 0, tls_size);
-   tls = tls_buf;
- #endif
+ #include <algorithm>
++#include <limits>
+ #include <cstdint>
+ #include <limits>
  
