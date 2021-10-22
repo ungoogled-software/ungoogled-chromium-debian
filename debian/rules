@@ -26,7 +26,8 @@ export CC    := clang-$(LLVM_VERSION)
 export CXX   := clang++-$(LLVM_VERSION)
 
 # Setup compiler and linkers flags
-export DEB_CXXFLAGS_MAINT_STRIP := -g -flto=auto -ffat-lto-objects
+export DEB_BUILD_MAINT_OPTIONS  := hardening=+all optimize=-lto
+export DEB_CXXFLAGS_MAINT_STRIP := -g
 export CXXFLAGS                 := $(shell dpkg-buildflags --get CXXFLAGS) \
                                    -Wno-unknown-warning-option
 export CFLAGS                   := $(CXXFLAGS)
