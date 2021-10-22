@@ -47,6 +47,16 @@
      }
    }
    rustflags = [ "-g" ]
+--- a/net/third_party/quiche/src/http2/adapter/window_manager.h
++++ b/net/third_party/quiche/src/http2/adapter/window_manager.h
+@@ -2,6 +2,7 @@
+ #define QUICHE_HTTP2_ADAPTER_WINDOW_MANAGER_H_
+ 
+ #include <functional>
++#include <cstddef>
+ 
+ #include "common/platform/api/quiche_export.h"
+ 
 --- a/sandbox/linux/services/credentials.cc
 +++ b/sandbox/linux/services/credentials.cc
 @@ -100,7 +100,9 @@
