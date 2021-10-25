@@ -1,4 +1,6 @@
 archlinux/unexpire-accelerated-video-decode-flag.patch
+archlinux/ozone-x11-fix-VA-API.patch
+archlinux/chromium-95-harfbuzz-3.patch
 archlinux/pipewire-do-not-typecheck-the-portal-session_handle.patch
 archlinux/wayland-egl.patch
 
