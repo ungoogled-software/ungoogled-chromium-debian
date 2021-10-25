@@ -18,18 +18,20 @@ export NM=llvm-nm-$(LLVM_VERSION)
 export CC=clang-$(LLVM_VERSION)
 export CXX=clang++-$(LLVM_VERSION)
 
-# hack to allow clang to find the default cfi_blacklist.txt
-RESOURCE_DIR:=$(shell $(CC) --print-resource-dir)
-export CXXFLAGS+=-resource-dir=$(RESOURCE_DIR)
-export CPPFLAGS+=-resource-dir=$(RESOURCE_DIR)
-export CFLAGS+=-resource-dir=$(RESOURCE_DIR)
-
-# more verbose linker output
-export LDFLAGS+=-Wl,--stats
-
 # initial flags from dpkg-buildflags
 export DEB_CXXFLAGS_MAINT_STRIP=-g
 export CXXFLAGS=$(shell dpkg-buildflags --get CXXFLAGS)
+
+# hack to allow clang to find the default cfi_ignorelist.txt and LLVM tools
+# -B<prefix> defined here: https://clang.llvm.org/docs/ClangCommandLineReference.html
+RESOURCE_DIR:=$(shell $(CC) --print-resource-dir)
+export CXXFLAGS+=-resource-dir=$(RESOURCE_DIR) -B/usr/lib/llvm-$(LLVM_VERSION)/bin
+export CPPFLAGS+=-resource-dir=$(RESOURCE_DIR) -B/usr/lib/llvm-$(LLVM_VERSION)/bin
+export CFLAGS+=-resource-dir=$(RESOURCE_DIR) -B/usr/lib/llvm-$(LLVM_VERSION)/bin
+export LDFLAGS+=-resource-dir=$(RESOURCE_DIR) -B/usr/lib/llvm-$(LLVM_VERSION)/bin
+
+# more verbose linker output
+export LDFLAGS+=-Wl,--stats
 
 # set the appropriate cpu architecture
 DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
@@ -50,9 +52,6 @@ endif
 defines+=$(shell cat ungoogled-chromium/flags.gn | tr "\n" " " | sed 's/"/\\"/g')
 defines+=$(shell cat flags.portable.gn | tr "\n" " " | sed 's/"/\\"/g')
 
-# From ungoogled-chromium-archlinux
-defines+=link_pulseaudio=true \
-
 # handle parallel build options
 njobs=1
 ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
@@ -63,7 +62,7 @@ endif
 	dh $@
 
 build/src/out/Release/gn:
-	cd build/src && python2 tools/gn/bootstrap/bootstrap.py -o out/Release/gn --skip-generate-buildfiles -j$(njobs)
+	cd build/src && python tools/gn/bootstrap/bootstrap.py -o out/Release/gn --skip-generate-buildfiles -j$(njobs)
 
 override_dh_auto_configure:
 	# output compiler information
