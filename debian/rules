@@ -48,21 +48,34 @@ CODENAME := $(patsubst %:,,$(shell lsb_release -c))
 GN_FLAGS := $(shell tr "\n" " " < $(UC_DIR)/flags.gn | sed 's/"/\\"/g')
 
 # Add our downstream Debian flags
-GN_FLAGS += \
+GN_FLAGS +=                                                           \
         custom_toolchain=\"//build/toolchain/linux/unbundle:default\" \
-        host_toolchain=\"//build/toolchain/linux/unbundle:default\" \
-        use_custom_libcxx=false \
-        is_official_build=true \
-        is_debug=false \
-        symbol_level=1 \
-        blink_enable_generated_code_formatting=false \
-        is_cfi=false \
-        use_sysroot=false \
-        use_gnome_keyring=false \
-        ffmpeg_branding=\"Chrome\" \
-        proprietary_codecs=true \
-        link_pulseaudio=true \
-        use_vaapi=true
+        host_toolchain=\"//build/toolchain/linux/unbundle:default\"   \
+        use_custom_libcxx=false                                       \
+        is_official_build=true                                        \
+        is_debug=false                                                \
+        symbol_level=1                                                \
+        blink_enable_generated_code_formatting=false                  \
+        is_cfi=false                                                  \
+        use_sysroot=false                                             \
+        use_gnome_keyring=false                                       \
+        ffmpeg_branding=\"Chrome\"                                    \
+        proprietary_codecs=true                                       \
+        use_pulseaudio=true                                           \
+        link_pulseaudio=true                                          \
+        use_vaapi=true                                                \
+        use_ozone=true                                                \
+        use_goma=false                                                \
+        use_allocator=\"tcmalloc\"                                    \
+        enable_vr=false                                               \
+        enable_iterator_debugging=false                               \
+        optimize_webui=false                                          \
+        use_gio=true                                                  \
+        use_lld=true                                                  \
+        is_clang=true                                                 \
+        use_kerberos=false                                            \
+        use_cups=true                                                 \
+        v8_enable_backtrace=true                                      \
 
 # Currently omitted from base (focal): icu, harfbuzz-ng, ffmpeg, openh264, libvpx
 SYS_LIBS :=         \
@@ -80,7 +93,7 @@ SYS_LIBS :=         \
         opus        \
         re2         \
         snappy      \
-        zlib
+        zlib        \
 
 # Add extra flags for system libs
 GN_FLAGS +=                           \
@@ -88,7 +101,8 @@ GN_FLAGS +=                           \
         use_system_lcms2=true         \
         use_system_libopenjpeg2=true  \
         use_system_libpng=true        \
-        use_system_zlib=true
+        use_system_zlib=true          \
+        use_system_libjpeg=true       \
 
 %:
 	dh $@
