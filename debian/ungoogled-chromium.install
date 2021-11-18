@@ -1,4 +1,5 @@
 build/src/out/Release/chromium usr/lib/chromium
+build/src/out/Release/chrome_crashpad_handler usr/lib/chromium
 
 build/src/out/Release/chrome_*.pak usr/lib/chromium
 build/src/out/Release/resources.pak usr/lib/chromium
