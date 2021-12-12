@@ -1,6 +1,6 @@
 --- a/chrome/browser/flag-metadata.json
 +++ b/chrome/browser/flag-metadata.json
-@@ -1285,7 +1285,7 @@
+@@ -1342,7 +1342,7 @@
    {
      "name": "enable-accelerated-video-decode",
      "owners": [ "media-dev@chromium.org" ],

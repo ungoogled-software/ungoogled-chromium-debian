@@ -1,6 +1,8 @@
 archlinux/unexpire-accelerated-video-decode-flag.patch
 archlinux/wayland-egl.patch
 
+chromium-wayland-vaapi/0001-ozone-wayland-add-VA-API-support.patch
+
 debian/clang-format.patch
 debian/debianization/sandbox.patch
 debian/debianization/master-preferences.patch

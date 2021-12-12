@@ -1,6 +1,6 @@
 --- a/third_party/blink/renderer/bindings/scripts/bind_gen/style_format.py
 +++ b/third_party/blink/renderer/bindings/scripts/bind_gen/style_format.py
-@@ -43,8 +43,7 @@ def init(root_src_dir):
+@@ -43,8 +43,7 @@ def init(root_src_dir, enable_style_form
                                             platform)
  
      # //buildtools/<platform>/clang-format
