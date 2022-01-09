@@ -25,7 +25,7 @@ script:
   - sed -i -e 's|3.26|3.00|g' opt/google/chrome/chrome
   - cat > ./AppRun <<\EOF
   - #!/bin/sh
-  - HERE=$(dirname $(readlink -f "${0}"))
+  - HERE="$(dirname "$(readlink -f "${0}")")"
   - export LD_LIBRARY_PATH="${HERE}"/usr/lib:$PATH
   - "${HERE}"/opt/google/chrome/chrome --password-store=basic $@
   - EOF
