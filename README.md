@@ -67,7 +67,10 @@ Then run a normal build
 
 ```sh
 # Use "export ..." for AR, NM, CC, CXX, or others to specify the compiler to use
-# It defaults to LLVM tools. See build.sh for more details
+# In addition, there are custom variables:
+# - LLVM_BIN to specify the path to the "bin" directory for LLVM
+# - LLVM_VERSION to specify the LLVM version
+# These variables have defaults for LLVM on Debian. See build.sh for more details
 ./build.sh
 ./package.sh
 ```

@@ -23,17 +23,21 @@ cat "$_root_dir/flags.portable.gn" >> "$_src_dir/out/Default/args.gn"
 
 # Set commands or paths to LLVM-provided tools outside the script via 'export ...'
 # or before these lines
-export AR=${AR:=llvm-ar}
-export NM=${NM:=llvm-nm}
-export CC=${CC:=clang}
-export CXX=${CXX:=clang++}
+export LLVM_VERSION=${LLVM_VERSION:=13}
+export AR=${AR:=llvm-ar-${LLVM_VERSION}}
+export NM=${NM:=llvm-nm-${LLVM_VERSION}}
+export CC=${CC:=clang-${LLVM_VERSION}}
+export CXX=${CXX:=clang++-${LLVM_VERSION}}
+export LLVM_BIN=${LLVM_BIN:=/usr/lib/llvm-${LLVM_VERSION}/bin}
 # You may also set CFLAGS, CPPFLAGS, CXXFLAGS, and LDFLAGS
 # See build/toolchain/linux/unbundle/ in the Chromium source for more details.
 #
-# Hack to allow clang to find the default cfi_blacklist.txt
-export CXXFLAGS+=-resource-dir=$("$CC" --print-resource-dir)
-export CPPFLAGS+=-resource-dir=$("$CC" --print-resource-dir)
-export CFLAGS+=-resource-dir=$("$CC" --print-resource-dir)
+# Hack to allow clang to find the default cfi_ignorelist.txt and LLVM tools
+# -B<prefix> defined here: https://clang.llvm.org/docs/ClangCommandLineReference.html
+_llvm_resource_dir=$("$CC" --print-resource-dir)
+export CXXFLAGS+=-resource-dir=${_llvm_resource_dir} -B${LLVM_BIN}
+export CPPFLAGS+=-resource-dir=${_llvm_resource_dir} -B${LLVM_BIN}
+export CFLAGS+=-resource-dir=${_llvm_resource_dir} -B${LLVM_BIN}
 
 cd "$_src_dir"
 
