@@ -52,7 +52,7 @@ forwarded: http://code.google.com/p/chromium/issues/detail?id=73591
  .TP
  \fB\-\-user\-data\-dir\fR=\fIDIR\fR
  Specifies the directory that user data (your "profile") is kept in.
-@@ -114,6 +139,7 @@ as
+@@ -108,6 +133,7 @@ as
  See the GTK documentation for more:
  .IP
  <http://library.gnome.org/devel/gtk/stable/gtk-running.html>
@@ -60,7 +60,7 @@ forwarded: http://code.google.com/p/chromium/issues/detail?id=73591
  <http://library.gnome.org/devel/gtk/stable/gtk-x11.html>
  
  .SH ENVIRONMENT
-@@ -159,12 +185,29 @@ Default directory for cache data.  (Why?
+@@ -153,12 +179,29 @@ Default directory for cache data.  (Why?
  <http://standards.freedesktop.org/basedir-spec/latest/> .)
  
  .SH BUGS
