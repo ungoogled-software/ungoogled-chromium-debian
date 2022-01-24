@@ -14,7 +14,7 @@ Subject: [PATCH] ozone/wayland: add VA-API support
 
 --- a/media/gpu/vaapi/vaapi_picture_factory.cc
 +++ b/media/gpu/vaapi/vaapi_picture_factory.cc
-@@ -102,7 +102,7 @@ uint32_t VaapiPictureFactory::GetGLTextu
+@@ -101,7 +101,7 @@ uint32_t VaapiPictureFactory::GetGLTextu
  }
  
  gfx::BufferFormat VaapiPictureFactory::GetBufferFormat() {
@@ -119,8 +119,8 @@ Subject: [PATCH] ozone/wayland: add VA-API support
  }  // namespace ui
 --- a/ui/ozone/platform/wayland/ozone_platform_wayland.cc
 +++ b/ui/ozone/platform/wayland/ozone_platform_wayland.cc
-@@ -314,6 +314,10 @@ class OzonePlatformWayland : public Ozon
-       // coordinates, instead only surface-local ones are supported.
+@@ -312,6 +312,10 @@ class OzonePlatformWayland : public Ozon
+       // arbitrary position.
        properties->supports_global_screen_coordinates = false;
  
 +#if defined(OS_LINUX)
