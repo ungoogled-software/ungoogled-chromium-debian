@@ -35,9 +35,9 @@ export LLVM_BIN=${LLVM_BIN:=/usr/lib/llvm-${LLVM_VERSION}/bin}
 # Hack to allow clang to find the default cfi_ignorelist.txt and LLVM tools
 # -B<prefix> defined here: https://clang.llvm.org/docs/ClangCommandLineReference.html
 _llvm_resource_dir=$("$CC" --print-resource-dir)
-export CXXFLAGS+=-resource-dir=${_llvm_resource_dir} -B${LLVM_BIN}
-export CPPFLAGS+=-resource-dir=${_llvm_resource_dir} -B${LLVM_BIN}
-export CFLAGS+=-resource-dir=${_llvm_resource_dir} -B${LLVM_BIN}
+export CXXFLAGS+="-resource-dir=${_llvm_resource_dir} -B${LLVM_BIN}"
+export CPPFLAGS+="-resource-dir=${_llvm_resource_dir} -B${LLVM_BIN}"
+export CFLAGS+="-resource-dir=${_llvm_resource_dir} -B${LLVM_BIN}"
 
 cd "$_src_dir"
 
