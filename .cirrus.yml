@@ -1,0 +1,24 @@
+container:
+    dockerfile: .cirrus_Dockerfile
+
+# TODO: Syntax checking for debian/ folder contents?
+
+validate_with_source_task:
+    submodule_checkout_script:
+        - git submodule update --init --recursive
+    check_patch_files_script:
+        - debian/submodules/ungoogled-chromium/devutils/check_patch_files.py -p debian/patches
+    merge_patches_script:
+        - debian/submodules/ungoogled-chromium/utils/patches.py merge -p debian/patches debian/submodules/ungoogled-chromium/patches
+    download_cache:
+        folder: download_cache
+        fingerprint_script: cat debian/submodules/ungoogled-chromium/chromium_version.txt
+        populate_script:
+            - mkdir download_cache || true
+            - debian/submodules/ungoogled-chromium/utils/downloads.py retrieve -i debian/submodules/ungoogled-chromium/downloads.ini -c download_cache
+    unpack_source_script:
+        - debian/submodules/ungoogled-chromium/utils/downloads.py unpack -i debian/submodules/ungoogled-chromium/downloads.ini -c download_cache src
+    validate_patches_script:
+        - debian/submodules/ungoogled-chromium/devutils/validate_patches.py -l src -p debian/patches -s debian/patches/series
+
+# vim: set expandtab shiftwidth=4 softtabstop=4:
