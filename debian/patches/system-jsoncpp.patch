@@ -1,6 +1,6 @@
 --- a/build/linux/unbundle/replace_gn_files.py
 +++ b/build/linux/unbundle/replace_gn_files.py
-@@ -23,6 +23,7 @@
+@@ -21,6 +21,7 @@
    'freetype': 'build/config/freetype/freetype.gni',
    'harfbuzz-ng': 'third_party/harfbuzz-ng/harfbuzz.gni',
    'icu': 'third_party/icu/BUILD.gn',

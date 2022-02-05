@@ -1,6 +1,6 @@
 --- a/base/compiler_specific.h
 +++ b/base/compiler_specific.h
-@@ -364,12 +364,7 @@
+@@ -365,12 +365,7 @@
  
  #endif  // defined(__clang_analyzer__)
  
@@ -15,7 +15,7 @@
  // non-trivial destructor or copy/move constructor. Such types can be relocated
 --- a/build/config/compiler/BUILD.gn
 +++ b/build/config/compiler/BUILD.gn
-@@ -348,7 +348,7 @@
+@@ -350,7 +350,7 @@
      }
  
      if (use_lld) {
@@ -24,7 +24,7 @@
        if (lld_path != "") {
          ldflags += [ "-B$lld_path" ]
        }
-@@ -1264,7 +1264,7 @@
+@@ -1249,7 +1249,7 @@
      } else {
        # -ffile-compilation-dir is an alias for both -fdebug-compilation-dir=
        # and -fcoverage-compilation-dir=.
@@ -33,7 +33,7 @@
      }
      if (!is_win) {
        # We don't use clang -cc1as on Windows (yet? https://crbug.com/762167)
-@@ -2459,13 +2459,6 @@
+@@ -2354,13 +2354,6 @@
          "-Xclang",
          "-debug-info-kind=limited",
        ]
@@ -47,16 +47,6 @@
      }
    }
    rustflags = [ "-g" ]
---- a/net/third_party/quiche/src/http2/adapter/window_manager.h
-+++ b/net/third_party/quiche/src/http2/adapter/window_manager.h
-@@ -2,6 +2,7 @@
- #define QUICHE_HTTP2_ADAPTER_WINDOW_MANAGER_H_
- 
- #include <functional>
-+#include <cstddef>
- 
- #include "common/platform/api/quiche_export.h"
- 
 --- a/sandbox/linux/services/credentials.cc
 +++ b/sandbox/linux/services/credentials.cc
 @@ -100,7 +100,9 @@
@@ -70,16 +60,6 @@
    tls = tls_buf;
  #endif
  
---- a/third_party/blink/renderer/platform/heap/v8_wrapper/custom_spaces.h
-+++ b/third_party/blink/renderer/platform/heap/v8_wrapper/custom_spaces.h
-@@ -7,6 +7,7 @@
- 
- #include <memory>
- #include <vector>
-+#include <memory>
- 
- #include "third_party/blink/renderer/platform/platform_export.h"
- #include "v8/include/cppgc/custom-space.h"
 --- a/third_party/breakpad/breakpad/src/client/linux/handler/exception_handler.cc
 +++ b/third_party/breakpad/breakpad/src/client/linux/handler/exception_handler.cc
 @@ -138,7 +138,7 @@
@@ -91,13 +71,3 @@
  
    // Only set an alternative stack if there isn't already one, or if the current
    // one is too small.
---- a/third_party/ruy/src/ruy/block_map.cc
-+++ b/third_party/ruy/src/ruy/block_map.cc
-@@ -16,6 +16,7 @@
- #include "ruy/block_map.h"
- 
- #include <algorithm>
-+#include <limits>
- #include <cstdint>
- #include <limits>
- 

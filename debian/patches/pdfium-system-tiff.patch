@@ -22,7 +22,7 @@
  }
 --- a/third_party/pdfium/third_party/BUILD.gn
 +++ b/third_party/pdfium/third_party/BUILD.gn
-@@ -501,62 +501,13 @@
+@@ -501,59 +501,13 @@
    }
  }
  
@@ -38,8 +38,7 @@
 -      ":pdfium_third_party_config",
 -    ]
 -    if (is_win) {
--      # Need to undefine the macro since it is redefined in
--      # tif_ojpeg.c and tif_jpeg.c.
+-      # Need to undefine the macro since it is redefined in tif_jpeg.c.
 -      configs -= [ "//build/config/win:lean_and_mean" ]
 -    }
 -    deps = [
@@ -68,7 +67,6 @@
 -      "libtiff/tif_luv.c",
 -      "libtiff/tif_lzw.c",
 -      "libtiff/tif_next.c",
--      "libtiff/tif_ojpeg.c",
 -      "libtiff/tif_open.c",
 -      "libtiff/tif_packbits.c",
 -      "libtiff/tif_pixarlog.c",
@@ -82,7 +80,6 @@
 -      "libtiff/tif_version.c",
 -      "libtiff/tif_warning.c",
 -      "libtiff/tif_write.c",
--      "libtiff/tif_zip.c",
 -      "libtiff/tiffiop.h",
 -      "libtiff/tiffvers.h",
 -    ]
@@ -90,4 +87,3 @@
    }
  }
  
-Only in b/third_party/pdfium/third_party: BUILD.gn.orig

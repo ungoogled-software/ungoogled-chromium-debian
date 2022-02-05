@@ -5,7 +5,5 @@ perfetto-system-zlib.patch
 pdfium-system-tiff.patch
 system-jsoncpp.patch
 template-correction.patch
-unexpire-accelerated-video-decode-flag.patch
 fix-node-architecture.patch
 sql-virtual-cursor.patch
-skia-disable-ftcolor.patch

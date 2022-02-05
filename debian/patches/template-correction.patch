@@ -37,7 +37,7 @@
  a given user data directory.
  
  .TP
-@@ -108,7 +108,7 @@
+@@ -102,7 +102,7 @@
  Show version information.
  
  .PP
@@ -46,7 +46,7 @@
  as
  .BR \-\-display .
  See the GTK documentation for more:
-@@ -117,7 +117,7 @@
+@@ -111,7 +111,7 @@
  <http://library.gnome.org/devel/gtk/stable/gtk-x11.html>
  
  .SH ENVIRONMENT
@@ -55,7 +55,7 @@
  
  .TP
  .B all_proxy
-@@ -150,11 +150,11 @@
+@@ -144,11 +144,11 @@
  
  .SH FILES
  .TP
