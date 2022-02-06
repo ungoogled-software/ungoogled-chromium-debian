@@ -1,0 +1,11 @@
+--- a/media/gpu/chromeos/video_decoder_pipeline.cc
++++ b/media/gpu/chromeos/video_decoder_pipeline.cc
+@@ -28,7 +28,7 @@
+ 
+ #if BUILDFLAG(USE_VAAPI)
+ #include "media/gpu/vaapi/vaapi_video_decoder.h"
+-#include "third_party/libdrm/src/include/drm/drm_fourcc.h"
++#include "drm/drm_fourcc.h"
+ #elif BUILDFLAG(USE_V4L2_CODEC)
+ #include "media/gpu/v4l2/v4l2_video_decoder.h"
+ #else
