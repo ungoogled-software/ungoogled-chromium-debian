@@ -39,7 +39,7 @@ JOBS := $(patsubst parallel=%,%,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
 endif
 
 # Version of node to install
-NODE_VERSION := v14.15.4
+NODE_VERSION := v16.13.0
 
 # Find the distribution codename for this release
 CODENAME := $(patsubst %:,,$(shell lsb_release -c))
