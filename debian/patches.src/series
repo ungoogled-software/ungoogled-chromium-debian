@@ -1,5 +1,6 @@
 archlinux/unexpire-accelerated-video-decode-flag.patch
-archlinux/wayland-fix-binding-to-wrong-version.patch
+archlinux/downgrade-duplicate-peer-error-to-dvlog.patch
+archlinux/use-FT_Done_MM_Var-in-CFX_Font-AdjustMMParams.patch
 archlinux/wayland-egl.patch
 
 chromium-wayland-vaapi/0001-ozone-wayland-add-VA-API-support.patch
