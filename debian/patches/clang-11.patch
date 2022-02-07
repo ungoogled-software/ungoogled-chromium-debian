@@ -71,9 +71,31 @@
  
    // Only set an alternative stack if there isn't already one, or if the current
    // one is too small.
+--- a/components/optimization_guide/core/entity_metadata.cc
++++ b/components/optimization_guide/core/entity_metadata.cc
+@@ -67,7 +67,7 @@
+                 const ScoredEntityMetadata& rhs) {
+   constexpr const double kScoreTolerance = 1e-6;
+   return lhs.metadata == rhs.metadata &&
+-         abs(lhs.score - rhs.score) <= kScoreTolerance;
++         std::abs(lhs.score - rhs.score) <= kScoreTolerance;
+ }
+ 
+ }  // namespace optimization_guide
+--- a/components/optimization_guide/core/page_content_annotations_common.cc
++++ b/components/optimization_guide/core/page_content_annotations_common.cc
+@@ -37,7 +37,7 @@
+ bool WeightedString::operator==(const WeightedString& other) const {
+   constexpr double kWeightTolerance = 1e-6;
+   return this->value_ == other.value_ &&
+-         abs(this->weight_ - other.weight_) <= kWeightTolerance;
++         std::abs(this->weight_ - other.weight_) <= kWeightTolerance;
+ }
+ 
+ std::string WeightedString::ToString() const {
 --- a/third_party/blink/renderer/platform/wtf/math_extras.h
 +++ b/third_party/blink/renderer/platform/wtf/math_extras.h
-@@ -127,11 +127,11 @@
+@@ -127,14 +127,10 @@
    return g * (1.0f / 400.0f);
  }
  
@@ -83,7 +105,9 @@
  }
  
 -constexpr float RoundHalfTowardsPositiveInfinity(float value) {
-+inline float RoundHalfTowardsPositiveInfinity(float value) {
-   return std::floor(value + 0.5f);
- }
+-  return std::floor(value + 0.5f);
+-}
+-
+ // ClampTo() is implemented by templated helper classes (to allow for partial
+ // template specialization) as well as several helper functions.
  
