@@ -13,6 +13,7 @@ out/Release/locales/*.pak                                                      u
 out/Release/swiftshader/lib*.so                                                usr/lib/chromium/swiftshader
 debian/submodules/chromium-launcher/chromium                                   usr/bin
 debian/chromium-flags.conf                                                     etc
+debian/initial_preferences                                                     usr/lib/chromium
 chrome/installer/linux/common/desktop.template                              => usr/share/applications/chromium.desktop
 chrome/app/resources/manpage.1.in                                           => usr/share/man/man1/chromium.1
 chrome/installer/linux/common/chromium-browser/chromium-browser.appdata.xml => usr/share/metainfo/chromium.appdata.xml
