@@ -6,6 +6,12 @@ UNGOOGLED_CHROMIUM="$ROOT_DIR/ungoogled-chromium"
 SCRIPTS="$DEBIAN/scripts"
 UTILS="$UNGOOGLED_CHROMIUM/utils"
 
+apply_main_patches()
+{
+    local ROOT="$1"
+    python3 -B "$UTILS/patches.py" apply "$ROOT" "$UNGOOGLED_CHROMIUM/patches" "$ROOT_DIR/patches"
+}
+
 setup_source()
 {
     local CACHE="$ROOT_DIR/build/download_cache"
@@ -15,7 +21,7 @@ setup_source()
     python3 -B "$UTILS/downloads.py" retrieve -i "$UNGOOGLED_CHROMIUM/downloads.ini" -c "$CACHE"
     python3 -B "$UTILS/downloads.py" unpack -i "$UNGOOGLED_CHROMIUM/downloads.ini" -c "$CACHE" "$ROOT"
     python3 -B "$UTILS/prune_binaries.py" "$ROOT" "$UNGOOGLED_CHROMIUM/pruning.list"
-    python3 -B "$UTILS/patches.py" apply "$ROOT" "$UNGOOGLED_CHROMIUM/patches" "$ROOT_DIR/patches"
+    apply_main_patches "$ROOT"
     cd $ROOT && env QUILT_PATCHES=$DEBIAN/patches.src quilt push -a
     #(cd $ROOT && $SCRIPTS/check-upstream)
 }
@@ -25,6 +31,11 @@ case "$1" in
 debian)
     "$SCRIPTS/generate_changelog"
     #sed -i "/^Maintainer:/cMaintainer: $(cat debian/uploader.txt)" "$DEBIAN/control"
+    ;;
+
+main-patches)
+    mkdir -p "$ROOT_DIR/build/src"
+    apply_main_patches "$ROOT_DIR/build/src"
     ;;
 
 local-src)
