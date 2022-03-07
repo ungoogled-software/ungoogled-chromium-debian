@@ -119,7 +119,7 @@ Subject: [PATCH] ozone/wayland: add VA-API support
  }  // namespace ui
 --- a/ui/ozone/platform/wayland/ozone_platform_wayland.cc
 +++ b/ui/ozone/platform/wayland/ozone_platform_wayland.cc
-@@ -286,6 +286,10 @@ class OzonePlatformWayland : public Ozon
+@@ -288,6 +288,10 @@ class OzonePlatformWayland : public Ozon
        // arbitrary position.
        properties->supports_global_screen_coordinates = false;
  

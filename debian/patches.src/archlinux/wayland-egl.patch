@@ -7,7 +7,7 @@
 +  handle.planes[0].size = size_.GetArea();
 +
    return handle;
- #endif  // !defined(OS_FUCHSIA)
+ #endif  // BUILDFLAG(IS_FUCHSIA)
  }
 --- a/gpu/command_buffer/service/error_state.cc
 +++ b/gpu/command_buffer/service/error_state.cc
