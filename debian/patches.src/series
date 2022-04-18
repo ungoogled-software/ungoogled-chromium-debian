@@ -1,9 +1,8 @@
 archlinux/unexpire-accelerated-video-decode-flag.patch
 archlinux/webcodecs-stop-using-AudioOpusEncoder.patch
-archlinux/use-FT_Done_MM_Var-in-CFX_Font-AdjustMMParams.patch
+archlinux/webrtc-check-existence-of-cursor-metadata.patch
 archlinux/wayland-egl.patch
-
-chromium-wayland-vaapi/0001-ozone-wayland-add-VA-API-support.patch
+archlinux/ozone-add-va-api-support-to-wayland.patch
 
 debian/clang-format.patch
 debian/debianization/sandbox.patch
