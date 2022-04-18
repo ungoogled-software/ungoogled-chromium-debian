@@ -42,7 +42,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 +++ b/tools/typescript/tsconfig_base.json
 @@ -3,7 +3,7 @@
      "module": "ESNext",
-     "target": "ESNext",
+     "target": "ES2021",
  
 -    "noEmitOnError": true,
 +    "noEmitOnError": false,
