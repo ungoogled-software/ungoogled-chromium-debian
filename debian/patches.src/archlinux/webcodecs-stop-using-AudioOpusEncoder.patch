@@ -19,8 +19,6 @@ Cr-Commit-Position: refs/heads/main@{#974895}
  media/mojo/services/gpu_mojo_media_client.cc | 10 +---------
  1 file changed, 1 insertion(+), 9 deletions(-)
 
-diff --git a/media/mojo/services/gpu_mojo_media_client.cc b/media/mojo/services/gpu_mojo_media_client.cc
-index 8f83a4d6cf6..40cdaff8d3a 100644
 --- a/media/mojo/services/gpu_mojo_media_client.cc
 +++ b/media/mojo/services/gpu_mojo_media_client.cc
 @@ -13,7 +13,6 @@
@@ -31,7 +29,7 @@ index 8f83a4d6cf6..40cdaff8d3a 100644
  #include "media/base/audio_decoder.h"
  #include "media/base/cdm_factory.h"
  #include "media/base/media_switches.h"
-@@ -119,14 +118,7 @@ std::unique_ptr<AudioEncoder> GpuMojoMediaClient::CreateAudioEncoder(
+@@ -119,14 +118,7 @@ std::unique_ptr<AudioEncoder> GpuMojoMed
      scoped_refptr<base::SequencedTaskRunner> task_runner) {
    if (!base::FeatureList::IsEnabled(features::kPlatformAudioEncoder))
      return nullptr;

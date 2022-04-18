@@ -16,11 +16,9 @@ Cr-Commit-Position: refs/heads/main@{#36240}
  .../desktop_capture/linux/wayland/shared_screencast_stream.cc   | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/modules/desktop_capture/linux/wayland/shared_screencast_stream.cc b/modules/desktop_capture/linux/wayland/shared_screencast_stream.cc
-index a8c86e26..9e81df4c 100644
 --- a/third_party/webrtc/modules/desktop_capture/linux/wayland/shared_screencast_stream.cc
 +++ b/third_party/webrtc/modules/desktop_capture/linux/wayland/shared_screencast_stream.cc
-@@ -650,7 +650,7 @@ void SharedScreenCastStreamPrivate::ProcessBuffer(pw_buffer* buffer) {
+@@ -650,7 +650,7 @@ void SharedScreenCastStreamPrivate::Proc
      const struct spa_meta_cursor* cursor =
          static_cast<struct spa_meta_cursor*>(spa_buffer_find_meta_data(
              spa_buffer, SPA_META_Cursor, sizeof(*cursor)));
