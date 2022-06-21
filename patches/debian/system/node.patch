@@ -48,4 +48,4 @@ author: Michael Gilbert <mgilbert@debian.org>
 +    "noEmitOnError": false,
      "pretty": true,
  
-     "forceConsistentCasingInFileNames": true,
+     "allowUnreachableCode": false,
