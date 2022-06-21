@@ -12,15 +12,15 @@ RUN apt-get -y --no-install-recommends install git debhelper python python3 pkg-
 WORKDIR /root
 
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
-RUN add-apt-repository "deb http://apt.llvm.org/bullseye llvm-toolchain-bullseye-13 main"
+RUN add-apt-repository "deb http://apt.llvm.org/bullseye llvm-toolchain-bullseye-14 main"
 RUN apt-get update
 
-RUN apt-get install -y libllvm-13-ocaml-dev libllvm13 llvm-13 llvm-13-dev llvm-13-doc llvm-13-examples llvm-13-runtime clang-13 clang-tools-13 clang-13-doc libclang-common-13-dev libclang-13-dev libclang1-13 clang-format-13 clangd-13 libfuzzer-13-dev lldb-13 lld-13 libc++-13-dev libc++abi-13-dev libomp-13-dev libclc-13-dev libunwind-13-dev
+RUN apt-get install -y libllvm-14-ocaml-dev libllvm14 llvm-14 llvm-14-dev llvm-14-doc llvm-14-examples llvm-14-runtime clang-14 clang-tools-14 clang-14-doc libclang-common-14-dev libclang-14-dev libclang1-14 clang-format-14 clangd-14 libfuzzer-14-dev lldb-14 lld-14 libc++-14-dev libc++abi-14-dev libomp-14-dev libclc-14-dev libunwind-14-dev
 
-RUN update-alternatives --install /usr/bin/clang clang /usr/bin/clang-13 800
-RUN update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-13 800
-RUN update-alternatives --install /usr/bin/llvm-ar llvm-ar /usr/bin/llvm-ar-13 800
-RUN update-alternatives --install /usr/bin/llvm-nm llvm-nm /usr/bin/llvm-nm-13 800
+RUN update-alternatives --install /usr/bin/clang clang /usr/bin/clang-14 800
+RUN update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-14 800
+RUN update-alternatives --install /usr/bin/llvm-ar llvm-ar /usr/bin/llvm-ar-14 800
+RUN update-alternatives --install /usr/bin/llvm-nm llvm-nm /usr/bin/llvm-nm-14 800
 
 RUN mkdir /repo
 WORKDIR /repo
