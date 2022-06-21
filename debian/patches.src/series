@@ -1,6 +1,5 @@
 archlinux/remove-no-opaque-pointers-flag.patch
 archlinux/iwyu-add-utility-for-std-exchange.patch
-archlinux/enable-GlobalMediaControlsCastStartStop.patch
 archlinux/wayland-egl.patch
 archlinux/ozone-add-va-api-support-to-wayland.patch
 
