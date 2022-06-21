@@ -1,6 +1,6 @@
-archlinux/unexpire-accelerated-video-decode-flag.patch
-archlinux/webcodecs-stop-using-AudioOpusEncoder.patch
-archlinux/webrtc-check-existence-of-cursor-metadata.patch
+archlinux/remove-no-opaque-pointers-flag.patch
+archlinux/iwyu-add-utility-for-std-exchange.patch
+archlinux/enable-GlobalMediaControlsCastStartStop.patch
 archlinux/wayland-egl.patch
 archlinux/ozone-add-va-api-support-to-wayland.patch
 
