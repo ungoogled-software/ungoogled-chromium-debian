@@ -1,6 +1,6 @@
 --- a/build/config/compiler/BUILD.gn
 +++ b/build/config/compiler/BUILD.gn
-@@ -2015,7 +2015,7 @@
+@@ -2058,7 +2058,7 @@
      # - Investigate -Oz here, maybe just for ARM?
      cflags = [ "-Os" ] + common_optimize_on_cflags
    } else {
@@ -9,7 +9,7 @@
    }
    if (optimize_for_size) {
      rustflags = [ "-Copt-level=s" ]
-@@ -2086,7 +2086,7 @@
+@@ -2129,7 +2129,7 @@
      } else if (optimize_for_fuzzing) {
        cflags = [ "-O1" ] + common_optimize_on_cflags
      } else {
@@ -18,7 +18,7 @@
      }
      rustflags = [ "-Copt-level=3" ]
    }
-@@ -2119,7 +2119,7 @@
+@@ -2162,7 +2162,7 @@
      } else if (optimize_for_fuzzing) {
        cflags = [ "-O1" ] + common_optimize_on_cflags
      } else {
@@ -29,7 +29,7 @@
    }
 --- a/tools/gn/build/gen.py
 +++ b/tools/gn/build/gen.py
-@@ -344,10 +344,8 @@
+@@ -395,10 +395,8 @@
        cflags.extend(['-O0', '-g'])
      else:
        cflags.append('-DNDEBUG')

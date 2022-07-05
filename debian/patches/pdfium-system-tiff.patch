@@ -1,8 +1,8 @@
 --- a/third_party/pdfium/core/fxcodec/tiff/tiff_decoder.cpp
 +++ b/third_party/pdfium/core/fxcodec/tiff/tiff_decoder.cpp
-@@ -21,9 +21,7 @@
- #include "third_party/base/check.h"
+@@ -22,9 +22,7 @@
  #include "third_party/base/notreached.h"
+ #include "third_party/base/numerics/safe_conversions.h"
  
 -extern "C" {
 -#include "third_party/libtiff/tiffiop.h"
@@ -11,7 +11,7 @@
  
  namespace {
  
-@@ -186,7 +184,7 @@
+@@ -190,7 +188,7 @@
                               tiff_write, tiff_seek, tiff_close, tiff_get_size,
                               tiff_map, tiff_unmap);
    if (tif) {
@@ -22,7 +22,7 @@
  }
 --- a/third_party/pdfium/third_party/BUILD.gn
 +++ b/third_party/pdfium/third_party/BUILD.gn
-@@ -501,59 +501,13 @@
+@@ -512,59 +512,13 @@
    }
  }
  

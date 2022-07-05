@@ -1,4 +1,3 @@
-clang-11.patch
 use-package-optimizations.patch
 shim-fix-for-official-builds.patch
 perfetto-system-zlib.patch
@@ -7,4 +6,3 @@ system-jsoncpp.patch
 template-correction.patch
 fix-node-architecture.patch
 sql-virtual-cursor.patch
-vaapi-libdrm.patch

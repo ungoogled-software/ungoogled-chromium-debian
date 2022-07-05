@@ -46,7 +46,7 @@
  as
  .BR \-\-display .
  See the GTK documentation for more:
-@@ -111,7 +111,7 @@
+@@ -112,7 +112,7 @@
  <http://library.gnome.org/devel/gtk/stable/gtk-x11.html>
  
  .SH ENVIRONMENT
@@ -55,7 +55,7 @@
  
  .TP
  .B all_proxy
-@@ -144,11 +144,11 @@
+@@ -145,11 +145,11 @@
  
  .SH FILES
  .TP

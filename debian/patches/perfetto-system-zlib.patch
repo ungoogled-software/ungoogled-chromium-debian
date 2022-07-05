@@ -1,6 +1,6 @@
 --- a/third_party/perfetto/gn/BUILD.gn
 +++ b/third_party/perfetto/gn/BUILD.gn
-@@ -382,7 +382,7 @@
+@@ -386,7 +386,7 @@
  if (enable_perfetto_zlib) {
    group("zlib") {
      if (perfetto_use_system_zlib) {
