@@ -1,3 +1,4 @@
+clang-11.patch
 use-package-optimizations.patch
 shim-fix-for-official-builds.patch
 perfetto-system-zlib.patch

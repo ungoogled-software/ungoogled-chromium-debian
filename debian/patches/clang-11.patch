@@ -1,0 +1,65 @@
+--- a/base/compiler_specific.h
++++ b/base/compiler_specific.h
+@@ -328,12 +328,7 @@
+ 
+ #endif  // defined(__clang_analyzer__)
+ 
+-// Use nomerge attribute to disable optimization of merging multiple same calls.
+-#if defined(__clang__) && HAS_ATTRIBUTE(nomerge)
+-#define NOMERGE [[clang::nomerge]]
+-#else
+ #define NOMERGE
+-#endif
+ 
+ // Marks a type as being eligible for the "trivial" ABI despite having a
+ // non-trivial destructor or copy/move constructor. Such types can be relocated
+--- a/build/config/compiler/BUILD.gn
++++ b/build/config/compiler/BUILD.gn
+@@ -345,7 +345,7 @@
+     }
+ 
+     if (use_lld) {
+-      ldflags += [ "-fuse-ld=lld" ]
++      ldflags += [ "-fuse-ld=lld-11" ]
+       if (lld_path != "") {
+         ldflags += [ "-B$lld_path" ]
+       }
+@@ -1249,7 +1249,7 @@
+     } else {
+       # -ffile-compilation-dir is an alias for both -fdebug-compilation-dir=
+       # and -fcoverage-compilation-dir=.
+-      cflags += [ "-ffile-compilation-dir=." ]
++      cflags += [ "-fdebug-compilation-dir=." ]
+     }
+     if (!is_win) {
+       # We don't use clang -cc1as on Windows (yet? https://crbug.com/762167)
+@@ -1534,15 +1534,6 @@
+         cflags += [ "-Wno-unqualified-std-cast-call" ]
+       }
+ 
+-      if (!is_nacl && !(is_chromeos ||
+-                        default_toolchain == "//build/toolchain/cros:target")) {
+-        # TODO(https://crbug.com/1316298): Re-enable once test failure is figured out
+-        cflags += [
+-          "-Xclang",
+-          "-no-opaque-pointers",
+-        ]
+-      }
+-
+       if (is_fuchsia) {
+         # TODO(https://bugs.chromium.org/p/fuchsia/issues/detail?id=77383)
+         cflags += [ "-Wno-deprecated-copy" ]
+@@ -2400,13 +2391,6 @@
+         "-Xclang",
+         "-debug-info-kind=limited",
+       ]
+-    } else {
+-      # Use constructor homing for debug info. This option reduces debug info
+-      # by emitting class type info only when constructors are emitted.
+-      cflags += [
+-        "-Xclang",
+-        "-fuse-ctor-homing",
+-      ]
+     }
+   }
+   rustflags = [ "-g" ]
