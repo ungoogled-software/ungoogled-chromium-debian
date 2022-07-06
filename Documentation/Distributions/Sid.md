@@ -19,3 +19,5 @@ curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Deb
     | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg                                       \
     > /dev/null
 ```
+
+<br>
