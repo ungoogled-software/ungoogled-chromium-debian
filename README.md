@@ -1,12 +1,14 @@
 
-[![Badge Bullseye]][Debian]  
-[![Badge Sid]][Debian]    
-[![Badge Focal]][Ubuntu]  
+<div align = center>
+
+[![Badge Bullseye]][Debian] 
+[![Badge Sid]][Debian] 
+[![Badge Focal]][Ubuntu] 
 [![Badge Impish]][Ubuntu]
 
 <br>
-
-<div align = center>
+<br>
+<br>
 
 # Ungoogled Chromium
 
@@ -14,19 +16,15 @@
 
 <br>
 <br>
-
----
+<br>
 
 [![Button Installation]][Installation]   
 [![Button Supported]][Supported]   
 [![Button Building]][Building]
 
----
-
 <br>
 <br>
-
-
+<br>
 
 ## Repository
 
@@ -35,6 +33,8 @@ designed to be built directly from the git repository and <br>
 serve for **Debian** / **Ubuntu** release newer than `Focal`.
 
 <br>
+<br>
+
 
 <!----------------------------------------------------------------------------->
 
