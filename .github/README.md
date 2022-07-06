@@ -1,63 +1,154 @@
-# ungoogled-chromium-debian
 
-This repository contains files to build Debian packages of
-[ungoogled-chromium](//github.com/Eloston/ungoogled-chromium).
+# [![Badge Debian]][#]
 
-These are the new unified packaging files which are designed to be built
-directly from the git repository and serve as a single set of packaging
-files for all Debian or Ubuntu releases newer than the currently oldest
-supported release, `Focal`.
+***Debian*** *packaging files for **[Ungoogled Chromium]**.*
 
-Even so we will only be supporting a subset of the available distributions.
-These are currently:
-- Debian Bullseye
-- Debian Sid
-- Ubuntu Focal
-- Ubuntu Impish
+<br>
 
-The only guarantee we will make for support longevity is as follows:
-- Debian stable releases will be supported at least until the next stable release is available.
-- Ubuntu LTS releases will be supported at least until the next LTS release is available.
-- Ubuntu regular releases will be supported until their normal EOL with Ubuntu upstream.
+## Repository
 
-The actual time we decide to drop support for a release after these windows
-have elapsed will depend on what we have to gain from doing so. Examples of
-reasons we may drop a release include: upgrading to a newer toolchain and
-reintroduction of system libraries.
+These are packaging files designed have been designed <br>
+to be built directly from the git repository and serve for <br>
+**Debian** / **Ubuntu** release newer than `Focal`.
 
-## Getting OBS packages
+<br>
+<br>
 
-Use the following instructions to setup your system for our OBS repositories. Make sure to use the one for the correct distribution release for your installation.
-- Debian Bullseye
-  ```sh
-  # echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Debian_Bullseye/ /' | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list > /dev/null
-  # curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Debian_Bullseye/Release.key' | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg > /dev/null
-  # sudo apt update
-  # sudo apt install -y ungoogled-chromium
-  ```
-- Debian Sid
-  ```sh
-  # echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Debian_Sid/ /' | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list > /dev/null
-  # curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Debian_Sid/Release.key' | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg > /dev/null
-  # sudo apt update
-  # sudo apt install -y ungoogled-chromium
-  ```
-- Ubuntu Focal
-  ```sh
-  # echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Focal/ /' | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list > /dev/null
-  # curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Focal/Release.key' | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg > /dev/null
-  # sudo apt update
-  # sudo apt install -y ungoogled-chromium
-  ```
-- Ubuntu Impish
-  ```sh
-  # echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Impish/ /' | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list > /dev/null
-  # curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Impish/Release.key' | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg > /dev/null
-  # sudo apt update
-  # sudo apt install -y ungoogled-chromium
-  ```
+## Supported
 
-## Building a binary package
+<kbd>  Bullseye  </kbd>  
+<kbd>  Sid  </kbd>  
+<kbd>  Focal  </kbd>  
+<kbd>  Impish  </kbd>
+
+<br>
+<br>
+
+## Guarantees
+
+-   **Debian Stable** / **Ubuntu LTS** will be supported at<br>
+    least until the next of their releases is available.
+
+-   **Ubuntu Regular** release will be supported <br>
+    until their upstream **E**nd-**O**f-**L**ife date.
+
+<br>
+<br>
+
+## Timing
+
+The actual time we decide to drop support for a <br>
+release after the guaranteed windows depends <br>
+on what we have to gain.
+
+### Reasons
+
+*for which we may drop a release.*
+
+-   Upgrading to a newer toolchain
+
+-   Reintroduction of system libraries
+
+<br>
+<br>
+
+## Preparations
+
+*How to set up your system for our **OBS** repositories.*
+
+<br>
+
+***Make sure to use the correct version for your distribution.***
+
+<br>
+
+### Debian Bullseye
+
+```shell
+echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Debian_Bullseye/ /'    \
+    | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list                                 \
+    > /dev/null
+```
+
+```shell
+curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Debian_Bullseye/Release.key'   \
+    | gpg --dearmor                                                                                         \
+    | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg                                           \
+    > /dev/null
+```
+
+<br>
+
+### Debian Sid
+
+```shell
+echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Debian_Sid/ /' \
+    | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list                         \
+    > /dev/null
+```
+
+```shell
+curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Debian_Sid/Release.key'    \
+    | gpg --dearmor                                                                                     \
+    | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg                                       \
+    > /dev/null
+```
+
+<br>
+
+### Ubuntu Focal
+
+```shell
+echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Focal/ /'   \
+    | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list                             \
+    > /dev/null
+```
+
+```shell
+curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Focal/Release.key'  \
+    | gpg --dearmor                                                                                     \
+    | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg                                       \
+    > /dev/null
+```
+<br>
+
+### Ubuntu Impish
+
+```shell
+echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Impish/ /'  \
+    | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list                             \
+    > /dev/null
+```
+
+```shell
+curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Impish/Release.key' \
+    | gpg --dearmor                                                                                     \
+    | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg                                       \
+    > /dev/null
+```
+  
+  
+<br>
+
+## Installation
+
+*Once you have set up your system, you* <br>
+*can install the **Ungoogled Chromium**.*
+
+```shell
+sudo apt update
+```
+
+```shell
+sudo apt install -y ungoogled-chromium
+```
+
+<br>
+<br>
+
+## Building
+
+*How to build a binary package.*
 
 ```sh
 # Install initial packages
@@ -80,3 +171,10 @@ rm ungoogled-chromium-build-deps_*
 # Build the package
 dpkg-buildpackage -b -uc
 ```
+
+
+[Badge Debian]: https://img.shields.io/badge/Ungoogled_Chromium-A81D33?style=for-the-badge&logoColor=white&logo=Debian
+
+[Ungoogled Chromium]: https://github.com/Eloston/ungoogled-chromium
+
+[#]: # 'Ungoogled Chromium for Debian'
