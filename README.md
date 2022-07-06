@@ -1,180 +1,64 @@
 
-# [![Badge Debian]][#]
-
-***Debian*** *packaging files for **[Ungoogled Chromium]**.*
+[![Badge Bullseye]][Debian]  
+[![Badge Sid]][Debian]    
+[![Badge Focal]][Ubuntu]  
+[![Badge Impish]][Ubuntu]
 
 <br>
+
+<div align = center>
+
+# Ungoogled Chromium
+
+***Debian*** *packages for **[Ungoogled Chromium]**.*
+
+<br>
+<br>
+
+---
+
+[![Button Installation]][Installation]   
+[![Button Supported]][Supported]   
+[![Button Building]][Building]
+
+---
+
+<br>
+<br>
+
+
 
 ## Repository
 
-These are packaging files designed have been designed <br>
-to be built directly from the git repository and serve for <br>
-**Debian** / **Ubuntu** release newer than `Focal`.
-
-<br>
-<br>
-
-## Supported
-
-<kbd>  Bullseye  </kbd>  
-<kbd>  Sid  </kbd>  
-<kbd>  Focal  </kbd>  
-<kbd>  Impish  </kbd>
-
-<br>
-<br>
-
-## Guarantees
-
--   **Debian Stable** / **Ubuntu LTS** will be supported at<br>
-    least until the next of their releases is available.
-
--   **Ubuntu Regular** release will be supported <br>
-    until their upstream **E**nd-**O**f-**L**ife date.
-
-<br>
-<br>
-
-## Timing
-
-The actual time we decide to drop support for a <br>
-release after the guaranteed windows depends <br>
-on what we have to gain.
-
-### Reasons
-
-*for which we may drop a release.*
-
--   Upgrading to a newer toolchain
-
--   Reintroduction of system libraries
-
-<br>
-<br>
-
-## Preparations
-
-*How to set up your system for our **OBS** repositories.*
+This repository contains packaging files that have been <br>
+designed to be built directly from the git repository and <br>
+serve for **Debian** / **Ubuntu** release newer than `Focal`.
 
 <br>
 
-***Make sure to use the correct version for your distribution.***
-
-<br>
-
-### Debian Bullseye
-
-```shell
-echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Debian_Bullseye/ /'    \
-    | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list                                 \
-    > /dev/null
-```
-
-```shell
-curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Debian_Bullseye/Release.key'   \
-    | gpg --dearmor                                                                                         \
-    | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg                                           \
-    > /dev/null
-```
-
-<br>
-
-### Debian Sid
-
-```shell
-echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Debian_Sid/ /' \
-    | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list                         \
-    > /dev/null
-```
-
-```shell
-curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Debian_Sid/Release.key'    \
-    | gpg --dearmor                                                                                     \
-    | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg                                       \
-    > /dev/null
-```
-
-<br>
-
-### Ubuntu Focal
-
-```shell
-echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Focal/ /'   \
-    | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list                             \
-    > /dev/null
-```
-
-```shell
-curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Focal/Release.key'  \
-    | gpg --dearmor                                                                                     \
-    | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg                                       \
-    > /dev/null
-```
-<br>
-
-### Ubuntu Impish
-
-```shell
-echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Impish/ /'  \
-    | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list                             \
-    > /dev/null
-```
-
-```shell
-curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Impish/Release.key' \
-    | gpg --dearmor                                                                                     \
-    | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg                                       \
-    > /dev/null
-```
-  
-  
-<br>
-
-## Installation
-
-*Once you have set up your system, you* <br>
-*can install the **Ungoogled Chromium**.*
-
-```shell
-sudo apt update
-```
-
-```shell
-sudo apt install -y ungoogled-chromium
-```
-
-<br>
-<br>
-
-## Building
-
-*How to build a binary package.*
-
-```sh
-# Install initial packages
-sudo apt install -y devscripts equivs
-
-# Clone repository and switch to it (optional if are already in it)
-git clone https://github.com/ungoogled-software/ungoogled-chromium-debian.git
-cd ungoogled-chromium-debian
-
-# Initiate the submodules (optional if they are already initiated)
-git submodule update --init --recursive
-
-# Prepare the local source
-debian/rules setup
-
-# Install missing packages
-sudo mk-build-deps -i debian/control
-rm ungoogled-chromium-build-deps_*
-
-# Build the package
-dpkg-buildpackage -b -uc
-```
-
-
-[Badge Debian]: https://img.shields.io/badge/Ungoogled_Chromium-A81D33?style=for-the-badge&logoColor=white&logo=Debian
+<!----------------------------------------------------------------------------->
 
 [Ungoogled Chromium]: https://github.com/Eloston/ungoogled-chromium
+[Debian]: https://www.debian.org/releases/
+[Ubuntu]: https://wiki.ubuntu.com/Releases
 
 [#]: # 'Ungoogled Chromium for Debian'
+
+[Installation]: Documentation/Installation.md
+[Supported]: Documentation/Supported.md
+[Building]: Documentation/Building.md
+
+
+<!--------------------------------[ Badges ]----------------------------------->
+
+[Badge Bullseye]: https://img.shields.io/badge/11_Bullseye-A81D33?style=for-the-badge&logoColor=white&logo=Debian
+[Badge Impish]: https://img.shields.io/badge/22.04_Impish-E95420?style=for-the-badge&logoColor=white&logo=Ubuntu
+[Badge Focal]: https://img.shields.io/badge/21.10_Focal-E95420?style=for-the-badge&logoColor=white&logo=Ubuntu
+[Badge Sid]: https://img.shields.io/badge/12_Sid-A81D33?style=for-the-badge&logoColor=white&logo=Debian
+
+
+<!-------------------------------[ Buttons ]----------------------------------->
+
+[Button Installation]: https://img.shields.io/badge/Installation-FF3366?style=for-the-badge&logoColor=white&logo=DocuSign
+[Button Supported]: https://img.shields.io/badge/Supported-428813?style=for-the-badge&logoColor=white&logo=OpenStreetMap
+[Button Building]: https://img.shields.io/badge/Building-0FAAFF?style=for-the-badge&logoColor=white&logo=AzureArtifacts
