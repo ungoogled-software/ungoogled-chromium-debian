@@ -46,10 +46,10 @@
 
 <!----------------------------------------------------------------------------->
 
-[Bullseye]: Distribution/Bullseye.md
-[Impish]: Distribution/Impish.md
-[Focal]: Distribution/Focal.md
-[Sid]: Distribution/Sid.md
+[Bullseye]: Distributions/Bullseye.md
+[Impish]: Distributions/Impish.md
+[Focal]: Distributions/Focal.md
+[Sid]: Distributions/Sid.md
 
 
 <!--------------------------------[ Badges ]----------------------------------->
