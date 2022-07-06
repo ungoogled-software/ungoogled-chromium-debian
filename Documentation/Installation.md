@@ -1,90 +1,61 @@
-## Preparations
 
-*How to set up your system for our **OBS** repositories.*
+# Installation
 
-<br>
-
-***Make sure to use the correct version for your distribution.***
+*How install an **Ungoogled Chromium** OBS package.*
 
 <br>
 
-### Debian Bullseye
+## Preparation
 
-```shell
-echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Debian_Bullseye/ /'    \
-    | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list                                 \
-    > /dev/null
-```
-
-```shell
-curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Debian_Bullseye/Release.key'   \
-    | gpg --dearmor                                                                                         \
-    | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg                                           \
-    > /dev/null
-```
+*First, please follow the distribution specific* <br>
+*instructions on how to set up your system.*
 
 <br>
 
-### Debian Sid
+[![Badge Bullseye]][Bullseye] 
+[![Badge Sid]][Sid] 
+[![Badge Focal]][Focal] 
+[![Badge Impish]][Impish]
 
-```shell
-echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Debian_Sid/ /' \
-    | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list                         \
-    > /dev/null
-```
+<br>
+<br>
 
-```shell
-curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Debian_Sid/Release.key'    \
-    | gpg --dearmor                                                                                     \
-    | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg                                       \
-    > /dev/null
-```
+## Steps
+
+*Once you have set up your system,* <br>
+*you can follow up with these step.*
 
 <br>
 
-### Ubuntu Focal
+1.  **Update your system**
 
-```shell
-echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Focal/ /'   \
-    | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list                             \
-    > /dev/null
-```
-
-```shell
-curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Focal/Release.key'  \
-    | gpg --dearmor                                                                                     \
-    | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg                                       \
-    > /dev/null
-```
+    ```shell
+    sudo apt update
+    ```
+    
 <br>
 
-### Ubuntu Impish
+2.  **Install Ungoogle Chromium**
 
-```shell
-echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Impish/ /'  \
-    | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list                             \
-    > /dev/null
-```
-
-```shell
-curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Impish/Release.key' \
-    | gpg --dearmor                                                                                     \
-    | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg                                       \
-    > /dev/null
-```
-  
-  
+    ```shell
+    sudo apt install -y ungoogled-chromium
+    ```
+    
 <br>
 
-## Installation
 
-*Once you have set up your system, you* <br>
-*can install the **Ungoogled Chromium**.*
+<!----------------------------------------------------------------------------->
 
-```shell
-sudo apt update
-```
+[Bullseye]: Distribution/Bullseye.md
+[Impish]: Distribution/Impish.md
+[Focal]: Distribution/Focal.md
+[Sid]: Distribution/Sid.md
 
-```shell
-sudo apt install -y ungoogled-chromium
-```
+
+<!--------------------------------[ Badges ]----------------------------------->
+
+[Badge Bullseye]: https://img.shields.io/badge/Bullseye-A81D33?style=for-the-badge&logoColor=white&logo=Debian
+[Badge Impish]: https://img.shields.io/badge/Impish-E95420?style=for-the-badge&logoColor=white&logo=Ubuntu
+[Badge Focal]: https://img.shields.io/badge/Focal-E95420?style=for-the-badge&logoColor=white&logo=Ubuntu
+[Badge Sid]: https://img.shields.io/badge/Sid-A81D33?style=for-the-badge&logoColor=white&logo=Debian
+
