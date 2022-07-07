@@ -79,3 +79,14 @@
    return std::floor(value + 0.5f);
  }
  
+--- a/third_party/tflite_support/src/tensorflow_lite_support/cc/task/core/category.h
++++ b/third_party/tflite_support/src/tensorflow_lite_support/cc/task/core/category.h
+@@ -33,7 +33,7 @@
+   friend bool operator==(const Category& lhs, const Category& rhs) {
+     constexpr const double kScoreTolerance = 1e-6;
+     return lhs.class_name == rhs.class_name &&
+-           abs((double)(lhs.score - rhs.score)) <= kScoreTolerance;
++           std::abs((double)(lhs.score - rhs.score)) <= kScoreTolerance;
+   }
+ 
+   friend bool operator!=(const Category& lhs, const Category& rhs) {
