@@ -1,6 +1,6 @@
 --- a/build/config/compiler/BUILD.gn
 +++ b/build/config/compiler/BUILD.gn
-@@ -2058,7 +2058,7 @@
+@@ -2049,7 +2049,7 @@
      # - Investigate -Oz here, maybe just for ARM?
      cflags = [ "-Os" ] + common_optimize_on_cflags
    } else {
@@ -9,7 +9,7 @@
    }
    if (optimize_for_size) {
      rustflags = [ "-Copt-level=s" ]
-@@ -2129,7 +2129,7 @@
+@@ -2120,7 +2120,7 @@
      } else if (optimize_for_fuzzing) {
        cflags = [ "-O1" ] + common_optimize_on_cflags
      } else {
@@ -18,7 +18,7 @@
      }
      rustflags = [ "-Copt-level=3" ]
    }
-@@ -2162,7 +2162,7 @@
+@@ -2153,7 +2153,7 @@
      } else if (optimize_for_fuzzing) {
        cflags = [ "-O1" ] + common_optimize_on_cflags
      } else {

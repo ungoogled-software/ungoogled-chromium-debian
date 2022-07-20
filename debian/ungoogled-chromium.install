@@ -4,13 +4,14 @@ out/Release/chrome                                                             u
 out/Release/chromedriver                                                       usr/lib/chromium
 out/Release/libEGL.so                                                          usr/lib/chromium
 out/Release/libGLESv2.so                                                       usr/lib/chromium
+out/Release/libvk_swiftshader.so                                               usr/lib/chromium
+out/Release/vk_swiftshader_icd.json                                            usr/lib/chromium
 out/Release/chrome_*_percent.pak                                               usr/lib/chromium
 out/Release/chrome_crashpad_handler                                            usr/lib/chromium
 out/Release/v8_context_snapshot.bin                                            usr/lib/chromium
 out/Release/icudtl.dat                                                         usr/lib/chromium
 out/Release/resources.pak                                                      usr/lib/chromium
 out/Release/locales/*.pak                                                      usr/lib/chromium/locales
-out/Release/swiftshader/lib*.so                                                usr/lib/chromium/swiftshader
 debian/submodules/chromium-launcher/chromium                                   usr/bin
 debian/chromium-flags.conf                                                     etc
 debian/initial_preferences                                                     usr/lib/chromium
