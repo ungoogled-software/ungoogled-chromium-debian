@@ -51,7 +51,6 @@ serve for **Debian** / **Ubuntu** release newer than `Focal`.
 <!--------------------------------[ Badges ]----------------------------------->
 
 [Badge Bullseye]: https://img.shields.io/badge/11_Bullseye-A81D33?style=for-the-badge&logoColor=white&logo=Debian
-[Badge Impish]: https://img.shields.io/badge/22.04_Impish-E95420?style=for-the-badge&logoColor=white&logo=Ubuntu
 [Badge Focal]: https://img.shields.io/badge/21.10_Focal-E95420?style=for-the-badge&logoColor=white&logo=Ubuntu
 [Badge Sid]: https://img.shields.io/badge/12_Sid-A81D33?style=for-the-badge&logoColor=white&logo=Debian
 

@@ -46,7 +46,6 @@
 <!----------------------------------------------------------------------------->
 
 [Bullseye]: Distributions/Bullseye.md
-[Impish]: Distributions/Impish.md
 [Focal]: Distributions/Focal.md
 [Sid]: Distributions/Sid.md
 
@@ -54,7 +53,6 @@
 <!--------------------------------[ Badges ]----------------------------------->
 
 [Badge Bullseye]: https://img.shields.io/badge/Bullseye-A81D33?style=for-the-badge&logoColor=white&logo=Debian
-[Badge Impish]: https://img.shields.io/badge/Impish-E95420?style=for-the-badge&logoColor=white&logo=Ubuntu
 [Badge Focal]: https://img.shields.io/badge/Focal-E95420?style=for-the-badge&logoColor=white&logo=Ubuntu
 [Badge Sid]: https://img.shields.io/badge/Sid-A81D33?style=for-the-badge&logoColor=white&logo=Debian
 
