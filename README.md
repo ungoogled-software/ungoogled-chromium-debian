@@ -3,8 +3,7 @@
 
 [![Badge Bullseye]][Debian] 
 [![Badge Sid]][Debian] 
-[![Badge Focal]][Ubuntu] 
-[![Badge Impish]][Ubuntu]
+[![Badge Focal]][Ubuntu]
 
 <br>
 <br>

@@ -14,8 +14,7 @@
 
 [![Badge Bullseye]][Bullseye] 
 [![Badge Sid]][Sid] 
-[![Badge Focal]][Focal] 
-[![Badge Impish]][Impish]
+[![Badge Focal]][Focal]
 
 <br>
 <br>
