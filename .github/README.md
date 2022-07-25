@@ -1,59 +1,82 @@
-<div align = center>
+# ungoogled-chromium-debian
 
-[![Badge Bullseye]][Debian] 
-[![Badge Sid]][Debian] 
-[![Badge Focal]][Ubuntu]
+This repository contains files to build Debian packages of
+[ungoogled-chromium](//github.com/Eloston/ungoogled-chromium).
 
-<br>
-<br>
-<br>
+These are the new unified packaging files which are designed to be built
+directly from the git repository and serve as a single set of packaging
+files for all Debian or Ubuntu releases newer than the currently oldest
+supported release, `Focal`.
 
-# Ungoogled Chromium
+Even so we will only be supporting a subset of the available distributions.
+These are currently:
+- Debian Bullseye
+- Debian Sid
+- Ubuntu Focal
+- Ubuntu Impish
 
-***Debian*** *packages for **[Ungoogled Chromium]**.*
+The only guarantee we will make for support longevity is as follows:
+- Debian stable releases will be supported at least until the next stable release is available.
+- Ubuntu LTS releases will be supported at least until the next LTS release is available.
+- Ubuntu regular releases will be supported until their normal EOL with Ubuntu upstream.
 
-<br>
-<br>
-<br>
+The actual time we decide to drop support for a release after these windows
+have elapsed will depend on what we have to gain from doing so. Examples of
+reasons we may drop a release include: upgrading to a newer toolchain and
+reintroduction of system libraries.
 
-[![Button Installation]][Installation]   
-[![Button Supported]][Supported]   
-[![Button Building]][Building]
+## Getting OBS packages
 
-<br>
-<br>
-<br>
+Use the following instructions to setup your system for our OBS repositories. Make sure to use the one for the correct distribution release for your installation.
+- Debian Bullseye
+  ```sh
+  # echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Debian_Bullseye/ /' | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list > /dev/null
+  # curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Debian_Bullseye/Release.key' | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg > /dev/null
+  # sudo apt update
+  # sudo apt install -y ungoogled-chromium
+  ```
+- Debian Sid
+  ```sh
+  # echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Debian_Sid/ /' | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list > /dev/null
+  # curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Debian_Sid/Release.key' | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg > /dev/null
+  # sudo apt update
+  # sudo apt install -y ungoogled-chromium
+  ```
+- Ubuntu Focal
+  ```sh
+  # echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Focal/ /' | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list > /dev/null
+  # curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Focal/Release.key' | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg > /dev/null
+  # sudo apt update
+  # sudo apt install -y ungoogled-chromium
+  ```
+- Ubuntu Impish
+  ```sh
+  # echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Impish/ /' | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list > /dev/null
+  # curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Impish/Release.key' | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg > /dev/null
+  # sudo apt update
+  # sudo apt install -y ungoogled-chromium
+  ```
 
-## Repository
+## Building a binary package
 
-This repository contains packaging files that have been <br>
-designed to be built directly from the git repository and <br>
-serve for **Debian** / **Ubuntu** release newer than `Focal`.
+```sh
+# Install initial packages
+sudo apt install -y devscripts equivs
 
-<br>
-<br>
+# Clone repository and switch to it (optional if are already in it)
+git clone https://github.com/ungoogled-software/ungoogled-chromium-debian.git
+cd ungoogled-chromium-debian
 
-<!----------------------------------------------------------------------------->
+# Initiate the submodules (optional if they are already initiated)
+git submodule update --init --recursive
 
-[Ungoogled Chromium]: https://github.com/Eloston/ungoogled-chromium
-[Debian]: https://www.debian.org/releases/
-[Ubuntu]: https://wiki.ubuntu.com/Releases
+# Prepare the local source
+debian/rules setup
 
-[#]: # 'Ungoogled Chromium for Debian'
+# Install missing packages
+sudo mk-build-deps -i debian/control
+rm ungoogled-chromium-build-deps_*
 
-[Installation]: Documentation/Installation.md
-[Supported]: Documentation/Supported.md
-[Building]: Documentation/Building.md
-
-
-<!--------------------------------[ Badges ]----------------------------------->
-
-[Badge Bullseye]: https://img.shields.io/badge/11_Bullseye-A81D33?style=for-the-badge&logoColor=white&logo=Debian
-[Badge Focal]: https://img.shields.io/badge/21.10_Focal-E95420?style=for-the-badge&logoColor=white&logo=Ubuntu
-[Badge Sid]: https://img.shields.io/badge/12_Sid-A81D33?style=for-the-badge&logoColor=white&logo=Debian
-
-<!-------------------------------[ Buttons ]----------------------------------->
-
-[Button Installation]: https://img.shields.io/badge/Installation-FF3366?style=for-the-badge&logoColor=white&logo=DocuSign
-[Button Supported]: https://img.shields.io/badge/Supported-428813?style=for-the-badge&logoColor=white&logo=OpenStreetMap
-[Button Building]: https://img.shields.io/badge/Building-0FAAFF?style=for-the-badge&logoColor=white&logo=AzureArtifacts
+# Build the package
+dpkg-buildpackage -b -uc
+```
