@@ -13,7 +13,6 @@ These are currently:
 - Debian Bullseye
 - Debian Sid
 - Ubuntu Focal
-- Ubuntu Impish
 
 The only guarantee we will make for support longevity is as follows:
 - Debian stable releases will be supported at least until the next stable release is available.
@@ -46,13 +45,6 @@ Use the following instructions to setup your system for our OBS repositories. Ma
   ```sh
   # echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Focal/ /' | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list > /dev/null
   # curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Focal/Release.key' | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg > /dev/null
-  # sudo apt update
-  # sudo apt install -y ungoogled-chromium
-  ```
-- Ubuntu Impish
-  ```sh
-  # echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Impish/ /' | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list > /dev/null
-  # curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Ubuntu_Impish/Release.key' | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg > /dev/null
   # sudo apt update
   # sudo apt install -y ungoogled-chromium
   ```
