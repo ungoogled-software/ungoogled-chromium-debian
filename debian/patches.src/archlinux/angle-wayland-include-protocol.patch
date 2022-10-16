@@ -1,7 +1,6 @@
-diff -upr third_party/angle.orig/BUILD.gn third_party/angle/BUILD.gn
---- third_party/angle.orig/BUILD.gn	2022-08-17 19:38:11.000000000 +0000
-+++ third_party/angle/BUILD.gn	2022-08-18 11:04:09.061751111 +0000
-@@ -489,6 +489,12 @@ config("angle_vulkan_wayland_config") {
+--- a/third_party/angle/BUILD.gn
++++ b/third_party/angle/BUILD.gn
+@@ -507,6 +507,12 @@ config("angle_vulkan_wayland_config") {
    if (angle_enable_vulkan && angle_use_wayland &&
        defined(vulkan_wayland_include_dirs)) {
      include_dirs = vulkan_wayland_include_dirs
@@ -14,7 +13,7 @@ diff -upr third_party/angle.orig/BUILD.gn third_party/angle/BUILD.gn
    }
  }
  
-@@ -1073,6 +1079,7 @@ if (angle_use_wayland) {
+@@ -1094,6 +1100,7 @@ if (angle_use_wayland) {
      include_dirs = [
        "$wayland_dir/egl",
        "$wayland_dir/src",
@@ -22,9 +21,8 @@ diff -upr third_party/angle.orig/BUILD.gn third_party/angle/BUILD.gn
      ]
    }
  
-diff -upr third_party/angle.orig/src/third_party/volk/BUILD.gn third_party/angle/src/third_party/volk/BUILD.gn
---- third_party/angle.orig/src/third_party/volk/BUILD.gn	2022-08-17 19:38:12.000000000 +0000
-+++ third_party/angle/src/third_party/volk/BUILD.gn	2022-08-18 11:04:36.499828006 +0000
+--- a/third_party/angle/src/third_party/volk/BUILD.gn
++++ b/third_party/angle/src/third_party/volk/BUILD.gn
 @@ -21,6 +21,9 @@ source_set("volk") {
    configs += [ "$angle_root:angle_no_cfi_icall" ]
    public_deps = [ "$angle_vulkan_headers_dir:vulkan_headers" ]

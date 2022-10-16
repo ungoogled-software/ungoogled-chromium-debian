@@ -1,6 +1,6 @@
 --- a/ui/gl/gl_image_native_pixmap.cc
 +++ b/ui/gl/gl_image_native_pixmap.cc
-@@ -326,6 +326,8 @@ gfx::NativePixmapHandle GLImageNativePix
+@@ -352,6 +352,8 @@ gfx::NativePixmapHandle GLImageNativePix
                                 std::move(scoped_fd));
    }
  
