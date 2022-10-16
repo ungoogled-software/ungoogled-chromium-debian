@@ -1,7 +1,7 @@
-archlinux/remove-no-opaque-pointers-flag.patch
-archlinux/iwyu-add-utility-for-std-exchange.patch
+archlinux/angle-wayland-include-protocol.patch
 archlinux/wayland-egl.patch
 archlinux/ozone-add-va-api-support-to-wayland.patch
+archlinux/remove-main-main10-profile-limit.patch
 
 debian/clang-format.patch
 debian/debianization/sandbox.patch

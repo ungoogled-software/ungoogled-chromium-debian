@@ -15,3 +15,5 @@ use_gnome_keyring=false
 use_kerberos=false
 use_sysroot=false
 use_vaapi=true
+enable_platform_hevc=true
+enable_hevc_parser_and_hw_decoder=true
