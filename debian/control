@@ -9,10 +9,10 @@ Standards-Version: 4.5.0
 Rules-Requires-Root: no
 Build-Depends:
  debhelper (>= 11),
- clang-14,
- clang-format-14,
- lld-14,
- llvm-14-dev,
+ clang-15,
+ clang-format-15,
+ lld-15,
+ llvm-15-dev,
  git,
  python-is-python3,
  python3,
