@@ -30,7 +30,6 @@ Build-Depends:
  bison,
  nodejs (>> 12),
  node-typescript (>= 4.4.3),
- terser | uglifyjs.terser,
  libpipewire-0.3-dev,
  valgrind,
  xz-utils,
