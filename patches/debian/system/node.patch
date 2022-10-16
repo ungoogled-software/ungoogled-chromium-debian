@@ -14,7 +14,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 -    finally:
 -        sys.path = old_sys_path
 -    return node.GetBinaryPath()
-+    return '/usr/bin/nodejs'
++    return '/usr/bin/node'
  
  
  def devtools_root_path():
