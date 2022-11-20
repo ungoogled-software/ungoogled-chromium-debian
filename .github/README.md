@@ -1,6 +1,6 @@
 # ungoogled-chromium-debian (unmaintained)
 
-This project is currently not maintained.
+The debian packaging is currently not maintained.
 
 ---
 
