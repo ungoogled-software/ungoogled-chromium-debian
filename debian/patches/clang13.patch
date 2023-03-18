@@ -1,0 +1,31 @@
+author: Andres Salomon <dilinger@debian.org>
+description: drop various arguments that clang-13 doesn't support
+
+These usually show up as either warnings or actual errors; eg,
+
+warning: unknown warning option '-Wno-deprecated-non-prototype' [-Wunknown-warning-option]
+error: unknown argument: '-no-opaque-pointers'
+
+
+Index: chromium-109.0.5414.74/build/config/compiler/BUILD.gn
+===================================================================
+--- chromium-109.0.5414.74.orig/build/config/compiler/BUILD.gn
++++ chromium-109.0.5414.74/build/config/compiler/BUILD.gn
+@@ -808,9 +808,6 @@ config("compiler") {
+   #   lldb doesn't have the needed changes yet.
+   # * Fuchsia isn't supported as zxdb doesn't support simple template names yet.
+   # TODO(crbug.com/1379070): Remove if the upstream default ever changes.
+-  if (is_clang && !is_nacl && !is_win && !is_apple && !is_fuchsia) {
+-    cflags_cc += [ "-gsimple-template-names" ]
+-  }
+ 
+   # MLGO specific flags. These flags enable an ML-based inliner trained on
+   # Chrome on Android (arm32) with ThinLTO enabled, optimizing for size.
+@@ -1603,7 +1600,6 @@ config("default_warnings") {
+       if (!is_nacl) {
+         cflags += [
+           # TODO(crbug.com/1343975) Evaluate and possibly enable.
+-          "-Wno-deprecated-builtins",
+ 
+           # TODO(crbug.com/1352183) Evaluate and possibly enable.
+           "-Wno-bitfield-constant-conversion",
