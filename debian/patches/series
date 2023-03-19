@@ -1,8 +1,8 @@
+use-package-optimizations
 icu-shim.patch
-chromium-110-compiler.patch
+clang-version-check.patch
 clang13.patch
 lld-13.patch
-use-package-optimizations.patch
 perfetto-system-zlib.patch
 pdfium-system-tiff.patch
 system-jsoncpp.patch
