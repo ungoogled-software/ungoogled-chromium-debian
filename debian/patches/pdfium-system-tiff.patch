@@ -11,7 +11,7 @@
  
  namespace {
  
-@@ -190,7 +188,7 @@
+@@ -191,7 +189,7 @@
                               tiff_write, tiff_seek, tiff_close, tiff_get_size,
                               tiff_map, tiff_unmap);
    if (tif) {
@@ -22,7 +22,7 @@
  }
 --- a/third_party/pdfium/third_party/BUILD.gn
 +++ b/third_party/pdfium/third_party/BUILD.gn
-@@ -512,59 +512,13 @@
+@@ -451,59 +451,13 @@
    }
  }
  

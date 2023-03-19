@@ -5,11 +5,11 @@ Upstream doesn't allow overridding the linker (other than toggling
 lld vs gold). 
 
 
-Index: chromium-103.0.5060.134/build/config/compiler/BUILD.gn
+Index: build/config/compiler/BUILD.gn
 ===================================================================
---- chromium-103.0.5060.134.orig/build/config/compiler/BUILD.gn
-+++ chromium-103.0.5060.134/build/config/compiler/BUILD.gn
-@@ -345,7 +345,7 @@ config("compiler") {
+--- a/build/config/compiler/BUILD.gn
++++ b/build/config/compiler/BUILD.gn
+@@ -341,7 +341,7 @@ config("compiler") {
      }
  
      if (use_lld) {

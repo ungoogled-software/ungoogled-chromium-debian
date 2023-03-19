@@ -1,11 +1,10 @@
 use-package-optimizations.patch
 icu-shim.patch
-clang-version-check.patch
+chromium-110-compiler.patch
 clang13.patch
 lld-13.patch
 perfetto-system-zlib.patch
 pdfium-system-tiff.patch
-system-jsoncpp.patch
 template-correction.patch
 fix-node-architecture.patch
 sql-virtual-cursor.patch
