@@ -19,7 +19,7 @@ AUTHOR   := ungoogled-chromium Maintainers <github@null.invalid>
 DATETIME := $(shell date -R)
 
 # Assign the clang toolchain to use
-LLVM_VERSION ?= 11
+LLVM_VERSION ?= 13
 export AR    := llvm-ar-$(LLVM_VERSION)
 export NM    := llvm-nm-$(LLVM_VERSION)
 export CC    := clang-$(LLVM_VERSION)

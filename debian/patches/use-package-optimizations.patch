@@ -1,15 +1,15 @@
 --- a/build/config/compiler/BUILD.gn
 +++ b/build/config/compiler/BUILD.gn
-@@ -2049,7 +2049,7 @@
-     # - Investigate -Oz here, maybe just for ARM?
-     cflags = [ "-Os" ] + common_optimize_on_cflags
+@@ -2154,7 +2154,7 @@
+     # vectorization while otherwise optimizing for size.
+     rustflags = [ "-Copt-level=s" ]
    } else {
 -    cflags = [ "-O2" ] + common_optimize_on_cflags
 +    cflags = common_optimize_on_cflags
-   }
-   if (optimize_for_size) {
-     rustflags = [ "-Copt-level=s" ]
-@@ -2120,7 +2120,7 @@
+ 
+     # The `-O3` for clang turns on extra optimizations compared to the standard
+     # `-O2`. But for rust, `-Copt-level=3` is the default and is thus reliable
+@@ -2225,7 +2225,7 @@
      } else if (optimize_for_fuzzing) {
        cflags = [ "-O1" ] + common_optimize_on_cflags
      } else {
@@ -18,7 +18,7 @@
      }
      rustflags = [ "-Copt-level=3" ]
    }
-@@ -2153,7 +2153,7 @@
+@@ -2258,7 +2258,7 @@
      } else if (optimize_for_fuzzing) {
        cflags = [ "-O1" ] + common_optimize_on_cflags
      } else {

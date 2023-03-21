@@ -1,0 +1,20 @@
+author: Andres Salomon <dilinger@debian.org>
+description: hardcode lld for clang-13
+
+Upstream doesn't allow overridding the linker (other than toggling
+lld vs gold). 
+
+
+Index: build/config/compiler/BUILD.gn
+===================================================================
+--- a/build/config/compiler/BUILD.gn
++++ b/build/config/compiler/BUILD.gn
+@@ -341,7 +341,7 @@ config("compiler") {
+     }
+ 
+     if (use_lld) {
+-      ldflags += [ "-fuse-ld=lld" ]
++      ldflags += [ "-fuse-ld=lld-13" ]
+       if (lld_path != "") {
+         ldflags += [ "-B$lld_path" ]
+       }

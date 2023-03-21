@@ -81,7 +81,7 @@
    <metadata_license>CC0-1.0</metadata_license>
    <project_license>BSD-3-Clause and LGPL-2.1+ and Apache-2.0 and IJG and MIT and GPL-2.0+ and ISC and OpenSSL and (MPL-1.1 or GPL-2.0 or LGPL-2.0)</project_license>
    <name>Chromium Web Browser</name>
-@@ -12,15 +10,6 @@
+@@ -12,17 +10,8 @@
      Chromium is an open-source browser project that aims to build a safer, faster,
      and more stable way to experience the web.
      </p>
@@ -97,6 +97,8 @@
    </description>
    <url type="homepage">https://www.chromium.org/Home</url>
    <screenshots>
+     <screenshot type="default">
+       <image>https://www.gstatic.com/chrome/appstream/chrome-2.png</image>
 --- a/chrome/installer/linux/common/desktop.template
 +++ b/chrome/installer/linux/common/desktop.template
 @@ -1,6 +1,6 @@
@@ -134,4 +136,4 @@
  Name[zh_CN]=新建隐身窗口
  Name[zh_TW]=新增無痕式視窗
 -Exec=/usr/bin/@@USR_BIN_SYMLINK_NAME@@ --incognito
-+Exec=/usr/bin/chromium --incognito
+++Exec=/usr/bin/chromium --incognito

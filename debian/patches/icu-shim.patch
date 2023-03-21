@@ -1,0 +1,19 @@
+description: allow building against system icu even when is_offical_build=true
+author: Andres Salomon <dilinger@debian.org>
+
+I noticed this when switching to an official build and trying to build against
+the system's libicu, but it may be necessary for other system libs as well.
+If we switch to using the bundled icu, we can see if it's possible to get rid
+of it.
+
+--- a/tools/generate_shim_headers/generate_shim_headers.py
++++ b/tools/generate_shim_headers/generate_shim_headers.py
+@@ -18,7 +18,7 @@ import sys
+ 
+ 
+ SHIM_TEMPLATE = """
+-#if defined(OFFICIAL_BUILD)
++#if defined(DONT_TELL_ME_WHAT_TO_DO_GOOGLE)
+ #error shim headers must not be used in official builds!
+ #endif
+ """
