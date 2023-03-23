@@ -53,6 +53,9 @@ cat > _service << EOF
         <param name="url">https://nodejs.org/dist/$NODE_VERSION/node-$NODE_VERSION-linux-x64.tar.xz</param>
     </service>
     <service name="download_url">
+        <param name="url">https://nodejs.org/dist/$NODE_VERSION/node-$NODE_VERSION-linux-armv7l.tar.xz</param>
+    </service>
+    <service name="download_url">
         <param name="url">https://nodejs.org/dist/$NODE_VERSION/node-$NODE_VERSION-linux-arm64.tar.xz</param>
     </service>
     <service name="download_url">
@@ -97,6 +100,7 @@ mkdir -p debian/download_cache
 ln -s ../../../SOURCES/chromium-$UC_VERSION.tar.xz debian/download_cache/chromium-$UC_VERSION.tar.xz
 ln -s ../../../SOURCES/chromium-$UC_VERSION.tar.xz.hashes debian/download_cache/chromium-$UC_VERSION.tar.xz.hashes
 ln -s ../../../SOURCES/node-$NODE_VERSION-linux-x64.tar.xz debian/download_cache/node-$NODE_VERSION-linux-x64.tar.xz
+ln -s ../../../SOURCES/node-$NODE_VERSION-linux-armv7l.tar.xz debian/download_cache/node-$NODE_VERSION-linux-armv7l.tar.xz
 ln -s ../../../SOURCES/node-$NODE_VERSION-linux-arm64.tar.xz debian/download_cache/node-$NODE_VERSION-linux-arm64.tar.xz
 ln -s ../../../SOURCES/node-$NODE_VERSION.sha256sum debian/download_cache/node-$NODE_VERSION.sha256sum
 

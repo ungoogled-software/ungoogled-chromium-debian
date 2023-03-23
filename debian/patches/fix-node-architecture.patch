@@ -1,6 +1,6 @@
 --- a/third_party/node/node.py
 +++ b/third_party/node/node.py
-@@ -11,14 +11,11 @@
+@@ -11,14 +11,13 @@
  
  
  def GetBinaryPath():
@@ -14,6 +14,8 @@
 -
 +  if platform.machine() == 'x86_64':
 +    return os_path.join(os_path.dirname(__file__), 'linux', 'node-linux-x64', 'bin', 'node')
++  if platform.machine() == 'armv7l':
++    return os_path.join(os_path.dirname(__file__), 'linux', 'node-linux-armv7l', 'bin', 'node')
 +  if platform.machine() == 'aarch64':
 +    return os_path.join(os_path.dirname(__file__), 'linux', 'node-linux-arm64', 'bin', 'node')
 +  return ''
