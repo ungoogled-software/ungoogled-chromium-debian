@@ -33,9 +33,10 @@ export CXXFLAGS                 := $(shell dpkg-buildflags --get CXXFLAGS) \
 export CFLAGS                   := $(CXXFLAGS)
 
 # Use parallel jobs if requested
-JOBS := 1
 ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
 JOBS := $(patsubst parallel=%,%,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
+else
+JOBS := 1
 endif
 
 # Version of node to install
