@@ -8,3 +8,4 @@ pdfium-system-tiff.patch
 template-correction.patch
 fix-node-architecture.patch
 sql-virtual-cursor.patch
+fix-armhf.patch
