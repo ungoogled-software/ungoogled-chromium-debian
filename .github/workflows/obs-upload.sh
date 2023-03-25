@@ -95,6 +95,12 @@ EOF
 cat > build.script << EOF
 export LANG=C.UTF-8
 
+JOBS="\${DEB_BUILD_OPTIONS#*=}"
+case "\$(uname -m)" in
+aarch64) DEB_BUILD_OPTIONS="parallel=\$(("\$JOBS" / 2))" ;;
+esac
+JOBS=
+
 tar -x -f ../SOURCES/ungoogled-chromium.tar.xz
 mkdir -p debian/download_cache
 ln -s ../../../SOURCES/chromium-$UC_VERSION.tar.xz debian/download_cache/chromium-$UC_VERSION.tar.xz
