@@ -58,6 +58,7 @@ GN_FLAGS +=                                                           \
         symbol_level=1                                                \
         blink_enable_generated_code_formatting=false                  \
         is_cfi=false                                                  \
+        use_thin_lto=false                                            \
         use_sysroot=false                                             \
         use_gnome_keyring=false                                       \
         ffmpeg_branding=\"Chrome\"                                    \
