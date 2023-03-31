@@ -1,3 +1,17 @@
+--- a/chrome/BUILD.gn
++++ b/chrome/BUILD.gn
+@@ -344,6 +344,11 @@
+           "//ui/base",
+         ]
+       }
++
++      if (current_cpu == "arm") {
++        lib_dirs = [ "/usr/lib/llvm-13/lib/clang/13.0.1/lib/linux" ]
++        libs = [ ":libclang_rt.builtins-armhf.a" ]
++      }
+     }
+ 
+     if (is_chromeos_ash || is_win) {
 --- a/tools/v8_context_snapshot/BUILD.gn
 +++ b/tools/v8_context_snapshot/BUILD.gn
 @@ -93,6 +93,11 @@
