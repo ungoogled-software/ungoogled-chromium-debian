@@ -9,7 +9,7 @@ Index: build/config/compiler/BUILD.gn
 ===================================================================
 --- a/build/config/compiler/BUILD.gn
 +++ b/build/config/compiler/BUILD.gn
-@@ -341,7 +341,7 @@ config("compiler") {
+@@ -346,7 +346,7 @@ config("compiler") {
      }
  
      if (use_lld) {
