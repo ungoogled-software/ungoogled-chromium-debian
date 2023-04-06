@@ -77,7 +77,6 @@ GN_FLAGS +=                                                           \
         use_kerberos=false                                            \
         use_cups=true                                                 \
         v8_enable_backtrace=true                                      \
-        use_cxx17=true                                                \
 
 # Currently omitted from base (bullseye): icu, harfbuzz-ng, ffmpeg, openh264, libvpx
 SYS_LIBS :=         \
