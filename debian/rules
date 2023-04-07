@@ -14,7 +14,7 @@ GN       := $(OUT_DIR)/gn
 
 # Changelog and control template variables
 VERSION  := $(file < $(UC_DIR)/chromium_version.txt)-1
-RELEASE  := bullseye
+RELEASE  := jammy
 AUTHOR   := ungoogled-chromium Maintainers <github@null.invalid>
 DATETIME := $(shell date -R)
 
@@ -78,7 +78,7 @@ GN_FLAGS +=                                                           \
         use_cups=true                                                 \
         v8_enable_backtrace=true                                      \
 
-# Currently omitted from base (bullseye): icu, harfbuzz-ng, ffmpeg, openh264, libvpx
+# Currently omitted from base (jammy): icu, harfbuzz-ng, ffmpeg, openh264, libvpx
 SYS_LIBS :=         \
         flac        \
         fontconfig  \
