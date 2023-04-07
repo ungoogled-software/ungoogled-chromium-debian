@@ -16,15 +16,11 @@ Even so we will only be supporting a subset of the available distributions.
 These are currently:
 - Debian Sid
 
-The only guarantee we will make for support longevity is as follows:
-- Debian stable releases will be supported at least until the next stable release is available.
-- Ubuntu LTS releases will be supported at least until the next LTS release is available.
-- Ubuntu regular releases will be supported until their normal EOL with Ubuntu upstream.
-
-The actual time we decide to drop support for a release after these windows
-have elapsed will depend on what we have to gain from doing so. Examples of
-reasons we may drop a release include: upgrading to a newer toolchain and
-reintroduction of system libraries.
+All releases shall be supported on a best-effort basis. `x86_64` is the only
+architecture we can be reliably test so any other architectures will only be
+buildable at best. Older releases may be dropped at any time if they are too
+difficult to continue to support due to how bleeding edge Chromium tends to
+be.
 
 ## Getting OBS packages
 
