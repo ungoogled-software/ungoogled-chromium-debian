@@ -19,7 +19,7 @@ AUTHOR   := ungoogled-chromium Maintainers <github@null.invalid>
 DATETIME := $(shell date -R)
 
 # Assign the clang toolchain to use
-LLVM_VERSION ?= 13
+LLVM_VERSION ?= 14
 export AR    := llvm-ar-$(LLVM_VERSION)
 export NM    := llvm-nm-$(LLVM_VERSION)
 export CC    := clang-$(LLVM_VERSION)
@@ -145,7 +145,7 @@ override_dh_auto_configure:
 override_dh_auto_build: $(GN)
 	$(GN) gen $(OUT_DIR) --args="$(GN_FLAGS)" --fail-on-unused-args
 	ninja -j $(JOBS) -C $(OUT_DIR) chrome chrome_sandbox chromedriver
-	make -C $(CL_DIR) CFLAGS="$(CFLAGS) -g -pie -fPIE" CHROMIUM_BINARY=/usr/lib/chromium/chrome chromium
+	make -C $(CL_DIR) CFLAGS="$(CFLAGS) -pie -fPIE" CHROMIUM_BINARY=/usr/lib/chromium/chrome chromium
 
 override_dh_prep:
 	for file in `find -name "*.gn.orig" -o -name "*.gni.orig"`; do mv $$file $${file%.orig}; done
