@@ -1,8 +1,7 @@
 use-package-optimizations.patch
 icu-shim.patch
 chromium-110-compiler.patch
-clang13.patch
-lld-13.patch
+lld-14.patch
 perfetto-system-zlib.patch
 pdfium-system-tiff.patch
 template-correction.patch
