@@ -29,7 +29,8 @@ export CXX   := clang++-$(LLVM_VERSION)
 export DEB_BUILD_MAINT_OPTIONS  := hardening=+all optimize=-lto
 export DEB_CXXFLAGS_MAINT_STRIP := -g
 export CXXFLAGS                 := $(shell dpkg-buildflags --get CXXFLAGS) \
-                                   -Wno-unknown-warning-option
+                                   -Wno-unknown-warning-option             \
+                                   -Wno-deprecated-declarations
 export CFLAGS                   := $(CXXFLAGS)
 
 # Use parallel jobs if requested
