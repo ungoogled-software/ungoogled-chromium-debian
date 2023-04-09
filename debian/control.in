@@ -15,6 +15,7 @@ Build-Depends:
  libc++-14-dev,
  python-is-python3,
  ninja-build,
+ generate-ninja,
  pkg-config,
  gperf,
  libncurses-dev,

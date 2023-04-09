@@ -10,7 +10,6 @@ UP_DIR   := $(UC_DIR)/patches
 DL_CACHE := $(DB_DIR)/download_cache
 DS_CACHE := $(DB_DIR)/domsubcache.tar.gz
 OUT_DIR  := out/Release
-GN       := $(OUT_DIR)/gn
 
 # Changelog and control template variables
 VERSION  := $(file < $(UC_DIR)/chromium_version.txt)-1
@@ -133,18 +132,14 @@ setup: changelog control download
 	tar -C third_party/node/linux -xf $(DL_CACHE)/node-$(NODE_VERSION)-linux-armv7l.tar.xz --transform=s/^node-$(NODE_VERSION)-linux-armv7l/node-linux-armv7l/
 	tar -C third_party/node/linux -xf $(DL_CACHE)/node-$(NODE_VERSION)-linux-arm64.tar.xz --transform=s/^node-$(NODE_VERSION)-linux-arm64/node-linux-arm64/
 
-$(GN):
-	# Switch to distribution GN once generate-ninja has widespread availability
-	tools/gn/bootstrap/bootstrap.py -j $(JOBS) --skip-generate-buildfiles
-
 override_dh_auto_configure:
 	$(UL_DIR)/patches.py apply $(RT_DIR) $(UP_DIR)
 	$(UL_DIR)/domain_substitution.py apply -r $(UC_DIR)/domain_regex.list -f $(UC_DIR)/domain_substitution.list -c $(DS_CACHE) $(RT_DIR)
 	cp $(SH_DIR)/jsoncpp.gn build/linux/unbundle
 	build/linux/unbundle/replace_gn_files.py --system-libraries $(SYS_LIBS)
 
-override_dh_auto_build: $(GN)
-	$(GN) gen $(OUT_DIR) --args="$(GN_FLAGS)" --fail-on-unused-args
+override_dh_auto_build:
+	gn gen $(OUT_DIR) --args="$(GN_FLAGS)" --fail-on-unused-args
 	ninja -j $(JOBS) -C $(OUT_DIR) chrome chrome_sandbox chromedriver
 	make -C $(CL_DIR) CFLAGS="$(CFLAGS) -pie -fPIE" CHROMIUM_BINARY=/usr/lib/chromium/chrome chromium
 
