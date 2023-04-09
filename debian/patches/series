@@ -1,4 +1,3 @@
-use-package-optimizations.patch
 icu-shim.patch
 chromium-110-compiler.patch
 lld-14.patch
