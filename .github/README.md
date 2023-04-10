@@ -15,6 +15,8 @@ currently oldest supported release, `Jammy`.
 Even so we will only be supporting a subset of the available distributions.
 These are currently:
 - Debian Sid
+- Ubuntu Jammy
+- Ubuntu Lunar
 
 All releases shall be supported on a best-effort basis. `x86_64` is the only
 architecture we can be reliably test so any other architectures will only be
