@@ -16,9 +16,9 @@ These are currently:
 
 All releases shall be supported on a best-effort basis. `x86_64` is the only
 architecture we can be reliably test so any other architectures will only be
-buildable at best. Older releases may be dropped at any time if they are too
-difficult to continue to support due to how bleeding edge Chromium tends to
-be.
+guaranteed to be buildable at best. Older releases may be dropped at any time
+if they are too difficult to continue to support due to how bleeding edge
+Chromium tends to be.
 
 ## Getting OBS packages
 
