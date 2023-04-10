@@ -1,8 +1,4 @@
-# ungoogled-chromium-debian (unmaintained)
-
-The debian packaging is currently maintained but version will behind the current ungoogled-chromium version.
-
----
+# ungoogled-chromium-debian
 
 This repository contains files to build Debian packages of
 [ungoogled-chromium](//github.com/Eloston/ungoogled-chromium).
