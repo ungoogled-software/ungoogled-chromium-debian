@@ -24,14 +24,8 @@ be.
 
 ## Getting OBS packages
 
-Use the following instructions to setup your system for our OBS repositories. Make sure to use the one for the correct distribution release for your installation.
-- Debian Sid
-  ```sh
-  # echo 'deb http://download.opensuse.org/repositories/home:/ungoogled_chromium/Debian_Sid/ /' | sudo tee /etc/apt/sources.list.d/home-ungoogled_chromium.list > /dev/null
-  # curl -s 'https://download.opensuse.org/repositories/home:/ungoogled_chromium/Debian_Sid/Release.key' | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home-ungoogled_chromium.gpg > /dev/null
-  # sudo apt update
-  # sudo apt install -y ungoogled-chromium
-  ```
+We now defer to here:
+[OBS Setup Instructions](https://software.opensuse.org//download.html?project=home%3Aungoogled_chromium&package=ungoogled-chromium)
 
 ## Building a binary package
 
