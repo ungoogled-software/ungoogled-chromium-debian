@@ -25,6 +25,12 @@ Chromium tends to be.
 We now defer to here:
 [OBS Setup Instructions](https://software.opensuse.org//download.html?project=home%3Aungoogled_chromium&package=ungoogled-chromium)
 
+Also note, if you have added the repository previously, you may eventually
+get errors about expired keys. This is due to how OBS generates repository
+keys and we have no known way to control it. At present the only known
+solution is to redo the steps for adding the repository key as OBS does
+regenerate it eventually with a new expiration date.
+
 ## Building a binary package
 
 ```sh
