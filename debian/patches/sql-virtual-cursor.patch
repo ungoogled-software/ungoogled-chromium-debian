@@ -142,7 +142,7 @@
  
 --- a/sql/recover_module/cursor.h
 +++ b/sql/recover_module/cursor.h
-@@ -130,7 +130,7 @@
+@@ -128,7 +128,7 @@
    std::vector<std::unique_ptr<InnerPageDecoder>> inner_decoders_;
  
    // Decodes the leaf page containing records.
