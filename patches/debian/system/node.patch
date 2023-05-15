@@ -20,9 +20,9 @@ author: Michael Gilbert <mgilbert@debian.org>
  def devtools_root_path():
 --- a/tools/typescript/tsconfig_base.json
 +++ b/tools/typescript/tsconfig_base.json
-@@ -3,7 +3,7 @@
-     "module": "ESNext",
-     "target": "ES2021",
+@@ -4,7 +4,7 @@
+     "target": "ESNext",
+     "useDefineForClassFields": false,
  
 -    "noEmitOnError": true,
 +    "noEmitOnError": false,
