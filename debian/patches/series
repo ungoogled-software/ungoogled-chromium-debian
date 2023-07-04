@@ -1,8 +1,8 @@
 icu-shim.patch
 lld-14.patch
 perfetto-system-zlib.patch
-pdfium-system-tiff.patch
 template-correction.patch
 fix-node-architecture.patch
-sql-virtual-cursor.patch
 disable-clang-version-check.patch
+clang-attribs.patch
+structured-binding-scope-bug.patch
