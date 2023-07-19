@@ -7,3 +7,4 @@ disable-clang-version-check.patch
 clang-attribs.patch
 structured-binding-scope-bug.patch
 typename.patch
+sql-virtual-cursor.patch
