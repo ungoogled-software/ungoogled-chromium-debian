@@ -1,6 +1,8 @@
+description: In order to build w/ libstdc++ >= 11 and clang, this patch is needed.
+author: https://bugs.gentoo.org/786597#c14
 --- a/sql/recover_module/btree.cc
 +++ b/sql/recover_module/btree.cc
-@@ -136,16 +136,25 @@
+@@ -136,16 +136,25 @@ static_assert(std::is_trivially_destruct
                "Move the destructor to the .cc file if it's non-trival");
  #endif  // !DCHECK_IS_ON()
  
@@ -34,7 +36,7 @@
    DCHECK(CanAdvance());
 --- a/sql/recover_module/btree.h
 +++ b/sql/recover_module/btree.h
-@@ -103,7 +103,7 @@
+@@ -106,7 +106,7 @@ class LeafPageDecoder {
    //
    // |db_reader| must have been used to read an inner page of a table B-tree.
    // |db_reader| must outlive this instance.
@@ -43,7 +45,7 @@
    ~LeafPageDecoder() noexcept = default;
  
    LeafPageDecoder(const LeafPageDecoder&) = delete;
-@@ -151,6 +151,15 @@
+@@ -154,6 +154,15 @@ class LeafPageDecoder {
    // read as long as CanAdvance() returns true.
    bool TryAdvance();
  
@@ -59,7 +61,7 @@
    // True if the given reader may point to an inner page in a table B-tree.
    //
    // The last ReadPage() call on |db_reader| must have succeeded.
-@@ -164,14 +173,14 @@
+@@ -167,16 +176,16 @@ class LeafPageDecoder {
    static int ComputeCellCount(DatabasePageReader* db_reader);
  
    // The number of the B-tree page this reader is reading.
@@ -69,8 +71,10 @@
    //
    // Raw pointer usage is acceptable because this instance's owner is expected
    // to ensure that the DatabasePageReader outlives this.
--  DatabasePageReader* const db_reader_;
-+  DatabasePageReader* db_reader_;
+   // This field is not a raw_ptr<> because it caused a
+   // std::is_trivially_destructible static_assert failure.
+-  RAW_PTR_EXCLUSION DatabasePageReader* const db_reader_;
++  RAW_PTR_EXCLUSION DatabasePageReader* db_reader_;
    // Caches the ComputeCellCount() value for this reader's page.
 -  const int cell_count_ = ComputeCellCount(db_reader_);
 +  int cell_count_;
@@ -79,7 +83,7 @@
    //
 --- a/sql/recover_module/cursor.cc
 +++ b/sql/recover_module/cursor.cc
-@@ -28,7 +28,7 @@
+@@ -28,7 +28,7 @@ VirtualCursor::~VirtualCursor() {
  int VirtualCursor::First() {
    DCHECK_CALLED_ON_VALID_SEQUENCE(sequence_checker_);
    inner_decoders_.clear();
@@ -88,7 +92,7 @@
  
    AppendPageDecoder(table_->root_page_id());
    return Next();
-@@ -38,18 +38,18 @@
+@@ -38,18 +38,18 @@ int VirtualCursor::Next() {
    DCHECK_CALLED_ON_VALID_SEQUENCE(sequence_checker_);
    record_reader_.Reset();
  
@@ -114,7 +118,7 @@
          continue;
        }
        if (!record_reader_.Initialize())
-@@ -101,13 +101,13 @@
+@@ -101,13 +101,13 @@ int VirtualCursor::ReadColumn(int column
  int64_t VirtualCursor::RowId() {
    DCHECK_CALLED_ON_VALID_SEQUENCE(sequence_checker_);
    DCHECK(record_reader_.IsInitialized());
@@ -131,7 +135,7 @@
        << __func__
        << " must only be called when the current path has no leaf decoder";
  
-@@ -115,7 +115,7 @@
+@@ -115,7 +115,7 @@ void VirtualCursor::AppendPageDecoder(in
      return;
  
    if (LeafPageDecoder::IsOnValidPage(&db_reader_)) {
@@ -142,7 +146,7 @@
  
 --- a/sql/recover_module/cursor.h
 +++ b/sql/recover_module/cursor.h
-@@ -128,7 +128,7 @@
+@@ -128,7 +128,7 @@ class VirtualCursor {
    std::vector<std::unique_ptr<InnerPageDecoder>> inner_decoders_;
  
    // Decodes the leaf page containing records.
@@ -153,7 +157,7 @@
  };
 --- a/sql/recover_module/pager.cc
 +++ b/sql/recover_module/pager.cc
-@@ -23,8 +23,7 @@
+@@ -23,8 +23,7 @@ static_assert(DatabasePageReader::kMaxPa
                "ints are not appropriate for representing page IDs");
  
  DatabasePageReader::DatabasePageReader(VirtualTable* table)
@@ -163,7 +167,7 @@
    DCHECK(table != nullptr);
    DCHECK(IsValidPageSize(table->page_size()));
  }
-@@ -57,8 +56,8 @@
+@@ -57,8 +56,8 @@ int DatabasePageReader::ReadPage(int pag
                      std::numeric_limits<int64_t>::max(),
                  "The |read_offset| computation above may overflow");
  
@@ -184,7 +188,7 @@
  #include <cstdint>
  #include <memory>
  #include <ostream>
-@@ -72,7 +73,7 @@
+@@ -72,7 +73,7 @@ class DatabasePageReader {
      DCHECK_CALLED_ON_VALID_SEQUENCE(sequence_checker_);
      DCHECK_NE(page_id_, kInvalidPageId)
          << "Successful ReadPage() required before accessing pager state";
@@ -193,7 +197,7 @@
    }
  
    // The number of bytes in the page read by the last ReadPage() call.
-@@ -139,7 +140,7 @@
+@@ -139,7 +140,7 @@ class DatabasePageReader {
    int page_id_ = kInvalidPageId;
    // Stores the bytes of the last page successfully read by ReadPage().
    // The content is undefined if the last call to ReadPage() did not succeed.

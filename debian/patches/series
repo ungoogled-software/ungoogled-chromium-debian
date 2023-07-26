@@ -4,5 +4,8 @@ perfetto-system-zlib.patch
 pdfium-system-tiff.patch
 template-correction.patch
 fix-node-architecture.patch
-sql-virtual-cursor.patch
 disable-clang-version-check.patch
+clang-attribs.patch
+structured-binding-scope-bug.patch
+typename.patch
+sql-virtual-cursor.patch

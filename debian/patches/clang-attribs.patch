@@ -1,0 +1,196 @@
+description: revert commit that uses clang::always_inline
+
+clang-14 doesn't like this and splits out hundreds of warnings per file in
+base/allocator. Technically it doesn't FTBFS, but my build log grew to
+about 1.7gb before I decided that the warnings had to go. This is a partial
+revert of:
+
+commit f541f7780152ad2d639cbd8ed3f4a3afcd054276
+Author: Peter Kasting <pkasting@chromium.org>
+Date:   Fri Mar 10 23:44:46 2023 +0000
+
+    Change from __attribute__(x) to [[clang::x]] for various attributes.
+
+
+
+--- a/base/allocator/partition_allocator/partition_alloc_base/compiler_specific.h
++++ b/base/allocator/partition_allocator/partition_alloc_base/compiler_specific.h
+@@ -24,9 +24,7 @@
+ // Annotate a function indicating it should not be inlined.
+ // Use like:
+ //   NOINLINE void DoStuff() { ... }
+-#if defined(__clang__) && PA_HAS_ATTRIBUTE(noinline)
+-#define PA_NOINLINE [[clang::noinline]]
+-#elif defined(COMPILER_GCC) && PA_HAS_ATTRIBUTE(noinline)
++#if defined(COMPILER_GCC) || defined(__clang__)
+ #define PA_NOINLINE __attribute__((noinline))
+ #elif defined(COMPILER_MSVC)
+ #define PA_NOINLINE __declspec(noinline)
+@@ -34,10 +32,7 @@
+ #define PA_NOINLINE
+ #endif
+ 
+-#if defined(__clang__) && defined(NDEBUG) && PA_HAS_ATTRIBUTE(always_inline)
+-#define PA_ALWAYS_INLINE [[clang::always_inline]] inline
+-#elif defined(COMPILER_GCC) && defined(NDEBUG) && \
+-    PA_HAS_ATTRIBUTE(always_inline)
++#if defined(COMPILER_GCC) && defined(NDEBUG)
+ #define PA_ALWAYS_INLINE inline __attribute__((__always_inline__))
+ #elif defined(COMPILER_MSVC) && defined(NDEBUG)
+ #define PA_ALWAYS_INLINE __forceinline
+@@ -54,36 +49,45 @@
+ // Use like:
+ //   void NOT_TAIL_CALLED FooBar();
+ #if defined(__clang__) && PA_HAS_ATTRIBUTE(not_tail_called)
+-#define PA_NOT_TAIL_CALLED [[clang::not_tail_called]]
++#define PA_NOT_TAIL_CALLED __attribute__((not_tail_called))
+ #else
+ #define PA_NOT_TAIL_CALLED
+ #endif
+ 
+ // Specify memory alignment for structs, classes, etc.
+ // Use like:
+-//   class PA_ALIGNAS(16) MyClass { ... }
+-//   PA_ALIGNAS(16) int array[4];
++//   class ALIGNAS(16) MyClass { ... }
++//   ALIGNAS(16) int array[4];
+ //
+ // In most places you can use the C++11 keyword "alignas", which is preferred.
+ //
+-// Historically, compilers had trouble mixing __attribute__((...)) syntax with
+-// alignas(...) syntax. However, at least Clang is very accepting nowadays. It
+-// may be that this macro can be removed entirely.
+-#if defined(__clang__)
+-#define PA_ALIGNAS(byte_alignment) alignas(byte_alignment)
+-#elif defined(COMPILER_MSVC)
++// But compilers have trouble mixing __attribute__((...)) syntax with
++// alignas(...) syntax.
++//
++// Doesn't work in clang or gcc:
++//   struct alignas(16) __attribute__((packed)) S { char c; };
++// Works in clang but not gcc:
++//   struct __attribute__((packed)) alignas(16) S2 { char c; };
++// Works in clang and gcc:
++//   struct alignas(16) S3 { char c; } __attribute__((packed));
++//
++// There are also some attributes that must be specified *before* a class
++// definition: visibility (used for exporting functions/classes) is one of
++// these attributes. This means that it is not possible to use alignas() with a
++// class that is marked as exported.
++#if defined(COMPILER_MSVC)
+ #define PA_ALIGNAS(byte_alignment) __declspec(align(byte_alignment))
+-#elif defined(COMPILER_GCC) && PA_HAS_ATTRIBUTE(aligned)
++#elif defined(COMPILER_GCC)
+ #define PA_ALIGNAS(byte_alignment) __attribute__((aligned(byte_alignment)))
+ #endif
+ 
+-// Tells the compiler a function is using a printf-style format string.
++// Tell the compiler a function is using a printf-style format string.
+ // |format_param| is the one-based index of the format string parameter;
+ // |dots_param| is the one-based index of the "..." parameter.
+ // For v*printf functions (which take a va_list), pass 0 for dots_param.
+ // (This is undocumented but matches what the system C headers do.)
+ // For member functions, the implicit this parameter counts as index 1.
+-#if (defined(COMPILER_GCC) || defined(__clang__)) && PA_HAS_ATTRIBUTE(format)
++#if defined(COMPILER_GCC) || defined(__clang__)
+ #define PA_PRINTF_FORMAT(format_param, dots_param) \
+   __attribute__((format(printf, format_param, dots_param)))
+ #else
+--- a/base/compiler_specific.h
++++ b/base/compiler_specific.h
+@@ -41,9 +41,7 @@
+ // Annotate a function indicating it should not be inlined.
+ // Use like:
+ //   NOINLINE void DoStuff() { ... }
+-#if defined(__clang__) && HAS_ATTRIBUTE(noinline)
+-#define NOINLINE [[clang::noinline]]
+-#elif defined(COMPILER_GCC) && HAS_ATTRIBUTE(noinline)
++#if defined(COMPILER_GCC) || defined(__clang__)
+ #define NOINLINE __attribute__((noinline))
+ #elif defined(COMPILER_MSVC)
+ #define NOINLINE __declspec(noinline)
+@@ -51,9 +49,7 @@
+ #define NOINLINE
+ #endif
+ 
+-#if defined(__clang__) && defined(NDEBUG) && HAS_ATTRIBUTE(always_inline)
+-#define ALWAYS_INLINE [[clang::always_inline]] inline
+-#elif defined(COMPILER_GCC) && defined(NDEBUG) && HAS_ATTRIBUTE(always_inline)
++#if defined(COMPILER_GCC) && defined(NDEBUG)
+ #define ALWAYS_INLINE inline __attribute__((__always_inline__))
+ #elif defined(COMPILER_MSVC) && defined(NDEBUG)
+ #define ALWAYS_INLINE __forceinline
+@@ -70,7 +66,7 @@
+ // Use like:
+ //   NOT_TAIL_CALLED void FooBar();
+ #if defined(__clang__) && HAS_ATTRIBUTE(not_tail_called)
+-#define NOT_TAIL_CALLED [[clang::not_tail_called]]
++#define NOT_TAIL_CALLED __attribute__((not_tail_called))
+ #else
+ #define NOT_TAIL_CALLED
+ #endif
+@@ -82,14 +78,23 @@
+ //
+ // In most places you can use the C++11 keyword "alignas", which is preferred.
+ //
+-// Historically, compilers had trouble mixing __attribute__((...)) syntax with
+-// alignas(...) syntax. However, at least Clang is very accepting nowadays. It
+-// may be that this macro can be removed entirely.
+-#if defined(__clang__)
+-#define ALIGNAS(byte_alignment) alignas(byte_alignment)
+-#elif defined(COMPILER_MSVC)
++// But compilers have trouble mixing __attribute__((...)) syntax with
++// alignas(...) syntax.
++//
++// Doesn't work in clang or gcc:
++//   struct alignas(16) __attribute__((packed)) S { char c; };
++// Works in clang but not gcc:
++//   struct __attribute__((packed)) alignas(16) S2 { char c; };
++// Works in clang and gcc:
++//   struct alignas(16) S3 { char c; } __attribute__((packed));
++//
++// There are also some attributes that must be specified *before* a class
++// definition: visibility (used for exporting functions/classes) is one of
++// these attributes. This means that it is not possible to use alignas() with a
++// class that is marked as exported.
++#if defined(COMPILER_MSVC)
+ #define ALIGNAS(byte_alignment) __declspec(align(byte_alignment))
+-#elif defined(COMPILER_GCC) && HAS_ATTRIBUTE(aligned)
++#elif defined(COMPILER_GCC)
+ #define ALIGNAS(byte_alignment) __attribute__((aligned(byte_alignment)))
+ #endif
+ 
+@@ -107,13 +112,13 @@
+ #define NO_UNIQUE_ADDRESS
+ #endif
+ 
+-// Tells the compiler a function is using a printf-style format string.
++// Tell the compiler a function is using a printf-style format string.
+ // |format_param| is the one-based index of the format string parameter;
+ // |dots_param| is the one-based index of the "..." parameter.
+ // For v*printf functions (which take a va_list), pass 0 for dots_param.
+ // (This is undocumented but matches what the system C headers do.)
+ // For member functions, the implicit this parameter counts as index 1.
+-#if (defined(COMPILER_GCC) || defined(__clang__)) && HAS_ATTRIBUTE(format)
++#if defined(COMPILER_GCC) || defined(__clang__)
+ #define PRINTF_FORMAT(format_param, dots_param) \
+   __attribute__((format(printf, format_param, dots_param)))
+ #else
+@@ -158,7 +163,7 @@
+ // DISABLE_CFI_PERF -- Disable Control Flow Integrity for perf reasons.
+ #if !defined(DISABLE_CFI_PERF)
+ #if defined(__clang__) && defined(OFFICIAL_BUILD)
+-#define DISABLE_CFI_PERF NO_SANITIZE("cfi")
++#define DISABLE_CFI_PERF __attribute__((no_sanitize("cfi")))
+ #else
+ #define DISABLE_CFI_PERF
+ #endif
+@@ -285,7 +290,7 @@
+ // please document the problem for someone who is going to cleanup it later.
+ // E.g. platform, bot, benchmark or test name in patch description or next to
+ // the attribute.
+-#define STACK_UNINITIALIZED [[clang::uninitialized]]
++#define STACK_UNINITIALIZED __attribute__((uninitialized))
+ #else
+ #define STACK_UNINITIALIZED
+ #endif
