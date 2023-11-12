@@ -4,7 +4,7 @@
 # Version of and paths to pristine Debian Chromium source tree + tarball,
 # obtainable by running "apt-get source chromium" on a Debian system
 #
-VERSION      = 118.0.5993.70
+VERSION      = 119.0.6045.105
 ORIG_SOURCE  = chromium-$(VERSION)
 ORIG_TARBALL = chromium_$(VERSION).orig.tar.xz
 
@@ -50,11 +50,6 @@ export DEBEMAIL    ?= cereal@example.com
 #
 PATCH_DROP_LIST =
 
-# More comprehensive disabling in
-# ungoogled-upstream/core/ungoogled-chromium/disable-privacy-sandbox.patch
-#
-PATCH_DROP_LIST += disable/privacy-sandbox.patch
-
 # The edits in this patch are included in
 # ungoogled-upstream/core/ungoogled-chromium/fix-building-with-prunned-binaries.patch
 #
@@ -71,11 +66,18 @@ PATCH_DROP_LIST += disable/signin.patch
 #
 PATCH_DROP_LIST += disable/third-party-cookies.patch
 
-# Copy of ungoogled-upstream/core/ungoogled-chromium/disable-web-environment-integrity.patch
+# Debian's imported copy of
+# ungoogled-upstream/core/ungoogled-chromium/disable-privacy-sandbox.patch
 #
-PATCH_DROP_LIST += ungoogled/core/ungoogled-chromium/disable-web-environment-integrity.patch
+PATCH_DROP_LIST += ungoogled/disable-privacy-sandbox.patch
 
-# This patch is already applied as disable/google-api-warning.patch
+# Debian's imported copy of
+# ungoogled-upstream/core/ungoogled-chromium/disable-web-environment-integrity.patch
+#
+PATCH_DROP_LIST += ungoogled/disable-web-environment-integrity.patch
+
+# Ungoogled-chromium's imported copy of
+# disable/google-api-warning.patch
 #
 PATCH_DROP_LIST += ungoogled-upstream/extra/debian/disable/google-api-warning.patch
 
@@ -161,7 +163,7 @@ source-package: stage-6.stamp
 #
 stage-1.stamp: $(orig_tree_dep) series.add
 	test ! -f stage-2.stamp
-	@$(MAKE) check-git_warning
+	@$(MAKE) -f $(lastword $(MAKEFILE_LIST)) check-git_warning
 ifndef INPLACE
 # Note: Can't speed this up using hardlinks, alas:
 # https://savannah.nongnu.org/bugs/?63994
