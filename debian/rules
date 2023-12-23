@@ -13,12 +13,12 @@ OUT_DIR  := out/Release
 
 # Changelog and control template variables
 VERSION  := $(file < $(UC_DIR)/chromium_version.txt)-1
-RELEASE  := jammy
+RELEASE  := bookworm
 AUTHOR   := ungoogled-chromium Maintainers <github@null.invalid>
 DATETIME := $(shell date -R)
 
 # Assign the clang toolchain to use
-LLVM_VERSION ?= 14
+LLVM_VERSION ?= 16
 export AR    := llvm-ar-$(LLVM_VERSION)
 export NM    := llvm-nm-$(LLVM_VERSION)
 export CC    := clang-$(LLVM_VERSION)
