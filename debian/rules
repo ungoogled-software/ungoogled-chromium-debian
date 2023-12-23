@@ -60,7 +60,6 @@ GN_FLAGS +=                                                           \
         is_cfi=false                                                  \
         use_thin_lto=false                                            \
         use_sysroot=false                                             \
-        use_gnome_keyring=false                                       \
         ffmpeg_branding=\"Chrome\"                                    \
         proprietary_codecs=true                                       \
         use_pulseaudio=true                                           \
@@ -77,6 +76,7 @@ GN_FLAGS +=                                                           \
         use_kerberos=false                                            \
         use_cups=true                                                 \
         v8_enable_backtrace=true                                      \
+	enable_rust=false                                             \
 
 # Currently omitted from base (jammy): icu, harfbuzz-ng, ffmpeg, openh264, libvpx
 SYS_LIBS :=         \
