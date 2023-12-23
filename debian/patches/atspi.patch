@@ -1,0 +1,15 @@
+author: Andres Salomon <dilinger@debian.org>
+
+https://chromium-review.googlesource.com/c/chromium/src/+/4883576 broke
+builds with atspi >= 2.50. This fixes it.
+
+--- a/build/config/linux/atspi2/BUILD.gn
++++ b/build/config/linux/atspi2/BUILD.gn
+@@ -20,6 +20,7 @@ if (use_atk) {
+     major = atspi_version[0]
+     minor = atspi_version[1]
+     micro = atspi_version[2]
++    not_needed(["major", "micro"])
+ 
+     # ATSPI 2.49.90 now defines these for us and it's an error for us to
+     # redefine them on the compiler command line.

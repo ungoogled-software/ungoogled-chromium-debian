@@ -1,0 +1,35 @@
+author: Andres Salomon <dilinger@debian.org>
+
+This is some clang-18 stuff. For clang-16, the compiler chokes on these
+flags. These used to only be enabled when llvm_force_head_revision=true,
+but now they're enabled unconditionally.
+
+--- a/build/config/compiler/BUILD.gn
++++ b/build/config/compiler/BUILD.gn
+@@ -621,15 +621,10 @@ config("compiler") {
+     # TODO(crbug.com/1491036): This isn't supported by Cronet's mainline llvm version.
+     if (default_toolchain != "//build/toolchain/cros:target" &&
+         !llvm_android_mainline) {
+-      cflags += [
+-        "-mllvm",
+-        "-split-threshold-for-reg-with-hint=0",
+-      ]
+       if (use_thin_lto && is_a_target_toolchain) {
+         if (is_win) {
+           ldflags += [ "-mllvm:-split-threshold-for-reg-with-hint=0" ]
+         } else {
+-          ldflags += [ "-Wl,-mllvm,-split-threshold-for-reg-with-hint=0" ]
+         }
+       }
+     }
+@@ -1878,10 +1873,8 @@ config("default_warnings") {
+           "-Wno-vla-extension",
+ 
+           # TODO(https://crbug.com/1490607): Fix and re-enable.
+-          "-Wno-thread-safety-reference-return",
+ 
+           # TODO(crbug.com/1495100): Evaluate and possibly enable.
+-          "-Wno-delayed-template-parsing-in-cxx20",
+         ]
+       }
+     }
