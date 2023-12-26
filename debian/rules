@@ -77,7 +77,6 @@ GN_FLAGS +=                                                           \
         use_cups=true                                                 \
         v8_enable_backtrace=true                                      \
 	enable_rust=false                                             \
-	build_with_tflite_lib=false                                   \
 
 # Currently omitted from base (jammy): icu, harfbuzz-ng, ffmpeg, openh264, libvpx
 SYS_LIBS :=         \
