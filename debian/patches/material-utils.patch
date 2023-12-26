@@ -1,0 +1,44 @@
+./../third_party/material_color_utilities/src/cpp/palettes/tones.cc:59:27: note: use function 'std::abs' instead
+  double smallest_delta = abs(smallest_delta_hct.get_chroma() - chroma);
+                          ^~~
+                          std::abs
+../../third_party/material_color_utilities/src/cpp/palettes/tones.cc:70:9: error: use of undeclared identifier 'round'
+    if (round(chroma) == round(smallest_delta_hct.get_chroma())) {
+        ^
+
+--- a/third_party/material_color_utilities/src/cpp/palettes/tones.cc
++++ b/third_party/material_color_utilities/src/cpp/palettes/tones.cc
+@@ -16,6 +16,8 @@
+ 
+ #include "cpp/palettes/tones.h"
+ 
++#include <cmath>
++
+ #include "cpp/cam/cam.h"
+ #include "cpp/cam/hct.h"
+ 
+@@ -55,7 +57,7 @@ Argb TonalPalette::get(double tone) cons
+ Hct TonalPalette::createKeyColor(double hue, double chroma) {
+   double start_tone = 50.0;
+   Hct smallest_delta_hct(hue, chroma, start_tone);
+-  double smallest_delta = abs(smallest_delta_hct.get_chroma() - chroma);
++  double smallest_delta = std::abs(smallest_delta_hct.get_chroma() - chroma);
+   // Starting from T50, check T+/-delta to see if they match the requested
+   // chroma.
+   //
+@@ -71,13 +73,13 @@ Hct TonalPalette::createKeyColor(double
+       return smallest_delta_hct;
+     }
+     Hct hct_add(hue, chroma, start_tone + delta);
+-    double hct_add_delta = abs(hct_add.get_chroma() - chroma);
++    double hct_add_delta = std::abs(hct_add.get_chroma() - chroma);
+     if (hct_add_delta < smallest_delta) {
+       smallest_delta = hct_add_delta;
+       smallest_delta_hct = hct_add;
+     }
+     Hct hct_subtract(hue, chroma, start_tone - delta);
+-    double hct_subtract_delta = abs(hct_subtract.get_chroma() - chroma);
++    double hct_subtract_delta = std::abs(hct_subtract.get_chroma() - chroma);
+     if (hct_subtract_delta < smallest_delta) {
+       smallest_delta = hct_subtract_delta;
+       smallest_delta_hct = hct_subtract;
