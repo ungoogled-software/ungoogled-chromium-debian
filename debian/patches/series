@@ -11,3 +11,5 @@ disable-clang-version-check.patch
 sql-virtual-cursor.patch
 atspi.patch
 absl-optional.patch
+material-utils.patch
+driver-chrome-path.patch
