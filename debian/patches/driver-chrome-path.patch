@@ -3,23 +3,24 @@ author: Michel Le Bihan <michel@lebihan.pl>
 
 --- a/chrome/test/chromedriver/chrome/chrome_finder.cc
 +++ b/chrome/test/chromedriver/chrome/chrome_finder.cc
-@@ -67,9 +67,6 @@ void GetApplicationDirs(std::vector<base
-   locations->push_back(base::FilePath("/usr/bin"));
-   locations->push_back(base::FilePath("/sbin"));
-   locations->push_back(base::FilePath("/bin"));
+@@ -68,9 +68,6 @@ void GetApplicationDirs(std::vector<base
+   locations->emplace_back("/usr/bin");
+   locations->emplace_back("/sbin");
+   locations->emplace_back("/bin");
 -  // Lastly, try the default installation location.
--  locations->push_back(base::FilePath("/opt/google/chrome"));
--  locations->push_back(base::FilePath("/opt/chromium.org/chromium"));
+-  locations->emplace_back("/opt/google/chrome");
+-  locations->emplace_back("/opt/chromium.org/chromium");
  }
  #elif BUILDFLAG(IS_ANDROID)
  void GetApplicationDirs(std::vector<base::FilePath>* locations) {
-@@ -158,9 +155,6 @@ bool FindChrome(base::FilePath* browser_
-     base::FilePath(chrome::kGoogleChromeBrowserProcessExecutablePath),
-     base::FilePath(chrome::kChromiumBrowserProcessExecutablePath),
+@@ -126,9 +123,7 @@ std::vector<base::FilePath> GetChromePro
+         base::FilePath(chrome::kGoogleChromeBrowserProcessExecutablePath),
+         base::FilePath(chrome::kChromiumBrowserProcessExecutablePath),
  #elif BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_CHROMEOS)
 -    base::FilePath(chrome::kBrowserProcessExecutablePath),
--    base::FilePath("chrome"),  // Chrome for Testing or Google Chrome
--    base::FilePath("google-chrome"),
-     base::FilePath("chromium"),
-     base::FilePath("chromium-browser"),
+-        base::FilePath("chrome"),  // Chrome for Testing or Google Chrome
+-        base::FilePath("google-chrome"), base::FilePath("chromium"),
++        base::FilePath("chromium"),
+         base::FilePath("chromium-browser"),
  #else
+     // it will compile but won't work on other OSes
