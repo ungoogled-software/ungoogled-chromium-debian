@@ -103,6 +103,7 @@ GN_FLAGS +=                           \
         use_system_libpng=true        \
         use_system_zlib=true          \
         use_system_libjpeg=true       \
+	use_system_libtiff=true       \
 
 %:
 	dh $@
