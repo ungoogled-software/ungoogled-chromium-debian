@@ -1,10 +1,9 @@
 icu-shim.patch
-lld-16.patch
+clang-version.patch
 clang16.patch
 nullptr_t.patch
 generate-ninja.patch
 perfetto-system-zlib.patch
-pdfium-system-tiff.patch
 template-correction.patch
 fix-node-architecture.patch
 disable-clang-version-check.patch

@@ -6,9 +6,9 @@ matter anyways.
 
 Index: chromium-117.0.5938.62/third_party/blink/renderer/core/BUILD.gn
 ===================================================================
---- chromium-117.0.5938.62.orig/third_party/blink/renderer/core/BUILD.gn
-+++ chromium-117.0.5938.62/third_party/blink/renderer/core/BUILD.gn
-@@ -1694,7 +1694,6 @@ action_foreach("element_locator_test_pro
+--- a/third_party/blink/renderer/core/BUILD.gn
++++ b/third_party/blink/renderer/core/BUILD.gn
+@@ -1677,7 +1677,6 @@ action_foreach("element_locator_test_pro
    python_path_root = "${root_out_dir}/pyproto"
    python_path_proto = "${python_path_root}/third_party/blink/renderer/core/lcp_critical_path_predictor"
  

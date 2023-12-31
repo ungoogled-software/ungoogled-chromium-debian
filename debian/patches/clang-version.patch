@@ -6,7 +6,7 @@ lld vs gold).
 
 --- a/build/config/compiler/BUILD.gn
 +++ b/build/config/compiler/BUILD.gn
-@@ -378,7 +378,7 @@ config("compiler") {
+@@ -391,7 +391,7 @@ config("compiler") {
      }
  
      if (use_lld) {

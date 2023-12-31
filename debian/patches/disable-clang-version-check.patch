@@ -11,7 +11,7 @@ For now, let's just get this building in debian.
 
 --- a/tools/clang/scripts/update.py
 +++ b/tools/clang/scripts/update.py
-@@ -359,7 +359,7 @@
+@@ -366,7 +366,7 @@
        return 0
  
      stamp_version = ReadStampFile(STAMP_FILE).partition(',')[0]
