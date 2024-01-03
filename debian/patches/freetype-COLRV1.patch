@@ -1,18 +1,33 @@
-diff a/SkFontHost_FreeType_common.cpp b/SkFontHost_FreeType_common.cpp
-58,61d57
-< #if (((FREETYPE_MAJOR)  < 2) || \
-<      ((FREETYPE_MAJOR) == 2 && (FREETYPE_MINOR)  < 11) || \
-<      ((FREETYPE_MAJOR) == 2 && (FREETYPE_MINOR) == 11 && (FREETYPE_PATCH) < 1)) && \
-<     !defined(FT_STATIC_CAST)
-63,65d58
-< #else
-< #    include "src/base/SkScopeExit.h"
-< #endif
-diff a/SkFontHost_FreeType.cpp b/SkFontHost_FreeType.cpp
-95,98d94
-< #if (((FREETYPE_MAJOR)  < 2) || \
-<      ((FREETYPE_MAJOR) == 2 && (FREETYPE_MINOR)  < 11) || \
-<      ((FREETYPE_MAJOR) == 2 && (FREETYPE_MINOR) == 11 && (FREETYPE_PATCH) < 1)) && \
-<     !defined(FT_STATIC_CAST)
-100d95
-< #endif
+--- a/third_party/skia/src/ports/SkFontHost_FreeType_common.cpp
++++ b/third_party/skia/src/ports/SkFontHost_FreeType_common.cpp
+@@ -55,14 +55,7 @@
+ // FT_PaintRadialGradient changed size and layout at VER-2-11-0-147-gd3d3ff76d
+ // FT_STATIC_CAST introduced VER-2-11-0-172-g9079c5d91
+ // So undefine TT_SUPPORT_COLRV1 before 2.11.1 but not if FT_STATIC_CAST is defined.
+-#if (((FREETYPE_MAJOR)  < 2) || \
+-     ((FREETYPE_MAJOR) == 2 && (FREETYPE_MINOR)  < 11) || \
+-     ((FREETYPE_MAJOR) == 2 && (FREETYPE_MINOR) == 11 && (FREETYPE_PATCH) < 1)) && \
+-    !defined(FT_STATIC_CAST)
+ #    undef TT_SUPPORT_COLRV1
+-#else
+-#    include "src/base/SkScopeExit.h"
+-#endif
+ #endif
+ 
+ // FT_OUTLINE_OVERLAP was added in FreeType 2.10.3
+--- a/third_party/skia/src/ports/SkFontHost_FreeType.cpp
++++ b/third_party/skia/src/ports/SkFontHost_FreeType.cpp
+@@ -92,13 +92,8 @@
+ // FT_PaintRadialGradient changed size and layout at VER-2-11-0-147-gd3d3ff76d
+ // FT_STATIC_CAST introduced VER-2-11-0-172-g9079c5d91
+ // So undefine TT_SUPPORT_COLRV1 before 2.11.1 but not if FT_STATIC_CAST is defined.
+-#if (((FREETYPE_MAJOR)  < 2) || \
+-     ((FREETYPE_MAJOR) == 2 && (FREETYPE_MINOR)  < 11) || \
+-     ((FREETYPE_MAJOR) == 2 && (FREETYPE_MINOR) == 11 && (FREETYPE_PATCH) < 1)) && \
+-    !defined(FT_STATIC_CAST)
+ #    undef TT_SUPPORT_COLRV1
+ #endif
+-#endif
+ 
+ //#define ENABLE_GLYPH_SPEW     // for tracing calls
+ //#define DUMP_STRIKE_CREATION
