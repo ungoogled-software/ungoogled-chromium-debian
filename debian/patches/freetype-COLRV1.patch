@@ -1,0 +1,18 @@
+diff a/SkFontHost_FreeType_common.cpp b/SkFontHost_FreeType_common.cpp
+58,61d57
+< #if (((FREETYPE_MAJOR)  < 2) || \
+<      ((FREETYPE_MAJOR) == 2 && (FREETYPE_MINOR)  < 11) || \
+<      ((FREETYPE_MAJOR) == 2 && (FREETYPE_MINOR) == 11 && (FREETYPE_PATCH) < 1)) && \
+<     !defined(FT_STATIC_CAST)
+63,65d58
+< #else
+< #    include "src/base/SkScopeExit.h"
+< #endif
+diff a/SkFontHost_FreeType.cpp b/SkFontHost_FreeType.cpp
+95,98d94
+< #if (((FREETYPE_MAJOR)  < 2) || \
+<      ((FREETYPE_MAJOR) == 2 && (FREETYPE_MINOR)  < 11) || \
+<      ((FREETYPE_MAJOR) == 2 && (FREETYPE_MINOR) == 11 && (FREETYPE_PATCH) < 1)) && \
+<     !defined(FT_STATIC_CAST)
+100d95
+< #endif
