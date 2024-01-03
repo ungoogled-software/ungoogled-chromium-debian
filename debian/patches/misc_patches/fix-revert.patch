@@ -1,0 +1,93 @@
+diff a/_extraction.py b/_extraction.py
+99c99
+< def _extract_tar_with_7z(binary, archive_path, output_dir, relative_to, skip_unused):
+---
+> def _extract_tar_with_7z(binary, archive_path, output_dir, relative_to):
+107,109c107,109
+<     if skip_unused:
+<         for cpath in CONTINGENT_PATHS:
+<             cmd2 += ('-x!%s/%s' % (str(relative_to), cpath[:-1]), )
+---
+>     #if skip_unused:
+>     #    for cpath in CONTINGENT_PATHS:
+>     #        cmd2 += ('-x!%s/%s' % (str(relative_to), cpath[:-1]), )
+125c125
+< def _extract_tar_with_tar(binary, archive_path, output_dir, relative_to, skip_unused):
+---
+> def _extract_tar_with_tar(binary, archive_path, output_dir, relative_to):
+129,131c129,131
+<     if skip_unused:
+<         for cpath in CONTINGENT_PATHS:
+<             cmd += ('--exclude=%s/%s' % (str(relative_to), cpath[:-1]), )
+---
+>     #if skip_unused:
+>     #    for cpath in CONTINGENT_PATHS:
+>     #        cmd += ('--exclude=%s/%s' % (str(relative_to), cpath[:-1]), )
+143c143
+< def _extract_tar_with_winrar(binary, archive_path, output_dir, relative_to, skip_unused):
+---
+> def _extract_tar_with_winrar(binary, archive_path, output_dir, relative_to):
+147,149c147,149
+<     if skip_unused:
+<         for cpath in CONTINGENT_PATHS:
+<             cmd += ('-x%s%s%s' % (str(relative_to), os.sep, cpath[:-1].replace('/'), os.sep), )
+---
+>     #if skip_unused:
+>     #    for cpath in CONTINGENT_PATHS:
+>     #        cmd += ('-x%s%s%s' % (str(relative_to), os.sep, cpath[:-1].replace('/'), os.sep), )
+159c159
+< def _extract_tar_with_python(archive_path, output_dir, relative_to, skip_unused):
+---
+> def _extract_tar_with_python(archive_path, output_dir, relative_to):
+187,191c187,191
+<                 if skip_unused and [
+<                         cpath for cpath in CONTINGENT_PATHS
+<                         if tarinfo.name.startswith(str(relative_to) + '/' + cpath)
+<                 ]:
+<                     continue
+---
+>                 #if skip_unused and [
+>                 #        cpath for cpath in CONTINGENT_PATHS
+>                 #        if tarinfo.name.startswith(str(relative_to) + '/' + cpath)
+>                 #]:
+>                 #    continue
+215c215
+< def extract_tar_file(archive_path, output_dir, relative_to, skip_unused, extractors=None):
+---
+> def extract_tar_file(archive_path, output_dir, relative_to, extractors=None):
+240c240
+<             _extract_tar_with_7z(sevenzip_bin, archive_path, output_dir, relative_to, skip_unused)
+---
+>             _extract_tar_with_7z(sevenzip_bin, archive_path, output_dir, relative_to)
+249c249
+<             _extract_tar_with_winrar(winrar_bin, archive_path, output_dir, relative_to, skip_unused)
+---
+>             _extract_tar_with_winrar(winrar_bin, archive_path, output_dir, relative_to)
+257c257
+<             _extract_tar_with_tar(tar_bin, archive_path, output_dir, relative_to, skip_unused)
+---
+>             _extract_tar_with_tar(tar_bin, archive_path, output_dir, relative_to)
+263c263
+<     _extract_tar_with_python(archive_path, output_dir, relative_to, skip_unused)
+---
+>     _extract_tar_with_python(archive_path, output_dir, relative_to)
+270d269
+<         skip_unused,
+303,305c302,304
+<     if skip_unused:
+<         for cpath in CONTINGENT_PATHS:
+<             cmd += ('-x!%s/%s' % (str(relative_to), cpath[:-1]), )
+---
+>     #if skip_unused:
+>     #    for cpath in CONTINGENT_PATHS:
+>     #        cmd += ('-x!%s/%s' % (str(relative_to), cpath[:-1]), )
+320d318
+<         skip_unused,
+351,353c349,351
+<     if skip_unused:
+<         for cpath in CONTINGENT_PATHS:
+<             cmd += ('-x%s%s%s' % (str(relative_to), os.sep, cpath[:-1].replace('/', os.sep)), )
+---
+>     #if skip_unused:
+>     #    for cpath in CONTINGENT_PATHS:
+>     #        cmd += ('-x%s%s%s' % (str(relative_to), os.sep, cpath[:-1].replace('/', os.sep)), )
