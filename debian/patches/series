@@ -1,4 +1,3 @@
-misc_patches/fix-revert.patch
 freetype-COLRV1.patch
 icu-shim.patch
 clang-version.patch
