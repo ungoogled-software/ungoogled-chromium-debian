@@ -4,7 +4,7 @@
 # Version of and paths to pristine Debian Chromium source tree + tarball,
 # obtainable by running "apt-get source chromium" on a Debian system
 #
-VERSION      = 119.0.6045.105
+VERSION      = 121.0.6167.85
 ORIG_SOURCE  = chromium-$(VERSION)
 ORIG_TARBALL = chromium_$(VERSION).orig.tar.xz
 
@@ -70,11 +70,6 @@ PATCH_DROP_LIST += disable/third-party-cookies.patch
 # ungoogled-upstream/core/ungoogled-chromium/disable-privacy-sandbox.patch
 #
 PATCH_DROP_LIST += ungoogled/disable-privacy-sandbox.patch
-
-# Debian's imported copy of
-# ungoogled-upstream/core/ungoogled-chromium/disable-web-environment-integrity.patch
-#
-PATCH_DROP_LIST += ungoogled/disable-web-environment-integrity.patch
 
 # Ungoogled-chromium's imported copy of
 # disable/google-api-warning.patch
