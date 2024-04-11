@@ -1,0 +1,99 @@
+This patch greatly speeds up the "dpkg-source --build" operation when the
+--no-generate-diff option is used. It has been submitted to the upstream
+project, but discussion on it remains unresolved:
+
+    https://lists.debian.org/debian-dpkg/2023/09/msg00013.html
+
+This patch specifically targets the version of dpkg in Ubuntu 22.04.
+
+--- /usr/share/perl5/Dpkg/Source/Package/V2.pm.orig
++++ /usr/share/perl5/Dpkg/Source/Package/V2.pm
+@@ -60,6 +60,7 @@
+     $self->{options}{unapply_patches} //= 'auto';
+     $self->{options}{skip_debianization} //= 0;
+     $self->{options}{create_empty_orig} //= 0;
++    $self->{options}{generate_diff} //= 1;
+     $self->{options}{auto_commit} //= 0;
+     $self->{options}{ignore_bad_version} //= 0;
+ }
+@@ -94,6 +95,10 @@
+         help => N_('create an empty original tarball if missing'),
+         when => 'build',
+     }, {
++        name => '--no-generate-diff',
++        help => N_('do not generate diff against upstream sources'),
++        when => 'build',
++    }, {
+         name => '--abort-on-upstream-changes',
+         help => N_('abort if generated diff has upstream files changes'),
+         when => 'build',
+@@ -145,6 +150,9 @@
+     } elsif ($opt eq '--create-empty-orig') {
+         $self->{options}{create_empty_orig} = 1;
+         return 1;
++    } elsif ($opt eq '--no-generate-diff') {
++        $self->{options}{generate_diff} = 0;
++        return 1;
+     } elsif ($opt eq '--abort-on-upstream-changes') {
+         $self->{options}{auto_commit} = 0;
+         return 1;
+@@ -448,6 +456,8 @@
+         }
+     }
+ 
++    return if !$opts{do_diff};
++
+     # Unpack a second copy for comparison
+     my $tmp = tempdir("$dirname.orig.XXXXXX", DIR => $updir);
+     push_exit_handler(sub { erasedir($tmp) });
+@@ -516,6 +526,21 @@
+         usageerr(g_("-b takes only one parameter with format '%s'"),
+                  $self->{fields}{'Format'});
+     }
++    if (!$self->{options}{generate_diff} &&
++        ($self->{options}{include_removal}   ||
++         $self->{options}{include_timestamp} ||
++         $self->{options}{include_binaries}  ||
++         $self->{options}{create_empty_orig} ||
++         $self->{options}{auto_commit})) {
++        my @incompat = (
++            "--include-removal",
++            "--include-timestamp",
++            "--include-binaries",
++            "--create-empty-orig",
++            "--auto-commit"
++        );
++        usageerr(g_("--no-generate-diff is incompatible with the following options: %s"), join(", ", @incompat));
++    }
+     $self->prepare_build($dir);
+ 
+     my $include_binaries = $self->{options}{include_binaries};
+@@ -555,8 +580,9 @@
+                                         header_from => $autopatch,
+                                         handle_binary => $handle_binary,
+                                         skip_auto => $self->{options}{auto_commit},
++                                        do_diff => $self->{options}{generate_diff},
+                                         usage => 'build');
+-    unless (-z $tmpdiff or $self->{options}{auto_commit}) {
++    unless (!$tmpdiff or -z $tmpdiff or $self->{options}{auto_commit}) {
+         info(g_('Hint: make sure the version in debian/changelog matches ' .
+                 'the unpacked source tree'));
+         info(g_('you can integrate the local changes with %s'),
+@@ -564,7 +590,7 @@
+         error(g_('aborting due to unexpected upstream changes, see %s'),
+               $tmpdiff);
+     }
+-    push_exit_handler(sub { unlink($tmpdiff) });
++    push_exit_handler(sub { !$tmpdiff or unlink($tmpdiff) });
+     $binaryfiles->update_debian_source_include_binaries() if $include_binaries;
+ 
+     # Install the diff as the new autopatch
+@@ -576,7 +602,7 @@
+              $autopatch) if -e $autopatch;
+         rmdir(File::Spec->catdir($dir, 'debian', 'patches')); # No check on purpose
+     }
+-    unlink($tmpdiff) or syserr(g_('cannot remove %s'), $tmpdiff);
++    !$tmpdiff or unlink($tmpdiff) or syserr(g_('cannot remove %s'), $tmpdiff);
+     pop_exit_handler();
+ 
+     # Create the debian.tar

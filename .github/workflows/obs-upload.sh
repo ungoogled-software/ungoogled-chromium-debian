@@ -1,136 +1,199 @@
-#!/bin/sh
+#!/bin/bash
+# obs-upload.sh
+#
+# Upload Debian source package files to the openSUSE Build Service
+# (https://build.opensuse.org/)
+#
+
 set -e
 
-RT_DIR="$PWD"
-DB_DIR="$RT_DIR/debian"
-UC_DIR="$DB_DIR/submodules/ungoogled-chromium"
+test -n "$DOWNLOAD_DIR"
+test -n "$OUTPUT_DIR"
+test -n "$WORK_DIR"
 
-for i in OBS_API_USERNAME OBS_API_PASSWORD
+upload_dir=$WORK_DIR/upload
+
+for var in OSC_USERNAME OSC_PASSWORD
 do
-    if test -z "$(eval echo \$$i)"
-    then
-        echo "$i is not in the environment. Aborting."
-        exit 1
-    fi
+	if test -z "$(eval echo \$$var)"
+	then
+		echo "$var is not set in the environment. Aborting."
+		exit 1
+	fi
 done
 
-PROJECT="${OBS_API_PROJECT:-home:$OBS_API_USERNAME}"
+test -n "$OSC" || OSC=osc
+test -n "$OBS_PROJECT" || export OBS_PROJECT="home:$OSC_USERNAME"
 
-case "$GITHUB_EVENT_NAME" in
-    workflow_dispatch) REPOSITORY="$PROJECT:testing" ;;
-    push) REPOSITORY="$PROJECT" ;;
-    *) echo "Not running as part of a GitHub workflow. Aborting."; exit 1 ;;
-esac
+# Do NOT use a config file, just rely on the env vars
+#
+export OSC_CONFIG=/dev/null
 
-curl()
+if ! $OSC --help > /dev/null 2>&1
+then
+	echo 'osc(1) is not available. Aborting.'
+	exit 1
+fi
+
+# API reference: https://api.opensuse.org/apidocs/
+
+osc_add_file()
 {
-    for i in `seq 1 5`
-    do
-        {
-            command curl -sS -K - "$@" << EOF
-user="$OBS_API_USERNAME:$OBS_API_PASSWORD"
-EOF
-        } && return 0 || sleep 30s
-    done
-    return 1
+	local project="$1" package="$2" local_file="$3" remote_file="$4"
+	test -n "$remote_file" || remote_file="$local_file"
+
+	$OSC api -T "$local_file" "/source/$project/$package/$remote_file" > /dev/null
 }
 
-debian/rules changelog control
+osc_delete_file()
+{
+	local project="$1" package="$2" file="$3"
 
-read UC_VERSION < $UC_DIR/chromium_version.txt
-AUTHOR=`grep 'AUTHOR *:=' $DB_DIR/rules | cut -f 2 -d '=' | sed -r 's;^ *| *$;;g'`
-NODE_VERSION=`grep 'NODE_VERSION *:=' $DB_DIR/rules | cut -f 2 -d '=' | sed -r 's;^ *| *$;;g'`
+	$OSC api -X DELETE "/source/$project/$package/$file" > /dev/null
+}
 
-cat > _service << EOF
+osc_commit()
+{
+	local project="$1" package="$2" comment="$3"
+	local comment_enc=$(printf '%s' "$comment" | jq -Rrs @uri)
+
+	# Note: The regular "osc commit" command requires a checked-out
+	# package directory, and is thus not suitable for our use here
+
+	$OSC api -m POST "/source/$project/$package?cmd=commit&comment=$comment_enc" > /dev/null
+}
+
+obs_sync_files()
+{
+	local codename="$1" dir="$2" commit_message="$3"
+	local remote_list=$WORK_DIR/remote-files.txt
+
+	echo "Syncing files to OBS project/package: $OBS_PROJECT/$codename"
+
+	$OSC list -l $OBS_PROJECT $codename > $remote_list
+
+	(cd $dir
+
+	do_commit=false
+
+	while read md5 rev size d1 d2 d3 remote_file
+	do
+		if [ ! -f "$remote_file" ]
+		then
+			echo "D    $codename/$remote_file ..."
+			osc_delete_file $OBS_PROJECT $codename "$remote_file"
+			do_commit=true
+		fi
+	done < $remote_list
+
+	for local_file in *
+	do
+		do_upload=false
+
+		if awk -v file="$local_file" \
+			'$7 == file {print "found"}' $remote_list \
+		   | grep -q .
+		then
+			# File present on OBS, check MD5 sum
+			md5=$(md5sum "$local_file" | awk '{print $1}')
+			awk \
+				-v md5="$md5" \
+				-v file="$local_file" \
+				'$1 == md5 && $7 == file {print "found"}' \
+				$remote_list \
+			| grep -q . || do_upload=true
+		else
+			# File not present on OBS
+			do_upload=true
+		fi
+
+		if $do_upload
+		then
+			echo "A    $codename/$local_file ..."
+			osc_add_file $OBS_PROJECT $codename "$local_file"
+			do_commit=true
+		fi
+	done
+
+	if $do_commit
+	then
+		echo 'Committing update ...'
+		osc_commit $OBS_PROJECT $codename "$commit_message"
+	else
+		echo 'No changes to commit.'
+	fi
+
+	) # return to previous dir
+
+	rm -f $remote_list
+}
+
+for dsc_file in $OUTPUT_DIR/*/*.dsc
+do
+	dir=$(dirname $dsc_file)
+	codename=$(basename $dir)
+
+	package=$(sed -n 's/^Source: //p'  $dsc_file)
+	version=$(sed -n 's/^Version: //p' $dsc_file)
+
+	sums=$(grep -E '^ [0-9a-f]{64} ' $dsc_file)
+
+	orig_src=$(echo   "$sums" | awk '/\.orig\.tar\./   {print $3}')
+	debian_src=$(echo "$sums" | awk '/\.debian\.tar\./ {print $3}')
+
+	dsc_sha256=$(sha256sum $dsc_file | awk '{print $1}')
+
+	orig_src_sha256=$(echo   "$sums" | awk '/\.orig\.tar\./   {print $1}')
+	debian_src_sha256=$(echo "$sums" | awk '/\.debian\.tar\./ {print $1}')
+
+	chromium_orig_src=$DOWNLOAD_DIR/${orig_src#ungoogled-}
+	test -s $chromium_orig_src
+
+	run_url=
+	test -z "$GITHUB_RUN_ID" || run_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+
+	if [ -n "$run_url" ]
+	then
+		comment="Origin: $run_url"
+	else
+		comment="Origin: manual upload"
+	fi
+
+	rm -rf   $upload_dir
+	mkdir -p $upload_dir
+
+	ln $dsc_file $dir/$debian_src $upload_dir/
+	ln $chromium_orig_src $upload_dir/$orig_src
+
+	# Reference: https://en.opensuse.org/openSUSE:Build_Service_Concept_SourceService
+	#
+	cat > $upload_dir/_service << END
+<!-- $comment -->
 <services>
-    <service name="download_url">
-        <param name="url">https://commondatastorage.googleapis.com/chromium-browser-official/chromium-$UC_VERSION.tar.xz</param>
-    </service>
-    <service name="download_url">
-        <param name="url">https://commondatastorage.googleapis.com/chromium-browser-official/chromium-$UC_VERSION.tar.xz.hashes</param>
-    </service>
-    <service name="download_url">
-        <param name="url">https://nodejs.org/dist/$NODE_VERSION/node-$NODE_VERSION-linux-x64.tar.xz</param>
-    </service>
-    <service name="download_url">
-        <param name="url">https://nodejs.org/dist/$NODE_VERSION/node-$NODE_VERSION-linux-armv7l.tar.xz</param>
-    </service>
-    <service name="download_url">
-        <param name="url">https://nodejs.org/dist/$NODE_VERSION/node-$NODE_VERSION-linux-arm64.tar.xz</param>
-    </service>
-    <service name="download_url">
-        <param name="url">https://nodejs.org/dist/$NODE_VERSION/SHASUMS256.txt</param>
-        <param name="filename">node-$NODE_VERSION.sha256sum</param>
-    </service>
+  <service name="verify_file">
+    <param name="file">$orig_src</param>
+    <param name="verifier">sha256</param>
+    <param name="checksum">$orig_src_sha256</param>
+  </service>
+  <service name="verify_file">
+    <param name="file">$debian_src</param>
+    <param name="verifier">sha256</param>
+    <param name="checksum">$debian_src_sha256</param>
+  </service>
+  <service name="verify_file">
+    <param name="file">$(basename $dsc_file)</param>
+    <param name="verifier">sha256</param>
+    <param name="checksum">$dsc_sha256</param>
+  </service>
 </services>
-EOF
+END
 
-tar -c -T/dev/null | xz -9 > ungoogled-chromium_$UC_VERSION.orig.tar.xz
-tar -c -T/dev/null | xz -9 > ungoogled-chromium_$UC_VERSION.debian.tar.xz
-tar -c --exclude-vcs --exclude='download_cache/*' -C $RT_DIR debian/ | xz -9 > ungoogled-chromium.tar.xz
+	commit_message="$package $version
 
-cat > ungoogled-chromium.dsc << EOF
-Format: 3.0 (quilt)
-Source: ungoogled-chromium
-Binary: ungoogled-chromium
-Architecture: any
-Version: $UC_VERSION
-Maintainer: $AUTHOR
-Homepage: https://github.com/Eloston/ungoogled-chromium
-Standards-Version: 4.5.0
-Build-Depends: $(sed -n '/^Build-Depends:/,/^$/p' < $DB_DIR/control | tr -d '\n' | cut -f 2 -d : | sed -r 's;^ *| *$;;g')
-Package-List:
- ungoogled-chromium deb web optional arch=any
-Checksums-Sha1:
- $(sha1sum < ungoogled-chromium_$UC_VERSION.orig.tar.xz | cut -f 1 -d ' ') $(stat -c '%s' ungoogled-chromium_$UC_VERSION.orig.tar.xz) ungoogled-chromium_$UC_VERSION.orig.tar.xz
- $(sha1sum < ungoogled-chromium_$UC_VERSION.debian.tar.xz | cut -f 1 -d ' ') $(stat -c '%s' ungoogled-chromium_$UC_VERSION.debian.tar.xz) ungoogled-chromium_$UC_VERSION.debian.tar.xz
-Checksums-Sha256:
- $(sha256sum < ungoogled-chromium_$UC_VERSION.orig.tar.xz | cut -f 1 -d ' ') $(stat -c '%s' ungoogled-chromium_$UC_VERSION.orig.tar.xz) ungoogled-chromium_$UC_VERSION.orig.tar.xz
- $(sha256sum < ungoogled-chromium_$UC_VERSION.debian.tar.xz | cut -f 1 -d ' ') $(stat -c '%s' ungoogled-chromium_$UC_VERSION.debian.tar.xz) ungoogled-chromium_$UC_VERSION.debian.tar.xz
-Files:
- $(md5sum < ungoogled-chromium_$UC_VERSION.orig.tar.xz | cut -f 1 -d ' ') $(stat -c '%s' ungoogled-chromium_$UC_VERSION.orig.tar.xz) ungoogled-chromium_$UC_VERSION.orig.tar.xz
- $(md5sum < ungoogled-chromium_$UC_VERSION.debian.tar.xz | cut -f 1 -d ' ') $(stat -c '%s' ungoogled-chromium_$UC_VERSION.debian.tar.xz) ungoogled-chromium_$UC_VERSION.debian.tar.xz
-EOF
+$comment"
 
-cat > build.script << EOF
-export LANG=C.UTF-8
-
-JOBS="\${DEB_BUILD_OPTIONS#*=}"
-case "\$(uname -m)" in
-aarch64) DEB_BUILD_OPTIONS="parallel=\$(("\$JOBS" / 2))" ;;
-esac
-JOBS=
-
-tar -x -f ../SOURCES/ungoogled-chromium.tar.xz
-mkdir -p debian/download_cache
-ln -s ../../../SOURCES/chromium-$UC_VERSION.tar.xz debian/download_cache/chromium-$UC_VERSION.tar.xz
-ln -s ../../../SOURCES/chromium-$UC_VERSION.tar.xz.hashes debian/download_cache/chromium-$UC_VERSION.tar.xz.hashes
-ln -s ../../../SOURCES/node-$NODE_VERSION-linux-x64.tar.xz debian/download_cache/node-$NODE_VERSION-linux-x64.tar.xz
-ln -s ../../../SOURCES/node-$NODE_VERSION-linux-armv7l.tar.xz debian/download_cache/node-$NODE_VERSION-linux-armv7l.tar.xz
-ln -s ../../../SOURCES/node-$NODE_VERSION-linux-arm64.tar.xz debian/download_cache/node-$NODE_VERSION-linux-arm64.tar.xz
-ln -s ../../../SOURCES/node-$NODE_VERSION.sha256sum debian/download_cache/node-$NODE_VERSION.sha256sum
-
-debian/rules setup
-
-dpkg-buildpackage -b -uc
-EOF
-
-PACKAGE="ungoogled-chromium-debian"
-
-curl "https://api.opensuse.org/source/$REPOSITORY/$PACKAGE" -F 'cmd=deleteuploadrev'
-
-curl "https://api.opensuse.org/source/$REPOSITORY/$PACKAGE" > directory.xml
-
-xmlstarlet sel -t -v '//entry/@name' < directory.xml | while read FILENAME
-do
-    curl "https://api.opensuse.org/source/$REPOSITORY/$PACKAGE/$FILENAME?rev=upload" -X DELETE
+	obs_sync_files $codename $upload_dir "$commit_message"
+	echo ' '
 done
 
-for FILENAME in _service ungoogled-chromium_$UC_VERSION.orig.tar.xz ungoogled-chromium_$UC_VERSION.debian.tar.xz ungoogled-chromium.tar.xz ungoogled-chromium.dsc build.script
-do
-    curl "https://api.opensuse.org/source/$REPOSITORY/$PACKAGE/$FILENAME?rev=upload" -T "$FILENAME"
-done
-
-curl "https://api.opensuse.org/source/$REPOSITORY/$PACKAGE" -F 'cmd=commit'
-
-rm -f _service ungoogled-chromium_$UC_VERSION.orig.tar.xz ungoogled-chromium_$UC_VERSION.debian.tar.xz ungoogled-chromium.tar.xz ungoogled-chromium.dsc build.script directory.xml
+# end obs-upload.sh
