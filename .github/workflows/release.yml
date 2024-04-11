@@ -1,0 +1,144 @@
+---
+name: Release cycle
+
+on:
+  repository_dispatch:
+    types: [new-debian-version, new-uc-version]
+  workflow_dispatch:
+
+concurrency:
+  group: __ungoogled-chromium_singleton__
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    permissions:
+      # needed by "gh cache delete"
+      actions: write
+    env:
+      DOWNLOAD_DIR: /home/runner/download
+      OUTPUT_DIR:   /home/runner/output
+      STATE_DIR:    /home/runner/state
+      WORK_DIR:     /home/runner/work
+    steps:
+      - name: Clone u-c-d Git repository
+        uses: actions/checkout@v4
+
+      - name: Clone u-c Git repository
+        uses: actions/checkout@v4
+        with:
+          repository: ungoogled-software/ungoogled-chromium
+          fetch-depth: 20
+          fetch-tags: true
+          path: ungoogled-chromium
+
+      - name: Tweak Dpkg config to elide progress indicators
+        run: echo 'Dpkg::Use-Pty "false";' | sudo tee /etc/apt/apt.conf.d/55no-use-pty
+
+      - name: Install packages required for upstream check
+        run: sudo apt-get -y --no-install-recommends install debian-archive-keyring devscripts
+
+      - name: Restore persistent state
+        id: restore-state
+        uses: actions/cache/restore@v4
+        # https://github.com/actions/runner/discussions/871
+        with:
+          key: state-v${{github.run_id}}
+          restore-keys: state
+          path: ${{env.STATE_DIR}}
+
+      - name: Check if new upstream versions are available
+        id: check
+        run: .github/workflows/get-latest.sh --skip-download
+
+      - name: Restore download cache
+        id: restore-download
+        if: ${{steps.check.outputs.todo}}
+        uses: actions/cache/restore@v4
+        # https://github.com/actions/runner/discussions/871
+        with:
+          key: download-v${{github.run_id}}
+          restore-keys: download
+          path: ${{env.DOWNLOAD_DIR}}
+
+      - name: Download latest upstream versions
+        if: ${{steps.check.outputs.todo}}
+        run: .github/workflows/get-latest.sh --skip-update
+
+      - name: Remove obsolete files from download cache
+        if: ${{steps.check.outputs.todo}}
+        run: |
+          del_files=$(cat $WORK_DIR/obsolete.chromium.txt)
+          cd $DOWNLOAD_DIR
+          rm -fv $del_files
+          echo 'Download cache contents:'
+          ls -l
+
+      - name: Save download cache
+        if: ${{steps.check.outputs.todo}}
+        uses: actions/cache/save@v4
+        with:
+          key: download-v${{github.run_id}}
+          path: ${{env.DOWNLOAD_DIR}}
+
+      - name: Delete previous version of download cache
+        if: ${{steps.check.outputs.todo && steps.restore-download.outputs.cache-matched-key}}
+        env:
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: gh cache delete ${{steps.restore-download.outputs.cache-matched-key}}
+
+      - name: Install packages required for conversion
+        if: ${{steps.check.outputs.todo}}
+        run: sudo apt-get -y --no-install-recommends install debian-keyring dpkg-dev quilt
+
+      - name: Patch Dpkg to speed up source package builds
+        if: ${{steps.check.outputs.todo}}
+        run: (cd / && sudo patch -p1) < .github/workflows/dpkg-source-build.patch
+
+      - name: Clone osc Git repository
+        # Needed because the version of osc(1) in ubuntu-22.04 is too old
+        if: ${{steps.check.outputs.todo}}
+        uses: actions/checkout@v4
+        with:
+          repository: openSUSE/osc
+          ref: 21c9828cd1fc51b8d03f0f1aa01c41df38a3630b # 1.8.3
+          path: osc
+
+      - name: Convert chromium to ungoogled-chromium
+        if: ${{steps.check.outputs.todo}}
+        env:
+          DEBFULLNAME: ${{vars.DEBFULLNAME}}
+          DEBEMAIL:    ${{vars.DEBEMAIL}}
+        run: .github/workflows/convert.sh
+
+      - name: Upload u-c packages to OBS
+        if: ${{steps.check.outputs.todo}}
+        env:
+          OSC: ${{github.workspace}}/osc/osc-wrapper.py
+          OSC_USERNAME: ${{secrets.OSC_USERNAME || vars.OSC_USERNAME}}
+          OSC_PASSWORD: ${{secrets.OSC_PASSWORD}}
+          OBS_PROJECT:  ${{vars.OBS_PROJECT}}
+        run: .github/workflows/obs-upload.sh
+
+      - name: Save persistent state
+        uses: actions/cache/save@v4
+        with:
+          key: state-v${{github.run_id}}
+          path: ${{env.STATE_DIR}}
+
+      - name: Delete previous version of persistent state
+        if: ${{steps.restore-state.outputs.cache-matched-key}}
+        env:
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: gh cache delete ${{steps.restore-state.outputs.cache-matched-key}}
+
+      - name: Save converted source package files as artifacts
+        if: ${{steps.check.outputs.todo}}
+        uses: actions/upload-artifact@v4
+        with:
+          name: releases
+          compression-level: 1
+          if-no-files-found: ignore
+          path: ${{env.OUTPUT_DIR}}/*
+
+# EOF
