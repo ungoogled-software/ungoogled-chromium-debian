@@ -4,7 +4,7 @@
 # Version of and paths to pristine Debian Chromium source tree + tarball,
 # obtainable by running "apt-get source chromium" on a Debian system
 #
-VERSION      = 121.0.6167.85
+VERSION      = 130.0.6723.58
 ORIG_SOURCE  = chromium-$(VERSION)
 ORIG_TARBALL = chromium_$(VERSION).orig.tar.xz
 
@@ -75,6 +75,11 @@ PATCH_DROP_LIST += ungoogled/disable-privacy-sandbox.patch
 # disable/google-api-warning.patch
 #
 PATCH_DROP_LIST += ungoogled-upstream/extra/debian/disable/google-api-warning.patch
+
+# Debian already applies this fix, when needed, in
+# bookworm/cacheline.patch
+#
+PATCH_DROP_LIST += ungoogled-upstream/upstream-fixes/hardware_destructive_interference_size.patch
 
 ifdef DEBIAN_STABLE
 # No additional patches to drop at this time
