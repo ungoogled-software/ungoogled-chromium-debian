@@ -35,7 +35,7 @@ regenerate it eventually with a new expiration date.
 
 ```sh
 # Install initial packages
-sudo apt install -y devscripts equivs
+sudo apt install -y devscripts equivs curl
 
 # Clone repository and switch to it (optional if are already in it)
 git clone https://github.com/ungoogled-software/ungoogled-chromium-debian.git
