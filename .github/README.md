@@ -1,5 +1,10 @@
 # ungoogled-chromium-debian
 
+# WARNING
+This build system for and distribution of Ungoogled Chromium is badly out of date and is a serious security risk to use.
+If you use Ubuntu or fully compatible derrivatives (Mint, etc) then consider obtaining Ungoogled Chromium from the [xtradeb PPA](https://xtradeb.net/).  If you use Debian, then use a flat Linux install.
+---
+
 This repository contains files to build Debian packages of
 [ungoogled-chromium](//github.com/Eloston/ungoogled-chromium).
 
