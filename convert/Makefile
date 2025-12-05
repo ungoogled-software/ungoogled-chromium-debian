@@ -4,7 +4,7 @@
 # Version of and paths to pristine Debian Chromium source tree + tarball,
 # obtainable by running "apt-get source chromium" on a Debian system
 #
-VERSION      = 130.0.6723.58
+VERSION      = 143.0.7499.40
 ORIG_SOURCE  = chromium-$(VERSION)
 ORIG_TARBALL = chromium_$(VERSION).orig.tar.xz
 
@@ -76,11 +76,6 @@ PATCH_DROP_LIST += ungoogled/disable-privacy-sandbox.patch
 #
 PATCH_DROP_LIST += ungoogled-upstream/extra/debian/disable/google-api-warning.patch
 
-# Debian already applies this fix, when needed, in
-# bookworm/cacheline.patch
-#
-PATCH_DROP_LIST += ungoogled-upstream/upstream-fixes/hardware_destructive_interference_size.patch
-
 ifdef DEBIAN_STABLE
 # No additional patches to drop at this time
 #PATCH_DROP_LIST +=
@@ -133,7 +128,7 @@ export LC_COLLATE = C
 #
 quilt_auto_refresh = \
 	while :; do \
-		(set -x; $(QUILT) push -a -f -q) | tee tmp.quilt.out; \
+		(set -x; $(QUILT) push -afq --fuzz=0) | tee tmp.quilt.out; \
 		! grep -q 'FAILED -- saving rejects' tmp.quilt.out || exit; \
 		if tail -n 1 tmp.quilt.out | grep -q 'forced; needs refresh'; then \
 			(set -x; $(QUILT) refresh) || exit; \
@@ -167,7 +162,7 @@ stage-1.stamp: $(orig_tree_dep) series.add
 ifndef INPLACE
 # Note: Can't speed this up using hardlinks, alas:
 # https://savannah.nongnu.org/bugs/?63994
-	rsync -a --delete-after $(ORIG_SOURCE)/ $(ug_source)
+	rsync -a --inplace --delete $(ORIG_SOURCE)/ $(ug_source)
 endif
 	touch $(ug_source)/__UNGOOGLED_CHROMIUM_CONVERSION_INCOMPLETE__
 	cp -a $(UNGOOGLED_PATCHES) $(ug_source)/debian/patches/ungoogled-upstream
@@ -188,7 +183,7 @@ endif
 stage-2.stamp: stage-1.stamp $(new_tree_dep)
 	test ! -f stage-3.stamp
 	! grep '^#ungoogled#' $(ug_source)/debian/patches/series
-	cd $(ug_source) && ($(QUILT) pop -a -f -q || test $$? -eq 2)
+	cd $(ug_source) && ($(QUILT) pop -afq || test $$? -eq 2)
 	for p in $(PATCH_DROP_LIST); do \
 		echo "checking $$p"; \
 		grep -Fqx "$$p" $(ug_source)/debian/patches/series || exit; \
@@ -239,7 +234,7 @@ stage-3.stamp: $(stage_3_deps)
 		$(if $(DISTRIBUTION),--distribution $(DISTRIBUTION)) \
 		$(if $(URGENCY),--urgency $(URGENCY)) \
 		--no-auto-nmu \
-		'New upstream Debian package release.'
+		'Apply ungoogled-chromium modifications.'
 
 	touch $@
 
@@ -485,12 +480,12 @@ check-patch-drop-list: stage-2.stamp
 	: >tmp.check-pdl.out
 	cd $(ug_source)/debian/patches && cp -p series series.orig
 	for p in $(PATCH_DROP_LIST); do \
-		(cd $(ug_source) && set -x && $(QUILT) pop -a -f -q); \
+		(cd $(ug_source) && set -x && $(QUILT) pop -afq); \
 		echo "==== checking $$p drop ===="; \
 		(cd $(ug_source)/debian/patches && cp -fp series.orig series); \
 		perl -pi -e '$$a=$$_; $$a =~ s/^#ungoogled#|\n$$//g; $$a eq "'"$$p"'" and $$_="$$a\n"' \
 			$(ug_source)/debian/patches/series; \
-		if (cd $(ug_source) && set -x && $(QUILT) push -a -f -q); then \
+		if (cd $(ug_source) && set -x && $(QUILT) push -afq --fuzz=0); then \
 			echo "==== $$p drop NOT NEEDED ===="; \
 			echo "$$p: remove from PATCH_DROP_LIST" >>tmp.check-pdl.out; \
 		else \
@@ -499,8 +494,8 @@ check-patch-drop-list: stage-2.stamp
 	done
 	cd $(ug_source)/debian/patches && mv -f series.orig series
 	find $(ug_source) -type f -name \*.rej -delete
-	cd $(ug_source) && $(QUILT) pop  -a -f -q
-	cd $(ug_source) && $(QUILT) push -a -f -q
+	cd $(ug_source) && $(QUILT) pop  -afq
+	cd $(ug_source) && $(QUILT) push -afq --fuzz=0
 	@echo; ! grep . tmp.check-pdl.out
 	rm -f tmp.check-pdl.out
 	@echo '==== $@ OK ===='
@@ -516,6 +511,7 @@ check_domsub_deps = \
 #
 .PHONY: check-domsub
 check-domsub: $(check_domsub_deps)
+	rm -rf tmp.src.?
 	mkdir tmp.src.a tmp.src.b
 	cd tmp.src.a && tar xf ../domain_substitution.files.tar
 	cd tmp.src.b && tar xf ../domain_substitution.files.tar
@@ -556,7 +552,7 @@ compare-flags: $(ORIG_SOURCE)/debian/rules $(UNGOOGLED)/flags.gn
 
 .PHONY: unpatch
 unpatch:
-	cd $(ug_source) && $(QUILT) pop -a -f -q
+	cd $(ug_source) && $(QUILT) pop -afq
 	rm -rf $(ug_source)/.pc
 
 .PHONY: clean
