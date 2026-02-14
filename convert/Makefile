@@ -1,11 +1,17 @@
 # convert/Makefile
 # This makefile requires GNU Make.
 
-# Version of and paths to pristine Debian Chromium source tree + tarball,
-# obtainable by running "apt-get source chromium" on a Debian system
+# Path to pristine Debian Chromium source tree
 #
-VERSION      = 143.0.7499.40
-ORIG_SOURCE  = chromium-$(VERSION)
+ORIG_SOURCE = chromium-srcpkg
+
+# Version of upstream Chromium source
+#
+VERSION := $(shell cut -d= -f2 $(ORIG_SOURCE)/chrome/VERSION | tr '\n' . | sed 's/\.$$/\n/')
+
+# Path to Debian Chromium orig source tarball, obtainable by running
+# "apt-get source chromium" on a Debian system
+#
 ORIG_TARBALL = chromium_$(VERSION).orig.tar.xz
 
 # Uncomment this if you wish to modify $(ORIG_SOURCE), otherwise the
@@ -16,7 +22,7 @@ ORIG_TARBALL = chromium_$(VERSION).orig.tar.xz
 # Path to local ungoogled-chromium Git repo
 # https://github.com/ungoogled-software/ungoogled-chromium
 #
-UNGOOGLED = $(PWD)/ungoogled-chromium
+UNGOOGLED = $(CURDIR)/ungoogled-chromium
 UNGOOGLED_PATCHES = $(UNGOOGLED)/patches
 
 # Path to convert/ subdir of ungoogled-chromium-debian Git repo
@@ -27,7 +33,7 @@ DEBIAN_CONVERT = .
 
 # Append this to the Debian package version string
 #
-ADD_VERSION_SUFFIX =
+ADD_VERSION_SUFFIX = .$(shell cat $(UNGOOGLED)/revision.txt)
 
 # Target distribution (e.g. bookworm, jammy)
 # If unset, the distribution will be set to UNRELEASED.
@@ -70,6 +76,10 @@ PATCH_DROP_LIST += disable/third-party-cookies.patch
 # ungoogled-upstream/core/ungoogled-chromium/disable-privacy-sandbox.patch
 #
 PATCH_DROP_LIST += ungoogled/disable-privacy-sandbox.patch
+
+# Conflicts with Debian's system/rollup.patch
+#
+PATCH_DROP_LIST += ungoogled-upstream/core/ungoogled-chromium/build-with-wasm-rollup.patch
 
 # Ungoogled-chromium's imported copy of
 # disable/google-api-warning.patch
@@ -205,7 +215,7 @@ stage_3_deps = \
 #
 # * Add the domain-substitution script
 # * Append ungoogled-chromium section to debian/rules
-# * Hook the (un)patch targets into the "build-arch" and "clean" targets
+# * Hook the domain-patching target into the main build targets
 # * Add a line to rename-via-copy the chromedriver binary, as it will
 #   be installed in /usr/bin/ and thus cannot keep the original name
 # * Update the package changelog
@@ -216,8 +226,7 @@ stage-3.stamp: $(stage_3_deps)
 	cat rules.add >>$(ug_source)/debian/rules
 
 	perl -pi \
-		-e '/^override_dh_auto_build-arch:/ and s/$$/ patch/;' \
-		-e '/^override_dh_auto_clean:/ and s/$$/ unpatch/' \
+		-e '/^override_dh_auto_build-(arch|indep):/ and s/$$/ domain-substitution/;' \
 		$(ug_source)/debian/rules
 
 	perl -pi -e 'm,^\tcp (out/Release)/chrome_sandbox , and' \
@@ -333,13 +342,9 @@ rules.add: $(UNGOOGLED)/flags.gn
 	 perl -p -e 's/"/\\"/g; $$p = ($$.==1) ? "defines+=" : " "x9;' \
 		-e 's/(.*)/$$p$$1 \\/' \
 		$(UNGOOGLED)/flags.gn; \
-	 printf '\npatch:\n'; \
-	 printf '\ttest -f   ungoogled-domain-substitution.orig.tar \\\n'; \
-	 printf '\t|| debian/ungoogled-domain-substitution.sh\n\n'; \
-	 printf 'unpatch:\n'; \
-	 printf '\ttest ! -f ungoogled-domain-substitution.orig.tar \\\n'; \
-	 printf '\t|| tar xf ungoogled-domain-substitution.orig.tar\n'; \
-	 printf '\trm -f     ungoogled-domain-substitution.orig.tar\n' \
+	 printf '\ndomain-substitution:\n'; \
+	 printf '\ttest -d .pc/domain-substitution.VIRTUAL.patch \\\n'; \
+	 printf '\t|| debian/ungoogled-domain-substitution.sh\n'; \
 	) >$@
 
 # Script that maps files from the original debian/ subdirectory to the
@@ -385,8 +390,8 @@ ungoogled-domain-substitution.sh: $(UNGOOGLED)/domain_regex.list domain_substitu
 	$(UNGOOGLED)/utils/make_domsub_script.py \
 		--regex $(UNGOOGLED)/domain_regex.list \
 		--files domain_substitution.list \
+		--backup quilt \
 		--output $@.new
-	perl -pi -e 's/^(backup)=/$$1=ungoogled-/' $@.new
 	chmod 755 $@.new
 	mv -f $@.new $@
 
@@ -522,8 +527,9 @@ check-domsub: $(check_domsub_deps)
 		--files domain_substitution.list \
 		tmp.src.a
 
+	mkdir tmp.src.b/.pc
 	cd tmp.src.b && $(TIME) ../ungoogled-domain-substitution.sh
-	rm tmp.src.b/ungoogled-domain-substitution.orig.tar
+	rm -rf tmp.src.b/.pc
 
 	diff -ru tmp.src.a tmp.src.b
 	rm -rf tmp.src.?
