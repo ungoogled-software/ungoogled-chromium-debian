@@ -56,6 +56,12 @@ export DEBEMAIL    ?= cereal@example.com
 #
 PATCH_DROP_LIST =
 
+# The edits in this patch are (mostly) included in
+# ungoogled-upstream/core/ungoogled-chromium/fix-building-with-prunned-binaries.patch
+# (see https://github.com/ungoogled-software/ungoogled-chromium/pull/3676)
+#
+PATCH_DROP_LIST += disable/glic.patch
+
 # The edits in this patch are included in
 # ungoogled-upstream/core/ungoogled-chromium/fix-building-with-prunned-binaries.patch
 #
