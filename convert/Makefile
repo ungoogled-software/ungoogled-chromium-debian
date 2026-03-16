@@ -92,6 +92,11 @@ PATCH_DROP_LIST += ungoogled-upstream/core/ungoogled-chromium/build-with-wasm-ro
 #
 PATCH_DROP_LIST += ungoogled-upstream/extra/debian/disable/google-api-warning.patch
 
+# Edits are (partly) included in
+# ungoogled-upstream/upstream-fixes/missing-dependencies.patch
+#
+PATCH_DROP_LIST += upstream/profile.patch
+
 ifdef DEBIAN_STABLE
 # No additional patches to drop at this time
 #PATCH_DROP_LIST +=
@@ -285,7 +290,8 @@ stage-4.stamp: $(stage_4_deps)
 		$(ug_source)/debian/scripts/*
 
 	perl -pi -e 's/\b(chromedriver)\b/ungoogled-$$1/' \
-		$(ug_source)/debian/chromium-driver.install
+		$(ug_source)/debian/chromium-driver.install \
+		$(ug_source)/debian/chromium-driver.lintian-overrides
 
 	$(DEBIAN_CONVERT)/editcontrol.pl -i \
 		-e '$$field =~ /^(Source|Package|Breaks|Depends|Recommends|Replaces|Suggests)$$/ and s/\b(chromium)\b/ungoogled-$$1/g;' \
