@@ -56,12 +56,6 @@ export DEBEMAIL    ?= cereal@example.com
 #
 PATCH_DROP_LIST =
 
-# The edits in this patch are (mostly) included in
-# ungoogled-upstream/core/ungoogled-chromium/fix-building-with-prunned-binaries.patch
-# (see https://github.com/ungoogled-software/ungoogled-chromium/pull/3676)
-#
-PATCH_DROP_LIST += disable/glic.patch
-
 # The edits in this patch are included in
 # ungoogled-upstream/core/ungoogled-chromium/fix-building-with-prunned-binaries.patch
 #
@@ -78,10 +72,13 @@ PATCH_DROP_LIST += disable/signin.patch
 #
 PATCH_DROP_LIST += disable/third-party-cookies.patch
 
-# Debian's imported copy of
-# ungoogled-upstream/core/ungoogled-chromium/disable-privacy-sandbox.patch
+# Debian's imported copies of ungoogled-chromium patches in
+# ungoogled-upstream/core/ungoogled-chromium/
 #
-PATCH_DROP_LIST += ungoogled/disable-privacy-sandbox.patch
+PATCH_DROP_LIST += \
+	ungoogled/disable-ai.patch \
+	ungoogled/disable-mei-preload.patch \
+	ungoogled/disable-privacy-sandbox.patch
 
 # Conflicts with Debian's system/rollup.patch
 #
