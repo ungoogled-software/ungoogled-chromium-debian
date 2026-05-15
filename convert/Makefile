@@ -75,10 +75,10 @@ PATCH_DROP_LIST += disable/third-party-cookies.patch
 # Debian's imported copies of ungoogled-chromium patches in
 # ungoogled-upstream/core/ungoogled-chromium/
 #
-PATCH_DROP_LIST += \
-	ungoogled/disable-ai.patch \
-	ungoogled/disable-mei-preload.patch \
-	ungoogled/disable-privacy-sandbox.patch
+imported_ug_patches := $(addprefix ungoogled/, $(notdir \
+	$(wildcard $(ORIG_SOURCE)/debian/patches/ungoogled/*.patch) \
+))
+PATCH_DROP_LIST += $(imported_ug_patches)
 
 # Conflicts with Debian's system/rollup.patch
 #
@@ -292,12 +292,11 @@ stage-4.stamp: $(stage_4_deps)
 
 	if ! grep '^Maintainer:' $(ug_source)/debian/control | grep -Fq '<$(DEBEMAIL)>'; \
 	then \
-		$(DEBIAN_CONVERT)/editcontrol.pl -i \
-			-e 'if ($$field eq "Maintainer") { set_field("XSBC-Original-Maintainer", $$_); $$_="__UGC_MAINTAINER__"; }' \
-			$(ug_source)/debian/control || exit; \
-		sed -i 's#__UGC_MAINTAINER__#$(DEBFULLNAME) <$(DEBEMAIL)>#' \
+		sed -i \
+			-e '/^Maintainer:/ { s/^/XSBC-Original-/' \
+			-e "i Maintainer: $(DEBFULLNAME) <$(DEBEMAIL)>" \
+			-e '}' \
 			$(ug_source)/debian/control; \
-		sed -i 's/^Xsbc-/XSBC-/' $(ug_source)/debian/control; \
 	fi
 
 # Check for any double-replacement snafus
@@ -474,6 +473,38 @@ check-git check-git_warning: $(UNGOOGLED_PATCHES)/series
 		;; \
 	esac
 
+# The Debian package of Chromium imports a subset of ungoogled-chromium
+# patches, under debian/patches/ungoogled/. Check that the patches therein
+# actually correspond to patches in the ungoogled-chromium tree. Also warn
+# if the same-named patches are not identical between the two locations.
+#
+.PHONY: check-imported-patches
+check-imported-patches: $(ORIG_SOURCE)/debian/patches/series $(UNGOOGLED_PATCHES)/series
+	: > tmp.check-imp-diff
+	: > tmp.check-imp-miss
+	for p in $$(cd $(ORIG_SOURCE)/debian/patches/ungoogled && echo *.patch); do \
+		if [ ! -f $(UNGOOGLED_PATCHES)/core/ungoogled-chromium/$$p ]; then \
+			echo "  $$p" >> tmp.check-imp-miss; \
+		elif ! cmp -s \
+			$(ORIG_SOURCE)/debian/patches/ungoogled/$$p \
+			$(UNGOOGLED_PATCHES)/core/ungoogled-chromium/$$p; \
+		then \
+			echo "  $$p" >> tmp.check-imp-diff; \
+		fi; \
+	done
+	@if [ -s tmp.check-imp-diff ]; then \
+		echo 'Warning: These patches differ between ungoogled-chromium and Debian:'; \
+		cat tmp.check-imp-diff; \
+		echo 'Review with "diff -ru $(UNGOOGLED_PATCHES)/core/ungoogled-chromium $(ORIG_SOURCE)/debian/patches/ungoogled"'; \
+	fi
+	@if [ -s tmp.check-imp-miss ]; then \
+		echo 'Error: These patches are present in Debian but not ungoogled-chromium:'; \
+		cat tmp.check-imp-miss; \
+		exit 1; \
+	fi
+	@rm tmp.check-imp-*
+	@echo '==== $@ OK ===='
+
 # Check that every patch listed in PATCH_DROP_LIST needs to be dropped
 # in order for the ungoogled-chromium patch series to apply cleanly.
 # That is, verify that PATCH_DROP_LIST is minimal, so that we don't drop
@@ -487,13 +518,13 @@ check-git check-git_warning: $(UNGOOGLED_PATCHES)/series
 check-patch-drop-list: stage-2.stamp
 	! find $(ug_source) -type f -name \*.rej | grep .
 	: >tmp.check-pdl.out
-	cd $(ug_source)/debian/patches && cp -p series series.orig
+	export QUILT_SERIES=series.check-pdl; \
 	for p in $(PATCH_DROP_LIST); do \
-		(cd $(ug_source) && set -x && $(QUILT) pop -afq); \
+		(cd $(ug_source) && set -x && $(QUILT) pop -afq && rm -r .pc); \
 		echo "==== checking $$p drop ===="; \
-		(cd $(ug_source)/debian/patches && cp -fp series.orig series); \
-		perl -pi -e '$$a=$$_; $$a =~ s/^#ungoogled#|\n$$//g; $$a eq "'"$$p"'" and $$_="$$a\n"' \
-			$(ug_source)/debian/patches/series; \
+		(cd $(ug_source)/debian/patches \
+		 && perl -pe '$$a=$$_; $$a =~ s/^#ungoogled#|\n$$//g; $$a eq "'"$$p"'" and $$_="$$a\n"' \
+			series > $$QUILT_SERIES); \
 		if (cd $(ug_source) && set -x && $(QUILT) push -afq --fuzz=0); then \
 			echo "==== $$p drop NOT NEEDED ===="; \
 			echo "$$p: remove from PATCH_DROP_LIST" >>tmp.check-pdl.out; \
@@ -501,9 +532,10 @@ check-patch-drop-list: stage-2.stamp
 			echo "==== $$p drop OK ===="; \
 		fi; \
 	done
-	cd $(ug_source)/debian/patches && mv -f series.orig series
 	find $(ug_source) -type f -name \*.rej -delete
 	cd $(ug_source) && $(QUILT) pop  -afq
+	rm -r $(ug_source)/.pc
+	rm $(ug_source)/debian/patches/series.check-pdl
 	cd $(ug_source) && $(QUILT) push -afq --fuzz=0
 	@echo; ! grep . tmp.check-pdl.out
 	rm -f tmp.check-pdl.out
@@ -540,7 +572,7 @@ check-domsub: $(check_domsub_deps)
 	@echo '==== $@ OK ===='
 
 .PHONY: check
-check: check-git check-patch-drop-list check-domsub
+check: check-git check-imported-patches check-patch-drop-list check-domsub
 
 # Compare the GN flags used by Debian versus those specified by
 # ungoogled-chromium. Each output line is in one of two (tab-separated)
