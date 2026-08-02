@@ -9,10 +9,24 @@ ORIG_SOURCE = chromium-srcpkg
 #
 VERSION := $(shell cut -d= -f2 $(ORIG_SOURCE)/chrome/VERSION | tr '\n' . | sed 's/\.$$/\n/')
 
-# Path to Debian Chromium orig source tarball, obtainable by running
-# "apt-get source chromium" on a Debian system
+# Path to Debian Chromium "orig" source tarball, obtainable by running
+# "apt-get source chromium" on a Debian system. NOTE: The "orig-pre-gen"
+# tarball cannot be re-used. If you want one for ungoogled-chromium, then
+# it must be generated from scratch in the converted tree; see below.
 #
 ORIG_TARBALL = chromium_$(VERSION).orig.tar.xz
+
+# Uncomment this if you wish to generate a new "orig-pre-gen" source
+# tarball for the newly-converted instance of ungoogled-chromium. Note
+# that this involves a partial build of the tree, so all the required
+# build-dependencies must already be installed.
+#
+#INIT_PRE_GEN = 1
+
+# Commands to run before and after the INIT_PRE_GEN portion
+#
+INIT_PRE_GEN_BEFORE = @echo '::group::Create orig-pre-gen tarball'
+INIT_PRE_GEN_AFTER  = @echo '::endgroup::'
 
 # Uncomment this if you wish to modify $(ORIG_SOURCE), otherwise the
 # conversion process will operate on a copy.
@@ -94,6 +108,8 @@ ifdef DEBIAN_STABLE
 #PATCH_DROP_LIST +=
 endif
 
+DPKG_SOURCE ?= dpkg-source --no-preparation --abort-on-upstream-changes
+
 # quilt(1) setup
 #
 QUILT = quilt --quiltrc /dev/null
@@ -166,6 +182,7 @@ source-package: stage-6.stamp
 # Stage 1
 #
 # * Create a new ungoogled-chromium source tree
+# * Delete the pre-gen/ subdirectory if it exists
 # * Copy in the ungoogled-chromium patches
 # * Append the ungoogled-chromium patches to the patch series
 #
@@ -178,6 +195,7 @@ ifndef INPLACE
 	rsync -a --inplace --delete $(ORIG_SOURCE)/ $(ug_source)
 endif
 	touch $(ug_source)/__UNGOOGLED_CHROMIUM_CONVERSION_INCOMPLETE__
+	rm -rf $(ug_source)/pre-gen
 	cp -a $(UNGOOGLED_PATCHES) $(ug_source)/debian/patches/ungoogled-upstream
 	rm -f $(ug_source)/debian/patches/ungoogled/series
 	cat series.add >>$(ug_source)/debian/patches/series
@@ -293,8 +311,9 @@ stage-4.stamp: $(stage_4_deps)
 	if ! grep '^Maintainer:' $(ug_source)/debian/control | grep -Fq '<$(DEBEMAIL)>'; \
 	then \
 		sed -i \
+			-e '/^XSBC-Original-Maintainer:/I d' \
 			-e '/^Maintainer:/ { s/^/XSBC-Original-/' \
-			-e "i Maintainer: $(DEBFULLNAME) <$(DEBEMAIL)>" \
+			-e "  i Maintainer: $(DEBFULLNAME) <$(DEBEMAIL)>" \
 			-e '}' \
 			$(ug_source)/debian/control; \
 	fi
@@ -303,7 +322,25 @@ stage-4.stamp: $(stage_4_deps)
 	! grep -ri --exclude-dir=patches ungoogled.ungoogled \
 		$(ug_source)/debian
 
+# Temporary, remove after 151.0.7922.71
+ifdef INIT_PRE_GEN
+	sed -i 's!=\.\./chromium_!=../ungoogled-chromium_!' \
+		$(ug_source)/debian/scripts/init-pre-gen.sh
+endif
+
+# Temporary, remove once this is merged:
+# https://github.com/ungoogled-software/ungoogled-chromium/pull/3893
+ifdef INIT_PRE_GEN
+	sed -i '/models.trace.lantern.simulation.unittests-tsconfig.json/ a \  "gen/third_party/devtools-frontend/src/front_end/panels/elements/unittests-tsconfig.json",  # u-c' \
+		$(ug_source)/debian/deb_pre_gen.py
+endif
+
 	touch $@
+
+# Temporary, remove after 151.0.7922.71
+ifdef INIT_PRE_GEN
+export GOCACHE = $(abspath $(ug_source)/out/Release/go-home-tmp)
+endif
 
 # Stage 5
 #
@@ -322,10 +359,16 @@ stage-5.stamp: stage-4.stamp $(new_tree_dep) debian-file-map.sh
 
 # Stage 6
 #
+# * Produce a new orig-pre-gen tarball, if requested
 # * Build the Debian source package
 #
 stage-6.stamp: stage-5.stamp $(new_tree_dep) $(ug_tarball)
-	dpkg-source --abort-on-upstream-changes --build $(ug_source)
+ifdef INIT_PRE_GEN
+	$(INIT_PRE_GEN_BEFORE)
+	cd $(ug_source) && debian/rules init-pre-gen clean
+	$(INIT_PRE_GEN_AFTER)
+endif
+	$(DPKG_SOURCE) --build $(ug_source)
 	touch $@
 	ls -Ll ungoogled-chromium_$(VERSION)*
 
