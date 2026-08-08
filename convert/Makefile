@@ -322,25 +322,7 @@ stage-4.stamp: $(stage_4_deps)
 	! grep -ri --exclude-dir=patches ungoogled.ungoogled \
 		$(ug_source)/debian
 
-# Temporary, remove after 151.0.7922.71
-ifdef INIT_PRE_GEN
-	sed -i 's!=\.\./chromium_!=../ungoogled-chromium_!' \
-		$(ug_source)/debian/scripts/init-pre-gen.sh
-endif
-
-# Temporary, remove once this is merged:
-# https://github.com/ungoogled-software/ungoogled-chromium/pull/3893
-ifdef INIT_PRE_GEN
-	sed -i '/models.trace.lantern.simulation.unittests-tsconfig.json/ a \  "gen/third_party/devtools-frontend/src/front_end/panels/elements/unittests-tsconfig.json",  # u-c' \
-		$(ug_source)/debian/deb_pre_gen.py
-endif
-
 	touch $@
-
-# Temporary, remove after 151.0.7922.71
-ifdef INIT_PRE_GEN
-export GOCACHE = $(abspath $(ug_source)/out/Release/go-home-tmp)
-endif
 
 # Stage 5
 #
