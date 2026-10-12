@@ -94,10 +94,6 @@ imported_ug_patches := $(addprefix ungoogled/, $(notdir \
 ))
 PATCH_DROP_LIST += $(imported_ug_patches)
 
-# Conflicts with Debian's system/rollup.patch
-#
-PATCH_DROP_LIST += ungoogled-upstream/core/ungoogled-chromium/build-with-wasm-rollup.patch
-
 # Ungoogled-chromium's imported copy of
 # disable/google-api-warning.patch
 #
